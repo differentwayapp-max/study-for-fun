@@ -1,0 +1,66 @@
+rules_version = '2';
+
+// Study for fun – who can read and write what.
+//
+// families/{familyId}            familyId = the parent's uid (Google sign-in)
+//   inviteToken                  secret inside every kid link
+//   /fam/kids                    the parent's list of kids
+//   /sets/{setId}                practice sets (questions, chapters …)
+//   /progress/{kidId}            the kid's games, trophies, chosen name and picture
+//   /devices/{uid}               a kid's phone/tablet (anonymous sign-in) that opened a kid link
+//
+// Parent: reads and writes everything in their own family.
+// Kid device: joins once with the link's token, then reads the family's practices
+//             and writes only progress.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isParent(familyId) {
+      return signedIn()
+        && request.auth.uid == familyId
+        && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+    function isDevice(familyId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/families/$(familyId)/devices/$(request.auth.uid));
+    }
+
+    match /families/{familyId} {
+      allow read, write: if isParent(familyId);
+
+      match /devices/{uid} {
+        allow read: if isParent(familyId) || (signedIn() && request.auth.uid == uid);
+        allow create: if signedIn()
+          && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['token', 'at'])
+          && request.resource.data.token
+             == get(/databases/$(database)/documents/families/$(familyId)).data.inviteToken;
+        allow delete: if isParent(familyId);
+        allow update: if false;
+      }
+
+      match /fam/{docId} {
+        allow read: if isParent(familyId) || isDevice(familyId);
+        allow write: if isParent(familyId);
+      }
+
+      match /sets/{setId} {
+        allow read: if isParent(familyId) || isDevice(familyId);
+        allow write: if isParent(familyId);
+      }
+
+      match /progress/{kidId} {
+        allow read: if isParent(familyId) || isDevice(familyId);
+        allow write: if (isParent(familyId) || isDevice(familyId))
+          && request.resource.data.keys().hasOnly(['history', 'profile']);
+        allow delete: if isParent(familyId);
+      }
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

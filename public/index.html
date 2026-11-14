@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v46">
+<meta name="sff-ver" content="sff-v47">
 <script src="/i18n.js"></script>
 <script src="/kid-rest.js"></script>
 <meta charset="utf-8">
@@ -398,6 +398,7 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .rbadge{font-family:var(--display);font-weight:600;font-size:.72em;border:1.5px solid var(--ink);border-radius:999px;padding:1px 8px;white-space:nowrap}
 .r-admin{background:#FFE69A}.r-helper{background:#DDF6EC}.r-tutor{background:#EDE9FF}
 .addline{display:block;width:100%;margin-top:10px;border:2px dashed var(--ink);border-radius:16px;padding:10px;background:#FAFBFF;font-family:var(--display);font-weight:600;cursor:pointer;color:var(--ink)}
+.pendrow{opacity:.75}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -960,7 +961,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   })();
   (function(){
     try{ const iv=new URLSearchParams(location.search).get('invite');
-      if(iv&&/^[A-Za-z0-9_-]{6,64}\.[A-Za-z0-9]{6,32}$/.test(iv)){ sessionStorage.setItem('sff_invite',iv);
+      if(iv&&/^[A-Za-z0-9_-]{6,64}\.[A-Za-z0-9]{6,32}$/.test(iv)){ localStorage.setItem('sff_invite',iv+'|'+Date.now());
         ['sff_kids','sff_sets','sff_history','sff_data_fam'].forEach(k=>localStorage.removeItem(k));
         window.history.replaceState(null,'',location.pathname); }
     }catch(e){}
@@ -1048,7 +1049,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       const myName = u.displayName || (u.email || '').split('@')[0] || 'הורה';
       // 1. an invitation to join another family
       let inviteMsg = null, inv = null;
-      try { inv = sessionStorage.getItem('sff_invite'); sessionStorage.removeItem('sff_invite'); } catch (e) {}
+      try { const raw = LS.getItem('sff_invite'); if (raw) { const [code, at] = raw.split('|'); if (Date.now() - (+at || 0) < 7 * 864e5) inv = code; LS.removeItem('sff_invite'); } } catch (e) {}
       if (inv) {
         const [ifam, icode] = inv.split('.');
         try {
@@ -1099,6 +1100,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       W.__sffFamily = {
         famId, famName: cur.name,
         members: async () => (await F.getDocs(F.collection(fdb, `families/${famId}/members`))).docs.map(d => ({ uid: d.id, ...d.data() })),
+        pending: async () => (await F.getDocs(F.collection(fdb, `families/${famId}/invites`))).docs.map(d => ({ code: d.id, ...d.data() })).filter(x => !x.used && x.exp > Date.now()),
+        cancel: async code => F.deleteDoc(F.doc(fdb, `families/${famId}/invites/${code}`)),
         invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false }); return `${location.origin}/?invite=${famId}.${code}`; },
         remove: async muid => F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`)),
         leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); location.reload(); },
@@ -3051,6 +3054,10 @@ async function renderFamily(){
   $('famAdults').innerHTML = ownerRow + ms.map(m=>`<div class="frow"><span class="ava-e" style="background:${m.role==='tutor'?'#EDE9FF':m.role==='admin'?'#FFE69A':'#DDF6EC'}">${m.role==='tutor'?'🧑‍🏫':m.role==='admin'?'🧑':'👵'}</span>
       <div class="who"><b>${esc(m.name||'')}${m.uid===me?' (את/ה)':''}</b><span class="hint">${esc(kidNames(m.kids)||'כל הילדים')}</span></div>${roleBadge(m.role)}
       ${canManage()&&m.uid!==me?`<button class="btn ghost small" onclick="removeMember('${m.uid}',this)" aria-label="הסרה">✕</button>`:''}</div>`).join('');
+  if(canManage()){ let pend=[]; try{ pend=await F.pending(); }catch(e){}
+    if(pend.length) $('famAdults').insertAdjacentHTML('beforeend', pend.map(x=>`<div class="frow pendrow"><span class="ava-e">⏳</span>
+      <div class="who"><b>${esc(x.name||'מבוגר/ת')}</b><span class="hint">ההזמנה עוד לא נפתחה · ${ROLES[x.role]?ROLES[x.role][1]:''}</span></div>
+      <button class="btn ghost small" onclick="window.__sffFamily.cancel('${x.code}').then(renderFamily)" aria-label="ביטול">✕</button></div>`).join('')); }
 }
 let INV={role:'helper',kids:[]};
 function openInvite(){

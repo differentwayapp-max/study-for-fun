@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v43">
+<meta name="sff-ver" content="sff-v44">
 <script src="/i18n.js"></script>
 <script src="/kid-rest.js"></script>
 <meta charset="utf-8">
@@ -378,6 +378,26 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .demotag{display:inline-block;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:.85em;margin-top:4px}
 .rsec{margin:14px 2px 8px;font-size:1.08em}
 .cardcount{text-align:center;font-family:var(--display);font-weight:700;font-size:1.15em;margin-top:8px}
+.dlgwrap{position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:12}
+.dlgsm{max-width:360px;width:100%;margin:0;padding:14px}
+.dlghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.dlgtag{border-radius:999px;padding:3px 12px;font-family:var(--display);font-weight:600;font-size:.9em;color:#fff}
+.dlgtag.kid{background:var(--blue)}.dlgtag.adult{background:#8B6CFF}.dlgtag.gift{background:var(--mint)}
+.to{display:flex;align-items:center;gap:10px;background:#F4F2FF;border-radius:14px;padding:8px 10px;margin:6px 0 10px;text-align:start}
+.ava-e{width:40px;height:40px;border-radius:50%;border:var(--line);display:grid;place-items:center;font-size:1.3em;flex:none;background:#fff}
+.btn.wa{display:flex;width:100%;justify-content:center;background:#25D366;color:#fff;text-decoration:none}
+.tinyurl{margin-top:8px;font-size:.72em;opacity:.6;text-align:center;direction:ltr}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.roles button{border:var(--line);border-radius:14px;background:#fff;padding:6px 4px;cursor:pointer;font-family:var(--display);display:flex;flex-direction:column;gap:2px;align-items:center;color:var(--ink)}
+.roles button small{font-family:inherit;font-weight:400;font-size:.68em;color:var(--ink2);line-height:1.2}
+.roles button.on{background:var(--ink);color:#fff}.roles button.on small{color:#dfe4f2}
+.famsw{margin-bottom:12px}
+.fh{display:flex;align-items:center;gap:8px;margin:0 0 6px;flex-wrap:wrap}.fh .hint{margin-inline-start:auto;font-weight:400}
+.frow{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1.5px dashed #E1E6F2}.frow:first-of-type{border-top:0}
+.frow .who{flex:1;min-width:0}.frow .who b{display:block;font-family:var(--display)}
+.rbadge{font-family:var(--display);font-weight:600;font-size:.72em;border:1.5px solid var(--ink);border-radius:999px;padding:1px 8px;white-space:nowrap}
+.r-admin{background:#FFE69A}.r-helper{background:#DDF6EC}.r-tutor{background:#EDE9FF}
+.addline{display:block;width:100%;margin-top:10px;border:2px dashed var(--ink);border-radius:16px;padding:10px;background:#FAFBFF;font-family:var(--display);font-weight:600;cursor:pointer;color:var(--ink)}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -554,6 +574,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   <nav id="pNav" class="tabs" style="display:inline-flex;margin-bottom:14px">
     <button id="pTabKids" class="on" onclick="go('kids')">👧 ילדים</button>
     <button id="pTabStats" onclick="go('stats')">📊 פידבק</button>
+    <button id="pTabFam" onclick="go('family')">👨‍👩‍👧 משפחה</button>
   </nav>
 
   <!-- PARENT: kids (one card per child) -->
@@ -721,13 +742,43 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="hint" id="adMsg" style="margin-top:6px"></div>
     </div>
   </div>
+  <div id="invDlg" class="hidden dlgwrap">
+    <div class="card dlgsm"><div class="dlghead"><span class="dlgtag adult">✉️ הזמנת מבוגר</span><button class="btn ghost small" onclick="$('invDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+      <div id="invForm">
+        <div class="hint">מה יוכל/תוכל לעשות?</div>
+        <div class="roles" id="invRoles"></div>
+        <input id="invName" type="text" maxlength="24" placeholder="שם (למשל: סבתא רותי)" style="margin-top:8px">
+        <div id="invKidsWrap" class="hidden"><div class="hint" style="margin-top:8px">לאילו ילדים?</div><div class="chipsel" id="invKids"></div></div>
+        <button class="btn big" style="width:100%;justify-content:center;margin-top:12px" onclick="makeInvite()">יצירת הזמנה</button>
+      </div>
+      <div id="invDone" class="hidden">
+        <div class="to"><span class="ava-e" id="invIco"></span><div><b id="invWho"></b><div class="hint" id="invRole"></div></div></div>
+        <a class="btn wa" id="invWa" target="_blank" rel="noopener">💬 שליחה בוואטסאפ</a>
+        <button class="btn ghost" style="width:100%;justify-content:center;margin-top:8px" onclick="copyText($('invUrl').value,'invMsg')">📋 העתקה</button>
+        <input id="invUrl" readonly class="tinyurl"><div class="hint center" id="invMsg"></div>
+      </div>
+      <div class="hint center" style="margin-top:8px">לאדם אחד · בתוקף 7 ימים · כניסה עם Google</div>
+    </div>
+  </div>
+  <div id="shDlg" class="hidden dlgwrap">
+    <div class="card dlgsm"><div class="dlghead"><span class="dlgtag gift">🎁 תרגול למשפחה אחרת</span><button class="btn ghost small" onclick="$('shDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+      <div class="to"><span class="ava-e" id="shIco"></span><div><b id="shWhat"></b><div class="hint">יקבלו עותק לילדים שלהם · לא יראו את הילדים שלך</div></div></div>
+      <a class="btn wa" id="shWa" target="_blank" rel="noopener">💬 שליחה בוואטסאפ</a>
+      <button class="btn ghost" style="width:100%;justify-content:center;margin-top:8px" onclick="copyText($('shUrl').value,'shMsg')">📋 העתקה</button>
+      <input id="shUrl" readonly class="tinyurl"><div class="hint center" id="shMsg"></div>
+    </div>
+  </div>
   <div id="linkDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:10">
     <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
       <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('linkDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
-      <div id="klAva" style="display:flex;justify-content:center"></div>
-      <h2 id="klName" style="margin:8px 0 2px"></h2>
-      <div class="hint">🔗 ← 📱</div>
-      <div class="linkbox"><input id="klUrl" type="text" readonly><button class="btn" onclick="copyKidLink()">העתקה</button></div>
+      <span class="dlgtag kid" style="margin:-4px auto 8px;display:inline-block">🧒 קישור לילד</span>
+      <div class="hint">הקישור הזה מיועד ל:</div>
+      <div id="klAva" style="display:flex;justify-content:center;margin-top:6px"></div>
+      <h2 id="klName" style="margin:6px 0 0"></h2>
+      <div class="hint" id="klFor"></div>
+      <a class="btn wa" id="klWa" target="_blank" rel="noopener" style="margin-top:12px">💬 שליחה בוואטסאפ</a>
+      <button class="btn ghost" style="width:100%;justify-content:center;margin-top:8px" onclick="copyKidLink()">📋 העתקה</button>
+      <input id="klUrl" type="text" readonly class="tinyurl">
       <div class="hint" id="klMsg" style="margin-top:6px"></div>
     </div>
   </div>
@@ -755,7 +806,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div id="rSuggest" class="hidden"></div>
       <div class="actions" style="justify-content:center">
         <button class="btn big" onclick="openModes(curSet)">▶ לשחק</button>
-        <button class="btn ghost" onclick="openShare()">🔗 שיתוף</button>
+        <button class="btn ghost" onclick="openPracticeShare(curSet)">🎁 לשלוח להורה אחר</button>
         <button class="btn ghost" id="rDel" onclick="delSet()" aria-label="מחיקת התרגול">🗑</button>
         <label class="btn ghost" style="cursor:pointer"><input type="checkbox" id="rCompete" onchange="toggleCompete(this.checked)" style="width:18px;height:18px;accent-color:var(--blue)"> 🏅 תחרות</label>
       </div>
@@ -780,6 +831,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     <div class="car" id="subCar"></div>
     <div id="kComp" style="margin-top:18px"></div>
   </section>
+
+  <!-- PARENT: the family – kids (their links) and the adults who help -->
+  <section id="vFamily" class="hidden"><div id="famBody"></div></section>
 
   <!-- PARENT: catalog of ready practice sets -->
   <section id="vCat" class="hidden">
@@ -864,7 +918,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       </div>
     </div>
   </section>
-  <footer class="pfoot"><a href="/privacy.html" target="_blank" rel="noopener">🔒 מדיניות פרטיות</a><span>·</span><button class="linkbtn" onclick="openDelAcc()">🗑 מחיקת חשבון</button></footer>
+  <footer class="pfoot"><a href="/privacy.html" target="_blank" rel="noopener">🔒 מדיניות פרטיות</a><span>·</span><button class="linkbtn" id="footDel" onclick="window.SFF_ROLE&&window.SFF_ROLE!=='owner'?leaveFamily():openDelAcc()">🗑 מחיקת חשבון</button></footer>
 </div>
 <div id="delAccDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:12">
   <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
@@ -902,6 +956,13 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         document.querySelector('link[rel="manifest"]')?.remove();   // the icon then keeps this address
         window.SFF_KID_DEVICE=true;
       }
+    }catch(e){}
+  })();
+  (function(){
+    try{ const iv=new URLSearchParams(location.search).get('invite');
+      if(iv&&/^[A-Za-z0-9_-]{6,64}\.[A-Za-z0-9]{6,32}$/.test(iv)){ sessionStorage.setItem('sff_invite',iv);
+        ['sff_kids','sff_sets','sff_history','sff_data_fam'].forEach(k=>localStorage.removeItem(k));
+        window.history.replaceState(null,'',location.pathname); }
     }catch(e){}
   })();
   (function(){
@@ -982,22 +1043,76 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
       if (!u && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
       if (!u) u = await showLogin();
-      uid = u.uid; famId = uid; role = 'parent';
-      const fref = F.doc(fdb, `families/${famId}`);
-      const f = await F.getDoc(fref);
-      let token = f.exists() && f.data().inviteToken;
-      if (!token) {
-        token = Array.from(crypto.getRandomValues(new Uint8Array(18)), b => b.toString(16).padStart(2, '0')).join('');
-        await F.setDoc(fref, { inviteToken: token, createdAt: Date.now() }, { merge: true });
+      uid = u.uid; role = 'parent';
+      const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => b.toString(16).padStart(2, '0')).join('');
+      const myName = u.displayName || (u.email || '').split('@')[0] || 'הורה';
+      // 1. an invitation to join another family
+      let inviteMsg = null, inv = null;
+      try { inv = sessionStorage.getItem('sff_invite'); sessionStorage.removeItem('sff_invite'); } catch (e) {}
+      if (inv) {
+        const [ifam, icode] = inv.split('.');
+        try {
+          if (ifam === uid) inviteMsg = 'own';
+          else {
+            const mref = F.doc(fdb, `families/${ifam}/members/${uid}`);
+            const already = await F.getDoc(mref).catch(() => null);
+            if (!(already && already.exists())) {
+              const iref = F.doc(fdb, `families/${ifam}/invites/${icode}`), isnap = await F.getDoc(iref);
+              if (!isnap.exists()) throw new Error('missing');
+              const I = isnap.data(); if (I.used) throw new Error('used'); if (I.exp < Date.now()) throw new Error('expired');
+              await F.setDoc(mref, { role: I.role, name: myName, kids: I.kids || [], invite: icode, at: Date.now() });
+              await F.updateDoc(iref, { used: true, usedBy: uid });
+            }
+            await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayUnion(ifam) }, { merge: true });
+            LS.setItem('sff_active_fam', ifam); inviteMsg = 'joined';
+          }
+        } catch (e) { inviteMsg = 'bad:' + (e && e.message || e); }
       }
+      // 2. the adult's own family always exists
+      const own = F.doc(fdb, `families/${uid}`), ownSnap = await F.getDoc(own);
+      if (!ownSnap.exists() || !ownSnap.data().inviteToken) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName }, { merge: true });
+      else if (!ownSnap.data().name) await F.setDoc(own, { name: myName }, { merge: true });
+      // 3. every family this adult belongs to, and the active one
+      const us = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null);
+      const famIds = [uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid))];
+      const famInfo = [];
+      for (const fid of famIds) {
+        try {
+          const fsn = await F.getDoc(F.doc(fdb, `families/${fid}`)); if (!fsn.exists()) continue;
+          let r = 'owner', m = null;
+          if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
+          famInfo.push({ id: fid, name: fsn.data().name || '', role: r, member: m, token: fsn.data().inviteToken });
+        } catch (e) {}
+      }
+      let active = LS.getItem('sff_active_fam'); if (!famInfo.some(x => x.id === active)) active = uid;
+      const cur = famInfo.find(x => x.id === active) || famInfo[0];
+      famId = cur.id;
+      // the data kept on this device belongs to one family – never mix families
+      const dataFam = LS.getItem('sff_data_fam');
+      if (dataFam && dataFam !== famId) { ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', famId); location.reload(); await new Promise(() => {}); }
+      LS.setItem('sff_data_fam', famId);
+      W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
+      W.SFF_FAMS = famInfo.map(({ id, name, role }) => ({ id, name, role }));
+      let token = cur.token;
       W.SFF_APP_URL = `${location.origin}/?f=${famId}&t=${token}`;
+      // 4. family management (rules decide what each role may really do)
+      W.__sffFamily = {
+        famId, famName: cur.name,
+        members: async () => (await F.getDocs(F.collection(fdb, `families/${famId}/members`))).docs.map(d => ({ uid: d.id, ...d.data() })),
+        invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false }); return `${location.origin}/?invite=${famId}.${code}`; },
+        remove: async muid => F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`)),
+        leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); location.reload(); },
+        switchTo: fid => { LS.setItem('sff_active_fam', fid); location.reload(); }
+      };
       if (role === 'parent') W.__sffDeleteAccount = async () => {
-      const fam = `families/${famId}`;
-      for (const sub of ['sets', 'progress', 'devices', 'fam']) {
+      const fam = `families/${uid}`;
+      for (const sub of ['sets', 'progress', 'devices', 'fam', 'members', 'invites']) {
         const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`));
         await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
       }
       await F.deleteDoc(F.doc(fdb, fam));
+      for (const x of (W.SFF_FAMS || [])) if (x.role !== 'owner') { try { await F.deleteDoc(F.doc(fdb, `families/${x.id}/members/${uid}`)); } catch (e) {} }
+      try { await F.deleteDoc(F.doc(fdb, `users/${uid}`)); } catch (e) {}
       try { await auth.currentUser.delete(); }
       catch (e) {
         if (String(e.code).includes('requires-recent-login')) {
@@ -1100,8 +1215,10 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       document.body.appendChild(el);
       el.querySelector('#fbGo').onclick = async () => {
         try {
-          const { getAuth, GoogleAuthProvider, signInWithPopup } = await import(base + 'firebase-auth.js');
-          const r = await signInWithPopup(getAuth(), new GoogleAuthProvider());
+          const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = await import(base + 'firebase-auth.js');
+          const r = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE)            // tests only: a fake Google account on the local emulator
+            ? await signInWithCredential(getAuth(), GoogleAuthProvider.credential(JSON.stringify(W.SFF_TEST_GOOGLE)))
+            : await signInWithPopup(getAuth(), new GoogleAuthProvider());
           el.remove(); resolve(r.user);
         } catch (e) { el.querySelector('#fbErr').textContent = '⚠️ ' + (e.code || e.message); }
       };
@@ -1265,23 +1382,24 @@ async function ask(prompt, opts={}){
 
 /* ---------- navigation ---------- */
 function show(v){
-  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
+  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vFamily','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
   window.scrollTo(0,0);
 }
 function go(mode){
   if(typeof locked==='function' && locked() && mode!=='kid') mode='kid';
   if(mode==='admin' && !document.documentElement.classList.contains('isadmin')) mode='kids';
-  const parentSide = mode==='parent'||mode==='stats'||mode==='kids';
+  const parentSide = mode==='parent'||mode==='stats'||mode==='kids'||mode==='family';
   $('tabParent').classList.toggle('on',parentSide);
   $('tabKid').classList.toggle('on',mode==='kid');
   $('tabAdmin').classList.toggle('on',mode==='admin');
   $('pNav').classList.toggle('hidden',!parentSide);
   $('pTabKids').classList.toggle('on',mode==='kids');
-  $('pTabStats').classList.toggle('on',mode==='stats');
+  $('pTabStats').classList.toggle('on',mode==='stats'); $('pTabFam').classList.toggle('on',mode==='family');
   document.body.classList.remove('young');
   document.body.classList.toggle('kidside', mode==='kid');
   if(mode==='kids'||mode==='parent'){ renderKids(); show('vKids'); }
   else if(mode==='stats'){ fillStatsFilters(); renderStats(); show('vStats'); }
+  else if(mode==='family'){ show('vFamily'); renderFamily(); }
   else if(mode==='admin'){ renderAdmin(); show('vAdmin'); }
   else { renderKidSets(); show('vKid'); }
 }
@@ -1710,6 +1828,7 @@ function renderCatalog(){
       ${soon?'<button class="btn big" disabled style="width:100%;justify-content:center;margin-top:10px">🔔 בקרוב</button>'
         :has?`<button class="btn ghost big" style="width:100%;justify-content:center;margin-top:10px" onclick="go('kids')">✓ כבר אצל ${esc(k.name)}</button>`
         :`<button class="btn big" style="width:100%;justify-content:center;margin-top:10px" onclick="openAddDialog('${x.id}'${k?`,'${k.id}'`:''})">＋ הוספה${k?' ל'+esc(k.name):''}</button>`}
+      ${soon?'':`<button class="linkbtn" style="display:block;margin:10px auto 0" onclick="shareCatalog('${x.id}')">🎁 לשלוח להורה אחר</button>`}
     </div>`; };
   $('catList').innerHTML=(mine.length?mine.map(card).join(''):`<div class="card center"><p class="sub" style="margin:0">${k?`עוד אין תרגול מוכן לכיתה ${GRADES[k.grade]}`:'—'}</p></div>`)
     +(other.length?`<h3 style="margin:18px 4px 8px">כיתות אחרות</h3>${other.map(card).join('')}`:'')
@@ -1937,7 +2056,7 @@ async function qaAllSets(){
   QA_ALL_BUSY=false; renderKids();
 }
 function renderKids(){
-  const slides=kids.map(k=>{
+  const slides=visibleKids().map(k=>{
     const ss=kidSets(k), pct=ss.length?ss.reduce((a,x)=>a+setProgress(x),0)/ss.length:0;
     const rows=ss.map(x=>{ const [c,ico]=subjStyle(x.subject); const dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c);
       return `<button class="prow" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}</span>
@@ -1945,13 +2064,13 @@ function renderKids(){
         <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`}).join('');
     const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?`<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button>`:'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}</div>`).join('');
     return `<div class="card herocard kidhero">
-      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button><button class="btn ghost small" onclick="editKid('${k.id}')" aria-label="עריכה">✎</button></span></div>
+      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button>${canManage()?`<button class="btn ghost small" onclick="editKid('${k.id}')" aria-label="עריכה">✎</button>`:''}</span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
         <div class="m">🏆 ${kidTrophies(k)}<small>גביעים</small></div><div class="m">🔥 ${kidStreak(k)}<small>ימים ברצף</small></div></div>
       <div style="display:flex;flex-direction:column;gap:10px">${pend}${rows}</div>
       <button class="btn ${ss.length?'ghost':'big'}" style="justify-content:center;margin-top:auto" onclick="openCatalog('${k.id}')">＋ תרגול ל${esc(k.name)}</button>
     </div>`; });
-  slides.push(`<div class="card herocard kidhero addcard" id="kidForm">
+  if(canManage()) slides.push(`<div class="card herocard kidhero addcard" id="kidForm">
       <div class="center">${mascot('wow',KF.color)}<h2 id="kfTitle" style="margin-top:6px">${KF.id?'עריכה':'＋ ילד/ה'}</h2></div>
       <div><label for="kfName">שם</label><input id="kfName" type="text" placeholder="נועה" maxlength="20"></div>
       <div><label for="kfGrade">כיתה</label><select id="kfGrade"></select></div>
@@ -1963,6 +2082,7 @@ function renderKids(){
   renderCar('kidCar',slides);
   const pend=qaAllPending().length; $('qaAll').classList.toggle('hidden',!pend&&!QA_ALL_BUSY); if(pend&&!QA_ALL_BUSY) $('qaAllMsg').textContent=`${pend} 📚`;
   if(pend && sample && !QA_ALL_BUSY && !window.__qaAuto){ window.__qaAuto=true; setTimeout(qaAllSets,800); }
+  if(!$('kfName')) return;                       // helpers / tutors have no "add a kid" card
   gradeOptions($('kfGrade'));
   $('kfName').value = KF.id ? kidById(KF.id).name : (prevName||'');
   $('kfGrade').value = KF.id ? kidById(KF.id).grade : (prevGrade??3);
@@ -2817,7 +2937,7 @@ function ownerUnlock(){ lsSet('sff_unlock','1'); LOCK=null; lsSet('sff_lock',nul
 const QUEUE={};
 function qwrite(key, fn){ if(window.__sffDeleting) return Promise.resolve(); const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
 const sent={};
-function pushKids(){ if(!DB||!IS_OWNER) return;
+function pushKids(){ if(!DB||!IS_OWNER||!canManage()) return;
   const list=kids.map(({id,name,grade,color,resetAt})=>({id,name,grade,color,...(resetAt?{resetAt}:{})}));
   const j=JSON.stringify(list); if(sent.kids===j) return; sent.kids=j;
   qwrite('kids',()=>DB.doc('fam/kids').set({list})); }
@@ -2904,15 +3024,89 @@ async function deleteAccount(){
   }catch(e){ window.__sffDeleting=false; b.disabled=false; msg.textContent='⚠️ '+(e&&e.message?e.message:'לא הצליח – נסו שוב'); }
 }
 
+/* ---------- family: roles, kids' links, adults ---------- */
+const canManage=()=>!window.SFF_ROLE||['owner','admin'].includes(window.SFF_ROLE);
+const isTutor=()=>window.SFF_ROLE==='tutor';
+const visibleKids=()=>isTutor()&&window.SFF_MEMBER&&Array.isArray(window.SFF_MEMBER.kids)&&window.SFF_MEMBER.kids.length?kids.filter(k=>window.SFF_MEMBER.kids.includes(k.id)):kids;
+const ROLES={owner:['👑','מנהל/ת','הכול'],admin:['👑','מנהל/ת','הכול'],helper:['💛','מלווה','לראות התקדמות ולהוסיף תרגולים'],tutor:['📚','מורה','רק הילדים שנבחרו']};
+const roleBadge=r=>{ const x=ROLES[r]||ROLES.helper; return `<span class="rbadge r-${r==='owner'?'admin':r}">${x[0]} ${x[1]}</span>`; };
+async function renderFamily(){
+  const F=window.__sffFamily, el=$('famBody');
+  const fams=window.SFF_FAMS||[];
+  const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||'')}</button>`).join('')}</div>` : '';
+  const kidRows=visibleKids().map(k=>{ const played=history.some(h=>h.kidId===k.id);
+    return `<div class="frow">${avatarHtml(k,44)}<div class="who"><b>${esc(k.name)}</b><span class="hint">כיתה ${GRADES[k.grade]} · ${played?'📱 משחק/ת':'⚪ עוד לא התחיל/ה'}</span></div>
+      <button class="btn small" onclick="openKidLink('${k.id}')">🔗 לשלוח ל${esc(k.name)}</button></div>`; }).join('') || `<p class="hint">עוד אין ילדים${canManage()?' – מוסיפים בלשונית 👧 ילדים':''}</p>`;
+  el.innerHTML=`${sw}
+    <div class="card"><h3 class="fh">🧒 הילדים <span class="hint">קישור אישי לטלפון של כל ילד</span></h3>${kidRows}</div>
+    <div class="card"><h3 class="fh">👩‍👦 המבוגרים <span class="hint">כניסה עם Google</span></h3><div id="famAdults"><p class="hint">⏳</p></div>
+      ${F&&canManage()?`<button class="addline" onclick="openInvite()">＋ הזמנת מבוגר</button>`:''}
+      ${F&&window.SFF_ROLE&&window.SFF_ROLE!=='owner'?`<button class="linkbtn" style="margin-top:10px" onclick="leaveFamily()">🚪 יציאה מהמשפחה</button>`:''}</div>`;
+  if(!F){ $('famAdults').innerHTML='<p class="hint">ניהול מבוגרים זמין אחרי כניסה עם Google</p>'; return; }
+  let ms=[]; try{ ms=await F.members(); }catch(e){}
+  const me=window.SFF_UID, kidNames=ids=>(ids||[]).map(id=>(kidById(id)||{}).name).filter(Boolean).join(', ');
+  const ownerRow = window.SFF_ROLE==='owner'
+    ? `<div class="frow"><span class="ava-e" style="background:#FFE69A">👩</span><div class="who"><b>${esc(window.SFF_MYNAME||'')} (את/ה)</b><span class="hint">הכול</span></div>${roleBadge('owner')}</div>`
+    : `<div class="frow"><span class="ava-e" style="background:#FFE69A">👩</span><div class="who"><b>${esc(F.famName||'')}</b><span class="hint">פתח/ה את המשפחה</span></div>${roleBadge('owner')}</div>`;
+  $('famAdults').innerHTML = ownerRow + ms.map(m=>`<div class="frow"><span class="ava-e" style="background:${m.role==='tutor'?'#EDE9FF':m.role==='admin'?'#FFE69A':'#DDF6EC'}">${m.role==='tutor'?'🧑‍🏫':m.role==='admin'?'🧑':'👵'}</span>
+      <div class="who"><b>${esc(m.name||'')}${m.uid===me?' (את/ה)':''}</b><span class="hint">${esc(kidNames(m.kids)||'כל הילדים')}</span></div>${roleBadge(m.role)}
+      ${canManage()&&m.uid!==me?`<button class="btn ghost small" onclick="removeMember('${m.uid}',this)" aria-label="הסרה">✕</button>`:''}</div>`).join('');
+}
+let INV={role:'helper',kids:[]};
+function openInvite(){
+  INV={role:'helper',kids:[]}; $('invName').value=''; $('invForm').classList.remove('hidden'); $('invDone').classList.add('hidden'); invRender(); $('invDlg').classList.remove('hidden');
+}
+function invRender(){
+  $('invRoles').innerHTML=['helper','tutor','admin'].map(r=>`<button class="${INV.role===r?'on':''}" onclick="INV.role='${r}';invRender()"><b>${ROLES[r][0]} ${ROLES[r][1]}</b><small>${ROLES[r][2]}</small></button>`).join('');
+  $('invKidsWrap').classList.toggle('hidden',INV.role!=='tutor');
+  $('invKids').innerHTML=kids.map(k=>`<button class="${INV.kids.includes(k.id)?'on':''}" onclick="INV.kids=INV.kids.includes('${k.id}')?INV.kids.filter(x=>x!=='${k.id}'):INV.kids.concat('${k.id}');invRender()">${esc(k.name)}</button>`).join('');
+}
+async function makeInvite(){
+  if(INV.role==='tutor'&&!INV.kids.length){ toast('👆 בחרו ילד/ה'); return; }
+  const name=$('invName').value.trim();
+  try{
+    const url=await window.__sffFamily.invite(INV.role,name,INV.role==='tutor'?INV.kids:[]);
+    $('invUrl').value=url; $('invIco').textContent=ROLES[INV.role][0];
+    $('invWho').textContent=name||'מבוגר/ת'; $('invRole').textContent=`${ROLES[INV.role][1]} · ${INV.role==='tutor'?INV.kids.map(id=>(kidById(id)||{}).name).join(', '):ROLES[INV.role][2]}`;
+    $('invWa').href='https://wa.me/?text='+encodeURIComponent(`${name?name+', ':''}הזמנה להצטרף ל-Study for fun ולעקוב אחרי התרגול של הילדים 💛\n${url}`);
+    $('invForm').classList.add('hidden'); $('invDone').classList.remove('hidden'); $('invMsg').textContent='';
+  }catch(e){ toast('⚠️ '+esc(e.message||e)); }
+}
+async function removeMember(muid,btn){
+  if(btn.dataset.arm!=='1'){ btn.dataset.arm='1'; btn.textContent='להסיר?'; setTimeout(()=>{ btn.dataset.arm=''; btn.textContent='✕'; },3000); return; }
+  try{ await window.__sffFamily.remove(muid); renderFamily(); }catch(e){ toast('⚠️ '+esc(e.message||e)); }
+}
+function leaveFamily(){ if(confirm('לצאת מהמשפחה הזו?')) window.__sffFamily.leave(); }
+// a ready practice set for another family: a link (catalog sets) or a code
+function openPracticeShare(set){
+  const code=set.src?String(set.src).replace(/_/g,'-'):'';
+  let url;
+  if(code) url=`${location.origin}/?add=${encodeURIComponent(code)}`;
+  else { curSet=set; openShare(); url=$('shareCode').value; $('shareBox').classList.add('hidden'); }
+  const [c,ico]=subjStyle(set.subject); $('shIco').textContent=ico; $('shIco').style.background=c;
+  $('shWhat').textContent=`${set.subject} · כיתה ${GRADES[set.grade]}`;
+  $('shUrl').value=url; $('shMsg').textContent='';
+  $('shWa').href='https://wa.me/?text='+encodeURIComponent(`תרגול מוכן ב-Study for fun: ${set.subject} כיתה ${GRADES[set.grade]} 🎁\n${code?url:'קוד: '+url}`);
+  $('shDlg').classList.remove('hidden');
+}
+function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) openPracticeShare({subject:x.subject,grade:x.grade,src:x.id}); }
+
 /* kid link dialog */
 function openKidLink(id){ const k=kidById(id); if(!k) return;
-  $('klAva').innerHTML=avatarHtml(k,90); $('klName').textContent=k.name;
+  $('klAva').innerHTML=avatarHtml(k,80); $('klName').textContent=`${k.name} · כיתה ${GRADES[k.grade]}`;
+  $('klFor').textContent=`לטלפון של ${k.name} בלבד · בלי סיסמה`;
+  const url=`${window.SFF_APP_URL||APP_URL}#kid-${k.id}`;
+  $('klWa').href='https://wa.me/?text='+encodeURIComponent(`${k.name}, זה הקישור שלך לתרגול 🎮\n${url}`);
   $('klUrl').value=`${window.SFF_APP_URL||APP_URL}#kid-${k.id}`; $('klMsg').textContent=''; $('linkDlg').classList.remove('hidden'); }
 async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl').value); $('klMsg').textContent='✓'; }catch(e){ $('klUrl').select(); $('klMsg').textContent='⌘C'; } }
 
 applyLock();
 go(locked()?'kid':'kids');
-cloudInit().then(openPendingAdd).then(()=>setTimeout(autoUpdateSets,2500));
+cloudInit().then(()=>{ const m=window.SFF_INVITE_MSG; if(!m) return;
+    if(m==='joined'){ toast(`✓ הצטרפת למשפחה של ${esc((window.__sffFamily||{}).famName||'')}`); go('family'); }
+    else if(String(m).startsWith('bad')) toast('⚠️ ההזמנה כבר נוצלה או שפג תוקפה – בקשו הזמנה חדשה');
+    if(window.SFF_ROLE&&window.SFF_ROLE!=='owner'&&$('footDel')) $('footDel').textContent='🚪 יציאה מהמשפחה';
+  }).then(openPendingAdd).then(()=>setTimeout(autoUpdateSets,2500));
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>

@@ -2,59 +2,93 @@ rules_version = '2';
 
 // Study for fun – who can read and write what.
 //
-// families/{familyId}            familyId = the parent's uid (Google sign-in)
-//   inviteToken                  secret inside every kid link
-//   /fam/kids                    the parent's list of kids
+// families/{familyId}            familyId = the founding parent's uid (Google sign-in)
+//   inviteToken, name            secret inside every kid link · the family's display name
+//   /fam/kids                    the list of kids
 //   /sets/{setId}                practice sets (questions, chapters …)
-//   /progress/{kidId}            the kid's games, trophies, chosen name and picture
+//   /progress/{kidId}            a kid's games, trophies, chosen name and picture
 //   /devices/{uid}               a kid's phone/tablet (anonymous sign-in) that opened a kid link
+//   /members/{uid}               another adult in the family: { role: admin | helper | tutor, name, kids[], invite }
+//   /invites/{code}              an invitation for one adult: { role, name, kids[], by, exp, used }
+// users/{uid}                    { fams: [familyId…] } – the families an adult belongs to (written by that adult)
 //
-// Parent: reads and writes everything in their own family.
-// Kid device: joins once with the link's token, then reads the family's practices
-//             and writes only progress.
+// Founding parent and admins: everything in the family.
+// Helpers / tutors: read everything in the family, add and change practice sets, write progress.
+//                   (A tutor's view is limited to the chosen kids in the app.)
+// Kid device: joins once with the link's token, reads the family's practice sets, writes only progress.
 service cloud.firestore {
   match /databases/{database}/documents {
 
     function signedIn() { return request.auth != null; }
-    function isParent(familyId) {
-      return signedIn()
-        && request.auth.uid == familyId
-        && request.auth.token.firebase.sign_in_provider != 'anonymous';
+    function google() { return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous'; }
+    function famPath(f) { return /databases/$(database)/documents/families/$(f); }
+    function isOwner(f) { return google() && request.auth.uid == f; }
+    function isMember(f) { return google() && exists(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)); }
+    function memberRole(f) { return get(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)).data.role; }
+    function isAdmin(f) { return isOwner(f) || (isMember(f) && memberRole(f) == 'admin'); }
+    function isAdult(f) { return isOwner(f) || isMember(f); }
+    function isDevice(f) {
+      return signedIn() && exists(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid));
     }
-    function isDevice(familyId) {
-      return signedIn()
-        && exists(/databases/$(database)/documents/families/$(familyId)/devices/$(request.auth.uid));
+
+    match /users/{uid} {
+      allow read, write: if google() && request.auth.uid == uid;
     }
 
     match /families/{familyId} {
-      allow read, write: if isParent(familyId);
+      allow read: if isAdult(familyId);
+      allow create, delete: if isOwner(familyId);
+      allow update: if isAdmin(familyId);
 
       match /devices/{uid} {
-        allow read: if isParent(familyId) || (signedIn() && request.auth.uid == uid);
+        allow read: if isAdult(familyId) || (signedIn() && request.auth.uid == uid);
         allow create: if signedIn()
           && request.auth.uid == uid
           && request.resource.data.keys().hasOnly(['token', 'at'])
-          && request.resource.data.token
-             == get(/databases/$(database)/documents/families/$(familyId)).data.inviteToken;
-        allow delete: if isParent(familyId);
+          && request.resource.data.token == get(famPath(familyId)).data.inviteToken;
+        allow delete: if isAdmin(familyId);
         allow update: if false;
       }
 
       match /fam/{docId} {
-        allow read: if isParent(familyId) || isDevice(familyId);
-        allow write: if isParent(familyId);
+        allow read: if isAdult(familyId) || isDevice(familyId);
+        allow write: if isAdmin(familyId);
       }
 
       match /sets/{setId} {
-        allow read: if isParent(familyId) || isDevice(familyId);
-        allow write: if isParent(familyId);
+        allow read: if isAdult(familyId) || isDevice(familyId);
+        allow create, update: if isAdult(familyId);
+        allow delete: if isAdmin(familyId);
       }
 
       match /progress/{kidId} {
-        allow read: if isParent(familyId) || isDevice(familyId);
-        allow write: if (isParent(familyId) || isDevice(familyId))
+        allow read: if isAdult(familyId) || isDevice(familyId);
+        allow write: if (isAdult(familyId) || isDevice(familyId))
           && request.resource.data.keys().hasOnly(['history', 'profile']);
-        allow delete: if isParent(familyId);
+        allow delete: if isAdmin(familyId);
+      }
+
+      // other adults of the family
+      match /members/{uid} {
+        allow read: if isAdult(familyId) || (google() && request.auth.uid == uid);
+        // joining: only yourself, only with a valid, unused invitation, and only with the role it gives
+        allow create: if google() && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['role', 'name', 'kids', 'invite', 'at'])
+          && exists(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite))
+          && get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.used == false
+          && get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.exp > request.time.toMillis()
+          && request.resource.data.role == get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.role;
+        allow update: if isAdmin(familyId);
+        allow delete: if isAdmin(familyId) || (google() && request.auth.uid == uid);   // remove someone · leave
+      }
+
+      match /invites/{code} {
+        allow create, delete: if isAdmin(familyId);
+        allow read: if google();                    // the code itself is the secret
+        // the invited adult marks it used (once)
+        allow update: if google() && resource.data.used == false
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['used', 'usedBy'])
+          && request.resource.data.used == true && request.resource.data.usedBy == request.auth.uid;
       }
     }
 

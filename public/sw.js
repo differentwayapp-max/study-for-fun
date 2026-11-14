@@ -1,6 +1,6 @@
 // Study for fun – service worker: the app opens even without network.
 // Bump VERSION on every deploy that changes the app shell.
-const VERSION = 'sff-v43';
+const VERSION = 'sff-v44';
 const SHELL = [
   '/',
   '/index.html',

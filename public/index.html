@@ -234,6 +234,20 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .wchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px;max-height:40vh;overflow:auto}
 .wchips span{border-radius:999px;padding:2px 10px;font-size:.85em;border:1.5px solid}
 .wchips .ok{background:#E3F8EF;border-color:#24C78E}.wchips .bad{background:var(--badbg);border-color:#F5B5B7}
+.wcard .wtabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.wcard .wtabs button{border:1.5px solid var(--ink);border-radius:999px;padding:3px 12px;background:#fff;cursor:pointer;font:inherit;font-size:.85em}
+.wcard .wtabs .on{background:var(--ink);color:#fff}
+.wlist{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.wchip{border:var(--line);border-radius:14px;padding:5px 10px;display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:600;font-size:.95em;cursor:pointer;color:var(--ink)}
+.wchip i{font-style:normal;font-size:.78em;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:0 6px}
+.wchip.r{background:#FFD9D9}.wchip.o{background:#FFE9C2}.wchip.g{background:#D9F6EA;cursor:default;font-size:.85em;padding:3px 9px}
+.wchip.sel{outline:3px solid var(--blue);outline-offset:2px}
+.wlegend{display:flex;gap:12px;margin-top:8px;font-size:.8em;color:var(--ink2)}.wlegend span{display:flex;align-items:center;gap:4px}
+.wlegend .dot{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--ink)}.wlegend .dot.r{background:#FFD9D9}.wlegend .dot.o{background:#FFE9C2}
+.wdetail{border:2px dashed var(--ink);border-radius:16px;padding:12px;margin-top:12px;background:#FFFBEF}
+.wdetail .wtop{display:flex;align-items:center;gap:12px}.wdetail .wemo{font-size:2.4em}
+.wrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.wrow span{background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:1px 9px;font-size:.85em}
+.wgood{border-top:2px dashed #D9D4EA;margin-top:14px;padding-top:10px}
 .qbox{font-family:var(--display);font-weight:600;font-size:1.55em;line-height:1.35;margin:0 0 20px;unicode-bidi:plaintext}
 body.young .qbox{font-size:1.8em}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -593,6 +607,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     <div id="sEmpty" class="card center hidden"><div class="big">📊</div><p class="sub" style="margin:0">0 🎮</p></div>
     <div id="sBody">
       <div class="stats" id="sStats"></div>
+      <div id="sWords"></div>
       <div class="card" id="sExam"></div>
       <div class="card hidden" id="sComp"></div>
       <div class="card" id="sFocus"></div>
@@ -1540,7 +1555,7 @@ const ART={
  riddle:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3" font-family="Fredoka" font-weight="700" font-size="20" text-anchor="middle"><rect x="6" y="44" width="30" height="30" rx="7" fill="#F2A63B"/><rect x="45" y="44" width="30" height="30" rx="7" fill="#BFE6FF"/><rect x="84" y="44" width="30" height="30" rx="7" fill="#FFD6E2"/></g><g font-family="Fredoka" font-weight="700" font-size="19" text-anchor="middle" fill="#1B2A4A"><text x="21" y="66">C</text><text x="60" y="66">A</text><text x="99" y="66">T</text></g><circle cx="60" cy="20" r="16" fill="#B9A7FF" stroke="#1B2A4A" stroke-width="3"/><text x="60" y="27" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="20" fill="#1B2A4A">?</text></svg>`
 };
 const SUBJ={ 'אנגלית':['#2F6BFF','Ab'], 'מתמטיקה':['#F2A63B','+−'], 'עברית / לשון':['#FF5C8A','אב'], 'מדעים':['#24C78E','🔬'], 'היסטוריה':['#B9A7FF','🏛️'], 'תנ"ך':['#F2A63B','📜'] };
-const subjStyle=s=>SUBJ[s]||['#2F6BFF','★'];
+const subjStyle=s=>SUBJ[s]||SUBJ[String(s||'').replace(/^🎯\s*/,'')]||['#2F6BFF','★'];
 
 /* ---------- kid home ---------- */
 
@@ -2069,7 +2084,7 @@ function sfx(ok){
   }catch(e){}
 }
 const EN_SAY=t=>/[A-Za-z]/.test(t||'') && !/[\u0590-\u05FF]/.test(t||'');
-const isEnSet=s=>!!s && (s.subject==='אנגלית' || /english/i.test(s.subject||''));
+const isEnSet=s=>!!s && (/אנגלית/.test(s.subject||'') || /english/i.test(s.subject||''));
 function sayEn(text, force){
   if((MUTE&&!force) || !G || !isEnSet(G.set) || !EN_SAY(text)) return;
   try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){}
@@ -2147,6 +2162,72 @@ function recordSession(by, right, n){
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);
 }
+/* ---------- words to strengthen (from each question's result) ---------- */
+const MODE_ICO={choice:'✅',memory:'🃏',match:'〰️',riddle:'🧩',spell:'🔤'};
+let WSTAT={};   // setId → {items, tab, sel}
+function wordCat(set,q){ return passageOf(set,q)?'unseen':(/_{2,}/.test(q.question)||/which is correct/i.test(q.question))?'grammar':'vocab'; }
+function wordStats(set, H){
+  const by={};
+  [...H].filter(h=>h.setId===set.id&&Array.isArray(h.qr)).reverse().forEach(h=>h.qr.forEach(([i,ok,pick])=>{
+    const q=set.questions[i]; if(!q) return;
+    const label=String(q.options[q.answer]).trim(), key=label.toLowerCase();
+    const x=by[key]=by[key]||{label,q,cat:wordCat(set,q),ok:0,bad:0,last:0,seq:[],picks:{}};
+    ok?x.ok++:x.bad++; if(!ok) x.last=h.at; x.seq.push([h.mode||'choice',ok]);
+    if(!ok&&Number.isInteger(pick)&&q.options[pick]!=null){ const w=q.options[pick]; x.picks[w]=(x.picks[w]||0)+1; }
+  }));
+  return Object.values(by);
+}
+const wState=x=>x.bad>=2&&x.bad>=x.ok?'r':x.bad?'o':'g';
+function whenTxt(t){ const d=Math.round((new Date().setHours(0,0,0,0)-new Date(t).setHours(0,0,0,0))/864e5); return d<=0?'היום':d===1?'אתמול':fmtDate(new Date(t).toISOString().slice(0,10)); }
+function renderWords(H){
+  const ids=[...new Set(H.filter(h=>Array.isArray(h.qr)&&h.qr.length).map(h=>h.setId))];
+  const list=ids.map(getSet).filter(Boolean);
+  $('sWords').innerHTML=list.map(set=>{
+    const st=WSTAT[set.id]=WSTAT[set.id]||{tab:'all',sel:null}; st.items=wordStats(set,H);
+    const cats=['vocab','grammar','unseen'].filter(c=>st.items.some(x=>x.cat===c));
+    const items=st.items.filter(x=>st.tab==='all'||x.cat===st.tab);
+    const weak=items.filter(x=>x.bad).sort((a,b)=>b.bad-a.bad||b.last-a.last), good=items.filter(x=>!x.bad);
+    const seen=new Set(st.items.map(x=>x.label.toLowerCase()));
+    const all=set.words&&set.words.length?set.words:[...new Set(set.questions.map(q=>String(q.options[q.answer]).trim()))];
+    const notYet=all.filter(w=>![...seen].some(l=>l===w.toLowerCase()||l.startsWith(w.toLowerCase()+' ')||l.endsWith(' '+w.toLowerCase()))).length;
+    const sel=weak.find(x=>x.label===st.sel)||null;
+    const kid=kidOfSet(set), en=isEnSet(set);
+    const tabName={all:'הכול',vocab:'אוצר מילים',grammar:'דקדוק',unseen:'Unseen'};
+    return `<div class="card wcard"><h3 style="margin:0">🔤 מילים לחיזוק · ${esc(set.subject)}</h3>
+      <div class="hint">${esc(kid?kid.name:set.name)}${set.examDate&&daysLeft(set.examDate)>=0?' · '+daysLeftTxt(set.examDate):''}</div>
+      ${cats.length>1?`<div class="wtabs">${['all',...cats].map(c=>`<button class="${st.tab===c?'on':''}" onclick="WSTAT['${set.id}'].tab='${c}';WSTAT['${set.id}'].sel=null;renderStats()">${tabName[c]}</button>`).join('')}</div>`:''}
+      ${weak.length?`<div class="wlist">${weak.map(x=>`<button class="wchip ${wState(x)} ${sel===x?'sel':''}" dir="ltr" onclick="WSTAT['${set.id}'].sel=${esc(JSON.stringify(x.label))};renderStats()"><i>✗${x.bad}</i>${esc(x.label)}</button>`).join('')}</div>
+        <div class="wlegend"><span><i class="dot r"></i>טעות 2+</span><span><i class="dot o"></i>טעות אחת</span></div>`
+        :`<p class="sub" style="margin:10px 0 0">🌟 אין טעויות${items.length?'':' עדיין'}</p>`}
+      ${sel?`<div class="wdetail"><div class="wtop"><span class="wemo">${esc(sel.q.emoji||'⭐')}</span><div><b dir="ltr" style="font-size:1.35em">${esc(sel.label)}</b>
+          ${en&&EN_SAY(sel.label)?`<button class="btn ghost small" onclick="sayWord(${esc(JSON.stringify(sel.label))})" aria-label="השמעה">🔊</button>`:''}
+          <div class="hint" dir="auto">${esc(sel.q.explanation||'')}</div></div></div>
+        <div class="wrow"><span>✗ ${sel.bad}</span><span>✓ ${sel.ok}</span><span>📅 ${whenTxt(sel.last)}</span></div>
+        <div class="wrow">${sel.seq.slice(-8).map(([m,ok])=>`<span>${MODE_ICO[m]||'🎮'} ${ok?'✓':'✗'}</span>`).join('')}</div>
+        ${Object.keys(sel.picks).length?`<div class="hint" style="margin-top:8px">ענתה במקום: ${Object.entries(sel.picks).sort((a,b)=>b[1]-a[1]).map(([w,c])=>`<b dir="ltr">${esc(w)}</b> ×${c}`).join(' · ')}</div>`:''}
+        <div class="hint" style="margin-top:6px" dir="auto">❓ ${esc(sel.q.question)}</div></div>`:(weak.length?`<p class="hint" style="margin:8px 0 0">👆 לחיצה על מילה = פירוט</p>`:'')}
+      ${weak.length&&kid?`<button class="btn" style="width:100%;justify-content:center;margin-top:12px" onclick="makeWordDrill('${set.id}')">🎯 סט חיזוק · ${weak.length} ${weak.length===1?'מילה':'מילים'}</button>`:''}
+      <div class="wgood"><b>✅ יושבות טוב · ${good.length}</b>${good.length?`<div class="wlist">${good.sort((a,b)=>b.ok-a.ok).slice(0,12).map(x=>`<span class="wchip g" dir="ltr">${esc(x.label)}</span>`).join('')}${good.length>12?`<span class="wchip g">+${good.length-12}</span>`:''}</div>`:''}
+        ${notYet?`<div class="hint" style="margin-top:6px">⬜ עוד לא תורגלו: ${notYet}</div>`:''}</div>
+    </div>`; }).join('');
+}
+function sayWord(t){ try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }
+// a small practice set (for the same child) with exactly the words that had mistakes – no AI needed
+function makeWordDrill(setId){
+  const set=getSet(setId), st=WSTAT[setId]; if(!set||!st) return;
+  const weakKeys=new Set(st.items.filter(x=>x.bad&&(st.tab==='all'||x.cat===st.tab)).map(x=>x.label.toLowerCase()));
+  const qs=set.questions.filter(q=>weakKeys.has(String(q.options[q.answer]).trim().toLowerCase()) && !passageOf(set,q))
+    .map(({ch,...q})=>({...q, ch:0}));
+  if(!qs.length){ toast('📖 Unseen → ▶'); return; }
+  const id='r'+set.id, old=sets.find(x=>x.id===id);
+  const topics=[...new Set(qs.map(q=>q.topic))];
+  const body={kidId:set.kidId, name:set.name, grade:set.grade, subject:'🎯 '+String(set.subject).replace(/^🎯\s*/,''), topics, questions:qs,
+    chapters:[{title:'🎯 חיזוק', topics, count:qs.length}], examDate:set.examDate||'', dailyGoal:1, perRound:qs.length, compete:false, shared:true, reinf:set.id,
+    qa:{checked:qs.length,passed:qs.length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[]};
+  if(old){ Object.assign(old, body, {updated:Date.now()}); delete old.order; delete old.pos; }
+  else sets.unshift({id, created:Date.now(), ...body});
+  store.save(); toast(`🎯 ✓ ${qs.length}`); renderStats();
+}
 function fillStatsFilters(){
   const kids=[...new Set(history.map(h=>h.kid))], subs=[...new Set(history.map(h=>h.subject))];
   const keep=(id,vals,all)=>{const el=$(id),cur=el.value; el.innerHTML=`<option value="">${all}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join(''); if(vals.includes(cur)) el.value=cur;};
@@ -2159,6 +2240,7 @@ function renderStats(){
   renderCompCards();
   $('sEmpty').classList.toggle('hidden',H.length>0); $('sBody').classList.toggle('hidden',!H.length);
   if(!H.length) return;
+  renderWords(H);
   const qn=H.reduce((a,h)=>a+h.n,0), qr=H.reduce((a,h)=>a+h.right,0);
   const dayset=new Set(H.map(h=>new Date(h.at).toDateString()));
   $('sStats').innerHTML=`<div class="stat"><b>${H.length}</b><span>תרגולים שהושלמו</span></div><div class="stat"><b>${qn}</b><span>שאלות שנענו</span></div><div class="stat"><b>${Math.round(qr/qn*100)}%</b><span>הצלחה כללית</span></div><div class="stat"><b>${dayset.size}</b><span>ימים עם תרגול</span></div><div class="stat"><b>🏆 ${trophyCountFiltered(H)}</b><span>גביעים</span></div>`;

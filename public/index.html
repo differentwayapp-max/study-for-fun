@@ -746,7 +746,6 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       <div class="ava-big" id="pfPreview"></div>
       <input id="pfName" type="text" maxlength="14" style="max-width:260px;text-align:center;font-family:var(--display);font-size:1.4em;margin:10px auto 16px;display:block" aria-label="השם שלי">
       <div class="avagrid" id="pfGrid"></div>
-      <input id="pfPhoto" type="file" accept="image/*" class="hidden">
       <div class="actions" style="justify-content:center"><button class="btn big" onclick="saveProfile()">✓</button></div>
     </div>
   </section>
@@ -1799,7 +1798,6 @@ function renderSets(){}
 const AVA_EMOJI=['🦊','🐼','🐯','🦄','🐸','🐙','🦖','🐱','🐶','🐵'];
 function avatarHtml(k,size=56){
   const a=k&&k.avatar, st=`width:${size}px;height:${size}px`;
-  if(a&&a.type==='photo') return `<span class="ava" style="${st}"><img src="${a.value}" alt=""></span>`;
   if(a&&a.type==='emoji') return `<span class="ava emo" style="${st};font-size:${Math.round(size*.62)}px">${a.value}</span>`;
   return `<span class="ava" style="${st}">${mascot('happy',(a&&a.type==='mascot'&&a.value)||k?.color||'#2F6BFF')}</span>`;
 }
@@ -1815,20 +1813,14 @@ function renderProfile(){
   $('pfPreview').innerHTML=avatarHtml(tmp,130);
   const same=(t,v)=>PF.avatar.type===t&&PF.avatar.value===v;
   $('pfGrid').innerHTML=KID_COLORS.map(c=>`<button class="${same('mascot',c)?'on':''}" onclick="PF.avatar={type:'mascot',value:'${c}'};renderProfile()">${mascot('happy',c)}</button>`).join('')
-    +AVA_EMOJI.map(e=>`<button class="${same('emoji',e)?'on':''}" onclick="PF.avatar={type:'emoji',value:'${e}'};renderProfile()">${e}</button>`).join('')
-    +`<button class="${PF.avatar.type==='photo'?'on':''}" onclick="$('pfPhoto').click()" aria-label="תמונה שלי">📷</button>`;
+    +AVA_EMOJI.map(e=>`<button class="${same('emoji',e)?'on':''}" onclick="PF.avatar={type:'emoji',value:'${e}'};renderProfile()">${e}</button>`).join('');
 }
 function saveProfile(){
   const k=kidById(activeKid); const n=$('pfName').value.trim();
   k.avatar=PF.avatar; k.nick = n && n!==k.name ? n : (n? null : k.nick); if(n===k.name) k.nick=null;
   saveKidsLocal(); pushProgress(k.id); go('kid');
 }
-document.addEventListener('change',e=>{ if(e.target.id!=='pfPhoto') return; const f=e.target.files[0]; e.target.value=''; if(!f) return;
-  const img=new Image(), url=URL.createObjectURL(f);
-  img.onload=()=>{ const c=document.createElement('canvas'), S=160; c.width=c.height=S; const x=c.getContext('2d');
-    const m=Math.min(img.width,img.height); x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,S,S);
-    PF.avatar={type:'photo',value:c.toDataURL('image/jpeg',.8)}; URL.revokeObjectURL(url); renderProfile(); };
-  img.src=url; });
+// personal photos are not offered (children's privacy) – characters and animals only
 
 /* ---------- kid: one card per subject ---------- */
 let activeKid=null;
@@ -2297,6 +2289,7 @@ function renderCompCards(){
 
 /* ---------- practice history & feedback ---------- */
 let history=[]; try{ history=JSON.parse(localStorage.getItem('sff_history')||'[]'); }catch(e){}
+kids.forEach(k=>{ if(k.avatar&&k.avatar.type==='photo') k.avatar=null; }); try{ localStorage.setItem('sff_kids',JSON.stringify(kids)); }catch(e){}
 setTimeout(()=>{ try{ if(applyResets()) rerender(); }catch(e){} },0);
 // drop games played before a child's progress was reset (on every device)
 function applyResets(){
@@ -2522,7 +2515,8 @@ async function cloudInit(){
     let changed=false;
     q.docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);
       (p.history||[]).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
-      if(k && IS_OWNER && p.profile){ if(p.profile.nick!==undefined&&k.nick!==p.profile.nick){k.nick=p.profile.nick;changed=true;} if(p.profile.avatar&&JSON.stringify(k.avatar)!==JSON.stringify(p.profile.avatar)){k.avatar=p.profile.avatar;changed=true;} }
+      if(k && IS_OWNER && p.profile){ if(p.profile.nick!==undefined&&k.nick!==p.profile.nick){k.nick=p.profile.nick;changed=true;} if(p.profile.avatar&&p.profile.avatar.type!=='photo'&&JSON.stringify(k.avatar)!==JSON.stringify(p.profile.avatar)){k.avatar=p.profile.avatar;changed=true;}
+        if(p.profile.avatar&&p.profile.avatar.type==='photo'){ if(k.avatar&&k.avatar.type==='photo') k.avatar=null; changed=true; pushProgress(k.id); } }
     });
     if(applyResets()) changed=true;
     if(changed){ history.sort((a,b)=>b.at-a.at); saveHistoryLocal(); saveKidsLocal(); rerender(); }

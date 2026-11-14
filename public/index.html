@@ -147,6 +147,7 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 /* mode picker */
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .modes .mode:last-child:nth-child(odd){grid-column:1/-1}
+.mode.readmode{background:#FFFBEF}.mode.readmode p{margin:0;font-size:.85em}
 
 .mode{--c:var(--blue);border:var(--line);border-radius:22px;background:var(--paper);padding:18px;text-align:center;cursor:pointer;box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s;position:relative}
 .mode:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--ink)}
@@ -1549,6 +1550,7 @@ function mascot(m='happy',body='#2F6BFF'){
 function starSvg(on){return `<svg viewBox="0 0 64 64" class="${on?'on':''}"><polygon points="${starPts(32,34,28,12)}" fill="${on?'#F2A63B':'#fff'}" stroke="#1B2A4A" stroke-width="4" stroke-linejoin="round"/></svg>`;}
 const TROPHY=`<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 10h28v14a14 14 0 0 1-28 0z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3.5" stroke-linejoin="round"/><path d="M18 14H9a9 9 0 0 0 11 13M46 14h9a9 9 0 0 1-11 13" fill="none" stroke="#1B2A4A" stroke-width="3.5"/><path d="M28 38h8v8h-8z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3.5"/><rect x="18" y="46" width="28" height="9" rx="3" fill="#2F6BFF" stroke="#1B2A4A" stroke-width="3.5"/><polygon points="${starPts(32,22,6,2.6)}" fill="#fff"/></svg>`;
 const ART={
+ read:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3" stroke-linejoin="round"><path d="M60 18C48 10 30 10 14 14v56c16-4 34-4 46 4z" fill="#FFE69A"/><path d="M60 18c12-8 30-8 46-4v56c-16-4-34-4-46 4z" fill="#BFE6FF"/></g><g stroke="#1B2A4A" stroke-width="2.5" stroke-linecap="round"><path d="M24 28h26M24 38h26M24 48h20M70 28h26M70 38h26M70 48h18"/></g><circle cx="98" cy="64" r="13" fill="#24C78E" stroke="#1B2A4A" stroke-width="3"/><path d="M92 64l4 4 8-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  spell:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3" font-family="Fredoka" font-weight="700" font-size="20" text-anchor="middle"><rect x="6" y="44" width="30" height="30" rx="7" fill="#24C78E"/><rect x="45" y="44" width="30" height="30" rx="7" fill="#FFE69A"/><rect x="84" y="44" width="30" height="30" rx="7" fill="#BFE6FF"/></g><g font-family="Fredoka" font-weight="700" font-size="19" text-anchor="middle" fill="#1B2A4A"><text x="21" y="66">U</text><text x="60" y="66">S</text><text x="99" y="66">N</text></g><path d="M48 10h8l10-8v34l-10-8h-8z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3" stroke-linejoin="round"/><path d="M72 12q6 7 0 14M78 7q11 12 0 24" fill="none" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/></svg>`,
  choice:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3"><rect x="8" y="6" width="48" height="32" rx="9" fill="#BFE6FF"/><rect x="64" y="6" width="48" height="32" rx="9" fill="#FFE69A"/><rect x="8" y="46" width="48" height="32" rx="9" fill="#24C78E"/><rect x="64" y="46" width="48" height="32" rx="9" fill="#FFD6E2"/></g><path d="M22 62l8 8 14-16" fill="none" stroke="#1B2A4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  memory:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3"><rect x="14" y="10" width="42" height="62" rx="9" fill="#FF5C8A" transform="rotate(-8 35 41)"/><rect x="62" y="10" width="42" height="62" rx="9" fill="#fff" transform="rotate(7 83 41)"/></g><circle cx="35" cy="41" r="11" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3"/><text x="35" y="47" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="17" fill="#1B2A4A">?</text><text x="84" y="49" text-anchor="middle" font-size="24">🍎</text></svg>`,
@@ -1790,8 +1792,16 @@ function openModes(set, ch){
   $('modes').innerHTML=MODES.map(m=>{const n=modePool({questions:pool,chapters:set.chapters},m.id).length, ok=n>=MIN[m.id];
     const go = PENDING_CH==null ? `openTopics(getSet('${set.id}'),'${m.id}')` : `startGame(getSet('${set.id}'),null,'${m.id}',PENDING_CH)`;
     return `<button class="mode" ${ok?'':'disabled style="opacity:.5;cursor:not-allowed"'} onclick="${go}">
-      ${m.id===rec&&ok?'<span class="rec">⭐</span>':''}<div class="art">${ART[m.id]}</div><h3>${m.name}</h3></button>`}).join('');
+      ${m.id===rec&&ok?'<span class="rec">⭐</span>':''}<div class="art">${ART[m.id]}</div><h3>${m.name}</h3></button>`}).join('')
+    + readTiles(set);
   show('vModes');
+}
+// reading passages (Unseen) get their own big tile – one per passage chapter
+function readTiles(set){
+  if(PENDING_CH!=null && PENDING_CH>=0) return '';
+  const C=Array.isArray(set.chapters)?set.chapters:[], dn=chaptersDone(set);
+  return C.map((c,i)=>c&&c.text&&set.questions.some(q=>q.ch===i)?`<button class="mode readmode" onclick="startGame(getSet('${set.id}'),null,'choice',${i})">
+    ${dn.has(i)?'<span class="rec">★</span>':''}<div class="art">${ART.read}</div><h3>קטע קריאה</h3><p dir="auto">${esc(c.title.replace(/^📖\s*(Unseen:\s*)?/,''))}</p></button>`:'').join('');
 }
 /* ---------- choose a topic (or a mix) for the chosen game ---------- */
 let PENDING_MODE='choice';

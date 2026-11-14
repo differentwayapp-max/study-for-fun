@@ -2266,7 +2266,16 @@ cloudInit();
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>
-  if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+  if('serviceWorker' in navigator){
+    // a new version takes over → reload once, unless a game is running (then on the next screen change)
+    const hadSW=!!navigator.serviceWorker.controller; let reloaded=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(!hadSW||reloaded) return;
+      const go=()=>{ if(reloaded) return; reloaded=true; location.reload(); };
+      if(document.getElementById('vGame')?.classList.contains('hidden')!==false) go();
+      else { const t=setInterval(()=>{ if(document.getElementById('vGame').classList.contains('hidden')){ clearInterval(t); go(); } },1000); }
+    });
+    window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').then(r=>{ setInterval(()=>r.update().catch(()=>{}),30*60*1000); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) r.update().catch(()=>{}); }); }).catch(()=>{}));
+  }
 </script>
 </body>
 </html>

@@ -384,6 +384,18 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .ringplay .play{position:absolute;inset:38px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);box-shadow:0 6px 0 var(--ink);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
 .ringplay .play:active{transform:translateY(6px);box-shadow:none}
 .ringplay .play svg{position:static;width:64px;height:64px}
+.roadbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;background:#fff;color:var(--ink);border:var(--line);border-radius:18px;box-shadow:0 4px 0 var(--ink);padding:10px;font-family:var(--display);font-weight:600;font-size:1.05em;cursor:pointer}
+.roadbtn:active{transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
+#vRoad{margin:0 -4px}
+.roadhdr{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:10px;background:var(--paper);border:var(--line);border-radius:20px;box-shadow:0 4px 0 var(--ink);padding:10px 12px;margin-bottom:10px}
+.roadhdr .rdt{flex:1;min-width:0}.roadhdr .rdt b{font-family:var(--display);font-size:1.1em}
+.rdbar{height:10px;border:2px solid var(--ink);border-radius:99px;background:#EEF1F8;overflow:hidden;margin-top:4px}.rdbar i{display:block;height:100%}
+.rdst{flex:none;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;font-family:var(--display);font-weight:600;font-size:.8em;background:#fff}
+.rdst.ok{background:var(--mint);color:#fff}.rdst.warn{background:#FFE9C2}
+.roadmap{background:#BFE6C8;border:var(--line);border-radius:24px;overflow:hidden}
+.roadmap svg{display:block;width:100%;height:auto}.roadmap text{font-family:var(--display)}
+.roadmap .st{cursor:pointer}.roadmap .st-now>circle:nth-child(2){animation:rdpulse 1.4s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes rdpulse{50%{transform:scale(1.06)}}
 .trail{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
 .trail .n{cursor:pointer;font:inherit;line-height:1;overflow:hidden;flex:none;box-sizing:border-box;font-family:var(--display);font-weight:700;width:34px;height:34px;border-radius:50%;border:var(--line);background:#fff;display:grid;place-items:center;font-size:15px;color:var(--ink)}
 .trail .n.done{background:var(--mint)}.trail .n.now{background:var(--sun);width:42px;height:42px}.trail .n.rev{background:var(--lilac)}.trail .n.fin{background:var(--sun);border-radius:12px;width:42px;height:42px}
@@ -735,6 +747,12 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     <div class="carhead"><button class="arrow" onclick="carStep('subCar',1)" aria-label="הקודם">›</button><div class="cardots" id="subCarDots"></div><button class="arrow" onclick="carStep('subCar',-1)" aria-label="הבא">‹</button></div>
     <div class="car" id="subCar"></div>
     <div id="kComp" style="margin-top:18px"></div>
+  </section>
+
+  <!-- KID: the road to the test -->
+  <section id="vRoad" class="hidden">
+    <div class="roadhdr" id="rdHdr"></div>
+    <div class="roadmap" id="rdMap"></div>
   </section>
 
   <!-- KID: choose game type -->
@@ -1162,7 +1180,7 @@ async function ask(prompt, opts={}){
 
 /* ---------- navigation ---------- */
 function show(v){
-  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
+  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
   window.scrollTo(0,0);
 }
 function go(mode){
@@ -1878,10 +1896,102 @@ function renderKidSets(){
       <div class="top"><div class="ico">${ico}</div>${s.examDate?`<span class="flagtag">🏁 ${Math.max(0,daysLeft(s.examDate))}</span>`:'<span></span>'}</div>
       <h2>${esc(s.subject)}</h2>
       <div class="ringplay">${ringSvg(setProgress(s),dark?'#1B2A4A':'#F2A63B',dark?'#ffffff88':'#ffffff44')}<button class="play" onclick="openModes(getSet('${s.id}'))" aria-label="לשחק">${PLAY}</button></div>
-      <div class="trail" style="color:${fg}">${nodes.join('<i></i>')}</div>
+      <button class="roadbtn" onclick="openRoad('${s.id}')">🗺️ הדרך למבחן <b>${Math.min(dn.size,tot)}/${tot}</b></button>
       <div class="daypips">${pips}<span>${done>=g?'🏆':''}</span></div>
     </div>`; }));
   const k=kids.length>1?'':(me?`<style>#whoami{display:none}</style>`:'');
+}
+
+/* ---------- the road to the test: every chapter is a station, split into days until the test ---------- */
+const ROAD_T={gram:{c:'#2F6BFF',i:'✏️',l:'דקדוק'},word:{c:'#24C78E',i:'🔤',l:'מילים'},read:{c:'#F2A63B',i:'📖',l:'קריאה'},rev:{c:'#B9A7FF',i:'🔁',l:'חזרה למבחן'},prac:{c:'#2F6BFF',i:'✏️',l:'תרגול'}};
+const WEEKDAY=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+function chType(set,c){
+  if(c.text) return 'read';
+  const all=(set.topics||[]).length;
+  if(/חזרה|review/i.test(c.title||'')||(all>2&&(c.topics||[]).length>=all)) return 'rev';
+  if(!/אנגלית|עברית|english/i.test(set.subject||'')) return 'prac';
+  const g=c.qs.filter(q=>wordCat(set,q)==='grammar').length; return g>=c.qs.length/2?'gram':'word';
+}
+function chName(c){ let t=String(c.title||'').replace(/^📖\s*/,''); if(t.includes(':')) t=t.split(':').slice(1).join(':').trim(); return t.length>22?t.slice(0,21)+'…':t; }
+function roadPlan(set){
+  const C=getChapters(set), N=C.length, dn=chaptersDone(set), DAY=864e5, t0=new Date().setHours(0,0,0,0);
+  const dayOf=t=>Math.round((new Date(t).setHours(0,0,0,0)-t0)/DAY);
+  const first={}; history.filter(h=>h.setId===set.id&&!h.retry&&h.ch!=null&&h.ch>=0).forEach(h=>{ if(!first[h.ch]||h.at<first[h.ch]) first[h.ch]=h.at; });
+  const day={};                                   // chapter → day offset (0 = today)
+  for(let i=0;i<N;i++) if(dn.has(i)) day[i]=Math.min(0,first[i]?dayOf(first[i]):0);
+  const rest=[...Array(N).keys()].filter(i=>!dn.has(i)), doneToday=Object.values(day).filter(d=>d===0).length;
+  const dl=set.examDate?daysLeft(set.examDate):null, goal=set.dailyGoal||2;
+  let D, revDay, flagDay=null, perDay;
+  if(dl!=null && dl>=1){ D=Math.max(1,dl-1); revDay=dl>=2?dl-1:0; flagDay=dl; }
+  else if(dl===0){ D=1; revDay=0; flagDay=0; }
+  else { D=Math.max(1,Math.ceil(rest.length/goal)); revDay=null; }
+  perDay=Math.ceil((rest.length+doneToday)/D);
+  const todayLeft=dl!=null&&dl>=0?Math.max(0,perDay-doneToday):Math.max(0,goal-doneToday);
+  let k=0; rest.slice(0,todayLeft).forEach(i=>{ day[i]=0; k++; });
+  let left=rest.slice(k);
+  for(let d=1; left.length; d++){ const span=dl!=null&&dl>=1?Math.max(1,D-d):1; const q=dl!=null&&dl>=1?Math.ceil(left.length/span):goal; left.splice(0,q).forEach(i=>day[i]=d); }
+  if(revDay==null) revDay=Math.max(0,...Object.values(day))+(rest.length?0:0);
+  const behind = dl!=null && dl>=1 && Math.ceil((rest.length+doneToday)/D)>goal;
+  return {C,N,dn,day,revDay,flagDay,dl,perDay,behind,dayOf,t0,DAY};
+}
+function dayLabel(d,t0){ if(d===0) return 'היום'; if(d===-1) return 'אתמול'; if(d===1) return 'מחר'; return 'יום '+WEEKDAY[new Date(t0+d*864e5).getDay()]; }
+let ROAD_SET=null;
+function openRoad(id){ ROAD_SET=id; renderRoad(); show('vRoad'); setTimeout(()=>{ const n=document.querySelector('#rdMap .st-now'); if(n) n.scrollIntoView({block:'center',behavior:'smooth'}); },60); }
+function renderRoad(){
+  const set=getSet(ROAD_SET); if(!set) return go('kid');
+  const P=roadPlan(set), nx=nextChapter(set), [sc]=subjStyle(set.subject);
+  // header
+  const doneN=Math.min(P.dn.size,P.N);
+  const status = P.dl==null ? '' : P.dl<0 ? '<span class="rdst">🏁 המבחן עבר</span>'
+    : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
+  $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
+    <div class="rdt"><b>🗺️ הדרך למבחן</b><div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
+    <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i></div></div>${status}`;
+  // stations in road order, with a campsite at the start of each day
+  const items=[]; let lastDay=null;
+  const order=[...Array(P.N).keys()].sort((a,b)=>P.day[a]-P.day[b]||a-b);
+  const push=(d,st)=>{ if(d!==lastDay){ items.push({camp:d}); lastDay=d; } items.push(st); };
+  order.forEach(i=>push(P.day[i],{i,c:P.C[i]}));
+  push(Math.max(P.revDay,lastDay??0),{rev:true});
+  if(P.flagDay!=null) push(P.flagDay,{flag:true});
+  // geometry
+  const W=390, pts=[]; let y=60, side=0;
+  items.forEach(it=>{ const x=it.camp!=null?195:it.flag?195:(side++%2?280:110); pts.push({x,y,it}); y+=it.camp!=null?92:it.flag?150:122; });
+  const H=y+40, path=n=>{ let d=`M ${pts[0].x} ${pts[0].y}`; for(let i=1;i<=n;i++){ const a=pts[i-1],b=pts[i],m=(a.y+b.y)/2; d+=` C ${a.x} ${m}, ${b.x} ${m}, ${b.x} ${b.y}`; } return d; };
+  const nowIdx=pts.findIndex(p=>p.it.c&&p.it.i===nx), revIdx=pts.findIndex(p=>p.it.rev);
+  const walked=nowIdx>=0?nowIdx:(nx<0?revIdx:0);
+  const deco=['🌳','🌲','🌼','🪨','🌷','🌳'];
+  let svg=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" direction="ltr" style="direction:ltr">`;
+  for(let yy=130,j=0; yy<H-60; yy+=210,j++) svg+=`<text x="${j%2?352:34}" y="${yy}" font-size="30" text-anchor="middle">${deco[j%deco.length]}</text>`;
+  svg+=`<path d="${path(pts.length-1)}" fill="none" stroke="#1B2A4A" stroke-width="44" stroke-linecap="round"/><path d="${path(pts.length-1)}" fill="none" stroke="#E9D3A6" stroke-width="36" stroke-linecap="round"/>
+    <path d="${path(pts.length-1)}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="10 14" opacity=".7"/>`;
+  if(walked>0) svg+=`<path d="${path(walked)}" fill="none" stroke="#F2A63B" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 18"/>`;
+  const me=kidOfSet(set);
+  pts.forEach(({x,y,it},pi)=>{
+    if(it.camp!=null){ const d=it.camp, done=d<0||d===0&&todayCount(set.id)>=todayGoal(set);
+      const won = d<=0 && history.filter(h=>h.setId===set.id&&P.dayOf(h.at)===d).length>=(d===0?todayGoal(set):(set.dailyGoal||2));
+      svg+=`<rect x="${x-70}" y="${y-20}" width="140" height="40" rx="20" fill="${d===0?'#1B2A4A':'#fff'}" stroke="#1B2A4A" stroke-width="3"/>
+        <text x="${x}" y="${y+7}" font-size="17" text-anchor="middle" font-weight="600" fill="${d===0?'#fff':'#1B2A4A'}">⛺ ${esc(dayLabel(d,P.t0))}</text>
+        <text x="${x+96}" y="${y+10}" font-size="28" text-anchor="middle" opacity="${won?1:.28}">🏆</text>`; return; }
+    if(it.flag){ svg+=`<g class="st" onclick="openModes(getSet('${set.id}'),-1)"><circle cx="${x}" cy="${y+10}" r="50" fill="#FF5C8A" stroke="#1B2A4A" stroke-width="4"/><text x="${x}" y="${y+26}" font-size="46" text-anchor="middle">🏁</text></g>
+      <text x="${x}" y="${y+86}" font-size="18" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום – בהצלחה!':'יום המבחן'}</text>`; return; }
+    const isRev=!!it.rev, T=ROAD_T[isRev?'rev':chType(set,it.c)];
+    const done=isRev?false:P.dn.has(it.i), now=isRev?nx<0:it.i===nx, day=isRev?P.revDay:P.day[it.i], pale=!done&&!now&&day>0;
+    const r=now?42:34, emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
+    const go=isRev?`openModes(getSet('${set.id}'),-1)`:`openModes(getSet('${set.id}'),${it.i})`;
+    svg+=`<g class="st ${now?'st-now':''}" onclick="${go}"><circle cx="${x}" cy="${y+4}" r="${r}" fill="#1B2A4A"/>
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:pale?'#E8ECF4':'#fff'}" stroke="${pale?'#9AA4BF':'#1B2A4A'}" stroke-width="4"/>
+      ${!done&&!pale?`<circle cx="${x}" cy="${y}" r="${r-9}" fill="none" stroke="${T.c}" stroke-width="6"/>`:''}
+      <text x="${x}" y="${y+11}" font-size="${now?34:28}" text-anchor="middle" opacity="${pale?.5:1}">${esc(emo)}</text>
+      <circle cx="${x+r-6}" cy="${y-r+6}" r="14" fill="#fff" stroke="#1B2A4A" stroke-width="2.5"/><text x="${x+r-6}" y="${y-r+12}" font-size="15" text-anchor="middle">${T.i}</text></g>`;
+    const lx=x>195?x-r-10:x+r+10, an=x>195?'end':'start';
+    svg+=`<text x="${lx}" y="${y-4}" font-size="13" text-anchor="${an}" fill="#3c4a6b">${esc(T.l)}${isRev?'':' · '+(it.i+1)}</text>
+      <text x="${lx}" y="${y+15}" font-size="16" text-anchor="${an}" font-weight="700" fill="${pale?'#8a93ab':'#1B2A4A'}">${esc(isRev?'חזרה על הטעויות':chName(it.c))}</text>`;
+    if(now){ svg+=`<foreignObject x="${x-26}" y="${y-r-58}" width="52" height="52"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,50):'🧒'}</div></foreignObject>
+      <g class="st" onclick="${go}"><rect x="${x-50}" y="${y+r+10}" width="100" height="32" rx="16" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3"/>
+      <text x="${x}" y="${y+r+32}" font-size="16" text-anchor="middle" font-weight="700">▶ קדימה!</text></g>`; }
+  });
+  $('rdMap').innerHTML=svg+'</svg>';
 }
 
 /* ---------- game types ---------- */

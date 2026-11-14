@@ -13,19 +13,20 @@ def L(ch, size=70): return [(ch, 50, 52, size)]          # a big letter as the p
 def seq(*cs): return [(c, 14 + i * 24, 52, 30) for i, c in enumerate(cs)]
 
 C = []
-C.append(("ABC: big & small", [AB], [
- (AB, "Small letter?", ["b", "d", "p", "q"], 0, "B גדולה = b קטנה", L("B")),
- (AB, "Big letter?", ["D", "B", "P", "Q"], 0, "d קטנה = D גדולה", L("d")),
- (AB, "Small letter?", ["g", "q", "j", "y"], 0, "G גדולה = g קטנה", L("G")),
- (AB, "Big letter?", ["H", "N", "K", "A"], 0, "h קטנה = H גדולה", L("h")),
- (AB, "Small letter?", ["q", "p", "g", "d"], 0, "Q גדולה = q קטנה", L("Q")),
- (AB, "Big letter?", ["M", "W", "N", "V"], 0, "m קטנה = M גדולה", L("m")),
- (AB, "Small letter?", ["n", "u", "m", "h"], 0, "N גדולה = n קטנה", L("N")),
- (AB, "Big letter?", ["A", "O", "E", "U"], 0, "a קטנה = A גדולה", L("a")),
- (AB, "Small letter?", ["f", "t", "l", "j"], 0, "F גדולה = f קטנה", L("F")),
- (AB, "Big letter?", ["U", "V", "N", "W"], 0, "u קטנה = U גדולה", L("u")),
- (AB, "Small letter?", ["y", "v", "g", "j"], 0, "Y גדולה = y קטנה", L("Y")),
-]))
+# ---- all 26 letters, big ↔ small (questions in Hebrew so the question never shows the answer) ----
+LOOK = {"a": "oeu", "b": "dpq", "c": "eoa", "d": "bpq", "e": "aoc", "f": "tlj", "g": "qjy", "h": "nkb", "i": "jrt", "j": "igy",
+        "k": "hxy", "l": "ejt", "m": "nwu", "n": "mhu", "o": "aec", "p": "qbd", "q": "pgd", "r": "nvt", "s": "zcx", "t": "flj",
+        "u": "vnw", "v": "uwy", "w": "mvu", "x": "kyz", "y": "vgj", "z": "sxn"}
+def bigsmall(letters, start_small):
+    out = []
+    for n, ch in enumerate(letters):
+        small = (n + start_small) % 2 == 0           # alternate: show BIG → ask small, show small → ask BIG
+        if small: q, opts, pic, ex = "האות הקטנה?", [ch] + list(LOOK[ch]), ch.upper(), f"{ch.upper()} גדולה = {ch} קטנה"
+        else:     q, opts, pic, ex = "האות הגדולה?", [ch.upper()] + [x.upper() for x in LOOK[ch]], ch, f"{ch} קטנה = {ch.upper()} גדולה"
+        out.append((AB, q, opts, 0, ex, [(pic, 50, 52, 70)]))
+    return out
+C.append(("ABC: big & small A–M", [AB], bigsmall("abcdefghijklm", 0)))
+C.append(("ABC: big & small N–Z", [AB], bigsmall("nopqrstuvwxyz", 1)))
 
 C.append(("ABC: order & first letter", [AB], [
  (AB, "What comes next?", ["D", "E", "F", "B"], 0, "A B C D", seq("A", "B", "C", "❓")),
@@ -41,18 +42,47 @@ C.append(("ABC: order & first letter", [AB], [
  (AB, "Starts with E:", ["elephant", "tiger", "bird", "fish"], 0, "elephant מתחיל ב-E", [("E", 30, 50, 40), ("🐘", 70, 52, 36)]),
 ]))
 
+
+WORDS = [("a","apple","🍎"),("a","ant","🐜"),("b","banana","🍌"),("b","bird","🐦"),("c","cat","🐈"),("c","car","🚗"),
+  ("d","dog","🐕"),("d","duck","🦆"),("e","egg","🥚"),("e","elephant","🐘"),("f","fish","🐟"),("f","frog","🐸"),
+  ("g","giraffe","🦒"),("g","grapes","🍇"),("h","house","🏠"),("h","hat","🎩"),("i","ice cream","🍦"),("i","island","🏝️"),
+  ("j","juice","🧃"),("j","jacket","🧥"),("k","koala","🐨"),("k","key","🔑"),("l","lion","🦁"),("l","lemon","🍋"),
+  ("m","monkey","🐒"),("m","moon","🌙"),("n","nose","👃"),("n","nut","🥜"),("o","octopus","🐙"),("o","orange","🍊"),
+  ("p","pizza","🍕"),("p","pen","🖊️"),("q","queen","👑"),("q","question","❓"),("r","rabbit","🐇"),("r","rain","🌧️"),
+  ("s","sun","☀️"),("s","snake","🐍"),("t","tiger","🐅"),("t","tree","🌳"),("u","umbrella","☂️"),("u","unicorn","🦄"),
+  ("v","violin","🎻"),("v","van","🚐"),("w","watch","⌚"),("w","whale","🐳"),("x","fox","🦊"),("x","box","📦"),
+  ("y","yes","👍"),("y","yellow","💛"),("z","zebra","🦓"),("z","zero","0️⃣")]
+def letter_words(lo, hi):
+    out = []
+    pool = [w for _, w, _ in WORDS]
+    for i, (L, w, e) in enumerate(WORDS):
+        if not (lo <= L <= hi): continue
+        # three distractors that do NOT start with (or, for X, contain) the letter
+        bad = [x for x in pool if (L not in x if L == "x" else not x.startswith(L))]
+        d = [bad[(i * 7 + k * 11) % len(bad)] for k in range(3)]
+        k = 3
+        while len(set(d)) < 3: d = list(dict.fromkeys(d)) + [bad[(i * 7 + k * 11) % len(bad)]]; d = d[:3]; k += 1
+        if L == "x": q, ex = "Has the letter X:", f"{w} – יש בה x"
+        else:        q, ex = f"{L.upper()} is for…", ("queen = מלכה, מתחיל ב-Q" if w == "queen" else f"{w} מתחיל ב-{L.upper()}")
+        out.append((AB, q, [w] + d, 0, ex, [(L.upper(), 26, 50, 40), (e, 70, 52, 40)]))
+    return out
+C.append(("Two words for each letter A–F", [AB], letter_words("a", "f")))
+C.append(("Two words for each letter G–M", [AB], letter_words("g", "m")))
+C.append(("Two words for each letter N–S", [AB], letter_words("n", "s")))
+C.append(("Two words for each letter T–Z", [AB], letter_words("t", "z")))
+
 C.append(("Colors", [CO], [
  (CO, "What color is it?", ["red", "blue", "green", "black"], 0, "אדום = red", [("🍓", 50, 52, 56)]),
  (CO, "What color is it?", ["green", "red", "brown", "orange"], 0, "ירוק = green", [("🥦", 50, 52, 56)]),
  (CO, "What color is it?", ["gray", "purple", "orange", "blue"], 0, "אפור = gray", [("🐘", 50, 52, 56)]),
  (CO, "What color is it?", ["brown", "green", "red", "purple"], 0, "חום = brown", [("🐻", 50, 52, 56)]),
- (CO, "What color is it?", ["blue", "black", "orange", "gray"], 0, "כחול = blue", [("🟦", 50, 52, 56)]),
+ (CO, "What color is it?", ["blue", "black", "orange", "gray"], 0, "כחול = blue", [("🔵", 50, 52, 56)]),
  (CO, "What color is it?", ["orange", "purple", "green", "brown"], 0, "כתום = orange", [("🍊", 50, 52, 56)]),
  (CO, "What color is it?", ["purple", "red", "gray", "blue"], 0, "סגול = purple", [("🍇", 50, 52, 56)]),
  (CO, "What color is it?", ["black", "brown", "blue", "green"], 0, "שחור = black", [("⬛", 50, 52, 56)]),
- (CO, "אדום = ?", ["red", "orange", "purple", "brown"], 0, "אדום = red", [("🟥", 50, 52, 50)]),
+ (CO, "אדום = ?", ["red", "orange", "purple", "brown"], 0, "אדום = red", [("🔴", 50, 52, 50)]),
  (CO, "כחול = ?", ["blue", "black", "gray", "green"], 0, "כחול = blue", [("💙", 50, 52, 50)]),
- (CO, "חום = ?", ["brown", "black", "gray", "orange"], 0, "חום = brown", [("🟫", 50, 52, 50)]),
+ (CO, "חום = ?", ["brown", "black", "gray", "orange"], 0, "חום = brown", [("🌰", 50, 52, 50)]),
 ]))
 
 C.append(("Animals", [AN], [
@@ -78,7 +108,7 @@ C.append(("Prepositions", [PR], [
  (PR, "The bird is ___ the house.", ["on top of", "under", "in", "in front of"], 0, "הציפור מעל הבית – על הגג = on top of", [("🏠", 50, 64, 48), ("🐦", 50, 36, 22)]),
  (PR, "על = ?", ["on", "in", "under", "next to"], 0, "על = on", [("📕", 50, 68, 40), ("🍎", 50, 36, 26)]),
  (PR, "בתוך = ?", ["in", "on", "under", "next to"], 0, "בתוך = in (הילד בתוך האמבטיה)", [("🛀", 50, 52, 56)]),
- (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (החתול על הערימה)", [("📚", 50, 68, 46), ("🐈", 50, 36, 26)]),
+ (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור מעל העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 22, 22)]),
  (PR, "מתחת = ?", ["under", "on", "in", "next to"], 0, "מתחת = under", [("☂️", 50, 34, 44), ("🧒", 50, 74, 28)]),
  (PR, "ליד = ?", ["next to", "under", "in", "on"], 0, "ליד = next to", [("🧒", 36, 58, 32), ("🧒", 64, 58, 32)]),
  (PR, "לפני = ?", ["in front of", "next to", "on top of", "under"], 0, "לפני = in front of", [("🏠", 50, 40, 54), ("🚗", 50, 62, 34)]),
@@ -92,7 +122,7 @@ C.append(("Verbs", [VE], [
  (VE, "Which verb?", ["eat", "drink", "sleep", "cut"], 0, "לאכול = eat", [("😋", 38, 52, 40), ("🍕", 70, 58, 30)]),
  (VE, "Which verb?", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥤", 50, 52, 56)]),
  (VE, "Which verb?", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("✂️", 40, 48, 44), ("📄", 70, 58, 32)]),
- (VE, "Which verb?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🦘", 50, 48, 56)]),
+ (VE, "Which verb?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🐸", 50, 50, 56)]),
  (VE, "לשתות = ?", ["drink", "eat", "cut", "sleep"], 0, "לשתות = drink", [("🧃", 50, 52, 50)]),
  (VE, "לקפוץ = ?", ["jump", "eat", "run", "fly"], 0, "לקפוץ = jump", [("🐸", 50, 52, 50)]),
  (VE, "לישון = ?", ["sleep", "eat", "jump", "cut"], 0, "לישון = sleep", [("🛌", 50, 52, 54)]),
@@ -107,9 +137,9 @@ C.append(("Missing letter", [ML], [
  (ML, "ti_er", ["g", "j", "q", "p"], 0, "t-i-g-e-r = tiger", [("🐅", 50, 52, 56)]),
  (ML, "monk_y", ["e", "a", "i", "o"], 0, "monkey = קוף", [("🐒", 50, 52, 56)]),
  (ML, "elep_ant", ["h", "k", "n", "f"], 0, "elephant = פיל", [("🐘", 50, 52, 56)]),
- (ML, "j_mp", ["u", "a", "o", "i"], 0, "j-u-m-p = jump", [("🦘", 50, 52, 56)]),
+ (ML, "j_mp", ["u", "a", "o", "i"], 0, "j-u-m-p = jump", [("🐸", 50, 52, 56)]),
  (ML, "s_im", ["w", "v", "m", "u"], 0, "s-w-i-m = swim", [("🏊", 50, 52, 56)]),
- (ML, "_reen", ["g", "q", "c", "b"], 0, "g-r-e-e-n = green", [("🟩", 50, 52, 50)]),
+ (ML, "_reen", ["g", "q", "c", "b"], 0, "g-r-e-e-n = green", [("💚", 50, 52, 50)]),
 ]))
 
 C.append(("Review", [AN, CO, VE], [
@@ -119,7 +149,7 @@ C.append(("Review", [AN, CO, VE], [
  (AN, "פרת משה רבנו = ?", ["ladybird", "bird", "octopus", "fish"], 0, "פרת משה רבנו = ladybird", [("🐞", 50, 52, 50)]),
  (AN, "תנין = ?", ["alligator", "octopus", "tiger", "lion"], 0, "תנין = alligator", [("🐊", 50, 52, 50)]),
  (CO, "ירוק = ?", ["green", "gray", "blue", "brown"], 0, "ירוק = green", [("🍏", 50, 52, 50)]),
- (CO, "סגול = ?", ["purple", "orange", "red", "black"], 0, "סגול = purple", [("🟪", 50, 52, 50)]),
+ (CO, "סגול = ?", ["purple", "orange", "red", "black"], 0, "סגול = purple", [("💜", 50, 52, 50)]),
  (CO, "אפור = ?", ["gray", "green", "black", "brown"], 0, "אפור = gray", [("🐘", 50, 52, 50)]),
  (VE, "לרוץ = ?", ["run", "swim", "jump", "fly"], 0, "לרוץ = run", [("🏃‍♀️", 50, 52, 50)]),
  (VE, "לגזור = ?", ["cut", "eat", "drink", "run"], 0, "לגזור = cut", [("✂️", 50, 52, 50)]),
@@ -129,4 +159,5 @@ C.append(("Review", [AN, CO, VE], [
 WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")
 
 # station type on the map
-KINDS = {"ABC: big & small": "abc", "ABC: order & first letter": "abc", "Missing letter": "abc", "Prepositions": "gram"}
+KINDS = {"ABC: big & small A–M": "abc", "ABC: big & small N–Z": "abc", "ABC: order & first letter": "abc", "Missing letter": "abc", "Prepositions": "gram",
+         "Two words for each letter A–F": "abc", "Two words for each letter G–M": "abc", "Two words for each letter N–S": "abc", "Two words for each letter T–Z": "abc"}

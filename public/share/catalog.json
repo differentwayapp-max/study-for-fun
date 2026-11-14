@@ -1,8 +1,44 @@
 {
  "sets": [
   {
+   "id": "en4-nov26",
+   "ver": "08406562ce",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 156,
+   "chapters": 13,
+   "reading": 0,
+   "words": 34,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB"
+    }
+   ],
+   "status": "ready"
+  },
+  {
    "id": "en7-nov26",
-   "ver": "36d1f3e67f",
+   "ver": "1f90ae693e",
    "subject": "אנגלית",
    "grade": 6,
    "title": "Present Simple · Weather & Nature",
@@ -32,42 +68,6 @@
     {
      "q": "She ___ like snow.",
      "e": "👧❄️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en4-nov26",
-   "ver": "e6ab5f1a51",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 89,
-   "chapters": 8,
-   "reading": 0,
-   "words": 34,
-   "samples": [
-    {
-     "q": "Small letter?",
-     "e": "B"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB"
-    },
-    {
-     "q": "What color is it?",
-     "e": "🍓"
     }
    ],
    "status": "ready"

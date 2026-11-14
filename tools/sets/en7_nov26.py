@@ -71,7 +71,7 @@ C.append(("Nature & places", [NP], [
  (NP, "The sun rises in the ___.", ["east", "west", "north", "south"], 0, "השמש זורחת במזרח", [("🌅", 50, 52, 56)]),
  (NP, "The sun sets in the ___.", ["west", "east", "north", "south"], 0, "השמש שוקעת במערב", [("🌇", 50, 52, 56)]),
  (NP, "בריכת שחייה = ?", ["swimming pool", "river", "sea", "hole"], 0, "בריכת שחייה = swimming pool", [("🏊‍♀️", 50, 50, 50)]),
- (NP, "What is this?", ["park", "field", "roof", "sidewalk"], 0, "פארק = park", [("🌳", 30, 50, 40), ("🛝", 68, 60, 38)]),
+ (NP, "What is this?", ["park", "field", "roof", "sidewalk"], 0, "פארק = park", [("🌳", 30, 50, 40), ("🏞️", 68, 60, 38)]),
  (NP, "גג = ?", ["roof", "ground", "hole", "floor"], 0, "גג = roof", [("🏠", 50, 58, 54), ("⬆️", 50, 15, 18)]),
  (NP, "What is this?", ["hole", "bone", "roof", "shade"], 0, "חור = hole", "🕳️"),
 ]))
@@ -132,7 +132,7 @@ C.append(("Everyday words", [EW], [
  (EW, "Who is he?", ["farmer", "sailor", "fan", "city"], 0, "חקלאי = farmer", [("🧑‍🌾", 40, 55, 44), ("🚜", 75, 65, 28)]),
  (EW, "Who is he?", ["sailor", "farmer", "fan", "problem"], 0, "מלח = sailor", [("🧔", 35, 55, 40), ("⛵", 70, 50, 34), ("⚓", 50, 85, 18)]),
  (EW, "What is this?", ["ice cream cone", "ice", "snow", "bone"], 0, "גביע גלידה = ice cream cone", "🍦"),
- (EW, "What is this?", ["fan", "coat", "roof", "hole"], 0, "מאוורר / מניפה = fan", "🪭"),
+ (EW, "מאוורר = ?", ["fan", "coat", "roof", "hole"], 0, "מאוורר = fan", "🌬️"),
  (EW, "צל = ?", ["shade", "shine", "sweat", "snow"], 0, "צל = shade", [("🌳", 45, 45, 50), ("⛱️", 75, 70, 24)]),
  (EW, "What is this?", ["wave", "wind", "river", "field"], 0, "גל = wave", [("🌊", 45, 55, 50), ("🏄", 70, 35, 24)]),
  (EW, "זיעה = ?", ["sweat", "skin", "sea", "snow"], 0, "זיעה = sweat", [("🥵", 45, 55, 46), ("💦", 75, 35, 22)]),
@@ -194,7 +194,7 @@ def _ch(title): return next(c for c in C if c[0] == title)[2]
 _ch("Nature & places").extend([
  (NP, "בירה (עיר) = ?", ["capital", "city", "field", "earth"], 0, "ירושלים היא ה-capital", [("🏛️", 50, 55, 50), ("⭐", 78, 25, 18)]),
  (NP, "On a map, down = ?", ["south", "north", "east", "west"], 0, "למטה במפה = דרום", [("🧭", 50, 45, 46), ("⬇️", 50, 82, 20)]),
- (NP, "קרקע = ?", ["ground", "roof", "hole", "sea"], 0, "קרקע = ground", [("🌱", 50, 50, 40), ("🟫", 50, 80, 30)]),
+ (NP, "קרקע = ?", ["ground", "roof", "hole", "sea"], 0, "קרקע = ground", [("🌱", 50, 50, 40), ("👇", 50, 82, 26)]),
 ])
 _ch("Action words").extend([
  (AW, "לבדוק = ?", ["check", "set", "stay", "fall"], 0, "לבדוק = check", [("🔍", 45, 50, 46), ("✅", 75, 30, 22)]),

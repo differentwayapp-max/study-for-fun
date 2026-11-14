@@ -373,6 +373,7 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .catpeek>div{border:1.5px solid #D9D4EA;border-radius:14px;padding:6px;text-align:center;font-size:.8em;background:#FAFBFF;line-height:1.25}
 .catpeek .e{font-size:1.9em;line-height:1.2}
 .aibox{border:2px dashed var(--sun);background:#FFFBEF;border-radius:18px;padding:12px 14px;text-align:center;margin-top:6px}
+.demotag{display:inline-block;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:.85em;margin-top:4px}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -1973,7 +1974,7 @@ function renderKidSets(){
     const pips=Array.from({length:g},(_,i)=>`<span class="pip ${i<done?'on':''}">${i<done?'★':''}</span>`).join('');
     return `<div class="card herocard hero" style="background:${c};color:${fg}">
       <div class="top"><div class="ico">${ico}</div>${s.examDate?`<span class="flagtag">🏁 ${Math.max(0,daysLeft(s.examDate))}</span>`:'<span></span>'}</div>
-      <h2>${esc(s.subject)}</h2>
+      <h2>${esc(s.subject)}</h2>${s.demo?`<div class="demotag">🎲 דוגמה – ${me?`עוד אין תרגול ל${esc(kidName(me))}`:'עוד אין תרגול'}</div>`:''}
       <div class="ringplay">${ringSvg(setProgress(s),dark?'#1B2A4A':'#F2A63B',dark?'#ffffff88':'#ffffff44')}<button class="play" onclick="openModes(getSet('${s.id}'))" aria-label="לשחק">${PLAY}</button></div>
       <button class="roadbtn" onclick="openRoad('${s.id}')">🗺️ הדרך למבחן <b>${Math.min(dn.size,tot)}/${tot}</b></button>
       <div class="daypips">${pips}<span>${done>=g?'🏆':''}</span></div>
@@ -2027,7 +2028,7 @@ function renderRoad(){
     : P.ahead ? '<span class="rdst ok">⚡ מקדים!</span>'
     : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
   $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
-    <div class="rdt"><b>🗺️ הדרך למבחן</b><div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
+    <div class="rdt"><b>🗺️ הדרך למבחן</b>${set.demo?' <span class="demotag">🎲 דוגמה</span>':''}<div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
     <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i></div></div>${status}`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;

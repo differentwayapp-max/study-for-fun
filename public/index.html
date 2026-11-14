@@ -248,6 +248,7 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .wdetail .wtop{display:flex;align-items:center;gap:12px}.wdetail .wemo{font-size:2.4em}
 .wrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.wrow span{background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:1px 9px;font-size:.85em}
 .wgood{border-top:2px dashed #D9D4EA;margin-top:14px;padding-top:10px}
+.pastbar{display:inline-block;background:#EDE9FF;border:var(--line);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;margin-bottom:10px}
 .qbox{font-family:var(--display);font-weight:600;font-size:1.55em;line-height:1.35;margin:0 0 20px;unicode-bidi:plaintext}
 body.young .qbox{font-size:1.8em}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -1862,7 +1863,42 @@ function showSheet(ok, text){
       <button class="btn" onclick="nextQ()">${G.i+1<G.qs.length?'הבא ‹':'סיום 🏁'}</button>
     </div>
     <div class="expl ${ok?'':'show'}" id="gExpl" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div>`;
-  if(ok) burst();
+  if(G.res.length) $('gSheet').querySelector('.row2').insertAdjacentHTML('afterbegin',`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`);
+  if(ok){ burst(); autoNext(); }
+}
+// right answer → next question by itself (wrong answer waits, so the explanation can be read)
+function autoNext(){
+  const tok=G.tok=(G.tok||0)+1, t0=Date.now();
+  const tick=()=>{ if(!G||G.tok!==tok||!$('gSheet').classList.contains('show')) return;
+    let talking=false; try{ talking=speechSynthesis.speaking; }catch(e){}
+    if(Date.now()-t0<1300 || (talking && Date.now()-t0<4500)) return setTimeout(tick,200);
+    nextQ(); };
+  setTimeout(tick,200);
+}
+/* look back at answered questions (choice / riddle / spell) */
+function pastView(j){
+  if(!G||!G.res[j]) return; G.tok=(G.tok||0)+1; G.view=j; try{speechSynthesis.cancel()}catch(e){}
+  const r=G.res[j], q=r.q, txt=passageOf(G.set,q), last=j===G.res.length-1;
+  $('gSheet').className='sheet';
+  $('gCount').textContent=`↩ ${j+1} / ${G.qs.length}`;
+  const opts = G.mode==='choice'
+    ? `<div class="opts">${q.options.map((o,k)=>`<button class="opt ${k===q.answer?'right':k===r.pick?'wrong':'dim'}" dir="auto" disabled><span class="key">${'אבגד'[k]}</span>${esc(o)}</button>`).join('')}</div>`
+    : `<div class="center" style="margin:6px 0 14px"><span class="pill ${r.ok?'ok':'bad'}" dir="ltr" style="font-size:1.3em;padding:6px 16px">${esc(q.options[q.answer])}</span></div>`;
+  $('gPlay').innerHTML=`<div class="pastbar">${r.ok?'✓':'✗'} שאלה ${j+1}</div>
+    ${txt?`<details class="passage"><summary>📖 קטע קריאה</summary><div class="ptext" dir="auto">${txt.split(/\n\s*\n/).map(par=>`<p>${esc(par.trim())}</p>`).join('')}</div></details>`:picOf(q)}
+    <div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>${opts}
+    <div class="expl show" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div>
+    <div class="helpers" style="justify-content:space-between">
+      ${j>0?`<button class="btn ghost small" onclick="pastView(${j-1})">› הקודם</button>`:'<span></span>'}
+      ${isEnSet(G.set)&&EN_SAY(q.options[q.answer])?`<button class="btn ghost small" onclick="sayAnswer(G.res[${j}].q)" aria-label="השמעה">🔊</button>`:''}
+      <button class="btn small" onclick="pastNext(${j})">${last?'חזרה לשאלה ‹':'הבא ‹'}</button>
+    </div>`;
+}
+function pastNext(j){
+  if(j+1<G.res.length) return pastView(j+1);
+  G.view=null;
+  if(G.res.length>G.i) return nextQ();            // the current question was already answered
+  ({choice:choiceRender,riddle:riddleRender,spell:riddleRender})[G.mode]();
 }
 function nextQ(){ $('gSheet').className='sheet'; G.i++; if(G.i<G.qs.length) ({choice:choiceRender,riddle:riddleRender,spell:riddleRender})[G.mode](); else endGame(); }
 const shortTxt=t=>t.trim().split(/\s+/).length<=6;
@@ -1884,7 +1920,7 @@ function choiceRender(){
   const top=txt?`<details class="passage" open><summary>📖 קטע קריאה ${EN_SAY(txt)?`<button class="btn ghost small" onclick="event.preventDefault();sayEn(passageOf(G.set,curQ()),true)" aria-label="הקראת הקטע">🔊</button>`:''}</summary><div class="ptext" dir="auto">${txt.split(/\n\s*\n/).map(par=>`<p>${esc(par.trim())}</p>`).join('')}</div></details>`:picOf(q);
   $('gPlay').innerHTML=`${top}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
     <div class="opts">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${'אבגד'[k]}</span>${esc(o)}</button>`).join('')}</div>
-    <div class="helpers"><button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
+    <div class="helpers">${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
   if(track(G.set.grade).young) speakQ();
 }
 function choicePick(k){
@@ -1999,7 +2035,7 @@ function riddleRender(){
   $('gPlay').innerHTML=`
     ${picOf(q)}<div class="qbox short" dir="auto">${esc(q.question)}</div>
     <div id="rSlots"></div><div id="rTiles"></div>
-    <div class="helpers" style="justify-content:center">${spell?(EN_SAY(ans)?`<button class="btn small" onclick="sayEn(G.r.ans,true)" aria-label="השמעת המילה">🔊</button>`:''):`<button class="btn ghost small" onclick="riddleHint()">💡 רמז</button>`}<button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button>${spell?'':`<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button>`}<button class="btn ghost small" onclick="riddleGiveUp()">🤷</button></div>`;
+    <div class="helpers" style="justify-content:center">${spell?(EN_SAY(ans)?`<button class="btn small" onclick="sayEn(G.r.ans,true)" aria-label="השמעת המילה">🔊</button>`:''):`<button class="btn ghost small" onclick="riddleHint()">💡 רמז</button>`}<button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button>${spell?'':`<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button>`}<button class="btn ghost small" onclick="riddleGiveUp()">🤷</button>${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">›</button>`:''}</div>`;
   riddleDraw();
   if(spell) setTimeout(()=>sayEn(ans),300);
 }
@@ -2028,7 +2064,7 @@ function riddleCheck(){
   if(typed.toLowerCase()===R.ans.toLowerCase()){
     R.done=true; riddleDraw('ok'); sayAnswer(curQ());
     const ok=R.hints<=1; G.res.push({q:curQ(),ok}); award(true);
-    showSheet(true, R.hints?`פתרת! (עם ${R.hints} ${R.hints===1?'רמז':'רמזים'})`:PRAISE[Math.floor(Math.random()*PRAISE.length)]);
+    showSheet(true, R.hints?`פתרת! (עם ${R.hints} ${R.hints===1?'רמז':'רמזים'})`:PRAISE[Math.floor(Math.random()*PRAISE.length)]);   // showSheet(ok) → autoNext
   } else { riddleDraw('bad'); setTimeout(()=>riddleDraw(),400); }
 }
 function riddleGiveUp(){

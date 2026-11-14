@@ -146,6 +146,7 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 
 /* mode picker */
 .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.modes .mode:last-child:nth-child(odd){grid-column:1/-1}
 
 .mode{--c:var(--blue);border:var(--line);border-radius:22px;background:var(--paper);padding:18px;text-align:center;cursor:pointer;box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s;position:relative}
 .mode:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--ink)}
@@ -712,6 +713,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       <div class="hud">
         <div class="chips"><span class="chip" id="gScore"></span><span class="chip" id="gStreak"></span></div>
         <span class="hint" id="gCount"></span>
+        <button class="quit" id="gMute" onclick="toggleMute()" aria-label="צליל">🔊</button>
         <button class="quit" onclick="quitGame()" aria-label="יציאה">✕</button>
       </div>
       <div id="gTop"></div>
@@ -1493,6 +1495,7 @@ function mascot(m='happy',body='#2F6BFF'){
 function starSvg(on){return `<svg viewBox="0 0 64 64" class="${on?'on':''}"><polygon points="${starPts(32,34,28,12)}" fill="${on?'#F2A63B':'#fff'}" stroke="#1B2A4A" stroke-width="4" stroke-linejoin="round"/></svg>`;}
 const TROPHY=`<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 10h28v14a14 14 0 0 1-28 0z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3.5" stroke-linejoin="round"/><path d="M18 14H9a9 9 0 0 0 11 13M46 14h9a9 9 0 0 1-11 13" fill="none" stroke="#1B2A4A" stroke-width="3.5"/><path d="M28 38h8v8h-8z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3.5"/><rect x="18" y="46" width="28" height="9" rx="3" fill="#2F6BFF" stroke="#1B2A4A" stroke-width="3.5"/><polygon points="${starPts(32,22,6,2.6)}" fill="#fff"/></svg>`;
 const ART={
+ spell:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3" font-family="Fredoka" font-weight="700" font-size="20" text-anchor="middle"><rect x="6" y="44" width="30" height="30" rx="7" fill="#24C78E"/><rect x="45" y="44" width="30" height="30" rx="7" fill="#FFE69A"/><rect x="84" y="44" width="30" height="30" rx="7" fill="#BFE6FF"/></g><g font-family="Fredoka" font-weight="700" font-size="19" text-anchor="middle" fill="#1B2A4A"><text x="21" y="66">U</text><text x="60" y="66">S</text><text x="99" y="66">N</text></g><path d="M48 10h8l10-8v34l-10-8h-8z" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3" stroke-linejoin="round"/><path d="M72 12q6 7 0 14M78 7q11 12 0 24" fill="none" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/></svg>`,
  choice:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3"><rect x="8" y="6" width="48" height="32" rx="9" fill="#BFE6FF"/><rect x="64" y="6" width="48" height="32" rx="9" fill="#FFE69A"/><rect x="8" y="46" width="48" height="32" rx="9" fill="#24C78E"/><rect x="64" y="46" width="48" height="32" rx="9" fill="#FFD6E2"/></g><path d="M22 62l8 8 14-16" fill="none" stroke="#1B2A4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  memory:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3"><rect x="14" y="10" width="42" height="62" rx="9" fill="#FF5C8A" transform="rotate(-8 35 41)"/><rect x="62" y="10" width="42" height="62" rx="9" fill="#fff" transform="rotate(7 83 41)"/></g><circle cx="35" cy="41" r="11" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3"/><text x="35" y="47" text-anchor="middle" font-family="Fredoka" font-weight="700" font-size="17" fill="#1B2A4A">?</text><text x="84" y="49" text-anchor="middle" font-size="24">🍎</text></svg>`,
  match:`<svg viewBox="0 0 120 84"><g stroke="#1B2A4A" stroke-width="3"><rect x="4" y="6" width="34" height="18" rx="6" fill="#fff"/><rect x="4" y="33" width="34" height="18" rx="6" fill="#fff"/><rect x="4" y="60" width="34" height="18" rx="6" fill="#fff"/><rect x="82" y="6" width="34" height="18" rx="6" fill="#FFF6D6"/><rect x="82" y="33" width="34" height="18" rx="6" fill="#FFF6D6"/><rect x="82" y="60" width="34" height="18" rx="6" fill="#FFF6D6"/></g><path d="M38 15 C60 15 60 69 82 69" stroke="#2F6BFF" stroke-width="4" fill="none"/><path d="M38 42 C60 42 60 15 82 15" stroke="#24C78E" stroke-width="4" fill="none"/><path d="M38 69 C60 69 60 42 82 42" stroke="#FF5C8A" stroke-width="4" fill="none"/></svg>`,
@@ -1704,7 +1707,8 @@ const MODES=[
   {id:'choice', name:'בחירה מתשובות', desc:'בוחרים את התשובה הנכונה מתוך 4 ומתקדמים במסלול'},
   {id:'memory', name:'משחק הזיכרון', desc:'הופכים קלפים ומוצאים כל שאלה עם התשובה שלה'},
   {id:'match',  name:'התאמה בקו', desc:'מותחים קו בין כל שאלה לתשובה הנכונה'},
-  {id:'riddle', name:'חידות', desc:'מרכיבים את התשובה מאותיות – עם רמזים'}
+  {id:'riddle', name:'חידות', desc:'מרכיבים את התשובה מאותיות – עם רמזים'},
+  {id:'spell',  name:'איות', desc:'שומעים את המילה ומסדרים את האותיות'}
 ];
 const shortA=q=>q.options[q.answer].length<=40 && q.question.length<=110;
 const riddleOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=14 && /^[\p{L}\p{N} '\-]+$/u.test(a);};
@@ -1713,9 +1717,11 @@ function modePool(set,id){
   if(id==='memory') return qs.filter(shortA);
   if(id==='match') return qs.filter(shortA);
   if(id==='riddle') return qs.filter(riddleOK);
+  if(id==='spell') return qs.filter(spellOK);
   return qs;
 }
-const MIN={choice:1,memory:3,match:3,riddle:2};
+const spellOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=12 && /^[\p{L} ]+$/u.test(a) && [...a].filter(c=>c!==' ').length>=2;};
+const MIN={choice:1,memory:3,match:3,riddle:2,spell:2};
 function recommended(set){ const g=set.grade; return g<=2?'memory':g<=5?'match':g<=8?'riddle':'choice'; }
 let PENDING_CH=null;
 function openModes(set, ch){
@@ -1766,12 +1772,12 @@ function startGame(set, onlyQs, mode, ch, topic){
   let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q]},mode).length);
   if(pool.length<MIN[mode]){ mode='choice'; pool=base; }
   const per=set.perRound||10;
-  const cap={choice:per,memory:Math.min(6,per),match:Math.min(10,per),riddle:Math.min(8,per)}[mode];
+  const cap={choice:per,memory:Math.min(6,per),match:Math.min(10,per),riddle:Math.min(8,per),spell:Math.min(8,per)}[mode];
   const qs = mode==='choice' ? shuffle(pool) : shuffle(pool).slice(0,cap);
   G={set, mode, ch: onlyQs?null:ch, topic:topic||null, retry:false, qs, i:0, score:0, streak:0, best:0, res:[], moves:0};
   $('gSheet').className='sheet'; $('gTop').innerHTML=''; 
-  show('vGame'); hud();
-  ({choice:choiceStart,memory:memStart,match:matchStart,riddle:riddleStart})[mode]();
+  show('vGame'); hud(); muteIcon();
+  ({choice:choiceStart,memory:memStart,match:matchStart,riddle:riddleStart,spell:riddleStart})[mode]();
 }
 function nextRoundQs(set,n){ // walk through all the material in order, round after round
   const N=set.questions.length; n=Math.min(n,N);
@@ -1783,7 +1789,7 @@ function hud(){
   $('gScore').innerHTML='⭐ '+G.score; $('gStreak').innerHTML='🔥 '+G.streak;
 }
 function bump(id){ const el=$(id); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
-function award(ok){
+function award(ok){ sfx(ok);
   if(ok){ G.streak++; G.best=Math.max(G.best,G.streak); G.score+=10+Math.min(G.streak-1,5)*2; bump('gScore'); }
   else G.streak=0;
   hud(); if(ok&&G.streak>=2) bump('gStreak');
@@ -1803,7 +1809,7 @@ function showSheet(ok, text){
     <div class="expl ${ok?'':'show'}" id="gExpl" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div>`;
   if(ok) burst();
 }
-function nextQ(){ $('gSheet').className='sheet'; G.i++; if(G.i<G.qs.length) ({choice:choiceRender,riddle:riddleRender})[G.mode](); else endGame(); }
+function nextQ(){ $('gSheet').className='sheet'; G.i++; if(G.i<G.qs.length) ({choice:choiceRender,riddle:riddleRender,spell:riddleRender})[G.mode](); else endGame(); }
 const shortTxt=t=>t.trim().split(/\s+/).length<=6;
 function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sc.map(it=>`<span style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
@@ -1829,7 +1835,7 @@ function choicePick(k){
   const btns=[...document.querySelectorAll('#gPlay .opt')];
   btns.forEach((b,i)=>{b.disabled=true; if(i!==q.answer&&i!==k) b.classList.add('dim');});
   btns[q.answer].classList.add('right'); if(!ok) btns[k].classList.add('wrong');
-  G.res.push({q,ok}); award(ok);
+  G.res.push({q,ok}); award(ok); sayAnswer(q);
   $('gTop').innerHTML=trackHtml();
   const me=document.querySelector('.track .me'); if(me) requestAnimationFrame(()=>me.style.insetInlineStart=`${((G.i+1)/G.qs.length)*100}%`);
   showSheet(ok, ok?PRAISE[Math.floor(Math.random()*PRAISE.length)]+(G.streak>=3?` ${G.streak} ברצף!`:'') : `כמעט! התשובה: ${q.options[q.answer]}`);
@@ -1856,7 +1862,7 @@ function memFlip(i){
   if(A.p===B.p && A.side!==B.side){
     M.lock=true;
     setTimeout(()=>{ if(!$('mc'+a)) return; [a,b].forEach(x=>{$('mc'+x).classList.remove('up');$('mc'+x).classList.add('got')}); M.open=[]; M.lock=false; M.found++;
-      const q=G.qs[A.p], ok=(M.miss[A.p]||0)<=1; G.res.push({q,ok}); award(true); burst(); memHud();
+      const q=G.qs[A.p], ok=(M.miss[A.p]||0)<=1; G.res.push({q,ok}); award(true); sayEn(q.options[q.answer]); burst(); memHud();
       if(M.found===G.qs.length) setTimeout(memDone,700); },350);
   } else {
     M.miss[A.p]=(M.miss[A.p]||0)+1; if(A.p!==B.p) M.miss[B.p]=(M.miss[B.p]||0)+1;
@@ -1902,7 +1908,7 @@ function matchTo(j){
   if(i===j){
     M.done[i]=true; drawLine(i,j,LINE_COLORS[i%5]); M.lines.push([i,j]);
     $('mq'+i).classList.remove('sel'); $('mq'+i).classList.add('done'); $('ma'+j).classList.add('done');
-    const ok=!M.first[i]; G.res.push({q,ok}); award(ok); if(ok) burst(); M.sel=null;
+    const ok=!M.first[i]; G.res.push({q,ok}); award(ok); sayEn(q.options[q.answer]); if(ok) burst(); M.sel=null;
     if(Object.keys(M.done).length===M.slice.length) setTimeout(matchRoundDone,600);
   } else {
     M.first[i]=true; G.streak=0; hud();
@@ -1928,15 +1934,17 @@ function riddleRender(){
   const chars=[...ans];
   const pool=heb?'אבגדהוזחטיכלמנסעפצקרשת':'abcdefghijklmnopqrstuvwxyz';
   const letters=chars.filter(c=>c!==' ');
-  const extra=Array.from({length:Math.min(4,Math.max(2,8-letters.length))},()=>{const c=pool[Math.floor(Math.random()*pool.length)];return up?c.toUpperCase():c;});
+  const spell=G.mode==='spell';
+  const extra=spell?[]:Array.from({length:Math.min(4,Math.max(2,8-letters.length))},()=>{const c=pool[Math.floor(Math.random()*pool.length)];return up?c.toUpperCase():c;});
   G.r={ans, chars, heb, slots:chars.map(c=>c===' '?' ':null), tiles:shuffle(letters.concat(extra)).map(c=>({c,used:false})), hints:0, done:false};
-  $('gCount').textContent=`חידה ${G.i+1} מתוך ${G.qs.length}`;
+  $('gCount').textContent=`${spell?'מילה':'חידה'} ${G.i+1} מתוך ${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   $('gPlay').innerHTML=`
     ${picOf(q)}<div class="qbox short" dir="auto">${esc(q.question)}</div>
     <div id="rSlots"></div><div id="rTiles"></div>
-    <div class="helpers" style="justify-content:center"><button class="btn ghost small" onclick="riddleHint()">💡 רמז</button><button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button><button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button><button class="btn ghost small" onclick="riddleGiveUp()">🤷</button></div>`;
+    <div class="helpers" style="justify-content:center">${spell?(EN_SAY(ans)?`<button class="btn small" onclick="sayEn(G.r.ans,true)" aria-label="השמעת המילה">🔊</button>`:''):`<button class="btn ghost small" onclick="riddleHint()">💡 רמז</button>`}<button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button>${spell?'':`<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button>`}<button class="btn ghost small" onclick="riddleGiveUp()">🤷</button></div>`;
   riddleDraw();
+  if(spell) setTimeout(()=>sayEn(ans),300);
 }
 function riddleDraw(state){
   const R=G.r;
@@ -1961,14 +1969,14 @@ function riddleCheck(){
   const R=G.r; if(R.slots.some(s=>s===null)) return;
   const typed=R.slots.map((s,i)=>R.chars[i]===' '?' ':s.c).join('');
   if(typed.toLowerCase()===R.ans.toLowerCase()){
-    R.done=true; riddleDraw('ok');
+    R.done=true; riddleDraw('ok'); sayAnswer(curQ());
     const ok=R.hints<=1; G.res.push({q:curQ(),ok}); award(true);
     showSheet(true, R.hints?`פתרת! (עם ${R.hints} ${R.hints===1?'רמז':'רמזים'})`:PRAISE[Math.floor(Math.random()*PRAISE.length)]);
   } else { riddleDraw('bad'); setTimeout(()=>riddleDraw(),400); }
 }
 function riddleGiveUp(){
   const R=G.r; if(R.done) return; R.done=true;
-  R.slots=R.chars.map(c=>c===' '?' ':{c,hint:true}); riddleDraw();
+  R.slots=R.chars.map(c=>c===' '?' ':{c,hint:true}); riddleDraw(); sayAnswer(curQ());
   G.res.push({q:curQ(),ok:false}); award(false);
   showSheet(false, `התשובה היא: ${R.ans}`);
 }
@@ -2001,8 +2009,31 @@ function retryMistakes(){ startGame(G.set, G.res.filter(r=>!r.ok).map(r=>r.q), '
 function refreshCurrentQ(){
   if(!G||!G.qs) return; const q=G.qs[G.i]; if(G.set.questions.includes(q)) return;
   const idx=REP?.i; if(idx==null) return; G.qs[G.i]=G.set.questions[idx];
-  if(!$('gSheet').classList.contains('show') && (G.mode==='choice'||G.mode==='riddle')) ({choice:choiceRender,riddle:riddleRender})[G.mode]();
+  if(!$('gSheet').classList.contains('show') && (G.mode==='choice'||G.mode==='riddle'||G.mode==='spell')) ({choice:choiceRender,riddle:riddleRender,spell:riddleRender})[G.mode]();
 }
+/* ---------- sound: effects + English words read aloud ---------- */
+let MUTE=false; try{ MUTE=localStorage.getItem('sff_mute')==='1'; }catch(e){}
+function muteIcon(){ const b=$('gMute'); if(b) b.textContent=MUTE?'🔇':'🔊'; }
+function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
+let AC=null;
+function sfx(ok){
+  if(MUTE) return;
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume();
+    const notes=ok?[[660,0],[880,.09]]:[[300,0],[220,.12]], t0=AC.currentTime;
+    notes.forEach(([f,dt])=>{ const o=AC.createOscillator(), g=AC.createGain(); o.type=ok?'triangle':'square'; o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,t0+dt); g.gain.exponentialRampToValueAtTime(ok?.18:.07,t0+dt+.02); g.gain.exponentialRampToValueAtTime(0.0001,t0+dt+.22);
+      o.connect(g).connect(AC.destination); o.start(t0+dt); o.stop(t0+dt+.25); });
+  }catch(e){}
+}
+const EN_SAY=t=>/[A-Za-z]/.test(t||'') && !/[\u0590-\u05FF]/.test(t||'');
+const isEnSet=s=>!!s && (s.subject==='אנגלית' || /english/i.test(s.subject||''));
+function sayEn(text, force){
+  if((MUTE&&!force) || !G || !isEnSet(G.set) || !EN_SAY(text)) return;
+  try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){}
+}
+// grammar (sentence with a blank) → the whole sentence; vocabulary → the word
+function sayAnswer(q){ const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
 function speakQ(){
   try{
     const q=curQ(); speechSynthesis.cancel();

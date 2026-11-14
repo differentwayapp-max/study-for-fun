@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v33">
+<meta name="sff-ver" content="sff-v34">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -376,6 +376,7 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .aibox{border:2px dashed var(--sun);background:#FFFBEF;border-radius:18px;padding:12px 14px;text-align:center;margin-top:6px}
 .demotag{display:inline-block;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:.85em;margin-top:4px}
 .rsec{margin:14px 2px 8px;font-size:1.08em}
+.cardcount{text-align:center;font-family:var(--display);font-weight:700;font-size:1.15em;margin-top:8px}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -2003,8 +2004,8 @@ function renderKidSets(){
     return `<div class="card herocard hero" style="background:${c};color:${fg}">
       <div class="top"><div class="ico">${ico}</div>${s.examDate?`<span class="flagtag">🏁 ${Math.max(0,daysLeft(s.examDate))}</span>`:'<span></span>'}</div>
       <h2>${esc(s.subject)}</h2>${s.demo?`<div class="demotag">🎲 דוגמה – ${me?`עוד אין תרגול ל${esc(kidName(me))}`:'עוד אין תרגול'}</div>`:''}
-      <div class="ringplay">${ringSvg(setProgress(s),dark?'#1B2A4A':'#F2A63B',dark?'#ffffff88':'#ffffff44')}<button class="play" onclick="openModes(getSet('${s.id}'))" aria-label="לשחק">${PLAY}</button></div>
-      <button class="roadbtn" onclick="openRoad('${s.id}')">🗺️ הדרך למבחן <b>${Math.min(dn.size,tot)}/${tot}</b></button>
+      <div class="ringplay">${ringSvg(setProgress(s),dark?'#1B2A4A':'#F2A63B',dark?'#ffffff88':'#ffffff44')}<button class="play" onclick="openRoad('${s.id}')" aria-label="לשחק">${PLAY}</button></div>
+      <div class="cardcount">🗺️ ${Math.min(dn.size,tot)}/${tot}</div>
       <div class="daypips">${pips}<span>${done>=g?'🏆':''}</span></div>
     </div>`; }));
   const k=kids.length>1?'':(me?`<style>#whoami{display:none}</style>`:'');

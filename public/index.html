@@ -374,6 +374,7 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .catpeek .e{font-size:1.9em;line-height:1.2}
 .aibox{border:2px dashed var(--sun);background:#FFFBEF;border-radius:18px;padding:12px 14px;text-align:center;margin-top:6px}
 .demotag{display:inline-block;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:.85em;margin-top:4px}
+.rsec{margin:14px 2px 8px;font-size:1.08em}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -1534,8 +1535,10 @@ function renderReview(set){
   $('rTitle').textContent=`${set.subject} · ${set.name}`;
   $('rSub').textContent=`כיתה ${GRADES[set.grade]}${set.examDate?` · 🏁 ${fmtDate(set.examDate)}`:''} · 🏆 ${todayGoal(set)} ביום`;
   const C=getChapters(set), dn=chaptersDone(set);
-  $('rStats').innerHTML=`<span>📚 ${C.length}</span><span>❓ ${set.questions.length}</span><span>🛡️ ${set.qa.passed}/${set.qa.checked}</span>${set.qa.fixed?`<span>🔧 ${set.qa.fixed}</span>`:''}`;
-  $('rCover').innerHTML=`<div class="chlist" style="width:100%">${C.map((ch,i)=>`<div class="chrow ${dn.has(i)?'done':''}"><span class="no">${dn.has(i)?'★':i+1}</span><span class="nm" dir="auto">${esc(ch.title)}</span><span class="hint">❓ ${ch.qs.length}</span></div>`).join('')}</div>`;
+  $('rStats').innerHTML=`<span>📚 ${C.length} פרקים</span><span>❓ ${set.questions.length} שאלות</span><span>⭐ ${dn.size} עברו</span>`;
+  $('rCover').innerHTML=`<h3 class="rsec">📚 פרקי התרגול – לפי הסדר במסלול של ${esc((kidOfSet(set)||{}).name||'הילד/ה')}</h3>
+    <div class="hint" style="margin:-4px 2px 8px">⭐ = עבר/ה את הפרק (70% ומעלה) · ❓ = מספר השאלות בפרק</div>
+    <div class="chlist" style="width:100%">${C.map((ch,i)=>`<div class="chrow ${dn.has(i)?'done':''}"><span class="no">${dn.has(i)?'★':i+1}</span><span class="nm" dir="auto">${esc(ch.title)}</span><span class="hint">❓ ${ch.qs.length}</span></div>`).join('')}</div>`;
   renderWordCov(set);
   const sg=$('rSuggest');
   if(set.suggestions&&set.suggestions.length){

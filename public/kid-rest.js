@@ -99,11 +99,13 @@
 
   // Watchdog (a plain script, so it runs even where the app's module script does not – e.g. iPhone Lockdown Mode):
   // on a kid's phone, if the main connection has not finished after 6 s, connect through the backup.
-  W.addEventListener('load', () => setTimeout(async () => {
+  // starts when the page is read (not after every font/picture: Lockdown Mode blocks some of them); sooner when Lockdown is detected
+  const startWatch = () => setTimeout(async () => {
     if (W.__sffDone || !W.SFF_KID_DEVICE || !W.__sffResolve) return;
     const fam = LS.getItem('sff_fam'), tok = LS.getItem('sff_tok'); if (!fam || !tok || !W.SFF_FIREBASE_CONFIG) return;
     W.__sffDone = true;
     try { const api = await W.SFF_KID_REST(W.SFF_FIREBASE_CONFIG, fam, tok); W.__sffVia = 'rest:watchdog(' + (W.__sffStage || 'no-module') + ')'; W.__sffResolve(api); }
     catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); W.__sffResolve(null); }
-  }, 6000));
+  }, typeof WebAssembly === 'undefined' ? 1500 : 6000);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startWatch); else startWatch();
 })();

@@ -822,6 +822,23 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
        sample → the `ask` Cloud Function (functions/index.js), which calls Claude
        user   → Firebase Auth (parent = Google sign-in, kid device = anonymous + invite token)  -->
 <script>
+  // A kid's device always keeps its own address  /?f=<family>&t=<token>&k=<kid>#kid-<kid>
+  // so that a home-screen icon (iPhone keeps it separate from Safari) opens the kid – never the Google sign-in.
+  (function(){
+    try{
+      const q=new URLSearchParams(location.search), LSx=localStorage;
+      const f=q.get('f')||LSx.getItem('sff_fam'), t=q.get('t')||LSx.getItem('sff_tok');
+      const hk=(location.hash.match(/^#kid-([A-Za-z0-9-]+)$/)||[])[1];
+      const k=hk||q.get('k')||LSx.getItem('sff_lock');
+      if(f&&t&&LSx.getItem('sff_unlock')!=='1'){          // (a parent who previewed and left kid mode is not a kid device)
+        LSx.setItem('sff_fam',f); LSx.setItem('sff_tok',t); if(k) LSx.setItem('sff_lock',k);
+        const want=`/?f=${encodeURIComponent(f)}&t=${encodeURIComponent(t)}${k?`&k=${encodeURIComponent(k)}`:''}${k?`#kid-${k}`:''}`;
+        if(location.pathname+location.search+location.hash!==want) window.history.replaceState(null,'',want);
+        document.querySelector('link[rel="manifest"]')?.remove();   // the icon then keeps this address
+        window.SFF_KID_DEVICE=true;
+      }
+    }catch(e){}
+  })();
   (function(){
     try{ const a=new URLSearchParams(location.search).get('add'); if(a&&/^(SFF1@)?[A-Za-z0-9-]{3,60}$/.test(a)){ sessionStorage.setItem('sff_add', a.replace(/^SFF1@/,'')); window.history.replaceState(null,'',location.pathname+location.hash); } }catch(e){}
     let resolveReady; window.__sffReady = new Promise(r => resolveReady = r); window.__sffResolve = resolveReady;
@@ -848,10 +865,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
 
     // A kid link looks like  https://<site>/?f=<familyId>&t=<inviteToken>#kid-<kidId>
     const qp = new URLSearchParams(location.search);
-    if (qp.get('f') && qp.get('t')) {
-      LS.setItem('sff_fam', qp.get('f')); LS.setItem('sff_tok', qp.get('t'));
-      W.history.replaceState(null, '', location.pathname + location.hash);
-    }
+    if (qp.get('f') && qp.get('t')) { LS.setItem('sff_fam', qp.get('f')); LS.setItem('sff_tok', qp.get('t')); }   // the address itself is kept (see above)
     const kidFam = LS.getItem('sff_fam'), kidTok = LS.getItem('sff_tok');
 
     const firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
@@ -867,6 +881,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     } else {
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
+      if (!u && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
       if (!u) u = await showLogin();
       uid = u.uid; famId = uid; role = 'parent';
       const fref = F.doc(fdb, `families/${famId}`);
@@ -961,6 +976,14 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     W.__sffResolve(null);   // the app keeps working on this device only
   }
 
+  // ---- a kid's device that lost its link: no sign-in, just ask for the link
+  function showKidNoLink() {
+    const logo = document.getElementById('logoFull')?.src || '';
+    const el = document.createElement('div'); el.id = 'fbLogin';
+    el.innerHTML = `<div class="fbbox"><img src="${logo}" alt="Study for fun"><div style="font-size:3.2em;margin:6px 0">🧒🔗</div>
+      <h2 style="margin:0 0 6px">צריך את הלינק מההורה</h2><div class="hint">בקשו מההורה לשלוח שוב את הלינק, ופתחו אותו בטלפון הזה</div></div>`;
+    document.body.appendChild(el);
+  }
   // ---- parent sign-in screen
   function showLogin() {
     return new Promise(resolve => {

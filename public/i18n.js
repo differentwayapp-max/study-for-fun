@@ -123,6 +123,7 @@
     [new RegExp(`^כיתה ${GRX}(.*)$`), (m, g, rest) => `Grade ${GR[g]}${tr(rest)}`],
     [/^(שאלה|חידה|מילה|סיבוב) (\d+) מתוך (\d+)$/, (m, w, a, b) => `${{ 'שאלה': 'Question', 'חידה': 'Riddle', 'מילה': 'Word', 'סיבוב': 'Round' }[w]} ${a} of ${b}`],
     [/^פרק (\d+)$/, (m, n) => `Chapter ${n}`],
+    [/^✨ (תרגול עודכן|(\d+) תרגולים עודכנו) – ההתקדמות נשמרה$/, (m, a, n) => `✨ ${n ? n + ' practice sets' : 'Practice set'} updated – progress kept`],
     [/^🎲 דוגמה – עוד אין תרגול ל(.+)$/, (m, n) => `🎲 Example – no practice set for ${n} yet`],
     [/^🎲 דוגמה – עוד אין תרגול$/, () => '🎲 Example – no practice set yet'],
     [/^מתאים ל(.+)$/, (m, n) => `Right for ${n}`],

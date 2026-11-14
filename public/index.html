@@ -1585,10 +1585,10 @@ function applyImport(p, ik){
   const qs=p.qs, words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
   const qa={...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]};
   const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
-  if(old){ Object.assign(old,{src:p.src,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
+  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
     delete old.order; delete old.pos; store.save(); return {set:old, msg:`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`}; }
   const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
-    qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',words};
+    qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',ver:p.ver||'',words};
   sets.unshift(set); store.save(); return {set, msg:`נוסף: ${set.subject} · ${qs.length} שאלות ✓`};
 }
 async function importSet(){
@@ -1666,6 +1666,20 @@ function renderCatalog(){
   $('catList').innerHTML=(mine.length?mine.map(card).join(''):`<div class="card center"><p class="sub" style="margin:0">${k?`עוד אין תרגול מוכן לכיתה ${GRADES[k.grade]}`:'—'}</p></div>`)
     +(other.length?`<h3 style="margin:18px 4px 8px">כיתות אחרות</h3>${other.map(card).join('')}`:'')
     +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
+}
+
+async function autoUpdateSets(){
+  if(!IS_OWNER && DB) return;                           // only the parent's app writes; kids get it through the sync
+  const mine=sets.filter(s=>s.src&&s.shared&&s.kidId); if(!mine.length) return;
+  let cat; try{ const r=await fetch(`/share/catalog.json?t=${Date.now()}`); cat=r.ok?(await r.json()).sets||[]:[]; }catch(e){ return; }
+  let n=0;
+  for(const s of mine){
+    const e=cat.find(x=>x.id===String(s.src).replace(/_/g,'-')); if(!e||!e.ver||e.ver===s.ver) continue;
+    try{ const p=await loadShare(e.id), k=kidById(s.kidId); if(!k) continue;
+      const keep={examDate:s.examDate, dailyGoal:s.dailyGoal};
+      applyImport(p,k); Object.assign(s,keep); n++; }catch(err){}
+  }
+  if(n){ store.save(); rerender(); toast(`✨ ${n===1?'תרגול עודכן':n+' תרגולים עודכנו'} – ההתקדמות נשמרה`); }
 }
 
 /* ---------- error reports ---------- */
@@ -2795,7 +2809,7 @@ async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl'
 
 applyLock();
 go(locked()?'kid':'kids');
-cloudInit().then(openPendingAdd);
+cloudInit().then(openPendingAdd).then(()=>setTimeout(autoUpdateSets,2500));
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>

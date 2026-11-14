@@ -54,7 +54,9 @@ if errors:
     print("\n".join(errors)); sys.exit(1)
 
 riddle = sum(1 for q in qs if re.fullmatch(r"[A-Za-z0-9 '\-]{2,14}", q["options"][q["answer"]]))
-payload = {"v": 1, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs,
+import hashlib
+ver = hashlib.sha1(json.dumps([SET, chapters, qs], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:10]   # changes only when the content changes
+payload = {"v": 1, "ver": ver, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs,
            "qa": {"checked": len(qs), "passed": len(qs), "fixed": 0, "dropped": 0}}
 code = "SFF1:" + base64.b64encode(json.dumps(payload, ensure_ascii=False).encode("utf-8")).decode()
 sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
@@ -74,7 +76,7 @@ samples, seen_ch = [], set()
 for q in qs:                                   # one sample from different chapters, pictures first
     if q["ch"] in seen_ch or len(samples) >= 3 or ("text" in chapters[q["ch"]]): continue
     seen_ch.add(q["ch"]); samples.append({"q": q["question"], "e": "".join(it["e"] for it in q["scene"][:2])})
-entry = {"id": code_name, "subject": SET["subject"], "grade": SET["grade"], "title": SET.get("title", SET["name"]),
+entry = {"id": code_name, "ver": ver, "subject": SET["subject"], "grade": SET["grade"], "title": SET.get("title", SET["name"]),
          "desc": SET.get("desc", ""), "desc_en": SET.get("desc_en", ""), "tags": SET.get("tags", SET["topics"]), "questions": len(qs), "chapters": len(chapters),
          "reading": sum(1 for c in chapters if c.get("text")), "words": len(word_list), "samples": samples, "status": "ready"}
 catalog["sets"] = [e for e in catalog["sets"] if e.get("id") != code_name] + [entry]

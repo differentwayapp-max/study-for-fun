@@ -688,6 +688,8 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
         <label class="btn ghost" style="cursor:pointer"><input type="checkbox" id="rCompete" onchange="toggleCompete(this.checked)" style="width:18px;height:18px;accent-color:var(--blue)"> 🏅 תחרות</label>
       </div>
       <div id="shareBox" class="hidden" style="margin-top:14px">
+        <div id="shareLinkRow" class="hidden" style="margin-bottom:10px"><label>🔗 לינק לתרגול</label><input id="shareLink" dir="ltr" readonly onclick="this.select()">
+          <div class="actions" style="margin-top:8px"><button class="btn small" onclick="copyText($('shareLink').value,'shareMsg')">העתקת לינק</button></div><div class="hint" style="margin-top:6px">הורה אחר: פותח → כניסה עם Google → בוחר ילד/ה → ייבוא</div></div>
         <textarea id="shareCode" dir="ltr" readonly style="min-height:64px"></textarea>
         <div class="actions" style="margin-top:8px"><button class="btn small" onclick="copyShare()">העתקה</button><span id="shareMsg" class="hint"></span></div>
       </div>
@@ -780,6 +782,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
        user   → Firebase Auth (parent = Google sign-in, kid device = anonymous + invite token)  -->
 <script>
   (function(){
+    try{ const a=new URLSearchParams(location.search).get('add'); if(a&&/^(SFF1@)?[A-Za-z0-9-]{3,60}$/.test(a)){ sessionStorage.setItem('sff_add', a.replace(/^SFF1@/,'')); window.history.replaceState(null,'',location.pathname+location.hash); } }catch(e){}
     let resolveReady; window.__sffReady = new Promise(r => resolveReady = r); window.__sffResolve = resolveReady;
     window.claude = { use: (name) => window.__sffReady.then(api => api ? api.use(name) : null) };
   })();
@@ -1416,8 +1419,11 @@ function openShare(){
   const s=curSet;
   const payload={v:1,src:s.src||'',words:s.words||[],name:s.name,grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
   $('shareCode').value='SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  const code=s.src?String(s.src).replace(/_/g,'-'):'';
+  $('shareLinkRow').classList.toggle('hidden',!code); if(code) $('shareLink').value=`${location.origin}/?add=${encodeURIComponent(code)}`;
   $('shareBox').classList.remove('hidden'); $('shareMsg').textContent='';
 }
+async function copyText(t,msgId){ try{ await navigator.clipboard.writeText(t); $(msgId).textContent='הועתק ✓'; }catch(e){ $(msgId).textContent='סמנו והעתיקו ידנית'; } }
 async function copyShare(){
   try{ await navigator.clipboard.writeText($('shareCode').value); $('shareMsg').textContent='הועתק ✓'; }
   catch(e){ $('shareCode').select(); $('shareMsg').textContent='סמנו את הקוד והעתיקו ידנית'; }
@@ -1669,6 +1675,7 @@ function renderKids(){
       <div><label for="kfGrade">כיתה</label><select id="kfGrade"></select></div>
       <div class="swatches" id="kfColors" style="justify-content:center"></div>
       <div class="actions" style="justify-content:center"><button class="btn big" onclick="saveKid()" id="kfSave">שמירה</button><button class="btn ghost ${KF.id?'':'hidden'}" id="kfCancel" onclick="resetKidForm()">ביטול</button>${KF.id?`<button class="btn ghost" onclick="delKid('${KF.id}')">${delArm===KF.id?'למחוק?':'🗑'}</button>`:''}</div>
+      ${KF.id?`<div class="center"><button class="btn ${resetArm===KF.id?'sun':'ghost'} small" onclick="resetKid('${KF.id}')">${resetArm===KF.id?'↺ לאפס את כל ההתקדמות?':'↺ איפוס התקדמות'}</button></div>`:''}
       <div class="hint center" id="kfMsg"></div></div>`);
   const prevName=$('kfName')?.value, prevGrade=$('kfGrade')?.value;
   renderCar('kidCar',slides);
@@ -2198,6 +2205,21 @@ function renderCompCards(){
 
 /* ---------- practice history & feedback ---------- */
 let history=[]; try{ history=JSON.parse(localStorage.getItem('sff_history')||'[]'); }catch(e){}
+setTimeout(()=>{ try{ if(applyResets()) rerender(); }catch(e){} },0);
+// drop games played before a child's progress was reset (on every device)
+function applyResets(){
+  const n=history.length;
+  history=history.filter(h=>{ const k=h.kidId&&kids.find(x=>x.id===h.kidId); return !(k&&k.resetAt&&h.at<k.resetAt); });
+  if(history.length!==n){ saveHistoryLocal(); return true; } return false;
+}
+let resetArm=null;
+function resetKid(id){
+  const k=kidById(id); if(!k) return;
+  if(resetArm!==id){ resetArm=id; renderKids(); carGo('kidCar',kids.length); setTimeout(()=>{ if(resetArm===id){ resetArm=null; renderKids(); } },4000); return; }
+  resetArm=null; k.resetAt=Date.now(); saveKids(); applyResets();
+  sets.filter(s=>kidOfSet(s)===k).forEach(s=>{ delete s.order; delete s.pos; }); store.save();
+  pushProgress(id); resetKidForm(); renderKids(); toast(`↺ ${esc(k.name)} ✓`);
+}
 function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
 function recordSession(by, right, n){
   const s=G.set;
@@ -2367,7 +2389,7 @@ const QUEUE={};
 function qwrite(key, fn){ const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
 const sent={};
 function pushKids(){ if(!DB||!IS_OWNER) return;
-  const list=kids.map(({id,name,grade,color})=>({id,name,grade,color}));
+  const list=kids.map(({id,name,grade,color,resetAt})=>({id,name,grade,color,...(resetAt?{resetAt}:{})}));
   const j=JSON.stringify(list); if(sent.kids===j) return; sent.kids=j;
   qwrite('kids',()=>DB.doc('fam/kids').set({list})); }
 let pushT=null;
@@ -2394,9 +2416,9 @@ async function cloudInit(){
   if(!DB) return;
   DB.doc('fam/kids').onSnapshot(snap=>{
     const remote=snap.exists?(snap.data().list||[]):[];
-    if(IS_OWNER){ remote.forEach(r=>{ if(!kidById(r.id)) kids.push({...r}); }); if(!snap.exists&&kids.length) pushKids(); }
+    if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt; }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
-    saveKidsLocal(); applyLock(); rerender();
+    saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender();
   },()=>{});
   DB.collection('sets').onSnapshot(q=>{
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
@@ -2410,6 +2432,7 @@ async function cloudInit(){
       (p.history||[]).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
       if(k && IS_OWNER && p.profile){ if(p.profile.nick!==undefined&&k.nick!==p.profile.nick){k.nick=p.profile.nick;changed=true;} if(p.profile.avatar&&JSON.stringify(k.avatar)!==JSON.stringify(p.profile.avatar)){k.avatar=p.profile.avatar;changed=true;} }
     });
+    if(applyResets()) changed=true;
     if(changed){ history.sort((a,b)=>b.at-a.at); saveHistoryLocal(); saveKidsLocal(); rerender(); }
   },()=>{});
 }
@@ -2422,7 +2445,13 @@ async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl'
 
 applyLock();
 go(locked()?'kid':'kids');
-cloudInit();
+cloudInit().then(openPendingAdd);
+function openPendingAdd(){
+  let a=null; try{ a=sessionStorage.getItem('sff_add'); }catch(e){}
+  if(!a || locked()) return; try{ sessionStorage.removeItem('sff_add'); }catch(e){}
+  openWizard(kids.length===1?kids[0].id:null); $('impBox').classList.remove('hidden'); $('importCode').value='SFF1@'+a;
+  $('importMsg').textContent=kids.length?'👆 בחרו ילד/ה ← ייבוא':'👆 הוסיפו ילד/ה ← ייבוא';
+}
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>

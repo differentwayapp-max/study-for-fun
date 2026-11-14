@@ -506,6 +506,8 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 
 /* kid-locked device */
 body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami{display:none!important}
+header .tabs[role=tablist]{display:none}#tabKid{display:none!important}
+html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 .linkbox{display:flex;gap:8px;align-items:center;margin-top:12px}
 .linkbox input{direction:ltr;font-size:.85em}
 
@@ -898,6 +900,12 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     }catch(e){}
   })();
   (function(){
+    try{ const v=new URLSearchParams(location.search).get('admin');
+      if(v==='on'||v==='off'){ localStorage.setItem('sff_admin', v==='on'?'1':'0'); window.history.replaceState(null,'',location.pathname+location.hash); }
+      if(localStorage.getItem('sff_admin')==='1') document.documentElement.classList.add('isadmin');
+    }catch(e){}
+  })();
+  (function(){
     try{ const a=new URLSearchParams(location.search).get('add'); if(a&&/^(SFF1@)?[A-Za-z0-9-]{3,60}$/.test(a)){ sessionStorage.setItem('sff_add', a.replace(/^SFF1@/,'')); window.history.replaceState(null,'',location.pathname+location.hash); } }catch(e){}
     let resolveReady; window.__sffReady = new Promise(r => resolveReady = r); window.__sffResolve = resolveReady;
     window.claude = { use: (name) => window.__sffReady.then(api => api ? api.use(name) : null) };
@@ -1225,6 +1233,7 @@ function show(v){
 }
 function go(mode){
   if(typeof locked==='function' && locked() && mode!=='kid') mode='kid';
+  if(mode==='admin' && !document.documentElement.classList.contains('isadmin')) mode='kids';
   const parentSide = mode==='parent'||mode==='stats'||mode==='kids';
   $('tabParent').classList.toggle('on',parentSide);
   $('tabKid').classList.toggle('on',mode==='kid');

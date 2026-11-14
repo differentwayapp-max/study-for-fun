@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v42">
+<meta name="sff-ver" content="sff-v43">
 <script src="/i18n.js"></script>
 <script src="/kid-rest.js"></script>
 <meta charset="utf-8">
@@ -920,13 +920,15 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const cfg = window.SFF_FIREBASE_CONFIG, V = window.SFF_FIREBASE_SDK || '10.14.1';
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
+  W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
-  let finished = false; const finish = api => { if (finished) return; finished = true; W.__sffResolve(api); };
+  let finished = false; const finish = api => { if (finished || W.__sffDone) return; finished = true; W.__sffDone = true; W.__sffResolve(api); };
   async function restFallback(why) {
-    if (finished || !W.SFF_KID_REST) return;
-    try { const api = await W.SFF_KID_REST(cfg, LS.getItem('sff_fam'), LS.getItem('sff_tok')); W.__sffVia = 'rest:' + why; finish(api); }
-    catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); finish(null); }
+    if (finished || W.__sffDone || !W.SFF_KID_REST) return;
+    W.__sffDone = true; finished = true;
+    try { const api = await W.SFF_KID_REST(cfg, LS.getItem('sff_fam'), LS.getItem('sff_tok')); W.__sffVia = 'rest:' + why; W.__sffResolve(api); }
+    catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); W.__sffResolve(null); }
   }
   const SKIP = isKid && typeof WebAssembly === 'undefined';      // Lockdown Mode switches WebAssembly off
   if (isKid && !SKIP) setTimeout(() => restFallback('timeout'), 9000);
@@ -945,6 +947,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     let fdb;
     try { fdb = F.initializeFirestore(app, { localCache: idbOK ? F.persistentLocalCache() : F.memoryLocalCache(), experimentalAutoDetectLongPolling: true }); }   // works offline
     catch (e) { try { fdb = F.initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); } catch (e2) { fdb = F.getFirestore(app); } }
+    if (W.SFF_REST_EMU) { A.connectAuthEmulator(auth, W.SFF_REST_EMU.auth, { disableWarnings: true }); F.connectFirestoreEmulator(fdb, '127.0.0.1', 8080); }   // tests only
     const fns = getFunctions(app, W.SFF_FUNCTIONS_REGION || 'europe-west1');
     const callAsk = httpsCallable(fns, 'ask', { timeout: 300000 });
 
@@ -2624,6 +2627,7 @@ function renderCompCards(){
 
 /* ---------- practice history & feedback ---------- */
 let history=[]; try{ history=JSON.parse(localStorage.getItem('sff_history')||'[]'); }catch(e){}
+history.forEach(h=>{ if(Array.isArray(h.qr)) h.qr=h.qr.map(x=>Array.isArray(x)?x.join('.'):x); });
 kids.forEach(k=>{ if(k.avatar&&k.avatar.type==='photo') k.avatar=null; }); try{ localStorage.setItem('sff_kids',JSON.stringify(kids)); }catch(e){}
 setTimeout(()=>{ try{ if(applyResets()) rerender(); }catch(e){} },0);
 // drop games played before a child's progress was reset (on every device)
@@ -2645,7 +2649,7 @@ function recordSession(by, right, n){
   const s=G.set;
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
     retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode,
-    qr:G.res.map(r=>{ const a=[s.questions.indexOf(r.q), r.ok?1:0]; if(!r.ok&&Number.isInteger(r.pick)) a.push(r.pick); return a; }).filter(x=>x[0]>=0),
+    qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);
@@ -2656,7 +2660,8 @@ let WSTAT={};   // setId → {items, tab, sel}
 function wordCat(set,q){ return passageOf(set,q)?'unseen':(/_{2,}/.test(q.question)||/which is correct/i.test(q.question))?'grammar':'vocab'; }
 function wordStats(set, H){
   const by={};
-  [...H].filter(h=>h.setId===set.id&&Array.isArray(h.qr)).reverse().forEach(h=>h.qr.forEach(([i,ok,pick])=>{
+  const qrItem=x=>Array.isArray(x)?x:String(x).split('.').map(Number);          // "12.0.2" (also old [12,0,2])
+  [...H].filter(h=>h.setId===set.id&&Array.isArray(h.qr)).reverse().forEach(h=>h.qr.map(qrItem).forEach(([i,ok,pick])=>{
     const q=set.questions[i]; if(!q) return;
     const label=String(q.options[q.answer]).trim(), key=label.toLowerCase();
     const x=by[key]=by[key]||{label,q,cat:wordCat(set,q),ok:0,bad:0,last:0,seq:[],picks:{}};

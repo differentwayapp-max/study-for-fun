@@ -29,18 +29,21 @@
   const encF = o => Object.fromEntries(Object.entries(o || {}).filter(([, v]) => v !== undefined).map(([k, v]) => [k, enc(v)]));
 
   W.SFF_KID_REST = async function (cfg, famId, token) {
-    const KEY = cfg.apiKey, ROOT = `https://firestore.googleapis.com/v1/projects/${cfg.projectId}/databases/(default)/documents`;
+    const EMU = W.SFF_REST_EMU;   // tests only: local Firebase emulators
+    const KEY = cfg.apiKey, ROOT = `${EMU ? EMU.fs : 'https://firestore.googleapis.com'}/v1/projects/${cfg.projectId}/databases/(default)/documents`;
+    const AUTH = EMU ? `${EMU.auth}/identitytoolkit.googleapis.com` : 'https://identitytoolkit.googleapis.com';
+    const STS = EMU ? `${EMU.auth}/securetoken.googleapis.com` : 'https://securetoken.googleapis.com';
     let idToken = null, exp = 0, uid = null;
 
     async function signIn() {
       const rt = LS.getItem('sff_rest_rt');
       if (rt) {
-        const r = await fetch(`https://securetoken.googleapis.com/v1/token?key=${KEY}`, {
+        const r = await fetch(`${STS}/v1/token?key=${KEY}`, {
           method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: 'grant_type=refresh_token&refresh_token=' + encodeURIComponent(rt) });
         if (r.ok) { const j = await r.json(); idToken = j.id_token; uid = j.user_id; exp = Date.now() + (+j.expires_in - 120) * 1000; LS.setItem('sff_rest_rt', j.refresh_token); return; }
       }
-      const r = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${KEY}`, {
+      const r = await fetch(`${AUTH}/v1/accounts:signUp?key=${KEY}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ returnSecureToken: true }) });
       if (!r.ok) throw new Error('sign-in ' + r.status);
       const j = await r.json(); idToken = j.idToken; uid = j.localId; exp = Date.now() + (+j.expiresIn - 120) * 1000; LS.setItem('sff_rest_rt', j.refreshToken);
@@ -93,4 +96,14 @@
     W.__sffStage = 'rest-ready';
     return { use: async n => n === 'db' ? dbApi : n === 'user' ? userApi : null };
   };
+
+  // Watchdog (a plain script, so it runs even where the app's module script does not – e.g. iPhone Lockdown Mode):
+  // on a kid's phone, if the main connection has not finished after 6 s, connect through the backup.
+  W.addEventListener('load', () => setTimeout(async () => {
+    if (W.__sffDone || !W.SFF_KID_DEVICE || !W.__sffResolve) return;
+    const fam = LS.getItem('sff_fam'), tok = LS.getItem('sff_tok'); if (!fam || !tok || !W.SFF_FIREBASE_CONFIG) return;
+    W.__sffDone = true;
+    try { const api = await W.SFF_KID_REST(W.SFF_FIREBASE_CONFIG, fam, tok); W.__sffVia = 'rest:watchdog(' + (W.__sffStage || 'no-module') + ')'; W.__sffResolve(api); }
+    catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); W.__sffResolve(null); }
+  }, 6000));
 })();

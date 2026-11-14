@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v34">
+<meta name="sff-ver" content="sff-v35">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -857,7 +857,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="topicchips" id="eTopics" style="justify-content:center"></div>
       <div class="actions" style="justify-content:center">
         <button class="btn sun" id="eRetry" onclick="retryMistakes()">🔁 הטעויות</button>
-        <button class="btn" onclick="openTopics(G.set,G.mode)">🎮 עוד</button>
+        <button class="btn" onclick="openRoad(G.set.id)">🗺️ למפה</button>
         <button class="btn ghost" onclick="go('kid')">🏠</button>
       </div>
     </div>
@@ -2074,13 +2074,13 @@ function renderRoad(){
     <path d="${d}" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="8 10" opacity=".8"/>`;
   const me=kidOfSet(set);
   pts.forEach(({x,y,it})=>{
-    if(it.flag){ svg+=`<g class="st" onclick="openModes(getSet('${set.id}'),-1)"><circle cx="${x}" cy="${y+3}" r="40" fill="#1B2A4A"/><circle cx="${x}" cy="${y}" r="40" fill="#FF5C8A" stroke="#1B2A4A" stroke-width="4"/>
+    if(it.flag){ svg+=`<g class="st" onclick="startStation('${set.id}',-1)"><circle cx="${x}" cy="${y+3}" r="40" fill="#1B2A4A"/><circle cx="${x}" cy="${y}" r="40" fill="#FF5C8A" stroke="#1B2A4A" stroke-width="4"/>
       <text x="${x}" y="${y+14}" font-size="38" text-anchor="middle">🏁</text></g>
       <text x="${x}" y="${y+62}" font-size="14" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום!':'המבחן · '+fmtDate(set.examDate)}</text>`; return; }
     const isRev=!!it.rev, T=ROAD_T[isRev?'rev':chType(set,it.c)];
     const done=!isRev&&P.dn.has(it.i), again=!isRev&&!done&&best[it.i]!=null, now=isRev?nx<0:it.i===nx, r=now?40:34;
     const emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
-    const go=isRev?`openModes(getSet('${set.id}'),-1)`:`openModes(getSet('${set.id}'),${it.i})`;
+    const go=`startStation('${set.id}',${isRev?-1:it.i})`;
     svg+=`<g class="st ${now?'st-now':''}" onclick="${go}"><circle cx="${x}" cy="${y+4}" r="${r}" fill="#1B2A4A"/>
       <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:'#fff'}" stroke="#1B2A4A" stroke-width="3.5"/>
       ${!done?`<circle cx="${x}" cy="${y}" r="${r-8}" fill="none" stroke="${again?'#FF8A00':T.c}" stroke-width="6" ${again?'stroke-dasharray="9 6"':''}/>`:''}
@@ -2095,6 +2095,24 @@ function renderRoad(){
   $('rdMap').innerHTML=svg+'</svg>';
 }
 
+/* ---------- the app picks the game for each station, and keeps them varied ---------- */
+// which games suit which material (first = best fit); reading passages and reviews stay "choice"
+const FIT={ word:['spell','memory','match','riddle','choice'], gram:['choice','match','riddle'], prac:['choice','match','memory'],
+            read:['choice'], rev:['choice','match'] };
+function pickMode(set, ch){
+  const C=getChapters(set), c=ch>=0?C[ch]:null, type=c?chType(set,c):'rev';
+  let cand=[...(FIT[type]||['choice'])];
+  if(track(set.grade).young && type==='word') cand=['memory','match','choice','spell'];            // grades 1–3: no letters games first
+  const qs=ch>=0?c.qs:set.questions;
+  cand=cand.filter(m=>modePool({questions:qs,chapters:set.chapters},m).length>=MIN[m]);
+  if(!cand.length) return 'choice';
+  // variety: not the game just played, and the one used least lately in this practice set; the same chapter gets a new game when replayed
+  const H=history.filter(h=>h.setId===set.id&&h.mode).slice(0,12), last=H[0]&&H[0].mode, lastHere=(history.find(h=>h.setId===set.id&&h.ch===ch&&h.mode)||{}).mode;
+  const score=m=>H.filter(h=>h.mode===m).length*2 + (m===last?5:0) + (m===lastHere?4:0) + cand.indexOf(m)*.6;
+  return cand.slice().sort((a,b)=>score(a)-score(b))[0];
+}
+function startStation(setId, ch){ const set=getSet(setId); if(!set) return; startGame(set, null, pickMode(set,ch), ch); }
+
 /* ---------- kid feedback: what I know, what to practise again ---------- */
 function openMe(){
   go('kid'); const me=kidById(activeKid)||kids[0], mine=(me?kidSets(me):sets).filter(s=>!s.demo);
@@ -2107,7 +2125,7 @@ function openMe(){
     const [c,ico]=subjStyle(set.subject);
     return `<div class="card mecard"><div class="mehead"><span class="subjico" style="background:${c};color:#fff">${ico}</span><b>${esc(set.subject)}</b>
         <button class="btn ghost small" onclick="openRoad('${set.id}')">🗺️ ${dn.size}/${C.length}</button></div>
-      ${again.length?`<h3>🔁 פרקים לנסות שוב</h3><div class="mebtns">${again.map(i=>`<button class="btn small sun" onclick="openModes(getSet('${set.id}'),${i})">פרק ${i+1} · ${Math.round(best[i]*100)}%</button>`).join('')}</div>`:''}
+      ${again.length?`<h3>🔁 פרקים לנסות שוב</h3><div class="mebtns">${again.map(i=>`<button class="btn small sun" onclick="startStation('${set.id}',${i})">פרק ${i+1} · ${Math.round(best[i]*100)}%</button>`).join('')}</div>`:''}
       <h3>💪 לתרגל שוב <span class="hint">${practise.length}</span></h3>
       ${practise.length?`<div class="wlist">${practise.map(x=>`<span class="wchip ${x.bad>=2?'r':'o'}" dir="ltr"><i>✗${x.bad}</i>${esc(x.label)}</span>`).join('')}</div>
         <button class="btn big" style="width:100%;justify-content:center;margin-top:12px" onclick="practiseWeak('${set.id}')">🎯 לתרגל אותן עכשיו</button>`:`<p class="sub" style="margin:4px 0 0">${items.length?'🌟 אין מה לתרגל שוב – כל הכבוד!':'▶ עוד לא שיחקת – מתחילים!'}</p>`}
@@ -2226,7 +2244,7 @@ function award(ok){ sfx(ok);
   else G.streak=0;
   hud(); if(ok&&G.streak>=2) bump('gStreak');
 }
-function quitGame(){ try{speechSynthesis.cancel()}catch(e){} if(G.res.length) endGame(); else openTopics(G.set,G.mode); }
+function quitGame(){ try{speechSynthesis.cancel()}catch(e){} if(G.res.length) endGame(); else if(G.set&&!G.set.demo&&getSet(G.set.id)) openRoad(G.set.id); else go('kid'); }
 const PRAISE=['כל הכבוד!','מעולה!','בדיוק!','יופי!','אלופים!','וואו!'];
 const curQ=()=>G.qs[G.i];
 function showSheet(ok, text){

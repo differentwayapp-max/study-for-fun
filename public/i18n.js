@@ -98,7 +98,7 @@
     'בניית תרגול חדש עם AI תיפתח בקרוב': 'Building a new practice set with AI is coming soon',
     'בינתיים אפשר להוסיף תרגול מוכן עם 🔗 קוד שיתוף (בשלב הראשון)': 'Meanwhile you can add a ready practice set with a 🔗 share code (in step 1)',
     'בקרוב': 'Coming soon',
-    'הדרך למבחן': 'Road to the test', 'עוד אין משחקים בטווח הזה': 'No games in this period yet', 'כשהילד/ה ישחקו – יופיעו כאן מה הם יודעים ומה כדאי לתרגל שוב.': 'Once your kid plays, you will see here what they know and what to practise again.', 'תרגולים מוכנים': 'Ready practice sets', 'כל הכיתות': 'All grades', 'כיתות אחרות': 'Other grades', 'קטע קריאה': 'Reading passage',
+    'הדרך למבחן': 'Road to the test', 'למפה': 'To the map', 'עוד אין משחקים בטווח הזה': 'No games in this period yet', 'כשהילד/ה ישחקו – יופיעו כאן מה הם יודעים ומה כדאי לתרגל שוב.': 'Once your kid plays, you will see here what they know and what to practise again.', 'תרגולים מוכנים': 'Ready practice sets', 'כל הכיתות': 'All grades', 'כיתות אחרות': 'Other grades', 'קטע קריאה': 'Reading passage',
     'בנייה מהחומר שלכם': 'Build from your own material', 'חסר תרגול': 'Missing a practice set', 'בנייה עם AI מהחומר שלכם – בקרוב': 'Building with AI from your material – coming soon',
     'תאריך המבחן': 'Test date', '(לא חובה)': '(optional)', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
     'לתרגל אותן עכשיו': 'Practise them now', 'אני יודע': 'I know', 'אין מה לתרגל שוב – כל הכבוד': 'Nothing to practise again – well done', 'עוד לא שיחקת – מתחילים': "You haven't played yet – let's start",

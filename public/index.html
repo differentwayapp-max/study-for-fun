@@ -364,6 +364,15 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .mehead{display:flex;align-items:center;gap:10px}.mehead b{font-family:var(--display);font-size:1.25em;flex:1}
 .mehead .subjico{width:44px;height:44px;border-radius:12px;border:var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:700}
 .mebtns{display:flex;flex-wrap:wrap;gap:8px}
+.catcard{margin-bottom:14px}.catcard.soon{opacity:.6}
+.cathead{display:flex;gap:12px;align-items:center}.cathead b{font-family:var(--display);font-size:1.15em}
+.cathead .subjico{width:54px;height:54px;flex:none;border-radius:16px;border:var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.25em}
+.catstats{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px}.catstats span{border:1.5px solid var(--ink);border-radius:999px;padding:1px 10px;font-size:.88em;background:#F4F2FF}
+.cattags{display:flex;flex-wrap:wrap;gap:6px}.cattags span{background:#FFF6E3;border-radius:8px;padding:2px 8px;font-size:.82em}
+.catpeek{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 2px}
+.catpeek>div{border:1.5px solid #D9D4EA;border-radius:14px;padding:6px;text-align:center;font-size:.8em;background:#FAFBFF;line-height:1.25}
+.catpeek .e{font-size:1.9em;line-height:1.2}
+.aibox{border:2px dashed var(--sun);background:#FFFBEF;border-radius:18px;padding:12px 14px;text-align:center;margin-top:6px}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -699,6 +708,8 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
         <div><label for="adName">שם</label><input id="adName" type="text" maxlength="20" placeholder="נועה"></div>
         <div><label for="adGrade">כיתה</label><select id="adGrade"></select></div>
       </div>
+      <label for="adExam" style="display:block;margin-top:14px">🏁 תאריך המבחן <span class="hint">(לא חובה)</span></label>
+      <input id="adExam" type="date" style="max-width:220px;margin:0 auto;display:block">
       <button class="btn big" style="width:100%;justify-content:center;margin-top:16px" onclick="addConfirm()">הוספה ✓</button>
       <div class="hint" id="adMsg" style="margin-top:6px"></div>
     </div>
@@ -760,6 +771,14 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     <div class="carhead"><button class="arrow" onclick="carStep('subCar',1)" aria-label="הקודם">›</button><div class="cardots" id="subCarDots"></div><button class="arrow" onclick="carStep('subCar',-1)" aria-label="הבא">‹</button></div>
     <div class="car" id="subCar"></div>
     <div id="kComp" style="margin-top:18px"></div>
+  </section>
+
+  <!-- PARENT: catalog of ready practice sets -->
+  <section id="vCat" class="hidden">
+    <div class="roadhdr"><button class="btn ghost small" onclick="go('kids')" aria-label="חזרה">✕</button><div class="rdt"><b>📚 תרגולים מוכנים</b></div></div>
+    <div class="hint" style="margin:4px 2px">למי?</div><div class="chipsel" id="catKids"></div>
+    <div class="chipsel" id="catSubj" style="margin-top:8px"></div>
+    <div id="catList" style="margin-top:14px"></div>
   </section>
 
   <!-- KID: what I know / what to practise again -->
@@ -1200,7 +1219,7 @@ async function ask(prompt, opts={}){
 
 /* ---------- navigation ---------- */
 function show(v){
-  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
+  ['vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vModes','vGame','vEnd','vAdmin','vStats'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
   window.scrollTo(0,0);
 }
 function go(mode){
@@ -1585,8 +1604,12 @@ let ADD=null;
 async function openPendingAdd(){
   let a=null; try{ a=sessionStorage.getItem('sff_add'); }catch(e){}
   if(!a || locked()) return; try{ sessionStorage.removeItem('sff_add'); }catch(e){}
+  openAddDialog(a);
+}
+async function openAddDialog(a, kidId){
   let p; try{ p=await loadShare(a); }catch(e){ toast('⚠️ הלינק לתרגול לא תקין'); return; }
-  ADD={p, kidId: kids.length===1?kids[0].id:null, newKid: !kids.length};
+  ADD={p, kidId: kidId || (kids.length===1?kids[0].id:null), newKid: !kids.length};
+  $('adExam').value = p.examDate && daysLeft(p.examDate)>=0 ? p.examDate : '';
   $('adGrade').innerHTML=GRADES.map((g,i)=>`<option value="${i}">כיתה ${g}</option>`).join(''); $('adGrade').value=String(+p.grade||0);
   $('adName').value=''; $('adMsg').textContent='';
   const [c,ico]=subjStyle(p.subject), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c);
@@ -1605,9 +1628,43 @@ function addConfirm(){
   if(ADD.newKid){ const n=$('adName').value.trim(); if(!n){ $('adMsg').textContent='👆 שם'; $('adName').focus(); return; }
     k={id:'k'+Date.now(),name:n,grade:+$('adGrade').value,color:KID_COLORS[kids.length%5]}; kids.push(k); saveKids(); }
   else { k=kidById(ADD.kidId); if(!k){ $('adMsg').textContent='👆 בחרו ילד/ה'; return; } }
+  const ex=$('adExam').value||'', nCh=(ADD.p.chapters||[]).length||Math.ceil(ADD.p.qs.length/(ADD.p.perRound||10));
+  ADD.p.examDate=ex; ADD.p.dailyGoal=ex?defGoalCh(nCh,ex).goal:(ADD.p.dailyGoal||2);
   const r=applyImport(ADD.p, k); ADD=null; $('addDlg').classList.add('hidden');
   go('kids'); const i=kids.indexOf(k); if(i>=0) carGo('kidCar',i);
   toast(`✓ ${esc(r.set.subject)} · ${esc(k.name)} — 🔗 לשלוח לילד`, ()=>openKidLink(k.id));
+}
+
+/* ---------- catalog of ready practice sets (public/share/catalog.json) ---------- */
+let CAT={list:null,kid:null,subj:''};
+async function openCatalog(kidId){
+  CAT.kid=kidId||CAT.kid||(kids[0]&&kids[0].id)||null; show('vCat'); $('catList').innerHTML='<p class="center">⏳</p>';
+  try{ const r=await fetch(`/share/catalog.json?t=${Date.now()}`); CAT.list=r.ok?((await r.json()).sets||[]):[]; }catch(e){ CAT.list=CAT.list||[]; }
+  renderCatalog();
+}
+function renderCatalog(){
+  const k=kidById(CAT.kid), L=CAT.list||[];
+  $('catKids').innerHTML=kids.map(x=>`<button class="${x.id===CAT.kid?'on':''}" onclick="CAT.kid='${x.id}';renderCatalog()"><span class="dot" style="background:${x.color}"></span>${esc(x.name)} · ${GRADES[x.grade]}</button>`).join('')
+    +`<button class="${!k?'on':''}" onclick="CAT.kid=null;renderCatalog()">כל הכיתות</button>`;
+  const subs=[...new Set(L.map(x=>x.subject))];
+  $('catSubj').innerHTML=subs.length>1?[`<button class="${!CAT.subj?'on':''}" onclick="CAT.subj='';renderCatalog()">הכול</button>`,...subs.map(x=>{const [,ico]=subjStyle(x); return `<button class="${CAT.subj===x?'on':''}" onclick='CAT.subj=${JSON.stringify(x)};renderCatalog()'>${ico} ${esc(x)}</button>`;})].join(''):'';
+  const fit=x=>!k||x.grade===k.grade, list=L.filter(x=>!CAT.subj||x.subject===CAT.subj);
+  const mine=list.filter(fit), other=k?list.filter(x=>!fit(x)):[];
+  const card=x=>{ const [c,ico]=subjStyle(x.subject), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), soon=x.status!=='ready';
+    const has=k&&sets.some(s=>s.kidId===k.id&&s.src&&s.src.replace(/_/g,'-')===x.id);
+    return `<div class="card catcard ${soon?'soon':''}"><div class="cathead"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}</span>
+      <div><b>${esc(x.subject)} · כיתה ${GRADES[x.grade]}</b>${k&&fit(x)?` <span class="pill ok">מתאים ל${esc(k.name)}</span>`:''}<div class="hint" dir="auto">${esc(x.title||'')}</div></div></div>
+      ${(()=>{ const d=(window.SFF_LANG&&SFF_LANG()==='en'&&x.desc_en)||x.desc; return d?`<p class="sub" dir="auto" translate="no" style="margin:8px 0 0">${esc(d)}</p>`:''; })()}
+      ${soon?'':`<div class="catstats"><span>❓ ${x.questions}</span><span>📚 ${x.chapters} פרקים</span>${x.reading?`<span>📖 קטע קריאה</span>`:''}${x.words?`<span>🔤 ${x.words} מילים</span>`:''}</div>
+      <div class="cattags" dir="auto">${(x.tags||[]).map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+      <div class="catpeek" translate="no">${(x.samples||[]).map(q=>`<div><div class="e">${esc(q.e)}</div><span dir="auto">${esc(q.q)}</span></div>`).join('')}</div>`}
+      ${soon?'<button class="btn big" disabled style="width:100%;justify-content:center;margin-top:10px">🔔 בקרוב</button>'
+        :has?`<button class="btn ghost big" style="width:100%;justify-content:center;margin-top:10px" onclick="go('kids')">✓ כבר אצל ${esc(k.name)}</button>`
+        :`<button class="btn big" style="width:100%;justify-content:center;margin-top:10px" onclick="openAddDialog('${x.id}'${k?`,'${k.id}'`:''})">＋ הוספה${k?' ל'+esc(k.name):''}</button>`}
+    </div>`; };
+  $('catList').innerHTML=(mine.length?mine.map(card).join(''):`<div class="card center"><p class="sub" style="margin:0">${k?`עוד אין תרגול מוכן לכיתה ${GRADES[k.grade]}`:'—'}</p></div>`)
+    +(other.length?`<h3 style="margin:18px 4px 8px">כיתות אחרות</h3>${other.map(card).join('')}`:'')
+    +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
 }
 
 /* ---------- error reports ---------- */
@@ -1829,7 +1886,7 @@ function renderKids(){
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
         <div class="m">🏆 ${kidTrophies(k)}<small>גביעים</small></div><div class="m">🔥 ${kidStreak(k)}<small>ימים ברצף</small></div></div>
       <div style="display:flex;flex-direction:column;gap:10px">${pend}${rows}</div>
-      <button class="btn ${ss.length?'ghost':'big'}" style="justify-content:center;margin-top:auto" onclick="openWizard('${k.id}')">＋ תרגול ל${esc(k.name)}</button>
+      <button class="btn ${ss.length?'ghost':'big'}" style="justify-content:center;margin-top:auto" onclick="openCatalog('${k.id}')">＋ תרגול ל${esc(k.name)}</button>
     </div>`; });
   slides.push(`<div class="card herocard kidhero addcard" id="kidForm">
       <div class="center">${mascot('wow',KF.color)}<h2 id="kfTitle" style="margin-top:6px">${KF.id?'עריכה':'＋ ילד/ה'}</h2></div>
@@ -2002,7 +2059,7 @@ function renderRoad(){
       ${again?`<rect x="${x-r-6}" y="${y+r-18}" width="46" height="22" rx="11" fill="#FF8A00" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+17}" y="${y+r-2}" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">🔁${Math.round(best[it.i]*100)}%</text>`:''}
       ${!isRev&&it.i===goalAfter?`<circle cx="${x-r+4}" cy="${y-r+6}" r="14" fill="${goalDone?'#24C78E':'#FFFBEF'}" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+4}" y="${y-r+12}" font-size="15" text-anchor="middle">🏆</text>`:''}</g>
       <text x="${x}" y="${y+r+18}" font-size="12" text-anchor="middle" fill="#3c4a6b">${isRev?esc(T.l):(it.i+1)+' · '+esc(T.l)}</text>
-      <text x="${x}" y="${y+r+34}" font-size="13" text-anchor="middle" font-weight="700" fill="#1B2A4A">${esc((s=>s.length>13?s.slice(0,12)+'…':s)(isRev?'חזרה על הטעויות':chName(it.c)))}</text>`;
+      <text x="${x}" y="${y+r+34}" font-size="13" text-anchor="middle" font-weight="700" fill="#1B2A4A">${esc((s=>s.length>13?s.slice(0,12)+'…':s)(isRev?(window.sffT?sffT('חזרה על הטעויות'):'חזרה על הטעויות'):chName(it.c)))}</text>`;
     if(now) svg+=`<foreignObject x="${x-20}" y="${y-r-44}" width="40" height="40"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,38):'🧒'}</div></foreignObject>`;
   });
   $('rdMap').innerHTML=svg+'</svg>';

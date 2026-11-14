@@ -98,7 +98,9 @@
     'בניית תרגול חדש עם AI תיפתח בקרוב': 'Building a new practice set with AI is coming soon',
     'בינתיים אפשר להוסיף תרגול מוכן עם 🔗 קוד שיתוף (בשלב הראשון)': 'Meanwhile you can add a ready practice set with a 🔗 share code (in step 1)',
     'בקרוב': 'Coming soon',
-    'הדרך למבחן': 'Road to the test', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
+    'הדרך למבחן': 'Road to the test', 'תרגולים מוכנים': 'Ready practice sets', 'כל הכיתות': 'All grades', 'כיתות אחרות': 'Other grades', 'קטע קריאה': 'Reading passage',
+    'בנייה מהחומר שלכם': 'Build from your own material', 'חסר תרגול': 'Missing a practice set', 'בנייה עם AI מהחומר שלכם – בקרוב': 'Building with AI from your material – coming soon',
+    'תאריך המבחן': 'Test date', '(לא חובה)': '(optional)', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
     'לתרגל אותן עכשיו': 'Practise them now', 'אני יודע': 'I know', 'אין מה לתרגל שוב – כל הכבוד': 'Nothing to practise again – well done', 'עוד לא שיחקת – מתחילים': "You haven't played yet – let's start",
     'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
     'חזרה על הטעויות': 'Mistakes review', 'יום המבחן': 'Test day', 'מחר': 'Tomorrow',
@@ -121,6 +123,11 @@
     [new RegExp(`^כיתה ${GRX}(.*)$`), (m, g, rest) => `Grade ${GR[g]}${tr(rest)}`],
     [/^(שאלה|חידה|מילה|סיבוב) (\d+) מתוך (\d+)$/, (m, w, a, b) => `${{ 'שאלה': 'Question', 'חידה': 'Riddle', 'מילה': 'Word', 'סיבוב': 'Round' }[w]} ${a} of ${b}`],
     [/^פרק (\d+)$/, (m, n) => `Chapter ${n}`],
+    [/^מתאים ל(.+)$/, (m, n) => `Right for ${n}`],
+    [/^✓ כבר אצל (.+)$/, (m, n) => `✓ Already with ${n}`],
+    [/^＋ הוספה ל(.+)$/, (m, n) => `＋ Add for ${n}`],
+    [/^עוד אין תרגול מוכן לכיתה (.+)$/, (m, g) => `No ready practice set for grade ${GR[g] || g} yet`],
+    [/^(\d+) (מילים)$/, (m, n) => `${n} words`],
     [/^פרק (\d+) · (\d+)%$/, (m, n, p) => `Chapter ${n} · ${p}%`],
     [/^היעד של היום: פרק (\d+)( ✓)?$/, (m, n, c) => `Today's goal: chapter ${n}${c || ''}`],
     [/^(עברתי|לנסות שוב|עוד) (\d+)$/, (m, w, n) => `${{ 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'עוד': 'Left' }[w]} ${n}`],
@@ -167,6 +174,7 @@
     let out = null;
     if (T[t] != null) out = T[t];
     if (out == null) for (const [re, fn] of P) { const m = t.match(re); if (m) { out = fn(...m); break; } }
+    if (out == null && t.includes(' · ')) { const parts = t.split(' · ').map(x => HE.test(x) ? translate(x) : x); if (!parts.some(x => HE.test(x))) out = parts.join(' · '); }
     if (out == null) {                                  // non-Hebrew edges (emoji, numbers, punctuation) stay as they are
       const a = t.search(HE), b = t.length - [...t].reverse().join('').search(HE);
       const core = t.slice(a, b), pre = t.slice(0, a), post = t.slice(b);
@@ -174,7 +182,6 @@
         if (c != null) out = pre + c + post;
         else { for (const [re, fn] of P) { const m = core.match(re); if (m) { out = pre + fn(...m) + post; break; } } } }
     }
-    if (out == null && t.includes(' · ')) { const parts = t.split(' · ').map(x => HE.test(x) ? translate(x) : x); if (!parts.some(x => HE.test(x))) out = parts.join(' · '); }
     if (out == null) { missing.add(t); out = t; }
     else out = out.replace(/[‹›]/g, c => c === '‹' ? '›' : '‹');   // "next / back" arrows point the other way in English
     const r = lead + out + trail; cache.set(s, r); return r;

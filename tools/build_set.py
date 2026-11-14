@@ -65,6 +65,20 @@ aliases = set(out.parent.glob(src.stem.replace("_", "-") + "-*.txt"))
 for a in ns.get("OLD_CODES", []): aliases.add(out.parent / f"{a}.txt")
 aliases.add(out.parent / f"{src.stem.replace('_', '-')}.txt")   # stable name used by the in-app share link (/?add=<name>)
 for f in aliases | {out}: f.write_text(code, encoding="utf-8")
+# catalog entry (public/share/catalog.json) – what the in-app catalog shows
+cat_path = out.parent / "catalog.json"
+try: catalog = json.loads(cat_path.read_text(encoding="utf-8"))
+except Exception: catalog = {"sets": []}
+code_name = src.stem.replace("_", "-")
+samples, seen_ch = [], set()
+for q in qs:                                   # one sample from different chapters, pictures first
+    if q["ch"] in seen_ch or len(samples) >= 3 or ("text" in chapters[q["ch"]]): continue
+    seen_ch.add(q["ch"]); samples.append({"q": q["question"], "e": "".join(it["e"] for it in q["scene"][:2])})
+entry = {"id": code_name, "subject": SET["subject"], "grade": SET["grade"], "title": SET.get("title", SET["name"]),
+         "desc": SET.get("desc", ""), "desc_en": SET.get("desc_en", ""), "tags": SET.get("tags", SET["topics"]), "questions": len(qs), "chapters": len(chapters),
+         "reading": sum(1 for c in chapters if c.get("text")), "words": len(word_list), "samples": samples, "status": "ready"}
+catalog["sets"] = [e for e in catalog["sets"] if e.get("id") != code_name] + [entry]
+cat_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"OK  words {len(word_list)}/{len(word_list)} practised")
 print(f"OK  {len(qs)} questions · {len(chapters)} chapters · riddle-ready {riddle}")
 print(f"CODE  SFF1@{sid}")

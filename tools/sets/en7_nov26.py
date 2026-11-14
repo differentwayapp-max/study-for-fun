@@ -3,6 +3,8 @@
 PS, WE, NP, AW, DW, EW, UN = "Present Simple", "Weather words", "Nature & places", "Action words", "Describing words", "Everyday words", "Unseen"
 
 SET = dict(name="English – Present Simple + Words", grade=6, subject="אנגלית",
+           title="Present Simple · Weather & Nature", desc="דקדוק, 112 מילים מהדף וקטע קריאה", desc_en="Grammar, 112 worksheet words and a reading passage",
+           tags=["Present Simple", "has / does", "always / never", "Weather", "Nature", "Unseen"],
            examDate="2026-11-18", dailyGoal=5, perRound=13,
            topics=[PS, WE, NP, AW, DW, EW, UN])
 

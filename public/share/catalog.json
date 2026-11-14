@@ -1,0 +1,39 @@
+{
+ "sets": [
+  {
+   "id": "en7-nov26",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Present Simple · Weather & Nature",
+   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
+   "desc_en": "Grammar, 112 worksheet words and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to school.",
+     "e": "👧🏫"
+    },
+    {
+     "q": "What is this?",
+     "e": "🌧️"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️"
+    }
+   ],
+   "status": "ready"
+  }
+ ]
+}

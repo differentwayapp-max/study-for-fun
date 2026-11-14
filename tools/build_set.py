@@ -20,8 +20,9 @@ errors, qs, chapters = [], [], []
 rng = random.Random(src.stem)   # same file → same option order
 for ci, chap in enumerate(C):
     title, topics, items = chap[:3]
-    text = chap[3].strip() if len(chap) > 3 else ""
-    chapters.append({"title": title, "topics": topics, "count": len(items), **({"text": text} if text else {})})
+    text = chap[3].strip() if len(chap) > 3 and isinstance(chap[3], str) else ""
+    kind = (ns.get("KINDS") or {}).get(title, "")          # optional station type on the map (abc / gram / word / read / rev)
+    chapters.append({"title": title, "topics": topics, "count": len(items), **({"text": text} if text else {}), **({"kind": kind} if kind else {})})
     if text and not 80 <= words(text) <= 300: errors.append(f"ch{ci+1}: passage has {words(text)} words")
     for topic, q, opts, ans, expl, sc in items:
         tag = f"ch{ci+1} «{q}» → {opts[ans]}"

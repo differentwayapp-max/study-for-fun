@@ -98,7 +98,7 @@
     'בניית תרגול חדש עם AI תיפתח בקרוב': 'Building a new practice set with AI is coming soon',
     'בינתיים אפשר להוסיף תרגול מוכן עם 🔗 קוד שיתוף (בשלב הראשון)': 'Meanwhile you can add a ready practice set with a 🔗 share code (in step 1)',
     'בקרוב': 'Coming soon',
-    'הדרך למבחן': 'Road to the test', 'מחפשים את התרגולים שלך…': 'Looking for your practice sets…', 'עוד אין כאן תרגול': 'No practice set here yet', 'רגע אחד': 'One moment',
+    'הדרך למבחן': 'Road to the test', 'אותיות': 'Letters', 'מחפשים את התרגולים שלך…': 'Looking for your practice sets…', 'עוד אין כאן תרגול': 'No practice set here yet', 'רגע אחד': 'One moment',
     'הטלפון עוד לא מחובר לילד/ה – פתחו את הלינק מההורה': 'This phone is not connected to a kid yet – open the link from your parent', 'משפחה': 'Family', 'הילדים': 'Kids', 'המבוגרים': 'Adults', 'קישור אישי לטלפון של כל ילד': "Each kid's own phone link",
     'כניסה עם Google': 'Sign in with Google', 'הזמנת מבוגר': 'Invite an adult', 'מה יוכל/תוכל לעשות?': 'What can they do?', 'שם (למשל: סבתא רותי)': 'Name (e.g. Grandma Ruth)',
     'לאילו ילדים?': 'Which kids?', 'יצירת הזמנה': 'Create invitation', 'שליחה בוואטסאפ': 'Send on WhatsApp', 'העתקה': 'Copy',

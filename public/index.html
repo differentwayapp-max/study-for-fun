@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v38">
+<meta name="sff-ver" content="sff-v39">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2054,6 +2054,12 @@ function roadPlan(set){
   const ahead = dl!=null && dl>=1 && doneToday>perDay;
   return {C,N,dn,day,revDay,flagDay,dl,perDay,behind,ahead,dayOf,t0,DAY};
 }
+// on the example map: who this phone is, and what it found – so a screenshot tells what is missing
+function demoWhy(){
+  const me=kidById(LOCK||activeKid), ver=document.querySelector('meta[name=sff-ver]')?.content||'';
+  return `<div class="hint" style="margin-top:4px">${me?`עוד אין תרגול ל${esc(kidName(me))} – ההורה מוסיף/ה מהקטלוג`:'הטלפון עוד לא מחובר לילד/ה'}</div>
+    <div class="hint" translate="no" dir="ltr" style="font-size:.7em;opacity:.65">${esc(ver)} · kid:${esc(String(LOCK||'-').slice(-6))} · kids:${kids.length} · sets:${sets.filter(s=>!s.demo).length} · ${esc(window.__sffStage||'-')}${window.__sffJoinErr?' · join:'+esc(window.__sffJoinErr):''} · idb:${window.SFF_IDB===false?'off':'on'}</div>`;
+}
 function dayLabel(d,t0){ if(d===0) return 'היום'; if(d===-1) return 'אתמול'; if(d===1) return 'מחר'; return 'יום '+WEEKDAY[new Date(t0+d*864e5).getDay()]; }
 let ROAD_SET=null;
 function openRoad(id){ ROAD_SET=id; renderRoad(); show('vRoad'); setTimeout(()=>{ const n=document.querySelector('#rdMap .st-now'); if(n) n.scrollIntoView({block:'center',behavior:'smooth'}); },60); }
@@ -2067,7 +2073,7 @@ function renderRoad(){
     : P.ahead ? '<span class="rdst ok">⚡ מקדים!</span>'
     : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
   $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
-    <div class="rdt"><b>🗺️ הדרך למבחן</b>${set.demo?' <span class="demotag">🎲 דוגמה</span>':''}<div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
+    <div class="rdt"><b>🗺️ הדרך למבחן</b>${set.demo?' <span class="demotag">🎲 דוגמה</span>'+demoWhy():''}<div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
     <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i></div></div>${status}`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;

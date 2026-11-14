@@ -125,6 +125,8 @@
     [new RegExp(`^כיתה ${GRX}(.*)$`), (m, g, rest) => `Grade ${GR[g]}${tr(rest)}`],
     [/^(שאלה|חידה|מילה|סיבוב) (\d+) מתוך (\d+)$/, (m, w, a, b) => `${{ 'שאלה': 'Question', 'חידה': 'Riddle', 'מילה': 'Word', 'סיבוב': 'Round' }[w]} ${a} of ${b}`],
     [/^פרק (\d+)$/, (m, n) => `Chapter ${n}`],
+    [/^עוד אין תרגול ל(.+) – ההורה מוסיף\/ה מהקטלוג$/, (m, n) => `No practice set for ${n} yet – the parent adds one from the catalog`],
+    [/^הטלפון עוד לא מחובר לילד\/ה$/, () => 'This phone is not connected to a kid yet'],
     [/^(📚 )?פרקי התרגול – לפי הסדר במסלול של (.+)$/, (m, e, n) => `${e || ''}The chapters – in order on ${n}'s road`],
     [/^(⭐ )?(\d+) עברו$/, (m, e, n) => `${e || ''}${n} passed`],
     [/^⭐ = עבר\/ה את הפרק \(70% ומעלה\) · ❓ = מספר השאלות בפרק$/, () => '⭐ = chapter passed (70%+) · ❓ = questions in the chapter'],

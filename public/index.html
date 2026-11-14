@@ -2660,6 +2660,9 @@ function fillStatsFilters(){
   const kids=[...new Set(history.map(h=>h.kid))], subs=[...new Set(history.map(h=>h.subject))];
   const keep=(id,vals,all)=>{const el=$(id),cur=el.value; el.innerHTML=`<option value="">${all}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join(''); if(vals.includes(cur)) el.value=cur;};
   keep('sKid',kids,'כל הילדים'); keep('sSubj',subs,'כל המקצועות');
+  // only show a filter when there is something to choose from
+  $('sKid').classList.toggle('hidden',kids.length<2); if(kids.length<2) $('sKid').value='';
+  $('sSubj').classList.toggle('hidden',subs.length<2); if(subs.length<2) $('sSubj').value='';
 }
 function renderStats(){
   const kid=$('sKid').value, subj=$('sSubj').value, days=+$('sRange').value;

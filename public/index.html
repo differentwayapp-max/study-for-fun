@@ -162,10 +162,10 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 /* game stage */
 .stage{background:var(--paper);border:var(--line);border-radius:28px;box-shadow:0 6px 0 var(--ink);overflow:hidden}
 .stage .hud{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:12px 12px;border-bottom:var(--line);background:#F4F2FF;flex-wrap:nowrap}
-.stage .hud #gCount{flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.stage .hud #gCount{flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;font-family:var(--display);font-weight:700;font-size:1.12em;color:var(--ink)}
 .stage .hud .quit{flex:none;font-size:1.1em;padding:4px}
 .chips{display:flex;gap:8px}
-.chip{background:#fff;border:var(--line);border-radius:999px;padding:3px 12px;font-family:var(--display);font-weight:700;font-size:1.02em;display:inline-flex;gap:6px;align-items:center}
+.chip{background:#fff;border:var(--line);border-radius:999px;padding:4px 12px;font-family:var(--display);font-weight:700;font-size:1.2em;display:inline-flex;gap:6px;align-items:center}
 .chip.pop{animation:pop .35s}
 @keyframes pop{40%{transform:scale(1.25)}}
 .quit{background:none;border:0;cursor:pointer;font-family:var(--display);font-weight:600;color:var(--ink2)}
@@ -178,8 +178,9 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .track .flag{position:absolute;top:8px;inset-inline-end:-12px;font-size:28px}
 .track .me{position:absolute;top:0;width:44px;height:44px;margin-inline-start:-22px;transition:inset-inline-start .5s cubic-bezier(.3,1.5,.5,1)}
 /* memory */
-.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:640px;margin:0 auto}
-@media(max-width:560px){.mem{grid-template-columns:repeat(3,1fr)}}
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:680px;margin:0 auto}
+.mem.few{grid-template-columns:repeat(3,1fr);max-width:520px}
+@media(max-width:560px){.mem{grid-template-columns:repeat(3,1fr);gap:10px}}
 .mcard{aspect-ratio:4/5;perspective:800px;cursor:pointer;border:0;background:none;padding:0}
 .mcard .in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
 .mcard.up .in,.mcard.got .in{transform:rotateY(180deg)}
@@ -187,20 +188,22 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .mcard .b{background:var(--blue);background-image:radial-gradient(#fff 2px,transparent 2.5px),radial-gradient(#fff 2px,transparent 2.5px);background-size:18px 18px;background-position:0 0,9px 9px}
 .mcard .b span{width:46px;height:46px;border-radius:50%;background:var(--sun);border:var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.5em}
 .mcard:nth-child(3n+2) .b{background-color:var(--berry)}.mcard:nth-child(3n) .b{background-color:var(--mint)}
-.mcard .f{transform:rotateY(180deg);background:#fff;text-align:center;font-family:var(--display);font-weight:600;font-size:.88em;line-height:1.25;unicode-bidi:plaintext;overflow:hidden}
+.mcard .f{transform:rotateY(180deg);background:#fff;text-align:center;font-family:var(--display);font-weight:700;font-size:1.05em;line-height:1.2;padding:6px;unicode-bidi:plaintext;overflow:hidden}
 .mcard .f .em{font-size:2em;line-height:1;margin-bottom:4px}
-.mcard .f.qside{background:#F1EDFF}.mcard .f.aside{background:#FFF6D6;font-size:1.05em}
+.mcard .f.qside{background:#F1EDFF}.mcard .f.aside{background:#FFF6D6;font-size:1.3em;word-break:break-word}
+.mcard .f .scene.mini{width:100%;margin:0 0 4px}
+.mcard .f .em{font-size:2.6em}
 .mcard.got .f{background:var(--mint)}
 .mcard.got{animation:pop .4s}
 .mcard.no .in{animation:shake .35s}
 
 /* match with lines */
 .matchwrap{position:relative;display:grid;grid-template-columns:1.35fr 1fr;gap:56px}
-@media(max-width:560px){.matchwrap{gap:30px}.mitem{font-size:.92em;padding:8px 10px}}
+@media(max-width:560px){.matchwrap{gap:26px;grid-template-columns:1fr 1fr}.mitem{padding:8px 10px}}
 .matchwrap svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .mcol{display:flex;flex-direction:column;gap:10px}
-.mitem{position:relative;border:var(--line);border-radius:14px;background:#fff;padding:10px 12px;font-family:var(--display);font-weight:600;cursor:pointer;text-align:start;box-shadow:0 3px 0 var(--ink);unicode-bidi:plaintext;min-height:54px;display:flex;align-items:center;gap:8px}
-.mitem .em{font-size:1.5em}
+.mitem{position:relative;border:var(--line);border-radius:14px;background:#fff;padding:10px 12px;font-family:var(--display);font-weight:600;cursor:pointer;text-align:start;box-shadow:0 3px 0 var(--ink);unicode-bidi:plaintext;min-height:66px;font-size:1.15em;display:flex;align-items:center;gap:8px}
+.mitem .em{font-size:2.2em}
 .mitem::after{content:"";position:absolute;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;border:var(--line);background:#fff}
 .mcol.q .mitem::after{left:-9px}.mcol.a .mitem::after{right:-9px}
 .mitem.sel{background:var(--sun)}
@@ -210,14 +213,14 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .mcol.a .mitem{background:#FFFBEA}
 
 /* riddle */
-.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0 18px;direction:ltr}
+.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0 18px;direction:ltr;--s:var(--sz,48px)}
 .slots.rtl{direction:rtl}
-.slot{width:44px;height:52px;border:var(--line);border-radius:12px;background:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.5em;cursor:pointer;border-bottom-width:5px}
+.slot{width:var(--s);height:calc(var(--s) * 1.18);font-size:calc(var(--s) * .62)!important;border:var(--line);border-radius:12px;background:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.5em;cursor:pointer;border-bottom-width:5px}
 .slot.sp{border:0;width:16px;background:none;cursor:default}
 .slot.hint{background:var(--lilac)}
 .slots.ok .slot{background:var(--mint)}.slots.bad .slot{background:var(--badbg);animation:shake .35s}
 .tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;direction:ltr}
-.tile{width:48px;height:48px;border:var(--line);border-radius:12px;background:var(--sun);font-family:var(--display);font-weight:700;font-size:1.4em;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tile{width:max(var(--sz,48px),50px);height:max(var(--sz,48px),50px);border:var(--line);border-radius:12px;background:var(--sun);font-family:var(--display);font-weight:700;font-size:calc(max(var(--sz,48px),50px) * .6);cursor:pointer;box-shadow:0 4px 0 var(--ink)}
 .tile:nth-child(3n+1){background:#BFE6FF}.tile:nth-child(3n+2){background:#FFD6E2}
 .tile:active{transform:translateY(4px);box-shadow:none}
 .tile.used{visibility:hidden}
@@ -229,7 +232,7 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .passage{border:var(--line);border-radius:18px;background:#FFFBEF;margin:0 0 14px;overflow:hidden}
 .passage summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px;font-family:var(--display);font-weight:600;background:#FFE69A;border-bottom:var(--line)}
 .passage:not([open]) summary{border-bottom:0}
-.passage .ptext{max-height:38vh;overflow:auto;padding:10px 16px;line-height:1.6;font-size:1.02em;unicode-bidi:plaintext}
+.passage .ptext{max-height:42vh;overflow:auto;padding:12px 16px;line-height:1.65;font-size:1.18em;unicode-bidi:plaintext}
 .passage .ptext p{margin:0 0 10px}
 .wordcov{border:var(--line);border-radius:16px;background:#fff;margin:0 0 12px}
 .wordcov summary{cursor:pointer;padding:8px 14px;font-family:var(--display);font-weight:600}
@@ -255,10 +258,10 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 body.young .qbox{font-size:1.8em}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:560px){.opts{grid-template-columns:1fr}}
-.opt{--c:#EAF0FF;position:relative;border:var(--line);background:var(--c);border-radius:18px;padding:16px 16px 16px 16px;padding-inline-start:58px;text-align:start;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.12em;
+.opt{--c:#EAF0FF;position:relative;border:var(--line);background:var(--c);border-radius:18px;padding:16px 16px 16px 16px;padding-inline-start:58px;text-align:start;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1.3em;
   unicode-bidi:plaintext;box-shadow:0 4px 0 var(--ink);transition:transform .08s,box-shadow .08s;min-height:64px}
 .opt:nth-child(1){--c:#EAF0FF}.opt:nth-child(2){--c:#FFF3CC}.opt:nth-child(3){--c:#DDF6EC}.opt:nth-child(4){--c:#FFE4EC}
-.opt .key{position:absolute;inset-inline-start:12px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:10px;border:var(--line);background:#fff;display:grid;place-items:center;font-size:.9em}
+.opt .key{position:absolute;inset-inline-start:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:10px;border:var(--line);background:#fff;display:grid;place-items:center;font-size:.9em}
 .opt:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 var(--ink)}
 .opt:active:not(:disabled){transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
 .opt:disabled{cursor:default}
@@ -445,7 +448,8 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .scene span{position:absolute;transform:translate(-50%,-50%);line-height:1}
 .scene.mini{aspect-ratio:4/3;max-height:none;border-radius:12px;border-width:1.5px;margin:0 0 4px}
 .scene.mini .ground{height:14%}
-.mitem .scene.mini{width:72px;flex:none;margin:0}
+.mitem .scene.mini{width:96px;flex:none;margin:0}
+@media(max-width:560px){.mcol.q .mitem{flex-direction:column;justify-content:center;text-align:center;gap:4px;font-size:1em}.mcol.q .mitem .scene.mini{width:100%;max-width:130px}}
 .qbox.short{text-align:center;font-size:1.4em}
 
 /* topic picker */
@@ -2148,6 +2152,9 @@ function pastNext(j){
 }
 function nextQ(){ $('gSheet').className='sheet'; G.i++; if(G.i<G.qs.length) ({choice:choiceRender,riddle:riddleRender,spell:riddleRender})[G.mode](); else endGame(); }
 const shortTxt=t=>t.trim().split(/\s+/).length<=6;
+// the question text next to a picture – skipped when it only says "what is this?" (the picture says it)
+const GENERIC_Q=/^(what is this|what are these|who is (he|she|this)|מה זה|מי זה)\s*\??$/i;
+const cueTxt=q=>!(q.scene||q.emoji) || (shortTxt(q.question) && !GENERIC_Q.test(q.question.trim()));
 function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sc.map(it=>`<span style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
 
@@ -2160,7 +2167,7 @@ function trackHtml(){
 }
 function choiceRender(){
   const q=curQ();
-  $('gCount').textContent=`שאלה ${G.i+1} מתוך ${G.qs.length}`;
+  $('gCount').textContent=`❓ ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   const txt=passageOf(G.set,q);
   const top=txt?`<details class="passage" open><summary>📖 קטע קריאה ${EN_SAY(txt)?`<button class="btn ghost small" onclick="event.preventDefault();sayEn(passageOf(G.set,curQ()),true)" aria-label="הקראת הקטע">🔊</button>`:''}</summary><div class="ptext" dir="auto">${txt.split(/\n\s*\n/).map(par=>`<p>${esc(par.trim())}</p>`).join('')}</div></details>`:picOf(q);
@@ -2186,12 +2193,12 @@ function memStart(){
   G.mem={cards, open:[], found:0, miss:{}, lock:false};
   $('gTop').innerHTML='';
   memHud();
-  $('gPlay').innerHTML=`<div class="mem" style="grid-template-columns:repeat(${cards.length<=6?3:4},1fr);max-width:${cards.length<=6?480:640}px">${cards.map((c,i)=>{const q=G.qs[c.p];
-    const face = c.side==='q' ? `<div class="f qside" dir="auto">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<div class="em" style="font-size:3em">${esc(q.emoji)}</div>`:'')}${(shortTxt(q.question)||(!q.scene&&!q.emoji))?`<span style="font-size:.85em">${esc(q.question)}</span>`:''}</div>`
+  $('gPlay').innerHTML=`<div class="mem ${cards.length<=6?'few':''}">${cards.map((c,i)=>{const q=G.qs[c.p];
+    const face = c.side==='q' ? `<div class="f qside" dir="auto">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<div class="em" style="font-size:3em">${esc(q.emoji)}</div>`:'')}${(cueTxt(q))?`<span style="font-size:.85em">${esc(q.question)}</span>`:''}</div>`
                               : `<div class="f aside" dir="auto">${esc(q.options[q.answer])}</div>`;
     return `<button class="mcard" id="mc${i}" onclick="memFlip(${i})" aria-label="קלף ${i+1}"><div class="in"><div class="b"><span>?</span></div>${face}</div></button>`}).join('')}</div>`;
 }
-function memHud(){ if(!G||!G.mem) return; $('gCount').textContent=`זוגות: ${G.mem.found}/${G.qs.length} · מהלכים: ${G.moves}`; }
+function memHud(){ if(!G||!G.mem) return; $('gCount').textContent=`🃏 ${G.mem.found}/${G.qs.length} · 👆 ${G.moves}`; }
 function memFlip(i){
   const M=G.mem, el=$('mc'+i);
   if(M.lock||el.classList.contains('up')||el.classList.contains('got')) return;
@@ -2222,10 +2229,10 @@ function matchRound(){
   G.m={slice, ans:shuffle(slice.map((q,i)=>i)), sel:null, done:{}, first:{}, lines:[]};
   const rounds=Math.ceil(G.qs.length/per);
   $('gTop').innerHTML='';
-  $('gCount').textContent= rounds>1?`סיבוב ${G.round+1} מתוך ${rounds}`:'';
+  $('gCount').textContent= rounds>1?`〰️ ${G.round+1}/${rounds}`:'';
   $('gPlay').innerHTML=`
     <div class="matchwrap" id="mw"><svg class="lines" id="mlines"></svg>
-      <div class="mcol q">${slice.map((q,i)=>`<button class="mitem" id="mq${i}" dir="auto" onclick="matchSel(${i})">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<span class="em" style="font-size:2em">${esc(q.emoji)}</span>`:'')}${(shortTxt(q.question)||(!q.scene&&!q.emoji))?`<span>${esc(q.question)}</span>`:''}</button>`).join('')}</div>
+      <div class="mcol q">${slice.map((q,i)=>`<button class="mitem" id="mq${i}" dir="auto" onclick="matchSel(${i})">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<span class="em" style="font-size:2em">${esc(q.emoji)}</span>`:'')}${(cueTxt(q))?`<span>${esc(q.question)}</span>`:''}</button>`).join('')}</div>
       <div class="mcol a">${G.m.ans.map((qi,j)=>`<button class="mitem" id="ma${qi}" dir="auto" onclick="matchTo(${qi})">${esc(slice[qi].options[slice[qi].answer])}</button>`).join('')}</div>
     </div>`;
 }
@@ -2276,7 +2283,7 @@ function riddleRender(){
   const spell=G.mode==='spell';
   const extra=spell?[]:Array.from({length:Math.min(4,Math.max(2,8-letters.length))},()=>{const c=pool[Math.floor(Math.random()*pool.length)];return up?c.toUpperCase():c;});
   G.r={ans, chars, heb, slots:chars.map(c=>c===' '?' ':null), tiles:shuffle(letters.concat(extra)).map(c=>({c,used:false})), hints:0, done:false};
-  $('gCount').textContent=`${spell?'מילה':'חידה'} ${G.i+1} מתוך ${G.qs.length}`;
+  $('gCount').textContent=`${spell?'🔤':'🧩'} ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   $('gPlay').innerHTML=`
     ${picOf(q)}<div class="qbox short" dir="auto">${esc(q.question)}</div>
@@ -2287,6 +2294,8 @@ function riddleRender(){
 }
 function riddleDraw(state){
   const R=G.r;
+  const gp=$('gPlay'), cs=getComputedStyle(gp), W=Math.min(gp.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-4, 560), n=Math.max(R.chars.length,1);
+  const sz=Math.max(34,Math.min(60,Math.floor(W/n)-7)); $('gPlay').style.setProperty('--sz',sz+'px');
   $('rSlots').innerHTML=`<div class="slots ${R.heb?'rtl':''} ${state||''}">${R.slots.map((c,i)=>R.chars[i]===' '?'<span class="slot sp"></span>':`<button class="slot ${c&&c.hint?'hint':''}" onclick="riddleBack(${i})">${c?esc(c.c):''}</button>`).join('')}</div>`;
   $('rTiles').innerHTML=`<div class="tiles">${R.tiles.map((t,k)=>`<button class="tile ${t.used?'used':''}" onclick="riddleTap(${k})">${esc(t.c)}</button>`).join('')}</div>`;
 }

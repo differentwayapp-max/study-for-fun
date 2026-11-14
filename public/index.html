@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v36">
+<meta name="sff-ver" content="sff-v37">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -926,9 +926,12 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     const { getFunctions, httpsCallable } = await import(base + 'firebase-functions.js');
 
     const app = initializeApp(cfg);
-    const auth = A.getAuth(app);
+    // iPhone Lockdown Mode (and some private modes) switch IndexedDB off – then everything runs from memory + localStorage
+    const idbOK = await new Promise(res => { try { const r = indexedDB.open('sff-probe'); r.onsuccess = () => { try { r.result.close(); } catch (e) {} res(true); }; r.onerror = () => res(false); r.onblocked = () => res(false); setTimeout(() => res(false), 1500); } catch (e) { res(false); } });
+    W.SFF_IDB = idbOK;
+    const auth = idbOK ? A.getAuth(app) : A.initializeAuth(app, { persistence: [A.browserLocalPersistence, A.inMemoryPersistence] });
     let fdb;
-    try { fdb = F.initializeFirestore(app, { localCache: F.persistentLocalCache(), experimentalAutoDetectLongPolling: true }); }   // works offline
+    try { fdb = F.initializeFirestore(app, { localCache: idbOK ? F.persistentLocalCache() : F.memoryLocalCache(), experimentalAutoDetectLongPolling: true }); }   // works offline
     catch (e) { try { fdb = F.initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); } catch (e2) { fdb = F.getFirestore(app); } }
     const fns = getFunctions(app, W.SFF_FUNCTIONS_REGION || 'europe-west1');
     const callAsk = httpsCallable(fns, 'ask', { timeout: 300000 });
@@ -2802,7 +2805,8 @@ function showCloudErr(msg){
   const lockdown = typeof WebAssembly==='undefined';          // iPhone Lockdown Mode switches WebAssembly off
   const el=$('cloudErr'); if(!el) return;
   el.innerHTML=`<b>⚠️ אין חיבור לתרגולים שלך</b><div class="hint" style="margin-top:4px">${lockdown?'באייפון מופעל "מצב נעילה" (Lockdown). ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה לאתר הזה.':'בדקו שיש אינטרנט ונסו שוב.'}</div>
-    <button class="btn small" style="margin-top:8px" onclick="location.reload()">🔄 לנסות שוב</button>`;
+    <button class="btn small" style="margin-top:8px" onclick="location.reload()">🔄 לנסות שוב</button>
+    <div class="hint" translate="no" style="margin-top:6px;font-size:.7em;opacity:.7" dir="ltr">${esc(String(msg||'').slice(0,90))} · idb:${window.SFF_IDB===false?'off':'on'}</div>`;
   el.classList.remove('hidden');
 }
 async function cloudInit(){

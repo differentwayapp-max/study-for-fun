@@ -229,6 +229,11 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .passage:not([open]) summary{border-bottom:0}
 .passage .ptext{max-height:38vh;overflow:auto;padding:10px 16px;line-height:1.6;font-size:1.02em;unicode-bidi:plaintext}
 .passage .ptext p{margin:0 0 10px}
+.wordcov{border:var(--line);border-radius:16px;background:#fff;margin:0 0 12px}
+.wordcov summary{cursor:pointer;padding:8px 14px;font-family:var(--display);font-weight:600}
+.wchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px;max-height:40vh;overflow:auto}
+.wchips span{border-radius:999px;padding:2px 10px;font-size:.85em;border:1.5px solid}
+.wchips .ok{background:#E3F8EF;border-color:#24C78E}.wchips .bad{background:var(--badbg);border-color:#F5B5B7}
 .qbox{font-family:var(--display);font-weight:600;font-size:1.55em;line-height:1.35;margin:0 0 20px;unicode-bidi:plaintext}
 body.young .qbox{font-size:1.8em}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -657,6 +662,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       <div class="rhead"><div class="subjico" id="rIco"></div><div><h2 id="rTitle"></h2><div class="hint" id="rSub"></div></div><button class="btn ghost small" style="margin-inline-start:auto" onclick="go('kids')">✕</button></div>
       <div class="bigstats" id="rStats"></div>
       <div id="rCover" style="margin-bottom:10px"></div>
+      <details id="rWords" class="wordcov hidden"><summary></summary><div class="wchips"></div></details>
       <div id="rSuggest" class="hidden"></div>
       <div class="actions" style="justify-content:center">
         <button class="btn big" onclick="openModes(curSet)">▶ לשחק</button>
@@ -1335,6 +1341,18 @@ ${JSON.stringify(bad.map(b=>({i:b.i,why:b.why,...qs[b.i]})))}`,
 }
 
 /* ---------- review ---------- */
+// every word of the source list (set.words) should be a correct answer somewhere
+function wordCoverage(set){
+  const ans=set.questions.map(q=>String(q.options[q.answer]).toLowerCase()).join(' | ');
+  const esc_=w=>w.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return (set.words||[]).map(w=>({w, ok:new RegExp('\\b'+esc_(w)+'(s|es|ed|d|ing)?\\b').test(ans)}));
+}
+function renderWordCov(set){
+  const box=$('rWords'), cov=wordCoverage(set); box.classList.toggle('hidden',!cov.length); if(!cov.length) return;
+  const ok=cov.filter(x=>x.ok).length;
+  box.querySelector('summary').innerHTML=`📋 מילים מהדף: <b>${ok}/${cov.length}</b> ${ok===cov.length?'✓':'⚠️'}`;
+  box.querySelector('.wchips').innerHTML=cov.sort((a,b)=>a.ok-b.ok).map(x=>`<span class="${x.ok?'ok':'bad'}" dir="ltr">${esc(x.w)}</span>`).join('');
+}
 function renderReview(set){
   $('shareBox').classList.add('hidden');
   $('rCompete').checked=!!set.compete;
@@ -1347,6 +1365,7 @@ function renderReview(set){
   const C=getChapters(set), dn=chaptersDone(set);
   $('rStats').innerHTML=`<span>📚 ${C.length}</span><span>❓ ${set.questions.length}</span><span>🛡️ ${set.qa.passed}/${set.qa.checked}</span>${set.qa.fixed?`<span>🔧 ${set.qa.fixed}</span>`:''}`;
   $('rCover').innerHTML=`<div class="chlist" style="width:100%">${C.map((ch,i)=>`<div class="chrow ${dn.has(i)?'done':''}"><span class="no">${dn.has(i)?'★':i+1}</span><span class="nm" dir="auto">${esc(ch.title)}</span><span class="hint">❓ ${ch.qs.length}</span></div>`).join('')}</div>`;
+  renderWordCov(set);
   const sg=$('rSuggest');
   if(set.suggestions&&set.suggestions.length){
     sg.classList.remove('hidden');
@@ -1378,7 +1397,7 @@ function delQ(i){ curSet.questions.splice(i,1); store.save(); renderReview(curSe
 /* ---------- sharing ---------- */
 function openShare(){
   const s=curSet;
-  const payload={v:1,name:s.name,grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
+  const payload={v:1,src:s.src||'',words:s.words||[],name:s.name,grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
   $('shareCode').value='SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   $('shareBox').classList.remove('hidden'); $('shareMsg').textContent='';
 }
@@ -1396,8 +1415,14 @@ async function importSet(){
     const qs=clean(p.questions,p.topics);
     if(!qs.length) throw 0;
     const ik=kidById(W.kidId); if(!ik){ msg.textContent='בחרו קודם ילד/ה'; return; }
+    const words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
+    // same source for the same child → update in place, so stars, trophies and progress stay
+    const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
+    if(old){ Object.assign(old,{src:p.src,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,
+        qa:{...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]},updated:Date.now()}); delete old.order; delete old.pos;
+      store.save(); $('importCode').value=''; msg.textContent=`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`; return; }
     const set={id:'s'+Date.now(),kidId:ik?ik.id:null,name:ik?ik.name:(p.name||'משותף'),grade:ik?ik.grade:(+p.grade||0),perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
-      qa:{...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]},coverage:{},suggestions:[],created:Date.now(),shared:true};
+      qa:{...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]},coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',words};
     sets.unshift(set); store.save(); $('importCode').value=''; msg.textContent=`נוסף: ${set.subject} · ${qs.length} שאלות ✓`;
   }catch(e){ msg.textContent='הקוד לא תקין – בדקו שהועתק במלואו'; }
 }
@@ -2116,7 +2141,8 @@ function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.string
 function recordSession(by, right, n){
   const s=G.set;
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
-    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score,
+    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode,
+    qr:G.res.map(r=>[s.questions.indexOf(r.q), r.ok?1:0]).filter(x=>x[0]>=0),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);

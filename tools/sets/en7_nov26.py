@@ -183,3 +183,57 @@ C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW, UN], [
  (AW, "תלוי ב... = ?", ["it depends on", "feel like", "make plans", "can't wait"], 0, "תלוי ב... = it depends on", "🤷"),
  (AW, "לא יכול לחכות = ?", ["can't wait", "feel like", "hold a record", "hang out"], 0, "לא יכול לחכות = can't wait", [("🤩", 45, 50, 46), ("⏳", 75, 30, 22)]),
 ]))
+
+# Word Review list (Student's Book p.37) – every word must be practised (build_set.py checks).
+WORD_LIST = """arrive|below|capital|check|city|cloud|coat|dangerous|divide|earth|east|famous|feel like|field|finger|free|get on|ground|heat|heavy|it depends on|low|mountain|north|park|predict|probably|rain|rise|river|sea|season|set|several|solve|south|spend|stay|strange|surprised|through|vacation|wake up|warm|weather|west|wind|worried|zero|advice|back|bone|can't wait|certainly|chin|close|cover|curly|degree|destroy|extreme|fall|fan|farmer|for example|freezing|fry|go fishing|hang out|hold a record|hole|hope|ice|ice cream cone|indoors|in the right|kind of|leave|lie down|luckily|make plans|mean|melt|opposite|outdoors|outside|pleasant|problem|put on|really|roll down|roof|sailor|scarf|shade|shine|sidewalk|skin|snow|solution|special|sticky|storm|sweat|swimming pool|take off|temperature|the whole|turn off|turn on|wave|wet""".split("|")
+
+# ---- coverage: every Word Review word is a correct answer somewhere ----
+def _ch(title): return next(c for c in C if c[0] == title)[2]
+_ch("Nature & places").extend([
+ (NP, "בירה (עיר) = ?", ["capital", "city", "field", "earth"], 0, "ירושלים היא ה-capital", [("🏛️", 50, 55, 50), ("⭐", 78, 25, 18)]),
+ (NP, "Down on the map?", ["south", "north", "east", "west"], 0, "למטה במפה = דרום", [("🧭", 50, 45, 46), ("⬇️", 50, 82, 20)]),
+ (NP, "קרקע = ?", ["ground", "roof", "hole", "sea"], 0, "קרקע = ground", [("🌱", 50, 50, 40), ("🟫", 50, 80, 30)]),
+])
+_ch("Action words").extend([
+ (AW, "לבדוק = ?", ["check", "set", "stay", "fall"], 0, "לבדוק = check", [("🔍", 45, 50, 46), ("✅", 75, 30, 22)]),
+ (AW, "לקום (מהשינה) = ?", ["wake up", "lie down", "get on", "hang out"], 0, "לקום = wake up", [("⏰", 35, 45, 36), ("🛏️", 70, 62, 38)]),
+])
+_ch("Describing words").extend([
+ (DW, "קרוב = ?", ["close", "low", "free", "heavy"], 0, "קרוב = close", [("🏠", 38, 55, 34), ("🏠", 62, 55, 34)]),
+ (DW, "חמים (נעים) = ?", ["warm", "wet", "low", "sticky"], 0, "חמים = warm", [("☕", 40, 55, 40), ("🧣", 72, 45, 30)]),
+])
+_ch("Everyday words").extend([
+ (EW, "סנטר = ?", ["chin", "skin", "bone", "finger"], 0, "סנטר = chin", "🧔"),
+ (EW, "עור = ?", ["skin", "bone", "chin", "scarf"], 0, "עור = skin", "✋"),
+ (EW, "גב = ?", ["back", "chin", "bone", "skin"], 0, "גב = back", [("🧍", 45, 52, 46), ("🎒", 70, 50, 26)]),
+])
+_i = next(i for i, c in enumerate(C) if c[0].startswith("📖"))
+C.insert(_i, ("Phrases", [AW, DW], [
+ (AW, "I ___ ice cream.", ["feel like", "hang out", "can't wait", "make plans"], 0, "מתחשק לי = I feel like", [("😋", 40, 55, 40), ("🍦", 72, 50, 32)]),
+ (AW, "לעלות על (אוטובוס) = ?", ["get on", "take off", "turn on", "roll down"], 0, "לעלות על = get on", [("🧍", 30, 58, 34), ("🚌", 68, 55, 44)]),
+ (AW, "לבלות (עם חברים) = ?", ["hang out", "make plans", "lie down", "put on"], 0, "לבלות = hang out", [("👫", 40, 55, 40), ("🍕", 72, 60, 26)]),
+ (AW, "We ___ time together.", ["spend", "set", "stay", "fall"], 0, "spend time = לבלות זמן", [("👪", 45, 55, 46), ("⏰", 78, 25, 20)]),
+ (AW, "לתכנן תוכניות = ?", ["make plans", "hang out", "hold a record", "go fishing"], 0, "לתכנן = make plans", [("🗓️", 45, 52, 44), ("✏️", 75, 65, 22)]),
+ (AW, "להחזיק בשיא = ?", ["hold a record", "make plans", "roll down", "feel like"], 0, "להחזיק בשיא = hold a record", [("🏆", 45, 50, 46), ("🥇", 75, 30, 22)]),
+ (AW, "להוריד (חלון) = ?", ["roll down", "turn off", "take off", "get on"], 0, "להוריד חלון = roll down", [("🚗", 50, 55, 50), ("⬇️", 75, 30, 20)]),
+ (AW, "לכבות = ?", ["turn off", "turn on", "put on", "set"], 0, "לכבות = turn off", [("💡", 45, 50, 44), ("❌", 70, 30, 22)]),
+ (DW, "סוג של = ?", ["kind of", "for example", "the whole", "in the right"], 0, "סוג של = kind of", [("🍎", 35, 55, 30), ("🍐", 65, 55, 30)]),
+ (DW, "כל ה... (השלם) = ?", ["the whole", "kind of", "several", "opposite"], 0, "the whole pizza = כל הפיצה", "🍕"),
+ (DW, "להיות צודק = to be ___", ["in the right", "kind of", "the whole", "for example"], 0, "צודק = in the right", "👍"),
+ (DW, "לדוגמה = ?", ["for example", "kind of", "the whole", "really"], 0, "לדוגמה = for example", "💡"),
+]))
+C.insert(_i + 1, ("More words", [NP, DW, AW, EW], [
+ (NP, "מדרכה = ?", ["sidewalk", "roof", "field", "river"], 0, "מדרכה = sidewalk", [("🚶", 40, 55, 40), ("🛣️", 50, 85, 30)]),
+ (NP, "מחוץ ל... = ?", ["outside", "indoors", "below", "through"], 0, "מחוץ ל = outside", [("🚪", 35, 55, 40), ("🌳", 72, 50, 36)]),
+ (NP, "דרך (עוברים) = ?", ["through", "below", "outside", "close"], 0, "דרך = through", "🚇"),
+ (DW, "באמת = ?", ["really", "luckily", "probably", "certainly"], 0, "באמת = really", "😮"),
+ (DW, "בוודאי = ?", ["certainly", "really", "luckily", "probably"], 0, "בוודאי = certainly", "✅"),
+ (DW, "אפס = ?", ["zero", "several", "degree", "low"], 0, "0 = zero", "0️⃣"),
+ (AW, "להישאר = ?", ["stay", "leave", "arrive", "fall"], 0, "להישאר = stay", [("🏠", 45, 55, 46), ("🛋️", 72, 70, 22)]),
+ (AW, "ליפול = ?", ["fall", "rise", "stay", "shine"], 0, "ליפול = fall", [("🍂", 50, 35, 34), ("⬇️", 50, 75, 24)]),
+ (AW, "לזהור (השמש) = ?", ["shine", "set", "fall", "melt"], 0, "לזהור = shine", [("☀️", 50, 48, 50), ("✨", 78, 25, 20)]),
+ (AW, "לשקוע (השמש) = ?", ["set", "rise", "shine", "fall"], 0, "השמש שוקעת = the sun sets", "🌇"),
+ (AW, "What does it ___?", ["mean", "set", "check", "stay"], 0, "mean = פירושו", [("🤔", 40, 55, 40), ("💬", 72, 35, 26)]),
+ (EW, "כיסוי / כריכה = ?", ["cover", "coat", "roof", "fan"], 0, "כריכה = cover", "📕"),
+ (EW, "בעיה = ?", ["problem", "solution", "advice", "hope"], 0, "בעיה = problem", [("😟", 40, 55, 40), ("❗", 72, 35, 26)]),
+]))

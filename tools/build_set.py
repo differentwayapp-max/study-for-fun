@@ -43,11 +43,18 @@ for q in qs:
     if k in seen: errors.append(f"duplicate: {k}")
     seen[k] = 1
 
+# every word of the source list (WORD_LIST) must be a correct answer somewhere
+answers = " | ".join(q["options"][q["answer"]] for q in qs).lower()
+def practised(w): return re.search(r"\b" + re.escape(w.lower()) + r"(s|es|ed|d|ing)?\b", answers) is not None
+word_list = list(ns.get("WORD_LIST", []))
+missing = [w for w in word_list if not practised(w)]
+if missing: errors.append(f"words not practised ({len(missing)}): " + ", ".join(missing))
+
 if errors:
     print("\n".join(errors)); sys.exit(1)
 
 riddle = sum(1 for q in qs if re.fullmatch(r"[A-Za-z0-9 '\-]{2,14}", q["options"][q["answer"]]))
-payload = {"v": 1, **SET, "group": "", "chapters": chapters, "questions": qs,
+payload = {"v": 1, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs,
            "qa": {"checked": len(qs), "passed": len(qs), "fixed": 0, "dropped": 0}}
 code = "SFF1:" + base64.b64encode(json.dumps(payload, ensure_ascii=False).encode("utf-8")).decode()
 sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
@@ -55,5 +62,6 @@ out = pathlib.Path(__file__).resolve().parent.parent / "public" / "share" / f"{s
 out.parent.mkdir(exist_ok=True)
 for old in out.parent.glob(src.stem.replace("_", "-") + "-*.txt"): old.unlink()
 out.write_text(code, encoding="utf-8")
+print(f"OK  words {len(word_list)}/{len(word_list)} practised")
 print(f"OK  {len(qs)} questions · {len(chapters)} chapters · riddle-ready {riddle}")
 print(f"CODE  SFF1@{sid}")

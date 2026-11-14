@@ -2,12 +2,12 @@
 // Copy these values from: Firebase console → Project settings → General → Your apps → Web app.
 // They are not secret (the browser needs them); access is protected by firestore.rules.
 window.SFF_FIREBASE_CONFIG = {
-  apiKey: "REPLACE_ME",
-  authDomain: "study-for-fun.firebaseapp.com",
-  projectId: "study-for-fun",
-  storageBucket: "study-for-fun.appspot.com",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME"
+  apiKey: "AIzaSyDDHe8rCMpZDNcACG5_AJD3lw_Q5j0Nj0I",
+  authDomain: "study-for-fun-7b03c.firebaseapp.com",
+  projectId: "study-for-fun-7b03c",
+  storageBucket: "study-for-fun-7b03c.firebasestorage.app",
+  messagingSenderId: "16935647883",
+  appId: "1:16935647883:web:63eabfaeddaeb3877ff28e"
 };
 
 // Region of the Cloud Function that talks to Claude (functions/index.js).

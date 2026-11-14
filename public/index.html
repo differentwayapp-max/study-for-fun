@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v35">
+<meta name="sff-ver" content="sff-v36">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -772,6 +772,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 
   <!-- KID: home (one card per subject) -->
   <section id="vKid" class="hidden">
+    <div id="cloudErr" class="notice err hidden" style="margin-bottom:12px"></div>
     <div class="whoami" id="whoami"></div>
     <button class="mebar" id="meBar" onclick="openProfile()"></button>
     <div class="carhead"><button class="arrow" onclick="carStep('subCar',1)" aria-label="הקודם">›</button><div class="cardots" id="subCarDots"></div><button class="arrow" onclick="carStep('subCar',-1)" aria-label="הבא">‹</button></div>
@@ -927,8 +928,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     const app = initializeApp(cfg);
     const auth = A.getAuth(app);
     let fdb;
-    try { fdb = F.initializeFirestore(app, { localCache: F.persistentLocalCache() }); }   // works offline
-    catch (e) { fdb = F.getFirestore(app); }
+    try { fdb = F.initializeFirestore(app, { localCache: F.persistentLocalCache(), experimentalAutoDetectLongPolling: true }); }   // works offline
+    catch (e) { try { fdb = F.initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); } catch (e2) { fdb = F.getFirestore(app); } }
     const fns = getFunctions(app, W.SFF_FUNCTIONS_REGION || 'europe-west1');
     const callAsk = httpsCallable(fns, 'ask', { timeout: 300000 });
 
@@ -1042,6 +1043,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     W.__sffResolve({ use: async n => n === 'db' ? dbApi : n === 'sample' ? sampleApi : n === 'user' ? userApi : null });
   } catch (e) {
     console.error('Firebase start failed', e);
+    if (W.SFF_KID_DEVICE) W.__sffCloudErr = String(e && e.message || e);
     W.__sffResolve(null);   // the app keeps working on this device only
   }
 
@@ -2795,8 +2797,17 @@ function rerender(){
   else if(!$('vKid').classList.contains('hidden')) renderKidSets();
   else if(!$('vStats').classList.contains('hidden')){ fillStatsFilters(); renderStats(); }
 }
+function showCloudErr(msg){
+  if(!window.SFF_KID_DEVICE) return;
+  const lockdown = typeof WebAssembly==='undefined';          // iPhone Lockdown Mode switches WebAssembly off
+  const el=$('cloudErr'); if(!el) return;
+  el.innerHTML=`<b>⚠️ אין חיבור לתרגולים שלך</b><div class="hint" style="margin-top:4px">${lockdown?'באייפון מופעל "מצב נעילה" (Lockdown). ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה לאתר הזה.':'בדקו שיש אינטרנט ונסו שוב.'}</div>
+    <button class="btn small" style="margin-top:8px" onclick="location.reload()">🔄 לנסות שוב</button>`;
+  el.classList.remove('hidden');
+}
 async function cloudInit(){
   try{ DB=await window.claude?.use?.('db'); }catch(e){ DB=null; }
+  if(!DB && window.__sffCloudErr) showCloudErr(window.__sffCloudErr);
   try{ ME=await window.claude?.use?.('user'); }catch(e){ ME=null; }
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();
@@ -2812,7 +2823,7 @@ async function cloudInit(){
     if(IS_OWNER){ remote.forEach(r=>{ if(!sets.some(s=>s.id===r.id)) sets.push(r); }); pushSets(); }
     else { const old=sets; sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
     storeSaveLocal(); rerender();
-  },()=>{});
+  },e=>showCloudErr(e&&e.message));
   DB.collection('progress').onSnapshot(q=>{
     let changed=false;
     q.docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);

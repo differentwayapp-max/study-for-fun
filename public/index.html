@@ -1877,7 +1877,7 @@ function choicePick(k){
   const btns=[...document.querySelectorAll('#gPlay .opt')];
   btns.forEach((b,i)=>{b.disabled=true; if(i!==q.answer&&i!==k) b.classList.add('dim');});
   btns[q.answer].classList.add('right'); if(!ok) btns[k].classList.add('wrong');
-  G.res.push({q,ok}); award(ok); sayAnswer(q);
+  G.res.push({q,ok,pick:k}); award(ok); sayAnswer(q);
   $('gTop').innerHTML=trackHtml();
   const me=document.querySelector('.track .me'); if(me) requestAnimationFrame(()=>me.style.insetInlineStart=`${((G.i+1)/G.qs.length)*100}%`);
   showSheet(ok, ok?PRAISE[Math.floor(Math.random()*PRAISE.length)]+(G.streak>=3?` ${G.streak} ברצף!`:'') : `כמעט! התשובה: ${q.options[q.answer]}`);
@@ -2142,7 +2142,7 @@ function recordSession(by, right, n){
   const s=G.set;
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
     retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode,
-    qr:G.res.map(r=>[s.questions.indexOf(r.q), r.ok?1:0]).filter(x=>x[0]>=0),
+    qr:G.res.map(r=>{ const a=[s.questions.indexOf(r.q), r.ok?1:0]; if(!r.ok&&Number.isInteger(r.pick)) a.push(r.pick); return a; }).filter(x=>x[0]>=0),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);

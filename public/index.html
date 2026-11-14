@@ -1936,7 +1936,8 @@ function roadPlan(set){
   for(let d=1; left.length; d++){ const span=dl!=null&&dl>=1?Math.max(1,D-d):1; const q=dl!=null&&dl>=1?Math.ceil(left.length/span):goal; left.splice(0,q).forEach(i=>day[i]=d); }
   if(revDay==null) revDay=Math.max(0,...Object.values(day))+(rest.length?0:0);
   const behind = dl!=null && dl>=1 && Math.ceil((rest.length+doneToday)/D)>goal;
-  return {C,N,dn,day,revDay,flagDay,dl,perDay,behind,dayOf,t0,DAY};
+  const ahead = dl!=null && dl>=1 && doneToday>perDay;
+  return {C,N,dn,day,revDay,flagDay,dl,perDay,behind,ahead,dayOf,t0,DAY};
 }
 function dayLabel(d,t0){ if(d===0) return 'היום'; if(d===-1) return 'אתמול'; if(d===1) return 'מחר'; return 'יום '+WEEKDAY[new Date(t0+d*864e5).getDay()]; }
 let ROAD_SET=null;
@@ -1947,20 +1948,19 @@ function renderRoad(){
   // header
   const doneN=Math.min(P.dn.size,P.N);
   const status = P.dl==null ? '' : P.dl<0 ? '<span class="rdst">🏁 המבחן עבר</span>'
+    : P.dn.size>=P.N ? '<span class="rdst ok">🌟 סיימת הכול!</span>'
+    : P.ahead ? '<span class="rdst ok">⚡ מקדים!</span>'
     : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
   $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
     <div class="rdt"><b>🗺️ הדרך למבחן</b><div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
     <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i></div></div>${status}`;
-  // stations in road order, with a campsite at the start of each day
-  const items=[]; let lastDay=null;
-  const order=[...Array(P.N).keys()].sort((a,b)=>P.day[a]-P.day[b]||a-b);
-  const push=(d,st)=>{ if(d!==lastDay){ items.push({camp:d}); lastDay=d; } items.push(st); };
-  order.forEach(i=>push(P.day[i],{i,c:P.C[i]}));
-  push(Math.max(P.revDay,lastDay??0),{rev:true});
-  if(P.flagDay!=null) push(P.flagDay,{flag:true});
-  // geometry
+  // one open road: every chapter in order → review → 🏁. Today's goal is a banner on the road; the child may go past it.
+  const items=[], todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
+  const goalDone=todays.every(i=>P.dn.has(i));
+  for(let i=0;i<P.N;i++){ items.push({i,c:P.C[i]}); if(i===goalAfter && goalAfter<P.N-1) items.push({goal:true}); }
+  items.push({rev:true}); if(P.flagDay!=null) items.push({flag:true});
   const W=390, pts=[]; let y=60, side=0;
-  items.forEach(it=>{ const x=it.camp!=null?195:it.flag?195:(side++%2?280:110); pts.push({x,y,it}); y+=it.camp!=null?92:it.flag?150:122; });
+  items.forEach(it=>{ const x=it.goal||it.flag?195:(side++%2?280:110); pts.push({x,y,it}); y+=it.goal?165:it.flag?150:122; });
   const H=y+40, path=n=>{ let d=`M ${pts[0].x} ${pts[0].y}`; for(let i=1;i<=n;i++){ const a=pts[i-1],b=pts[i],m=(a.y+b.y)/2; d+=` C ${a.x} ${m}, ${b.x} ${m}, ${b.x} ${b.y}`; } return d; };
   const nowIdx=pts.findIndex(p=>p.it.c&&p.it.i===nx), revIdx=pts.findIndex(p=>p.it.rev);
   const walked=nowIdx>=0?nowIdx:(nx<0?revIdx:0);
@@ -1971,26 +1971,24 @@ function renderRoad(){
     <path d="${path(pts.length-1)}" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="10 14" opacity=".7"/>`;
   if(walked>0) svg+=`<path d="${path(walked)}" fill="none" stroke="#F2A63B" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 18"/>`;
   const me=kidOfSet(set);
-  pts.forEach(({x,y,it},pi)=>{
-    if(it.camp!=null){ const d=it.camp, done=d<0||d===0&&todayCount(set.id)>=todayGoal(set);
-      const won = d<=0 && history.filter(h=>h.setId===set.id&&P.dayOf(h.at)===d).length>=(d===0?todayGoal(set):(set.dailyGoal||2));
-      svg+=`<rect x="${x-70}" y="${y-20}" width="140" height="40" rx="20" fill="${d===0?'#1B2A4A':'#fff'}" stroke="#1B2A4A" stroke-width="3"/>
-        <text x="${x}" y="${y+7}" font-size="17" text-anchor="middle" font-weight="600" fill="${d===0?'#fff':'#1B2A4A'}">⛺ ${esc(dayLabel(d,P.t0))}</text>
-        <text x="${x+96}" y="${y+10}" font-size="28" text-anchor="middle" opacity="${won?1:.28}">🏆</text>`; return; }
+  pts.forEach(({x,y,it})=>{
+    if(it.goal){ svg+=`<rect x="${x-118}" y="${y-22}" width="236" height="44" rx="22" fill="${goalDone?'#24C78E':'#FFFBEF'}" stroke="#1B2A4A" stroke-width="3" stroke-dasharray="${goalDone?'0':'7 5'}"/>
+        <text x="${x}" y="${y+7}" font-size="17" text-anchor="middle" font-weight="700" fill="${goalDone?'#fff':'#1B2A4A'}">${goalDone?'🏆 היעד של היום הושג!':'🏆 היעד של היום'}</text>`;
+      if(goalDone && nx>goalAfter) svg+=`<rect x="${x-80}" y="${y+28}" width="160" height="26" rx="13" fill="#fff" stroke="#1B2A4A" stroke-width="2"/><text x="${x}" y="${y+46}" font-size="14" text-anchor="middle" font-weight="600" fill="#1B2A4A">ממשיכים קדימה? 💪</text>`; return; }
     if(it.flag){ svg+=`<g class="st" onclick="openModes(getSet('${set.id}'),-1)"><circle cx="${x}" cy="${y+10}" r="50" fill="#FF5C8A" stroke="#1B2A4A" stroke-width="4"/><text x="${x}" y="${y+26}" font-size="46" text-anchor="middle">🏁</text></g>
-      <text x="${x}" y="${y+86}" font-size="18" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום – בהצלחה!':'יום המבחן'}</text>`; return; }
+      <text x="${x}" y="${y+86}" font-size="18" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום – בהצלחה!':'המבחן · '+fmtDate(set.examDate)}</text>`; return; }
     const isRev=!!it.rev, T=ROAD_T[isRev?'rev':chType(set,it.c)];
-    const done=isRev?false:P.dn.has(it.i), now=isRev?nx<0:it.i===nx, day=isRev?P.revDay:P.day[it.i], pale=!done&&!now&&day>0;
+    const done=isRev?false:P.dn.has(it.i), now=isRev?nx<0:it.i===nx;
     const r=now?42:34, emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
     const go=isRev?`openModes(getSet('${set.id}'),-1)`:`openModes(getSet('${set.id}'),${it.i})`;
     svg+=`<g class="st ${now?'st-now':''}" onclick="${go}"><circle cx="${x}" cy="${y+4}" r="${r}" fill="#1B2A4A"/>
-      <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:pale?'#E8ECF4':'#fff'}" stroke="${pale?'#9AA4BF':'#1B2A4A'}" stroke-width="4"/>
-      ${!done&&!pale?`<circle cx="${x}" cy="${y}" r="${r-9}" fill="none" stroke="${T.c}" stroke-width="6"/>`:''}
-      <text x="${x}" y="${y+11}" font-size="${now?34:28}" text-anchor="middle" opacity="${pale?.5:1}">${esc(emo)}</text>
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:'#fff'}" stroke="#1B2A4A" stroke-width="4"/>
+      ${!done?`<circle cx="${x}" cy="${y}" r="${r-9}" fill="none" stroke="${T.c}" stroke-width="6"/>`:''}
+      <text x="${x}" y="${y+11}" font-size="${now?34:28}" text-anchor="middle">${esc(emo)}</text>
       <circle cx="${x+r-6}" cy="${y-r+6}" r="14" fill="#fff" stroke="#1B2A4A" stroke-width="2.5"/><text x="${x+r-6}" y="${y-r+12}" font-size="15" text-anchor="middle">${T.i}</text></g>`;
     const lx=x>195?x-r-10:x+r+10, an=x>195?'end':'start';
     svg+=`<text x="${lx}" y="${y-4}" font-size="13" text-anchor="${an}" fill="#3c4a6b">${esc(T.l)}${isRev?'':' · '+(it.i+1)}</text>
-      <text x="${lx}" y="${y+15}" font-size="16" text-anchor="${an}" font-weight="700" fill="${pale?'#8a93ab':'#1B2A4A'}">${esc(isRev?'חזרה על הטעויות':chName(it.c))}</text>`;
+      <text x="${lx}" y="${y+15}" font-size="16" text-anchor="${an}" font-weight="700" fill="#1B2A4A">${esc(isRev?'חזרה על הטעויות':chName(it.c))}</text>`;
     if(now){ svg+=`<foreignObject x="${x-26}" y="${y-r-58}" width="52" height="52"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,50):'🧒'}</div></foreignObject>
       <g class="st" onclick="${go}"><rect x="${x-50}" y="${y+r+10}" width="100" height="32" rx="16" fill="#F2A63B" stroke="#1B2A4A" stroke-width="3"/>
       <text x="${x}" y="${y+r+32}" font-size="16" text-anchor="middle" font-weight="700">▶ קדימה!</text></g>`; }

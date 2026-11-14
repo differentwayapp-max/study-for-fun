@@ -7,6 +7,7 @@ cur=$(grep -o "const VERSION = 'sff-v[0-9]*'" public/sw.js | grep -o '[0-9]*')
 new="sff-v$((cur+1))"
 sed -i "s/const VERSION = 'sff-v$cur'/const VERSION = '$new'/" public/sw.js
 sed -i "s/<meta name=\"sff-ver\" content=\"[^\"]*\">/<meta name=\"sff-ver\" content=\"$new\">/" public/index.html
+sed -i -E "s/\?v=sff-v[0-9]+\"/?v=$new\"/g" public/index.html   # file addresses carry the version → no phone mixes old files with a new page
 printf '{"v": "%s"}' "$new" > public/version.json
 git add -A && git commit -qm "${1:-Deploy $new}
 

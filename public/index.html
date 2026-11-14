@@ -661,6 +661,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       <div class="actions" style="justify-content:center">
         <button class="btn big" onclick="openModes(curSet)">▶ לשחק</button>
         <button class="btn ghost" onclick="openShare()">🔗 שיתוף</button>
+        <button class="btn ghost" id="rDel" onclick="delSet()" aria-label="מחיקת התרגול">🗑</button>
         <label class="btn ghost" style="cursor:pointer"><input type="checkbox" id="rCompete" onchange="toggleCompete(this.checked)" style="width:18px;height:18px;accent-color:var(--blue)"> 🏅 תחרות</label>
       </div>
       <div id="shareBox" class="hidden" style="margin-top:14px">
@@ -1485,6 +1486,11 @@ function setRow(s, kid){
 function allSets(){ return sets.concat([DEMO]); }
 function getSet(id){ return allSets().find(s=>s.id===id); }
 function removeSet(id){ sets=sets.filter(s=>s.id!==id); store.save(); renderSets(); }
+let delT=null;
+function delSet(){ const b=$('rDel'); if(!curSet||curSet.demo) return;
+  if(b.dataset.arm!=='1'){ b.dataset.arm='1'; b.textContent='🗑 למחוק?'; b.classList.add('sun'); clearTimeout(delT); delT=setTimeout(()=>{ b.dataset.arm=''; b.textContent='🗑'; b.classList.remove('sun'); },3000); return; }
+  b.dataset.arm=''; b.textContent='🗑'; b.classList.remove('sun'); removeSet(curSet.id); curSet=null; go('kids'); toast('🗑 ✓'); }
+function dropBuild(id){ BUILDS=BUILDS.filter(b=>b.id!==id); renderKids(); }
 
 /* ---------- art (inline SVG – no external images) ---------- */
 function starPts(cx,cy,R,r){let p=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
@@ -1606,7 +1612,7 @@ function renderKids(){
       return `<button class="prow" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}</span>
         <span><span class="t">${esc(x.subject)}${x.compete?' 🏅':''}${x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}</span>${daysStrip(x)}</span>
         <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`}).join('');
-    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span><span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span></div>`).join('');
+    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?`<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button>`:'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}</div>`).join('');
     return `<div class="card herocard kidhero">
       <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button><button class="btn ghost small" onclick="editKid('${k.id}')" aria-label="עריכה">✎</button></span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>

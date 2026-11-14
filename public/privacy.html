@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מדיניות פרטיות · Study for fun</title>
+<meta name="robots" content="index">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E4F1FF;--card:#fff;--ink:#1B2A4A;--muted:#5B6785;--sun:#F2A63B;--blue:#2F6BFF;--line:2px solid #1B2A4A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg) radial-gradient(#c9dcf5 1px,transparent 1px) 0 0/22px 22px;color:var(--ink);font-family:"Varela Round",Arial,sans-serif;line-height:1.75}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.card{background:var(--card);border:var(--line);border-radius:24px;box-shadow:0 5px 0 var(--ink);padding:22px}
+h1,h2,.top a,button{font-family:Fredoka,Arial,sans-serif}
+h1{margin:0 0 2px;font-size:28px}
+h2{font-size:19px;margin:24px 0 4px;display:flex;align-items:center;gap:8px}
+.muted{color:var(--muted);font-size:14px}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.top a{color:var(--ink);font-weight:600;text-decoration:none;margin-inline-end:auto}
+button{border:var(--line);background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;cursor:pointer;font-size:15px;box-shadow:0 3px 0 var(--ink)}
+ul{padding-inline-start:22px;margin:4px 0}
+li{margin:2px 0}
+a{color:var(--blue)}
+.note{background:#FFF6E3;border:1.5px dashed var(--sun);border-radius:14px;padding:10px 14px;margin-top:10px;font-size:15px}
+[data-l]{display:none}
+html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a href="/" data-l="he">→ חזרה ל-Study for fun</a><a href="/" data-l="en">← Back to Study for fun</a>
+    <button onclick="setLang(document.documentElement.lang==='he'?'en':'he')"><span data-l="he">English</span><span data-l="en">עברית</span></button>
+  </div>
+
+  <div class="card" data-l="he">
+    <h1>מדיניות פרטיות</h1>
+    <div class="muted">Study for fun · by D-WAY · עודכן לאחרונה: 14 בנובמבר 2026</div>
+    <p>Study for fun היא אפליקציה לתרגול למבחנים דרך משחקים, לילדים בכיתות א'–י"ב. ההורה בונה תרגול לקראת מבחן, והילד משחק בו בטלפון. הדף הזה מסביר איזה מידע נשמר, למה, ומי יכול לראות אותו.</p>
+
+    <h2>📋 איזה מידע נשמר</h2>
+    <ul>
+      <li><b>הורה:</b> שם וכתובת מייל כפי שהתקבלו מחשבון Google בעת הכניסה.</li>
+      <li><b>ילדים:</b> שם פרטי או כינוי, כיתה וצבע שההורה בחר. הילד יכול לבחור לעצמו כינוי ותמונה – דמות, חיה, או תמונה אישית (לא חובה). אין צורך במייל או במספר טלפון של ילד.</li>
+      <li><b>תרגולים:</b> מקצוע, תאריך מבחן, נושאים, השאלות והתשובות.</li>
+      <li><b>חומר לימוד:</b> צילומי דפים, טקסט או קישור שההורה מעלה כדי לבנות תרגול. הם משמשים לבניית השאלות בלבד, וצילומי הדפים לא נשמרים אחרי הבנייה.</li>
+      <li><b>פעילות:</b> המשחקים ששוחקו, אילו שאלות נענו נכון ואילו לא (כולל התשובה שנבחרה), כוכבים, גביעים ותאריכים – כדי להציג להורה פידבק ולבנות סט חיזוק.</li>
+      <li><b>מכשירים:</b> מזהה טכני אנונימי למכשיר של ילד שחובר בקישור, ומועד החיבור.</li>
+    </ul>
+
+    <h2>🌍 איפה המידע נשמר ומי מעבד אותו</h2>
+    <ul>
+      <li>המידע נשמר בשירות <b>Google Firebase</b>, בשרתים באירופה (בלגיה). הכניסה מתבצעת דרך Google.</li>
+      <li>כדי לבנות תרגול, חומר הלימוד נשלח לעיבוד אצל <b>Anthropic</b> (מודל Claude). נשלחים רק החומר, המקצוע, הכיתה והנושאים – <b>בלי שם הילד ובלי פרטים מזהים</b>. לפי תנאי Anthropic, מידע שנשלח דרך הממשק שלה אינו משמש לאימון המודלים.</li>
+      <li>במכשיר עצמו נשמר עותק של התרגולים וההתקדמות, כדי שהאפליקציה תעבוד גם בלי רשת.</li>
+    </ul>
+
+    <h2>👀 מי יכול לראות את המידע</h2>
+    <ul>
+      <li>רק ההורה ומכשירים של ילדים שחוברו בקישור של אותה משפחה רואים את המידע שלה. משפחות אחרות לא יכולות לראות אותו. ההגבלה נאכפת בשרת.</li>
+      <li>מכשיר של ילד רואה את התרגולים של המשפחה, ושומר רק את ההתקדמות שלו.</li>
+      <li>כשההורה משתף תרגול עם הורה אחר (קוד או קישור), נשלחות רק השאלות – בלי שם הילד ובלי ההתקדמות שלו.</li>
+      <li>מנהלת השירות ניגשת למידע רק לצורך תפעול, תמיכה ותיקון תקלות.</li>
+    </ul>
+
+    <h2>🚫 מה אנחנו לא עושים</h2>
+    <ul>
+      <li>לא מוכרים ולא מעבירים מידע לאף גורם, מלבד שירותי האחסון והעיבוד שלמעלה.</li>
+      <li>אין פרסומות ואין מעקב פרסומי.</li>
+      <li>לא משתמשים בכלי אנליטיקה באפליקציה.</li>
+      <li>אין רכישות מתוך האפליקציה לילדים, ואין צ'אט או קשר עם משתמשים אחרים.</li>
+    </ul>
+
+    <h2>🧒 ילדים</h2>
+    <p>ההורה הוא שמוסיף את הילדים ומחבר את המכשירים שלהם, והוא האחראי לכך ונותן את ההסכמה בשמם. ילד לא נרשם בעצמו. מומלץ להשתמש בשם פרטי או בכינוי בלבד, ולבחור דמות במקום תמונה אישית.</p>
+
+    <h2>⏳ כמה זמן המידע נשמר</h2>
+    <p>המידע נשמר כל עוד החשבון קיים, כדי שהילד יוכל להמשיך לתרגל ולראות את ההתקדמות שלו. ההיסטוריה מוגבלת ל-300 המשחקים האחרונים לכל ילד. ההורה יכול לאפס התקדמות, למחוק ילד או למחוק את כל החשבון בכל רגע.</p>
+
+    <h2 id="delete">🗑 מחיקת המידע</h2>
+    <ul>
+      <li><b>כל החשבון:</b> במסך ההורה, בתחתית המסך ← "מחיקת חשבון". נמחקים הילדים, התרגולים, ההתקדמות וחשבון הכניסה – גם מהמכשירים של הילדים. המחיקה מיידית וסופית.</li>
+      <li><b>ילד אחד:</b> בכרטיס הילד ← ✎ ← 🗑. נמחקים גם התרגולים וההתקדמות שלו.</li>
+      <li><b>איפוס התקדמות:</b> בכרטיס הילד ← ✎ ← "איפוס התקדמות".</li>
+      <li><b>בלי גישה לאפליקציה:</b> אפשר לבקש מחיקה במייל (למטה), מכתובת המייל של חשבון Google. הבקשה תטופל תוך 30 יום.</li>
+    </ul>
+
+    <h2>⚖️ הזכויות שלך</h2>
+    <p>בהתאם לחוק הגנת הפרטיות, התשמ"א–1981, את/ה יכול/ה לבקש לעיין במידע שנשמר עליך ועל ילדיך, לתקן אותו או למחוק אותו. רוב הפעולות זמינות ישירות באפליקציה, ואפשר גם לפנות במייל.</p>
+
+    <h2>🔄 שינויים במדיניות</h2>
+    <p>אם המדיניות תשתנה, התאריך בראש הדף יתעדכן, ושינוי מהותי יוצג באפליקציה.</p>
+
+    <h2>✉️ יצירת קשר</h2>
+    <p>לשאלות או לבקשות בנושא פרטיות: <a href="mailto:taliahblass@gmail.com">taliahblass@gmail.com</a></p>
+  </div>
+
+  <div class="card" data-l="en" dir="ltr" style="text-align:left">
+    <h1>Privacy policy</h1>
+    <div class="muted">Study for fun · by D-WAY · Last updated: November 14, 2026</div>
+    <p>Study for fun is an app for practising for school tests through games, for kids in grades 1–12. A parent builds practice for an upcoming test, and the kid plays it on a phone. This page explains what information is stored, why, and who can see it.</p>
+
+    <h2>📋 What we store</h2>
+    <ul>
+      <li><b>Parent:</b> name and email address as provided by your Google account when you sign in.</li>
+      <li><b>Kids:</b> a first name or nickname, grade and colour chosen by the parent. A kid can choose a nickname and a picture – a character, an animal, or (optionally) a personal photo. No email or phone number is needed for a kid.</li>
+      <li><b>Practice sets:</b> subject, test date, topics, questions and answers.</li>
+      <li><b>Study material:</b> page photos, text or a link that the parent uploads to build a practice set. They are used only to build the questions; page photos are not kept after the build.</li>
+      <li><b>Activity:</b> games played, which questions were answered right or wrong (including the option chosen), stars, trophies and dates – to show the parent feedback and build a review set.</li>
+      <li><b>Devices:</b> an anonymous technical ID for a kid's device connected with a link, and when it was connected.</li>
+    </ul>
+
+    <h2>🌍 Where it is stored and who processes it</h2>
+    <ul>
+      <li>Data is stored with <b>Google Firebase</b> on servers in Europe (Belgium). Sign-in is handled by Google.</li>
+      <li>To build a practice set, the study material is processed by <b>Anthropic</b> (Claude model). Only the material, subject, grade and topics are sent – <b>never the kid's name or any identifying details</b>. Under Anthropic's terms, data sent through its API is not used to train its models.</li>
+      <li>The device keeps a copy of practice sets and progress so the app works offline.</li>
+    </ul>
+
+    <h2>👀 Who can see it</h2>
+    <ul>
+      <li>Only the parent and kids' devices connected with that family's link can see the family's data. Other families cannot. This is enforced on the server.</li>
+      <li>A kid's device can see the family's practice sets and saves only its own progress.</li>
+      <li>When a parent shares a practice set with another parent (code or link), only the questions are shared – never the kid's name or progress.</li>
+      <li>The service administrator accesses data only for operation, support and fixing problems.</li>
+    </ul>
+
+    <h2>🚫 What we don't do</h2>
+    <ul>
+      <li>We don't sell or share data with anyone, other than the storage and processing services above.</li>
+      <li>No ads and no ad tracking.</li>
+      <li>No analytics tools in the app.</li>
+      <li>No in-app purchases for kids, and no chat or contact with other users.</li>
+    </ul>
+
+    <h2>🧒 Children</h2>
+    <p>A parent adds the kids and connects their devices, is responsible for doing so, and gives consent on their behalf. Kids do not sign up themselves. We recommend using a first name or nickname only, and choosing a character instead of a personal photo.</p>
+
+    <h2>⏳ How long data is kept</h2>
+    <p>Data is kept while the account exists, so the kid can keep practising and see their progress. History is limited to the last 300 games per kid. A parent can reset progress, delete a kid, or delete the whole account at any time.</p>
+
+    <h2 id="delete-en">🗑 Deleting your data</h2>
+    <ul>
+      <li><b>The whole account:</b> on the parent screen, at the bottom → "Delete account". Kids, practice sets, progress and the sign-in account are deleted – from the kids' devices too. Deletion is immediate and permanent.</li>
+      <li><b>One kid:</b> kid card → ✎ → 🗑. Their practice sets and progress are deleted too.</li>
+      <li><b>Reset progress:</b> kid card → ✎ → "Reset progress".</li>
+      <li><b>Without access to the app:</b> request deletion by email (below), from your Google account's email address. Requests are handled within 30 days.</li>
+    </ul>
+
+    <h2>⚖️ Your rights</h2>
+    <p>Under Israel's Protection of Privacy Law, 1981, you can ask to see the information stored about you and your kids, correct it or delete it. Most actions are available directly in the app, and you can also contact us by email.</p>
+
+    <h2>🔄 Changes</h2>
+    <p>If this policy changes, the date at the top will be updated, and material changes will be shown in the app.</p>
+
+    <h2>✉️ Contact</h2>
+    <p>For privacy questions or requests: <a href="mailto:taliahblass@gmail.com">taliahblass@gmail.com</a></p>
+  </div>
+</main>
+<script>
+function setLang(l){ document.documentElement.lang=l; document.documentElement.dir=l==='he'?'rtl':'ltr'; try{localStorage.setItem('sff_privacy_lang',l)}catch(e){} }
+(function(){ let l=null; try{ l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('sff_privacy_lang'); }catch(e){}
+  if(!l && !/^he\b/i.test(navigator.language||'')) l='en'; if(l==='en'||l==='he') setLang(l);
+  if(location.hash==='#delete' && document.documentElement.lang==='en') location.hash='#delete-en'; })();
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v47">
+<meta name="sff-ver" content="sff-v48">
 <script src="/i18n.js"></script>
 <script src="/kid-rest.js"></script>
 <meta charset="utf-8">
@@ -2150,6 +2150,19 @@ function renderKidSets(){
   $('whoami').innerHTML = kids.length>1 ? kids.map(k=>`<button class="${k.id===activeKid?'on':''}" onclick="activeKid='${k.id}';renderKidSets()">${avatarHtml(k,34)}${esc(kidName(k))}</button>`).join('') : '';
   $('meBar').classList.toggle('hidden',!me); if(me) $('meBar').innerHTML=`${avatarHtml(me,52)}<span>${esc(kidName(me))}</span><span class="pen">✎</span>`;
   const mine = me ? kidSets(me) : sets;
+  // a kid's phone never shows the example: it says what is happening (and how far the connection got)
+  if(!mine.length && locked()){
+    const ver=document.querySelector('meta[name=sff-ver]')?.content||'', waiting=!window.__sffDone && !window.__sffCloudErr;
+    renderCar('subCar',[`<div class="card herocard center nokid">
+      <div style="font-size:3.4em">${waiting?'⏳':'📭'}</div>
+      <h2 style="margin:6px 0">${waiting?'מחפשים את התרגולים שלך…':'עוד אין כאן תרגול'}</h2>
+      <p class="sub" style="margin:0 0 12px">${waiting?'רגע אחד':(me?`ההורה עוד לא הוסיף/ה תרגול ל${esc(kidName(me))}`:'הטלפון עוד לא מחובר לילד/ה – פתחו את הלינק מההורה')}</p>
+      <button class="btn" onclick="location.reload()">🔄 לנסות שוב</button>
+      <div class="hint" translate="no" dir="ltr" style="font-size:.7em;opacity:.65;margin-top:12px">${esc(ver)} · kid:${esc(String(LOCK||'-').slice(-6))} · kids:${kids.length} · sets:${sets.filter(x=>!x.demo).length} · ${esc(window.__sffStage||'-')} · ${esc(window.__sffVia||'-')}${window.__sffJoinErr?' · join:'+esc(window.__sffJoinErr):''}${window.__sffCloudErr?' · '+esc(String(window.__sffCloudErr).slice(0,40)):''}</div>
+    </div>`]);
+    if(waiting) setTimeout(()=>{ if(!$('vKid').classList.contains('hidden')) renderKidSets(); },2500);
+    return;
+  }
   const list = mine.length ? mine : [DEMO];
   renderCar('subCar', list.map(s=>{
     const [c,ico]=subjStyle(s.subject), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), fg=dark?'#1B2A4A':'#fff';

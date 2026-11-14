@@ -1,10 +1,10 @@
 # Practice set: English, grade 7 – Present Simple + Word Review (Student's Book p.37). Exam 18.11.2026.
 # Run: python3 -I tools/build_set.py tools/sets/en7_nov26.py
-PS, WE, NP, AW, DW, EW = "Present Simple", "Weather words", "Nature & places", "Action words", "Describing words", "Everyday words"
+PS, WE, NP, AW, DW, EW, UN = "Present Simple", "Weather words", "Nature & places", "Action words", "Describing words", "Everyday words", "Unseen"
 
 SET = dict(name="English – Present Simple + Words", grade=6, subject="אנגלית",
-           examDate="2026-11-18", dailyGoal=3, perRound=13,
-           topics=[PS, WE, NP, AW, DW, EW])
+           examDate="2026-11-18", dailyGoal=4, perRound=13,
+           topics=[PS, WE, NP, AW, DW, EW, UN])
 
 # (title, topics, [ (topic, question, [options], answer_index, explanation, scene) ])
 # scene: list of (emoji, x, y, size)  — or a single emoji string → centered.
@@ -138,7 +138,37 @@ C.append(("Everyday words", [EW], [
  (EW, "פתרון = ?", ["solution", "problem", "advice", "hope"], 0, "פתרון = solution", [("💡", 40, 45, 40), ("✅", 70, 65, 26)]),
 ]))
 
-C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW], [
+
+# Unseen – Band II level (~190 words), built on the Word Review list and written in Present Simple.
+PASSAGE = """
+Weather Watcher
+
+Lia is thirteen years old. She lives with her family in a small city near the mountains in the north. Her father is a farmer, so the weather is very important to him. Every morning, Lia wakes up early and checks the temperature outside. Then she writes it in a special notebook.
+
+In the summer, the heat is extreme. It is often 35 degrees! Lia and her friends spend time at the swimming pool or sit in the shade of a big tree. In the winter, it is freezing. Sometimes there is snow on the ground and ice on the roof. Lia puts on her warm coat and her scarf before she leaves the house.
+
+Lia wants to be a weather scientist. She hopes to predict storms and help farmers. "When a storm arrives, it can destroy a whole field," she says. "If farmers know about it early, they can protect their plants."
+
+Lia's dream is to visit the South Pole. "It is probably the coldest place on earth," she says. "I can't wait!"
+"""
+
+C.append(("📖 Unseen: Weather Watcher", [UN], [
+ (UN, "How old is Lia?", ["13", "12", "14", "30"], 0, "בשורה הראשונה: thirteen = 13", [("👧", 50, 52, 50)]),
+ (UN, "Where does Lia live?", ["near the mountains", "near the sea", "in the desert", "on an island"], 0, "near the mountains in the north", "🏔️"),
+ (UN, "What is her father's job?", ["farmer", "sailor", "teacher", "scientist"], 0, "Her father is a farmer", "🧑‍🌾"),
+ (UN, "What does Lia check every morning?", ["the temperature", "the news", "her phone", "the river"], 0, "checks the temperature outside", "🌡️"),
+ (UN, "What is the summer like?", ["very hot", "freezing", "rainy", "windy"], 0, "the heat is extreme = חום קיצוני", "☀️"),
+ (UN, "Where do the friends swim?", ["at the pool", "in the sea", "in the river", "at school"], 0, "at the swimming pool", "🏊"),
+ (UN, "Where is the ice?", ["on the roof", "in the pool", "on the tree", "in the river"], 0, "ice on the roof", "🧊"),
+ (UN, "What does Lia wear in winter?", ["coat and scarf", "hat and gloves", "a swimsuit", "sunglasses"], 0, "her warm coat and her scarf", "🧣"),
+ (UN, "What does Lia want to be?", ["weather scientist", "farmer", "teacher", "sailor"], 0, "Lia wants to be a weather scientist", "🔬"),
+ (UN, "What can a storm do?", ["destroy a field", "help farmers", "melt the snow", "cool the city"], 0, "it can destroy a whole field", "⛈️"),
+ (UN, "\"predict\" means:", ["לחזות", "להרוס", "להגן", "לבדוק"], 0, "predict storms = לחזות סערות", "🔮"),
+ (UN, "What is the South Pole?", ["the coldest place", "the hottest place", "a small city", "a big field"], 0, "probably the coldest place on earth", "🐧"),
+ (UN, "\"I can't wait!\" – Lia is:", ["excited", "worried", "sad", "bored"], 0, "I can't wait! = מתרגשת", "🤩"),
+], PASSAGE))
+
+C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW, UN], [
  (EW, "עצה = ?", ["advice", "hope", "problem", "opposite"], 0, "עצה = advice", [("🧓", 35, 55, 40), ("💬", 70, 35, 28)]),
  (EW, "תקווה = ?", ["hope", "hole", "heat", "ice"], 0, "תקווה = hope", [("🙏", 40, 55, 40), ("🌈", 70, 30, 30)]),
  (NP, "בחוץ = ?", ["outdoors", "indoors", "below", "through"], 0, "בחוץ = outdoors", [("🏕️", 45, 55, 46), ("🌳", 78, 50, 28)]),

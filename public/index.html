@@ -159,7 +159,9 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 
 /* game stage */
 .stage{background:var(--paper);border:var(--line);border-radius:28px;box-shadow:0 6px 0 var(--ink);overflow:hidden}
-.stage .hud{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:var(--line);background:#F4F2FF;flex-wrap:wrap}
+.stage .hud{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:12px 12px;border-bottom:var(--line);background:#F4F2FF;flex-wrap:nowrap}
+.stage .hud #gCount{flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.stage .hud .quit{flex:none;font-size:1.1em;padding:4px}
 .chips{display:flex;gap:8px}
 .chip{background:#fff;border:var(--line);border-radius:999px;padding:3px 12px;font-family:var(--display);font-weight:700;font-size:1.02em;display:inline-flex;gap:6px;align-items:center}
 .chip.pop{animation:pop .35s}
@@ -222,6 +224,11 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 
 .play{padding:18px 20px 22px}
 .topic-tag{display:inline-block;background:var(--lilac);border:var(--line);border-radius:999px;padding:1px 12px;font-family:var(--display);font-weight:600;font-size:.82em;margin-bottom:12px}
+.passage{border:var(--line);border-radius:18px;background:#FFFBEF;margin:0 0 14px;overflow:hidden}
+.passage summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px;font-family:var(--display);font-weight:600;background:#FFE69A;border-bottom:var(--line)}
+.passage:not([open]) summary{border-bottom:0}
+.passage .ptext{max-height:38vh;overflow:auto;padding:10px 16px;line-height:1.6;font-size:1.02em;unicode-bidi:plaintext}
+.passage .ptext p{margin:0 0 10px}
 .qbox{font-family:var(--display);font-weight:600;font-size:1.55em;line-height:1.35;margin:0 0 20px;unicode-bidi:plaintext}
 body.young .qbox{font-size:1.8em}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -1712,8 +1719,10 @@ const MODES=[
 ];
 const shortA=q=>q.options[q.answer].length<=40 && q.question.length<=110;
 const riddleOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=14 && /^[\p{L}\p{N} '\-]+$/u.test(a);};
+// reading passage (Unseen) that belongs to a question's chapter – those questions are played in "choice" only
+const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
 function modePool(set,id){
-  const qs=set.questions;
+  const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q));
   if(id==='memory') return qs.filter(shortA);
   if(id==='match') return qs.filter(shortA);
   if(id==='riddle') return qs.filter(riddleOK);
@@ -1731,7 +1740,7 @@ function openModes(set, ch){
   $('mTitle').textContent = PENDING_CH==null ? set.subject : PENDING_CH>=0 ? `פרק ${PENDING_CH+1}` : '🔁';
   const pool = PENDING_CH==null ? set.questions : chapterQs(set,PENDING_CH);
   const rec=recommended(set);
-  $('modes').innerHTML=MODES.map(m=>{const n=modePool({questions:pool},m.id).length, ok=n>=MIN[m.id];
+  $('modes').innerHTML=MODES.map(m=>{const n=modePool({questions:pool,chapters:set.chapters},m.id).length, ok=n>=MIN[m.id];
     const go = PENDING_CH==null ? `openTopics(getSet('${set.id}'),'${m.id}')` : `startGame(getSet('${set.id}'),null,'${m.id}',PENDING_CH)`;
     return `<button class="mode" ${ok?'':'disabled style="opacity:.5;cursor:not-allowed"'} onclick="${go}">
       ${m.id===rec&&ok?'<span class="rec">⭐</span>':''}<div class="art">${ART[m.id]}</div><h3>${m.name}</h3></button>`}).join('');
@@ -1746,7 +1755,7 @@ function openTopics(set, mode){
   const m=MODES.find(x=>x.id===mode);
   $('tTitle').innerHTML=`<span class="tart">${ART[mode]}</span>${m.name}`;
   const topics=[...new Set(set.questions.map(q=>q.topic))];
-  const tiles=topics.map((t,i)=>{ const n=modePool({questions:set.questions.filter(q=>q.topic===t)},mode).length, ok=n>=MIN[mode];
+  const tiles=topics.map((t,i)=>{ const n=modePool({questions:set.questions.filter(q=>q.topic===t),chapters:set.chapters},mode).length, ok=n>=MIN[mode];
     return `<button class="ttile" ${ok?'':'disabled'} onclick="startTopic('${set.id}',${i})">${topicPic(set,t)}<b dir="auto">${esc(t)}</b>${ok?'':'<span>🚫</span>'}</button>`; });
   const nx=nextChapter(set);
   tiles.unshift(`<button class="ttile mix" onclick="startTopic('${set.id}',-1)"><div class="dice">🎲</div><b>מיקס</b>${nx>=0?`<span class="hint">פרק ${nx+1}</span>`:''}</button>`);
@@ -1769,7 +1778,7 @@ function startGame(set, onlyQs, mode, ch, topic){
   document.body.classList.toggle('young', track(set.grade).young);
   if(ch==null && !onlyQs) ch=nextChapter(set);
   const base = onlyQs || chapterQs(set,ch);
-  let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q]},mode).length);
+  let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q],chapters:set.chapters},mode).length);
   if(pool.length<MIN[mode]){ mode='choice'; pool=base; }
   const per=set.perRound||10;
   const cap={choice:per,memory:Math.min(6,per),match:Math.min(10,per),riddle:Math.min(8,per),spell:Math.min(8,per)}[mode];
@@ -1825,7 +1834,9 @@ function choiceRender(){
   const q=curQ();
   $('gCount').textContent=`שאלה ${G.i+1} מתוך ${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
-  $('gPlay').innerHTML=`${picOf(q)}<div class="qbox ${q.scene?'short':''}" dir="auto">${esc(q.question)}</div>
+  const txt=passageOf(G.set,q);
+  const top=txt?`<details class="passage" open><summary>📖 קטע קריאה ${EN_SAY(txt)?`<button class="btn ghost small" onclick="event.preventDefault();sayEn(passageOf(G.set,curQ()),true)" aria-label="הקראת הקטע">🔊</button>`:''}</summary><div class="ptext" dir="auto">${txt.split(/\n\s*\n/).map(par=>`<p>${esc(par.trim())}</p>`).join('')}</div></details>`:picOf(q);
+  $('gPlay').innerHTML=`${top}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
     <div class="opts">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${'אבגד'[k]}</span>${esc(o)}</button>`).join('')}</div>
     <div class="helpers"><button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
   if(track(G.set.grade).young) speakQ();

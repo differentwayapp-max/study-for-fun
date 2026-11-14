@@ -4,7 +4,7 @@ Usage:  python3 -I tools/build_set.py tools/sets/<file>.py
 Writes  public/share/<id>.txt  (an SFF1: code). In the app: New practice → 🔗 → type  SFF1@<id>  → Import.
 Checks the same rules the app uses (clean, needsPic, riddleOK) so no AI pass is needed after import.
 """
-import base64, json, pathlib, re, secrets, sys
+import base64, json, pathlib, random, re, secrets, sys
 
 src = pathlib.Path(sys.argv[1])
 ns = {}
@@ -17,8 +17,12 @@ def scene(s):
     return [{"e": e, "x": x, "y": y, "s": z} for e, x, y, z in s]
 
 errors, qs, chapters = [], [], []
-for ci, (title, topics, items) in enumerate(C):
-    chapters.append({"title": title, "topics": topics, "count": len(items)})
+rng = random.Random(src.stem)   # same file → same option order
+for ci, chap in enumerate(C):
+    title, topics, items = chap[:3]
+    text = chap[3].strip() if len(chap) > 3 else ""
+    chapters.append({"title": title, "topics": topics, "count": len(items), **({"text": text} if text else {})})
+    if text and not 80 <= words(text) <= 300: errors.append(f"ch{ci+1}: passage has {words(text)} words")
     for topic, q, opts, ans, expl, sc in items:
         tag = f"ch{ci+1} «{q}» → {opts[ans]}"
         if topic not in SET["topics"]: errors.append(f"{tag}: unknown topic {topic}")
@@ -27,6 +31,7 @@ for ci, (title, topics, items) in enumerate(C):
         if any(words(o) > 3 for o in opts): errors.append(f"{tag}: option > 3 words")
         if words(expl) > 10: errors.append(f"{tag}: explanation > 10 words")
         if opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")
+        right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
         if not 1 <= len(scn) <= 6 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")
         qs.append({"topic": topic, "question": q, "options": opts, "answer": ans,

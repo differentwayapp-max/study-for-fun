@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v41">
+<meta name="sff-ver" content="sff-v42">
 <script src="/i18n.js"></script>
+<script src="/kid-rest.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Study for fun</title>
@@ -919,7 +920,17 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const cfg = window.SFF_FIREBASE_CONFIG, V = window.SFF_FIREBASE_SDK || '10.14.1';
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
-  try {
+  // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
+  const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
+  let finished = false; const finish = api => { if (finished) return; finished = true; W.__sffResolve(api); };
+  async function restFallback(why) {
+    if (finished || !W.SFF_KID_REST) return;
+    try { const api = await W.SFF_KID_REST(cfg, LS.getItem('sff_fam'), LS.getItem('sff_tok')); W.__sffVia = 'rest:' + why; finish(api); }
+    catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); finish(null); }
+  }
+  const SKIP = isKid && typeof WebAssembly === 'undefined';      // Lockdown Mode switches WebAssembly off
+  if (isKid && !SKIP) setTimeout(() => restFallback('timeout'), 9000);
+  if (!SKIP) try {
     W.__sffStage = 'load';
     const { initializeApp } = await import(base + 'firebase-app.js');
     const A = await import(base + 'firebase-auth.js');
@@ -1055,13 +1066,15 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       me: async () => ({ id: uid })
     };
 
-    W.__sffStage = 'ready';
-    W.__sffResolve({ use: async n => n === 'db' ? dbApi : n === 'sample' ? sampleApi : n === 'user' ? userApi : null });
+    W.__sffStage = 'ready'; W.__sffVia = W.__sffVia || 'sdk';
+    finish({ use: async n => n === 'db' ? dbApi : n === 'sample' ? sampleApi : n === 'user' ? userApi : null });
   } catch (e) {
     console.error('Firebase start failed', e);
-    if (W.SFF_KID_DEVICE) W.__sffCloudErr = String(e && e.message || e);
-    W.__sffResolve(null);   // the app keeps working on this device only
+    if (isKid) await restFallback('error');
+    else { if (W.SFF_KID_DEVICE) W.__sffCloudErr = String(e && e.message || e); finish(null); }   // the app keeps working on this device only
   }
+
+  if (SKIP) await restFallback('lockdown');
 
   // ---- a kid's device that lost its link: no sign-in, just ask for the link
   function showKidNoLink() {
@@ -2066,7 +2079,7 @@ function roadPlan(set){
 function demoWhy(){
   const me=kidById(LOCK||activeKid), ver=document.querySelector('meta[name=sff-ver]')?.content||'';
   return `<div class="hint" style="margin-top:4px">${me?`עוד אין תרגול ל${esc(kidName(me))} – ההורה מוסיף/ה מהקטלוג`:'הטלפון עוד לא מחובר לילד/ה'}</div>
-    <div class="hint" translate="no" dir="ltr" style="font-size:.7em;opacity:.65">${esc(ver)} · kid:${esc(String(LOCK||'-').slice(-6))} · kids:${kids.length} · sets:${sets.filter(s=>!s.demo).length} · ${esc(window.__sffStage||'-')}${window.__sffJoinErr?' · join:'+esc(window.__sffJoinErr):''} · idb:${window.SFF_IDB===false?'off':'on'}</div>`;
+    <div class="hint" translate="no" dir="ltr" style="font-size:.7em;opacity:.65">${esc(ver)} · kid:${esc(String(LOCK||'-').slice(-6))} · kids:${kids.length} · sets:${sets.filter(s=>!s.demo).length} · ${esc(window.__sffStage||'-')}${window.__sffJoinErr?' · join:'+esc(window.__sffJoinErr):''} · idb:${window.SFF_IDB===false?'off':'on'} · ${esc(window.__sffVia||'-')}</div>`;
 }
 function dayLabel(d,t0){ if(d===0) return 'היום'; if(d===-1) return 'אתמול'; if(d===1) return 'מחר'; return 'יום '+WEEKDAY[new Date(t0+d*864e5).getDay()]; }
 let ROAD_SET=null;
@@ -2823,7 +2836,11 @@ function showCloudErr(msg){
   if(!window.SFF_KID_DEVICE) return;
   const lockdown = typeof WebAssembly==='undefined';          // iPhone Lockdown Mode switches WebAssembly off
   const el=$('cloudErr'); if(!el) return;
-  el.innerHTML=`<b>⚠️ אין חיבור לתרגולים שלך</b><div class="hint" style="margin-top:4px">${lockdown?'באייפון מופעל "מצב נעילה" (Lockdown). ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה לאתר הזה.':'בדקו שיש אינטרנט ונסו שוב.'}</div>
+  const denied=/permission/i.test(String(msg)+' '+(window.__sffJoinErr||''));
+  const tip = denied ? 'הלינק הזה לא פעיל. בקשו מההורה לשלוח שוב את הלינק מהכרטיס שלכם.'
+    : (lockdown && !String(window.__sffVia||'').startsWith('rest')) ? 'באייפון מופעל "מצב נעילה" (Lockdown). ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה לאתר הזה.'
+    : 'בדקו שיש אינטרנט ונסו שוב.';
+  el.innerHTML=`<b>⚠️ אין חיבור לתרגולים שלך</b><div class="hint" style="margin-top:4px">${tip}</div>
     <button class="btn small" style="margin-top:8px" onclick="location.reload()">🔄 לנסות שוב</button>
     <div class="hint" translate="no" style="margin-top:6px;font-size:.7em;opacity:.7" dir="ltr">${esc(String(msg||'').slice(0,90))} · idb:${window.SFF_IDB===false?'off':'on'}</div>`;
   el.classList.remove('hidden');
@@ -2833,6 +2850,14 @@ if(window.SFF_KID_DEVICE) setTimeout(()=>{ if(!CLOUD_SEEN) showCloudErr('stuck a
 async function cloudInit(){
   try{ DB=await window.claude?.use?.('db'); }catch(e){ DB=null; }
   if(!DB && window.__sffCloudErr) showCloudErr(window.__sffCloudErr);
+  if(!DB && !window.SFF_KID_DEVICE && !document.getElementById('fbLogin') && window.__sffStage && window.__sffStage!=='ready'){
+    const el=document.createElement('div'); el.id='fbLogin';
+    el.innerHTML=`<div class="fbbox"><img src="${$('logoFull')?.src||''}" alt="Study for fun"><div style="font-size:3em;margin:6px 0">🔌</div>
+      <h2 style="margin:0 0 6px">לא הצלחנו להתחבר בדפדפן הזה</h2>
+      <div class="hint">🧒 ילד/ה? פתחו את הלינק שההורה שלח לכם.<br>👩 הורה? נסו דפדפן אחר או מחשב.</div>
+      <button class="btn" style="margin-top:12px" onclick="location.reload()">🔄 לנסות שוב</button></div>`;
+    document.body.appendChild(el);
+  }
   try{ ME=await window.claude?.use?.('user'); }catch(e){ ME=null; }
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v37">
+<meta name="sff-ver" content="sff-v38">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -920,6 +920,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
   try {
+    W.__sffStage = 'load';
     const { initializeApp } = await import(base + 'firebase-app.js');
     const A = await import(base + 'firebase-auth.js');
     const F = await import(base + 'firebase-firestore.js');
@@ -941,16 +942,19 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     if (qp.get('f') && qp.get('t')) { LS.setItem('sff_fam', qp.get('f')); LS.setItem('sff_tok', qp.get('t')); }   // the address itself is kept (see above)
     const kidFam = LS.getItem('sff_fam'), kidTok = LS.getItem('sff_tok');
 
+    W.__sffStage = 'auth';
     const firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
     let role, uid, famId;
 
     if (kidFam && kidTok && (!firstUser || firstUser.isAnonymous)) {
       // ---- kid device: join the family once with the link's token
+      W.__sffStage = 'signin';
       const u = firstUser || (await A.signInAnonymously(auth)).user;
+      W.__sffStage = 'join';
       uid = u.uid; famId = kidFam; role = 'kid';
       const dref = F.doc(fdb, `families/${famId}/devices/${uid}`);
       const d = await F.getDoc(dref).catch(() => null);
-      if (!d || !d.exists()) await F.setDoc(dref, { token: kidTok, at: Date.now() }).catch(e => console.warn('join failed', e));
+      if (!d || !d.exists()) await F.setDoc(dref, { token: kidTok, at: Date.now() }).catch(e => { console.warn('join failed', e); W.__sffJoinErr = String(e && e.code || e); });
     } else {
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
@@ -1043,6 +1047,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       me: async () => ({ id: uid })
     };
 
+    W.__sffStage = 'ready';
     W.__sffResolve({ use: async n => n === 'db' ? dbApi : n === 'sample' ? sampleApi : n === 'user' ? userApi : null });
   } catch (e) {
     console.error('Firebase start failed', e);
@@ -2809,6 +2814,8 @@ function showCloudErr(msg){
     <div class="hint" translate="no" style="margin-top:6px;font-size:.7em;opacity:.7" dir="ltr">${esc(String(msg||'').slice(0,90))} · idb:${window.SFF_IDB===false?'off':'on'}</div>`;
   el.classList.remove('hidden');
 }
+let CLOUD_SEEN=false;
+if(window.SFF_KID_DEVICE) setTimeout(()=>{ if(!CLOUD_SEEN) showCloudErr('stuck at: '+(window.__sffStage||'start')+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')); },12000);
 async function cloudInit(){
   try{ DB=await window.claude?.use?.('db'); }catch(e){ DB=null; }
   if(!DB && window.__sffCloudErr) showCloudErr(window.__sffCloudErr);
@@ -2817,11 +2824,12 @@ async function cloudInit(){
   applyLock();
   if(!DB) return;
   DB.doc('fam/kids').onSnapshot(snap=>{
+    CLOUD_SEEN=true;
     const remote=snap.exists?(snap.data().list||[]):[];
     if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt; }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
     saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender();
-  },()=>{});
+  },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
   DB.collection('sets').onSnapshot(q=>{
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
     if(IS_OWNER){ remote.forEach(r=>{ if(!sets.some(s=>s.id===r.id)) sets.push(r); }); pushSets(); }

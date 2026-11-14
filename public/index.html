@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
+<meta name="sff-ver" content="sff-v33">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2829,6 +2830,25 @@ cloudInit().then(openPendingAdd).then(()=>setTimeout(autoUpdateSets,2500));
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>
+  // a newer version on the site → reload once (not during a game). Works even when the page stayed open for days.
+  (function(){
+    const mine=document.querySelector('meta[name=sff-ver]')?.content;
+    async function check(){
+      try{
+        const r=await fetch('/version.json?t='+Date.now(),{cache:'no-store'}); if(!r.ok) return;
+        const v=(await r.json()).v; if(!v||v===mine) return;
+        if(sessionStorage.getItem('sff_reload_for')===v) return;            // tried already – don't loop
+        if(!document.getElementById('vGame')?.classList.contains('hidden')) return;   // in a game: next time
+        sessionStorage.setItem('sff_reload_for',v);
+        try{ const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k))); }catch(e){}
+        try{ const rs=await navigator.serviceWorker?.getRegistrations(); await Promise.all((rs||[]).map(x=>x.update())); }catch(e){}
+        location.reload();
+      }catch(e){}
+    }
+    window.addEventListener('load',()=>setTimeout(check,1500));
+    document.addEventListener('visibilitychange',()=>{ if(!document.hidden) check(); });
+    setInterval(check,10*60*1000);
+  })();
   if('serviceWorker' in navigator){
     // a new version takes over → reload once, unless a game is running (then on the next screen change)
     const hadSW=!!navigator.serviceWorker.controller; let reloaded=false;

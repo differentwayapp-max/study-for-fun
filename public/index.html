@@ -1376,9 +1376,11 @@ async function copyShare(){
   try{ await navigator.clipboard.writeText($('shareCode').value); $('shareMsg').textContent='הועתק ✓'; }
   catch(e){ $('shareCode').select(); $('shareMsg').textContent='סמנו את הקוד והעתיקו ידנית'; }
 }
-function importSet(){
-  const raw=$('importCode').value.trim(), msg=$('importMsg');
+async function importSet(){
+  let raw=$('importCode').value.trim(); const msg=$('importMsg');
   try{
+    const short=raw.match(/^SFF1@([A-Za-z0-9-]{3,60})$/);   // short code → file in /share/
+    if(short){ msg.textContent='⏳'; const r=await fetch(`/share/${short[1]}.txt?t=${Date.now()}`); raw=r.ok?(await r.text()).trim():''; }
     if(!raw.startsWith('SFF1:')) throw 0;
     const p=JSON.parse(decodeURIComponent(escape(atob(raw.slice(5)))));
     const qs=clean(p.questions,p.topics);

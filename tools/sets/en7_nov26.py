@@ -1,0 +1,155 @@
+# Practice set: English, grade 7 – Present Simple + Word Review (Student's Book p.37). Exam 18.11.2026.
+# Run: python3 -I tools/build_set.py tools/sets/en7_nov26.py
+PS, WE, NP, AW, DW, EW = "Present Simple", "Weather words", "Nature & places", "Action words", "Describing words", "Everyday words"
+
+SET = dict(name="English – Present Simple + Words", grade=6, subject="אנגלית",
+           examDate="2026-11-18", dailyGoal=3, perRound=13,
+           topics=[PS, WE, NP, AW, DW, EW])
+
+# (title, topics, [ (topic, question, [options], answer_index, explanation, scene) ])
+# scene: list of (emoji, x, y, size)  — or a single emoji string → centered.
+C = []
+
+C.append(("Present Simple: he / she / it", [PS], [
+ (PS, "She ___ to school.", ["go", "goes", "going", "gone"], 1, "she ← מוסיפים es: goes", [("👧", 32, 55, 40), ("🏫", 72, 50, 46)]),
+ (PS, "He ___ football every day.", ["play", "plays", "playing", "played"], 1, "he + כל יום ← plays", [("👦", 35, 50, 42), ("⚽", 70, 70, 24)]),
+ (PS, "The sun ___ in the east.", ["rise", "rises", "rising", "rose"], 1, "השמש = it ← rises", [("🌅", 50, 52, 60)]),
+ (PS, "My cat ___ fish.", ["eat", "eats", "eating", "ate"], 1, "החתול = it ← eats", [("🐈", 35, 55, 44), ("🐟", 72, 60, 30)]),
+ (PS, "They ___ in the river.", ["swim", "swims", "swimming", "swam"], 0, "they = רבים ← בלי s", [("🏊", 32, 55, 34), ("🏊‍♀️", 68, 55, 34), ("🌊", 50, 82, 30)]),
+ (PS, "It ___ a lot in winter.", ["rain", "rains", "raining", "rained"], 1, "it ← rains", [("🌧️", 40, 45, 48), ("❄️", 75, 30, 22)]),
+ (PS, "Dad ___ TV at night.", ["watch", "watches", "watchs", "watching"], 1, "אחרי ch מוסיפים es", [("👨", 30, 55, 40), ("📺", 70, 52, 38), ("🌙", 85, 18, 18)]),
+ (PS, "I ___ up at seven.", ["wake", "wakes", "waking", "woke"], 0, "I ← בלי s", [("⏰", 35, 50, 40), ("🛏️", 70, 62, 40)]),
+ (PS, "The baby ___ a lot.", ["cry", "crys", "cries", "crying"], 2, "y אחרי עיצור ← ies", [("👶", 50, 52, 52), ("💧", 70, 40, 14)]),
+ (PS, "We ___ time in the park.", ["spend", "spends", "spending", "spent"], 0, "we = רבים ← בלי s", [("👪", 40, 60, 44), ("🌳", 78, 45, 40)]),
+ (PS, "Snow ___ in spring.", ["melt", "melts", "melting", "melted"], 1, "השלג = it ← melts", [("☀️", 25, 25, 30), ("⛄", 60, 60, 46)]),
+ (PS, "The farmer ___ apples.", ["sell", "sells", "selling", "sold"], 1, "farmer = he ← sells", [("🧑‍🌾", 35, 55, 44), ("🍎", 72, 62, 26)]),
+ (PS, "My sister ___ eggs.", ["fry", "frys", "fries", "frying"], 2, "y אחרי עיצור ← ies", [("👧", 32, 55, 40), ("🍳", 70, 58, 38)]),
+]))
+
+C.append(("Weather", [WE], [
+ (WE, "What is this?", ["rain", "snow", "wind", "ice"], 0, "גשם = rain", "🌧️"),
+ (WE, "What is this?", ["cloud", "sea", "roof", "field"], 0, "ענן = cloud", "☁️"),
+ (WE, "What is this?", ["snow", "rain", "heat", "shade"], 0, "שלג = snow", [("❄️", 30, 30, 26), ("⛄", 58, 60, 50)]),
+ (WE, "What is this?", ["wind", "wave", "ice", "cloud"], 0, "רוח = wind", [("🌬️", 40, 45, 46), ("🍃", 75, 55, 24)]),
+ (WE, "What is this?", ["storm", "river", "heat", "scarf"], 0, "סערה = storm", [("⛈️", 50, 40, 50), ("🌊", 50, 80, 30)]),
+ (WE, "What is this?", ["ice", "snow", "bone", "hole"], 0, "קרח = ice", "🧊"),
+ (WE, "חום = ?", ["heat", "ice", "wind", "shade"], 0, "חום = heat", [("☀️", 30, 30, 34), ("🥵", 62, 60, 40)]),
+ (WE, "קפוא = ?", ["freezing", "warm", "pleasant", "strange"], 0, "קפוא = freezing", [("🥶", 45, 55, 46), ("❄️", 78, 30, 22)]),
+ (WE, "מזג אוויר = ?", ["weather", "season", "sea", "sweat"], 0, "מזג אוויר = weather", "🌦️"),
+ (WE, "עונה = ?", ["season", "sailor", "scarf", "skin"], 0, "עונה = season", [("🌸", 25, 35, 24), ("☀️", 75, 35, 24), ("🍂", 25, 72, 24), ("❄️", 75, 72, 24)]),
+ (WE, "It is 30 ___.", ["degrees", "zeros", "rivers", "waves"], 0, "30° = 30 מעלות", [("🌡️", 50, 50, 50)]),
+ (WE, "My coat is ___.", ["wet", "curly", "low", "famous"], 0, "רטוב = wet", [("🧥", 45, 58, 44), ("💧", 70, 35, 16), ("🌧️", 50, 18, 26)]),
+ (WE, "A ___ day.", ["pleasant", "dangerous", "heavy", "worried"], 0, "נעים = pleasant", [("🌤️", 40, 35, 40), ("😊", 68, 66, 30)]),
+]))
+
+C.append(("Present Simple: don't / doesn't", [PS], [
+ (PS, "She ___ like snow.", ["don't", "doesn't", "isn't", "aren't"], 1, "she ← doesn't", [("👧", 35, 55, 40), ("❄️", 70, 35, 24), ("👎", 72, 70, 20)]),
+ (PS, "They ___ live in the city.", ["don't", "doesn't", "isn't", "not"], 0, "they ← don't", [("👫", 30, 60, 38), ("🏙️", 72, 50, 40), ("❌", 72, 50, 20)]),
+ (PS, "He doesn't ___ fish.", ["eat", "eats", "eating", "ate"], 0, "אחרי doesn't ← בלי s", [("👦", 35, 55, 40), ("🐟", 70, 55, 28), ("❌", 70, 55, 16)]),
+ (PS, "I ___ go fishing.", ["don't", "doesn't", "am not", "not"], 0, "I ← don't", [("🎣", 45, 50, 46), ("❌", 70, 30, 20)]),
+ (PS, "It ___ snow in Eilat.", ["don't", "doesn't", "isn't", "aren't"], 1, "it ← doesn't", [("🏜️", 50, 55, 56), ("☀️", 78, 22, 22)]),
+ (PS, "We ___ swim in winter.", ["don't", "doesn't", "isn't", "aren't"], 0, "we ← don't", [("🏊", 40, 60, 36), ("❄️", 72, 30, 26), ("❌", 40, 60, 18)]),
+ (PS, "My dog doesn't ___ cats.", ["like", "likes", "liking", "liked"], 0, "אחרי doesn't ← בלי s", [("🐕", 32, 58, 40), ("🐈", 72, 58, 34)]),
+ (PS, "Dad ___ wear a scarf.", ["doesn't", "don't", "isn't", "aren't"], 0, "dad = he ← doesn't", [("👨", 38, 55, 40), ("🧣", 72, 55, 30), ("❌", 72, 55, 16)]),
+ (PS, "You ___ need a coat.", ["don't", "doesn't", "isn't", "not"], 0, "you ← don't", [("🧥", 40, 55, 40), ("☀️", 75, 25, 28)]),
+ (PS, "Cats ___ fly.", ["don't", "doesn't", "isn't", "aren't"], 0, "cats = רבים ← don't", [("🐈", 35, 65, 36), ("🐦", 70, 30, 26)]),
+ (PS, "She doesn't ___ TV.", ["watch", "watches", "watching", "watched"], 0, "אחרי doesn't ← בלי s", [("👧", 32, 55, 38), ("📺", 70, 52, 36), ("❌", 70, 52, 16)]),
+ (PS, "Which is correct?", ["He don't play", "He doesn't play", "He not play", "He doesn't plays"], 1, "he ← doesn't + פועל בלי s", [("👦", 50, 50, 46)]),
+ (PS, "Which is correct?", ["She don't swim", "She doesn't swims", "She doesn't swim", "She not swim"], 2, "she ← doesn't + פועל בלי s", [("👧", 40, 50, 40), ("🏊‍♀️", 72, 62, 24)]),
+]))
+
+C.append(("Nature & places", [NP], [
+ (NP, "What is this?", ["mountain", "river", "field", "roof"], 0, "הר = mountain", "🏔️"),
+ (NP, "What is this?", ["sea", "river", "field", "hole"], 0, "ים = sea", [("🌊", 50, 55, 50), ("⛵", 72, 35, 22)]),
+ (NP, "נהר = ?", ["river", "roof", "sea", "road"], 0, "נהר = river", [("🏞️", 50, 52, 56)]),
+ (NP, "שדה = ?", ["field", "park", "city", "hole"], 0, "שדה = field", [("🌾", 35, 60, 38), ("🐄", 70, 58, 32)]),
+ (NP, "What is this?", ["city", "field", "earth", "pool"], 0, "עיר = city", "🏙️"),
+ (NP, "What is this?", ["earth", "ground", "sea", "city"], 0, "כדור הארץ = earth", "🌍"),
+ (NP, "Up on the map?", ["north", "south", "east", "west"], 0, "למעלה במפה = צפון", [("🧭", 50, 55, 46), ("⬆️", 50, 18, 20)]),
+ (NP, "The sun rises in the ___.", ["east", "west", "north", "south"], 0, "השמש זורחת במזרח", [("🌅", 50, 52, 56)]),
+ (NP, "The sun sets in the ___.", ["west", "east", "north", "south"], 0, "השמש שוקעת במערב", [("🌇", 50, 52, 56)]),
+ (NP, "What is this?", ["swimming pool", "river", "sea", "hole"], 0, "בריכת שחייה = swimming pool", [("🏊‍♀️", 50, 50, 50)]),
+ (NP, "What is this?", ["park", "field", "roof", "sidewalk"], 0, "פארק = park", [("🌳", 30, 50, 40), ("🛝", 68, 60, 38)]),
+ (NP, "גג = ?", ["roof", "ground", "hole", "floor"], 0, "גג = roof", [("🏠", 50, 58, 54), ("⬆️", 50, 15, 18)]),
+ (NP, "What is this?", ["hole", "bone", "roof", "shade"], 0, "חור = hole", "🕳️"),
+]))
+
+C.append(("Present Simple: questions", [PS], [
+ (PS, "___ she like ice cream?", ["Do", "Does", "Is", "Are"], 1, "she ← Does", [("👧", 35, 55, 40), ("🍦", 70, 50, 32)]),
+ (PS, "___ they play football?", ["Do", "Does", "Is", "Am"], 0, "they ← Do", [("👫", 35, 55, 40), ("⚽", 70, 70, 24)]),
+ (PS, "Does he ___ fishing?", ["go", "goes", "going", "went"], 0, "אחרי Does ← בלי s", [("👦", 35, 55, 40), ("🎣", 70, 50, 32)]),
+ (PS, "___ you wake up early?", ["Do", "Does", "Is", "Are"], 0, "you ← Do", [("⏰", 50, 50, 46)]),
+ (PS, "Does it ___ in winter?", ["rain", "rains", "raining", "rained"], 0, "אחרי Does ← בלי s", [("🌧️", 45, 45, 46), ("❄️", 75, 30, 20)]),
+ (PS, "Where ___ he live?", ["does", "do", "is", "are"], 0, "he ← does", [("👦", 35, 55, 38), ("🏠", 70, 55, 38), ("❓", 50, 18, 20)]),
+ (PS, "What ___ you eat?", ["do", "does", "are", "is"], 0, "you ← do", [("🍽️", 50, 55, 44), ("❓", 75, 25, 20)]),
+ (PS, "When ___ the sun rise?", ["does", "do", "is", "are"], 0, "השמש = it ← does", [("🌅", 45, 55, 46), ("⏰", 78, 25, 20)]),
+ (PS, "___ your dad cook?", ["Does", "Do", "Is", "Are"], 0, "dad = he ← Does", [("👨‍🍳", 50, 52, 50)]),
+ (PS, "Where do fish ___?", ["live", "lives", "living", "lived"], 0, "אחרי do ← בלי s", [("🐟", 40, 55, 34), ("🌊", 60, 75, 36)]),
+ (PS, "Which is correct?", ["Do she sing?", "Does she sing?", "Does she sings?", "Is she sing?"], 1, "she ← Does + פועל בלי s", [("👧", 40, 55, 40), ("🎤", 70, 50, 26)]),
+ (PS, "Which is correct?", ["Does they run?", "Do they runs?", "Do they run?", "Are they run?"], 2, "they ← Do + פועל בלי s", [("🏃", 35, 55, 36), ("🏃‍♀️", 68, 55, 36)]),
+ (PS, "Does Dana ___ a coat?", ["wear", "wears", "wearing", "wore"], 0, "אחרי Does ← בלי s", [("👧", 35, 55, 40), ("🧥", 70, 55, 32)]),
+]))
+
+C.append(("Action words", [AW], [
+ (AW, "להגיע = ?", ["arrive", "leave", "divide", "destroy"], 0, "להגיע = arrive", [("🏃‍♀️", 35, 55, 40), ("🏁", 72, 45, 32)]),
+ (AW, "לעזוב = ?", ["leave", "stay", "arrive", "rise"], 0, "לעזוב = leave", [("🚪", 40, 52, 46), ("👋", 72, 40, 26)]),
+ (AW, "Ice ___ in the sun.", ["melts", "rises", "sets", "fries"], 0, "נמס = melts", [("☀️", 25, 25, 30), ("🧊", 55, 55, 34), ("💧", 75, 75, 18)]),
+ (AW, "לטגן = ?", ["fry", "melt", "solve", "shine"], 0, "לטגן = fry", "🍳"),
+ (AW, "What is the hobby?", ["go fishing", "hang out", "lie down", "put on"], 0, "ללכת לדוג = go fishing", [("🎣", 40, 50, 44), ("🐟", 72, 72, 24)]),
+ (AW, "לשכב = ?", ["lie down", "wake up", "get on", "put on"], 0, "לשכב = lie down", [("🛌", 50, 55, 54)]),
+ (AW, "ללבוש = ?", ["put on", "take off", "turn off", "roll down"], 0, "ללבוש = put on", [("🧥", 45, 55, 44), ("➡️", 75, 55, 22)]),
+ (AW, "להוריד (בגד) = ?", ["take off", "put on", "turn on", "get on"], 0, "להוריד = take off", [("🧥", 55, 55, 44), ("⬅️", 25, 55, 22)]),
+ (AW, "להדליק = ?", ["turn on", "turn off", "take off", "set"], 0, "להדליק = turn on", [("💡", 50, 50, 50)]),
+ (AW, "לפתור = ?", ["solve", "divide", "predict", "destroy"], 0, "לפתור = solve", [("🧩", 45, 55, 44), ("✅", 75, 30, 22)]),
+ (AW, "לחזות = ?", ["predict", "divide", "spend", "mean"], 0, "לחזות = predict", "🔮"),
+ (AW, "לחלק = ?", ["divide", "destroy", "fry", "hope"], 0, "לחלק = divide", [("🍕", 45, 55, 46), ("🔪", 75, 35, 22)]),
+ (AW, "להרוס = ?", ["destroy", "solve", "rise", "stay"], 0, "להרוס = destroy", [("💥", 50, 45, 50), ("🧱", 50, 78, 24)]),
+]))
+
+C.append(("Describing words", [DW], [
+ (DW, "מסוכן = ?", ["dangerous", "famous", "pleasant", "special"], 0, "מסוכן = dangerous", [("⚠️", 30, 35, 30), ("🦈", 58, 60, 46)]),
+ (DW, "מפורסם = ?", ["famous", "heavy", "strange", "worried"], 0, "מפורסם = famous", [("🌟", 30, 30, 26), ("🎤", 60, 58, 42)]),
+ (DW, "כבד = ?", ["heavy", "low", "close", "free"], 0, "כבד = heavy", "🏋️"),
+ (DW, "How does he feel?", ["worried", "pleasant", "sticky", "curly"], 0, "מודאג = worried", "😟"),
+ (DW, "How does she feel?", ["surprised", "worried", "freezing", "heavy"], 0, "מופתע = surprised", [("😲", 40, 50, 46), ("🎁", 75, 70, 26)]),
+ (DW, "מוזר = ?", ["strange", "special", "sticky", "extreme"], 0, "מוזר = strange", "👽"),
+ (DW, "Her hair is ___.", ["curly", "heavy", "low", "famous"], 0, "מתולתל = curly", "👩‍🦱"),
+ (DW, "דביק = ?", ["sticky", "curly", "extreme", "close"], 0, "דביק = sticky", "🍯"),
+ (DW, "מיוחד = ?", ["special", "strange", "several", "opposite"], 0, "מיוחד = special", "⭐"),
+ (DW, "חופשי = ?", ["free", "low", "wet", "warm"], 0, "חופשי = free", [("🕊️", 50, 45, 50)]),
+ (DW, "נמוך = ?", ["low", "close", "heavy", "free"], 0, "נמוך = low", [("⬇️", 50, 50, 46)]),
+ (DW, "הפוך = ?", ["opposite", "outside", "extreme", "several"], 0, "הפוך = opposite", [("⬆️", 35, 50, 36), ("⬇️", 65, 50, 36)]),
+ (DW, "קיצוני = ?", ["extreme", "famous", "pleasant", "worried"], 0, "קיצוני = extreme", [("🧗", 45, 55, 46), ("🔥", 75, 30, 22)]),
+]))
+
+C.append(("Everyday words", [EW], [
+ (EW, "What is this?", ["finger", "chin", "bone", "skin"], 0, "אצבע = finger", "☝️"),
+ (EW, "What is this?", ["bone", "skin", "ice", "fan"], 0, "עצם = bone", "🦴"),
+ (EW, "What is this?", ["scarf", "coat", "fan", "roof"], 0, "צעיף = scarf", "🧣"),
+ (EW, "What is this?", ["coat", "scarf", "cover", "cloud"], 0, "מעיל = coat", "🧥"),
+ (EW, "Who is he?", ["farmer", "sailor", "fan", "city"], 0, "חקלאי = farmer", [("🧑‍🌾", 40, 55, 44), ("🚜", 75, 65, 28)]),
+ (EW, "Who is he?", ["sailor", "farmer", "fan", "problem"], 0, "מלח = sailor", [("🧔", 35, 55, 40), ("⛵", 70, 50, 34), ("⚓", 50, 85, 18)]),
+ (EW, "What is this?", ["ice cream cone", "ice", "snow", "bone"], 0, "גביע גלידה = ice cream cone", "🍦"),
+ (EW, "What is this?", ["fan", "coat", "roof", "hole"], 0, "מאוורר / מניפה = fan", "🪭"),
+ (EW, "צל = ?", ["shade", "shine", "sweat", "snow"], 0, "צל = shade", [("🌳", 45, 45, 50), ("⛱️", 75, 70, 24)]),
+ (EW, "What is this?", ["wave", "wind", "river", "field"], 0, "גל = wave", [("🌊", 45, 55, 50), ("🏄", 70, 35, 24)]),
+ (EW, "זיעה = ?", ["sweat", "skin", "sea", "snow"], 0, "זיעה = sweat", [("🥵", 45, 55, 46), ("💦", 75, 35, 22)]),
+ (EW, "חופשה = ?", ["vacation", "advice", "season", "solution"], 0, "חופשה = vacation", [("🏖️", 45, 58, 46), ("✈️", 75, 25, 22)]),
+ (EW, "פתרון = ?", ["solution", "problem", "advice", "hope"], 0, "פתרון = solution", [("💡", 40, 45, 40), ("✅", 70, 65, 26)]),
+]))
+
+C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW], [
+ (EW, "עצה = ?", ["advice", "hope", "problem", "opposite"], 0, "עצה = advice", [("🧓", 35, 55, 40), ("💬", 70, 35, 28)]),
+ (EW, "תקווה = ?", ["hope", "hole", "heat", "ice"], 0, "תקווה = hope", [("🙏", 40, 55, 40), ("🌈", 70, 30, 30)]),
+ (NP, "בחוץ = ?", ["outdoors", "indoors", "below", "through"], 0, "בחוץ = outdoors", [("🏕️", 45, 55, 46), ("🌳", 78, 50, 28)]),
+ (NP, "בפנים = ?", ["indoors", "outdoors", "outside", "above"], 0, "בפנים = indoors", [("🏠", 45, 55, 46), ("🛋️", 75, 70, 22)]),
+ (NP, "מתחת = ?", ["below", "through", "close", "several"], 0, "מתחת = below", [("📦", 50, 35, 30), ("⬇️", 50, 72, 26)]),
+ (DW, "כמה (כמות) = ?", ["several", "certainly", "probably", "luckily"], 0, "כמה = several", [("🍎", 30, 50, 24), ("🍎", 50, 50, 24), ("🍎", 70, 50, 24)]),
+ (DW, "כנראה = ?", ["probably", "certainly", "luckily", "really"], 0, "כנראה = probably", "🤔"),
+ (DW, "למרבה המזל = ?", ["luckily", "really", "probably", "certainly"], 0, "למרבה המזל = luckily", "🍀"),
+ (PS, "He ___ in Haifa.", ["live", "lives", "living", "lived"], 1, "he ← lives", [("👦", 35, 55, 40), ("🏙️", 70, 50, 36)]),
+ (PS, "___ it snow here?", ["Does", "Do", "Is", "Are"], 0, "it ← Does", [("❄️", 45, 45, 44), ("❓", 75, 25, 20)]),
+ (PS, "We ___ like storms.", ["don't", "doesn't", "isn't", "aren't"], 0, "we ← don't", [("⛈️", 45, 45, 46), ("👎", 75, 72, 22)]),
+ (AW, "תלוי ב... = ?", ["it depends on", "feel like", "make plans", "can't wait"], 0, "תלוי ב... = it depends on", "🤷"),
+ (AW, "לא יכול לחכות = ?", ["can't wait", "feel like", "hold a record", "hang out"], 0, "לא יכול לחכות = can't wait", [("🤩", 45, 50, 46), ("⏳", 75, 30, 22)]),
+]))

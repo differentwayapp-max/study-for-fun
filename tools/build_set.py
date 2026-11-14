@@ -60,8 +60,10 @@ code = "SFF1:" + base64.b64encode(json.dumps(payload, ensure_ascii=False).encode
 sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
 out = pathlib.Path(__file__).resolve().parent.parent / "public" / "share" / f"{sid}.txt"
 out.parent.mkdir(exist_ok=True)
-for old in out.parent.glob(src.stem.replace("_", "-") + "-*.txt"): old.unlink()
-out.write_text(code, encoding="utf-8")
+# codes already handed out stay valid and always bring the latest version (import updates in place)
+aliases = set(out.parent.glob(src.stem.replace("_", "-") + "-*.txt"))
+for a in ns.get("OLD_CODES", []): aliases.add(out.parent / f"{a}.txt")
+for f in aliases | {out}: f.write_text(code, encoding="utf-8")
 print(f"OK  words {len(word_list)}/{len(word_list)} practised")
 print(f"OK  {len(qs)} questions · {len(chapters)} chapters · riddle-ready {riddle}")
 print(f"CODE  SFF1@{sid}")

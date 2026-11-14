@@ -1908,7 +1908,7 @@ function renderKids(){
       <div><label for="kfName">שם</label><input id="kfName" type="text" placeholder="נועה" maxlength="20"></div>
       <div><label for="kfGrade">כיתה</label><select id="kfGrade"></select></div>
       <div class="swatches" id="kfColors" style="justify-content:center"></div>
-      <div class="actions" style="justify-content:center"><button class="btn big" onclick="saveKid()" id="kfSave">שמירה</button><button class="btn ghost ${KF.id?'':'hidden'}" id="kfCancel" onclick="resetKidForm()">ביטול</button>${KF.id?`<button class="btn ghost" onclick="delKid('${KF.id}')">${delArm===KF.id?'למחוק?':'🗑'}</button>`:''}</div>
+      <div class="actions" style="justify-content:center;flex-wrap:wrap"><button class="btn big" onclick="saveKid()" id="kfSave">שמירה</button><button class="btn ghost ${KF.id?'':'hidden'}" id="kfCancel" onclick="resetKidForm()">ביטול</button>${KF.id?`<button class="btn ghost" onclick="delKid('${KF.id}')">${delArm===KF.id?'למחוק?':'🗑'}</button>`:''}</div>
       ${KF.id?`<div class="center"><button class="btn ${resetArm===KF.id?'sun':'ghost'} small" onclick="resetKid('${KF.id}')">${resetArm===KF.id?'↺ לאפס את כל ההתקדמות?':'↺ איפוס התקדמות'}</button></div>`:''}
       <div class="hint center" id="kfMsg"></div></div>`);
   const prevName=$('kfName')?.value, prevGrade=$('kfGrade')?.value;
@@ -1937,7 +1937,8 @@ function delKid(id){
   sets=sets.filter(s=>s.kidId!==id); store.save();
   history=history.filter(h=>h.kidId!==id); saveHistoryLocal();
   try{ if(DB&&IS_OWNER) DB.collection('progress').doc(id).delete(); }catch(e){}
-  renderKids();
+  const gone=(document.getElementById('kfName')||{}).value||''; if($('kfName')) $('kfName').value='';   // the form must not keep the deleted name
+  renderKids(); carGo('kidCar',0); toast(`🗑 ${esc(gone)} ✓`);
 }
 function renderSets(){}
 

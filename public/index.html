@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta name="sff-ver" content="sff-v40">
+<meta name="sff-ver" content="sff-v41">
 <script src="/i18n.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -943,8 +943,16 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     const kidFam = LS.getItem('sff_fam'), kidTok = LS.getItem('sff_tok');
 
     W.__sffStage = 'auth';
-    const firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
+    let firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
     let role, uid, famId;
+    // A kid link of a family, opened on a phone signed in to a *different* Google account (e.g. the kid once tapped
+    // "Sign in with Google"): the link wins – sign that account out and continue as this family's kid device.
+    // The family's own parent (same account) keeps the parent view, as before.
+    const linkNow = new URLSearchParams(location.search);
+    if (linkNow.get('f') && linkNow.get('t') && firstUser && !firstUser.isAnonymous && firstUser.uid !== linkNow.get('f')) {
+      try { await A.signOut(auth); } catch (e) {}
+      firstUser = null;
+    }
 
     if (kidFam && kidTok && (!firstUser || firstUser.isAnonymous)) {
       // ---- kid device: join the family once with the link's token

@@ -5,6 +5,7 @@
    read/write only progress. Live updates are replaced by a short refresh every 45 seconds. */
 (function () {
   const W = window, LS = W.localStorage;
+  W.__sffKR = 'loaded';
 
   // Firestore value <-> plain JS
   const dec = v => {
@@ -100,12 +101,13 @@
   // Watchdog (a plain script, so it runs even where the app's module script does not – e.g. iPhone Lockdown Mode):
   // on a kid's phone, if the main connection has not finished after 6 s, connect through the backup.
   // starts when the page is read (not after every font/picture: Lockdown Mode blocks some of them); sooner when Lockdown is detected
-  const startWatch = () => setTimeout(async () => {
-    if (W.__sffDone || !W.SFF_KID_DEVICE || !W.__sffResolve) return;
+  const startWatch = () => { W.__sffKR = 'armed'; setTimeout(async () => {
+    W.__sffKR = 'fired';
+    if (W.__sffDone || !W.SFF_KID_DEVICE || !W.__sffResolve) { W.__sffKR = 'skip:' + (W.__sffDone ? 'done' : !W.SFF_KID_DEVICE ? 'notkid' : 'noresolve'); return; }
     const fam = LS.getItem('sff_fam'), tok = LS.getItem('sff_tok'); if (!fam || !tok || !W.SFF_FIREBASE_CONFIG) return;
     W.__sffDone = true;
     try { const api = await W.SFF_KID_REST(W.SFF_FIREBASE_CONFIG, fam, tok); W.__sffVia = 'rest:watchdog(' + (W.__sffStage || 'no-module') + ')'; W.__sffResolve(api); }
     catch (e) { W.__sffCloudErr = 'rest ' + (e && e.message || e); W.__sffResolve(null); }
-  }, typeof WebAssembly === 'undefined' ? 1500 : 6000);
+  }, typeof WebAssembly === 'undefined' ? 1500 : 6000); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startWatch); else startWatch();
 })();

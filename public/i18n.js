@@ -95,6 +95,9 @@
     'בחרו לאיזה ילד התרגול (או הוסיפו ילד חדש).': 'Pick which kid the practice set is for (or add a new kid).',
     'גוששים': 'Explorers', 'חוקרים': 'Researchers', 'משימות': 'Missions', 'מאסטר': 'Master',
     'מבחן: ': 'Test: ', 'חזרה ביום שלפני': 'review the day before', 'בונה ובודק': 'Building and checking',
+    'בניית תרגול חדש עם AI תיפתח בקרוב': 'Building a new practice set with AI is coming soon',
+    'בינתיים אפשר להוסיף תרגול מוכן עם 🔗 קוד שיתוף (בשלב הראשון)': 'Meanwhile you can add a ready practice set with a 🔗 share code (in step 1)',
+    'בקרוב': 'Coming soon',
     'ביום': 'a day', 'אב עברית / לשון': 'אב Hebrew', 'אב Hebrew': 'אב Hebrew', '🛡️ דוח QA': '🛡️ QA report', '🛡️🖼️ QA לכל התרגולים': '🛡️🖼️ QA for all practice sets',
     'העלאת תמונות לא זמינה כאן – הדביקו את הטקסט של הדפים.': "Photo upload isn't available here – paste the text of the pages.",
     'בגרסה המלאה האפליקציה תקרא רק את העמודים שציינתם. באב-הטיפוס היא לא יכולה לפתוח קישורים – צלמו את העמודים או הדביקו את השאלות.':

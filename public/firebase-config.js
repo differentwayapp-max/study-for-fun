@@ -15,3 +15,6 @@ window.SFF_FUNCTIONS_REGION = "europe-west1";
 
 // Firebase JS SDK version loaded from gstatic.
 window.SFF_FIREBASE_SDK = "10.14.1";
+
+// Building practice sets with AI (Claude). Turn on once Blaze + the ANTHROPIC_API_KEY secret + the `ask` function are deployed.
+window.SFF_AI_ENABLED = false;

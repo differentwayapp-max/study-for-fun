@@ -348,6 +348,11 @@ body.young .qbox{font-size:1.8em}
 .pfoot{display:flex;justify-content:center;align-items:center;gap:10px;margin:28px 0 8px;font-size:.85em;color:var(--ink2)}
 .pfoot a{color:var(--ink2)}.pfoot .linkbtn{color:var(--ink2);font-weight:500;font-size:1em}
 body.kidside .pfoot,body.locked .pfoot{display:none}
+/* AI not connected yet: say so, and hide what needs it */
+.aioff,.aioff-btn{display:none}
+body.noai .aioff{display:block;margin:0 0 12px;background:#FFF6E3;border-color:var(--sun);color:var(--ink)}
+body.noai .aioff-btn.show{display:inline-flex;margin-inline-start:auto;opacity:.6;cursor:not-allowed}
+body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:none!important}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -522,6 +527,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     <div class="card wiz">
       <div class="wizhead">
         <button class="btn ghost small" onclick="go('parent')">ביטול</button>
+        <div class="notice aioff"><b>🛠️ בניית תרגול חדש עם AI תיפתח בקרוב</b><div class="hint" style="margin-top:4px">בינתיים אפשר להוסיף תרגול מוכן עם 🔗 קוד שיתוף (בשלב הראשון)</div></div>
         <ol class="wsteps" id="wSteps"><li>למי</li><li>נושאים</li><li>חומר</li><li>סיכום</li></ol>
       </div>
 
@@ -593,6 +599,7 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
         <button class="btn ghost small" id="wDemo" onclick="fillDemo()">מילוי דוגמה</button>
         <button class="btn" id="wNext" onclick="wizGo(1)">המשך</button>
         <button class="btn big hidden" id="btnBuild" onclick="build()">✨ בנו את התרגול</button>
+        <button class="btn big aioff-btn" disabled>🔒 בקרוב</button>
       </div>
     </div>
   </section>
@@ -1064,6 +1071,7 @@ function wizRender(){
   [...$('wSteps').children].forEach((li,i)=>{ li.className=i+1===W.step?'on':i+1<W.step?'done':''; });
   $('wBack').classList.toggle('hidden',W.step===1);
   $('wNext').classList.toggle('hidden',W.step===4); $('btnBuild').classList.toggle('hidden',W.step!==4);
+  document.querySelector('.aioff-btn')?.classList.toggle('show',W.step===4);
   $('wKids').innerHTML=kids.map(k=>`<button class="${W.kidId===k.id?'on':''}" onclick="W.kidId='${k.id}';wizRender()"><span class="dotc" style="background:${k.color}"></span>${esc(k.name)} · ${GRADES[k.grade]}</button>`).join('')+`<button class="add" onclick="$('wKidQuick').classList.toggle('hidden');$('qkName').focus()">＋ ילד/ה חדש/ה</button>`;
   $('wSubj').innerHTML=SUBJECTS.map(x=>`<button class="${W.subject===x?'on':''}" onclick='W.subject=${JSON.stringify(x)};wizRender()'>${subjStyle(x)[1]} ${esc(x)}</button>`).join('');
   document.querySelectorAll('.srccard')[2].classList.toggle('on',!$('srcLink').classList.contains('hidden'));
@@ -1115,9 +1123,9 @@ function wizSummary(){
 /* ---------- AI ---------- */
 (async()=>{
   try{
-    sample = await window.claude?.use?.('sample');
+    sample = window.SFF_AI_ENABLED===false ? null : await window.claude?.use?.('sample');
   }catch(e){ sample=null; }
-  if(!sample){ $('noAI').classList.remove('hidden'); return; }
+  if(!sample){ document.body.classList.add('noai'); return; }
   try{ const lim = await sample.limits(); canImages = !!(lim && lim.images); }catch(e){ canImages=false; }
   if(!canImages){ $('imgNote').classList.remove('hidden'); $('drop').classList.add('hidden'); }
 })();
@@ -1195,6 +1203,7 @@ let BUILDS=[], CUR_BUILD=null;
 function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
 function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
 async function build(){
+  if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
   const name=$('fName').value.trim()||'הילד/ה';
   const gi=+$('fGrade').value, grade=GRADES[gi];
   const subject=$('fSubject').value;
@@ -2453,6 +2462,7 @@ function trophyCountFiltered(H){ const per={}; H.forEach(h=>{const k=h.setId+'|'
   return Object.entries(per).filter(([k,c])=>{const st=getSet(k.split('|')[0]); return c>=((st&&st.dailyGoal)||2);}).length; }
 function avg(a){ return a.reduce((x,y)=>x+y,0)/a.length; }
 function buildReinforce(subject, topics, grade, kid){
+  if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
   const k=kids.find(x=>x.name===kid);
   openWizard(k?k.id:null); W.subject=SUBJECTS.includes(subject)?subject:'אחר';
   $('fTopics').value=topics.join('\n'); W.step=k?2:1; wizRender();

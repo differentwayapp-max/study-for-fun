@@ -1,10 +1,11 @@
 // Study for fun – service worker: the app opens even without network.
 // Bump VERSION on every deploy that changes the app shell.
-const VERSION = 'sff-v17';
+const VERSION = 'sff-v18';
 const SHELL = [
   '/',
   '/index.html',
   '/firebase-config.js',
+  '/i18n.js',
   '/manifest.webmanifest',
   '/icons/icon-192.png',
   '/icons/icon-512.png',

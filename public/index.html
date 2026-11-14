@@ -344,6 +344,9 @@ body.young .qbox{font-size:1.8em}
 .def b{font-family:var(--display)}
 .def .val{font-family:var(--display);font-weight:700;font-size:1.5em;min-width:2ch;text-align:center}
 .def .defin{grid-column:1/-1;max-width:140px}
+.pfoot{display:flex;justify-content:center;align-items:center;gap:10px;margin:28px 0 8px;font-size:.85em;color:var(--ink2)}
+.pfoot a{color:var(--ink2)}.pfoot .linkbtn{color:var(--ink2);font-weight:500;font-size:1em}
+body.kidside .pfoot,body.locked .pfoot{display:none}
 .linkbtn{background:none;border:0;color:var(--blue);font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .setgroup{margin-bottom:16px}
 .setgroup>.gh{display:flex;align-items:center;gap:10px;margin:0 4px 10px}
@@ -788,6 +791,19 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       </div>
     </div>
   </section>
+  <footer class="pfoot"><a href="/privacy.html" target="_blank" rel="noopener">🔒 מדיניות פרטיות</a><span>·</span><button class="linkbtn" onclick="openDelAcc()">🗑 מחיקת חשבון</button></footer>
+</div>
+<div id="delAccDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:12">
+  <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
+    <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('delAccDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+    <div style="font-size:3em">🗑</div>
+    <h2 style="margin:6px 0">מחיקת החשבון</h2>
+    <p class="sub" style="margin:0 0 10px">יימחקו לצמיתות: הילדים, התרגולים, ההתקדמות והפידבק – גם מהטלפונים של הילדים. אי אפשר לשחזר.</p>
+    <label for="delAccTxt">כדי לאשר, כתבו: <b>מחיקה</b></label>
+    <input id="delAccTxt" type="text" autocomplete="off" oninput="$('delAccGo').disabled=this.value.trim()!=='מחיקה'">
+    <button id="delAccGo" class="btn big" style="width:100%;justify-content:center;margin-top:14px;background:var(--bad,#E5484D)" disabled onclick="deleteAccount()">🗑 מחיקה לצמיתות</button>
+    <div class="hint" id="delAccMsg" style="margin-top:8px"></div>
+  </div>
 </div>
 <div class="burst" id="burst"></div>
 
@@ -853,7 +869,23 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
         await F.setDoc(fref, { inviteToken: token, createdAt: Date.now() }, { merge: true });
       }
       W.SFF_APP_URL = `${location.origin}/?f=${famId}&t=${token}`;
-      const out = document.getElementById('fbOut');
+      if (role === 'parent') W.__sffDeleteAccount = async () => {
+      const fam = `families/${famId}`;
+      for (const sub of ['sets', 'progress', 'devices', 'fam']) {
+        const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`));
+        await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
+      }
+      await F.deleteDoc(F.doc(fdb, fam));
+      try { await auth.currentUser.delete(); }
+      catch (e) {
+        if (String(e.code).includes('requires-recent-login')) {
+          await A.reauthenticateWithPopup(auth.currentUser, new A.GoogleAuthProvider());
+          await auth.currentUser.delete();
+        } else throw e;
+      }
+      try { await F.terminate(fdb); await F.clearIndexedDbPersistence(fdb); } catch (e) {}
+    };
+    const out = document.getElementById('fbOut');
       if (out) { out.classList.remove('hidden'); out.onclick = () => A.signOut(auth).then(() => location.reload()); }
     }
 
@@ -928,7 +960,8 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
       const el = document.createElement('div');
       el.id = 'fbLogin';
       el.innerHTML = `<div class="fbbox"><img src="${logo}" alt="Study for fun"><button class="btn big" id="fbGo">כניסה עם Google</button>
-        <div class="hint">🧒 ← 🔗 מההורה</div><div class="hint" id="fbErr"></div></div>`;
+        <div class="hint">🧒 ← 🔗 מההורה</div><div class="hint" id="fbErr"></div>
+        <div class="hint" style="margin-top:18px">בכניסה את/ה מאשר/ת את <a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></div></div>`;
       document.body.appendChild(el);
       el.querySelector('#fbGo').onclick = async () => {
         try {
@@ -1754,7 +1787,11 @@ function saveKid(){
 }
 function delKid(id){
   if(delArm!==id){ delArm=id; renderKids(); carGo('kidCar',kids.length); return; }
-  kids=kids.filter(k=>k.id!==id); delArm=null; KF={id:null,color:KID_COLORS[kids.length%5]}; saveKids(); renderKids();
+  kids=kids.filter(k=>k.id!==id); delArm=null; KF={id:null,color:KID_COLORS[kids.length%5]}; saveKids();
+  sets=sets.filter(s=>s.kidId!==id); store.save();
+  history=history.filter(h=>h.kidId!==id); saveHistoryLocal();
+  try{ if(DB&&IS_OWNER) DB.collection('progress').doc(id).delete(); }catch(e){}
+  renderKids();
 }
 function renderSets(){}
 
@@ -2441,7 +2478,7 @@ function ownerUnlock(){ lsSet('sff_unlock','1'); LOCK=null; lsSet('sff_lock',nul
 
 /* write queue: one write at a time per document */
 const QUEUE={};
-function qwrite(key, fn){ const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
+function qwrite(key, fn){ if(window.__sffDeleting) return Promise.resolve(); const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
 const sent={};
 function pushKids(){ if(!DB||!IS_OWNER) return;
   const list=kids.map(({id,name,grade,color,resetAt})=>({id,name,grade,color,...(resetAt?{resetAt}:{})}));
@@ -2490,6 +2527,18 @@ async function cloudInit(){
     if(applyResets()) changed=true;
     if(changed){ history.sort((a,b)=>b.at-a.at); saveHistoryLocal(); saveKidsLocal(); rerender(); }
   },()=>{});
+}
+
+/* delete the parent's account and all family data */
+function openDelAcc(){ $('delAccTxt').value=''; $('delAccGo').disabled=true; $('delAccMsg').textContent=''; $('delAccDlg').classList.remove('hidden'); }
+async function deleteAccount(){
+  const msg=$('delAccMsg'), b=$('delAccGo'); b.disabled=true; msg.textContent='⏳';
+  window.__sffDeleting=true;   // no more syncing while the data is being removed
+  try{
+    if(typeof window.__sffDeleteAccount==='function') await window.__sffDeleteAccount();
+    Object.keys(localStorage).filter(k=>k.startsWith('sff_')).forEach(k=>localStorage.removeItem(k));
+    msg.textContent='✓ נמחק'; setTimeout(()=>location.replace('/'),900);
+  }catch(e){ window.__sffDeleting=false; b.disabled=false; msg.textContent='⚠️ '+(e&&e.message?e.message:'לא הצליח – נסו שוב'); }
 }
 
 /* kid link dialog */

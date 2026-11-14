@@ -649,6 +649,23 @@ body.locked header .tabs,body.locked #pNav,body.locked #noAI,body.locked #whoami
     </div>
   </div>
 
+  <div id="addDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:11">
+    <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
+      <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('addDlg').classList.add('hidden');ADD=null" aria-label="סגירה">✕</button></div>
+      <div class="subjico" id="adIco" style="margin:0 auto;width:64px;height:64px;font-size:1.6em"></div>
+      <div class="hint" style="margin-top:8px">🎁 תרגול מוכן</div>
+      <h2 id="adTitle" style="margin:2px 0 8px"></h2>
+      <div class="bigstats" id="adInfo" style="justify-content:center"></div>
+      <label style="display:block;margin-top:14px">למי?</label>
+      <div class="chipsel" id="adKids" style="justify-content:center"></div>
+      <div id="adNew" class="hidden" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;text-align:start">
+        <div><label for="adName">שם</label><input id="adName" type="text" maxlength="20" placeholder="נועה"></div>
+        <div><label for="adGrade">כיתה</label><select id="adGrade"></select></div>
+      </div>
+      <button class="btn big" style="width:100%;justify-content:center;margin-top:16px" onclick="addConfirm()">הוספה ✓</button>
+      <div class="hint" id="adMsg" style="margin-top:6px"></div>
+    </div>
+  </div>
   <div id="linkDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:10">
     <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
       <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('linkDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
@@ -1428,26 +1445,64 @@ async function copyShare(){
   try{ await navigator.clipboard.writeText($('shareCode').value); $('shareMsg').textContent='הועתק ✓'; }
   catch(e){ $('shareCode').select(); $('shareMsg').textContent='סמנו את הקוד והעתיקו ידנית'; }
 }
+// share code → practice-set payload ("SFF1:<base64>" or the short "SFF1@<name>" kept in /share/)
+async function loadShare(raw){
+  raw=String(raw||'').trim();
+  const short=raw.match(/^(?:SFF1@)?([A-Za-z0-9-]{3,60})$/);
+  if(short && !raw.startsWith('SFF1:')){ const r=await fetch(`/share/${short[1]}.txt?t=${Date.now()}`); raw=r.ok?(await r.text()).trim():''; }
+  if(!raw.startsWith('SFF1:')) throw 0;
+  const p=JSON.parse(decodeURIComponent(escape(atob(raw.slice(5)))));
+  p.qs=clean(p.questions,p.topics); if(!p.qs.length) throw 0;
+  return p;
+}
+// add the practice set to a child (same source again → update in place, progress kept)
+function applyImport(p, ik){
+  const qs=p.qs, words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
+  const qa={...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]};
+  const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
+  if(old){ Object.assign(old,{src:p.src,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
+    delete old.order; delete old.pos; store.save(); return {set:old, msg:`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`}; }
+  const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
+    qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',words};
+  sets.unshift(set); store.save(); return {set, msg:`נוסף: ${set.subject} · ${qs.length} שאלות ✓`};
+}
 async function importSet(){
-  let raw=$('importCode').value.trim(); const msg=$('importMsg');
+  const msg=$('importMsg');
   try{
-    const short=raw.match(/^SFF1@([A-Za-z0-9-]{3,60})$/);   // short code → file in /share/
-    if(short){ msg.textContent='⏳'; const r=await fetch(`/share/${short[1]}.txt?t=${Date.now()}`); raw=r.ok?(await r.text()).trim():''; }
-    if(!raw.startsWith('SFF1:')) throw 0;
-    const p=JSON.parse(decodeURIComponent(escape(atob(raw.slice(5)))));
-    const qs=clean(p.questions,p.topics);
-    if(!qs.length) throw 0;
+    msg.textContent='⏳'; const p=await loadShare($('importCode').value);
     const ik=kidById(W.kidId); if(!ik){ msg.textContent='בחרו קודם ילד/ה'; return; }
-    const words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
-    // same source for the same child → update in place, so stars, trophies and progress stay
-    const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
-    if(old){ Object.assign(old,{src:p.src,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,
-        qa:{...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]},updated:Date.now()}); delete old.order; delete old.pos;
-      store.save(); $('importCode').value=''; msg.textContent=`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`; return; }
-    const set={id:'s'+Date.now(),kidId:ik?ik.id:null,name:ik?ik.name:(p.name||'משותף'),grade:ik?ik.grade:(+p.grade||0),perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
-      qa:{...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]},coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',words};
-    sets.unshift(set); store.save(); $('importCode').value=''; msg.textContent=`נוסף: ${set.subject} · ${qs.length} שאלות ✓`;
+    msg.textContent=applyImport(p, ik).msg; $('importCode').value='';
   }catch(e){ msg.textContent='הקוד לא תקין – בדקו שהועתק במלואו'; }
+}
+
+/* ---------- arriving with a link to a ready practice set (/?add=<name>): one simple screen ---------- */
+let ADD=null;
+async function openPendingAdd(){
+  let a=null; try{ a=sessionStorage.getItem('sff_add'); }catch(e){}
+  if(!a || locked()) return; try{ sessionStorage.removeItem('sff_add'); }catch(e){}
+  let p; try{ p=await loadShare(a); }catch(e){ toast('⚠️ הלינק לתרגול לא תקין'); return; }
+  ADD={p, kidId: kids.length===1?kids[0].id:null, newKid: !kids.length};
+  $('adGrade').innerHTML=GRADES.map((g,i)=>`<option value="${i}">כיתה ${g}</option>`).join(''); $('adGrade').value=String(+p.grade||0);
+  $('adName').value=''; $('adMsg').textContent='';
+  const [c,ico]=subjStyle(p.subject), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c);
+  $('adIco').style.background=c; $('adIco').style.color=dark?'#1B2A4A':'#fff'; $('adIco').textContent=ico;
+  $('adTitle').textContent=p.subject||'תרגול';
+  $('adInfo').innerHTML=`<span>כיתה ${GRADES[+p.grade||0]}</span><span>❓ ${p.qs.length}</span><span>📚 ${(p.chapters||[]).length||'—'}</span>${p.examDate?`<span>🏁 ${fmtDate(p.examDate)}</span>`:''}`;
+  addRender(); $('addDlg').classList.remove('hidden');
+}
+function addRender(){
+  $('adKids').innerHTML=kids.map(k=>`<button class="${ADD.kidId===k.id&&!ADD.newKid?'on':''}" onclick="ADD.kidId='${k.id}';ADD.newKid=false;addRender()"><span class="dot" style="background:${k.color}"></span>${esc(k.name)}</button>`).join('')
+    +`<button class="${ADD.newKid?'on':''}" onclick="ADD.newKid=true;addRender()">＋ ילד/ה</button>`;
+  $('adNew').classList.toggle('hidden',!ADD.newKid);
+}
+function addConfirm(){
+  let k;
+  if(ADD.newKid){ const n=$('adName').value.trim(); if(!n){ $('adMsg').textContent='👆 שם'; $('adName').focus(); return; }
+    k={id:'k'+Date.now(),name:n,grade:+$('adGrade').value,color:KID_COLORS[kids.length%5]}; kids.push(k); saveKids(); }
+  else { k=kidById(ADD.kidId); if(!k){ $('adMsg').textContent='👆 בחרו ילד/ה'; return; } }
+  const r=applyImport(ADD.p, k); ADD=null; $('addDlg').classList.add('hidden');
+  go('kids'); const i=kids.indexOf(k); if(i>=0) carGo('kidCar',i);
+  toast(`✓ ${esc(r.set.subject)} · ${esc(k.name)} — 🔗 לשלוח לילד`, ()=>openKidLink(k.id));
 }
 
 /* ---------- error reports ---------- */
@@ -2446,12 +2501,6 @@ async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl'
 applyLock();
 go(locked()?'kid':'kids');
 cloudInit().then(openPendingAdd);
-function openPendingAdd(){
-  let a=null; try{ a=sessionStorage.getItem('sff_add'); }catch(e){}
-  if(!a || locked()) return; try{ sessionStorage.removeItem('sff_add'); }catch(e){}
-  openWizard(kids.length===1?kids[0].id:null); $('impBox').classList.remove('hidden'); $('importCode').value='SFF1@'+a;
-  $('importMsg').textContent=kids.length?'👆 בחרו ילד/ה ← ייבוא':'👆 הוסיפו ילד/ה ← ייבוא';
-}
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 </script>
 <script>

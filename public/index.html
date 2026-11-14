@@ -1368,7 +1368,7 @@ function delQ(i){ curSet.questions.splice(i,1); store.save(); renderReview(curSe
 /* ---------- sharing ---------- */
 function openShare(){
   const s=curSet;
-  const payload={v:1,name:s.name,grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,ch})=>({topic,question,options,answer,explanation,emoji,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
+  const payload={v:1,name:s.name,grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
   $('shareCode').value='SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   $('shareBox').classList.remove('hidden'); $('shareMsg').textContent='';
 }

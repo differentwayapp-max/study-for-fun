@@ -8,7 +8,7 @@ const OUT = process.env.OUT; const ok = (c, m) => { console.log((c ? '  ✓ ' : 
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
   await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1200);
   await p.evaluate(async () => {
-    sample = { limits: async () => ({ images: true }), json: async prompt => {   // mocked AI
+    sample = { limits: async () => ({ images: true }), json: async (prompt, opts = {}) => { if (/NEW multiple-choice/.test(prompt)) window.__lastGen = { imgs: (opts.images || []).length, sheet: /worksheet photo/.test(prompt) };   // mocked AI
       if (/Turn each practice question into a PICTURE/.test(prompt)) return { items: [] };
       if (/independent checker/.test(prompt)) { const n = (prompt.match(/"i":/g) || []).length; return { results: [...Array(n).keys()].map(i => ({ i, pick: 0, multiple_correct: false, problem: '' })) }; }
       const t = (prompt.match(/one of (\[[^\]]*\])/) || [])[1]; const topic = t ? JSON.parse(t)[0] : 'x'; const n = +(prompt.match(/Write (\d+) NEW/) || [0, 6])[1];
@@ -19,7 +19,10 @@ const OUT = process.env.OUT; const ok = (c, m) => { console.log((c ? '  ✓ ' : 
   await p.click('.rhead [aria-label="אפשרויות"]'); await p.click('#rEdit'); await p.waitForTimeout(400);
   await p.click('#chb0 > .chrow'); await p.waitForTimeout(400);
   await p.screenshot({ path: OUT + '/ed_0.png' });
+  await p.evaluate(() => { canImages = true; EDIT_IMGS = [new Blob(['x'], { type: 'image/png' })]; renderRevChapters(curSet); });
   await p.evaluate(() => moreQs(0)); await p.waitForTimeout(1500);
+  const lg = await p.evaluate(() => window.__lastGen); ok(lg && lg.imgs === 1 && lg.sheet, 'worksheet photo sent with the request');
+  await p.evaluate(() => { EDIT_IMGS = []; });
   const n1 = await p.evaluate(() => ({ q: curSet.questions.length, c0: getChapters(curSet)[0].qs.length, edited: !!curSet.edited }));
   ok(n1.c0 === n0.c0 + 6 && n1.q === n0.q + 6 && n1.edited, `+6 questions in chapter 1 (${n0.c0} → ${n1.c0})`);
   await p.fill('#newChName', 'שברים'); await p.evaluate(() => addChapter()); await p.waitForTimeout(1500);

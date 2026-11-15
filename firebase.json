@@ -80,7 +80,8 @@
         "node_modules",
         ".git",
         "*.local"
-      ]
+      ],
+      "runtime": "nodejs22"
     }
   ],
   "emulators": {

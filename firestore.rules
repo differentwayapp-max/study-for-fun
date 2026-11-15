@@ -11,6 +11,8 @@ rules_version = '2';
 //   /members/{uid}               another adult in the family: { role: admin | helper | tutor, name, kids[], invite }
 //   /invites/{code}              an invitation for one adult: { role, name, kids[], by, exp, used }
 // users/{uid}                    { fams: [familyId…] } – the families an adult belongs to (written by that adult)
+//   families/{f}/usage/{YYYY-MM}  { builds, light } · billing/main { credits } · builds/{id}  – server only
+// meta/ai_spend_{YYYY-MM}        estimated AI spend this month (server only, $40 cap)
 //
 // Founding parent and admins: everything in the family.
 // Helpers / tutors: read everything in the family, add and change practice sets, write progress.
@@ -81,6 +83,11 @@ service cloud.firestore {
         allow update: if isAdmin(familyId);
         allow delete: if isAdmin(familyId) || (google() && request.auth.uid == uid);   // remove someone · leave
       }
+
+      // monthly quota and paid credits – written only by the server (Cloud Functions), read by the family's adults
+      match /usage/{month} { allow read: if isAdult(familyId); allow write: if false; }
+      match /billing/{doc} { allow read: if isAdult(familyId); allow write: if false; }
+      match /builds/{id} { allow read: if isAdult(familyId); allow write: if false; }
 
       match /invites/{code} {
         allow create, delete: if isAdmin(familyId);

@@ -1,0 +1,26 @@
+plugins { id 'com.android.application' }
+def keyProps = new Properties()
+def kf = rootProject.file('keys/upload.properties')
+if (kf.exists()) keyProps.load(new FileInputStream(kf))
+android {
+    namespace 'app.dway.studyforfun'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'app.dway.studyforfun'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+    }
+    signingConfigs {
+        upload {
+            if (kf.exists()) {
+                storeFile rootProject.file(keyProps['storeFile']); storePassword keyProps['storePassword']
+                keyAlias keyProps['keyAlias']; keyPassword keyProps['keyPassword']
+            }
+        }
+    }
+    buildTypes { release { minifyEnabled false; signingConfig signingConfigs.upload } }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+dependencies { implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.4' }

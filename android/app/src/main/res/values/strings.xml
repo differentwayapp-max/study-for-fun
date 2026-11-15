@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Study for fun</string>
+  <string name="asset_statements">[{ \"relation\": [\"delegate_permission/common.handle_all_urls\"], \"target\": { \"namespace\": \"web\", \"site\": \"https://study-for-fun-7b03c.web.app\" } }]</string>
+</resources>

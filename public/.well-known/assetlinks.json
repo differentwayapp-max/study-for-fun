@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.dway.studyforfun",
+    "sha256_cert_fingerprints": [
+      "1A:2E:CA:2B:67:70:52:9D:3F:84:B4:89:FD:95:1A:63:44:7E:8C:B6:8D:39:7A:62:6E:3A:51:1C:D4:2F:26:96"
+    ]
+  }
+}]

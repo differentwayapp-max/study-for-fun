@@ -74,11 +74,11 @@
   },
   {
    "id": "math7-nov26",
-   "ver": "5cb42b614a",
+   "ver": "f2cc2b3036",
    "subject": "מתמטיקה",
    "grade": 6,
    "title": "מערכת צירים · מספרים מכוונים · זוויות",
-   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות",
+   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות · לפי עמודי הספר",
    "desc_en": "Coordinates, absolute value, signed numbers, angles",
    "tags": [
     "מערכת צירים",

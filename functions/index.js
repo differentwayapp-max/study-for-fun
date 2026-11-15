@@ -190,7 +190,7 @@ exports.ask = onCall(
     content.push({ type: 'text', text: prompt });
 
     const model = MODELS[tier] || MODELS.default;
-    const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
+    const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
     let msg;
     try {
       // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call

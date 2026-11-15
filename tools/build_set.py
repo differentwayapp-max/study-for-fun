@@ -5,6 +5,8 @@ Writes  public/share/<id>.txt  (an SFF1: code). In the app: New practice â†’ ðŸ”
 Checks the same rules the app uses (clean, needsPic, riddleOK) so no AI pass is needed after import.
 """
 import base64, json, pathlib, random, re, secrets, sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import pic_rules   # the picture must show the answer itself; no emoji newer than 2019
 
 src = pathlib.Path(sys.argv[1])
 ns = {}
@@ -32,6 +34,7 @@ for ci, chap in enumerate(C):
         if any(words(o) > 3 for o in opts): errors.append(f"{tag}: option > 3 words")
         if words(expl) > 10: errors.append(f"{tag}: explanation > 10 words")
         if not ns.get("ANSWER_IN_Q_OK") and opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")
+        for prob in pic_rules.check(q, opts[ans], sc): errors.append(f"{tag}: {prob}")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
         if not 1 <= len(scn) <= 6 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")

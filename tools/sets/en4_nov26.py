@@ -34,7 +34,7 @@ C.append(("ABC: order & first letter", [AB], [
  (AB, "What comes next?", ["I", "J", "K", "E"], 0, "F G H I", seq("F", "G", "H", "❓")),
  (AB, "What comes next?", ["Q", "R", "S", "T"], 0, "N O P Q", seq("N", "O", "P", "❓")),
  (AB, "What comes next?", ["Z", "A", "V", "U"], 0, "W X Y Z – סוף ה-ABC", seq("W", "X", "Y", "❓")),
- (AB, "Starts with?", ["d", "b", "g", "p"], 0, "dog מתחיל ב-d", [("🐕", 50, 52, 56)]),
+ (AB, "Starts with?", ["d", "b", "g", "t"], 0, "dog מתחיל ב-d", [("🐕", 50, 52, 56)]),
  (AB, "Starts with?", ["f", "p", "t", "v"], 0, "fish מתחיל ב-f", [("🐟", 50, 52, 56)]),
  (AB, "Starts with?", ["o", "a", "u", "c"], 0, "octopus מתחיל ב-o", [("🐙", 50, 52, 56)]),
  (AB, "Starts with?", ["l", "i", "j", "y"], 0, "lion מתחיל ב-l", [("🦁", 50, 52, 56)]),
@@ -46,12 +46,12 @@ C.append(("ABC: order & first letter", [AB], [
 
 # First letter – ONLY words from the class vocabulary (WORD_LIST). Letters with no class word
 # (h, k, q, v, w, x, y, z) are practised in the big & small and the order chapters.
-PIC = {"alligator": "🐊", "black": "⚫", "brown": "🌰", "blue": "🔵", "bird": "🐦", "cat": "🐈", "cut": "✂️", "dog": "🐕",
-       "drink": "🥤", "elephant": "🐘", "eat": "🍽️", "fish": "🐟", "fly": "✈️", "green": "💚", "gray": "", "giraffe": "🦒",
-       "in": "", "in front of": "", "jump": "🤸", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "",
+PIC = {"alligator": "🐊", "black": "⚫", "brown": "", "blue": "🔵", "bird": "🐦", "cat": "🐈", "cut": "", "dog": "🐕",
+       "drink": "", "elephant": "🐘", "eat": "", "fish": "🐟", "fly": "🕊️", "green": "💚", "gray": "", "giraffe": "🦒",
+       "in": "", "in front of": "", "jump": "", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "",
        "on top of": "", "orange": "🍊", "octopus": "🐙", "purple": "💜", "red": "🔴", "run": "🏃", "swim": "🏊", "sleep": "😴",
        "tiger": "🐅", "under": ""}
-HEB = {"gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
+HEB = {"brown": "חום", "drink": "לשתות", "eat": "לאכול", "jump": "לקפוץ", "cut": "לגזור", "gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
 def first_letter(lo, hi):
     out, pool = [], ["alligator", "black", "cat", "dog", "elephant", "fish", "green", "jump", "lion", "monkey", "orange",
                      "purple", "red", "swim", "tiger", "under", "bird", "drink", "giraffe", "octopus", "sleep", "run", "eat", "fly"]
@@ -75,12 +75,12 @@ C.append(("First letter P–U", [AB], first_letter("p", "u")))
 C.append(("Colors", [CO], [
  (CO, "What color is it?", ["red", "blue", "green", "black"], 0, "אדום = red", [("🍓", 50, 52, 56)]),
  (CO, "What color is it?", ["green", "red", "brown", "orange"], 0, "ירוק = green", [("🥦", 50, 52, 56)]),
- (CO, "What color is it?", ["gray", "purple", "orange", "blue"], 0, "אפור = gray", [("🐘", 50, 52, 56)]),
+ (CO, "What color is it?", ["gray", "purple", "orange", "green"], 0, "אפור = gray", [("🐘", 50, 52, 56)]),
  (CO, "What color is it?", ["brown", "green", "red", "purple"], 0, "חום = brown", [("🐻", 50, 52, 56)]),
  (CO, "What color is it?", ["blue", "black", "orange", "gray"], 0, "כחול = blue", [("🔵", 50, 52, 56)]),
  (CO, "What color is it?", ["orange", "purple", "green", "brown"], 0, "כתום = orange", [("🍊", 50, 52, 56)]),
- (CO, "What color is it?", ["purple", "red", "gray", "blue"], 0, "סגול = purple", [("🍇", 50, 52, 56)]),
- (CO, "What color is it?", ["black", "brown", "blue", "green"], 0, "שחור = black", [("⬛", 50, 52, 56)]),
+ (CO, "What color is it?", ["purple", "red", "gray", "green"], 0, "סגול = purple", [("🍇", 50, 52, 56)]),
+ (CO, "What color is it?", ["black", "brown", "blue", "green"], 0, "שחור = black", [("⚫", 50, 52, 56)]),
  (CO, "אדום = ?", ["red", "orange", "purple", "brown"], 0, "אדום = red", [("🔴", 50, 52, 50)]),
  (CO, "כחול = ?", ["blue", "black", "gray", "green"], 0, "כחול = blue", [("💙", 50, 52, 50)]),
  (CO, "חום = ?", ["brown", "black", "gray", "orange"], 0, "חום = brown", [("🌰", 50, 52, 50)]),
@@ -103,13 +103,13 @@ C.append(("Animals", [AN], [
 
 C.append(("Prepositions", [PR], [
  (PR, "The cat is ___ the box.", ["on", "in", "under", "next to"], 0, "החתול על הקופסה = on", [("📦", 50, 66, 50), ("🐈", 50, 30, 30)]),
- (PR, "The cat is ___ the chair.", ["under", "on", "in", "next to"], 0, "החתול מתחת לכיסא = under", [("🪑", 50, 42, 52), ("🐈", 50, 80, 22)]),
+ (PR, "The cat is ___ the bed.", ["under", "on", "in", "next to"], 0, "החתול מתחת למיטה = under", [("🛏️", 50, 42, 56), ("🐈", 50, 62, 20)]),
  (PR, "The cat is ___ the dog.", ["next to", "on", "under", "in"], 0, "החתול ליד הכלב = next to", [("🐈", 34, 60, 32), ("🐕", 68, 60, 32)]),
- (PR, "The dog is ___ the tree.", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 62, 30)]),
+ (PR, "The dog is ___ the tree.", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 72, 38)]),
  (PR, "The bird is ___ the house.", ["on top of", "under", "in", "in front of"], 0, "הציפור מעל הבית – על הגג = on top of", [("🏠", 50, 64, 48), ("🐦", 50, 36, 22)]),
  (PR, "על = ?", ["on", "in", "under", "next to"], 0, "על = on", [("📕", 50, 68, 40), ("🍎", 50, 36, 26)]),
  (PR, "בתוך = ?", ["in", "on", "under", "next to"], 0, "בתוך = in (הילד בתוך האמבטיה)", [("🛀", 50, 52, 56)]),
- (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור מעל העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 22, 22)]),
+ (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור על העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
  (PR, "מתחת = ?", ["under", "on", "in", "next to"], 0, "מתחת = under", [("☂️", 50, 34, 44), ("🧒", 50, 74, 28)]),
  (PR, "ליד = ?", ["next to", "under", "in", "on"], 0, "ליד = next to", [("🧒", 36, 58, 32), ("🧒", 64, 58, 32)]),
  (PR, "לפני = ?", ["in front of", "next to", "on top of", "under"], 0, "לפני = in front of", [("🏠", 50, 40, 54), ("🚗", 50, 62, 34)]),
@@ -120,11 +120,11 @@ C.append(("Verbs", [VE], [
  (VE, "Which verb?", ["swim", "fly", "run", "jump"], 0, "לשחות = swim", [("🏊", 50, 52, 56)]),
  (VE, "Which verb?", ["fly", "swim", "jump", "drink"], 0, "לעוף = fly", [("🕊️", 50, 40, 52), ("☁️", 22, 24, 22)]),
  (VE, "Which verb?", ["sleep", "eat", "cut", "run"], 0, "לישון = sleep", [("😴", 50, 52, 56)]),
- (VE, "Which verb?", ["eat", "drink", "sleep", "cut"], 0, "לאכול = eat", [("😋", 38, 52, 40), ("🍕", 70, 58, 30)]),
- (VE, "Which verb?", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥤", 50, 52, 56)]),
- (VE, "Which verb?", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("✂️", 40, 48, 44), ("📄", 70, 58, 32)]),
+ (VE, "I ___ pizza.", ["eat", "drink", "sleep", "cut"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
+ (VE, "I ___ milk.", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥛", 50, 52, 52)]),
+ (VE, "I ___ the paper.", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("✂️", 40, 48, 44), ("📄", 70, 58, 32)]),
  (VE, "קופצים גבוה = ?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🤸", 50, 50, 56)]),
- (VE, "לשתות = ?", ["drink", "eat", "cut", "sleep"], 0, "לשתות = drink", [("🧃", 50, 52, 50)]),
+ (VE, "לשתות = ?", ["drink", "eat", "cut", "sleep"], 0, "לשתות = drink", [("🥛", 50, 52, 50)]),
  (VE, "לקפוץ = ?", ["jump", "eat", "run", "fly"], 0, "לקפוץ = jump", [("🤸", 50, 52, 50)]),
  (VE, "לישון = ?", ["sleep", "eat", "jump", "cut"], 0, "לישון = sleep", [("🛌", 50, 52, 54)]),
 ]))

@@ -7,10 +7,6 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
 const q = (topic, question, options, answer, explanation, sc, ch) => ({ topic, question, options, answer, explanation, emoji: sc[0][0],
   scene: sc.map(([e, x, y, s]) => ({ e, x, y, s })), ch });
 const SAMPLES = [
-  { src: 'shot-math', subject: 'מתמטיקה', grade: 3, topics: ['לוח הכפל', 'חילוק'], chapters: [{ title: 'לוח הכפל', topics: ['לוח הכפל'], count: 2 }, { title: 'חילוק', topics: ['חילוק'], count: 1 }],
-    qs: [q('לוח הכפל', '7 × 8 = ?', ['56', '54', '48', '64'], 0, '7 × 8 = 56', [['🧮', 50, 52, 56]], 0),
-         q('לוח הכפל', '6 × 6 = ?', ['36', '12', '30', '42'], 0, '6 × 6 = 36', [['🎲', 50, 52, 56]], 0),
-         q('חילוק', '12 עוגיות ל-3 ילדים. כמה לכל אחד?', ['4', '3', '6', '9'], 0, '12 : 3 = 4', [['🍪', 50, 52, 56]], 1)] },
   { src: 'shot-heb', subject: 'עברית / לשון', grade: 3, topics: ['חלקי דיבר'], chapters: [{ title: 'שם עצם ופועל', topics: ['חלקי דיבר'], count: 2 }],
     qs: [q('חלקי דיבר', 'איזו מילה היא פועל?', ['רץ', 'שולחן', 'יפה', 'כחול'], 0, 'רץ = פעולה, לכן פועל', [['🏃', 50, 52, 56]], 0),
          q('חלקי דיבר', 'איזו מילה היא שם עצם?', ['כלב', 'קופץ', 'גדול', 'מהר'], 0, 'כלב = שם של דבר', [['🐕', 50, 52, 56]], 0)] },
@@ -32,12 +28,13 @@ const SAMPLES = [
   };
   const p = await open('mom', 'אמא של נועה');
   await p.evaluate(async (S) => {
-    kids.push({ id: 'k1', name: 'נועה', grade: 4, color: '#FF5C8A' }, { id: 'k2', name: 'איתי', grade: 2, color: '#2F6BFF' }); saveKids();
+    kids.push({ id: 'k1', name: 'נועה', grade: 6, color: '#FF5C8A' }, { id: 'k2', name: 'איתי', grade: 2, color: '#2F6BFF' }); saveKids();
     for (const x of S) { applyImport({ ...x, examDate: '', dailyGoal: 2 }, kidById('k1')); await new Promise(r => setTimeout(r, 20)); }   // ids are time-based
-    const pl = await loadShare('en4-nov26'); applyImport(pl, kidById('k1'));
+    applyImport(await loadShare('en4-nov26'), kidById('k1')); await new Promise(r => setTimeout(r, 20));
+    applyImport(await loadShare('math7-nov26'), kidById('k1'));
   }, SAMPLES);
   await p.waitForTimeout(2500);
-  await p.evaluate(() => { const s = sets.find(x => x.src === 'en4_nov26' || x.src === 'en4-nov26') || sets.find(x => x.subject === 'אנגלית' && !x.demo);
+  await p.evaluate(() => { const s = sets.find(x => x.subject === 'מתמטיקה' && !x.demo);
     s.examDate = new Date(Date.now() + 6 * 864e5).toISOString().slice(0, 10); store.save();
     const now = Date.now();
     [[0, 11, 12], [1, 12, 13], [2, 9, 12], [3, 5, 12]].forEach(([ch, r, n], i) => history.unshift({ at: now - (5 - i) * 36e5, kidId: 'k1', kid: 'נועה', subject: s.subject, grade: s.grade, setId: s.id, ch, right: r, n, score: r * 10, mode: 'choice',
@@ -54,12 +51,12 @@ const SAMPLES = [
     await p.evaluate(([id, ch]) => { go('kid'); startGame(getSet(id), null, 'choice', ch); }, [id, sub === 'אנגלית' ? 4 : 0]); await shot(name);
   }
   await p.evaluate(() => go('kid')); await shot('s_home');
-  await p.evaluate(id => openRoad(id), await sid('אנגלית')); await shot('s_map', 1500);
+  await p.evaluate(id => openRoad(id), await sid('מתמטיקה')); await shot('s_map', 1500);
   await p.evaluate(() => { go('kid'); activeKid = 'k1'; openMe(); }); await shot('s_me', 1500);
   await p.evaluate(() => go('stats')); await shot('s_parent', 1500);
   await p.reload({ waitUntil: 'load' }); await p.waitForFunction(() => window.SFF_ROLE); await p.waitForTimeout(2500);
   await p.evaluate(() => go('family')); await shot('s_family', 2500);
-  await p.evaluate(() => { go('kids'); openAddDialog('en4-nov26', 'k1'); }); await shot('s_add', 2000);
+  await p.evaluate(() => { go('kids'); openAddDialog('math7-nov26', 'k1'); }); await shot('s_add', 2000);
   await p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); openCatalog('k1'); }); await shot('s_catalog', 2500);
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

@@ -4,7 +4,13 @@
 //
 //   firebase functions:secrets:set ANTHROPIC_API_KEY
 //
-const { onCall, HttpsError } = require('firebase-functions/v2/https');
+const { onCall: onCallRaw, HttpsError } = require('firebase-functions/v2/https');
+// every call logs one short line: which function, ok or which error (no prompt text, no personal data)
+const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
+  const t = Date.now(), name = (fn.name || 'call');
+  try { const r = await fn(req); console.log(`${name} ok ${Date.now() - t}ms`); return r; }
+  catch (e) { console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`); throw e; }
+});
 const { defineSecret, defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const Anthropic = require('@anthropic-ai/sdk').default;
@@ -71,7 +77,7 @@ async function addSpend(model, usage) {
 }
 
 // Start a new practice set: uses one of this month's free builds, or one paid credit.
-exports.startBuild = onCall({ region: 'europe-west1', maxInstances: 10 }, async (request) => {
+exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function startBuild(request) {
   const auth = parentOnly(request);
   const { famId, subject = '' } = request.data || {};
   await checkFamily(auth.uid, famId);
@@ -95,7 +101,7 @@ exports.startBuild = onCall({ region: 'europe-west1', maxInstances: 10 }, async 
 });
 
 // End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back.
-exports.endBuild = onCall({ region: 'europe-west1', maxInstances: 10 }, async (request) => {
+exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
   const auth = parentOnly(request);
   const { famId, buildId, ok } = request.data || {};
   await checkFamily(auth.uid, famId);
@@ -159,12 +165,13 @@ function extractJson(text) {
 exports.ask = onCall(
   {
     region: 'europe-west1',
+    invoker: 'public',            // callable from the app (who may call is checked inside: signed-in parent, family, quota)
     secrets: [ANTHROPIC_API_KEY],
     timeoutSeconds: 300,
     memory: '512MiB',
     maxInstances: 10
   },
-  async (request) => {
+  async function ask(request) {
     // Only signed-in parents (Google) may spend AI credit; kid devices are anonymous.
     const auth = parentOnly(request);
 

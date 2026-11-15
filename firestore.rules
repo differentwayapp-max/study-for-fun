@@ -33,6 +33,20 @@ service cloud.firestore {
       return signedIn() && exists(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid));
     }
 
+    // app admins (by Google account email) – review catalog suggestions, publish to the catalog
+    function appAdmin() { return google() && request.auth.token.email in ['differentway.app@gmail.com', 'taliahblass@gmail.com']; }
+
+    // the in-app catalog: every signed-in user reads it; only admins publish
+    match /catalog/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
+    match /catalogCode/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
+    // a parent offers a practice set; only admins read and handle the suggestions
+    match /catalogSuggestions/{id} {
+      allow create: if google() && request.resource.data.by == request.auth.uid
+        && request.resource.data.keys().hasOnly(['by','byName','at','subject','grade','topics','chapters','questions','code'])
+        && request.resource.data.code is string && request.resource.data.code.size() < 900000;
+      allow read, update, delete: if appAdmin();
+    }
+
     match /users/{uid} {
       allow read, write: if google() && request.auth.uid == uid;
     }

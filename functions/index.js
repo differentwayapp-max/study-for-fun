@@ -7,6 +7,7 @@
 const { onCall, HttpsError } = require('firebase-functions/v2/https');
 const { defineSecret, defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
+const Anthropic = require('@anthropic-ai/sdk').default;
 admin.initializeApp();
 const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 const db = getFirestore();
@@ -188,30 +189,28 @@ exports.ask = onCall(
     }
     content.push({ type: 'text', text: prompt });
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY.value(),
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: MODELS[tier] || MODELS.default,
-        max_tokens: 8000,
+    const model = MODELS[tier] || MODELS.default;
+    const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value() });
+    let msg;
+    try {
+      // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call
+      msg = await client.beta.messages.create({
+        model,
+        max_tokens: 16000,
+        betas: ['server-side-fallback-2026-07-01'],
+        fallbacks: 'default',
         system: 'You build exam practice for Israeli school children. Reply with valid JSON only: no prose, no code fences.',
         messages: [{ role: 'user', content }]
-      })
-    });
-
-    if (res.status === 429) throw new HttpsError('resource-exhausted', 'rate_limited');
-    if (!res.ok) {
-      const body = await res.text().catch(() => '');
-      console.error('Anthropic API error', res.status, body.slice(0, 500));
-      throw new HttpsError('internal', `AI request failed (${res.status}).`);
+      });
+    } catch (e) {
+      if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
+      if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
+      if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
+      throw e;
     }
-
-    const msg = await res.json();
-    await addSpend(msg.model || MODELS[tier] || MODELS.default, msg.usage).catch(e => console.error('spend log', e));
+    await addSpend(msg.model || model, msg.usage).catch(e => console.error('spend log', e));
+    if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
+    if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
     const text = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
     return { json: extractJson(text) };
   }

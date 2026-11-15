@@ -13,6 +13,7 @@ def L(ch, size=70): return [(ch, 50, 52, size)]          # a big letter as the p
 def seq(*cs): return [(c, 14 + i * 24, 52, 30) for i, c in enumerate(cs)]
 
 C = []
+WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")
 # ---- all 26 letters, big ↔ small (questions in Hebrew so the question never shows the answer) ----
 LOOK = {"a": "oeu", "b": "dpq", "c": "eoa", "d": "bpq", "e": "aoc", "f": "tlj", "g": "qjy", "h": "nkb", "i": "jrt", "j": "igy",
         "k": "hxy", "l": "ejt", "m": "nwu", "n": "mhu", "o": "aec", "p": "qbd", "q": "pgd", "r": "nvt", "s": "zcx", "t": "flj",
@@ -43,33 +44,33 @@ C.append(("ABC: order & first letter", [AB], [
 ]))
 
 
-WORDS = [("a","apple","🍎"),("a","ant","🐜"),("b","banana","🍌"),("b","bird","🐦"),("c","cat","🐈"),("c","car","🚗"),
-  ("d","dog","🐕"),("d","duck","🦆"),("e","egg","🥚"),("e","elephant","🐘"),("f","fish","🐟"),("f","frog","🐸"),
-  ("g","giraffe","🦒"),("g","grapes","🍇"),("h","house","🏠"),("h","hat","🎩"),("i","ice cream","🍦"),("i","island","🏝️"),
-  ("j","juice","🧃"),("j","jacket","🧥"),("k","koala","🐨"),("k","key","🔑"),("l","lion","🦁"),("l","lemon","🍋"),
-  ("m","monkey","🐒"),("m","moon","🌙"),("n","nose","👃"),("n","nut","🥜"),("o","octopus","🐙"),("o","orange","🍊"),
-  ("p","pizza","🍕"),("p","pen","🖊️"),("q","queen","👑"),("q","question","❓"),("r","rabbit","🐇"),("r","rain","🌧️"),
-  ("s","sun","☀️"),("s","snake","🐍"),("t","tiger","🐅"),("t","tree","🌳"),("u","umbrella","☂️"),("u","unicorn","🦄"),
-  ("v","violin","🎻"),("v","van","🚐"),("w","watch","⌚"),("w","whale","🐳"),("x","fox","🦊"),("x","box","📦"),
-  ("y","yes","👍"),("y","yellow","💛"),("z","zebra","🦓"),("z","zero","0️⃣")]
-def letter_words(lo, hi):
-    out = []
-    pool = [w for _, w, _ in WORDS]
-    for i, (L, w, e) in enumerate(WORDS):
-        if not (lo <= L <= hi): continue
-        # three distractors that do NOT start with (or, for X, contain) the letter
-        bad = [x for x in pool if (L not in x if L == "x" else not x.startswith(L))]
-        d = [bad[(i * 7 + k * 11) % len(bad)] for k in range(3)]
-        k = 3
-        while len(set(d)) < 3: d = list(dict.fromkeys(d)) + [bad[(i * 7 + k * 11) % len(bad)]]; d = d[:3]; k += 1
-        if L == "x": q, ex = "Has the letter X:", f"{w} – יש בה x"
-        else:        q, ex = f"{L.upper()} is for…", ("queen = מלכה, מתחיל ב-Q" if w == "queen" else f"{w} מתחיל ב-{L.upper()}")
-        out.append((AB, q, [w] + d, 0, ex, [(L.upper(), 26, 50, 40), (e, 70, 52, 40)]))
+# First letter – ONLY words from the class vocabulary (WORD_LIST). Letters with no class word
+# (h, k, q, v, w, x, y, z) are practised in the big & small and the order chapters.
+PIC = {"alligator": "🐊", "black": "⚫", "brown": "🌰", "blue": "🔵", "bird": "🐦", "cat": "🐈", "cut": "✂️", "dog": "🐕",
+       "drink": "🥤", "elephant": "🐘", "eat": "🍽️", "fish": "🐟", "fly": "✈️", "green": "💚", "gray": "", "giraffe": "🦒",
+       "in": "", "in front of": "", "jump": "🤸", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "",
+       "on top of": "", "orange": "🍊", "octopus": "🐙", "purple": "💜", "red": "🔴", "run": "🏃", "swim": "🏊", "sleep": "😴",
+       "tiger": "🐅", "under": ""}
+HEB = {"gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
+def first_letter(lo, hi):
+    out, pool = [], ["alligator", "black", "cat", "dog", "elephant", "fish", "green", "jump", "lion", "monkey", "orange",
+                     "purple", "red", "swim", "tiger", "under", "bird", "drink", "giraffe", "octopus", "sleep", "run", "eat", "fly"]
+    words = [w for w in WORD_LIST if lo <= w[0] <= hi]
+    for i, w in enumerate(words):
+        L = w[0]
+        bad = [x for x in pool if x[0] != L]
+        d = []
+        k = 0
+        while len(d) < 3: x = bad[(i * 5 + k * 7) % len(bad)]; k += 1; d += [x] if x not in d else []
+        heb = HEB.get(w)
+        ex = f"{w} = {heb}, מתחיל ב-{L.upper()}" if heb else f"{w} מתחיל ב-{L.upper()}"
+        sc = [(L.upper(), 26, 50, 40), (PIC[w], 70, 52, 40)] if PIC[w] else [(L.upper(), 50, 50, 56)]
+        out.append((AB, f"{L.upper()} is for…" if PIC[w] else f"{L.upper()} is for… ({heb})", [w] + d, 0, ex, sc))
     return out
-C.append(("Two words for each letter A–F", [AB], letter_words("a", "f")))
-C.append(("Two words for each letter G–M", [AB], letter_words("g", "m")))
-C.append(("Two words for each letter N–S", [AB], letter_words("n", "s")))
-C.append(("Two words for each letter T–Z", [AB], letter_words("t", "z")))
+C.append(("First letter A–D", [AB], first_letter("a", "d")))
+C.append(("First letter E–L", [AB], first_letter("e", "l")))
+C.append(("First letter M–O", [AB], first_letter("m", "o")))
+C.append(("First letter P–U", [AB], first_letter("p", "u")))
 
 C.append(("Colors", [CO], [
  (CO, "What color is it?", ["red", "blue", "green", "black"], 0, "אדום = red", [("🍓", 50, 52, 56)]),
@@ -156,10 +157,9 @@ C.append(("Review", [AN, CO, VE], [
  (VE, "לאכול = ?", ["eat", "drink", "sleep", "fly"], 0, "לאכול = eat", [("🍎", 50, 52, 50)]),
 ]))
 
-WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")
 
 # station type on the map
 KINDS = {"ABC: big & small A–M": "abc", "ABC: big & small N–Z": "abc", "ABC: order & first letter": "abc", "Missing letter": "abc", "Prepositions": "gram",
-         "Two words for each letter A–F": "abc", "Two words for each letter G–M": "abc", "Two words for each letter N–S": "abc", "Two words for each letter T–Z": "abc"}
+         "First letter A–D": "abc", "First letter E–L": "abc", "First letter M–O": "abc", "First letter P–U": "abc"}
 
 QA = {"fixed": 12}   # reworded after the independent review

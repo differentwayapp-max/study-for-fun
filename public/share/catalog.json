@@ -1,42 +1,6 @@
 {
  "sets": [
   {
-   "id": "en4-nov26",
-   "ver": "08406562ce",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 156,
-   "chapters": 13,
-   "reading": 0,
-   "words": 34,
-   "samples": [
-    {
-     "q": "האות הקטנה?",
-     "e": "A"
-    },
-    {
-     "q": "האות הגדולה?",
-     "e": "n"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en7-nov26",
    "ver": "1f90ae693e",
    "subject": "אנגלית",
@@ -105,6 +69,42 @@
     {
      "q": "⁦|-5| = ?⁩",
      "e": "📏"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en4-nov26",
+   "ver": "08406562ce",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 156,
+   "chapters": 13,
+   "reading": 0,
+   "words": 34,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB"
     }
    ],
    "status": "ready"

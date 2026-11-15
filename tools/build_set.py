@@ -58,7 +58,7 @@ riddle = sum(1 for q in qs if re.fullmatch(r"[A-Za-z0-9 '\-]{2,14}", q["options"
 import hashlib
 ver = hashlib.sha1(json.dumps([SET, chapters, qs], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:10]   # changes only when the content changes
 payload = {"v": 1, "ver": ver, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs,
-           "qa": {"checked": len(qs), "passed": len(qs), "fixed": 0, "dropped": 0}}
+           "qa": {"checked": len(qs), "passed": len(qs), "fixed": 0, "dropped": 0, **ns.get("QA", {})}}   # QA = {"fixed": n}: questions reworded after review
 code = "SFF1:" + base64.b64encode(json.dumps(payload, ensure_ascii=False).encode("utf-8")).decode()
 sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
 out = pathlib.Path(__file__).resolve().parent.parent / "public" / "share" / f"{sid}.txt"

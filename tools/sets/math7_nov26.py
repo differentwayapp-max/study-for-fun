@@ -184,3 +184,5 @@ C.append(("חזרה למבחן", [CO, NL, AB, AR, SN, AT, AS, BI], [
 ]))
 
 OLD_CODES = []
+
+QA = {"fixed": 10}   # reworded after the independent review

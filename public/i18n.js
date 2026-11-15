@@ -119,7 +119,7 @@
     'חזרה על הטעויות': 'Mistakes review', 'יום המבחן': 'Test day', 'מחר': 'Tomorrow',
     'יום ראשון': 'Sunday', 'יום שני': 'Monday', 'יום שלישי': 'Tuesday', 'יום רביעי': 'Wednesday', 'יום חמישי': 'Thursday', 'יום שישי': 'Friday', 'יום שבת': 'Saturday',
     'צריך את הלינק מההורה': 'You need the link from your parent', 'בקשו מההורה לשלוח שוב את הלינק, ופתחו אותו בטלפון הזה': 'Ask your parent to send the link again, and open it on this phone',
-    'ביום': 'a day', 'אב עברית / לשון': 'אב Hebrew', 'אב Hebrew': 'אב Hebrew', '🛡️ דוח QA': '🛡️ QA report', '🛡️🖼️ QA לכל התרגולים': '🛡️🖼️ QA for all practice sets',
+    'ביום': 'a day', 'אב עברית / לשון': 'אב Hebrew', 'אב Hebrew': 'אב Hebrew', '🛡️ דוח QA': '🛡️ QA report', '🛡️🖼️ QA לכל התרגולים': '🛡️🖼️ QA for all practice sets', '✅ בדיקת התשובות': '✅ Answer check', '✅ בדיקת התשובות בכל התרגולים': '✅ Check answers in all practice sets', 'לוחצים על פרק כדי לראות את השאלות שלו · ⭐ = עבר/ה את הפרק (70% ומעלה)': 'Tap a chapter to see its questions · ⭐ = passed the chapter (70%+)', 'הפרק הבא ‹': 'Next chapter ‹', '› הפרק הקודם': '› Previous chapter',   /* ‹ › are swapped for English after translating */ 'סגירה ▴': 'Close ▴', '🚩 דיווח': '🚩 Report', '🗑 מחיקה': '🗑 Delete', 'מה השתנה:': 'What changed:', '✏️ תוקנה': '✏️ Fixed', '🗑 הוסרה': '🗑 Removed',
     'העלאת תמונות לא זמינה כאן – הדביקו את הטקסט של הדפים.': "Photo upload isn't available here – paste the text of the pages.",
     'בגרסה המלאה האפליקציה תקרא רק את העמודים שציינתם. באב-הטיפוס היא לא יכולה לפתוח קישורים – צלמו את העמודים או הדביקו את השאלות.':
       "The app reads only the pages you list. It can't open links here – take photos of the pages or paste the questions.",
@@ -136,6 +136,10 @@
     [new RegExp(`^כיתה ${GRX}(.*)$`), (m, g, rest) => `Grade ${GR[g]}${tr(rest)}`],
     [/^(שאלה|חידה|מילה|סיבוב) (\d+) מתוך (\d+)$/, (m, w, a, b) => `${{ 'שאלה': 'Question', 'חידה': 'Riddle', 'מילה': 'Word', 'סיבוב': 'Round' }[w]} ${a} of ${b}`],
     [/^פרק (\d+)$/, (m, n) => `Chapter ${n}`],
+    [/^כל (\d+) השאלות נבדקו, וכל התשובות נכונות\.$/, (m, n) => `All ${n} questions were checked, and all the answers are correct.`],
+    [/^(\d+) שאלות נוסחו מחדש כדי שיהיו ברורות יותר\.$/, (m, n) => `${n} questions were reworded to make them clearer.`],
+    [/^(\d+) שאלות לא היו ברורות והוסרו\.$/, (m, n) => `${n} unclear questions were removed.`],
+    [/^(.*?)(\d+) שאלות$/, (m, a, n) => `${a.replace(/עמ'/, 'p.')}${n} questions`],
     [/^🔗 לשלוח ל(.+)$/, (m, n) => `🔗 Send to ${n}`],
     [/^ההורה עוד לא הוסיף\/ה תרגול ל(.+)$/, (m, n) => `Your parent hasn't added a practice set for ${n} yet`],
     [/^ההזמנה עוד לא נפתחה · (.*)$/, (m, r) => `Invitation not opened yet · ${tr(r)}`],
@@ -218,7 +222,7 @@
   }
 
   // learning content – never translated
-  const SKIP = '.qbox,.opts .opt,.passage .ptext,.expl,.mcard .f,.mitem,.slots,.tiles,.wchips,.wchip,.wdetail .hint,.q-list .q>:not(.meta),#rQA,#repQ,.ttile b,[translate="no"]';
+  const SKIP = '.qbox,.opts .opt,.passage .ptext,.expl,.mcard .f,.mitem,.slots,.tiles,.wchips,.wchip,.wdetail .hint,.q-list .q>:not(.meta),#repQ,.ttile b,[translate="no"]';
   const ALLOW = '.key,.expl>b:first-child';
   const ATTRS = ['placeholder', 'aria-label', 'title', 'alt'];
   const skipEl = el => !!el && !el.matches(ALLOW) && !!el.closest(SKIP) && !(el.closest('.expl') && el.matches('.expl>b:first-child'));

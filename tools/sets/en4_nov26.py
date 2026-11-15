@@ -161,3 +161,5 @@ WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|br
 # station type on the map
 KINDS = {"ABC: big & small A–M": "abc", "ABC: big & small N–Z": "abc", "ABC: order & first letter": "abc", "Missing letter": "abc", "Prepositions": "gram",
          "Two words for each letter A–F": "abc", "Two words for each letter G–M": "abc", "Two words for each letter N–S": "abc", "Two words for each letter T–Z": "abc"}
+
+QA = {"fixed": 12}   # reworded after the independent review

@@ -14,28 +14,31 @@
 | Package name | app.dway.studyforfun |
 
 ## תיאור קצר (עד 80 תווים)
-מתכוננים למבחן דרך משחקים: מפה עד יום המבחן, משחקים קצרים ומעקב להורים.
+למידה חוויתית באנגלית, מתמטיקה, שפה ומדעים – מותאמת לחומר וליום המבחן.
 
 ## תיאור מלא
-Study for fun הופכת את ההכנה למבחן למשחק.
+Study for fun – למידה חוויתית של מקצועות הליבה: אנגלית, מתמטיקה, שפה ומדעים.
 
-ההורה בוחר תרגול מהקטלוג (או בונה תרגול לפי החומר למבחן) וקובע את תאריך המבחן.
-הילד מקבל מפה עם כל הפרקים עד יום המבחן. כל פרק הוא תחנה, ובכל תחנה משחק אחר:
-✅ שאלות עם תמונות
-🃏 משחק זיכרון
-〰️ התאמה
-🔤 סידור אותיות, עם הקראה של המילים באנגלית
+🎮 לומדים דרך משחק
+כל פרק הוא תחנה במפה, ובכל תחנה משחק אחר: שאלות עם תמונות, זיכרון, התאמה וסידור אותיות (עם הקראה של המילים באנגלית).
 
-⭐ פרק שעברו עליו 70% ומעלה מקבל כוכב. פרק שלא הצליח נשאר פתוח לתרגול חוזר.
-📊 "מה אני יודע": הילד רואה מה כבר יודע ומה צריך לחזק, ומתרגל את זה בלחיצה.
-👨‍👩‍👧 ההורה רואה את ההתקדמות של כל ילד, ויכול להזמין מבוגרים נוספים (בן/בת זוג, סבא וסבתא, מורה פרטי/ת).
+📊 פידבק לילד וגם להורה
+הילד רואה מה כבר יודע ובאילו נושאים כדאי לעשות חזרה, ומתרגל אותם בלחיצה.
+ההורה רואה את ההתקדמות של כל ילד, את המילים והנושאים לחיזוק.
 
-הילד נכנס עם קישור אישי. אין צורך באימייל לילד, אין פרסומות, ואין רכישות בתוך האפליקציה.
+👨‍👩‍👧 כל המשפחה מלווה
+אפשר לשתף בן/בת זוג, סבא וסבתא או מורה פרטי במעקב ההתקדמות ובחיזוק.
+
+🗓️ תרגול לפי החומר ועד יום המבחן
+התרגול נבנה לפי החומר הספציפי של המבחן, והמפה מחלקת את הפרקים עד תאריך המבחן.
+⭐ פרק שעברו בו 70% ומעלה מקבל כוכב. פרק שלא הצליח נשאר פתוח לתרגול חוזר.
+
+הילד נכנס עם קישור אישי – בלי אימייל לילד, בלי פרסומות ובלי רכישות.
 
 by D-WAY
 
 ## English (optional second language)
-Short: Prepare for school tests through games – a map to test day, short games, parent tracking.
+Short: Playful learning in English, math, language and science – tailored to the test material and date.
 
 Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Parents follow each kid's progress and can invite other adults. Kids join with a personal link – no email for kids, no ads, no in-app purchases.
 

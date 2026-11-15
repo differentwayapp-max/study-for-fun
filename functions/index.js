@@ -56,7 +56,8 @@ function monthKey(d = new Date()) {           // Israel time, e.g. "2026-11"
 }
 function isAdminUser(auth) {
   const list = ADMIN_EMAILS.value().split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
-  return !!auth.token.email && auth.token.email_verified !== false && list.includes(auth.token.email.toLowerCase());
+  const google = auth.token.firebase?.sign_in_provider === 'google.com';   // Google accounts' emails are Google's own
+  return !!auth.token.email && (google || auth.token.email_verified === true) && list.includes(auth.token.email.toLowerCase());
 }
 function parentOnly(request) {
   const auth = request.auth;
@@ -144,6 +145,27 @@ async function claimCall(auth, famId, buildId) {
     }
   });
 }
+
+// Admin: the registered accounts – name, email, dates, sign-in type. No kids, no practice sets, no progress.
+exports.adminUsers = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 3 }, async function adminUsers(request) {
+  const auth = parentOnly(request);
+  if (!isAdminUser(auth)) throw new HttpsError('permission-denied', 'Admins only.');
+  const { getAuth } = require('firebase-admin/auth');
+  const parents = [], month = monthKey(); let kidDevices = 0, token;
+  do {
+    const page = await getAuth().listUsers(1000, token); token = page.pageToken;
+    for (const u of page.users) {
+      const prov = (u.providerData[0] || {}).providerId || 'anonymous';
+      if (prov === 'anonymous' || !u.email) { kidDevices++; continue; }      // a kid's phone (joined with a kid link)
+      parents.push({ uid: u.uid, name: u.displayName || '', email: u.email, created: Date.parse(u.metadata.creationTime) || 0,
+        last: Date.parse(u.metadata.lastRefreshTime || u.metadata.lastSignInTime) || 0 });
+    }
+  } while (token && parents.length < 5000);
+  // how many new practice sets each account built this month (a number only)
+  await Promise.all(parents.map(async p => { try { p.builds = (await db.doc(`families/${p.uid}/usage/${month}`).get()).data()?.builds || 0; } catch (_) { p.builds = 0; } }));
+  parents.sort((a, b) => b.last - a.last);
+  return { parents: parents.map(({ uid, ...p }) => p), kidDevices, month };
+});
 
 // For the payment webhook (not exposed yet): add paid practice sets to a family.
 async function grantCredits(famId, n, ref) {

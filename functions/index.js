@@ -9,7 +9,15 @@ const { onCall: onCallRaw, HttpsError } = require('firebase-functions/v2/https')
 const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   const t = Date.now(), name = (fn.name || 'call');
   try { const r = await fn(req); console.log(`${name} ok ${Date.now() - t}ms`); return r; }
-  catch (e) { console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`); throw e; }
+  catch (e) {
+    console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
+    const fam = req.data && req.data.famId;
+    if (typeof fam === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(fam) && e.code !== 'resource-exhausted') {
+      try { await getFirestore().collection(`families/${fam}/errlog`).add({ at: Date.now(), where: 'server:' + name, code: String(e.code || e.name || 'error'),
+        msg: String(e.message || e).slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
+    }
+    throw e;
+  }
 });
 const { defineSecret, defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
@@ -167,7 +175,7 @@ exports.ask = onCall(
     region: 'europe-west1',
     invoker: 'public',            // callable from the app (who may call is checked inside: signed-in parent, family, quota)
     secrets: [ANTHROPIC_API_KEY],
-    timeoutSeconds: 300,
+    timeoutSeconds: 540,
     memory: '512MiB',
     maxInstances: 10
   },

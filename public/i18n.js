@@ -14,7 +14,7 @@
 
   // exact interface strings (the Hebrew "core": first to last Hebrew letter)
   const T = {
-    'הורה': 'Parent', 'ילד/ה': 'Kid', 'מנהל': 'Admin', 'ילדים': 'Kids', 'פידבק': 'Feedback',
+    'הורה': 'Parent', 'ילד/ה': 'Kid', 'מנהל': 'Admin', 'ילדים': 'Kids', 'פידבק': 'Feedback', 'מעקב התקדמות': 'Progress',
     'גביעים': 'Trophies', 'ימים ברצף': 'Day streak', 'שם': 'Name', 'כיתה': 'Grade', 'שמירה': 'Save',
     'מדיניות פרטיות': 'Privacy policy', 'מחיקת חשבון': 'Delete account', 'יציאה': 'Sign out', 'מצב הורה': 'Parent mode',
     'הקודם': 'Previous', 'הבא': 'Next', 'לינק לילד': 'Kid link', 'עריכה': 'Edit', 'נועה': 'Emma', 'צבע': 'Colour',

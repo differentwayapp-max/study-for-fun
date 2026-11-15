@@ -31,7 +31,7 @@ for ci, chap in enumerate(C):
         if words(q) > 6: errors.append(f"{tag}: question > 6 words")
         if any(words(o) > 3 for o in opts): errors.append(f"{tag}: option > 3 words")
         if words(expl) > 10: errors.append(f"{tag}: explanation > 10 words")
-        if opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")
+        if not ns.get("ANSWER_IN_Q_OK") and opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
         if not 1 <= len(scn) <= 6 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")

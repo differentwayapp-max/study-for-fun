@@ -64,7 +64,12 @@
     W.__sffStage = 'rest-join';
     const dev = `families/${famId}/devices/${uid}`;
     const have = await call('GET', dev).catch(() => null);
-    if (!have) await call('PATCH', dev, { fields: encF({ token, at: Date.now() }) }, 'currentDocument.exists=false')
+    const kid = LS.getItem('sff_lock');   // the link's token belongs to this kid – the phone joins as this kid's device
+    const join = kid ? { token, kid, at: Date.now() } : { token, at: Date.now() };
+    const haveKid = have && have.fields && have.fields.kid ? dec(have.fields.kid) : null;
+    if (!have) await call('PATCH', dev, { fields: encF(join) }, 'currentDocument.exists=false')
+      .catch(e => { W.__sffJoinErr = String(e.code || e.message); });
+    else if (kid && haveKid && haveKid !== kid) await call('PATCH', dev, { fields: encF(join) })
       .catch(e => { W.__sffJoinErr = String(e.code || e.message); });
 
     const P = `families/${famId}/`;

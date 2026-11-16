@@ -8,10 +8,10 @@ const enc = x => x === null || x === undefined ? { nullValue: null } : typeof x 
 const encF = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined).map(([k, v]) => [k, enc(v)]));
 const put = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' }, body: JSON.stringify({ fields: encF(obj) }) }).then(r => { if (!r.ok) throw new Error(path + ' ' + r.status); });
 (async () => {
-  const code = fs.readFileSync('/home/user/study-for-fun/public/share/en7-nov26.txt', 'utf8').slice(5);
+  const code = fs.readFileSync(__dirname + '/../../public/share/en7-nov26.txt', 'utf8').slice(5);
   const p0 = JSON.parse(Buffer.from(code, 'base64').toString('utf8'));
   const set = { id: 's1', kidId: 'k1', name: 'Ben', grade: 6, subject: p0.subject, topics: p0.topics, questions: p0.questions, chapters: p0.chapters, examDate: '2026-11-18', dailyGoal: 5, perRound: 13, shared: true, src: 'en7_nov26', words: p0.words, qa: p0.qa };
-  await put('families/FAM1', { inviteToken: 'TOK1', createdAt: Date.now() });
+  await put('families/FAM1', { inviteToken: 'OLD', kidTokens: { k1: 'TOK1' }, createdAt: Date.now() });
   await put('families/FAM1/fam/kids', { list: [{ id: 'k1', name: 'Ben', grade: 6, color: '#2F6BFF' }] });
   await put('families/FAM1/sets/s1', { set });
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] }); const errs = [];

@@ -9,7 +9,7 @@ const OUT = process.env.OUT; const ok = (c, m) => { console.log((c ? '  ✓ ' : 
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1500); return p; };
   const fam = await open('dana', 'dana@t.local', 'דנה כהן');
   await fam.evaluate(() => { kids.push({ id: 'k1', name: 'יואב', grade: 3, color: '#2F6BFF' }); saveKids(); }); await fam.waitForTimeout(1500);
-  const link = await fam.evaluate(() => window.SFF_APP_URL + '#kid-k1');
+  const link = await fam.evaluate(() => window.__sffFamily.kidLink('k1'));
   const kid = await (await b.newContext()).newPage(); await kid.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; }); await kid.goto(link); await kid.waitForTimeout(6000);
   const denied = await fam.evaluate(async () => { try { await window.__sffAdminUsers(); return 'allowed'; } catch (e) { return String(e.code || e.message); } });
   ok(/permission/.test(denied), 'a regular parent is refused (' + denied + ')');

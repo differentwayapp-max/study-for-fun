@@ -7,7 +7,8 @@ rules_version = '2';
 //   /fam/kids                    the list of kids
 //   /sets/{setId}                practice sets (questions, chapters …)
 //   /progress/{kidId}            a kid's games, trophies, chosen name and picture
-//   /devices/{uid}               a kid's phone/tablet (anonymous sign-in) that opened a kid link
+//   /devices/{uid}               a kid's phone/tablet (anonymous sign-in) that opened a kid link: { token, kid, at }
+//                                kidTokens.{kidId} in the family document = the secret of that kid's link
 //   /members/{uid}               another adult in the family: { role: admin | helper | tutor, name, kids[], invite }
 //   /invites/{code}              an invitation for one adult: { role, name, kids[], by, exp, used }
 // users/{uid}                    { fams: [familyId…] } – the families an adult belongs to (written by that adult)
@@ -17,7 +18,8 @@ rules_version = '2';
 // Founding parent and admins: everything in the family.
 // Helpers / tutors: read everything in the family, add and change practice sets, write progress.
 //                   (A tutor's view is limited to the chosen kids in the app.)
-// Kid device: joins once with the link's token, reads the family's practice sets, writes only progress.
+// Kid device: joins once with its kid's link token, reads the family's practice sets, writes only that kid's progress.
+//             (phones that joined before per-kid links have no `kid` and keep their old access)
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -32,6 +34,10 @@ service cloud.firestore {
     function isDevice(f) {
       return signedIn() && exists(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid));
     }
+    // the kid a device belongs to (null: a phone that joined before per-kid links)
+    function deviceKid(f) { return get(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid)).data.get('kid', null); }
+    function kidToken(f, kid) { return get(famPath(f)).data.get('kidTokens', {}).get(kid, null); }
+    function invitePath(f, code) { return /databases/$(database)/documents/families/$(f)/invites/$(code); }
 
     // app admins (by Google account email) – review catalog suggestions, publish to the catalog
     function appAdmin() { return google() && request.auth.token.email in ['differentway.app@gmail.com', 'taliahblass@gmail.com']; }
@@ -58,12 +64,14 @@ service cloud.firestore {
 
       match /devices/{uid} {
         allow read: if isAdult(familyId) || (signedIn() && request.auth.uid == uid);
-        allow create: if signedIn()
+        // join (or move the phone to another kid of the family) only with that kid's link token
+        allow create, update: if signedIn()
           && request.auth.uid == uid
-          && request.resource.data.keys().hasOnly(['token', 'at'])
-          && request.resource.data.token == get(famPath(familyId)).data.inviteToken;
+          && request.resource.data.keys().hasOnly(['token', 'kid', 'at'])
+          && request.resource.data.kid is string
+          && request.resource.data.token is string
+          && request.resource.data.token == kidToken(familyId, request.resource.data.kid);
         allow delete: if isAdmin(familyId);
-        allow update: if false;
       }
 
       match /fam/{docId} {
@@ -79,7 +87,7 @@ service cloud.firestore {
 
       match /progress/{kidId} {
         allow read: if isAdult(familyId) || isDevice(familyId);
-        allow write: if (isAdult(familyId) || isDevice(familyId))
+        allow write: if (isAdult(familyId) || (isDevice(familyId) && deviceKid(familyId) in [null, kidId]))
           && request.resource.data.keys().hasOnly(['history', 'profile']);
         allow delete: if isAdmin(familyId);
       }
@@ -87,13 +95,18 @@ service cloud.firestore {
       // other adults of the family
       match /members/{uid} {
         allow read: if isAdult(familyId) || (google() && request.auth.uid == uid);
-        // joining: only yourself, only with a valid, unused invitation, and only with the role it gives
+        // joining: only yourself, only with a valid, unused invitation, with exactly the role and kids it gives,
+        // and in the same write that marks the invitation used (so one invitation = one adult)
         allow create: if google() && request.auth.uid == uid
           && request.resource.data.keys().hasOnly(['role', 'name', 'kids', 'invite', 'at'])
-          && exists(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite))
-          && get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.used == false
-          && get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.exp > request.time.toMillis()
-          && request.resource.data.role == get(/databases/$(database)/documents/families/$(familyId)/invites/$(request.resource.data.invite)).data.role;
+          && request.resource.data.invite is string
+          && exists(invitePath(familyId, request.resource.data.invite))
+          && get(invitePath(familyId, request.resource.data.invite)).data.used == false
+          && get(invitePath(familyId, request.resource.data.invite)).data.exp > request.time.toMillis()
+          && request.resource.data.role == get(invitePath(familyId, request.resource.data.invite)).data.role
+          && request.resource.data.kids == get(invitePath(familyId, request.resource.data.invite)).data.kids
+          && getAfter(invitePath(familyId, request.resource.data.invite)).data.used == true
+          && getAfter(invitePath(familyId, request.resource.data.invite)).data.usedBy == request.auth.uid;
         allow update: if isAdmin(familyId);
         allow delete: if isAdmin(familyId) || (google() && request.auth.uid == uid);   // remove someone · leave
       }
@@ -114,10 +127,11 @@ service cloud.firestore {
       match /invites/{code} {
         allow create, delete: if isAdmin(familyId);
         allow read: if google();                    // the code itself is the secret
-        // the invited adult marks it used (once)
+        // the invited adult marks it used (once), together with joining
         allow update: if google() && resource.data.used == false
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['used', 'usedBy'])
-          && request.resource.data.used == true && request.resource.data.usedBy == request.auth.uid;
+          && request.resource.data.used == true && request.resource.data.usedBy == request.auth.uid
+          && getAfter(/databases/$(database)/documents/families/$(familyId)/members/$(request.auth.uid)).data.invite == code;
       }
     }
 

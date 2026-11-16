@@ -66,7 +66,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(await T.p.evaluate(() => window.__sffFamily.famId) === tutorUid, 'the removed tutor is back to her own family only');
 
   console.log('6. the kid\'s phone still works');
-  const link = await O.p.evaluate(() => window.SFF_APP_URL + '#kid-k2');
+  const link = await O.p.evaluate(() => window.__sffFamily.kidLink('k2'));
   const kc = await b.newContext({ viewport: { width: 390, height: 844 } }); const kp = await kc.newPage(); kp.on('pageerror', e => errs.push('kid: ' + e.message));
   await kp.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; });
   await kp.goto(link, { waitUntil: 'load' }); await kp.waitForTimeout(7000);

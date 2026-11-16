@@ -46,6 +46,10 @@ const LIGHT_CALLS = 40;
 const BUILD_CALLS = 60;                       // AI calls one build may make (a 10-chapter set needs ~25)
 const BUILD_HOURS = 3;                        // a build token is valid this long
 const MONTHLY_CAP_USD = 40;
+// One family may use at most this much of the month's AI budget (3 normal builds cost far less),
+// so a single account can never use up the whole app's budget. Admins have no family limit.
+const FAMILY_CAP_USD = 8;
+const REFUNDS_PER_MONTH = 2;                  // failed-at-the-start builds given back per family per month
 const PRICE = {                               // USD per 1M tokens: [input, output]
   'claude-haiku-5-5': [0.10, 0.50], 'claude-sonnet-5-5': [2, 10], 'claude-opus-5-5': [4, 20]
 };
@@ -77,11 +81,19 @@ async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
   if ((g.data()?.usd || 0) >= MONTHLY_CAP_USD) throw new HttpsError('resource-exhausted', 'budget', { reason: 'budget' });
 }
-async function addSpend(model, usage) {
+// this family's share of the month's AI spend (checked after checkFamily, so famId is valid)
+async function checkFamilyBudget(auth, famId) {
+  if (isAdminUser(auth)) return;
+  const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
+  if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
+}
+async function addSpend(model, usage, famId) {
   const [pi, po] = PRICE[model] || PRICE['claude-sonnet-5-5'];
   const inTok = (usage?.input_tokens || 0) + (usage?.cache_creation_input_tokens || 0) * 1.25 + (usage?.cache_read_input_tokens || 0) * 0.1;
   const usd = (inTok * pi + (usage?.output_tokens || 0) * po) / 1e6;
   await db.doc(`meta/ai_spend_${monthKey()}`).set({ usd: FieldValue.increment(usd), calls: FieldValue.increment(1) }, { merge: true });
+  if (typeof famId === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(famId))
+    await db.doc(`families/${famId}/usage/${monthKey()}`).set({ usd: FieldValue.increment(usd), month: monthKey() }, { merge: true });
   return usd;
 }
 
@@ -91,6 +103,7 @@ exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   const { famId, subject = '' } = request.data || {};
   await checkFamily(auth.uid, famId);
   await checkBudget();
+  await checkFamilyBudget(auth, famId);
   const month = monthKey(), adminUser = isAdminUser(auth);
   const usageRef = db.doc(`families/${famId}/usage/${month}`), billRef = db.doc(`families/${famId}/billing/main`);
   const buildRef = db.collection(`families/${famId}/builds`).doc();
@@ -109,7 +122,8 @@ exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   });
 });
 
-// End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back.
+// End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back
+// – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
 exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
   const auth = parentOnly(request);
   const { famId, buildId, ok } = request.data || {};
@@ -119,9 +133,11 @@ exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstan
   return db.runTransaction(async (tx) => {
     const bd = await tx.get(buildRef);
     if (!bd.exists || bd.data().status !== 'running') return { refunded: false };
-    const d = bd.data(), refund = !ok && d.calls <= 3;
+    const d = bd.data(), usageRef = db.doc(`families/${famId}/usage/${d.month}`);
+    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
+    const refund = !ok && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
     tx.update(buildRef, { status: ok ? 'done' : 'failed', endedAt: Date.now(), refunded: refund });
-    if (refund && d.kind === 'free') tx.set(db.doc(`families/${famId}/usage/${d.month}`), { builds: FieldValue.increment(-1) }, { merge: true });
+    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
     if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
     return { refunded: refund };
   });
@@ -214,6 +230,8 @@ exports.ask = onCall(
     }
 
     await checkBudget();
+    if (!isAdminUser(auth)) await checkFamily(auth.uid, famId);
+    await checkFamilyBudget(auth, famId);
     await claimCall(auth, famId, buildId);
 
     const content = [];
@@ -245,7 +263,7 @@ exports.ask = onCall(
       if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
       throw e;
     }
-    await addSpend(msg.model || model, msg.usage).catch(e => console.error('spend log', e));
+    await addSpend(msg.model || model, msg.usage, famId).catch(e => console.error('spend log', e));
     if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
     if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
     const text = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');

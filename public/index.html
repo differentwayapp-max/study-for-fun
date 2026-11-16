@@ -1183,7 +1183,11 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       uid = u.uid; famId = kidFam; role = 'kid';
       const dref = F.doc(fdb, `families/${famId}/devices/${uid}`);
       const d = await F.getDoc(dref).catch(() => null);
-      if (!d || !d.exists()) await F.setDoc(dref, { token: kidTok, at: Date.now() }).catch(e => { console.warn('join failed', e); W.__sffJoinErr = String(e && e.code || e); });
+      // the link's token belongs to one kid: the phone joins as that kid's device and may write only that kid's progress
+      const lockKid = LS.getItem('sff_lock');
+      const join = lockKid ? { token: kidTok, kid: lockKid, at: Date.now() } : { token: kidTok, at: Date.now() };
+      if (!d || !d.exists()) await F.setDoc(dref, join).catch(e => { console.warn('join failed', e); W.__sffJoinErr = String(e && e.code || e); });
+      else if (lockKid && d.data().kid && d.data().kid !== lockKid) await F.setDoc(dref, join).catch(e => { console.warn('rejoin failed', e); W.__sffJoinErr = String(e && e.code || e); });   // the phone now belongs to another kid of the family
     } else {
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
@@ -1206,8 +1210,11 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
               const iref = F.doc(fdb, `families/${ifam}/invites/${icode}`), isnap = await F.getDoc(iref);
               if (!isnap.exists()) throw new Error('missing');
               const I = isnap.data(); if (I.used) throw new Error('used'); if (I.exp < Date.now()) throw new Error('expired');
-              await F.setDoc(mref, { role: I.role, name: myName, kids: I.kids || [], invite: icode, at: Date.now() });
-              await F.updateDoc(iref, { used: true, usedBy: uid });
+              // one atomic write: joining and using up the invitation (the rules accept the join only together with it)
+              const wb = F.writeBatch(fdb);
+              wb.set(mref, { role: I.role, name: myName, kids: I.kids || [], invite: icode, at: Date.now() });
+              wb.update(iref, { used: true, usedBy: uid });
+              await wb.commit();
             }
             await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayUnion(ifam) }, { merge: true });
             LS.setItem('sff_active_fam', ifam); inviteMsg = 'joined';
@@ -1247,6 +1254,13 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         members: async () => (await F.getDocs(F.collection(fdb, `families/${famId}/members`))).docs.map(d => ({ uid: d.id, ...d.data() })),
         pending: async () => (await F.getDocs(F.collection(fdb, `families/${famId}/invites`))).docs.map(d => ({ code: d.id, ...d.data() })).filter(x => !x.used && x.exp > Date.now()),
         cancel: async code => F.deleteDoc(F.doc(fdb, `families/${famId}/invites/${code}`)),
+        // a kid's personal link: its token lets a phone join as this kid only (made once, kept in the family document)
+        kidLink: async kid => {
+          const fr = F.doc(fdb, `families/${famId}`), fs = await F.getDoc(fr);
+          let t = ((fs.exists() && fs.data().kidTokens) || {})[kid];
+          if (!t) { t = rnd(16); await F.updateDoc(fr, new F.FieldPath('kidTokens', kid), t); }
+          return `${location.origin}/?f=${famId}&t=${t}&k=${encodeURIComponent(kid)}#kid-${kid}`;
+        },
         invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false }); return `${location.origin}/?invite=${famId}.${code}`; },
         remove: async muid => F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`)),
         leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); W.sffSoftReload('רגע…'); },
@@ -1405,6 +1419,24 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 /* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// data a kid's phone writes (progress: games + chosen name/picture) is untrusted – keep only the expected shapes
+const safeColor = c => /^#[0-9A-Fa-f]{3,8}$/.test(String(c||'')) ? c : '#2F6BFF';
+function cleanAvatar(a){
+  if(!a||typeof a!=='object') return null;
+  if(a.type==='mascot') return /^#[0-9A-Fa-f]{3,8}$/.test(String(a.value||''))?{type:'mascot',value:a.value}:null;
+  if(a.type==='emoji') return typeof a.value==='string'&&[...a.value].length<=8&&!/[<>&"'`]/.test(a.value)?{type:'emoji',value:a.value}:null;
+  return null;
+}
+const cleanNick = n => typeof n==='string' ? n.replace(/[<>]/g,'').trim().slice(0,30) || null : null;
+function cleanHist(h){
+  if(!h||typeof h!=='object'||!Number.isFinite(+h.at)) return null;
+  const str=(v,n=120)=>typeof v==='string'?v.slice(0,n):'', num=v=>Number.isFinite(+v)?+v:0;
+  const topics={}; if(h.topics&&typeof h.topics==='object') Object.entries(h.topics).slice(0,60).forEach(([t,v])=>{ if(v&&typeof v==='object') topics[String(t).slice(0,120)]={r:num(v.r),n:num(v.n)}; });
+  return {at:+h.at, kidId:typeof h.kidId==='string'?h.kidId.slice(0,40):null, kid:str(h.kid,60), subject:str(h.subject,60), grade:Number.isInteger(+h.grade)?+h.grade:0,
+    setId:str(h.setId,60), retry:!!h.retry, topic:typeof h.topic==='string'?h.topic.slice(0,120):null, ch:Number.isInteger(h.ch)?h.ch:null,
+    right:num(h.right), n:Math.max(1,num(h.n)), score:num(h.score), mode:['choice','memory','match','riddle','spell'].includes(h.mode)?h.mode:'choice',
+    qr:Array.isArray(h.qr)?h.qr.filter(x=>typeof x==='string'&&/^\d+\.[01](\.\d)?$/.test(x)).slice(0,200):[], topics};
+}
 const GRADES = ["א'","ב'","ג'","ד'","ה'","ו'","ז'","ח'","ט'","י'","י\"א","י\"ב"];
 function track(gi){ // grade index 0..11
   if(gi<=2) return {name:'גוששים', young:true};
@@ -1519,7 +1551,7 @@ function showQuotaErr(e){
   if(e?.code!=='quota') logFail('build:start', e, W.subject);
   W.step=4; wizRender();
   if(e?.code==='quota'){ const el=$('quotaLine'); el.innerHTML=quotaHtml({used:e.used??QUOTA.free, credits:e.credits||0}); el.className='quota out'; $('btnBuild').disabled=true; return; }
-  wizErr(e?.code==='budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. אפשר להוסיף תרגול מוכן מהקטלוג.' : 'לא הצלחנו להתחיל את הבנייה: '+(e?.message||e));
+  wizErr((e?.code==='budget'||e?.code==='family_budget') ? 'בניית תרגולים חדשים עצרה לחודש הזה. אפשר להוסיף תרגול מוכן מהקטלוג.' : 'לא הצלחנו להתחיל את הבנייה: '+(e?.message||e));
 }
 /* ---------- failure log: families/{f}/errlog – what failed, where, why (no prompt text) ---------- */
 async function logFail(where, e, subject){
@@ -1832,7 +1864,7 @@ Return JSON only: {"questions":[{"topic":string,"question":string,"options":[4 s
     if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); return; }
     if(CUR_BUILD===B) CUR_BUILD=null;
     setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
-    const msg = e?.code==='budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
+    const msg = (e?.code==='budget'||e?.code==='family_budget') ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
       : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
       : e?.code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
       : e?.code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
@@ -2322,6 +2354,7 @@ function dropBuild(id){ BUILDS=BUILDS.filter(b=>b.id!==id); renderKids(); }
 /* ---------- art (inline SVG – no external images) ---------- */
 function starPts(cx,cy,R,r){let p=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
 function mascot(m='happy',body='#2F6BFF'){
+  body=safeColor(body);
   const mouth = m==='sad' ? '<path d="M41 79 Q50 71 59 79" fill="none" stroke="#1B2A4A" stroke-width="4" stroke-linecap="round"/>'
     : m==='wow' ? '<ellipse cx="50" cy="76" rx="6" ry="7" fill="#1B2A4A"/>'
     : '<path d="M38 72 Q50 86 62 72 Z" fill="#1B2A4A"/><path d="M44 77 Q50 81 56 77" fill="#FF5C8A"/>';
@@ -2501,7 +2534,7 @@ function renderSets(){}
 const AVA_EMOJI=['🦊','🐼','🐯','🦄','🐸','🐙','🦖','🐱','🐶','🐵'];
 function avatarHtml(k,size=56){
   const a=k&&k.avatar, st=`width:${size}px;height:${size}px`;
-  if(a&&a.type==='emoji') return `<span class="ava emo" style="${st};font-size:${Math.round(size*.62)}px">${a.value}</span>`;
+  if(a&&a.type==='emoji') return `<span class="ava emo" style="${st};font-size:${Math.round(size*.62)}px">${esc(a.value)}</span>`;
   return `<span class="ava" style="${st}">${mascot('happy',(a&&a.type==='mascot'&&a.value)||k?.color||'#2F6BFF')}</span>`;
 }
 const kidName=k=>k?(k.nick||k.name):'';
@@ -3446,8 +3479,9 @@ async function cloudInit(){
   DB.collection('progress').onSnapshot(q=>{
     let changed=false;
     q.docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);
-      (p.history||[]).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
-      if(k && IS_OWNER && p.profile){ if(p.profile.nick!==undefined&&k.nick!==p.profile.nick){k.nick=p.profile.nick;changed=true;} if(p.profile.avatar&&p.profile.avatar.type!=='photo'&&JSON.stringify(k.avatar)!==JSON.stringify(p.profile.avatar)){k.avatar=p.profile.avatar;changed=true;}
+      (Array.isArray(p.history)?p.history:[]).map(cleanHist).filter(Boolean).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
+      if(k && IS_OWNER && p.profile){ const nick=cleanNick(p.profile.nick), ava=cleanAvatar(p.profile.avatar);
+        if(p.profile.nick!==undefined&&k.nick!==nick){k.nick=nick;changed=true;} if(ava&&JSON.stringify(k.avatar)!==JSON.stringify(ava)){k.avatar=ava;changed=true;}
         if(p.profile.avatar&&p.profile.avatar.type==='photo'){ if(k.avatar&&k.avatar.type==='photo') k.avatar=null; changed=true; pushProgress(k.id); } }
     });
     if(applyResets()) changed=true;
@@ -3545,12 +3579,15 @@ function openPracticeShare(set){
 function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) openPracticeShare({subject:x.subject,grade:x.grade,src:x.id}); }
 
 /* kid link dialog */
-function openKidLink(id){ const k=kidById(id); if(!k) return;
+async function openKidLink(id){ const k=kidById(id); if(!k) return;
   $('klAva').innerHTML=avatarHtml(k,80); $('klName').textContent=`${k.name} · כיתה ${GRADES[k.grade]}`;
   $('klFor').textContent=`לטלפון של ${k.name} בלבד · בלי סיסמה`;
-  const url=`${window.SFF_APP_URL||APP_URL}#kid-${k.id}`;
+  $('klUrl').value='⏳'; $('klWa').removeAttribute('href'); $('klMsg').textContent=''; $('linkDlg').classList.remove('hidden');
+  let url;
+  try{ url=window.__sffFamily&&window.__sffFamily.kidLink ? await window.__sffFamily.kidLink(k.id) : `${window.SFF_APP_URL||APP_URL}#kid-${k.id}`; }
+  catch(e){ $('klUrl').value=''; $('klMsg').textContent='⚠️ רק ההורה שפתח את המשפחה יכול ליצור קישור'; return; }
   $('klWa').href='https://wa.me/?text='+encodeURIComponent(`${k.name}, זה הקישור שלך לתרגול 🎮\n${url}`);
-  $('klUrl').value=`${window.SFF_APP_URL||APP_URL}#kid-${k.id}`; $('klMsg').textContent=''; $('linkDlg').classList.remove('hidden'); }
+  $('klUrl').value=url; }
 async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl').value); $('klMsg').textContent='✓'; }catch(e){ $('klUrl').select(); $('klMsg').textContent='⌘C'; } }
 
 applyLock();

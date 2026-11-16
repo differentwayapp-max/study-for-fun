@@ -110,13 +110,52 @@
    "status": "ready"
   },
   {
+   "id": "sci1",
+   "ver": "f7878b8b08",
+   "subject": "מדעים",
+   "grade": 0,
+   "title": "מזג אוויר · חושים · צמחים ובעלי חיים",
+   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים וטכנולוגיה",
+   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals and technology",
+   "tags": [
+    "מזג אוויר",
+    "אנרגיה",
+    "החושים",
+    "בריאות",
+    "עונות השנה",
+    "יום ולילה",
+    "צמחים",
+    "בעלי חיים",
+    "טכנולוגיה"
+   ],
+   "questions": 194,
+   "chapters": 19,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך מזג האוויר בתמונה?",
+     "e": "🌧️"
+    },
+    {
+     "q": "במה מודדים כמה חם בחוץ?",
+     "e": "🌡️"
+    },
+    {
+     "q": "מה נותן לכדור הארץ אור וחום?",
+     "e": "🌍"
+    }
+   ],
+   "status": "ready"
+  },
+  {
    "id": "math1",
-   "ver": "bfa3181a65",
+   "ver": "e574c797d7",
    "subject": "מתמטיקה",
    "grade": 0,
    "title": "מספרים · חיבור וחיסור · צורות · שעון",
-   "desc": "מספרים עד 100, חיבור וחיסור עד 20, צורות, שעון ומדידה",
-   "desc_en": "Numbers to 100, adding and subtracting to 20, shapes, clock and measuring",
+   "desc": "מספרים עד 100, חיבור וחיסור עד 20, כפל ראשון, חצי, צורות, שיקוף, אורך ושעון",
+   "desc_en": "Numbers to 100, adding and subtracting to 20, first multiplication, half, shapes, mirror, length and clock",
    "tags": [
     "מספרים עד 100",
     "זוגי ואי-זוגי",
@@ -126,44 +165,46 @@
     "צורות",
     "שעון"
    ],
-   "questions": 83,
-   "chapters": 12,
+   "questions": 317,
+   "chapters": 31,
    "reading": 0,
    "words": 0,
    "samples": [
     {
      "q": "כמה תפוחים?",
-     "e": "🍎🍎🍎"
+     "e": "🍎🍎"
     },
     {
-     "q": "איזה מספר בא אחרי ⁦9⁩?",
+     "q": "איזה מספר בא אחרי ⁦12⁩?",
      "e": "🔢"
     },
     {
-     "q": "איזה מספר זוגי?",
-     "e": "🧦🧦🧦🧦"
+     "q": "כמה בסך הכול?",
+     "e": "🔟🔟"
     }
    ],
    "status": "ready"
   },
   {
    "id": "heb1",
-   "ver": "eef043c42c",
+   "ver": "cb9c49c848",
    "subject": "עברית / לשון",
    "grade": 0,
-   "title": "אותיות · ניקוד · קריאה ראשונה",
-   "desc": "אותיות, צלילים וניקוד, קריאת מילים ומשפטים, חרוזים",
-   "desc_en": "Letters, sounds and vowel marks, reading words and sentences, rhymes",
+   "title": "אותיות · ניקוד · קריאה · כתיבה",
+   "desc": "אותיות, אותיות סופיות, ניקוד והברות, חרוזים, קריאת מילים ומשפטים, איות והפכים",
+   "desc_en": "Letters, final letters, vowel marks and syllables, rhymes, reading words and sentences, spelling, opposites",
    "tags": [
     "אותיות",
-    "ניקוד",
-    "קריאת מילים",
     "אותיות סופיות",
-    "משפטים",
-    "חרוזים"
+    "ניקוד",
+    "הברות",
+    "חרוזים",
+    "קריאה",
+    "איות",
+    "הפכים"
    ],
-   "questions": 75,
-   "chapters": 9,
+   "questions": 216,
+   "chapters": 21,
    "reading": 0,
    "words": 0,
    "samples": [
@@ -173,48 +214,11 @@
     },
     {
      "q": "בְּאֵיזוֹ אוֹת מַתְחִילָה הַמִּלָּה?",
+     "e": "🐶"
+    },
+    {
+     "q": "בְּאֵיזוֹ אוֹת מַתְחִילָה הַמִּלָּה?",
      "e": "🍋"
-    },
-    {
-     "q": "בְּאֵיזֶה צְלִיל מַתְחִילָה הַמִּלָּה?",
-     "e": "🐟"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci1",
-   "ver": "da458782b3",
-   "subject": "מדעים",
-   "grade": 0,
-   "title": "חושים · עונות · צמחים ובעלי חיים",
-   "desc": "מזג אוויר, החושים, אורח חיים בריא, עונות השנה, צמחים ובעלי חיים",
-   "desc_en": "Weather, the senses, healthy living, seasons, plants and animals",
-   "tags": [
-    "מזג אוויר",
-    "החושים",
-    "בריאות",
-    "עונות השנה",
-    "צמחים",
-    "בעלי חיים",
-    "טכנולוגיה"
-   ],
-   "questions": 51,
-   "chapters": 8,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "במה מודדים חום וקור?",
-     "e": "🌡️"
-    },
-    {
-     "q": "בעזרת מה רואים?",
-     "e": "👀"
-    },
-    {
-     "q": "מה עושים לפני האוכל?",
-     "e": "🧼"
     }
    ],
    "status": "ready"

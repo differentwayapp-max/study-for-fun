@@ -932,6 +932,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <button class="ditem adminonly" onclick="closeMenu();openSuggestions()"><span class="di">📤</span>הצעות לקטלוג</button>
         <button class="ditem adminonly" onclick="closeMenu();openErrLog()"><span class="di">🧾</span>יומן תקלות</button>
         <a class="ditem" href="/privacy.html" target="_blank" rel="noopener"><span class="di">🔒</span>מדיניות פרטיות</a>
+        <a class="ditem" href="/terms.html" onclick="this.href='/terms.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">📜</span>תנאי שימוש</a>
         <button class="ditem" id="footDel" onclick="closeMenu();window.SFF_ROLE&&window.SFF_ROLE!=='owner'?leaveFamily():openDelAcc()"><span class="di">🗑</span>מחיקת חשבון</button>
         <button id="fbOut" class="ditem hidden"><span class="di">🚪</span>התנתקות</button>
       </div>
@@ -1460,6 +1461,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     document.body.appendChild(el);
   }
   // ---- parent sign-in screen
+  const TERMS_VERSION = '2026-11-16';   // the date on terms.html – change both together
   function showLogin() {
     return new Promise(resolve => {
       const logo = document.getElementById('logoFull')?.src || '';
@@ -1470,13 +1472,19 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
           <button class="fbcard kid" id="fbKid" type="button"><span class="e">🧒</span><b>אני ילד/ה</b><span class="hint">נכנסים עם הקישור מההורה</span></button>
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
+        <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
         <div class="notice fbkidmsg hidden" id="fbKidMsg"><b>🔗 צריך את הקישור האישי שלך</b><div>ההורה שולח/ת אותו בוואטסאפ מהאפליקציה. לוחצים עליו, ומשחקים. בלי סיסמה ובלי Google.</div></div>
         <div class="hint" id="fbErr"></div>
         <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div>
-        <div class="hint" style="margin-top:18px">בכניסה את/ה מאשר/ת את <a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></div></div>`;
+        </div>`;
       document.body.appendChild(el);
       el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); };
+      // consent to the terms: an unticked box that the parent ticks before signing in (tests with a fake Google account start ticked)
+      const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
+      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; };
       el.querySelector('#fbGo').onclick = async () => {
+        if (!agree.checked) { el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT('כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש') : 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש'; return; }
+        try { localStorage.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); } catch (e) {}
         try {
           const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = await import(base + 'firebase-auth.js');
           const r = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE)            // tests only: a fake Google account on the local emulator
@@ -1498,6 +1506,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   #fbLogin .fbcard .e{font-size:44px;line-height:1.1}#fbLogin .fbcard b{font-family:var(--display);font-size:1.15em}
   #fbLogin .fbcard.kid{background:#FFF6D6}#fbLogin .fbcard.on{background:var(--sun)}
   #fbLogin .fbcard:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+  #fbLogin .fbterms{display:flex;align-items:flex-start;gap:8px;max-width:min(92vw,420px);text-align:start;font-size:.95em;cursor:pointer;padding:8px 10px;border-radius:12px}
+  #fbLogin .fbterms input{width:20px;height:20px;margin:2px 0 0;flex:none;accent-color:var(--blue)}
+  #fbLogin .fbterms.need{background:#FFF6E3;outline:2px solid var(--sun)}
   #fbLogin .fbkidmsg{max-width:min(92vw,420px);text-align:start;background:#FFF6E3;border-color:var(--sun)}
 </style>
 

@@ -223,8 +223,8 @@ exports.ask = onCall(
     const auth = parentOnly(request);
 
     const { prompt, images = [], tier = 'default', famId, buildId } = request.data || {};
-    if (typeof prompt !== 'string' || !prompt.trim() || prompt.length > 60000) {
-      throw new HttpsError('invalid-argument', 'Missing or oversized prompt.');
+    if (typeof prompt !== 'string' || !prompt.trim() || prompt.length > 300000) {
+      throw new HttpsError('invalid-argument', `Missing or oversized prompt (${typeof prompt === 'string' ? prompt.length : typeof prompt} chars).`);
     }
     if (!Array.isArray(images) || images.length > MAX_IMAGES) {
       throw new HttpsError('invalid-argument', `Up to ${MAX_IMAGES} images.`);

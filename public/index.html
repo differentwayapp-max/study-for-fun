@@ -16,6 +16,26 @@
 </script>
 <meta name="sff-ver" content="sff-v95">
 <script src="/i18n.js?v=sff-v95"></script>
+<script>
+/* Math inside Hebrew ("מה חסר? _ + 20 = 90") is wrapped in Unicode isolates U+2066…U+2069. iPhone Safari ignores them and
+   shows "90 = 20 + _", so every such run is drawn in a real left-to-right element instead. */
+(function(){
+  const SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,OPTION:1,TITLE:1};
+  function fix(t){
+    const v=t.nodeValue; if(v.indexOf('⁦')<0) return; const par=t.parentNode; if(!par||SKIP[par.nodeName]||par.namespaceURI!=='http://www.w3.org/1999/xhtml') return;
+    const f=document.createDocumentFragment(); let i=0, re=/⁦([^⁩]*)⁩?/g, m;
+    while((m=re.exec(v))){ if(m.index>i) f.appendChild(document.createTextNode(v.slice(i,m.index)));
+      const b=document.createElement('bdi'); b.dir='ltr'; b.className='ltr'; b.textContent=m[1]; f.appendChild(b); i=re.lastIndex; }
+    if(i<v.length) f.appendChild(document.createTextNode(v.slice(i)));
+    par.replaceChild(f,t);
+  }
+  function walk(n){ if(n.nodeType===3) return fix(n); if(n.nodeType!==1||SKIP[n.nodeName]) return;
+    const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT), list=[]; while(w.nextNode()) if(w.currentNode.nodeValue.indexOf('⁦')>=0) list.push(w.currentNode); list.forEach(fix); }
+  new MutationObserver(ms=>ms.forEach(m=>{ if(m.type==='characterData') fix(m.target); else m.addedNodes.forEach(walk); }))
+    .observe(document.documentElement,{childList:true,subtree:true,characterData:true});
+  document.addEventListener('DOMContentLoaded',()=>walk(document.body));
+})();
+</script>
 <script src="/kid-rest.js?v=sff-v95"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -615,6 +635,7 @@ button.chrow{width:100%;background:#fff;text-align:start;cursor:pointer;font:inh
 .scene{position:relative;container-type:size;width:100%;aspect-ratio:16/10;max-height:46vh;background:#EAF4FF;border:var(--line);border-radius:22px;overflow:hidden;margin:0 auto 16px}
 .scene .ground{position:absolute;inset:auto 0 0 0;height:16%;background:#D9EFCF;border-top:2px solid #B9D9A9}
 .scene span{position:absolute;transform:translate(-50%,-50%);line-height:1;white-space:nowrap}
+.ltr{unicode-bidi:isolate;direction:ltr}
 .scene span.tx{font-family:var(--display);font-weight:700;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:.3em;padding:.08em .35em .12em;box-shadow:0 .08em 0 var(--ink)}
 .scene.mini{aspect-ratio:4/3;max-height:none;border-radius:12px;border-width:1.5px;margin:0 0 4px}
 .scene.mini .ground{height:14%}
@@ -1972,7 +1993,7 @@ ${JSON.stringify(list.map((q,i)=>({i,topic:q.topic,question:q.question,scene:q.s
       {modelTier:'complex'});
     return Array.isArray(r?.results)?r.results:[];
   };
-  const res = await solve(qs);
+  const res = []; for(let k=0;k<qs.length;k+=40) res.push(...(await solve(qs.slice(k,k+40))).map(r=>({...r,i:+r.i+k})));   // big sets: 40 questions per call
   const byI = Object.fromEntries(res.map(r=>[r.i,r]));
   const bad=[];
   qs.forEach((q,i)=>{

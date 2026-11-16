@@ -10,7 +10,7 @@ SET = dict(name="English – ABC, Colors, Animals", grade=3, subject="אנגלי
            topics=[AB, CO, AN, PR, VE, ML])
 
 def L(ch, size=70): return [(ch, 50, 52, size)]          # a big letter as the picture
-def seq(*cs): return [(c, 14 + i * 24, 52, 30) for i, c in enumerate(cs)]
+def seq(*cs): return [(c, 17 + i * 22, 52, 26) for i, c in enumerate(cs)]
 
 C = []
 WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")

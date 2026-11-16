@@ -196,6 +196,7 @@ void grantCredits;   // called by the payment webhook once payments open
 
 const MAX_IMAGES = 6;
 const MAX_IMAGE_B64 = 5 * 1024 * 1024; // ~3.7 MB per image after base64
+const MAX_PDF_B64 = 8.2 * 1024 * 1024;  // a 6 MB PDF after base64 (callable requests are limited to 10 MB)
 
 function extractJson(text) {
   const t = String(text || '').replace(/```(?:json)?/gi, '').trim();
@@ -236,8 +237,13 @@ exports.ask = onCall(
 
     const content = [];
     for (const img of images) {
-      if (!img || typeof img.data !== 'string' || img.data.length > MAX_IMAGE_B64) {
+      if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
         throw new HttpsError('invalid-argument', 'Image too large.');
+      }
+      if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
+        if (img.data.length > MAX_PDF_B64) throw new HttpsError('invalid-argument', 'PDF too large.');
+        content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
+        continue;
       }
       const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
       content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });

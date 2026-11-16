@@ -25,6 +25,7 @@ const OUT = process.env.OUT;
   if (OUT) await p.screenshot({ path: `${OUT}/fin_parent.png`, fullPage: true });
   await p.click('.kidhero .donesec summary'); await p.waitForTimeout(300);
   if (OUT) await p.screenshot({ path: `${OUT}/fin_parent_open.png`, fullPage: true });
+  console.log('heights', JSON.stringify(await p.evaluate(() => [...document.querySelectorAll('.kidhero .prow')].map(x => Math.round(x.getBoundingClientRect().height)))));
   const parent = await p.evaluate(() => ({ active: [...document.querySelectorAll('.kidhero > div > .prow, .kidhero .prow:not(.fin)')].map(x => x.querySelector('.t').textContent.trim()),
     fin: [...document.querySelectorAll('.kidhero .donelist .prow')].map(x => x.textContent.replace(/\s+/g, ' ').trim()) }));
   await p.evaluate(() => { activeKid = 'k2'; go('kid'); }); await p.waitForTimeout(800);

@@ -15,3 +15,5 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_018ARCFrnypinXbQosbA2nGK"
 firebase deploy --only hosting --non-interactive 2>&1 | sed 's/\x1b\[[0-9;?]*[A-Za-z]//g' | tail -1
 echo "deployed $new"
+# back up to GitHub (retry on network errors)
+for i in 1 2 3 4; do git push -q origin HEAD 2>/dev/null && { echo "pushed to GitHub"; break; }; sleep $((2**i)); done

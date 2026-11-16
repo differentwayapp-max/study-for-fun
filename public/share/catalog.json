@@ -589,6 +589,286 @@
     }
    ],
    "status": "ready"
+  },
+  {
+   "id": "math2",
+   "ver": "e720eca584",
+   "subject": "מתמטיקה",
+   "grade": 1,
+   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · גופים · שעון",
+   "desc": "מספרים עד 1,000, חיבור וחיסור עד 100 בראש ובמאונך, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
+   "desc_en": "Numbers to 1,000, adding and subtracting to 100 (mental and vertical), missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, solids, reflection and translation, length, area, weight and the clock",
+   "tags": [
+    "מספרים עד 1,000",
+    "חיבור וחיסור עד 100",
+    "מספר חסר",
+    "לוח הכפל",
+    "חילוק",
+    "חצי ורבע",
+    "דיאגרמות",
+    "גופים",
+    "מדידות",
+    "שעון"
+   ],
+   "questions": 299,
+   "chapters": 29,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה בסך הכול?",
+     "e": "💯💯"
+    },
+    {
+     "q": "כתבו בספרות: שלוש מאות ושבעים",
+     "e": "שלוש מאות ושבעים"
+    },
+    {
+     "q": "מה חסר? ⁦100, 200, 300, _⁩",
+     "e": "100, 200, 300, ?"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb2",
+   "ver": "a0359f49fd",
+   "subject": "עברית / לשון",
+   "grade": 1,
+   "title": "קריאה · הבנת הנקרא · כתיב · פיסוק · יחיד ורבים · זכר ונקבה · אוצר מילים",
+   "desc": "קריאת מילים ומשפטים, ארבעה קטעי קריאה מנוקדים (סיפור, מידע, הוראות), אותיות שנשמעות דומה, אותיות סופיות, סימני פיסוק, יחיד ורבים, זכר ונקבה, הפכים, מילים נרדפות וקבוצות",
+   "desc_en": "Reading words and sentences, four short vocalised passages (stories, information, instructions), spelling of sound-alike letters, final letters, punctuation, singular and plural, masculine and feminine, opposites, synonyms and categories",
+   "tags": [
+    "קריאה",
+    "הבנת הנקרא",
+    "כתיב",
+    "אותיות סופיות",
+    "פיסוק",
+    "יחיד ורבים",
+    "זכר ונקבה",
+    "הפכים",
+    "מילים נרדפות",
+    "קבוצות"
+   ],
+   "questions": 237,
+   "chapters": 23,
+   "reading": 4,
+   "words": 0,
+   "samples": [
+    {
+     "q": "אֵיזוֹ מִלָּה מַתְאִימָה לַתְּמוּנָה?",
+     "e": "🐢"
+    },
+    {
+     "q": "אֵיזֶה מִשְׁפָּט מַתְאִים לַתְּמוּנָה?",
+     "e": "🐶💤"
+    },
+    {
+     "q": "אֵיזוֹ מִלָּה כְּתוּבָה נָכוֹן?",
+     "e": "🐭"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci2",
+   "ver": "04db86964a",
+   "subject": "מדעים",
+   "grade": 1,
+   "title": "חומרים · יצורים חיים · שיניים · טבע · טכנולוגיה",
+   "desc": "תכונות ומיון של חומרים, מוצק נוזל וגז, יצורים חיים וצורכיהם, השיניים ובריאותן, בעלי חיים ובתי גידול, שמירה על הטבע וטכנולוגיה",
+   "desc_en": "Properties and sorting of materials, solid, liquid and gas, living things and their needs, teeth and dental health, animal groups and habitats, protecting nature and technology",
+   "tags": [
+    "תכונות חומרים",
+    "מיון חומרים",
+    "מוצק נוזל וגז",
+    "חי ודומם",
+    "צורכי היצורים",
+    "שיניים",
+    "בריאות השיניים",
+    "בתי גידול",
+    "שמירה על הטבע",
+    "טכנולוגיה"
+   ],
+   "questions": 220,
+   "chapters": 21,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איזה חפץ עשוי מחומר רך?",
+     "e": "🔨🧸"
+    },
+    {
+     "q": "איך נקרא חומר שמתכופף ולא נשבר?",
+     "e": "🤸"
+    },
+    {
+     "q": "ממה עשוי המפתח?",
+     "e": "🔑"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math3",
+   "ver": "73e99d6390",
+   "subject": "מתמטיקה",
+   "grade": 2,
+   "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
+   "desc": "מספרים עד 10,000, עיגול ואומדן, חיבור וחיסור במאונך, לוח הכפל, כפל דו-ספרתי, חילוק עם שארית, סדר פעולות, חצי שליש ורבע, זוויות, ישרים מקבילים ומאונכים, משולשים ומרובעים, אורך, משקל, ליטר וזמן",
+   "desc_en": "Numbers to 10,000, rounding and estimating, column addition and subtraction, times tables, 2-digit by 1-digit multiplication, division with remainder, order of operations, halves, thirds and quarters, angles, parallel and perpendicular lines, triangles and quadrilaterals, length, weight, litres and time",
+   "tags": [
+    "מספרים עד 10,000",
+    "עיגול ואומדן",
+    "חיבור וחיסור במאונך",
+    "לוח הכפל",
+    "חילוק עם שארית",
+    "סדר פעולות",
+    "שברים",
+    "זוויות",
+    "משולשים ומרובעים",
+    "מדידות וזמן"
+   ],
+   "questions": 318,
+   "chapters": 31,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 4 במספר ⁦4,725⁩?",
+     "e": "4,725"
+    },
+    {
+     "q": "איזה מספר כתוב בכרטיס?",
+     "e": "2 אלפים3 מאות"
+    },
+    {
+     "q": "איזה סימן מתאים? ⁦4,312 ___ 4,231⁩",
+     "e": "4,312 ? 4,231"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb3",
+   "ver": "bd03d34dd3",
+   "subject": "עברית / לשון",
+   "grade": 2,
+   "title": "הבנת הנקרא · סוגות · כתיבה · שורש · חלקי דיבר · זמנים · פיסוק · מילון",
+   "desc": "חמישה קטעי קריאה (סיפור, מידע, טיעון, הוראות, שיר), סוגות, מבנה סיפור, תיאור, מכתב ודיווח, שורש ומשפחת מילים, חלקי דיבר, זמנים וגופים, פיסוק, נרדפות והפכים, ביטויים ומילון",
+   "desc_en": "Five reading passages (story, information, argument, instructions, poem), genres, story structure, description, letter and report, roots and word families, parts of speech, tenses and persons, punctuation, synonyms and opposites, expressions, dictionary skills",
+   "tags": [
+    "הבנת הנקרא",
+    "סוגות",
+    "מבנה סיפור",
+    "כתיבה",
+    "שורש",
+    "חלקי דיבר",
+    "זמנים וגופים",
+    "פיסוק",
+    "נרדפות והפכים",
+    "מילון"
+   ],
+   "questions": 266,
+   "chapters": 26,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "בטקסט יש דמויות, בעיה ופתרון. איזה טקסט זה?",
+     "e": "📖דמויות • בעיה"
+    },
+    {
+     "q": "מאיזה טקסט לקוחה השורה?",
+     "e": "🐇היה היה פעם"
+    },
+    {
+     "q": "מה מספרים בפתיחה של סיפור?",
+     "e": "📖👧"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci3",
+   "ver": "4addc78373",
+   "subject": "מדעים",
+   "grade": 2,
+   "title": "חומרים · חשמל · צמחים · שומרים על הסביבה",
+   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
+   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning and fire safety, electric circuits, conductors and insulators, electrical safety, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
+   "tags": [
+    "תכונות חומרים",
+    "תערובות",
+    "בעירה",
+    "מעגל חשמלי",
+    "מוליכים ומבודדים",
+    "בטיחות בחשמל",
+    "צרכי הצמח",
+    "חלקי הצמח",
+    "נביטה והאבקה",
+    "מחזור וחיסכון"
+   ],
+   "questions": 260,
+   "chapters": 25,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך נקרא חומר שהאור עובר דרכו?",
+     "e": "👓"
+    },
+    {
+     "q": "מאיזה חומר כדאי לעשות מטרייה?",
+     "e": "☂️"
+    },
+    {
+     "q": "מהי תערובת?",
+     "e": "🥗"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en3",
+   "ver": "da79d1cb71",
+   "subject": "אנגלית",
+   "grade": 2,
+   "title": "ABC · First words · Short sentences",
+   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות ומשפטים קצרים",
+   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, capital and small letters, ABC order, reading short words, first words and short sentences",
+   "tags": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have"
+   ],
+   "questions": 266,
+   "chapters": 25,
+   "reading": 0,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Which word rhymes with cat?",
+     "e": "🐈cat"
+    },
+    {
+     "q": "Which word starts like ball?",
+     "e": "⚽ball"
+    },
+    {
+     "q": "איזו אות נקראת אֶם?",
+     "e": "אֶם"
+    }
+   ],
+   "status": "ready"
   }
  ]
 }

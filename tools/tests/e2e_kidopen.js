@@ -29,5 +29,11 @@ const { chromium } = require('playwright');
     const back = await p.evaluate(() => [...document.querySelectorAll('#kidCar .kidhero')].map(el => [el.querySelector('h2')?.textContent, Math.round(el.getBoundingClientRect().x)]));
     out.push({ target, opened, back });
   }
-  console.log(JSON.stringify(out, null, 1), JSON.stringify(errs)); await b.close();
+  // the kid screen opened from the 1st kid's practice ("▶ לשחק") must be that kid's, even after visiting the 2nd kid's screen
+  const kidScreen = await p.evaluate(() => { activeKid = 'k2'; go('kid');
+    const s1 = sets.find(s => s.kidId === 'k1'); curSet = s1; renderReview(s1); show('vReview'); openModes(s1);
+    const a = kidById(activeKid).name; openRoad(s1.id); return { modes: a, road: kidById(activeKid).name }; });
+  out.push({ kidScreen }); if (kidScreen.modes !== 'עדי' || kidScreen.road !== 'עדי') errs.push('kid screen follows the set');
+  if (out.some(o => o.opened && !o.opened.startsWith('בן'))) errs.push('opened the wrong kid');
+  console.log(JSON.stringify(out, null, 1), JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

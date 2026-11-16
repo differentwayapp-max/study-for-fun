@@ -33,10 +33,12 @@ self.addEventListener('fetch', e => {
   if (url.origin !== location.origin) return;
   // Page navigations: always the network (no HTTP cache); the saved copy only when really offline.
   if (req.mode === 'navigate') {
+    // only the app page itself is saved as the offline copy – not stand-alone pages (guide.html, privacy.html)
+    const app = url.pathname === '/index.html' || !url.pathname.endsWith('.html');
     e.respondWith(fetch(req, { cache: 'no-store' }).then(r => {
-      if (r.ok) { const copy = r.clone(); caches.open(VERSION).then(c => c.put('/index.html', copy)); }
+      if (r.ok && app) { const copy = r.clone(); caches.open(VERSION).then(c => c.put('/index.html', copy)); }
       return r;
-    }).catch(() => fetch(req).catch(() => caches.match('/index.html'))));
+    }).catch(() => fetch(req).catch(() => caches.match(app ? '/index.html' : req))));
     return;
   }
   // The app's own code files: network first too (cache only offline), so a new version is never held back.

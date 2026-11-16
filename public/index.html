@@ -298,6 +298,10 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .passage:not([open]) summary{border-bottom:0}
 .passage .ptext{max-height:42vh;overflow:auto;padding:12px 16px;line-height:1.65;font-size:1.18em;unicode-bidi:plaintext}
 .passage .ptext p{margin:0 0 10px}
+.passage .rdbar{display:flex;gap:6px}
+.passage .rw{border-radius:6px;padding:0 1px;cursor:pointer;transition:background .15s}
+.passage .rw.done{color:#5B6B8C}
+.passage .rw.on{background:var(--sun);color:var(--ink);box-shadow:0 0 0 2px var(--sun)}
 .wordcov{border:var(--line);border-radius:16px;background:#fff;margin:0 0 12px}
 .wordcov summary{cursor:pointer;padding:8px 14px;font-family:var(--display);font-weight:600}
 .wchips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px;max-height:40vh;overflow:auto}
@@ -495,7 +499,9 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .suredlg{text-align:center;max-width:320px;width:100%}.suredlg h3{margin:6px 0 4px;font-family:var(--display);font-size:1.25em}.suredlg p{margin:0 0 14px}
 .sureico{font-size:44px;line-height:1}.surebtns{display:flex;gap:10px;justify-content:center}.surebtns .btn{flex:1;justify-content:center}
 .btn.danger{background:#FF5C5C;color:#fff}
-.dlgwrap{position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:12}
+.dlgwrap{position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:60}
+.dlgwrap>*{max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+.dlgwrap .dlghead{position:sticky;top:-18px;z-index:2;background:inherit;background-color:var(--paper,#fff);padding-top:4px}
 .dlgsm{max-width:360px;width:100%;margin:0;padding:14px}
 .dlghead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .dlgtag{border-radius:999px;padding:3px 12px;font-family:var(--display);font-weight:600;font-size:.9em;color:#fff}
@@ -636,6 +642,7 @@ button.chrow{width:100%;background:#fff;text-align:start;cursor:pointer;font:inh
 .scene .ground{position:absolute;inset:auto 0 0 0;height:16%;background:#D9EFCF;border-top:2px solid #B9D9A9}
 .scene span{position:absolute;transform:translate(-50%,-50%);line-height:1;white-space:nowrap}
 .ltr{unicode-bidi:isolate;direction:ltr}
+.scene span.tx.he{font-family:inherit;line-height:1.25;padding-top:0}
 .scene span.tx{font-family:var(--display);font-weight:700;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:.3em;padding:.08em .35em .12em;box-shadow:0 .08em 0 var(--ink)}
 .scene.mini{aspect-ratio:4/3;max-height:none;border-radius:12px;border-width:1.5px;margin:0 0 4px}
 .scene.mini .ground{height:14%}
@@ -662,7 +669,7 @@ button.chrow{width:100%;background:#fff;text-align:start;cursor:pointer;font:inh
 .dots3 i:nth-child(2){animation-delay:.2s;background:var(--blue)}.dots3 i:nth-child(3){animation-delay:.4s;background:var(--mint)}
 @keyframes dot{40%{transform:translateY(-10px)}}
 .prow.pending{cursor:default;border-style:dashed;box-shadow:none}
-.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:30;background:var(--mint);border:var(--line);border-radius:18px;padding:12px 18px;font-family:var(--display);font-weight:700;box-shadow:0 4px 0 var(--ink);cursor:pointer;animation:rise .3s}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:95;background:var(--mint);border:var(--line);border-radius:18px;padding:12px 18px;font-family:var(--display);font-weight:700;box-shadow:0 4px 0 var(--ink);cursor:pointer;animation:rise .3s}
 
 /* avatars */
 .ava{display:inline-grid;place-items:center;border-radius:50%;overflow:hidden;flex:none;line-height:1}
@@ -852,7 +859,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   </section>
 
   <!-- REPORT dialog -->
-  <div id="repDlg" class="hidden" style="position:fixed;inset:0;background:rgba(31,42,68,.45);display:grid;place-items:center;padding:16px;z-index:10">
+  <div id="repDlg" class="hidden" style="position:fixed;inset:0;background:rgba(31,42,68,.45);display:grid;place-items:center;padding:16px;z-index:60">
     <div class="card" style="max-width:520px;width:100%;margin:0">
       <h3>🚩</h3>
       <div id="repQ" class="sub" dir="auto"></div>
@@ -866,7 +873,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     </div>
   </div>
 
-  <div id="addDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:11">
+  <div id="addDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:60">
     <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
       <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('addDlg').classList.add('hidden');ADD=null" aria-label="סגירה">✕</button></div>
       <div class="subjico" id="adIco" style="margin:0 auto;width:64px;height:64px;font-size:1.6em"></div>
@@ -949,7 +956,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <input id="shUrl" readonly class="tinyurl"><div class="hint center" id="shMsg"></div>
     </div>
   </div>
-  <div id="linkDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:10">
+  <div id="linkDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:60">
     <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
       <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('linkDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
       <span class="dlgtag kid" style="margin:-4px auto 8px;display:inline-block">🧒 קישור לילד</span>
@@ -1105,7 +1112,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   </section>
 
 </div>
-<div id="delAccDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:12">
+<div id="delAccDlg" class="hidden" style="position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:60">
   <div class="card herocard" style="max-width:420px;width:100%;margin:0;text-align:center">
     <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="$('delAccDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
     <div style="font-size:3em">🗑</div>
@@ -2874,6 +2881,36 @@ const MODES=[
 const shortA=q=>q.options[q.answer].length<=40 && q.question.length<=110;
 const riddleOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=14 && /^[\p{L}\p{N} '\-]+$/u.test(a);};
 // reading passage (Unseen) that belongs to a question's chapter – those questions are played in "choice" only
+/* ---------- reading the passage aloud: pause, go on from the same word, the word being read is coloured ---------- */
+const RD={text:'',words:[],i:0,on:false,tok:0};
+function rdSetText(txt){ if(RD.text===txt) return; rdStop(); RD.text=txt; RD.i=0; RD.words=[];
+  txt.split(/\n\s*\n/).forEach((par,pi)=>par.trim().split(/\s+/).filter(Boolean).forEach(w=>RD.words.push({w,p:pi}))); }
+function passageHtml(txt){ rdSetText(txt); let h='', p=-1;
+  RD.words.forEach((x,i)=>{ if(x.p!==p){ if(p>=0) h+='</p>'; h+='<p>'; p=x.p; } h+=`<span class="rw${i<RD.i?' done':''}${i===RD.i&&RD.on?' on':''}" data-i="${i}" onclick="rdFrom(${i})">${esc(x.w)}</span> `; });
+  if(p>=0) h+='</p>';
+  return `<details class="passage" open><summary>📖 קטע קריאה <span class="rdbar" onclick="event.preventDefault()">
+    <button class="btn small rdplay" onclick="rdToggle()" aria-label="${RD.on?'עצירה':'הקראה'}">${RD.on?'⏸':(RD.i?'▶️ המשך':'🔊 הקראה')}</button>
+    ${RD.i?`<button class="btn ghost small" onclick="rdFrom(0)" aria-label="מההתחלה">⏮</button>`:''}</span></summary><div class="ptext" dir="auto">${h}</div></details>`; }
+function rdPaint(){ document.querySelectorAll('.passage .rw').forEach(el=>{ const i=+el.dataset.i; el.classList.toggle('done',i<RD.i); el.classList.toggle('on',RD.on&&i===RD.i); });
+  const b=document.querySelector('.passage .rdplay'); if(b){ b.textContent=RD.on?'⏸':(RD.i?'▶️ המשך':'🔊 הקראה'); b.setAttribute('aria-label',RD.on?'עצירה':'הקראה'); }
+  const cur=document.querySelector('.passage .rw.on'); if(cur){ const box=cur.closest('.ptext'), r=cur.getBoundingClientRect(), br=box.getBoundingClientRect(); if(r.top<br.top||r.bottom>br.bottom) box.scrollTop+=r.top-br.top-br.height/3; } }
+function rdStop(){ if(!RD.on) return; RD.on=false; RD.tok++; try{speechSynthesis.cancel()}catch(e){} rdPaint(); }
+function rdToggle(){ if(RD.on) rdStop(); else { if(RD.i>=RD.words.length) RD.i=0; RD.on=true; rdChunk(); } }
+function rdFrom(i){ rdStop(); RD.i=i; RD.on=true; rdChunk(); }
+function rdChunk(){
+  if(!RD.on) return; if(RD.i>=RD.words.length){ RD.on=false; RD.i=0; rdPaint(); return; }
+  let j=RD.i; while(j<RD.words.length-1 && j-RD.i<24 && !/[.!?:׃]["'”’)]*$/.test(RD.words[j].w) && RD.words[j+1].p===RD.words[j].p) j++;
+  const part=RD.words.slice(RD.i,j+1), starts=[]; let t='';
+  part.forEach(x=>{ starts.push(t.length); t+=x.w+' '; });
+  const tok=++RD.tok, base=RD.i; rdPaint();
+  try{ speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t.replace(/_+/g,' ')); u.lang=/[\u0590-\u05FF]/.test(t)?'he-IL':'en-US'; u.rate=.85;
+    u.onboundary=e=>{ if(tok!==RD.tok||e.name&&e.name!=='word') return; let k=0; while(k+1<starts.length&&starts[k+1]<=e.charIndex) k++; RD.i=base+k; rdPaint(); };
+    u.onend=()=>{ if(tok!==RD.tok) return; RD.i=base+part.length; rdChunk(); };
+    u.onerror=()=>{ if(tok===RD.tok){ RD.on=false; rdPaint(); } };
+    speechSynthesis.speak(u);
+  }catch(e){ RD.on=false; rdPaint(); }
+}
 const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
 function modePool(set,id){
   const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q));
@@ -2969,7 +3006,7 @@ function award(ok){ sfx(ok);
   else G.streak=0;
   hud(); if(ok&&G.streak>=2) bump('gStreak');
 }
-function quitGame(){ try{speechSynthesis.cancel()}catch(e){} if(G.res.length) endGame(); else if(G.set&&!G.set.demo&&getSet(G.set.id)) openRoad(G.set.id); else go('kid'); }
+function quitGame(){ rdStop(); RD.text=''; try{speechSynthesis.cancel()}catch(e){} if(G.res.length) endGame(); else if(G.set&&!G.set.demo&&getSet(G.set.id)) openRoad(G.set.id); else go('kid'); }
 const PRAISE=['כל הכבוד!','מעולה!','בדיוק!','יופי!','אלופים!','וואו!'];
 const curQ=()=>G.qs[G.i];
 function showSheet(ok, text){
@@ -2996,7 +3033,7 @@ function autoNext(){
 }
 /* look back at answered questions (choice / riddle / spell) */
 function pastView(j){
-  if(!G||!G.res[j]) return; G.tok=(G.tok||0)+1; G.view=j; try{speechSynthesis.cancel()}catch(e){}
+  if(!G||!G.res[j]) return; G.tok=(G.tok||0)+1; G.view=j; rdStop(); try{speechSynthesis.cancel()}catch(e){}
   const r=G.res[j], q=r.q, txt=passageOf(G.set,q), last=j===G.res.length-1;
   $('gSheet').className='sheet';
   $('gCount').textContent=`↩ ${j+1} / ${G.qs.length}`;
@@ -3029,9 +3066,9 @@ const SEG=window.Intl&&Intl.Segmenter?new Intl.Segmenter():null;
 function sceneItems(sc){ return sc.flatMap(it=>{ if(!PIC_CH.test(it.e)) return [it]; const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
   if(g.length<2) return [it]; const n=g.length, s=Math.min(it.s,125/n), step=Math.min(92/n,s/1.6*1.35), c=Math.min(Math.max(it.x,4+step*(n-1)/2),96-step*(n-1)/2);
   return g.map((e,j)=>({e,x:+(c+(j-(n-1)/2)*step).toFixed(1),y:it.y,s})); }); }
-const PIC_CH=/[\u2190-\u2BFF\u{1F000}-\u{1FAFF}\uFE0F\u20E3]/u;
+const PIC_CH=/[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\u{1F000}-\u{1FAFF}\uFE0F\u20E3]/u;   // arrows (→) and math signs (−) are text
 function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sceneItems(sc).map(it=>{ const tx=!PIC_CH.test(it.e);
-  return `<span class="${tx?'tx':''}" dir="${tx?'ltr':'auto'}" style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`; }).join('')}</div>`; }
+  const he=tx&&/[\u0590-\u05FF]/.test(it.e); return `<span class="${tx?'tx':''}${he?' he':''}" dir="${he?'rtl':tx?'ltr':'auto'}" style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`; }).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
 
 /* --- 1. multiple choice with a quest path --- */
@@ -3046,7 +3083,7 @@ function choiceRender(){
   $('gCount').textContent=`❓ ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   const txt=passageOf(G.set,q);
-  const top=txt?`<details class="passage" open><summary>📖 קטע קריאה ${EN_SAY(txt)?`<button class="btn ghost small" onclick="event.preventDefault();sayEn(passageOf(G.set,curQ()),true)" aria-label="הקראת הקטע">🔊</button>`:''}</summary><div class="ptext" dir="auto">${txt.split(/\n\s*\n/).map(par=>`<p>${esc(par.trim())}</p>`).join('')}</div></details>`:picOf(q);
+  const top=txt?passageHtml(txt):picOf(q);
   $('gPlay').innerHTML=`${top}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
     <div class="opts">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${'אבגד'[k]}</span>${esc(o)}</button>`).join('')}</div>
     <div class="helpers">${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
@@ -3221,7 +3258,7 @@ function riddleGiveUp(){
 
 /* ---------- end of round ---------- */
 function endGame(){
-  try{speechSynthesis.cancel()}catch(e){}
+  rdStop(); RD.text=''; try{speechSynthesis.cancel()}catch(e){}
   if(!G.res.length){ openModes(G.set); return; }
   const right=G.res.filter(r=>r.ok).length, n=G.res.length, pct=right/n;
   const stars = pct>=.9?3:pct>=.6?2:pct>0?1:0;
@@ -3252,7 +3289,7 @@ function refreshCurrentQ(){
 /* ---------- sound: effects + English words read aloud ---------- */
 let MUTE=false; try{ MUTE=localStorage.getItem('sff_mute')==='1'; }catch(e){}
 function muteIcon(){ const b=$('gMute'); if(b) b.textContent=MUTE?'🔇':'🔊'; }
-function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
+function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) rdStop(); if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
 let AC=null;
 function sfx(ok){
   if(MUTE) return;
@@ -3268,13 +3305,13 @@ const EN_SAY=t=>/[A-Za-z]/.test(t||'') && !/[\u0590-\u05FF]/.test(t||'');
 const isEnSet=s=>!!s && (/אנגלית/.test(s.subject||'') || /english/i.test(s.subject||''));
 function sayEn(text, force){
   if((MUTE&&!force) || !G || !isEnSet(G.set) || !EN_SAY(text)) return;
-  try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){}
+  rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){}
 }
 // grammar (sentence with a blank) → the whole sentence; vocabulary → the word
 function sayAnswer(q){ const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
 function speakQ(){
   try{
-    const q=curQ(); speechSynthesis.cancel();
+    rdStop(); const q=curQ(); speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(q.question);
     u.lang=/[a-zA-Z]{3}/.test(q.question)&&!/[֐-׿]/.test(q.question)?'en-US':'he-IL';
     u.rate=.9; speechSynthesis.speak(u);
@@ -3429,7 +3466,7 @@ function renderSetCards(H){
         ${notYet?`<div class="hint" style="margin-top:6px">⬜ עוד לא תורגלו: ${notYet}</div>`:''}</div>
     </div>`; }).join('');
 }
-function sayWord(t){ try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }
+function sayWord(t){ rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }
 // a small practice set (for the same child) with exactly the words that had mistakes – no AI needed
 function makeWordDrill(setId){
   const set=getSet(setId), st=WSTAT[setId]; if(!set||!st) return;
@@ -3523,8 +3560,8 @@ function pushKids(){ if(!DB||!IS_OWNER||!canManage()) return;
   qwrite('kids',()=>DB.doc('fam/kids').set({list})); }
 let pushT=null;
 function pushSets(){ if(!DB||!IS_OWNER) return; clearTimeout(pushT); pushT=setTimeout(()=>{
-  sets.forEach(s=>{ const {order,pos,...body}=s; const j=JSON.stringify(body); if(sent['s:'+s.id]===j) return; sent['s:'+s.id]=j;
-    qwrite('s:'+s.id,()=>DB.collection('sets').doc(s.id).set({set:body})); });
+  sets.forEach(s=>{ const {order,pos,cloud,...body}=s; const j=JSON.stringify(body); if(sent['s:'+s.id]===j) return; sent['s:'+s.id]=j;
+    qwrite('s:'+s.id,()=>DB.collection('sets').doc(s.id).set({set:body}).then(()=>{ if(!s.cloud){ s.cloud=true; storeSaveLocal(); } })); });
   Object.keys(sent).filter(k=>k.startsWith('s:')&&!sets.some(s=>'s:'+s.id===k)).forEach(k=>{ delete sent[k]; qwrite(k,()=>DB.collection('sets').doc(k.slice(2)).delete()); });
 },600); }
 function pushProgress(kidId){ if(!DB||!kidId) return; const k=kidById(kidId); if(!k) return;
@@ -3576,7 +3613,13 @@ async function cloudInit(){
   },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
   DB.collection('sets').onSnapshot(q=>{
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
-    if(IS_OWNER){ remote.forEach(r=>{ if(!sets.some(s=>s.id===r.id)) sets.push(r); }); pushSets(); }
+    if(IS_OWNER){
+      const ids=new Set(remote.map(r=>r.id)), fresh=!(q.metadata&&q.metadata.fromCache);
+      // a set that was in the cloud and is gone was deleted on another phone – drop it here too, don't upload it again
+      // (sets from before this flag: gone from the cloud and older than an hour count as deleted)
+      if(fresh) sets=sets.filter(s=>ids.has(s.id) || (!s.cloud && Date.now()-(s.created||0)<3600e3));
+      remote.forEach(r=>{ const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
+      pushSets(); }
     else { const old=sets; sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
     storeSaveLocal(); rerender();
   },e=>showCloudErr(e&&e.message));

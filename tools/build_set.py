@@ -43,7 +43,7 @@ def bases(e):
         if 0x1F1E6 <= c <= 0x1F1FF and i + 1 < len(cps) and 0x1F1E6 <= cps[i + 1] <= 0x1F1FF: i += 1
         n += 1; i += 1
     return n
-EMOJI_RE = re.compile("[\u2190-\u2BFF\U0001F000-\U0001FAFF\uFE0F\u20E3]")
+EMOJI_RE = re.compile("[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\U0001F000-\U0001FAFF\uFE0F\u20E3]")   # arrows (→) and math signs (−) are text
 def is_text(e): return not EMOJI_RE.search(e)          # a picture item that is a number card / short text, e.g. "12 → ?"
 # a picture that has nothing to do with the question: only allowed next to other, real items
 GENERIC = set("🤔 ❓ ❔ 🔢 ➕ ➖ ✖️ ➗ 🧮 💯 ✏️ 📝 ✍️ 🔍 📚 💭 ✨ 🎯 🏆".split())
@@ -71,7 +71,7 @@ for ci, chap in enumerate(C):
         for prob in pic_rules.check(q, opts[ans], sc): errors.append(f"{tag}: {prob}")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
-        if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")
+        if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 and not is_text(it["e"]) for it in scn): errors.append(f"{tag}: bad scene")
         if len(scn) == 1 and scn[0]["e"] in GENERIC: errors.append(f"{tag}: the picture is decoration ({scn[0]['e']}) – show what the question is about, or the numbers as a card (TXT)")
         for it in scn:
             if is_text(it["e"]):

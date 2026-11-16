@@ -19,8 +19,16 @@ const OUT = process.env.OUT;
       await p.evaluate(() => { CAT.grade = 2; renderCatalog(); }); await p.waitForTimeout(500);
       await p.screenshot({ path: `${OUT}/cat_he_g3.png`, fullPage: true });
       await p.evaluate(() => { CAT.grade = 0; renderCatalog(); });
-      const ok = await p.evaluate(() => !!document.querySelector('#catList .catcard button.btn.big:not([disabled])'));
-      if (!ok) errs.push('no add button');
+      await p.click('.subjtile >> nth=0'); await p.waitForTimeout(1500);
+      if (!await p.$('.pickgo[disabled]')) errs.push('add should wait for a topic');
+      await p.click('.pick >> nth=0'); await p.click('.pick >> nth=2'); await p.waitForTimeout(300);
+      await p.screenshot({ path: `${OUT}/cat_he_subj.png`, fullPage: true });
+      await p.click('.pickgo'); await p.waitForTimeout(1200);
+      await p.screenshot({ path: `${OUT}/cat_he_add.png` });
+      await p.click('#addDlg .btn.big'); await p.waitForTimeout(800);
+      const r = await p.evaluate(() => { const s = sets.find(x => x.kidId === 'k1'); return s && { pick: s.pick, topics: [...new Set(s.questions.map(q => q.topic))], ch: s.chapters.length, n: s.questions.length, bad: s.questions.some(q => !s.chapters[q.ch]) }; });
+      console.log('added', JSON.stringify(r));
+      if (!r || r.topics.length !== 2 || r.bad) errs.push('picked set wrong');
     }
     await p.close();
   }

@@ -443,6 +443,20 @@ body.noai #btnBuild,body.noai #picFix,body.noai #qaAll,body.noai #noAI{display:n
 .catsub{margin:14px 0 6px}.catsubh{display:flex;align-items:center;gap:10px;margin:0 4px 8px}.catsubh b{font-family:var(--display);font-size:1.15em}.catsubh .hint{margin-inline-start:auto}
 .catsubh .subjico{width:40px;height:40px;flex:none;border-radius:12px;border:var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:700}
 .catttl b{font-family:var(--display);font-size:1.1em}
+.subjgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 14px}
+.subjtile{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 8px 14px;border:var(--line);border-radius:22px;background:#fff;box-shadow:0 4px 0 var(--ink);cursor:pointer;font:inherit;color:var(--ink);min-height:150px;justify-content:center}
+.subjtile .subjico{width:58px;height:58px;border-radius:16px;font-size:1.5em}.subjtile b{font-family:var(--display);font-size:1.15em}
+.subjtile.off{background:#FBFAFF;box-shadow:none;border-style:dashed}.subjtile:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
+.subjtile:focus-visible,.pick:focus-within{outline:3px solid #2F6BFF;outline-offset:2px}
+.catback{margin:8px 2px 2px;font-size:1em}
+.pickhd{display:flex;justify-content:space-between;align-items:center;margin:12px 2px 8px;font-weight:600}
+.picklist{display:flex;flex-direction:column;gap:8px}
+.pick{display:flex;align-items:center;gap:12px;min-height:52px;padding:8px 12px;border:2px solid #D8DDEA;border-radius:14px;cursor:pointer;background:#fff}
+.pick input{position:absolute;opacity:0;width:1px;height:1px}
+.pick .box{flex:none;width:28px;height:28px;border:2.5px solid var(--ink);border-radius:8px;display:grid;place-items:center;color:transparent;font-weight:800}
+.pick.on{border-color:var(--ink);background:#EEF3FF}.pick.on .box{background:var(--ink);color:#fff}
+.pick .t{flex:1;font-weight:600}.pick .c{font-size:.85em;color:var(--ink2);white-space:nowrap}
+.pickgo{width:100%;justify-content:center;margin-top:14px}
 .soonc{border-style:dashed;box-shadow:none;background:#FBFAFF}
 .currl{margin:0;padding-inline-start:20px}.currl li{margin:3px 0;font-size:.95em}
 .curr{margin:2px 6px 8px}.curr summary{cursor:pointer;font-weight:600;color:var(--ink2)}.curr .currl{margin-top:6px}
@@ -600,7 +614,7 @@ button.chrow{width:100%;background:#fff;text-align:start;cursor:pointer;font:inh
 /* picture scenes */
 .scene{position:relative;container-type:size;width:100%;aspect-ratio:16/10;max-height:46vh;background:#EAF4FF;border:var(--line);border-radius:22px;overflow:hidden;margin:0 auto 16px}
 .scene .ground{position:absolute;inset:auto 0 0 0;height:16%;background:#D9EFCF;border-top:2px solid #B9D9A9}
-.scene span{position:absolute;transform:translate(-50%,-50%);line-height:1}
+.scene span{position:absolute;transform:translate(-50%,-50%);line-height:1;white-space:nowrap}
 .scene.mini{aspect-ratio:4/3;max-height:none;border-radius:12px;border-width:1.5px;margin:0 0 4px}
 .scene.mini .ground{height:14%}
 .mitem .scene.mini{width:96px;flex:none;margin:0}
@@ -1897,7 +1911,7 @@ function distribute(n, topics){
 function cleanScene(sc){
   if(!Array.isArray(sc)||!sc.length) return null;
   const n=v=>Math.max(0,Math.min(100,+v||0));
-  const out=sc.slice(0,8).filter(it=>it&&typeof it.e==='string'&&[...it.e].length<=4).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
+  const out=sc.slice(0,12).filter(it=>it&&typeof it.e==='string'&&[...it.e].length<=4).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
   return out.length?out:null;
 }
 function clean(arr, topics){
@@ -2175,10 +2189,10 @@ function applyImport(p, ik){
   const qs=p.qs, words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
   const qa={...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]};
   const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
-  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
+  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',pick:p.pick||null,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
     delete old.order; delete old.pos; store.save(); return {set:old, msg:`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`}; }
   const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
-    qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',ver:p.ver||'',words};
+    qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',ver:p.ver||'',pick:p.pick||null,words};
   sets.unshift(set); store.save(); return {set, msg:`נוסף: ${set.subject} · ${qs.length} שאלות ✓`};
 }
 async function importSet(){
@@ -2197,8 +2211,8 @@ async function openPendingAdd(){
   if(!a || locked()) return; try{ sessionStorage.removeItem('sff_add'); }catch(e){}
   openAddDialog(a);
 }
-async function openAddDialog(a, kidId){
-  let p; try{ p=await loadShare(a); }catch(e){ toast('⚠️ הלינק לתרגול לא תקין'); return; }
+async function openAddDialog(a, kidId, pick){
+  let p; try{ p=pickTopics(await loadShare(a), pick); }catch(e){ toast('⚠️ הלינק לתרגול לא תקין'); return; }
   ADD={p, kidId: kidId || (kids.length===1?kids[0].id:null), newKid: !kids.length};
   $('adExam').value = p.examDate && daysLeft(p.examDate)>=0 ? p.examDate : '';
   $('adGrade').innerHTML=GRADES.map((g,i)=>`<option value="${i}">כיתה ${g}</option>`).join(''); $('adGrade').value=String(+p.grade||0);
@@ -2227,10 +2241,10 @@ function addConfirm(){
 }
 
 /* ---------- catalog of ready practice sets (public/share/catalog.json) ---------- */
-let CAT={list:null,kid:null,subj:''};
+let CAT={list:null,kid:null,subj:'',pick:{},p:{}};
 async function openCatalog(kidId){
   loadCurriculum().then(()=>{ if(!$('vCat').classList.contains('hidden')) renderCatalog(); });
-  if(kidId&&kidId!==CAT.kid) CAT.grade=null;
+  if(kidId&&kidId!==CAT.kid){ CAT.grade=null; CAT.subj=''; CAT.pick={}; }
   CAT.kid=kidId||CAT.kid||(kids[0]&&kids[0].id)||null; show('vCat'); $('catList').innerHTML='<p class="center">⏳</p>';
   try{ const r=await fetch(`/share/catalog.json?t=${Date.now()}`); CAT.list=r.ok?((await r.json()).sets||[]):[]; }catch(e){ CAT.list=CAT.list||[]; }
   try{ const more=window.__sffRoot?await window.__sffRoot.list('catalog'):[]; CAT.list=CAT.list.concat(more.map(x=>({...x,id:'fs-'+x.id,status:'ready'}))); }catch(e){}   // approved suggestions
@@ -2239,41 +2253,60 @@ async function openCatalog(kidId){
 const CAT_SUBJ=['מתמטיקה','עברית / לשון','מדעים','אנגלית'];
 let CURR=null;
 async function loadCurriculum(){ if(CURR) return CURR; try{ const r=await fetch('/share/curriculum.json'); CURR=r.ok?await r.json():{grades:{}}; }catch(e){ CURR={grades:{}}; } return CURR; }
+// keep only the topics the parent ticked (chapters renumbered; a mixed review chapter left with < 4 questions is dropped)
+function pickTopics(p, pick){
+  if(!Array.isArray(pick)||!pick.length) return p;
+  const keep=new Set(pick), map={}, ch=[];
+  (p.chapters||[]).forEach((c,i)=>{ const n=p.qs.filter(q=>q.ch===i&&keep.has(q.topic)).length;
+    if(n && !(n<4 && (c.topics||[]).length>1)){ map[i]=ch.length; ch.push({...c,topics:(c.topics||[]).filter(t=>keep.has(t)),count:n}); } });
+  const qs=p.qs.filter(q=>keep.has(q.topic)&&(!p.chapters||map[q.ch]!=null)).map(q=>p.chapters?{...q,ch:map[q.ch]}:q);
+  return {...p, qs, topics:p.topics.filter(t=>keep.has(t)), chapters:p.chapters?ch:null, pick:[...pick]};
+}
+const catSet=id=>(CAT.p=CAT.p||{})[id];
+async function catLoad(id){ if(catSet(id)) return; try{ CAT.p[id]=await loadShare(id); }catch(e){ CAT.p[id]={qs:[],topics:[],bad:1}; } if(!$('vCat').classList.contains('hidden')) renderCatalog(); }
+function catPick(id){ CAT.pick=CAT.pick||{}; return CAT.pick[id]=CAT.pick[id]||new Set(); }
+function catToggle(id, t, on){ const P=catPick(id); on?P.add(t):P.delete(t); renderCatalog(); }
+function catAll(id){ const p=catSet(id), P=catPick(id), all=P.size===p.topics.length; p.topics.forEach(t=>all?P.delete(t):P.add(t)); renderCatalog(); }
+function catAdd(id){ const P=[...catPick(id)]; if(!P.length) return; const k=kidById(CAT.kid); openAddDialog(id, k?k.id:null, P); }
 function renderCatalog(){
   const k=kidById(CAT.kid), L=CAT.list||[];
   if(CAT.grade==null) CAT.grade=k?k.grade:0;
-  const g=CAT.grade;
-  $('catKids').innerHTML=kids.map(x=>`<button class="${x.id===CAT.kid?'on':''}" onclick="CAT.kid='${x.id}';CAT.grade=${x.grade};renderCatalog()"><span class="dot" style="background:${x.color}"></span><span translate="no">${esc(x.name)} · ${EN()?'Grade '+(x.grade+1):GRADES[x.grade]}</span></button>`).join('');
+  const g=CAT.grade, sub=CAT.subj||'';
+  $('catKids').innerHTML=kids.map(x=>`<button class="${x.id===CAT.kid?'on':''}" onclick="CAT.kid='${x.id}';CAT.grade=${x.grade};CAT.subj='';CAT.pick={};renderCatalog()"><span class="dot" style="background:${x.color}"></span><span translate="no">${esc(x.name)} · ${EN()?'Grade '+(x.grade+1):GRADES[x.grade]}</span></button>`).join('');
   $('catKids').parentElement.classList.toggle('hidden',!kids.length);
-  // grade tabs: א'–ח', each with its number of ready practice sets
   $('catGrades').innerHTML=GRADES.slice(0,8).map((G,i)=>{ const n=L.filter(x=>x.grade===i&&x.status==='ready').length;
-    return `<button role="tab" aria-selected="${i===g}" class="gbtn ${i===g?'on':''} ${n?'':'empty'}" onclick="CAT.grade=${i};renderCatalog()" aria-label="כיתה ${G}${n?`, ${n} תרגולים`:''}" translate="no">${EN()?i+1:G.replace(/'/,'')}${n?`<i class="n">${n}</i>`:''}</button>`; }).join('');
-  const cur=(CURR&&CURR.grades&&CURR.grades[g])||{};
-  const here=L.filter(x=>x.grade===g);
-  const card=x=>{ const [c,ico]=subjStyle(x.subject), soon=x.status!=='ready';
-    const has=k&&sets.some(s=>s.kidId===k.id&&s.src&&s.src.replace(/_/g,'-')===x.id);
-    const d=(window.SFF_LANG&&SFF_LANG()==='en'&&x.desc_en)||x.desc;
-    return `<div class="card catcard ${soon?'soon':''}">
-      <div class="catttl"><b dir="auto">${esc(x.title||x.subject)}</b>${k&&k.grade===x.grade?` <span class="pill ok">מתאים ל${esc(k.name)}</span>`:''}</div>
-      ${d?`<p class="sub" dir="auto" translate="no" style="margin:6px 0 0">${esc(d)}</p>`:''}
-      ${soon?'':`<div class="catstats"><span>❓ ${x.questions} שאלות</span><span>📚 ${x.chapters} פרקים</span>${x.reading?`<span>📖 קטע קריאה</span>`:''}${x.words?`<span>🔤 ${x.words} מילים</span>`:''}</div>
-      <div class="catpeek" translate="no">${(x.samples||[]).map(q=>`<div><div class="e">${esc(q.e)}</div><span dir="auto">${esc(q.q)}</span></div>`).join('')}</div>`}
-      ${soon?'<button class="btn big" disabled style="width:100%;justify-content:center;margin-top:10px">🔔 בקרוב</button>'
-        :has?`<button class="btn ghost big" style="width:100%;justify-content:center;margin-top:10px" onclick="go('kids')">✓ כבר אצל ${esc(k.name)}</button>`
-        :`<button class="btn big" style="width:100%;justify-content:center;margin-top:10px" onclick="openAddDialog('${x.id}'${k?`,'${k.id}'`:''})">＋ הוספה${k?' ל'+esc(k.name):''}</button>`}
-      ${soon?'':`<button class="linkbtn" style="display:block;margin:10px auto 0" onclick="shareCatalog('${x.id}')">🎁 לשלוח להורה אחר</button>`}
+    return `<button role="tab" aria-selected="${i===g}" class="gbtn ${i===g?'on':''} ${n?'':'empty'}" onclick="CAT.grade=${i};CAT.subj='';renderCatalog()" aria-label="כיתה ${G}${n?`, ${n} תרגולים`:''}" translate="no">${EN()?i+1:G.replace(/'/,'')}${n?`<i class="n">${n}</i>`:''}</button>`; }).join('');
+  const cur=(CURR&&CURR.grades&&CURR.grades[g])||{}, here=L.filter(x=>x.grade===g&&x.status==='ready');
+  const ico=s=>{ const [c,i]=subjStyle(s), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c); return `<span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${i}</span>`; };
+  const currList=(s,open)=>{ const t=cur[s]||[]; return t.length?`<details class="curr" ${open?'open':''}><summary>📋 מה לומדים בכיתה ${GRADES[g]} לפי התוכנית</summary><ul class="currl">${t.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''; };
+  // 1) the grade: one big tile per subject
+  if(!sub){
+    $('catList').innerHTML=`<h2 class="catgh">כיתה ${GRADES[g]} <span class="hint">בוחרים מקצוע</span></h2><div class="subjgrid">`
+     +CAT_SUBJ.map(s=>{ const mine=here.filter(x=>x.subject===s), noProg=s==='אנגלית'&&g<2;
+       const nT=mine.reduce((a,x)=>a+((x.tags||[]).length||0),0);
+       return `<button class="subjtile ${mine.length?'':'off'}" onclick="CAT.subj=${esc(JSON.stringify(s))};renderCatalog();scrollTo(0,0)">${ico(s)}<b>${esc(s)}</b><span class="hint">${mine.length?`✓ ${mine.length===1?'תרגול מוכן':mine.length+' תרגולים מוכנים'}`:noProg?'לא נלמד כמקצוע':'בקרוב'}</span></button>`; }).join('')+`</div>`
+     +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
+    return;
+  }
+  // 2) one subject: tick the topics of the test, then add
+  const mine=here.filter(x=>x.subject===sub), noProg=sub==='אנגלית'&&g<2;
+  mine.forEach(x=>{ if(!catSet(x.id)) catLoad(x.id); });
+  const block=x=>{ const p=catSet(x.id); if(!p) return `<div class="card catcard"><p class="center">⏳</p></div>`; if(p.bad) return '';
+    const P=catPick(x.id), cnt=t=>p.qs.filter(q=>q.topic===t).length, n=P.size?pickTopics(p,[...P]).qs.length:0;
+    const has=k&&sets.find(s=>s.kidId===k.id&&s.src&&s.src.replace(/_/g,'-')===x.id);
+    return `<div class="card catcard">
+      <div class="catttl"><b dir="auto">${esc(x.title||x.subject)}</b></div>
+      <div class="pickhd"><span>✔️ סמנו את הנושאים שבמבחן</span><button class="linkbtn" onclick="catAll('${x.id}')">${P.size===p.topics.length?'ניקוי':'בחירת הכול'}</button></div>
+      <div class="picklist" role="group" aria-label="נושאים">${p.topics.map(t=>`<label class="pick ${P.has(t)?'on':''}"><input type="checkbox" ${P.has(t)?'checked':''} onchange='catToggle("${x.id}",${esc(JSON.stringify(t))},this.checked)'><span class="box" aria-hidden="true">✓</span><span class="t" dir="auto">${esc(t)}</span><span class="c">${cnt(t)} שאלות</span></label>`).join('')}</div>
+      ${has?`<p class="hint" style="margin:10px 2px 0">✓ כבר אצל ${esc(k.name)}${Array.isArray(has.pick)?` · ${has.pick.length} נושאים`:''} – הוספה תעדכן את הנושאים</p>`:''}
+      <button class="btn big pickgo" ${P.size?'':'disabled'} onclick="catAdd('${x.id}')">${P.size?`＋ ${k?'הוספה ל'+esc(k.name):'הוספה'} · ${n} שאלות`:'👆 סמנו לפחות נושא אחד'}</button>
+      <button class="linkbtn" style="display:block;margin:10px auto 0" onclick="shareCatalog('${x.id}')">🎁 לשלוח להורה אחר</button>
     </div>`; };
-  const nReady=here.filter(x=>x.status==='ready').length;
-  $('catList').innerHTML=`<h2 class="catgh">כיתה ${GRADES[g]} <span class="hint">${nReady?`${nReady} תרגולים מוכנים`:'עוד אין תרגולים מוכנים'}</span></h2>`
-   +CAT_SUBJ.map(sub=>{ const [c,ico]=subjStyle(sub), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), mine=here.filter(x=>x.subject===sub), topics=cur[sub]||[];
-    const noProg=sub==='אנגלית'&&g<2;
-    return `<section class="catsub" aria-label="${esc(sub)}"><div class="catsubh"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}</span><b>${esc(sub)}</b><span class="hint">${mine.length?`${mine.length} ${mine.length===1?'תרגול':'תרגולים'}`:noProg?'לא נלמד כמקצוע':'בקרוב'}</span></div>
-      ${mine.map(card).join('')}
-      ${!mine.length?`<div class="card soonc">${noProg?`<p class="sub" style="margin:0">${esc(topics[0]||'')}</p>`:`<p class="sub" style="margin:0 0 8px">עוד אין תרגול מוכן. מה לומדים בכיתה ${GRADES[g]}:</p><ul class="currl">${topics.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
-        ${sample?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum('${sub}',${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`
-       :topics.length&&!noProg?`<details class="curr"><summary>📋 מה לומדים בכיתה ${GRADES[g]}</summary><ul class="currl">${topics.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details>`:''}
-    </section>`; }).join('')
-   +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
+  $('catList').innerHTML=`<button class="linkbtn catback" onclick="CAT.subj='';renderCatalog()">‹ כל המקצועות</button>
+    <div class="catsubh">${ico(sub)}<b>${esc(sub)} · כיתה ${GRADES[g]}</b></div>`
+   +(mine.length?mine.map(block).join('')+currList(sub,false)
+     :`<div class="card soonc">${noProg?`<p class="sub" style="margin:0">${esc((cur[sub]||[])[0]||'')}</p>`:`<p class="sub" style="margin:0 0 8px">עוד אין תרגול מוכן. מה לומדים בכיתה ${GRADES[g]}:</p><ul class="currl">${(cur[sub]||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+        ${sample?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum(${esc(JSON.stringify(sub))},${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`);
 }
 // a subject with no ready set: open the builder with that grade's curriculum topics filled in
 function buildFromCurriculum(sub, g){ const k=kidById(CAT.kid)||kids.find(x=>x.grade===g)||null; const topics=((CURR&&CURR.grades[g])||{})[sub]||[];
@@ -2286,7 +2319,7 @@ async function autoUpdateSets(){
   let n=0;
   for(const s of mine){
     const e=cat.find(x=>x.id===String(s.src).replace(/_/g,'-')); if(!e||!e.ver||e.ver===s.ver) continue;
-    try{ const p=await loadShare(e.id), k=kidById(s.kidId); if(!k) continue;
+    try{ const p=pickTopics(await loadShare(e.id), s.pick), k=kidById(s.kidId); if(!k) continue;
       const keep={examDate:s.examDate, dailyGoal:s.dailyGoal};
       applyImport(p,k); Object.assign(s,keep); n++; }catch(err){}
   }
@@ -2959,7 +2992,12 @@ const shortTxt=t=>t.trim().split(/\s+/).length<=6;
 // the question text next to a picture – skipped when it only says "what is this?" (the picture says it)
 const GENERIC_Q=/^(what is this|what are these|who is (he|she|this)|מה זה|מי זה)\s*\??$/i;
 const cueTxt=q=>!(q.scene||q.emoji) || (shortTxt(q.question) && !GENERIC_Q.test(q.question.trim()));
-function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sc.map(it=>`<span style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`).join('')}</div>`; }
+// several emoji in one item ("🍎🍎🍎") would run out of the frame and wrap: draw them one by one, side by side, sized to fit
+const SEG=window.Intl&&Intl.Segmenter?new Intl.Segmenter():null;
+function sceneItems(sc){ return sc.flatMap(it=>{ const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
+  if(g.length<2) return [it]; const n=g.length, s=Math.min(it.s,125/n), step=Math.min(92/n,s/1.6*1.35), c=Math.min(Math.max(it.x,4+step*(n-1)/2),96-step*(n-1)/2);
+  return g.map((e,j)=>({e,x:+(c+(j-(n-1)/2)*step).toFixed(1),y:it.y,s})); }); }
+function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sceneItems(sc).map(it=>`<span style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
 
 /* --- 1. multiple choice with a quest path --- */

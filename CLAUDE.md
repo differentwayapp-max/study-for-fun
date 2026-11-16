@@ -24,4 +24,4 @@ Test hooks: `window.SFF_REST_EMU` (emulator addresses) and `window.SFF_TEST_GOOG
 ## Deploy
 `tools/deploy.sh "message"` – bumps the version everywhere (sff-vN), commits, deploys hosting, pushes to GitHub.
 Functions: `firebase deploy --only functions`. Rules: `firebase deploy --only firestore:rules`.
-Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py`, then deploy (existing copies update automatically, progress kept).
+Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py` (one emoji per picture item – use `COUNT(("🍎",3))` for counting pictures), then `IDS=<id> node tools/tests/local_scenes.js` with the app served (renders every picture: 0 bad scenes), then deploy (existing copies update automatically, progress kept).

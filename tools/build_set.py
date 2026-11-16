@@ -9,10 +9,30 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import pic_rules   # the picture must show the answer itself; no emoji newer than 2019
 
 src = pathlib.Path(sys.argv[1])
-ns = {}
+def COUNT(*rows, top=10, bottom=84):
+    """Counting picture: each row is (emoji, n). Lays the emoji out one by one, evenly, inside the frame.
+    COUNT(("🍎", 3))  ·  COUNT(("🐟", 3), ("🐟", 3))  ·  COUNT(("🍎", 2), ("🍎", 2), ("🍎", 2))  (groups of 2)"""
+    r, out = len(rows), []
+    for i, (e, n) in enumerate(rows):
+        s = min(44, 0.75 * (bottom - top) / r, 125 / n)          # font size in % of the frame height (the frame is 16:10)
+        y = top + (bottom - top) * (i + .5) / r
+        step = min(92 / n, s / 1.6 * 1.35)                        # % of the width between neighbours
+        for j in range(n): out.append((e, round(50 + (j - (n - 1) / 2) * step, 1), round(y, 1), round(s)))
+    return out
+
+ns = {"COUNT": COUNT}
 exec(src.read_text(encoding="utf-8"), ns)
 SET, C = ns["SET"], ns["C"]
 
+def bases(e):
+    """How many separate emoji are in e (ZWJ sequences, skin tones, keycaps and flags count as one)."""
+    n, cps, i = 0, [ord(c) for c in e], 0
+    while i < len(cps):
+        c = cps[i]
+        if c in (0xFE0F, 0xFE0E, 0x20E3) or 0x1F3FB <= c <= 0x1F3FF or (i and cps[i - 1] == 0x200D) or c == 0x200D: i += 1; continue
+        if 0x1F1E6 <= c <= 0x1F1FF and i + 1 < len(cps) and 0x1F1E6 <= cps[i + 1] <= 0x1F1FF: i += 1
+        n += 1; i += 1
+    return n
 def words(t): return len(str(t).split())
 def scene(s):
     if isinstance(s, str): return [{"e": s, "x": 50, "y": 52, "s": 56}]
@@ -37,7 +57,11 @@ for ci, chap in enumerate(C):
         for prob in pic_rules.check(q, opts[ans], sc): errors.append(f"{tag}: {prob}")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
-        if not 1 <= len(scn) <= 6 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")
+        if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")
+        for it in scn:
+            if bases(it["e"]) != 1: errors.append(f"{tag}: one emoji per picture item – \"{it['e']}\" (use COUNT for several)")
+            hw, hh = it["s"] * .62 / 1.6, it["s"] * .5                # half width / height of the emoji, in % of the frame
+            if it["x"] - hw < -1 or it["x"] + hw > 101 or it["y"] - hh < -1 or it["y"] + hh > 101: errors.append(f"{tag}: \"{it['e']}\" is outside the frame")
         qs.append({"topic": topic, "question": q, "options": opts, "answer": ans,
                    "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci})
 

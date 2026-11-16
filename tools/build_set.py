@@ -25,7 +25,12 @@ def COUNT(*rows, top=10, bottom=84):
         for j in range(n): out.append((e, round(50 + (j - (n - 1) / 2) * step, 1), round(y, 1), round(s)))
     return out
 
-ns = {"COUNT": COUNT}
+def TXT(*lines, s=None):
+    """A number card instead of a decoration: TXT("12 → ?")  ·  TXT("5 + 3", "= ?"). Shown big, left-to-right."""
+    n = len(lines); z = s or min(34, 70 / n, 140 / max(len(l) for l in lines))
+    return [(l, 50, round(14 + 70 * (i + .5) / n, 1), round(z)) for i, l in enumerate(lines)]
+
+ns = {"COUNT": COUNT, "TXT": TXT}
 exec(src.read_text(encoding="utf-8"), ns)
 SET, C = ns["SET"], ns["C"]
 
@@ -38,6 +43,10 @@ def bases(e):
         if 0x1F1E6 <= c <= 0x1F1FF and i + 1 < len(cps) and 0x1F1E6 <= cps[i + 1] <= 0x1F1FF: i += 1
         n += 1; i += 1
     return n
+EMOJI_RE = re.compile("[\u2190-\u2BFF\U0001F000-\U0001FAFF\uFE0F\u20E3]")
+def is_text(e): return not EMOJI_RE.search(e)          # a picture item that is a number card / short text, e.g. "12 → ?"
+# a picture that has nothing to do with the question: only allowed next to other, real items
+GENERIC = set("🤔 ❓ ❔ 🔢 ➕ ➖ ✖️ ➗ 🧮 💯 ✏️ 📝 ✍️ 🔍 📚 💭 ✨ 🎯 🏆".split())
 def words(t): return len(str(t).split())
 def scene(s):
     if isinstance(s, str): return [{"e": s, "x": 50, "y": 52, "s": 56}]
@@ -63,7 +72,13 @@ for ci, chap in enumerate(C):
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
         if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 for it in scn): errors.append(f"{tag}: bad scene")
+        if len(scn) == 1 and scn[0]["e"] in GENERIC: errors.append(f"{tag}: the picture is decoration ({scn[0]['e']}) – show what the question is about, or the numbers as a card (TXT)")
         for it in scn:
+            if is_text(it["e"]):
+                if len(it["e"]) > 16: errors.append(f"{tag}: picture text too long \"{it['e']}\"")
+                hw = it["s"] * .3 * len(it["e"]) / 1.6
+                if it["x"] - hw < 1 or it["x"] + hw > 99: errors.append(f"{tag}: picture text \"{it['e']}\" is too wide")
+                continue
             if bases(it["e"]) != 1: errors.append(f"{tag}: one emoji per picture item – \"{it['e']}\" (use COUNT for several)")
             hw, hh = it["s"] * .62 / 1.6, it["s"] * .5                # half width / height of the emoji, in % of the frame
             if it["x"] - hw < -1 or it["x"] + hw > 101 or it["y"] - hh < -1 or it["y"] + hh > 101: errors.append(f"{tag}: \"{it['e']}\" is outside the frame")

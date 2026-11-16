@@ -615,6 +615,7 @@ button.chrow{width:100%;background:#fff;text-align:start;cursor:pointer;font:inh
 .scene{position:relative;container-type:size;width:100%;aspect-ratio:16/10;max-height:46vh;background:#EAF4FF;border:var(--line);border-radius:22px;overflow:hidden;margin:0 auto 16px}
 .scene .ground{position:absolute;inset:auto 0 0 0;height:16%;background:#D9EFCF;border-top:2px solid #B9D9A9}
 .scene span{position:absolute;transform:translate(-50%,-50%);line-height:1;white-space:nowrap}
+.scene span.tx{font-family:var(--display);font-weight:700;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:.3em;padding:.08em .35em .12em;box-shadow:0 .08em 0 var(--ink)}
 .scene.mini{aspect-ratio:4/3;max-height:none;border-radius:12px;border-width:1.5px;margin:0 0 4px}
 .scene.mini .ground{height:14%}
 .mitem .scene.mini{width:96px;flex:none;margin:0}
@@ -1916,7 +1917,7 @@ function distribute(n, topics){
 function cleanScene(sc){
   if(!Array.isArray(sc)||!sc.length) return null;
   const n=v=>Math.max(0,Math.min(100,+v||0));
-  const out=sc.slice(0,12).filter(it=>it&&typeof it.e==='string'&&[...it.e].length<=4).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
+  const out=sc.slice(0,12).filter(it=>it&&typeof it.e==='string'&&([...it.e].length<=4||(it.e.length<=16&&!PIC_CH.test(it.e)))).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
   return out.length?out:null;
 }
 function clean(arr, topics){
@@ -1931,7 +1932,7 @@ function clean(arr, topics){
 const words=t=>String(t||'').trim().split(/\s+/).filter(Boolean).length;
 const needsPic=q=>!q.scene || words(q.question)>6 || words(q.explanation)>14 || q.options.some(o=>words(o)>4) || q.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase());
 // The picture must show the ANSWER itself – never a related thing (🐸 for "jump" makes a child think "frog").
-const PIC_RULE = 'PICTURE RULE (strict): the scene must show the correct answer ITSELF, so a child who sees only the picture thinks of that exact word and of no other option. Never a related object or animal instead (a frog for "jump" is WRONG: the child thinks "frog"; a cup for "eat" is WRONG). Verbs: show the person doing the action (🏃 run, 🏊 swim, 😴 sleep, 🤸 jump). No picture where another option also fits (a frog can jump AND swim). Use only common emojis from before 2019. If no emoji shows the word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
+const PIC_RULE = 'PICTURE MUST BE RELATED: every scene shows what THIS question is about – never a decoration (no lone 🤔 ❓ 🔢 ➕ ➖ ✏️ 📝 🔟 💯 etc.). Several things = several items, ONE emoji per item (never "🍎🍎🍎" in one item), all inside 0-100 with room for their size. For number questions with nothing real to draw, a scene item may be a short text card instead of an emoji (max 16 chars, e.g. {"e":"12 → ?","x":50,"y":50,"s":30} or {"e":"5 + 3",...}) showing the given numbers – never the answer. For word problems show the story\'s objects (5 apples = five 🍎 items). '+'PICTURE RULE (strict): the scene must show the correct answer ITSELF, so a child who sees only the picture thinks of that exact word and of no other option. Never a related object or animal instead (a frog for "jump" is WRONG: the child thinks "frog"; a cup for "eat" is WRONG). Verbs: show the person doing the action (🏃 run, 🏊 swim, 😴 sleep, 🤸 jump). No picture where another option also fits (a frog can jump AND swim). Use only common emojis from before 2019. If no emoji shows the word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
 async function picturePass(qs, ctx, askFn=ask, onProgress){
   const idx=qs.map((q,i)=>needsPic(q)?i:-1).filter(i=>i>=0);
   for(let k=0;k<idx.length;k+=12){
@@ -2422,7 +2423,9 @@ let delT=null;
 async function delSet(){ if(!curSet||curSet.demo) return; const id=curSet.id;
   if(!(await askSure({ico:'🗑',title:'למחוק את התרגול?',text:'התרגול וההתקדמות בו יימחקו מהאפליקציה.',yes:'מחיקה',danger:true}))) return;
   removeSet(id); curSet=null; go('kids'); toast('🗑 ✓'); }
-function dropBuild(id){ BUILDS=BUILDS.filter(b=>b.id!==id); renderKids(); }
+async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
+  if(b.state!=='err' && !(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true}))) return;
+  b.cancel=true; if(CUR_BUILD===b) CUR_BUILD=null; BUILDS=BUILDS.filter(x=>x!==b); renderKids(); }
 
 /* ---------- art (inline SVG – no external images) ---------- */
 function starPts(cx,cy,R,r){let p=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
@@ -2556,7 +2559,7 @@ function renderKids(){
       return `<button class="prow" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}</span>
         <span><span class="t">${esc(x.subject)}${x.compete?' 🏅':''}${x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}</span>${daysStrip(x)}</span>
         <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`}).join('');
-    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?`<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button>`:'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}</div>`).join('');
+    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`).join('');
     return `<div class="card herocard kidhero">
       <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button>${canManage()?`<button class="btn ghost small" onclick="editKid('${k.id}')" aria-label="עריכה">✎</button>`:''}</span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
@@ -3002,10 +3005,12 @@ const GENERIC_Q=/^(what is this|what are these|who is (he|she|this)|מה זה|מ
 const cueTxt=q=>!(q.scene||q.emoji) || (shortTxt(q.question) && !GENERIC_Q.test(q.question.trim()));
 // several emoji in one item ("🍎🍎🍎") would run out of the frame and wrap: draw them one by one, side by side, sized to fit
 const SEG=window.Intl&&Intl.Segmenter?new Intl.Segmenter():null;
-function sceneItems(sc){ return sc.flatMap(it=>{ const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
+function sceneItems(sc){ return sc.flatMap(it=>{ if(!PIC_CH.test(it.e)) return [it]; const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
   if(g.length<2) return [it]; const n=g.length, s=Math.min(it.s,125/n), step=Math.min(92/n,s/1.6*1.35), c=Math.min(Math.max(it.x,4+step*(n-1)/2),96-step*(n-1)/2);
   return g.map((e,j)=>({e,x:+(c+(j-(n-1)/2)*step).toFixed(1),y:it.y,s})); }); }
-function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sceneItems(sc).map(it=>`<span style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`).join('')}</div>`; }
+const PIC_CH=/[\u2190-\u2BFF\u{1F000}-\u{1FAFF}\uFE0F\u20E3]/u;
+function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true"><i class="ground"></i>${sceneItems(sc).map(it=>{ const tx=!PIC_CH.test(it.e);
+  return `<span class="${tx?'tx':''}" dir="${tx?'ltr':'auto'}" style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`; }).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
 
 /* --- 1. multiple choice with a quest path --- */

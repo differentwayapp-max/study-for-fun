@@ -30,7 +30,7 @@ for ci, chap in enumerate(C):
         tag = f"ch{ci+1} «{q}» → {opts[ans]}"
         if topic not in SET["topics"]: errors.append(f"{tag}: unknown topic {topic}")
         if len(opts) != 4 or len({o.strip() for o in opts}) != 4: errors.append(f"{tag}: need 4 different options")
-        if words(q) > 6: errors.append(f"{tag}: question > 6 words")
+        if words(q) > ns.get("MAX_Q_WORDS", 6): errors.append(f"{tag}: question > {ns.get('MAX_Q_WORDS', 6)} words")
         if any(words(o) > 3 for o in opts): errors.append(f"{tag}: option > 3 words")
         if words(expl) > 10: errors.append(f"{tag}: explanation > 10 words")
         if not ns.get("ANSWER_IN_Q_OK") and opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")

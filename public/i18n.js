@@ -16,7 +16,7 @@
   const T = {
     'הורה': 'Parent', 'ילד/ה': 'Kid', 'מנהל': 'Admin', 'ילדים': 'Kids', 'פידבק': 'Feedback', 'מעקב התקדמות': 'Progress',
     'גביעים': 'Trophies', 'ימים ברצף': 'Day streak', 'שם': 'Name', 'כיתה': 'Grade', 'שמירה': 'Save',
-    'מדיניות פרטיות': 'Privacy policy', 'מדריך למשתמש': 'User guide (Hebrew)', 'מחיקת חשבון': 'Delete account', 'יציאה': 'Sign out', 'מצב הורה': 'Parent mode',
+    'מדיניות פרטיות': 'Privacy policy', 'מדריך למשתמש': 'User guide', 'מחיקת חשבון': 'Delete account', 'יציאה': 'Sign out', 'מצב הורה': 'Parent mode',
     'הקודם': 'Previous', 'הבא': 'Next', 'לינק לילד': 'Kid link', 'עריכה': 'Edit', 'נועה': 'Emma', 'צבע': 'Colour',
     'שם הילד/ה': "Kid's name", 'למשל: עמודים 12–14, תרגילים 3–8': 'e.g. pages 12–14, exercises 3–8',
     'אפשר להעתיק לכאן שאלות מדף עבודה או מאתר': 'Paste questions from a worksheet or a website',

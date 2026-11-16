@@ -921,7 +921,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="dsec pside">
         <button class="ditem" onclick="closeMenu();go('family')"><span class="di">👨‍👩‍👧</span>המשפחה והמבוגרים</button>
         <button class="ditem" onclick="closeMenu();openCatalog(curKidForCatalog())"><span class="di">📚</span>קטלוג תרגולים</button>
-        <a class="ditem" href="/guide.html" target="_blank" rel="noopener"><span class="di">📖</span>מדריך למשתמש</a>
+        <a class="ditem" href="/guide.html" onclick="this.href='/guide.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">📖</span>מדריך למשתמש</a>
       </div>
       <div class="dsec">
         <button class="ditem" onclick="toggleLang()"><span class="di">🌐</span><span>שפה</span><span class="dval langbtn" translate="no">EN</span></button>

@@ -33,12 +33,21 @@ th{background:var(--soft);font-family:Fredoka,Arial,sans-serif;font-weight:600}
 .toc li{break-inside:avoid}
 @media (max-width:560px){.toc ol{columns:1}}
 .up{display:inline-block;margin-top:10px;font-size:14px;text-decoration:none}
+.top a{margin-inline-end:auto}
+button{font-family:Fredoka,Arial,sans-serif;border:var(--line);background:#fff;border-radius:999px;padding:4px 14px;font-weight:600;cursor:pointer;font-size:15px;box-shadow:0 3px 0 var(--ink);color:var(--ink)}
+[data-l]{display:none}
+html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
+html[lang=he] span[data-l=he], html[lang=en] span[data-l=en], html[lang=he] a[data-l=he], html[lang=en] a[data-l=en]{display:inline}
 </style>
 </head>
 <body>
 <main>
-  <div class="top"><a href="/">→ חזרה ל-Study for fun</a></div>
+  <div class="top">
+    <a href="/" data-l="he">→ חזרה ל-Study for fun</a><a href="/" data-l="en">← Back to Study for fun</a>
+    <button onclick="setLang(document.documentElement.lang==='he'?'en':'he')"><span data-l="he">English</span><span data-l="en">עברית</span></button>
+  </div>
 
+<div data-l="he">
   <div class="card toc">
     <h1>📖 מדריך למשתמש</h1>
     <div class="muted">Study for fun · by D-WAY</div>
@@ -427,6 +436,402 @@ th{background:var(--soft);font-family:Fredoka,Arial,sans-serif;font-weight:600}
     <p>פרטיות ושמירת מידע – לפי <a href="/privacy.html">מדיניות הפרטיות</a>.</p>
     <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ לתוכן העניינים</a>
   </section>
+</div>
+<div data-l="en">
+  <div class="card toc">
+    <h1>📖 User guide</h1>
+    <div class="muted">Study for fun · by D-WAY</div>
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#e1">Introduction – who uses the app, basic terms</a></li>
+      <li><a href="#e2">Getting started – sign-in, home screen, parent screen</a></li>
+      <li><a href="#e3">Kids and the kid's phone link</a></li>
+      <li><a href="#e4">Practice sets – catalog, AI building, editing</a></li>
+      <li><a href="#e5">The kid's experience – map, games, rewards</a></li>
+      <li><a href="#e6">Progress – the Feedback tab</a></li>
+      <li><a href="#e7">Focused practice 🎯</a></li>
+      <li><a href="#e8">Friendly competition 🏅</a></li>
+      <li><a href="#e9">Sharing the family – adults and permissions</a></li>
+      <li><a href="#e10">Privacy, deleting the account, troubleshooting</a></li>
+      <li><a href="#e11">About the content and test preparation</a></li>
+    </ol>
+  </div>
+
+  <section class="card" id="e1">
+    <h2>1. Introduction</h2>
+    <p>Study for fun is an app where kids practise school material through games – for a test, for review or to strengthen what they learn – while the parent picks or builds the practice and follows the progress. It suits grades 1 to 12, in English, Math, Hebrew language and Science.</p>
+    <p>The app runs in the browser and on phones, in Hebrew and English. There are no ads and no purchases for kids.</p>
+    <h3>Who uses the app</h3>
+    <div class="tbl"><table>
+      <tr><th>Role</th><th>How they sign in</th><th>What they do</th></tr>
+      <tr><td>Parent (family manager)</td><td>Google account</td><td>Adds kids, picks or builds practice sets, sends the kid link, follows Feedback, invites adults</td></tr>
+      <tr><td>Kid</td><td>A personal link from the parent – no password, no email</td><td>Plays the practice sets, collects stars and trophies, sees "What I know"</td></tr>
+      <tr><td>Invited adult (helper / tutor)</td><td>Invitation from the parent + Google sign-in</td><td>Sees progress and adds practice sets for the chosen kids</td></tr>
+    </table></div>
+    <h3>Basic terms</h3>
+    <ul>
+      <li><b>Practice set</b> – questions on specific material (a test, a book chapter or a review), split into chapters. A test date is optional.</li>
+      <li><b>Chapter</b> – a station on the map. A chapter passed with 70% or more earns a star.</li>
+      <li><b>Round</b> – one game inside a chapter (for example 10 questions).</li>
+      <li><b>Road to the test (the map)</b> – the chapters in order, with a daily goal. With a test date, the road is spread until that date; without one – a steady pace of 2 rounds a day.</li>
+      <li><b>Daily trophy</b> – won by finishing today's number of games.</li>
+      <li><b>Catalog</b> – ready practice sets by grade and subject.</li>
+    </ul>
+    <div class="note"><b>Good to know:</b> the app is a practice aid and does not replace school material. Some content is created with AI and may contain mistakes, and there is no guarantee of test results. Details in section 11.</div>
+  </section>
+
+  <section class="card" id="e2">
+    <h2>2. Getting started</h2>
+    <p>The parent signs in with Google and sets up the family; the kid needs no account and joins only through a personal link.</p>
+    <h3>Opening the app</h3>
+    <p>For now the app is not in Google Play or the App Store. You open it with a link and add it to the phone's home screen – then it opens from an icon, full screen, like any app.</p>
+    <p><b>The app link:</b> <a href="https://study-for-fun-7b03c.web.app">study-for-fun-7b03c.web.app</a></p>
+    <div class="tbl"><table>
+      <tr><th>Who</th><th>Which link to open</th></tr>
+      <tr><td>Parent</td><td>The general app link (above)</td></tr>
+      <tr><td>Kid</td><td>The personal link the parent sends from the app (section 3)</td></tr>
+      <tr><td>Invited adult</td><td>The invitation link from the manager (section 9)</td></tr>
+    </table></div>
+    <h3>Adding to the home screen</h3>
+    <p>Do this once on each phone, <b>after opening the right link</b> (on a kid's phone – their personal link).</p>
+    <p><b>iPhone (Safari):</b></p>
+    <ol>
+      <li>Open the link in Safari. If it opened inside WhatsApp – tap "Open in Safari".</li>
+      <li>Tap the <b>Share</b> button (a square with an arrow up).</li>
+      <li>Choose <b>Add to Home Screen</b> (scroll down the menu if you don't see it).</li>
+      <li>Tap <b>Add</b>. A Study for fun icon appears.</li>
+    </ol>
+    <p><b>Android (Chrome):</b></p>
+    <ol>
+      <li>Open the link in Chrome.</li>
+      <li>Tap the three dots ⋮ at the top.</li>
+      <li>Choose <b>Install app</b> or <b>Add to Home screen</b>, and confirm.</li>
+    </ol>
+    <p><b>Computer:</b> simply use the browser and bookmark the link. Chrome shows an install icon in the address bar if you want one.</p>
+    <div class="note">From now on, open the app from the home-screen icon. The games work offline too, and progress syncs when you're back online.</div>
+    <h3>First sign-in – the "Who is it?" screen</h3>
+    <ol>
+      <li>Open the app link (or the home-screen icon).</li>
+      <li>Choose <b>👩 I'm a parent</b> and sign in with Google. Signing in accepts the privacy policy.</li>
+      <li>The family is created automatically, and whoever opened it is the manager 👑.</li>
+      <li>Add a first kid (section 3) and a first practice set (section 4).</li>
+    </ol>
+    <p>A kid who chooses <b>🧒 I'm a kid</b> without a link is told to ask the parent for their personal link.</p>
+    <h3>The parent screen</h3>
+    <div class="tbl"><table>
+      <tr><th>Area</th><th>What it has</th></tr>
+      <tr><td>EN / עב button</td><td>Switches the interface between Hebrew and English. Learning content (questions and answers) is not translated</td></tr>
+      <tr><td>Side menu</td><td>Family, catalog, language, this guide, privacy policy, delete account, sign out</td></tr>
+      <tr><td>👧 Kids tab</td><td>A card per kid, their practice sets, adding a practice set from the catalog</td></tr>
+      <tr><td>📊 Feedback tab</td><td>Progress, words and topics to strengthen</td></tr>
+      <tr><td>👨‍👩‍👧 Family tab</td><td>Kids' phone links, the adults in the family, invitations</td></tr>
+    </table></div>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e3">
+    <h2>3. Kids and the kid's phone link</h2>
+    <p>Each kid gets their own card and a personal link for their phone; the link connects that phone to that kid only.</p>
+    <h3>Adding a kid</h3>
+    <ol>
+      <li>In the <b>👧 Kids</b> tab, use the arrows ‹ › to reach the <b>＋ Kid</b> card.</li>
+      <li>Type a <b>Name</b> (first name only), choose a <b>Grade</b> (1–12) and a <b>Colour</b> for the character.</li>
+      <li>Tap <b>Save</b>.</li>
+    </ol>
+    <p>You can also add a kid while adding a practice set, with <b>+ Kid</b> under "Who?".</p>
+    <h3>The kid's card</h3>
+    <ul>
+      <li>An overall progress ring (%), 🏆 trophies and 🔥 day streak.</li>
+      <li>The active practice sets, with test date 🏁 and progress %. Focused practice 🎯 is listed first.</li>
+      <li>Finished sets are folded below under <b>✓ Finished practice sets</b>.</li>
+      <li>A set being built shows ⏳ and about 15 minutes.</li>
+      <li><b>＋ Practice set for [name]</b> opens the catalog.</li>
+    </ul>
+    <h3>Edit, reset, delete</h3>
+    <p>Tap ✎ on the kid's card:</p>
+    <ul>
+      <li><b>Save</b> – update name, grade or colour.</li>
+      <li><b>↺ Reset progress</b> – deletes all progress (tap again to confirm).</li>
+      <li><b>🗑</b> – delete the kid (tap again to confirm).</li>
+    </ul>
+    <h3>Sending the kid link</h3>
+    <ol>
+      <li>Tap 🔗 on the kid's card, or in the <b>Family</b> tab tap <b>🔗 Send to [name]</b>.</li>
+      <li>Choose <b>💬 Send on WhatsApp</b> or <b>📋 Copy</b>.</li>
+      <li>The kid opens the link <b>on their own phone</b> – once. From then on the app opens straight on them, no password.</li>
+    </ol>
+    <p>After the link opens on the kid's phone, add it to the home screen (section 2), so the kid opens it from an icon and doesn't need to find the WhatsApp message.</p>
+    <p>The Family tab shows each kid's status: 📱 <b>Playing</b> (phone connected) or ⚪ <b>Not started yet</b>.</p>
+    <div class="note">Tip: each kid has their own link. One kid's link saves progress for that kid only.</div>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e4">
+    <h2>4. Practice sets</h2>
+    <p>There are two ways to give a kid a practice set: pick a ready one from the catalog, or build one from your own material (a test, a worksheet, a book chapter) with AI. Subjects: English, Math, Hebrew language and Science.</p>
+    <h3>Option A: a ready practice set from the catalog 📚</h3>
+    <p>The catalog is arranged by grade, following the Ministry of Education curriculum.</p>
+    <ol>
+      <li>On the kid's card tap <b>＋ Practice set for [name]</b>.</li>
+      <li>Choose a subject. A subject with no set for this grade is marked <b>Coming soon</b>.</li>
+      <li>Tick the topics of the test.</li>
+      <li>The "🎁 Ready practice set" window shows the grade, number of questions ❓ and chapters 📚.</li>
+      <li>Choose <b>Who?</b>, enter the <b>🏁 Test date</b> (optional) and tap <b>✓ Add</b>.</li>
+    </ol>
+    <p>When a catalog set is updated, the kid's copy updates by itself and progress is kept.</p>
+    <h3>Option B: build from your own material ✨</h3>
+    <p>At the bottom of the catalog tap <b>✨ Build from your own material</b>. A 4-step wizard:</p>
+    <div class="tbl"><table>
+      <tr><th>Step</th><th>What you fill in</th></tr>
+      <tr><td>1. Who</td><td>Kid, subject, test date. Here you can also import a set with a 🔗 share code</td></tr>
+      <tr><td>2. Topics</td><td>The topics to practise, one per line (at least one)</td></tr>
+      <tr><td>3. Material</td><td>Sample pages (optional): 📷 camera, 🖼️ photos, 🔗 link + which pages, or 📋 pasted text</td></tr>
+      <tr><td>4. Summary</td><td>Check the details and settings, and tap <b>✨ Build the practice set</b></td></tr>
+    </table></div>
+    <p>Settings in the summary step (calculated automatically, change them with <b>Edit</b>):</p>
+    <ul>
+      <li><b>❓ Questions per round</b> – 5 to 20.</li>
+      <li><b>🏆 Chapters a day</b> – set by the days left until the test. No test date: 2 rounds a day. The evening before the test a review round is added.</li>
+    </ul>
+    <p>Building takes about 5–15 minutes. You can move to other screens (<b>🏠 Home – building continues</b>), but don't close the app until it finishes. The set appears on the kid's card when it's ready. To cancel: <b>✕ Cancel the build</b>.</p>
+    <p><b>Limit:</b> each family can build up to 3 new practice sets with AI a month, free of charge. After 3 builds you can build again next month. The limit applies to building only – adding sets from the catalog, importing with a share code and playing existing sets are not limited. A failed build is returned to the limit (up to twice a month).</p>
+    <h3>Working with an existing set</h3>
+    <p>Tap a practice set on the kid's card. The chapters are listed in road order (⭐ = passed with 70%+); tapping a chapter shows its questions, the right answer and the explanation.</p>
+    <p>The <b>Practice options</b> menu:</p>
+    <div class="tbl"><table>
+      <tr><th>Action</th><th>What it does</th></tr>
+      <tr><td>✏️ Edit practice set</td><td>Edit mode: add questions from worksheets or slides, add a new chapter for a new topic, remove a chapter or a question. An edited catalog set no longer gets catalog updates</td></tr>
+      <tr><td>🎁 Send to another parent</td><td>A link or share code. The other parent gets a copy for their kids and doesn't see yours</td></tr>
+      <tr><td>📤 Suggest for the catalog</td><td>Sends the set for review, to be added to the catalog</td></tr>
+      <tr><td>🏅 Competition between the kids</td><td>Turns on a leaderboard (section 8)</td></tr>
+      <tr><td>✅ Answer check</td><td>Automatically checks every answer in the set</td></tr>
+      <tr><td>🗑 Delete practice set</td><td>Removes the set from the kid</td></tr>
+    </table></div>
+    <p><b>Report a mistake 🚩:</b> next to each question tap <b>Report</b>, briefly write what's wrong and send it for checking. The app answers "Thanks! That's indeed a mistake" (and fixes it) or "Checked – the question is fine".</p>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e5">
+    <h2>5. The kid's experience</h2>
+    <p>The kid opens the app, taps ▶ on a subject and moves along the map chapter by chapter – to the end of the material, or to test day if one is set.</p>
+    <h3>The kid's home screen</h3>
+    <ul>
+      <li>At the top: the kids in the family (when the parent shows the kid view) and the <b>📊 What I know</b> button.</li>
+      <li>A card per subject, with a progress ring, a ▶ button and the days left to the test 🏁. Switch subjects with the arrows ‹ ›.</li>
+      <li>Focused practice is marked 🎯.</li>
+    </ul>
+    <h3>Road to the test 🗺️</h3>
+    <ul>
+      <li>Each chapter is a station on the map. At the top: how many chapters are done (e.g. 3/13) and how many days are left.</li>
+      <li><b>Today's goal</b> – how many chapters to do today. States: ✓ On time, ⚡ Ahead, or ⚠️ "X chapters a day to make it".</li>
+      <li>⭐ on a station = passed with 70%+. A station with 🔁 and a percentage = still open for another try.</li>
+      <li>With a test date: the day before has a review round on everything.</li>
+    </ul>
+    <h3>The games</h3>
+    <p>Each chapter comes as a different game:</p>
+    <div class="tbl"><table>
+      <tr><th>Game</th><th>How to play</th></tr>
+      <tr><td>Multiple choice</td><td>A question with a picture and four answers (A–D)</td></tr>
+      <tr><td>Memory</td><td>Flip cards and find pairs</td></tr>
+      <tr><td>Match the lines</td><td>Connect each item to its pair</td></tr>
+      <tr><td>Spelling / riddles</td><td>Put letters in order to make a word, with the English word spoken and hints</td></tr>
+      <tr><td>Reading passage</td><td>Read a passage (it can be read aloud) and answer questions</td></tr>
+      <tr><td>Mix</td><td>A mix of several kinds</td></tr>
+    </table></div>
+    <p>Tools during a game: 🔊 Read aloud, 💡 Hint, 💡 Why? (explanation after answering) and 🚩 Report a mistake.</p>
+    <p>At the end of a round: a summary, 🔁 <b>Mistakes</b> to practise again, sometimes a 🎁 <b>Bonus: Memory</b> game, and buttons 🗺️ To the map or 🏠 Home.</p>
+    <h3>Rewards</h3>
+    <ul>
+      <li><b>⭐ Star</b> – for every chapter passed with 70%+.</li>
+      <li><b>🏆 Daily trophy</b> – for finishing today's number of games.</li>
+      <li><b>🔥 Day streak</b> – consecutive days with practice.</li>
+      <li><b>🏅 Leaderboard</b> (only when the parent turned on competition) – section 8.</li>
+    </ul>
+    <h3>"What I know" 📊</h3>
+    <p>A screen for the kid, per subject:</p>
+    <ul>
+      <li><b>🔁 Chapters to try again</b> – chapters under 70%, with the percentage.</li>
+      <li><b>💪 Practise again</b> – words and questions with mistakes (×1, ×2), and a <b>🎯 Practise them now</b> button.</li>
+      <li><b>✅ I know</b> – what is already solid.</li>
+    </ul>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e6">
+    <h2>6. Progress – the 📊 Feedback tab</h2>
+    <p>The Feedback tab shows the parent how much the kid practises, what they already know and what to strengthen.</p>
+    <h3>Filters</h3>
+    <p>At the top choose a period (last 7 days / last 30 days / all time), the kid and the subject.</p>
+    <h3>What is shown</h3>
+    <div class="tbl"><table>
+      <tr><th>Part</th><th>What it shows</th></tr>
+      <tr><td>Summary cards</td><td>Rounds completed, questions answered, overall success (%), days with practice, trophies</td></tr>
+      <tr><td>🔤 Words to practise</td><td>Words with mistakes, filtered by All / Vocabulary / Grammar. Tap a word for details: when the mistake happened and what was answered instead</td></tr>
+      <tr><td>Upcoming tests</td><td>The next test dates</td></tr>
+      <tr><td>🎯 Worth strengthening</td><td>Weak topics, and a <b>✨ Build a review set for these topics</b> button (section 7)</td></tr>
+      <tr><td>Topics already solid</td><td>Topics above 80%</td></tr>
+      <tr><td>Success by topic</td><td>A table: topic, number of questions, success % and trend (improving / steady / dropping)</td></tr>
+      <tr><td>Recent rounds</td><td>When, which set and the result. You can see the mistakes of each round</td></tr>
+    </table></div>
+    <h3>How a topic's status is set</h3>
+    <div class="tbl"><table>
+      <tr><th>Status</th><th>Success</th></tr>
+      <tr><td>Strengthen</td><td>Under 60%</td></tr>
+      <tr><td>Almost there</td><td>60%–80%</td></tr>
+      <tr><td>Mastered</td><td>80% or more</td></tr>
+    </table></div>
+    <p>A status is set only with at least 3 questions in the topic; below that it shows "Little data".</p>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e7">
+    <h2>7. Focused practice 🎯</h2>
+    <p>Focused practice works only on what the kid hasn't mastered yet, instead of going over all the material again. There are two ways to get to it.</p>
+    <div class="tbl"><table>
+      <tr><th></th><th>The parent builds a review set</th><th>The kid practises mistakes right away</th></tr>
+      <tr><td>Where</td><td>📊 Feedback tab → 🎯 Worth strengthening</td><td>📊 What I know → 💪 Practise again</td></tr>
+      <tr><td>Button</td><td>✨ Build a review set for these topics</td><td>🎯 Practise them now</td></tr>
+      <tr><td>What happens</td><td>A new set is built with AI on the weak topics (under 60%)</td><td>An instant multiple-choice game with only the questions that had mistakes</td></tr>
+      <tr><td>Counts toward the build limit</td><td>Yes</td><td>No</td></tr>
+    </table></div>
+    <h3>Building a review set (parent)</h3>
+    <ol>
+      <li>In the <b>📊 Feedback</b> tab find the practice set, and under <b>🎯 Worth strengthening</b> tap <b>✨ Build a review set for these topics</b>.</li>
+      <li>The build wizard opens with the kid, subject and topics to strengthen already filled in.</li>
+      <li>You can change topics or attach a picture of sample questions, then continue to <b>✨ Build the practice set</b>.</li>
+    </ol>
+    <p>The button shows only when a topic needs strengthening (at least 3 questions in the topic).</p>
+    <h3>How to recognise focused practice</h3>
+    <ul>
+      <li>On the kid's card (parent): a 🎯 icon and a <b>Focused</b> tag, listed first.</li>
+      <li>On the kid's screen: a subject card with 🎯 and the words <b>Focused practice</b>.</li>
+      <li>It works like any practice set: map, chapters, stars and tracking in Feedback.</li>
+    </ul>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e8">
+    <h2>8. Friendly competition 🏅</h2>
+    <p>Competition adds a leaderboard to a specific practice set, to encourage steady practice; it is off until the parent turns it on.</p>
+    <h3>Turning it on</h3>
+    <ol>
+      <li>Open the practice set from the kid's card and tap <b>Practice options</b>.</li>
+      <li>Turn on <b>🏅 Competition between the kids</b>.</li>
+      <li>A 🏅 appears next to the set's name. To turn it off – the same switch.</li>
+    </ol>
+    <h3>Who takes part</h3>
+    <ul>
+      <li>All the kids in the family who practise the same set.</li>
+      <li>Kids from other families who got the set (🎁 Send to another parent) and turned competition on too – so kids can compete with classmates.</li>
+    </ul>
+    <h3>Points</h3>
+    <div class="tbl"><table>
+      <tr><th>What</th><th>Points</th></tr>
+      <tr><td>A completed round</td><td>10, up to 5 rounds a day</td></tr>
+      <tr><td>Daily trophy</td><td>5 more</td></tr>
+      <tr><td>A round with no right answer or under 30% success</td><td>0, and not shown</td></tr>
+    </table></div>
+    <p>The daily cap encourages healthy practice rather than a marathon. A kid who practised on 3 days in the last week gets a <b>🔥 Most consistent this week</b> badge.</p>
+    <h3>Where to see the board</h3>
+    <ul>
+      <li><b>The kid</b> – a <b>🏅 Leaderboard</b> card on their screen. At the end of each round they see how many points were added.</li>
+      <li><b>The parent</b> – a <b>🏅 Friendly competition</b> card in the 📊 Feedback tab: rank, points, rounds and trophies per kid.</li>
+      <li>Parents can tick <b>Show example kids</b> to see how the table looks with a group.</li>
+    </ul>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e9">
+    <h2>9. Sharing the family – adults and permissions</h2>
+    <p>You can add a partner, grandparents or a private tutor; each adult gets a role that sets what they can see.</p>
+    <h3>Roles</h3>
+    <div class="tbl"><table>
+      <tr><th>Role</th><th>Allowed</th></tr>
+      <tr><td>👑 Manager</td><td>Everything: kids, practice sets, adults and settings</td></tr>
+      <tr><td>💛 Helper</td><td>See progress and add practice sets, for all kids</td></tr>
+      <tr><td>📚 Tutor</td><td>Like a helper, but only for the chosen kids</td></tr>
+    </table></div>
+    <h3>Inviting an adult</h3>
+    <ol>
+      <li>In the <b>Family</b> tab tap <b>＋ Invite an adult</b>.</li>
+      <li>Choose a role and type a name (e.g. Grandma Ruth). For a tutor – tick <b>Which kids?</b></li>
+      <li>Tap <b>Create invitation</b> and send it with <b>💬 WhatsApp</b> or <b>📋 Copy</b>.</li>
+      <li>The invited adult opens the link and signs in with Google.</li>
+    </ol>
+    <p>An invitation is for one person and is valid for 7 days. Until it's opened it shows "Invitation not opened yet". If it expired – create a new one.</p>
+    <h3>Removing and leaving</h3>
+    <ul>
+      <li>A manager removes an adult with the ✕ next to their name.</li>
+      <li>An invited adult can leave with <b>🚪 Leave the family</b>.</li>
+    </ul>
+    <h3>Sharing a practice set with another family</h3>
+    <p>This is different from inviting an adult: the other parent only gets a copy of the set.</p>
+    <ol>
+      <li>In the set: options → <b>🎁 Send to another parent</b> → copy the link or share code.</li>
+      <li>The other parent opens it → signs in with Google → picks a kid → <b>Import</b>.</li>
+    </ol>
+    <p>When competition is on for the set, kids from families who got it can appear together on the leaderboard.</p>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e10">
+    <h2>10. Privacy, deleting the account, troubleshooting</h2>
+    <h3>Privacy</h3>
+    <ul>
+      <li>Only these are kept: the kid's first name, the parent's name and email from the Google account, and game results.</li>
+      <li>No ads, no purchases for kids, and the data is not shared with third parties.</li>
+      <li>The privacy policy is on the sign-in screen and in the side menu: <a href="/privacy.html">privacy policy</a>.</li>
+    </ul>
+    <h3>Deleting the account</h3>
+    <ol>
+      <li>Side menu → <b>Delete account</b>.</li>
+      <li>Type the confirmation word shown and tap <b>🗑 Delete permanently</b>.</li>
+    </ol>
+    <p>Kids, practice sets, progress and feedback are deleted – from the kids' phones too. This can't be undone.</p>
+    <h3>Troubleshooting</h3>
+    <div class="tbl"><table>
+      <tr><th>What you see</th><th>What to do</th></tr>
+      <tr><td>"This phone is not connected to a kid yet"</td><td>Open the link from the kid's card on the kid's phone</td></tr>
+      <tr><td>"This link is not active"</td><td>The parent sends the link again from the kid's card</td></tr>
+      <tr><td>"This invitation was already used or has expired"</td><td>Ask the manager for a new invitation</td></tr>
+      <tr><td>"Can't reach your practice sets"</td><td>Check the internet connection and try again</td></tr>
+      <tr><td>iPhone: Lockdown Mode</td><td>In Safari: aA → Website Settings → turn off Lockdown Mode for this site</td></tr>
+      <tr><td>"We couldn't connect in this browser" (parent)</td><td>Try another browser or a computer</td></tr>
+      <tr><td>"Too many requests"</td><td>Wait a minute and try again</td></tr>
+      <tr><td>A build failed (⚠️ on the card)</td><td>Delete it with ✕ and try again; the build is returned to the limit</td></tr>
+      <tr><td>A question with a wrong answer</td><td>🚩 Report a mistake (section 4)</td></tr>
+    </table></div>
+    <h3>Frequently asked questions</h3>
+    <ul>
+      <li><b>Does the kid need an email?</b> No. Only a personal link from the parent.</li>
+      <li><b>What if there's no test date?</b> The set works with a default of 2 rounds a day.</li>
+      <li><b>A chapter wasn't passed – is it locked?</b> No. It stays open for another try and shows in "Chapters to try again".</li>
+      <li><b>Can a finished set be played again?</b> Yes, under "Done" on the kid's screen.</li>
+    </ul>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+
+  <section class="card" id="e11">
+    <h2>11. About the content and test preparation</h2>
+    <p>Study for fun is a practice aid, and it does not replace the school's material and instructions. Using the app is subject to the following:</p>
+    <ol>
+      <li><b>A practice aid only.</b> The practice sets are meant for review and extra practice. They do not replace official learning material, the teacher's instructions or professional teaching.</li>
+      <li><b>No guarantee of results.</b> There is no guarantee of a grade, of success in a test, or that a practice set covers everything that will be asked. Stars, success percentages and "Mastered" reflect practice in the app only, not an educational assessment.</li>
+      <li><b>Content made with AI.</b> Questions, answers, explanations and pictures are built automatically and checked automatically, but may contain mistakes or inaccuracies. Parents are advised to look over the questions (section 4) and report any mistake 🚩. If there is a conflict – the school's and the teacher's material prevails.</li>
+      <li><b>Catalog practice sets.</b> The ready sets are based on the Ministry of Education curriculum, but the app is not on behalf of the Ministry, was not approved by it and is not connected to any specific school. The material of a class test may differ.</li>
+      <li><b>Material uploaded by the parent.</b> Whoever uploads worksheets, pictures, links or text confirms they may use them for personal and family practice. Do not upload material with identifying details (students' names, grades and the like). When sharing a set with another family or suggesting it for the catalog, the person sharing is responsible for being allowed to share it.</li>
+      <li><b>Parental guidance.</b> The app is meant for kids under a parent's guidance and responsibility. The parent decides on the right amount of practice and screen time.</li>
+      <li><b>Limitation of liability.</b> The service is provided as is. D-WAY is not liable for damage resulting from a mistake in the content, from using the app or from test results, subject to law.</li>
+    </ol>
+    <p>Privacy and data – according to the <a href="/privacy.html">privacy policy</a>.</p>
+    <a class="up" href="#top" onclick="scrollTo(0,0);return false">↑ Back to contents</a>
+  </section>
+</div>
 </main>
+<script>
+function setLang(l){ const h=document.documentElement; h.lang=l; h.dir=l==='he'?'rtl':'ltr'; document.title=l==='he'?'מדריך למשתמש · Study for fun':'User guide · Study for fun'; try{localStorage.setItem('sff_guide_lang',l)}catch(e){} }
+(function(){ let l=null; try{ l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('sff_guide_lang')||localStorage.getItem('sff_lang'); }catch(e){}
+  if(!l && !/^he\b/i.test(navigator.language||'')) l='en'; if(l==='en'||l==='he') setLang(l); })();
+</script>
 </body>
 </html>

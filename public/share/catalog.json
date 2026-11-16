@@ -151,46 +151,6 @@
    "status": "ready"
   },
   {
-   "id": "sci7-materials",
-   "ver": "e9de7b3de8",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל",
-   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה, גז ומשקל · לפי עמודי הספר",
-   "desc_en": "Materials and bodies, volume, measuring liquids, mass, gas and weight",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון"
-   ],
-   "questions": 152,
-   "chapters": 17,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬"
-    },
-    {
-     "q": "מהו נפח?",
-     "e": "📦"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math7-nov26",
    "ver": "84cf6d8ee1",
    "subject": "מתמטיקה",
@@ -259,6 +219,52 @@
     {
      "q": "What comes next?",
      "e": "AB"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "46df46edae",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · מצבי צבירה · חקר",
+   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 281,
+   "chapters": 28,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬"
+    },
+    {
+     "q": "מהו נפח?",
+     "e": "📦"
     }
    ],
    "status": "ready"

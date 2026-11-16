@@ -12,6 +12,11 @@ src = pathlib.Path(sys.argv[1])
 def COUNT(*rows, top=10, bottom=84):
     """Counting picture: each row is (emoji, n). Lays the emoji out one by one, evenly, inside the frame.
     COUNT(("🍎", 3))  ·  COUNT(("🐟", 3), ("🐟", 3))  ·  COUNT(("🍎", 2), ("🍎", 2), ("🍎", 2))  (groups of 2)"""
+    split = []                                                     # more than 6 in a row gets too small: wrap into rows of ≤ 6
+    for e, n in rows:
+        k = -(-n // 6); per = -(-n // k)
+        split += [(e, min(per, n - i * per)) for i in range(k)]
+    rows = split
     r, out = len(rows), []
     for i, (e, n) in enumerate(rows):
         s = min(44, 0.75 * (bottom - top) / r, 125 / n)          # font size in % of the frame height (the frame is 16:10)

@@ -268,6 +268,327 @@
     }
    ],
    "status": "ready"
+  },
+  {
+   "id": "math4",
+   "ver": "522b4661fd",
+   "subject": "מתמטיקה",
+   "grade": 3,
+   "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות",
+   "desc": "מספרים עד מיליונים, ארבע פעולות במאונך, סדר פעולות, סימני התחלקות, שברים, מרובעים, משולשים, תיבה, היקף ושטח, זמן ויחידות",
+   "desc_en": "Numbers to millions, the four operations (long multiplication and division), order of operations, divisibility, fractions, quadrilaterals, triangles, boxes, perimeter and area, time and units",
+   "tags": [
+    "מספרים גדולים",
+    "עיגול",
+    "כפל וחילוק ארוך",
+    "סדר פעולות",
+    "סימני התחלקות",
+    "שברים",
+    "משולשים ומרובעים",
+    "תיבה ונפח",
+    "היקף ושטח",
+    "זמן ויחידות"
+   ],
+   "questions": 320,
+   "chapters": 31,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 5 במספר ⁦352,184⁩?",
+     "e": "352,184"
+    },
+    {
+     "q": "מה ערך הספרה 2 במספר ⁦2,050,000⁩?",
+     "e": "2,050,000"
+    },
+    {
+     "q": "⁦87,654 ___ 87,564⁩",
+     "e": "87,654? 87,564"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb4",
+   "ver": "b97715ab1e",
+   "subject": "עברית / לשון",
+   "grade": 3,
+   "title": "הבנת הנקרא · סוגות · כתיבה · שורש · חלקי דיבר · פיסוק · מילון",
+   "desc": "חמישה קטעי קריאה (סיפור, מידע, טיעון, הוראות, שיר), סוגות, מבנה טקסט, שורש, חלקי דיבר, זמנים וגופים, התאמה, פיסוק, נרדפות והפכים, ביטויים ומילון",
+   "desc_en": "Five reading passages (story, information, argument, instructions, poem), genres, text structure, roots, parts of speech, tenses and persons, agreement, punctuation, synonyms and opposites, idioms, dictionary skills",
+   "tags": [
+    "הבנת הנקרא",
+    "סוגות",
+    "מבנה טקסט",
+    "שורש",
+    "חלקי דיבר",
+    "זמנים וגופים",
+    "זכר ונקבה",
+    "פיסוק",
+    "נרדפות והפכים",
+    "מילון"
+   ],
+   "questions": 269,
+   "chapters": 26,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "בטקסט יש דמויות, מקום, בעיה ופתרון. איזה טקסט זה?",
+     "e": "📖דמויות • מקום"
+    },
+    {
+     "q": "מאיזה סוג טקסט לקוח הקטע בכרטיס?",
+     "e": "🥣דרושים: 2 ביצים,"
+    },
+    {
+     "q": "מה מספרים בדרך כלל בפתיחת הסיפור?",
+     "e": "📖👧"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en4",
+   "ver": "7f92a03730",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "Sounds · Words · Short sentences · Reading",
+   "desc": "אנגלית לכיתה ד' – כל השנה: חרוזים וצלילים, תנועות קצרות, sh ch th, מילים בסיסיות, משפטים קצרים וקטעי קריאה קצרים",
+   "desc_en": "Grade 4 English, the whole year: rhymes and sounds, short vowels, sh ch th, core words, short sentences and short reading passages",
+   "tags": [
+    "Rhymes",
+    "Short vowels",
+    "sh ch th",
+    "Sight words",
+    "Family",
+    "Colors & numbers",
+    "Body & clothes",
+    "Animals & food",
+    "Days",
+    "I am / I can",
+    "There is / are",
+    "Reading"
+   ],
+   "questions": 336,
+   "chapters": 31,
+   "reading": 3,
+   "words": 135,
+   "samples": [
+    {
+     "q": "Which word rhymes with cat?",
+     "e": "🐈cat"
+    },
+    {
+     "q": "Which word starts like dog?",
+     "e": "🐕dog"
+    },
+    {
+     "q": "h_t (כובע)",
+     "e": "🎩"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci4",
+   "ver": "adcf276b00",
+   "subject": "מדעים",
+   "grade": 3,
+   "title": "חומרים · מים ואוויר · גוף האדם · בעלי חיים · טכנולוגיה",
+   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
+   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, vertebrates and invertebrates, technological systems and simple machines",
+   "tags": [
+    "נפח ומסה",
+    "מצבי צבירה",
+    "מחזור המים",
+    "אוויר",
+    "שלד ושרירים",
+    "העור",
+    "מזג אוויר",
+    "בעלי חיים",
+    "מפתח מיון",
+    "מכונות פשוטות"
+   ],
+   "questions": 260,
+   "chapters": 25,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהו נפח?",
+     "e": "📦"
+    },
+    {
+     "q": "מה מודדים במאזניים?",
+     "e": "⚖️"
+    },
+    {
+     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
+     "e": "🧱"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math7",
+   "ver": "1dac53e5b3",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "ביטויים · משוואות · פונקציות · חזקות · שטחים · זוויות",
+   "desc": "כל שנת ז' אחרי פרק המספרים המכוונים: ביטויים אלגבריים, פילוג, משוואות ובעיות, פונקציות וגרפים, חזקות, יחס ואחוזים, שטחים וזוויות",
+   "desc_en": "Algebraic expressions, like terms, the distributive law, equations and word problems, functions and graphs, powers and roots, ratio and percent, areas, angles in triangles and polygons, parallel lines",
+   "tags": [
+    "ביטויים אלגבריים",
+    "כינוס איברים",
+    "חוק הפילוג",
+    "משוואות",
+    "בעיות מילוליות",
+    "פונקציות וגרפים",
+    "חזקות ושורשים",
+    "יחס ואחוזים",
+    "שטחים",
+    "זוויות"
+   ],
+   "questions": 305,
+   "chapters": 29,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
+     "e": "2x + 1x = 3"
+    },
+    {
+     "q": "פי 3 ממספר x. איך כותבים?",
+     "e": "פי 3 מ-x"
+    },
+    {
+     "q": "⁦3x+5x = ?⁩",
+     "e": "3x + 5x= ?"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb7",
+   "ver": "f1465b485d",
+   "subject": "עברית / לשון",
+   "grade": 6,
+   "title": "הבנת הנקרא · סיכום · טיעון · תחביר · שורשים ובניינים · משקלים · שם המספר · משלב",
+   "desc": "ארבעה קטעי קריאה (טיעון ומידע), סיכום וסיכום ממזג, כתיבת טיעון, חלקי המשפט, סוגי משפטים, מילות קישור, שורשים וגזרות, בניינים, משקלים, שם המספר, מילות יחס בנטייה ומשלב לשון",
+   "desc_en": "Four reading passages (argument and information), summary and merged summary, argument writing, parts of the sentence, sentence types, connectors, roots and verb groups, binyanim, noun patterns, number words, inflected prepositions and register",
+   "tags": [
+    "טקסט טיעוני",
+    "טקסט מידעי",
+    "סיכום ממזג",
+    "חלקי המשפט",
+    "מחובר ומורכב",
+    "מילות קישור",
+    "גזרות",
+    "בניינים",
+    "משקלים",
+    "שם המספר"
+   ],
+   "questions": 281,
+   "chapters": 27,
+   "reading": 4,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה משאירים בסיכום?",
+     "e": "📄➡️"
+    },
+    {
+     "q": "מהו סיכום ממזג?",
+     "e": "📄📄"
+    },
+    {
+     "q": "מה מופיע בפתיחה של טקסט טיעוני?",
+     "e": "📄🗣️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en7",
+   "ver": "be21011eee",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Past · Future · Comparing · Modals · Band II words · Unseen",
+   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
+   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, modals, quantifiers, connectors, Band II words and four Unseen passages",
+   "tags": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ],
+   "questions": 304,
+   "chapters": 29,
+   "reading": 4,
+   "words": 58,
+   "samples": [
+    {
+     "q": "Yesterday I ___ my room.",
+     "e": "🧹🛏️"
+    },
+    {
+     "q": "Which word tells us it is the past?",
+     "e": "📅⬅️"
+    },
+    {
+     "q": "Past of go?",
+     "e": "🚶go → ?"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7",
+   "ver": "5b71d6134d",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · מערכות הובלה",
+   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, היצור החי, התא, רמות ארגון ומערכות הובלה באדם ובצמח",
+   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants",
+   "tags": [
+    "מודל חלקיקי",
+    "שינוי כימי",
+    "תמיסות",
+    "אנרגיה",
+    "מקורות אנרגיה",
+    "מעבר חום",
+    "התא",
+    "מיקרוסקופ",
+    "מחזור הדם",
+    "הובלה בצמח"
+   ],
+   "questions": 300,
+   "chapters": 29,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
+     "e": "⚫⚫"
+    },
+    {
+     "q": "למה לנוזל אין צורה קבועה?",
+     "e": "💧"
+    },
+    {
+     "q": "מחממים מים. מה קורה לחלקיקים?",
+     "e": "🔥💧"
+    }
+   ],
+   "status": "ready"
   }
  ]
 }

@@ -95,7 +95,10 @@ The catalog also has a **💌 Invite friends with this practice set** button.
 
 - **Multiple choice** – pick the right answer out of 4.
 - **Match the lines** – draw a line between a question and its answer.
-- **Letter order** – put the letters of the answer in order (in English you also hear the word). It appears once on the road.
+- **🧩 Riddles** – build the answer from letters, with a 💡 hint when stuck.
+- **Letter order** – put the letters of the answer in order (in English you also hear the word).
+
+Riddles and letter order are writing games, so they appear at one station only on the road – in a chapter whose answers are short words. When that station is played again, they take turns.
 - **🎁 Memory** – a bonus. It doesn't count toward progress.
 - **📖 Reading passage** – in reading chapters you read a passage and answer questions about it. Tap 🔊 to hear the passage, pause ⏸ and go on from the same word. The word being read is highlighted, and tapping a word starts reading from there.
 

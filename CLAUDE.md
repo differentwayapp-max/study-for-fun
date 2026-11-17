@@ -25,3 +25,10 @@ Test hooks: `window.SFF_REST_EMU` (emulator addresses) and `window.SFF_TEST_GOOG
 `tools/deploy.sh "message"` – bumps the version everywhere (sff-vN), commits, deploys hosting, pushes to GitHub.
 Functions: `firebase deploy --only functions`. Rules: `firebase deploy --only firestore:rules`.
 Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py` (one emoji per picture item – use `COUNT(("🍎",3))` for counting pictures), then `IDS=<id> node tools/tests/local_scenes.js` with the app served (renders every picture: 0 bad scenes), then deploy (existing copies update automatically, progress kept).
+
+## Open tasks
+- Bug reports by email: reports are saved in `bugReports` (admins: ☰ → דיווחים מהמשתמשים). Emailing them is ready but OFF:
+  the owner first opens a dedicated mailbox (company domain – tell us the provider: Google Workspace / Microsoft / other),
+  creates an app password and saves it in Secret Manager as `GMAIL_APP_PASSWORD` (never in code/chat), sets the addresses
+  in the app (☰ → ⚙️ הגדרות מנהל → `adminConfig/main`), then `ENABLE_BUG_MAIL=1` in functions/.env and deploy `mailBugReport`.
+  A non-Google provider needs an SMTP host setting added to `mailBugReport`.

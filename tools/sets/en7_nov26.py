@@ -34,7 +34,7 @@ C.append(("Weather", [WE], [
  (WE, "What is this?", ["snow", "rain", "heat", "shade"], 0, "שלג = snow", [("❄️", 30, 30, 26), ("⛄", 58, 60, 50)]),
  (WE, "רוח = ?", ["wind", "wave", "ice", "cloud"], 0, "רוח = wind", [("🍃", 35, 45, 30), ("💨", 65, 50, 34)]),
  (WE, "What is this?", ["storm", "river", "heat", "scarf"], 0, "סערה = storm", [("⛈️", 50, 40, 50), ("💨", 75, 72, 26)]),
- (WE, "קרח = ?", ["ice", "snow", "bone", "hole"], 0, "קרח = ice", "❄️"),
+ (WE, "קרח = ?", ["ice", "snow", "bone", "hole"], 0, "קרח = ice", "⛸️"),
  (WE, "חום = ?", ["heat", "ice", "wind", "shade"], 0, "חום = heat", [("☀️", 30, 30, 34), ("🥵", 62, 60, 40)]),
  (WE, "קפוא = ?", ["freezing", "warm", "pleasant", "strange"], 0, "קפוא = freezing", [("🥶", 45, 55, 46), ("❄️", 78, 30, 22)]),
  (WE, "מזג אוויר = ?", ["weather", "season", "sea", "sweat"], 0, "מזג אוויר = weather", "🌦️"),
@@ -132,7 +132,7 @@ C.append(("Everyday words", [EW], [
  (EW, "Who is he?", ["farmer", "sailor", "fan", "city"], 0, "חקלאי = farmer", [("👨‍🌾", 40, 55, 44), ("🚜", 75, 65, 28)]),
  (EW, "Who is he?", ["sailor", "farmer", "fan", "problem"], 0, "מלח = sailor", [("🧔", 35, 55, 40), ("⛵", 70, 50, 34), ("⚓", 50, 85, 18)]),
  (EW, "What is this?", ["ice cream cone", "ice", "snow", "bone"], 0, "גביע גלידה = ice cream cone", "🍦"),
- (EW, "מאוורר = ?", ["fan", "coat", "roof", "hole"], 0, "מאוורר = fan", "🌀"),
+ (EW, "מאוורר = ?", ["fan", "coat", "roof", "hole"], 0, "מאוורר = fan", [("🥵", 38, 52, 44), ("💨", 72, 50, 32)]),
  (EW, "צל = ?", ["shade", "shine", "sweat", "snow"], 0, "צל = shade", [("🌳", 45, 45, 50), ("⛱️", 75, 70, 24)]),
  (EW, "What is this?", ["wave", "wind", "river", "field"], 0, "גל = wave", [("🌊", 45, 55, 50), ("🏄", 70, 35, 24)]),
  (EW, "זיעה = ?", ["sweat", "skin", "sea", "snow"], 0, "זיעה = sweat", [("🥵", 45, 55, 46), ("💦", 75, 35, 22)]),
@@ -177,7 +177,7 @@ C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW, UN], [
  (NP, "בפנים = ?", ["indoors", "outdoors", "outside", "above"], 0, "בפנים = indoors", [("🏠", 45, 55, 46), ("🛋️", 75, 70, 22)]),
  (NP, "מתחת = ?", ["below", "through", "close", "several"], 0, "מתחת = below", [("📦", 50, 35, 30), ("⬇️", 50, 72, 26)]),
  (DW, "כמה (כמות) = ?", ["several", "certainly", "probably", "luckily"], 0, "כמה = several", [("🍎", 30, 50, 24), ("🍎", 50, 50, 24), ("🍎", 70, 50, 24)]),
- (DW, "כנראה = ?", ["probably", "certainly", "luckily", "really"], 0, "כנראה = probably", "🤔"),
+ (DW, "כנראה = ?", ["probably", "certainly", "luckily", "really"], 0, "כנראה = probably", "🤷"),
  (DW, "למרבה המזל = ?", ["luckily", "really", "probably", "certainly"], 0, "למרבה המזל = luckily", "🍀"),
  (PS, "He ___ in Haifa.", ["live", "lives", "living", "to live"], 1, "he ← lives", [("👦", 35, 55, 40), ("🏙️", 70, 50, 36)]),
  (PS, "___ it snow here?", ["Does", "Do", "Is", "Are"], 0, "it ← Does", [("❄️", 45, 45, 44), ("❓", 75, 25, 20)]),
@@ -207,7 +207,7 @@ _ch("Describing words").extend([
 _ch("Everyday words").extend([
  (EW, "סנטר = ?", ["chin", "skin", "bone", "finger"], 0, "סנטר = chin", "🧔"),
  (EW, "עור = ?", ["skin", "bone", "chin", "scarf"], 0, "עור = skin", "✋"),
- (EW, "גב = ?", ["back", "chin", "bone", "skin"], 0, "גב = back", [("🎒", 50, 52, 46)]),
+ (EW, "גב = ?", ["back", "chin", "bone", "skin"], 0, "גב = back", TXT("גב")),
 ])
 _i = next(i for i, c in enumerate(C) if c[0].startswith("📖"))
 C.insert(_i, ("Phrases", [AW, DW], [

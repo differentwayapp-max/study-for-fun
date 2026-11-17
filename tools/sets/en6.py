@@ -4,6 +4,7 @@
 # the Past Simple (was / were, regular -ed, common irregular verbs, didn't, Did…?), Band I vocabulary
 # (family, routines, jobs, school subjects, sports, food, places, weather, feelings), writing
 # (and / but / because, which sentence fits, order of sentences, capital letters) and four reading passages.
+# Added (curriculum coverage): this · that · these · those, commands (Open… / Don't…), describing people, clothes, telling the time.
 # Organised by fine topics (≈20 questions each) so a parent can tick only what the test covers.
 # Run: python3 -I tools/build_set.py tools/sets/en6.py
 import re
@@ -13,15 +14,18 @@ PN, PR, QW = "Pronouns & possessives", "Prepositions: place & time", "Questions 
 PW, PI, PD = "Past: was / were · -ed", "Past: irregular verbs", "Past: didn't · Did…?"
 VP, VS, VW = "Words: family, routines & jobs", "Words: school, sports & food", "Words: places, weather & feelings"
 WR, RD = "Writing: sentences & connectors", "Reading"
+TH, IM = "this · that · these · those", "Commands: Open… / Don't…"
+DP, CL, TM = "Describing people", "Words: clothes", "Telling the time"
 
 SET = dict(name="English ו'", grade=5, subject="אנגלית",
-           title="Grammar · Past Simple · Band I words · Reading",
-           desc="אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), אוצר מילים, כתיבה וארבעה קטעי קריאה",
-           desc_en="Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), Band I words, writing and four reading passages",
+           title="Grammar · Past Simple · Time · Band I words · Reading",
+           desc="אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
+           desc_en="Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
            tags=["Present Simple / Progressive", "can · there is", "have got", "Plurals", "Pronouns", "Prepositions",
-                 "Questions", "Past Simple", "Band I words", "Writing", "Reading"],
+                 "Questions", "Past Simple", "this / these", "Commands", "Describing people", "Clothes", "Telling the time",
+                 "Band I words", "Writing", "Reading"],
            examDate="", dailyGoal=2, perRound=10,
-           topics=[PG, CT, PL, PN, PR, QW, PW, PI, PD, VP, VS, VW, WR, RD])
+           topics=[PG, CT, PL, PN, PR, QW, PW, PI, PD, VP, VS, VW, TH, IM, DP, CL, TM, WR, RD])
 MAX_Q_WORDS = 12
 ANSWER_IN_Q_OK = True    # short answers ("is", "in", "on") are letters inside other words of the question; every item checked by hand
 
@@ -120,8 +124,8 @@ C.append(("Plurals: -s · -es · -ies · -ves", [PL], [
 C.append(("Irregular plurals", [PL], [
  Q(PL, "Two ___ are talking.", ["women", "womans", "woman", "womens"], 0, "woman – women", COUNT(("👩", 2))),
  Q(PL, "The ___ are playing in the park.", ["children", "childs", "childrens", "child"], 0, "child – children", ROW("🧒", "🧒", "🌳")),
- Q(PL, "I walked a lot. My ___ hurt.", ["feet", "foots", "feets", "foot"], 0, "foot – feet", "🦶"),
- Q(PL, "Brush your ___ before bed.", ["teeth", "tooths", "teeths", "tooth"], 0, "tooth – teeth", "🦷"),
+ Q(PL, "I walked a lot. My ___ hurt.", ["feet", "foots", "feets", "foot"], 0, "foot – feet", COUNT(("🦶", 2))),
+ Q(PL, "Brush your ___ before bed.", ["teeth", "tooths", "teeths", "tooth"], 0, "tooth – teeth", "😁"),
  Q(PL, "There are three ___ in the kitchen!", ["mice", "mouses", "mices", "mouse"], 0, "mouse – mice", COUNT(("🐁", 3))),
  Q(PL, "The farmer has twenty ___.", ["sheep", "sheeps", "sheepes", "sheepies"], 0, "sheep – sheep (אותה מילה)", COUNT(("🐑", 3))),
  Q(PL, "Look at those two ___! They're very tall.", ["men", "mans", "mens", "man"], 0, "man – men", COUNT(("👨", 2))),
@@ -414,6 +418,143 @@ C.append(("Feelings", [VW], [
  Q(VW, "I won first prize! My parents are ___ of me.", ["proud", "scared", "tired", "angry"], 0, "proud of = גאה ב…", "🥇"),
 ]))
 
+# ───────────── this · that · these · those ─────────────
+C.append(("this · these (near)", [TH], [
+ Q(TH, "___ is my pencil, here in my hand.", ["This", "These", "Those", "They"], 0, "קרוב ויחיד ← This", ROW("✋", "✏️")),
+ Q(TH, "Look at ___ shoes on my feet!", ["these", "this", "those", "that"], 0, "קרוב (על הרגליים) ורבים ← these", COUNT(("👟", 2))),
+ Q(TH, "___ apples here are red.", ["These", "This", "Those", "That"], 0, "here + רבים ← These", COUNT(("🍎", 3))),
+ Q(TH, "I have a cookie in my hand. ___ cookie is yummy.", ["This", "These", "Those", "That"], 0, "קרוב (ביד) ויחיד ← This", ROW("✋", "🍪")),
+ Q(TH, "Plural of \"this\"?", ["these", "those", "thises", "this's"], 0, "this (יחיד) – these (רבים)", TXT("this → ?")),
+ Q(TH, "Which is correct?", ["These are books.", "This are books.", "These is books.", "These book are."], 0, "these + are + שם עצם ברבים", COUNT(("📕", 3))),
+ Q(TH, "Mom, ___ is my friend Tom. He's in my class.", ["this", "these", "they", "it's"], 0, "מציגים אדם אחד ← this is", ROW("👩", "👦")),
+ Q(TH, "These ___ my parents.", ["are", "is", "am", "be"], 0, "these = רבים ← are", ROW("👨", "👩")),
+ Q(TH, "Are ___ your keys? I found them here.", ["these", "this", "that", "it"], 0, "keys = רבים, קרוב ← these", COUNT(("🔑", 2))),
+ Q(TH, "this = ?", ["זה (קרוב)", "אלה (קרובים)", "ההוא (רחוק)", "ההם (רחוקים)"], 0, "this = זה, these = אלה", TXT("this")),
+ Q(TH, "these = ?", ["אלה (קרובים)", "זה (קרוב)", "ההוא (רחוק)", "ההם (רחוקים)"], 0, "these = אלה, כמה דברים קרובים", TXT("these")),
+]))
+
+C.append(("that · those (far)", [TH], [
+ Q(TH, "Look at ___ bird up in the sky!", ["that", "those", "these", "them"], 0, "רחוק ויחיד ← that", ROW("👆", "🐦")),
+ Q(TH, "___ mountains over there are very high.", ["Those", "That", "This", "These"], 0, "over there + רבים ← Those", ROW("🏔️", "🏔️")),
+ Q(TH, "Who is ___ man over there?", ["that", "those", "these", "this"], 0, "רחוק ויחיד ← that", "👨"),
+ Q(TH, "Plural of \"that\"?", ["those", "these", "thats", "thoses"], 0, "that (יחיד) – those (רבים)", TXT("that → ?")),
+ Q(TH, "___ stars far away are so bright.", ["Those", "That", "These", "This"], 0, "far away + רבים ← Those", COUNT(("⭐", 3))),
+ Q(TH, "The ball is far away. Is ___ your ball?", ["that", "this", "those", "these"], 0, "far away ויחיד ← that", "⚽"),
+ Q(TH, "Near: these. Far: ___.", ["those", "this", "here", "that's"], 0, "רבים: these קרוב, those רחוק", TXT("these / ?")),
+ Q(TH, "Which is correct?", ["Those are cars.", "Those is cars.", "That are cars.", "Those car are."], 0, "those + are + רבים", ROW("🚗", "🚗")),
+ Q(TH, "___ house over there is my grandma's.", ["That", "Those", "These", "This"], 0, "over there ויחיד ← That", ROW("🏠", "👵")),
+ Q(TH, "Are ___ your shoes over there, by the door?", ["those", "this", "that", "these"], 0, "over there + shoes (רבים) ← those", ROW("🚪", "👟", "👟")),
+]))
+
+# ───────────── Commands: Open… / Don't… ─────────────
+C.append(("Commands: Open the door!", [IM], [
+ Q(IM, "It's hot in here. ___ the window, please.", ["Open", "Opens", "Opening", "To open"], 0, "ציווי ← פועל בסיס, בלי s", ROW("🥵", "🏠")),
+ Q(IM, "___ your hands before you eat.", ["Wash", "Washes", "Washing", "Washed"], 0, "ציווי מתחיל בפועל בסיס", ROW("🧼", "👐")),
+ Q(IM, "Teacher: \"___ your books to page 20.\"", ["Open", "Opens", "Opened", "Opening"], 0, "הוראה ← פועל בסיס: Open", ROW("👩‍🏫", "📖")),
+ Q(IM, "Which sentence is a command?", ["Sit down, please.", "She sits down.", "He sat down.", "They are sitting."], 0, "ציווי: פועל בסיס בהתחלה, בלי נושא", ROW("👩‍🏫", "🧒")),
+ Q(IM, "Please ___ quiet in the library.", ["be", "are", "is", "being"], 0, "ציווי של to be ← be", ROW("📖", "🤫")),
+ Q(IM, "Mom: \"___ your room now, please!\"", ["Clean", "Cleans", "Cleaning", "Cleaned"], 0, "ציווי ← Clean (בסיס)", ROW("🧹", "🛏️")),
+ Q(IM, "How do you tell the class \"שבו!\"?", ["Sit down!", "Stand up!", "Sits down!", "Sitting down!"], 0, "sit down = לשבת, stand up = לקום", ROW("👩‍🏫", "🧒", "🧒")),
+ Q(IM, "___ left at the bank. The park is there.", ["Turn", "Turns", "Turning", "Turned"], 0, "הוראות דרך ← ציווי: Turn", ROW("🏦", "⬅️")),
+ Q(IM, "___ a picture of your family.", ["Draw", "Draws", "Drawing", "Drew"], 0, "הוראה במבחן ← Draw (בסיס)", ROW("🖍️", "👪")),
+ Q(IM, "Which is a polite command?", ["Please sit down.", "Please sits down.", "Please sat down.", "Please sitting down."], 0, "Please + פועל בסיס ← בקשה מנומסת", ROW("🙏", "🧒")),
+]))
+
+C.append(("Commands: Don't run!", [IM], [
+ Q(IM, "___ run in the corridor!", ["Don't", "Doesn't", "Not", "No"], 0, "ציווי שלילי ← Don't + פועל", ROW("🏃", "🚫")),
+ Q(IM, "Don't ___ in class. Put your hand up.", ["shout", "shouts", "shouting", "shouted"], 0, "אחרי Don't ← פועל בסיס", ROW("📢", "🚫")),
+ Q(IM, "The water is deep. ___ swim here!", ["Don't", "Doesn't", "Not", "No"], 0, "אסור לשחות ← Don't swim", ROW("🌊", "🚫")),
+ Q(IM, "What does this sign say?", ["Don't smoke.", "Smoke here.", "Don't eat.", "Don't run."], 0, "🚭 = אסור לעשן", "🚭"),
+ Q(IM, "Which is correct?", ["Don't touch it!", "Not touch it!", "Doesn't touch it!", "Don't touches it!"], 0, "Don't + פועל בסיס", ROW("🔥", "✋")),
+ Q(IM, "Don't ___ late for school!", ["be", "are", "is", "being"], 0, "Don't be = אל תהיה", ROW("⏰", "🏫")),
+ Q(IM, "\"אל תשכח!\" = ?", ["Don't forget!", "Not forget!", "You forget!", "Doesn't forget!"], 0, "אל + פועל ← Don't + פועל", "🎒"),
+ Q(IM, "It's a library. ___ talk loudly.", ["Don't", "Do", "Please", "Let's"], 0, "בספרייה שומרים על שקט ← Don't", ROW("📖", "🤫")),
+ Q(IM, "The floor is wet. ___!", ["Be careful", "Don't careful", "Be carefully", "Careful be"], 0, "ציווי של to be ← Be careful", ROW("💧", "⚠️")),
+ Q(IM, "Pool rule: ___ near the water.", ["Don't run", "Doesn't run", "Not run", "Don't running"], 0, "כלל ← Don't + פועל בסיס", ROW("🏊", "🚫")),
+]))
+
+# ───────────── Describing people ─────────────
+C.append(("What does he look like?", [DP], [
+ Q(DP, "My dad is ___. He is 1.90 meters!", ["tall", "short", "young", "old"], 0, "1.90 מטר ← גבוה = tall", ROW("👨", "📏")),
+ Q(DP, "My baby brother is one year old. He is very ___.", ["young", "old", "tall", "strong"], 0, "בן שנה ← young = צעיר", "👶"),
+ Q(DP, "Grandpa is eighty. He is ___.", ["old", "young", "new", "little"], 0, "בן שמונים ← old = זקן", "👴"),
+ Q(DP, "Dana has ___ hair.", ["blond", "black", "red", "gray"], 0, "blond = שיער בהיר, צהוב", "👱‍♀️"),
+ Q(DP, "What color is his hair?", ["red", "blond", "black", "white"], 0, "שיער כתום-אדום = red hair", "👨‍🦰"),
+ Q(DP, "Grandpa has no hair. He is ___.", ["bald", "blond", "tall", "young"], 0, "bald = קירח, בלי שיער", "👨‍🦲"),
+ Q(DP, "Opposite of tall?", ["short", "old", "thin", "new"], 0, "tall – short = גבוה – נמוך", TXT("tall ↔ ?")),
+ Q(DP, "Opposite of old (for a person)?", ["young", "new", "short", "tall"], 0, "אדם: old – young; חפץ: old – new", TXT("old ↔ ?")),
+ Q(DP, "He has a ___. Look at his chin!", ["beard", "bag", "bed", "bird"], 0, "beard = זקן (שיער על הפנים)", "🧔"),
+ Q(DP, "She can't see well, so she wears ___.", ["glasses", "gloves", "a scarf", "boots"], 0, "glasses = משקפיים, עוזרים לראות", ROW("👩", "👓")),
+]))
+
+C.append(("What is she like?", [DP], [
+ Q(DP, "My sister always helps people. She is ___.", ["kind", "lazy", "rude", "angry"], 0, "עוזרת לכולם ← kind = טובת לב", ROW("👧", "🤝")),
+ Q(DP, "He never does his homework. He is ___.", ["lazy", "clever", "kind", "funny"], 0, "lazy = עצלן", ROW("😴", "📓")),
+ Q(DP, "Tom always tells jokes. He is ___.", ["funny", "sad", "shy", "quiet"], 0, "מספר בדיחות ← funny = מצחיק", "😂"),
+ Q(DP, "She doesn't talk to new people. She is ___.", ["shy", "noisy", "funny", "rude"], 0, "shy = ביישן, מתבייש", "🙈"),
+ Q(DP, "Which word describes hair?", ["curly", "kind", "lazy", "funny"], 0, "curly hair = שיער מתולתל", "👨‍🦱"),
+ Q(DP, "Which word is NOT about how a person looks?", ["kind", "tall", "blond", "thin"], 0, "kind = אופי, לא מראה", ROW("👩", "👨")),
+ Q(DP, "\"What does he look like?\" – Which answer fits?", ["He's very tall.", "He's a doctor.", "He likes pizza.", "He's fine, thanks."], 0, "look like = איך הוא נראה", "👨"),
+ Q(DP, "\"What is she like?\" – Which answer fits?", ["She's very kind.", "She's twelve.", "She likes cats.", "She's at school."], 0, "What is she like? = מה האופי שלה", "👩"),
+ Q(DP, "Opposite of fat?", ["thin", "tall", "short", "young"], 0, "fat – thin = שמן – רזה", TXT("fat ↔ ?")),
+ Q(DP, "She has ___. It goes down to her back.", ["long hair", "hair long", "longs hair", "a long hairs"], 0, "תואר לפני שם העצם: long hair", "👩"),
+]))
+
+# ───────────── Words: clothes ─────────────
+C.append(("Clothes", [CL], [
+ Q(CL, "I wear a ___ on my head.", ["hat", "shoe", "sock", "shirt"], 0, "hat = כובע", "👒"),
+ Q(CL, "It's cold. Put on your ___.", ["coat", "shorts", "sandals", "T-shirt"], 0, "coat = מעיל, שומר מהקור", "🧥"),
+ Q(CL, "You wear ___ on your feet, inside your shoes.", ["socks", "gloves", "hats", "scarves"], 0, "socks = גרביים", "🧦"),
+ Q(CL, "You wear ___ on your hands in winter.", ["gloves", "socks", "boots", "glasses"], 0, "gloves = כפפות", "🧤"),
+ Q(CL, "She is wearing a pretty pink ___.", ["dress", "shoes", "jeans", "glasses"], 0, "dress = שמלה (a + יחיד)", "👗"),
+ Q(CL, "Dad wears a shirt and a ___ to work.", ["tie", "skirt", "dress", "sock"], 0, "tie = עניבה", "👔"),
+ Q(CL, "In summer I wear ___ and a T-shirt.", ["shorts", "a coat", "gloves", "boots"], 0, "קיץ ← shorts = מכנסיים קצרים", ROW("☀️", "👕")),
+ Q(CL, "___ are blue trousers for every day.", ["Jeans", "Shoes", "Socks", "Hats"], 0, "jeans = מכנסי ג'ינס", "👖"),
+ Q(CL, "You wear a ___ around your neck when it's cold.", ["scarf", "belt", "ring", "sock"], 0, "scarf = צעיף", "🧣"),
+ Q(CL, "In the rain I wear ___ on my feet.", ["boots", "gloves", "a hat", "a scarf"], 0, "boots = מגפיים", ROW("🌧️", "👢")),
+]))
+
+C.append(("Wearing clothes", [CL], [
+ Q(CL, "Today Noa ___ a red dress.", ["is wearing", "wear", "are wearing", "wearing"], 0, "היום, עכשיו + she ← is wearing", "👗"),
+ Q(CL, "It's cold outside. ___ your coat!", ["Put on", "Take off", "Put in", "Take on"], 0, "put on = ללבוש", ROW("❄️", "🧥")),
+ Q(CL, "It's hot in here. ___ your sweater.", ["Take off", "Put on", "Wear on", "Take on"], 0, "take off = להוריד בגד", ROW("🥵", "👕")),
+ Q(CL, "These shoes are too small. I need a bigger ___.", ["size", "color", "shop", "price"], 0, "size = מידה", "👟"),
+ Q(CL, "\"What are you wearing?\" – Which answer fits?", ["A blue T-shirt.", "At home.", "I'm fine.", "Yes, I am."], 0, "wearing = לובש ← עונים בבגד", ROW("👕", "👖")),
+ Q(CL, "One sock, two ___.", ["socks", "sockes", "sock", "socken"], 0, "רבים ← מוסיפים s", COUNT(("🧦", 2))),
+ Q(CL, "My new jeans ___ blue.", ["are", "is", "am", "be"], 0, "jeans תמיד ברבים ← are", "👖"),
+ Q(CL, "A ___ keeps my trousers up.", ["belt", "tie", "scarf", "glove"], 0, "belt = חגורה", "👖"),
+ Q(CL, "At my school we all wear a ___.", ["uniform", "umbrella", "pocket", "backpack"], 0, "uniform = תלבושת אחידה", ROW("🏫", "👕")),
+ Q(CL, "Which is NOT clothes?", ["umbrella", "shirt", "skirt", "jacket"], 0, "umbrella = מטרייה, לא בגד", ROW("☂️", "👕", "👗")),
+]))
+
+# ───────────── Telling the time ─────────────
+C.append(("What time is it? o'clock · half past", [TM], [
+ Q(TM, "What time is it?", ["three o'clock", "nine o'clock", "half past three", "twelve o'clock"], 0, "הקטן על 3, הגדול על 12", "🕒"),
+ Q(TM, "What time is it?", ["half past six", "six o'clock", "half past twelve", "twelve o'clock"], 0, "הגדול על 6 = חצי ← half past six", "🕡"),
+ Q(TM, "half past = ?", ["וחצי", "ורבע", "רבע ל-", "בדיוק"], 0, "half = חצי ← half past = וחצי", TXT("half past")),
+ Q(TM, "o'clock = ?", ["שעה עגולה", "וחצי", "ורבע", "רבע ל-"], 0, "seven o'clock = שבע בדיוק", TXT("7:00")),
+ Q(TM, "School starts at 8:00. That's ___.", ["eight o'clock", "half past eight", "eight past", "o'clock eight"], 0, "8:00 ← eight o'clock", "🕗"),
+ Q(TM, "It's 4:30. It's ___.", ["half past four", "half past five", "four o'clock", "half four past"], 0, "4:30 ← half past four", TXT("4:30")),
+ Q(TM, "What ___ is it? – It's ten o'clock.", ["time", "day", "clock", "watch"], 0, "What time is it? = מה השעה?", "🕙"),
+ Q(TM, "The film starts at half past seven. When is that?", ["7:30", "6:30", "7:00", "8:30"], 0, "half past seven = שבע וחצי", "🎬"),
+ Q(TM, "It's 12:00. It's ___.", ["twelve o'clock", "two o'clock", "half past twelve", "twelve past"], 0, "12:00 ← twelve o'clock", "🕛"),
+ Q(TM, "What time is it?", ["half past nine", "nine o'clock", "half past six", "half past ten"], 0, "הקטן אחרי 9, הגדול על 6", "🕤"),
+]))
+
+C.append(("quarter past · quarter to", [TM], [
+ Q(TM, "7:15 = ?", ["quarter past seven", "quarter to seven", "half past seven", "seven fifteen past"], 0, "15 דקות אחרי 7 ← quarter past", TXT("7:15")),
+ Q(TM, "7:45 = ?", ["quarter to eight", "quarter past seven", "quarter to seven", "half past eight"], 0, "15 דקות לפני 8 ← quarter to eight", TXT("7:45")),
+ Q(TM, "quarter past = ?", ["ורבע", "רבע ל-", "וחצי", "בדיוק"], 0, "quarter = רבע, past = אחרי", TXT("quarter past")),
+ Q(TM, "quarter to = ?", ["רבע ל-", "ורבע", "וחצי", "בדיוק"], 0, "to = לפני ← רבע לפני השעה", TXT("quarter to")),
+ Q(TM, "It's quarter past three. Which time is it?", ["3:15", "3:45", "2:45", "3:30"], 0, "past = אחרי 3 ← 3:15", TXT("quarter", "past 3")),
+ Q(TM, "It's quarter to five. Which time is it?", ["4:45", "5:15", "5:45", "4:15"], 0, "רבע לפני 5 ← 4:45", TXT("quarter", "to 5")),
+ Q(TM, "Lunch is at 1:30. That's ___.", ["half past one", "quarter past one", "half past two", "one o'clock"], 0, "1:30 ← half past one", "🍽️"),
+ Q(TM, "How many minutes are in a quarter of an hour?", ["15", "30", "45", "25"], 0, "שעה = 60 דקות, רבע = 15", TXT("¼ hour")),
+ Q(TM, "How many minutes are in half an hour?", ["30", "15", "60", "45"], 0, "חצי מ-60 = 30", "⏳"),
+ Q(TM, "My piano lesson is ___ quarter past four.", ["at", "in", "on", "to"], 0, "לפני שעה ← at", "🎹"),
+ Q(TM, "It's 10:45. It's quarter ___ eleven.", ["to", "past", "of", "at"], 0, "רבע לפני 11 ← quarter to", TXT("10:45")),
+]))
+
 # ───────────── Writing ─────────────
 C.append(("Connectors: and · but · because", [WR], [
  Q(WR, "I like apples ___ bananas.", ["and", "but", "because", "or"], 0, "and = ו… (מוסיף עוד דבר)", ROW("🍎", "🍌")),
@@ -571,8 +712,8 @@ C.append(("חזרה כללית", [PG, CT, PL, PN, PR, QW, PW, PI, PD, VP, VS, VW
 ]))
 
 # station type on the map
-KINDS = {c[0]: "gram" for c in C if c[1][0] in (PG, CT, PL, PN, PR, QW, PW, PI, PD, WR)}
-KINDS.update({c[0]: "word" for c in C if c[1][0] in (VP, VS, VW)})
+KINDS = {c[0]: "gram" for c in C if c[1][0] in (PG, CT, PL, PN, PR, QW, PW, PI, PD, WR, TH, IM, TM)}
+KINDS.update({c[0]: "word" for c in C if c[1][0] in (VP, VS, VW, DP, CL)})
 KINDS.update({c[0]: "read" for c in C if c[1][0] == RD})
 KINDS["חזרה כללית"] = "rev"
 
@@ -585,4 +726,6 @@ football|tennis|basketball|swimming|skiing|cycling|play|win|team|
 carrot|grapes|milk|eggs|soup|dinner|sweet|sour|water|lunch|
 library|hospital|museum|airport|market|beach|station|cinema|bakery|neighborhood|
 rainy|sunny|cloudy|windy|hot|freezing|cold|snow|storm|rainbow|
-worried|hungry|happy|bored|angry|scared|tired|excited|sad|proud""".replace("\n", "").split("|")
+worried|hungry|happy|bored|angry|scared|tired|excited|sad|proud|
+hat|coat|socks|gloves|dress|tie|jeans|scarf|boots|uniform|
+tall|young|bald|beard|glasses|kind|lazy|funny|shy|thin""".replace("\n", "").split("|")

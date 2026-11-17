@@ -2,8 +2,8 @@
 # Present Perfect (have/has + V3, ever/never/already/yet, since/for), Past Simple vs Present Perfect,
 # Past Progressive with when / while, future forms (will / going to / present progressive for plans),
 # the first conditional, comparatives & superlatives (irregular, as … as), modals (must / have to / should / might),
-# quantifiers, relative pronouns (who / which / that), writing a paragraph and connectors,
-# Band II vocabulary (environment & technology, health & travel, media & feelings) and four longer Unseen passages.
+# quantifiers, relative pronouns (who / which / that), the passive (Present / Past Simple), used to, writing a paragraph and connectors,
+# Band II vocabulary (environment & technology, health & travel, media & feelings), word building (un- / dis- / -ful / -less / -tion) and four longer Unseen passages.
 # The grade 7 sets (en7, en7_nov26) are not repeated here.
 # Organised by fine topics (≈20 questions each) so a parent can tick only what the test covers.
 # Run: python3 -I tools/build_set.py tools/sets/en8.py
@@ -15,15 +15,16 @@ MD, QT, RP = "Modals: must · have to · should · might", "Quantifiers", "Relat
 WR = "Paragraphs & connectors"
 VE, VH, VM = "Words: environment & technology", "Words: health & travel", "Words: media & feelings"
 UN = "Unseen"
+PS, UT, WF = "Passive: is made · was built", "used to", "Word building: un- · -ful · -tion"
 
 SET = dict(name="English ח'", grade=7, subject="אנגלית",
-           title="Present Perfect · Conditionals · Modals · Band II · Unseen",
-           desc="אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, כתיבת פסקה ומילות קישור, אוצר מילים Band II וארבעה קטעי Unseen ארוכים",
-           desc_en="Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, paragraphs and connectors, Band II words and four longer Unseen passages",
+           title="Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+           desc="אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+           desc_en="Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
            tags=["Present Perfect", "since / for", "when / while", "will / going to", "If … will", "Modals",
-                 "who / which / that", "Connectors", "Band II words", "Unseen"],
+                 "who / which / that", "Passive", "used to", "Connectors", "Band II words", "Word building", "Unseen"],
            examDate="", dailyGoal=2, perRound=10,
-           topics=[PF, PV, PP, FU, CI, CS, MD, QT, RP, WR, VE, VH, VM, UN])
+           topics=[PF, PV, PP, FU, CI, CS, MD, QT, RP, PS, UT, WR, VE, VH, VM, WF, UN])
 MAX_Q_WORDS = 12
 
 
@@ -104,7 +105,7 @@ C.append(("Past Progressive: was / were + -ing", [PP], [
  Q(PP, "I was walking home ___ I saw an accident.", ["when", "while", "during", "since"], 0, "פעולה קצרה שהפריעה ← when", ROW("🚶", "🚗")),
  Q(PP, "___ we were eating, the lights went out.", ["While", "During", "Since", "For"], 0, "While + פעולה ארוכה", ROW("🍝", "💡")),
  Q(PP, "What were you doing at 9 last night?", ["I was sleeping", "I am sleeping", "I sleep", "I have slept"], 0, "שאלה ב-Past Progressive ← תשובה בו", ROW("🛌", "🕘")),
- Q(PP, "The sun ___ and the birds were singing.", ["was shining", "were shining", "shined", "is shining"], 0, "the sun ← was + ing", ROW("☀️", "🐦")),
+ Q(PP, "The sun ___ and the birds were singing.", ["was shining", "were shining", "shines", "is shining"], 0, "the sun ← was + ing", ROW("☀️", "🐦")),
  Q(PP, "I was cooking when he called. Which action was short?", ["calling", "cooking", "both", "neither"], 0, "הפעולה הקצרה ב-Past Simple", ROW("🍳", "📞")),
  Q(PP, "Which is correct?", ["They were sleeping", "They was sleeping", "They sleeping", "They were sleep"], 0, "they ← were + ing", ROW("😴", "😴")),
  Q(PP, "She hurt her hand while she ___.", ["was cooking", "were cooking", "cooks", "is cooking"], 0, "while + was + ing", ROW("🔪", "🥕")),
@@ -225,7 +226,7 @@ C.append(("might · advice · rules", [MD], [
  Q(MD, "We ___ go to Eilat, but we haven't decided.", ["might", "must", "have to", "mustn't"], 0, "עוד לא החלטנו ← might", ROW("🏖️", "🤔")),
  Q(MD, "Which modal gives advice?", ["should", "must", "might", "have to"], 0, "should = כדאי ← עצה", ROW("💬", "👍")),
  Q(MD, "Which modal shows possibility?", ["might", "must", "mustn't", "have to"], 0, "might = אולי ← אפשרות", ROW("🎲", "🤷")),
- Q(MD, "You ___ to be 18 to drive a car.", ["have", "must", "should", "might"], 0, "רק have לפני to", ROW("🚗", "🔞")),
+ Q(MD, "You ___ to be 17 to drive a car.", ["have", "must", "should", "might"], 0, "רק have לפני to", "🚗"),
  Q(MD, "Do I ___ to bring food on the trip?", ["have", "must", "should", "might"], 0, "Do I have to…? = האם חייב?", ROW("🥪", "🎒")),
  Q(MD, "Look at the sign. You ___ swim here.", ["mustn't", "don't have to", "might", "should"], 0, "השלט אוסר ← mustn't", [("🏊", 20, 52, 34), ("NO SWIMMING", 64, 52, 11)]),
  Q(MD, "My tooth hurts. – You ___ see a dentist.", ["should", "mustn't", "might not", "don't have"], 0, "עצה ← should", ROW("🦷", "😣")),
@@ -283,6 +284,87 @@ C.append(("Relative clauses: joining ideas", [RP], [
  Q(RP, "Do you know anyone ___ can fix computers?", ["who", "which", "whose", "where"], 0, "anyone = אדם ← who", ROW("💻", "🔧")),
  Q(RP, "These are the shoes ___ I bought yesterday.", ["which", "who", "whose", "where"], 0, "shoes = דברים ← which", ROW("👟", "🛍️")),
  Q(RP, "My aunt, ___ lives in London, is a nurse.", ["who", "that", "which", "where"], 0, "בין פסיקים, אדם ← who (לא that)", ROW("👩‍⚕️", "🇬🇧")),
+]))
+
+# ───────────── Passive: is made · was built ─────────────
+C.append(("Passive: is made · are spoken", [PS], [
+ Q(PS, "Cheese ___ from milk.", ["is made", "makes", "is make", "made"], 0, "הגבינה לא עושה ← is + V3: is made", ROW("🥛", "🧀")),
+ Q(PS, "English ___ in many countries.", ["is spoken", "speaks", "is speak", "are spoken"], 0, "שפה לא מדברת ← is spoken (speak-spoke-spoken)", ROW("💬", "🌍")),
+ Q(PS, "These phones ___ in China.", ["are made", "is made", "make", "are make"], 0, "phones = רבים ← are + V3", COUNT(("📱", 2))),
+ Q(PS, "Active: People grow oranges. Passive: Oranges ___.", ["are grown", "grow", "are grew", "is grown"], 0, "oranges רבים ← are + V3 (grow-grew-grown)", ROW("🍊", "🌳")),
+ Q(PS, "The classroom ___ every day.", ["is cleaned", "cleans", "is cleaning", "are cleaned"], 0, "הכיתה לא מנקה, מנקים אותה ← is cleaned", ROW("🏫", "🧹")),
+ Q(PS, "Which sentence is passive?", ["Bread is baked.", "Mom bakes bread.", "Mom is baking.", "Bread smells good."], 0, "is + V3: עושים משהו ללחם", "🍞"),
+ Q(PS, "Letters ___ every morning.", ["are delivered", "deliver", "are deliver", "is delivered"], 0, "מכתבים לא מחלקים ← are delivered", ROW("✉️", "📮")),
+ Q(PS, "Is Hebrew ___ in Brazil? – No, it isn't.", ["spoken", "speak", "spoke", "speaking"], 0, "שאלה בסביל: Is + V3", ROW("🇧🇷", "💬")),
+ Q(PS, "Football ___ all over the world.", ["is played", "plays", "is play", "are played"], 0, "כדורגל לא משחק ← is played", ROW("⚽", "🌍")),
+ Q(PS, "Passive in the present: am / is / are + ___", ["V3", "V1", "-ing", "to + verb"], 0, "סביל בהווה: is/are + צורה שלישית", TXT("is + ?")),
+]))
+
+C.append(("Passive: was built · were written", [PS], [
+ Q(PS, "The pyramids ___ thousands of years ago.", ["were built", "built", "was built", "are built"], 0, "ago + רבים ← were + V3 (build-built-built)", ROW("🐪", "🏜️")),
+ Q(PS, "This bridge ___ in 1990.", ["was built", "built", "is built", "were built"], 0, "1990 = עבר, bridge יחיד ← was built", ROW("🌉", "📅")),
+ Q(PS, "Harry Potter ___ by J.K. Rowling.", ["was written", "wrote", "was wrote", "is writing"], 0, "write-wrote-written ← was written", ROW("✍️", "📖")),
+ Q(PS, "The telephone ___ by Bell in 1876.", ["was invented", "invented", "is invented", "were invented"], 0, "הטלפון לא המציא ← was invented", "☎️"),
+ Q(PS, "My bike ___ yesterday! I can't find it.", ["was stolen", "stole", "was stole", "is stealing"], 0, "steal-stole-stolen ← was stolen", ROW("🚲", "❓")),
+ Q(PS, "\"Romeo and Juliet\" was written ___ Shakespeare.", ["by", "from", "with", "of"], 0, "מי עשה את הפעולה ← by", "📖"),
+ Q(PS, "Active: Someone cleaned the room. Passive: The room ___.", ["was cleaned", "cleaned", "is cleaned", "were cleaned"], 0, "עבר, room יחיד ← was + V3", ROW("🧹", "🛏️")),
+ Q(PS, "When ___ this photo taken? – Last summer.", ["was", "were", "did", "is"], 0, "photo יחיד, last summer ← was … taken", "📷"),
+ Q(PS, "The windows ___ during the storm last night.", ["were broken", "broken", "was broken", "are broken"], 0, "windows רבים, עבר ← were + V3", ROW("⛈️", "🏠")),
+ Q(PS, "The thief ___ by the police.", ["was caught", "caught", "was catch", "catches"], 0, "catch-caught-caught ← was caught", "👮"),
+]))
+
+# ───────────── used to ─────────────
+C.append(("used to: things I did before", [UT], [
+ Q(UT, "When I was little, I ___ cry a lot.", ["used to", "use to", "am used", "was use"], 0, "הרגל בעבר שנגמר ← used to", "👶"),
+ Q(UT, "My dad ___ smoke, but he stopped.", ["used to", "uses to", "is used", "use to"], 0, "עשה פעם, היום כבר לא ← used to", "🚭"),
+ Q(UT, "I used to ___ in Eilat. Now my home is in Haifa.", ["live", "lived", "living", "lives"], 0, "אחרי used to ← פועל בסיס", ROW("🏜️", "🏙️")),
+ Q(UT, "\"I used to play football.\" Do I play now?", ["No, not now", "Yes, every day", "Yes, sometimes", "Yes, always"], 0, "used to = פעם כן, היום כבר לא", "⚽"),
+ Q(UT, "There ___ be a cinema here. Now it's a bank.", ["used to", "uses to", "use", "was use"], 0, "היה פעם, היום כבר לא ← used to", ROW("🎬", "🏦")),
+ Q(UT, "\"used to\" means:", ["פעם (וכבר לא)", "עכשיו", "בעתיד", "אף פעם"], 0, "used to ← הרגל בעבר שהשתנה", TXT("used to")),
+ Q(UT, "Before phones, people ___ write letters.", ["used to", "use to", "are used", "using to"], 0, "הרגל בעבר ← used to + פועל בסיס", ROW("✉️", "📮")),
+ Q(UT, "Grandma used to ___ us stories every night.", ["tell", "told", "telling", "tells"], 0, "used to + פועל בסיס: tell", ROW("👵", "📖")),
+ Q(UT, "She ___ have long hair, but now it's short.", ["used to", "uses to", "is used", "use to"], 0, "פעם ארוך, היום קצר ← used to", "👩"),
+ Q(UT, "Which is correct?", ["used to swim", "use to swam", "used to swam", "used swimming"], 0, "used to + פועל בסיס: swim", "🏊"),
+]))
+
+C.append(("used to: negatives & questions", [UT], [
+ Q(UT, "I ___ like vegetables, but now I love them.", ["didn't use to", "didn't used to", "not used to", "don't use to"], 0, "בשלילה: didn't use to (בלי d)", "🥦"),
+ Q(UT, "___ you use to live in Tel Aviv?", ["Did", "Do", "Were", "Are"], 0, "שאלה בעבר ← Did + use to", "🏙️"),
+ Q(UT, "\"You used to have a dog, right?\" – \"Yes, I ___.\"", ["did", "used", "do", "was"], 0, "שאלה על העבר ← Yes, I did", "🐕"),
+ Q(UT, "He didn't ___ to wear glasses.", ["use", "used", "uses", "using"], 0, "אחרי didn't ← use, בלי d", ROW("👦", "👓")),
+ Q(UT, "A hundred years ago, people ___ have phones.", ["didn't use to", "used to", "don't", "aren't"], 0, "פעם לא היו טלפונים ← didn't use to", "📱"),
+ Q(UT, "My brother used to be shy, but now he's very ___.", ["friendly", "shy", "quiet", "afraid"], 0, "but = ניגוד ← פעם ביישן, היום חברותי", "👦"),
+ Q(UT, "Where ___ your grandparents use to live?", ["did", "do", "were", "are"], 0, "שאלה על העבר ← did + use to", ROW("👴", "👵", "🏠")),
+ Q(UT, "\"I didn't use to like tea.\" Do I like it now?", ["Yes, I do", "No, never", "No, I don't", "I hate it"], 0, "פעם לא אהבתי ← היום כן", "🍵"),
+ Q(UT, "used to or Past Simple? I ___ to Paris last year.", ["went", "used to go", "use to go", "was used"], 0, "פעם אחת, last year ← Past Simple", ROW("🗼", "📅")),
+ Q(UT, "Dinosaurs ___ live on Earth.", ["used to", "use to", "uses to", "are used"], 0, "חיו פעם, היום כבר לא ← used to", "🦕"),
+]))
+
+# ───────────── Word building ─────────────
+C.append(("Word building: -tion · -ment · -ful · -less", [WF], [
+ Q(WF, "Noun of invent?", ["invention", "inventful", "inventment", "inventless"], 0, "invent + ion ← שם עצם: invention (המצאה)", PW("💡", "invent → ?")),
+ Q(WF, "Noun of pollute?", ["pollution", "pollutement", "polluteful", "pollutness"], 0, "pollute ← pollution = זיהום", PW("🏭", "pollute → ?")),
+ Q(WF, "Noun of enjoy?", ["enjoyment", "enjoytion", "enjoyful", "enjoyness"], 0, "enjoy + ment = enjoyment (הנאה)", PW("😊", "enjoy → ?")),
+ Q(WF, "Noun of inform?", ["information", "informful", "informless", "informent"], 0, "inform + ation = information (מידע)", PW("ℹ️", "inform → ?")),
+ Q(WF, "govern + ___ = government", ["-ment", "-ful", "-less", "-tion"], 0, "govern + ment = government (ממשלה)", TXT("govern + ?")),
+ Q(WF, "A rainbow is very ___.", ["colorful", "colorless", "uncolor", "colortion"], 0, "ful = מלא ב- ← colorful = צבעוני", "🌈"),
+ Q(WF, "Thank you! You were very ___.", ["helpful", "helpless", "unhelpful", "helpment"], 0, "help + ful = עוזר, מועיל", ROW("🤝", "😊")),
+ Q(WF, "This knife doesn't cut. It's ___.", ["useless", "useful", "unuse", "usement"], 0, "less = בלי ← useless = חסר תועלת", "🔪"),
+ Q(WF, "A ___ hero is never afraid.", ["fearless", "fearful", "unfear", "fearment"], 0, "fear + less = בלי פחד", "🦸"),
+ Q(WF, "\"careless\" means:", ["לא זהיר", "זהיר מאוד", "אכפתי", "דאגה"], 0, "less = בלי ← בלי זהירות", TXT("careless")),
+]))
+
+C.append(("Word building: un- · dis-", [WF], [
+ Q(WF, "Opposite of happy?", ["unhappy", "dishappy", "happyless", "inhappy"], 0, "un + happy = לא שמח", PW("😢", "happy ↔ ?")),
+ Q(WF, "Opposite of agree?", ["disagree", "unagree", "agreeless", "inagree"], 0, "dis + agree = לא מסכים", PW("👎", "agree ↔ ?")),
+ Q(WF, "Opposite of appear?", ["disappear", "unappear", "appearless", "inappear"], 0, "dis + appear = להיעלם", PW("🎩", "appear ↔ ?")),
+ Q(WF, "This shirt isn't comfortable. It's ___.", ["uncomfortable", "discomfortable", "comfortful", "incomfortable"], 0, "un + comfortable = לא נוח", "👕"),
+ Q(WF, "The door isn't locked. It's ___.", ["unlocked", "dislocked", "lockless", "inlocked"], 0, "un + locked = לא נעול", "🚪"),
+ Q(WF, "He doesn't tell the truth. He is ___.", ["dishonest", "unhonest", "honestless", "inhonest"], 0, "dis + honest = לא ישר", "🤥"),
+ Q(WF, "\"unfair\" means:", ["לא הוגן", "הוגן מאוד", "יריד", "הוגנות"], 0, "un = לא ← unfair = לא הוגן", TXT("unfair")),
+ Q(WF, "It's ___ to swim here. There are sharks!", ["unsafe", "dissafe", "safeless", "insafe"], 0, "un + safe = לא בטוח", ROW("🦈", "🌊")),
+ Q(WF, "Which prefix makes obey negative?", ["dis-", "un-", "-less", "-ful"], 0, "disobey = לא לציית", TXT("? + obey")),
+ Q(WF, "Opposite of careful?", ["careless", "uncareful", "discareful", "carement"], 0, "ful (עם) ↔ less (בלי)", PW("⚠️", "careful ↔ ?")),
 ]))
 
 # ───────────── Paragraphs & connectors ─────────────
@@ -534,8 +616,8 @@ C.append(("חזרה כללית", [PF, PV, PP, FU, CI, CS, MD, QT, RP, WR, VE, VH
 ]))
 
 # station type on the map
-KINDS = {c[0]: "gram" for c in C if c[1][0] in (PF, PV, PP, FU, CI, CS, MD, QT, RP, WR)}
-KINDS.update({c[0]: "word" for c in C if c[1][0] in (VE, VH, VM)})
+KINDS = {c[0]: "gram" for c in C if c[1][0] in (PF, PV, PP, FU, CI, CS, MD, QT, RP, PS, UT, WR)}
+KINDS.update({c[0]: "word" for c in C if c[1][0] in (VE, VH, VM, WF)})
 KINDS.update({c[0]: "read" for c in C if c[1][0] == UN})
 KINDS["חזרה כללית"] = "rev"
 

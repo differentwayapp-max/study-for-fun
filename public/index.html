@@ -463,6 +463,16 @@ html[dir=ltr] .ditem .dchev{transform:scaleX(-1)}.ditem .dl{flex:1;min-width:0}.
 body.kidside .pside,body.locked .pside{display:none!important}
 #menuBtn.dot{position:relative}#menuBtn.dot::after{content:'';position:absolute;top:-4px;inset-inline-end:-4px;width:14px;height:14px;border-radius:50%;background:#E5484D;border:2px solid #fff}
 .rdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#E5484D;vertical-align:middle;margin-inline-start:6px}.rdot.hidden{display:none}
+/* first-run welcome screens (parents) */
+.onb{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;align-items:center;padding:22px 20px calc(18px + env(safe-area-inset-bottom));text-align:center;color:var(--ink);font-family:var(--display);overflow:auto}
+.onb .ontop{align-self:stretch;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--ink2)}
+.onb .ontop button{background:none;border:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.onb .shot{align-self:stretch;max-width:430px;margin:14px auto 12px}
+.onb .shot img{display:block;width:100%;object-fit:cover;object-position:top;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);background:#fff}
+.onb h1{font-size:1.55em;margin:4px 0 8px}.onb p{font-size:1.05em;line-height:1.5;margin:0;color:var(--ink2);max-width:430px}
+.onb .tip{margin-top:10px;background:#fff;border:2px dashed var(--ink);border-radius:12px;padding:6px 10px;font-weight:600;max-width:430px}
+.onb .dots{display:flex;gap:8px;margin:16px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
+.onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
 .sugcard{margin:10px 0 0;padding:12px}
 .workbox{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border:2px solid #9B8CFF;border-radius:16px;background:#F1EDFF}
@@ -1354,6 +1364,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       const dataFam = LS.getItem('sff_data_fam');
       if (dataFam && dataFam !== famId) { ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', famId); W.sffSoftReload('רגע…'); await new Promise(() => {}); }
       LS.setItem('sff_data_fam', famId);
+      W.SFF_ONB_DONE = !!(us && us.exists() && us.data().onb);
+      W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { onb: Date.now() }, { merge: true }).catch(() => {});
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
       W.SFF_FAMS = famInfo.map(({ id, name, role }) => ({ id, name, role }));
       let token = cur.token;
@@ -4008,6 +4020,46 @@ function openPracticeShare(set){
   $('shDlg').classList.remove('hidden');
 }
 function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) openPracticeShare({subject:x.subject,grade:x.grade,src:x.id}); }
+
+/* ---------- first-run welcome screens (parents, right after the terms approval) ----------
+   "הבנתי" → a note that everything is in the user guide, never shown again (kept with the account);
+   "אחר כך" → shown again the next time the app opens. Kid phones never see it. Pictures: real app screens (public/onb). */
+const ONB=[
+  {bg:'#E4F1FF', m:['wow','#2F6BFF'], ill:'🎮 📚 ⭐', t:'ברוכים הבאים! 👋', p:'כאן הילדים מתרגלים דרך משחקים, ואתם רואים איך הם מתקדמים.'},
+  {bg:'#DDF6EC', img:['pick',330], t:'מוסיפים ילד ובוחרים תרגול', p:'בוחרים כיתה ונושא מקטלוג התרגולים המוכנים, או מצלמים דף עבודה, ואנחנו בונים ממנו תרגול.', tip:'☰ ← 📚 קטלוג תרגולים ← בוחרים כיתה ומסמנים נושאים ✔'},
+  {bg:'#FFF3CC', img:['family',120,'link',230], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…'},
+  {bg:'#FFE4EC', img:['stats',340], t:'עוקבים ומחזקים', p:'רואים מה הילד יודע ואיפה טעה. בלחיצה אחת בונים תרגול חיזוק ממוקד 🎯', tip:'📊 מעקב התקדמות ← 🔎 לראות את הטעויות · 🎯 סט חיזוק'},
+];
+let ONB_I=0;
+function maybeOnb(){
+  if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;                 // tests: not in the way
+  if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE) return;
+  try{ if(localStorage.getItem('sff_onb_done')) return; if(sessionStorage.getItem('sff_onb_later')) return; }catch(e){}
+  ONB_I=0; onbShow();
+}
+function onbShow(){
+  const s=ONB[ONB_I], n=ONB.length, last=ONB_I===n-1, L=(window.SFF_LANG&&SFF_LANG())==='en'?'en':'he';
+  const img=(k,h)=>`<img src="/onb/${L}-${k}.webp" alt="" style="max-height:${h}px">`;
+  const pics=s.img?`<div class="shot">${img(s.img[0],s.img[1])}${s.img[2]?`<div style="font-size:1.6em;margin:2px 0">⬇️</div>${img(s.img[2],s.img[3])}`:''}</div>`
+    :`<div style="width:150px;height:150px;margin:36px 0 8px">${mascot(s.m[0],s.m[1])}</div><div style="font-size:2.2em;letter-spacing:6px;margin:4px 0 16px">${s.ill}</div>`;
+  let el=$('onb'); if(!el){ el=document.createElement('div'); el.id='onb'; el.className='onb'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); }
+  el.style.background=s.bg;
+  el.innerHTML=`<div class="ontop"><span>${ONB_I+1}/${n}</span><button onclick="onbLater()">אחר כך</button></div>${pics}
+    <h1>${s.t}</h1><p>${s.p}</p>${s.tip?`<div class="tip">📍 ${s.tip}</div>`:''}
+    <div style="flex:1"></div><div class="dots">${ONB.map((_,k)=>`<span class="${k===ONB_I?'on':''}"></span>`).join('')}</div>
+    <div class="btns">${last?`<button class="btn big" onclick="onbDone()">הבנתי ✓</button><button class="btn ghost" onclick="onbLater()">אחר כך – להציג שוב בכניסה הבאה</button>`
+      :`<button class="btn big" onclick="ONB_I++;onbShow()">הבא ‹</button>${ONB_I?`<button class="btn ghost small" onclick="ONB_I--;onbShow()">› הקודם</button>`:''}`}</div>`;
+  el.scrollTop=0;
+}
+function onbLater(){ try{ sessionStorage.setItem('sff_onb_later','1'); }catch(e){} $('onb')?.remove(); }
+function onbDone(){ try{ localStorage.setItem('sff_onb_done','1'); }catch(e){} window.__sffOnbDone&&window.__sffOnbDone(); $('onb')?.remove();
+  const d=document.createElement('div'); d.id='onbNote'; d.className='onb'; d.style.cssText='background:rgba(27,42,74,.55);justify-content:center';
+  d.innerHTML=`<div style="background:#fff;border:3px solid var(--ink);border-radius:22px;padding:24px 20px;box-shadow:0 6px 0 var(--ink);max-width:400px">
+    <div style="font-size:3em">📖</div><h2 style="margin:6px 0 10px">מעולה!</h2>
+    <p style="font-size:1.1em;line-height:1.5;color:var(--ink2);margin:0 0 18px">את כל ההסברים אפשר למצוא בכל זמן במדריך למשתמש: ☰ ← 📖 מדריך למשתמש</p>
+    <button class="btn big" style="width:100%" onclick="$('onbNote').remove()">יאללה, מתחילים 🚀</button></div>`;
+  document.body.appendChild(d); }
+(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); setTimeout(maybeOnb,400); } else if(++n>240) clearInterval(t); },500); })();
 
 /* kid link dialog */
 async function openKidLink(id){ const k=kidById(id); if(!k) return;

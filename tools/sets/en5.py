@@ -2,9 +2,10 @@
 # am / is / are and have / has, Present Simple (he / she / it -s, don't / doesn't, questions),
 # Present Progressive (am / is / are + -ing), can / can't and there is / there are, plurals (regular and
 # common irregular), subject and object pronouns and possessives, prepositions of place and time,
-# question words, a first look at the Past Simple (was / were, regular -ed), Band I vocabulary
+# question words, a first look at the Past Simple (was / were, regular -ed, basic irregular verbs:
+# went, ate, saw, had), telling the time (o'clock, half past, quarter past), Band I vocabulary
 # (daily routine and time words, home, food and clothes, weather, hobbies and places in town)
-# and three short reading passages.
+# and three short reading passages (with inference questions).
 # Organised by fine topics (≈20 questions each) so a parent can tick only what the test covers.
 # Run: python3 -I tools/build_set.py tools/sets/en5.py
 import re
@@ -14,15 +15,17 @@ CT, PL, PN = "can · there is / are", "Plurals", "Pronouns & possessives"
 PP, QW, PA = "Prepositions: place & time", "Question words", "Past: was / were · -ed"
 VD, VH, VT = "Words: daily routine & time", "Words: home, food & clothes", "Words: weather, hobbies & town"
 RD = "Reading"
+PI, TM = "Past: went · ate · saw · had", "Telling the time"
 
 SET = dict(name="English ה'", grade=4, subject="אנגלית",
            title="Grammar · Band I words · Reading",
-           desc="אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר, אוצר מילים Band I ושלושה קטעי קריאה",
-           desc_en="Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past, Band I words and three reading passages",
+           desc="אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
+           desc_en="Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
            tags=["am / is / are", "Present Simple", "Present Progressive", "can / there is", "Plurals",
-                 "Pronouns", "Prepositions", "Question words", "Past: was / -ed", "Band I words", "Reading"],
+                 "Pronouns", "Prepositions", "Question words", "Past: was / -ed", "Past: went / ate",
+                 "Telling the time", "Band I words", "Reading"],
            examDate="", dailyGoal=2, perRound=10,
-           topics=[BE, PS, PG, CT, PL, PN, PP, QW, PA, VD, VH, VT, RD])
+           topics=[BE, PS, PG, CT, PL, PN, PP, QW, PA, PI, VD, TM, VH, VT, RD])
 MAX_Q_WORDS = 12
 ANSWER_IN_Q_OK = True    # short answers ("is", "in", "on") are letters inside other words of the question; every item checked by hand
 
@@ -89,7 +92,7 @@ C.append(("Present Simple: he plays", [PS], [
  Q(PS, "We ___ dinner at seven.", ["eat", "eats", "eating", "eates"], 0, "we ← בלי s", ROW("🍽️", "🕖")),
  Q(PS, "The shop ___ at nine.", ["opens", "open", "opening", "opend"], 0, "the shop = it ← opens", ROW("🏪", "🕘")),
  Q(PS, "My dog ___ in the garden.", ["sleeps", "sleep", "sleeping", "sleepes"], 0, "the dog = it ← sleeps", ROW("🐕", "🌳")),
- Q(PS, "Which is correct?", ["She reads books.", "She read books.", "She reading books.", "She readies books."], 0, "she ← reads", ROW("👧", "📚")),
+ Q(PS, "Which is correct?", ["She reads books.", "She readed books.", "She reading books.", "She readies books."], 0, "she ← reads", ROW("👧", "📚")),
  Q(PS, "Lea ___ the piano.", ["plays", "play", "plaies", "playing"], 0, "y אחרי תנועה ← רק s", "🎹"),
 ]))
 
@@ -322,6 +325,33 @@ C.append(("Past Simple: -ed", [PA], [
  Q(PA, "I ___ my room yesterday.", ["cleaned", "clean", "cleans", "cleaning"], 0, "yesterday ← עבר: cleaned", "🧹"),
 ]))
 
+C.append(("Past: went · ate · saw · had", [PI], [
+ Q(PI, "Yesterday I ___ to the park.", ["went", "goed", "go", "goes"], 0, "go בעבר ← went (לא goed)", "🌳"),
+ Q(PI, "Past of go?", ["went", "goed", "goes", "wented"], 0, "go ← went: פועל לא רגיל, בלי ed", TXT("go → ?")),
+ Q(PI, "Past of eat?", ["ate", "eated", "eats", "eat"], 0, "eat ← ate: פועל לא רגיל", TXT("eat → ?")),
+ Q(PI, "Past of see?", ["saw", "seed", "sees", "seeing"], 0, "see ← saw: פועל לא רגיל", TXT("see → ?")),
+ Q(PI, "Past of have?", ["had", "haved", "has", "having"], 0, "have / has ← had", TXT("have → ?")),
+ Q(PI, "We ___ pizza for dinner yesterday.", ["ate", "eated", "eat", "eats"], 0, "yesterday ← עבר: eat ← ate", "🍕"),
+ Q(PI, "Last night we ___ a funny film.", ["saw", "seed", "see", "sees"], 0, "last night ← עבר: see ← saw", "🎬"),
+ Q(PI, "She ___ a bad cold last week.", ["had", "haved", "has", "have"], 0, "last week ← עבר: has ← had", "🤧"),
+ Q(PI, "אכלתי = ?", ["I ate", "I eat", "I eated", "I eats"], 0, "אכלתי = עבר ← I ate", "🍎"),
+ Q(PI, "ראיתי = ?", ["I saw", "I see", "I seed", "I sees"], 0, "ראיתי = עבר ← I saw", "👀"),
+ Q(PI, "Which verb is in the past?", ["went", "go", "goes", "going"], 0, "went = הלך (עבר של go)", "🚶"),
+]))
+
+C.append(("Past: more irregular verbs", [PI], [
+ Q(PI, "Dad ___ home at six yesterday.", ["came", "comed", "comes", "come"], 0, "yesterday ← עבר: come ← came", ROW("👨", "🏠")),
+ Q(PI, "I ___ my homework last night.", ["did", "doed", "do", "does"], 0, "last night ← עבר: do ← did", "📓"),
+ Q(PI, "Yesterday we ___ under a big tree.", ["sat", "sitted", "sit", "sits"], 0, "yesterday ← עבר: sit ← sat", "🌳"),
+ Q(PI, "Mom ___ a cake last week.", ["made", "maked", "makes", "make"], 0, "last week ← עבר: make ← made", "🎂"),
+ Q(PI, "Yesterday Tom ___ a big breakfast.", ["had", "has", "haved", "have"], 0, "yesterday ← עבר: had", "🍳"),
+ Q(PI, "Which sentence is correct?", ["I went home.", "I goed home.", "I wented home.", "I gone home."], 0, "go בעבר ← went, בלי ed", "🏠"),
+ Q(PI, "Did you see the lion? Yes, I ___ it.", ["saw", "see", "seed", "sees"], 0, "עבר: see ← saw", "🦁"),
+ Q(PI, "Yesterday I didn't ___ to school.", ["go", "went", "goes", "goed"], 0, "אחרי didn't ← צורת הבסיס: go", "🏫"),
+ Q(PI, "___ you see the film yesterday?", ["Did", "Do", "Does", "Are"], 0, "שאלה בעבר ← Did + see", "🎬"),
+ Q(PI, "Which word is NOT in the past?", ["eat", "went", "saw", "had"], 0, "eat = הווה. העבר שלו: ate", "📅"),
+]))
+
 # ───────────── Words: daily routine & time ─────────────
 C.append(("Daily routine", [VD], [
  Q(VD, "להתעורר = ?", ["wake up", "get dressed", "go to bed", "brush"], 0, "להתעורר = wake up", ROW("⏰", "🛏️")),
@@ -352,6 +382,33 @@ C.append(("Time words", [VD], [
  Q(VD, "תמיד = ?", ["always", "never", "sometimes", "usually"], 0, "תמיד = always", TXT("100%")),
  Q(VD, "אף פעם = ?", ["never", "always", "often", "sometimes"], 0, "אף פעם = never", TXT("0%")),
  Q(VD, "The month after March is ___.", ["April", "May", "February", "June"], 0, "March ← April", TXT("March → ?")),
+]))
+
+# ───────────── Telling the time ─────────────
+C.append(("Telling the time: half past", [TM], [
+ Q(TM, "What time is it?", ["half past seven", "half past eight", "seven o'clock", "half past six"], 0, "7 ועוד 30 דקות = half past seven", PW("🕢", "7:30")),
+ Q(TM, "What time is it?", ["half past four", "half past five", "four o'clock", "quarter past four"], 0, "4 ועוד חצי שעה = half past four", PW("🕟", "4:30")),
+ Q(TM, "What time is it?", ["eleven o'clock", "half past eleven", "seven o'clock", "quarter past eleven"], 0, "11 בדיוק = eleven o'clock", PW("🕚", "11:00")),
+ Q(TM, "How many minutes are in half an hour?", ["thirty", "fifteen", "sixty", "forty-five"], 0, "שעה = 60 דקות. חצי שעה = 30", TXT("½ hour")),
+ Q(TM, "Which clock shows half past nine?", ["9:30", "9:15", "10:30", "9:00"], 0, "half past nine = 9 וחצי = 9:30", TXT("half past", "nine")),
+ Q(TM, "{half past two} = ?", ["2:30", "2:15", "3:30", "2:00"], 0, "half past = וחצי: 2:30", TXT("half past", "two")),
+ Q(TM, "שמונה וחצי = ?", ["half past eight", "half past seven", "eight o'clock", "quarter past eight"], 0, "וחצי = half past: half past eight", TXT("8:30")),
+ Q(TM, "School starts at 8:30. It starts at ___.", ["half past eight", "half past nine", "eight o'clock", "quarter past eight"], 0, "8:30 = half past eight", PW("🏫", "8:30")),
+ Q(TM, "Breakfast is half an hour after 7:00. When?", ["half past seven", "half past six", "eight o'clock", "quarter past seven"], 0, "7:00 ועוד 30 דקות = 7:30", PW("🥣", "7:00")),
+ Q(TM, "What time is it?", ["half past twelve", "twelve o'clock", "half past one", "quarter past twelve"], 0, "12 ועוד 30 דקות = half past twelve", PW("🕧", "12:30")),
+]))
+
+C.append(("Telling the time: quarter past", [TM], [
+ Q(TM, "What time is it?", ["quarter past five", "quarter past six", "half past five", "five o'clock"], 0, "5 ועוד 15 דקות = quarter past five", TXT("5:15")),
+ Q(TM, "How many minutes are in a quarter of an hour?", ["fifteen", "thirty", "twenty-five", "sixty"], 0, "רבע שעה = 60 : 4 = 15 דקות", TXT("¼ hour")),
+ Q(TM, "Which clock shows quarter past ten?", ["10:15", "10:30", "11:15", "10:45"], 0, "quarter past = ורבע: 10:15", TXT("quarter past", "ten")),
+ Q(TM, "שבע ורבע = ?", ["quarter past seven", "quarter past six", "half past seven", "seven o'clock"], 0, "ורבע = quarter past: quarter past seven", TXT("7:15")),
+ Q(TM, "The bus comes at 8:15. It comes at ___.", ["quarter past eight", "quarter past nine", "half past eight", "eight o'clock"], 0, "8:15 = quarter past eight", PW("🚌", "8:15")),
+ Q(TM, "It is 3:00. Fifteen minutes later it is ___.", ["quarter past three", "half past three", "quarter past four", "three o'clock"], 0, "3:00 ועוד 15 דקות = 3:15", TXT("3:00", "+ 15 min")),
+ Q(TM, "{quarter past two} = ?", ["2:15", "2:30", "3:15", "2:45"], 0, "quarter past = ורבע: 2:15", TXT("quarter past", "two")),
+ Q(TM, "What time is it?", ["quarter past twelve", "half past twelve", "twelve o'clock", "quarter past two"], 0, "12 ועוד 15 דקות = quarter past twelve", TXT("12:15")),
+ Q(TM, "What time is it?", ["half past nine", "quarter past nine", "nine o'clock", "half past ten"], 0, "9 ועוד 30 דקות = half past nine", PW("🕤", "9:30")),
+ Q(TM, "Which time comes first in the morning?", ["quarter past seven", "half past seven", "eight o'clock", "half past eight"], 0, "7:15 לפני 7:30, 8:00 ו-8:30", ROW("🌅", "⏰")),
 ]))
 
 # ───────────── Words: home, food & clothes ─────────────
@@ -434,6 +491,8 @@ C.append(("📖 Reading: A Busy Morning", [RD], [
  Q(RD, "When does school start?", ["at eight", "at seven", "at nine", "at six"], 0, "School starts at eight o'clock", "🏫"),
  Q(RD, "Why does Noa like English?", ["she loves stories", "it's easy", "she likes Maya", "it's short"], 0, "because she loves reading stories", "📖"),
  Q(RD, "What does Noa play?", ["the guitar", "football", "the piano", "tennis"], 0, "plays the guitar", ROW("👧", "🎵")),
+ Q(RD, "Is Noa late for school?", ["No, she isn't.", "Yes, she is.", "Yes, every day.", "She is sick."], 0, "ב-7:15 היא מוכנה, הבית קרוב, ובית הספר ב-8:00", ROW("⏰", "🏫")),
+ Q(RD, "What is the text mostly about?", ["Noa's morning", "Noa's school", "Ben's breakfast", "Maya's family"], 0, "הטקסט מספר מה נועה עושה בבוקר", "👧"),
 ], P1))
 
 P2 = """
@@ -443,16 +502,18 @@ It is Saturday morning, and it is raining. Tom and his sister, Lily, are at home
 """
 C.append(("📖 Reading: A Rainy Saturday", [RD], [
  Q(RD, "What day is it?", ["Saturday", "Friday", "Sunday", "Monday"], 0, "It is Saturday morning", "📅"),
- Q(RD, "What is the weather like?", ["rainy", "sunny", "windy", "snowy"], 0, "it is raining = גשום", "🌦️"),
+ Q(RD, "What is the weather like?", ["rainy", "sunny", "windy", "snowy"], 0, "it is raining = גשום", "🌧️"),
  Q(RD, "What is Mom doing?", ["reading a newspaper", "cooking", "sleeping", "watching TV"], 0, "Mom is reading a newspaper", "👩"),
  Q(RD, "Where is Dad?", ["in the kitchen", "in the garden", "in the park", "in the bedroom"], 0, "Dad is cooking in the kitchen", "👨"),
  Q(RD, "Where is Tom sitting?", ["on the sofa", "on the bed", "on the floor", "in a box"], 0, "sitting on the sofa", "👦"),
  Q(RD, "Why is Tom bored?", ["can't play outside", "he is sick", "no television", "Lily is sleeping"], 0, "We can't play in the park", ROW("👦", "🌧️")),
  Q(RD, "Whose idea is the box house?", ["Lily's", "Tom's", "Mom's", "Dad's"], 0, "Lily has an idea", ROW("💡", "📦")),
- Q(RD, "How many boxes are there?", ["three", "two", "four", "one"], 0, "three big boxes", "📦"),
+ Q(RD, "How many boxes are there?", ["three", "two", "four", "one"], 0, "three big boxes", COUNT(("📦", 3))),
  Q(RD, "Where are the boxes?", ["under Lily's bed", "in the kitchen", "in the garden", "on the sofa"], 0, "under her bed", "📦"),
  Q(RD, "Who is sleeping in the box house?", ["the cat", "Tom", "Lily", "the dog"], 0, "the cat is sleeping in the box house", ROW("📦", "😴")),
  Q(RD, "\"bored\" means:", ["משועמם", "עייף", "שמח", "רעב"], 0, "bored = משועמם", TXT("bored")),
+ Q(RD, "What will the family do now?", ["eat pancakes", "go to school", "play outside", "cook pancakes"], 0, "Dad: The pancakes are ready! ← עכשיו אוכלים", ROW("🥞", "👪")),
+ Q(RD, "Which is the best new title?", ["The Box House", "A Sunny Day", "In the Park", "Dad's New Car"], 0, "רוב הסיפור על בית הקופסאות", ROW("📦", "🏠")),
 ], P2))
 
 P3 = """
@@ -464,7 +525,7 @@ C.append(("📖 Reading: Our Trip to the Zoo", [RD], [
  Q(RD, "When did the class visit the zoo?", ["last Friday", "last Sunday", "yesterday", "last summer"], 0, "Last Friday was a great day", "🗓️"),
  Q(RD, "Where is the zoo?", ["in Jerusalem", "in Haifa", "in Eilat", "in Tel Aviv"], 0, "the zoo in Jerusalem", "🦁"),
  Q(RD, "What was the weather like?", ["sunny and warm", "rainy", "cold and windy", "snowy"], 0, "The weather was sunny and warm", "🌤️"),
- Q(RD, "How many big lions were there?", ["two", "three", "five", "one"], 0, "two big lions and three cubs", "🦁"),
+ Q(RD, "How many big lions were there?", ["two", "three", "five", "one"], 0, "two big lions and three cubs", COUNT(("🦁", 2))),
  Q(RD, "What did one monkey do?", ["It jumped.", "It slept.", "It ate.", "It sang."], 0, "One monkey jumped on a tree", "🐒"),
  Q(RD, "Who laughed a lot?", ["Adam", "the teacher", "the monkey", "the lions"], 0, "My friend Adam laughed a lot", "😂"),
  Q(RD, "Where did they eat lunch?", ["under a tree", "on the bus", "at school", "near the lions"], 0, "we sat under a big tree", "🥪"),
@@ -472,6 +533,9 @@ C.append(("📖 Reading: Our Trip to the Zoo", [RD], [
  Q(RD, "How did they go back to school?", ["by bus", "on foot", "by train", "by car"], 0, "we traveled back by bus", "🏫"),
  Q(RD, "How did they feel at three o'clock?", ["tired", "hungry", "bored", "sad"], 0, "At three o'clock we were tired", "🕒"),
  Q(RD, "\"cubs\" means:", ["גורים", "קופים", "עצים", "אריות"], 0, "cubs = גורים (אריות קטנים)", TXT("cubs")),
+ Q(RD, "How many lions were there in all?", ["five", "two", "three", "six"], 0, "שני אריות גדולים ושלושה גורים: 2 + 3 = 5", COUNT(("🦁", 2), ("🦁", 3))),
+ Q(RD, "Why do you think the writer liked the penguins best?", ["They were funny.", "They were big.", "They were sleeping.", "They ate sandwiches."], 0, "They were very funny! – לכן אהב אותם", "🐧"),
+ Q(RD, "Did the writer enjoy the trip?", ["Yes, very much.", "No, it rained.", "No, too boring.", "Only the bus."], 0, "It was the best trip of the year", ROW("😀", "🚌")),
 ], P3))
 
 # ───────────── Review ─────────────
@@ -501,8 +565,8 @@ C.append(("חזרה כללית", [BE, PS, PG, CT, PL, PN, PP, QW, PA, VD, VH, VT
 ]))
 
 # station type on the map
-KINDS = {c[0]: "gram" for c in C if c[1][0] in (BE, PS, PG, CT, PL, PN, PP, QW, PA)}
-KINDS.update({c[0]: "word" for c in C if c[1][0] in (VD, VH, VT)})
+KINDS = {c[0]: "gram" for c in C if c[1][0] in (BE, PS, PG, CT, PL, PN, PP, QW, PA, PI)}
+KINDS.update({c[0]: "word" for c in C if c[1][0] in (VD, TM, VH, VT)})
 KINDS.update({c[0]: "read" for c in C if c[1][0] == RD})
 KINDS["חזרה כללית"] = "rev"
 

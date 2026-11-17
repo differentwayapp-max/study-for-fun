@@ -120,7 +120,7 @@ C.append(("Verbs", [VE], [
  (VE, "Which verb?", ["swim", "fly", "run", "jump"], 0, "לשחות = swim", [("🏊", 50, 52, 56)]),
  (VE, "Which verb?", ["fly", "swim", "jump", "drink"], 0, "לעוף = fly", [("🕊️", 50, 40, 52), ("☁️", 22, 24, 22)]),
  (VE, "Which verb?", ["sleep", "eat", "cut", "run"], 0, "לישון = sleep", [("😴", 50, 52, 56)]),
- (VE, "I ___ pizza.", ["eat", "drink", "sleep", "cut"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
+ (VE, "I ___ pizza.", ["eat", "drink", "sleep", "sing"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
  (VE, "I ___ milk.", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥛", 50, 52, 52)]),
  (VE, "I ___ the paper.", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("✂️", 40, 48, 44), ("📄", 70, 58, 32)]),
  (VE, "קופצים גבוה = ?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🤸", 50, 50, 56)]),

@@ -17,3 +17,4 @@ store/upload/
 undefined/
 e2e_home.png
 e2e_map.png
+__pycache__/

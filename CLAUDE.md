@@ -36,3 +36,5 @@ When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in inde
   creates an app password and saves it in Secret Manager as `GMAIL_APP_PASSWORD` (never in code/chat), sets the addresses
   in the app (☰ → ⚙️ הגדרות מנהל → `adminConfig/main`), then `ENABLE_BUG_MAIL=1` in functions/.env and deploy `mailBugReport`.
   A non-Google provider needs an SMTP host setting added to `mailBugReport`.
+  The same switch also turns on `mailServerAlerts`: once an hour, anything new in the server log (errors, slow calls,
+  fallbacks, AI spend past 80% of the cap) is emailed as one message. Until then app admins see a red dot on ☰ (`checkServerLog`).

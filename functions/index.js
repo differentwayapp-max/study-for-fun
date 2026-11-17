@@ -105,11 +105,19 @@ async function checkFamilyBudget(auth, famId) {
   const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
   if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
 }
+// once a month, when the AI spend passes 80% of the monthly cap: a line in the server log (red dot for the app admins, and the alert email)
+async function spendAlert() {
+  const ref = db.doc(`meta/ai_spend_${monthKey()}`);
+  const hit = await db.runTransaction(async t => { const d = (await t.get(ref)).data() || {};
+    if ((d.usd || 0) < MONTHLY_CAP_USD * 0.8 || d.alert80) return 0; t.set(ref, { alert80: Date.now() }, { merge: true }); return d.usd; });
+  if (hit) await serverLog({ fn: 'ask', kind: 'budget', code: '80%', msg: `AI spend this month: $${hit.toFixed(2)} of the $${MONTHLY_CAP_USD} cap`, ms: 0 });
+}
 async function addSpend(model, usage, famId) {
   const [pi, po] = PRICE[model] || PRICE['claude-sonnet-5-5'];
   const inTok = (usage?.input_tokens || 0) + (usage?.cache_creation_input_tokens || 0) * 1.25 + (usage?.cache_read_input_tokens || 0) * 0.1;
   const usd = (inTok * pi + (usage?.output_tokens || 0) * po) / 1e6;
   await db.doc(`meta/ai_spend_${monthKey()}`).set({ usd: FieldValue.increment(usd), calls: FieldValue.increment(1) }, { merge: true });
+  await spendAlert().catch(() => {});
   if (typeof famId === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(famId))
     await db.doc(`families/${famId}/usage/${monthKey()}`).set({ usd: FieldValue.increment(usd), month: monthKey() }, { merge: true });
   return usd;
@@ -327,4 +335,32 @@ if (GMAIL_APP_PASSWORD) exports.mailBugReport = onDocumentCreated({ document: 'b
       text: `${String(r.text || '').slice(0, 3000)}\n\n—\nסוג: ${kind}\nמסך: ${clean(r.where, 120)}\nגרסה: ${clean(r.ver, 20)}\nתפקיד: ${clean(r.role, 20)}\nמכשיר: ${clean(r.ua, 160)}\nזמן: ${new Date(r.at || Date.now()).toISOString()}` });
     await snap.ref.update({ mailed: Date.now() });
     console.log('mailBugReport: sent');
+  });
+
+/* ---------- unusual events → at most one email an hour to the app admins ----------
+   Every hour: anything new in the server log (errors, slow calls, model fallbacks, AI spend past 80%) goes out as one
+   plain-text email – a count per kind and the lines themselves (function, code, short message: the log never holds
+   prompt text or personal data). Nothing new → no email. Same mailbox and switch (ENABLE_BUG_MAIL) as the bug reports. */
+if (GMAIL_APP_PASSWORD) exports.mailServerAlerts = require('firebase-functions/v2/scheduler').onSchedule(
+  { schedule: 'every 60 minutes', region: 'europe-west1', secrets: [GMAIL_APP_PASSWORD], retryCount: 0 },
+  async () => {
+    const mark = db.doc('meta/alertmail'), since = ((await mark.get()).data() || {}).last || (Date.now() - 3600e3);
+    const q = await db.collection('serverLog').where('at', '>', since).orderBy('at').limit(200).get();
+    if (q.empty) return;
+    const rows = q.docs.map(d => d.data()), last = rows[rows.length - 1].at;
+    const cfg = (await db.doc('adminConfig/main').get()).data() || {};
+    const to = String(cfg.reportMail || '').trim(), from = String(cfg.senderMail || to).trim();
+    if (!MAIL_RE.test(to) || !MAIL_RE.test(from)) { console.log('mailServerAlerts: no address set'); return; }
+    const clean = (v, n) => String(v || '').replace(/[\r\n]+/g, ' ').slice(0, n);
+    const name = { error: 'תקלות', slow: 'קריאות איטיות', fallback: 'מודל חלופי', budget: 'הוצאות AI' };
+    const count = {}; rows.forEach(r => { count[r.kind] = (count[r.kind] || 0) + 1; });
+    const lines = rows.slice(-60).map(r => `${new Date(r.at).toISOString().slice(0, 16).replace('T', ' ')}  ${clean(r.kind, 10)}  ${clean(r.fn, 20)}  ${clean(r.code, 40)}  ${clean(r.msg, 200)}`);
+    const nodemailer = require('nodemailer');
+    const tr = nodemailer.createTransport({ service: 'gmail', auth: { user: from, pass: GMAIL_APP_PASSWORD.value().replace(/\s+/g, '') } });
+    await tr.sendMail({ from: `Study for fun <${from}>`, to,
+      subject: `Study for fun – ${rows.length} אירועים ביומן השרת`,
+      text: Object.entries(count).map(([k, n]) => `${name[k] || k}: ${n}`).join('\n')
+        + `\n\n${lines.join('\n')}\n\n—\nהיומן המלא באפליקציה: ☰ ← יומן שרת (השעות ב-UTC)` });
+    await mark.set({ last }, { merge: true });
+    console.log('mailServerAlerts: sent', rows.length);
   });

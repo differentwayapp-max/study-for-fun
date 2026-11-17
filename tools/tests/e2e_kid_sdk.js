@@ -24,10 +24,10 @@ const put = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: 
     const st = await p.evaluate(() => ({ via: window.__sffVia, stage: window.__sffStage, kids: kids.length, sets: sets.filter(s => !s.demo).length, err: window.__sffCloudErr || window.__sffJoinErr || '' }));
     console.log(name.padEnd(10), JSON.stringify(st)); console.log('   errs:', errs.slice(0,5).join(' | '));
     if (name === 'right link') {
-      await p.screenshot({ path: 'e2e_home.png' });
+      await p.screenshot({ path: `${process.env.OUT || require('os').tmpdir()}/e2e_home.png` });
       await p.click('#subCar .play'); await p.waitForTimeout(800);
       console.log('   map stations:', await p.evaluate(() => document.querySelectorAll('#rdMap .st').length), '| demo?', await p.evaluate(() => !!document.querySelector('#rdHdr .demotag')));
-      await p.screenshot({ path: 'e2e_map.png' });
+      await p.screenshot({ path: `${process.env.OUT || require('os').tmpdir()}/e2e_map.png` });
       // play chapter 1 and finish it → progress must reach the family (parent side)
       await p.evaluate(() => { const s = sets.find(x => !x.demo); startGame(s, null, 'choice', 0); G.qs.forEach(q => G.res.push({ q, ok: true })); endGame(); });
       await p.waitForTimeout(2500);

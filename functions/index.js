@@ -6,11 +6,25 @@
 //
 const { onCall: onCallRaw, HttpsError } = require('firebase-functions/v2/https');
 // every call logs one short line: which function, ok or which error (no prompt text, no personal data)
+// The app admins' server log (serverLog, read in the app: ☰ → ניהול האפליקציה → יומן שרת): failures, slow calls
+// (a timeout at 540 s cannot write anything – a call over 7 minutes is the warning) and model fallbacks.
+// No prompt text and no personal data; at most 500 entries a day, so nobody can flood it.
+async function serverLog(entry) {
+  try {
+    const d = getFirestore(), cnt = d.doc(`meta/serverlog_${new Date().toISOString().slice(0, 10)}`);
+    const ok = await d.runTransaction(async t => { const c = await t.get(cnt), n = (c.exists && c.data().n) || 0; if (n >= 500) return false; t.set(cnt, { n: n + 1 }, { merge: true }); return true; });
+    if (ok) await d.collection('serverLog').add({ at: Date.now(), ...entry });
+  } catch (_) {}
+}
+const SLOW_MS = 7 * 60 * 1000;
 const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   const t = Date.now(), name = (fn.name || 'call');
-  try { const r = await fn(req); console.log(`${name} ok ${Date.now() - t}ms`); return r; }
+  try { const r = await fn(req); const ms = Date.now() - t; console.log(`${name} ok ${ms}ms`);
+    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – close to the 9-minute limit', ms });
+    return r; }
   catch (e) {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
+    await serverLog({ fn: name, kind: 'error', code: String(e.code || e.name || 'error').slice(0, 60), msg: String(e.message || e).slice(0, 300), ms: Date.now() - t });
     const fam = req.data && req.data.famId, uid = req.auth && req.auth.uid;
     const google = req.auth && req.auth.token && req.auth.token.firebase && req.auth.token.firebase.sign_in_provider === 'google.com';
     if (typeof fam === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(fam) && e.code !== 'resource-exhausted' && uid && google) {
@@ -261,7 +275,7 @@ exports.ask = onCall(
       // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call
       msg = await client.beta.messages.create({
         model,
-        max_tokens: 16000,
+        max_tokens: tier === 'complex' ? 8000 : 16000,   // the answer check returns short JSON – a lower cap keeps it far from the 540 s limit
         betas: ['server-side-fallback-2026-07-01'],
         fallbacks: 'default',
         system: 'You build exam practice for Israeli school children. Reply with valid JSON only: no prose, no code fences.',
@@ -274,6 +288,10 @@ exports.ask = onCall(
       throw e;
     }
     await addSpend(msg.model || model, msg.usage, famId).catch(e => console.error('spend log', e));
+    if (msg.model && msg.model !== model) {   // the API answered on a fallback model
+      await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
+      await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `asked ${model}, answered by ${msg.model}`, ms: 0 });
+    }
     if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
     if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
     const text = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');

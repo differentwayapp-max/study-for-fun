@@ -1,7 +1,7 @@
 // Bug / idea report: the side-menu window saves the report (rules: any signed-in user creates their own, only app admins read).
 // adminConfig (where reports are emailed) is closed to anyone who is not an app admin. Run inside the emulators (firestore, auth). OUT=dir for a screenshot.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); const p = await ctx.newPage();

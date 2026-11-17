@@ -2,7 +2,7 @@
 // the side menu links to both, the sign-in box blocks "I'm a parent" until ticked, and the consent is kept with the account.
 // Run inside the emulators (firestore, auth). OUT=dir for screenshots.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [], ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) errs.push(m); };

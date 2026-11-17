@@ -67,6 +67,8 @@ service cloud.firestore {
         && getAfter(/databases/$(database)/documents/bugLimits/$(request.auth.uid)).data.at == request.time;
       allow read, delete: if appAdmin();
     }
+    // the server log (written only by the server): app admins read and clear it
+    match /serverLog/{id} { allow read, delete: if appAdmin(); }
     match /bugLimits/{uid} {
       allow read: if signedIn() && request.auth.uid == uid;
       allow create: if signedIn() && request.auth.uid == uid && request.resource.data.keys().hasOnly(['at']) && request.resource.data.at == request.time;

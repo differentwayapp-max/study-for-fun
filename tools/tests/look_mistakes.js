@@ -1,6 +1,6 @@
 // Progress tracking → a practice set's card → "see the mistakes": each wrong question with the kid's answer and the right one.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch(); const errs = [];
   for (const lang of ['he', 'en']) {

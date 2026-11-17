@@ -1,6 +1,6 @@
 // Side menu, ⋯ practice menu and carousels (local emulators). OUT=dir
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const p = await (await b.newContext({ viewport: { width: 360, height: 720 }, deviceScaleFactor: 2 })).newPage();

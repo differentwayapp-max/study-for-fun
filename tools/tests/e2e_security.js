@@ -138,9 +138,14 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   const famLog = async () => ((await (await fetch(`${DOCS}/families/${fam}/errlog?pageSize=300`, { headers: { Authorization: 'Bearer owner' } })).json()).documents || []).length;
   const callAsk = (H, data) => fetch(`http://127.0.0.1:5001/${PROJ}/europe-west1/ask`, { method: 'POST', headers: H, body: JSON.stringify({ data }) }).then(r => r.status);
   const n0 = await famLog();
+  const srvLog = async () => ((await (await fetch(`${DOCS}/serverLog?pageSize=300`, { headers: { Authorization: 'Bearer owner' } })).json()).documents || []);
+  const s0 = (await srvLog()).length;
   const anon = await user(null), mail = await user('stranger@t.local');
   await callAsk(anon.H, { prompt: '', famId: fam }); await callAsk(mail.H, { prompt: '', famId: fam });
   ok(await famLog() === n0, "an anonymous or non-Google caller cannot write into a family's error log");
+  const sl = await srvLog();
+  ok(sl.length >= s0 + 2 && sl.every(d => !JSON.stringify(d.fields).includes(fam)), 'the admins\' server log gets the failures (function, code, time – no family id)');
+  ok(await fetch(`${DOCS}/serverLog`, { headers: anon.H }).then(r => r.status) === 403, 'a non-admin cannot read the server log');
   await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('', {}); } catch (e) {} });
   await p.waitForTimeout(800);
   ok(await famLog() >= n0, "the family's own parent still gets server errors in the log");

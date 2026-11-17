@@ -1,7 +1,7 @@
 // Finished practice sets fold into their own section (test date passed / all stations done / a focused 🎯 practice
 // was opened for it); focused practice sits on top with a big 🎯. Parent card + kid screen. OUT=dir for screenshots.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));

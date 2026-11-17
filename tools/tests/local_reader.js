@@ -1,7 +1,7 @@
 // Reading a passage aloud: play → pause keeps the place → go on from there; tapping a word starts there; the word is coloured.
 // Speech is faked (headless has no voices): every utterance fires its word boundaries, unless paused.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 360, height: 720 }, deviceScaleFactor: 2 })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));

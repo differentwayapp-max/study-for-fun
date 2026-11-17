@@ -1,6 +1,6 @@
 // Editing a practice set (local emulators, AI answers mocked): more questions, a new topic chapter, remove a chapter.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT; const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
+const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const p = await (await b.newContext({ viewport: { width: 360, height: 760 }, deviceScaleFactor: 2 })).newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));

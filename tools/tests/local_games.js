@@ -1,7 +1,7 @@
 // No game-type screen: "▶ לשחק" opens the map, a chapter starts its game right away. The parent can switch game types off
 // per practice set (multiple choice always stays); switched-off games never appear, and no memory bonus when it is off.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));

@@ -2,7 +2,7 @@
 // inside the frame, is drawn on one line, and does not cover another emoji. IDS=math1,heb1 OUT=dir (optional)
 const { chromium } = require('playwright');
 const IDS = (process.env.IDS || '').split(',').filter(Boolean);
-const OUT = process.env.OUT;
+const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch();
   const p = await (await b.newContext({ viewport: { width: 360, height: 720 }, deviceScaleFactor: 1 })).newPage();

@@ -1,6 +1,6 @@
 // Catalog suggestion flow (emulators): a parent suggests → admin reviews and approves → it appears in the catalog and can be added.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT; const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
+const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const open = async (sub, email, name) => { const p = await (await b.newContext({ viewport: { width: 360, height: 760 }, deviceScaleFactor: 2 })).newPage();

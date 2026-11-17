@@ -16,7 +16,7 @@
   const T = {
     'הורה': 'Parent', 'ילד/ה': 'Kid', 'מנהל': 'Admin', 'ילדים': 'Kids', 'פידבק': 'Feedback', 'מעקב התקדמות': 'Progress',
     'גביעים': 'Trophies', 'ימים ברצף': 'Day streak', 'שם': 'Name', 'כיתה': 'Grade', 'שמירה': 'Save',
-    'מדיניות פרטיות': 'Privacy policy', 'מדריך למשתמש': 'User guide', '💡 למה?': '💡 Why?', '⏳ אפשר לשלוח דיווח נוסף בעוד דקה': '⏳ You can send another report in a minute', 'למה?': 'Why?', 'משפחה ותרגולים': 'Family & practice', 'עזרה ושירות': 'Help & support', 'הגדרות': 'Settings', 'ניהול האפליקציה': 'App management', 'חשבון ופרטיות': 'Account & privacy', 'רגע לפני שממשיכים': 'One moment before you continue', 'עדכנו את תנאי השימוש ואת מדיניות הפרטיות. כדי להמשיך להשתמש באפליקציה צריך לאשר אותם פעם אחת.': 'We updated the terms of use and the privacy policy. To keep using the app, please approve them once.', 'המשך ←': 'Continue →', 'תנאי שימוש': 'Terms of use', 'קראתי ואני מסכימ/ה ל': 'I have read and agree to the ', 'תנאי השימוש': 'terms of use', 'ול': ' and the ', 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש': 'To continue, tick that you have read and agree to the terms of use', 'מחיקת חשבון': 'Delete account', 'יציאה': 'Sign out', 'מצב הורה': 'Parent mode',
+    'מדיניות פרטיות': 'Privacy policy', 'מדריך למשתמש': 'User guide', '💡 למה?': '💡 Why?', 'יומן שרת': 'Server log', '🗑 לנקות את היומן': '🗑 Clear the log', 'אין רשומות 🎉': 'No entries 🎉', '⏳ אפשר לשלוח דיווח נוסף בעוד דקה': '⏳ You can send another report in a minute', 'למה?': 'Why?', 'משפחה ותרגולים': 'Family & practice', 'עזרה ושירות': 'Help & support', 'הגדרות': 'Settings', 'ניהול האפליקציה': 'App management', 'חשבון ופרטיות': 'Account & privacy', 'רגע לפני שממשיכים': 'One moment before you continue', 'עדכנו את תנאי השימוש ואת מדיניות הפרטיות. כדי להמשיך להשתמש באפליקציה צריך לאשר אותם פעם אחת.': 'We updated the terms of use and the privacy policy. To keep using the app, please approve them once.', 'המשך ←': 'Continue →', 'תנאי שימוש': 'Terms of use', 'קראתי ואני מסכימ/ה ל': 'I have read and agree to the ', 'תנאי השימוש': 'terms of use', 'ול': ' and the ', 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש': 'To continue, tick that you have read and agree to the terms of use', 'מחיקת חשבון': 'Delete account', 'יציאה': 'Sign out', 'מצב הורה': 'Parent mode',
     'הקודם': 'Previous', 'הבא': 'Next', 'לינק לילד': 'Kid link', 'עריכה': 'Edit', 'נועה': 'Emma', 'צבע': 'Colour',
     'שם הילד/ה': "Kid's name", 'למשל: עמודים 12–14, תרגילים 3–8': 'e.g. pages 12–14, exercises 3–8',
     'אפשר להעתיק לכאן שאלות מדף עבודה או מאתר': 'Paste questions from a worksheet or a website',
@@ -186,6 +186,8 @@
     [/^✓ סיימתי · (\d+)$/, (m, n) => `✓ Done · ${n}`],
     [/^🎉 כל התרגולים הסתיימו – מוסיפים תרגול מהקטלוג 📚$/, () => '🎉 All practice sets are finished – add one from the catalog 📚'],
     [/^🐞 דיווחים מהמשתמשים · (\d+)$/, (m, n) => `🐞 User reports · ${n}`],
+    [/^🖥️ יומן שרת · (\d+)$/, (m, n) => `🖥️ Server log · ${n}`],
+    [/^⚠️ תקלות (\d+) · 🐢 קריאות איטיות (\d+) · 🔀 מודל חלופי (\d+)$/, (m, a, b, c) => `⚠️ Errors ${a} · 🐢 Slow calls ${b} · 🔀 Fallback model ${c}`],
     [/^(\d+) שאלות$/, (m, n) => `${n} questions`],
     [/^📋 מה לומדים בכיתה (.+) לפי התוכנית$/, (m, g) => `📋 What grade ${GR[g] || g} learns`],
     [/^＋ (?:הוספה ל(.+)|הוספה) · (\d+) שאלות$/, (m, k, b) => `＋ Add${k ? ' for ' + k : ''} · ${b} questions`],

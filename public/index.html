@@ -945,6 +945,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <button class="ditem " onclick="closeMenu();openSuggestions()" ><span class="di">📤</span><span class="dl">הצעות לקטלוג</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openBugList()" ><span class="di">🐞</span><span class="dl">דיווחים מהמשתמשים</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openErrLog()" ><span class="di">🧾</span><span class="dl">יומן תקלות</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openServerLog()" ><span class="di">🖥️</span><span class="dl">יומן שרת</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openAdminCfg()" ><span class="di">⚙️</span><span class="dl">הגדרות מנהל</span><span class="dchev" aria-hidden="true">‹</span></button>
       </div></div>
       <div class="dgrp pside"><h4>חשבון ופרטיות</h4><div class="dcard">
@@ -3678,6 +3679,19 @@ async function saveAdminCfg(){
   if(!to||!ok(to)||!ok(from)){ $('cfgMsg').textContent='⚠️ בדקו את כתובת המייל'; return; }
   try{ await window.__sffRoot.set('adminConfig','main',{reportMail:to, senderMail:from, updated:Date.now()}); $('cfgMsg').textContent='✅ נשמר'; }
   catch(e){ $('cfgMsg').textContent='⚠️ לא נשמר – אין הרשאה'; }
+}
+async function openServerLog(){
+  let list=[]; try{ list=await window.__sffRoot.list('serverLog'); }catch(e){ toast('⚠️ אין הרשאה'); return; }
+  list.sort((a,b)=>(Number(b.at)||0)-(Number(a.at)||0));
+  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀'};
+  const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
+  box.innerHTML=`<div class="dlghead"><b>🖥️ יומן שרת · ${list.length}</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
+    <p class="hint" style="margin:0 0 8px">⚠️ תקלות ${n('error')} · 🐢 קריאות איטיות ${n('slow')} · 🔀 מודל חלופי ${n('fallback')}</p>`+
+    (list.length?list.slice(0,100).map(r=>`<div class="errrow"><div><b>${esc(new Date(Number(r.at)||0).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}))}</b> · ${ico[r.kind]||'•'} ${esc(r.fn||'')}${r.ms?` · ${Math.round((Number(r.ms)||0)/1000)} שנ'`:''}</div>
+      <div class="hint" dir="ltr" translate="no">${esc(r.code||'')} ${esc(r.msg||'')}</div></div>`).join('')
+      +`<button class="btn ghost small" style="margin-top:10px" id="slClear">🗑 לנקות את היומן</button>`:'<p class="hint center">אין רשומות 🎉</p>');
+  const c=$('slClear'); if(c) c.addEventListener('click',async()=>{ for(const r of list){ try{ await window.__sffRoot.del('serverLog',r.id); }catch(e){} } openServerLog(); });
+  $('moreDlg').classList.remove('hidden');
 }
 async function delBug(id,btn){ try{ await window.__sffRoot.del('bugReports',id); btn.closest('.errrow').remove(); }catch(e){ toast('⚠️'); } }
 function sayWord(t){ rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }

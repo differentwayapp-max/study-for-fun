@@ -15,3 +15,5 @@ store/upload/
 
 # screenshots tests write when OUT is not set
 undefined/
+e2e_home.png
+e2e_map.png

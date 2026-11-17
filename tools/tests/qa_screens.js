@@ -1,7 +1,7 @@
 // Full screen walk (emulators): every screen in Hebrew and English at phone width.
 // Checks: page errors, sideways overflow, a way back, Hebrew UI text left untranslated in English. Screenshots → OUT.
 const { chromium } = require('playwright');
-const OUT = process.env.OUT; const findings = [];
+const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const findings = [];
 const SCREENS = [
   ['kids', async p => p.evaluate(() => go('kids'))],
   ['menu', async p => { await p.evaluate(() => go('kids')); await p.click('#menuBtn'); }, true],

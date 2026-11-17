@@ -281,11 +281,12 @@ exports.ask = onCall(
    The addresses live in adminConfig/main (only the app admins can read or write it, from the admin screen in the app);
    the Gmail app password is a secret (GMAIL_APP_PASSWORD in Secret Manager) – never in the code or in Firestore.
    The email is plain text, at most 60 a day; a report is marked so it is never mailed twice. */
-const GMAIL_APP_PASSWORD = defineSecret('GMAIL_APP_PASSWORD');
 const { onDocumentCreated } = require('firebase-functions/v2/firestore');
 const MAIL_RE = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[a-z]{2,}$/i;
 // Off until the mailbox and the GMAIL_APP_PASSWORD secret exist: then add ENABLE_BUG_MAIL=1 to functions/.env and deploy.
-if (process.env.ENABLE_BUG_MAIL === '1') exports.mailBugReport = onDocumentCreated({ document: 'bugReports/{id}', region: 'europe-west1', secrets: [GMAIL_APP_PASSWORD], maxInstances: 2, retry: false },
+// the secret is declared only when on – otherwise deploys would ask for a password that does not exist yet
+const GMAIL_APP_PASSWORD = process.env.ENABLE_BUG_MAIL === '1' ? defineSecret('GMAIL_APP_PASSWORD') : null;
+if (GMAIL_APP_PASSWORD) exports.mailBugReport = onDocumentCreated({ document: 'bugReports/{id}', region: 'europe-west1', secrets: [GMAIL_APP_PASSWORD], maxInstances: 2, retry: false },
   async (event) => {
     const snap = event.data; if (!snap) return;
     const r = snap.data() || {};

@@ -46,6 +46,11 @@ service cloud.firestore {
     match /catalog/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
     match /catalogCode/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
     // a parent offers a practice set; only admins read and handle the suggestions
+    // settings only the app admins see (where bug reports are emailed); the server reads it with admin rights
+    match /adminConfig/{id} {
+      allow read, write: if appAdmin();
+    }
+
     // bug reports / ideas from any signed-in user (parents and kid phones); only the app admins read them
     match /bugReports/{id} {
       allow create: if signedIn()

@@ -276,3 +276,31 @@ exports.ask = onCall(
     return { json: extractJson(text) };
   }
 );
+
+/* ---------- a user's bug report / idea → an email to the D-WAY team ----------
+   The addresses live in adminConfig/main (only the app admins can read or write it, from the admin screen in the app);
+   the Gmail app password is a secret (GMAIL_APP_PASSWORD in Secret Manager) – never in the code or in Firestore.
+   The email is plain text, at most 60 a day; a report is marked so it is never mailed twice. */
+const GMAIL_APP_PASSWORD = defineSecret('GMAIL_APP_PASSWORD');
+const { onDocumentCreated } = require('firebase-functions/v2/firestore');
+const MAIL_RE = /^[^\s@<>"',;]+@[^\s@<>"',;]+\.[a-z]{2,}$/i;
+exports.mailBugReport = onDocumentCreated({ document: 'bugReports/{id}', region: 'europe-west1', secrets: [GMAIL_APP_PASSWORD], maxInstances: 2, retry: false },
+  async (event) => {
+    const snap = event.data; if (!snap) return;
+    const r = snap.data() || {};
+    const cfg = (await db.doc('adminConfig/main').get()).data() || {};
+    const to = String(cfg.reportMail || '').trim(), from = String(cfg.senderMail || to).trim();
+    if (!MAIL_RE.test(to) || !MAIL_RE.test(from)) { console.log('mailBugReport: no address set'); return; }
+    const day = new Date().toISOString().slice(0, 10), cnt = db.doc(`meta/bugmail_${day}`);
+    const ok = await db.runTransaction(async t => { const c = await t.get(cnt), n = (c.exists && c.data().n) || 0; if (n >= 60) return false; t.set(cnt, { n: n + 1 }, { merge: true }); return true; });
+    if (!ok) { console.log('mailBugReport: daily limit'); return; }
+    const clean = (v, n) => String(v || '').replace(/[\r\n]+/g, ' ').slice(0, n);
+    const kind = { bug: 'תקלה', idea: 'רעיון', q: 'שאלה' }[r.kind] || 'דיווח';
+    const nodemailer = require('nodemailer');
+    const tr = nodemailer.createTransport({ service: 'gmail', auth: { user: from, pass: GMAIL_APP_PASSWORD.value().replace(/\s+/g, '') } });
+    await tr.sendMail({ from: `Study for fun <${from}>`, to,
+      subject: `Study for fun – ${kind}${r.byName ? ' מ' + clean(r.byName, 40) : ''}`,
+      text: `${String(r.text || '').slice(0, 3000)}\n\n—\nסוג: ${kind}\nמסך: ${clean(r.where, 120)}\nגרסה: ${clean(r.ver, 20)}\nתפקיד: ${clean(r.role, 20)}\nמכשיר: ${clean(r.ua, 160)}\nזמן: ${new Date(r.at || Date.now()).toISOString()}` });
+    await snap.ref.update({ mailed: Date.now() });
+    console.log('mailBugReport: sent');
+  });

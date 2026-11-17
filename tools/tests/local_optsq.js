@@ -16,11 +16,22 @@ const { chromium } = require('playwright');
       const C = getChapters(s); out.chapters += C.length; out.matchCh += C.filter((c, i) => modePool({ questions: c.qs, chapters: s.chapters }, 'match').length === c.qs.length).length;
     }
     const t = q => needOpts({ question: q });
-    out.samples = { yes: ['Which is correct?', 'Which sentence about her is correct?', 'Which word is NOT an animal?', 'מה נכון?', 'מה מהבאים שביר?', 'איזה מזון יוצא דופן?'].filter(t).length,
+    out.samples = { yes: ['Which is correct?', 'Which sentence about her is correct?', 'Which word is NOT an animal?', 'מה נכון?', 'מה מהבאים שביר?', 'איזה מזון יוצא דופן?',
+        'אֵיזֶה מֵהֶם פְּרִי?', 'איזו מילה יוצאת דופן?', 'איזו מילה כתובה נכון?', 'מה אינו חלק מהצמח?', 'Choose the correct word.'].filter(t).length,
       no: ['Which word rhymes with cat?', "You ___ use phones. It's not allowed.", 'My parents ___ in Haifa.', 'כמה ילדים בחרו בננה?', 'מה זה?'].filter(t).length };
+    // one-letter answers keep their case in the match game: "D" is not "d"
+    const L = (q, a) => ({ topic: 't', question: q, options: [a, 'x1', 'x2', 'x3'], answer: 0, explanation: '', ch: 0 });
+    const ls = { id: 'lt', kidId: 'k1', name: 'עדי', grade: 3, subject: 'אנגלית', topics: ['t'], chapters: [{ title: 'a', topics: ['t'], count: 3 }],
+      questions: [L('האות הגדולה של d?', 'D'), L('האות הקטנה של D?', 'd'), L('cat', 'חתול')], examDate: '', dailyGoal: 1, perRound: 10, qa: {}, created: Date.now() };
+    kids.push({ id: 'k1', name: 'עדי', grade: 3, color: '#FF5C8A' }); sets.push(ls); startGame(ls, null, 'match', 0);
+    const big = G.m.slice.findIndex(q => q.options[0] === 'D'), small = G.m.slice.findIndex(q => q.options[0] === 'd');
+    matchSel(big); matchTo(small); out.caseWrong = !G.m.done[big];
+    matchSel(big); matchTo(big); out.caseRight = !!G.m.done[big];
+    out.perSet = {}; for (const e of cat.sets) { const s = await loadShare(e.id); s.questions = s.qs; const C = getChapters(s);
+      out.perSet[e.id] = C.filter(c => modePool({ questions: c.qs, chapters: s.chapters }, 'match').length === c.qs.length && c.qs.length >= 3).length + '/' + C.length; }
     return out;
   });
   console.log(JSON.stringify(r));
-  if (r.leaks.length || r.samples.yes !== 6 || r.samples.no !== 0) errs.push('options questions');
+  if (r.leaks.length || r.samples.yes !== 11 || !r.caseWrong || !r.caseRight || r.samples.no !== 0) errs.push('options questions');
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

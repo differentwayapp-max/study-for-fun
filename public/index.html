@@ -3038,9 +3038,9 @@ function rdChunk(){
 }
 const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
 // questions that only make sense next to their options ("Which is correct?", "מה נכון?", "מה מהבאים…") – choice only
-const OPTS_EN=/\b(is|are) (correct|true|right|wrong|false)\b|^which (one|of these)\b|\bof these\b|odd one|doesn't belong|does not belong/i, OPTS_NOT=/\bNOT\b/;
-const OPTS_HE=/(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שייך|יוצא דופן|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן/;
-const needOpts=q=>{ const t=String(q.question).replace(/[\u2066-\u2069]/g,''); return OPTS_EN.test(t)||OPTS_NOT.test(t)||OPTS_HE.test(t); };
+const OPTS_EN=/\bcorrect\b|\b(is|are) (correct|true|right|wrong|false)\b|^which (one|of these)\b|\bof these\b|odd one|doesn't belong|does not belong/i, OPTS_NOT=/\bNOT\b/;
+const OPTS_HE=/(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שייך|יוצא דופן|יוצאת דופן|אינו |אינה |אינם |אינן |איננה|כתוב נכון|כתובה נכון|כתובות נכון|מבין אלה|מאלה|איזה משפט נכון|באיזו מילה יש|יש טעות|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן/;
+const needOpts=q=>{ const t=String(q.question).replace(/[\u2066-\u2069]/g,'').replace(/[\u0591-\u05C7]/g,''); return OPTS_EN.test(t)||OPTS_NOT.test(t)||OPTS_HE.test(t); };
 function modePool(set,id){
   const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q)&&!needOpts(q));
   if(id==='memory') return qs.filter(q=>shortA(q) && (!(q.scene||q.emoji) || cueTxt(q) || GENERIC_Q.test(q.question.trim())));   // a long question would hide its text on the small card
@@ -3288,7 +3288,7 @@ function memDone(){
 const optKey=(q,k)=>q.options.some(o=>/\d/.test(o))?'אבגד'[k]:String(k+1);
 /* --- 3. match with lines --- */
 // Two questions with the same answer: either answer card is right for either question.
-const ansKey=q=>String(q.options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
+const ansKey=q=>{ const a=String(q.options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim(); return a.length>1?a.toLowerCase():a; };   // one letter keeps its case (D ≠ d)
 function matchStart(){ G.round=0; matchRound(); }
 function matchRound(){
   G.mtparts=evenSplit(G.qs.length,5); const [mf,mt]=G.mtparts[G.round], slice=G.qs.slice(mf,mt);

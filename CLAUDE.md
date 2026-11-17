@@ -26,6 +26,10 @@ Test hooks: `window.SFF_REST_EMU` (emulator addresses) and `window.SFF_TEST_GOOG
 Functions: `firebase deploy --only functions`. Rules: `firebase deploy --only firestore:rules`.
 Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py` (one emoji per picture item – use `COUNT(("🍎",3))` for counting pictures), then `IDS=<id> node tools/tests/local_scenes.js` with the app served (renders every picture: 0 bad scenes), then deploy (existing copies update automatically, progress kept).
 
+User guide + terms: edit `tools/docs/{guide,terms}-{he,en}.md`, then `python3 -I tools/build_docs.py` → `public/guide.html`, `public/terms.html`.
+When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in index.html – every parent then approves once again
+(kept in `users/{uid}.terms`). Test: `e2e_terms.js`.
+
 ## Open tasks
 - Bug reports by email: reports are saved in `bugReports` (admins: ☰ → דיווחים מהמשתמשים). Emailing them is ready but OFF:
   the owner first opens a dedicated mailbox (company domain – tell us the provider: Google Workspace / Microsoft / other),

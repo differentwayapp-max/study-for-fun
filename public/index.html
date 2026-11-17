@@ -925,6 +925,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="dsec pside">
         <button class="ditem" onclick="closeMenu();go('family')"><span class="di">👨‍👩‍👧</span>המשפחה והמבוגרים</button>
         <button class="ditem" onclick="closeMenu();openCatalog(curKidForCatalog())"><span class="di">📚</span>קטלוג תרגולים</button>
+        <a class="ditem" href="/guide.html" onclick="this.href='/guide.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">📖</span>מדריך למשתמש</a>
       </div>
       <div class="dsec">
         <button class="ditem" onclick="closeMenu();openBug()"><span class="di">🐞</span>דיווח על תקלה או רעיון</button>
@@ -938,6 +939,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <button class="ditem adminonly" onclick="closeMenu();openBugList()"><span class="di">🐞</span>דיווחים מהמשתמשים</button>
         <button class="ditem adminonly" onclick="closeMenu();openAdminCfg()"><span class="di">⚙️</span>הגדרות מנהל</button>
         <a class="ditem" href="/privacy.html" target="_blank" rel="noopener"><span class="di">🔒</span>מדיניות פרטיות</a>
+        <a class="ditem" href="/terms.html" onclick="this.href='/terms.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">⚖️</span>תנאי שימוש</a>
         <button class="ditem" id="footDel" onclick="closeMenu();window.SFF_ROLE&&window.SFF_ROLE!=='owner'?leaveFamily():openDelAcc()"><span class="di">🗑</span>מחיקת חשבון</button>
         <button id="fbOut" class="ditem hidden"><span class="di">🚪</span>התנתקות</button>
       </div>
@@ -1206,6 +1208,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const cfg = window.SFF_FIREBASE_CONFIG, V = window.SFF_FIREBASE_SDK || '10.14.1';
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
+  const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (terms.html) – change both together
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
@@ -1315,6 +1318,11 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       else if (!ownSnap.data().name) await F.setDoc(own, { name: myName }, { merge: true });
       // 3. every family this adult belongs to, and the active one
       const us = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null);
+      // the parent's consent to the terms (given on the sign-in screen) is kept with the account: version + when
+      // parents already signed in (or when the terms change) approve once, here – before the app opens
+      try { let tk = JSON.parse(LS.getItem('sff_terms_ok') || 'null'); const had = us && us.exists() && us.data().terms;
+        if ((!tk || tk.v !== TERMS_VERSION) && (!had || had.v !== TERMS_VERSION)) { tk = await askConsent(); LS.setItem('sff_terms_ok', JSON.stringify(tk)); }
+        if (tk && tk.v && (!had || had.v !== tk.v)) await F.setDoc(F.doc(fdb, `users/${uid}`), { terms: { v: String(tk.v).slice(0, 20), at: +tk.at || Date.now() } }, { merge: true }); } catch (e) {}
       const famIds = [uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid))];
       const famInfo = [];
       for (const fid of famIds) {
@@ -1467,6 +1475,24 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     document.body.appendChild(el);
   }
   // ---- parent sign-in screen
+  // one-time approval of the terms of use and the privacy policy (both, one tick) for a parent who is already signed in
+  function askConsent() {
+    if (W.SFF_TEST_GOOGLE && !W.SFF_TEST_ASK_CONSENT) return Promise.resolve({ v: TERMS_VERSION, at: Date.now() });   // tests: approved
+    return new Promise(resolve => {
+      const el = document.createElement('div'); el.id = 'fbLogin'; const lg = W.SFF_LANG ? W.SFF_LANG() : 'he';
+      el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">רגע לפני שממשיכים</h2>
+        <div class="hint" style="max-width:min(92vw,420px)">עדכנו את תנאי השימוש ואת מדיניות הפרטיות. כדי להמשיך להשתמש באפליקציה צריך לאשר אותם פעם אחת.</div>
+        <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html?lang=${lg}" target="_blank" rel="noopener">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
+        <button class="btn big" id="fbOk" type="button">המשך ←</button><div class="hint" id="fbErr"></div></div>`;
+      document.body.appendChild(el);
+      const agree = el.querySelector('#fbAgree');
+      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; };
+      el.querySelector('#fbOk').onclick = () => {
+        if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש'; el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; return; }
+        el.remove(); resolve({ v: TERMS_VERSION, at: Date.now() });
+      };
+    });
+  }
   function showLogin() {
     return new Promise(resolve => {
       const logo = document.getElementById('logoFull')?.src || '';
@@ -1477,13 +1503,19 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
           <button class="fbcard kid" id="fbKid" type="button"><span class="e">🧒</span><b>אני ילד/ה</b><span class="hint">נכנסים עם הקישור מההורה</span></button>
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
+        <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
         <div class="notice fbkidmsg hidden" id="fbKidMsg"><b>🔗 צריך את הקישור האישי שלך</b><div>ההורה שולח/ת אותו בוואטסאפ מהאפליקציה. לוחצים עליו, ומשחקים. בלי סיסמה ובלי Google.</div></div>
         <div class="hint" id="fbErr"></div>
-        <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div>
-        <div class="hint" style="margin-top:18px">בכניסה את/ה מאשר/ת את <a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></div></div>`;
+        <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div></div>`;
       document.body.appendChild(el);
       el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); };
+      // consent: the box starts unticked (tests with a fake Google account start ticked); the consent is kept with the account
+      const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
+      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; };
       el.querySelector('#fbGo').onclick = async () => {
+        if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
+          el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
+        try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); } catch (e) {}
         try {
           const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = await import(base + 'firebase-auth.js');
           const r = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE)            // tests only: a fake Google account on the local emulator
@@ -1505,6 +1537,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   #fbLogin .fbcard .e{font-size:44px;line-height:1.1}#fbLogin .fbcard b{font-family:var(--display);font-size:1.15em}
   #fbLogin .fbcard.kid{background:#FFF6D6}#fbLogin .fbcard.on{background:var(--sun)}
   #fbLogin .fbcard:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+  #fbLogin .fbterms{display:flex;align-items:flex-start;gap:10px;max-width:min(92vw,420px);text-align:start;font-size:.95em;cursor:pointer;padding:10px 12px;border-radius:12px;line-height:1.5}
+  #fbLogin .fbterms input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:#2F6BFF}
+  #fbLogin .fbterms.need{background:#FFF6E3;outline:2px solid #F2A63B}
   #fbLogin .fbkidmsg{max-width:min(92vw,420px);text-align:start;background:#FFF6E3;border-color:var(--sun)}
 </style>
 

@@ -38,12 +38,14 @@ C.append(("ABC: order & first letter", [AB], [
  (AB, "Starts with?", ["f", "p", "t", "v"], 0, "fish מתחיל ב-f", [("🐟", 50, 52, 56)]),
  (AB, "Starts with?", ["o", "a", "u", "c"], 0, "octopus מתחיל ב-o", [("🐙", 50, 52, 56)]),
  (AB, "Starts with?", ["l", "i", "j", "y"], 0, "lion מתחיל ב-l", [("🦁", 50, 52, 56)]),
- (AB, "Starts with B:", ["bird", "cat", "fish", "dog"], 0, "bird מתחיל ב-B", [("B", 30, 50, 40), ("🐦", 70, 52, 36)]),
- (AB, "Starts with M:", ["monkey", "cat", "dog", "lion"], 0, "monkey מתחיל ב-M", [("M", 30, 50, 40), ("🐒", 70, 52, 36)]),
- (AB, "Starts with E:", ["elephant", "tiger", "bird", "fish"], 0, "elephant מתחיל ב-E", [("E", 30, 50, 40), ("🐘", 70, 52, 36)]),
+ (AB, "Starts with B:", ["bird", "cat", "fish", "dog"], 0, "bird מתחיל ב-B", [("B", 50, 22, 30), ("🐈", 17, 66, 26), ("🐦", 39, 66, 26), ("🐕", 61, 66, 26), ("🐟", 83, 66, 26)]),
+ (AB, "Starts with M:", ["monkey", "cat", "dog", "lion"], 0, "monkey מתחיל ב-M", [("M", 50, 22, 30), ("🐕", 17, 66, 26), ("🦁", 39, 66, 26), ("🐒", 61, 66, 26), ("🐈", 83, 66, 26)]),
+ (AB, "Starts with E:", ["elephant", "tiger", "bird", "fish"], 0, "elephant מתחיל ב-E", [("E", 50, 22, 30), ("🐅", 17, 66, 26), ("🐟", 39, 66, 26), ("🐘", 61, 66, 26), ("🐦", 83, 66, 26)]),
 ]))
 
 
+# Every "X is for…" question names the word in Hebrew: in the match game several words start with
+# the same letter (black/blue/bird), so the Hebrew makes each question fit only its own answer.
 # First letter – ONLY words from the class vocabulary (WORD_LIST). Letters with no class word
 # (h, k, q, v, w, x, y, z) are practised in the big & small and the order chapters.
 PIC = {"alligator": "🐊", "black": "⚫", "brown": "", "blue": "🔵", "bird": "🐦", "cat": "🐈", "cut": "", "dog": "🐕",
@@ -51,7 +53,10 @@ PIC = {"alligator": "🐊", "black": "⚫", "brown": "", "blue": "🔵", "bird":
        "in": "", "in front of": "", "jump": "", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "",
        "on top of": "", "orange": "🍊", "octopus": "🐙", "purple": "💜", "red": "🔴", "run": "🏃", "swim": "🏊", "sleep": "😴",
        "tiger": "🐅", "under": ""}
-HEB = {"brown": "חום", "drink": "לשתות", "eat": "לאכול", "jump": "לקפוץ", "cut": "לגזור", "gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
+HEB = {"alligator": "תנין", "black": "שחור", "blue": "כחול", "bird": "ציפור", "cat": "חתול", "dog": "כלב", "elephant": "פיל",
+       "fish": "דג", "fly": "לעוף", "green": "ירוק", "giraffe": "ג'ירפה", "lion": "אריה", "ladybird": "פרת משה רבנו", "monkey": "קוף",
+       "orange": "כתום", "octopus": "תמנון", "purple": "סגול", "red": "אדום", "run": "לרוץ", "swim": "לשחות", "sleep": "לישון", "tiger": "נמר",
+       "brown": "חום", "drink": "לשתות", "eat": "לאכול", "jump": "לקפוץ", "cut": "לגזור", "gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
 def first_letter(lo, hi):
     out, pool = [], ["alligator", "black", "cat", "dog", "elephant", "fish", "green", "jump", "lion", "monkey", "orange",
                      "purple", "red", "swim", "tiger", "under", "bird", "drink", "giraffe", "octopus", "sleep", "run", "eat", "fly"]
@@ -65,7 +70,7 @@ def first_letter(lo, hi):
         heb = HEB.get(w)
         ex = f"{w} = {heb}, מתחיל ב-{L.upper()}" if heb else f"{w} מתחיל ב-{L.upper()}"
         sc = [(L.upper(), 26, 50, 40), (PIC[w], 70, 52, 40)] if PIC[w] else [(L.upper(), 50, 50, 56)]
-        out.append((AB, f"{L.upper()} is for…" if PIC[w] else f"{L.upper()} is for… ({heb})", [w] + d, 0, ex, sc))
+        out.append((AB, f"{L.upper()} is for… ({heb})", [w] + d, 0, ex, sc))
     return out
 C.append(("First letter A–D", [AB], first_letter("a", "d")))
 C.append(("First letter E–L", [AB], first_letter("e", "l")))
@@ -102,11 +107,11 @@ C.append(("Animals", [AN], [
 ]))
 
 C.append(("Prepositions", [PR], [
- (PR, "The cat is ___ the box.", ["on", "in", "under", "next to"], 0, "החתול על הקופסה = on", [("📦", 50, 66, 50), ("🐈", 50, 30, 30)]),
+ (PR, "The boy is ___ the bath.", ["in", "on", "under", "next to"], 0, "הילד בתוך האמבטיה = in", [("🛀", 50, 52, 56)]),
  (PR, "The cat is ___ the bed.", ["under", "on", "in", "next to"], 0, "החתול מתחת למיטה = under", [("🛏️", 50, 42, 56), ("🐈", 50, 62, 20)]),
  (PR, "The cat is ___ the dog.", ["next to", "on", "under", "in"], 0, "החתול ליד הכלב = next to", [("🐈", 34, 60, 32), ("🐕", 68, 60, 32)]),
  (PR, "The dog is ___ the tree.", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 72, 38)]),
- (PR, "The bird is ___ the house.", ["on top of", "under", "in", "in front of"], 0, "הציפור מעל הבית – על הגג = on top of", [("🏠", 50, 64, 48), ("🐦", 50, 36, 22)]),
+ (PR, "The fish is ___ the boat.", ["under", "on top of", "in", "in front of"], 0, "הדג מתחת לסירה = under", [("⛵", 50, 34, 44), ("🐟", 50, 76, 24)]),
  (PR, "על = ?", ["on", "in", "under", "next to"], 0, "על = on", [("📕", 50, 68, 40), ("🍎", 50, 36, 26)]),
  (PR, "בתוך = ?", ["in", "on", "under", "next to"], 0, "בתוך = in (הילד בתוך האמבטיה)", [("🛀", 50, 52, 56)]),
  (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור על העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
@@ -122,7 +127,7 @@ C.append(("Verbs", [VE], [
  (VE, "Which verb?", ["sleep", "eat", "cut", "run"], 0, "לישון = sleep", [("😴", 50, 52, 56)]),
  (VE, "I ___ pizza.", ["eat", "drink", "sleep", "sing"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
  (VE, "I ___ milk.", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥛", 50, 52, 52)]),
- (VE, "I ___ the paper.", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("✂️", 40, 48, 44), ("📄", 70, 58, 32)]),
+ (VE, "I ___ the paper.", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("📄", 50, 52, 52)]),
  (VE, "קופצים גבוה = ?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🤸", 50, 50, 56)]),
  (VE, "לשתות = ?", ["drink", "eat", "cut", "sleep"], 0, "לשתות = drink", [("🥛", 50, 52, 50)]),
  (VE, "לקפוץ = ?", ["jump", "eat", "run", "fly"], 0, "לקפוץ = jump", [("🤸", 50, 52, 50)]),

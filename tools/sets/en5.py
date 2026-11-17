@@ -82,7 +82,7 @@ C.append(("have · has", [BE], [
 
 # ───────────── Present Simple ─────────────
 C.append(("Present Simple: he plays", [PS], [
- Q(PS, "He ___ football. He is a good player.", ["plays", "play", "playing", "playes"], 0, "he ← plays", ROW("👦", "⚽")),
+ Q(PS, "He ___ football and scores goals.", ["plays", "play", "playing", "playes"], 0, "he ← plays", ROW("👦", "⚽")),
  Q(PS, "I ___ milk in the morning.", ["drink", "drinks", "drinking", "drinkes"], 0, "I ← בלי s", ROW("🥛", "🌅")),
  Q(PS, "She ___ to school by bus.", ["goes", "go", "gos", "going"], 0, "she + go ← goes", ROW("👧", "🚌")),
  Q(PS, "My mom ___ TV at night.", ["watches", "watch", "watchs", "watching"], 0, "אחרי ch מוסיפים es", ROW("👩", "📺")),
@@ -98,15 +98,15 @@ C.append(("Present Simple: he plays", [PS], [
 
 C.append(("Present Simple: don't · doesn't · Do?", [PS], [
  Q(PS, "I ___ like fish.", ["don't", "doesn't", "isn't", "not"], 0, "I ← don't", ROW("🐟", "👎")),
- Q(PS, "He ___ eat meat.", ["doesn't", "don't", "isn't", "not"], 0, "he ← doesn't", ROW("👦", "🍖")),
+ Q(PS, "He ___ eat meat. He eats only vegetables.", ["doesn't", "don't", "isn't", "not"], 0, "he ← doesn't", ROW("👦", "🍖")),
  Q(PS, "She doesn't ___ coffee.", ["drink", "drinks", "drinking", "drank"], 0, "אחרי doesn't ← בלי s", ROW("👩", "☕")),
- Q(PS, "They ___ walk to school.", ["don't", "doesn't", "aren't", "isn't"], 0, "they ← don't", ROW("👫", "🏫")),
+ Q(PS, "They ___ walk to school. They go by bus.", ["don't", "doesn't", "aren't", "isn't"], 0, "they ← don't", ROW("👫", "🏫")),
  Q(PS, "___ you like pizza?", ["Do", "Does", "Are", "Is"], 0, "you ← Do", "🍕"),
  Q(PS, "___ she play tennis?", ["Does", "Do", "Is", "Are"], 0, "she ← Does", ROW("👧", "🎾")),
  Q(PS, "Does he ___ English?", ["speak", "speaks", "speaking", "spoke"], 0, "אחרי Does ← בלי s", ROW("👦", "💬")),
  Q(PS, "Do they live here? Yes, they ___.", ["do", "does", "are", "is"], 0, "Do ← Yes, they do", ROW("👫", "🏠")),
  Q(PS, "Does your cat swim? No, it ___.", ["doesn't", "don't", "isn't", "not"], 0, "Does ← No, it doesn't", ROW("🐈", "🌊")),
- Q(PS, "My dad ___ work on Saturday.", ["doesn't", "don't", "isn't", "not"], 0, "dad = he ← doesn't", ROW("👨", "🗓️")),
+ Q(PS, "My dad ___ work on Saturday. He rests at home.", ["doesn't", "don't", "isn't", "not"], 0, "dad = he ← doesn't", ROW("👨", "🗓️")),
  Q(PS, "Which is correct?", ["He doesn't run.", "He don't run.", "He doesn't runs.", "He not run."], 0, "he ← doesn't + פועל בלי s", "🏃"),
  Q(PS, "We ___ have a car.", ["don't", "doesn't", "aren't", "not"], 0, "we ← don't", ROW("🚗", "❌")),
 ]))
@@ -208,7 +208,7 @@ C.append(("Irregular plurals: man – men", [PL], [
 C.append(("Pronouns: I – me · he – him", [PN], [
  Q(PN, "Dan is my friend. ___ is ten.", ["He", "She", "It", "They"], 0, "Dan = בן ← He", "👦"),
  Q(PN, "Mia is nice. I like ___.", ["her", "she", "him", "they"], 0, "Mia = בת, אחרי הפועל ← her", "👧"),
- Q(PN, "This is Tom. Please call ___.", ["him", "he", "his", "her"], 0, "Tom = בן, אחרי הפועל ← him", ROW("👦", "📞")),
+ Q(PN, "This is my friend Tom. Please call ___.", ["him", "he", "his", "her"], 0, "Tom = בן, אחרי הפועל ← him", ROW("👦", "📞")),
  Q(PN, "Dana and I are friends. ___ play together.", ["We", "They", "Us", "She"], 0, "Dana and I = אנחנו ← We", "👭"),
  Q(PN, "Where is the ball? I can't see ___.", ["it", "him", "she", "them"], 0, "ball = דבר אחד ← it", "⚽"),
  Q(PN, "The kids are here. Look at ___!", ["them", "they", "their", "us"], 0, "kids = הם, אחרי at ← them", ROW("🧒", "🧒")),
@@ -225,7 +225,7 @@ C.append(("my · your · his · her", [PN], [
  Q(PN, "Tom has a bike. ___ bike is red.", ["His", "Her", "He", "Him"], 0, "של Tom = שלו ← His", ROW("👦", "🚲")),
  Q(PN, "Lea has a cat. ___ cat is white.", ["Her", "His", "She", "Hers"], 0, "של Lea = שלה ← Her", ROW("👧", "🐈")),
  Q(PN, "Is this ___ bag, Dan? Yes, it's mine.", ["your", "you", "yours", "you're"], 0, "שלך + שם עצם ← your", "🎒"),
- Q(PN, "We love ___ school.", ["our", "us", "we", "ours"], 0, "שלנו + שם עצם ← our", "🏫"),
+ Q(PN, "We love ___ school. We learn a lot there.", ["our", "us", "we", "ours"], 0, "שלנו + שם עצם ← our", "🏫"),
  Q(PN, "They live in a big house. ___ house is new.", ["Their", "They", "There", "Them"], 0, "שלהם ← Their", ROW("👪", "🏠")),
  Q(PN, "In autumn the tree loses ___ leaves.", ["its", "it's", "it", "it is"], 0, "its = שלו (של דבר)", ROW("🌳", "🍂")),
  Q(PN, "שלה = ?", ["her", "his", "she", "your"], 0, "שלה = her", "👧"),

@@ -212,7 +212,7 @@ C.append(("Colors", [CN], [
  Q(CN, "Red and yellow make ___.", ["orange", "green", "purple", "brown"], 0, "אדום + צהוב = כתום", ROW("🔴", "➕", "💛")),
  Q(CN, "Blue and yellow make ___.", ["green", "orange", "pink", "black"], 0, "כחול + צהוב = ירוק", ROW("🔵", "➕", "💛")),
  Q(CN, "What color is the heart?", ["blue", "red", "pink", "green"], 0, "לב כחול = blue", "💙"),
- Q(CN, "What color are grapes?", ["purple", "blue", "red", "yellow"], 0, "ענבים סגולים = purple", "🍇"),
+ Q(CN, "What color are these grapes?", ["purple", "blue", "red", "yellow"], 0, "ענבים סגולים = purple", "🍇"),
 ]))
 
 C.append(("Numbers 1–10", [CN], [
@@ -238,7 +238,7 @@ C.append(("Numbers 11–20", [CN], [
  Q(CN, "20 = ?", ["twenty", "twelve", "two", "ten"], 0, "20 = twenty", TXT("20")),
  Q(CN, "How many?", ["eleven", "twelve", "ten", "seven"], 0, "6 + 5 = 11 = eleven", COUNT(("🐟", 6), ("🐟", 5))),
  Q(CN, "What comes after sixteen?", ["seventeen", "fifteen", "eighteen", "seven"], 0, "אחרי 16 בא 17 = seventeen", TXT("16 → ?")),
- Q(CN, "Which number is the biggest?", ["nineteen", "nine", "sixteen", "eleven"], 0, "19 = nineteen – הכי גדול", TXT("9 · 11", "16 · 19")),
+ Q(CN, "Which of these numbers is the biggest?", ["nineteen", "nine", "sixteen", "eleven"], 0, "19 = nineteen – הכי גדול", TXT("9 · 11", "16 · 19")),
 ]))
 
 # ───────────── Body & clothes ─────────────
@@ -247,7 +247,7 @@ C.append(("My body", [BC], [
  Q(BC, "I hear with my two ___.", ["ears", "eyes", "hands", "feet"], 0, "שומעים באוזניים = ears", "🎵"),
  Q(BC, "I eat and talk with my ___.", ["mouth", "nose", "ears", "eyes"], 0, "אוכלים ומדברים בפה = mouth", ROW("🍎", "🍞")),
  Q(BC, "I wear shoes on my ___.", ["feet", "ears", "eyes", "nose"], 0, "נעליים נועלים על כפות הרגליים = feet", "👟"),
- Q(BC, "An owl has two big ___.", ["eyes", "ears", "legs", "hands"], 0, "לינשוף שתי עיניים גדולות = eyes", "🦉"),
+ Q(BC, "An owl sees with its two big ___.", ["eyes", "ears", "legs", "hands"], 0, "לינשוף שתי עיניים גדולות = eyes", "🦉"),
  Q(BC, "A horse has four long ___.", ["legs", "eyes", "noses", "hands"], 0, "לסוס ארבע רגליים = legs", "🐎"),
  Q(BC, "זרוע = ?", ["arm", "leg", "ear", "nose"], 0, "זרוע = arm", "💪"),
  Q(BC, "שיניים = ?", ["teeth", "feet", "eyes", "ears"], 0, "שן = tooth, שיניים = teeth", "🦷"),
@@ -365,10 +365,10 @@ C.append(("I am · I have", [IA], [
 
 C.append(("I like · I can", [IA], [
  Q(IA, "אני אוהב פיצה = {I ___ pizza.}", ["like", "can", "am", "have"], 0, "אוהב = like", "🍕"),
- Q(IA, "I ___ swim.", ["can", "like", "am", "have"], 0, "I can swim = אני יודע לשחות", "🏊"),
+ Q(IA, "אני יכול לשחות = I ___ swim.", ["can", "like", "am", "have"], 0, "I can swim = אני יודע לשחות", "🏊"),
  Q(IA, "A fish can ___.", ["swim", "fly", "run", "sing"], 0, "דג יכול לשחות = swim", "🐟"),
  Q(IA, "A bird can ___.", ["fly", "read", "write", "cook"], 0, "ציפור יכולה לעוף = fly", "🐦"),
- Q(IA, "A cat can't ___.", ["fly", "run", "jump", "eat"], 0, "can't = לא יכול; חתול לא עף", "🐈"),
+ Q(IA, "A cat has no wings. It can't ___.", ["fly", "run", "jump", "eat"], 0, "can't = לא יכול; חתול לא עף", "🐈"),
  Q(IA, "Can you jump? Yes, I ___.", ["can", "am", "like", "have"], 0, "Can you…? Yes, I can.", "🤸"),
  Q(IA, "Can a dog fly? No, it ___.", ["can't", "can", "isn't", "not"], 0, "כלב לא עף ← No, it can't", "🐕"),
  Q(IA, "אני לא אוהב חלב = {I don't ___ milk.}", ["like", "can", "am", "have"], 0, "I don't like = אני לא אוהב", ROW("🥛", "👎")),
@@ -382,7 +382,7 @@ C.append(("Do you like…? Yes, I do", [DL], [
  Q(DL, "Do you like pizza? Yes, I ___.", ["do", "am", "like", "can"], 0, "Do you…? ← Yes, I do", ROW("🍕", "👍")),
  Q(DL, "Do you like milk? No, I ___.", ["don't", "not", "am not", "do"], 0, "No ← I don't (= do not)", ROW("🥛", "👎")),
  Q(DL, "___ you like cats? Yes, I do.", ["Do", "Are", "Is", "Am"], 0, "שואלים אם אוהבים ← Do you like", "🐈"),
- Q(DL, "Do you like bananas? Say yes.", ["Yes, I do.", "Yes, I am.", "Yes, I like.", "Yes, I can."], 0, "Do you like…? ← Yes, I do", ROW("🍌", "👍")),
+ Q(DL, "Do you like bananas? Say yes in three words.", ["Yes, I do.", "Yes, I am.", "Yes, I like.", "Yes, I can."], 0, "Do you like…? ← Yes, I do", ROW("🍌", "👍")),
  Q(DL, "Do you like snakes? Say no.", ["No, I don't.", "No, I not.", "No, I am.", "No, I do."], 0, "לא אוהבים ← No, I don't", ROW("🐍", "👎")),
  Q(DL, "{Do you like apples?} = ?", ["אתה אוהב תפוחים?", "יש לך תפוחים?", "אתה רוצה תפוחים?", "איפה התפוחים?"], 0, "Do you like = אתה אוהב", "🍎"),
  Q(DL, "Do you like ___? Yes! They're my favorite fruit.", ["apples", "bread", "cheese", "milk"], 0, "fruit = פרי ← apples", "🍎"),
@@ -440,7 +440,7 @@ C.append(("Plurals: one cat, two cats", [TH], [
  Q(TH, "one egg, two ___", ["eggs", "egg", "an egg", "egges"], 0, "יותר מאחד ← מוסיפים s", COUNT(("🥚", 2))),
  Q(TH, "one box, two ___", ["boxes", "boxs", "box", "boxies"], 0, "אחרי x מוסיפים es", COUNT(("📦", 2))),
  Q(TH, "How many?", ["five apples", "five apple", "a apples", "fives apple"], 0, "חמישה ← apples עם s", COUNT(("🍎", 5))),
- Q(TH, "I have two ___.", ["hands", "hand", "handes", "a hand"], 0, "שתיים ← hands עם s", COUNT(("✋", 2))),
+ Q(TH, "I have two ___ and ten fingers.", ["hands", "hand", "handes", "a hand"], 0, "שתיים ← hands עם s", COUNT(("✋", 2))),
  Q(TH, "six ___", ["birds", "bird", "a bird", "birdes"], 0, "שש ← birds עם s", COUNT(("🐦", 6))),
  Q(TH, "Which of these words means \"more than one\"?", ["pens", "pen", "a pen", "one pen"], 0, "pens עם s = כמה עטים", "🖊️"),
  Q(TH, "Which is only ONE thing?", ["ball", "balls", "pens", "cats"], 0, "ball בלי s = כדור אחד", TXT("1")),
@@ -585,7 +585,7 @@ C.append(("חזרה כללית", [SR, VW, DG, AB, FF, CN, BC, AN, FD, SC, DY, IA
  Q(FF, "She is ___.", ["scared", "happy", "hungry", "tired"], 0, "מפחדת = scared", "😱"),
  Q(CN, "What color is a banana?", ["yellow", "blue", "purple", "black"], 0, "בננה צהובה = yellow", "🍌"),
  Q(CN, "17 = ?", ["seventeen", "seventy", "seven", "eleven"], 0, "17 = seventeen", TXT("17")),
- Q(BC, "I have two ___.", ["ears", "noses", "mouths", "heads"], 0, "שתי אוזניים = two ears", COUNT(("👂", 2))),
+ Q(BC, "I have two ___ on my head.", ["ears", "noses", "mouths", "heads"], 0, "שתי אוזניים = two ears", COUNT(("👂", 2))),
  Q(BC, "שמלה = ?", ["dress", "desk", "shirt", "sock"], 0, "שמלה = dress", "👗"),
  Q(AN, "What is this?", ["lion", "tiger", "bear", "horse"], 0, "אריה = lion", "🦁"),
  Q(FD, "Which is NOT food?", ["shoe", "bread", "egg", "rice"], 0, "נעל לא אוכלים!", ROW("👟", "🍞", "🥚", "🍚")),

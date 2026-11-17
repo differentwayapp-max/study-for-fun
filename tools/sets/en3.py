@@ -113,13 +113,13 @@ C.append(("Capital & small: match", [CS], [
 ]))
 
 C.append(("Capital or small?", [CS], [
- Q(CS, "איזו אות היא גדולה?", ["G", "g", "b", "e"], 0, "G גדולה. g, b, e קטנות", TXT("g  b  G  e")),
- Q(CS, "איזו אות היא קטנה?", ["m", "M", "T", "K"], 0, "m קטנה. M, T, K גדולות", TXT("M  T  m  K")),
- Q(CS, "איזו אות היא גדולה?", ["R", "r", "a", "n"], 0, "R גדולה. r, a, n קטנות", TXT("r  a  n  R")),
- Q(CS, "איזו אות היא קטנה?", ["f", "F", "L", "E"], 0, "f קטנה. F, L, E גדולות", TXT("F  f  L  E")),
- Q(CS, "איזה זוג הוא אותה אות?", ["B b", "B d", "D b", "P q"], 0, "B גדולה ו-b קטנה – אותה אות", TXT("B d · D b", "P q · B b")),
- Q(CS, "איזה זוג הוא אותה אות?", ["T t", "T f", "L t", "M n"], 0, "T גדולה ו-t קטנה – אותה אות", TXT("T f · L t", "T t · M n")),
- Q(CS, "איזה זוג הוא אותה אות?", ["M m", "M n", "N m", "W m"], 0, "M גדולה ו-m קטנה – אותה אות", TXT("M n · N m", "W m · M m")),
+ Q(CS, "איזו מהן היא אות גדולה?", ["G", "g", "b", "e"], 0, "G גדולה. g, b, e קטנות", TXT("g  b  G  e")),
+ Q(CS, "איזו מהן היא אות קטנה?", ["m", "M", "T", "K"], 0, "m קטנה. M, T, K גדולות", TXT("M  T  m  K")),
+ Q(CS, "איזו מהן היא אות גדולה?", ["R", "r", "a", "n"], 0, "R גדולה. r, a, n קטנות", TXT("r  a  n  R")),
+ Q(CS, "איזו מהן היא אות קטנה?", ["f", "F", "L", "E"], 0, "f קטנה. F, L, E גדולות", TXT("F  f  L  E")),
+ Q(CS, "איזה מהם הוא זוג של אותה אות?", ["B b", "B d", "D b", "P q"], 0, "B גדולה ו-b קטנה – אותה אות", TXT("B d · D b", "P q · B b")),
+ Q(CS, "איזה מהם הוא זוג של אותה אות?", ["T t", "T f", "L t", "M n"], 0, "T גדולה ו-t קטנה – אותה אות", TXT("T f · L t", "T t · M n")),
+ Q(CS, "איזה מהם הוא זוג של אותה אות?", ["M m", "M n", "N m", "W m"], 0, "M גדולה ו-m קטנה – אותה אות", TXT("M n · N m", "W m · M m")),
  Q(CS, "איך כותבים נכון את השם דן?", ["Dan", "dan", "dAn", "daN"], 0, "שם מתחיל באות גדולה: Dan", "👦"),
  Q(CS, "איך כותבים נכון את השם מאיה?", ["Maya", "maya", "mAya", "mayA"], 0, "שם מתחיל באות גדולה: Maya", "👧"),
  Q(CS, "המילה {I} (אני) נכתבת…", ["תמיד גדולה", "תמיד קטנה", "גדולה או קטנה", "רק בהתחלה"], 0, "I = אני, תמיד באות גדולה", "🙋"),
@@ -145,8 +145,8 @@ C.append(("ABC order: words", [AO], [
  Q(AO, "Which word comes first in ABC order?", ["cat", "dog", "fish", "sun"], 0, "c לפני d, f, s", ROW("🐈", "🐕", "🐟", "☀️")),
  Q(AO, "Which word comes last in ABC order?", ["sun", "bed", "hat", "pen"], 0, "s אחרי b, h, p", ROW("☀️", "🛏️", "🎩", "🖊️")),
  Q(AO, "Which word comes last in ABC order?", ["tree", "egg", "milk", "fish"], 0, "t אחרי e, f, m", ROW("🌳", "🥚", "🥛", "🐟")),
- Q(AO, "Which letters are in ABC order?", ["d e f", "d f e", "e d f", "f e d"], 0, "d, אחריה e, אחריה f", TXT("d f e · e d f", "f e d · d e f")),
- Q(AO, "Which letters are in ABC order?", ["l m n", "m l n", "n m l", "l n m"], 0, "l, אחריה m, אחריה n", TXT("m l n · n m l", "l n m · l m n")),
+ Q(AO, "Which of these letters are in ABC order?", ["d e f", "d f e", "e d f", "f e d"], 0, "d, אחריה e, אחריה f", TXT("d f e · e d f", "f e d · d e f")),
+ Q(AO, "Which of these letters are in ABC order?", ["l m n", "m l n", "n m l", "l n m"], 0, "l, אחריה m, אחריה n", TXT("m l n · n m l", "l n m · l m n")),
  Q(AO, "Which letter comes between F and H?", ["G", "E", "I", "J"], 0, "F G H", TXT("F, ?, H")),
  Q(AO, "Which letter comes before C?", ["B", "D", "A", "E"], 0, "B C D", TXT("?, C, D")),
  Q(AO, "Which letter comes after Y?", ["Z", "X", "W", "A"], 0, "X Y Z", TXT("X, Y, ?")),
@@ -229,8 +229,8 @@ C.append(("My body", [FB], [
  Q(FB, "יד = ?", ["hand", "head", "leg", "foot"], 0, "יד = hand", "✋"),
  Q(FB, "רגל = ?", ["leg", "arm", "ear", "eye"], 0, "רגל = leg", "🦵"),
  Q(FB, "ראש = ?", ["head", "hand", "hat", "ear"], 0, "ראש = head", "😀"),
- Q(FB, "I see with my ___.", ["eyes", "ears", "nose", "hands"], 0, "רואים בעיניים = eyes", "🌈"),
- Q(FB, "I hear with my ___.", ["ears", "eyes", "legs", "mouth"], 0, "שומעים באוזניים = ears", "🎵"),
+ Q(FB, "I see with my two ___.", ["eyes", "ears", "nose", "hands"], 0, "רואים בעיניים = eyes", "🌈"),
+ Q(FB, "I hear with my two ___.", ["ears", "eyes", "legs", "mouth"], 0, "שומעים באוזניים = ears", "🎵"),
  Q(FB, "I eat with my ___.", ["mouth", "nose", "ear", "leg"], 0, "אוכלים בפה = mouth", "🍎"),
 ]))
 
@@ -284,7 +284,7 @@ C.append(("Animals: words & sounds", [AN], [
  Q(AN, "ארנב = ?", ["rabbit", "mouse", "cat", "horse"], 0, "ארנב = rabbit", "🐇"),
  Q(AN, "תרנגולת = ?", ["hen", "pen", "duck", "cow"], 0, "תרנגולת = hen", "🐔"),
  Q(AN, "דבורה = ?", ["bee", "bird", "bear", "fish"], 0, "דבורה = bee", "🐝"),
- Q(AN, "{dog} = ?", ["כלב", "חתול", "דג", "פרה"], 0, "dog = כלב", TXT("dog")),
+ Q(AN, "{cat} = ?", ["חתול", "כלב", "דג", "פרה"], 0, "cat = חתול", TXT("cat")),
  Q(AN, "Which animal says \"moo\"?", ["cow", "dog", "cat", "duck"], 0, "הפרה עושה moo", TXT("Moo!")),
  Q(AN, "Which animal says \"woof\"?", ["dog", "cat", "cow", "sheep"], 0, "הכלב עושה woof", TXT("Woof!")),
  Q(AN, "Which of these animals can fly?", ["bird", "dog", "cow", "fish"], 0, "ציפור עפה = bird", ROW("🐦", "🐕", "🐄", "🐟")),
@@ -378,7 +378,7 @@ C.append(("Vowel sounds: the middle sound", [VS], [
  Q(VS, "Same middle sound as bed?", ["pen", "pin", "pan", "pot"], 0, "b-e-d, p-e-n: אותו צליל e באמצע", PW("🛏️", "bed")),
  Q(VS, "Same middle sound as pig?", ["six", "box", "bag", "bed"], 0, "p-i-g, s-i-x: אותו צליל i באמצע", PW("🐖", "pig")),
  Q(VS, "Same middle sound as dog?", ["box", "bus", "bag", "big"], 0, "d-o-g, b-o-x: אותו צליל o באמצע", PW("🐕", "dog")),
- Q(VS, "Same middle sound as sun?", ["bus", "bag", "big", "box"], 0, "s-u-n, b-u-s: אותו צליל u באמצע", PW("☀️", "sun")),
+ Q(VS, "Same middle sound as sun?", ["cup", "bag", "big", "box"], 0, "s-u-n, c-u-p: אותו צליל u באמצע", PW("☀️", "sun")),
  Q(VS, "Same middle sound as map?", ["bag", "bed", "big", "bug"], 0, "m-a-p, b-a-g: אותו צליל a באמצע", PW("🗺️", "map")),
  Q(VS, "Which word has a different middle sound?", ["pig", "cat", "hat", "map"], 0, "cat, hat, map עם a. pig עם i", ROW("🐈", "🎩", "🗺️", "🐖")),
  Q(VS, "Which word has a different middle sound?", ["sun", "pen", "hen", "ten"], 0, "pen, hen, ten עם e. sun עם u", ROW("🖊️", "🐔", "🔟", "☀️")),
@@ -409,7 +409,7 @@ C.append(("Hello! Goodbye!", [GR], [
  Q(GR, "{How are you?} = ?", ["מה שלומך?", "איך קוראים לך?", "בן כמה אתה?", "איפה אתה?"], 0, "How are you = מה שלומך", TXT("How are you?")),
  Q(GR, "{How are you?} – ___", ["I'm fine, thanks.", "I'm Dan.", "I'm eight.", "Goodbye!"], 0, "מה שלומך? – טוב, תודה: I'm fine", ROW("👧", "👦")),
  Q(GR, "{Goodbye!} = ?", ["להתראות!", "סליחה!", "תודה!", "בוקר טוב!"], 0, "Goodbye = להתראות", TXT("Goodbye!")),
- Q(GR, "בבוקר פוגשים את המורה. אומרים: ___", ["Good morning", "Good night", "Goodbye", "Thank you"], 0, "בבוקר, כשנפגשים: Good morning", ROW("🌅", "👩‍🏫")),
+ Q(GR, "מה מהבאים אומרים למורה בבוקר?", ["Good morning", "Good night", "Goodbye", "Thank you"], 0, "בבוקר, כשנפגשים: Good morning", ROW("🌅", "👩‍🏫")),
  Q(GR, "{Dan gives you a present.} You say: ___", ["Thank you", "Sorry", "Goodbye", "Good night"], 0, "מקבלים מתנה – אומרים תודה: Thank you", ROW("👦", "🎁")),
 ]))
 
@@ -437,7 +437,7 @@ C.append(("Read the card", [RS], [
  Q(RS, "Where is the bird?", ["on the tree", "in the box", "on the bed", "in the bag"], 0, "on the tree = על העץ", TXT("The bird is", "on the tree.")),
  Q(RS, "What am I?", ["a frog", "a dog", "a fish", "a bird"], 0, "ירוק וקופץ = צפרדע (frog)", TXT("I am green.", "I can jump.")),
  Q(RS, "What am I?", ["a banana", "an apple", "a carrot", "an egg"], 0, "צהובה, וקופים אוהבים אותה = banana", TXT("I am yellow.", "Monkeys", "like me.")),
- Q(RS, "What am I?", ["a dog", "a cat", "a cow", "a fish"], 0, "חיית מחמד שאומרת woof = dog", TXT("I am a pet.", "I say woof!")),
+ Q(RS, "What am I?", ["a cat", "a dog", "a cow", "a fish"], 0, "חיית מחמד שאומרת meow = cat", TXT("I am a pet.", "I say meow!")),
 ]))
 
 C.append(("Read a sentence", [RS], [
@@ -456,7 +456,7 @@ C.append(("Read a sentence", [RS], [
 # ───────────── Review ─────────────
 C.append(("חזרה כללית", [RH, LS, CS, AO, CV, SW, FB, CN, AN, FD, SC, SI], [
  Q(RH, "Which word rhymes with man?", ["can", "map", "men", "mom"], 0, "man – can: שתיהן נגמרות ב-an", PW("👨", "man")),
- Q(RH, "What is the first sound in bag?", ["b", "d", "g", "p"], 0, "bag מתחילה בצליל b", PW("👜", "bag")),
+ Q(RH, "What is the first sound in hat?", ["h", "b", "t", "p"], 0, "hat מתחילה בצליל h", PW("🎩", "hat")),
  Q(LS, "איזו אות נקראת אֶס?", ["S", "X", "C", "F"], 0, "S נקראת אֶס", TXT("אֶס")),
  Q(LS, "איזה צליל עושה האות {P}?", ["פ", "ב", "ט", "ק"], 0, "P עושה פ, כמו ב-pen", BIG("P")),
  Q(CS, "האות הקטנה של {T}?", ["t", "f", "l", "i"], 0, "T גדולה = t קטנה", BIG("T")),

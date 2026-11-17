@@ -37,7 +37,7 @@ C.append(("ABC: order & first letter", [AB], [
  (AB, "What comes next?", ["V", "W", "Y", "R"], 0, "S T U V", seq("S", "T", "U", "❓")),
  (AB, "What comes next?", ["Q", "R", "S", "T"], 0, "N O P Q", seq("N", "O", "P", "❓")),
  (AB, "What comes next?", ["Z", "A", "V", "U"], 0, "W X Y Z – סוף ה-ABC", seq("W", "X", "Y", "❓")),
- (AB, "Starts with?", ["d", "b", "g", "t"], 0, "dog מתחיל ב-d", [("🐕", 50, 52, 56)]),
+ (AB, "Starts with which small letter?", ["d", "b", "g", "t"], 0, "dog מתחיל ב-d", [("🐕", 50, 52, 56)]),
  (AB, "Starts with?", ["f", "p", "t", "v"], 0, "fish מתחיל ב-f", [("🐟", 50, 52, 56)]),
  (AB, "Starts with?", ["o", "a", "u", "c"], 0, "octopus מתחיל ב-o", [("🐙", 50, 52, 56)]),
  (AB, "Starts with?", ["l", "i", "j", "y"], 0, "lion מתחיל ב-l", [("🦁", 50, 52, 56)]),
@@ -111,9 +111,9 @@ C.append(("Animals", [AN], [
 
 C.append(("Prepositions", [PR], [
  (PR, "The boy is ___ the bath.", ["in", "on", "under", "next to"], 0, "הילד בתוך האמבטיה = in", [("🛀", 50, 52, 56)]),
- (PR, "The cat is ___ the bed.", ["under", "on", "in", "next to"], 0, "החתול מתחת למיטה = under", [("🛏️", 50, 42, 56), ("🐈", 50, 62, 20)]),
+ (PR, "The cat is ___ the bed.", ["under", "on", "in", "next to"], 0, "החתול מתחת למיטה = under", [("🛏️", 50, 38, 56), ("🐈", 50, 80, 20)]),
  (PR, "The cat is ___ the dog.", ["next to", "on", "under", "in"], 0, "החתול ליד הכלב = next to", [("🐈", 34, 60, 32), ("🐕", 68, 60, 32)]),
- (PR, "The dog is ___ the tree.", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 72, 38)]),
+ (PR, "Dog is ___ the tree (לפני)", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 72, 38)]),
  (PR, "The fish is ___ the boat.", ["under", "on top of", "in", "in front of"], 0, "הדג מתחת לסירה = under", [("⛵", 50, 34, 44), ("🐟", 50, 76, 24)]),
  (PR, "My birthday is ___ Sunday.", ["on", "in", "under", "next to"], 0, "ימים בשבוע: on Sunday", [("🎂", 50, 52, 52)]),
  (PR, "בתוך = ?", ["in", "on", "under", "next to"], 0, "בתוך = in (הילד בתוך האמבטיה)", [("🛀", 50, 52, 56)]),

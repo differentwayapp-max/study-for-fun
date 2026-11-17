@@ -29,11 +29,11 @@ C.append(("Present Simple: he / she / it", [PS], [
 ]))
 
 C.append(("Weather", [WE], [
- (WE, "What is this?", ["rain", "snow", "wind", "ice"], 0, "גשם = rain", "🌧️"),
+ (WE, "What is falling?", ["rain", "snow", "wind", "ice"], 0, "גשם = rain", "🌧️"),
  (WE, "What is this?", ["cloud", "sea", "roof", "field"], 0, "ענן = cloud", "☁️"),
  (WE, "What is this?", ["snow", "rain", "heat", "shade"], 0, "שלג = snow", [("❄️", 30, 30, 26), ("⛄", 58, 60, 50)]),
  (WE, "רוח = ?", ["wind", "wave", "ice", "cloud"], 0, "רוח = wind", [("🍃", 35, 45, 30), ("💨", 65, 50, 34)]),
- (WE, "What is this?", ["storm", "river", "heat", "scarf"], 0, "סערה = storm", [("⛈️", 50, 40, 50), ("💨", 75, 72, 26)]),
+ (WE, "Rain, thunder and wind: a ___.", ["storm", "river", "heat", "scarf"], 0, "סערה = storm", [("⛈️", 50, 40, 50), ("💨", 75, 72, 26)]),
  (WE, "קרח = ?", ["ice", "snow", "bone", "hole"], 0, "קרח = ice", "⛸️"),
  (WE, "חום = ?", ["heat", "ice", "wind", "shade"], 0, "חום = heat", [("☀️", 30, 30, 34), ("🥵", 62, 60, 40)]),
  (WE, "Five degrees below zero. It's ___.", ["freezing", "warm", "pleasant", "strange"], 0, "מתחת לאפס = קפוא = freezing", [("🌡️", 50, 50, 50)]),
@@ -66,7 +66,7 @@ C.append(("Nature & places", [NP], [
  (NP, "נהר = ?", ["river", "roof", "sea", "road"], 0, "נהר = river", [("🏞️", 50, 52, 56)]),
  (NP, "שדה = ?", ["field", "park", "city", "hole"], 0, "שדה = field", [("🌾", 35, 60, 38), ("🐄", 70, 58, 32)]),
  (NP, "What is this?", ["city", "field", "earth", "pool"], 0, "עיר = city", "🏙️"),
- (NP, "What is this?", ["Earth", "ground", "sea", "city"], 0, "כדור הארץ = Earth", "🌍"),
+ (NP, "כדור הארץ = ?", ["planet Earth", "ground", "sea", "city"], 0, "כדור הארץ = planet Earth", "🌍"),
  (NP, "On a map, up = ?", ["north", "south", "east", "west"], 0, "למעלה במפה = צפון", [("🧭", 50, 55, 46), ("⬆️", 50, 18, 20)]),
  (NP, "The sun rises in the ___.", ["east", "west", "north", "south"], 0, "השמש זורחת במזרח", [("🌅", 50, 52, 56)]),
  (NP, "The sun sets in the ___.", ["west", "east", "north", "south"], 0, "השמש שוקעת במערב", [("🌇", 50, 52, 56)]),

@@ -61,7 +61,7 @@ C.append(("Now or every day?", [PG], [
  Q(PG, "It never ___ in Eilat in the summer.", ["rains", "is raining", "rain", "raining"], 0, "never ← הרגל: rains", ROW("🏜️", "☀️")),
  Q(PG, "Which time words go with \"is playing\"?", ["at the moment", "every day", "usually", "on Sundays"], 0, "at the moment = ברגע זה", TXT("is playing")),
  Q(PG, "Which time word goes with \"plays\"?", ["usually", "now", "right now", "at the moment"], 0, "usually = בדרך כלל ← הרגל", TXT("plays")),
- Q(PG, "The children ___ in the garden at the moment.", ["are playing", "play", "plays", "is playing"], 0, "at the moment + רבים ← are playing", ROW("🧒", "🧒", "🌳")),
+ Q(PG, "The children ___ football in the garden at the moment.", ["are playing", "play", "plays", "is playing"], 0, "at the moment + רבים ← are playing", ROW("🧒", "🧒", "🌳")),
  Q(PG, "My grandparents ___ us every Saturday.", ["visit", "are visiting", "visits", "visiting"], 0, "every Saturday ← הרגל, רבים בלי s", ROW("👴", "👵", "🏠")),
  Q(PG, "Look! He is ___ in the pool.", ["swimming", "swiming", "swims", "swim"], 0, "swim ← מכפילים m: swimming", ROW("👦", "🏊")),
 ]))
@@ -170,7 +170,7 @@ C.append(("Prepositions of place", [PR], [
  Q(PR, "I live ___ Jerusalem.", ["in", "on", "at", "under"], 0, "עיר ← in", "🏙️"),
  Q(PR, "The picture is ___ the wall.", ["on", "in", "at", "under"], 0, "על הקיר ← on", "🖼️"),
  Q(PR, "Put the milk ___ the fridge.", ["in", "on", "at", "between"], 0, "בתוך המקרר ← in", "🥛"),
- Q(PR, "The teacher stands ___ the class.", ["in front of", "under", "between", "on"], 0, "מול הכיתה ← in front of", "👩‍🏫"),
+ Q(PR, "The teacher stands ___ the children.", ["in front of", "under", "between", "on"], 0, "מול הילדים ← in front of", [("🧒", 25, 34, 24), ("🧒", 50, 34, 24), ("🧒", 75, 34, 24), ("👩‍🏫", 50, 74, 40)]),
  Q(PR, "מאחורי = ?", ["behind", "in front of", "next to", "between"], 0, "מאחורי = behind", TXT("מאחורי")),
  Q(PR, "The cat is ___ the two dogs.", ["between", "under", "on", "in"], 0, "באמצע, בין שניים ← between", ROW("🐕", "🐈", "🐕")),
 ]))
@@ -245,14 +245,14 @@ C.append(("Past: -ed verbs", [PW], [
 
 # ───────────── Past: irregular verbs ─────────────
 C.append(("Irregular verbs: went · saw · ate", [PI], [
- Q(PI, "Yesterday we ___ to the zoo.", ["went", "goed", "go", "gone"], 0, "go ← went", ROW("🦁", "🐒")),
+ Q(PI, "Yesterday we ___ (go) to the zoo.", ["went", "goed", "go", "gone"], 0, "go ← went", ROW("🦁", "🐒")),
  Q(PI, "At the zoo I ___ a big lion.", ["saw", "seed", "see", "sees"], 0, "see ← saw", ROW("👀", "🦁")),
  Q(PI, "Last night we ___ (eat) pizza.", ["ate", "eated", "eat", "eats"], 0, "eat ← ate", "🍕"),
  Q(PI, "Last week she ___ (have) a great party.", ["had", "haved", "has", "have"], 0, "have ← had", "🎉"),
  Q(PI, "Dad ___ (buy) me a new ball yesterday.", ["bought", "buyed", "buys", "buy"], 0, "buy ← bought", ROW("👨", "⚽")),
  Q(PI, "Past of \"write\"?", ["wrote", "writed", "writted", "writes"], 0, "write ← wrote", TXT("write → ?")),
  Q(PI, "Past of \"come\"?", ["came", "comed", "come", "comes"], 0, "come ← came", TXT("come → ?")),
- Q(PI, "Yesterday I ___ my homework after school.", ["did", "doed", "do", "does"], 0, "do ← did", "📓"),
+ Q(PI, "Yesterday I ___ (do) my homework after school.", ["did", "doed", "do", "does"], 0, "do ← did", "📓"),
  Q(PI, "Last Friday we ___ (make) a cake for Mom.", ["made", "maked", "make", "makes"], 0, "make ← made", ROW("🎂", "👩")),
  Q(PI, "Last night Tom ___ (tell) his sister a story.", ["told", "telled", "tell", "tells"], 0, "tell ← told", ROW("👦", "👧", "🌙")),
 ]))
@@ -263,7 +263,7 @@ C.append(("Irregular verbs: swam · took · got", [PI], [
  Q(PI, "Past of \"take\"?", ["took", "taked", "takes", "tooked"], 0, "take ← took", TXT("take → ?")),
  Q(PI, "Last summer I ___ in the sea every day.", ["swam", "swim", "swims", "swimmed"], 0, "swim ← swam", ROW("🏊", "🌊")),
  Q(PI, "Yesterday she ___ up at six.", ["got", "get", "gets", "getted"], 0, "get up ← got up", "⏰"),
- Q(PI, "Last week we ___ the bus to Haifa.", ["took", "take", "takes", "taked"], 0, "take ← took", "🚌"),
+ Q(PI, "Last week we ___ (take) the bus to Haifa.", ["took", "take", "takes", "taked"], 0, "take ← took", "🚌"),
  Q(PI, "Yesterday the children ___ a song in class.", ["sang", "singed", "sing", "sings"], 0, "sing ← sang", ROW("🧒", "🎵")),
  Q(PI, "Yesterday I ___ a race and won!", ["ran", "run", "runs", "running"], 0, "run ← ran", "🏃"),
  Q(PI, "Which pair is correct?", ["go – went", "see – seed", "eat – eated", "have – haved"], 0, "go – went (פועל חריג)", TXT("now → past")),
@@ -275,7 +275,7 @@ C.append(("Past: didn't", [PD], [
  Q(PD, "I ___ go to school yesterday. I was sick.", ["didn't", "don't", "wasn't", "doesn't"], 0, "yesterday + פועל ← didn't", "🤒"),
  Q(PD, "She didn't ___ (eat) her lunch.", ["eat", "ate", "eats", "eating"], 0, "אחרי didn't ← צורת בסיס", "🥪"),
  Q(PD, "We didn't ___ the film. It was boring.", ["like", "liked", "likes", "liking"], 0, "אחרי didn't ← צורת בסיס", "🎬"),
- Q(PD, "He didn't ___ his homework last night.", ["do", "did", "does", "done"], 0, "אחרי didn't ← do", "📓"),
+ Q(PD, "He didn't ___ (do) his homework last night.", ["do", "did", "does", "done"], 0, "אחרי didn't ← do", "📓"),
  Q(PD, "Last week they ___ come to the party.", ["didn't", "weren't", "don't", "doesn't"], 0, "last week + פועל ← didn't", "🎉"),
  Q(PD, "I saw Dan. → I didn't ___ Dan.", ["see", "saw", "seen", "sees"], 0, "didn't + see (לא saw)", ROW("👀", "👦")),
  Q(PD, "Which is correct?", ["She didn't go.", "She didn't went.", "She not went.", "She doesn't went."], 0, "didn't + צורת בסיס", "🚶‍♀️"),
@@ -321,7 +321,7 @@ C.append(("Daily routine", [VP], [
  Q(VP, "Mom ___ dinner for the family.", ["cooks", "washes", "sleeps", "drives"], 0, "cook dinner = לבשל ארוחת ערב", ROW("👩", "🍽️")),
  Q(VP, "I ___ my hands before I eat.", ["wash", "brush", "take", "cut"], 0, "wash my hands = לשטוף ידיים", ROW("👐", "🍽️")),
  Q(VP, "First I wake up, then I ___ breakfast.", ["have", "do", "take", "go"], 0, "have breakfast = לאכול ארוחת בוקר", "🥣"),
- Q(VP, "I ___ the dog every evening.", ["walk", "go", "ride", "drive"], 0, "walk the dog = לטייל עם הכלב", "🐕"),
+ Q(VP, "I ___ the dog in the park every evening.", ["walk", "go", "ride", "drive"], 0, "walk the dog = לטייל עם הכלב", "🐕"),
 ]))
 
 C.append(("Jobs", [VP], [
@@ -373,7 +373,7 @@ C.append(("Food", [VS], [
  Q(VS, "Breakfast, lunch and ___.", ["dinner", "dessert", "snack", "kitchen"], 0, "dinner = ארוחת ערב", "🍽️"),
  Q(VS, "Ice cream is ___.", ["sweet", "salty", "sour", "hot"], 0, "sweet = מתוק", "🍦"),
  Q(VS, "Lemons are ___.", ["sour", "sweet", "salty", "hot"], 0, "sour = חמוץ", "🍋"),
- Q(VS, "I'm thirsty. Can I have some ___?", ["water", "bread", "rice", "cheese"], 0, "thirsty = צמא ← water", ROW("🚰", "🍞", "🍚", "🧀")),
+ Q(VS, "I'm thirsty. Can I have some ___ from the tap?", ["water", "bread", "rice", "cheese"], 0, "thirsty = צמא ← water", ROW("🚰", "🍞", "🍚", "🧀")),
  Q(VS, "ארוחת בוקר = ?", ["breakfast", "lunch", "dinner", "dessert"], 0, "ארוחת בוקר = breakfast", ROW("🥣", "🌅")),
  Q(VS, "ארוחת צהריים = ?", ["lunch", "dinner", "breakfast", "lesson"], 0, "ארוחת צהריים = lunch", ROW("🥪", "🕐")),
 ]))
@@ -478,7 +478,7 @@ C.append(("What does he look like?", [DP], [
  Q(DP, "My dad is ___. He is 1.90 meters!", ["tall", "short", "young", "old"], 0, "1.90 מטר ← גבוה = tall", ROW("👨", "📏")),
  Q(DP, "My baby brother is one year old. He is very ___.", ["young", "old", "tall", "strong"], 0, "בן שנה ← young = צעיר", "👶"),
  Q(DP, "Grandpa is eighty. He is ___.", ["old", "young", "new", "little"], 0, "בן שמונים ← old = זקן", "👴"),
- Q(DP, "Dana has ___ hair.", ["blond", "black", "red", "gray"], 0, "blond = שיער בהיר, צהוב", "👱‍♀️"),
+ Q(DP, "What color is Dana's hair?", ["blond", "black", "red", "gray"], 0, "blond = שיער בהיר, צהוב", "👱‍♀️"),
  Q(DP, "What color is his hair?", ["red", "blond", "black", "white"], 0, "שיער כתום-אדום = red hair", "👨‍🦰"),
  Q(DP, "Grandpa has no hair. He is ___.", ["bald", "blond", "tall", "young"], 0, "bald = קירח, בלי שיער", "👨‍🦲"),
  Q(DP, "Opposite of tall?", ["short", "old", "thin", "new"], 0, "tall – short = גבוה – נמוך", TXT("tall ↔ ?")),

@@ -445,15 +445,21 @@ body.young .qbox{font-size:1.8em}
 @keyframes dIn{from{transform:translateX(30px);opacity:.3}}
 [dir=ltr] .drawer .dpanel,html[lang=en] .drawer .dpanel{animation-name:dInR}@keyframes dInR{from{transform:translateX(-30px);opacity:.3}}
 #menuBtn{order:-1}   /* the menu button sits at the start (right in Hebrew); the menu opens from that side */
-.drawer .dtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}.drawer .dtop img{height:34px}
-.drawer .dwho{display:flex;flex-direction:column;padding:6px 8px 10px;border-bottom:2px dashed #E3E1F2}
-.dsec{display:flex;flex-direction:column;gap:2px;padding:6px 0;border-bottom:2px dashed #E3E1F2}.dsec:last-of-type{border-bottom:0}
-.ditem{display:flex;align-items:center;gap:10px;width:100%;padding:11px 10px;border:0;border-radius:12px;background:none;font:inherit;font-family:var(--display);font-weight:600;color:var(--ink);text-align:start;text-decoration:none;cursor:pointer}
-.ditem:hover,.ditem:focus-visible{background:#F1EDFF}.ditem .di{width:26px;text-align:center;font-size:1.15em}.ditem .dval{margin-inline-start:auto;border:2px solid var(--ink);border-radius:8px;padding:0 8px;font-size:.85em}
+.drawer .dtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}.drawer .dtop img{height:30px}
+.drawer .dwho{display:flex;flex-direction:column;align-items:center;text-align:center;padding:4px 8px 6px;gap:2px}
+.drawer .dava{width:76px;height:76px;border-radius:50%;background:#EEF1F8;border:2px solid #D8DDEA;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:1.9em;color:var(--ink);margin-bottom:4px}
+.drawer .dwho b{font-family:var(--display);font-size:1.2em}.drawer .dwho .hint{font-size:.82em;line-height:1.4}
+.ditem{display:flex;align-items:center;gap:12px;width:100%;min-height:50px;padding:12px 12px;border:0;border-radius:14px;background:none;box-shadow:none;font:inherit;font-family:var(--display);font-weight:600;color:var(--ink);text-align:start;text-decoration:none;cursor:pointer}
+.ditem:hover,.ditem:focus-visible{background:#E9EEFA;outline:none}.ditem .di{width:26px;flex:none;text-align:center;font-size:1.15em}
+.ditem .dval{margin-inline-start:auto;border:2px solid var(--ink);border-radius:8px;padding:0 8px;font-size:.85em}
 .ditem.danger{color:#B4232A}.ditem .dswitch{margin-inline-start:auto;width:22px;height:22px;accent-color:var(--blue)}
-.dqa{display:block}.dqa summary{display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer}.dqa summary::-webkit-details-marker{display:none}.dqa #rQA{padding:8px 4px 0;font-family:var(--body);font-weight:400}
-.moresheet{width:min(92vw,420px);display:flex;flex-direction:column;gap:2px}
-.dver{margin-top:auto;font-size:.7em;opacity:.6;text-align:center}
+.dcard .ditem{border-radius:0}.dcard .ditem:first-child{border-radius:14px 14px 0 0}.dcard .ditem:last-child{border-radius:0 0 14px 14px}
+.dgrp{margin-top:10px}.dgrp h4{margin:0 6px 6px;font-family:var(--display);font-size:.95em;color:var(--ink)}
+.dcard{background:#F4F7FC;border-radius:18px;padding:2px 4px;display:flex;flex-direction:column}
+.dcard>.ditem:not(.hidden)~.ditem:not(.hidden){border-top:1px solid #E3E8F2}
+.drawer .dgrp.adminonly{display:none!important}body.aiadmin .drawer .dgrp.adminonly{display:block!important}
+html[dir=ltr] .ditem .dchev{transform:scaleX(-1)}.ditem .dl{flex:1;min-width:0}.ditem .dchev{color:#8C96AE;font-size:1.25em;line-height:1;margin-inline-start:6px}
+.dver{margin-top:auto;padding-top:14px;font-size:.72em;opacity:.6;text-align:center}
 body.kidside .pside,body.locked .pside{display:none!important}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
 .sugcard{margin:10px 0 0;padding:12px}
@@ -920,29 +926,33 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   </div>
   <div id="sideMenu" class="drawer hidden" onclick="if(event.target===this)closeMenu()" role="dialog" aria-modal="true" aria-label="תפריט">
     <aside class="dpanel">
-      <div class="dtop"><img src="" alt="Study for fun" id="dLogo"><button class="btn ghost small" onclick="closeMenu()" aria-label="סגירה">✕</button></div>
-      <div class="dwho pside"><b id="dName"></b><span class="hint" id="dSub"></span></div>
-      <div class="dsec pside">
-        <button class="ditem" onclick="closeMenu();go('family')"><span class="di">👨‍👩‍👧</span>המשפחה והמבוגרים</button>
-        <button class="ditem" onclick="closeMenu();openCatalog(curKidForCatalog())"><span class="di">📚</span>קטלוג תרגולים</button>
-        <a class="ditem" href="/guide.html" onclick="this.href='/guide.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">📖</span>מדריך למשתמש</a>
-      </div>
-      <div class="dsec">
-        <button class="ditem" onclick="closeMenu();openBug()"><span class="di">🐞</span>דיווח על תקלה או רעיון</button>
-        <button class="ditem" onclick="toggleLang()"><span class="di">🌐</span><span>שפה</span><span class="dval langbtn" translate="no">EN</span></button>
-        <button id="ownerExit" class="ditem hidden" onclick="closeMenu();ownerUnlock()"><span class="di">👩</span>חזרה למצב הורה</button>
-      </div>
-      <div class="dsec pside">
-        <button class="ditem adminonly" onclick="closeMenu();openUsers()"><span class="di">👥</span>משתמשים רשומים</button>
-        <button class="ditem adminonly" onclick="closeMenu();openSuggestions()"><span class="di">📤</span>הצעות לקטלוג</button>
-        <button class="ditem adminonly" onclick="closeMenu();openErrLog()"><span class="di">🧾</span>יומן תקלות</button>
-        <button class="ditem adminonly" onclick="closeMenu();openBugList()"><span class="di">🐞</span>דיווחים מהמשתמשים</button>
-        <button class="ditem adminonly" onclick="closeMenu();openAdminCfg()"><span class="di">⚙️</span>הגדרות מנהל</button>
-        <a class="ditem" href="/privacy.html" target="_blank" rel="noopener"><span class="di">🔒</span>מדיניות פרטיות</a>
-        <a class="ditem" href="/terms.html" onclick="this.href='/terms.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">⚖️</span>תנאי שימוש</a>
-        <button class="ditem" id="footDel" onclick="closeMenu();window.SFF_ROLE&&window.SFF_ROLE!=='owner'?leaveFamily():openDelAcc()"><span class="di">🗑</span>מחיקת חשבון</button>
-        <button id="fbOut" class="ditem hidden"><span class="di">🚪</span>התנתקות</button>
-      </div>
+      <div class="dtop"><button class="btn ghost small" onclick="closeMenu()" aria-label="סגירה">✕</button><img src="" alt="Study for fun" id="dLogo"></div>
+      <div class="dwho pside"><span class="dava" id="dAva" aria-hidden="true"></span><b id="dName"></b><span class="hint" id="dSub"></span></div>
+      <div class="dgrp pside"><h4>משפחה ותרגולים</h4><div class="dcard">
+        <button class="ditem " onclick="closeMenu();go('family')" ><span class="di">👨‍👩‍👧</span><span class="dl">המשפחה והמבוגרים</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openCatalog(curKidForCatalog())" ><span class="di">📚</span><span class="dl">קטלוג תרגולים</span><span class="dchev" aria-hidden="true">‹</span></button>
+      </div></div>
+      <div class="dgrp pside"><h4>עזרה ושירות</h4><div class="dcard">
+        <a class="ditem " href="/guide.html" onclick="this.href='/guide.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">📖</span><span class="dl">מדריך למשתמש</span><span class="dchev" aria-hidden="true">‹</span></a>
+        <button class="ditem " onclick="closeMenu();openBug()" ><span class="di">🐞</span><span class="dl">דיווח על תקלה או רעיון</span><span class="dchev" aria-hidden="true">‹</span></button>
+      </div></div>
+      <div class="dgrp"><h4>הגדרות</h4><div class="dcard">
+        <button class="ditem " onclick="toggleLang()" ><span class="di">🌐</span><span class="dl">שפה</span><span class="dval langbtn" translate="no">EN</span></button>
+        <button class="ditem hidden" id="ownerExit" onclick="closeMenu();ownerUnlock()" ><span class="di">👩</span><span class="dl">חזרה למצב הורה</span><span class="dchev" aria-hidden="true">‹</span></button>
+      </div></div>
+      <div class="dgrp pside adminonly"><h4>ניהול האפליקציה</h4><div class="dcard">
+        <button class="ditem " onclick="closeMenu();openUsers()" ><span class="di">👥</span><span class="dl">משתמשים רשומים</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openSuggestions()" ><span class="di">📤</span><span class="dl">הצעות לקטלוג</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openBugList()" ><span class="di">🐞</span><span class="dl">דיווחים מהמשתמשים</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openErrLog()" ><span class="di">🧾</span><span class="dl">יומן תקלות</span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openAdminCfg()" ><span class="di">⚙️</span><span class="dl">הגדרות מנהל</span><span class="dchev" aria-hidden="true">‹</span></button>
+      </div></div>
+      <div class="dgrp pside"><h4>חשבון ופרטיות</h4><div class="dcard">
+        <a class="ditem " href="/privacy.html"  target="_blank" rel="noopener"><span class="di">🔒</span><span class="dl">מדיניות פרטיות</span><span class="dchev" aria-hidden="true">‹</span></a>
+        <a class="ditem " href="/terms.html" onclick="this.href='/terms.html?lang='+(window.SFF_LANG?SFF_LANG():'he')" target="_blank" rel="noopener"><span class="di">⚖️</span><span class="dl">תנאי שימוש</span><span class="dchev" aria-hidden="true">‹</span></a>
+        <button class="ditem hidden" id="fbOut"><span class="di">🚪</span><span class="dl">התנתקות</span></button>
+        <button class="ditem danger" id="footDel" onclick="closeMenu();window.SFF_ROLE&&window.SFF_ROLE!=='owner'?leaveFamily():openDelAcc()" ><span class="di">🗑</span><span class="dl">מחיקת חשבון</span></button>
+      </div></div>
       <div class="dver hint" id="dVer" translate="no"></div>
     </aside>
   </div>
@@ -3729,11 +3739,12 @@ function IS_OWNER_PREVIEW_OFF(){ return lsGet('sff_unlock')==='1'; }
 (function(){ const set=()=>{ const h=document.querySelector('header'); if(h) document.documentElement.style.setProperty('--hh',h.offsetHeight+'px'); };
   try{ new ResizeObserver(set).observe(document.querySelector('header')); }catch(e){ addEventListener('resize',set); } set(); })();
 function closeReview(){ const k=curSet&&curSet.kidId, i=k?visibleKids().findIndex(x=>x.id===k):-1; if(i>=0) CAR_WANT.kidCar=i; go('kids'); }
-function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||''; $('dName').textContent=window.SFF_MYNAME||'';
+function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||''; const nm=window.SFF_MYNAME||''; $('dName').textContent=nm;
+  $('dAva').textContent=nm.trim().split(/\s+/).slice(0,2).map(w=>[...w][0]||'').join('')||'🙂';
   const F=window.__sffFamily, own=window.SFF_ROLE==='owner';
   const famTxt=F&&F.famName?(own?'🏠 המשפחה שלי':'👨‍👩‍👧 מחובר/ת למשפחה של '+F.famName):'';   // a member sees whose family it is – not someone else's name as if it were theirs
   $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), esc(famTxt)].filter(Boolean).join('<br>');
-  $('dVer').textContent=document.querySelector('meta[name="sff-ver"]')?.content||''; m.classList.remove('hidden'); }
+  $('dVer').textContent=(EN()?'Version ':'גרסה ')+(document.querySelector('meta[name="sff-ver"]')?.content||'').replace(/^sff-v/,''); m.classList.remove('hidden'); }
 function closeMenu(){ $('sideMenu').classList.add('hidden'); }
 function curKidForCatalog(){ try{ return visibleKids()[carIndex('kidCar')]?.id||null; }catch(e){ return null; } }
 function openMore(){ if(!curSet) return; $('rDel').classList.toggle('hidden',!!curSet.demo||!canManage()); $('rEdit')?.classList.toggle('hidden',!!curSet.demo); $('rSuggest2')?.classList.toggle('hidden',!!curSet.demo||(!!curSet.src&&!curSet.edited)); $('moreDlg').classList.remove('hidden'); }

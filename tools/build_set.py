@@ -140,7 +140,8 @@ sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
 out = pathlib.Path(__file__).resolve().parent.parent / "public" / "share" / f"{sid}.txt"
 out.parent.mkdir(exist_ok=True)
 # codes already handed out stay valid and always bring the latest version (import updates in place)
-aliases = set(out.parent.glob(src.stem.replace("_", "-") + "-*.txt"))
+# only this set's own codes (<name>-<6 hex>.txt) – "math7-*" must not catch math7-nov26's files
+aliases = {p for p in out.parent.glob(src.stem.replace("_", "-") + "-*.txt") if re.fullmatch(re.escape(src.stem.replace("_", "-")) + r"-[0-9a-f]{6}", p.stem)}
 for a in ns.get("OLD_CODES", []): aliases.add(out.parent / f"{a}.txt")
 aliases.add(out.parent / f"{src.stem.replace('_', '-')}.txt")   # stable name used by the in-app share link (/?add=<name>)
 for f in aliases | {out}: f.write_text(code, encoding="utf-8")

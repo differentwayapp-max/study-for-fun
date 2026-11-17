@@ -2041,7 +2041,7 @@ function clean(arr, topics){
 const words=t=>String(t||'').trim().split(/\s+/).filter(Boolean).length;
 const needsPic=q=>!q.scene || words(q.question)>6 || words(q.explanation)>14 || q.options.some(o=>words(o)>4) || q.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase());
 // The picture must show the ANSWER itself – never a related thing (🐸 for "jump" makes a child think "frog").
-const PIC_RULE = 'PICTURE MUST BE RELATED: every scene shows what THIS question is about – never a decoration (no lone 🤔 ❓ 🔢 ➕ ➖ ✏️ 📝 🔟 💯 etc.). Several things = several items, ONE emoji per item (never "🍎🍎🍎" in one item), all inside 0-100 with room for their size. For number questions with nothing real to draw, a scene item may be a short text card instead of an emoji (max 16 chars, e.g. {"e":"12 → ?","x":50,"y":50,"s":30} or {"e":"5 + 3",...}) showing the given numbers – never the answer. For word problems show the story\'s objects (5 apples = five 🍎 items). '+'PICTURE RULE (strict): the scene must show the correct answer ITSELF, so a child who sees only the picture thinks of that exact word and of no other option. Never a related object or animal instead (a frog for "jump" is WRONG: the child thinks "frog"; a cup for "eat" is WRONG). Verbs: show the person doing the action (🏃 run, 🏊 swim, 😴 sleep, 🤸 jump). No picture where another option also fits (a frog can jump AND swim). Use only common emojis from before 2019. If no emoji shows the word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
+const PIC_RULE = 'PICTURE MUST BE RELATED: every scene shows what THIS question is about – never a decoration (no lone 🤔 ❓ 🔢 ➕ ➖ ✏️ 📝 🔟 💯 etc.). Several things = several items, ONE emoji per item (never "🍎🍎🍎" in one item), all inside 0-100 with room for their size. For number questions with nothing real to draw, a scene item may be a short text card instead of an emoji (max 16 chars, e.g. {"e":"12 → ?","x":50,"y":50,"s":30} or {"e":"5 + 3",...}) showing the given numbers – never the answer. For word problems show the story\'s objects (5 apples = five 🍎 items). '+'PICTURE NEVER GIVES THE ANSWER AWAY (strict): a child who does not know the answer must NOT be able to pick it by looking at the picture, and the picture must never confuse him. The picture shows only what the QUESTION gives: (1) naming questions ("What is this?", "Which animal?", "מה זה?", a verb): the picture IS the question – show exactly the thing to name, so the child thinks of that one word and no other option (a frog for "jump" is WRONG: he thinks "frog"; verbs: a person doing the action 🏃 run, 🏊 swim); (2) counting/arithmetic: the objects or the given numbers, never the result; (3) reading a table/graph/sentence/clock: that data; (4) every other question (knowledge, facts, categories, opposites, instruments, concepts): NEVER a picture of the right option alone – show ALL the options side by side, or the situation the question describes without its result (which tool measures mass? → show objects to weigh, NOT scales; which is a fruit? → show all four options). No picture where another option also fits. If nothing fits, use "scene": null rather than a misleading picture. Use only common emojis from before 2019. If no emoji shows a naming word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
 async function picturePass(qs, ctx, askFn=ask, onProgress, want=needsPic){
   for(let round=0; round<2; round++){                       // a second round for any question still without a picture
   const idx=qs.map((q,i)=>(round?noPic(q):want(q))?i:-1).filter(i=>i>=0); if(!idx.length) break;
@@ -2076,7 +2076,7 @@ async function runQA(qs, ctx, langRule, askFn=ask){
     const r = await askFn(
 `You are an independent checker. ${ctx}
 Solve each question yourself (the picture is described by its emoji scene). You are NOT given the answer key. For each, return the index (0-3) of the single correct option, or -1 if no option is correct, and flag problems.
-Flag as a problem: the question text already contains or gives away the answer; more than one option could fit (e.g. "under" and "below"); the scene does not match the question; the scene shows something related instead of the answer itself, so a child would think of a different word (e.g. 🐸 for "jump" → "frog").
+Flag as a problem: the question text already contains or gives away the answer; more than one option could fit (e.g. "under" and "below"); the scene does not match the question; the scene shows something related instead of the answer itself, so a child would think of a different word (e.g. 🐸 for "jump" → "frog"); the scene gives the answer away in a question that is not "name what you see" (e.g. ⚖️ for "which tool measures mass?") – a child who does not know could pick it from the picture.
 Return JSON only: {"results":[{"i":number,"pick":number,"multiple_correct":boolean,"problem":string ("" if none; short Hebrew note if the question is ambiguous, has a factual/grammar error, or is unsuitable for the grade)}]}
 QUESTIONS:
 ${JSON.stringify(list.map((q,i)=>({i,topic:q.topic,question:q.question,scene:q.scene||null,options:q.options})))}`,
@@ -3252,14 +3252,14 @@ function memFlip(i){
   el.classList.add('up'); M.open.push(i);
   if(M.open.length<2) return;
   G.moves++; const [a,b]=M.open, A=M.cards[a], B=M.cards[b];
-  if(A.p===B.p && A.side!==B.side){
+  if(A.side!==B.side && (A.p===B.p||ansKey(G.qs[A.p])===ansKey(G.qs[B.p]))){
     M.lock=true;
     setTimeout(()=>{ if(!$('mc'+a)) return; [a,b].forEach(x=>{$('mc'+x).classList.remove('up');$('mc'+x).classList.add('got')}); M.open=[]; M.lock=false; M.found++;
-      const q=G.qs[A.p], ok=(M.miss[A.p]||0)<=1; G.res.push({q,ok}); award(true); sayEn(q.options[q.answer]); burst(); memHud();
+      const qp=(A.side==='q'?A:B).p, q=G.qs[qp], ok=(M.miss[qp]||0)<=1; G.res.push({q,ok}); award(true); sayEn(q.options[q.answer]); burst(); memHud();
       if(M.found===M.total) setTimeout(memDone,700); },350);
   } else {
     // a mistake only when the matching card was already seen – first looks at hidden cards are not mistakes
-    const mate=M.cards.findIndex((c,k)=>k!==a&&c.p===A.p&&c.side!==A.side), known=M.seen.has(mate);
+    const known=M.cards.some((c,k)=>k!==a&&c.side!==A.side&&ansKey(G.qs[c.p])===ansKey(G.qs[A.p])&&M.seen.has(k)&&!$('mc'+k)?.classList.contains('got'));
     M.seen.add(a); M.seen.add(b);
     if(known){ M.miss[A.p]=(M.miss[A.p]||0)+1; G.streak=0; hud(); }
     M.lock=true;
@@ -3278,10 +3278,12 @@ function memDone(){
 }
 
 /* --- 3. match with lines --- */
+// Two questions with the same answer: either answer card is right for either question.
+const ansKey=q=>String(q.options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim().toLowerCase();
 function matchStart(){ G.round=0; matchRound(); }
 function matchRound(){
   G.mtparts=evenSplit(G.qs.length,5); const [mf,mt]=G.mtparts[G.round], slice=G.qs.slice(mf,mt);
-  G.m={slice, ans:shuffle(slice.map((q,i)=>i)), sel:null, done:{}, first:{}, lines:[]};
+  G.m={slice, ans:shuffle(slice.map((q,i)=>i)), sel:null, done:{}, used:{}, first:{}, lines:[]};
   const rounds=G.mtparts.length;
   $('gTop').innerHTML='';
   $('gCount').textContent= rounds>1?`〰️ ${G.round+1}/${rounds}`:'';
@@ -3304,10 +3306,10 @@ function drawLine(i,j,color,cls){
 }
 const LINE_COLORS=['#2F6BFF','#24C78E','#FF5C8A','#FFB000','#8B6CFF'];
 function matchTo(j){
-  const M=G.m; if(M.sel==null||M.done[j]) return;
+  const M=G.m; if(M.sel==null||M.used[j]) return;
   const i=M.sel, q=M.slice[i];
-  if(i===j){
-    M.done[i]=true; drawLine(i,j,LINE_COLORS[i%5]); M.lines.push([i,j]);
+  if(i===j||ansKey(M.slice[j])===ansKey(q)){
+    M.done[i]=true; M.used[j]=true; drawLine(i,j,LINE_COLORS[i%5]); M.lines.push([i,j]);
     $('mq'+i).classList.remove('sel'); $('mq'+i).classList.add('done'); $('ma'+j).classList.add('done');
     const ok=!M.first[i]; G.res.push({q,ok}); award(ok); sayEn(q.options[q.answer]); if(ok) burst(); M.sel=null;
     if(Object.keys(M.done).length===M.slice.length) setTimeout(matchRoundDone,600);

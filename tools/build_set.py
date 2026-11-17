@@ -69,6 +69,13 @@ for ci, chap in enumerate(C):
         if words(expl) > 10: errors.append(f"{tag}: explanation > 10 words")
         if not ns.get("ANSWER_IN_Q_OK") and opts[ans].lower() in q.lower(): errors.append(f"{tag}: question gives the answer away")
         for prob in pic_rules.check(q, opts[ans], sc): errors.append(f"{tag}: {prob}")
+        # the picture must not give the answer away: a picture of the right option alone (and none of the others)
+        if not pic_rules.PIC_DEPENDENT.match(q.replace("⁦", "").replace("⁩", "").strip()):
+            pe = {it[0] if not isinstance(it, str) else it for it in ([sc] if isinstance(sc, str) else (sc or []))}
+            em = lambda o: [c for c in EMOJI_RE.sub(lambda m: "\0" + m.group(0) + "\0", o).split("\0") if c and EMOJI_RE.match(c)]
+            mine, others = em(opts[ans]), [e for i, o in enumerate(opts) if i != ans for e in em(o)]
+            if mine and any(e in pe for e in mine) and not any(e in pe for e in others):
+                errors.append(f"{tag}: the picture shows the answer – show all the options, or the question's data")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
         if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 and not is_text(it["e"]) for it in scn): errors.append(f"{tag}: bad scene")
@@ -102,6 +109,8 @@ if missing: errors.append(f"words not practised ({len(missing)}): " + ", ".join(
 
 if errors:
     print("\n".join(errors)); sys.exit(1)
+if __import__("os").environ.get("SFF_DRY"):   # check only, write nothing (safe to run many builds at once)
+    print(f"ok (dry): {len(qs)} questions"); sys.exit(0)
 
 riddle = sum(1 for q in qs if re.fullmatch(r"[A-Za-z0-9 '\-]{2,14}", q["options"][q["answer"]]))
 import hashlib

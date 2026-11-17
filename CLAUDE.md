@@ -7,7 +7,7 @@ Kids practise for school tests through games; a parent picks or builds practice 
 - `public/kid-rest.js` – kid phones' REST fallback (Lockdown mode / no IndexedDB). `public/sw.js` – service worker.
 - `functions/index.js` – Cloud Functions (europe-west1): `ask` (Claude via the Anthropic SDK), `startBuild`/`endBuild` (3 builds/month per family, paid credits later), `adminUsers`. Monthly AI cap $40, at most $8 of it per family; 2 refunds of failed builds per family a month. Admin emails in `functions/.env`.
 - `firestore.rules` – who reads/writes what (owner, admin, helper, tutor, kid device, app admins).
-- `tools/sets/*.py` + `tools/build_set.py` – hand-built catalog practice sets → `public/share/`. `tools/pic_rules.py` – the picture must show the answer itself; no emoji newer than 2019.
+- `tools/sets/*.py` + `tools/build_set.py` – hand-built catalog practice sets → `public/share/`. `tools/pic_rules.py` – the picture never gives the answer away (a naming question shows the thing to name; any other question shows all the options or its data, never the right option alone); no emoji newer than 2019. `SFF_DRY=1 python3 -I tools/build_set.py <file>` checks a set without writing.
 - `android/` – Trusted Web Activity for Google Play (signing key is NOT in the repo). `store/` – store listing text and images.
 
 ## Run the tests

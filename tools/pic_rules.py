@@ -5,7 +5,9 @@
    and says so. Fix it with a clearer picture (then add the pair here after checking it) or put the Hebrew meaning
    in the question, e.g. \"j_mp (לקפוץ)\" – a question with Hebrew in it does not rely on the picture.
    (Why: 🐸 for \"jump\" made kids think \"frog\".)
-2. No emoji newer than 2019 anywhere – older phones show an empty box.
+2. Any other question: the picture must NOT give the answer away – show all the options or the question's data,
+   never the right option alone (build_set.py stops when the picture holds only the right option's emoji).
+3. No emoji newer than 2019 anywhere – older phones show an empty box.
 """
 import re
 

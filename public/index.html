@@ -297,7 +297,7 @@ th{color:var(--ink2);font-weight:400;font-size:.88em}
 .passage summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px;font-family:var(--display);font-weight:600;background:#FFE69A;border-bottom:var(--line)}
 .passage:not([open]) summary{border-bottom:0}
 .passage .ptext{max-height:42vh;overflow:auto;padding:12px 16px;line-height:1.65;font-size:1.18em;unicode-bidi:plaintext}
-.passage .ptext p{margin:0 0 10px}
+.passage .ptext p{margin:0 0 10px;white-space:pre-line}
 .passage .rdctl{display:flex;gap:6px;flex:none;align-items:center}
 .passage .rdctl .btn{flex:none;min-height:38px;height:auto;padding:6px 14px;font-size:.88em;line-height:1.2;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
 .passage summary{min-height:52px}
@@ -2997,9 +2997,10 @@ const riddleOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.l
 /* ---------- reading the passage aloud: pause, go on from the same word, the word being read is coloured ---------- */
 const RD={text:'',words:[],i:0,on:false,tok:0};
 function rdSetText(txt){ if(RD.text===txt) return; rdStop(); RD.text=txt; RD.i=0; RD.words=[];
-  txt.split(/\n\s*\n/).forEach((par,pi)=>par.trim().split(/\s+/).filter(Boolean).forEach(w=>RD.words.push({w,p:pi}))); }
+  // a poem keeps its lines: each word knows its line (l), a new line inside a paragraph is drawn with <br>
+  txt.split(/\n\s*\n/).forEach((par,pi)=>par.trim().split(/\n/).forEach((ln,li)=>ln.trim().split(/\s+/).filter(Boolean).forEach(w=>RD.words.push({w,p:pi,l:li})))); }
 function passageHtml(txt){ rdSetText(txt); let h='', p=-1;
-  RD.words.forEach((x,i)=>{ if(x.p!==p){ if(p>=0) h+='</p>'; h+='<p>'; p=x.p; } h+=`<span class="rw${i<RD.i?' done':''}${i===RD.i&&RD.on?' on':''}" data-i="${i}" onclick="rdFrom(${i})">${esc(x.w)}</span> `; });
+  let l=0; RD.words.forEach((x,i)=>{ if(x.p!==p){ if(p>=0) h+='</p>'; h+='<p>'; p=x.p; l=x.l; } else if(x.l!==l){ h+='<br>'; l=x.l; } h+=`<span class="rw${i<RD.i?' done':''}${i===RD.i&&RD.on?' on':''}" data-i="${i}" onclick="rdFrom(${i})">${esc(x.w)}</span> `; });
   if(p>=0) h+='</p>';
   return `<details class="passage" open><summary>📖 קטע קריאה <span class="rdctl" onclick="event.preventDefault()">
     <button class="btn small rdplay" onclick="rdToggle()" aria-label="${RD.on?'עצירה':'הקראה'}">${RD.on?'⏸':(RD.i?'▶️ המשך':'🔊 הקראה')}</button>

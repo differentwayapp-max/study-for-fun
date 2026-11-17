@@ -938,6 +938,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       </div></div>
       <div class="dgrp"><h4>הגדרות</h4><div class="dcard">
         <button class="ditem " onclick="toggleLang()" ><span class="di">🌐</span><span class="dl">שפה</span><span class="dval langbtn" translate="no">EN</span></button>
+        <button class="ditem " onclick="closeMenu();openSoundCheck()" ><span class="di">🔊</span><span class="dl">בדיקת צליל</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem hidden" id="ownerExit" onclick="closeMenu();ownerUnlock()" ><span class="di">👩</span><span class="dl">חזרה למצב הורה</span><span class="dchev" aria-hidden="true">‹</span></button>
       </div></div>
       <div class="dgrp pside adminonly"><h4>ניהול האפליקציה</h4><div class="dcard">
@@ -3436,6 +3437,28 @@ function unlockAudio(){
 const AUDIO_EV=['pointerdown','touchend','keydown'];
 function audioOnce(){ unlockAudio(); if(AC&&AC.state==='running'&&window.__sffSpoke) AUDIO_EV.forEach(x=>document.removeEventListener(x,audioOnce,true)); }
 AUDIO_EV.forEach(t=>document.addEventListener(t,audioOnce,true));
+// a sound check a parent can run on any phone: plays a tone and an English word, and lists what this phone supports
+async function openSoundCheck(){
+  const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
+  const row=(ok,t,h)=>`<div class="errrow"><b>${ok?'✅':'❌'} ${esc(t)}</b>${h?`<div class="hint">${esc(h)}</div>`:''}</div>`;
+  unlockAudio(); const wasMute=MUTE; let beep=false, spoke=null, voices=[];
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); await AC.resume(); MUTE=false; sfx(true); MUTE=wasMute; beep=AC.state==='running'; }catch(e){}
+  try{ voices=speechSynthesis.getVoices(); if(!voices.length){ await new Promise(r=>{ speechSynthesis.onvoiceschanged=r; setTimeout(r,1500); }); voices=speechSynthesis.getVoices(); } }catch(e){}
+  const en=voices.filter(v=>/^en/i.test(v.lang)), he=voices.filter(v=>/^(he|iw)/i.test(v.lang));
+  try{ speechSynthesis.cancel(); spoke=await new Promise(res=>{ const u=new SpeechSynthesisUtterance('Hello! Study for fun.'); u.lang='en-US'; u.rate=.9;
+    u.onstart=()=>res(true); u.onerror=e=>res('error: '+(e.error||'')); setTimeout(()=>res(false),3000); speechSynthesis.speak(u); }); }catch(e){ spoke='error: '+(e.message||e); }
+  const ver=document.querySelector('meta[name=sff-ver]')?.content||'', lock=String(window.__sffVia||'').startsWith('rest');
+  box.innerHTML=`<div class="dlghead"><b>🔊 בדיקת צליל</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
+    <p class="hint" style="margin:0 0 8px">עכשיו אמור להישמע צליל קצר ואחריו "Hello! Study for fun".</p>`
+    +row(!wasMute,'הצליל באפליקציה פתוח', wasMute?'בטלפון הזה הצליל כבוי באפליקציה: לוחצים 🔇 במסך המשחק כדי להפעיל':'')
+    +row(beep,'צלילי משחק (טון בתשובה)', beep?'':'הדפדפן לא מפעיל צלילים. באייפון: הגדרות ← צלילים, ולוודא שהטלפון לא על שקט')
+    +row(spoke===true,'הקראה באנגלית', spoke===true?'':(spoke===false?'הטלפון לא התחיל להקריא':String(spoke))+(en.length?'':' · אין בטלפון קול באנגלית: הגדרות ← נגישות ← תוכן מוקרא ← קולות ← English'))
+    +row(en.length>0,`קולות באנגלית: ${en.length}`, en.slice(0,3).map(v=>v.name).join(', '))
+    +row(he.length>0,`קולות בעברית: ${he.length}`, '')
+    +row(!lock,'מצב רגיל של הדפדפן', lock?'הטלפון במצב נעילה (Lockdown) – הוא חוסם חלק מהצלילים. ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה':'')
+    +`<p class="hint center" dir="ltr" translate="no" style="margin-top:8px">${esc(ver)} · ${esc(navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').slice(0,90))}</p>`;
+  $('moreDlg').classList.remove('hidden');
+}
 function sfx(ok){
   if(MUTE) return;
   try{

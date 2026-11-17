@@ -18,20 +18,23 @@ WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|br
 LOOK = {"a": "oeu", "b": "dpq", "c": "eoa", "d": "bpq", "e": "aoc", "f": "tlj", "g": "qjy", "h": "nkb", "i": "jrt", "j": "igy",
         "k": "hxy", "l": "ejt", "m": "nwu", "n": "mhu", "o": "aec", "p": "qbd", "q": "pgd", "r": "nvt", "s": "zcx", "t": "flj",
         "u": "vnw", "v": "uwy", "w": "mvu", "x": "kyz", "y": "vgj", "z": "sxn"}
+WORD_TAG = {"I": "Ice", "l": "lion"}               # a word that tells I from l without showing the asked letter
 def bigsmall(letters, start_small):
     out = []
     for n, ch in enumerate(letters):
         small = (n + start_small) % 2 == 0           # alternate: show BIG → ask small, show small → ask BIG
         if small: q, opts, pic, ex = "האות הקטנה?", [ch] + list(LOOK[ch]), ch.upper(), f"{ch.upper()} גדולה = {ch} קטנה"
         else:     q, opts, pic, ex = "האות הגדולה?", [ch.upper()] + [x.upper() for x in LOOK[ch]], ch, f"{ch} קטנה = {ch.upper()} גדולה"
-        out.append((AB, q, opts, 0, ex, [(pic, 50, 52, 70)]))
+        sc = [(pic, 50, 52, 70)]
+        if pic in WORD_TAG: sc = [(pic, 50, 42, 60), (WORD_TAG[pic], 50, 82, 22)]   # in the app font I and l look alike
+        out.append((AB, q, opts, 0, ex, sc))
     return out
 C.append(("ABC: big & small A–M", [AB], bigsmall("abcdefghijklm", 0)))
 C.append(("ABC: big & small N–Z", [AB], bigsmall("nopqrstuvwxyz", 1)))
 
 C.append(("ABC: order & first letter", [AB], [
  (AB, "What comes next?", ["D", "E", "F", "B"], 0, "A B C D", seq("A", "B", "C", "❓")),
- (AB, "What comes next?", ["I", "J", "K", "E"], 0, "F G H I", seq("F", "G", "H", "❓")),
+ (AB, "What comes next?", ["V", "W", "Y", "R"], 0, "S T U V", seq("S", "T", "U", "❓")),
  (AB, "What comes next?", ["Q", "R", "S", "T"], 0, "N O P Q", seq("N", "O", "P", "❓")),
  (AB, "What comes next?", ["Z", "A", "V", "U"], 0, "W X Y Z – סוף ה-ABC", seq("W", "X", "Y", "❓")),
  (AB, "Starts with?", ["d", "b", "g", "t"], 0, "dog מתחיל ב-d", [("🐕", 50, 52, 56)]),
@@ -112,7 +115,7 @@ C.append(("Prepositions", [PR], [
  (PR, "The cat is ___ the dog.", ["next to", "on", "under", "in"], 0, "החתול ליד הכלב = next to", [("🐈", 34, 60, 32), ("🐕", 68, 60, 32)]),
  (PR, "The dog is ___ the tree.", ["in front of", "on", "in", "on top of"], 0, "הכלב לפני העץ = in front of", [("🌳", 50, 40, 62), ("🐕", 50, 72, 38)]),
  (PR, "The fish is ___ the boat.", ["under", "on top of", "in", "in front of"], 0, "הדג מתחת לסירה = under", [("⛵", 50, 34, 44), ("🐟", 50, 76, 24)]),
- (PR, "על = ?", ["on", "in", "under", "next to"], 0, "על = on", [("📕", 50, 68, 40), ("🍎", 50, 36, 26)]),
+ (PR, "My birthday is ___ Sunday.", ["on", "in", "under", "next to"], 0, "ימים בשבוע: on Sunday", [("🎂", 50, 52, 52)]),
  (PR, "בתוך = ?", ["in", "on", "under", "next to"], 0, "בתוך = in (הילד בתוך האמבטיה)", [("🛀", 50, 52, 56)]),
  (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור על העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
  (PR, "מתחת = ?", ["under", "on", "in", "next to"], 0, "מתחת = under", [("☂️", 50, 34, 44), ("🧒", 50, 74, 28)]),
@@ -125,7 +128,7 @@ C.append(("Verbs", [VE], [
  (VE, "Which verb?", ["swim", "fly", "run", "jump"], 0, "לשחות = swim", [("🏊", 50, 52, 56)]),
  (VE, "Which verb?", ["fly", "swim", "jump", "drink"], 0, "לעוף = fly", [("🕊️", 50, 40, 52), ("☁️", 22, 24, 22)]),
  (VE, "Which verb?", ["sleep", "eat", "cut", "run"], 0, "לישון = sleep", [("😴", 50, 52, 56)]),
- (VE, "I ___ pizza.", ["eat", "drink", "sleep", "sing"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
+ (VE, "I ___ pizza for lunch.", ["eat", "drink", "sleep", "sing"], 0, "לאכול = eat", [("🍕", 50, 52, 52)]),
  (VE, "I ___ milk.", ["drink", "eat", "swim", "fly"], 0, "לשתות = drink", [("🥛", 50, 52, 52)]),
  (VE, "I ___ the paper.", ["cut", "jump", "drink", "sleep"], 0, "לגזור = cut", [("📄", 50, 52, 52)]),
  (VE, "קופצים גבוה = ?", ["jump", "run", "fly", "swim"], 0, "לקפוץ = jump", [("🤸", 50, 50, 56)]),

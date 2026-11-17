@@ -36,7 +36,7 @@ C.append(("Weather", [WE], [
  (WE, "What is this?", ["storm", "river", "heat", "scarf"], 0, "סערה = storm", [("⛈️", 50, 40, 50), ("💨", 75, 72, 26)]),
  (WE, "קרח = ?", ["ice", "snow", "bone", "hole"], 0, "קרח = ice", "⛸️"),
  (WE, "חום = ?", ["heat", "ice", "wind", "shade"], 0, "חום = heat", [("☀️", 30, 30, 34), ("🥵", 62, 60, 40)]),
- (WE, "קפוא = ?", ["freezing", "warm", "pleasant", "strange"], 0, "קפוא = freezing", [("🥶", 45, 55, 46), ("❄️", 78, 30, 22)]),
+ (WE, "Five degrees below zero. It's ___.", ["freezing", "warm", "pleasant", "strange"], 0, "מתחת לאפס = קפוא = freezing", [("🌡️", 50, 50, 50)]),
  (WE, "מזג אוויר = ?", ["weather", "season", "sea", "sweat"], 0, "מזג אוויר = weather", "🌦️"),
  (WE, "עונה = ?", ["season", "sailor", "scarf", "skin"], 0, "עונה = season", [("🌸", 25, 35, 24), ("☀️", 75, 35, 24), ("🍂", 25, 72, 24), ("❄️", 75, 72, 24)]),
  (WE, "It is 30 ___.", ["degrees", "zeros", "rivers", "waves"], 0, "30° = 30 מעלות", [("🌡️", 50, 50, 50)]),

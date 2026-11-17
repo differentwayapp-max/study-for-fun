@@ -65,7 +65,7 @@ C.append(("First sounds", [RH], [
  Q(RH, "What is the first sound in pen?", ["p", "b", "e", "n"], 0, "pen מתחילה בצליל p", PW("🖊️", "pen")),
  Q(RH, "What is the first sound in ten?", ["t", "d", "n", "e"], 0, "ten מתחילה בצליל t", PW("🔟", "ten")),
  Q(RH, "Which word starts with r?", ["red", "bed", "hat", "sun"], 0, "red מתחילה ב-r", BIG("r")),
- Q(RH, "Which two words start the same?", ["bus, bed", "cat, dog", "sun, pen", "hat, fish"], 0, "bus ו-bed מתחילות בצליל b", ROW("🚌", "🛏️", "🐈", "🐕")),
+ Q(RH, "Which two words start the same?", ["bus, bed", "cat, dog", "sun, pen", "hat, fish"], 0, "bus ו-bed מתחילות בצליל b", [("🚌", 17, 30, 26), ("🛏️", 37, 30, 26), ("🐈", 63, 30, 26), ("🐕", 83, 30, 26), ("☀️", 17, 74, 26), ("🖊️", 37, 74, 26), ("🎩", 63, 74, 26), ("🐟", 83, 74, 26)]),
  Q(RH, "Which word starts like duck?", ["dog", "cup", "cap", "can"], 0, "duck ו-dog מתחילות בצליל d", PW("🦆", "duck")),
 ]))
 
@@ -287,7 +287,7 @@ C.append(("Animals: words & sounds", [AN], [
  Q(AN, "{dog} = ?", ["כלב", "חתול", "דג", "פרה"], 0, "dog = כלב", TXT("dog")),
  Q(AN, "Which animal says \"moo\"?", ["cow", "dog", "cat", "duck"], 0, "הפרה עושה moo", TXT("Moo!")),
  Q(AN, "Which animal says \"woof\"?", ["dog", "cat", "cow", "sheep"], 0, "הכלב עושה woof", TXT("Woof!")),
- Q(AN, "Which animal can fly?", ["bird", "dog", "cow", "fish"], 0, "ציפור עפה = bird", ROW("🐦", "🐕", "🐄", "🐟")),
+ Q(AN, "Which of these animals can fly?", ["bird", "dog", "cow", "fish"], 0, "ציפור עפה = bird", ROW("🐦", "🐕", "🐄", "🐟")),
  Q(AN, "Which animal lives in the sea?", ["fish", "cow", "cat", "horse"], 0, "דג חי בים = fish", "🌊"),
 ]))
 
@@ -347,7 +347,7 @@ C.append(("School: words & use", [SC], [
 
 # ───────────── Sentences & instructions ─────────────
 C.append(("I am · I have · This is", [SI], [
- Q(SI, "I ___ a girl.", ["am", "is", "are", "have"], 0, "I ← am: I am a girl", "👧"),
+ Q(SI, "I ___ a girl.", ["am", "is", "are", "be"], 0, "I ← am: I am a girl", "👧"),
  Q(SI, "I ___ happy.", ["am", "have", "is", "are"], 0, "I am happy = אני שמח", "😀"),
  Q(SI, "I ___ a dog. (יש לי)", ["have", "am", "is", "are"], 0, "יש לי = I have", "🐕"),
  Q(SI, "I ___ two cats. (יש לי)", ["have", "am", "is", "are"], 0, "יש לי = I have", COUNT(("🐈", 2))),

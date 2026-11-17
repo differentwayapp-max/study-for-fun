@@ -2,7 +2,7 @@
  "sets": [
   {
    "id": "en3",
-   "ver": "ec12806ebb",
+   "ver": "82d0660192",
    "subject": "אנגלית",
    "grade": 2,
    "title": "ABC · First words · Short sentences",
@@ -45,7 +45,7 @@
   },
   {
    "id": "en4",
-   "ver": "9cafb055a0",
+   "ver": "5fd995e467",
    "subject": "אנגלית",
    "grade": 3,
    "title": "Sounds · Words · Sentences · Questions · Reading",
@@ -93,7 +93,7 @@
   },
   {
    "id": "en4-nov26",
-   "ver": "8d337f810c",
+   "ver": "cb77b39ae3",
    "subject": "אנגלית",
    "grade": 3,
    "title": "ABC · Colors · Animals",
@@ -128,8 +128,51 @@
    "status": "ready"
   },
   {
+   "id": "en5",
+   "ver": "bc8ec76c19",
+   "subject": "אנגלית",
+   "grade": 4,
+   "title": "Grammar · Band I words · Reading",
+   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
+   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
+   "tags": [
+    "am / is / are",
+    "Present Simple",
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Past: went / ate",
+    "Telling the time",
+    "Band I words",
+    "Reading"
+   ],
+   "questions": 389,
+   "chapters": 32,
+   "reading": 3,
+   "words": 72,
+   "samples": [
+    {
+     "q": "My brother is eight, and I ___ eleven.",
+     "e": "👦11"
+    },
+    {
+     "q": "I ___ a new bike.",
+     "e": "🚲"
+    },
+    {
+     "q": "He ___ football. He is a good player.",
+     "e": "👦⚽"
+    }
+   ],
+   "status": "ready"
+  },
+  {
    "id": "en6",
-   "ver": "d3ee444eac",
+   "ver": "454afb5213",
    "subject": "אנגלית",
    "grade": 5,
    "title": "Grammar · Past Simple · Time · Band I words · Reading",
@@ -175,7 +218,7 @@
   },
   {
    "id": "en7",
-   "ver": "57fd858c1b",
+   "ver": "3308fac15d",
    "subject": "אנגלית",
    "grade": 6,
    "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
@@ -217,7 +260,7 @@
   },
   {
    "id": "en7-nov26",
-   "ver": "cbe7611be8",
+   "ver": "33fc097ee7",
    "subject": "אנגלית",
    "grade": 6,
    "title": "Present Simple · Weather & Nature",
@@ -253,7 +296,7 @@
   },
   {
    "id": "en8",
-   "ver": "b5a62074f3",
+   "ver": "d5c0239d1a",
    "subject": "אנגלית",
    "grade": 7,
    "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
@@ -296,7 +339,7 @@
   },
   {
    "id": "heb1",
-   "ver": "dae22de22c",
+   "ver": "2262f68b2f",
    "subject": "עברית / לשון",
    "grade": 0,
    "title": "אותיות · ניקוד · קריאה · כתיבה",
@@ -339,7 +382,7 @@
   },
   {
    "id": "heb2",
-   "ver": "a8abeacb6b",
+   "ver": "39333c51c3",
    "subject": "עברית / לשון",
    "grade": 1,
    "title": "קריאה · הבנת הנקרא · שיר · כתיב · פיסוק · זמנים · משפחות מילים · אוצר מילים",
@@ -384,7 +427,7 @@
   },
   {
    "id": "heb3",
-   "ver": "9c9bfea152",
+   "ver": "8b33a06c36",
    "subject": "עברית / לשון",
    "grade": 2,
    "title": "הבנת הנקרא · סוגות · כתיבה · שורש · חלקי דיבר · זמנים · פיסוק · מילון",
@@ -428,7 +471,7 @@
   },
   {
    "id": "heb4",
-   "ver": "2893b8f5fb",
+   "ver": "e4f75e4649",
    "subject": "עברית / לשון",
    "grade": 3,
    "title": "הבנת הנקרא · סוגות · שורש · שם המספר · נושא ונשוא · סמיכות · פיסוק · מילון",
@@ -458,23 +501,23 @@
    "words": 0,
    "samples": [
     {
-     "q": "בטקסט יש דמויות, מקום, בעיה ופתרון. איזה טקסט זה?",
-     "e": "📖דמויות • מקום"
+     "q": "כותבים בו כל ערב, לעצמנו, מה קרה היום. מה זה?",
+     "e": "🌙✏️"
     },
     {
      "q": "מאיזה סוג טקסט לקוח הקטע בכרטיס?",
      "e": "🥣דרושים: 2 ביצים,"
     },
     {
-     "q": "מה מספרים בדרך כלל בפתיחת הסיפור?",
-     "e": "📖▶️"
+     "q": "מה מספרת הפתיחה שבכרטיס?",
+     "e": "📖לפני שנים רבות,"
     }
    ],
    "status": "ready"
   },
   {
    "id": "heb5",
-   "ver": "50a7febfd2",
+   "ver": "cad6d6efd7",
    "subject": "עברית / לשון",
    "grade": 4,
    "title": "הבנת הנקרא · טיעון וסיכום · שורש ובניינים · מילות יחס וקישור · פיסוק · התאמה, קניין וסמיכות · ספרות",
@@ -497,8 +540,8 @@
     "שיר ודימוי",
     "משל ונמשל"
    ],
-   "questions": 370,
-   "chapters": 35,
+   "questions": 380,
+   "chapters": 36,
    "reading": 5,
    "words": 0,
    "samples": [
@@ -511,7 +554,7 @@
      "e": "🎭מקור א: ביום ה'"
     },
     {
-     "q": "מהי \"טענה\" בטקסט טיעוני?",
+     "q": "איך נקראת עמדת הכותב בטיעון?",
      "e": "📄✍️"
     }
    ],
@@ -519,7 +562,7 @@
   },
   {
    "id": "heb6",
-   "ver": "96b5314e26",
+   "ver": "b29c90e746",
    "subject": "עברית / לשון",
    "grade": 5,
    "title": "הבנת הנקרא · טיעון וסיכום ממזג · שבעת הבניינים · פעיל וסביל · פיסוק ותחביר · שם המספר · לשון ציורית",
@@ -561,7 +604,7 @@
   },
   {
    "id": "heb7",
-   "ver": "6970360316",
+   "ver": "522f7ae778",
    "subject": "עברית / לשון",
    "grade": 6,
    "title": "הבנת הנקרא · סיכום · טיעון · תחביר · פיסוק · שורשים ובניינים · משקלים · סמיכות · שם המספר · משלב",
@@ -603,7 +646,7 @@
   },
   {
    "id": "heb8",
-   "ver": "1b0959d3e9",
+   "ver": "0837fda88a",
    "subject": "עברית / לשון",
    "grade": 7,
    "title": "הבנת הנקרא · סיכום ממזג · טיעון · תחביר ופסוקיות · פיסוק וציטוט · גזרות (גם פ״א ול״א) ובניינים · משקלים · שם המספר · משלב",
@@ -645,7 +688,7 @@
   },
   {
    "id": "math1",
-   "ver": "f5cc7d228b",
+   "ver": "fed5a6739d",
    "subject": "מתמטיקה",
    "grade": 0,
    "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
@@ -685,7 +728,7 @@
   },
   {
    "id": "math2",
-   "ver": "603af8f5c5",
+   "ver": "57baf5dc02",
    "subject": "מתמטיקה",
    "grade": 1,
    "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
@@ -728,7 +771,7 @@
   },
   {
    "id": "math3",
-   "ver": "1981c88e60",
+   "ver": "99c8134b87",
    "subject": "מתמטיקה",
    "grade": 2,
    "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
@@ -770,7 +813,7 @@
   },
   {
    "id": "math4",
-   "ver": "c2131da04c",
+   "ver": "d040fd8965",
    "subject": "מתמטיקה",
    "grade": 3,
    "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
@@ -813,7 +856,7 @@
   },
   {
    "id": "math5",
-   "ver": "63af6d4069",
+   "ver": "3dae280d8e",
    "subject": "מתמטיקה",
    "grade": 4,
    "title": "שברים · עשרוניים · אחוזים · ראשוניים והתחלקות · משולשים ומרובעים · שטחים · ממוצע",
@@ -857,7 +900,7 @@
   },
   {
    "id": "math6",
-   "ver": "7782b9ef07",
+   "ver": "96090d6492",
    "subject": "מתמטיקה",
    "grade": 5,
    "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
@@ -900,12 +943,12 @@
   },
   {
    "id": "math7",
-   "ver": "6571c84c45",
+   "ver": "955061c804",
    "subject": "מתמטיקה",
    "grade": 6,
    "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
-   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס ואחוזים, שטחים וזוויות",
-   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio and percent, areas, angles in triangles and polygons, parallel lines",
+   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
+   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
    "tags": [
     "מספרים מכוונים",
     "ביטויים אלגבריים",
@@ -916,11 +959,11 @@
     "מערכת צירים",
     "פונקציות וגרפים",
     "חזקות ושורשים",
-    "יחס ואחוזים",
+    "יחס",
     "שטחים",
     "זוויות"
    ],
-   "questions": 335,
+   "questions": 338,
    "chapters": 32,
    "reading": 0,
    "words": 0,
@@ -942,7 +985,7 @@
   },
   {
    "id": "math7-nov26",
-   "ver": "711c79af9c",
+   "ver": "ad4a51bbb6",
    "subject": "מתמטיקה",
    "grade": 6,
    "title": "מערכת צירים · מספרים מכוונים · זוויות",
@@ -967,7 +1010,7 @@
      "e": "(3, 5)"
     },
     {
-     "q": "איזה מספר הכי גדול?",
+     "q": "איזה מהם הכי גדול?",
      "e": "-2    -7-10    -15"
     },
     {
@@ -979,7 +1022,7 @@
   },
   {
    "id": "math8",
-   "ver": "e511c90519",
+   "ver": "e7a66ed6a5",
    "subject": "מתמטיקה",
    "grade": 7,
    "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
@@ -1023,8 +1066,49 @@
    "status": "ready"
   },
   {
+   "id": "sci1",
+   "ver": "87ac4c97a4",
+   "subject": "מדעים",
+   "grade": 0,
+   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
+   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
+   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
+   "tags": [
+    "מזג אוויר",
+    "אנרגיה",
+    "החושים",
+    "בריאות",
+    "עונות השנה",
+    "יום ולילה",
+    "צמחים",
+    "בעלי חיים",
+    "חי ודומם",
+    "תכונות חפצים",
+    "טכנולוגיה"
+   ],
+   "questions": 234,
+   "chapters": 23,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך מזג האוויר בתמונה?",
+     "e": "🌧️"
+    },
+    {
+     "q": "במה מודדים כמה חם בחוץ?",
+     "e": "☀️❄️"
+    },
+    {
+     "q": "מה נותן לכדור הארץ אור וחום?",
+     "e": "🌍"
+    }
+   ],
+   "status": "ready"
+  },
+  {
    "id": "sci2",
-   "ver": "c62c6bc7be",
+   "ver": "1078701423",
    "subject": "מדעים",
    "grade": 1,
    "title": "חומרים · יצורים חיים · שיניים · צמחים · טבע · טכנולוגיה",
@@ -1065,7 +1149,7 @@
   },
   {
    "id": "sci3",
-   "ver": "37503821ff",
+   "ver": "b2776fd9c4",
    "subject": "מדעים",
    "grade": 2,
    "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
@@ -1106,7 +1190,7 @@
   },
   {
    "id": "sci4",
-   "ver": "0599cf1ada",
+   "ver": "e167956b0f",
    "subject": "מדעים",
    "grade": 3,
    "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
@@ -1147,7 +1231,7 @@
   },
   {
    "id": "sci5",
-   "ver": "95663e12f7",
+   "ver": "913d1065ac",
    "subject": "מדעים",
    "grade": 4,
    "title": "מתכות · תזונה · עיכול, נשימה ומחזור הדם · קרקע · מערכת השמש · תכנון מוצר",
@@ -1180,7 +1264,7 @@
      "e": "🔩🌧️"
     },
     {
-     "q": "מאיזה חומר כדאי לבנות סיר בישול?",
+     "q": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
      "e": "🍲🔥"
     }
    ],
@@ -1188,7 +1272,7 @@
   },
   {
    "id": "sci6",
-   "ver": "5f3dfe3224",
+   "ver": "a02916366b",
    "subject": "מדעים",
    "grade": 5,
    "title": "אנרגיה · אור וקול · חשמל ומגנטים · העין, העדשות והאוזן · מערכת אקולוגית · מערכת טכנולוגית",
@@ -1231,7 +1315,7 @@
   },
   {
    "id": "sci7",
-   "ver": "67fde9d6fc",
+   "ver": "0c4c429d77",
    "subject": "מדעים",
    "grade": 6,
    "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
@@ -1262,7 +1346,7 @@
    "samples": [
     {
      "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
-     "e": "🧱💧"
+     "e": "⚫⚫"
     },
     {
      "q": "למה לנוזל אין צורה קבועה?",
@@ -1277,7 +1361,7 @@
   },
   {
    "id": "sci7-materials",
-   "ver": "7ab9d24a83",
+   "ver": "5aae2f5cd9",
    "subject": "מדעים",
    "grade": 6,
    "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
@@ -1325,7 +1409,7 @@
   },
   {
    "id": "sci8",
-   "ver": "dedbffb5fb",
+   "ver": "bccba65b8a",
    "subject": "מדעים",
    "grade": 7,
    "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
@@ -1366,90 +1450,6 @@
     {
      "q": "איפה נמצאים הפרוטונים?",
      "e": "⚛️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en5",
-   "ver": "aca3054a9e",
-   "subject": "אנגלית",
-   "grade": 4,
-   "title": "Grammar · Band I words · Reading",
-   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
-   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
-   "tags": [
-    "am / is / are",
-    "Present Simple",
-    "Present Progressive",
-    "can / there is",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Question words",
-    "Past: was / -ed",
-    "Past: went / ate",
-    "Telling the time",
-    "Band I words",
-    "Reading"
-   ],
-   "questions": 389,
-   "chapters": 32,
-   "reading": 3,
-   "words": 72,
-   "samples": [
-    {
-     "q": "I ___ ten years old.",
-     "e": "👦10"
-    },
-    {
-     "q": "I ___ a new bike.",
-     "e": "🚲"
-    },
-    {
-     "q": "He ___ football. He is a good player.",
-     "e": "👦⚽"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci1",
-   "ver": "11b925085c",
-   "subject": "מדעים",
-   "grade": 0,
-   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
-   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
-   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
-   "tags": [
-    "מזג אוויר",
-    "אנרגיה",
-    "החושים",
-    "בריאות",
-    "עונות השנה",
-    "יום ולילה",
-    "צמחים",
-    "בעלי חיים",
-    "חי ודומם",
-    "תכונות חפצים",
-    "טכנולוגיה"
-   ],
-   "questions": 234,
-   "chapters": 23,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך מזג האוויר בתמונה?",
-     "e": "🌧️"
-    },
-    {
-     "q": "במה מודדים כמה חם בחוץ?",
-     "e": "☀️❄️"
-    },
-    {
-     "q": "מה נותן לכדור הארץ אור וחום?",
-     "e": "🌍"
     }
    ],
    "status": "ready"

@@ -25,15 +25,12 @@ The parent picks or builds the practice, and the kid plays. The parent sees the 
 
 ## ☰ Side menu
 
-Tap ☰ to open the menu:
+Tap ☰ to open the menu. Your name and family are at the top, and below them the items, grouped by topic:
 
-- **Family & adults** – the kids, their personal links and the adults in the family.
-- **Practice catalog** – ready practice sets by grade and subject.
-- **Language** – switch between Hebrew and English. The questions themselves are not translated.
-- **Report a problem or an idea** – send a note to the app team.
-- **Privacy policy**
-- **Delete account**
-- **Sign out**
+- **Family & practice** – **Family & adults** (the kids, their personal links and the adults in the family) and **Practice catalog** (ready practice sets by grade and subject).
+- **Help & support** – **User guide** (this guide) and **Report a problem or an idea** (send a note to the app team).
+- **Settings** – **Language**: switch between Hebrew and English. The questions themselves are not translated.
+- **Account & privacy** – **Privacy policy**, **Terms of use**, **Sign out** and **Delete account**.
 
 ## 👧 Adding a kid and sending the link
 
@@ -74,7 +71,7 @@ Building takes about 5–15 minutes. You can move to other screens, but don't cl
 
 ## ⚙️ Practice set settings
 
-Tap a practice set on the kid's card:
+Tap a practice set on the kid's card. Some of the options are in the ⋯ menu at the top of the practice set:
 
 - **🎮 Game types on the road** – the app picks a suitable game for each station. You can remove types that don't suit the kid.
 - **✏️ Edit practice set** – add questions from worksheets, add a chapter or remove one.
@@ -98,8 +95,11 @@ The catalog also has a **💌 Invite friends with this practice set** button.
 
 - **Multiple choice** – pick the right answer out of 4.
 - **Match the lines** – draw a line between a question and its answer.
-- **Spelling** – hear a word and put the letters in order.
+- **Letter order** – put the letters of the answer in order (in English you also hear the word). It appears once on the road.
 - **🎁 Memory** – a bonus. It doesn't count toward progress.
+- **📖 Reading passage** – in reading chapters you read a passage and answer questions about it. Tap 🔊 to hear the passage, pause ⏸ and go on from the same word. The word being read is highlighted, and tapping a word starts reading from there.
+
+During a game there is read aloud of the question 🔊, "💡 Why?" with an explanation after answering, and 🚩 to report a mistake in a question.
 
 ### Rewards
 
@@ -121,7 +121,7 @@ On the feedback screen:
 
 ### 🎯 Review set
 
-- Under **Worth strengthening**, tap **✨ Build a review set for these topics**.
+- Below the topics worth strengthening, tap **✨ Practice set for these topics**.
 - A focused practice set is built on the weak topics only. It's marked 🎯 and listed first.
 - A review set counts toward the limit of 3 practice sets a month.
 

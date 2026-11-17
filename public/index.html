@@ -4002,8 +4002,8 @@ function openPracticeShare(set){
   $('shWhat').textContent=`${set.subject} · כיתה ${GRADES[set.grade]}`;
   $('shUrl').value=url; $('shMsg').textContent='';
   const subj=String(set.subject).replace(/^🎯\s*/,''), msg=EN()
-    ? `Hi 😊 We use Study for fun – an app where kids get ready for tests by playing, and parents follow their progress.\nYou're invited to try it! Here's a ready practice set: ${window.sffT?sffT(subj):subj}, grade ${set.grade+1} 🎁\n${code?url:'Practice code: '+url}`
-    : `היי 😊 אנחנו משתמשים ב-Study for fun – אפליקציה שבה הילדים מתכוננים למבחנים דרך משחק, וההורים רואים את ההתקדמות.\nמזמינים אתכם לנסות! מצרפים תרגול מוכן: ${subj} לכיתה ${GRADES[set.grade]} 🎁\n${code?url:'קוד התרגול: '+url}`;
+    ? `Hi 😊 We use Study for fun – an app where kids practise by playing, and parents follow their progress.\nYou're invited to try it! Here's a ready practice set: ${window.sffT?sffT(subj):subj}, grade ${set.grade+1} 🎁\n${code?url:'Practice code: '+url}`
+    : `היי 😊 אנחנו משתמשים ב-Study for fun – אפליקציה שבה הילדים מתרגלים דרך משחק, וההורים רואים את ההתקדמות.\nמזמינים אתכם לנסות! מצרפים תרגול מוכן: ${subj} לכיתה ${GRADES[set.grade]} 🎁\n${code?url:'קוד התרגול: '+url}`;
   $('shWa').href='https://wa.me/?text='+encodeURIComponent(msg); $('shDlg').dataset.msg=msg;
   $('shDlg').classList.remove('hidden');
 }

@@ -1400,7 +1400,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       get: async (c, id) => { const d = await F.getDoc(F.doc(fdb, c, id)); return d.exists() ? d.data() : null; },
       set: (c, id, data) => F.setDoc(F.doc(fdb, c, id), data),
       add: async (c, data) => (await F.addDoc(F.collection(fdb, c), data)).id,
-      del: (c, id) => F.deleteDoc(F.doc(fdb, c, id))
+      del: (c, id) => F.deleteDoc(F.doc(fdb, c, id)),
+      addLimited: async (c, data, lim) => { const wb = F.writeBatch(fdb), ref = F.doc(F.collection(fdb, c));
+        wb.set(F.doc(fdb, lim, uid), { at: F.serverTimestamp() }); wb.set(ref, data); await wb.commit(); return ref.id; }
     };
     const P = `families/${famId}/`;
     const clean = d => JSON.parse(JSON.stringify(d));               // Firestore rejects `undefined`
@@ -1725,8 +1727,8 @@ async function openSuggestions(){
   $('uList').innerHTML='<p class="center">⏳</p>';
   let L=[]; try{ L=(await window.__sffRoot.list('catalogSuggestions')).sort((a,b)=>b.at-a.at); }catch(e){ $('uList').innerHTML=`<p class="notice err">⚠️ ${esc(e.message||e)}</p>`; return; }
   SUG=L;
-  $('uList').innerHTML=L.length?L.map((x,i)=>`<div class="card sugcard"><b>${esc(x.subject)} · כיתה ${GRADES[x.grade]||''}</b><div class="hint">${esc((x.topics||[]).join(' · '))}</div>
-    <div class="hint">📚 ${x.chapters} פרקים · ❓ ${x.questions} שאלות · ${esc(x.byName||'')} · ${new Date(x.at).toLocaleDateString('he-IL')}</div>
+  $('uList').innerHTML=L.length?L.map((x,i)=>`<div class="card sugcard"><b>${esc(x.subject)} · כיתה ${esc(GRADES[x.grade]||'')}</b><div class="hint">${esc((x.topics||[]).join(' · '))}</div>
+    <div class="hint">📚 ${Number(x.chapters)||0} פרקים · ❓ ${Number(x.questions)||0} שאלות · ${esc(x.byName||'')} · ${esc(new Date(Number(x.at)||0).toLocaleDateString('he-IL'))}</div>
     <div class="actions" style="margin-top:8px"><button class="btn small" onclick="previewSuggestion(${i})">👁 לבדוק</button><button class="btn small" onclick="approveSuggestion(${i})">✓ לאשר לקטלוג</button><button class="btn ghost small danger" onclick="rejectSuggestion(${i})">✕ לדחות</button></div></div>`).join('')
     :'<p class="hint center">אין הצעות חדשות</p>';
 }
@@ -1736,11 +1738,11 @@ async function previewSuggestion(i){ const x=SUG[i]; if(!x) return; let p; try{ 
   renderReview(curSet); show('vReview'); toast('👁 תצוגה לבדיקה בלבד'); }
 async function approveSuggestion(i){ const x=SUG[i]; if(!x) return;
   const title=prompt('כותרת לקטלוג (למשל: שברים · כיתה ה)', (x.topics||[]).slice(0,3).join(' · ')); if(title==null) return;
-  try{ const p=await loadShare(x.code), id=x.id, payload={...setPayload({...p, questions:p.qs, qa:p.qa||{checked:p.qs.length,passed:p.qs.length,fixed:0,dropped:0}}), src:'fs-'+id, ver:String(Date.now())};
+  try{ const p=await loadShare(x.code), id=Array.from(crypto.getRandomValues(new Uint8Array(10)),b=>b.toString(16).padStart(2,'0')).join(''), payload={...setPayload({...p, questions:p.qs, qa:p.qa||{checked:p.qs.length,passed:p.qs.length,fixed:0,dropped:0}}), src:'fs-'+id, ver:String(Date.now())};
     await window.__sffRoot.set('catalogCode', id, {code:codeOf(payload)});
-    await window.__sffRoot.set('catalog', id, {ver:payload.ver, subject:x.subject, grade:x.grade, title, desc:'', tags:(x.topics||[]).slice(0,6), questions:p.qs.length,
-      chapters:(p.chapters||[]).length||x.chapters, reading:0, words:(p.words||[]).length, samples:p.qs.slice(0,3).map(q=>({q:q.question,e:q.emoji||''})), at:Date.now()});
-    await window.__sffRoot.del('catalogSuggestions', id); toast('✓ נוסף לקטלוג'); openSuggestions(); }catch(e){ toast('⚠️ '+(e.message||e)); }
+    await window.__sffRoot.set('catalog', id, {ver:payload.ver, subject:String(x.subject||'').slice(0,60), grade:Math.max(0,Math.min(11,parseInt(x.grade)||0)), title:String(title).slice(0,80), desc:'', tags:(x.topics||[]).slice(0,6).map(t=>String(t).slice(0,40)), questions:p.qs.length,
+      chapters:(p.chapters||[]).length||(Number(x.chapters)||0), reading:0, words:(p.words||[]).length, samples:p.qs.slice(0,3).map(q=>({q:q.question,e:q.emoji||''})), at:Date.now()});
+    await window.__sffRoot.del('catalogSuggestions', x.id); toast('✓ נוסף לקטלוג'); openSuggestions(); }catch(e){ toast('⚠️ '+(e.message||e)); }
 }
 async function rejectSuggestion(i){ const x=SUG[i]; if(!x) return; if(!(await askSure({ico:'✕',title:'לדחות את ההצעה?',yes:'דחייה',danger:true}))) return;
   try{ await window.__sffRoot.del('catalogSuggestions', x.id); openSuggestions(); }catch(e){ toast('⚠️ '+(e.message||e)); } }
@@ -2361,7 +2363,11 @@ async function openCatalog(kidId){
   if(kidId&&kidId!==CAT.kid){ CAT.grade=null; CAT.subj=''; CAT.pick={}; }
   CAT.kid=kidId||CAT.kid||(kids[0]&&kids[0].id)||null; show('vCat'); $('catList').innerHTML='<p class="center">⏳</p>';
   try{ const r=await fetch(`/share/catalog.json?t=${Date.now()}`); CAT.list=r.ok?((await r.json()).sets||[]):[]; }catch(e){ CAT.list=CAT.list||[]; }
-  try{ const more=window.__sffRoot?await window.__sffRoot.list('catalog'):[]; CAT.list=CAT.list.concat(more.map(x=>({...x,id:'fs-'+x.id,status:'ready'}))); }catch(e){}   // approved suggestions
+  try{ const more=window.__sffRoot?await window.__sffRoot.list('catalog'):[];   // approved suggestions – a plain id and clean shapes only
+    CAT.list=CAT.list.concat(more.filter(x=>/^[A-Za-z0-9_-]{1,40}$/.test(String(x.id))).map(x=>({id:'fs-'+x.id, status:'ready', ver:String(x.ver||'').slice(0,40),
+      subject:String(x.subject||'').slice(0,60), grade:Math.max(0,Math.min(11,parseInt(x.grade)||0)), title:String(x.title||'').slice(0,80), desc:String(x.desc||'').slice(0,200),
+      tags:Array.isArray(x.tags)?x.tags.slice(0,6).map(t=>String(t).slice(0,40)):[], questions:Number(x.questions)||0, chapters:Number(x.chapters)||0, reading:0, words:Number(x.words)||0,
+      samples:Array.isArray(x.samples)?x.samples.slice(0,3).map(q=>({q:String(q&&q.q||'').slice(0,120), e:String(q&&q.e||'').slice(0,8)})):[]}))); }catch(e){}
   renderCatalog();
 }
 const CAT_SUBJ=['מתמטיקה','עברית / לשון','מדעים','אנגלית'];
@@ -3638,8 +3644,8 @@ async function sendBug(){
   const ver=document.querySelector('meta[name=sff-ver]')?.content||'', ua=navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').slice(0,160);
   const kindHe={bug:'תקלה',idea:'רעיון',q:'שאלה'}[BUG.kind], role=window.SFF_ROLE||'', name=window.SFF_MYNAME||'';
   const rep={by:window.SFF_UID||'', byName:name.slice(0,60), at:Date.now(), kind:BUG.kind, text:text.slice(0,3000), where:String(BUG.where||'').slice(0,120), ver, ua, role};
-  let saved=false; try{ if(window.__sffRoot){ await window.__sffRoot.add('bugReports',rep); saved=true; } }catch(e){}
-  $('bugMsg').textContent = saved ? '✅ נשלח לצוות D-WAY. תודה! 🙏' : '⚠️ לא הצלחנו לשלוח – נסו שוב';
+  let saved=false, soon=false; try{ if(window.__sffRoot){ await window.__sffRoot.addLimited('bugReports',rep,'bugLimits'); saved=true; } }catch(e){ soon=/permission/i.test(String(e&&(e.code||e.message))); }
+  $('bugMsg').textContent = saved ? '✅ נשלח לצוות D-WAY. תודה! 🙏' : soon ? '⏳ אפשר לשלוח דיווח נוסף בעוד דקה' : '⚠️ לא הצלחנו לשלוח – נסו שוב';
   if(saved){ BUG.text=''; $('bugText').value=''; }
 }
 async function openBugList(){
@@ -3649,7 +3655,8 @@ async function openBugList(){
   box.innerHTML=`<div class="dlghead"><b>🐞 דיווחים מהמשתמשים · ${list.length}</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>`+
     (list.length?list.slice(0,60).map(r=>`<div class="errrow"><div><b>${esc(new Date(r.at).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}))}</b> · ${{bug:'🐞',idea:'💡',q:'❓'}[r.kind]||''} ${esc(r.byName||'')} · ${esc(r.where||'')}</div>
       <div dir="auto" style="white-space:pre-wrap;margin:4px 0">${esc(r.text||'')}</div><div class="hint" dir="ltr" translate="no">${esc(r.ver||'')} · ${esc(r.role||'')} · ${esc((r.ua||'').slice(0,90))}</div>
-      <button class="linkbtn" onclick="delBug('${r.id}',this)">🗑 סגירה</button></div>`).join(''):'<p class="hint center">אין דיווחים 🎉</p>');
+      <button class="linkbtn bugdel" data-id="${esc(r.id)}">🗑 סגירה</button></div>`).join(''):'<p class="hint center">אין דיווחים 🎉</p>');
+  box.querySelectorAll('.bugdel').forEach(b=>b.addEventListener('click',()=>delBug(b.dataset.id,b)));   // ids come from other users: never inside onclick
   $('moreDlg').classList.remove('hidden');
 }
 async function openAdminCfg(){

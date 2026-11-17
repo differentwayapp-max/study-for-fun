@@ -3,6 +3,10 @@
 //  2. one family cannot use up the AI budget (per-family cap, limited refunds)
 //  3. one adult invitation = one adult, with exactly the role and kids it gives
 //  4. a kid phone joins with its own kid's link and writes only that kid's progress
+//  5. bug reports: no markup through the document id, typed/sized fields, one a minute per user; the admin list runs no script
+//  6. catalog suggestions: typed fields; the admin list and the in-app catalog run no script from them
+//  7. the server writes a family's error log only for that family's own parents
+//  8. app admins need a verified address; the service worker never stores /share/ files
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_security.js"
 const { chromium } = require('playwright');
 const FS = 'http://127.0.0.1:8080', AU = 'http://127.0.0.1:9099', PROJ = 'study-for-fun-7b03c';
@@ -88,6 +92,65 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   ok(st === 'family_budget', 'a family at its $8 share cannot start a build: ' + st);
   const ask = await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('hi', {}); return 'ok'; } catch (e) { return e.code; } });
   ok(ask === 'family_budget', '…nor make AI calls: ' + ask);
+  console.log('5. bug reports');
+  const rid = () => Array.from({ length: 20 }, () => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 62)]).join('');
+  const bug = (u, extra = {}) => ({ by: u.uid, byName: 'x', at: Date.now(), kind: 'bug', text: 'hi', where: 'vKids', ver: 'sff-v1', ua: 'ua', role: '', ...extra });
+  const report = (u, id, data) => commit(u, [{ update: { name: `${ROOT}/bugLimits/${u.uid}`, fields: {} }, updateTransforms: [{ fieldPath: 'at', setToServerValue: 'REQUEST_TIME' }] },
+    { update: { name: `${ROOT}/bugReports/${id}`, fields: encF(data) }, currentDocument: { exists: false } }]);
+  const atk = await user(null), evilId = 'x" onmouseover="window.__PWNED=5" y="';
+  ok(await report(atk, encodeURIComponent(evilId), bug(atk)) !== 200, 'a report whose id carries markup is refused');
+  ok(await report(atk, rid(), bug(atk, { byName: 'n'.repeat(61) })) === 403, 'a too long name is refused');
+  ok(await report(atk, rid(), bug(atk, { at: 'now' })) === 403, 'a time that is not a number is refused');
+  ok(await report(atk, rid(), bug(atk)) === 200, 'a normal report is accepted');
+  ok(await report(atk, rid(), bug(atk)) === 403, 'a second report within a minute is refused');
+  await p.evaluate(ev => { const L = window.__sffRoot.list; window.__sffRoot.list = async c => c === 'bugReports'
+    ? [{ id: ev, by: 'x', byName: '<img src=x onerror="window.__PWNED=6">', at: Date.now(), kind: 'bug', text: '<b onmouseover="window.__PWNED=7">t</b>', where: 'w', ver: 'v', ua: 'u', role: 'r' },
+       { id: "');window.__PWNED=8;('", at: Date.now(), kind: 'idea', text: 't' }] : L(c); openBugList(); }, evilId);
+  await p.waitForTimeout(400);
+  // the admin moves the mouse over every part of the list and presses 🗑 (inline handlers would fire on these events)
+  await p.evaluate(() => document.querySelectorAll('#moreDlg *').forEach(el => ['mouseover', 'mouseenter', 'focus'].forEach(t => el.dispatchEvent(new MouseEvent(t, { bubbles: true })))));
+  await p.evaluate(() => document.querySelectorAll('#moreDlg .bugdel').forEach(b => b.click())); await p.waitForTimeout(400);
+  ok(await p.evaluate(() => window.__PWNED) === undefined && await p.evaluate(() => [...document.querySelectorAll('#moreDlg .bugdel')].every(b => !b.getAttribute('onmouseover') && !b.getAttribute('onclick'))),
+    'admin report list: no script runs from an id, a name or a text (hover + click)');
+  await p.evaluate(() => closeMore());
+
+  console.log('6. catalog suggestions');
+  const sug = extra => p.evaluate(async x => { try { await window.__sffRoot.add('catalogSuggestions', { by: window.SFF_UID, byName: 'P', at: Date.now(), subject: 'מדעים', grade: 3, topics: ['a'], chapters: 2, questions: 10, code: 'SFF1:x', ...x }); return 'ok'; } catch (e) { return 'denied'; } }, extra);
+  ok(await sug({ chapters: '<img src=x onerror="window.__PWNED=9">' }) === 'denied', 'a suggestion with markup instead of a number is refused');
+  ok(await sug({ subject: 's'.repeat(61) }) === 'denied', 'a too long subject is refused');
+  ok(await sug({}) === 'ok', 'a normal suggestion is accepted');
+  await p.evaluate(() => { const L = window.__sffRoot.list; window.__sffRoot.list = async c => c === 'catalogSuggestions'
+    ? [{ id: 'a', by: 'x', byName: '<img src=x onerror="window.__PWNED=10">', at: Date.now(), subject: '<img src=x onerror="window.__PWNED=11">', grade: '"><img src=x onerror="window.__PWNED=12">',
+        topics: ['<img src=x onerror="window.__PWNED=13">'], chapters: '<img src=x onerror="window.__PWNED=14">', questions: '<svg onload="window.__PWNED=15">', code: 'x' }]
+    : c === 'catalog' ? [{ id: "x');window.__PWNED=16;('", title: 'evil', grade: 3, subject: 'מדעים' },
+        { id: 'okid', title: '<img src=x onerror="window.__PWNED=17">', subject: 'מדעים', grade: '"><img src=x onerror="window.__PWNED=18">', tags: ['<img src=x onerror="window.__PWNED=19">'], questions: '<b>', chapters: 1, samples: [{ q: '<img src=x onerror="window.__PWNED=20">', e: '<b>' }] }]
+    : L(c); openSuggestions(); });
+  await p.waitForTimeout(800);
+  await p.evaluate(() => document.querySelectorAll('#uList *').forEach(el => el.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))));
+  await p.evaluate(() => openCatalog()); await p.waitForTimeout(1500);
+  for (let g = 0; g < 8; g++) for (const sb of ['מתמטיקה', 'עברית / לשון', 'מדעים', 'אנגלית']) await p.evaluate(([g, sb]) => { CAT.grade = g; CAT.subj = sb; renderCatalog();
+    document.querySelectorAll('#vCat *').forEach(el => el.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))); }, [g, sb]);
+  await p.waitForTimeout(600);
+  ok(await p.evaluate(() => window.__PWNED) === undefined, 'admin suggestion list and the in-app catalog: no script runs');
+  ok(await p.evaluate(() => !(CAT.list || []).some(x => /[^A-Za-z0-9_-]/.test(String(x.id).replace(/^fs-/, '')))), 'a catalog entry with a strange id is not shown');
+
+  console.log('7. the server error log');
+  const famLog = async () => ((await (await fetch(`${DOCS}/families/${fam}/errlog?pageSize=300`, { headers: { Authorization: 'Bearer owner' } })).json()).documents || []).length;
+  const callAsk = (H, data) => fetch(`http://127.0.0.1:5001/${PROJ}/europe-west1/ask`, { method: 'POST', headers: H, body: JSON.stringify({ data }) }).then(r => r.status);
+  const n0 = await famLog();
+  const anon = await user(null), mail = await user('stranger@t.local');
+  await callAsk(anon.H, { prompt: '', famId: fam }); await callAsk(mail.H, { prompt: '', famId: fam });
+  ok(await famLog() === n0, "an anonymous or non-Google caller cannot write into a family's error log");
+  await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('', {}); } catch (e) {} });
+  await p.waitForTimeout(800);
+  ok(await famLog() >= n0, "the family's own parent still gets server errors in the log");
+
+  console.log('8. admins and the service worker');
+  const fsr = require('fs'), pth = require('path');
+  const rules = fsr.readFileSync(pth.join(__dirname, '../../firestore.rules'), 'utf8'), sw = fsr.readFileSync(pth.join(__dirname, '../../public/sw.js'), 'utf8');
+  ok(/function appAdmin\(\)[^}]*email_verified == true/.test(rules), 'appAdmin() requires a verified address');
+  ok(sw.includes("if (url.pathname.startsWith('/share/')) return;"), 'the service worker never caches /share/ files');
+
   ok(!errs.length, 'no page errors ' + errs.join(' | '));
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

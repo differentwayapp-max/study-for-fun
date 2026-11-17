@@ -11,9 +11,13 @@ const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   try { const r = await fn(req); console.log(`${name} ok ${Date.now() - t}ms`); return r; }
   catch (e) {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
-    const fam = req.data && req.data.famId;
-    if (typeof fam === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(fam) && e.code !== 'resource-exhausted') {
-      try { await getFirestore().collection(`families/${fam}/errlog`).add({ at: Date.now(), where: 'server:' + name, code: String(e.code || e.name || 'error'),
+    const fam = req.data && req.data.famId, uid = req.auth && req.auth.uid;
+    const google = req.auth && req.auth.token && req.auth.token.firebase && req.auth.token.firebase.sign_in_provider === 'google.com';
+    if (typeof fam === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(fam) && e.code !== 'resource-exhausted' && uid && google) {
+      try {
+        // only into the caller's own family: the owner, or a member (a stranger's famId writes nothing)
+        const member = fam === uid || (await getFirestore().doc(`families/${fam}/members/${uid}`).get()).exists;
+        if (member) await getFirestore().collection(`families/${fam}/errlog`).add({ at: Date.now(), where: 'server:' + name, code: String(e.code || e.name || 'error'),
         msg: String(e.message || e).slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
     }
     throw e;

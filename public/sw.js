@@ -49,6 +49,8 @@ self.addEventListener('fetch', e => {
     }).catch(() => caches.match(req)));
     return;
   }
+  // Practice-set files and the catalog change on the server and are asked for with ?t=… – always the network, never cached.
+  if (url.pathname.startsWith('/share/')) return;
   // Static files: cache first.
   e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(r => {
     if (r.ok) { const copy = r.clone(); caches.open(VERSION).then(c => c.put(req, copy)); }

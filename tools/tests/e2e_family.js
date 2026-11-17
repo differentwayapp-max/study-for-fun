@@ -31,7 +31,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const ownerUid = await O.p.evaluate(() => window.SFF_UID);
   ok(new RegExp('\\?invite=' + ownerUid + '\\.[0-9a-f]+$').test(inv1), 'invitation link: ' + inv1.replace(APP, '/'));
   await O.p.evaluate(() => go('family')); await O.p.waitForTimeout(800);
-  await O.p.screenshot({ path: '/tmp/claude-0/-home-user/f1f58124-ffdc-5396-a49f-3c76f54353ce/scratchpad/fam_owner.png', fullPage: true });
+  if (process.env.OUT) await O.p.screenshot({ path: `${process.env.OUT}/fam_owner.png`, fullPage: true });
 
   console.log('2. grandma opens her invitation (helper)');
   const G = await open('grandma', inv1);
@@ -44,7 +44,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(/permission/.test(denied), 'cannot change the kids list (' + denied + ')');
   ok(await G.p.evaluate(() => !document.querySelector('[aria-label="עריכה"]')), 'no edit button for a helper');
   await G.p.evaluate(() => go('family')); await G.p.waitForTimeout(800);
-  await G.p.screenshot({ path: '/tmp/claude-0/-home-user/f1f58124-ffdc-5396-a49f-3c76f54353ce/scratchpad/fam_grandma.png', fullPage: true });
+  if (process.env.OUT) await G.p.screenshot({ path: `${process.env.OUT}/fam_grandma.png`, fullPage: true });
 
   console.log('3. the tutor (only Ben)');
   const T = await open('tutor', inv2);

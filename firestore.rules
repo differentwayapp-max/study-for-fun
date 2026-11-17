@@ -40,7 +40,11 @@ service cloud.firestore {
     function invitePath(f, code) { return /databases/$(database)/documents/families/$(f)/invites/$(code); }
 
     // app admins (by Google account email) – review catalog suggestions, publish to the catalog
-    function appAdmin() { return google() && request.auth.token.email in ['differentway.app@gmail.com', 'taliahblass@gmail.com']; }
+    // an app admin: a Google account with one of these addresses, and the address must be verified
+    function appAdmin() { return google() && request.auth.token.email_verified == true && request.auth.token.email in ['differentway.app@gmail.com', 'taliahblass@gmail.com']; }
+    // documents other users create may only have Firestore's own random ids (no quotes or markup smuggled in through the id)
+    function autoId(id) { return id.matches('^[A-Za-z0-9]{20}$'); }
+    function str(v, n) { return v is string && v.size() <= n; }
 
     // the in-app catalog: every signed-in user reads it; only admins publish
     match /catalog/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
@@ -53,17 +57,31 @@ service cloud.firestore {
 
     // bug reports / ideas from any signed-in user (parents and kid phones); only the app admins read them
     match /bugReports/{id} {
-      allow create: if signedIn()
+      // a random id, typed and sized fields, and at most one report a minute per user (written together with bugLimits/{uid})
+      allow create: if signedIn() && autoId(id)
         && request.resource.data.keys().hasOnly(['by','byName','at','kind','text','where','ver','ua','role'])
         && request.resource.data.by == request.auth.uid
-        && request.resource.data.text is string && request.resource.data.text.size() <= 3000
-        && request.resource.data.kind in ['bug','idea','q'];
+        && str(request.resource.data.text, 3000) && request.resource.data.kind in ['bug','idea','q']
+        && str(request.resource.data.byName, 60) && str(request.resource.data.where, 120) && str(request.resource.data.ver, 30)
+        && str(request.resource.data.ua, 300) && str(request.resource.data.role, 20) && request.resource.data.at is number
+        && getAfter(/databases/$(database)/documents/bugLimits/$(request.auth.uid)).data.at == request.time;
       allow read, delete: if appAdmin();
+    }
+    match /bugLimits/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create: if signedIn() && request.auth.uid == uid && request.resource.data.keys().hasOnly(['at']) && request.resource.data.at == request.time;
+      allow update: if signedIn() && request.auth.uid == uid && request.resource.data.keys().hasOnly(['at']) && request.resource.data.at == request.time
+        && request.time > resource.data.at + duration.value(1, 'm');
     }
 
     match /catalogSuggestions/{id} {
-      allow create: if google() && request.resource.data.by == request.auth.uid
+      allow create: if google() && autoId(id) && request.resource.data.by == request.auth.uid
         && request.resource.data.keys().hasOnly(['by','byName','at','subject','grade','topics','chapters','questions','code'])
+        && str(request.resource.data.byName, 60) && str(request.resource.data.subject, 60)
+        && request.resource.data.grade is int && request.resource.data.grade >= 0 && request.resource.data.grade <= 11
+        && request.resource.data.chapters is int && request.resource.data.questions is int
+        && request.resource.data.topics is list && request.resource.data.topics.size() <= 30
+        && request.resource.data.at is number
         && request.resource.data.code is string && request.resource.data.code.size() < 900000;
       allow read, update, delete: if appAdmin();
     }

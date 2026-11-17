@@ -3425,10 +3425,21 @@ let MUTE=false; try{ MUTE=localStorage.getItem('sff_mute')==='1'; }catch(e){}
 function muteIcon(){ const b=$('gMute'); if(b) b.textContent=MUTE?'🔇':'🔊'; }
 function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) rdStop(); if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
 let AC=null;
+// iPhone: Web Audio stays silent when the ring/silent switch is on, and until a first touch starts it. On the first touch
+// we ask for "playback" audio (plays like a video, also in silent mode), start the audio engine and play one silent sample.
+function unlockAudio(){
+  try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){}
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state!=='running') AC.resume();
+    const b=AC.createBuffer(1,1,22050), s=AC.createBufferSource(); s.buffer=b; s.connect(AC.destination); s.start(0); }catch(e){}
+  try{ if(window.speechSynthesis&&!window.__sffSpoke){ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); window.__sffSpoke=1; } }catch(e){}
+}
+const AUDIO_EV=['pointerdown','touchend','keydown'];
+function audioOnce(){ unlockAudio(); if(AC&&AC.state==='running'&&window.__sffSpoke) AUDIO_EV.forEach(x=>document.removeEventListener(x,audioOnce,true)); }
+AUDIO_EV.forEach(t=>document.addEventListener(t,audioOnce,true));
 function sfx(ok){
   if(MUTE) return;
   try{
-    AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state==='suspended') AC.resume();
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)(); if(AC.state!=='running') AC.resume();
     const notes=ok?[[660,0],[880,.09]]:[[300,0],[220,.12]], t0=AC.currentTime;
     notes.forEach(([f,dt])=>{ const o=AC.createOscillator(), g=AC.createGain(); o.type=ok?'triangle':'square'; o.frequency.value=f;
       g.gain.setValueAtTime(0.0001,t0+dt); g.gain.exponentialRampToValueAtTime(ok?.18:.07,t0+dt+.02); g.gain.exponentialRampToValueAtTime(0.0001,t0+dt+.22);

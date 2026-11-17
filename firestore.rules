@@ -46,6 +46,16 @@ service cloud.firestore {
     match /catalog/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
     match /catalogCode/{id} { allow read: if signedIn(); allow write: if appAdmin(); }
     // a parent offers a practice set; only admins read and handle the suggestions
+    // bug reports / ideas from any signed-in user (parents and kid phones); only the app admins read them
+    match /bugReports/{id} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['by','byName','at','kind','text','where','ver','ua','role'])
+        && request.resource.data.by == request.auth.uid
+        && request.resource.data.text is string && request.resource.data.text.size() <= 3000
+        && request.resource.data.kind in ['bug','idea','q'];
+      allow read, delete: if appAdmin();
+    }
+
     match /catalogSuggestions/{id} {
       allow create: if google() && request.resource.data.by == request.auth.uid
         && request.resource.data.keys().hasOnly(['by','byName','at','subject','grade','topics','chapters','questions','code'])

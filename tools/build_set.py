@@ -52,7 +52,7 @@ def scene(s):
     if isinstance(s, str): return [{"e": s, "x": 50, "y": 52, "s": 56}]
     return [{"e": e, "x": x, "y": y, "s": z} for e, x, y, z in s]
 
-errors, qs, chapters = [], [], []
+errors, warns, qs, chapters = [], [], [], []
 rng = random.Random(src.stem)   # same file → same option order
 for ci, chap in enumerate(C):
     title, topics, items = chap[:3]
@@ -78,6 +78,23 @@ for ci, chap in enumerate(C):
                 errors.append(f"{tag}: the picture shows the answer – show all the options, or the question's data")
         right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
+        # a text card in the picture must not give the answer away: a card that IS the answer is an error; a card that holds
+        # the answer and none of the other options (and the answer is not in the question) is a warning – fine only when
+        # the card is the question's own data (a table, a sentence to read)
+        nrm = lambda t: (lambda x: x if len(x) == 1 else x.lower())(re.sub(r"[\s\u2066-\u2069.,!?:;'\"()]", "", str(t)))   # one letter keeps its case
+        has = lambda card, o: re.search(r"(?<![\w\u0590-\u05FF])" + re.escape(str(o).strip().lower()) + r"(?![\w\u0590-\u05FF])", card.lower()) is not None
+        cards = [it["e"] for it in scn if is_text(it["e"])]
+        data = any(has(c, o) for c in cards for o in opts if o != right) or has(q, right)   # the other options are on the cards too (a table) / the question names it
+        for it in scn:
+            if not is_text(it["e"]) or not nrm(right) or data: continue
+            if nrm(it["e"]) == nrm(right) and len(cards) == 1: errors.append(f"{tag}: the picture card \"{it['e']}\" is the answer – show the question's data or all the options")
+            elif nrm(it["e"]) == nrm(right) or has(it["e"], right):
+                warns.append(f"{tag}: the picture card \"{it['e']}\" holds the answer – fine only if it is the question's own data")
+        # emoji options: a picture of only two options, one of them the answer, points at the answer
+        oem = [[c for c in o if EMOJI_RE.match(c)] for o in opts]
+        if all(oem):
+            shown = [i for i, e in enumerate(oem) if any(x in [it["e"] for it in scn] for x in e)]
+            if len(shown) == 2 and opts.index(right) in shown: warns.append(f"{tag}: the picture shows only two options, one of them the answer")
         if not 1 <= len(scn) <= 12 or any(len(it["e"]) > 4 and not is_text(it["e"]) for it in scn): errors.append(f"{tag}: bad scene")
         if len(scn) == 1 and scn[0]["e"] in GENERIC: errors.append(f"{tag}: the picture is decoration ({scn[0]['e']}) – show what the question is about, or the numbers as a card (TXT)")
         for it in scn:
@@ -107,6 +124,7 @@ word_list = list(ns.get("WORD_LIST", []))
 missing = [w for w in word_list if not practised(w)]
 if missing: errors.append(f"words not practised ({len(missing)}): " + ", ".join(missing))
 
+if warns and not __import__("os").environ.get("SFF_QUIET"): print("\n".join("warning: " + w for w in warns), file=sys.stderr)
 if errors:
     print("\n".join(errors)); sys.exit(1)
 if __import__("os").environ.get("SFF_DRY"):   # check only, write nothing (safe to run many builds at once)

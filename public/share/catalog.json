@@ -869,6 +869,329 @@
     }
    ],
    "status": "ready"
+  },
+  {
+   "id": "math5",
+   "ver": "d3fc7db900",
+   "subject": "מתמטיקה",
+   "grade": 4,
+   "title": "שברים · עשרוניים · אחוזים · ראשוניים · מרובעים ושטחים · ממוצע",
+   "desc": "צמצום והרחבה, השוואת שברים, מספר מעורב, חיבור וחיסור שברים, שברים עשרוניים, אחוזים, מחלקים וראשוניים, מרובעים, גובה ושטחים, גרפים וממוצע",
+   "desc_en": "Simplifying and comparing fractions, mixed numbers, adding fractions, decimals, first percents, divisors and primes, quadrilaterals, heights and areas, graphs and the mean",
+   "tags": [
+    "צמצום והרחבה",
+    "השוואת שברים",
+    "מספר מעורב",
+    "חיבור שברים",
+    "שברים עשרוניים",
+    "אחוזים",
+    "ראשוניים ופריקים",
+    "מרובעים",
+    "שטחים",
+    "ממוצע וגרפים"
+   ],
+   "questions": 320,
+   "chapters": 31,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "צמצמו את ⁦6/8⁩ ככל האפשר",
+     "e": "6/8"
+    },
+    {
+     "q": "הרחיבו את ⁦2/5⁩ פי ⁦3⁩",
+     "e": "2/5"
+    },
+    {
+     "q": "⁦3/4 ___ 2/3⁩",
+     "e": "3/4 ? 2/3"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb5",
+   "ver": "604d85c320",
+   "subject": "עברית / לשון",
+   "grade": 4,
+   "title": "הבנת הנקרא · טיעון וסיכום · שורש ובניינים · מילות יחס וקישור · ספרות",
+   "desc": "חמישה קטעי קריאה ארוכים (מידע עם טבלה, טיעון, סיפור, אגדה, שיר), מיזוג מידע וטבלאות, כתיבת טיעון, סיכום ודיווח, שורש ותבנית, בניינים, מילות יחס בנטייה, מילות קישור, יסודות הסיפור, שיר ודימוי, אגדות ומשלים",
+   "desc_en": "Five longer reading passages (information with a table, argument, story, legend, poem), merging sources and reading tables, writing an argument, summary and report, root and pattern, verb patterns (binyanim), prepositions with suffixes, connectors, story elements, poems and images, legends and fables",
+   "tags": [
+    "הבנת הנקרא",
+    "טבלאות ותרשימים",
+    "טיעון",
+    "סיכום ודיווח",
+    "שורש ותבנית",
+    "בניינים",
+    "מילות יחס",
+    "מילות קישור",
+    "יסודות הסיפור",
+    "שיר ודימוי",
+    "משל ונמשל"
+   ],
+   "questions": 280,
+   "chapters": 26,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "לפי הטבלה, איזו כיתה קראה הכי הרבה ספרים?",
+     "e": "כיתהה'1"
+    },
+    {
+     "q": "לפי שני המקורות, מתי ההצגה?",
+     "e": "🎭מקור א: ביום ה'"
+    },
+    {
+     "q": "מהי \"טענה\" בטקסט טיעוני?",
+     "e": "🗣️💭"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en5",
+   "ver": "134bbbf8c3",
+   "subject": "אנגלית",
+   "grade": 4,
+   "title": "Grammar · Band I words · Reading",
+   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר, אוצר מילים Band I ושלושה קטעי קריאה",
+   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past, Band I words and three reading passages",
+   "tags": [
+    "am / is / are",
+    "Present Simple",
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Band I words",
+    "Reading"
+   ],
+   "questions": 341,
+   "chapters": 28,
+   "reading": 3,
+   "words": 72,
+   "samples": [
+    {
+     "q": "I ___ ten years old.",
+     "e": "👦10"
+    },
+    {
+     "q": "I ___ a new bike.",
+     "e": "🚲"
+    },
+    {
+     "q": "He ___ football every day.",
+     "e": "👦⚽"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci5",
+   "ver": "350722d69c",
+   "subject": "מדעים",
+   "grade": 4,
+   "title": "מתכות · תזונה · עיכול ונשימה · קרקע · מערכת השמש · תכנון מוצר",
+   "desc": "תכונות המתכות, בחירת חומרים ומיחזור, רכיבי המזון ותזונה נבונה, מערכת העיכול ומערכת הנשימה, קרקע וסלעים, סחיפה ושימור קרקע, מערכת השמש, הירח ומופעיו, יום ולילה, שנה ועונות, ותהליך תכנון ובניית מוצר",
+   "desc_en": "Metals and their properties, choosing materials and recycling, nutrients and a balanced diet, the digestive and respiratory systems, soil and rocks, erosion and soil conservation, the solar system, the Moon and its phases, day and night, the year and seasons, and the design process",
+   "tags": [
+    "מתכות",
+    "מיחזור",
+    "תזונה",
+    "מערכת העיכול",
+    "מערכת הנשימה",
+    "קרקע וסלעים",
+    "מערכת השמש",
+    "הירח",
+    "יום ולילה ועונות",
+    "תכנון מוצר"
+   ],
+   "questions": 260,
+   "chapters": 25,
+   "reading": 2,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה מהבאים עשוי ממתכת?",
+     "e": "🔩✏️"
+    },
+    {
+     "q": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
+     "e": "🔩🌧️"
+    },
+    {
+     "q": "מאיזה חומר כדאי לבנות סיר בישול?",
+     "e": "🍲🔥"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math6",
+   "ver": "f89e22d195",
+   "subject": "מתמטיקה",
+   "grade": 5,
+   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מעגל · נפח · גופים",
+   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מעגל ועיגול, נפח וליטר, גופים ופריסות, ממוצע וגרפים",
+   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, circles (circumference and area), volume and liters, solids and nets, mean, median and graphs",
+   "tags": [
+    "כפל וחילוק שברים",
+    "עשרוניים",
+    "אחוזים",
+    "הנחות",
+    "יחס",
+    "קנה מידה",
+    "מעגל ועיגול",
+    "נפח",
+    "פריסות",
+    "ממוצע וגרפים"
+   ],
+   "questions": 323,
+   "chapters": 31,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "⁦2/3 × 3/4 =⁩",
+     "e": "2/3 × 3/4"
+    },
+    {
+     "q": "⁦1 1/2 × 2/3 =⁩",
+     "e": "1 1/2 × 2/3"
+    },
+    {
+     "q": "מה המספר ההופכי של ⁦3/4⁩?",
+     "e": "3/4"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb6",
+   "ver": "eca36ce917",
+   "subject": "עברית / לשון",
+   "grade": 5,
+   "title": "הבנת הנקרא · טיעון וסיכום ממזג · שבעת הבניינים · פעיל וסביל · שם המספר · לשון ציורית",
+   "desc": "חמישה קטעי קריאה ארוכים (מידע עם נתונים, מאמר דעה, סיפור, מדרש, שיר) והשוואת טקסטים, טבלאות ותרשימים, כתיבת טיעון, סיכום וסיכום ממזג, שורש ומשקל, שבעת הבניינים, פעיל וסביל, מילות יחס בנטייה, מילות קישור ופיסוק, שם המספר, דימוי, האנשה ומטפורה, ניבים מן המקורות, מספר ונושא, משל ונמשל",
+   "desc_en": "Five longer reading passages (information with data, op-ed, story, midrash, poem) and comparing texts, tables and charts, argument writing, summary and merged summary, root and noun patterns, the seven binyanim, active and passive, inflected prepositions, connectors and punctuation, number words, simile, personification and metaphor, idioms from the sources, narrator and theme, fables",
+   "tags": [
+    "הבנת הנקרא",
+    "עמדת הכותב",
+    "טבלאות ותרשימים",
+    "טיעון",
+    "סיכום ממזג",
+    "בניינים",
+    "פעיל וסביל",
+    "מילות קישור",
+    "שם המספר",
+    "לשון ציורית"
+   ],
+   "questions": 301,
+   "chapters": 28,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "בכמה גדל מספר הקוראים מ־2022 עד 2024?",
+     "e": "שנה2022"
+    },
+    {
+     "q": "מה הבעיה בשני המקורות שבכרטיס?",
+     "e": "🎬א: הסרט ב־17:00"
+    },
+    {
+     "q": "איזה חלק בטיעון מופיע בכרטיס?",
+     "e": "🏫לדעתי, צריך"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci6",
+   "ver": "695132e758",
+   "subject": "מדעים",
+   "grade": 5,
+   "title": "אנרגיה · אור וקול · חשמל · העין והאוזן · מערכת אקולוגית · מערכת טכנולוגית",
+   "desc": "סוגי אנרגיה, המרות ושרשראות אנרגיה, ייצור חשמל וחיסכון, אור וצללים, החזרה, שקיפות וצבעים, קול – גובה ועוצמה, מעגל חשמלי טורי ומקבילי, מוליכים ובטיחות בחשמל, העין והאוזן, יצרנים, צרכנים ומפרקים, בתי גידול בישראל והשפעת האדם, ומערכת טכנולוגית",
+   "desc_en": "Types of energy, energy conversions and chains, producing electricity and saving energy, light and shadows, reflection, transparency and colours, sound – pitch and loudness, series and parallel circuits, conductors and electrical safety, the eye and the ear, producers, consumers and decomposers, habitats in Israel and human influence, and a technological system",
+   "tags": [
+    "אנרגיה",
+    "ייצור חשמל",
+    "אור וצל",
+    "קול",
+    "מעגל חשמלי",
+    "בטיחות בחשמל",
+    "העין והאוזן",
+    "מערכת אקולוגית",
+    "בתי גידול",
+    "מערכת טכנולוגית"
+   ],
+   "questions": 289,
+   "chapters": 28,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהי אנרגיה?",
+     "e": "⚡🔥"
+    },
+    {
+     "q": "איזו מהן היא אנרגיה אגורה?",
+     "e": "📚⬆️"
+    },
+    {
+     "q": "נורה דולקת: החשמל הופך בעיקר ל…",
+     "e": "⚡⬅️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en6",
+   "ver": "ba967c865a",
+   "subject": "אנגלית",
+   "grade": 5,
+   "title": "Grammar · Past Simple · Band I words · Reading",
+   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), אוצר מילים, כתיבה וארבעה קטעי קריאה",
+   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), Band I words, writing and four reading passages",
+   "tags": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "Band I words",
+    "Writing",
+    "Reading"
+   ],
+   "questions": 358,
+   "chapters": 34,
+   "reading": 4,
+   "words": 87,
+   "samples": [
+    {
+     "q": "Look! The baby ___.",
+     "e": "👶😴"
+    },
+    {
+     "q": "___ your sister playing the piano now?",
+     "e": "👧🎹"
+    },
+    {
+     "q": "Fish ___ swim, but they can't walk.",
+     "e": "🐟"
+    }
+   ],
+   "status": "ready"
   }
  ]
 }

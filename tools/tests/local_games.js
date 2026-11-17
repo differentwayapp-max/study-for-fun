@@ -19,13 +19,13 @@ const OUT = process.env.OUT;
   });
   await p.evaluate(() => document.getElementById('rGames').open = true);
   if (OUT) await p.screenshot({ path: `${OUT}/games.png`, fullPage: true });
-  await p.click('#rGames .pick >> nth=1'); await p.click('#rGames .pick >> nth=2'); await p.click('#rGames .pick >> nth=3'); await p.waitForTimeout(200);
+  for (let k = 1; k <= 4; k++) await p.click(`#rGames .pick >> nth=${k}`); await p.waitForTimeout(200);
   const r2 = await p.evaluate(() => { const s = curSet, C = getChapters(s); const after = C.map((_, i) => pickMode(s, i));
     startGame(s, null, 'choice', 0); G.res = G.qs.map(q => ({ q, ok: true })); endGame();
     return { noGames: s.noGames, after, bonus: !document.getElementById('eBonus').classList.contains('hidden') }; });
   console.log(JSON.stringify({ r, r2 }));
-  const ok = r.afterPlay.road && !r.afterPlay.modes && r.afterCh.game && !r.afterCh.modes && r.boxes === 4 && r.before.some(m => m !== 'choice')
-    && r2.after.every(m => m === 'choice') && !r2.bonus && r2.noGames.length === 3;
+  const ok = r.afterPlay.road && !r.afterPlay.modes && r.afterCh.game && !r.afterCh.modes && r.boxes === 5 && r.before.some(m => m !== 'choice')
+    && r2.after.every(m => m === 'choice') && !r2.bonus && r2.noGames.length === 4;
   if (!ok) errs.push('games');
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

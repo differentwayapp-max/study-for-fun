@@ -76,6 +76,8 @@ for ci, chap in enumerate(C):
         for it in scn:
             if is_text(it["e"]):
                 if len(it["e"]) > 16: errors.append(f"{tag}: picture text too long \"{it['e']}\"")
+                if "→" in it["e"] and re.search(r"[\u0590-\u05FF]", it["e"]):   # a Hebrew card is drawn right-to-left: the arrow would point back
+                    errors.append(f"{tag}: Hebrew card with → \"{it['e']}\" – write it with ←")
                 hw = it["s"] * .3 * len(it["e"]) / 1.6
                 if it["x"] - hw < 1 or it["x"] + hw > 99: errors.append(f"{tag}: picture text \"{it['e']}\" is too wide")
                 continue

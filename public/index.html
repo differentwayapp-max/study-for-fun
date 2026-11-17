@@ -1464,6 +1464,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         const input = typeof prompt === 'string' ? prompt : prompt.map(m => m.content).join('\n\n');
         const images = opts.images ? await Promise.all(opts.images.slice(0, 6).map(toB64)) : [];
         try {
+          if (opts.ping) return (await callAsk({ ping: true })).data.json;
           const r = await callAsk({ prompt: input, images, tier: opts.modelTier || 'default', famId: W.__sffFamily?.famId, buildId: opts.buildId || null });
           return r.data.json;
         } catch (e) {
@@ -1714,7 +1715,7 @@ function showQuotaErr(e){
 async function logFail(where, e, subject){
   if(/internal/i.test(String(e?.code||'')+String(e?.message||'')) && sample && !where.startsWith('ping')){
     let ping='';
-    try{ await sample.json('', {}); ping='server answered'; }catch(p){ ping=/missing|oversized|invalid/i.test(String(p?.message||''))?'server reachable (code error)':'server NOT reachable: '+String(p?.code||'')+' '+String(p?.message||''); }
+    try{ await sample.json('', {ping:true}); ping='server answered'; }catch(p){ ping='server NOT reachable: '+String(p?.code||'')+' '+String(p?.message||''); }
     e={code:e?.code, message:String(e?.message||e)+' | ping: '+ping};
   }
   const rec={at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').slice(0,300),

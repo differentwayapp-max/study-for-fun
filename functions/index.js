@@ -248,6 +248,8 @@ exports.ask = onCall(
     // Only signed-in parents (Google) may spend AI credit; kid devices are anonymous.
     const auth = parentOnly(request);
 
+    // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
+    if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { prompt, images = [], tier = 'default', famId, buildId } = request.data || {};
     if (typeof prompt !== 'string' || !prompt.trim() || prompt.length > 300000) {
       throw new HttpsError('invalid-argument', `Missing or oversized prompt (${typeof prompt === 'string' ? prompt.length : typeof prompt} chars).`);

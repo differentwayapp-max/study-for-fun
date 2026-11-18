@@ -56,7 +56,7 @@ In these games all questions of a **chapter** meet: each question shows only its
 ## 5. Repetition
 - **The same question must not appear twice** in a set, and not as an identical question in **any** set of the same subject (other grades included). The build warns `DUP vs <id>` (same text + answer, or the same numbers + answer). In a duplicate pair, change the **higher grade** and raise its level.
 - Near-duplicates inside a set (same answer, almost the same wording) – vary them, unless they are deliberate practice of a core fact.
-- **Core facts / characteristics (מאפיינים)** – e.g. minutes in an hour, units, definitions, properties – should be met more than once, but **varied**: different wording or a different angle, and (in the app) a different game – never the same question again and again.
+- **Core facts / characteristics (מאפיינים)** – the facts a child must simply know, e.g. "כמה דקות יש בשעה?" (60), "כמה מטרים יש בקילומטר?" (1,000), units, definitions, properties – are part of learning by repetition: the child should meet them more than once, but **varied** – a different game (choice → match → riddle), a different wording or angle ("כמה דקות בשעה וחצי?", "2 ק״מ = ? מטר", "60 דקות = ?"), a later chapter or the review. Never the identical question again and again in the same form.
 
 ## 6. Build and check (every time)
 1. `SFF_DRY=1 python3 -I tools/build_set.py tools/sets/<file>.py` – checks without writing (safe when several sets are edited at once). Must end with `ok (dry)`. Read every `warning:` line (picture card holding the answer, `DUP vs …`) and fix the real ones.

@@ -62,6 +62,10 @@ def scene(s):
     return [{"e": e, "x": x, "y": y, "s": z} for e, x, y, z in s]
 
 errors, warns, qs, chapters = [], [], [], []
+# core facts (tools/core_facts.json: set id → question texts): they come back in later stations as review questions, in another game
+_nq = lambda t: re.sub(r"[\s\u0591-\u05C7\u2066-\u2069]", "", str(t))
+try: CORE_Q = {_nq(t) for t in json.loads((pathlib.Path(__file__).resolve().parent / "core_facts.json").read_text(encoding="utf-8")).get(src.stem.replace("_", "-"), [])}
+except FileNotFoundError: CORE_Q = set()
 rng = random.Random(src.stem)   # same file → same option order
 prng = random.Random(src.stem + ":pictures")   # a separate stream, so the option order above never changes because of pictures
 # a picture of the options side by side must not always have the answer in the same place (the source files list the answer
@@ -163,7 +167,8 @@ for ci, chap in enumerate(C):
             if bases(it["e"]) != 1: errors.append(f"{tag}: one emoji per picture item – \"{it['e']}\" (use COUNT for several)")
             hw, hh = it["s"] * .62 / 1.6, it["s"] * .5                # half width / height of the emoji, in % of the frame
             if it["x"] - hw < -1 or it["x"] + hw > 101 or it["y"] - hh < -1 or it["y"] + hh > 101: errors.append(f"{tag}: \"{it['e']}\" is outside the frame")
-        qs.append({"topic": topic, "question": q, "options": opts, "answer": ans,
+        is_core = _nq(q) in CORE_Q
+        qs.append({"topic": topic, "question": q, "options": opts, "answer": ans, **({"core": True} if is_core else {}),
                    "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci})
 
 # the answer's place among the option pictures must look random (it was always the left one)
@@ -205,6 +210,8 @@ try:
             elif _num_key(q["question"], q["options"][q["answer"]]) in _nums: warns.append(f"DUP vs {_e['id']} (same numbers, same answer): «{q['question']}» → {q['options'][q['answer']]}")
 except Exception as _ex: warns.append(f"duplicate check skipped: {_ex}")
 
+_missing = CORE_Q - {_nq(q["question"]) for q in qs}
+if _missing: warns.append(f"core_facts.json: {len(_missing)} question(s) not found in the set (reworded?)")
 if warns and not __import__("os").environ.get("SFF_QUIET"): print("\n".join("warning: " + w for w in warns), file=sys.stderr)
 if errors:
     print("\n".join(errors)); sys.exit(1)

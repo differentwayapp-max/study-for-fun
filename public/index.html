@@ -475,6 +475,7 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .onb .onbsep{align-self:stretch;max-width:430px;width:100%;margin:18px auto 12px;border:0;border-top:2px dashed var(--ink);opacity:.35}
 .onb .dots{display:flex;gap:8px;margin:16px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
 .onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
+.revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
 .sugcard{margin:10px 0 0;padding:12px}
 .workbox{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border:2px solid #9B8CFF;border-radius:16px;background:#F1EDFF}
@@ -1975,7 +1976,7 @@ ${langRule}
 Emoji: one emoji that pictures the question (for vocabulary, the word itself; otherwise the topic or scene) – it is shown to the child as the question's picture, so it must not give away the answer unless the question asks to name a pictured thing.
 Picture first (REQUIRED): the child answers by LOOKING. The question text must NEVER contain or hint the answer. Add "scene": 1-6 items {\"e\": one emoji, \"x\": 0-100 left→right, \"y\": 0-100 top→bottom (ground is at y≈85), \"s\": size 15-80} that stages the situation (e.g. a cat sitting on a chair: chair x50 y66 s62, cat x50 y28 s34; three books: three book emoji side by side). Then keep "question" very short (max 6 words, e.g. "Where is the cat?", "What is this?", "There ___ three books.") and options 1-3 words. If the topic truly cannot be pictured, use "scene": null and still keep the question short. Explanations: max 12 words. ${PIC_RULE}
 Explanation: 1-3 short sentences a child can follow, explaining WHY the answer is right (and the common mistake if useful).
-Return JSON only: {"questions":[{"topic":string (exactly one of: ${JSON.stringify(ch.topics)}),"question":string,"options":[string,string,string,string],"answer":number (0-3),"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,
+Return JSON only: {"questions":[{"topic":string (exactly one of: ${JSON.stringify(ch.topics)}),"question":string,"options":[string,string,string,string],"answer":number (0-3),"explanation":string,"core":boolean (true only for a basic fact the child must simply remember – e.g. minutes in an hour, metres in a km, a definition or unit; it comes back later as a review question),"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,
         {modelTier:'default'});
       qs = qs.concat(clean(gen?.questions, ch.topics).map(q=>({...q,ch:ci})));
     }
@@ -2052,7 +2053,7 @@ function clean(arr, topics){
   return arr.filter(q=>q && typeof q.question==='string' && Array.isArray(q.options) && q.options.length===4
       && Number.isInteger(+q.answer) && +q.answer>=0 && +q.answer<4 && new Set(q.options.map(o=>String(o).trim())).size===4)
     .map(q=>({topic: topics.includes(q.topic)?q.topic:(topics.find(t=>t.toLowerCase()===String(q.topic||'').toLowerCase())||topics[0]),
-      question:String(q.question).trim(), options:q.options.map(o=>String(o).trim()), answer:+q.answer, explanation:String(q.explanation||'').trim(), emoji:(typeof q.emoji==='string'&&[...q.emoji].length<=4)?q.emoji.trim():'', ...(cleanScene(q.scene)?{scene:cleanScene(q.scene)}:{}), ...(Number.isInteger(q.ch)?{ch:q.ch}:{})}));
+      question:String(q.question).trim(), options:q.options.map(o=>String(o).trim()), answer:+q.answer, explanation:String(q.explanation||'').trim(), emoji:(typeof q.emoji==='string'&&[...q.emoji].length<=4)?q.emoji.trim():'', ...(cleanScene(q.scene)?{scene:cleanScene(q.scene)}:{}), ...(Number.isInteger(q.ch)?{ch:q.ch}:{}), ...(q.core===true?{core:true}:{})}));
 }
 
 /* picture pass: every question gets a scene and a short stem that does not give the answer away */
@@ -2246,7 +2247,7 @@ ${imgs.length?`The parent attached ${imgs.length} worksheet photo(s) for this ch
 `:''}${nameIt?`This is a NEW chapter built only from the attached worksheet(s): give it a short Hebrew title (2-4 words) that names the material.`:`This is the chapter "${title}" (topics: ${JSON.stringify(topics)}).`} Write ${n} NEW multiple-choice practice questions. Do not repeat these: ${JSON.stringify(avoid)}.
 Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${GRADES[set.grade]}; no trick questions. ${langRule}
 Question max 6 words when possible, options max 3 words, explanation max 10 words for a child. ${PIC_RULE}
-Return JSON only: {${nameIt?'"title":string,':''}"questions":[{"topic":string${nameIt?'':` (one of ${JSON.stringify(topics)})`},"question":string,"options":[4 strings],"answer":number (0-3),"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,{modelTier:'default', ...(imgs.length&&canImages?{images:imgs}:{})});
+Return JSON only: {${nameIt?'"title":string,':''}"questions":[{"topic":string${nameIt?'':` (one of ${JSON.stringify(topics)})`},"question":string,"options":[4 strings],"answer":number (0-3),"explanation":string,"core":boolean (true only for a basic fact the child must simply remember – e.g. minutes in an hour, metres in a km, a definition or unit; it comes back later as a review question),"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,{modelTier:'default', ...(imgs.length&&canImages?{images:imgs}:{})});
   const tp=nameIt?[String(r?.title||'מדפי העבודה').slice(0,40)]:topics;
   let qs=clean(r?.questions,tp).map(q=>({...q,ch:ci}));
   if(!qs.length) throw {code:'error',message:'no questions'};
@@ -3139,10 +3140,26 @@ function startGame(set, onlyQs, mode, ch, topic){
   // riddles / spelling: questions that don't fit letter tiles stay in the session as multiple choice
   const src = whole && (mode==='riddle'||mode==='spell') ? base : pool;
   const qs = mode==='choice' ? shuffle(pool) : shuffle(src).slice(0,cap);
-  G={set, mode, ch: onlyQs?null:ch, topic:topic||null, retry:false, qs, i:0, score:0, streak:0, best:0, res:[], moves:0};
+  const rev = whole ? reviewQs(set, ch, mode) : [];                       // core facts from earlier stations, at the end
+  G={set, mode, ch: onlyQs?null:ch, topic:topic||null, retry:false, qs:qs.concat(rev), rev:new Set(rev), i:0, score:0, streak:0, best:0, res:[], moves:0};
   $('gSheet').className='sheet'; $('gTop').innerHTML=''; 
   show('vGame'); hud(); muteIcon();
   ({choice:choiceStart,memory:memStart,match:matchStart,riddle:riddleStart,spell:riddleStart})[mode]();
+}
+// Core facts (q.core – e.g. minutes in an hour, metres in a km) come back as 2–3 short review questions at the end of a later
+// station: only facts the kid already met in another station, not today, and not in the same kind of game as last time
+// (a fact last seen as multiple choice comes back in riddles, and so on); mistakes first, then the longest ago.
+// Played only in one-question-at-a-time games (choice / riddle / spell) – in match / memory they could clash with the station's cards.
+function reviewQs(set, ch, mode){
+  if(!['choice','riddle','spell'].includes(mode) || !(ch>=0)) return [];
+  const core=set.questions.map((q,i)=>[q,i]).filter(([q])=>q.core && q.ch!==ch && !passageOf(set,q));
+  if(!core.length) return [];
+  const last={}, today=new Date().toDateString();
+  history.filter(h=>h.setId===set.id && Array.isArray(h.qr)).forEach(h=>h.qr.forEach(x=>{ const [i,ok]=String(x).split('.');   // newest first
+    if(last[i]==null) last[i]={at:h.at, mode:h.mode, ok:ok==='1'}; }));
+  const cand=core.filter(([q,i])=>{ const f=last[i]; return f && new Date(f.at).toDateString()!==today && f.mode!==mode; })
+    .sort((a,b)=>{ const A=last[a[1]], B=last[b[1]]; return (A.ok-B.ok) || (A.at-B.at); });
+  return cand.slice(0, cand.length>=6?3:2).map(([q])=>q);
 }
 function nextRoundQs(set,n){ // walk through all the material in order, round after round
   const N=set.questions.length; n=Math.min(n,N);
@@ -3237,7 +3254,7 @@ function choiceRender(){
   $('gTop').innerHTML=trackHtml();
   const txt=passageOf(G.set,q);
   const top=txt?passageHtml(txt):picOf(q);
-  $('gPlay').innerHTML=`${top}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
+  $('gPlay').innerHTML=`${top}${G.rev&&G.rev.has(q)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
     <div class="opts">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${optKey(q,k)}</span>${esc(o)}</button>`).join('')}</div>
     <div class="helpers">${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
   if(track(G.set.grade).young) speakQ();
@@ -3370,7 +3387,7 @@ function riddleRender(){
   $('gCount').textContent=`${spell?'🔤':'🧩'} ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   $('gPlay').innerHTML=`
-    ${picOf(q)}<div class="qbox short" dir="auto">${esc(q.question)}</div>
+    ${picOf(q)}${G.rev&&G.rev.has(q)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox short" dir="auto">${esc(q.question)}</div>
     <div id="rSlots"></div><div id="rTiles"></div>
     <div class="helpers" style="justify-content:center">${spell?(EN_SAY(ans)?`<button class="btn small" onclick="sayEn(G.r.ans,true)" aria-label="השמעת המילה">🔊</button>`:''):`<button class="btn ghost small" onclick="riddleHint()">💡 רמז</button>`}<button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button>${spell?'':`<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button>`}<button class="btn ghost small" onclick="riddleGiveUp()">🤷</button>${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">›</button>`:''}</div>`;
   riddleDraw();
@@ -3441,7 +3458,7 @@ function endGame(){
   if(stars>=2||done===goal){ burst(); setTimeout(burst,400); }
 }
 // the bonus game uses the cards of the station just played (if they suit memory cards)
-function bonusQs(){ if(!G||!G.set||!gameOn(G.set,'memory')) return null; const pool=modePool({questions:G.res.map(r=>r.q),chapters:G.set.chapters},'memory'); return pool.length>=MIN.memory?pool:null; }
+function bonusQs(){ if(!G||!G.set||!gameOn(G.set,'memory')) return null; const pool=modePool({questions:G.res.filter(r=>!(G.rev&&G.rev.has(r.q))).map(r=>r.q),chapters:G.set.chapters},'memory'); return pool.length>=MIN.memory?pool:null; }
 function startBonus(){ const qs=bonusQs(); if(qs) startGame(G.set, qs, 'memory', G.ch); }
 function retryMistakes(){ startGame(G.set, G.res.filter(r=>!r.ok).map(r=>r.q), 'choice'); G.retry=true; }
 function refreshCurrentQ(){
@@ -3585,9 +3602,10 @@ function resetKid(id){
 }
 function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
 function recordSession(by, right, n){
-  const s=G.set;
+  const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
+  if(rv.length){ right-=rv.filter(r=>r.ok).length; n-=rv.length; }
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
-    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode,
+    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
     qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
   history=history.slice(0,500);

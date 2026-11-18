@@ -30,7 +30,16 @@ def TXT(*lines, s=None):
     n = len(lines); z = s or min(34, 70 / n, 140 / max(len(l) for l in lines))
     return [(l, 50, round(14 + 70 * (i + .5) / n, 1), round(z)) for i, l in enumerate(lines)]
 
-ns = {"COUNT": COUNT, "TXT": TXT}
+class OptRow(list):
+    """A picture row whose pictures ARE the options (made by OPTS) – the only kind of row the build may shuffle."""
+def OPTS(*es, y=52):
+    """The options as pictures, side by side, in the same order as the question's options (picture k = option k; fewer
+    pictures = the first options). The build moves them so the answer is not always in the same place:
+    Q(..., ["כלב", "חתול", "דג", "ציפור"], ..., OPTS("🐕", "🐈", "🐟", "🐦"))"""
+    n = len(es); s = min(40, 125 / n); step = min(92 / n, s / 1.6 * 1.35)
+    return OptRow((e, round(50 + (j - (n - 1) / 2) * step, 1), y, round(s)) for j, e in enumerate(es))
+
+ns = {"COUNT": COUNT, "TXT": TXT, "OPTS": OPTS}
 exec(src.read_text(encoding="utf-8"), ns)
 SET, C = ns["SET"], ns["C"]
 
@@ -43,7 +52,7 @@ def bases(e):
         if 0x1F1E6 <= c <= 0x1F1FF and i + 1 < len(cps) and 0x1F1E6 <= cps[i + 1] <= 0x1F1FF: i += 1
         n += 1; i += 1
     return n
-EMOJI_RE = re.compile("[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\U0001F000-\U0001FAFF\uFE0F\u20E3]")   # arrows (→) and math signs (−) are text
+EMOJI_RE = re.compile("[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\U0001F000-\U0001FAFF\uFE0F\u20E3\u200D]")   # arrows (→) and math signs (−) are text
 def is_text(e): return not EMOJI_RE.search(e)          # a picture item that is a number card / short text, e.g. "12 → ?"
 # a picture that has nothing to do with the question: only allowed next to other, real items
 GENERIC = set("🤔 ❓ ❔ 🔢 ➕ ➖ ✖️ ➗ 🧮 💯 ✏️ 📝 ✍️ 🔍 📚 💭 ✨ 🎯 🏆".split())
@@ -59,7 +68,8 @@ prng = random.Random(src.stem + ":pictures")   # a separate stream, so the optio
 # first, so it was always the left picture). Kept in place: sequences / patterns (repeats, ❓, arrows, signs), COUNT, text cards.
 KEEP_ORDER = set("❓ ❔ ➡️ ⬅️ ⬆️ ⬇️ ↔️ ↕️ ➕ ➖ ✖️ ➗ 🟰 ⏩ ⏪ 🔜 🔁 🔄 ▶️ ◀️".split()) | {"➡", "⬅", "⬆", "⬇", "↔", "▶", "◀"}
 pic_stats = {"rows": 0, "rows_answer_first": 0, "cards": 0}
-answer_slot, slot_bag = {}, []
+answer_slot, slot_bags, rows_by_n = {}, {}, {}
+POSITION_RE = re.compile(r"מימין|משמאל|ראשון|ראשונה|שני|שנייה|שלישי|רביעי|אחרון|אחרונה|במקום|בתור|לפני|אחרי|באמצע|\b(first|second|third|last|before|after|left|right|order|next to|between)\b", re.I)
 def option_picture_row(scn):
     items = [it for it in scn if not is_text(it["e"])]
     if len(items) < 2 or len(items) != len(scn): return None
@@ -90,18 +100,32 @@ for ci, chap in enumerate(C):
                 errors.append(f"{tag}: the picture shows the answer – show all the options, or the question's data")
         src_opts = opts; right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
-        # the option pictures: the answer's picture takes the next place of a shuffled rotation (so every place gets it about
-        # equally often), the other pictures fill the other places at random. Rows of 2–3 pictures are scenes (who + what),
-        # not options – their order tells the story, so they stay as they are.
+        # the option pictures move (the source lists the answer first, so it was always the left picture): only a row made
+        # by OPTS(...), or a row whose every picture is written in an option – never a story row, and never when the
+        # question is about place or order (first / right / before …). The answer's picture takes the next place of a shuffled
+        # rotation (every place gets it about equally often); the other pictures fill the other places at random.
         row = option_picture_row(scn)
-        if row and len(row) == len(opts):
+        positional = POSITION_RE.search(q.replace("⁦", "").replace("⁩", ""))
+        if row and not (isinstance(sc, OptRow) or all(any(it["e"] in o for o in src_opts) for it in row)): row = None
+        if isinstance(sc, OptRow) and not row: errors.append(f"{tag}: OPTS(...) needs 2–4 different emoji in one row")
+        if row and len(row) > len(opts): row = None
+        if row and positional: row = None
+        before = [(it["e"], it["x"]) for it in scn]
+        if row:
             xs = sorted(it["x"] for it in row)
-            if not slot_bag: slot_bag.extend(range(len(xs))); prng.shuffle(slot_bag)
-            target = slot_bag.pop(); rest = [i for i in range(len(xs)) if i != target]; prng.shuffle(rest)
             src_ans = src_opts.index(right)
-            for k, it in enumerate(row): it["x"] = xs[target] if k == src_ans else xs[rest.pop()]
-            pic_stats["rows"] += 1; pic_stats["rows_answer_first"] += target == 0
-            answer_slot[target] = answer_slot.get(target, 0) + 1
+            if src_ans < len(row):   # the answer is drawn: rotate its place
+                bag = slot_bags.setdefault(len(xs), [])
+                if not bag: bag.extend(range(len(xs))); prng.shuffle(bag)
+                target = bag.pop(); rest = [i for i in range(len(xs)) if i != target]; prng.shuffle(rest)
+                for k, it in enumerate(row): it["x"] = xs[target] if k == src_ans else xs[rest.pop()]
+                pic_stats["rows"] += 1; pic_stats["rows_answer_first"] += target == 0
+                answer_slot[(len(xs), target)] = answer_slot.get((len(xs), target), 0) + 1; rows_by_n[len(xs)] = rows_by_n.get(len(xs), 0) + 1
+            else:
+                order = list(range(len(row))); prng.shuffle(order)
+                for k, it in enumerate(row): it["x"] = xs[order[k]]
+            if __import__("os").environ.get("SFF_PICLIST"): print("SHUF\t" + q + "\t" + " ".join(it["e"] for it in sorted(row, key=lambda it: it["x"])), file=sys.stderr)
+        if positional and [(it["e"], it["x"]) for it in scn] != before: errors.append(f"{tag}: the question is about place or order, but its picture was moved")
         # option cards listed one under the other (each card is one of the options): the same, top to bottom
         cards = [it for it in scn if is_text(it["e"])]
         nrm_o = lambda t: re.sub(r"[\s\u2066-\u2069]", "", str(t))
@@ -143,9 +167,10 @@ for ci, chap in enumerate(C):
                    "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci})
 
 # the answer's place among the option pictures must look random (it was always the left one)
-if pic_stats["rows"] >= 10 and max(answer_slot.values()) > .4 * pic_stats["rows"]:
-    errors.append(f"option pictures: the answer is in the same place in {max(answer_slot.values())} of {pic_stats['rows']} rows – more than 40%")
-if __import__("os").environ.get("SFF_PICSTATS"): print("pictures:", json.dumps({**pic_stats, "answer_slot": answer_slot}), file=sys.stderr)
+for (n_, slot_), c_ in answer_slot.items():
+    if rows_by_n[n_] >= 10 and c_ > max(.4, 1.6 / n_) * rows_by_n[n_]:
+        errors.append(f"option pictures: the answer is in place {slot_ + 1} of {n_} in {c_} of {rows_by_n[n_]} rows – too often")
+if __import__("os").environ.get("SFF_PICSTATS"): print("pictures:", json.dumps({**pic_stats, "answer_slot": {f"{n}:{k + 1}": v for (n, k), v in answer_slot.items()}}), file=sys.stderr)
 
 seen = {}
 for q in qs:
@@ -164,15 +189,20 @@ if missing: errors.append(f"words not practised ({len(missing)}): " + ", ".join(
 def _dup_key(q, a):
     t = lambda x: re.sub(r"[\s\u0591-\u05C7\u2066-\u2069.,!?:;'\"()\-–_]", "", str(x)).lower()
     return t(q) + "|" + t(a)
+def _num_key(q, a):   # the numbers of the question (at least two) + the same answer
+    n = re.findall(r"\d+(?:[.,]\d+)?", str(q))
+    return "|".join(n) + "=>" + re.sub(r"[\s\u2066-\u2069]", "", str(a)).lower() if len(n) >= 2 else None
 try:
     _share = pathlib.Path(__file__).resolve().parent.parent / "public" / "share"
     _me = src.stem.replace("_", "-")
     for _e in json.loads((_share / "catalog.json").read_text(encoding="utf-8")).get("sets", []):
-        if _e.get("id") == _me or _e.get("subject") != SET["subject"] or abs(int(_e.get("grade", -9)) - int(SET["grade"])) != 1: continue
+        if _e.get("id") == _me or _e.get("subject") != SET["subject"]: continue   # every set of the same subject
         _d = json.loads(base64.b64decode((_share / f"{_e['id']}.txt").read_text(encoding="utf-8")[5:]))
         _theirs = {_dup_key(x["question"], x["options"][x["answer"]]) for x in _d["questions"]}
+        _nums = {_num_key(x["question"], x["options"][x["answer"]]) for x in _d["questions"]} - {None}
         for q in qs:
             if _dup_key(q["question"], q["options"][q["answer"]]) in _theirs: warns.append(f"DUP vs {_e['id']}: «{q['question']}» → {q['options'][q['answer']]}")
+            elif _num_key(q["question"], q["options"][q["answer"]]) in _nums: warns.append(f"DUP vs {_e['id']} (same numbers, same answer): «{q['question']}» → {q['options'][q['answer']]}")
 except Exception as _ex: warns.append(f"duplicate check skipped: {_ex}")
 
 if warns and not __import__("os").environ.get("SFF_QUIET"): print("\n".join("warning: " + w for w in warns), file=sys.stderr)

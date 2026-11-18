@@ -52,7 +52,7 @@ C.append(("Past Simple: -ed", [PR], [
  Q(PR, "Past of decide?", ["decided", "decideed", "decidded", "deciding"], 0, "נגמר ב-e ← מוסיפים רק d", PW("🤔", "decide → ?")),
  Q(PR, "Last summer they ___ at a hotel in Eilat.", ["stayed", "stay", "stays", "staying"], 0, "last summer ← עבר: stayed", ROW("🏨", "🏖️")),
  Q(PR, "He ___ his grandma at her house two days ago.", ["visited", "visit", "visits", "visiting"], 0, "ago = לפני ← עבר", ROW("👦", "👵")),
- Q(PR, "The hungry baby ___ all night yesterday.", ["cried", "cryed", "cries", "crying"], 0, "y אחרי עיצור ← ied", ROW("👶", "🌙")),
+ Q(PR, "The little girl ___ when she fell off her bike.", ["cried", "cryed", "cries", "crying"], 0, "y אחרי עיצור ← ied", ROW("👧", "🚲")),
 ]))
 
 C.append(("Past Simple: time words & spelling", [PR], [
@@ -98,8 +98,8 @@ C.append(("Irregular verbs in sentences", [PI], [
 
 # ───────────── Past Simple: negatives & questions ─────────────
 C.append(("Past Simple: didn't · wasn't · weren't", [PN], [
- Q(PN, "I ___ go to school yesterday.", ["didn't", "don't", "wasn't", "doesn't"], 0, "yesterday ← didn't", ROW("🏫", "❌")),
- Q(PN, "She didn't ___ her homework.", ["do", "did", "does", "doing"], 0, "אחרי didn't ← צורת בסיס", ROW("👧", "📓")),
+ Q(PN, "I was sick, so I ___ go to school on Monday.", ["didn't", "don't", "wasn't", "doesn't"], 0, "עבר + פועל ← didn't", ROW("🤒", "🏫")),
+ Q(PN, "She didn't ___ her homework, so the teacher was angry.", ["do", "did", "does", "doing"], 0, "אחרי didn't ← צורת בסיס", ROW("👧", "📓")),
  Q(PN, "We ran, but we didn't ___ the bus.", ["catch", "caught", "catches", "catching"], 0, "אחרי didn't ← צורת בסיס", ROW("🏃", "🚌")),
  Q(PN, "Which is correct?", ["He didn't swim", "He didn't swam", "He not swam", "He don't swam"], 0, "didn't + צורת בסיס", ROW("🏊", "❌")),
  Q(PN, "They ___ like the film last night.", ["didn't", "don't", "doesn't", "weren't"], 0, "last night ← didn't", ROW("🎬", "👎")),
@@ -111,7 +111,7 @@ C.append(("Past Simple: didn't · wasn't · weren't", [PN], [
 ]))
 
 C.append(("Past Simple: questions", [PN], [
- Q(PN, "___ you see the match yesterday?", ["Did", "Do", "Does", "Were"], 0, "שאלה בעבר ← Did", ROW("⚽", "📺")),
+ Q(PN, "___ you and your friends enjoy the trip yesterday?", ["Did", "Do", "Does", "Were"], 0, "שאלה בעבר + פועל ← Did", ROW("🚌", "👫")),
  Q(PN, "Did she ___ the cake?", ["make", "made", "makes", "making"], 0, "אחרי Did ← צורת בסיס", ROW("👧", "🎂")),
  Q(PN, "How long ___ your family stay in Eilat last summer?", ["did", "were", "was", "does"], 0, "last summer + stay ← did", ROW("🏨", "🏖️")),
  Q(PN, "What did he ___ to you?", ["say", "said", "says", "saying"], 0, "אחרי did ← צורת בסיס", ROW("👦", "💬")),
@@ -329,7 +329,7 @@ C.append(("much · many · a lot of", [QT], [
 
 C.append(("some · any · a few · a little", [QT], [
  Q(QT, "I bought ___ bread and ___ eggs.", ["some", "any", "many", "a few"], 0, "משפט חיובי, גם נספר וגם לא נספר ← some", ROW("🍞", "🍽️")),
- Q(QT, "There isn't ___ juice in the fridge – not one drop.", ["any", "many", "a few", "a lot"], 0, "שלילה, אף טיפה ← any", ROW("🥤", "❌")),
+ Q(QT, "Dad drank it all, so there isn't ___ juice left.", ["any", "many", "a few", "a lot"], 0, "שלילה, לא נשאר כלום ← any", ROW("👨", "🥤", "❌")),
  Q(QT, "I don't have ___ money – not even one shekel.", ["any", "some", "many", "a few"], 0, "שלילה ← any", ROW("👛", "❌")),
  Q(QT, "I have only ___ friends in Haifa – just three.", ["a few", "a little", "much", "any"], 0, "מעט + נספר ← a few", PW("👫", "3")),
  Q(QT, "Add only ___ salt to the soup.", ["a little", "a few", "many", "any"], 0, "מעט + לא נספר ← a little", ROW("🧂", "🍲")),

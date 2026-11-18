@@ -162,7 +162,7 @@ C.append(("📖 Unseen: Weather Watcher", [UN], [
  (UN, "What is the summer like?", ["very hot", "freezing", "rainy", "windy"], 0, "the heat is extreme = חום קיצוני", [("☀️", 20, 50, 30), ("❄️", 40, 50, 30), ("🌧️", 60, 50, 30), ("💨", 80, 50, 30)]),
  (UN, "Where do the friends swim?", ["at the pool", "in the sea", "in the river", "at school"], 0, "at the swimming pool", "🏊"),
  (UN, "Where is the ice?", ["on the roof", "in the pool", "on the tree", "in the river"], 0, "ice on the roof", [("🏠", 20, 50, 30), ("🏊", 40, 50, 30), ("🌳", 60, 50, 30), ("🏞️", 80, 50, 30)]),
- (UN, "What does Lia wear in winter?", ["coat and scarf", "hat and gloves", "a swimsuit", "sunglasses"], 0, "her warm coat and her scarf", [("🧥", 16, 40, 24), ("🧣", 32, 62, 24), ("🧢", 50, 40, 24), ("🧤", 66, 62, 24), ("👙", 82, 40, 24), ("🕶️", 84, 72, 22)]),
+ (UN, "What does Lia wear in winter?", ["coat and scarf", "hat and gloves", "a swimsuit", "sunglasses"], 0, "her warm coat and her scarf", [("👙", 16, 50, 24), ("🧢", 38, 38, 24), ("🧤", 38, 70, 24), ("🧥", 62, 38, 24), ("🧣", 62, 70, 24), ("🕶️", 84, 50, 22)]),
  (UN, "What does Lia want to be?", ["weather scientist", "farmer", "teacher", "sailor"], 0, "Lia wants to be a weather scientist", [("👩‍🔬", 20, 50, 30), ("👩‍🌾", 40, 50, 30), ("👩‍🏫", 60, 50, 30), ("⛵", 80, 50, 30)]),
  (UN, "What can a storm do?", ["destroy a field", "help farmers", "melt the snow", "cool the city"], 0, "it can destroy a whole field", "⛈️"),
  (UN, "\"predict\" means:", ["לחזות", "להרוס", "להגן", "לבדוק"], 0, "predict storms = לחזות סערות", [("🔮", 20, 50, 30), ("💥", 40, 50, 30), ("🛡️", 60, 50, 30), ("🔍", 80, 50, 30)]),

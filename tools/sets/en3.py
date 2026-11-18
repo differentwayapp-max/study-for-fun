@@ -133,7 +133,7 @@ C.append(("ABC: what comes next?", [AO], [
  Q(AO, "Which letter is missing?", ["M", "O", "J", "P"], 0, "K L M N", TXT("K, L, ?, N")),
  Q(AO, "Which letter is missing?", ["Q", "O", "S", "T"], 0, "P Q R", TXT("P, ?, R")),
  Q(AO, "Which letter is missing?", ["U", "V", "R", "W"], 0, "S T U", TXT("S, T, ?")),
- Q(AO, "Which letter is missing?", ["c", "e", "b", "f"], 0, "a b c d", TXT("a, b, ?, d")),
+ Q(AO, "Which letter is missing?", ["x", "v", "z", "u"], 0, "w x y", TXT("w, ?, y")),
  Q(AO, "What is the first letter of the ABC?", ["A", "B", "Z", "E"], 0, "ה-ABC מתחיל ב-A", TXT("? B C D")),
  Q(AO, "What is the last letter of the ABC?", ["Z", "Y", "X", "W"], 0, "ה-ABC נגמר ב-Z", TXT("W X Y ?")),
  Q(AO, "How many letters are in the ABC?", ["26", "24", "22", "28"], 0, "מ-A עד Z יש 26 אותיות", TXT("A … Z")),
@@ -145,8 +145,8 @@ C.append(("ABC order: words", [AO], [
  Q(AO, "Which word comes first in ABC order?", ["cat", "dog", "fish", "sun"], 0, "c לפני d, f, s", ROW("🐈", "🐕", "🐟", "☀️")),
  Q(AO, "Which word comes last in ABC order?", ["sun", "bed", "hat", "pen"], 0, "s אחרי b, h, p", ROW("☀️", "🛏️", "🎩", "🖊️")),
  Q(AO, "Which word comes last in ABC order?", ["tree", "egg", "milk", "fish"], 0, "t אחרי e, f, m", ROW("🌳", "🥚", "🥛", "🐟")),
- Q(AO, "Which of these letters are in ABC order?", ["d e f", "d f e", "e d f", "f e d"], 0, "d, אחריה e, אחריה f", TXT("d f e · e d f", "f e d · d e f")),
- Q(AO, "Which of these letters are in ABC order?", ["l m n", "m l n", "n m l", "l n m"], 0, "l, אחריה m, אחריה n", TXT("m l n · n m l", "l n m · l m n")),
+ Q(AO, "Which of these is in ABC order?", ["d e f", "d f e", "e d f", "f e d"], 0, "d, אחריה e, אחריה f", TXT("d f e · e d f", "f e d · d e f")),
+ Q(AO, "Which of these is in ABC order?", ["l m n", "m l n", "n m l", "l n m"], 0, "l, אחריה m, אחריה n", TXT("m l n · n m l", "l n m · l m n")),
  Q(AO, "Which letter comes between F and H?", ["G", "E", "I", "J"], 0, "F G H", TXT("F, ?, H")),
  Q(AO, "Which letter comes before C?", ["B", "D", "A", "E"], 0, "B C D", TXT("?, C, D")),
  Q(AO, "Which letter comes after Y?", ["Z", "X", "W", "A"], 0, "X Y Z", TXT("X, Y, ?")),
@@ -307,7 +307,7 @@ C.append(("Food words", [FD], [
 
 C.append(("Food: eat & drink", [FD], [
  Q(FD, "Which is a drink?", ["milk", "bread", "egg", "cake"], 0, "חלב שותים = drink", ROW("🥛", "🍞", "🥚", "🍰")),
- Q(FD, "Which is a yellow fruit?", ["banana", "carrot", "bread", "cheese"], 0, "בננה היא פרי צהוב = fruit", ROW("🍌", "🥕", "🍞", "🧀")),
+ Q(FD, "Which of these is a yellow fruit?", ["banana", "carrot", "bread", "cheese"], 0, "בננה היא פרי צהוב = fruit", ROW("🍌", "🥕", "🍞", "🧀")),
  Q(FD, "Which is NOT food?", ["book", "apple", "egg", "bread"], 0, "ספר לא אוכלים!", ROW("📕", "🍎", "🥚", "🍞")),
  Q(FD, "גלידה = ?", ["ice cream", "cake", "candy", "milk"], 0, "גלידה = ice cream", "🍦"),
  Q(FD, "תפוז = ?", ["orange", "apple", "banana", "grapes"], 0, "תפוז = orange", "🍊"),
@@ -347,7 +347,7 @@ C.append(("School: words & use", [SC], [
 
 # ───────────── Sentences & instructions ─────────────
 C.append(("I am · I have · This is", [SI], [
- Q(SI, "I ___ a girl.", ["am", "is", "are", "be"], 0, "I ← am: I am a girl", "👧"),
+ Q(SI, "I ___ a girl. (אני ילדה)", ["am", "is", "are", "be"], 0, "I ← am: I am a girl", "👧"),
  Q(SI, "I ___ happy.", ["am", "have", "is", "are"], 0, "I am happy = אני שמח", "😀"),
  Q(SI, "I ___ a dog. (יש לי)", ["have", "am", "is", "are"], 0, "יש לי = I have", "🐕"),
  Q(SI, "I ___ two cats. (יש לי)", ["have", "am", "is", "are"], 0, "יש לי = I have", COUNT(("🐈", 2))),
@@ -380,10 +380,10 @@ C.append(("Vowel sounds: the middle sound", [VS], [
  Q(VS, "Same middle sound as dog?", ["box", "bus", "bag", "big"], 0, "d-o-g, b-o-x: אותו צליל o באמצע", PW("🐕", "dog")),
  Q(VS, "Same middle sound as sun?", ["cup", "bag", "big", "box"], 0, "s-u-n, c-u-p: אותו צליל u באמצע", PW("☀️", "sun")),
  Q(VS, "Same middle sound as map?", ["bag", "bed", "big", "bug"], 0, "m-a-p, b-a-g: אותו צליל a באמצע", PW("🗺️", "map")),
- Q(VS, "Which word has a different middle sound?", ["pig", "cat", "hat", "map"], 0, "cat, hat, map עם a. pig עם i", ROW("🐈", "🎩", "🗺️", "🐖")),
- Q(VS, "Which word has a different middle sound?", ["sun", "pen", "hen", "ten"], 0, "pen, hen, ten עם e. sun עם u", ROW("🖊️", "🐔", "🔟", "☀️")),
- Q(VS, "Which word has a different middle sound?", ["bed", "dog", "fox", "box"], 0, "dog, fox, box עם o. bed עם e", ROW("🐕", "🦊", "📦", "🛏️")),
- Q(VS, "Which word has a different middle sound?", ["cup", "map", "cat", "bag"], 0, "map, cat, bag עם a. cup עם u", ROW("🗺️", "🐈", "👜", "☕")),
+ Q(VS, "Which of these has a different middle sound?", ["pig", "cat", "hat", "map"], 0, "cat, hat, map עם a. pig עם i", ROW("🐈", "🎩", "🗺️", "🐖")),
+ Q(VS, "Which of these has a different middle sound?", ["sun", "pen", "hen", "ten"], 0, "pen, hen, ten עם e. sun עם u", ROW("🖊️", "🐔", "🔟", "☀️")),
+ Q(VS, "Which of these has a different middle sound?", ["bed", "dog", "fox", "box"], 0, "dog, fox, box עם o. bed עם e", ROW("🐕", "🦊", "📦", "🛏️")),
+ Q(VS, "Which of these has a different middle sound?", ["cup", "map", "cat", "bag"], 0, "map, cat, bag עם a. cup עם u", ROW("🗺️", "🐈", "👜", "☕")),
 ]))
 
 C.append(("Vowel sounds: change the sound", [VS], [
@@ -471,7 +471,7 @@ C.append(("חזרה כללית", [RH, LS, CS, AO, CV, SW, FB, CN, AN, FD, SC, SI
  Q(CN, "What color is it?", ["blue", "green", "black", "purple"], 0, "כחול = blue", "🔵"),
  Q(CN, "How many?", ["ten", "nine", "eight", "two"], 0, "5 + 5 = 10 = ten", COUNT(("🌸", 5), ("🌸", 5))),
  Q(AN, "What is this?", ["giraffe", "horse", "elephant", "lion"], 0, "ג'ירפה = giraffe", "🦒"),
- Q(FD, "Which is NOT a drink?", ["cake", "milk", "water", "juice"], 0, "עוגה אוכלים, לא שותים", ROW("🍰", "🥛", "💧")),
+ Q(FD, "Which is NOT a drink?", ["cake", "milk", "water", "juice"], 0, "עוגה אוכלים, לא שותים", ROW("🍰", "🥛", "💧", "🍹")),
  Q(SC, "{ruler} = ?", ["סרגל", "עיפרון", "מספריים", "ספר"], 0, "ruler = סרגל", TXT("ruler")),
  Q(SI, "I ___ nine.", ["am", "is", "are", "have"], 0, "גיל: I am nine = אני בן תשע", TXT("9")),
  Q(SI, "{Open the door.} = ?", ["פתחו את הדלת", "סגרו את הדלת", "שבו בשקט", "קומו"], 0, "open = לפתוח, door = דלת", TXT("Open the door.")),

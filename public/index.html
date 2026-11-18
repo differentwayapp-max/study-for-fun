@@ -471,6 +471,8 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .onb .shot img{display:block;width:100%;object-fit:cover;object-position:top;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);background:#fff}
 .onb h1{font-size:1.55em;margin:4px 0 8px}.onb p{font-size:1.05em;line-height:1.5;margin:0;color:var(--ink2);max-width:430px}
 .onb .tip{margin-top:10px;background:#fff;border:2px dashed var(--ink);border-radius:12px;padding:6px 10px;font-weight:600;max-width:430px}
+.onb .onbul{max-width:430px;margin:10px 0 0;padding-inline-start:20px;text-align:start;color:var(--ink2);line-height:1.5;font-size:1em}.onb .onbul li{margin-bottom:4px}
+.onb .onbsep{align-self:stretch;max-width:430px;width:100%;margin:18px auto 12px;border:0;border-top:2px dashed var(--ink);opacity:.35}
 .onb .dots{display:flex;gap:8px;margin:16px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
 .onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
@@ -4029,8 +4031,10 @@ function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) open
    "אחר כך" → shown again the next time the app opens. Kid phones never see it. Pictures: real app screens (public/onb). */
 const ONB=[
   {bg:'#E4F1FF', m:['wow','#2F6BFF'], ill:'🎮 📚 ⭐', t:'ברוכים הבאים! 👋', p:'כאן הילדים מתרגלים דרך משחקים, ואתם רואים איך הם מתקדמים.'},
-  {bg:'#DDF6EC', img:['pick',330], t:'מוסיפים ילד ובוחרים תרגול', p:'בוחרים כיתה ונושא מקטלוג התרגולים המוכנים, או מצלמים דף עבודה, ואנחנו בונים ממנו תרגול.', tip:'☰ ← 📚 קטלוג תרגולים ← בוחרים כיתה ומסמנים נושאים ✔'},
-  {bg:'#FFF3CC', img:['family',120,'link',230], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…'},
+  {bg:'#DDF6EC', img:['pick',280], t:'מוסיפים ילד ובוחרים תרגול', p:'ניתן לבחור מקטלוג התרגולים הקיים בהתאם לכיתה, המקצוע הרלוונטי והחומר הספציפי שתרצו לתרגל.',
+   bullets:['התרגולים שלנו בנויים על בסיס החומר המפורסם של משרד החינוך.','ניתן לבנות תרגול ממוקד: מצלמים דף עבודה ואנחנו בונים ממנו תרגול.'], tip:'☰ ← 📚 קטלוג תרגולים ← בוחרים כיתה ומסמנים נושאים ✔'},
+  {bg:'#FFF3CC', img:['family',100,'link',190], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…',
+   more:{p:'אפשר לשתף גם גורמים נוספים למעקב – סבא וסבתא, מורה או מלווה – בקישור הזמנה משלהם.', img:['invite',190], tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← ＋ הזמנת מבוגר'}},
   {bg:'#FFE4EC', img:['stats',340], t:'עוקבים ומחזקים', p:'רואים מה הילד יודע ואיפה טעה. בלחיצה אחת בונים תרגול חיזוק ממוקד 🎯', tip:'📊 מעקב התקדמות ← 🔎 לראות את הטעויות · 🎯 סט חיזוק'},
 ];
 let ONB_I=0;
@@ -4048,7 +4052,7 @@ function onbShow(){
   let el=$('onb'); if(!el){ el=document.createElement('div'); el.id='onb'; el.className='onb'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); }
   el.style.background=s.bg;
   el.innerHTML=`<div class="ontop"><span>${ONB_I+1}/${n}</span><button onclick="onbLater()">אחר כך</button></div>${pics}
-    <h1>${s.t}</h1><p>${s.p}</p>${s.tip?`<div class="tip">📍 ${s.tip}</div>`:''}
+    <h1>${s.t}</h1><p>${s.p}</p>${s.bullets?`<ul class="onbul">${s.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`:''}${s.tip?`<div class="tip">📍 ${s.tip}</div>`:''}${s.more?`<hr class="onbsep"><p>${s.more.p}</p><div class="shot">${img(s.more.img[0],s.more.img[1])}</div><div class="tip">📍 ${s.more.tip}</div>`:''}
     <div style="flex:1"></div><div class="dots">${ONB.map((_,k)=>`<span class="${k===ONB_I?'on':''}"></span>`).join('')}</div>
     <div class="btns">${last?`<button class="btn big" onclick="onbDone()">הבנתי ✓</button><button class="btn ghost" onclick="onbLater()">אחר כך – להציג שוב בכניסה הבאה</button>`
       :`<button class="btn big" onclick="ONB_I++;onbShow()">הבא ‹</button>${ONB_I?`<button class="btn ghost small" onclick="ONB_I--;onbShow()">› הקודם</button>`:''}`}</div>`;

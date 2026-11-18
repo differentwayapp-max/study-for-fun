@@ -1,4 +1,5 @@
-// First-run welcome screens (parents, right after the terms approval): 4 screens with real app pictures;
+// First-run welcome screens (parents, right after the terms approval): 4 screens with real app pictures (5 pictures:
+// screen 3 also shows how to invite other adults to follow along);
 // "אחר כך" → shown again the next time the app opens (a new tab), "הבנתי" → a note about the user guide, then never again
 // (kept with the account, so not on another phone either). Run inside the emulators (firestore, auth). OUT=dir for screenshots.
 const { chromium } = require('playwright');
@@ -22,7 +23,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
     if (i < 3) await p1.click('#onb .btns .btn.big');
     await p1.waitForTimeout(400);
   }
-  ok(imgs.length === 4 && imgs.every(Boolean), `the real app pictures load (${imgs.length})`);
+  ok(imgs.length === 5 && imgs.every(Boolean), `the real app pictures load (${imgs.length})`);
   ok(/הבנתי/.test(await p1.textContent('#onb .btns')), 'the last screen has "הבנתי" and "אחר כך"');
   await p1.click('#onb .btns .btn.ghost'); await p1.waitForTimeout(300);
   ok(!(await vis(p1, '#onb')), '"אחר כך" closes it');
@@ -42,7 +43,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const c4 = await mk('en'), p4 = await open(c4);
   ok(await vis(p4, '#onb') && /Welcome/.test(await p4.textContent('#onb')), 'English: translated');
   await p4.click('#onb .btns .btn.big'); await p4.waitForTimeout(400);
-  const en = await p4.evaluate(() => ({ src: document.querySelector('#onb img')?.getAttribute('src'), heb: /[֐-׿]/.test(document.querySelector('#onb h1').textContent + document.querySelector('#onb p').textContent + document.querySelector('#onb .tip').textContent) }));
+  const en = await p4.evaluate(() => ({ src: document.querySelector('#onb img')?.getAttribute('src'), heb: /[֐-׿]/.test(document.querySelector('#onb h1').textContent + document.querySelector('#onb p').textContent + document.querySelector('#onb .tip').textContent + document.querySelector('#onb .onbul').textContent) }));
   ok(en.src === '/onb/en-pick.webp' && !en.heb, 'English: English pictures and no Hebrew text ' + JSON.stringify(en));
   if (OUT) await p4.screenshot({ path: `${OUT}/onb_live_en.png` });
   ok(![p1, p2, p3, p4].some(p => p.errs.length), 'no page errors ' + JSON.stringify([p1, p2, p3, p4].flatMap(p => p.errs)));

@@ -239,7 +239,7 @@ C.append(("my · your · his · her", [PN], [
 C.append(("Where? in · on · under · next to", [PP], [
  Q(PP, "The cat is ___ the box.", ["on", "in", "under", "at"], 0, "החתול על הקופסה ← on", ON("🐈", "📦")),
  Q(PP, "The dog is ___ the bed.", ["under", "on", "in", "at"], 0, "הכלב מתחת למיטה ← under", [("🛏️", 50, 40, 56), ("🐕", 50, 68, 20)]),
- Q(PP, "The baby is ___ the bath.", ["in", "on", "at", "under"], 0, "בתוך האמבטיה ← in", "🛀"),
+ Q(PP, "The fish are ___ the tank.", ["in", "on", "at", "under"], 0, "הדגים בתוך האקווריום ← in", COUNT(("🐠", 2))),
  Q(PP, "The chair is ___ the table.", ["next to", "on", "under", "in"], 0, "הכיסא ליד השולחן ← next to", NEXT("💺", "🍽️")),
  Q(PP, "The girl is ___ the umbrella.", ["under", "on", "in", "at"], 0, "הילדה מתחת למטרייה ← under", UNDER("👧", "☂️")),
  Q(PP, "The shop is ___ the bank.", ["next to", "under", "in", "on"], 0, "החנות ליד הבנק ← next to", NEXT("🏪", "🏦")),

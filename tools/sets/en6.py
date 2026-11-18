@@ -236,7 +236,7 @@ C.append(("Past: -ed verbs", [PW], [
  Q(PW, "Past of \"hurry\"?", ["hurried", "hurryed", "hured", "hurries"], 0, "y אחרי עיצור ← ied", TXT("hurry → ?")),
  Q(PW, "Past of \"shop\"?", ["shopped", "shoped", "shopt", "shops"], 0, "מכפילים את p ← shopped", TXT("shop → ?")),
  Q(PW, "Past of \"smile\"?", ["smiled", "smileed", "smilied", "smiles"], 0, "מסתיים ב-e ← מוסיפים רק d", TXT("smile → ?")),
- Q(PW, "Past of \"stay\"?", ["stayed", "staied", "staid", "stays"], 0, "y אחרי תנועה ← ed", TXT("stay → ?")),
+ Q(PW, "Past of \"stay\"?", ["stayed", "staied", "stayd", "stays"], 0, "y אחרי תנועה ← ed", TXT("stay → ?")),
  Q(PW, "Last night the baby ___ (cry) a lot.", ["cried", "cryed", "cries", "crying"], 0, "cry ← cried", "👶"),
  Q(PW, "Two years ago we ___ to a new house.", ["moved", "move", "moves", "moving"], 0, "ago ← עבר: moved", ROW("🚚", "🏡")),
  Q(PW, "Yesterday I ___ to school with Dan.", ["walked", "walk", "walking", "walks"], 0, "yesterday ← עבר: walked", "🚶"),
@@ -252,7 +252,7 @@ C.append(("Irregular verbs: went · saw · ate", [PI], [
  Q(PI, "Dad ___ (buy) me a new ball yesterday.", ["bought", "buyed", "buys", "buy"], 0, "buy ← bought", ROW("👨", "⚽")),
  Q(PI, "Past of \"write\"?", ["wrote", "writed", "writted", "writes"], 0, "write ← wrote", TXT("write → ?")),
  Q(PI, "Past of \"come\"?", ["came", "comed", "come", "comes"], 0, "come ← came", TXT("come → ?")),
- Q(PI, "Yesterday I ___ (do) my homework after school.", ["did", "doed", "do", "does"], 0, "do ← did", "📓"),
+ Q(PI, "Last night I ___ (sleep) for ten hours.", ["slept", "sleeped", "sleep", "sleeps"], 0, "sleep ← slept", "🛌"),
  Q(PI, "Last Friday we ___ (make) a cake for Mom.", ["made", "maked", "make", "makes"], 0, "make ← made", ROW("🎂", "👩")),
  Q(PI, "Last night Tom ___ (tell) his sister a story.", ["told", "telled", "tell", "tells"], 0, "tell ← told", ROW("👦", "👧", "🌙")),
 ]))
@@ -373,7 +373,7 @@ C.append(("Food", [VS], [
  Q(VS, "Breakfast, lunch and ___.", ["dinner", "dessert", "snack", "kitchen"], 0, "dinner = ארוחת ערב", "🍽️"),
  Q(VS, "Ice cream is ___.", ["sweet", "salty", "sour", "hot"], 0, "sweet = מתוק", "🍦"),
  Q(VS, "Lemons are ___.", ["sour", "sweet", "salty", "hot"], 0, "sour = חמוץ", "🍋"),
- Q(VS, "I'm thirsty. Can I have some ___ from the tap?", ["water", "bread", "rice", "cheese"], 0, "thirsty = צמא ← water", OPTS("🚰", "🍞", "🍚", "🧀")),
+ Q(VS, "I'm thirsty. Can I have a glass of orange ___?", ["juice", "bread", "rice", "cheese"], 0, "orange juice = מיץ תפוזים – שותים מכוס", OPTS("🥤", "🍞", "🍚", "🧀")),
  Q(VS, "ארוחת בוקר = ?", ["breakfast", "lunch", "dinner", "dessert"], 0, "ארוחת בוקר = breakfast", ROW("🥣", "🌅")),
  Q(VS, "The meal at noon, between breakfast and dinner, is ___.", ["lunch", "supper", "dessert", "menu"], 0, "lunch = ארוחת צהריים", ROW("🥪", "🕛")),
 ]))
@@ -470,7 +470,7 @@ C.append(("Commands: Don't run!", [IM], [
  Q(IM, "\"אל תשכח!\" = ?", ["Don't forget!", "Not forget!", "You forget!", "Doesn't forget!"], 0, "אל + פועל ← Don't + פועל", "🎒"),
  Q(IM, "It's a library. ___ talk loudly.", ["Don't", "Do", "Please", "Let's"], 0, "בספרייה שומרים על שקט ← Don't", ROW("📖", "🤫")),
  Q(IM, "___ careful! The floor is wet.", ["Be", "Don't", "Is", "Being"], 0, "ציווי של to be ← Be careful", ROW("💧", "⚠️")),
- Q(IM, "Pool rule: ___ near the water – the floor is slippery!", ["Don't run", "Doesn't run", "Not run", "Don't running"], 0, "כלל ← Don't + פועל בסיס", ROW("🏃", "🚫")),
+ Q(IM, "Pool rule: ___ into the water – it isn't deep!", ["Don't jump", "Doesn't jump", "Not jump", "Don't jumping"], 0, "כלל ← Don't + פועל בסיס", ROW("🏊", "🚫")),
 ]))
 
 # ───────────── Describing people ─────────────
@@ -547,7 +547,7 @@ C.append(("quarter past · quarter to", [TM], [
  Q(TM, "It's quarter past three. Which time is it?", ["3:15", "3:45", "2:45", "3:30"], 0, "past = אחרי 3 ← 3:15", TXT("quarter", "past 3")),
  Q(TM, "It's quarter to five. Which time is it?", ["4:45", "5:15", "5:45", "4:15"], 0, "רבע לפני 5 ← 4:45", TXT("quarter", "to 5")),
  Q(TM, "Lunch is at 1:30. That's ___.", ["half past one", "quarter past one", "half past two", "one o'clock"], 0, "1:30 ← half past one", "🍽️"),
- Q(TM, "It's 3:00. What time is it in a quarter of an hour?", ["3:15", "3:45", "3:30", "2:45"], 0, "רבע שעה = 15 דקות ← 3:15", TXT("3:00", "+ ¼ hour")),
+ Q(TM, "It's 6:30. What time is it in a quarter of an hour?", ["6:45", "6:15", "7:00", "7:30"], 0, "רבע שעה = 15 דקות ← 6:45", TXT("6:30", "+ ¼ hour")),
  Q(TM, "How many minutes are in half an hour?", ["30", "15", "60", "45"], 0, "חצי מ-60 = 30", "⏳"),
  Q(TM, "My piano lesson is ___ quarter past four.", ["at", "in", "on", "to"], 0, "שעה מדויקת ← at", "🎹"),
  Q(TM, "It's 8:45. It's ___.", ["quarter to nine", "quarter past nine", "quarter to eight", "half past eight"], 0, "8:45 = רבע לפני 9 ← quarter to nine", TXT("8:45")),

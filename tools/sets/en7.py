@@ -60,7 +60,7 @@ C.append(("Past Simple: time words & spelling", [PR], [
  Q(PR, "Which week is in the past?", ["last week", "next week", "every week", "tomorrow"], 0, "last week = בשבוע שעבר", ROW("📅", "⬅️")),
  Q(PR, "I ___ TV last night.", ["watched", "watch", "watches", "watching"], 0, "last night ← watched", ROW("📺", "🌙")),
  Q(PR, "Which is NOT a past verb?", ["walks", "walked", "opened", "laughed"], 0, "walks = הווה; השאר עבר", ROW("🚶", "🚪", "😂")),
- Q(PR, "Past of plan?", ["planned", "planed", "planing", "plans"], 0, "תנועה קצרה + n ← מכפילים: planned", PW("🗓️", "plan → ?")),
+ Q(PR, "Past of plan?", ["planned", "plannd", "planded", "plans"], 0, "תנועה קצרה + n ← מכפילים: planned", PW("🗓️", "plan → ?")),
  Q(PR, "Past of worry?", ["worried", "worryed", "worries", "woried"], 0, "y אחרי עיצור ← ied", PW("😟", "worry → ?")),
  Q(PR, "Past of enjoy?", ["enjoyed", "enjoied", "enjoys", "enjoid"], 0, "y אחרי תנועה ← רק ed", PW("😊", "enjoy → ?")),
  Q(PR, "My dad ___ dinner on the stove an hour ago.", ["cooked", "cook", "cooks", "cooking"], 0, "an hour ago ← עבר: cooked", ROW("👨‍🍳", "🍲")),
@@ -99,7 +99,7 @@ C.append(("Irregular verbs in sentences", [PI], [
 # ───────────── Past Simple: negatives & questions ─────────────
 C.append(("Past Simple: didn't · wasn't · weren't", [PN], [
  Q(PN, "The shop was closed, so we ___ buy any bread.", ["didn't", "don't", "wasn't", "doesn't"], 0, "עבר + פועל ← didn't", ROW("🏪", "🔒", "🍞")),
- Q(PN, "He didn't ___ the shopping, so there's no milk.", ["do", "did", "does", "doing"], 0, "אחרי didn't ← צורת בסיס", ROW("🛒", "🥛", "❌")),
+ Q(PN, "He bought a hat, but he didn't ___ shoes.", ["buy", "bought", "buys", "brought"], 0, "didn't + buy (לא bought)", ROW("👦", "🎩", "👟")),
  Q(PN, "We ran, but we didn't ___ the bus.", ["catch", "caught", "catches", "catching"], 0, "אחרי didn't ← צורת בסיס", ROW("🏃", "🚌")),
  Q(PN, "Which is correct?", ["He didn't swim", "He didn't swam", "He not swam", "He don't swam"], 0, "didn't + צורת בסיס", ROW("🏊", "❌")),
  Q(PN, "They ___ like the film last night.", ["didn't", "don't", "doesn't", "weren't"], 0, "last night ← didn't", ROW("🎬", "👎")),
@@ -158,7 +158,7 @@ C.append(("Future: will · won't", [FU], [
  Q(FU, "They said yes! They ___ come to the party.", ["will", "are", "did", "was"], 0, "הם הסכימו + עתיד ← will", ROW("🎉", "👍")),
  Q(FU, "I'm thirsty. – I ___ get you some water.", ["will", "am", "did", "was"], 0, "החלטה ברגע הדיבור ← will", ROW("🥵", "💧")),
  Q(FU, "will not = ?", ["won't", "wasn't", "weren't", "don't"], 0, "will not = won't", TXT("will not")),
- Q(FU, "In 2050 people ___ live on Mars, and I'll visit them!", ["will", "did", "were", "was"], 0, "תחזית לעתיד ← will", PW("🚀", "2050")),
+ Q(FU, "Good news! Scientists think people ___ live on Mars in 2050.", ["will", "did", "were", "was"], 0, "תחזית לעתיד ← will", PW("🚀", "2050")),
  Q(FU, "Can you come tomorrow? – Sure, I ___ be there.", ["will", "did", "was", "am"], 0, "tomorrow ← will + be", ROW("📅", "👍")),
  Q(FU, "Which is correct?", ["He will swim", "He will swims", "He wills swim", "He will swimming"], 0, "will + צורת בסיס", ROW("🏊", "📅")),
  Q(FU, "The phone is ringing. – I ___ answer it! Hello?", ["will", "am", "did", "was"], 0, "החלטה ברגע הדיבור ← will", ROW("📞", "🔔")),

@@ -169,7 +169,7 @@ C.append(("Greetings: what do you say?", [GR], [
  Q(GR, "Thank you! – ___", ["You're welcome.", "Sorry.", "Goodbye.", "Good night."], 0, "עונים לתודה: You're welcome = אין בעד מה", ROW("🎁", "🙂")),
  Q(GR, "{Thank you very much!} = ?", ["תודה רבה!", "בבקשה!", "סליחה!", "להתראות!"], 0, "very much = מאוד, הרבה ← תודה רבה", OPTS("🎁", "🙋", "😬", "👋")),
  Q(GR, "{See you tomorrow!} = ?", ["נתראה מחר!", "בוקר טוב!", "תודה רבה!", "מה שלומך?"], 0, "see you = נתראה, tomorrow = מחר", ROW("👦", "👧")),
- Q(GR, "It's your friend's birthday. You say: Happy ___!", ["birthday", "morning", "night", "sorry"], 0, "ליום הולדת אומרים Happy birthday", "🎂"),
+ Q(GR, "It's your friend's birthday. You say: ___ birthday!", ["Happy", "Good", "Nice", "Sorry"], 0, "ליום הולדת אומרים Happy birthday = יום הולדת שמח", "🎂"),
  Q(GR, "{Good evening!} = ?", ["ערב טוב!", "בוקר טוב!", "לילה טוב!", "יום טוב!"], 0, "evening = ערב ← ערב טוב", OPTS("🌆", "🌅", "🌙", "☀️")),
 ]))
 
@@ -365,7 +365,7 @@ C.append(("I am · I have", [IA], [
 
 C.append(("I like · I can", [IA], [
  Q(IA, "אני אוהב פיצה = {I ___ pizza.}", ["like", "can", "am", "have"], 0, "אוהב = like", "🍕"),
- Q(IA, "אני יכול לשחות = I ___ swim.", ["can", "like", "am", "have"], 0, "I can swim = אני יודע לשחות", "🏊"),
+ Q(IA, "My little sister ___ draw, but she can't read.", ["can", "likes", "is", "has"], 0, "היא יודעת לצייר ← can (ההפך מ-can't)", ROW("👧", "🖍️")),
  Q(IA, "A fish can ___.", ["swim", "fly", "run", "sing"], 0, "דג יכול לשחות = swim", "🐟"),
  Q(IA, "A bird can ___.", ["fly", "read", "write", "cook"], 0, "ציפור יכולה לעוף = fly", "🐦"),
  Q(IA, "A cat has no wings. It can't ___.", ["fly", "run", "jump", "eat"], 0, "can't = לא יכול; חתול לא עף", "🐈"),
@@ -474,7 +474,7 @@ C.append(("Where? in · on · under", [PR], [
  Q(PR, "The fish is ___ the sea.", ["in", "on", "under", "next to"], 0, "הדג בתוך הים ← in", INSIDE("🐠", "🌊")),
  Q(PR, "The bird is ___ the car.", ["on", "in", "under", "next to"], 0, "הציפור על המכונית ← on", ON("🐦", "🚗")),
  Q(PR, "The boy is ___ the umbrella.", ["under", "on", "in", "next to"], 0, "הילד מתחת למטרייה ← under", UNDER("👦", "☂️")),
- Q(PR, "The boy is ___ the bath.", ["in", "on", "under", "next to"], 0, "הילד בתוך האמבטיה ← in", "🛀"),
+ Q(PR, "The cat is ___ the basket.", ["in", "on", "under", "next to"], 0, "החתול בתוך הסל ← in", INSIDE("🐈", "🧺")),
  Q(PR, "Dad is ___ bed. He is sleeping.", ["in", "under", "next to", "up"], 0, "שוכבים בתוך המיטה ← in bed", "🛌"),
  Q(PR, "What is under the book?", ["a notebook", "scissors", "a pen", "a ball"], 0, "המחברת מתחת לספר = notebook", STACK("✂️", "📕", "📓")),
  Q(PR, "What is on the book?", ["scissors", "a notebook", "a cup", "a ball"], 0, "המספריים על הספר = scissors", STACK("✂️", "📕", "📓")),
@@ -483,7 +483,7 @@ C.append(("Where? in · on · under", [PR], [
 
 C.append(("Where is it? next to · in · on · under", [PR], [
  Q(PR, "The dog is ___ the cat.", ["next to", "on", "under", "in"], 0, "הכלב ליד החתול ← next to", NEXT("🐕", "🐈")),
- Q(PR, "ליד = ?", ["next to", "under", "on", "in"], 0, "ליד = next to (העץ ליד הבית)", NEXT("🌳", "🏠")),
+ Q(PR, "The tree is ___ the house.", ["next to", "under", "on", "in"], 0, "העץ ליד הבית ← next to", NEXT("🌳", "🏠")),
  Q(PR, "What is on the flower?", ["a bee", "a bird", "a frog", "a fish"], 0, "הדבורה על הפרח = bee", ON("🐝", "🌻") + [("🐸", 18, 72, 24)]),
  Q(PR, "Where is the ball?", ["in the bag", "on the bag", "under the bed", "on the dog"], 0, "הכדור בתוך הילקוט ← in the bag", INSIDE("⚽", "🎒")),
  Q(PR, "Where is the bird?", ["on the house", "in the house", "under the house", "in the sea"], 0, "הציפור על הבית ← on the house", ON("🐦", "🏠")),
@@ -587,7 +587,7 @@ C.append(("חזרה כללית", [SR, VW, DG, AB, FF, CN, BC, AN, FD, SC, DY, IA
  Q(CN, "17 = ?", ["seventeen", "seventy", "seven", "eleven"], 0, "17 = seventeen", TXT("17")),
  Q(BC, "I have two ___ on my head.", ["ears", "noses", "mouths", "heads"], 0, "שתי אוזניים = two ears", "🙂"),
  Q(BC, "שמלה = ?", ["dress", "desk", "shirt", "sock"], 0, "שמלה = dress", "👗"),
- Q(AN, "The ___ is king of the animals.", ["lion", "tiger", "bear", "horse"], 0, "האריה = מלך החיות = lion", "👑"),
+ Q(AN, "Which animal is NOT a pet?", ["lion", "cat", "dog", "rabbit"], 0, "אריה = חיית בר, לא חיית מחמד", OPTS("🦁", "🐈", "🐕", "🐇")),
  Q(FD, "Which is NOT food?", ["shoe", "bread", "egg", "rice"], 0, "נעל לא אוכלים!", OPTS("👟", "🍞", "🥚", "🍚")),
  Q(SC, "סגרו את הספר = {___ your book.}", ["Close", "Open", "Read", "Draw"], 0, "לסגור = close", "📕"),
  Q(DY, "Today is Sunday. Tomorrow is ___.", ["Monday", "Saturday", "Tuesday", "Friday"], 0, "אחרי Sunday בא Monday", TXT("Sunday → ?")),

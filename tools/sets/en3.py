@@ -463,7 +463,7 @@ C.append(("חזרה כללית", [RH, LS, CS, AO, CV, SW, FB, CN, AN, FD, SC, SI
  Q(CS, "האות הגדולה של {b}?", ["B", "D", "P", "R"], 0, "b קטנה = B גדולה", BIG("b")),
  Q(AO, "What comes after M?", ["N", "L", "O", "W"], 0, "L M N", TXT("L, M, ?")),
  Q(AO, "Which word comes first in ABC order?", ["bus", "pig", "sun", "map"], 0, "b לפני m, p, s", ROW("🗺️", "☀️", "🚌", "🐖")),
- Q(CV, "r_n (לרוץ)", ["u", "a", "i", "e"], 0, "r-u-n = run", "🏃"),
+ Q(CV, "r_n (לרוץ)", ["u", "o", "i", "e"], 0, "r-u-n = run", "🏃"),
  Q(CV, "Read the sounds: b-e-d", ["bed", "bad", "bid", "red"], 0, "b-e-d ביחד = bed", TXT("b-e-d")),
  Q(SW, "We ___ to school. (הולכים)", ["go", "see", "like", "can"], 0, "הולכים = go", "🏫"),
  Q(FB, "I smell with my ___.", ["nose", "ear", "eye", "hand"], 0, "מריחים באף = nose", "🌸"),

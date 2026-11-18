@@ -117,7 +117,7 @@ C.append(("Prepositions", [PR], [
  (PR, "The fish is ___ the boat.", ["under", "on top of", "in", "in front of"], 0, "הדג מתחת לסירה = under", [("⛵", 50, 34, 44), ("🐟", 50, 76, 24)]),
  (PR, "My birthday is ___ Sunday.", ["on", "in", "under", "next to"], 0, "ימים בשבוע: on Sunday", [("🎂", 50, 52, 52)]),
  (PR, "The milk is ___ the glass.", ["in", "on", "under", "next to"], 0, "החלב בתוך הכוס = in", [("🥛", 50, 52, 56)]),
- (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "מעל = on top of (הציפור על העץ)", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
+ (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "on top of = מעל, על גבי: הציפור על העץ", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
  (PR, "מתחת = ?", ["under", "on", "in", "next to"], 0, "מתחת = under", [("☂️", 50, 34, 44), ("🧒", 50, 74, 28)]),
  (PR, "ליד = ?", ["next to", "under", "in", "on"], 0, "ליד = next to", [("🧒", 36, 58, 32), ("🧒", 64, 58, 32)]),
  (PR, "לפני = ?", ["in front of", "next to", "on top of", "under"], 0, "לפני = in front of", [("🏠", 50, 40, 54), ("🚗", 50, 62, 34)]),

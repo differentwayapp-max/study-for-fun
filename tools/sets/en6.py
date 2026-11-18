@@ -116,7 +116,7 @@ C.append(("Plurals: -s · -es · -ies · -ves", [PL], [
  Q(PL, "There are seven ___ in a week.", ["days", "daies", "dayes", "day"], 0, "y אחרי תנועה ← רק s", "🗓️"),
  Q(PL, "I need two ___ for the soup.", ["potatoes", "potatos", "potato", "potatoies"], 0, "potato ← מוסיפים es", COUNT(("🥔", 2))),
  Q(PL, "She washes the ___ after dinner.", ["dishes", "dishs", "dish", "dishies"], 0, "אחרי sh ← es", COUNT(("🍽️", 3))),
- Q(PL, "Which plural is NOT correct?", ["boxs", "cities", "keys", "buses"], 0, "box ← boxes, לא boxs", ROW("📦", "🏙️", "🔑", "🚌")),
+ Q(PL, "Which plural is NOT correct?", ["boxs", "cities", "keys", "buses"], 0, "box ← boxes, לא boxs", OPTS("📦", "🏙️", "🔑", "🚌")),
  Q(PL, "In autumn the ___ fall from the trees.", ["leaves", "leafs", "leafes", "leaf"], 0, "f ← ves: leaf – leaves", "🍂"),
  Q(PL, "There are many ___ in our city.", ["libraries", "librarys", "libraryes", "library"], 0, "y אחרי עיצור ← ies", ROW("🏙️", "📖")),
 ]))
@@ -152,12 +152,12 @@ C.append(("Possessives: my · mine · their", [PN], [
  Q(PN, "This is Noa. ___ hair is red.", ["Her", "She", "His", "Hers"], 0, "השיער שלה ← Her", "👩‍🦰"),
  Q(PN, "Dan is sad. ___ dog is sick.", ["His", "He", "Her", "Him"], 0, "הכלב שלו ← His", ROW("👦", "🐕")),
  Q(PN, "We love ___ new house. We moved in last week.", ["our", "us", "we", "ours"], 0, "הבית שלנו ← our + שם עצם", "🏡"),
- Q(PN, "The dog is eating ___ food.", ["its", "it's", "it", "their"], 0, "האוכל שלו (של הכלב) ← its", ROW("🐕", "🦴")),
+ Q(PN, "Look at this tree. ___ leaves are green.", ["Its", "It's", "It", "Their"], 0, "העלים שלו (של העץ) ← Its", "🌳"),
  Q(PN, "Is this your pen? Yes, it's ___.", ["mine", "my", "me", "I"], 0, "שלי בסוף המשפט ← mine", "🖊️"),
  Q(PN, "This bag is Ron's. It's ___.", ["his", "him", "he", "her"], 0, "של רון = שלו ← his", "🎒"),
  Q(PN, "Dan and I bought these shoes. They're ___.", ["ours", "our", "us", "we"], 0, "שלנו בסוף המשפט ← ours", COUNT(("👟", 2))),
  Q(PN, "The children are in ___ classroom.", ["their", "there", "they", "them"], 0, "הכיתה שלהם ← their", "🏫"),
- Q(PN, "Is this ___ phone, Maya?", ["your", "you", "yours", "you're"], 0, "שלך + שם עצם ← your", "📱"),
+ Q(PN, "Maya, is this ___ phone? (שלך)", ["your", "you", "yours", "you're"], 0, "שלך + שם עצם ← your", "📱"),
  Q(PN, "This is Rina's book. The book is ___.", ["hers", "her", "she", "his"], 0, "של רינה = שלה ← hers", "📗"),
 ]))
 
@@ -199,7 +199,7 @@ C.append(("Question words", [QW], [
  Q(QW, "___ is your phone number? 054-1234567.", ["What", "Who", "Where", "When"], 0, "מספר טלפון ← What", "📱"),
  Q(QW, "___ book is yours, the red or the blue?", ["Which", "Who", "Where", "How"], 0, "בחירה בין שניים ← Which", ROW("📕", "📘")),
  Q(QW, "___ do you go to school? By bus.", ["How", "What", "Where", "When"], 0, "איך ← How", "🚌"),
- Q(QW, "___ bag is this? It's Dan's.", ["Whose", "Who", "Who's", "Where"], 0, "של מי ← Whose", "🎒"),
+ Q(QW, "___ bag is this? – It's Dan's bag. (של מי)", ["Whose", "Who", "Who's", "Where"], 0, "של מי ← Whose", "🎒"),
 ]))
 
 C.append(("Making questions", [QW], [
@@ -353,9 +353,9 @@ C.append(("School subjects", [VS], [
 
 C.append(("Sports", [VS], [
  Q(VS, "You kick the ball in ___.", ["football", "tennis", "basketball", "swimming"], 0, "football = כדורגל", "🦶"),
- Q(VS, "You need a racket for ___.", ["tennis", "football", "swimming", "running"], 0, "racket = מחבט ← tennis", ROW("🎾", "⚽", "🏊", "🏃")),
+ Q(VS, "You need a racket for ___.", ["tennis", "football", "swimming", "running"], 0, "racket = מחבט ← tennis", OPTS("🎾", "⚽", "🏊", "🏃")),
  Q(VS, "In ___ you throw the ball into a basket.", ["basketball", "football", "tennis", "swimming"], 0, "basketball = כדורסל", "🧺"),
- Q(VS, "You need a pool for ___.", ["swimming", "skiing", "cycling", "running"], 0, "swimming = שחייה", ROW("🏊", "⛷️", "🚴", "🏃")),
+ Q(VS, "You need a pool for ___.", ["swimming", "skiing", "cycling", "running"], 0, "swimming = שחייה", OPTS("🏊", "⛷️", "🚴", "🏃")),
  Q(VS, "You need snow for ___.", ["skiing", "swimming", "cycling", "tennis"], 0, "skiing = סקי", "❄️"),
  Q(VS, "The sport with a bike is ___.", ["cycling", "running", "skiing", "swimming"], 0, "cycling = רכיבה על אופניים", "🚲"),
  Q(VS, "We ___ basketball after school.", ["play", "go", "do", "make"], 0, "משחק עם כדור ← play", "🏀"),
@@ -365,15 +365,15 @@ C.append(("Sports", [VS], [
 ]))
 
 C.append(("Food", [VS], [
- Q(VS, "Which one is a vegetable?", ["carrot", "banana", "apple", "cake"], 0, "carrot = גזר, ירק", ROW("🥕", "🍌", "🍎", "🍰")),
- Q(VS, "Which one is a fruit?", ["grapes", "potato", "carrot", "cucumber"], 0, "grapes = ענבים, פרי", ROW("🍇", "🥔", "🥕", "🥒")),
- Q(VS, "Cows give us ___.", ["milk", "juice", "eggs", "bread"], 0, "פרה ← חלב = milk", "🐄"),
+ Q(VS, "Which one is a vegetable?", ["carrot", "banana", "apple", "cake"], 0, "carrot = גזר, ירק", OPTS("🥕", "🍌", "🍎", "🍰")),
+ Q(VS, "Which one is a fruit?", ["grapes", "potato", "carrot", "cucumber"], 0, "grapes = ענבים, פרי", OPTS("🍇", "🥔", "🥕", "🥒")),
+ Q(VS, "Cheese and butter are made from ___.", ["milk", "juice", "eggs", "bread"], 0, "גבינה וחמאה עושים מחלב = milk", "🧀"),
  Q(VS, "Chickens give us ___.", ["eggs", "milk", "cheese", "bread"], 0, "תרנגולת ← ביצים = eggs", "🐔"),
  Q(VS, "I eat ___ with a spoon.", ["soup", "bread", "an apple", "pizza"], 0, "soup = מרק, אוכלים בכף", "🥄"),
  Q(VS, "Breakfast, lunch and ___.", ["dinner", "dessert", "snack", "kitchen"], 0, "dinner = ארוחת ערב", "🍽️"),
  Q(VS, "Ice cream is ___.", ["sweet", "salty", "sour", "hot"], 0, "sweet = מתוק", "🍦"),
  Q(VS, "Lemons are ___.", ["sour", "sweet", "salty", "hot"], 0, "sour = חמוץ", "🍋"),
- Q(VS, "I'm thirsty. Can I have some ___ from the tap?", ["water", "bread", "rice", "cheese"], 0, "thirsty = צמא ← water", ROW("🚰", "🍞", "🍚", "🧀")),
+ Q(VS, "I'm thirsty. Can I have some ___ from the tap?", ["water", "bread", "rice", "cheese"], 0, "thirsty = צמא ← water", OPTS("🚰", "🍞", "🍚", "🧀")),
  Q(VS, "ארוחת בוקר = ?", ["breakfast", "lunch", "dinner", "dessert"], 0, "ארוחת בוקר = breakfast", ROW("🥣", "🌅")),
  Q(VS, "The meal at noon, between breakfast and dinner, is ___.", ["lunch", "supper", "dessert", "menu"], 0, "lunch = ארוחת צהריים", ROW("🥪", "🕛")),
 ]))
@@ -385,10 +385,10 @@ C.append(("Places", [VW], [
  Q(VW, "You see old things and art in a ___.", ["museum", "zoo", "pool", "market"], 0, "museum = מוזיאון", ROW("🏺", "🖼️")),
  Q(VW, "Planes take off at the ___.", ["airport", "bus stop", "library", "beach"], 0, "airport = שדה תעופה", "🛫"),
  Q(VW, "You buy fruit and vegetables at the ___.", ["market", "bank", "post office", "cinema"], 0, "market = שוק", ROW("🍎", "🥕", "🍌")),
- Q(VW, "You swim and play in the sand at the ___.", ["beach", "library", "bank", "airport"], 0, "beach = חוף ים", ROW("🏖️", "📖", "🏦", "🛫")),
+ Q(VW, "You swim and play in the sand at the ___.", ["beach", "library", "bank", "airport"], 0, "beach = חוף ים", OPTS("🏖️", "📖", "🏦", "🛫")),
  Q(VW, "You wait for the train at the ___.", ["station", "airport", "beach", "office"], 0, "station = תחנה", "🚆"),
  Q(VW, "You watch a film at the ___.", ["cinema", "museum", "library", "bank"], 0, "cinema = קולנוע", "🎬"),
- Q(VW, "You buy bread and cakes at the ___.", ["bakery", "bank", "library", "station"], 0, "bakery = מאפייה", ROW("🥖", "🍰")),
+ Q(VW, "You buy fresh bread and cakes from the baker at the ___.", ["bakery", "bank", "library", "station"], 0, "bakery = מאפייה", ROW("🥖", "🍰")),
  Q(VW, "שכונה = ?", ["neighborhood", "street", "city", "country"], 0, "שכונה = neighborhood", "🏘️"),
 ]))
 
@@ -502,15 +502,15 @@ C.append(("What is she like?", [DP], [
 
 # ───────────── Words: clothes ─────────────
 C.append(("Clothes", [CL], [
- Q(CL, "I wear a ___ on my head.", ["hat", "shoe", "sock", "shirt"], 0, "hat = כובע", ROW("👒", "👞", "🧦", "👕")),
+ Q(CL, "I wear a ___ on my head.", ["hat", "shoe", "sock", "shirt"], 0, "hat = כובע", OPTS("👒", "👞", "🧦", "👕")),
  Q(CL, "A ___ is a long, warm jacket for winter.", ["coat", "shorts", "sandals", "T-shirt"], 0, "coat = מעיל, שומר מהקור", "❄️"),
  Q(CL, "You wear ___ on your feet, inside your shoes.", ["socks", "gloves", "hats", "scarves"], 0, "socks = גרביים", ROW("🦶", "👟")),
  Q(CL, "You wear ___ on your hands in winter.", ["gloves", "socks", "boots", "glasses"], 0, "gloves = כפפות", ROW("👐", "❄️")),
- Q(CL, "A ___ is a top and a skirt in one piece.", ["dress", "shirt", "coat", "scarf"], 0, "dress = שמלה", ROW("👗", "👕", "🧥", "🧣")),
+ Q(CL, "A ___ is a top and a skirt in one piece.", ["dress", "shirt", "coat", "scarf"], 0, "dress = שמלה", OPTS("👗", "👕", "🧥", "🧣")),
  Q(CL, "For work, Dad wears a ___ under his shirt collar.", ["tie", "skirt", "dress", "sock"], 0, "tie = עניבה", ROW("👨", "💼")),
  Q(CL, "In summer I wear ___ (short trousers) and a T-shirt.", ["shorts", "a coat", "gloves", "boots"], 0, "קיץ ← shorts = מכנסיים קצרים", ROW("☀️", "👕")),
- Q(CL, "___ are blue trousers for every day.", ["Jeans", "Shoes", "Socks", "Hats"], 0, "jeans = מכנסי ג'ינס", ROW("👖", "👟", "🧦", "👒")),
- Q(CL, "You wear a ___ around your neck when it's cold.", ["scarf", "belt", "ring", "sock"], 0, "scarf = צעיף", ROW("🧣", "💍", "🧦")),
+ Q(CL, "___ are blue trousers for every day.", ["Jeans", "Shoes", "Socks", "Hats"], 0, "jeans = מכנסי ג'ינס", OPTS("👖", "👟", "🧦", "👒")),
+ Q(CL, "You wear a ___ around your neck when it's cold.", ["scarf", "ring", "sock", "belt"], 0, "scarf = צעיף", OPTS("🧣", "💍", "🧦")),
  Q(CL, "Rain ___ keep my feet dry.", ["boots", "hats", "scarves", "gloves"], 0, "rain boots = מגפי גשם", ROW("🌧️", "🦶")),
 ]))
 
@@ -524,7 +524,7 @@ C.append(("Wearing clothes", [CL], [
  Q(CL, "My new jeans ___ blue.", ["are", "is", "am", "be"], 0, "jeans תמיד ברבים ← are", "👖"),
  Q(CL, "A ___ keeps my trousers up.", ["belt", "tie", "scarf", "glove"], 0, "belt = חגורה", "👖"),
  Q(CL, "At my school we all wear a ___.", ["uniform", "umbrella", "pocket", "backpack"], 0, "uniform = תלבושת אחידה", ROW("🏫", "👧", "👦")),
- Q(CL, "Which is NOT clothes?", ["umbrella", "shirt", "skirt", "jacket"], 0, "umbrella = מטרייה, לא בגד", ROW("☂️", "👕", "👗", "🧥")),
+ Q(CL, "Which is NOT clothes?", ["umbrella", "shirt", "skirt", "jacket"], 0, "umbrella = מטרייה, לא בגד", OPTS("☂️", "👕", "👗", "🧥")),
 ]))
 
 # ───────────── Telling the time ─────────────
@@ -558,7 +558,7 @@ C.append(("quarter past · quarter to", [TM], [
 # ───────────── Writing ─────────────
 C.append(("Connectors: and · but · because", [WR], [
  Q(WR, "I like apples ___ bananas.", ["and", "but", "because", "or"], 0, "and = ו… (מוסיף עוד דבר)", ROW("🍎", "🍌")),
- Q(WR, "I like cats, ___ I don't like dogs.", ["but", "because", "or", "so"], 0, "but = אבל (ניגוד)", ROW("🐈", "👍", "🐕", "👎")),
+ Q(WR, "I like cats, ___ I don't like dogs. (אבל)", ["but", "because", "or", "so"], 0, "but = אבל (ניגוד)", ROW("🐈", "👍", "🐕", "👎")),
  Q(WR, "I'm hungry ___ I didn't eat breakfast.", ["because", "but", "and", "or"], 0, "because = כי (סיבה)", "🍽️"),
  Q(WR, "She can sing, ___ she can't dance.", ["but", "because", "or", "so"], 0, "can מול can't ← but", ROW("🎤", "💃")),
  Q(WR, "We stayed at home ___ it was raining.", ["because", "but", "and", "or"], 0, "הגשם הוא הסיבה ← because", ROW("🏠", "🌧️")),
@@ -601,12 +601,12 @@ C.append(("📖 Reading: My New School", [RD], [
  Q(RD, "How old is Yoav?", ["twelve", "eleven", "ten", "thirteen"], 0, "I am twelve years old", "👦"),
  Q(RD, "When did Yoav's family move?", ["in the summer", "last winter", "last week", "in the spring"], 0, "My family moved here in the summer", "🚚"),
  Q(RD, "On which floor is the library?", ["the second", "the first", "the third", "the top"], 0, "on the second floor = בקומה השנייה", ROW("📖", "🏫")),
- Q(RD, "How does Yoav go to school?", ["by bike", "by bus", "on foot", "by car"], 0, "I go to school by bike", ROW("🚲", "🚌", "🚶", "🚗")),
+ Q(RD, "How does Yoav go to school?", ["by bike", "by bus", "on foot", "by car"], 0, "I go to school by bike", OPTS("🚲", "🚌", "🚶", "🚗")),
  Q(RD, "Why does Yoav like science?", ["he loves animals", "it is easy", "Eitan likes it", "Mr. Levi helps"], 0, "because I love animals and plants", "🔬"),
  Q(RD, "Who is Mr. Levi?", ["his math teacher", "his science teacher", "his father", "his friend"], 0, "my math teacher, Mr. Levi", "👨"),
- Q(RD, "What can Eitan do?", ["play the guitar", "play the piano", "speak French", "draw animals"], 0, "He can play the guitar", ROW("🎸", "🎹", "🗣️", "🎨")),
+ Q(RD, "What can Eitan do?", ["play the guitar", "play the piano", "speak French", "draw animals"], 0, "He can play the guitar", OPTS("🎸", "🎹", "🗣️", "🎨")),
  Q(RD, "What do the boys often do after school?", ["play basketball", "play football", "do homework", "read books"], 0, "we often play basketball in the park", ROW("🏀", "⚽", "📓", "📖")),
- Q(RD, "What is Yoav doing right now?", ["writing an email", "playing basketball", "reading a book", "sleeping"], 0, "Right now I am writing this email", ROW("📧", "🏀", "📖", "😴")),
+ Q(RD, "What is Yoav doing right now?", ["writing an email", "playing basketball", "reading a book", "sleeping"], 0, "Right now I am writing this email", OPTS("📧", "🏀", "📖", "😴")),
  Q(RD, "Why is Yoav very quiet?", ["his sister's sleeping", "he is tired", "he is sick", "Mom is working"], 0, "My little sister is sleeping", "🤫"),
 ], P1))
 
@@ -623,12 +623,12 @@ They went home at five o'clock. Maya was tired, but she wasn't sad. "It was the 
 """
 C.append(("📖 Reading: A Day at the Sea", [RD], [
  Q(RD, "When did the family go to the beach?", ["last Friday", "last Saturday", "yesterday", "last Sunday"], 0, "Last Friday was a hot and sunny day", "🏖️"),
- Q(RD, "What was the weather like?", ["hot and sunny", "cold and rainy", "cloudy", "windy"], 0, "a hot and sunny day", ROW("☀️", "🌧️", "☁️", "💨")),
- Q(RD, "How did they get to the beach?", ["by train", "by car", "by bus", "on foot"], 0, "They got up early and took the train", ROW("🚆", "🚗", "🚌", "🚶")),
+ Q(RD, "What was the weather like?", ["hot and sunny", "cold and rainy", "cloudy", "windy"], 0, "a hot and sunny day", OPTS("☀️", "🌧️", "☁️", "💨")),
+ Q(RD, "How did they get to the beach?", ["by train", "by car", "by bus", "on foot"], 0, "They got up early and took the train", OPTS("🚆", "🚗", "🚌", "🚶")),
  Q(RD, "What did Maya and Omer build?", ["a sandcastle", "a boat", "a house", "a snowman"], 0, "built a big sandcastle", ROW("👧", "👦", "🏖️")),
  Q(RD, "What did Mom do at the beach?", ["took photos", "read a newspaper", "swam", "slept"], 0, "Mom took a lot of photos", ROW("👩", "🏖️")),
- Q(RD, "What did they drink?", ["lemonade", "water", "orange juice", "milk"], 0, "they drank cold lemonade", ROW("🍋", "💧", "🍊", "🥛")),
- Q(RD, "What did Omer lose?", ["his hat", "his ball", "his shoes", "his bag"], 0, "Omer lost his blue hat", ROW("🧢", "⚽", "👟", "👜")),
+ Q(RD, "What did they drink?", ["lemonade", "water", "orange juice", "milk"], 0, "they drank cold lemonade", OPTS("🍋", "💧", "🍊", "🥛")),
+ Q(RD, "What did Omer lose?", ["his hat", "his ball", "his shoes", "his bag"], 0, "Omer lost his blue hat", OPTS("🧢", "⚽", "👟", "👜")),
  Q(RD, "Who found the hat?", ["Maya", "Omer", "Dad", "Mom"], 0, "Maya saw something blue in the water", ROW("🔍", "🧢")),
  Q(RD, "Where was the hat?", ["in the water", "under the umbrella", "in a bag", "on the train"], 0, "something blue in the water", "🧢"),
  Q(RD, "How did Maya feel at the end?", ["tired but happy", "sad and tired", "angry", "bored"], 0, "tired, but not sad – the best day", ROW("👧", "🌅")),
@@ -648,14 +648,14 @@ And me? I'm eleven, and I don't know what I want to be. Maybe a vet, because I l
 """
 C.append(("📖 Reading: Jobs in My Family", [RD], [
  Q(RD, "What is Ruth's job?", ["doctor", "nurse", "cook", "pilot"], 0, "My mother, Ruth, is a doctor", "👩"),
- Q(RD, "Where does Ruth work?", ["in a hospital", "in a restaurant", "in a school", "on a farm"], 0, "She works in a big hospital", ROW("🏥", "🍽️", "🏫", "🚜")),
- Q(RD, "When does Ruth sometimes work?", ["at night", "on Saturdays", "in the morning", "in the summer"], 0, "sometimes she works at night", ROW("🌙", "📅", "🌅", "☀️")),
+ Q(RD, "Where does Ruth work?", ["in a hospital", "in a restaurant", "in a school", "on a farm"], 0, "She works in a big hospital", OPTS("🏥", "🍽️", "🏫", "🚜")),
+ Q(RD, "When does Ruth sometimes work?", ["at night", "on Saturdays", "in the morning", "in the summer"], 0, "sometimes she works at night", OPTS("🌙", "📅", "🌅", "☀️")),
  Q(RD, "What do people love at David's restaurant?", ["fish and cake", "pizza and pasta", "soup and salad", "meat and rice"], 0, "his fish and his chocolate cake", "🍽️"),
  Q(RD, "What did Grandpa grow?", ["oranges and vegetables", "apples and bananas", "only flowers", "grapes and lemons"], 0, "He grew oranges and vegetables", ROW("👴", "🌱")),
  Q(RD, "What does Grandpa do every morning?", ["waters his tomatoes", "works all day", "cooks breakfast", "drives to work"], 0, "Every morning he waters his tomatoes", ROW("👴", "🌅")),
  Q(RD, "Who is a pilot?", ["Shira", "Ruth", "David", "Grandpa"], 0, "My aunt Shira is a pilot", "✈️"),
  Q(RD, "Why isn't Shira at home very often?", ["she flies planes", "she works nights", "she is sick", "she hates home"], 0, "She flies big planes to many countries", "🏠"),
- Q(RD, "Who doesn't work now?", ["Grandpa", "Shira", "David", "Ruth"], 0, "Now he is old, and he doesn't work", ROW("👴", "👩", "👨", "👩‍✈️")),
+ Q(RD, "Who doesn't work now?", ["Grandpa", "Shira", "David", "Ruth"], 0, "Now he is old, and he doesn't work", OPTS("👴", "👱‍♀️", "👨", "👩")),
  Q(RD, "What does the writer want to be?", ["not sure yet", "a doctor", "a pilot", "a farmer"], 0, "I don't know… maybe a vet or a cook", "🧒"),
  Q(RD, "A vet is a doctor for ___.", ["animals", "children", "teeth", "plants"], 0, "vet = וטרינר, רופא לבעלי חיים", "👨‍⚕️"),
 ], P3))
@@ -678,8 +678,8 @@ C.append(("📖 Reading: The Lost Phone", [RD], [
  Q(RD, "Where did Ben look first?", ["in his bag", "on the bus", "in the garden", "under a bench"], 0, "It wasn't in his bag", ROW("🎒", "🚌", "🌳")),
  Q(RD, "Ben couldn't find his phone. He was ___.", ["worried", "happy", "bored", "excited"], 0, "Ben was worried = מודאג", ROW("👦", "📱")),
  Q(RD, "Who called the bus company?", ["Ben's mom", "Ben", "Noam", "Mrs. Green"], 0, "Ben's mom called the bus company", "📞"),
- Q(RD, "Where did Ben eat lunch on Monday?", ["in the garden", "in the classroom", "on the bus", "at home"], 0, "he sat in the school garden", ROW("🌳", "🏫", "🚌", "🏠")),
- Q(RD, "What was the weather like that night?", ["rainy", "sunny", "snowy", "hot"], 0, "It rained all night", ROW("🌧️", "☀️", "❄️")),
+ Q(RD, "Where did Ben eat lunch on Monday?", ["in the garden", "in the classroom", "on the bus", "at home"], 0, "he sat in the school garden", OPTS("🌳", "🏫", "🚌", "🏠")),
+ Q(RD, "What was the weather like that night?", ["rainy", "sunny", "snowy", "hot"], 0, "It rained all night", OPTS("🌧️", "☀️", "❄️")),
  Q(RD, "Did Ben find the phone in the garden?", ["No, he didn't.", "Yes, he did.", "No, he wasn't.", "Yes, he was."], 0, "he didn't find anything", ROW("🌳", "🔍")),
  Q(RD, "Who found the phone?", ["the school guard", "Mrs. Green", "Noam", "Ben's mom"], 0, "The school guard found it", ROW("📱", "🌳")),
  Q(RD, "Who gave the phone back to Ben?", ["Mrs. Green", "the guard", "Noam", "his mom"], 0, "his teacher, Mrs. Green, had his phone", ROW("👦", "📱")),
@@ -704,7 +704,7 @@ C.append(("חזרה כללית", [PG, CT, PL, PN, PR, QW, PW, PI, PD, VP, VS, VW
  Q(PD, "___ Dana call you yesterday?", ["Did", "Does", "Was", "Is"], 0, "yesterday + call ← Did", ROW("👧", "📞")),
  Q(PD, "I didn't ___ TV last night.", ["watch", "watched", "watches", "watching"], 0, "אחרי didn't ← צורת בסיס", "📺"),
  Q(VP, "My aunt's daughter is my ___.", ["cousin", "sister", "aunt", "niece"], 0, "בת של דודה = בת דודה = cousin", TXT("aunt's daughter")),
- Q(VS, "You play ___ with a small ball on a table.", ["table tennis", "basketball", "football", "swimming"], 0, "table tennis = טניס שולחן", ROW("🏓", "🏀", "⚽", "🏊")),
+ Q(VS, "You play ___ with a small ball on a table.", ["table tennis", "basketball", "football", "swimming"], 0, "table tennis = טניס שולחן", OPTS("🏓", "🏀", "⚽", "🏊")),
  Q(VW, "My best friend moved away. I'm ___.", ["sad", "proud", "excited", "bored"], 0, "sad = עצוב", ROW("🚚", "👋")),
  Q(VW, "Let's go to the beach! It's ___ and hot.", ["sunny", "snowy", "rainy", "freezing"], 0, "hot + beach ← sunny", "🏖️"),
  Q(WR, "I went to bed early ___ I was tired.", ["because", "but", "or", "so"], 0, "עייפות היא הסיבה ← because", ROW("🛏️", "😴")),

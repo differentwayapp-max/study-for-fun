@@ -156,18 +156,18 @@ Lia's dream is to visit the South Pole. "It is probably the coldest place on ear
 
 C.append(("📖 Unseen: Weather Watcher", [UN], [
  (UN, "How old is Lia?", ["13", "12", "14", "30"], 0, "בשורה הראשונה: thirteen = 13", [("👧", 50, 52, 50)]),
- (UN, "Where does Lia live?", ["near the mountains", "near the sea", "in the desert", "on an island"], 0, "near the mountains in the north", [("🏔️", 20, 50, 30), ("🌊", 40, 50, 30), ("🏜️", 60, 50, 30), ("🏝️", 80, 50, 30)]),
- (UN, "What is her father's job?", ["farmer", "sailor", "teacher", "scientist"], 0, "Her father is a farmer", [("👨‍🌾", 20, 50, 30), ("⚓", 40, 50, 30), ("👨‍🏫", 60, 50, 30), ("👨‍🔬", 80, 50, 30)]),
- (UN, "What does Lia check every morning?", ["the temperature", "the news", "her phone", "the river"], 0, "checks the temperature outside", [("🌡️", 20, 50, 30), ("📰", 40, 50, 30), ("📱", 60, 50, 30), ("🏞️", 80, 50, 30)]),
- (UN, "What is the summer like?", ["very hot", "freezing", "rainy", "windy"], 0, "the heat is extreme = חום קיצוני", [("☀️", 20, 50, 30), ("❄️", 40, 50, 30), ("🌧️", 60, 50, 30), ("💨", 80, 50, 30)]),
+ (UN, "Where does Lia live?", ["near the mountains", "near the sea", "in the desert", "on an island"], 0, "near the mountains in the north", OPTS("🏔️", "🌊", "🏜️", "🏝️")),
+ (UN, "What is her father's job?", ["farmer", "sailor", "teacher", "scientist"], 0, "Her father is a farmer", OPTS("👨‍🌾", "⚓", "👨‍🏫", "👨‍🔬")),
+ (UN, "What does Lia check every morning?", ["the temperature", "the news", "her phone", "the river"], 0, "checks the temperature outside", OPTS("🌡️", "📰", "📱", "🏞️")),
+ (UN, "What is the summer like?", ["very hot", "freezing", "rainy", "windy"], 0, "the heat is extreme = חום קיצוני", OPTS("☀️", "❄️", "🌧️", "💨")),
  (UN, "Where do the friends swim?", ["at the pool", "in the sea", "in the river", "at school"], 0, "at the swimming pool", "🏊"),
- (UN, "Where is the ice?", ["on the roof", "in the pool", "on the tree", "in the river"], 0, "ice on the roof", [("🏠", 20, 50, 30), ("🏊", 40, 50, 30), ("🌳", 60, 50, 30), ("🏞️", 80, 50, 30)]),
+ (UN, "Where is the ice?", ["on the roof", "in the pool", "on the tree", "in the river"], 0, "ice on the roof", OPTS("🏠", "🏊", "🌳", "🏞️")),
  (UN, "What does Lia wear in winter?", ["coat and scarf", "hat and gloves", "a swimsuit", "sunglasses"], 0, "her warm coat and her scarf", [("👙", 16, 50, 24), ("🧢", 38, 38, 24), ("🧤", 38, 70, 24), ("🧥", 62, 38, 24), ("🧣", 62, 70, 24), ("🕶️", 84, 50, 22)]),
- (UN, "What does Lia want to be?", ["weather scientist", "farmer", "teacher", "sailor"], 0, "Lia wants to be a weather scientist", [("👩‍🔬", 20, 50, 30), ("👩‍🌾", 40, 50, 30), ("👩‍🏫", 60, 50, 30), ("⛵", 80, 50, 30)]),
+ (UN, "What does Lia want to be?", ["weather scientist", "farmer", "teacher", "sailor"], 0, "Lia wants to be a weather scientist", OPTS("👩‍🔬", "👩‍🌾", "👩‍🏫", "⛵")),
  (UN, "What can a storm do?", ["destroy a field", "help farmers", "melt the snow", "cool the city"], 0, "it can destroy a whole field", "⛈️"),
- (UN, "\"predict\" means:", ["לחזות", "להרוס", "להגן", "לבדוק"], 0, "predict storms = לחזות סערות", [("🔮", 20, 50, 30), ("💥", 40, 50, 30), ("🛡️", 60, 50, 30), ("🔍", 80, 50, 30)]),
- (UN, "What is the South Pole?", ["the coldest place", "the hottest place", "a small city", "a big field"], 0, "probably the coldest place on earth", [("❄️", 20, 50, 30), ("🔥", 40, 50, 30), ("🏘️", 60, 50, 30), ("🌾", 80, 50, 30)]),
- (UN, "\"I can't wait!\" – Lia is:", ["excited", "worried", "sad", "bored"], 0, "I can't wait! = מתרגשת", [("🤩", 20, 50, 30), ("😟", 40, 50, 30), ("😢", 60, 50, 30), ("😑", 80, 50, 30)]),
+ (UN, "\"predict\" means:", ["לחזות", "להרוס", "להגן", "לבדוק"], 0, "predict storms = לחזות סערות", OPTS("🔮", "💥", "🛡️", "🔍")),
+ (UN, "What is the South Pole?", ["the coldest place", "the hottest place", "a small city", "a big field"], 0, "probably the coldest place on earth", OPTS("❄️", "🔥", "🏘️", "🌾")),
+ (UN, "\"I can't wait!\" – Lia is:", ["excited", "worried", "sad", "bored"], 0, "I can't wait! = מתרגשת", OPTS("🤩", "😟", "😢", "😑")),
 ], PASSAGE))
 
 C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW, UN], [
@@ -198,7 +198,7 @@ _ch("Nature & places").extend([
 ])
 _ch("Action words").extend([
  (AW, "לבדוק = ?", ["check", "set", "stay", "fall"], 0, "לבדוק = check", [("🔍", 45, 50, 46), ("✅", 75, 30, 22)]),
- (AW, "להתעורר = ?", ["wake up", "lie down", "get on", "hang out"], 0, "להתעורר = wake up", [("⏰", 35, 45, 36), ("🛏️", 70, 62, 38)]),
+ (AW, "I ___ when my alarm rings.", ["wake up", "lie down", "get on", "hang out"], 0, "wake up = להתעורר", [("⏰", 35, 45, 36), ("🛏️", 70, 62, 38)]),
 ])
 _ch("Describing words").extend([
  (DW, "קרוב = ?", ["close", "low", "free", "heavy"], 0, "קרוב = close", [("🏠", 38, 55, 34), ("🏠", 62, 55, 34)]),
@@ -245,7 +245,7 @@ _u = next(i for i, c in enumerate(C) if c[0].startswith("📖"))
 C.insert(_u, ("Present Simple: has, does, always…", [PS], [
  (PS, "She ___ a dog.", ["has", "have", "haves", "having"], 0, "she ← has (לא haves)", [("👧", 35, 55, 40), ("🐕", 70, 58, 34)]),
  (PS, "My dad ___ the dishes.", ["does", "do", "dos", "doing"], 0, "he ← does (לא dos)", [("👨", 35, 55, 40), ("🍽️", 70, 55, 32)]),
- (PS, "They ___ a big house.", ["have", "has", "haves", "having"], 0, "they ← have", [("👫", 35, 58, 36), ("🏡", 70, 52, 40)]),
+ (PS, "My grandparents ___ a big garden.", ["have", "has", "haves", "having"], 0, "grandparents = they ← have", [("👴", 25, 58, 30), ("👵", 45, 58, 30), ("🏡", 75, 52, 40)]),
  (PS, "Does he swim? No, he ___.", ["doesn't", "don't", "isn't", "not"], 0, "Does ← No, he doesn't", [("👦", 40, 55, 40), ("🏊", 72, 60, 26), ("❌", 72, 60, 14)]),
  (PS, "Do you ski? No, I ___.", ["don't", "doesn't", "am not", "not"], 0, "Do you ← No, I don't", [("⛷️", 45, 50, 46), ("❌", 75, 30, 18)]),
  (PS, "100%: I ___ walk to school.", ["always", "never", "sometimes", "often"], 0, "100% = always = תמיד", [("🚶", 35, 55, 40), ("🏫", 72, 50, 34)]),
@@ -253,7 +253,7 @@ C.insert(_u, ("Present Simple: has, does, always…", [PS], [
  (PS, "לפעמים = ?", ["sometimes", "always", "never", "usually"], 0, "לפעמים = sometimes", [("🌦️", 50, 50, 50)]),
  (PS, "בדרך כלל = ?", ["usually", "never", "always", "sometimes"], 0, "בדרך כלל = usually", [("⏰", 50, 50, 46)]),
  (PS, "Which is correct?", ["He always walks", "He always walk", "He walk always", "Always he walk"], 0, "always לפני הפועל, ו-s ל-he", [("🚶", 50, 50, 46)]),
- (PS, "The shop ___ at nine.", ["opens", "open", "opening", "to open"], 0, "the shop = it ← opens", [("🏪", 45, 55, 46), ("🕘", 78, 25, 20)]),
+ (PS, "The museum ___ at ten.", ["opens", "open", "opening", "to open"], 0, "the museum = it ← opens", [("🏛️", 45, 55, 46), ("🕙", 78, 25, 20)]),
  (PS, "My parents ___ in Haifa.", ["work", "works", "working", "to work"], 0, "parents = רבים ← בלי s", [("👫", 40, 58, 38), ("🏙️", 75, 50, 32)]),
  (PS, "She ___ English very well.", ["speaks", "speak", "speaking", "to speak"], 0, "she ← speaks", [("👧", 40, 55, 40), ("💬", 72, 35, 26)]),
 ]))

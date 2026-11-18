@@ -50,15 +50,15 @@ C.append(("Rhymes & sounds", [SR], [
  Q(SR, "Which word rhymes with pen?", ["hen", "pin", "cup", "pan"], 0, "pen – hen: שתיהן נגמרות ב-en", PW("🖊️", "pen")),
  Q(SR, "Which word rhymes with cake?", ["snake", "cat", "duck", "cup"], 0, "cake – snake: שתיהן נגמרות ב-ake", PW("🍰", "cake")),
  Q(SR, "Which word rhymes with moon?", ["spoon", "man", "mom", "map"], 0, "moon – spoon: שתיהן נגמרות ב-oon", PW("🌙", "moon")),
- Q(SR, "Which word does NOT rhyme?", ["bus", "goat", "boat", "coat"], 0, "goat, boat, coat נגמרות ב-oat", ROW("🐐", "⛵", "🧥", "🚌")),
- Q(SR, "Which word does NOT rhyme?", ["pig", "ten", "hen", "pen"], 0, "ten, hen, pen נגמרות ב-en", ROW("🔟", "🐔", "🖊️", "🐖")),
+ Q(SR, "Which word does NOT rhyme?", ["bus", "goat", "boat", "coat"], 0, "goat, boat, coat נגמרות ב-oat", OPTS("🚌", "🐐", "⛵", "🧥")),
+ Q(SR, "Which word does NOT rhyme?", ["pig", "ten", "hen", "pen"], 0, "ten, hen, pen נגמרות ב-en", OPTS("🐖", "🔟", "🐔", "🖊️")),
  Q(SR, "Which word starts like dog?", ["duck", "cat", "pig", "sun"], 0, "dog ו-duck מתחילות בצליל d", PW("🐕", "dog")),
  Q(SR, "Which word starts with m?", ["milk", "nose", "hat", "sun"], 0, "milk מתחילה ב-m", BIG("m")),
  Q(SR, "What is the last sound in bus?", ["s", "b", "n", "t"], 0, "bus נגמרת בצליל s", PW("🚌", "bus")),
  Q(SR, "What is the last sound in dog?", ["g", "d", "t", "p"], 0, "dog נגמרת בצליל g", PW("🐕", "dog")),
  Q(SR, "What is the last sound in ten?", ["n", "t", "m", "e"], 0, "ten נגמרת בצליל n", PW("🔟", "ten")),
  Q(SR, "Which word ends with t?", ["cat", "bus", "pen", "dog"], 0, "c-a-t: הצליל האחרון הוא t", BIG("t")),
- Q(SR, "Which two words start with the same sound?", ["chips, cheese", "cat, shoe", "ship, cherry", "sun, three"], 0, "chips ו-cheese מתחילות בצליל ch", [(e, 14 + 24 * (i % 4), 32 + 40 * (i // 4), 26) for i, e in enumerate(("🍟", "🧀", "🐈", "👟", "🚢", "🍒", "☀️", "3️⃣"))]),
+ Q(SR, "Which two words start with the same sound?", ["chips, cheese", "cat, shoe", "ship, cherry", "sun, three"], 0, "chips ו-cheese מתחילות בצליל ch", [(e, 14 + 24 * (i % 4), 32 + 40 * (i // 4), 26) for i, e in enumerate(("🐈", "👟", "🚢", "🍒", "☀️", "3️⃣", "🍟", "🧀"))]),
 ]))
 
 # ───────────── Short vowels ─────────────
@@ -70,8 +70,8 @@ C.append(("Short vowels: a · e · i", [VW], [
  Q(VW, "t_n (עשר)", ["e", "a", "i", "u"], 0, "t-e-n = ten", "🔟"),
  Q(VW, "s_x (שש)", ["i", "a", "o", "e"], 0, "s-i-x = six", "6️⃣"),
  Q(VW, "h_n (תרנגולת)", ["e", "a", "i", "u"], 0, "h-e-n = hen", "🐔"),
- Q(VW, "Which word has a short a?", ["bag", "bed", "pig", "sun"], 0, "b-a-g: באמצע a", ROW("👜", "🛏️", "🐖", "☀️")),
- Q(VW, "Which word has a short i?", ["fish", "bed", "cat", "box"], 0, "f-i-sh: באמצע i", ROW("🐟", "🛏️", "🐈", "📦")),
+ Q(VW, "Which word has a short a?", ["bag", "bed", "pig", "sun"], 0, "b-a-g: באמצע a", OPTS("👜", "🛏️", "🐖", "☀️")),
+ Q(VW, "Which word has a short i?", ["fish", "bed", "cat", "box"], 0, "f-i-sh: באמצע i", OPTS("🐟", "🛏️", "🐈", "📦")),
  Q(VW, "Read the sounds: f-r-o-g", ["frog", "from", "fog", "flag"], 0, "f-r-o-g ביחד = frog (צפרדע)", TXT("f-r-o-g")),
 ]))
 
@@ -83,8 +83,8 @@ C.append(("Short vowels: o · u", [VW], [
  Q(VW, "c_p (ספל)", ["u", "a", "o", "i"], 0, "c-u-p = cup", "☕"),
  Q(VW, "d_ck (ברווז)", ["u", "o", "a", "e"], 0, "d-u-ck = duck", "🦆"),
  Q(VW, "s_ck (גרב)", ["o", "u", "a", "i"], 0, "s-o-ck = sock", "🧦"),
- Q(VW, "Which word has a short u?", ["bus", "box", "bag", "bed"], 0, "b-u-s: באמצע u", ROW("🚌", "📦", "👜", "🛏️")),
- Q(VW, "Which word has a short o?", ["dog", "duck", "bed", "pig"], 0, "d-o-g: באמצע o", ROW("🐕", "🦆", "🛏️", "🐖")),
+ Q(VW, "Which word has a short u?", ["bus", "box", "bag", "bed"], 0, "b-u-s: באמצע u", OPTS("🚌", "📦", "👜", "🛏️")),
+ Q(VW, "Which word has a short o?", ["dog", "duck", "bed", "pig"], 0, "d-o-g: באמצע o", OPTS("🐕", "🦆", "🛏️", "🐖")),
  Q(VW, "Read the sounds: d – o – g", ["dog", "dig", "dug", "bog"], 0, "d-o-g ביחד = dog", TXT("d-o-g")),
  Q(VW, "Which vowel is in cat, hat and map?", ["a", "e", "i", "o"], 0, "c-a-t, h-a-t, m-a-p: כולן עם a", TXT("cat", "hat", "map")),
 ]))
@@ -167,10 +167,10 @@ C.append(("Greetings: what do you say?", [GR], [
  Q(GR, "It's night. You go to bed. You say: ___", ["Good night!", "Good morning!", "Hello!", "Thank you!"], 0, "הולכים לישון ← Good night", ROW("🛏️", "🌙")),
  Q(GR, "בבקשה = ?", ["Please", "Thank you", "Sorry", "Goodbye"], 0, "כשמבקשים משהו אומרים please", ROW("🙋", "💧")),
  Q(GR, "Thank you! – ___", ["You're welcome.", "Sorry.", "Goodbye.", "Good night."], 0, "עונים לתודה: You're welcome = אין בעד מה", ROW("🎁", "🙂")),
- Q(GR, "{Thank you very much!} = ?", ["תודה רבה!", "בבקשה!", "סליחה!", "להתראות!"], 0, "very much = מאוד, הרבה ← תודה רבה", ROW("🎁", "🙋", "😬", "👋")),
+ Q(GR, "{Thank you very much!} = ?", ["תודה רבה!", "בבקשה!", "סליחה!", "להתראות!"], 0, "very much = מאוד, הרבה ← תודה רבה", OPTS("🎁", "🙋", "😬", "👋")),
  Q(GR, "{See you tomorrow!} = ?", ["נתראה מחר!", "בוקר טוב!", "תודה רבה!", "מה שלומך?"], 0, "see you = נתראה, tomorrow = מחר", ROW("👦", "👧")),
  Q(GR, "It's your friend's birthday. You say: Happy ___!", ["birthday", "morning", "night", "sorry"], 0, "ליום הולדת אומרים Happy birthday", "🎂"),
- Q(GR, "{Good evening!} = ?", ["ערב טוב!", "בוקר טוב!", "לילה טוב!", "יום טוב!"], 0, "evening = ערב ← ערב טוב", ROW("🌅", "🌆", "🌙", "☀️")),
+ Q(GR, "{Good evening!} = ?", ["ערב טוב!", "בוקר טוב!", "לילה טוב!", "יום טוב!"], 0, "evening = ערב ← ערב טוב", OPTS("🌆", "🌅", "🌙", "☀️")),
 ]))
 
 C.append(("Let's talk: How are you?", [GR], [
@@ -277,7 +277,7 @@ C.append(("Animals", [AN], [
  Q(AN, "עכבר = ?", ["mouse", "house", "horse", "cat"], 0, "עכבר = mouse", "🐭"),
  Q(AN, "Which animal says \"baa\"?", ["sheep", "cat", "cow", "dog"], 0, "הכבשה עושה baa", TXT("Baa!")),
  Q(AN, "Which animal says \"meow\"?", ["cat", "dog", "duck", "pig"], 0, "החתול עושה meow", TXT("Meow!")),
- Q(AN, "Which animal is the biggest?", ["elephant", "mouse", "bee", "frog"], 0, "הפיל גדול מאוד", ROW("🐘", "🐭", "🐝", "🐸")),
+ Q(AN, "Which animal is the biggest?", ["elephant", "mouse", "bee", "frog"], 0, "הפיל גדול מאוד", OPTS("🐘", "🐭", "🐝", "🐸")),
  Q(AN, "Which animal says \"cluck\"?", ["hen", "pen", "horse", "dog"], 0, "התרנגולת עושה cluck = hen", TXT("Cluck!")),
  Q(AN, "ברווז = ?", ["duck", "dog", "frog", "fish"], 0, "ברווז = duck", "🦆"),
  Q(AN, "Which animal says \"quack\"?", ["duck", "lion", "tiger", "monkey"], 0, "הברווז עושה quack", TXT("Quack!")),
@@ -289,8 +289,8 @@ C.append(("Food", [FD], [
  Q(FD, "גזר = ?", ["carrot", "cucumber", "tomato", "banana"], 0, "גזר = carrot", "🥕"),
  Q(FD, "This is a ___.", ["tomato", "potato", "cherry", "lemon"], 0, "עגבנייה = tomato", "🍅"),
  Q(FD, "It's cold and sweet. It's ___.", ["ice cream", "cake", "cookie", "candy"], 0, "קרה ומתוקה = גלידה = ice cream", ROW("🥶", "😋")),
- Q(FD, "Which of these is a vegetable?", ["cucumber", "apple", "banana", "cake"], 0, "מלפפון הוא ירק = cucumber", ROW("🥒", "🍎", "🍌", "🍰")),
- Q(FD, "Which of these is NOT a drink?", ["pizza", "milk", "water", "juice"], 0, "פיצה אוכלים, לא שותים", ROW("🍕", "🥛", "💧")),
+ Q(FD, "Which of these is a vegetable?", ["cucumber", "apple", "banana", "cake"], 0, "מלפפון הוא ירק = cucumber", OPTS("🥒", "🍎", "🍌", "🍰")),
+ Q(FD, "Which of these is NOT a drink?", ["pizza", "milk", "water", "juice"], 0, "פיצה אוכלים, לא שותים", OPTS("🍕", "🥛", "💧")),
  Q(FD, "ענבים = ?", ["grapes", "cherries", "apples", "plums"], 0, "ענבים = grapes", "🍇"),
  Q(FD, "Monkeys love long yellow ___.", ["bananas", "milk", "pizza", "cheese"], 0, "קופים אוהבים בננות", "🐒"),
  Q(FD, "Bees make ___.", ["honey", "milk", "eggs", "bread"], 0, "דבורים מכינות דבש = honey", "🐝"),
@@ -302,20 +302,20 @@ C.append(("School things", [SC], [
  Q(SC, "ילקוט = ?", ["bag", "book", "box", "pen"], 0, "ילקוט = (school) bag", "🎒"),
  Q(SC, "ספר = ?", ["book", "box", "bag", "bed"], 0, "ספר = book", "📕"),
  Q(SC, "Children learn at ___.", ["school", "house", "shop", "park"], 0, "לומדים בבית הספר = school", ROW("👧", "📚", "✏️")),
- Q(SC, "I write in ink with a ___.", ["pen", "book", "ruler", "bag"], 0, "כותבים בדיו בעט = pen", ROW("🖊️", "📕", "📏", "🎒")),
+ Q(SC, "I write in ink with a ___.", ["pen", "book", "ruler", "bag"], 0, "כותבים בדיו בעט = pen", OPTS("🖊️", "📕", "📏", "🎒")),
  Q(SC, "צבע שעווה = ?", ["crayon", "ruler", "book", "bag"], 0, "צבע (עפרון שעווה) = crayon", "🖍️"),
  Q(SC, "דלת = ?", ["door", "floor", "box", "desk"], 0, "דלת = door", "🚪"),
 ]))
 
 C.append(("Classroom instructions", [SC], [
  Q(SC, "פתחו את הדלת = {___ the door, please.}", ["Open", "Sit", "Stand", "Look"], 0, "לפתוח = open", "🚪"),
- Q(SC, "שבו בשקט = {___ down quietly.}", ["Sit", "Stand", "Look", "Open"], 0, "Sit down = שבו", "💺"),
- Q(SC, "קומו, כולם! = {Everybody, ___ up!}", ["Stand", "Sit", "Close", "Open"], 0, "Stand up = קומו", "⬆️"),
+ Q(SC, "שבו! {Story time! Please ___ down on the carpet.}", ["Sit", "Stand", "Look", "Open"], 0, "Sit down = שבו", "🧒"),
+ Q(SC, "קומו! {The teacher comes in. Everybody, ___ up!}", ["Stand", "Sit", "Close", "Open"], 0, "Stand up = קומו", "👩‍🏫"),
  Q(SC, "Point to the ___.", ["door", "book", "bag", "pen"], 0, "Point to = הצביעו על", ROW("👉", "🚪")),
- Q(SC, "Listen = ?", ["תקשיבו", "תכתבו", "תקראו", "תשבו"], 0, "listen = להקשיב", ROW("👂", "✍️", "📖", "💺")),
- Q(SC, "Write = ?", ["תכתבו", "תקראו", "תקשיבו", "תציירו"], 0, "write = לכתוב", ROW("✍️", "📖", "👂", "🖍️")),
+ Q(SC, "Listen = ?", ["תקשיבו", "תכתבו", "תקראו", "תשבו"], 0, "listen = להקשיב", OPTS("👂", "✍️", "📖", "💺")),
+ Q(SC, "Write = ?", ["תכתבו", "תקראו", "תקשיבו", "תציירו"], 0, "write = לכתוב", OPTS("✍️", "📖", "👂", "🖍️")),
  Q(SC, "תקראו = ?", ["Read", "Write", "Draw", "Listen"], 0, "לקרוא = read", "📖"),
- Q(SC, "Draw = ?", ["תציירו", "תכתבו", "תקראו", "תסגרו"], 0, "draw = לצייר", ROW("🖍️", "✍️", "📖", "🚪")),
+ Q(SC, "Draw = ?", ["תציירו", "תכתבו", "תקראו", "תסגרו"], 0, "draw = לצייר", OPTS("🖍️", "✍️", "📖", "🚪")),
  Q(SC, "Raise your ___.", ["hand", "foot", "bag", "book"], 0, "הרימו את היד = raise your hand", "👩‍🏫"),
  Q(SC, "שקט! = ?", ["Be quiet!", "Sit down!", "Stand up!", "Look!"], 0, "שקט = Be quiet", "🤫"),
  Q(SC, "הסתכלו על הלוח = {___ at the board.}", ["Look", "Listen", "Sit", "Close"], 0, "להסתכל = look", "👀"),
@@ -503,8 +503,8 @@ C.append(("What · Where · Who · How old", [QW], [
  Q(QW, "___ is this? It is a pencil.", ["What", "Who", "Where", "How old"], 0, "שואלים על דבר ← What", ROW("👉", "✏️")),
  Q(QW, "___ is my bag? It is on the chair.", ["Where", "Who", "What", "How old"], 0, "שואלים על מקום ← Where", "🎒"),
  Q(QW, "___ is he? He is my grandpa.", ["Who", "What", "Where", "How old"], 0, "שואלים על אדם ← Who", "👴"),
- Q(QW, "{Where} = ?", ["איפה", "מי", "מה", "בן כמה"], 0, "where = איפה (שואלים על מקום)", ROW("👦", "📦", "🗺️", "🎂")),
- Q(QW, "{Who} = ?", ["מי", "מה", "איפה", "בן כמה"], 0, "who = מי (שואלים על אדם)", ROW("👦", "📦", "🗺️", "🎂")),
+ Q(QW, "{Where} = ?", ["איפה", "מי", "מה", "בן כמה"], 0, "where = איפה (שואלים על מקום)", OPTS("🗺️", "👦", "📦", "🎂")),
+ Q(QW, "{Who} = ?", ["מי", "מה", "איפה", "בן כמה"], 0, "who = מי (שואלים על אדם)", OPTS("👦", "📦", "🗺️", "🎂")),
  Q(QW, "מה = ?", ["What", "Who", "Where", "How old"], 0, "מה = What (What is it?)", TXT("?")),
 ]))
 
@@ -555,7 +555,7 @@ C.append(("📖 Reading: At School", [RD], [
  Q(RD, "How many pencils does Dana have?", ["three", "two", "one", "four"], 0, "three pencils = 3 עפרונות", "🎒"),
  Q(RD, "What color is Dana's notebook?", ["red", "green", "blue", "yellow"], 0, "a red notebook", "📓"),
  Q(RD, "What does Dana eat?", ["a sandwich", "pizza", "a cake", "rice"], 0, "Dana eats a sandwich and an apple", "🍽️"),
- Q(RD, "What does Dana drink?", ["water", "milk", "juice", "tea"], 0, "She drinks water", ROW("🥛", "🍵", "💧", "🍹")),
+ Q(RD, "What does Dana drink?", ["water", "milk", "juice", "tea"], 0, "She drinks water", OPTS("💧", "🥛", "🍹", "🍵")),
 ], P2))
 
 P3 = """
@@ -588,7 +588,7 @@ C.append(("חזרה כללית", [SR, VW, DG, AB, FF, CN, BC, AN, FD, SC, DY, IA
  Q(BC, "I have two ___ on my head.", ["ears", "noses", "mouths", "heads"], 0, "שתי אוזניים = two ears", "🙂"),
  Q(BC, "שמלה = ?", ["dress", "desk", "shirt", "sock"], 0, "שמלה = dress", "👗"),
  Q(AN, "The ___ is king of the animals.", ["lion", "tiger", "bear", "horse"], 0, "האריה = מלך החיות = lion", "👑"),
- Q(FD, "Which is NOT food?", ["shoe", "bread", "egg", "rice"], 0, "נעל לא אוכלים!", ROW("👟", "🍞", "🥚", "🍚")),
+ Q(FD, "Which is NOT food?", ["shoe", "bread", "egg", "rice"], 0, "נעל לא אוכלים!", OPTS("👟", "🍞", "🥚", "🍚")),
  Q(SC, "סגרו את הספר = {___ your book.}", ["Close", "Open", "Read", "Draw"], 0, "לסגור = close", "📕"),
  Q(DY, "Today is Sunday. Tomorrow is ___.", ["Monday", "Saturday", "Tuesday", "Friday"], 0, "אחרי Sunday בא Monday", TXT("Sunday → ?")),
  Q(IA, "I ___ ride a bike.", ["can", "am", "like", "have"], 0, "I can ride = אני יודע לרכוב", "🚲"),

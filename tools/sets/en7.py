@@ -70,15 +70,15 @@ C.append(("Past Simple: time words & spelling", [PR], [
 
 # ───────────── Past Simple: irregular verbs ─────────────
 C.append(("Irregular verbs: go – went", [PI], [
- Q(PI, "Past of go?", ["went", "goed", "gone", "goes"], 0, "go – went (פועל לא רגיל)", PW("🚶", "go → ?")),
- Q(PI, "Past of eat?", ["ate", "eated", "eaten", "eats"], 0, "eat – ate", PW("🍔", "eat → ?")),
- Q(PI, "Past of see?", ["saw", "seed", "seen", "sees"], 0, "see – saw", PW("👀", "see → ?")),
+ Q(PI, "Past of bring?", ["brought", "bringed", "brings", "bringing"], 0, "bring – brought (פועל לא רגיל)", PW("🎒", "bring → ?")),
+ Q(PI, "Past of fly?", ["flew", "flied", "flown", "flies"], 0, "fly – flew", PW("🐦", "fly → ?")),
+ Q(PI, "Past of keep?", ["kept", "keeped", "keeps", "keeping"], 0, "keep – kept", PW("🔐", "keep → ?")),
  Q(PI, "Past of buy?", ["bought", "buyed", "brought", "buys"], 0, "buy – bought (brought = הביא)", PW("🛒", "buy → ?")),
  Q(PI, "Past of choose?", ["chose", "choosed", "chosen", "chooses"], 0, "choose – chose", PW("👉", "choose → ?")),
  Q(PI, "Past of understand?", ["understood", "understanded", "understands", "understand"], 0, "understand – understood", PW("💡", "understand → ?")),
  Q(PI, "Past of forget?", ["forgot", "forgetted", "forgets", "forgeted"], 0, "forget – forgot", PW("🤷", "forget → ?")),
  Q(PI, "Past of think?", ["thought", "thinked", "taught", "thinks"], 0, "think – thought (taught = לימד)", PW("💭", "think → ?")),
- Q(PI, "Past of have?", ["had", "haved", "has", "having"], 0, "have – had", PW("🎁", "have → ?")),
+ Q(PI, "Past of find?", ["found", "finded", "finds", "finding"], 0, "find – found", PW("🔍", "find → ?")),
  Q(PI, "Past of make?", ["made", "maked", "makes", "making"], 0, "make – made", PW("🎂", "make → ?")),
 ]))
 
@@ -92,14 +92,14 @@ C.append(("Irregular verbs in sentences", [PI], [
  Q(PI, "Past of break?", ["broke", "breaked", "broken", "breaks"], 0, "break – broke", PW("🥚", "break → ?")),
  Q(PI, "Past of swim?", ["swam", "swimmed", "swum", "swims"], 0, "swim – swam", PW("🏊", "swim → ?")),
  Q(PI, "Past of tell?", ["told", "telled", "tells", "taled"], 0, "tell – told", PW("🗣️", "tell → ?")),
- Q(PI, "Which base verb is irregular?", ["sleep", "walk", "play", "open"], 0, "sleep – slept, בלי ed", ROW("😴", "🚶", "⚽", "🚪")),
+ Q(PI, "Which base verb is irregular?", ["sleep", "walk", "play", "open"], 0, "sleep – slept, בלי ed", OPTS("😴", "🚶", "⚽", "🚪")),
  Q(PI, "Last year my sister ___ a prize.", ["won", "winned", "wins", "win"], 0, "win – won", ROW("👧", "🏆")),
 ]))
 
 # ───────────── Past Simple: negatives & questions ─────────────
 C.append(("Past Simple: didn't · wasn't · weren't", [PN], [
- Q(PN, "I was sick, so I ___ go to school on Monday.", ["didn't", "don't", "wasn't", "doesn't"], 0, "עבר + פועל ← didn't", ROW("🤒", "🏫")),
- Q(PN, "She didn't ___ her homework, so the teacher was angry.", ["do", "did", "does", "doing"], 0, "אחרי didn't ← צורת בסיס", ROW("👧", "📓")),
+ Q(PN, "The shop was closed, so we ___ buy any bread.", ["didn't", "don't", "wasn't", "doesn't"], 0, "עבר + פועל ← didn't", ROW("🏪", "🔒", "🍞")),
+ Q(PN, "He didn't ___ the shopping, so there's no milk.", ["do", "did", "does", "doing"], 0, "אחרי didn't ← צורת בסיס", ROW("🛒", "🥛", "❌")),
  Q(PN, "We ran, but we didn't ___ the bus.", ["catch", "caught", "catches", "catching"], 0, "אחרי didn't ← צורת בסיס", ROW("🏃", "🚌")),
  Q(PN, "Which is correct?", ["He didn't swim", "He didn't swam", "He not swam", "He don't swam"], 0, "didn't + צורת בסיס", ROW("🏊", "❌")),
  Q(PN, "They ___ like the film last night.", ["didn't", "don't", "doesn't", "weren't"], 0, "last night ← didn't", ROW("🎬", "👎")),
@@ -320,8 +320,8 @@ C.append(("much · many · a lot of", [QT], [
  Q(QT, "There isn't ___ milk.", ["much", "many", "a few", "these"], 0, "milk לא נספר ← much", ROW("🥛", "🥣")),
  Q(QT, "She has ___ of books – about 100!", ["a lot", "a little", "much", "any"], 0, "a lot of = הרבה", PW("📚", "100")),
  Q(QT, "There aren't ___ cars here.", ["many", "much", "a little", "a lot"], 0, "cars נספרים ← many", ROW("🚗", "🅿️")),
- Q(QT, "Which word goes with much?", ["money", "coins", "books", "cars"], 0, "much + לא נספר (money)", ROW("💵", "📕", "🚗")),
- Q(QT, "Which word goes with many?", ["students", "rice", "bread", "water"], 0, "many + נספר (students)", ROW("👦", "🍚", "🍞", "💧")),
+ Q(QT, "Which word goes with much?", ["money", "books", "cars", "coins"], 0, "much + לא נספר (money)", OPTS("💵", "📕", "🚗")),
+ Q(QT, "Which word goes with many?", ["students", "rice", "bread", "water"], 0, "many + נספר (students)", OPTS("👦", "🍚", "🍞", "💧")),
  Q(QT, "How ___ money do you have?", ["much", "many", "lot", "few"], 0, "money לא נספר ← much", ROW("👛", "💵")),
  Q(QT, "There are ___ of people here.", ["a lot", "much", "many", "a little"], 0, "a lot of people = הרבה אנשים", ROW("👫", "👫", "👫")),
  Q(QT, "How many ___ are in your class?", ["students", "water", "money", "homework"], 0, "many + נספר ברבים", ROW("🏫", "📋")),
@@ -329,13 +329,13 @@ C.append(("much · many · a lot of", [QT], [
 
 C.append(("some · any · a few · a little", [QT], [
  Q(QT, "I bought ___ bread and ___ eggs.", ["some", "any", "many", "a few"], 0, "משפט חיובי, גם נספר וגם לא נספר ← some", ROW("🍞", "🍽️")),
- Q(QT, "Dad drank it all, so there isn't ___ juice left.", ["any", "many", "a few", "a lot"], 0, "שלילה, לא נשאר כלום ← any", ROW("👨", "🥤", "❌")),
+ Q(QT, "Dad ate them all, so there aren't ___ apples left.", ["any", "much", "a little", "some"], 0, "שלילה, לא נשאר כלום ← any", ROW("👨", "🍎", "❌")),
  Q(QT, "I don't have ___ money – not even one shekel.", ["any", "some", "many", "a few"], 0, "שלילה ← any", ROW("👛", "❌")),
  Q(QT, "I have only ___ friends in Haifa – just three.", ["a few", "a little", "much", "any"], 0, "מעט + נספר ← a few", PW("👫", "3")),
  Q(QT, "Add only ___ salt to the soup.", ["a little", "a few", "many", "any"], 0, "מעט + לא נספר ← a little", ROW("🧂", "🍲")),
  Q(QT, "Can I have ___ tea and ___ cookies, please?", ["some", "any", "many", "a few"], 0, "בקשה (גם tea וגם cookies) ← some", ROW("☕", "🙏")),
- Q(QT, "Which word goes with a few?", ["books", "water", "sugar", "music"], 0, "a few + נספר (books)", ROW("📕", "💧", "🎵")),
- Q(QT, "Which word goes with a little?", ["milk", "eggs", "cups", "apples"], 0, "a little + לא נספר (milk)", ROW("🥛", "🥚", "🍎")),
+ Q(QT, "Which word goes with a few?", ["books", "water", "music", "sugar"], 0, "a few + נספר (books)", OPTS("📕", "💧", "🎵")),
+ Q(QT, "Which word goes with a little?", ["milk", "eggs", "apples", "cups"], 0, "a little + לא נספר (milk)", OPTS("🥛", "🥚", "🍎")),
  Q(QT, "There aren't ___ eggs in the fridge.", ["any", "some", "much", "a little"], 0, "שלילה + נספר ← any", ROW("🥚", "❌")),
  Q(QT, "Hurry! We don't have ___ time – only five minutes.", ["much", "many", "a few", "some"], 0, "time לא נספר ← much", ROW("⏰", "🏃")),
 ]))
@@ -343,7 +343,7 @@ C.append(("some · any · a few · a little", [QT], [
 # ───────────── Connectors ─────────────
 C.append(("and · but · because · so", [CN], [
  Q(CN, "I like tea ___ coffee.", ["and", "but", "so", "because"], 0, "מוסיפים עוד דבר ← and", ROW("☕", "🍵")),
- Q(CN, "I like dogs, ___ I don't like cats.", ["but", "and", "so", "because"], 0, "ניגוד ← but", ROW("🐕", "🐈")),
+ Q(CN, "The sun was shining, ___ the water was cold. (אבל)", ["but", "and", "so", "because"], 0, "but = אבל (ניגוד)", ROW("☀️", "🌊", "🥶")),
  Q(CN, "I'm hungry, ___ I'm making a sandwich.", ["so", "but", "because", "although"], 0, "תוצאה ← so", ROW("😋", "🥪")),
  Q(CN, "I'm making a sandwich ___ I'm hungry.", ["because", "so", "but", "although"], 0, "סיבה ← because", ROW("🥪", "😋")),
  Q(CN, "It was raining, ___ we stayed home.", ["so", "because", "but", "although"], 0, "תוצאה ← so", ROW("🌧️", "🏠")),

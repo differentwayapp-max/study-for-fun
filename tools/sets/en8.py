@@ -247,7 +247,7 @@ C.append(("too much · too many · enough · few", [QT], [
 ]))
 
 C.append(("Countable or uncountable?", [QT], [
- Q(QT, "Which noun is uncountable?", ["information", "book", "idea", "apple"], 0, "information – אין information-s", ROW("ℹ️", "📕", "💡", "🍎")),
+ Q(QT, "Which noun is uncountable?", ["information", "book", "idea", "apple"], 0, "information – אין information-s", OPTS("📰", "📕", "💡", "🍎")),
  Q(QT, "Which noun is countable?", ["coin", "money", "water", "advice"], 0, "coin – one coin, two coins", ROW("💰", "💧", "💬")),
  Q(QT, "Can you give me some ___ about the trip?", ["information", "informations", "an information", "many information"], 0, "information לא נספר: בלי s ובלי an", ROW("🧳", "🙏")),
  Q(QT, "How ___ hours do you sleep?", ["many", "much", "little", "any"], 0, "hours נספר ← How many", ROW("😴", "🕙")),

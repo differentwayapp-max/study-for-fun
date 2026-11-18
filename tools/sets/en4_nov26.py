@@ -95,18 +95,18 @@ C.append(("Colors", [CO], [
 ]))
 
 C.append(("Animals", [AN], [
- (AN, "It says woof.", ["dog", "cat", "lion", "fish"], 0, "כלב = dog", "🐕"),
- (AN, "It says meow.", ["cat", "dog", "tiger", "bird"], 0, "חתול = cat", "🐈"),
- (AN, "The king of the jungle.", ["lion", "tiger", "monkey", "dog"], 0, "אריה = lion", "🦁"),
+ (AN, "It likes bones.", ["dog", "bird", "fish", "octopus"], 0, "כלב = dog", "🦴"),
+ (AN, "It hunts mice.", ["cat", "fish", "giraffe", "elephant"], 0, "חתול = cat", "🐭"),
+ (AN, "It has a big mane. (רעמה)", ["lion", "tiger", "monkey", "dog"], 0, "אריה = lion", TXT("Roar!")),
  (AN, "What is this?", ["alligator", "fish", "elephant", "octopus"], 0, "תנין = alligator", "🐊"),
  (AN, "What is this?", ["tiger", "lion", "cat", "giraffe"], 0, "נמר (טיגריס) = tiger", "🐅"),
- (AN, "It has feathers.", ["bird", "fish", "ladybird", "monkey"], 0, "ציפור = bird", "🐦"),
+ (AN, "It has feathers.", ["bird", "fish", "ladybird", "monkey"], 0, "ציפור = bird", "🥚"),
  (AN, "What is this?", ["ladybird", "bird", "octopus", "cat"], 0, "פרת משה רבנו = ladybird", "🐞"),
- (AN, "It eats bananas.", ["monkey", "giraffe", "lion", "dog"], 0, "קוף = monkey", "🐒"),
+ (AN, "It eats bananas.", ["monkey", "giraffe", "lion", "dog"], 0, "קוף = monkey", "🍌"),
  (AN, "What is this?", ["octopus", "fish", "alligator", "bird"], 0, "תמנון = octopus", "🐙"),
- (AN, "It has a long trunk.", ["elephant", "giraffe", "tiger", "monkey"], 0, "פיל = elephant", "🐘"),
- (AN, "It has a very long neck.", ["giraffe", "elephant", "lion", "alligator"], 0, "ג'ירפה = giraffe", "🦒"),
- (AN, "It has fins.", ["fish", "octopus", "bird", "cat"], 0, "דג = fish", "🐟"),
+ (AN, "It has a long trunk.", ["elephant", "giraffe", "tiger", "monkey"], 0, "פיל = elephant", "🥜"),
+ (AN, "It has a very long neck.", ["giraffe", "elephant", "lion", "alligator"], 0, "ג'ירפה = giraffe", "🌳"),
+ (AN, "It has fins.", ["fish", "octopus", "bird", "cat"], 0, "דג = fish", "🌊"),
 ]))
 
 C.append(("Prepositions", [PR], [

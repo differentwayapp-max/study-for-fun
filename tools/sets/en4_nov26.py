@@ -3,7 +3,7 @@
 AB, CO, AN, PR, VE, ML, RV = "Alphabet", "Colors", "Animals", "Prepositions", "Verbs", "Missing letter", "Review"
 
 SET = dict(name="English – ABC, Colors, Animals", grade=3, subject="אנגלית",
-           title="ABC · Colors · Animals", desc="אותיות, צבעים, חיות, מילות יחס ופעלים",
+           title="ABC · Colors · Animals", desc="אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
            desc_en="Letters, colors, animals, prepositions and verbs",
            tags=["ABC", "Colors", "Animals", "Prepositions", "Verbs", "Missing letter"],
            examDate="", dailyGoal=2, perRound=11,
@@ -13,7 +13,7 @@ def L(ch, size=70): return [(ch, 50, 52, size)]          # a big letter as the p
 def seq(*cs): return [(c, 17 + i * 22, 52, 26) for i, c in enumerate(cs)]
 
 C = []
-WORD_LIST = """on|in|on top of|under|in front of|next to|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")
+WORD_LIST = """on|in|on top of|under|in front of|next to|between|over|red|green|black|gray|brown|blue|orange|purple|dog|cat|lion|alligator|tiger|bird|ladybird|monkey|octopus|elephant|giraffe|fish|drink|cut|jump|run|eat|swim|fly|sleep""".split("|")
 # ---- all 26 letters, big ↔ small (questions in Hebrew so the question never shows the answer) ----
 LOOK = {"a": "oeu", "b": "dpq", "c": "eoa", "d": "bpq", "e": "aoc", "f": "tlj", "g": "qjy", "h": "nkb", "i": "jrt", "j": "igy",
         "k": "hxy", "l": "ejt", "m": "nwu", "n": "mhu", "o": "aec", "p": "qbd", "q": "pgd", "r": "nvt", "s": "zcx", "t": "flj",
@@ -53,13 +53,13 @@ C.append(("ABC: order & first letter", [AB], [
 # (h, k, q, v, w, x, y, z) are practised in the big & small and the order chapters.
 PIC = {"alligator": "🐊", "black": "⚫", "brown": "", "blue": "🔵", "bird": "🐦", "cat": "🐈", "cut": "", "dog": "🐕",
        "drink": "", "elephant": "🐘", "eat": "", "fish": "🐟", "fly": "🕊️", "green": "💚", "gray": "", "giraffe": "🦒",
-       "in": "", "in front of": "", "jump": "", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "",
+       "in": "", "in front of": "", "jump": "", "lion": "🦁", "ladybird": "🐞", "monkey": "🐒", "next to": "", "on": "", "between": "", "over": "",
        "on top of": "", "orange": "🍊", "octopus": "🐙", "purple": "💜", "red": "🔴", "run": "🏃", "swim": "🏊", "sleep": "😴",
        "tiger": "🐅", "under": ""}
 HEB = {"alligator": "תנין", "black": "שחור", "blue": "כחול", "bird": "ציפור", "cat": "חתול", "dog": "כלב", "elephant": "פיל",
        "fish": "דג", "fly": "לעוף", "green": "ירוק", "giraffe": "ג'ירפה", "lion": "אריה", "ladybird": "פרת משה רבנו", "monkey": "קוף",
        "orange": "כתום", "octopus": "תמנון", "purple": "סגול", "red": "אדום", "run": "לרוץ", "swim": "לשחות", "sleep": "לישון", "tiger": "נמר",
-       "brown": "חום", "drink": "לשתות", "eat": "לאכול", "jump": "לקפוץ", "cut": "לגזור", "gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "מעל", "under": "מתחת"}
+       "brown": "חום", "drink": "לשתות", "eat": "לאכול", "jump": "לקפוץ", "cut": "לגזור", "gray": "אפור", "in": "בתוך", "in front of": "לפני", "next to": "ליד", "on": "על", "on top of": "על גבי", "over": "מעל", "between": "בין", "under": "מתחת"}
 def first_letter(lo, hi):
     out, pool = [], ["alligator", "black", "cat", "dog", "elephant", "fish", "green", "jump", "lion", "monkey", "orange",
                      "purple", "red", "swim", "tiger", "under", "bird", "drink", "giraffe", "octopus", "sleep", "run", "eat", "fly"]
@@ -117,7 +117,12 @@ C.append(("Prepositions", [PR], [
  (PR, "The fish is ___ the boat.", ["under", "on top of", "in", "in front of"], 0, "הדג מתחת לסירה = under", [("⛵", 50, 34, 44), ("🐟", 50, 76, 24)]),
  (PR, "My birthday is ___ Sunday.", ["on", "in", "under", "next to"], 0, "ימים בשבוע: on Sunday", [("🎂", 50, 52, 52)]),
  (PR, "The milk is ___ the glass.", ["in", "on", "under", "next to"], 0, "החלב בתוך הכוס = in", [("🥛", 50, 52, 56)]),
- (PR, "מעל = ?", ["on top of", "under", "next to", "in front of"], 0, "on top of = מעל, על גבי: הציפור על העץ", [("🌳", 50, 64, 50), ("🐦", 50, 40, 22)]),
+ (PR, "מעל = ?", ["over", "under", "next to", "between"], 0, "מעל, בלי לגעת = over", [("🌳", 50, 68, 44), ("☁️", 50, 22, 30)]),
+ (PR, "Which of these means על גבי?", ["on top of", "over", "under", "between"], 0, "על גבי, נוגע מלמעלה = on top of", [("📚", 50, 66, 46), ("🍎", 50, 38, 24)]),
+ (PR, "The plane is ___ the house.", ["over", "in", "under", "between"], 0, "המטוס מעל הבית = over", [("🏠", 50, 68, 44), ("✈️", 50, 22, 28)]),
+ (PR, "It is ___ the dogs. (בין)", ["between", "next to", "under", "on top of"], 0, "בין שני הכלבים = between", [("🐕", 22, 58, 30), ("🐈", 50, 58, 26), ("🐕", 78, 58, 30)]),
+ (PR, "בין = ?", ["between", "next to", "over", "in front of"], 0, "בין = between", [("🧒", 22, 58, 32), ("⚽", 50, 66, 22), ("🧒", 78, 58, 32)]),
+ (PR, "It is ___ the house. (ליד)", ["next to", "in", "over", "under"], 0, "הכלב ליד הבית = next to", [("🏠", 36, 58, 44), ("🐕", 74, 66, 30)]),
  (PR, "מתחת = ?", ["under", "on", "in", "next to"], 0, "מתחת = under", [("☂️", 50, 34, 44), ("🧒", 50, 74, 28)]),
  (PR, "ליד = ?", ["next to", "under", "in", "on"], 0, "ליד = next to", [("🧒", 36, 58, 32), ("🧒", 64, 58, 32)]),
  (PR, "לפני = ?", ["in front of", "next to", "on top of", "under"], 0, "לפני = in front of", [("🏠", 50, 40, 54), ("🚗", 50, 62, 34)]),

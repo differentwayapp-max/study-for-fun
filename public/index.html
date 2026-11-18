@@ -467,13 +467,13 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .onb{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;align-items:center;padding:22px 20px calc(18px + env(safe-area-inset-bottom));text-align:center;color:var(--ink);font-family:var(--display);overflow:auto}
 .onb .ontop{align-self:stretch;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--ink2)}
 .onb .ontop button{background:none;border:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:6px}
-.onb .shot{align-self:stretch;max-width:430px;margin:14px auto 12px}
-.onb .shot img{display:block;width:100%;object-fit:cover;object-position:top;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);background:#fff}
-.onb h1{font-size:1.55em;margin:4px 0 8px}.onb p{font-size:1.05em;line-height:1.5;margin:0;color:var(--ink2);max-width:430px}
+.onb .shot{align-self:stretch;width:100%;max-width:430px;margin:10px auto 10px;flex:none}
+.onb .shot img{display:block;width:auto;max-width:100%;margin:0 auto;object-fit:contain;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);background:#fff}
+.onb h1{font-size:1.5em;margin:2px 0 6px}.onb p{font-size:1.05em;line-height:1.5;margin:0;color:var(--ink2);max-width:430px}
 .onb .tip{margin-top:10px;background:#fff;border:2px dashed var(--ink);border-radius:12px;padding:6px 10px;font-weight:600;max-width:430px}
-.onb .onbul{max-width:430px;margin:10px 0 0;padding-inline-start:20px;text-align:start;color:var(--ink2);line-height:1.5;font-size:1em}.onb .onbul li{margin-bottom:4px}
+.onb .onbul{max-width:430px;margin:6px 0 0;padding-inline-start:20px;text-align:start;color:var(--ink2);line-height:1.4;font-size:.95em}.onb .onbul li{margin-bottom:2px}
 .onb .onbsep{align-self:stretch;max-width:430px;width:100%;margin:18px auto 12px;border:0;border-top:2px dashed var(--ink);opacity:.35}
-.onb .dots{display:flex;gap:8px;margin:16px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
+.onb .dots{display:flex;gap:8px;margin:12px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
 .onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
@@ -1310,7 +1310,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
       if (!u && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
-      if (!u) u = await showLogin();
+      if (!u) { u = await showLogin(); if (W.onbCover) W.onbCover(); }   // just signed in: no flash of the app before the welcome screens
       uid = u.uid; role = 'parent';
       const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => b.toString(16).padStart(2, '0')).join('');
       const myName = u.displayName || (u.email || '').split('@')[0] || 'הורה';
@@ -1350,6 +1350,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       try { let tk = JSON.parse(LS.getItem('sff_terms_ok') || 'null'); const had = us && us.exists() && us.data().terms;
         if ((!tk || tk.v !== TERMS_VERSION) && (!had || had.v !== TERMS_VERSION)) { tk = await askConsent(); LS.setItem('sff_terms_ok', JSON.stringify(tk)); }
         if (tk && tk.v && (!had || had.v !== tk.v)) await F.setDoc(F.doc(fdb, `users/${uid}`), { terms: { v: String(tk.v).slice(0, 20), at: +tk.at || Date.now() } }, { merge: true }); } catch (e) {}
+      W.SFF_ONB_DONE = !!(us && us.exists() && us.data().onb);
+      if (W.onbDecide) W.onbDecide(inviteMsg === 'joined', uid);   // an adult who just joined by invitation is not a new family
       const famIds = [uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid))];
       const famInfo = [];
       for (const fid of famIds) {
@@ -4079,15 +4081,34 @@ function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) open
    "אחר כך" → shown again the next time the app opens. Kid phones never see it. Pictures: real app screens (public/onb). */
 const ONB=[
   {bg:'#E4F1FF', m:['wow','#2F6BFF'], ill:'🎮 📚 ⭐', t:'ברוכים הבאים! 👋', p:'כאן הילדים מתרגלים דרך משחקים, ואתם רואים איך הם מתקדמים.'},
-  {bg:'#DDF6EC', img:['pick',280], t:'מוסיפים ילד ובוחרים תרגול', p:'ניתן לבחור מקטלוג התרגולים הקיים בהתאם לכיתה, המקצוע הרלוונטי והחומר הספציפי שתרצו לתרגל.',
+  {bg:'#DDF6EC', img:['pick',150], t:'מוסיפים ילד ובוחרים תרגול', p:'ניתן לבחור מקטלוג התרגולים הקיים בהתאם לכיתה, המקצוע הרלוונטי והחומר הספציפי שתרצו לתרגל.',
    bullets:['התרגולים שלנו בנויים על בסיס החומר המפורסם של משרד החינוך.','ניתן לבנות תרגול ממוקד: מצלמים דף עבודה ואנחנו בונים ממנו תרגול.'], tip:'☰ ← 📚 קטלוג תרגולים ← בוחרים כיתה ומסמנים נושאים ✔'},
-  {bg:'#FFF3CC', img:['family',100,'link',190], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…',
-   more:{p:'אפשר לשתף גם גורמים נוספים למעקב – סבא וסבתא, מורה או מלווה – בקישור הזמנה משלהם.', img:['invite',190], tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← ＋ הזמנת מבוגר'}},
-  {bg:'#FFE4EC', img:['stats',340], t:'עוקבים ומחזקים', p:'רואים מה הילד יודע ואיפה טעה. בלחיצה אחת בונים תרגול חיזוק ממוקד 🎯', tip:'📊 מעקב התקדמות ← 🔎 לראות את הטעויות · 🎯 סט חיזוק'},
+  {bg:'#FFF3CC', img:['family',76,'link',140], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…'},
+  {bg:'#EDE6FF', img:['invite',220], t:'מזמינים מבוגרים נוספים', p:'אפשר לשתף גם גורמים נוספים למעקב – סבא וסבתא, מורה או מלווה – בקישור הזמנה משלהם.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← ＋ הזמנת מבוגר'},
+  {bg:'#FFE4EC', img:['stats',180], t:'עוקבים ומחזקים', p:'רואים מה הילד יודע ואיפה טעה. בלחיצה אחת בונים תרגול חיזוק ממוקד 🎯', tip:'📊 מעקב התקדמות ← 🔎 לראות את הטעויות · 🎯 סט חיזוק'},
 ];
 let ONB_I=0;
+// right after the sign-in screen: a plain cover (no flash of the app), until the account says whether the welcome screens come
+function onbCover(){
+  if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
+  if($('onb')||$('onbWait')) return;
+  const d=document.createElement('div'); d.id='onbWait'; d.className='onb'; d.style.cssText='background:#E4F1FF;justify-content:center';
+  d.innerHTML=`<div style="width:140px;height:140px">${mascot('happy','#2F6BFF')}</div>`; document.body.appendChild(d);
+  setTimeout(()=>$('onbWait')?.remove(), 12000);                              // never stuck behind it
+}
+let ONB_SHOWN=false;
+function onbDecide(joined, uid){
+  $('onbWait')?.remove();
+  if(joined) return;
+  try{ const af=localStorage.getItem('sff_active_fam'); if(af && uid && af!==uid) return; }catch(e){}   // working in another family (helper / tutor): the role decides later
+  if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
+  if(window.SFF_ONB_DONE) return;
+  try{ if(localStorage.getItem('sff_onb_done')) return; if(sessionStorage.getItem('sff_onb_later')) return; }catch(e){}
+  ONB_SHOWN=true; ONB_I=0; onbShow();
+}
 function maybeOnb(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;                 // tests: not in the way
+  if(ONB_SHOWN || $('onb')) return;
   if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE) return;
   try{ if(localStorage.getItem('sff_onb_done')) return; if(sessionStorage.getItem('sff_onb_later')) return; }catch(e){}
   ONB_I=0; onbShow();

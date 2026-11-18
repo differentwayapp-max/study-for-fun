@@ -1971,7 +1971,7 @@ ${text?'\nPASTED MATERIAL:\n"""\n'+text.slice(0,8000)+'\n"""':''}`, opts) || pro
 `${ctx}
 ${profile.styles?'Match the style of the sample material: '+profile.styles:''} ${profile.difficulty?'Difficulty: '+profile.difficulty:''}
 This is chapter ${ci+1} of ${chapters.length} ("${ch.title}"). ${COPY_RULE} Write NEW multiple-choice practice questions (do not repeat these: ${JSON.stringify(qs.map(q=>q.question).slice(-30))}). Quota per topic: ${JSON.stringify(per)}.
-Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${grade}; no trick questions; vary positions of the correct answer.
+Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${grade}; no trick questions; vary positions of the correct answer. ${BUILD_RULES}
 ${langRule}
 Emoji: one emoji that pictures the question (for vocabulary, the word itself; otherwise the topic or scene) – it is shown to the child as the question's picture, so it must not give away the answer unless the question asks to name a pictured thing.
 Picture first (REQUIRED): the child answers by LOOKING. The question text must NEVER contain or hint the answer. Add "scene": 1-6 items {\"e\": one emoji, \"x\": 0-100 left→right, \"y\": 0-100 top→bottom (ground is at y≈85), \"s\": size 15-80} that stages the situation (e.g. a cat sitting on a chair: chair x50 y66 s62, cat x50 y28 s34; three books: three book emoji side by side). Then keep "question" very short (max 6 words, e.g. "Where is the cat?", "What is this?", "There ___ three books.") and options 1-3 words. If the topic truly cannot be pictured, use "scene": null and still keep the question short. Explanations: max 12 words. ${PIC_RULE}
@@ -1990,7 +1990,7 @@ Return JSON only: {"questions":[{"topic":string (exactly one of: ${JSON.stringif
       const ci=Math.max(0,chapters.findIndex(c=>c.topics.includes(t)));
       const more = await askB(
 `${ctx}
-Write 3 multiple-choice questions on the topic ${JSON.stringify(t)}. 4 options, one correct, ${langRule} Child-friendly explanation (max 12 words) and one emoji picture. Picture first: add a "scene" (1-6 emoji items with x,y 0-100 and size s 15-80) that stages the situation so the child answers by looking; question max 6 words.
+Write 3 multiple-choice questions on the topic ${JSON.stringify(t)}. 4 options, one correct, ${langRule} ${BUILD_RULES} ${PIC_RULE} Child-friendly explanation (max 12 words) and one emoji picture. Picture first: add a "scene" (1-6 emoji items with x,y 0-100 and size s 15-80) that stages the situation so the child answers by looking; question max 6 words.
 Return JSON only: {"questions":[{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,
         {modelTier:'default'});
       const extra=clean(more?.questions,[t]).map(q=>({...q,ch:ci})); added+=extra.length; qs=qs.concat(extra);
@@ -2042,8 +2042,12 @@ function distribute(n, topics){
   topics.forEach(t=>{per[t]=Math.max(1,base+(rem>0?1:0)); if(rem>0) rem--;});
   return per;
 }
+const TOO_NEW_SEQ=['🧑‍🌾','🧑‍🍳','🧑‍🏫','🧑‍🎓','🧑‍⚕️','🧑‍💻','🧑‍🚀','🧑‍🎨','🧑‍🔧','🧑‍🚒'];
+const TOO_NEW=new Set([...'🪑🪭🛝🪁🪀🟦🟥🟫🟩🟪🟧🟨🟢🩻🪼🫏🪿🪸🫧🧇🦘🩶🪢🫖🪴🪨🪵🛖🫐🫒🫑🫓🫔🫕🦬🦣🦫🦤🪶🦭🪲🪳🪰🪱🫀🫁🥷🫂🪄🪅🪆🧋🛻🛼🪃🪓🪔🪕🦯🦽🦾🧃🧉🧊🧄🧅🦩🦥🦦🦨🦪🧆🧈🧏🧍🧎🪐🪂🤿🥽🥼🦺🩰🩱🩲🩳🩸🩹🩺']);
+const tooNew=e=>TOO_NEW_SEQ.includes(e)||[...String(e)].some(c=>TOO_NEW.has(c));
 function cleanScene(sc){
   if(!Array.isArray(sc)||!sc.length) return null;
+  sc=sc.filter(it=>!(it&&tooNew(it.e))); if(!sc.length) return null;
   const n=v=>Math.max(0,Math.min(100,+v||0));
   const out=sc.slice(0,12).filter(it=>it&&typeof it.e==='string'&&([...it.e].length<=4||(it.e.length<=16&&!PIC_CH.test(it.e)))).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
   return out.length?out:null;
@@ -2062,6 +2066,8 @@ const needsPic=q=>!q.scene || words(q.question)>6 || words(q.explanation)>14 || 
 // The picture must show the ANSWER itself – never a related thing (🐸 for "jump" makes a child think "frog").
 // the parent's photos / pasted text only show what the test covers – never copied into the practice set (copyright)
 const COPY_RULE = 'OWN WORDS ONLY (copyright): the parent\'s material is only for understanding what the test covers – topics, words, kinds of exercises and level. Write every question, sentence, story and explanation in new words of your own. Never reproduce the material\'s wording: no sentence, story, reading passage, table or exercise copied, not even with small changes, and never a whole exercise list or page. Single words, names of concepts, numbers and facts may be used.';
+// the rules of the build-practice-set skill (.claude/skills/build-practice-set) – every question the AI writes follows them
+const BUILD_RULES = 'QUESTION RULES: exactly 4 different options, max 3 words each, exactly ONE correct – no distractor may also be correct (not a synonym, not a looser true statement, not an odd but grammatical sentence); distractors in the SAME FORM as the answer (a pair → pairs, a tool → tools, same gender/number/tense) and plausible for the grade. The question never contains or hints the answer; a question that is right only relative to its options is worded "Which of these… / איזה מהם… / מה מהבאים…". MATCH GAME: all questions of a chapter meet in one game where each shows only its text and picture and the answer cards are the chapter\'s answers – no other answer of the same chapter may also answer a question (including the same value in another form: "20 ₪"/"20", "1 מטר"/"מטר", singular/plural, masculine/feminine); if two answers truly fit both, write them as identical text, otherwise make the question specific. No two questions alike in the set; a core fact (e.g. minutes in an hour) may come back only in a varied form. A picture that shows the options side by side lists them in a RANDOM order (the answer not always first); a question about place or order keeps the real order. Only emoji from before 2019.';
 const PIC_RULE = 'PICTURE MUST BE RELATED: every scene shows what THIS question is about – never a decoration (no lone 🤔 ❓ 🔢 ➕ ➖ ✏️ 📝 🔟 💯 etc.). Several things = several items, ONE emoji per item (never "🍎🍎🍎" in one item), all inside 0-100 with room for their size. For number questions with nothing real to draw, a scene item may be a short text card instead of an emoji (max 16 chars, e.g. {"e":"12 → ?","x":50,"y":50,"s":30} or {"e":"5 + 3",...}) showing the given numbers – never the answer. For word problems show the story\'s objects (5 apples = five 🍎 items). '+'PICTURE NEVER GIVES THE ANSWER AWAY (strict): a child who does not know the answer must NOT be able to pick it by looking at the picture, and the picture must never confuse him. The picture shows only what the QUESTION gives: (1) naming questions ("What is this?", "Which animal?", "מה זה?", a verb): the picture IS the question – show exactly the thing to name, so the child thinks of that one word and no other option (a frog for "jump" is WRONG: he thinks "frog"; verbs: a person doing the action 🏃 run, 🏊 swim); (2) counting/arithmetic: the objects or the given numbers, never the result; (3) reading a table/graph/sentence/clock: that data; (4) every other question (knowledge, facts, categories, opposites, instruments, concepts): NEVER a picture of the right option alone – show ALL the options side by side, or the situation the question describes without its result (which tool measures mass? → show objects to weigh, NOT scales; which is a fruit? → show all four options). No picture where another option also fits. If nothing fits, use "scene": null rather than a misleading picture. Use only common emojis from before 2019. If no emoji shows a naming word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
 async function picturePass(qs, ctx, askFn=ask, onProgress, want=needsPic){
   for(let round=0; round<2; round++){                       // a second round for any question still without a picture
@@ -2077,7 +2083,7 @@ For each item return:
 - "question": max 6 words, must NOT contain or hint the answer (e.g. "Where is the ball?", "What is this?", "How many apples?").
 - "options": the same 4 options in the same order, each shortened to max 3 words if longer (meaning unchanged; the correct one stays correct).
 - "explanation": max 10 words, simple Hebrew, may use ← and emoji (e.g. "3 ספרים = רבים ← are"). If the topic truly cannot be pictured, scene = null but still shorten the question.
-${PIC_RULE}
+${PIC_RULE} ${BUILD_RULES}
 Return JSON only: {"items":[{"i":number,"scene":[...]|null,"question":string,"options":[4 strings],"explanation":string}]}
 ITEMS: ${JSON.stringify(part.map(i=>({i,question:qs[i].question,options:qs[i].options,answer:qs[i].options[qs[i].answer]})))}`,
       {modelTier:'default'});
@@ -2104,7 +2110,24 @@ ${JSON.stringify(list.map((q,i)=>({i,topic:q.topic,question:q.question,scene:q.s
       {modelTier:'complex'});
     return Array.isArray(r?.results)?r.results:[];
   };
+  // review (the review-practice-set skill): the questions of one chapter WITH their answers – what a blind solver cannot see
+  const review = async list => {
+    const r = await askFn(
+`You review practice questions for children (Study for fun). ${ctx}
+These questions belong to ONE chapter. In the match / memory games all of them meet: each question shows only its text and picture, and the answer cards are the chapter's correct answers. For each question check and flag ONLY real problems:
+- "clash": another question's correct answer in this list is ALSO a correct answer to this question (a synonym, a looser true answer, a grammatical alternative, the same value in another form like "20 ₪"/"20" or "1 מטר"/"מטר", singular/plural, masculine/feminine) – skip questions worded "which of these / איזה מהם / מה מהבאים / מה נכון / לא שייך", they are not in that game;
+- "form": a distractor is not in the same form as the answer (a pair answer with single distractors, a tool answer with non-tools, another gender/number/tense);
+- "duplicate": the same question (or almost the same, same answer) appears twice in the list;
+- "picture": the scene shows the right option alone, or only the answer and one distractor, in a question that does not ask to name what is pictured; or the scene is misleading;
+- "grade": unsuitable for the grade, or a factual / language error.
+Return JSON only: {"flags":[{"i":number,"kind":"clash"|"form"|"duplicate"|"picture"|"grade","note":string (short Hebrew note: what is wrong and with which other question)}]}
+QUESTIONS:
+${JSON.stringify(list.map((q,i)=>({i,question:q.question,scene:q.scene||null,options:q.options,answer:q.options[q.answer]})))}`,
+      {modelTier:'complex'});
+    return Array.isArray(r?.flags)?r.flags:[];
+  };
   const res = []; for(let k=0;k<qs.length;k+=40) res.push(...(await solve(qs.slice(k,k+40))).map(r=>({...r,i:+r.i+k})));   // big sets: 40 questions per call
+  const flags = []; for(let k=0;k<qs.length;k+=40) flags.push(...(await review(qs.slice(k,k+40))).map(f=>({...f,i:+f.i+k})));
   const byI = Object.fromEntries(res.map(r=>[r.i,r]));
   const bad=[];
   qs.forEach((q,i)=>{
@@ -2113,11 +2136,18 @@ ${JSON.stringify(list.map((q,i)=>({i,topic:q.topic,question:q.question,scene:q.s
     if(r.pick!==q.answer || r.multiple_correct || (r.problem&&r.problem.trim()))
       bad.push({i,why: r.pick!==q.answer?`הבודק בחר תשובה ${+r.pick+1} במקום ${q.answer+1}`:(r.multiple_correct?'יותר מתשובה נכונה אחת':r.problem)});
   });
+  // the reviewer's flags, and the rules a program can check by itself (exact duplicates, the same value in two forms)
+  const seen={}, val=a=>String(a).replace(/[\s\u2066-\u2069]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,'');
+  qs.forEach((q,i)=>{ const k=q.question.trim().toLowerCase(); if(seen[k]!=null && !bad.some(b=>b.i===i)) bad.push({i,why:'אותה שאלה מופיעה פעמיים'}); seen[k]=i; });
+  qs.forEach((q,i)=>{ const a=String(q.options[q.answer]).trim(); const j=qs.findIndex((o,k)=>k<i && String(o.options[o.answer]).trim()!==a && val(o.options[o.answer])===val(a) && /\d/.test(a));
+    if(j>=0 && !needOpts(q) && !bad.some(b=>b.i===i)) bad.push({i,why:`התשובה "${a}" היא אותו ערך כמו התשובה "${qs[j].options[qs[j].answer]}" של שאלה אחרת בפרק – לכתוב אותן באותה צורה`}); });
+  flags.forEach(f=>{ if(!Number.isInteger(f.i)||!qs[f.i]||bad.some(b=>b.i===f.i)) return; if(f.kind==='clash'&&needOpts(qs[f.i])) return;
+    bad.push({i:f.i, why:String(f.note||f.kind).slice(0,200)}); });
   let out = qs.slice();
   if(bad.length){
     const fx = await askFn(
 `${ctx}
-An independent checker flagged these practice questions. For each, decide: fix it (return a corrected question with 4 options, exactly one correct, and a correct explanation) or drop it if it cannot be fixed cleanly. ${langRule}
+An independent checker flagged these practice questions. For each, decide: fix it (return a corrected question with 4 options, exactly one correct, and a correct explanation) or drop it if it cannot be fixed cleanly. ${langRule} ${BUILD_RULES} ${PIC_RULE}
 Return JSON only: {"items":[{"i":number,"action":"fix"|"drop","question":{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}}]}
 FLAGGED:
 ${JSON.stringify(bad.map(b=>({i:b.i,why:b.why,...qs[b.i]})))}`,
@@ -2245,7 +2275,7 @@ async function aiQuestions(set, ci, title, topics, n, nameIt){
   const r=await ask(`${ctx}
 ${imgs.length?`The parent attached ${imgs.length} worksheet photo(s) for this chapter: base the questions on the material, words and exercise types shown there. ${COPY_RULE}
 `:''}${nameIt?`This is a NEW chapter built only from the attached worksheet(s): give it a short Hebrew title (2-4 words) that names the material.`:`This is the chapter "${title}" (topics: ${JSON.stringify(topics)}).`} Write ${n} NEW multiple-choice practice questions. Do not repeat these: ${JSON.stringify(avoid)}.
-Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${GRADES[set.grade]}; no trick questions. ${langRule}
+Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${GRADES[set.grade]}; no trick questions. ${langRule} ${BUILD_RULES}
 Question max 6 words when possible, options max 3 words, explanation max 10 words for a child. ${PIC_RULE}
 Return JSON only: {${nameIt?'"title":string,':''}"questions":[{"topic":string${nameIt?'':` (one of ${JSON.stringify(topics)})`},"question":string,"options":[4 strings],"answer":number (0-3),"explanation":string,"core":boolean (true only for a basic fact the child must simply remember – e.g. minutes in an hour, metres in a km, a definition or unit; it comes back later as a review question),"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,{modelTier:'default', ...(imgs.length&&canImages?{images:imgs}:{})});
   const tp=nameIt?[String(r?.title||'מדפי העבודה').slice(0,40)]:topics;

@@ -26,6 +26,7 @@ Test hooks: `window.SFF_REST_EMU` (emulator addresses) and `window.SFF_TEST_GOOG
 Functions: `firebase deploy --only functions`. Rules: `firebase deploy --only firestore:rules`.
 Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py` (one emoji per picture item – use `COUNT(("🍎",3))` for counting pictures), then `IDS=<id> node tools/tests/local_scenes.js` with the app served (renders every picture: 0 bad scenes), then deploy (existing copies update automatically, progress kept).
 
+**Practice sets – the skills are mandatory:** before building, extending or rewriting any practice set (a catalog set in `tools/sets/` or a set for a family), invoke the `build-practice-set` skill and follow it; when the set is done, invoke `review-practice-set` and review it before reporting or asking to deploy. The same rules run inside the app's AI building (`BUILD_RULES` in every prompt that writes questions, and the reviewer in `runQA`) – keep them in step with the skills.
 Skills: `.claude/skills/build-practice-set` (all the rules for writing a set) and `.claude/skills/review-practice-set` (how to review and report). `node tools/match_list.js <id>` lists each chapter's match-game questions and answer cards. `tools/core_facts.json` marks each set's core facts (they come back as review questions in later stations, `reviewQs`).
 
 User guide + terms: edit `tools/docs/{guide,terms}-{he,en}.md`, then `python3 -I tools/build_docs.py` → `public/guide.html`, `public/terms.html`.

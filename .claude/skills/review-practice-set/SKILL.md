@@ -1,6 +1,6 @@
 ---
 name: review-practice-set
-description: Review catalog practice sets of Study for fun (or one set, or the live version) question by question against every rule – correct answers, distractors, pictures that give the answer away or confuse, match/memory clashes, duplicates across grades, copyright, picture order – and write the findings as tables with proposed fixes. Use when asked to check / review / audit a practice set, a test or the catalog (בדיקה, סקירה של שאלון / תרגול / קטלוג).
+description: MANDATORY after building or changing any Study for fun practice set, and whenever asked to check / review / audit a set, a test or the catalog (בדיקה, סקירה של שאלון / תרגול / קטלוג) – question by question against every rule (answers, distractors, giveaway or confusing pictures, match/memory clashes, duplicates across grades, copyright, picture order), with findings as tables and proposed fixes.
 ---
 
 # Reviewing a practice set

@@ -1,6 +1,6 @@
 ---
 name: build-practice-set
-description: Build or extend a catalog practice set (tools/sets/<file>.py) for Study for fun – questions, options, explanations, pictures, chapters – following every rule the app, the games and the parent asked for. Use when asked to build a new practice set / test (שאלון, תרגול, מבחן), add chapters or questions, or rewrite questions in an existing set.
+description: MANDATORY before building, extending or rewriting any Study for fun practice set (a catalog set in tools/sets/<file>.py or a set for a family) – questions, options, explanations, pictures, chapters – with every rule the app, the games and the owner set. Use whenever asked to build a new practice set / test (שאלון, תרגול, מבחן), add chapters or questions, or rewrite questions.
 ---
 
 # Building a practice set

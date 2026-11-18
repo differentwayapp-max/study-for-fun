@@ -17,7 +17,7 @@ const { SET, OUT } = process.env, LANG = process.env.LANG2 || 'he';
   await p.click('#chb0 .chnav .btn:last-child'); await p.waitForTimeout(900);
   const st = await p.evaluate(() => ({ open: [...document.querySelectorAll('.chbox.open')].map(x => x.id), top: Math.round(document.getElementById('chb1').getBoundingClientRect().top) }));
   await p.screenshot({ path: `${OUT}/rv_3.png` });
-  await p.evaluate(() => { const d = [...document.querySelectorAll('details.fold')].find(x => x.querySelector('#rQA')); d.open = true; d.scrollIntoView(); }); await p.waitForTimeout(500);
+  await p.evaluate(() => { const d = document.getElementById('rQA').closest('details'); d.open = true; d.scrollIntoView(); /* the answer check lives in the ⋯ practice menu */ }); await p.waitForTimeout(500);
   await p.screenshot({ path: `${OUT}/rv_4.png` });
   console.log(JSON.stringify({ st, errs })); await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

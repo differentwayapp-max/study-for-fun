@@ -54,6 +54,18 @@ def scene(s):
 
 errors, warns, qs, chapters = [], [], [], []
 rng = random.Random(src.stem)   # same file → same option order
+prng = random.Random(src.stem + ":pictures")   # a separate stream, so the option order above never changes because of pictures
+# a picture of the options side by side must not always have the answer in the same place (the source files list the answer
+# first, so it was always the left picture). Kept in place: sequences / patterns (repeats, ❓, arrows, signs), COUNT, text cards.
+KEEP_ORDER = set("❓ ❔ ➡️ ⬅️ ⬆️ ⬇️ ↔️ ↕️ ➕ ➖ ✖️ ➗ 🟰 ⏩ ⏪ 🔜 🔁 🔄 ▶️ ◀️".split()) | {"➡", "⬅", "⬆", "⬇", "↔", "▶", "◀"}
+pic_stats = {"rows": 0, "rows_answer_first": 0, "cards": 0}
+answer_slot, slot_bag = {}, []
+def option_picture_row(scn):
+    items = [it for it in scn if not is_text(it["e"])]
+    if len(items) < 2 or len(items) != len(scn): return None
+    if len({round(it["y"]) for it in items}) != 1 or len({it["e"] for it in items}) != len(items): return None
+    if any(it["e"] in KEEP_ORDER or EMOJI_RE.sub("", it["e"]).strip() or "\u20e3" in it["e"] for it in items): return None
+    return sorted(items, key=lambda it: it["x"]) == items and items or None
 for ci, chap in enumerate(C):
     title, topics, items = chap[:3]
     text = chap[3].strip() if len(chap) > 3 and isinstance(chap[3], str) else ""
@@ -76,8 +88,27 @@ for ci, chap in enumerate(C):
             mine, others = em(opts[ans]), [e for i, o in enumerate(opts) if i != ans for e in em(o)]
             if mine and any(e in pe for e in mine) and not any(e in pe for e in others):
                 errors.append(f"{tag}: the picture shows the answer – show all the options, or the question's data")
-        right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
+        src_opts = opts; right = opts[ans]; opts = opts[:]; rng.shuffle(opts); ans = opts.index(right)   # answer not always first
         scn = scene(sc)
+        # the option pictures: the answer's picture takes the next place of a shuffled rotation (so every place gets it about
+        # equally often), the other pictures fill the other places at random. Rows of 2–3 pictures are scenes (who + what),
+        # not options – their order tells the story, so they stay as they are.
+        row = option_picture_row(scn)
+        if row and len(row) == len(opts):
+            xs = sorted(it["x"] for it in row)
+            if not slot_bag: slot_bag.extend(range(len(xs))); prng.shuffle(slot_bag)
+            target = slot_bag.pop(); rest = [i for i in range(len(xs)) if i != target]; prng.shuffle(rest)
+            src_ans = src_opts.index(right)
+            for k, it in enumerate(row): it["x"] = xs[target] if k == src_ans else xs[rest.pop()]
+            pic_stats["rows"] += 1; pic_stats["rows_answer_first"] += target == 0
+            answer_slot[target] = answer_slot.get(target, 0) + 1
+        # option cards listed one under the other (each card is one of the options): the same, top to bottom
+        cards = [it for it in scn if is_text(it["e"])]
+        nrm_o = lambda t: re.sub(r"[\s\u2066-\u2069]", "", str(t))
+        if len(cards) == len(scn) == len(opts) and len({round(c["x"]) for c in cards}) == 1 and all(nrm_o(c["e"]) in map(nrm_o, src_opts) for c in cards):
+            ys = sorted(c["y"] for c in cards); src_n = [nrm_o(o) for o in src_opts]
+            for c in cards: c["y"] = ys[opts.index(src_opts[src_n.index(nrm_o(c["e"]))])]
+            pic_stats["cards"] += 1
         # a text card in the picture must not give the answer away: a card that IS the answer is an error; a card that holds
         # the answer and none of the other options (and the answer is not in the question) is a warning – fine only when
         # the card is the question's own data (a table, a sentence to read)
@@ -111,6 +142,11 @@ for ci, chap in enumerate(C):
         qs.append({"topic": topic, "question": q, "options": opts, "answer": ans,
                    "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci})
 
+# the answer's place among the option pictures must look random (it was always the left one)
+if pic_stats["rows"] >= 10 and max(answer_slot.values()) > .4 * pic_stats["rows"]:
+    errors.append(f"option pictures: the answer is in the same place in {max(answer_slot.values())} of {pic_stats['rows']} rows – more than 40%")
+if __import__("os").environ.get("SFF_PICSTATS"): print("pictures:", json.dumps({**pic_stats, "answer_slot": answer_slot}), file=sys.stderr)
+
 seen = {}
 for q in qs:
     k = (q["question"], q["options"][q["answer"]])
@@ -123,6 +159,21 @@ def practised(w): return re.search(r"\b" + re.escape(w.lower()) + r"(s|es|ed|d|i
 word_list = list(ns.get("WORD_LIST", []))
 missing = [w for w in word_list if not practised(w)]
 if missing: errors.append(f"words not practised ({len(missing)}): " + ", ".join(missing))
+
+# the same question (and answer) in the set of the same subject one grade below or above: a warning (DUP vs <id>)
+def _dup_key(q, a):
+    t = lambda x: re.sub(r"[\s\u0591-\u05C7\u2066-\u2069.,!?:;'\"()\-–_]", "", str(x)).lower()
+    return t(q) + "|" + t(a)
+try:
+    _share = pathlib.Path(__file__).resolve().parent.parent / "public" / "share"
+    _me = src.stem.replace("_", "-")
+    for _e in json.loads((_share / "catalog.json").read_text(encoding="utf-8")).get("sets", []):
+        if _e.get("id") == _me or _e.get("subject") != SET["subject"] or abs(int(_e.get("grade", -9)) - int(SET["grade"])) != 1: continue
+        _d = json.loads(base64.b64decode((_share / f"{_e['id']}.txt").read_text(encoding="utf-8")[5:]))
+        _theirs = {_dup_key(x["question"], x["options"][x["answer"]]) for x in _d["questions"]}
+        for q in qs:
+            if _dup_key(q["question"], q["options"][q["answer"]]) in _theirs: warns.append(f"DUP vs {_e['id']}: «{q['question']}» → {q['options'][q['answer']]}")
+except Exception as _ex: warns.append(f"duplicate check skipped: {_ex}")
 
 if warns and not __import__("os").environ.get("SFF_QUIET"): print("\n".join("warning: " + w for w in warns), file=sys.stderr)
 if errors:

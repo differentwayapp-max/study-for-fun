@@ -3052,7 +3052,7 @@ function rdChunk(){
 const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
 // questions that only make sense next to their options ("Which is correct?", "מה נכון?", "מה מהבאים…") – choice only
 const OPTS_EN=/\bcorrect\b|\b(is|are) (correct|true|right|wrong|false)\b|^which (one|of these)\b|\bof these\b|odd one|doesn't belong|does not belong/i, OPTS_NOT=/\bNOT\b/;
-const OPTS_HE=/(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שייך|יוצא דופן|יוצאת דופן|אינו |אינה |אינם |אינן |איננה|כתוב נכון|כתובה נכון|כתובות נכון|מבין אלה|מאלה|איזה משפט נכון|באיזו מילה יש|יש טעות|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן/;
+const OPTS_HE=/(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שיי?ך|יוצא דופן|יוצאת דופן|אינו |אינה |אינם |אינן |איננה|כתוב נכון|כתובה נכון|כתובות נכון|מבין אלה|מאלה|איזה משפט נכון|באיזו מילה יש|יש טעות|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן/;
 const needOpts=q=>{ const t=String(q.question).replace(/[\u2066-\u2069]/g,'').replace(/[\u0591-\u05C7]/g,''); return OPTS_EN.test(t)||OPTS_NOT.test(t)||OPTS_HE.test(t); };
 function modePool(set,id){
   const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q)&&!needOpts(q));

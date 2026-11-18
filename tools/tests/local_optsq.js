@@ -17,7 +17,7 @@ const { chromium } = require('playwright');
     }
     const t = q => needOpts({ question: q });
     out.samples = { yes: ['Which is correct?', 'Which sentence about her is correct?', 'Which word is NOT an animal?', 'מה נכון?', 'מה מהבאים שביר?', 'איזה מזון יוצא דופן?',
-        'אֵיזֶה מֵהֶם פְּרִי?', 'איזו מילה יוצאת דופן?', 'איזו מילה כתובה נכון?', 'מה אינו חלק מהצמח?', 'Choose the correct word.'].filter(t).length,
+        'אֵיזֶה מֵהֶם פְּרִי?', 'איזו מילה יוצאת דופן?', 'איזו מילה כתובה נכון?', 'מה אינו חלק מהצמח?', 'Choose the correct word.', 'מָה מֵהֶם לֹא שַׁיָּךְ לַקְּבוּצָה?'].filter(t).length,
       no: ['Which word rhymes with cat?', "You ___ use phones. It's not allowed.", 'My parents ___ in Haifa.', 'כמה ילדים בחרו בננה?', 'מה זה?'].filter(t).length };
     // one-letter answers keep their case in the match game: "D" is not "d"
     const L = (q, a) => ({ topic: 't', question: q, options: [a, 'x1', 'x2', 'x3'], answer: 0, explanation: '', ch: 0 });
@@ -32,6 +32,6 @@ const { chromium } = require('playwright');
     return out;
   });
   console.log(JSON.stringify(r));
-  if (r.leaks.length || r.samples.yes !== 11 || !r.caseWrong || !r.caseRight || r.samples.no !== 0) errs.push('options questions');
+  if (r.leaks.length || r.samples.yes !== 12 || !r.caseWrong || !r.caseRight || r.samples.no !== 0) errs.push('options questions');
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

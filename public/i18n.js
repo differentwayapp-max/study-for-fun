@@ -128,6 +128,8 @@
     'הצגת ילדים לדוגמה (לראות איך הטבלה נראית עם קבוצה)': 'Show example kids (to see the table with a group)',
     'כשהורים נוספים שקיבלו את התרגול יפעילו תחרות, הילדים שלהם יופיעו כאן (בגרסה המלאה, דרך השרת).': 'When other parents who got this practice set turn on competition, their kids will show up here.',
     // first-run welcome screens
+    "פעולות נוספות": "More actions", "↺ איפוס ההתקדמות": "↺ Reset progress", "איפוס": "Reset", "צריך שם": "A name is needed", "התרגולים נשארים, אבל ההתקדמות, הגביעים והטעויות יתחילו מחדש.": "The practice sets stay, but progress, trophies and mistakes start over.", "הילד/ה, התרגולים וכל ההתקדמות יימחקו. אי אפשר לבטל.": "The kid, the practice sets and all the progress will be deleted. This cannot be undone.",
+    "חזרה על הכול": "Review everything", "כמעט מושלם!": "Almost perfect!", "לוחצים על שאלה, ואז על התשובה שלה": "Tap a question, then its answer", "הצליל כבוי – לוחצים על 🔇 כדי להדליק": "Sound is off – tap 🔇 to turn it on", "למבוגרים: כמה זה": "For grown-ups: what is", "ועוד": "and", "תוקנו": "fixed",
     "מזמינים מבוגרים נוספים": "Invite other adults too",
     "שאלת חזרה": "Review question",
     "ניתן לבחור מקטלוג התרגולים הקיים בהתאם לכיתה, המקצוע הרלוונטי והחומר הספציפי שתרצו לתרגל": "Pick from the ready practice catalog by grade, subject and the specific material you want to practise", "התרגולים שלנו בנויים על בסיס החומר המפורסם של משרד החינוך": "Our practice sets are based on the material published by the Ministry of Education", "ניתן לבנות תרגול ממוקד: מצלמים דף עבודה ואנחנו בונים ממנו תרגול": "You can build a focused set: take a photo of a worksheet and we build a practice set from it", "אפשר לשתף גם גורמים נוספים למעקב – סבא וסבתא, מורה או מלווה – בקישור הזמנה משלהם": "You can also invite others to follow along – grandparents, a teacher or a helper – each with their own invitation link", "📍 ☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← ＋ הזמנת מבוגר": "📍 ☰ → 👨‍👩‍👧 Family & adults → ＋ Invite an adult",
@@ -228,7 +230,13 @@
     [/^(\d+) פרקים עד (.+) \+ חזרה ביום שלפני$/, (m, n, d) => `${n} chapters by ${d} + review the day before`],
     [/^\+(\d+)( ועוד (\d+) על הגביע)? נקודות ללוח האלופים של הקבוצה(.*)$/, (m, a, x, b, r) => `+${a}${b ? ` and ${b} for the trophy` : ''} points on the group leaderboard${r}`],
     [/^משהו השתבש בבנייה: (.*)$/, (m, r) => `Something went wrong while building: ${r}`],
-    [/^לא ניתן אישור לשימוש ב-(.*)$/, (m, r) => `No permission to use ${r}`]
+    [/^לא ניתן אישור לשימוש ב-(.*)$/, (m, r) => `No permission to use ${r}`],
+    [/^נשארו (\d+) תווים$/, (m, n) => `${n} characters left`],
+    [/^עד (\d+) תווים$/, (m, n) => `Up to ${n} characters`],
+    [/^עריכה · (.+)$/, (m, n) => `Edit · ${n}`],
+    [/^מחיקת (.+)$/, (m, n) => `Delete ${n}`],
+    [/^לאפס את ההתקדמות של (.+)\?$/, (m, n) => `Reset ${n}'s progress?`],
+    [/^למחוק את (.+)\?$/, (m, n) => `Delete ${n}?`]
   ];
 
   const cache = new Map(); const missing = W.__i18nMissing = new Set();

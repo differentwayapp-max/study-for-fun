@@ -10,7 +10,7 @@ const put = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: 
 (async () => {
   const code = fs.readFileSync(__dirname + '/../../public/share/en7-nov26.txt', 'utf8').slice(5);
   const p0 = JSON.parse(Buffer.from(code, 'base64').toString('utf8'));
-  const set = { id: 's1', kidId: 'k1', name: 'Ben', grade: 6, subject: p0.subject, topics: p0.topics, questions: p0.questions, chapters: p0.chapters, examDate: '2026-11-18', dailyGoal: 5, perRound: 13, shared: true, src: 'en7_nov26', words: p0.words, qa: p0.qa };
+  const set = { id: 's1', kidId: 'k1', name: 'Ben', grade: 6, subject: p0.subject, topics: p0.topics, questions: p0.questions, chapters: p0.chapters, examDate: new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10) /* always a week ahead */, dailyGoal: 5, perRound: 13, shared: true, src: 'en7_nov26', words: p0.words, qa: p0.qa };
   await put('families/FAM1', { inviteToken: 'OLD', kidTokens: { k1: 'TOK1' }, createdAt: Date.now() });
   await put('families/FAM1/fam/kids', { list: [{ id: 'k1', name: 'Ben', grade: 6, color: '#2F6BFF' }] });
   await put('families/FAM1/sets/s1', { set });

@@ -34,6 +34,10 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     const msg = await p.textContent('#fbErr');
     ok(/סמנו שקראתם/.test(msg) && !popup && !!(await p.$('#fbLogin')), '"I\'m a parent" without the tick: a message, no Google sign-in');
     if (OUT) await p.screenshot({ path: `${OUT}/terms_signin.png` });
+    ok(await p.evaluate(() => document.getElementById('fbGo').classList.contains('on')), '"I\'m a parent" shows it was chosen');
+    await p.click('#fbAgree'); await p.waitForTimeout(1500);
+    const err = await p.textContent('#fbErr').catch(() => '');
+    ok(popup || /auth\//.test(err), 'ticking the terms after "I\'m a parent" carries on to Google by itself (' + (popup ? 'popup' : err) + ')');   // the emulator cannot open a real Google window
     await ctx.close();
   }
   // 3. a parent who ticked and signed in: the consent is kept with the account; the menu has both links

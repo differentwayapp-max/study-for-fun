@@ -361,6 +361,7 @@ body.young .qbox{font-size:1.8em}
 .opt.right{--c:var(--mint);opacity:1}
 .opt.right .key{background:var(--ink);color:#fff}
 .opt.wrong{--c:var(--bad);color:#fff;opacity:1;animation:shake .35s}
+.opt.wrong .key{color:var(--ink)}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .helpers{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 
@@ -476,6 +477,9 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .onb .dots{display:flex;gap:8px;margin:12px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
 .onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
+.mhowto{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink2);margin:2px 0 8px}
+.nameleft{display:block;min-height:1em;font-size:.8em;color:var(--ink2);margin-top:2px}
+.kedanger{margin-top:14px;border-top:2px dashed #E3E1F2;padding-top:8px}.kedanger summary{cursor:pointer;color:var(--ink2);font-size:.9em}.kedanger .btn{margin:8px 4px 0}.btn.danger{color:#C2342F;border-color:#C2342F}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
 .sugcard{margin:10px 0 0;padding:12px}
 .workbox{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border:2px solid #9B8CFF;border-radius:16px;background:#F1EDFF}
@@ -804,7 +808,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <div class="chipsel" id="wKids"></div>
         <div id="wKidQuick" class="kidform hidden" style="margin-top:12px">
           <div class="row" style="grid-template-columns:1.2fr 1fr auto;align-items:end">
-            <div><label for="qkName">שם</label><input id="qkName" type="text" maxlength="20" placeholder="שם הילד/ה"></div>
+            <div><label for="qkName">שם</label><input id="qkName" type="text" maxlength="20" placeholder="שם הילד/ה" oninput="nameLeft(this)"><small class="nameleft"></small></div>
             <div><label for="qkGrade">כיתה</label><select id="qkGrade"></select></div>
             <div><button class="btn" onclick="quickAddKid()">הוספה</button></div>
           </div>
@@ -930,7 +934,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <label style="display:block;margin-top:14px">למי?</label>
       <div class="chipsel" id="adKids" style="justify-content:center"></div>
       <div id="adNew" class="hidden" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;text-align:start">
-        <div><label for="adName">שם</label><input id="adName" type="text" maxlength="20" placeholder="נועה"></div>
+        <div><label for="adName">שם</label><input id="adName" type="text" maxlength="20" placeholder="נועה" oninput="nameLeft(this)"><small class="nameleft"></small></div>
         <div><label for="adGrade">כיתה</label><select id="adGrade"></select></div>
       </div>
       <label for="adExam" style="display:block;margin-top:14px">🏁 תאריך המבחן <span class="hint">(לא חובה)</span></label>
@@ -1124,7 +1128,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     <div class="card herocard" style="text-align:center">
       <div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="go('kid')" aria-label="סגירה">✕</button></div>
       <div class="ava-big" id="pfPreview"></div>
-      <input id="pfName" type="text" maxlength="14" style="max-width:260px;text-align:center;font-family:var(--display);font-size:1.4em;margin:10px auto 16px;display:block" aria-label="השם שלי">
+      <input id="pfName" type="text" maxlength="14" readonly tabindex="-1" style="max-width:260px;text-align:center;font-family:var(--display);font-size:1.4em;margin:10px auto 16px;display:block;border:0;background:none;box-shadow:none" aria-label="השם שלי">
       <div class="avagrid" id="pfGrid"></div>
       <div class="actions" style="justify-content:center"><button class="btn big" onclick="saveProfile()">✓</button></div>
     </div>
@@ -1543,11 +1547,13 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <div class="hint" id="fbErr"></div>
         <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div></div>`;
       document.body.appendChild(el);
-      el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); };
+      el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); el.querySelector('#fbGo').classList.remove('on'); };
       // consent: the box starts unticked (tests with a fake Google account start ticked); the consent is kept with the account
       const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
-      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; };
+      // "I'm a parent" first, then the tick: carry on to Google by itself (no second click)
+      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; if (agree.checked && el.querySelector('#fbGo').classList.contains('on')) el.querySelector('#fbGo').click(); };
       el.querySelector('#fbGo').onclick = async () => {
+        el.querySelector('#fbGo').classList.add('on'); el.querySelector('#fbKid').classList.remove('on'); el.querySelector('#fbKidMsg').classList.add('hidden');
         if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
           el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
         try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); } catch (e) {}
@@ -2748,7 +2754,7 @@ function renderKids(){
       +(fin.length?`<details class="donesec"><summary>✓ תרגולים שהסתיימו · ${fin.length}</summary><div class="donelist">${fin.map(x=>row(x,setDone(x))).join('')}</div></details>`:'');
     const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`).join('');
     return `<div class="card herocard kidhero">
-      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button>${canManage()?`<button class="btn ghost small" onclick="editKid('${k.id}')" aria-label="עריכה">✎</button>`:''}</span></div>
+      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small" onclick="openKidLink('${k.id}')" aria-label="לינק לילד">🔗</button>${canManage()?`<button class="btn ghost small" onclick="openKidEdit('${k.id}')" aria-label="עריכה">✎</button>`:''}</span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
         <div class="m">🏆 ${kidTrophies(k)}<small>גביעים</small></div><div class="m">🔥 ${kidStreak(k)}<small>ימים ברצף</small></div></div>
       <div style="display:flex;flex-direction:column;gap:10px">${pend}${rows}</div>
@@ -2756,7 +2762,7 @@ function renderKids(){
     </div>`; });
   if(canManage()) slides.push(`<div class="card herocard kidhero addcard" id="kidForm">
       <div class="who addwho">${mascot('wow',KF.color)}<h2 id="kfTitle">${KF.id?'עריכה':'＋ ילד/ה'}</h2></div>
-      <div class="kfrow"><div><label for="kfName">שם</label><input id="kfName" type="text" placeholder="נועה" maxlength="20"></div>
+      <div class="kfrow"><div><label for="kfName">שם</label><input id="kfName" type="text" placeholder="נועה" maxlength="20" oninput="nameLeft(this)"><small class="nameleft"></small></div>
       <div><label for="kfGrade">כיתה</label><select id="kfGrade"></select></div></div>
       <div class="swatches" id="kfColors" style="justify-content:center"></div>
       <div class="actions" style="justify-content:center;flex-wrap:wrap"><button class="btn big" onclick="saveKid()" id="kfSave">שמירה</button><button class="btn ghost ${KF.id?'':'hidden'}" id="kfCancel" onclick="resetKidForm()">ביטול</button>${KF.id?`<button class="btn ghost" onclick="delKid('${KF.id}')">${delArm===KF.id?'למחוק?':'🗑'}</button>`:''}</div>
@@ -2772,7 +2778,43 @@ function renderKids(){
   $('kfColors').innerHTML=KID_COLORS.map(c=>`<button class="sw ${KF.color===c?'on':''}" style="background:${c}" aria-label="צבע" onclick="KF.color='${c}';keepForm();renderKids();carGo('kidCar',kids.length)"></button>`).join('');
 }
 function keepForm(){}
+// names are up to 20 characters: from 15 on, say how many are left (instead of cutting without a word)
+function nameLeft(el){ const m=el.maxLength||20, n=el.value.length, t=el.parentElement&&el.parentElement.querySelector('.nameleft'); if(!t) return;
+  t.textContent = n>=m ? `עד ${m} תווים` : n>=m-5 ? `נשארו ${m-n} תווים` : ''; }
 function resetKidForm(){ KF={id:null,color:KID_COLORS[kids.length%5]}; if($('kfName')) $('kfName').value=''; renderKids(); }
+// edit a kid in place (name, grade, colour) – the window opens over the kid's own card, and the screen stays on it.
+// Reset / delete are at the bottom, apart from the usual buttons, and each asks first.
+let KE=null;
+function openKidEdit(id){ const k=kidById(id); if(!k||!canManage()) return; KE={id,color:k.color}; if($('kidEditBody')) $('kidEditBody').innerHTML=''; renderKidEdit(); $('kidEditDlg').classList.remove('hidden'); setTimeout(()=>$('keName')?.focus(),50); }
+function renderKidEdit(){
+  const k=kidById(KE.id); if(!k) return; let d=$('kidEditDlg');
+  if(!d){ d=document.createElement('div'); d.id='kidEditDlg'; d.className='dlgwrap hidden'; d.innerHTML='<div class="card dlgsm" id="kidEditBody"></div>'; document.body.appendChild(d);
+    d.addEventListener('click',e=>{ if(e.target===d) d.classList.add('hidden'); }); }
+  const name=$('keName')?.value ?? k.name, grade=$('keGrade')?.value ?? k.grade;
+  $('kidEditBody').innerHTML=`<div class="dlghead"><b>✎ עריכה · ${esc(k.name)}</b><button class="btn ghost small" onclick="$('kidEditDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+    <div style="display:flex;justify-content:center;margin:4px 0 8px">${avatarHtml({...k,color:KE.color},64)}</div>
+    <label for="keName">שם</label><input id="keName" type="text" maxlength="20" oninput="nameLeft(this)"><small class="nameleft"></small>
+    <label for="keGrade" style="margin-top:8px;display:block">כיתה</label><select id="keGrade"></select>
+    <div class="swatches" style="justify-content:center;margin-top:10px">${KID_COLORS.map(c=>`<button class="sw ${KE.color===c?'on':''}" style="background:${c}" aria-label="צבע" onclick="KE.color='${c}';renderKidEdit()"></button>`).join('')}</div>
+    <div class="hint center" id="keMsg"></div>
+    <button class="btn big" style="width:100%;justify-content:center;margin-top:10px" onclick="saveKidEdit()">שמירה</button>
+    <details class="kedanger"><summary>פעולות נוספות</summary>
+      <button class="btn ghost small" onclick="kidEditReset()">↺ איפוס ההתקדמות</button>
+      <button class="btn ghost small danger" onclick="kidEditDelete()">🗑 מחיקת ${esc(k.name)}</button></details>`;
+  gradeOptions($('keGrade')); $('keName').value=name; $('keGrade').value=grade; nameLeft($('keName'));
+}
+function saveKidEdit(){
+  const k=kidById(KE.id); if(!k) return; const name=$('keName').value.trim(), grade=+$('keGrade').value;
+  if(!name){ $('keMsg').textContent='צריך שם'; return; }
+  Object.assign(k,{name,grade,color:KE.color}); sets.forEach(x=>{ if(x.kidId===k.id) x.name=name; }); store.save(); saveKids();
+  $('kidEditDlg').classList.add('hidden'); const idx=visibleKids().indexOf(k); renderKids(); setTimeout(()=>carGo('kidCar',Math.max(0,idx)),50); toast(`✓ ${esc(name)}`);
+}
+async function kidEditReset(){ const k=kidById(KE.id); if(!k) return;
+  if(!(await askSure({ico:'↺',title:`לאפס את ההתקדמות של ${k.name}?`,text:'התרגולים נשארים, אבל ההתקדמות, הגביעים והטעויות יתחילו מחדש.',yes:'איפוס',danger:true}))) return;
+  resetArm=k.id; resetKid(k.id); $('kidEditDlg').classList.add('hidden'); }
+async function kidEditDelete(){ const k=kidById(KE.id); if(!k) return;
+  if(!(await askSure({ico:'🗑',title:`למחוק את ${k.name}?`,text:'הילד/ה, התרגולים וכל ההתקדמות יימחקו. אי אפשר לבטל.',yes:'מחיקה',danger:true}))) return;
+  delArm=k.id; delKid(k.id); $('kidEditDlg').classList.add('hidden'); }
 function editKid(id){ const k=kidById(id); KF={id,color:k.color}; renderKids(); carGo('kidCar',kids.length); }
 function saveKid(){
   const name=$('kfName').value.trim(), grade=+$('kfGrade').value;
@@ -2816,7 +2858,7 @@ function renderProfile(){
 }
 function saveProfile(){
   const k=kidById(activeKid); const n=$('pfName').value.trim();
-  k.avatar=PF.avatar; k.nick = n && n!==k.name ? n : (n? null : k.nick); if(n===k.name) k.nick=null;
+  k.avatar=PF.avatar;   // the name stays the one the parent set
   saveKidsLocal(); pushProgress(k.id); go('kid');
 }
 // personal photos are not offered (children's privacy) – characters and animals only
@@ -2965,7 +3007,7 @@ function renderRoad(){
       ${again?`<rect x="${x-r-6}" y="${y+r-18}" width="46" height="22" rx="11" fill="#6B5BD6" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+17}" y="${y+r-2}" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">↺${Math.round(best[it.i]*100)}%</text>`:''}
       ${!isRev&&it.i===goalAfter?`<circle cx="${x-r+4}" cy="${y-r+6}" r="14" fill="${goalDone?'#FFD166':'#FFFBEF'}" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+4}" y="${y-r+12}" font-size="15" text-anchor="middle">🏆</text>`:''}</g>
       <text x="${x}" y="${y+r+18}" font-size="12" text-anchor="middle" fill="#3c4a6b"${!isRev&&chPages(it.c)?' direction="rtl" style="direction:rtl;unicode-bidi:embed"':''}>${isRev?esc(T.l):(it.i+1)+' · '+(chPages(it.c)?esc(chPages(it.c).replace(/(\d[\d–-]*)/,'\u2066$1\u2069')):esc(T.l))}</text>
-      <text x="${x}" y="${y+r+34}" font-size="13" text-anchor="middle" font-weight="700" fill="#1B2A4A">${esc((s=>s.length>13?s.slice(0,12)+'…':s)(isRev?(window.sffT?sffT('חזרה על הטעויות'):'חזרה על הטעויות'):chName(it.c)))}</text>`;
+      <text x="${x}" y="${y+r+34}" font-size="13" text-anchor="middle" font-weight="700" fill="#1B2A4A">${esc((s=>s.length>13?s.slice(0,12)+'…':s)(isRev?(window.sffT?sffT('חזרה על הכול'):'חזרה על הכול'):chName(it.c)))}</text>`;
     if(now) svg+=`<foreignObject x="${x-20}" y="${y-r-44}" width="40" height="40"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,38):'🧒'}</div></foreignObject>`;
   });
   $('rdMap').innerHTML=svg+'</svg>';
@@ -3070,8 +3112,8 @@ function rdPaint(){ document.querySelectorAll('.passage .rw').forEach(el=>{ cons
   const b=document.querySelector('.passage .rdplay'); if(b){ b.textContent=RD.on?'⏸':(RD.i?'▶️ המשך':'🔊 הקראה'); b.setAttribute('aria-label',RD.on?'עצירה':'הקראה'); }
   const cur=document.querySelector('.passage .rw.on'); if(cur){ const box=cur.closest('.ptext'), r=cur.getBoundingClientRect(), br=box.getBoundingClientRect(); if(r.top<br.top||r.bottom>br.bottom) box.scrollTop+=r.top-br.top-br.height/3; } }
 function rdStop(){ if(!RD.on) return; RD.on=false; RD.tok++; try{speechSynthesis.cancel()}catch(e){} rdPaint(); }
-function rdToggle(){ if(RD.on) rdStop(); else { if(RD.i>=RD.words.length) RD.i=0; RD.on=true; rdChunk(); } }
-function rdFrom(i){ rdStop(); RD.i=i; RD.on=true; rdChunk(); }
+function rdToggle(){ if(RD.on) rdStop(); else { if(mutedNote()) return; if(RD.i>=RD.words.length) RD.i=0; RD.on=true; rdChunk(); } }
+function rdFrom(i){ rdStop(); if(mutedNote()) return; RD.i=i; RD.on=true; rdChunk(); }
 function rdChunk(){
   if(!RD.on) return; if(RD.i>=RD.words.length){ RD.on=false; RD.i=0; rdPaint(); return; }
   let j=RD.i; while(j<RD.words.length-1 && j-RD.i<24 && !/[.!?:׃]["'”’)]*$/.test(RD.words[j].w) && RD.words[j+1].p===RD.words[j].p) j++;
@@ -3079,7 +3121,7 @@ function rdChunk(){
   part.forEach(x=>{ starts.push(t.length); t+=x.w+' '; });
   const tok=++RD.tok, base=RD.i; rdPaint();
   try{ speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t.replace(/_+/g,' ')); u.lang=/[\u0590-\u05FF]/.test(t)?'he-IL':'en-US'; u.rate=.85;
+    const u=new SpeechSynthesisUtterance(t.replace(/_+/g,' ')); u.lang=/[\u0590-\u05FF]/.test(t)?'he-IL':'en-US'; u.rate=.85; u.voice=bestVoice(u.lang);
     u.onboundary=e=>{ if(tok!==RD.tok||e.name&&e.name!=='word') return; let k=0; while(k+1<starts.length&&starts[k+1]<=e.charIndex) k++; RD.i=base+k; rdPaint(); };
     u.onend=()=>{ if(tok!==RD.tok) return; RD.i=base+part.length; rdChunk(); };
     u.onerror=()=>{ if(tok===RD.tok){ RD.on=false; rdPaint(); } };
@@ -3360,7 +3402,7 @@ function matchRound(){
   G.mtparts=evenSplit(G.qs.length,5); const [mf,mt]=G.mtparts[G.round], slice=G.qs.slice(mf,mt);
   G.m={slice, ans:shuffle(slice.map((q,i)=>i)), sel:null, done:{}, used:{}, first:{}, lines:[]};
   const rounds=G.mtparts.length;
-  $('gTop').innerHTML='';
+  $('gTop').innerHTML='<div class="mhowto">👆 לוחצים על שאלה, ואז על התשובה שלה</div>';
   $('gCount').textContent= rounds>1?`〰️ ${G.round+1}/${rounds}`:'';
   $('gPlay').innerHTML=`
     <div class="matchwrap" id="mw"><svg class="lines" id="mlines"></svg>
@@ -3379,7 +3421,7 @@ function drawLine(i,j,color,cls){
   if(cls) p.setAttribute('class',cls);
   $('mlines').appendChild(p); return p;
 }
-const LINE_COLORS=['#2F6BFF','#24C78E','#FF5C8A','#FFB000','#8B6CFF'];
+const LINE_COLORS=['#2F6BFF','#24C78E','#8B6CFF','#F2A63B','#14A3B8'];
 function matchTo(j){
   const M=G.m; if(M.sel==null||M.used[j]) return;
   const i=M.sel, q=M.slice[i];
@@ -3469,7 +3511,7 @@ function endGame(){
   const right=G.res.filter(r=>r.ok).length, n=G.res.length, pct=right/n;
   const stars = pct>=.9?3:pct>=.6?2:pct>0?1:0;
   $('eStars').innerHTML=[0,1,2].map(i=>starSvg(i<stars)).join('');
-  $('eTitle').textContent = pct>=.9?'מושלם!':pct>=.6?'עבודה טובה!':'התחלה טובה – ממשיכים!';
+  $('eTitle').textContent = pct===1?'מושלם!':pct>=.9?'כמעט מושלם!':pct>=.6?'עבודה טובה!':'התחלה טובה – ממשיכים!';
   const modeName=MODES.find(m=>m.id===G.mode).name;
   $('eSub').innerHTML=`<span>✓ ${right}/${n}</span><span>⭐ ${G.score}</span>${G.best>1?`<span>🔥 ${G.best}</span>`:''}`;
   const by={}; G.res.forEach(r=>{by[r.q.topic]=by[r.q.topic]||[0,0]; by[r.q.topic][1]++; if(r.ok) by[r.q.topic][0]++;});
@@ -3500,6 +3542,12 @@ function refreshCurrentQ(){
 }
 /* ---------- sound: effects + English words read aloud ---------- */
 let MUTE=false; try{ MUTE=localStorage.getItem('sff_mute')==='1'; }catch(e){}
+// the most natural voice the phone has for a language (enhanced / premium / neural ones first, never a "compact" one)
+function bestVoice(lang){ try{ const all=speechSynthesis.getVoices(), base=String(lang).slice(0,2).toLowerCase();
+  const vs=all.filter(v=>String(v.lang).toLowerCase().replace('_','-').startsWith(base) || (base==='he'&&/^iw/i.test(v.lang)));
+  const score=v=>(/enhanced|premium|natural|neural|wavenet|siri/i.test(v.name)?4:0)+(/google/i.test(v.name)?2:0)+(/compact|eloquence/i.test(v.name)?-3:0)+(String(v.lang).replace('_','-')===lang?1:0);
+  return vs.sort((a,b)=>score(b)-score(a))[0]||null; }catch(e){ return null; } }
+try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices(); }catch(e){}
 function muteIcon(){ const b=$('gMute'); if(b) b.textContent=MUTE?'🔇':'🔊'; }
 function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) rdStop(); if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
 let AC=null;
@@ -3550,16 +3598,18 @@ const EN_SAY=t=>/[A-Za-z]/.test(t||'') && !/[\u0590-\u05FF]/.test(t||'');
 const isEnSet=s=>!!s && (/אנגלית/.test(s.subject||'') || /english/i.test(s.subject||''));
 function sayEn(text, force){
   if((MUTE&&!force) || !G || !isEnSet(G.set) || !EN_SAY(text)) return;
-  rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){}
+  rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); speechSynthesis.speak(u); }catch(e){}
 }
 // grammar (sentence with a blank) → the whole sentence; vocabulary → the word
 function sayAnswer(q){ const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
+function mutedNote(){ if(!MUTE) return false; toast('🔇 הצליל כבוי – לוחצים על 🔇 כדי להדליק'); return true; }
 function speakQ(){
+  if(mutedNote()) return;
   try{
     rdStop(); const q=curQ(); speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(q.question);
     u.lang=/[a-zA-Z]{3}/.test(q.question)&&!/[֐-׿]/.test(q.question)?'en-US':'he-IL';
-    u.rate=.9; speechSynthesis.speak(u);
+    u.rate=.9; u.voice=bestVoice(u.lang); speechSynthesis.speak(u);
   }catch(e){}
 }
 function burst(){
@@ -3632,6 +3682,8 @@ function resetKid(id){
   sets.filter(s=>kidOfSet(s)===k).forEach(s=>{ delete s.order; delete s.pos; }); store.save();
   pushProgress(id); resetKidForm(); renderKids(); toast(`↺ ${esc(k.name)} ✓`);
 }
+// a short key of a text (question / option) – history keeps it next to the index, so an updated set still finds them
+const tkey=t=>{ let h=2166136261; for(const c of String(t).replace(/[\s⁦-⁩]/g,'')){ h^=c.codePointAt(0); h=Math.imul(h,16777619)>>>0; } return h.toString(36); };
 function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
 function recordSession(by, right, n){
   const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
@@ -3639,6 +3691,7 @@ function recordSession(by, right, n){
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
     retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
     qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
+    qk:G.res.filter(r=>s.questions.indexOf(r.q)>=0).map(r=>tkey(r.q.question)+(!r.ok&&Number.isInteger(r.pick)?':'+tkey(r.q.options[r.pick]):'')),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);
@@ -3684,7 +3737,8 @@ function renderSetCards(H){
         <div class="hint">${Math.min(dnS.size,C.length)}/${C.length} פרקים · ${qn?Math.round(qr/qn*100):0}% הצלחה · ${qn} שאלות</div></div>
       ${rows.length?`<h4 class="ssec">🎯 נושאים</h4><div class="trows">${rows.map(x=>`<div class="trow"><b dir="auto">${esc(x.t)}</b><span class="tbar"><i style="width:${Math.round(x.p*100)}%;background:${TOPIC_CLR[x.status]}"></i></span><span class="tp">${Math.round(x.p*100)}%</span><span class="pill ${TOPIC_LBL[x.status][0]}">${TOPIC_LBL[x.status][1]}</span><span class="tt">${x.trend}</span></div>`).join('')}</div>
         ${weakT.length&&sample?`<div class="actions" style="margin-top:8px"><button class="btn small" onclick="buildReinforceIdx(${REINF.push([set.subject,weakT.map(w=>w.t),set.grade,(kidOfSet(set)||{}).name||set.name,set.id])-1})">✨ סט חיזוק לנושאים האלה</button></div>`:''}`:''}`;
-    const nm=mistakesOf(set,HS).length, mbtn=nm?`<button class="btn ghost mistbtn" onclick="openMistakes('${set.id}')">🔎 לראות את הטעויות · ${nm}</button>`:'';
+    const ms=mistakesOf(set,history), mo=ms.filter(m=>!m.fixed).length, mf=ms.length-mo;
+    const mbtn=ms.length?`<button class="btn ghost mistbtn" onclick="openMistakes('${set.id}')">🔎 לראות את הטעויות · ${mo}${mf?` <span class="hint">(ועוד ${mf} תוקנו)</span>`:''}</button>`:'';
     if(!HS.some(h=>Array.isArray(h.qr)&&h.qr.length)) return `<div class="card wcard scard">${head}${mbtn}</div>`;
     const st=WSTAT[set.id]=WSTAT[set.id]||{tab:'all',sel:null}; st.items=wordStats(set,H);
     const cats=['vocab','grammar','unseen'].filter(c=>st.items.some(x=>x.cat===c));
@@ -3716,7 +3770,12 @@ function renderSetCards(H){
 /* ---------- the kid's actual mistakes in one practice set: question, what they answered, the right answer ---------- */
 function mistakesOf(set, HS){
   const by={};
-  HS.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qr)).forEach(h=>h.qr.forEach(x=>{ const [i,ok,pick]=String(x).split('.').map(Number); const q=set.questions[i]; if(!q) return;
+  const byKey={}; set.questions.forEach((q,i)=>{ byKey[tkey(q.question)]=i; });
+  HS.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qr)).forEach(h=>h.qr.forEach((x,n)=>{ let [i,ok,pick]=String(x).split('.').map(Number);
+    const k=Array.isArray(h.qk)&&h.qk.length===h.qr.length?String(h.qk[n]).split(':'):null;
+    if(k){ if(byKey[k[0]]==null) return; i=byKey[k[0]]; const q0=set.questions[i]; pick=k[1]?q0.options.findIndex(o=>tkey(o)===k[1]):null; if(pick<0) pick=null; }
+    const q=set.questions[i]; if(!q) return;
+    if(!k && pick===q.answer) pick=null;                       // an old record from before an update: never show the right answer as the wrong one
     (by[i]=by[i]||{i,q,tries:[]}).tries.push({at:h.at,ok:!!ok,pick:Number.isInteger(pick)?pick:null,ch:h.ch}); }));
   return Object.values(by).filter(m=>m.tries.some(t=>!t.ok)).map(m=>{ m.tries.sort((a,b)=>a.at-b.at); const last=m.tries[m.tries.length-1], wrong=m.tries.filter(t=>!t.ok);
     return {...m, bad:wrong.length, fixed:last.ok, lastWrong:wrong[wrong.length-1]}; }).sort((a,b)=>(a.fixed-b.fixed)||(b.lastWrong.at-a.lastWrong.at));
@@ -3813,7 +3872,7 @@ async function openServerLog(){
   $('moreDlg').classList.remove('hidden');
 }
 async function delBug(id,btn){ try{ await window.__sffRoot.del('bugReports',id); btn.closest('.errrow').remove(); }catch(e){ toast('⚠️'); } }
-function sayWord(t){ rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; speechSynthesis.speak(u); }catch(e){} }
+function sayWord(t){ rdStop(); if(mutedNote()) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); speechSynthesis.speak(u); }catch(e){} }
 // a small practice set (for the same child) with exactly the words that had mistakes – no AI needed
 function makeWordDrill(setId){
   const set=getSet(setId), st=WSTAT[setId]; if(!set||!st) return;
@@ -3896,7 +3955,11 @@ function openMore(){ if(!curSet) return; $('rDel').classList.toggle('hidden',!!c
 function closeMore(){ $('moreDlg').classList.add('hidden'); const box=$('moreDlg').querySelector('.moresheet'); if(box.dataset.keep){ box.innerHTML=box.dataset.keep; delete box.dataset.keep; if(curSet&&$('rCompete')) $('rCompete').checked=!!curSet.compete; if(curSet) renderReview(curSet); } }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeMenu(); closeMore(); } });
 function applyLock(){ document.body.classList.toggle('locked', locked()); if(locked()) activeKid=LOCK; $('ownerExit').classList.toggle('hidden', !(locked()&&IS_OWNER)); }
-function ownerUnlock(){ lsSet('sff_unlock','1'); LOCK=null; lsSet('sff_lock',null); location.hash=''; applyLock(); go('kids'); }
+async function ownerUnlock(){
+  const a=6+Math.floor(Math.random()*4), b=6+Math.floor(Math.random()*4);
+  const v=prompt((window.sffT?sffT('למבוגרים: כמה זה'):'למבוגרים: כמה זה')+` ${a} × ${b}?`); if(v==null) return;
+  if(parseInt(v,10)!==a*b){ toast('✕'); return; }
+  lsSet('sff_unlock','1'); LOCK=null; lsSet('sff_lock',null); location.hash=''; applyLock(); go('kids'); }
 
 /* write queue: one write at a time per document */
 const QUEUE={};

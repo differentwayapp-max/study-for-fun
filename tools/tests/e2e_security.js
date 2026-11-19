@@ -16,9 +16,16 @@ const enc = x => x === null || x === undefined ? { nullValue: null } : typeof x 
   : typeof x === 'number' ? (Number.isInteger(x) ? { integerValue: String(x) } : { doubleValue: x }) : Array.isArray(x) ? { arrayValue: { values: x.map(enc) } } : { mapValue: { fields: encF(x) } };
 const encF = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined).map(([k, v]) => [k, enc(v)]));
 const admin = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' }, body: JSON.stringify({ fields: encF(obj) }) });
-const user = async email => {
-  const r = await fetch(`${AU}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=x`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+// an adult = an email account whose address is verified (as an email sign-in link gives); no email = a kid device (anonymous)
+const user = async (email, verified = true) => {
+  let r = await fetch(`${AU}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=x`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(email ? { email, password: 'pw123456', returnSecureToken: true } : { returnSecureToken: true }) }).then(r => r.json());
+  if (email && verified) {
+    await fetch(`${AU}/identitytoolkit.googleapis.com/v1/projects/${PROJ}/accounts:update`, { method: 'POST', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ localId: r.localId, emailVerified: true }) });
+    r = await fetch(`${AU}/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=x`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: 'pw123456', returnSecureToken: true }) }).then(r => r.json());
+  }
   return { uid: r.localId, H: { Authorization: 'Bearer ' + r.idToken, 'Content-Type': 'application/json' } };
 };
 const write = (u, path, obj, q = '') => fetch(`${DOCS}/${path}${q}`, { method: 'PATCH', headers: u.H, body: JSON.stringify({ fields: encF(obj) }) }).then(r => r.status);
@@ -69,6 +76,8 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   ok(!/[<>]/.test(JSON.stringify(kid1)), 'the kid keeps a clean name/picture: ' + JSON.stringify({ nick: kid1.nick, avatar: kid1.avatar }));
   ok(await p.evaluate(() => avatarHtml({ avatar: { type: 'emoji', value: '<b>x</b>' } }).includes('&lt;b&gt;')) && await p.evaluate(() => !mascot('happy', '"><b>').includes('"><b>')), 'avatar and colours are escaped when drawn');
 
+  { const nv = await user('unverified@t.local', false);
+    ok(await write(nv, `users/${nv.uid}`, { x: 1 }) === 403, 'an email account that never verified its address is not a parent'); }
   console.log('3. one invitation = one adult');
   await admin(`families/${fam}/invites/INV1`, { role: 'tutor', name: 'Tutor', kids: ['k1'], by: fam, exp: Date.now() + 864e5, used: false });
   const a1 = await user('tutor1@t.local'), a2 = await user('tutor2@t.local'), a3 = await user('tutor3@t.local');

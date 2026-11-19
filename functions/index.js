@@ -26,7 +26,7 @@ const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
     await serverLog({ fn: name, kind: 'error', code: String(e.code || e.name || 'error').slice(0, 60), msg: String(e.message || e).slice(0, 300), ms: Date.now() - t });
     const fam = req.data && req.data.famId, uid = req.auth && req.auth.uid;
-    const google = req.auth && req.auth.token && req.auth.token.firebase && req.auth.token.firebase.sign_in_provider === 'google.com';
+    const google = req.auth && req.auth.token && req.auth.token.firebase && (req.auth.token.firebase.sign_in_provider === 'google.com' || (req.auth.token.firebase.sign_in_provider !== 'anonymous' && req.auth.token.email_verified === true));   // a parent (Google or a verified email link)
     if (typeof fam === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(fam) && e.code !== 'resource-exhausted' && uid && google) {
       try {
         // only into the caller's own family: the owner, or a member (a stranger's famId writes nothing)
@@ -83,7 +83,9 @@ function isAdminUser(auth) {
 }
 function parentOnly(request) {
   const auth = request.auth;
-  if (!auth || auth.token.firebase?.sign_in_provider === 'anonymous') {
+  // a parent: Google, or an email sign-in link (verified address); never a kid device (anonymous) or an unverified email
+  if (!auth || auth.token.firebase?.sign_in_provider === 'anonymous'
+      || (auth.token.firebase?.sign_in_provider !== 'google.com' && auth.token.email_verified !== true)) {
     throw new HttpsError('permission-denied', 'Only a signed-in parent can build practices.');
   }
   return auth;

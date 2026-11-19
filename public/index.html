@@ -1336,6 +1336,14 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     const kidFam = LS.getItem('sff_fam'), kidTok = LS.getItem('sff_tok');
 
     W.__sffStage = 'auth';
+    if (A.isSignInWithEmailLink && A.isSignInWithEmailLink(auth, location.href)) {
+      try {
+        let mail = LS.getItem('sff_link_mail');
+        if (!mail) mail = prompt(W.sffT ? W.sffT('לאיזה מייל נשלח הקישור?') : 'לאיזה מייל נשלח הקישור?') || '';
+        await A.signInWithEmailLink(auth, mail.trim(), location.href); LS.removeItem('sff_link_mail');
+      } catch (e) { W.__sffMailErr = String(e.code || e.message || e); }
+      W.history.replaceState(null, '', location.origin + '/');              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
+    }
     let firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
     let role, uid, famId;
     // A kid link of a family, opened on a phone signed in to a *different* Google account (e.g. the kid once tapped
@@ -1593,6 +1601,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
         <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
+        <button class="fbemailbtn" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
+        <div class="fbemail hidden" id="fbEmail"><input id="fbEmailIn" type="email" inputmode="email" autocomplete="email" placeholder="המייל שלך" dir="ltr">
+          <button class="btn" id="fbEmailGo" type="button">שליחת קישור כניסה</button><div class="hint">נשלח קישור למייל. לוחצים עליו – ונכנסים. בלי סיסמה.</div></div>
         <div class="notice fbkidmsg hidden" id="fbKidMsg"><b>🔗 צריך את הקישור האישי שלך</b><div>ההורה שולח/ת אותו בוואטסאפ מהאפליקציה. לוחצים עליו, ומשחקים. בלי סיסמה ובלי Google.</div></div>
         <div class="hint" id="fbErr"></div>
         <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div></div>`;
@@ -1602,6 +1613,21 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
       // "I'm a parent" first, then the tick: carry on to Google by itself (no second click)
       agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; if (agree.checked && el.querySelector('#fbGo').classList.contains('on')) el.querySelector('#fbGo').click(); };
+      // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
+      el.querySelector('#fbEmailBtn').onclick = () => { el.querySelector('#fbEmail').classList.toggle('hidden'); el.querySelector('#fbEmailIn').focus(); };
+      el.querySelector('#fbEmailGo').onclick = async () => {
+        const mail = el.querySelector('#fbEmailIn').value.trim(), err = el.querySelector('#fbErr');
+        if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(mail)) { err.textContent = W.sffT ? W.sffT('צריך כתובת מייל תקינה') : 'צריך כתובת מייל תקינה'; return; }
+        if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
+          el.querySelector('#fbTerms').classList.add('need'); err.textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
+        try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); LS.setItem('sff_link_mail', mail); } catch (e) {}
+        try {
+          const { getAuth, sendSignInLinkToEmail } = await import(base + 'firebase-auth.js');
+          await sendSignInLinkToEmail(getAuth(), mail, { url: location.origin + '/?mail=1', handleCodeInApp: true });
+          el.querySelector('#fbEmail').innerHTML = `<div class="notice ok"><b>📬 שלחנו קישור ל-<span dir="ltr">${mail.replace(/[<>&"]/g, '')}</span></b><div>פותחים את המייל <b>בטלפון הזה</b> ולוחצים על הקישור. לא הגיע? בודקים בספאם.</div></div>`;
+          err.textContent = '';
+        } catch (e) { err.textContent = '⚠️ ' + (e.code || e.message); }
+      };
       el.querySelector('#fbGo').onclick = async () => {
         el.querySelector('#fbGo').classList.add('on'); el.querySelector('#fbKid').classList.remove('on'); el.querySelector('#fbKidMsg').classList.add('hidden');
         if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
@@ -1631,6 +1657,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   #fbLogin .fbterms{display:flex;align-items:flex-start;gap:10px;max-width:min(92vw,420px);text-align:start;font-size:.95em;cursor:pointer;padding:10px 12px;border-radius:12px;line-height:1.5}
   #fbLogin .fbterms input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:#2F6BFF}
   #fbLogin .fbterms.need{background:#FFF6E3;outline:2px solid #F2A63B}
+  #fbLogin .fbemailbtn{border:0;background:none;font:inherit;color:#2F6BFF;text-decoration:underline;cursor:pointer;padding:4px}
+  #fbLogin .fbemail{display:flex;flex-direction:column;gap:8px;width:min(92vw,420px)}#fbLogin .fbemail input{width:100%;box-sizing:border-box}
   #fbLogin .fbkidmsg{max-width:min(92vw,420px);text-align:start;background:#FFF6E3;border-color:var(--sun)}
 </style>
 

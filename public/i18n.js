@@ -128,6 +128,8 @@
     'הצגת ילדים לדוגמה (לראות איך הטבלה נראית עם קבוצה)': 'Show example kids (to see the table with a group)',
     'כשהורים נוספים שקיבלו את התרגול יפעילו תחרות, הילדים שלהם יופיעו כאן (בגרסה המלאה, דרך השרת).': 'When other parents who got this practice set turn on competition, their kids will show up here.',
     // first-run welcome screens
+    "שלחנו קישור ל": "We sent a link to",
+    "📧 אין לי Google – כניסה עם מייל": "📧 No Google? Sign in with email", "המייל שלך": "Your email", "שליחת קישור כניסה": "Send a sign-in link", "נשלח קישור למייל. לוחצים עליו – ונכנסים. בלי סיסמה.": "We email you a link. Tap it and you're in. No password.", "צריך כתובת מייל תקינה": "A valid email address is needed", "לאיזה מייל נשלח הקישור?": "Which email was the link sent to?", "פותחים את המייל": "Open the email", "בטלפון הזה": "on this phone", "ולוחצים על הקישור. לא הגיע? בודקים בספאם.": "and tap the link. Not there? Check spam.",
     "👆 לוחצים על מילה כדי לראות מאיזו שאלה היא": "👆 Tap a word to see the question it came from",
     "אין משחקים בטווח הזה": "No games in this range", "עוד אין תרגולים": "No practice sets yet", "＋ תרגול": "＋ Practice set",
     "אפשר לבחור כמה ילדים": "You can choose several kids",
@@ -238,6 +240,7 @@
     [/^נשארו (\d+) תווים$/, (m, n) => `${n} characters left`],
     [/^עד (\d+) תווים$/, (m, n) => `Up to ${n} characters`],
     [/^▶ לשחק עם (.+)$/, (m, n) => `▶ Play with ${n}`],
+    [/^📬 שלחנו קישור ל-(.+)$/, (m, n) => `📬 We sent a link to ${n}`],
     [/^🔗 שליחת קישור ל(.+)$/, (m, n) => `🔗 Send the link to ${n}`],
     [/^עריכה · (.+)$/, (m, n) => `Edit · ${n}`],
     [/^מחיקת (.+)$/, (m, n) => `Delete ${n}`],

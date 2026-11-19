@@ -24,7 +24,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function signedIn() { return request.auth != null; }
-    function google() { return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous'; }
+    // a parent: Google, or an email sign-in link (its address is verified by the link). An email+password account whose
+    // address was never verified is not a parent (Email/Password with links only – no one can borrow someone else's address)
+    function google() { return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous'
+      && (request.auth.token.firebase.sign_in_provider == 'google.com' || request.auth.token.email_verified == true); }
     function famPath(f) { return /databases/$(database)/documents/families/$(f); }
     function isOwner(f) { return google() && request.auth.uid == f; }
     function isMember(f) { return google() && exists(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)); }

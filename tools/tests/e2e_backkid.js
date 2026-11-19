@@ -13,7 +13,7 @@ const { chromium } = require('playwright'); const ok = (c, m) => { console.log((
     await p.evaluate(i => carGo('kidCar', i), start); await p.waitForTimeout(700); const before = await who();
     await p.evaluate(() => { const card = document.querySelectorAll('#kidCar .slide')[carIndex('kidCar')]; card.querySelector('.prow')?.click(); }); await p.waitForTimeout(900);
     const inSet = await p.evaluate(() => curSet && kidById(curSet.kidId)?.name);
-    await p.click('.rhead [aria-label="סגירה"]'); await p.waitForTimeout(900); const after = await who();
+    await p.click('#topBack'); await p.waitForTimeout(900); const after = await who();
     ok(after === before && inSet === before, `opened ${inSet}'s practice from ${before}'s card → back on ${after}'s card`);
   }
   // after an edit (saved to the cloud) – the case that was reported
@@ -22,13 +22,13 @@ const { chromium } = require('playwright'); const ok = (c, m) => { console.log((
   await p.evaluate(() => toggleEdit(true)); await p.evaluate(() => { REV_OPEN[curSet.id] = 0; renderReview(curSet); });
   const del = p.evaluate(() => delChapter(0)); await p.waitForTimeout(300); await p.click('#sureYes'); await del; await p.waitForTimeout(3500);
   const view1 = await p.evaluate(() => ({ review: !document.getElementById('vReview').classList.contains('hidden'), kid: kidById(curSet.kidId)?.name }));
-  await p.click('.rhead [aria-label="סגירה"]'); await p.waitForTimeout(2500);
+  await p.click('#topBack'); await p.waitForTimeout(2500);
   const view2 = await p.evaluate(() => ({ kids: !document.getElementById('vKids').classList.contains('hidden'), review: !document.getElementById('vReview').classList.contains('hidden'), card: visibleKids()[carIndex('kidCar')]?.name, cur: curSet && kidById(curSet.kidId)?.name }));
   ok(view1.review && view1.kid === 'עדי', 'edited עדי\'s practice (still on it after the cloud save)');
   ok(view2.kids && !view2.review && view2.card === 'עדי', `after editing → exit → ${view2.kids ? 'kids screen' : 'NOT kids screen'}, card: ${view2.card}`);
   // a cloud sync redraws the kids screen while it is hidden (that used to jump to the first kid)
   await p.evaluate(() => carGo('kidCar', 1)); await p.waitForTimeout(700);
   await p.evaluate(() => { document.querySelectorAll('#kidCar .slide')[1].querySelector('.prow').click(); }); await p.waitForTimeout(600);
-  await p.evaluate(() => renderKids()); await p.waitForTimeout(300); await p.click('.rhead [aria-label="סגירה"]'); await p.waitForTimeout(900);
+  await p.evaluate(() => renderKids()); await p.waitForTimeout(300); await p.click('#topBack'); await p.waitForTimeout(900);
   ok(await who() === 'עדי', 'redrawn while hidden → still back on עדי\'s card');
   console.log(JSON.stringify({ view1, view2, errs })); await b.close(); })().catch(e => { console.error('FAIL', e); process.exit(1); });

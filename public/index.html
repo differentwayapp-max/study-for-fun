@@ -1289,7 +1289,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const cfg = window.SFF_FIREBASE_CONFIG, V = window.SFF_FIREBASE_SDK || '10.14.1';
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
-  const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (terms.html) – change both together
+const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
+const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (terms.html) – change both together
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
@@ -1601,7 +1602,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
         <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
-        <button class="fbemailbtn" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
+        <button class="fbemailbtn hidden" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
         <div class="fbemail hidden" id="fbEmail"><input id="fbEmailIn" type="email" inputmode="email" autocomplete="email" placeholder="המייל שלך" dir="ltr">
           <button class="btn" id="fbEmailGo" type="button">שליחת קישור כניסה</button><div class="hint">נשלח קישור למייל. לוחצים עליו – ונכנסים. בלי סיסמה.</div></div>
         <div class="notice fbkidmsg hidden" id="fbKidMsg"><b>🔗 צריך את הקישור האישי שלך</b><div>ההורה שולח/ת אותו בוואטסאפ מהאפליקציה. לוחצים עליו, ומשחקים. בלי סיסמה ובלי Google.</div></div>
@@ -1614,6 +1615,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       // "I'm a parent" first, then the tick: carry on to Google by itself (no second click)
       agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; if (agree.checked && el.querySelector('#fbGo').classList.contains('on')) el.querySelector('#fbGo').click(); };
       // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
+      // the email sign-in shows only once "Email link (passwordless sign-in)" is on in the Firebase console (tests turn it on)
+      if (EMAIL_LINK || W.SFF_REST_EMU) el.querySelector('#fbEmailBtn').classList.remove('hidden');
       el.querySelector('#fbEmailBtn').onclick = () => { el.querySelector('#fbEmail').classList.toggle('hidden'); el.querySelector('#fbEmailIn').focus(); };
       el.querySelector('#fbEmailGo').onclick = async () => {
         const mail = el.querySelector('#fbEmailIn').value.trim(), err = el.querySelector('#fbErr');

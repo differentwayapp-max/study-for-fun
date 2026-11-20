@@ -3701,7 +3701,8 @@ async function openSoundCheck(){
   const row=(ok,t,h)=>`<div class="errrow"><b>${ok?'✅':'❌'} ${esc(t)}</b>${h?`<div class="hint">${esc(h)}</div>`:''}</div>`;
   const head=`<div class="dlghead"><b>🔊 בדיקת צליל</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>`;
   const tm=(p,ms)=>Promise.race([Promise.resolve(p).catch(()=>{}),new Promise(r=>setTimeout(r,ms))]);
-  unlockAudio(); const wasMute=MUTE; let beep=false, voices=[], ac0='-';
+  window.__sffSpoke=1; unlockAudio();   // the check's own sentence opens the voice – no silent one first that it would have to cancel
+  const wasMute=MUTE; let beep=false, voices=[], ac0='-';
   try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); ac0=AC.state; AC.resume(); MUTE=false; sfx(true); MUTE=wasMute; }catch(e){ MUTE=wasMute; }
   const spokeP=new Promise(res=>{ try{
     if(speechSynthesis.speaking||speechSynthesis.pending) speechSynthesis.cancel();

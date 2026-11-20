@@ -1,4 +1,5 @@
-// Full screen walk (emulators): every screen in Hebrew and English at phone width.
+// Full screen walk (emulators): every screen in Hebrew and English at phone width – 360 and 320 (iPhone "large icons" /
+// Display Zoom, small phones; QA_WIDTHS=360 for one width). At 320 the choice game must fit one screen (320×560).
 // Checks: page errors, sideways overflow, a way back, Hebrew UI text left untranslated in English. Screenshots → OUT.
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const findings = [];
@@ -26,10 +27,11 @@ const SCREENS = [
 ];
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
-  for (const lang of ['he', 'en']) {
-    const p = await (await b.newContext({ viewport: { width: 360, height: 720 }, deviceScaleFactor: 1 })).newPage();
+  for (const W of (process.env.QA_WIDTHS || '360,320').split(',').map(Number)) for (const lang of ['he', 'en']) {
+    const tag = W === 360 ? lang : `${lang}${W}`;
+    const p = await (await b.newContext({ viewport: { width: W, height: W === 320 ? 560 : 720 }, deviceScaleFactor: 1 })).newPage();
     const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/permission|Failed to load resource|ERR_|net::/i.test(m.text())) errs.push('console: ' + m.text().slice(0, 120)); });
-    await p.addInitScript(([l]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = { sub: 'qa' + l, email: 'differentway.app@gmail.com', email_verified: true, name: 'טליה' }; localStorage.setItem('sff_lang', l); }, [lang]);
+    await p.addInitScript(([l, t]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = { sub: 'qa' + t, email: 'differentway.app@gmail.com', email_verified: true, name: 'טליה' }; localStorage.setItem('sff_lang', l); }, [lang, tag]);
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(2500);
     await p.evaluate(async () => { kids.push({ id: 'k1', name: 'בן', grade: 6, color: '#2F6BFF' }, { id: 'k2', name: 'עדי', grade: 3, color: '#FF5C8A' }); saveKids();
@@ -49,14 +51,16 @@ const SCREENS = [
         if (lang === 'en') { const SKIP = '.qbox,.opts,.passage,.expl,.mcard,.mitem,.slots,.tiles,.wchips,.wchip,.wdetail,.q-list,#rQA,#repQ,.ttile,[translate="no"],.rq,.chqs,.nm,.who b,.utab,.cartab,.kidhero h2,.mebar,.whoami,#rTitle,.catcard .hint,.catcard p,.trow b,.scard h3,.sugcard,.errrow,#dName,#dSub,.prow .t,.rdlegend,svg,text';
           const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
           while ((n = w.nextNode())) { const t = n.textContent.trim(); if (!/[֐-׿]{2,}/.test(t)) continue; const el = n.parentElement; if (!vis(el) || el.closest(SKIP)) continue; heb.push(t.slice(0, 40)); } }
-        return { wide, back, heb: [...new Set(heb)].slice(0, 6) };
+        const ob = [...document.querySelectorAll('#vGame:not(.hidden) .opt')].map(o => o.getBoundingClientRect().bottom);
+        return { wide, back, heb: [...new Set(heb)].slice(0, 6), fits: !ob.length || Math.max(...ob) <= innerHeight };
       }, lang);
-      await p.screenshot({ path: `${OUT}/${lang}_${name}.png` });
-      if (r.wide) findings.push(`${lang} ${name}: page wider than the phone (sideways scroll)`);
-      if (!r.back && !['kids', 'kid-home'].includes(name)) findings.push(`${lang} ${name}: no visible way back`);
-      if (r.heb.length) findings.push(`${lang} ${name}: Hebrew left in English: ${r.heb.join(' | ')}`);
+      await p.screenshot({ path: `${OUT}/${tag}_${name}.png` });
+      if (r.wide) findings.push(`${tag} ${name}: page wider than the phone (sideways scroll)`);
+      if (!r.back && !['kids', 'kid-home'].includes(name)) findings.push(`${tag} ${name}: no visible way back`);
+      if (r.heb.length) findings.push(`${tag} ${name}: Hebrew left in English: ${r.heb.join(' | ')}`);
+      if (name === 'game-choice' && !r.fits) findings.push(`${tag} ${name}: the answers go below the screen`);
     }
-    if (errs.length) findings.push(`${lang}: page errors: ${[...new Set(errs)].slice(0, 5).join(' || ')}`);
+    if (errs.length) findings.push(`${tag}: page errors: ${[...new Set(errs)].slice(0, 5).join(' || ')}`);
     await p.context().close();
   }
   console.log(findings.length ? 'FINDINGS\n' + findings.join('\n') : 'no findings'); await b.close();

@@ -508,6 +508,20 @@ body.ingame header,body.ingame .bnav{display:none!important} body.ingame .wrap{p
 body.ingame .scene{max-height:30vh;margin-bottom:10px}
 body.ingame .qbox{font-size:1.3em;margin:4px 0 12px}
 @media(max-width:560px){ .opts.two{grid-template-columns:1fr 1fr} .opts.two .opt{padding:12px 8px;padding-inline-start:44px;min-height:56px;font-size:1.12em} .opts.two .opt .key{width:28px;height:28px;inset-inline-start:8px} }
+@media(max-width:360px){
+  body.ingame .wrap{padding-left:8px!important;padding-right:8px!important;padding-top:6px!important}
+  body.ingame .play{padding:10px 10px 14px}
+  body.ingame .hud{padding:6px 8px;gap:4px} body.ingame .hud .chips{gap:4px} body.ingame .hud .chip{font-size:.95em;padding:2px 7px;gap:3px}
+  body.ingame #gCount{flex:none;font-size:1em}   /* "1/10" is never cut */
+  body.ingame #gCount .mv{display:none}           /* memory: the pairs count stays, the moves count goes */
+  body.ingame .track{height:52px;margin:2px 24px 0}
+  body.ingame .scene{max-height:24vh;margin-bottom:6px;border-radius:16px}
+  body.ingame .qbox{font-size:1.12em;margin:2px 0 8px}
+  body.ingame .opts{gap:8px}
+  body.ingame .opts.two .opt{min-height:48px;padding:8px 6px;padding-inline-start:38px;font-size:1.02em}
+  body.ingame .opt{padding-top:10px;padding-bottom:10px}
+  body.ingame .opts.two .opt .key{width:24px;height:24px;inset-inline-start:6px;font-size:.8em}
+}
 body.ingame #gSheet.show{position:fixed;left:10px;right:10px;bottom:10px;max-width:680px;margin:0 auto;border:var(--line);border-radius:20px;box-shadow:0 12px 34px rgba(27,42,74,.28);z-index:45;max-height:70vh;overflow:auto}
 /* mobile: the menu's close button stays put; long kid names end with "…" instead of breaking or hiding under buttons;
    the name tabs show they scroll (soft edges) */
@@ -1668,7 +1682,8 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
 <script>
 /* ---------- helpers ---------- */
 const $ = id => document.getElementById(id);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
+  .replace(/\u2066[^\u2066\u2069]{1,28}\u2069/g, m => m.replace(/ /g, '\u00A0'));   // "20, 19, 18, _" stays on one line
 // data a kid's phone writes (progress: games + chosen name/picture) is untrusted – keep only the expected shapes
 const safeColor = c => /^#[0-9A-Fa-f]{3,8}$/.test(String(c||'')) ? c : '#2F6BFF';
 function cleanAvatar(a){
@@ -3488,7 +3503,7 @@ function memStart(){
                               : (a=>`<div class="f aside" dir="auto" style="font-size:${a.length>12?'.85em':a.length>8?'1em':a.length>6?'1.12em':'1.3em'}">${esc(a)}</div>`)(String(q.options[q.answer]));
     return `<button class="mcard" id="mc${i}" onclick="memFlip(${i})" aria-label="קלף ${i+1}"><div class="in"><div class="b"><span>?</span></div>${face}</div></button>`}).join('')}</div>`;
 }
-function memHud(){ if(!G||!G.mem) return; $('gCount').textContent=`🃏 ${G.mparts[G.mround][0]+G.mem.found}/${G.qs.length} · 👆 ${G.moves}`; }
+function memHud(){ if(!G||!G.mem) return; $('gCount').innerHTML=`🃏 ${G.mparts[G.mround][0]+G.mem.found}/${G.qs.length}<span class="mv"> · 👆 ${Number(G.moves)||0}</span>`; }
 function memFlip(i){
   const M=G.mem, el=$('mc'+i);
   if(M.lock||el.classList.contains('up')||el.classList.contains('got')) return;

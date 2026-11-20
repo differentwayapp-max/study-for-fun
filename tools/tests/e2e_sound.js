@@ -1,5 +1,5 @@
 // The sound check (☰ → הגדרות → בדיקת צליל) saves every run in the family's failure log (families/{f}/errlog, where
-// 'sound-check'): who ran it, what worked, the voice and the phone – so a "no sound" report can be investigated.
+// 'sound-check'): who ran it, what worked, the voice and the phone – so a "no sound" report can be investigated. The check screen itself does not mention the log.
 // A kid's phone (normal and Lockdown-like REST) adds its result but cannot read the log; a parent sees it in 🧾 יומן תקלות.
 // Run inside the emulators (firestore, auth). OUT=dir for screenshots.
 const { chromium } = require('playwright');
@@ -22,13 +22,13 @@ const ARGS = { args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecure
     if (mode === 'rest') await p.route('http://localhost:8765/?**', async r => { const res = await r.fetch(); r.fulfill({ response: res, body: (await res.text()).replace('<script type="module">', '<script type="text/x-blocked">') }); });
     const before = (await logOf('FSND')).length;
     await p.goto('http://localhost:8765/?f=FSND&t=TOKS#kid-k1', { waitUntil: 'load' }); await p.waitForTimeout(8000);
-    await p.evaluate(() => openSoundCheck()); await p.waitForFunction(() => /ביומן/.test(document.querySelector('#moreDlg .moresheet').textContent), null, { timeout: 15000 });
+    await p.evaluate(() => openSoundCheck()); await p.waitForFunction(() => window.__sffSoundLogged !== undefined, null, { timeout: 15000 });
     const note = await p.evaluate(() => document.querySelector('#moreDlg .moresheet').textContent);
     if (mode === 'sdk') await p.screenshot({ path: `${OUT}/sound_kid.png` });
     const L = (await logOf('FSND')).filter(r => r.where === 'sound-check');
     const r = L.sort((a, x) => Number(x.at) - Number(a.at))[0] || {};
     console.log(mode, JSON.stringify(r));
-    ok(/נשמרה ביומן/.test(note), `kid phone (${mode}): the screen says the result was saved`);
+    ok(!/יומן/.test(note) && /בדיקת צליל/.test(note), `kid phone (${mode}): the check screen does not mention the log`);
     ok(L.length > before - 0 && /Ben/.test(r.by || '') && /tone:/.test(r.msg || '') && /speak:/.test(r.msg || '') && ['ok', 'fail'].includes(r.code), `kid phone (${mode}): the log has who, tone, speech and the phone`);
     const read = await p.evaluate(async () => { try { const db = await window.claude.use('db'); const q = await db.collection('errlog').get(); return q.docs.length; } catch (e) { return 'denied'; } });
     ok(read === 'denied' || read === 0, `kid phone (${mode}) cannot read the family log (${read})`);
@@ -42,7 +42,7 @@ const ARGS = { args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecure
   await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1200);
   await p.evaluate(() => { document.getElementById('onb')?.remove(); openMenu(); });
   await p.waitForTimeout(300); await p.evaluate(() => [...document.querySelectorAll('#sideMenu .ditem')].find(x => /בדיקת צליל/.test(x.textContent)).click());
-  await p.waitForFunction(() => /ביומן/.test(document.querySelector('#moreDlg .moresheet').textContent), null, { timeout: 15000 });
+  await p.waitForFunction(() => window.__sffSoundLogged !== undefined, null, { timeout: 15000 });
   const uid = await p.evaluate(() => window.SFF_UID);
   const pl = (await logOf(uid)).filter(r => r.where === 'sound-check');
   ok(pl.length === 1 && pl[0].by === 'אמא', 'parent: the check from the menu is in the log, with the parent name');

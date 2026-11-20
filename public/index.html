@@ -3702,7 +3702,7 @@ async function openSoundCheck(){
   const allOk=!wasMute&&beep&&spoke===true&&en.length>0;
   const ua=navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').replace(/Mozilla\/5\.0\s*/,'');
   const sum=`mute:${wasMute?1:0} tone:${beep?'ok':'no'}(${AC?AC.state:'-'}) speak:${spoke===true?'ok':spoke===false?'silent':String(spoke).slice(0,30)} en:${en.length} he:${he.length} voice:${(bestVoice('en-US')||{}).name||'-'} lock:${lock?1:0} vol-session:${navigator.audioSession?navigator.audioSession.type:'-'} | `;
-  const logged=await logFail('sound-check', {code:allOk?'ok':'fail', message:(sum+ua).slice(0,300)}, '', who);
+  window.__sffSoundLogged=await logFail('sound-check', {code:allOk?'ok':'fail', message:(sum+ua).slice(0,300)}, '', who);
   box.innerHTML=`<div class="dlghead"><b>🔊 בדיקת צליל</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
     <p class="hint" style="margin:0 0 8px">עכשיו אמור להישמע צליל קצר ואחריו "Hello! Study for fun".</p>`
     +row(!wasMute,'הצליל באפליקציה פתוח', wasMute?'בטלפון הזה הצליל כבוי באפליקציה: לוחצים 🔇 במסך המשחק כדי להפעיל':'')
@@ -3711,7 +3711,6 @@ async function openSoundCheck(){
     +row(en.length>0,`קולות באנגלית: ${en.length}`, en.slice(0,3).map(v=>v.name).join(', '))
     +row(he.length>0,`קולות בעברית: ${he.length}`, '')
     +row(!lock,'מצב רגיל של הדפדפן', lock?'הטלפון במצב נעילה (Lockdown) – הוא חוסם חלק מהצלילים. ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה':'')
-    +`<p class="hint center" style="margin:8px 0 0">${logged?'📝 התוצאה נשמרה ביומן התקלות של המשפחה':'⚠️ לא הצלחנו לשמור את התוצאה ביומן'}</p>`
     +`<p class="hint center" dir="ltr" translate="no" style="margin-top:8px">${esc(ver)} · ${esc(navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').slice(0,90))}</p>`;
   $('moreDlg').classList.remove('hidden');
 }

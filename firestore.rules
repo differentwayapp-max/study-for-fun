@@ -153,11 +153,13 @@ service cloud.firestore {
       match /usage/{month} { allow read: if isAdult(familyId); allow write: if false; }
       match /billing/{doc} { allow read: if isAdult(familyId); allow write: if false; }
       match /builds/{id} { allow read: if isAdult(familyId); allow write: if false; }
-      // failure log (what failed and why – no prompt text): adults add entries and read them
+      // failure log (what failed and why – no prompt text): adults add entries and read them; a kid's phone adds
+      // entries too (a sound check on the kid's own phone), but cannot read them
       match /errlog/{id} {
         allow read: if isAdult(familyId);
-        allow create: if isAdult(familyId) && request.resource.data.keys().hasOnly(['at','where','code','msg','subject','ver','by'])
-          && request.resource.data.msg is string && request.resource.data.msg.size() <= 300;
+        allow create: if (isAdult(familyId) || isDevice(familyId)) && request.resource.data.keys().hasOnly(['at','where','code','msg','subject','ver','by'])
+          && request.resource.data.msg is string && request.resource.data.msg.size() <= 300
+          && str(request.resource.data.get('by', ''), 60) && str(request.resource.data.get('where', ''), 40);
         allow update: if false;
         allow delete: if isAdmin(familyId);   // account deletion
       }

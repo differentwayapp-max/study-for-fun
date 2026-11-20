@@ -3245,12 +3245,12 @@ function rdChunk(){
   const part=RD.words.slice(RD.i,j+1), starts=[]; let t='';
   part.forEach(x=>{ starts.push(t.length); t+=x.w+' '; });
   const tok=++RD.tok, base=RD.i; rdPaint();
-  try{ speechSynthesis.cancel();
+  try{
     const u=new SpeechSynthesisUtterance(t.replace(/_+/g,' ')); u.lang=/[\u0590-\u05FF]/.test(t)?'he-IL':'en-US'; u.rate=.85; u.voice=bestVoice(u.lang);
     u.onboundary=e=>{ if(tok!==RD.tok||e.name&&e.name!=='word') return; let k=0; while(k+1<starts.length&&starts[k+1]<=e.charIndex) k++; RD.i=base+k; rdPaint(); };
     u.onend=()=>{ if(tok!==RD.tok) return; RD.i=base+part.length; rdChunk(); };
     u.onerror=()=>{ if(tok===RD.tok){ RD.on=false; rdPaint(); } };
-    speechSynthesis.speak(u);
+    sayU(u);
   }catch(e){ RD.on=false; rdPaint(); }
 }
 const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
@@ -3668,11 +3668,19 @@ function refreshCurrentQ(){
 /* ---------- sound: effects + English words read aloud ---------- */
 let MUTE=false; try{ MUTE=localStorage.getItem('sff_mute')==='1'; }catch(e){}
 // the most natural voice the phone has for a language (enhanced / premium / neural ones first, never a "compact" one)
-function bestVoice(lang){ try{ const all=speechSynthesis.getVoices(), base=String(lang).slice(0,2).toLowerCase();
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function bestVoice(lang){ if(IOS) return null; try{ const all=speechSynthesis.getVoices(), base=String(lang).slice(0,2).toLowerCase();
   const vs=all.filter(v=>String(v.lang).toLowerCase().replace('_','-').startsWith(base) || (base==='he'&&/^iw/i.test(v.lang)));
   const score=v=>(/enhanced|premium|natural|neural|wavenet|siri/i.test(v.name)?4:0)+(/google/i.test(v.name)?2:0)+(/compact|eloquence/i.test(v.name)?-3:0)+(String(v.lang).replace('_','-')===lang?1:0);
   return vs.sort((a,b)=>score(b)-score(a))[0]||null; }catch(e){ return null; } }
 try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices(); }catch(e){}
+function sayU(u){
+  try{ if(speechSynthesis.speaking||speechSynthesis.pending) speechSynthesis.cancel(); }catch(e){}
+  let started=false; const st=u.onstart; u.onstart=e=>{ started=true; st&&st(e); };
+  speechSynthesis.speak(u);
+  if(u.voice) setTimeout(()=>{ try{ if(started||speechSynthesis.speaking) return; const v=new SpeechSynthesisUtterance(u.text);
+    v.lang=u.lang; v.rate=u.rate; v.onstart=st; v.onboundary=u.onboundary; v.onend=u.onend; v.onerror=u.onerror; speechSynthesis.cancel(); speechSynthesis.speak(v); }catch(e){} },1500);
+}
 function muteIcon(){ const b=$('gMute'); if(b) b.textContent=MUTE?'🔇':'🔊'; }
 function toggleMute(){ MUTE=!MUTE; try{ localStorage.setItem('sff_mute',MUTE?'1':'0'); }catch(e){} if(MUTE) rdStop(); if(MUTE) try{speechSynthesis.cancel()}catch(e){} muteIcon(); }
 let AC=null;
@@ -3691,28 +3699,38 @@ AUDIO_EV.forEach(t=>document.addEventListener(t,audioOnce,true));
 async function openSoundCheck(){
   const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
   const row=(ok,t,h)=>`<div class="errrow"><b>${ok?'✅':'❌'} ${esc(t)}</b>${h?`<div class="hint">${esc(h)}</div>`:''}</div>`;
-  unlockAudio(); const wasMute=MUTE; let beep=false, spoke=null, voices=[];
-  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); await AC.resume(); MUTE=false; sfx(true); MUTE=wasMute; beep=AC.state==='running'; }catch(e){}
+  const head=`<div class="dlghead"><b>🔊 בדיקת צליל</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>`;
+  const tm=(p,ms)=>Promise.race([Promise.resolve(p).catch(()=>{}),new Promise(r=>setTimeout(r,ms))]);
+  unlockAudio(); const wasMute=MUTE; let beep=false, voices=[], ac0='-';
+  try{ AC=AC||new (window.AudioContext||window.webkitAudioContext)(); ac0=AC.state; AC.resume(); MUTE=false; sfx(true); MUTE=wasMute; }catch(e){ MUTE=wasMute; }
+  const spokeP=new Promise(res=>{ try{
+    if(speechSynthesis.speaking||speechSynthesis.pending) speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance('Hello! Study for fun.'); u.lang='en-US'; u.rate=.9;
+    u.onstart=()=>res(true); u.onerror=e=>res('error: '+(e.error||'')); setTimeout(()=>res(false),4000); speechSynthesis.speak(u);
+  }catch(e){ res('error: '+(e.message||e)); } });
+  box.innerHTML=head+'<p class="hint center" style="margin:18px 0">⏳ בודקים… אמור להישמע צליל קצר ואחריו "Hello! Study for fun".</p>';
+  $('moreDlg').classList.remove('hidden');
+  try{ await tm(AC&&AC.resume(),1200); beep=!!AC&&AC.state==='running'; }catch(e){}
   try{ voices=speechSynthesis.getVoices(); if(!voices.length){ await new Promise(r=>{ speechSynthesis.onvoiceschanged=r; setTimeout(r,1500); }); voices=speechSynthesis.getVoices(); } }catch(e){}
+  const spoke=await spokeP;
   const en=voices.filter(v=>/^en/i.test(v.lang)), he=voices.filter(v=>/^(he|iw)/i.test(v.lang));
-  try{ speechSynthesis.cancel(); spoke=await new Promise(res=>{ const u=new SpeechSynthesisUtterance('Hello! Study for fun.'); u.lang='en-US'; u.rate=.9;
-    u.onstart=()=>res(true); u.onerror=e=>res('error: '+(e.error||'')); setTimeout(()=>res(false),3000); speechSynthesis.speak(u); }); }catch(e){ spoke='error: '+(e.message||e); }
   const ver=document.querySelector('meta[name=sff-ver]')?.content||'', lock=String(window.__sffVia||'').startsWith('rest');
   const kid=LOCK?kidById(LOCK):null, who=kid?('👦 '+kid.name):(window.SFF_MYNAME||'');
   const allOk=!wasMute&&beep&&spoke===true&&en.length>0;
   const ua=navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').replace(/Mozilla\/5\.0\s*/,'');
-  const sum=`mute:${wasMute?1:0} tone:${beep?'ok':'no'}(${AC?AC.state:'-'}) speak:${spoke===true?'ok':spoke===false?'silent':String(spoke).slice(0,30)} en:${en.length} he:${he.length} voice:${(bestVoice('en-US')||{}).name||'-'} lock:${lock?1:0} vol-session:${navigator.audioSession?navigator.audioSession.type:'-'} | `;
-  window.__sffSoundLogged=await logFail('sound-check', {code:allOk?'ok':'fail', message:(sum+ua).slice(0,300)}, '', who);
-  box.innerHTML=`<div class="dlghead"><b>🔊 בדיקת צליל</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
-    <p class="hint" style="margin:0 0 8px">עכשיו אמור להישמע צליל קצר ואחריו "Hello! Study for fun".</p>`
+  const sum=`mute:${wasMute?1:0} tone:${beep?'ok':'no'}(${ac0}>${AC?AC.state:'-'}) ios:${IOS?1:0} speak:${spoke===true?'ok':spoke===false?'silent':String(spoke).slice(0,30)} en:${en.length} he:${he.length} voice:${(bestVoice('en-US')||{}).name||'-'} lock:${lock?1:0} vol-session:${navigator.audioSession?navigator.audioSession.type:'-'} | `;
+  box.innerHTML=head+`<p class="hint" style="margin:0 0 8px">אמור היה להישמע צליל קצר ואחריו "Hello! Study for fun". באייפון: מגבירים את הווליום ומוודאים שמתג השקט בצד הטלפון לא על שקט.</p>`
     +row(!wasMute,'הצליל באפליקציה פתוח', wasMute?'בטלפון הזה הצליל כבוי באפליקציה: לוחצים 🔇 במסך המשחק כדי להפעיל':'')
     +row(beep,'צלילי משחק (טון בתשובה)', beep?'':'הדפדפן לא מפעיל צלילים. באייפון: הגדרות ← צלילים, ולוודא שהטלפון לא על שקט')
     +row(spoke===true,'הקראה באנגלית', spoke===true?'':(spoke===false?'הטלפון לא התחיל להקריא':String(spoke))+(en.length?'':' · אין בטלפון קול באנגלית: הגדרות ← נגישות ← תוכן מוקרא ← קולות ← English'))
     +row(en.length>0,`קולות באנגלית: ${en.length}`, en.slice(0,3).map(v=>v.name).join(', '))
     +row(he.length>0,`קולות בעברית: ${he.length}`, '')
     +row(!lock,'מצב רגיל של הדפדפן', lock?'הטלפון במצב נעילה (Lockdown) – הוא חוסם חלק מהצלילים. ב-Safari: aA ← הגדרות אתר ← לכבות מצב נעילה':'')
+    +`<button class="btn" style="width:100%;justify-content:center;margin-top:10px" onclick="openSoundCheck()">🔁 לבדוק שוב</button>`
     +`<p class="hint center" dir="ltr" translate="no" style="margin-top:8px">${esc(ver)} · ${esc(navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/,'').slice(0,90))}</p>`;
   $('moreDlg').classList.remove('hidden');
+  // the result goes to the family's failure log after it is on the screen (a slow or missing connection never holds it up)
+  window.__sffSoundLogged=await logFail('sound-check', {code:allOk?'ok':'fail', message:(sum+ua).slice(0,300)}, '', who);
 }
 function sfx(ok){
   if(MUTE) return;
@@ -3728,7 +3746,7 @@ const EN_SAY=t=>/[A-Za-z]/.test(t||'') && !/[\u0590-\u05FF]/.test(t||'');
 const isEnSet=s=>!!s && (/אנגלית/.test(s.subject||'') || /english/i.test(s.subject||''));
 function sayEn(text, force){
   if((MUTE&&!force) || !G || !isEnSet(G.set) || !EN_SAY(text)) return;
-  rdStop(); try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); speechSynthesis.speak(u); }catch(e){}
+  rdStop(); try{ const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); sayU(u); }catch(e){}
 }
 // grammar (sentence with a blank) → the whole sentence; vocabulary → the word
 function sayAnswer(q){ const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
@@ -3736,10 +3754,10 @@ function mutedNote(){ if(!MUTE) return false; toast('🔇 הצליל כבוי �
 function speakQ(){
   if(mutedNote()) return;
   try{
-    rdStop(); const q=curQ(); speechSynthesis.cancel();
+    rdStop(); const q=curQ();
     const u=new SpeechSynthesisUtterance(q.question);
     u.lang=/[a-zA-Z]{3}/.test(q.question)&&!/[֐-׿]/.test(q.question)?'en-US':'he-IL';
-    u.rate=.9; u.voice=bestVoice(u.lang); speechSynthesis.speak(u);
+    u.rate=.9; u.voice=bestVoice(u.lang); sayU(u);
   }catch(e){}
 }
 function burst(){
@@ -4010,7 +4028,7 @@ async function openServerLog(){
   $('moreDlg').classList.remove('hidden');
 }
 async function delBug(id,btn){ try{ await window.__sffRoot.del('bugReports',id); btn.closest('.errrow').remove(); }catch(e){ toast('⚠️'); } }
-function sayWord(t){ rdStop(); if(mutedNote()) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); speechSynthesis.speak(u); }catch(e){} }
+function sayWord(t){ rdStop(); if(mutedNote()) return; try{ const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); sayU(u); }catch(e){} }
 // a small practice set (for the same child) with exactly the words that had mistakes – no AI needed
 function makeWordDrill(setId){
   const set=getSet(setId), st=WSTAT[setId]; if(!set||!st) return;

@@ -533,6 +533,10 @@ body.ingame #gSheet.show{position:fixed;left:10px;right:10px;bottom:10px;max-wid
 button.wchip{font:inherit;cursor:pointer}
 .popmenu .wfq,.popmenu .wfa{display:block;unicode-bidi:plaintext}.popmenu .wfa{color:var(--ok);font-weight:600;margin-top:4px}
 #vMe h3 .hint::after{content:""}
+.readycard{margin:14px 0 0;padding:14px;border:2px solid #F2A63B;background:#FFF8E8;border-radius:18px;display:flex;flex-direction:column;gap:10px}
+.readycard .readyrow{display:flex;align-items:center;gap:10px;justify-content:space-between;background:#fff;border-radius:14px;padding:10px 12px;border:1.5px solid #F4D9A4}
+.readycard .readyrow .btn{flex:none} .readycard .linkbtn{align-self:flex-start}
+@media(max-width:420px){.readycard .readyrow{flex-direction:column;align-items:stretch}}
 .adminonly{display:none!important}body.aiadmin .adminonly{display:flex!important}
 .sugcard{margin:10px 0 0;padding:12px}
 .workbox{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border:2px solid #9B8CFF;border-radius:16px;background:#F1EDFF}
@@ -880,6 +884,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         </div>
         <label>מקצוע</label>
         <div class="chipsel" id="wSubj"></div>
+        <div class="readycard hidden" id="wReady" role="region" aria-live="polite"></div>
         <label for="fExam">🏁 תאריך המבחן</label>
         <input id="fExam" type="date" style="max-width:260px">
         <div style="margin-top:18px"><button class="linkbtn" onclick="$('impBox').classList.toggle('hidden')">🔗 קוד שיתוף</button>
@@ -1338,6 +1343,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     const callAsk = httpsCallable(fns, 'ask', { timeout: 540000 });
     const callStart = httpsCallable(fns, 'startBuild'), callEnd = httpsCallable(fns, 'endBuild'), callUsers = httpsCallable(fns, 'adminUsers');
     W.__sffAdminUsers = async () => (await callUsers({})).data;
+    if (W.SFF_REST_EMU) W.__sffAskRaw = d => callAsk(d).then(r => r.data);   // tests only (local emulators): a raw call, to see the server refuse it
     // a new practice set = one build: this month's free builds, then paid credits (see functions/index.js)
     W.__sffAI = {
       start: async subject => { try { return (await callStart({ famId: W.__sffFamily?.famId, subject })).data; }
@@ -1542,12 +1548,12 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     }
     const sampleApi = role !== 'parent' ? null : {
       limits: async () => ({ images: true }),
-      json: async (prompt, opts = {}) => {
-        const input = typeof prompt === 'string' ? prompt : prompt.map(m => m.content).join('\n\n');
+      // one AI step: its name (a closed list – functions/prompts.js) and its data; the server builds the prompt
+      json: async (step, data = {}, opts = {}) => {
         const images = opts.images ? await Promise.all(opts.images.slice(0, 6).map(toB64)) : [];
         try {
           if (opts.ping) return (await callAsk({ ping: true })).data.json;
-          const r = await callAsk({ prompt: input, images, tier: opts.modelTier || 'default', famId: W.__sffFamily?.famId, buildId: opts.buildId || null });
+          const r = await callAsk({ step, data, images, famId: W.__sffFamily?.famId, buildId: opts.buildId || null, ...(W.SFF_FAKE_AI ? { fake: true } : {}) });
           return r.data.json;
         } catch (e) {
           const c = String(e.code || '');
@@ -1700,7 +1706,10 @@ function cleanHist(h){
   return {at:+h.at, kidId:typeof h.kidId==='string'?h.kidId.slice(0,40):null, kid:str(h.kid,60), subject:str(h.subject,60), grade:Number.isInteger(+h.grade)?+h.grade:0,
     setId:str(h.setId,60), retry:!!h.retry, topic:typeof h.topic==='string'?h.topic.slice(0,120):null, ch:Number.isInteger(h.ch)?h.ch:null,
     right:num(h.right), n:Math.max(1,num(h.n)), score:num(h.score), mode:['choice','memory','match','riddle','spell'].includes(h.mode)?h.mode:'choice',
-    qr:Array.isArray(h.qr)?h.qr.filter(x=>typeof x==='string'&&/^\d+\.[01](\.\d)?$/.test(x)).slice(0,200):[], topics};
+    qr:Array.isArray(h.qr)?h.qr.filter(x=>typeof x==='string'&&/^\d+\.[01](\.\d)?$/.test(x)).slice(0,200):[], topics,
+    // each question's text key (and the picked option's when wrong) – finds the question again after the set changed or was deleted
+    ...(Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length&&h.qk.every(x=>typeof x==='string'&&/^[0-9a-z]{1,8}(:[0-9a-z]{1,8})?$/.test(x))?{qk:h.qk.slice(0,200)}:{}),
+    ...(typeof h.src==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(h.src)?{src:h.src}:{})};
 }
 const GRADES = ["א'","ב'","ג'","ד'","ה'","ו'","ז'","ח'","ט'","י'","י\"א","י\"ב"];
 function track(gi){ // grade index 0..11
@@ -1787,7 +1796,27 @@ function wizRender(){
   document.querySelectorAll('.srccard')[2].classList.toggle('on',!$('srcLink').classList.contains('hidden'));
   document.querySelectorAll('.srccard')[3].classList.toggle('on',!$('srcText').classList.contains('hidden'));
   if(W.step===4) wizSummary();
-  if(W.step===1||W.step===4) loadQuota(); else $('quotaLine').classList.add('hidden');   // the monthly limit is shown at the start and before building
+  if(W.step===1||W.step===4) loadQuota(); else $('quotaLine').classList.add('hidden');
+  readyCard();   // the monthly limit is shown at the start and before building
+}
+// a ready practice set for this kid's grade and the chosen subject (matched in code, no AI): adding it uses no build
+let READY_CAT=null, READY_T=0;
+async function readyCard(){
+  const el=$('wReady'); if(!el) return; const k=kidById(W.kidId), key=(W.kidId||'')+'|'+(W.subject||''), t=++READY_T;
+  if(W.step!==1||!k||!W.subject||(W.noReady||[]).includes(key)){ el.classList.add('hidden'); return; }
+  if(!READY_CAT){ try{ const r=await fetch('/share/catalog.json'); READY_CAT=r.ok?((await r.json()).sets||[]):[]; }catch(e){ READY_CAT=[]; } }
+  const have=new Set(sets.filter(s=>s.kidId===k.id&&s.src).map(s=>String(s.src).replace(/_/g,'-')));
+  const L=READY_CAT.filter(x=>x.status==='ready'&&x.grade===k.grade&&x.subject===W.subject&&!have.has(x.id)).slice(0,3);
+  if(!L.length){ el.classList.add('hidden'); return; }
+  const q=sample?await getQuota():null, left=q?Math.max(0,QUOTA.free-q.used)+(q.credits||0):QUOTA.free;
+  if(t!==READY_T) return;                                  // the parent changed the kid or the subject meanwhile
+  const en=EN(), T=x=>window.sffT?sffT(x):x, sub=en?T(W.subject):W.subject, gr=en?String(k.grade+1):GRADES[k.grade];
+  el.innerHTML=`<b class="readyhd">${en?`💡 We have a ready-made ${esc(sub)} practice for grade ${gr}`:`💡 יש לנו תרגול מוכן ל${esc(sub)} לכיתה ${gr}`}</b>`
+    +L.map(x=>`<div class="readyrow"><div><b dir="auto" translate="no">${esc(x.title||x.subject)}</b><div class="hint">${en?`${x.questions} questions · carefully built and checked by our team`:`${x.questions} שאלות · נבנה ונבדק בקפידה על ידי הצוות שלנו`}</div></div>
+      <button class="btn small" onclick="openAddDialog('${esc(x.id)}','${k.id}')">${en?'✓ Add the ready practice':'✓ להוסיף את התרגול המוכן'}</button></div>`).join('')
+    +`<div class="hint">${en?`Adding it doesn't use any of your ${left} monthly builds.`:`הוספת התרגול לא מנצלת אף אחת מ-${left} הבניות החודשיות שלכם.`}</div>
+    <button class="linkbtn" onclick='W.noReady=(W.noReady||[]).concat(${esc(JSON.stringify(key))});readyCard()'>${en?'Build a new one':'להמשיך לבנות תרגול חדש'}</button>`;
+  el.classList.remove('hidden');
 }
 function toggleSrc(id){ $(id).classList.toggle('hidden'); wizRender(); }
 function quickAddKid(){ const n=$('qkName').value.trim(); if(!n) return; const k={id:'k'+Date.now(),name:n,grade:+$('qkGrade').value,color:KID_COLORS[kids.length%5]}; kids.push(k); saveKids(); W.kidId=k.id; $('qkName').value=''; $('wKidQuick').classList.add('hidden'); wizRender(); }
@@ -1822,7 +1851,7 @@ function showQuotaErr(e){
 async function logFail(where, e, subject, who){
   if(/internal/i.test(String(e?.code||'')+String(e?.message||'')) && sample && !where.startsWith('ping')){
     let ping='';
-    try{ await sample.json('', {ping:true}); ping='server answered'; }catch(p){ ping='server NOT reachable: '+String(p?.code||'')+' '+String(p?.message||''); }
+    try{ await sample.json('ping', {}, {ping:true}); ping='server answered'; }catch(p){ ping='server NOT reachable: '+String(p?.code||'')+' '+String(p?.message||''); }
     e={code:e?.code, message:String(e?.message||e)+' | ping: '+ping};
   }
   const rec={at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').slice(0,300),
@@ -1938,9 +1967,9 @@ function wizSummary(){
 async function aiTester(){ try{ const e=String(window.SFF_EMAIL||'').trim().toLowerCase(); if(!e||!crypto?.subtle) return false;
   const h=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(e)))].map(b=>b.toString(16).padStart(2,'0')).join('');
   return (window.SFF_AI_TESTERS||[]).includes(h); }catch(e){ return false; } }
-async function ask(prompt, opts={}){
+async function ask(step, data, opts={}){
   if(!sample) throw {code:'not_granted', message:'AI not available'};
-  const b=CUR_BUILD; const r=await sample.json(prompt, opts);
+  const b=CUR_BUILD; const r=await sample.json(step, data, opts);
   if(b && b.cancel) throw {code:'cancel'};
   return r;
 }
@@ -2038,135 +2067,200 @@ function setStep(id,state,detail){
 
 let BUILDS=[], CUR_BUILD=null;
 async function askCancelBuild(){ if(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true})) cancelBuild(); }
-function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
+function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; endCp(CUR_BUILD.cp); BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
 function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
-async function build(){
+
+// the student and the test – the server builds every prompt from this (functions/prompts.js)
+function aiCtx(gi, subject, topics, extra={}){ return {gi:+gi||0, grade:GRADES[+gi||0], subject:String(subject||'').replace(/^🎯\s*/,''), topics:(topics||[]).slice(0,30), ...extra}; }
+const setAiCtx=set=>aiCtx(set.grade, set.subject, set.topics);
+const qSend=(q,i,extra={})=>({i, topic:q.topic||'', question:q.question, options:q.options, answer:q.answer, explanation:q.explanation||'', emoji:q.emoji||'', scene:q.scene||null, ...extra});
+const isPool=q=>!!q.srcq;            // a ready, already-checked question (srcq = its source) – never re-solved or changed
+const MAX_TOPICS=30;
+
+// a build keeps what every step produced (this phone), so a build that stopped goes on from there with the same build
+const CP_KEY='sff_build_cp', BUILD_MS=3*36e5-10*60e3;          // the server's build token lives 3 hours
+function cpSave(cp){ try{ localStorage.setItem(CP_KEY, JSON.stringify(cp)); }catch(e){} }
+function cpLoad(){ try{ return JSON.parse(localStorage.getItem(CP_KEY)||'null'); }catch(e){ return null; } }
+function endCp(cp, ok){ try{ localStorage.removeItem(CP_KEY); }catch(e){} if(cp&&cp.token&&window.__sffAI) window.__sffAI.end(cp.token.buildId, !!ok); }
+// after a reload: a build that stopped (and can still go on) shows on its kid's card with "▶ להמשיך"
+function restoreBuild(){ const cp=cpLoad(); if(!cp||!cp.in||BUILDS.some(b=>b.cp&&b.cp.at===cp.at)) return;
+  if(cp.fam!==(window.__sffFamily?.famId||'') || !cp.token || Date.now()-cp.at>BUILD_MS){ endCp(cp,false); return; }
+  BUILDS.push({id:'b'+cp.at, kidId:cp.in.kidId, subject:cp.in.subject, state:'err', cp}); if(!$('vKids').classList.contains('hidden')) renderKids(); }
+function resumeBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b||!b.cp) return; BUILDS=BUILDS.filter(x=>x!==b);
+  if(Date.now()-b.cp.at>BUILD_MS){ endCp(b.cp,false); toast('⏳ עבר יותר מדי זמן – בונים מחדש'); renderKids(); return; }
+  build(b.cp); }
+
+async function build(resume){
   if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
-  const name=$('fName').value.trim()||'הילד/ה', reinf=W.reinf||null;
-  const gi=+$('fGrade').value, grade=GRADES[gi];
-  const subject=$('fSubject').value;
-  const topics=$('fTopics').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  const count=Math.max(5,Math.min(30,+$('fCount').value||12));
-  const perRound=Math.max(5,Math.min(20,+$('fRound').value||defRound(gi,subject))), kidId=W.kidId;
-  const chapters=(W.chapters||defChapters(topics,perRound)).map(c=>({title:c.title,topics:c.topics,count:c.count}));
-  const text=$('fText').value.trim();
-  const link=$('fLink').value.trim(), pages=$('fPages').value.trim();
-  const examDate=$('fExam').value||'', dailyGoal=Math.max(1,Math.min(10,+$('fGoal').value||2));
-  const err=$('formErr'); err.className='notice err hidden'; err.style.background='';
-  if(!sample){ err.textContent='מנוע הבינה המלאכותית לא זמין בתצוגה הזו.'; err.classList.remove('hidden'); return; }
-  if(!topics.length){ err.textContent='צריך להזין לפחות נושא אחד.'; err.classList.remove('hidden'); return; }
-  if(!kidId){ err.textContent='בחרו ילד/ה בשלב הראשון.'; err.classList.remove('hidden'); return; }
-  err.classList.add('hidden');
+  let I;
+  if(resume) I=resume.in;
+  else {
+    const gi=+$('fGrade').value, subject=$('fSubject').value, topics=$('fTopics').value.split('\n').map(s=>s.trim()).filter(Boolean);
+    const perRound=Math.max(5,Math.min(20,+$('fRound').value||defRound(gi,subject)));
+    I={name:$('fName').value.trim()||'הילד/ה', reinf:W.reinf||null, gi, subject, topics, perRound, kidId:W.kidId,
+      chapters:(W.chapters||defChapters(topics,perRound)).map(c=>({title:c.title,topics:c.topics,count:Math.max(5,Math.min(20,c.count))})),
+      text:$('fText').value.trim().slice(0,8000), link:$('fLink').value.trim().slice(0,300), pages:$('fPages').value.trim().slice(0,200),
+      examDate:$('fExam').value||'', dailyGoal:Math.max(1,Math.min(10,+$('fGoal').value||2))};
+    const err=$('formErr'); err.className='notice err hidden'; err.style.background='';
+    const no=t=>{ err.textContent=t; err.classList.remove('hidden'); };
+    if(!I.topics.length) return no('צריך להזין לפחות נושא אחד.');
+    if(I.topics.length>MAX_TOPICS) return no(`עד ${MAX_TOPICS} נושאים בתרגול אחד – אפשר לבנות עוד תרגול לשאר.`);
+    if(!I.kidId) return no('בחרו ילד/ה בשלב הראשון.');
+  }
+  const {gi, subject, topics, chapters}=I, grade=GRADES[gi];
 
   $('steps').innerHTML = STEPS.map(([id,t,d],i)=>`<li id="st_${id}" data-n="${i+1}"><div class="ic">${i+1}</div><div><div class="t">${t}</div><div class="d">${d}</div></div></li>`).join('');
   $('buildErr').classList.add('hidden'); $('buildBack').classList.add('hidden');
   $('bTitle').textContent='⏳ בונים את התרגול…'; $('bSub').classList.remove('hidden'); $('bActs').innerHTML=`<button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button>`;
-  $('lMascot').innerHTML=mascot('happy',(kidById(W.kidId)||{}).color||'#2F6BFF');
-  const B={id:'b'+Date.now(), kidId:W.kidId, subject, state:'run'}; BUILDS.push(B); CUR_BUILD=B;
+  $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
+  const cp=resume||{v:1, at:Date.now(), fam:window.__sffFamily?.famId||'', in:I, token:null, done:{}, calls:0};
+  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B;
   show('vBuild');
 
   // one build from this month's quota (3 free per family, then paid credits)
-  try{ B.token = W.__sffAI ? await W.__sffAI.start(subject) : null; }
-  catch(e){ BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null; show('vForm'); showQuotaErr(e); return; }
-  const askB=(p,o={})=>ask(p,{...o,buildId:B.token?.buildId});
-  const isEnglish = /אנגלית/.test(subject);
-  const langRule = isEnglish
-    ? 'Write question stems and answer options in English (age-appropriate). Write every explanation in simple Hebrew, quoting the English words where needed.'
-    : 'Write questions, options and explanations in Hebrew.';
-  const ctx = `Student: Israeli school, grade ${grade} (grade index ${gi+1} of 12). Subject: ${subject}. Exam topics set by the parent: ${JSON.stringify(topics)}.`
-    + (pages ? ` The parent noted that the relevant sample questions are at: ${pages}${link?' (in '+link+')':''}; if the attached material shows page or exercise numbers, focus on those.` : '');
-
-  let profile={detected_topics:[],styles:'',difficulty:'',missing_from_parent_list:[]};
+  if(!cp.token){
+    try{ cp.token = window.__sffAI ? await window.__sffAI.start(subject) : null; }
+    catch(e){ BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null; show('vForm'); showQuotaErr(e); return; }
+  }
+  cpSave(cp);
+  const imgs=resume?[]:images.map(i=>i.blob);                     // the files are read once (scan); a resumed build does not need them
+  const askB=async (step,data,o={})=>{ const r=await ask(step,data,{...o,buildId:cp.token?.buildId}); cp.calls++; return r; };
+  const ctx=aiCtx(gi, subject, topics, {pages:I.pages, link:I.link});
+  const save=()=>cpSave(cp);
   let failStep='scan';
   try{
     /* 1. scan */
     setStep('scan','run');
-    if(text || images.length){
-      const opts={modelTier:'default'};
-      if(images.length && canImages) opts.images=images.map(i=>i.blob);
-      profile = await askB(
-`You are preparing exam practice for a child. ${ctx}
-The parent supplied sample material (${images.length} image(s) attached${text?' and the pasted text below':''}).
-Read it carefully. Return JSON only:
-{"detected_topics":[string],"styles":string (Hebrew, 1-2 sentences: what kinds of questions appear, formats, wording style),"difficulty":string (Hebrew, one sentence),"missing_from_parent_list":[string] (topics clearly present in the material that the parent's list does not include; [] if none)}
-${text?'\nPASTED MATERIAL:\n"""\n'+text.slice(0,8000)+'\n"""':''}`, opts) || profile;
-      setStep('scan','done',`נמצאו ${profile.detected_topics?.length||0} נושאים בחומר. ${profile.styles||''}`);
-    } else setStep('scan','done','לא הועלה חומר – השאלות ייבנו לפי הנושאים והכיתה בלבד');
-
-    /* 2. generate – one call per chapter */
-    failStep='gen'; setStep('gen','run');
-    let qs=[];
-    for(let ci=0;ci<chapters.length;ci++){
-      const ch=chapters[ci]; setStep('gen','run',`פרק ${ci+1} מתוך ${chapters.length}…`);
-      const per=distribute(ch.count, ch.topics);
-      const gen = await askB(
-`${ctx}
-${profile.styles?'Match the style of the sample material: '+profile.styles:''} ${profile.difficulty?'Difficulty: '+profile.difficulty:''}
-This is chapter ${ci+1} of ${chapters.length} ("${ch.title}"). ${COPY_RULE} Write NEW multiple-choice practice questions (do not repeat these: ${JSON.stringify(qs.map(q=>q.question).slice(-30))}). Quota per topic: ${JSON.stringify(per)}.
-Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${grade}; no trick questions; vary positions of the correct answer. ${BUILD_RULES}
-${langRule}
-Emoji: one emoji that pictures the question (for vocabulary, the word itself; otherwise the topic or scene) – it is shown to the child as the question's picture, so it must not give away the answer unless the question asks to name a pictured thing.
-Picture first (REQUIRED): the child answers by LOOKING. The question text must NEVER contain or hint the answer. Add "scene": 1-6 items {\"e\": one emoji, \"x\": 0-100 left→right, \"y\": 0-100 top→bottom (ground is at y≈85), \"s\": size 15-80} that stages the situation (e.g. a cat sitting on a chair: chair x50 y66 s62, cat x50 y28 s34; three books: three book emoji side by side). Then keep "question" very short (max 6 words, e.g. "Where is the cat?", "What is this?", "There ___ three books.") and options 1-3 words. If the topic truly cannot be pictured, use "scene": null and still keep the question short. Explanations: max 12 words. ${PIC_RULE}
-Explanation: 1-3 short sentences a child can follow, explaining WHY the answer is right (and the common mistake if useful).
-Return JSON only: {"questions":[{"topic":string (exactly one of: ${JSON.stringify(ch.topics)}),"question":string,"options":[string,string,string,string],"answer":number (0-3),"explanation":string,"core":boolean (true only for a basic fact the child must simply remember – e.g. minutes in an hour, metres in a km, a definition or unit; it comes back later as a review question),"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,
-        {modelTier:'default'});
-      qs = qs.concat(clean(gen?.questions, ch.topics).map(q=>({...q,ch:ci})));
+    if(!cp.done.scan){
+      cp.profile={detected_topics:[],styles:'',difficulty:'',missing_from_parent_list:[]};
+      if(I.text || imgs.length) cp.profile = (await askB('scan', {ctx, text:I.text}, imgs.length&&canImages?{images:imgs}:{})) || cp.profile;
+      cp.done.scan=1; save();
     }
+    const profile=cp.profile;
+    setStep('scan','done', (I.text||imgs.length||profile.detected_topics?.length)?`נמצאו ${profile.detected_topics?.length||0} נושאים בחומר. ${profile.styles||''}`:'לא הועלה חומר – השאלות ייבנו לפי הנושאים והכיתה בלבד');
+
+    /* 2. questions – one call per chapter (with checked questions from the pool where they fit, up to half a chapter) */
+    failStep='gen'; setStep('gen','run');
+    if(!cp.done.pool){ try{ cp.pool=await poolPick(askB, ctx, I, profile); }catch(e){ if(e?.code==='cancel') throw e; cp.pool={}; } cp.done.pool=1; save(); }
+    cp.gen=cp.gen||[];
+    for(let ci=0;ci<chapters.length;ci++){
+      if(cp.gen[ci]) continue;
+      const ch=chapters[ci], taken=(cp.pool&&cp.pool[ci])||[]; setStep('gen','run',`פרק ${ci+1} מתוך ${chapters.length}…`);
+      const need=Math.max(1,ch.count-taken.length), before=cp.gen.flat().concat(taken);
+      const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:ch.title, topics:ch.topics, quota:distribute(need, ch.topics),
+        avoid:before.map(q=>q.question).slice(-120), styles:profile.styles, difficulty:profile.difficulty});
+      cp.gen[ci]=taken.map(q=>({...q,ch:ci})).concat(g.qs); save();
+    }
+    let qs=cp.gen.flat().concat(cp.extra||[]);
     setStep('gen','done',`${chapters.length} פרקים · ${qs.length} שאלות`);
 
     /* 3. coverage – every topic gets questions */
     failStep='cover'; setStep('cover','run');
-    let added=0;
-    for(const t of topics){
-      if(qs.some(q=>q.topic===t)) continue;
-      const ci=Math.max(0,chapters.findIndex(c=>c.topics.includes(t)));
-      const more = await askB(
-`${ctx}
-Write 3 multiple-choice questions on the topic ${JSON.stringify(t)}. 4 options, one correct, ${langRule} ${BUILD_RULES} ${PIC_RULE} Child-friendly explanation (max 12 words) and one emoji picture. Picture first: add a "scene" (1-6 emoji items with x,y 0-100 and size s 15-80) that stages the situation so the child answers by looking; question max 6 words.
-Return JSON only: {"questions":[{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,
-        {modelTier:'default'});
-      const extra=clean(more?.questions,[t]).map(q=>({...q,ch:ci})); added+=extra.length; qs=qs.concat(extra);
+    if(!cp.done.cover){
+      cp.extra=cp.extra||[];
+      for(const t of topics){
+        if(qs.some(q=>q.topic===t)) continue;
+        const ci=Math.max(0,chapters.findIndex(c=>c.topics.includes(t)));
+        const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:t, topics:[t], quota:{[t]:3}, avoid:qs.map(q=>q.question).slice(-120)});
+        cp.extra=cp.extra.concat(g.qs); qs=qs.concat(g.qs); save();
+      }
+      cp.done.cover=1; save();
     }
     const missingTopics = topics.filter(t=>!qs.some(q=>q.topic===t));
-    setStep('cover', missingTopics.length?'fail':'done', (added?`+${added} שאלות. `:'')+(missingTopics.length?`חסר: ${missingTopics.join(', ')}`:'כל הנושאים מכוסים'));
 
-    /* picture pass */
-    setStep('cover','run','🖼️ תמונות…'); qs = await picturePass(qs, ctx, askB);
-    setStep('cover','done', missingTopics.length?`חסר: ${missingTopics.join(', ')}`:'✓ כל הנושאים · 🖼️ תמונות');
-    /* 4. QA */
+    /* pictures – only for questions that do not follow the picture rules yet */
+    setStep('cover','run','🖼️ תמונות…');
+    if(!cp.done.pics){ qs=await picturePass(qs, ctx, askB, null, q=>!isPool(q)&&needsPic(q)); cp.qs=qs; cp.done.pics=1; save(); } else qs=cp.qs;
+    setStep('cover', missingTopics.length?'fail':'done', missingTopics.length?`חסר: ${missingTopics.join(', ')}`:'✓ כל הנושאים · 🖼️ תמונות');
+
+    /* 4. QA – the whole set solved blind once; every chapter reviewed with its answers; fixes checked again */
     failStep='qa'; setStep('qa','run');
-    const qa={questions:[],checked:0,passed:0,fixed:0,dropped:0,log:[]};
-    for(let ci=0;ci<chapters.length;ci++){
-      setStep('qa','run',`פרק ${ci+1} מתוך ${chapters.length}…`);
-      const part=qs.filter(q=>q.ch===ci); if(!part.length) continue;
-      const r=await runQA(part, ctx, langRule, askB);
-      qa.questions=qa.questions.concat(r.questions.map(q=>({...q,ch:ci}))); ['checked','passed','fixed','dropped'].forEach(k=>qa[k]+=r[k]); qa.log=qa.log.concat(r.log);
-    }
-    qs = qa.questions;
+    if(!cp.done.qa){ cp.qa=await qaSet(qs, ctx, askB, {onProgress:t=>setStep('qa','run',t)}); cp.done.qa=1; save(); }
+    const qa=cp.qa; qs=qa.questions;
     setStep('qa','done',`נבדקו ${qa.checked} · עברו ${qa.passed} · תוקנו ${qa.fixed} · הוסרו ${qa.dropped}`);
 
     const coverage={}; topics.forEach(t=>coverage[t]=qs.filter(q=>q.topic===t).length);
-    const set={id:'s'+Date.now(), ...(reinf?{reinf}:{}), name, grade:gi, subject:reinf?'🎯 '+subject:subject, topics, questions:qs, source:{link,pages}, examDate, dailyGoal, perRound, kidId, chapters, qa:{checked:qa.checked,passed:qa.passed,fixed:qa.fixed,dropped:qa.dropped,log:qa.log},
-      coverage, suggestions:(profile.missing_from_parent_list||[]).filter(t=>!topics.includes(t)), created:Date.now()};
-    if(B.token) W.__sffAI.end(B.token.buildId,true);
+    const set={id:'s'+Date.now(), ...(I.reinf?{reinf:I.reinf}:{}), name:I.name, grade:gi, subject:I.reinf?'🎯 '+subject:subject, topics, questions:qs, source:{link:I.link,pages:I.pages}, examDate:I.examDate, dailyGoal:I.dailyGoal, perRound:I.perRound, kidId:I.kidId, chapters,
+      qa:{checked:qa.checked,passed:qa.passed,fixed:qa.fixed,dropped:qa.dropped,log:qa.log}, coverage, suggestions:(profile.missing_from_parent_list||[]).filter(t=>!topics.includes(t)), created:Date.now()};
+    poolRemember(I.kidId, qs);
+    endCp(cp, true);
     sets.unshift(set); store.save(); BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null;
     if(!$('vBuild').classList.contains('hidden')){ curSet=set; renderReview(set); show('vReview'); }
     else { toast(`✓ ${esc(subject)} מוכן`, ()=>{ curSet=set; go('kids'); renderReview(set); show('vReview'); }); if(!$('vKids').classList.contains('hidden')) renderKids(); }
   }catch(e){
-    if(B.token) W.__sffAI.end(B.token.buildId,false);     // failed at the start → the build is given back
-    if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); return; }
+    if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); endCp(cp,false); return; }
     if(CUR_BUILD===B) CUR_BUILD=null;
+    // a build that failed at the very start is given back (the server's refund rule); a longer one can go on from here
+    const canGoOn = cp.token && cp.calls>3 && !['budget','family_budget','quota','build_calls','build_closed','not_granted'].includes(e?.code) && Date.now()-cp.at<BUILD_MS;
+    if(canGoOn) cpSave(cp); else endCp(cp,false);
     setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
     const msg = (e?.code==='budget'||e?.code==='family_budget') ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
       : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
       : e?.code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
       : e?.code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
+      : e?.code==='pdf_pages' ? `קובץ ה-PDF ארוך מדי – עד ${e.max||20} עמודים. אפשר לשלוח רק את העמודים של המבחן.`
       : 'משהו השתבש בבנייה: '+(e?.message||e);
-    $('buildErr').textContent=msg; $('buildErr').classList.remove('hidden'); $('buildBack').classList.remove('hidden');
-    $('bTitle').textContent='⚠️ הבנייה נעצרה'; $('bSub').classList.add('hidden'); $('bActs').innerHTML=`<button class="btn ghost" onclick="go('kids')">🏠 למסך הבית</button>`;
-    B.state='err'; if(!$('vKids').classList.contains('hidden')) renderKids();
-    if($('vBuild').classList.contains('hidden')) toast(`⚠️ ${esc(subject)}`, ()=>{ BUILDS=BUILDS.filter(x=>x!==B); show('vBuild'); });
+    $('buildErr').innerHTML=esc(msg)+(canGoOn?'<br><b>מה שכבר נבנה נשמר.</b>':''); $('buildErr').classList.remove('hidden'); $('buildBack').classList.remove('hidden');
+    $('bTitle').textContent='⚠️ הבנייה נעצרה'; $('bSub').classList.add('hidden');
+    B.state='err';
+    $('bActs').innerHTML=(canGoOn?`<button class="btn big" onclick="resumeBuild('${B.id}')">▶ להמשיך מאיפה שנעצר</button>`:'')+`<button class="btn ghost" onclick="go('kids')">🏠 למסך הבית</button>`;
+    if(!canGoOn) B.cp=null;
+    if(!$('vKids').classList.contains('hidden')) renderKids();
+    if($('vBuild').classList.contains('hidden')) toast(`⚠️ ${esc(subject)}`, ()=>{ show('vBuild'); });
   }
+}
+
+/* one chapter's questions (a build, more questions, a new chapter, suggested topics, coverage) */
+async function genChapter(askFn, ctx, o){
+  const r=await askFn('gen', {ctx, chapter:{i:o.ci||0, n:o.n||1, title:o.title||'', topics:o.topics||[]}, quota:o.quota, avoid:(o.avoid||[]).slice(-120),
+    styles:o.styles||'', difficulty:o.difficulty||'', nameIt:!!o.nameIt}, o.images&&o.images.length&&canImages?{images:o.images}:{});
+  const tp=o.nameIt?Object.keys(o.quota):(o.topics||[]);
+  return {title:String(r?.title||'').slice(0,40), qs:clean(r?.questions, tp).map(q=>({...q,ch:o.ci||0}))};
+}
+
+/* ---------- the pool of ready questions (internal – never shown or named to the parent) ----------
+   Before a chapter is written, checked questions from the ready practice sets of the same subject and grade that fit the
+   chapter's topics may fill up to half of it. Per child: never from a ready set the child already has, never a question
+   the child already answered correctly (any set, also a deleted one – matched by the question's text), never a question
+   an earlier build already gave this child. */
+function solvedKeys(kidId){ const k=new Set();
+  history.filter(h=>h.kidId===kidId&&Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length).forEach(h=>h.qr.forEach((x,n)=>{
+    if(String(x).split('.')[1]==='1') k.add(String(h.qk[n]).split(':')[0]); }));
+  return k; }
+function poolUsed(kidId){ const k=kidById(kidId);
+  return new Set([...((k&&k.cq)||[]), ...sets.filter(s=>s.kidId===kidId).flatMap(s=>s.questions.map(q=>q.srcq).filter(Boolean))]); }
+function poolRemember(kidId, qs){ const k=kidById(kidId), add=qs.map(q=>q.srcq).filter(Boolean); if(!k||!add.length) return;
+  k.cq=[...new Set([...(k.cq||[]), ...add])].slice(-3000); saveKids(); }
+async function poolChapters(kidId, gi, subject){
+  let L=[]; try{ const r=await fetch('/share/catalog.json'); L=r.ok?((await r.json()).sets||[]):[]; }catch(e){ return []; }
+  const base=String(subject).replace(/^🎯\s*/,''), have=new Set(sets.filter(s=>s.kidId===kidId&&s.src).map(s=>String(s.src).replace(/_/g,'-')));
+  const used=poolUsed(kidId), solved=solvedKeys(kidId), out=[];
+  for(const x of L.filter(x=>x.status==='ready'&&x.grade===gi&&x.subject===base&&!have.has(x.id)).slice(0,4)){
+    let p; try{ p=await loadShare(x.id); }catch(e){ continue; }
+    (p.chapters||[]).forEach((c,ci)=>{ if(c&&typeof c.text==='string'&&c.text.trim()) return;           // reading passages need their text
+      const qs=p.qs.filter(q=>q.ch===ci).map(q=>({...q, srcq:x.id+':'+tkey(q.question)})).filter(q=>!used.has(q.srcq)&&!solved.has(tkey(q.question)));
+      if(qs.length>=2) out.push({ref:x.id+'#'+ci, title:String(c.title||'').slice(0,120), topics:(c.topics||[]).slice(0,20), qs}); });
+  }
+  return out.slice(0,150);
+}
+async function poolPick(askFn, ctx, I, profile){
+  const out={}, pool=await poolChapters(I.kidId, I.gi, I.subject); if(!pool.length) return out;
+  const want=[...new Set([...I.topics, ...(profile.detected_topics||[])])].slice(0,40);
+  const m=await askFn('match', {ctx, want, pool:pool.map(c=>({ref:c.ref,title:c.title,topics:c.topics}))});
+  const refs=t=>(((m&&m.map)||[]).find(x=>x.topic===t)||{}).refs||[];
+  const groups=[]; let total=0;
+  I.chapters.forEach((ch,ci)=>{ const seen=new Set(), cand=[];
+    ch.topics.forEach(t=>refs(t).forEach(r=>{ const c=pool.find(x=>x.ref===r); if(c) c.qs.forEach(q=>{ if(!seen.has(q.srcq)){ seen.add(q.srcq); cand.push({...q,topic:t}); } }); }));
+    const c80=cand.slice(0,80); if(c80.length && groups.length<12 && total+c80.length<=400){ total+=c80.length; groups.push({ci, topic:ch.topics.join(' + ').slice(0,120), cand:c80}); } });
+  if(!groups.length) return out;
+  const r=await askFn('select', {ctx, groups:groups.map(g=>({topic:g.topic, questions:g.cand.map((q,i)=>({i,question:q.question,answer:String(q.options[q.answer])}))}))});
+  const taken=new Set();
+  groups.forEach((g,k)=>{ const p=((r&&r.picks)||[]).find(x=>x.topic===g.topic)||((r&&r.picks)||[])[k]; if(!p||!Array.isArray(p.i)) return;
+    const max=Math.floor(I.chapters[g.ci].count/2);
+    const pick=[...new Set(p.i)].map(i=>g.cand[i]).filter(q=>q&&!taken.has(q.srcq)).sort(()=>Math.random()-.5).slice(0,max);
+    pick.forEach(q=>taken.add(q.srcq));
+    if(pick.length) out[g.ci]=pick.map(({topic,question,options,answer,explanation,emoji,scene,core,srcq})=>({topic,question,options,answer,explanation,emoji:emoji||'',...(scene?{scene}:{}),...(core?{core:true}:{}),ch:g.ci,srcq})); });
+  return out;
 }
 
 function distribute(n, topics){
@@ -2195,31 +2289,16 @@ function clean(arr, topics){
 /* picture pass: every question gets a scene and a short stem that does not give the answer away */
 const words=t=>String(t||'').trim().split(/\s+/).filter(Boolean).length;
 const needsPic=q=>!q.scene || words(q.question)>6 || words(q.explanation)>14 || q.options.some(o=>words(o)>4) || q.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase());
-// The picture must show the ANSWER itself – never a related thing (🐸 for "jump" makes a child think "frog").
-// the parent's photos / pasted text only show what the test covers – never copied into the practice set (copyright)
-const COPY_RULE = 'OWN WORDS ONLY (copyright): the parent\'s material is only for understanding what the test covers – topics, words, kinds of exercises and level. Write every question, sentence, story and explanation in new words of your own. Never reproduce the material\'s wording: no sentence, story, reading passage, table or exercise copied, not even with small changes, and never a whole exercise list or page. Single words, names of concepts, numbers and facts may be used.';
-// the rules of the build-practice-set skill (.claude/skills/build-practice-set) – every question the AI writes follows them
-const BUILD_RULES = 'QUESTION RULES: exactly 4 different options, max 3 words each, exactly ONE correct – no distractor may also be correct (not a synonym, not a looser true statement, not an odd but grammatical sentence); distractors in the SAME FORM as the answer (a pair → pairs, a tool → tools, same gender/number/tense) and plausible for the grade. The question never contains or hints the answer; a question that is right only relative to its options is worded "Which of these… / איזה מהם… / מה מהבאים…". MATCH GAME: all questions of a chapter meet in one game where each shows only its text and picture and the answer cards are the chapter\'s answers – no other answer of the same chapter may also answer a question (including the same value in another form: "20 ₪"/"20", "1 מטר"/"מטר", singular/plural, masculine/feminine); if two answers truly fit both, write them as identical text, otherwise make the question specific. No two questions alike in the set; a core fact (e.g. minutes in an hour) may come back only in a varied form. A picture that shows the options side by side lists them in a RANDOM order (the answer not always first); a question about place or order keeps the real order. Only emoji from before 2019.';
-const PIC_RULE = 'PICTURE MUST BE RELATED: every scene shows what THIS question is about – never a decoration (no lone 🤔 ❓ 🔢 ➕ ➖ ✏️ 📝 🔟 💯 etc.). Several things = several items, ONE emoji per item (never "🍎🍎🍎" in one item), all inside 0-100 with room for their size. For number questions with nothing real to draw, a scene item may be a short text card instead of an emoji (max 16 chars, e.g. {"e":"12 → ?","x":50,"y":50,"s":30} or {"e":"5 + 3",...}) showing the given numbers – never the answer. For word problems show the story\'s objects (5 apples = five 🍎 items). '+'PICTURE NEVER GIVES THE ANSWER AWAY (strict): a child who does not know the answer must NOT be able to pick it by looking at the picture, and the picture must never confuse him. The picture shows only what the QUESTION gives: (1) naming questions ("What is this?", "Which animal?", "מה זה?", a verb): the picture IS the question – show exactly the thing to name, so the child thinks of that one word and no other option (a frog for "jump" is WRONG: he thinks "frog"; verbs: a person doing the action 🏃 run, 🏊 swim); (2) counting/arithmetic: the objects or the given numbers, never the result; (3) reading a table/graph/sentence/clock: that data; (4) every other question (knowledge, facts, categories, opposites, instruments, concepts): NEVER a picture of the right option alone – show ALL the options side by side, or the situation the question describes without its result (which tool measures mass? → show objects to weigh, NOT scales; which is a fruit? → show all four options). No picture where another option also fits. If nothing fits, use "scene": null rather than a misleading picture. Use only common emojis from before 2019. If no emoji shows a naming word clearly, put its Hebrew meaning in brackets in the question, e.g. "j_mp (לקפוץ)".';
+// The rules for questions and pictures (BUILD_RULES, PIC_RULE, COPY_RULE) are in functions/prompts.js – the server puts them
+// in every AI call (one cached system prompt).
 async function picturePass(qs, ctx, askFn=ask, onProgress, want=needsPic){
   for(let round=0; round<2; round++){                       // a second round for any question still without a picture
-  const idx=qs.map((q,i)=>(round?noPic(q):want(q))?i:-1).filter(i=>i>=0); if(!idx.length) break;
+  const idx=qs.map((q,i)=>(isPool(q)?false:round?noPic(q):want(q))?i:-1).filter(i=>i>=0); if(!idx.length) break;
   for(let k=0;k<idx.length;k+=12){
     if(onProgress) onProgress(k, idx.length);
     const part=idx.slice(k,k+12);
-    const r=await askFn(
-`${ctx}
-Turn each practice question into a PICTURE question a child answers by looking.
-For each item return:
-- "scene": 1-6 items {"e": one emoji, "x": 0-100 left→right, "y": 0-100 top→bottom (floor ≈ 85), "s": size 15-80} staging the situation so the correct answer is visible (e.g. ball under a table: table x50 y55 s70, ball x50 y80 s16).
-- "question": max 6 words, must NOT contain or hint the answer (e.g. "Where is the ball?", "What is this?", "How many apples?").
-- "options": the same 4 options in the same order, each shortened to max 3 words if longer (meaning unchanged; the correct one stays correct).
-- "explanation": max 10 words, simple Hebrew, may use ← and emoji (e.g. "3 ספרים = רבים ← are"). If the topic truly cannot be pictured, scene = null but still shorten the question.
-${PIC_RULE} ${BUILD_RULES}
-Return JSON only: {"items":[{"i":number,"scene":[...]|null,"question":string,"options":[4 strings],"explanation":string}]}
-ITEMS: ${JSON.stringify(part.map(i=>({i,question:qs[i].question,options:qs[i].options,answer:qs[i].options[qs[i].answer]})))}`,
-      {modelTier:'default'});
-    (Array.isArray(r?.items)?r.items:[]).forEach(it=>{ const q=qs[it.i]; if(!q) return;
+    const r=await askFn('pics', {ctx, items:part.map(i=>({i, question:qs[i].question, options:qs[i].options, answer:qs[i].answer}))});
+    (Array.isArray(r?.items)?r.items:[]).forEach(it=>{ const q=qs[it.i]; if(!q||!part.includes(it.i)) return;
       const sc=cleanScene(it.scene); if(sc) q.scene=sc;
       if(Array.isArray(it.options)&&it.options.length===4&&it.options.every(o=>typeof o==='string'&&o.trim())&&new Set(it.options.map(o=>o.trim())).size===4) q.options=it.options.map(o=>o.trim());
       if(typeof it.question==='string' && it.question.trim() && !it.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase())) q.question=it.question.trim();
@@ -2228,83 +2307,76 @@ ITEMS: ${JSON.stringify(part.map(i=>({i,question:qs[i].question,options:qs[i].op
   }
   return qs;
 }
-async function runQA(qs, ctx, langRule, askFn=ask){
-  const log=[]; let fixed=0, dropped=0;
-  // blind solve
-  const solve = async list => {
-    const r = await askFn(
-`You are an independent checker. ${ctx}
-Solve each question yourself (the picture is described by its emoji scene). You are NOT given the answer key. For each, return the index (0-3) of the single correct option, or -1 if no option is correct, and flag problems.
-Flag as a problem: the question text already contains or gives away the answer; more than one option could fit (e.g. "under" and "below"); the scene does not match the question; the scene shows something related instead of the answer itself, so a child would think of a different word (e.g. 🐸 for "jump" → "frog"); the scene gives the answer away in a question that is not "name what you see" (e.g. ⚖️ for "which tool measures mass?") – a child who does not know could pick it from the picture.
-Return JSON only: {"results":[{"i":number,"pick":number,"multiple_correct":boolean,"problem":string ("" if none; short Hebrew note if the question is ambiguous, has a factual/grammar error, or is unsuitable for the grade)}]}
-QUESTIONS:
-${JSON.stringify(list.map((q,i)=>({i,topic:q.topic,question:q.question,scene:q.scene||null,options:q.options})))}`,
-      {modelTier:'complex'});
-    return Array.isArray(r?.results)?r.results:[];
-  };
-  // review (the review-practice-set skill): the questions of one chapter WITH their answers – what a blind solver cannot see
-  const review = async list => {
-    const r = await askFn(
-`You review practice questions for children (Study for fun). ${ctx}
-These questions belong to ONE chapter. In the match / memory games all of them meet: each question shows only its text and picture, and the answer cards are the chapter's correct answers. For each question check and flag ONLY real problems:
-- "clash": another question's correct answer in this list is ALSO a correct answer to this question (a synonym, a looser true answer, a grammatical alternative, the same value in another form like "20 ₪"/"20" or "1 מטר"/"מטר", singular/plural, masculine/feminine) – skip questions worded "which of these / איזה מהם / מה מהבאים / מה נכון / לא שייך", they are not in that game;
-- "form": a distractor is not in the same form as the answer (a pair answer with single distractors, a tool answer with non-tools, another gender/number/tense);
-- "duplicate": the same question (or almost the same, same answer) appears twice in the list;
-- "picture": the scene shows the right option alone, or only the answer and one distractor, in a question that does not ask to name what is pictured; or the scene is misleading;
-- "grade": unsuitable for the grade, or a factual / language error.
-Return JSON only: {"flags":[{"i":number,"kind":"clash"|"form"|"duplicate"|"picture"|"grade","note":string (short Hebrew note: what is wrong and with which other question)}]}
-QUESTIONS:
-${JSON.stringify(list.map((q,i)=>({i,question:q.question,scene:q.scene||null,options:q.options,answer:q.options[q.answer]})))}`,
-      {modelTier:'complex'});
-    return Array.isArray(r?.flags)?r.flags:[];
-  };
-  const res = []; for(let k=0;k<qs.length;k+=40) res.push(...(await solve(qs.slice(k,k+40))).map(r=>({...r,i:+r.i+k})));   // big sets: 40 questions per call
-  const flags = []; for(let k=0;k<qs.length;k+=40) flags.push(...(await review(qs.slice(k,k+40))).map(f=>({...f,i:+f.i+k})));
-  const byI = Object.fromEntries(res.map(r=>[r.i,r]));
-  const bad=[];
+// the rules a program can check by itself, before any AI review (the reviewer is asked only about the rest)
+const ansOf=q=>String(q.options[q.answer]).trim();
+function codeChecks(qs){
+  const bad=[], seen={}, val=a=>String(a).replace(/[\s⁦-⁩]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,'');
+  const add=(i,why)=>{ if(!bad.some(b=>b.i===i)) bad.push({i,why}); };
   qs.forEach((q,i)=>{
-    const r=byI[i];
+    if(q.emoji && tooNew(q.emoji)) q.emoji='';                                   // an emoji older phones cannot show: just dropped
+    const a=ansOf(q), t=String(q.question).toLowerCase().replace(/[⁦-⁩]/g,'');
+    if(words(a)>3) add(i,'התשובה ארוכה מ-3 מילים');
+    if(!/^[\d\s.,/−+×÷:=%-]+$/.test(a) && a.length>=2 && !needOpts(q) && new RegExp('(^|[^\\p{L}])'+a.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^\\p{L}]|$)','u').test(t)) add(i,'השאלה מסגירה את התשובה');
+    const k=String(q.question).trim().toLowerCase(); if(seen[k]!=null) add(i,'אותה שאלה מופיעה פעמיים'); seen[k]=i;
+    const j=qs.findIndex((o,k2)=>k2<i && (o.ch??0)===(q.ch??0) && ansOf(o)!==a && val(ansOf(o))===val(a) && /\d/.test(a));
+    if(j>=0 && !needOpts(q)) add(i,`התשובה "${a}" היא אותו ערך כמו התשובה "${ansOf(qs[j])}" של שאלה אחרת בפרק – לכתוב אותן באותה צורה`);
+  });
+  return bad;
+}
+// QA of new questions: the whole list solved blind once (40 per call), every chapter reviewed with its answers (the
+// questions already in the chapter – o.context – and the pool's come along "locked": seen for clashes, never changed),
+// the flagged ones fixed per chapter, every fix solved blind again and reviewed again with its chapter.
+async function qaSet(qs, ctx, askFn=ask, o={}){
+  const log=[]; let fixed=0, dropped=0; const prog=o.onProgress||(()=>{}), context=o.context||[];
+  const solve=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
+      const r=await askFn('solve', {ctx, questions:part.map(([q,i])=>qSend(q,i))}); out.push(...(Array.isArray(r?.results)?r.results:[])); } return out; };
+  const review=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
+      const r=await askFn('review', {ctx, questions:part.map(([q,i,locked])=>qSend(q,i,locked?{locked:true}:{}))}); out.push(...(Array.isArray(r?.flags)?r.flags:[])); } return out; };
+  const open=qs.map((q,i)=>[q,i]).filter(([q])=>!isPool(q));
+  const chs=[...new Set(qs.map(q=>q.ch??0))];
+  // the chapter as the games see it: its new questions (index i) and the locked ones (index 1000+)
+  const chapterList=(ch, list)=>list.map((q,i)=>[q,i,isPool(q)||q._lock]).filter(([q])=>(q.ch??0)===ch)
+    .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true]));
+  prog('בודקים את התשובות…');
+  const res=await solve(open), byI=Object.fromEntries(res.map(r=>[+r.i,r]));
+  const bad=codeChecks(qs).filter(b=>!isPool(qs[b.i]));
+  open.forEach(([q,i])=>{ if(bad.some(b=>b.i===i)) return; const r=byI[i];
     if(!r){ bad.push({i,why:'הבודק לא החזיר תשובה'}); return; }
     if(r.pick!==q.answer || r.multiple_correct || (r.problem&&r.problem.trim()))
-      bad.push({i,why: r.pick!==q.answer?`הבודק בחר תשובה ${+r.pick+1} במקום ${q.answer+1}`:(r.multiple_correct?'יותר מתשובה נכונה אחת':r.problem)});
-  });
-  // the reviewer's flags, and the rules a program can check by itself (exact duplicates, the same value in two forms)
-  const seen={}, val=a=>String(a).replace(/[\s\u2066-\u2069]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,'');
-  qs.forEach((q,i)=>{ const k=q.question.trim().toLowerCase(); if(seen[k]!=null && !bad.some(b=>b.i===i)) bad.push({i,why:'אותה שאלה מופיעה פעמיים'}); seen[k]=i; });
-  qs.forEach((q,i)=>{ const a=String(q.options[q.answer]).trim(); const j=qs.findIndex((o,k)=>k<i && String(o.options[o.answer]).trim()!==a && val(o.options[o.answer])===val(a) && /\d/.test(a));
-    if(j>=0 && !needOpts(q) && !bad.some(b=>b.i===i)) bad.push({i,why:`התשובה "${a}" היא אותו ערך כמו התשובה "${qs[j].options[qs[j].answer]}" של שאלה אחרת בפרק – לכתוב אותן באותה צורה`}); });
-  flags.forEach(f=>{ if(!Number.isInteger(f.i)||!qs[f.i]||bad.some(b=>b.i===f.i)) return; if(f.kind==='clash'&&needOpts(qs[f.i])) return;
-    bad.push({i:f.i, why:String(f.note||f.kind).slice(0,200)}); });
-  let out = qs.slice();
+      bad.push({i,why: r.pick!==q.answer?`הבודק בחר תשובה ${+r.pick+1} במקום ${q.answer+1}`:(r.multiple_correct?'יותר מתשובה נכונה אחת':r.problem)}); });
+  for(let n=0;n<chs.length;n++){ prog(`פרק ${n+1} מתוך ${chs.length}…`);
+    (await review(chapterList(chs[n], qs))).forEach(f=>{ const i=+f.i; if(!Number.isInteger(i)||i>=1000||!qs[i]||isPool(qs[i])||bad.some(b=>b.i===i)) return;
+      if(f.kind==='clash'&&needOpts(qs[i])) return; bad.push({i, why:String(f.note||f.kind).slice(0,200)}); }); }
+  const out=qs.slice();
   if(bad.length){
-    const fx = await askFn(
-`${ctx}
-An independent checker flagged these practice questions. For each, decide: fix it (return a corrected question with 4 options, exactly one correct, and a correct explanation) or drop it if it cannot be fixed cleanly. ${langRule} ${BUILD_RULES} ${PIC_RULE}
-Return JSON only: {"items":[{"i":number,"action":"fix"|"drop","question":{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}}]}
-FLAGGED:
-${JSON.stringify(bad.map(b=>({i:b.i,why:b.why,...qs[b.i]})))}`,
-      {modelTier:'complex'});
-    const items = Array.isArray(fx?.items)?fx.items:[];
-    const fixedQs=[]; const fixedIdx=[];
-    bad.forEach(b=>{
-      const it=items.find(x=>x.i===b.i);
-      const cq = it&&it.action==='fix' ? clean([it.question], [qs[b.i].topic, ...new Set(qs.map(q=>q.topic))])[0] : null;
-      if(cq){ fixedQs.push(cq); fixedIdx.push(b.i); }
-      else { out[b.i]=null; dropped++; log.push({q:qs[b.i].question, why:b.why, result:'הוסרה'}); }
-    });
-    // re-check fixed ones blind
-    if(fixedQs.length){
-      const re = await solve(fixedQs);
-      fixedQs.forEach((q,k)=>{
-        const r=re.find(x=>x.i===k); const i=fixedIdx[k];
-        const why=bad.find(b=>b.i===i).why;
-        if(r && r.pick===q.answer && !r.multiple_correct && !(r.problem&&r.problem.trim())){ out[i]={...q,fixed:true}; fixed++; log.push({q:q.question, why, result:'תוקנה ואומתה'}); }
-        else { out[i]=null; dropped++; log.push({q:qs[i].question, why, result:'הוסרה (התיקון לא עבר בדיקה חוזרת)'}); }
-      });
+    const fixedIdx=[];
+    for(const ch of chs){ const mine=bad.filter(b=>(qs[b.i].ch??0)===ch); if(!mine.length) continue;
+      prog('מתקנים…');
+      const others=qs.map((q,i)=>[q,i]).filter(([q,i])=>(q.ch??0)===ch&&!mine.some(b=>b.i===i)).map(([q,i])=>qSend(q,i)).concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>qSend(q,1000+k))).slice(0,40);
+      const fx=await askFn('fix', {ctx, items:mine.slice(0,40).map(b=>qSend(qs[b.i],b.i,{why:b.why})), others});
+      const items=Array.isArray(fx?.items)?fx.items:[];
+      mine.forEach(b=>{ const it=items.find(x=>+x.i===b.i);
+        const cq=it&&it.action==='fix'&&it.question ? clean([it.question], [qs[b.i].topic, ...new Set(qs.map(q=>q.topic))])[0] : null;
+        if(cq){ out[b.i]={...cq, ch:qs[b.i].ch}; fixedIdx.push(b.i); }
+        else { out[b.i]=null; dropped++; log.push({q:qs[b.i].question, why:b.why, result:'הוסרה'}); } });
+    }
+    if(fixedIdx.length){
+      // every fix: solved blind again, then reviewed again together with its chapter (a fix must not create a clash)
+      prog('בודקים את התיקונים…');
+      const re=await solve(fixedIdx.map(i=>[out[i],i])), reBy=Object.fromEntries(re.map(r=>[+r.i,r]));
+      const why=i=>bad.find(b=>b.i===i).why, fail=new Set();
+      fixedIdx.forEach(i=>{ const r=reBy[i]; if(!(r && r.pick===out[i].answer && !r.multiple_correct && !(r.problem&&r.problem.trim()))) fail.add(i); });
+      const cur=out.map(q=>q&&{...q}); fixedIdx.forEach(i=>{ if(cur[i]&&!fail.has(i)) cur[i]._fix=1; });
+      for(const ch of new Set(fixedIdx.filter(i=>!fail.has(i)).map(i=>out[i].ch??0))){
+        const list=cur.map((q,i)=>[q,i]).filter(([q])=>q&&(q.ch??0)===ch).map(([q,i])=>[q,i,!q._fix])
+          .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true]));
+        (await review(list)).forEach(f=>{ const i=+f.i; if(fixedIdx.includes(i)&&!(f.kind==='clash'&&needOpts(out[i]))) fail.add(i); });
+      }
+      fixedIdx.forEach(i=>{ if(fail.has(i)){ out[i]=null; dropped++; log.push({q:qs[i].question, why:why(i), result:'הוסרה (התיקון לא עבר בדיקה חוזרת)'}); }
+        else { out[i]={...out[i],fixed:true}; fixed++; log.push({q:out[i].question, why:why(i), result:'תוקנה ואומתה'}); } });
     }
   }
-  out=out.filter(Boolean);
-  return {questions:out, checked:qs.length, passed:qs.length-bad.length, fixed, dropped, log};
+  return {questions:out.filter(Boolean), checked:qs.length, passed:qs.length-bad.length, fixed, dropped, log};
 }
 
 /* ---------- review ---------- */
@@ -2400,22 +2472,15 @@ async function delChapter(ci){ const set=curSet, C=getChapters(set); if(!set||!C
   saveHistoryLocal(); try{ pushProgress(set.kidId); }catch(e){}
   REV_OPEN[set.id]=-1; markEdited(set); renderReview(set); toast('🗑 ✓');
 }
-function setCtx(set){ const isEn=/אנגלית/.test(set.subject);
-  return { isEn, ctx:`Student: Israeli school, grade ${GRADES[set.grade]} (grade index ${set.grade+1} of 12). Subject: ${set.subject}. Exam topics: ${JSON.stringify(set.topics||[])}.`,
-    langRule: isEn?'Write question stems and answer options in English (age-appropriate). Write every explanation in simple Hebrew, quoting the English words where needed.':'Write questions, options and explanations in Hebrew.' }; }
 async function aiQuestions(set, ci, title, topics, n, nameIt){
-  const {ctx,langRule}=setCtx(set), avoid=set.questions.map(q=>q.question).slice(-80), imgs=EDIT_IMGS.slice();
-  const r=await ask(`${ctx}
-${imgs.length?`The parent attached ${imgs.length} worksheet photo(s) for this chapter: base the questions on the material, words and exercise types shown there. ${COPY_RULE}
-`:''}${nameIt?`This is a NEW chapter built only from the attached worksheet(s): give it a short Hebrew title (2-4 words) that names the material.`:`This is the chapter "${title}" (topics: ${JSON.stringify(topics)}).`} Write ${n} NEW multiple-choice practice questions. Do not repeat these: ${JSON.stringify(avoid)}.
-Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${GRADES[set.grade]}; no trick questions. ${langRule} ${BUILD_RULES}
-Question max 6 words when possible, options max 3 words, explanation max 10 words for a child. ${PIC_RULE}
-Return JSON only: {${nameIt?'"title":string,':''}"questions":[{"topic":string${nameIt?'':` (one of ${JSON.stringify(topics)})`},"question":string,"options":[4 strings],"answer":number (0-3),"explanation":string,"core":boolean (true only for a basic fact the child must simply remember – e.g. minutes in an hour, metres in a km, a definition or unit; it comes back later as a review question),"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,{modelTier:'default', ...(imgs.length&&canImages?{images:imgs}:{})});
-  const tp=nameIt?[String(r?.title||'מדפי העבודה').slice(0,40)]:topics;
-  let qs=clean(r?.questions,tp).map(q=>({...q,ch:ci}));
+  const ctx=setAiCtx(set), imgs=EDIT_IMGS.slice(), quota=nameIt?{'מדפי העבודה':n}:distribute(n, topics);
+  const g=await genChapter(ask, ctx, {ci, n:Math.max(ci+1,getChapters(set).length), title, topics, quota, avoid:set.questions.map(q=>q.question).slice(-120), images:imgs, nameIt});
+  const tp=nameIt?(g.title||'מדפי העבודה'):null;
+  let qs=g.qs.map(q=>({...q, ...(tp?{topic:tp}:{}), ch:ci}));
   if(!qs.length) throw {code:'error',message:'no questions'};
-  qs=await picturePass(qs,ctx); const qa=await runQA(qs,ctx,langRule), out=qa.questions.map(q=>({...q,ch:ci}));
-  return nameIt?{qs:out,title:tp[0]}:out;
+  qs=await picturePass(qs,ctx);
+  const qa=await qaSet(qs, ctx, ask, {context:set.questions.filter(q=>q.ch===ci)}), out=qa.questions.map(q=>({...q,ch:ci}));
+  return nameIt?{qs:out,title:tp}:out;
 }
 let EDIT_BUSY=false; const PDF_MAX=6*1024*1024;
 async function moreQs(ci){ const set=curSet, C=getChapters(set), c=C[ci]; if(!set||!c||EDIT_BUSY){ if(EDIT_BUSY) busyNote(); return; } if(!sample){ toast('🛠️ בקרוב'); return; }
@@ -2450,7 +2515,7 @@ async function fixPictures(){
   const set=curSet; if(PIC_BUSY||!set||!sample) return; const n0=missingPics(set).length; if(!n0) return;
   PIC_BUSY=true;
   try{
-    const ctx=`Student: Israeli school, grade ${GRADES[set.grade]}. Subject: ${set.subject}.`;
+    const ctx=setAiCtx(set);
     workShow('🖼️ מוסיפים תמונות לשאלות…', `${n0} שאלות · אפשר להמשיך באפליקציה`);
     await picturePass(set.questions, ctx, ask, (k,n)=>workShow('🖼️ מוסיפים תמונות לשאלות…', `${Math.min(k+12,n)} מתוך ${n}`), noPic);
     PIC_BUSY=false; store.save(); if(curSet===set) renderReview(set);
@@ -2652,15 +2717,8 @@ async function sendReport(){
   if(!note){ out.className='notice err'; out.textContent='כתבו בקצרה מה לא נכון.'; return; }
   if(!sample){ out.className='notice err'; out.textContent='האימות האוטומטי לא זמין בתצוגה הזו.'; return; }
   $('repSend').disabled=true; out.className='notice'; out.textContent='בודק את הדיווח…';
-  const isEnglish=/אנגלית/.test(set.subject);
   try{
-    const r=await ask(
-`A user reported a possible error in a practice question for an Israeli student, grade ${GRADES[set.grade]}, subject ${set.subject}.
-Verify independently and impartially: solve the question yourself, check the options, the marked answer and the explanation. Do not assume the report is right or wrong.
-QUESTION: ${JSON.stringify(q)}
-REPORT: ${JSON.stringify(note)}
-Return JSON only: {"is_error":boolean,"feedback":string (Hebrew, 1-3 sentences, addressed to the reporter, explaining the verdict kindly and clearly),"category":"wrong_answer"|"multiple_correct"|"typo"|"wrong_explanation"|"unsuitable"|"none","corrected":{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null} or null (required when is_error is true; ${isEnglish?'question/options in English, explanation in Hebrew':'all in Hebrew'})}`,
-      {modelTier:'complex'});
+    const r=await ask('report', {ctx:setAiCtx(set), question:qSend(q,0), note:note.slice(0,1000)});
     const fixedQ = r?.is_error ? clean([r.corrected],[q.topic])[0] : null;
     const entry={at:Date.now(),set:set.subject+' · כיתה '+GRADES[set.grade],question:q.question,note,
       verdict:r?.is_error?'confirmed':'rejected',category:r?.category||'',feedback:r?.feedback||'',fixedTo:fixedQ?fixedQ.question:null};
@@ -2691,20 +2749,17 @@ function renderAdmin(){
 }
 
 async function addSuggested(){
-  const set=curSet, btn=$('addSug'); btn.disabled=true; btn.textContent='בונה ובודק…';
+  const set=curSet, btn=$('addSug'); if(!set||!set.suggestions||!set.suggestions.length) return; btn.disabled=true; btn.textContent='בונה ובודק…';
   try{
-    const isEnglish=/אנגלית/.test(set.subject);
-    const langRule = isEnglish?'Questions and options in English; explanations in simple Hebrew.':'Everything in Hebrew.';
-    const ctx=`Student: Israeli school, grade ${GRADES[set.grade]}. Subject: ${set.subject}.`;
-    const per={}; set.suggestions.forEach(t=>per[t]=2);
-    const r=await ask(`${ctx}\nWrite multiple-choice practice questions with this quota per topic: ${JSON.stringify(per)}. 4 options, one correct, child-friendly explanation. ${langRule}\nReturn JSON only: {"questions":[{"topic":string,"question":string,"options":[4 strings],"answer":number,"explanation":string,"emoji":string,"scene":[{"e":string,"x":number,"y":number,"s":number}]|null}]}`,{modelTier:'default'});
-    const extra=clean(r?.questions,set.suggestions);
-    const qa=await runQA(extra,ctx,langRule);
-    set.topics=set.topics.concat(set.suggestions); set.suggestions=[];
-    set.questions=set.questions.concat(qa.questions);
-    set.qa.checked+=qa.checked; set.qa.passed+=qa.passed; set.qa.fixed+=qa.fixed; set.qa.dropped+=qa.dropped; set.qa.log=(set.qa.log||[]).concat(qa.log);
-    store.save(); renderReview(set);
-  }catch(e){ btn.disabled=false; btn.textContent='לא הצליח – נסו שוב'; }
+    const C=getChapters(set), ci=C.length, sug=set.suggestions.slice(0,10), title=sug.join(' + ').slice(0,60);
+    if(!set.chapters) set.chapters=C.map(c=>({title:c.title,topics:c.topics,count:c.qs.length}));
+    const add=await aiQuestions({...set, topics:[...new Set([...(set.topics||[]),...sug])]}, ci, title, sug, Math.min(20,sug.length*2));
+    set.chapters.push({title, topics:sug, count:add.length});
+    set.topics=[...new Set([...set.topics,...sug])]; set.suggestions=[];
+    set.questions=set.questions.concat(add);
+    set.qa.checked+=add.length; set.qa.passed+=add.length;
+    markEdited(set); renderReview(set);
+  }catch(e){ logFail('edit:suggested', e, set.subject); btn.disabled=false; btn.textContent='לא הצליח – נסו שוב'; }
 }
 
 /* ---------- sets lists ---------- */
@@ -2725,7 +2780,7 @@ async function delSet(){ if(!curSet||curSet.demo) return; const id=curSet.id;
   removeSet(id); curSet=null; go('kids'); toast('🗑 ✓'); }
 async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
   if(b.state!=='err' && !(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true}))) return;
-  b.cancel=true; if(CUR_BUILD===b) CUR_BUILD=null; BUILDS=BUILDS.filter(x=>x!==b); renderKids(); }
+  b.cancel=true; if(b.cp) endCp(b.cp,false); if(CUR_BUILD===b) CUR_BUILD=null; BUILDS=BUILDS.filter(x=>x!==b); renderKids(); }
 
 /* ---------- art (inline SVG – no external images) ---------- */
 function starPts(cx,cy,R,r){let p=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
@@ -2855,11 +2910,10 @@ async function qaAllSets(){
   try{
     for(const set of list){
       k++; msg.textContent=`${k}/${list.length} · ${set.subject} · ${set.name}`;
-      const ctx=`Student: Israeli school, grade ${GRADES[set.grade]}. Subject: ${set.subject}.`;
-      const isEn=/אנגלית/.test(set.subject);
+      const ctx=setAiCtx(set);
       const changed=set.questions.filter(needsPic);
       await picturePass(set.questions, ctx);
-      const r=await runQA(changed, ctx, isEn?'Questions and options in English; explanations in simple Hebrew.':'Everything in Hebrew.');
+      const r=await qaSet(changed, ctx, ask, {context:set.questions.filter(q=>!changed.includes(q))});
       const keep=new Set(r.questions); set.questions=set.questions.filter(q=>!changed.includes(q)||keep.has(q)).map(q=>{ const f=r.questions.find(x=>x===q); return f||q; });
       r.questions.filter(q=>!set.questions.includes(q)).forEach(q=>set.questions.push(q));
       set.qa.log=(set.qa.log||[]).concat(r.log); set.qa.fixed+=r.fixed; set.qa.dropped+=r.dropped; set.picAuto=true;
@@ -2880,7 +2934,7 @@ function renderKids(){
     const act=ss.filter(x=>!setDone(x)).sort((a,b)=>(!!b.reinf)-(!!a.reinf)), fin=ss.filter(x=>setDone(x));
     const rows=act.map(x=>row(x)).join('')+(act.length?'':`<p class="hint center" style="margin:4px 0">${ss.length?'🎉 כל התרגולים הסתיימו – ':''}מוסיפים תרגול מהקטלוג 📚</p>`)
       +(fin.length?`<details class="donesec"><summary>✓ תרגולים שהסתיימו · ${fin.length}</summary><div class="donelist">${fin.map(x=>row(x,setDone(x))).join('')}</div></details>`:'');
-    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`).join('');
+    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}${b.state==='err'&&b.cp?`<button class="btn small" onclick="resumeBuild('${b.id}')">▶ להמשיך</button>`:''}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`).join('');
     return `<div class="card herocard kidhero">
       <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small kmore" onclick="kidMenu(this,'${k.id}')" aria-label="עוד" aria-haspopup="menu">⋯</button></span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
@@ -3856,7 +3910,7 @@ function recordSession(by, right, n){
   const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
   if(rv.length){ right-=rv.filter(r=>r.ok).length; n-=rv.length; }
   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
-    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
+    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(s.src?{src:String(s.src)}:{}), ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
     qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
     qk:G.res.filter(r=>s.questions.indexOf(r.q)>=0).map(r=>tkey(r.q.question)+(!r.ok&&Number.isInteger(r.pick)?':'+tkey(r.q.options[r.pick]):'')),
     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
@@ -4145,7 +4199,7 @@ const QUEUE={};
 function qwrite(key, fn){ if(window.__sffDeleting) return Promise.resolve(); const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
 const sent={};
 function pushKids(){ if(!DB||!IS_OWNER||!canManage()) return;
-  const list=kids.map(({id,name,grade,color,resetAt})=>({id,name,grade,color,...(resetAt?{resetAt}:{})}));
+  const list=kids.map(({id,name,grade,color,resetAt,cq})=>({id,name,grade,color,...(resetAt?{resetAt}:{}),...(Array.isArray(cq)&&cq.length?{cq:cq.slice(-3000)}:{})}));
   const j=JSON.stringify(list); if(sent.kids===j) return; sent.kids=j;
   qwrite('kids',()=>DB.doc('fam/kids').set({list})); }
 let pushT=null;
@@ -4197,7 +4251,8 @@ async function cloudInit(){
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true;
     const remote=snap.exists?(snap.data().list||[]):[];
-    if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt; }); if(!snap.exists&&kids.length) pushKids(); }
+    if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else { if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt;
+      if(Array.isArray(r.cq)&&r.cq.length) l.cq=[...new Set([...(l.cq||[]),...r.cq.filter(x=>typeof x==='string')])].slice(-3000); } }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
     saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender();
   },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
@@ -4416,7 +4471,7 @@ cloudInit().then(()=>{ const m=window.SFF_INVITE_MSG; if(!m) return;
     if(m==='joined'){ toast(`✓ הצטרפת למשפחה של ${esc((window.__sffFamily||{}).famName||'')}`); go('family'); }
     else if(String(m).startsWith('bad')) toast('⚠️ ההזמנה כבר נוצלה או שפג תוקפה – בקשו הזמנה חדשה');
     if(window.SFF_ROLE&&window.SFF_ROLE!=='owner'&&$('footDel')) $('footDel').innerHTML='<span class="di">🚪</span>יציאה מהמשפחה';
-  }).then(openPendingAdd).then(()=>setTimeout(autoUpdateSets,2500));
+  }).then(openPendingAdd).then(()=>{ setTimeout(autoUpdateSets,2500); setTimeout(restoreBuild,3000); });
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 // after a soft reload: keep the spinner until the cloud data is in, then fade it away
 (function(){ const h=document.documentElement; if(!h.classList.contains('soft')) return; const t0=Date.now(); $('splash')?.remove();

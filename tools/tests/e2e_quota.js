@@ -19,7 +19,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(refund.kind === 'free' && refund.used === 3, 'a build that failed at the start is given back ' + JSON.stringify(refund));
   const q = await run(async () => { const db = await window.claude.use('db'); const u = await db.doc('usage/' + monthKeyIL()).get(); let w; try { await db.doc('usage/' + monthKeyIL()).set({ builds: 0 }); w = 'written'; } catch (e) { w = 'denied'; } return { builds: u.data().builds, w }; });
   ok(q.builds === 3 && q.w === 'denied', 'parent reads the counter (' + q.builds + ') but cannot change it');
-  const call = await run(async id => { try { await (await window.claude.use('sample')).json('hi', { buildId: id }); return 'ok'; } catch (e) { return e.code + ':' + e.message; } }, refund.buildId);
+  const call = await run(async id => { try { await (await window.claude.use('sample')).json('match', { ctx: { gi: 0, grade: "א'", subject: "מתמטיקה", topics: ["חיבור"] }, want: ["חיבור"], pool: [{ ref: "a", title: "חיבור", topics: ["חיבור"] }] }, { buildId: id }); return 'ok'; } catch (e) { return e.code + ':' + e.message; } }, refund.buildId);
   ok(!/quota|budget|build_closed/.test(call), 'an AI call inside a build passes the checks (then the fake key fails): ' + call.slice(0, 60));
   const calls = await run(async () => { const db = await window.claude.use('db'); const s = await db.collection('builds').get(); return s.docs.map(d => d.data().calls).reduce((a, c) => a + c, 0); });
   ok(calls === 1, 'the call was counted on the build');
@@ -29,7 +29,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(res.ok, 'test: spend set to $40.01');
   const capped = await run(async () => { try { await window.__sffAI.start('מדעים'); return 'started'; } catch (e) { return e.code; } });
   ok(capped === 'budget' || capped === 'quota', 'new build refused when the month\'s AI spend reached $40 (' + capped + ')');
-  const capped2 = await run(async () => { try { await (await window.claude.use('sample')).json('hi', {}); return 'ok'; } catch (e) { return e.code; } });
+  const capped2 = await run(async () => { try { await (await window.claude.use('sample')).json('match', { ctx: { gi: 0, grade: "א'", subject: "מתמטיקה", topics: ["חיבור"] }, want: ["חיבור"], pool: [{ ref: "a", title: "חיבור", topics: ["חיבור"] }] }); return 'ok'; } catch (e) { return e.code; } });
   ok(capped2 === 'budget', 'AI calls refused at the $40 cap');
   await p.evaluate(async () => { await fetch('about:blank').catch(()=>{}); sample = await window.claude.use('sample'); kids.push({ id: 'k1', name: 'נועה', grade: 6, color: '#FF5C8A' }); saveKids(); openWizard('k1'); W.step = 4; wizRender(); }); await p.waitForTimeout(800);
   console.log('quota line:', await p.evaluate(() => document.getElementById('quotaLine').innerText.replace(/\s+/g, ' ')));

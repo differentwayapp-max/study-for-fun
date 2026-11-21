@@ -386,13 +386,16 @@ async function dropStudent(classId, kidId, by) {
   const ref = db.doc(`families/${classId}`), now = Date.now();
   const devs = await db.collection(`${ref.path}/devices`).where('kid', '==', kidId).get();
   const reqs = await db.collection(`${ref.path}/joinReqs`).where('kidId', '==', kidId).get();
+  const sets = await db.collection(`${ref.path}/sets`).where('set.kidId', '==', kidId).get();   // the student's practice sets carry the name
   await db.runTransaction(async tx => {
     const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef);
     const list = ((ks.exists && ks.data().list) || []).filter(k => k && k.id !== kidId);
     tx.set(kidsRef, { list });
     tx.delete(db.doc(`${ref.path}/kidpub/${kidId}`));
     tx.delete(db.doc(`${ref.path}/progress/${kidId}`));
+    tx.delete(db.doc(`${ref.path}/notes/${kidId}`));               // the teacher's private notes
     devs.docs.forEach(d => tx.delete(d.ref));
+    sets.docs.forEach(d => tx.delete(d.ref));
     reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now }));
     tx.update(ref, new FieldPath('kidTokens', kidId), FieldValue.delete());
     tx.set(db.doc(`${ref.path}/consents/${kidId}`), { status: 'revoked', revokedBy: by, revokedAt: now });

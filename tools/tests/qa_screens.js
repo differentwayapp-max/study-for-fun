@@ -1,6 +1,7 @@
 // Full screen walk (emulators): every screen in Hebrew and English at phone width – 360 and 320 (iPhone "large icons" /
 // Display Zoom, small phones; QA_WIDTHS=360 for one width). At 320 the choice game must fit one screen (320×560).
-// Also the teacher area (sign-in with 3 cards, the first choice, the group form, the teacher's home, ☰, the group screen).
+// Also the teacher area (sign-in with 3 cards, the first choice, the group form, the teacher's home, ☰, the group screen,
+// the report tab with no students yet, ☰ → איך זה עובד). The report with students: e2e_class_report.js; the intro: e2e_intro_teacher.js.
 // Checks: page errors, sideways overflow, a way back, Hebrew UI text left untranslated in English. Screenshots → OUT.
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const findings = [];
@@ -86,6 +87,8 @@ const SCREENS = [
       await p.click('#tsGo'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(2000); await check('t-home');
       await p.click('#menuBtn'); await p.waitForTimeout(500); await check('t-menu'); await p.evaluate(() => closeMenu());
       await p.evaluate(() => go('family')); await p.waitForTimeout(800); await check('t-group');
+      await p.evaluate(() => go('stats')); await p.waitForTimeout(600); await check('t-report');
+      await p.evaluate(() => { openHowItWorks(); }); await p.waitForTimeout(500); await check('t-howto'); await p.evaluate(() => introEnd());
     } catch (e) { findings.push(`${tag} teacher: ${e.message.slice(0, 120)}`); }
     if (errs.length) findings.push(`${tag} teacher: page errors: ${[...new Set(errs)].slice(0, 5).join(' || ')}`);
     await p.context().close();

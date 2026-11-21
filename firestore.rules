@@ -157,6 +157,10 @@ service cloud.firestore {
       match /consents/{kidId} { allow read: if isAdmin(familyId); allow write: if false; }
       match /joinReqs/{id} { allow read: if isAdmin(familyId); allow write: if false; }
       match /joinLink/{id} { allow read: if isAdmin(familyId); allow write: if false; }
+      // a group's teacher's private notes on a student (nobody else: no student phone, no parent)
+      match /notes/{kidId} { allow read, delete: if isClass(familyId) && isOwner(familyId);
+        allow create, update: if isClass(familyId) && isOwner(familyId) && request.resource.data.keys().hasOnly(['text','at'])
+          && request.resource.data.text is string && request.resource.data.text.size() <= 2000 && request.resource.data.at is number; }
 
       // a tutor's own small view of the family (see the top)
       match /tutorView/{code} {

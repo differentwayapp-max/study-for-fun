@@ -219,6 +219,10 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     ok(await rd3(dA, `families/${C}/progress/kB`) === 403 && ok3(await rd3(dA, `families/${C}/progress/kA`)), "…its own progress, not a classmate's");
     ok(await rd3(dA, `families/${C}/sets/sB`) === 403 && ok3(await rd3(dA, `families/${C}/sets/sA`)), "…its own practice sets, not a classmate's");
     ok(await rd3(dA, `families/${C}/joinReqs`) === 403 && await rd3(dA, `families/${C}/consents/kA`) === 403 && await rd3(dA, `families/${C}/joinLink/main`) === 403, '…no requests, consents or the group link');
+    await admin(`families/${C}/notes/kA`, { text: 'private', at: 1 });
+    ok(await rd3(dA, `families/${C}/notes/kA`) === 403 && await write(dA, `families/${C}/notes/kA`, { text: 'x', at: 2 }) === 403, "…nor the teacher's private notes (not even on itself)");
+    ok(await rd3(par, `families/${C}/notes/kA`) === 403 && await rd3(tB, `families/${C}/notes/kA`) === 403 && await rd3(anon, `families/${C}/notes/kA`) === 403, "a parent, another teacher or an anonymous phone cannot read a group's notes");
+    ok(ok3(await rd3(tc, `families/${C}/notes/kA`)) && await write(tc, `families/${C}/notes/kB`, { text: 'n', at: 3 }) === 200 && await write(tc, `families/${C}/notes/kB`, { text: 'n', at: 3, extra: 1 }) === 403, "the group's teacher reads and writes notes (only text + time)");
     ok(await write(dA, `families/${C}/progress/kB`, { history: [], profile: {} }) === 403 && await write(dA, `families/${C}/progress/kA`, { history: [], profile: {} }) === 200, "…writes its own progress only");
     ok(await rd3(dX, `families/${C}/joinReqs/R1abcdefghij12345678`) === 403 && await rd3(dX, `families/${C}/joinReqs`) === 403, 'an anonymous phone (a parent) cannot read requests');
     ok(String(await call(dX, 'joinStatus', { classId: C, reqId: 'R1abcdefghij12345678', statusKey: 'wrong' })) === 'not_found', 'a wrong status key shows nothing');

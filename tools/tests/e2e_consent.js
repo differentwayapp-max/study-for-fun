@@ -140,9 +140,12 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(/ההסכמה בוטלה/.test(await P1.p.textContent('#jBody')), 'the status page says so');
   await K.reload({ waitUntil: 'load' }); await K.waitForTimeout(7000);
   ok(await K.evaluate(() => !sets.filter(s => !s.demo).length), "the kid's phone no longer reaches the group");
+  await T.evaluate(async id => { await DB.doc('notes/' + id).set({ text: 'note', at: Date.now() }); await DB.collection('sets').doc('sx_' + id).set({ set: { id: 'sx_' + id, kidId: id, name: 'x', questions: [] } }); }, yo.id); await T.waitForTimeout(800);
+  ok(!!(await doc(`families/${cid}/notes/${yo.id}`)) && !!(await doc(`families/${cid}/sets/sx_${yo.id}`)), "(a private note and a practice set for the student)");
   await T.evaluate(id => tStudent(id), yo.id); await T.waitForTimeout(300);
   await T.click('#tDlg .btn.danger'); await T.waitForTimeout(300); await T.click('#sureYes').catch(() => {}); await T.waitForTimeout(2500);
   ok((await doc(`families/${cid}/consents/${yo.id}`)).status === 'revoked' && !(await doc(`families/${cid}/fam/kids`)).list.some(k => k.id === yo.id), 'the teacher takes a student out: the same');
+  ok(!(await doc(`families/${cid}/notes/${yo.id}`)) && !(await doc(`families/${cid}/sets/sx_${yo.id}`)), "…and the teacher's note and the student's practice sets are deleted too");
 
   console.log('9. no AI building in a group (yet)');
   const ai = await T.evaluate(async () => { const a = await (async () => { try { await window.__sffAI.start('אנגלית'); return 'started'; } catch (e) { return e.code; } })();

@@ -16,6 +16,7 @@ The link is sent to you after the teacher approves the request.
 
 - Your child's first name and the first letter of their family name.
 - The answers in the games, the scores, the trophies and the practice times.
+- The teacher's short notes on the progress – only the teacher sees them.
 - The parent's name, the signature, a way to get in touch (if you gave one), and when the consent was given.
 
 **Not** kept: photos of your child, your child's phone number, address, ID number or location.

@@ -467,16 +467,65 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .rdot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#E5484D;vertical-align:middle;margin-inline-start:6px}.rdot.hidden{display:none}
 /* first-run welcome screens (parents) */
 .onb{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;align-items:center;padding:22px 20px calc(18px + env(safe-area-inset-bottom));text-align:center;color:var(--ink);font-family:var(--display);overflow:auto}
-.onb .ontop{align-self:stretch;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:var(--ink2)}
-.onb .ontop button{background:none;border:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:6px}
-.onb .shot{align-self:stretch;width:100%;max-width:430px;margin:10px auto 10px;flex:none}
-.onb .shot img{display:block;width:auto;max-width:100%;margin:0 auto;object-fit:contain;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);background:#fff}
-.onb h1{font-size:1.5em;margin:2px 0 6px}.onb p{font-size:1.05em;line-height:1.5;margin:0;color:var(--ink2);max-width:430px}
-.onb .tip{margin-top:10px;background:#fff;border:2px dashed var(--ink);border-radius:12px;padding:6px 10px;font-weight:600;max-width:430px}
-.onb .onbul{max-width:430px;margin:6px 0 0;padding-inline-start:20px;text-align:start;color:var(--ink2);line-height:1.4;font-size:.95em}.onb .onbul li{margin-bottom:2px}
-.onb .onbsep{align-self:stretch;max-width:430px;width:100%;margin:18px auto 12px;border:0;border-top:2px dashed var(--ink);opacity:.35}
-.onb .dots{display:flex;gap:8px;margin:12px 0}.onb .dots span{width:10px;height:10px;border-radius:6px;background:#fff;border:2px solid var(--ink)}.onb .dots span.on{width:26px;background:var(--ink)}
-.onb .btns{align-self:stretch;max-width:430px;margin:0 auto;width:100%;display:grid;gap:10px}
+/* first-run intro (and the store pictures): each screen is drawn at 360 × 720 and scaled to the phone */
+.intro{position:fixed;inset:0;z-index:72;display:flex;flex-direction:column;color:#1B2A4A;font-family:var(--display);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.intro .itop{display:flex;justify-content:space-between;align-items:center;padding:4px 12px 0;min-height:48px;flex:none}
+.intro .ipos{font-weight:600;opacity:.75;padding:0 6px}
+.intro .iskip{min-height:44px;min-width:64px;padding:0 14px;border:0;background:none;color:inherit;font:inherit;font-weight:600;font-size:1.02em;text-decoration:underline;cursor:pointer}
+.intro .istage{flex:1;position:relative;overflow:hidden;min-height:0}
+.intro .ispace{width:1px;pointer-events:none}
+.intro .icard0{position:absolute;top:0;transform-origin:0 0}
+.intro .ibot{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 20px 14px}
+.intro .idots{display:flex;gap:2px}
+.intro .idots button{width:28px;height:44px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+.intro .idots button::after{content:'';width:10px;height:10px;border-radius:6px;background:rgba(27,42,74,.25);transition:width .2s}
+.intro .idots button.on::after{width:26px;background:#1B2A4A}
+.intro .inext{width:100%;max-width:400px;min-height:52px;border:0;border-radius:99px;background:#1B2A4A;color:#fff;font:inherit;font-weight:600;font-size:1.15em;cursor:pointer}
+.intro.dark{color:#fff}.intro.dark .inext{background:#fff;color:#1B2A4A}
+.intro.dark .idots button::after{background:rgba(255,255,255,.35)}.intro.dark .idots button.on::after{background:#fff}
+.icard0{width:360px;min-height:600px;overflow:hidden;position:relative;box-sizing:border-box;font-family:"Rubik",var(--display);color:#1B2A4A;display:flex;flex-direction:column;align-items:center;padding:40px 24px 0;text-align:center;line-height:1.3}
+.icard0.dark{color:#fff}
+.icard0 h1{margin:14px 0 0;font-family:"Rubik",var(--display);font-size:34px;line-height:1.12;font-weight:800;text-align:center}
+html[lang=en] .icard0 h1{font-size:30px!important;letter-spacing:-.3px}
+html[lang=en] .ifeat h1{font-size:52px!important}
+.icard0 p{margin:12px 0 0;font-size:15px;line-height:1.45;text-align:center;max-width:290px}
+.icard0 b{font-weight:700}
+.ibrand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.5px;color:#F2A63B}
+.itag{border-radius:99px;padding:5px 12px;font-size:13px;font-weight:700;margin-top:4px}
+.igrid{margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;text-align:start}
+.igrid>div{border-radius:16px;padding:14px 12px;display:flex;flex-direction:column;gap:6px}.igrid b{font-size:16px}.igrid span{font-size:12px}
+.iphone{position:absolute;left:50%;transform:translateX(-50%);border:7px solid #0D1830;border-radius:34px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;text-align:start}
+.irow{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.inode{position:absolute;width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-weight:800}
+.iava{border-radius:50%;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.ichips{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:12px;font-weight:700}.ichips span{border-radius:99px;padding:5px 10px}
+.iround{width:30px;height:30px;border-radius:50%;background:#EAF0FF;display:flex;align-items:center;justify-content:center}
+.iopts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:16px;font-weight:700}
+.iopts div{border:2px solid #D5DEF2;border-radius:14px;padding:11px;text-align:center}.iopts .on{border-color:#14A774;background:#DDF8EC;color:#0B6B4A}
+.isteps{margin-top:26px;width:100%;display:flex;flex-direction:column;align-items:center}
+.istep{width:100%;background:#fff;border-radius:18px;padding:14px;box-sizing:border-box;display:flex;align-items:center;gap:12px;text-align:start}
+.istep b{font-size:15px}.istep small{display:block;font-size:12px;color:#4A4870}
+.iico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.icard{width:100%;background:#fff;color:#1B2A4A;border-radius:22px;padding:16px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;text-align:start}
+.iweek{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;text-align:center;font-size:11px;font-weight:700}
+.iweek>div{display:flex;flex-direction:column;gap:4px;align-items:center}
+.iday{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.istats{margin-top:14px;width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:start}
+.istats>div{background:#0E2E22;color:#fff;border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:4px}.istats b{font-size:26px}.istats span{font-size:12px;color:#BFF0DC}
+.ibars{display:flex;flex-direction:column;gap:9px;font-size:12px;font-weight:500}
+.ibar{height:8px;background:#EAF0FF;border-radius:9px;margin-top:4px}.ibar div{height:8px;border-radius:9px}
+.ipodium{margin-top:26px;display:flex;align-items:flex-end;justify-content:center;gap:10px;width:100%}
+.ipod{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.ipod>div{width:100%;border-radius:16px 16px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}.ipod>div span{font-size:12px;font-weight:700}
+.iperson{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #EEEAFB}
+.iperson>span:last-child{border-radius:99px;padding:4px 9px;font-size:11px;font-weight:700;white-space:nowrap}
+.icta{margin-top:14px;width:100%;color:#fff;border-radius:16px;padding:14px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px}
+.isafe{background:#24365C;border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;text-align:start}.isafe b{font-size:15px}.isafe small{display:block;font-size:12px;color:#B9C6E4}
+.ifeat{width:1024px;height:500px;overflow:hidden;position:relative;box-sizing:border-box;background:#1B2A4A;font-family:"Rubik",var(--display);color:#fff;display:flex;align-items:center;padding:0 64px;gap:40px}
+.ifeat h1{font-family:"Rubik",var(--display);font-weight:800}
+body.ishot>*:not(#introShot){display:none!important}
+body.ishot{background:#fff;margin:0;padding:0;overflow:hidden}
+#introShot{position:fixed;inset:0;z-index:100000}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .mhowto{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink2);margin:2px 0 8px}
 .nameleft{display:block;min-height:1em;font-size:.8em;color:var(--ink2);margin-top:2px}
@@ -1029,6 +1078,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       </div></div>
       <div class="dgrp"><h4>הגדרות</h4><div class="dcard">
         <button class="ditem " onclick="toggleLang()" ><span class="di">🌐</span><span class="dl">שפה</span><span class="dval langbtn" translate="no">EN</span></button>
+        <button class="ditem " onclick="closeMenu();openIntro(!!window.SFF_KID_DEVICE||document.body.classList.contains('kidside'))" ><span class="di">💡</span><span class="dl">איך זה עובד</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openSoundCheck()" ><span class="di">🔊</span><span class="dl">בדיקת צליל</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem hidden" id="ownerExit" onclick="closeMenu();ownerUnlock()" ><span class="di">👩</span><span class="dl">חזרה למצב הורה</span><span class="dchev" aria-hidden="true">‹</span></button>
       </div></div>
@@ -1433,7 +1483,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       try { let tk = JSON.parse(LS.getItem('sff_terms_ok') || 'null'); const had = us && us.exists() && us.data().terms;
         if ((!tk || tk.v !== TERMS_VERSION) && (!had || had.v !== TERMS_VERSION)) { tk = await askConsent(); LS.setItem('sff_terms_ok', JSON.stringify(tk)); }
         if (tk && tk.v && (!had || had.v !== tk.v)) await F.setDoc(F.doc(fdb, `users/${uid}`), { terms: { v: String(tk.v).slice(0, 20), at: +tk.at || Date.now() } }, { merge: true }); } catch (e) {}
-      W.SFF_ONB_DONE = !!(us && us.exists() && us.data().onb);
+      W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
       if (W.onbDecide) W.onbDecide(inviteMsg === 'joined', uid);   // an adult who just joined by invitation is not a new family
       const famIds = [uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid))];
       const famInfo = [];
@@ -1452,8 +1502,8 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       const dataFam = LS.getItem('sff_data_fam');
       if (dataFam && dataFam !== famId) { ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', famId); W.sffSoftReload('רגע…'); await new Promise(() => {}); }
       LS.setItem('sff_data_fam', famId);
-      W.SFF_ONB_DONE = !!(us && us.exists() && us.data().onb);
-      W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { onb: Date.now() }, { merge: true }).catch(() => {});
+      W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
+      W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { intro: Date.now() }, { merge: true }).catch(() => {});
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
       W.SFF_FAMS = famInfo.map(({ id, name, role }) => ({ id, name, role }));
       let token = cur.token;
@@ -4249,7 +4299,7 @@ async function cloudInit(){
   applyLock();
   if(!DB) return;
   DB.doc('fam/kids').onSnapshot(snap=>{
-    CLOUD_SEEN=true;
+    CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];
     if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else { if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt;
       if(Array.isArray(r.cq)&&r.cq.length) l.cq=[...new Set([...(l.cq||[]),...r.cq.filter(x=>typeof x==='string')])].slice(-3000); } }); if(!snap.exists&&kids.length) pushKids(); }
@@ -4373,66 +4423,233 @@ function openPracticeShare(set){
 }
 function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) openPracticeShare({subject:x.subject,grade:x.grade,src:x.id}); }
 
-/* ---------- first-run welcome screens (parents, right after the terms approval) ----------
-   "הבנתי" → a note that everything is in the user guide, never shown again (kept with the account);
-   "אחר כך" → shown again the next time the app opens. Kid phones never see it. Pictures: real app screens (public/onb). */
-const ONB=[
-  {bg:'#E4F1FF', m:['wow','#2F6BFF'], ill:'🎮 📚 ⭐', t:'ברוכים הבאים! 👋', p:'כאן הילדים מתרגלים דרך משחקים, ואתם רואים איך הם מתקדמים.'},
-  {bg:'#DDF6EC', img:['pick',150], t:'מוסיפים ילד ובוחרים תרגול', p:'ניתן לבחור מקטלוג התרגולים הקיים בהתאם לכיתה, המקצוע הרלוונטי והחומר הספציפי שתרצו לתרגל.',
-   bullets:['התרגולים שלנו בנויים על בסיס החומר המפורסם של משרד החינוך.','ניתן לבנות תרגול ממוקד: מצלמים דף עבודה ואנחנו בונים ממנו תרגול.'], tip:'☰ ← 📚 קטלוג תרגולים ← בוחרים כיתה ומסמנים נושאים ✔'},
-  {bg:'#FFF3CC', img:['family',76,'link',140], t:'שולחים לילד קישור', p:'לכל ילד יש קישור אישי לטלפון, בלי סיסמה. הילד מתקדם במסלול של תחנות ומשחקים.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← 🔗 לשלוח ל…'},
-  {bg:'#EDE6FF', img:['invite',220], t:'מזמינים מבוגרים נוספים', p:'אפשר לשתף גם גורמים נוספים למעקב – סבא וסבתא, מורה או מלווה – בקישור הזמנה משלהם.', tip:'☰ ← 👨‍👩‍👧 המשפחה והמבוגרים ← ＋ הזמנת מבוגר'},
-  {bg:'#FFE4EC', img:['stats',180], t:'עוקבים ומחזקים', p:'רואים מה הילד יודע ואיפה טעה. בלחיצה אחת בונים תרגול חיזוק ממוקד 🎯', tip:'📊 מעקב התקדמות ← 🔎 לראות את הטעויות · 🎯 סט חיזוק'},
-];
-let ONB_I=0;
-// right after the sign-in screen: a plain cover (no flash of the app), until the account says whether the welcome screens come
+/* ---------- first-run intro screens (the design in the "store screens + intro" canvas) ----------
+   Parents (right after the sign-in and the terms): screens 1, 3, 4, 5, 7, 8. A kid phone (first time from its link): 2 and 6 only –
+   no parent text, no "for parents" tags. Shown once: a parent's is kept with the account (users/{uid}.intro), a kid's in
+   localStorage (no storage – e.g. Lockdown Mode – no intro). "דלג" counts as seen. Back any time: ☰ → איך זה עובד.
+   The same screens make the store pictures: /?intro=<1-8|feature>&shot=1 (tools/store_shots.js). Drawn in HTML, no pictures
+   (light, works offline, translated by i18n.js). Every claim here is checked against the app – keep them true. */
+const IC={
+  star:(c,s=18,f=1)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" ${f?`fill="${c}"`:`fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"`} aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.7 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>`,
+  sv:(c,s,d,w=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`,
+  pad:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/>',
+  doc:'<path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/>',
+  bars:'<path d="M3 20h18"/><path d="M6 16V11M11 16V7M16 16v-3M20 16V5"/>',
+  ppl:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14c3 0 6 1.5 6 4.5"/>',
+  cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+  spark:'<path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+  ok:'<path d="M5 12l5 5 9-10"/>',
+  spk:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/>',
+  again:'<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/>',
+  flag:'<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>',
+  cup:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8M9 18h6"/>',
+  fire:'<path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z"/>',
+  circ:'<path d="M7 11l3 3 7-7"/><path d="M20 12a8 8 0 1 1-4-6.9"/>',
+  link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  noad:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+  nocart:'<path d="M3 4h2l2.5 11h11L21 7H6.5"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/><path d="M4 2l16 18"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  down:'<svg width="14" height="22" viewBox="0 0 14 22" aria-hidden="true"><path d="M7 2v16M2 13l5 6 5-6" stroke="#1B2A4A" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>',
+  apple:s=>`<svg width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18c-4-6-12-6-16-1-6 7-3 22 4 29 4 4 8 4 12 2 4 2 8 2 12-2 7-7 10-22 4-29-4-5-12-5-16 1z" fill="#E5484D"/><path d="M32 18c0-5 2-9 6-11" stroke="#6B3E1E" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M34 12c5-3 10-1 12 2-5 2-9 1-12-2z" fill="#24C78E"/></svg>`
+};
+const iT=s=>window.sffT?sffT(s):s;                                       // names: the avatar letter follows the language
+const iAva=(nm,bg,c,sz=40,fs=16,x='')=>`<span translate="no" class="iava" style="width:${sz}px;height:${sz}px;background:${bg};color:${c};font-size:${fs}px;${x}">${esc(iT(nm)[0])}</span>`;
+const iTag=(t,st,K)=>K?'':`<span class="itag" style="${st}">${t}</span>`;
+const iPhone=(st,inner)=>`<div class="iphone" style="${st}">${inner}</div>`;
+const INTRO={
+  main:K=>({bg:'#1B2A4A', dark:1, h:600, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
+    <h1>לומדים למבחן<br><span style="color:#F2A63B">כמו במשחק</span></h1>
+    <p style="color:#D5DEF2">תרגול לפי החומר של המבחן, עד יום המבחן – והילד פשוט נהנה</p>
+    <div class="igrid">
+      <div style="background:#2F6BFF">${IC.sv('#fff',26,IC.pad)}<b>משחק כיפי</b><span style="color:#E4ECFF">תחנה = משחק אחר</span></div>
+      <div style="background:#F2A63B;color:#1B2A4A">${IC.sv('#1B2A4A',26,IC.doc)}<b>החומר שלכם</b><span>מצלמים דף – יש תרגול</span></div>
+      <div style="background:#24C78E;color:#0E2E22">${IC.sv('#0E2E22',26,IC.bars)}<b>מעקב להורה</b><span>מה יודע, מה לחזק</span></div>
+      <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>אחים, סבתא, מורה</span></div>
+    </div>
+    ${iPhone('top:490px;width:250px;height:290px;background:#E4F1FF;padding:18px 16px',`
+      <div class="irow" style="color:#1B2A4A;font-size:12px;font-weight:700"><span>המפה של נועה</span><span style="background:#FFF2C9;color:#946200;border-radius:99px;padding:3px 9px">עוד 5 ימים</span></div>
+      <div style="position:relative;height:200px" dir="ltr">
+        <svg width="204" height="200" viewBox="0 0 204 200" style="position:absolute;inset:0" aria-hidden="true"><path d="M30 180 C 120 170, 170 140, 150 105 S 40 80, 60 45 S 160 20, 175 12" fill="none" stroke="#B9C9EE" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round"/></svg>
+        <div class="inode" style="left:13px;top:160px;background:#24C78E">${IC.star('#fff')}</div>
+        <div class="inode" style="left:130px;top:86px;background:#24C78E">${IC.star('#fff')}</div>
+        <div class="inode" style="left:32px;top:28px;width:44px;height:44px;background:#2F6BFF;border-width:4px;box-shadow:0 0 0 6px rgba(47,107,255,.25);color:#fff;font-size:16px">3</div>
+        <div class="inode" style="left:166px;top:-6px;width:32px;height:32px;background:#D5DEF2;color:#4A4870;font-size:13px">4</div>
+      </div>`)}`}),
+  play:K=>({bg:'#2F6BFF', dark:1, h:580, html:`${iTag('לילד','background:rgba(255,255,255,.18)',K)}
+    <h1>כל תחנה –<br>משחק אחר</h1>
+    <p style="color:#E4ECFF">שאלות עם תמונות, זיכרון, התאמה וסידור אותיות – עם הקראה באנגלית</p>
+    <div class="ichips"><span style="background:#fff;color:#2F6BFF">שאלות</span><span style="background:#F2A63B;color:#1B2A4A">זיכרון</span><span style="background:#24C78E;color:#0E2E22">התאמה</span><span style="background:#FF5C8A;color:#3A0716">איות</span></div>
+    ${iPhone('top:360px;width:270px;height:400px;background:#fff;padding:20px 16px;gap:12px;color:#1B2A4A',`
+      <div class="irow" style="font-size:12px;font-weight:700"><span>תחנה 3 · 6/10</span><span style="color:#2F6BFF" translate="no">English</span></div>
+      <div style="height:6px;background:#EAF0FF;border-radius:9px"><div style="width:60%;height:6px;background:#2F6BFF;border-radius:9px"></div></div>
+      <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:4px" translate="no"><b style="font-size:19px" dir="ltr">What is this?</b><span class="iround">${IC.sv('#2F6BFF',16,IC.spk,2.2)}</span></div>
+      <div style="height:96px;background:#FFF3CC;border-radius:18px;display:flex;align-items:center;justify-content:center">${IC.apple(70)}</div>
+      <div class="iopts" dir="ltr" translate="no"><div>pear</div><div class="on">apple</div><div>grape</div><div>lemon</div></div>
+      <div style="align-self:center;background:#14A774;color:#fff;border-radius:99px;padding:7px 14px;font-size:14px;font-weight:700">מעולה! 3 ברצף</div>`)}`}),
+  build:K=>({bg:'#F2A63B', html:`${iTag('להורה','background:rgba(27,42,74,.12)',K)}
+    <h1 style="font-size:32px">מצלמים את החומר<br>מקבלים תרגול</h1>
+    <p>דף מהמחברת, צילום של דף העבודה או PDF מהמורה – והתרגול נבנה בדיוק על מה שיהיה במבחן</p>
+    <div class="isteps">
+      <div class="istep"><span class="iico" style="background:#FFF3CC">${IC.sv('#946200',24,IC.cam)}</span><div><b>1. מצלמים</b><small>"מבחן בחלוקה – עמודים 42–47"</small></div></div>${IC.down}
+      <div class="istep"><span class="iico" style="background:#EAF0FF">${IC.sv('#2F6BFF',24,IC.spark)}</span><div><b>2. התרגול נבנה</b><small>5 פרקים · 45 שאלות · בדיקה כפולה</small></div></div>${IC.down}
+      <div class="istep" style="background:#1B2A4A;color:#fff"><span class="iico" style="background:#24C78E">${IC.sv('#0E2E22',24,IC.ok,2.4)}</span><div><b>3. הילד כבר משחק</b><small style="color:#D5DEF2">נשלח בקישור אישי לטלפון שלו</small></div></div>
+    </div>
+    <div style="margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:13px;font-weight:700">או בוחרים מוכן מהקטלוג</span>
+      <div class="ichips" style="margin:0"><span style="background:#fff">אנגלית</span><span style="background:#fff">מתמטיקה</span><span style="background:#fff">לשון</span><span style="background:#fff">מדעים</span></div></div>`}),
+  testday:K=>{ const d=(day,cls,inner,lbl,st='')=>`<div><span style="color:${cls}">${day}</span><span class="iday" style="${st}">${inner}</span><span>${lbl}</span></div>`;
+    return {bg:'#24C78E', html:`${iTag('להורה','background:rgba(14,46,34,.12)',K)}
+    <h1 style="font-size:32px">מגיעים מוכנים<br>ליום המבחן</h1>
+    <p>בוחרים תאריך – והפרקים מתחלקים לבד, קצת בכל יום. בלי לחץ של הרגע האחרון</p>
+    <div class="icard" style="margin-top:24px">
+      <div class="irow"><b style="font-size:15px">מבחן באנגלית</b><span style="background:#1B2A4A;color:#fff;border-radius:12px;padding:6px 10px;font-size:13px;font-weight:700">יום ה׳ · 26.11</span></div>
+      <div class="iweek">${d('א׳','#4A4870',IC.star('#fff',16),'פרק 1','background:#24C78E')}${d('ב׳','#4A4870',IC.star('#fff',16),'פרק 2','background:#24C78E')}${d('היום','#2F6BFF','3','פרק 3','background:#2F6BFF;color:#fff;box-shadow:0 0 0 3px #C9D9FF')}${d('ד׳','#4A4870','4','פרק 4','background:#EAF0FF;color:#4A4870')}${d('ה׳','#4A4870',IC.sv('#946200',16,IC.again,2.4),'חזרה','background:#FFF2C9')}${d('ו׳','#4A4870',IC.sv('#fff',16,IC.flag,2.2),'מבחן','background:#FF5C8A')}</div>
+    </div>
+    <div class="istats"><div>${IC.sv('#F2A63B',28,IC.cup)}<span>גביע על כל יום שעומדים ביעד</span></div><div><b>70%</b><span>ומעלה = כוכב. פחות? נשאר פתוח לתרגול</span></div></div>
+    <p style="margin-top:16px;font-size:13px;font-weight:500">שאלות מפרקים קודמים חוזרות בהמשך – כדי שהחומר לא יישכח</p>`}; },
+  progress:K=>{ const bar=(t,v,c,tc)=>`<div><div class="irow"><span>${t}</span><b style="color:${tc}">${v}%</b></div><div class="ibar"><div style="width:${v}%;background:${c}"></div></div></div>`;
+    return {bg:'#E4F1FF', h:620, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
+    <h1 style="font-size:32px">יודעים בדיוק<br><span style="color:#2F6BFF">מה כבר יושב</span></h1>
+    <p style="color:#4A4870">רואים את ההתקדמות של כל ילד בכל נושא – ובלחיצה בונים סט חיזוק בדיוק למה שצריך</p>
+    ${iPhone('top:320px;width:276px;height:440px;background:#fff;padding:20px 16px;gap:12px',`
+      <div style="display:flex;align-items:center;gap:10px">${iAva('נועה','#FFE4EC','#B3264F')}<div style="flex:1"><b style="font-size:15px">נועה · כיתה ד׳</b><div style="font-size:11px;color:#4A4870">תרגלה היום · 4 ימים ברצף</div></div>
+        <span style="display:flex;align-items:center;gap:3px;font-weight:800;color:#946200;font-size:14px">${IC.star('#F2A63B',16)}3/5</span></div>
+      <div class="ibars">${bar('אוצר מילים – בית',92,'#14A774','#0B6B4A')}${bar('Present Simple',80,'#14A774','#0B6B4A')}${bar('מילות שאלה',58,'#F2A63B','#946200')}</div>
+      <div style="background:#FFF2C9;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px"><b style="font-size:13px;color:#6B4700">מילים לחיזוק</b>
+        <div class="ichips" style="margin:0;justify-content:flex-start" dir="ltr" translate="no"><span style="background:#fff">where</span><span style="background:#fff">which</span><span style="background:#fff">kitchen</span></div></div>
+      <div style="background:#2F6BFF;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px">סט חיזוק לנושאים האלה</div>`)}`}; },
+  compete:K=>{ const col=(nm,c,place,pts,h,top,big)=>`<div class="ipod">${top?`<svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><path d="M2 20L4 4l7 7 4-9 4 9 7-7 2 16z" fill="#F2A63B" stroke="#3A0716" stroke-width="1.5" stroke-linejoin="round"/></svg>`:''}
+      ${iAva(nm,'#fff',c,big?60:50,big?24:20,big?'box-shadow:0 0 0 4px #F2A63B':'')}<b style="font-size:${big?15:14}px">${nm}</b>
+      <div style="height:${h}px;${big?'background:#1B2A4A;color:#fff':'background:#fff;color:#4A4870'}"><b style="font-size:${big?32:26}px;${big?'color:#F2A63B':''}">${place}</b><span>${pts} נקודות</span></div></div>`;
+    return {bg:'#FF5C8A', html:`${iTag('בין האחים','background:rgba(58,7,22,.12)',K)}
+    <h1 style="font-size:32px">תחרות ידידותית<br>שמדרבנת לתרגל</h1>
+    <p>לוח אלופים לאחים שמתרגלים את אותו תרגול – כל תרגול שמסיימים מוסיף נקודות${K?'':'. ההורה מפעיל ומכבה'}</p>
+    <div class="ipodium">${col('יואב','#2F6BFF',2,110,96)}${col('נועה','#B3264F',1,140,140,1,1)}${col('תמר','#0B6B4A',3,90,72)}</div>
+    <div class="icard" style="border-radius:0 0 18px 18px;padding:14px;gap:10px;font-size:13px">
+      <div style="display:flex;align-items:center;gap:10px">${IC.sv('#B3264F',20,IC.cup)}<span>גביע יומי = עוד 5 נקודות</span></div>
+      <div style="display:flex;align-items:center;gap:10px">${IC.sv('#B3264F',20,IC.circ)}<span>כולם צוברים – אף אחד לא "מפסיד"</span></div></div>`}; },
+  share:K=>{ const row=(nm,bg,c,sub,role,rst,last)=>`<div class="iperson" style="${last?'border:0':''}">${iAva(nm,bg,c)}<div style="flex:1"><b style="font-size:14px">${nm}</b><div style="font-size:12px;color:#4A4870">${sub}</div></div><span style="${rst}">${role}</span></div>`;
+    const rl='background:#EEEAFB;color:#3B2E86';
+    return {bg:'#B9A7FF', html:`${iTag('להורה','background:rgba(27,20,64,.12)',K)}
+    <h1 style="font-size:32px">כל מי שמלווה<br>באותו מקום</h1>
+    <p>מזמינים בקישור את בן/בת הזוג, סבא וסבתא או מורה פרטי – וכולם רואים מה לחזק</p>
+    <div class="icard" style="margin-top:24px;padding:8px 14px;gap:0">
+      ${row('שירה (אמא)','#EAF0FF','#2F6BFF','בונה תרגולים','מנהלת','background:#1B2A4A;color:#fff')}
+      ${row('אבא','#DDF6EC','#0B6B4A','רואה התקדמות ומוסיף תרגולים','מלווה',rl)}
+      ${row('סבתא רותי','#FFE4EC','#B3264F','רואה את ההתקדמות','מלווה',rl)}
+      ${row('דנה – מורה פרטית','#FFF3CC','#946200','רואה רק את הילדים שנבחרו','מורה','background:#FFF2C9;color:#6B4700',1)}
+    </div>
+    <div class="icta" style="background:#1B1440">${IC.sv('#fff',18,IC.link,2.2)}<span>הזמנה בקישור – בוואטסאפ</span></div>
+    <p style="margin-top:12px;font-size:13px;font-weight:500">המורה רואה רק את התלמידים שלו – לא את שאר המשפחה</p>`}; },
+  safe:(K,shot)=>{ const it=(ic,c,t,s)=>`<div class="isafe">${IC.sv(c,26,ic)}<div><b>${t}</b><small>${s}</small></div></div>`;
+    return {bg:'#1B2A4A', dark:1, html:`<div style="width:72px;height:72px;border-radius:24px;background:#24C78E;display:flex;align-items:center;justify-content:center;flex:none">${IC.sv('#0E2E22',38,IC.shield)}</div>
+    <h1 style="margin-top:18px;font-size:32px">שקט נפשי<br><span style="color:#24C78E">להורים</span></h1>
+    <p style="color:#D5DEF2">נבנה בשביל ילדים – בלי שום דבר שמסיח אותם מהלמידה</p>
+    <div style="margin-top:26px;width:100%;display:flex;flex-direction:column;gap:10px">
+      ${it(IC.noad,'#FF5C8A','אפס פרסומות','אף פעם, לאף ילד')}${it(IC.nocart,'#F2A63B','הילד לא יכול לקנות כלום','אין רכישות בטלפון של הילד')}
+      ${it(IC.link,'#B9A7FF','כניסה בקישור אישי','בלי אימייל ובלי סיסמה לילד')}${it(IC.globe,'#7FB0FF','עברית ואנגלית','ממשק בשתי השפות')}
+    </div>${shot?'<div style="margin-top:22px;background:#F2A63B;color:#1B2A4A;border-radius:99px;padding:13px 28px;font-weight:800;font-size:16px">מתחילים בחינם</div>':''}`}; }
+};
+const INTRO_SETS={parent:['main','build','testday','progress','share','safe'], kid:['play','compete']};
+const INTRO_ALL=['main','play','build','testday','progress','compete','share','safe'];   // the store order 1–8
+const IN={list:[],i:0,kid:false};
+function introCard(key,K,shot){ const s=INTRO[key](K,shot); return {s, html:`<div class="icard0 ${s.dark?'dark':''}" dir="${document.documentElement.dir||'rtl'}" style="background:${s.bg}">${s.html}</div>`}; }
+function openIntro(kid){ IN.kid=!!kid; IN.list=INTRO_SETS[kid?'kid':'parent']; IN.i=0; introShow(); }
+function introShow(dir){
+  const key=IN.list[IN.i], n=IN.list.length, last=IN.i===n-1, {s,html}=introCard(key,IN.kid);
+  let el=$('intro'); if(!el){ el=document.createElement('div'); el.id='intro'; el.className='intro'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); introSwipe(el); }
+  el.style.background=s.bg; el.classList.toggle('dark',!!s.dark); el.dataset.key=key;
+  el.innerHTML=`<div class="itop"><span class="ipos">${IN.i+1}/${n}</span>${last?'':`<button class="iskip" onclick="introEnd()">דלג</button>`}</div>
+    <div class="istage">${html}</div>
+    <div class="ibot"><div class="idots">${IN.list.map((_,k)=>`<button class="${k===IN.i?'on':''}" onclick="introGo(${k})" aria-label="${k+1}/${n}"></button>`).join('')}</div>
+      <button class="inext" onclick="${last?'introEnd()':'introGo(IN.i+1)'}">${last?(IN.kid?'יאללה למפה':'מתחילים'):'הבא'}</button></div>`;
+  introFit(el, s.h);
+  if(dir){ const rtl=document.documentElement.dir!=='ltr', x=((dir>0)!==rtl?1:-1)*60;   // the new screen comes from the side it was swiped from
+    try{ el.querySelector('.istage').animate([{transform:`translateX(${x}px)`,opacity:0},{transform:'none',opacity:1}],{duration:220,easing:'ease-out'}); }catch(e){} }
+}
+// the screen is drawn at 360 px wide; it is scaled to the phone: as wide as the screen, as tall as the space between the bars
+function introFit(el, minH){
+  const st=el.querySelector('.istage'), c=el.querySelector('.icard0'); if(!st||!c) return;
+  c.style.height='auto'; c.style.transform='none';
+  // the content's height: the text and cards (a phone picture may run off the bottom – it is cut, like in the design)
+  const top=c.getBoundingClientRect().top, flow=Math.max(0,...[...c.children].filter(x=>!x.classList.contains('iphone')).map(x=>x.getBoundingClientRect().bottom-top))+18;
+  const need=Math.max(minH||0, flow), W=st.clientWidth, H=st.clientHeight;
+  const k=Math.min(W/360, 1.3, Math.max(H/need, .88));      // never smaller than 88% – a short phone scrolls the rest
+  c.style.transform=`scale(${k})`; c.style.height=Math.max(need, H/k)+'px'; st.style.overflowY=need*k>H+1?'auto':'hidden';
+  const sp=st.querySelector('.ispace')||st.appendChild(Object.assign(document.createElement('div'),{className:'ispace'})); sp.style.height=(Math.max(need, H/k)*k)+'px';
+  c.style.left=Math.max(0,(W-360*k)/2)+'px';
+}
+const introRefit=()=>{ const el=$('intro'); if(el) introFit(el, INTRO[el.dataset.key]?.(IN.kid).h); };
+window.addEventListener('resize',introRefit); try{ document.fonts.ready.then(introRefit); document.fonts.addEventListener('loadingdone',introRefit); }catch(e){}
+function introGo(k){ if(k<0||k>=IN.list.length||k===IN.i) return; const d=k>IN.i?1:-1; IN.i=k; introShow(d); }
+// swipe: to the left goes on (Hebrew: to the right – the screens run from right to left)
+function introSwipe(el){ let x0=null,y0=0;
+  el.addEventListener('touchstart',e=>{ x0=e.touches[0].clientX; y0=e.touches[0].clientY; },{passive:true});
+  el.addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; x0=null;
+    if(Math.abs(dx)<50||Math.abs(dx)<Math.abs(dy)) return; const rtl=document.documentElement.dir!=='ltr';
+    introGo(IN.i+((dx<0)!==rtl?1:-1)); },{passive:true}); }
+function introEnd(){ $('intro')?.remove();
+  if(IN.kid){ try{ localStorage.setItem('sff_kid_intro','1'); }catch(e){} return; }
+  try{ localStorage.setItem('sff_intro_done','1'); }catch(e){} window.__sffOnbDone&&window.__sffOnbDone(); }
+
+// right after the sign-in screen: a plain cover (no flash of the app), until the account says whether the intro comes
 function onbCover(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
-  if($('onb')||$('onbWait')) return;
-  const d=document.createElement('div'); d.id='onbWait'; d.className='onb'; d.style.cssText='background:#E4F1FF;justify-content:center';
+  if($('intro')||$('onbWait')) return;
+  const d=document.createElement('div'); d.id='onbWait'; d.className='onb'; d.style.cssText='background:#1B2A4A;justify-content:center';
   d.innerHTML=`<div style="width:140px;height:140px">${mascot('happy','#2F6BFF')}</div>`; document.body.appendChild(d);
   setTimeout(()=>$('onbWait')?.remove(), 12000);                              // never stuck behind it
 }
 let ONB_SHOWN=false;
+const introSeen=()=>{ try{ return !!(localStorage.getItem('sff_intro_done')||localStorage.getItem('sff_onb_done')); }catch(e){ return false; } };
 function onbDecide(joined, uid){
   $('onbWait')?.remove();
   if(joined) return;
   try{ const af=localStorage.getItem('sff_active_fam'); if(af && uid && af!==uid) return; }catch(e){}   // working in another family (helper / tutor): the role decides later
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
-  if(window.SFF_ONB_DONE) return;
-  try{ if(localStorage.getItem('sff_onb_done')) return; if(sessionStorage.getItem('sff_onb_later')) return; }catch(e){}
-  ONB_SHOWN=true; ONB_I=0; onbShow();
+  if(window.SFF_ONB_DONE || introSeen() || $('intro')) return;
+  ONB_SHOWN=true; openIntro(false);
 }
 function maybeOnb(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;                 // tests: not in the way
-  if(ONB_SHOWN || $('onb')) return;
-  if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE) return;
-  try{ if(localStorage.getItem('sff_onb_done')) return; if(sessionStorage.getItem('sff_onb_later')) return; }catch(e){}
-  ONB_I=0; onbShow();
+  if(ONB_SHOWN || $('intro') || window.SFF_KID_DEVICE) return;
+  if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE || introSeen()) return;
+  ONB_SHOWN=true; openIntro(false);
 }
-function onbShow(){
-  const s=ONB[ONB_I], n=ONB.length, last=ONB_I===n-1, L=(window.SFF_LANG&&SFF_LANG())==='en'?'en':'he';
-  const img=(k,h)=>`<img src="/onb/${L}-${k}.webp" alt="" style="max-height:${h}px">`;
-  const pics=s.img?`<div class="shot">${img(s.img[0],s.img[1])}${s.img[2]?`<div style="font-size:1.6em;margin:2px 0">⬇️</div>${img(s.img[2],s.img[3])}`:''}</div>`
-    :`<div style="width:150px;height:150px;margin:36px 0 8px">${mascot(s.m[0],s.m[1])}</div><div style="font-size:2.2em;letter-spacing:6px;margin:4px 0 16px">${s.ill}</div>`;
-  let el=$('onb'); if(!el){ el=document.createElement('div'); el.id='onb'; el.className='onb'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); }
-  el.style.background=s.bg;
-  el.innerHTML=`<div class="ontop"><span>${ONB_I+1}/${n}</span><button onclick="onbLater()">אחר כך</button></div>${pics}
-    <h1>${s.t}</h1><p>${s.p}</p>${s.bullets?`<ul class="onbul">${s.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`:''}${s.tip?`<div class="tip">📍 ${s.tip}</div>`:''}${s.more?`<hr class="onbsep"><p>${s.more.p}</p><div class="shot">${img(s.more.img[0],s.more.img[1])}</div><div class="tip">📍 ${s.more.tip}</div>`:''}
-    <div style="flex:1"></div><div class="dots">${ONB.map((_,k)=>`<span class="${k===ONB_I?'on':''}"></span>`).join('')}</div>
-    <div class="btns">${last?`<button class="btn big" onclick="onbDone()">הבנתי ✓</button><button class="btn ghost" onclick="onbLater()">אחר כך – להציג שוב בכניסה הבאה</button>`
-      :`<button class="btn big" onclick="ONB_I++;onbShow()">הבא ‹</button>${ONB_I?`<button class="btn ghost small" onclick="ONB_I--;onbShow()">› הקודם</button>`:''}`}</div>`;
-  el.scrollTop=0;
+// a kid phone, the first time from its link: the two kid screens. No storage (Lockdown Mode) → no intro (it would come every time).
+let KID_INTRO=false;
+function maybeKidIntro(){
+  if(KID_INTRO || !window.SFF_KID_DEVICE || $('intro')) return; KID_INTRO=true;
+  if(window.SFF_REST_EMU && !window.SFF_TEST_ONB) return;                    // tests: not in the way
+  if(String(window.SFF_NO_STORAGE||'').includes('l')) return;
+  try{ if(localStorage.getItem('sff_kid_intro')) return; localStorage.setItem('sff_kid_intro_t','1'); if(localStorage.getItem('sff_kid_intro_t')!=='1') return; localStorage.removeItem('sff_kid_intro_t'); }catch(e){ return; }
+  openIntro(true);
 }
-function onbLater(){ try{ sessionStorage.setItem('sff_onb_later','1'); }catch(e){} $('onb')?.remove(); }
-function onbDone(){ try{ localStorage.setItem('sff_onb_done','1'); }catch(e){} window.__sffOnbDone&&window.__sffOnbDone(); $('onb')?.remove();
-  const d=document.createElement('div'); d.id='onbNote'; d.className='onb'; d.style.cssText='background:rgba(27,42,74,.55);justify-content:center';
-  d.innerHTML=`<div style="background:#fff;border:3px solid var(--ink);border-radius:22px;padding:24px 20px;box-shadow:0 6px 0 var(--ink);max-width:400px">
-    <div style="font-size:3em">📖</div><h2 style="margin:6px 0 10px">מעולה!</h2>
-    <p style="font-size:1.1em;line-height:1.5;color:var(--ink2);margin:0 0 18px">את כל ההסברים אפשר למצוא בכל זמן במדריך למשתמש: ☰ ← 📖 מדריך למשתמש</p>
-    <button class="btn big" style="width:100%" onclick="$('onbNote').remove()">יאללה, מתחילים 🚀</button></div>`;
-  document.body.appendChild(d); }
 (function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); setTimeout(maybeOnb,400); } else if(++n>240) clearInterval(t); },500); })();
+// the store pictures: /?intro=<1-8|feature>&shot=1 – one screen at its design size, nothing else on top
+(function introShot(){ let q; try{ q=new URLSearchParams(location.search); }catch(e){ return; } const v=q.get('intro'); if(!v||q.get('shot')!=='1') return;
+  window.SFF_INTRO_SHOT=1; document.body.classList.add('ishot');
+  const el=document.createElement('div'); el.id='introShot';
+  if(v==='feature') el.innerHTML=introFeature();
+  else { const key=INTRO_ALL[(+v||1)-1]||'main'; el.innerHTML=introCard(key,false,true).html; el.firstChild.style.height='720px'; }
+  document.body.appendChild(el); })();
+function introFeature(){
+  const bar=(w,c)=>`<div style="height:8px;background:#fff;border-radius:9px"><div style="width:${w}%;height:8px;background:${c};border-radius:9px"></div></div>`;
+  return `<div class="ifeat" dir="${document.documentElement.dir||'rtl'}"><div style="flex:1;display:flex;flex-direction:column;gap:16px">
+    <div class="ibrand" style="font-size:18px;letter-spacing:1px">${IC.star('#F2A63B',26)}<span translate="no">STUDY FOR FUN</span></div>
+    <h1 style="margin:0;font-size:60px;line-height:1.05;text-align:start">לומדים למבחן<br><span style="color:#F2A63B">כמו במשחק</span></h1>
+    <p style="margin:0;font-size:22px;color:#D5DEF2;max-width:460px;line-height:1.4;text-align:start">תרגול לפי החומר שלכם, עד יום המבחן – עם מעקב להורים</p>
+    <div class="ichips" style="justify-content:flex-start;font-size:15px;margin-top:6px"><span style="background:#2F6BFF;padding:7px 14px">משחק</span><span style="background:#F2A63B;color:#1B2A4A;padding:7px 14px">החומר שלכם</span><span style="background:#24C78E;color:#0E2E22;padding:7px 14px">מעקב</span><span style="background:#FF5C8A;color:#3A0716;padding:7px 14px">כל המשפחה</span></div></div>
+    <div style="position:relative;width:380px;height:500px;flex:none" dir="ltr">
+      <div class="iphone" style="left:10px;top:70px;width:170px;height:330px;background:#2F6BFF;border-width:6px;border-radius:28px;transform:rotate(-8deg);padding:16px 12px;gap:8px;align-items:center">
+        <div style="width:100%;height:80px;background:#FFF3CC;border-radius:14px;display:flex;align-items:center;justify-content:center">${IC.apple(50)}</div>
+        <div style="width:100%;background:#fff;border-radius:10px;height:30px"></div><div style="width:100%;background:#DDF8EC;border:2px solid #14A774;border-radius:10px;height:30px;box-sizing:border-box"></div><div style="width:100%;background:#fff;border-radius:10px;height:30px"></div></div>
+      <div class="iphone" dir="${document.documentElement.dir||'rtl'}" style="left:auto;right:20px;top:40px;width:190px;height:370px;background:#E4F1FF;border-width:6px;border-radius:30px;transform:rotate(5deg);padding:18px 14px;gap:10px;color:#1B2A4A">
+        <b style="font-size:13px">ההתקדמות של נועה</b>${bar(90,'#14A774')}${bar(76,'#14A774')}${bar(52,'#F2A63B')}
+        <div style="display:flex;gap:6px;margin-top:8px">${IC.star('#F2A63B',26)}${IC.star('#F2A63B',26)}${IC.star('#F2A63B',26)}${IC.star('#D5DEF2',26)}</div>
+        <div style="margin-top:auto;background:#FFF2C9;color:#946200;border-radius:12px;padding:10px;font-size:12px;font-weight:700;text-align:center">עוד 5 ימים למבחן</div></div>
+    </div></div>`;
+}
 
 /* kid link dialog */
 async function openKidLink(id){ const k=kidById(id); if(!k) return;

@@ -83,3 +83,13 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 3. מעלים את הקובץ study-for-fun-1.0.0.aab → Review → Start rollout.
 4. שולחים לבודקים את קישור ההצטרפות (Join on Android).
 5. **14 יום ברצף** עם 12 בודקים לפחות שנשארים רשומים → אחרי זה כפתור "Apply for production".
+
+## תמונות לחנות
+נוצרות מתוך מסכי ההיכרות של האפליקציה (מקור אחד לשניהם): מגישים את האפליקציה (`python3 -m http.server 8765 --directory public &`) ומריצים `node tools/store_shots.js`.
+- **Phone screenshots** (1080×2160, לפי הסדר): `store/play/phone_1_main.png` … `phone_8_safe.png`. באנגלית: `store/play/en/`.
+  1 פתיחה · 2 משחק · 3 תרגול לפי החומר · 4 יום המבחן · 5 מעקב · 6 תחרות בין האחים · 7 שיתוף מורה ומשפחה · 8 בטוח לילדים.
+- **Feature graphic** (1024×500): `store/play/feature_1024x500.png` (באנגלית: `store/play/en/feature_1024x500.png`).
+- **App icon** (512×512): `store/play/icon_512.png`.
+- כל טענה בתמונות נבדקה מול הקוד. משנים טקסט ב-`INTRO` ב-index.html (ובתרגום ב-i18n.js) ומריצים שוב את הסקריפט.
+
+⚠️ כשייפתח תשלום על תרגולים נוספים (קרדיטים ב-startBuild): לעדכן כאן את "בלי רכישות" בתיאור ובאנגלית ("no in-app purchases"), ובטופס IARC "רכישות דיגיטליות? כן". במסך 8 כתוב "אין רכישות בטלפון של הילד" – זה נשאר נכון, כי התשלום הוא רק אצל ההורה.

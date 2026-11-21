@@ -16,6 +16,10 @@ rules_version = '2';
 //                                date by the parent's app), read only by the tutor who joined with that code
 // users/{uid}                    { fams: [familyId…] } – the families an adult belongs to (written by that adult)
 //   families/{f}/usage/{YYYY-MM}  { builds, light } · billing/main { credits } · builds/{id}  – server only
+// families/{classId}             a teacher's group: kind 'class', ownerUid = the teacher, a random 20-character id (never a
+//                                uid – those are 28), made only by the server (createClass: at most 10 a teacher); kind and
+//                                ownerUid never change. Until parents' consent exists (stage 2): no kid devices, no other adults.
+// teachers/{uid}                 { classes: [...] } – the server's count of a teacher's groups (read by that teacher)
 // meta/ai_spend_{YYYY-MM}        estimated AI spend this month (server only) · meta/ai_day_{date} (daily cap)
 //
 // Link secrets: families/{f}.kidTokens (a kid's link), .inviteToken (old family-wide link – no longer joins a phone),
@@ -37,7 +41,10 @@ service cloud.firestore {
     function google() { return signedIn() && request.auth.token.firebase.sign_in_provider != 'anonymous'
       && (request.auth.token.firebase.sign_in_provider == 'google.com' || request.auth.token.email_verified == true); }
     function famPath(f) { return /databases/$(database)/documents/families/$(f); }
-    function isOwner(f) { return google() && request.auth.uid == f; }
+    function famDoc(f) { return get(famPath(f)).data; }
+    function isClass(f) { return famDoc(f).get('kind', '') == 'class'; }
+    // the founding parent (the family id is the parent's uid) – or the teacher of a group (ownerUid; groups only)
+    function isOwner(f) { return google() && (request.auth.uid == f || (isClass(f) && famDoc(f).ownerUid == request.auth.uid)); }
     function isMember(f) { return google() && exists(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)); }
     function memberRole(f) { return get(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)).data.role; }
     function isAdmin(f) { return isOwner(f) || (isMember(f) && memberRole(f) == 'admin'); }
@@ -105,20 +112,25 @@ service cloud.firestore {
       allow read, update, delete: if appAdmin();
     }
 
+    match /teachers/{uid} { allow read: if google() && request.auth.uid == uid; allow write: if false; }
+
     match /users/{uid} {
       allow read, write: if google() && request.auth.uid == uid;
     }
 
     match /families/{familyId} {
       allow read: if isFull(familyId);                 // the family document holds the kid link secrets
-      allow create, delete: if isOwner(familyId);
-      allow update: if isAdmin(familyId);
+      // a family: only by its own parent, never with kind/ownerUid (a group is made by the server only)
+      allow create: if isOwner(familyId) && !('kind' in request.resource.data) && !('ownerUid' in request.resource.data);
+      allow delete: if isOwner(familyId);
+      allow update: if isAdmin(familyId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['kind', 'ownerUid']);
 
       match /devices/{uid} {
         allow read: if isFull(familyId) || (signedIn() && request.auth.uid == uid);
         // join (or move the phone to another kid of the family) only with that kid's link token
         allow create, update: if signedIn()
           && request.auth.uid == uid
+          && !isClass(familyId)                     // a group: kid phones join only after parents' consent (stage 2)
           && request.resource.data.keys().hasOnly(['token', 'kid', 'at'])
           && request.resource.data.kid is string
           && request.resource.data.token is string
@@ -189,7 +201,8 @@ service cloud.firestore {
       }
 
       match /invites/{code} {
-        allow create, delete: if isAdmin(familyId);
+        allow create: if isAdmin(familyId) && !isClass(familyId);   // a group has no other adults (not in the first version)
+        allow delete: if isAdmin(familyId);
         allow get: if google();                     // the code itself is the secret: open one by its code…
         allow list: if isAdmin(familyId);           // …but only the parent and admins list them (a family id is in every kid link)
         // the invited adult marks it used (once), together with joining

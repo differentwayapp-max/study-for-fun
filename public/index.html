@@ -526,6 +526,16 @@ html[lang=en] .ifeat h1{font-size:52px!important}
 body.ishot>*:not(#introShot){display:none!important}
 body.ishot{background:#fff;margin:0;padding:0;overflow:hidden}
 #introShot{position:fixed;inset:0;z-index:100000}
+/* a teacher's group */
+#fbLogin.tsetup .tsw{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(92vw,420px)}
+#fbLogin.tsetup .tform{display:flex;flex-direction:column;gap:6px;width:min(92vw,420px);text-align:start}
+#fbLogin.tsetup .tform label{margin:8px 0 2px}#fbLogin.tsetup .tform .btn{margin-top:12px;justify-content:center}
+#fbLogin.tsetup .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.thome{padding:18px 16px}.thome .thead{display:flex;align-items:center;gap:12px;text-align:start}.thome .thead h2{margin:0}
+.thome .tico{width:54px;height:54px;border-radius:16px;background:#EDE9FF;border:var(--line);display:grid;place-items:center;font-size:1.7em;flex:none}
+.thome .tempty{margin-top:18px;border:2px dashed #CFCBE6;border-radius:18px;padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.thome .tempty .sub{margin:0;max-width:360px}
+#dFams .ditem.on{background:#EEF3FF}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .mhowto{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink2);margin:2px 0 8px}
 .nameleft{display:block;min-height:1em;font-size:.8em;color:var(--ink2);margin-top:2px}
@@ -1067,6 +1077,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   <div id="sideMenu" class="drawer hidden" onclick="if(event.target===this)closeMenu()" role="dialog" aria-modal="true" aria-label="תפריט">
     <aside class="dpanel">
       <div class="dtop"><button class="btn ghost small" onclick="closeMenu()" aria-label="סגירה">✕</button><img src="" alt="Study for fun" id="dLogo"></div>
+      <div class="dgrp pside hidden" id="dFams"></div>
       <div class="dwho pside"><span class="dava" id="dAva" aria-hidden="true"></span><b id="dName"></b><span class="hint" id="dSub"></span></div>
       <div class="dgrp pside"><h4>משפחה ותרגולים</h4><div class="dcard">
         <button class="ditem " onclick="closeMenu();go('family')" ><span class="di">👨‍👩‍👧</span><span class="dl">המשפחה והמבוגרים</span><span class="dchev" aria-hidden="true">‹</span></button>
@@ -1393,6 +1404,9 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     if (W.SFF_REST_EMU) { const FN = await import(base + 'firebase-functions.js'); FN.connectFunctionsEmulator(fns, '127.0.0.1', 5001); }   // tests only
     const callAsk = httpsCallable(fns, 'ask', { timeout: 540000 });
     const callStart = httpsCallable(fns, 'startBuild'), callEnd = httpsCallable(fns, 'endBuild'), callUsers = httpsCallable(fns, 'adminUsers');
+    const callClass = httpsCallable(fns, 'createClass');
+    // a teacher's new group (the server makes it: a random id, at most 10 a teacher)
+    W.__sffNewClass = async o => { try { return (await callClass(o)).data.classId; } catch (e) { const d = e.details || {}; throw { code: d.reason || 'error', ...d, message: e.message }; } };
     W.__sffAdminUsers = async () => (await callUsers({})).data;
     if (W.SFF_REST_EMU) W.__sffAskRaw = d => callAsk(d).then(r => r.data);   // tests only (local emulators): a raw call, to see the server refuse it
     // a new practice set = one build: this month's free builds, then paid credits (see functions/index.js)
@@ -1473,10 +1487,16 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
           }
         } catch (e) { inviteMsg = 'bad:' + (e && e.message || e); }
       }
-      // 2. the adult's own family always exists
+      // 2. the adult's own family – a parent always has one; someone who signed in as a teacher gets none (☰ adds one later)
+      let want = null; try { want = LS.getItem('sff_want'); LS.removeItem('sff_want'); } catch (e) {}
+      const us0 = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null), ud0 = (us0 && us0.exists() && us0.data()) || {};
+      const teacherNow = want === 'teacher' || (want !== 'parent' && Array.isArray(ud0.roles) && ud0.roles.includes('teacher'));
       const own = F.doc(fdb, `families/${uid}`), ownSnap = await F.getDoc(own);
-      if (!ownSnap.exists() || !ownSnap.data().inviteToken) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName }, { merge: true });
+      if (!ownSnap.exists() && teacherNow) { /* a teacher: no empty family */ }
+      else if (!ownSnap.exists() || !ownSnap.data().inviteToken) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName }, { merge: true });
       else if (!ownSnap.data().name) await F.setDoc(own, { name: myName }, { merge: true });
+      if (want === 'teacher' && !(Array.isArray(ud0.roles) && ud0.roles.includes('teacher'))) await F.setDoc(F.doc(fdb, `users/${uid}`), { roles: F.arrayUnion('teacher') }, { merge: true }).catch(() => {});
+      W.SFF_TEACHER = teacherNow || (Array.isArray(ud0.roles) && ud0.roles.includes('teacher'));
       // 3. every family this adult belongs to, and the active one
       const us = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null);
       // the parent's consent to the terms (given on the sign-in screen) is kept with the account: version + when
@@ -1485,12 +1505,18 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
         if ((!tk || tk.v !== TERMS_VERSION) && (!had || had.v !== TERMS_VERSION)) { tk = await askConsent(); LS.setItem('sff_terms_ok', JSON.stringify(tk)); }
         if (tk && tk.v && (!had || had.v !== tk.v)) await F.setDoc(F.doc(fdb, `users/${uid}`), { terms: { v: String(tk.v).slice(0, 20), at: +tk.at || Date.now() } }, { merge: true }); } catch (e) {}
       W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
-      if (W.onbDecide) W.onbDecide(inviteMsg === 'joined', uid);   // an adult who just joined by invitation is not a new family
-      const famIds = [uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid))];
+      if (W.onbDecide) W.onbDecide(inviteMsg === 'joined' || teacherNow, uid);   // an adult who joined by invitation (or a teacher) is not a new family
+      const classIds = (((us && us.exists() && us.data().classes) || []).filter(x => typeof x === 'string'));
+      const famIds = [...new Set([uid, ...(((us && us.exists() && us.data().fams) || []).filter(x => x !== uid)), ...classIds])];
       const famInfo = [];
       for (const fid of famIds) {
         try {
           let r = 'owner', m = null;
+          if (classIds.includes(fid)) {        // a teacher's group: its own document says who the teacher is
+            const cs = await F.getDoc(F.doc(fdb, `families/${fid}`)); const cd = cs.exists() ? cs.data() : null;
+            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '' }, token: cd.inviteToken });
+            continue;
+          }
           if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
           if (r === 'tutor') {        // a tutor sees only the kids of the invitation: the family's small view for the tutor (no link secrets)
             const tv = m.invite ? await F.getDoc(F.doc(fdb, `families/${fid}/tutorView/${m.invite}`)).catch(() => null) : null;
@@ -1498,8 +1524,17 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
             continue;
           }
           const fsn = await F.getDoc(F.doc(fdb, `families/${fid}`)); if (!fsn.exists()) continue;
-          famInfo.push({ id: fid, name: fsn.data().name || '', role: r, member: m, token: fsn.data().inviteToken });
+          const fd = fsn.data(); if (fd.kind === 'class') continue;
+          famInfo.push({ id: fid, name: fd.name || '', role: r, member: m, token: fd.inviteToken });
         } catch (e) {}
+      }
+      // a teacher with no group yet (just chose "I'm a teacher", or has nothing else): the first group now
+      if (W.SFF_TEACHER && !famInfo.some(x => x.kind === 'class') && (want === 'teacher' || !famInfo.length)) {
+        for (;;) {
+          const o = await teacherSetup(null);
+          try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject }, token: '' }); LS.setItem('sff_active_fam', cid); break; }
+          catch (e) { alert((W.sffT ? W.sffT('לא הצלחנו לפתוח את הקבוצה') : 'לא הצלחנו לפתוח את הקבוצה') + ' (' + (e.code || e.message) + ')'); }
+        }
       }
       let active = LS.getItem('sff_active_fam'); if (!famInfo.some(x => x.id === active)) active = uid;
       const cur = famInfo.find(x => x.id === active) || famInfo[0];
@@ -1511,7 +1546,8 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
       W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { intro: Date.now() }, { merge: true }).catch(() => {});
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
-      W.SFF_FAMS = famInfo.map(({ id, name, role }) => ({ id, name, role }));
+      W.SFF_FAMS = famInfo.map(({ id, name, role, kind }) => ({ id, name, role, kind: kind || 'family' }));
+      W.SFF_KIND = cur.kind || 'family'; W.SFF_CLASS = cur.kind === 'class' ? { name: cur.name, ...cur.cls } : null;
       W.SFF_TUTOR_WAIT = cur.role === 'tutor' && !cur.tv;      // invited before the tutor view existed: the parent opens the app once
       let token = cur.token;
       W.SFF_APP_URL = `${location.origin}/?f=${famId}&t=${token}`;
@@ -1547,15 +1583,20 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
           await Promise.all(ds.docs.map(d => F.deleteDoc(d.ref)));
           return { url: `${location.origin}/?f=${famId}&t=${t}&k=${encodeURIComponent(kid)}#kid-${kid}`, devices: ds.size }; },
         leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); W.sffSoftReload('רגע…'); },
+        // a teacher who is also a parent: the own family, made now (a teacher gets none at sign-in)
+        addOwnFamily: async () => { const own = F.doc(fdb, `families/${uid}`);
+          if (!(await F.getDoc(own)).exists()) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName });
+          W.__sffFamily.switchTo(uid); },
         switchTo: fid => { LS.setItem('sff_active_fam', fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
       if (role === 'parent') W.__sffDeleteAccount = async () => {
-      const fam = `families/${uid}`;
-      for (const sub of ['sets', 'progress', 'devices', 'fam', 'members', 'invites', 'errlog']) {
-        const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`));
-        await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
+      for (const fam of [`families/${uid}`, ...(W.SFF_FAMS || []).filter(x => x.kind === 'class').map(x => `families/${x.id}`)]) {
+        for (const sub of ['sets', 'progress', 'devices', 'fam', 'members', 'invites', 'errlog', 'tutorView']) {
+          const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`)).catch(() => null);
+          if (q) await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
+        }
+        await F.deleteDoc(F.doc(fdb, fam)).catch(() => {});
       }
-      await F.deleteDoc(F.doc(fdb, fam));
       for (const x of (W.SFF_FAMS || [])) if (x.role !== 'owner') { try { await F.deleteDoc(F.doc(fdb, `families/${x.id}/members/${uid}`)); } catch (e) {} }
       try { await F.deleteDoc(F.doc(fdb, `users/${uid}`)); } catch (e) {}
       try { await auth.currentUser.delete(); }
@@ -1686,6 +1727,36 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       };
     });
   }
+  // a teacher's group: first "class teacher / private tutor", then the group's name, grade and subject
+  function teacherSetup(pre) {
+    return new Promise(resolve => {
+      const el = document.createElement('div'); el.id = 'fbLogin'; el.className = 'tsetup';
+      const step1 = () => {
+        el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">איך תשתמשו באפליקציה?</h2>
+          <div class="tsw"><button class="fbcard" id="tsClass" type="button"><span class="e">🏫</span><b>מורה לכיתה</b><span class="hint">כיתה שלמה, עד 40 תלמידים</span></button>
+            <button class="fbcard" id="tsPriv" type="button"><span class="e">🧑‍🏫</span><b>מורה פרטי/ת</b><span class="hint">התלמידים הפרטיים שלי</span></button></div>
+          <div class="hint">אותם מסכים לשניהם. אפשר לפתוח כמה קבוצות.</div></div>`;
+        el.querySelector('#tsClass').onclick = () => step2('class'); el.querySelector('#tsPriv').onclick = () => step2('private');
+      };
+      const step2 = teach => {
+        const cls = teach === 'class';
+        el.innerHTML = `<div class="fbbox"><h2 class="fbq">${cls ? '🏫 קבוצה חדשה' : '🧑‍🏫 קבוצה חדשה'}</h2>
+          <div class="tform"><label for="tsName">שם הקבוצה</label><input id="tsName" type="text" maxlength="40" placeholder="${cls ? "ד'2 – חשבון" : 'התלמידים שלי'}" value="${cls ? '' : (W.sffT ? W.sffT('התלמידים שלי') : 'התלמידים שלי')}">
+            <div class="tgrid"><div><label for="tsGrade">כיתה</label><select id="tsGrade">${GRADES.map((g, i) => `<option value="${i}" ${i === 3 ? 'selected' : ''}>${g}</option>`).join('')}</select></div>
+            <div><label for="tsSubj">מקצוע</label><select id="tsSubj">${SUBJECTS.map(x => `<option>${x}</option>`).join('')}</select></div></div>
+            <button class="btn big" id="tsGo" type="button">✓ פתיחת הקבוצה</button>
+            ${pre ? '<button class="btn ghost" id="tsCancel" type="button">ביטול</button>' : '<button class="linkbtn" id="tsBack" type="button">› חזרה</button>'}
+            <div class="hint" id="tsErr"></div></div></div>`;
+        el.querySelector('#tsGo').onclick = () => { const name = el.querySelector('#tsName').value.trim();
+          if (!name) { el.querySelector('#tsErr').textContent = W.sffT ? W.sffT('צריך שם לקבוצה') : 'צריך שם לקבוצה'; el.querySelector('#tsName').focus(); return; }
+          el.remove(); resolve({ teach, name: name.slice(0, 40), grade: +el.querySelector('#tsGrade').value, subject: el.querySelector('#tsSubj').value }); };
+        el.querySelector('#tsBack')?.addEventListener('click', step1);
+        el.querySelector('#tsCancel')?.addEventListener('click', () => { el.remove(); resolve(null); });
+      };
+      document.body.appendChild(el); step1();
+    });
+  }
+  W.sffTeacherSetup = teacherSetup;
   function showLogin() {
     return new Promise(resolve => {
       const logo = document.getElementById('logoFull')?.src || '';
@@ -1695,6 +1766,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
         <div class="fbwho">
           <button class="fbcard kid" id="fbKid" type="button"><span class="e">🧒</span><b>אני ילד/ה</b><span class="hint">נכנסים עם הקישור מההורה</span></button>
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
+          <button class="fbcard teach" id="fbTeach" type="button"><span class="e">🧑‍🏫</span><b>אני מורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
         <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
         <button class="fbemailbtn hidden" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
@@ -1704,11 +1776,15 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
         <div class="hint" id="fbErr"></div>
         <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div></div>`;
       document.body.appendChild(el);
-      el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); el.querySelector('#fbGo').classList.remove('on'); };
+      el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); el.querySelector('#fbGo').classList.remove('on'); el.querySelector('#fbTeach').classList.remove('on'); };
+      // parent or teacher: the same sign-in; the choice is kept until the account opens (a teacher gets no empty family)
+      const pick = who => { ['#fbGo', '#fbTeach', '#fbKid'].forEach(x => el.querySelector(x).classList.remove('on')); el.querySelector('#fbKidMsg').classList.add('hidden');
+        el.querySelector(who === 'teacher' ? '#fbTeach' : '#fbGo').classList.add('on'); try { LS.setItem('sff_want', who); } catch (e) {} };
       // consent: the box starts unticked (tests with a fake Google account start ticked); the consent is kept with the account
       const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
       // "I'm a parent" first, then the tick: carry on to Google by itself (no second click)
-      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = ''; if (agree.checked && el.querySelector('#fbGo').classList.contains('on')) el.querySelector('#fbGo').click(); };
+      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = '';
+        if (agree.checked && (el.querySelector('#fbGo').classList.contains('on') || el.querySelector('#fbTeach').classList.contains('on'))) signIn(); };
       // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
       // the email sign-in shows only once "Email link (passwordless sign-in)" is on in the Firebase console (tests turn it on)
       if (EMAIL_LINK || W.SFF_REST_EMU) el.querySelector('#fbEmailBtn').classList.remove('hidden');
@@ -1726,8 +1802,9 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
           err.textContent = '';
         } catch (e) { err.textContent = '⚠️ ' + (e.code || e.message); }
       };
-      el.querySelector('#fbGo').onclick = async () => {
-        el.querySelector('#fbGo').classList.add('on'); el.querySelector('#fbKid').classList.remove('on'); el.querySelector('#fbKidMsg').classList.add('hidden');
+      el.querySelector('#fbGo').onclick = () => { pick('parent'); signIn(); };
+      el.querySelector('#fbTeach').onclick = () => { pick('teacher'); signIn(); };
+      const signIn = async () => {
         if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
           el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
         try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); } catch (e) {}
@@ -1747,7 +1824,10 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
   #fbLogin .fbbox{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
   #fbLogin img{width:min(70vw,300px)}
   #fbLogin .fbq{margin:0;font-family:var(--display)}
-  #fbLogin .fbwho{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(92vw,420px)}
+  #fbLogin .fbwho{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(100%,440px)}
+  #fbLogin .fbbox{max-width:100%}
+  #fbLogin .fbcard.teach{background:#EDE9FF}
+  @media(max-width:360px){ #fbLogin .fbwho{gap:7px} #fbLogin .fbcard{padding:12px 4px} #fbLogin .fbcard .e{font-size:34px} #fbLogin .fbcard b{font-size:1em} #fbLogin .fbcard .hint{font-size:.72em} }
   #fbLogin .fbcard{display:flex;flex-direction:column;align-items:center;gap:4px;border:var(--line);border-radius:20px;box-shadow:0 5px 0 var(--ink);background:#fff;padding:16px 8px;cursor:pointer;font:inherit;color:var(--ink)}
   #fbLogin .fbcard .e{font-size:44px;line-height:1.1}#fbLogin .fbcard b{font-family:var(--display);font-size:1.15em}
   #fbLogin .fbcard.kid{background:#FFF6D6}#fbLogin .fbcard.on{background:var(--sun)}
@@ -2056,6 +2136,7 @@ let NAV_STACK=[];
 function viewTitle(v){
   const kidOf=s=>s&&(kidOfSet(s)||{}).name||'', sub=s=>s?String(s.subject).replace(/^🎯\s*/,''):'';
   const rs=typeof ROAD_SET!=='undefined'&&getSet(ROAD_SET);
+  if(isClassMode()&&(v==='vKids'||v==='vFamily')) return v==='vKids'?((window.SFF_CLASS||{}).name||''):'הקבוצה';
   return ({vKids:'ילדים',vStats:'מעקב התקדמות',vFamily:'המשפחה והמבוגרים',vCat:'קטלוג תרגולים',vWizard:'תרגול חדש',vBuild:'בונים תרגול',vAdmin:'ניהול',vUsers:'משתמשים',
     vReview:curSet?`${sub(curSet)} · ${kidOf(curSet)}`:'תרגול',vKid:(kidById(activeKid)||{}).name?kidName(kidById(activeKid)):'',vRoad:rs?sub(rs):'',vMe:'מה אני יודע',vProfile:'הדמות שלי',
     vModes:curSet?sub(curSet):'',vTopics:'נושאים'})[v]||'';
@@ -2998,7 +3079,20 @@ async function qaAllSets(){
   }catch(e){ msg.textContent='⚠️ '+(e?.code==='rate_limited'?'⏳':'✕'); }
   QA_ALL_BUSY=false; renderKids();
 }
+const isClassMode=()=>window.SFF_KIND==='class';
+const classWord=()=>window.SFF_CLASS&&window.SFF_CLASS.teach==='private'?'התלמידים שלי':'הכיתה';
+function renderTeacherHome(){
+  const C=window.SFF_CLASS||{}, cls=C.teach!=='private', subj=C.subject?` · ${esc(C.subject)}`:'';
+  $('kidCar').innerHTML=`<div class="card thome">
+    <div class="thead"><span class="tico">${cls?'🏫':'🧑‍🏫'}</span><div><h2>${esc(C.name||'')}</h2><div class="hint">${cls?'מורה לכיתה':'מורה פרטי/ת'} · כיתה ${GRADES[+C.grade||0]}${subj}</div></div></div>
+    <div class="tempty"><div style="font-size:2.4em">👋</div><b>עוד אין תלמידים</b>
+      <p class="sub">שולחים להורים קישור אחד, הם מאשרים את ההשתתפות של הילד/ה, ואתם מאשרים כל בקשה. רק אחרי האישור נפתח לתלמיד/ה קישור אישי.</p>
+      <button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div></div>`;
+  $('kidCarDots').innerHTML='';
+}
+function inviteStudents(){ toast('🔜 בקרוב: קישור הסכמה להורים'); }
 function renderKids(){
+  if(isClassMode()){ renderTeacherHome(); return; }
   if(window.SFF_ROLE==='tutor' && window.SFF_TUTOR_WAIT && !kids.length){
     $('kidCar').innerHTML=`<div class="card center" style="padding:26px 18px"><div style="font-size:2.6em">⏳</div><h2 style="margin:8px 0 6px">עוד רגע תראו את הילדים</h2>
       <p class="sub" style="margin:0">ההורה צריך/ה לפתוח את האפליקציה פעם אחת – ואז הילדים שהוזמנתם אליהם יופיעו כאן.</p></div>`;
@@ -4258,7 +4352,12 @@ function closeReview(){ const k=curSet&&curSet.kidId, i=k?visibleKids().findInde
 function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||''; const nm=window.SFF_MYNAME||''; $('dName').textContent=nm;
   $('dAva').textContent=nm.trim().split(/\s+/).slice(0,2).map(w=>[...w][0]||'').join('')||'🙂';
   const F=window.__sffFamily, own=window.SFF_ROLE==='owner';
-  const famTxt=F&&F.famName?(own?'🏠 המשפחה שלי':'👨‍👩‍👧 מחובר/ת למשפחה של '+F.famName):'';   // a member sees whose family it is – not someone else's name as if it were theirs
+  const famTxt=F&&F.famName?(isClassMode()?'🏫 '+F.famName:own?'🏠 המשפחה שלי':'👨‍👩‍👧 מחובר/ת למשפחה של '+F.famName):'';
+  { const fams=window.SFF_FAMS||[], T=!!window.SFF_TEACHER, box=$('dFams'), ownFam=fams.some(f=>f.kind!=='class'&&f.role==='owner');
+    const show=F&&(fams.length>1||T); box.classList.toggle('hidden',!show);
+    if(show) box.innerHTML=`<h4>${T?'הקבוצות והמשפחות':'המשפחות'}</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
+      ${T?`<button class="ditem" onclick="newClass()"><span class="di">➕</span><span class="dl">קבוצה חדשה</span></button>`:''}
+      ${T&&!ownFam?`<button class="ditem" onclick="closeMenu();window.__sffFamily.addOwnFamily()"><span class="di">🏠</span><span class="dl">משפחה משלי (גם הורה)</span></button>`:''}</div>`; }   // a member sees whose family it is – not someone else's name as if it were theirs
   $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), esc(famTxt)].filter(Boolean).join('<br>');
   $('dVer').textContent=(EN()?'Version ':'גרסה ')+(document.querySelector('meta[name="sff-ver"]')?.content||'').replace(/^sff-v/,''); m.classList.remove('hidden'); }
 function closeMenu(){ $('sideMenu').classList.add('hidden'); }
@@ -4409,10 +4508,21 @@ const isTutor=()=>window.SFF_ROLE==='tutor';
 const visibleKids=()=>isTutor()&&window.SFF_MEMBER&&Array.isArray(window.SFF_MEMBER.kids)&&window.SFF_MEMBER.kids.length?kids.filter(k=>window.SFF_MEMBER.kids.includes(k.id)):kids;
 const ROLES={owner:['👑','מנהל/ת','הכול'],admin:['👑','מנהל/ת','הכול'],helper:['💛','מלווה','לראות התקדמות ולהוסיף תרגולים'],tutor:['📚','מורה','רק הילדים שנבחרו']};
 const roleBadge=r=>{ const x=ROLES[r]||ROLES.helper; return `<span class="rbadge r-${r==='owner'?'admin':r}">${x[0]} ${x[1]}</span>`; };
+// the families and groups this adult belongs to (the switcher, in ☰ and on the family screen)
+function famLabel(f){ return f.kind==='class'?`${'🏫'} ${esc(f.name||'')}`:f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||''); }
+async function newClass(){ closeMenu(); const o=await window.sffTeacherSetup?.(true); if(!o) return;
+  try{ const id=await window.__sffNewClass(o); window.__sffFamily.switchTo(id); }
+  catch(e){ toast(e.code==='class_limit'?'⚠️ אפשר עד 10 קבוצות':'⚠️ '+(e.code||e.message)); } }
 async function renderFamily(){
   const F=window.__sffFamily, el=$('famBody');
   const fams=window.SFF_FAMS||[];
-  const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||'')}</button>`).join('')}</div>` : '';
+  if(isClassMode()){ const C=window.SFF_CLASS||{};
+    el.innerHTML=`${fams.length>1?`<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>`:''}
+      <div class="card"><h3 class="fh">${C.teach==='private'?'🧑‍🏫':'🏫'} ${esc(C.name||'')}</h3><p class="hint" style="margin:0">${C.teach==='private'?'מורה פרטי/ת':'מורה לכיתה'} · כיתה ${GRADES[+C.grade||0]}${C.subject?' · '+esc(C.subject):''}</p></div>
+      <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">עוד אין תלמידים. הזמנת התלמידים (עם הסכמת ההורים) תגיע בקרוב.</p></div>
+      <button class="addline" onclick="newClass()">＋ קבוצה חדשה</button>`;
+    return; }
+  const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>` : '';
   const kidRows=visibleKids().map(k=>{ const played=history.some(h=>h.kidId===k.id);
     return `<div class="frow">${avatarHtml(k,44)}<div class="who"><b>${esc(k.name)}</b><span class="hint">כיתה ${GRADES[k.grade]} · ${played?'📱 משחק/ת':'⚪ עוד לא התחיל/ה'}</span></div>
       ${isTutor()?'':`<button class="btn small" onclick="openKidLink('${k.id}')">🔗 לשלוח ל${esc(k.name)}</button>`}</div>`; }).join('') || `<p class="hint">עוד אין ילדים${canManage()?' – מוסיפים בלשונית 👧 ילדים':''}</p>`;
@@ -4673,7 +4783,7 @@ function onbDecide(joined, uid){
 function maybeOnb(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;                 // tests: not in the way
   if(ONB_SHOWN || $('intro') || window.SFF_KID_DEVICE) return;
-  if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE || introSeen()) return;
+  if(!['owner','admin'].includes(window.SFF_ROLE) || window.SFF_ONB_DONE || introSeen() || isClassMode() || window.SFF_TEACHER) return;
   ONB_SHOWN=true; openIntro(false);
 }
 // a kid phone, the first time from its link: the two kid screens. No storage (Lockdown Mode) → no intro (it would come every time).
@@ -4685,7 +4795,14 @@ function maybeKidIntro(){
   try{ if(localStorage.getItem('sff_kid_intro')) return; localStorage.setItem('sff_kid_intro_t','1'); if(localStorage.getItem('sff_kid_intro_t')!=='1') return; localStorage.removeItem('sff_kid_intro_t'); }catch(e){ return; }
   openIntro(true);
 }
-(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); setTimeout(maybeOnb,400); } else if(++n>240) clearInterval(t); },500); })();
+(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(maybeOnb,400); } else if(++n>240) clearInterval(t); },500); })();
+// a teacher's group: the same app, the words of a group (students, the group)
+function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
+  const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };
+  lab('bnKids','🧒','תלמידים'); lab('bnFam','🏫','קבוצה');
+  const m=document.querySelector(`#sideMenu .ditem[onclick="closeMenu();go('family')"] .dl`); if(m) m.textContent=window.sffT?sffT('הקבוצה'):'הקבוצה';
+  const v=NAV_STACK[NAV_STACK.length-1]; if(v){ const t=viewTitle(v); $('topTitle').textContent=window.sffT?sffT(t):t; }
+  try{ rerender(); }catch(e){} }
 // the store pictures: /?intro=<1-8|feature>&shot=1 – one screen at its design size, nothing else on top
 (function introShot(){ let q; try{ q=new URLSearchParams(location.search); }catch(e){ return; } const v=q.get('intro'); if(!v||q.get('shot')!=='1') return;
   window.SFF_INTRO_SHOT=1; document.body.classList.add('ishot');

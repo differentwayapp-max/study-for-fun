@@ -9,6 +9,7 @@
 //  8. app admins need a verified address; the service worker never stores /share/ files
 //  9. a tutor reads and writes only the kids of the invitation, never a link secret; helpers and admins as before
 // 10. a new kid link: the old link and the phones that joined with it stop working
+// 11. teachers' groups: made by the server only (random id, ≤ 10), kind/ownerUid fixed, one teacher never sees another's
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_security.js"
 const { chromium } = require('playwright');
 const FS = 'http://127.0.0.1:8080', AU = 'http://127.0.0.1:9099', PROJ = 'study-for-fun-7b03c';
@@ -158,6 +159,39 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   ok(await write(kn2, `families/${fam}/devices/${kn2.uid}`, { token: t1n, kid: 'k1', at: Date.now() }, '?currentDocument.exists=false') === 200
     && await rd(kn2, `families/${fam}/progress/k1`) === 200, 'the new link works');
 
+
+  console.log('11. teachers\' groups');
+  {
+    const FN = 'http://127.0.0.1:5001/study-for-fun-7b03c/europe-west1';
+    const call = (u, name, data) => fetch(`${FN}/${name}`, { method: 'POST', headers: u ? u.H : { 'Content-Type': 'application/json' }, body: JSON.stringify({ data }) })
+      .then(async r => { const j = await r.json().catch(() => ({})); return r.ok ? j.result : 'ERR:' + ((j.error && (j.error.details && j.error.details.reason || j.error.message)) || r.status); });
+    const rd2 = (u, path) => fetch(`${DOCS}/${path}`, { headers: u.H }).then(r => r.status);
+    const tA = await user('teacherA@t.local'), tB = await user('teacherB@t.local'), par = await user('parentX@t.local'), anon = await user(null);
+    const ca = await call(tA, 'createClass', { teach: 'class', name: "ד'2", grade: 3, subject: 'math' });
+    const cb = await call(tB, 'createClass', { teach: 'private', name: 'mine', grade: 5, subject: '' });
+    ok(ca && /^[A-Za-z0-9]{20}$/.test(ca.classId) && cb && cb.classId, 'the server makes a group (a random 20-character id)');
+    const A = ca.classId, B = cb.classId;
+    ok(String(await call(anon, 'createClass', { teach: 'class', name: 'x', grade: 1 })).startsWith('ERR'), 'a kid device (anonymous) cannot make a group');
+    ok(String(await call(tA, 'createClass', { teach: 'boss', name: 'x', grade: 1 })).startsWith('ERR'), 'bad input is refused');
+    // the rules
+    ok(await write(par, `families/${tA.uid}`, { kind: 'class', ownerUid: par.uid, name: 'x' }, '?currentDocument.exists=false') === 403, "a group on someone else's uid: refused");
+    ok(await write(par, `families/abcdefghij0123456789`, { kind: 'class', ownerUid: par.uid, name: 'x' }, '?currentDocument.exists=false') === 403, 'a group made by an app (not the server): refused');
+    ok(await write(par, `families/${par.uid}`, { kind: 'class', ownerUid: par.uid, name: 'x' }, '?currentDocument.exists=false') === 403, 'a family with kind/ownerUid at its start: refused');
+    ok(await write(par, `families/${par.uid}`, { name: 'Parent X', inviteToken: 'abc' }, '?currentDocument.exists=false') === 200, '…a normal family: fine');
+    ok(await write(par, `families/${par.uid}`, { ownerUid: tA.uid }, '?updateMask.fieldPaths=ownerUid') === 403, 'adding ownerUid to a family: refused');
+    ok(await write(par, `families/${par.uid}`, { kind: 'class' }, '?updateMask.fieldPaths=kind') === 403, 'adding kind to a family: refused');
+    ok(await write(tA, `families/${A}`, { ownerUid: tB.uid }, '?updateMask.fieldPaths=ownerUid') === 403, "changing a group's ownerUid: refused");
+    ok(await write(tA, `families/${A}`, { kind: 'family' }, '?updateMask.fieldPaths=kind') === 403, "changing a group's kind: refused");
+    ok(await write(tA, `families/${A}`, { name: 'ד\'2 – חשבון' }, '?updateMask.fieldPaths=name') === 200, 'the teacher renames the group');
+    ok(await rd2(tA, `families/${A}`) === 200 && await write(tA, `families/${A}/fam/kids`, { list: [] }) === 200, 'the teacher reads and writes the group');
+    ok(await rd2(tA, `families/${B}`) === 403 && await rd2(tA, `families/${B}/fam/kids`) === 403 && await write(tA, `families/${B}/fam/kids`, { list: [] }) === 403, "teacher A cannot read or write teacher B's group");
+    ok(await rd2(par, `families/${A}`) === 403 && await rd2(par, `families/${A}/fam/kids`) === 403, 'a parent cannot read a group');
+    ok(await write(tA, `families/${A}/invites/I1`, { role: 'admin', name: '', kids: [], by: tA.uid, exp: Date.now() + 864e5, used: false }) === 403, 'no other adults in a group (no invitations)');
+    ok(await write(anon, `families/${A}/devices/${anon.uid}`, { token: 'x', kid: 'k1', at: Date.now() }) === 403, 'no kid devices in a group yet (parents\' consent first)');
+    ok(await rd2(tA, `teachers/${tA.uid}`) === 200 && await rd2(tB, `teachers/${tA.uid}`) === 403 && await write(tA, `teachers/${tA.uid}`, { classes: [] }) === 403, "the server's group count: read by its teacher, written by no one");
+    let last; for (let i = 0; i < 10; i++) last = await call(tA, 'createClass', { teach: 'class', name: 'g' + i, grade: 1 });
+    ok(String(last) === 'ERR:class_limit', 'at most 10 groups a teacher: ' + JSON.stringify(last));
+  }
   console.log('2. AI budget: limited refunds, a cap per family');
   const ends = [];
   for (let i = 0; i < 3; i++) ends.push(await p.evaluate(async () => { const s = await window.__sffAI.start('מתמטיקה'); return (await window.__sffAI.end(s.buildId, false)).refunded; }));

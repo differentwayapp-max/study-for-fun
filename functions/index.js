@@ -102,12 +102,15 @@ function parentOnly(request) {
   }
   return auth;
 }
-// the caller must be the family's founder or an adult member of it
+// the caller must be the family's founder or an adult member of it – or the teacher of a group (kind 'class', ownerUid)
 async function checkFamily(uid, famId) {
   if (typeof famId !== 'string' || !/^[A-Za-z0-9_-]{6,128}$/.test(famId)) throw new HttpsError('invalid-argument', 'Missing family.');
   if (uid === famId) return;
   const m = await db.doc(`families/${famId}/members/${uid}`).get();
-  if (!m.exists) throw new HttpsError('permission-denied', 'Not a member of this family.');
+  if (m.exists) return;
+  const f = await db.doc(`families/${famId}`).get();
+  if (f.exists && f.data().kind === 'class' && f.data().ownerUid === uid) return;
+  throw new HttpsError('permission-denied', 'Not a member of this family.');
 }
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
@@ -200,6 +203,29 @@ exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInst
     tx.set(buildRef, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month });
     return { buildId: buildRef.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: FREE_BUILDS, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS };
   });
+});
+
+// A teacher's new group: families/{random 20-character id} with kind 'class' and ownerUid – made here only, so the id is never
+// someone's uid and a teacher has at most MAX_CLASSES groups (counted in teachers/{uid}, which no client can write).
+const MAX_CLASSES = 10;
+exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function createClass(request) {
+  const auth = parentOnly(request);
+  const d = request.data || {};
+  const teach = d.teach === 'private' ? 'private' : d.teach === 'class' ? 'class' : null;
+  const name = typeof d.name === 'string' ? d.name.replace(/[<>]/g, '').trim().slice(0, 40) : '';
+  const grade = Number.isInteger(d.grade) && d.grade >= 0 && d.grade <= 11 ? d.grade : null;
+  const subject = typeof d.subject === 'string' ? d.subject.replace(/[<>]/g, '').trim().slice(0, 40) : '';
+  if (!teach || !name || grade === null) throw new HttpsError('invalid-argument', 'bad_input');
+  const tref = db.doc(`teachers/${auth.uid}`), cref = db.collection('families').doc();      // a random 20-character id
+  const tok = () => require('crypto').randomBytes(18).toString('hex');
+  await db.runTransaction(async tx => {
+    const t = await tx.get(tref), have = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+    if (have.length >= MAX_CLASSES) throw new HttpsError('resource-exhausted', 'class_limit', { reason: 'class_limit', max: MAX_CLASSES });
+    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
+    tx.set(tref, { classes: FieldValue.arrayUnion(cref.id), at: Date.now() }, { merge: true });
+    tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach }, { merge: true });
+  });
+  return { classId: cref.id };
 });
 
 // End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back

@@ -526,6 +526,7 @@ html[lang=en] .ifeat h1{font-size:52px!important}
 body.ishot>*:not(#introShot){display:none!important}
 body.ishot{background:#fff;margin:0;padding:0;overflow:hidden}
 #introShot{position:fixed;inset:0;z-index:100000}
+#vBuild li .tm{display:block;font-size:.85em;color:var(--ink2);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .mhowto{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink2);margin:2px 0 8px}
 .nameleft{display:block;min-height:1em;font-size:.8em;color:var(--ink2);margin-top:2px}
@@ -1162,7 +1163,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="lmascot" id="lMascot"></div>
       <div class="dots3"><i></i><i></i><i></i></div>
       <h2 id="bTitle">⏳ בונים את התרגול…</h2>
-      <p class="sub" id="bSub" style="margin:0 auto 12px;max-width:420px">זה לוקח בערך 5–15 דקות. אפשר לעבור למסכים אחרים באפליקציה – כשהתרגול יהיה מוכן הוא יופיע בכרטיס של הילד, ונודיע לך. רק לא לסגור את האפליקציה עצמה עד שזה נגמר.</p>
+      <p class="sub" id="bSub" style="margin:0 auto 12px;max-width:420px">זה לוקח בערך 5–15 דקות. אפשר לעבור למסכים אחרים באפליקציה – כשהתרגול יהיה מוכן הוא יופיע בכרטיס של הילד, ונודיע לך. רק לא לסגור את האפליקציה ולא לנעול את המסך עד שזה נגמר.</p>
       <div class="actions" id="bActs" style="justify-content:center;flex-wrap:wrap"><button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button></div>
       <ul class="steps" id="steps"></ul>
       <div id="buildErr" class="notice err hidden" style="margin-top:12px"></div>
@@ -2042,9 +2043,19 @@ function wizSummary(){
 async function aiTester(){ try{ const e=String(window.SFF_EMAIL||'').trim().toLowerCase(); if(!e||!crypto?.subtle) return false;
   const h=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(e)))].map(b=>b.toString(16).padStart(2,'0')).join('');
   return (window.SFF_AI_TESTERS||[]).includes(h); }catch(e){ return false; } }
+const AI_WAIT_MS=8*60e3, AI_HIDDEN_MS=30e3;
+// iPhone cuts the app's connections when the screen locks: the answer never arrives and the clock stops – so the wait is
+// measured on the wall clock, and a call that was in the background for more than 30 s counts as lost
+function aiWatch(p){ return new Promise((res,rej)=>{ const t0=Date.now(); let hidAt=document.hidden?t0:0, done=false;
+  const fin=f=>v=>{ if(done) return; done=true; clearInterval(iv); document.removeEventListener('visibilitychange',vis); f(v); };
+  const check=()=>{ if(Date.now()-t0>AI_WAIT_MS) fin(rej)({code:'ai_slow', message:'no answer in time'}); };
+  const vis=()=>{ if(document.hidden){ hidAt=Date.now(); return; }
+    if(hidAt&&Date.now()-hidAt>AI_HIDDEN_MS){ fin(rej)({code:'lost', message:'the connection was cut (background)'}); return; } hidAt=0; check(); };
+  const iv=setInterval(check,5000); document.addEventListener('visibilitychange',vis);
+  p.then(fin(res),fin(rej)); }); }
 async function ask(step, data, opts={}){
   if(!sample) throw {code:'not_granted', message:'AI not available'};
-  const b=CUR_BUILD; const r=await sample.json(step, data, opts);
+  const b=CUR_BUILD; const r=await aiWatch(sample.json(step, data, opts));
   if(b && b.cancel) throw {code:'cancel'};
   return r;
 }
@@ -2135,12 +2146,25 @@ const STEPS=[
   ['qa','✅ בדיקת התשובות','']
 ];
 function setStep(id,state,detail){
-  const li=$('st_'+id); li.className=state;
+  const li=$('st_'+id); if(state==='run'&&li.className!=='run') li.dataset.t0=Date.now(); li.className=state;
+  if(state!=='run'){ li.querySelector('.tm')?.remove(); } else stepClock();
   li.querySelector('.ic').textContent = state==='done'?'✓':state==='fail'?'!':li.dataset.n;
   if(detail) li.querySelector('.d').textContent=detail;
 }
 
+let stepT=null;
+function stepClock(){ if(stepT) return; stepT=setInterval(()=>{ const run=[...document.querySelectorAll('#vBuild li.run')];
+  if(!run.length){ clearInterval(stepT); stepT=null; return; }
+  run.forEach(li=>{ const s=Math.max(0,Math.round((Date.now()-(+li.dataset.t0||Date.now()))/1000)); let t=li.querySelector('.tm');
+    if(!t){ t=document.createElement('span'); t.className='tm'; t.setAttribute('translate','no'); li.querySelector('.d').after(t); }
+    t.textContent=`⏱ ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }); },1000); }
 let BUILDS=[], CUR_BUILD=null;
+// while a build runs, the screen does not turn itself off (Wake Lock – iOS 16.4+, Android); a lock by the button still stops it
+let WAKE=null;
+async function wakeSync(){ const want=BUILDS.some(b=>b.state==='run')&&!document.hidden;
+  try{ if(want&&!WAKE&&navigator.wakeLock){ WAKE=await navigator.wakeLock.request('screen'); WAKE.addEventListener('release',()=>{ WAKE=null; }); }
+    else if(!want&&WAKE){ const w=WAKE; WAKE=null; await w.release(); } }catch(e){ WAKE=null; } }
+document.addEventListener('visibilitychange',wakeSync); setInterval(wakeSync,3000);
 async function askCancelBuild(){ if(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true})) cancelBuild(); }
 function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; endCp(CUR_BUILD.cp); BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
 function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
@@ -2189,7 +2213,7 @@ async function build(resume){
   $('bTitle').textContent='⏳ בונים את התרגול…'; $('bSub').classList.remove('hidden'); $('bActs').innerHTML=`<button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button>`;
   $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
   const cp=resume||{v:1, at:Date.now(), fam:window.__sffFamily?.famId||'', in:I, token:null, done:{}, calls:0};
-  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B;
+  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B; wakeSync();
   show('vBuild');
 
   // one build from this month's quota (3 free per family, then paid credits)
@@ -2271,6 +2295,8 @@ async function build(resume){
     setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
     const msg = e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
       : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
+      : e?.code==='lost' ? 'החיבור נקטע – הטלפון ננעל או שהאפליקציה עברה לרקע. אפשר להמשיך מאותה נקודה.'
+      : e?.code==='ai_slow' ? 'ה-AI לא ענה בזמן. אפשר להמשיך מאותה נקודה.'
       : e?.code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
       : e?.code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
       : e?.code==='pdf_pages' ? `קובץ ה-PDF ארוך מדי – עד ${e.max||20} עמודים. אפשר לשלוח רק את העמודים של המבחן.`
@@ -2401,12 +2427,17 @@ function codeChecks(qs){
 // QA of new questions: the whole list solved blind once (40 per call), every chapter reviewed with its answers (the
 // questions already in the chapter – o.context – and the pool's come along "locked": seen for clashes, never changed),
 // the flagged ones fixed per chapter, every fix solved blind again and reviewed again with its chapter.
+// run fn over the items, at most n at a time; the results keep the items' order
+async function pmap(items, n, fn){ const out=new Array(items.length); let k=0;
+  await Promise.all(Array.from({length:Math.min(n,items.length)}, async()=>{ while(k<items.length){ const i=k++; out[i]=await fn(items[i],i); } })); return out; }
+const QA_PAR=3;
 async function qaSet(qs, ctx, askFn=ask, o={}){
   const log=[]; let fixed=0, dropped=0; const prog=o.onProgress||(()=>{}), context=o.context||[];
-  const solve=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
-      const r=await askFn('solve', {ctx, questions:part.map(([q,i])=>qSend(q,i))}); out.push(...(Array.isArray(r?.results)?r.results:[])); } return out; };
-  const review=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
-      const r=await askFn('review', {ctx, questions:part.map(([q,i,locked])=>qSend(q,i,locked?{locked:true}:{}))}); out.push(...(Array.isArray(r?.flags)?r.flags:[])); } return out; };
+  const parts=list=>{ const p=[]; for(let k=0;k<list.length;k+=40) p.push(list.slice(k,k+40)); return p; };
+  const solve=async list=>(await pmap(parts(list), QA_PAR, async part=>{
+      const r=await askFn('solve', {ctx, questions:part.map(([q,i])=>qSend(q,i))}); return Array.isArray(r?.results)?r.results:[]; })).flat();
+  const review=async list=>(await pmap(parts(list), QA_PAR, async part=>{
+      const r=await askFn('review', {ctx, questions:part.map(([q,i,locked])=>qSend(q,i,locked?{locked:true}:{}))}); return Array.isArray(r?.flags)?r.flags:[]; })).flat();
   const open=qs.map((q,i)=>[q,i]).filter(([q])=>!isPool(q));
   const chs=[...new Set(qs.map(q=>q.ch??0))];
   // the chapter as the games see it: its new questions (index i) and the locked ones (index 1000+)
@@ -2419,22 +2450,25 @@ async function qaSet(qs, ctx, askFn=ask, o={}){
     if(!r){ bad.push({i,why:'הבודק לא החזיר תשובה'}); return; }
     if(r.pick!==q.answer || r.multiple_correct || (r.problem&&r.problem.trim()))
       bad.push({i,why: r.pick!==q.answer?`הבודק בחר תשובה ${+r.pick+1} במקום ${q.answer+1}`:(r.multiple_correct?'יותר מתשובה נכונה אחת':r.problem)}); });
-  for(let n=0;n<chs.length;n++){ prog(`פרק ${n+1} מתוך ${chs.length}…`);
-    (await review(chapterList(chs[n], qs))).forEach(f=>{ const i=+f.i; if(!Number.isInteger(i)||i>=1000||!qs[i]||isPool(qs[i])||bad.some(b=>b.i===i)) return;
-      if(f.kind==='clash'&&needOpts(qs[i])) return; bad.push({i, why:String(f.note||f.kind).slice(0,200)}); }); }
+  let rdone=0; prog(`סוקרים את הפרקים… 0 מתוך ${chs.length}`);
+  const rflags=await pmap(chs, QA_PAR, async ch=>{ const f=await review(chapterList(ch, qs)); prog(`סוקרים את הפרקים… ${++rdone} מתוך ${chs.length}`); return f; });
+  rflags.forEach(fl=>fl.forEach(f=>{ const i=+f.i; if(!Number.isInteger(i)||i>=1000||!qs[i]||isPool(qs[i])||bad.some(b=>b.i===i)) return;
+      if(f.kind==='clash'&&needOpts(qs[i])) return; bad.push({i, why:String(f.note||f.kind).slice(0,200)}); }));
   const out=qs.slice();
   if(bad.length){
     const fixedIdx=[];
-    for(const ch of chs){ const mine=bad.filter(b=>(qs[b.i].ch??0)===ch); if(!mine.length) continue;
-      prog('מתקנים…');
+    prog('מתקנים…');
+    const fixChs=chs.filter(ch=>bad.some(b=>(qs[b.i].ch??0)===ch));
+    const fxs=await pmap(fixChs, QA_PAR, async ch=>{ const mine=bad.filter(b=>(qs[b.i].ch??0)===ch);
       const others=qs.map((q,i)=>[q,i]).filter(([q,i])=>(q.ch??0)===ch&&!mine.some(b=>b.i===i)).map(([q,i])=>qSend(q,i)).concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>qSend(q,1000+k))).slice(0,40);
-      const fx=await askFn('fix', {ctx, items:mine.slice(0,40).map(b=>qSend(qs[b.i],b.i,{why:b.why})), others});
+      return askFn('fix', {ctx, items:mine.slice(0,40).map(b=>qSend(qs[b.i],b.i,{why:b.why})), others}); });
+    fixChs.forEach((ch,n)=>{ const mine=bad.filter(b=>(qs[b.i].ch??0)===ch), fx=fxs[n];
       const items=Array.isArray(fx?.items)?fx.items:[];
       mine.forEach(b=>{ const it=items.find(x=>+x.i===b.i);
         const cq=it&&it.action==='fix'&&it.question ? clean([it.question], [qs[b.i].topic, ...new Set(qs.map(q=>q.topic))])[0] : null;
         if(cq){ out[b.i]={...cq, ch:qs[b.i].ch}; fixedIdx.push(b.i); }
         else { out[b.i]=null; dropped++; log.push({q:qs[b.i].question, why:b.why, result:'הוסרה'}); } });
-    }
+    });
     if(fixedIdx.length){
       // every fix: solved blind again, then reviewed again together with its chapter (a fix must not create a clash)
       prog('בודקים את התיקונים…');
@@ -2442,11 +2476,10 @@ async function qaSet(qs, ctx, askFn=ask, o={}){
       const why=i=>bad.find(b=>b.i===i).why, fail=new Set();
       fixedIdx.forEach(i=>{ const r=reBy[i]; if(!(r && r.pick===out[i].answer && !r.multiple_correct && !(r.problem&&r.problem.trim()))) fail.add(i); });
       const cur=out.map(q=>q&&{...q}); fixedIdx.forEach(i=>{ if(cur[i]&&!fail.has(i)) cur[i]._fix=1; });
-      for(const ch of new Set(fixedIdx.filter(i=>!fail.has(i)).map(i=>out[i].ch??0))){
-        const list=cur.map((q,i)=>[q,i]).filter(([q])=>q&&(q.ch??0)===ch).map(([q,i])=>[q,i,!q._fix])
-          .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true]));
-        (await review(list)).forEach(f=>{ const i=+f.i; if(fixedIdx.includes(i)&&!(f.kind==='clash'&&needOpts(out[i]))) fail.add(i); });
-      }
+      const reChs=[...new Set(fixedIdx.filter(i=>!fail.has(i)).map(i=>out[i].ch??0))];
+      (await pmap(reChs, QA_PAR, ch=>{ const list=cur.map((q,i)=>[q,i]).filter(([q])=>q&&(q.ch??0)===ch).map(([q,i])=>[q,i,!q._fix])
+          .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true])); return review(list); }))
+        .forEach(fl=>fl.forEach(f=>{ const i=+f.i; if(fixedIdx.includes(i)&&!(f.kind==='clash'&&needOpts(out[i]))) fail.add(i); }));
       fixedIdx.forEach(i=>{ if(fail.has(i)){ out[i]=null; dropped++; log.push({q:qs[i].question, why:why(i), result:'הוסרה (התיקון לא עבר בדיקה חוזרת)'}); }
         else { out[i]={...out[i],fixed:true}; fixed++; log.push({q:out[i].question, why:why(i), result:'תוקנה ואומתה'}); } });
     }

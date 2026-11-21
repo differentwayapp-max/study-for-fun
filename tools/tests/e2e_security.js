@@ -99,7 +99,7 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   await admin(`families/${fam}/usage/${month}`, { usd: 8.01, builds: 1, refunds: 2, month });
   const st = await p.evaluate(async () => { try { await window.__sffAI.start('אנגלית'); return 'started'; } catch (e) { return e.code; } });
   ok(st === 'family_budget', 'a family at its $8 share cannot start a build: ' + st);
-  const ask = await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('hi', {}); return 'ok'; } catch (e) { return e.code; } });
+  const ask = await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('match', { ctx: { gi: 0, grade: "א'", subject: "מתמטיקה", topics: ["חיבור"] }, want: ["חיבור"], pool: [{ ref: "a", title: "חיבור", topics: ["חיבור"] }] }); return 'ok'; } catch (e) { return e.code; } });
   ok(ask === 'family_budget', '…nor make AI calls: ' + ask);
   console.log('5. bug reports');
   const rid = () => Array.from({ length: 20 }, () => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random() * 62)]).join('');
@@ -150,12 +150,12 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   const srvLog = async () => ((await (await fetch(`${DOCS}/serverLog?pageSize=300`, { headers: { Authorization: 'Bearer owner' } })).json()).documents || []);
   const s0 = (await srvLog()).length;
   const anon = await user(null), mail = await user('stranger@t.local');
-  await callAsk(anon.H, { prompt: '', famId: fam }); await callAsk(mail.H, { prompt: '', famId: fam });
+  await callAsk(anon.H, { step: 'match', data: {}, famId: fam }); await callAsk(mail.H, { step: 'match', data: {}, famId: fam });
   ok(await famLog() === n0, "an anonymous or non-Google caller cannot write into a family's error log");
   const sl = await srvLog();
   ok(sl.length >= s0 + 2 && sl.every(d => !JSON.stringify(d.fields).includes(fam)), 'the admins\' server log gets the failures (function, code, time – no family id)');
   ok(await fetch(`${DOCS}/serverLog`, { headers: anon.H }).then(r => r.status) === 403, 'a non-admin cannot read the server log');
-  await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('', {}); } catch (e) {} });
+  await p.evaluate(async () => { try { await (await window.claude.use('sample')).json('nope', {}); } catch (e) {} });
   await p.waitForTimeout(800);
   ok(await famLog() >= n0, "the family's own parent still gets server errors in the log");
 

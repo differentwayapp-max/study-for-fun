@@ -8,7 +8,7 @@ const { chromium } = require('playwright');
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2000); await p.evaluate(() => document.getElementById('fbLogin')?.remove());
   const r = await p.evaluate(async () => {
     let calls = 0, asked = [];
-    sample = { limits: async () => ({ images: true }), json: async prompt => { calls++; const m = prompt.match(/ITEMS: (\[.*\])\s*$/s); const items = m ? JSON.parse(m[1]) : [];
+    sample = { limits: async () => ({ images: true }), json: async (step, d) => { calls++; const items = step === 'pics' ? d.items : [];
       asked.push(items.map(x => x.i)); return { items: items.map(x => ({ i: x.i, scene: [{ e: '🍎', x: 50, y: 50, s: 40 }], question: x.question, options: x.options, explanation: 'הסבר' })) }; } };
     kids.push({ id: 'k1', name: 'נועה', grade: 0, color: '#FF5C8A' });
     const mine = { id: 'm1', kidId: 'k1', name: 'נועה', grade: 0, subject: 'מדעים', topics: ['א'], chapters: null, qa: {}, created: Date.now(),

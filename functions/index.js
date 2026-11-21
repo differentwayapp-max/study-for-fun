@@ -1,5 +1,6 @@
-// Study for fun – the only server code: a callable function that sends the app's
-// prompts (and photos of worksheets) to Claude and returns parsed JSON.
+// Study for fun – the only server code. `ask` runs one STEP of building / checking a practice set with Claude: the app
+// sends the step's name (a closed list) and structured data; the prompts, the rules, the model, effort and limits of each
+// step live on the server (functions/prompts.js), so the app cannot use the AI for anything else.
 // The Anthropic API key stays here as a secret and never reaches the browser.
 //
 //   firebase functions:secrets:set ANTHROPIC_API_KEY
@@ -46,31 +47,42 @@ const db = getFirestore();
 
 const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY');
 
-// The app asks for a tier; we map it to a model.
-const MODELS = {
-  quick: 'claude-haiku-5-5',
-  default: 'claude-sonnet-5-5',
-  complex: 'claude-opus-5-5'
-};
+const { SYSTEM, STEPS, Bad } = require('./prompts');
 
 // ---- limits ------------------------------------------------------------------------------
 // Every family gets FREE_BUILDS new practice sets a month. More need a paid credit (PRICE_ILS each),
 // added to families/{f}/billing/main.credits by the payment provider's webhook once payments open.
 // Small AI edits outside a build (fix a question, add pictures) are capped by LIGHT_CALLS a month.
-// The whole app stops calling the AI once this month's estimated spend reaches MONTHLY_CAP_USD.
+// The whole app stops calling the AI for the day once the day's estimated spend reaches DAILY_CAP_USD (no monthly cap for now:
+// MONTHLY_CAP_USD = Infinity; the month is still recorded in meta/ai_spend_<month>).
 const FREE_BUILDS = 3;
 const PRICE_ILS = 5;
 const LIGHT_CALLS = 40;
-const BUILD_CALLS = 60;                       // AI calls one build may make (a 10-chapter set needs ~25)
+// AI calls one build may make – counted for the largest build the wizard allows: 10 chapters (defChapters: 5-10) × 20
+// questions (the chapter stepper: 5-20) = 200 questions, at most 30 topics (the wizard and prompts.js refuse more).
+//   scan 1 + match 1 + select 1 + write 10 (one per chapter) + coverage ≤ 30 (one per topic left with no question;
+//   every topic has a chapter, so normally 0) + pictures ≤ 2 rounds × ⌈200/12⌉ = 34 + blind solve ⌈200/40⌉ = 5
+//   + review 10 (one per chapter) + fix 10 + re-solve of the fixed 10 + re-review with their chapter 10
+//   = 1+1+1+10+30+34+5+10+10+10+10 = 122. A typical build (6 chapters × 10 questions) makes ~30 calls.
+const BUILD_CALLS = 125;
 const BUILD_HOURS = 3;                        // a build token is valid this long
-const MONTHLY_CAP_USD = 40;
+const MONTHLY_CAP_USD = Infinity;            // no monthly cap for now (the owner's decision); the daily cap protects
+const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel time)
 // One family may use at most this much of the month's AI budget (3 normal builds cost far less),
 // so a single account can never use up the whole app's budget. Admins have no family limit.
 const FAMILY_CAP_USD = 8;
 const REFUNDS_PER_MONTH = 2;                  // failed-at-the-start builds given back per family per month
-const PRICE = {                               // USD per 1M tokens: [input, output]
-  'claude-haiku-5-5': [0.10, 0.50], 'claude-sonnet-5-5': [2, 10], 'claude-opus-5-5': [4, 20]
+// USD per 1M tokens: [input, output] – the models the steps use AND the models the API may fall back to on a refusal,
+// so a fallback is never counted at a cheaper rate. An unknown model is counted at the most expensive rate here.
+const PRICE = {
+  'claude-haiku-5-5': [0.10, 0.50], 'claude-haiku-4-5': [1, 5],
+  'claude-sonnet-5-5': [2, 10], 'claude-sonnet-5': [2, 10], 'claude-sonnet-4-6': [3, 15],
+  'claude-opus-5-5': [4, 20], 'claude-opus-5': [5, 25], 'claude-opus-4-8': [5, 25], 'claude-opus-4-7': [5, 25], 'claude-opus-4-6': [5, 25],
+  'claude-fable-5-2': [8, 40]
 };
+const PRICE_TOP = Object.values(PRICE).reduce((a, p) => p[1] > a[1] ? p : a);
+const FALLBACK_TO = { 'claude-opus-5-5': ['claude-opus-5', 'claude-opus-4-8'], 'claude-sonnet-5-5': ['claude-sonnet-5'] };   // fallbacks: 'default'
+const priceOf = m => PRICE[m] || PRICE_TOP;
 const ADMIN_EMAILS = defineString('ADMIN_EMAILS', { default: '' });   // comma-separated, no family limits
 
 function monthKey(d = new Date()) {           // Israel time, e.g. "2026-11"
@@ -99,7 +111,8 @@ async function checkFamily(uid, famId) {
 }
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
-  if ((g.data()?.usd || 0) >= MONTHLY_CAP_USD) throw new HttpsError('resource-exhausted', 'budget', { reason: 'budget' });
+  const day = await db.doc(`meta/ai_day_${dayKey()}`).get();
+  if ((g.data()?.usd || 0) >= MONTHLY_CAP_USD || (day.data()?.usd || 0) >= DAILY_CAP_USD) throw new HttpsError('resource-exhausted', 'budget', { reason: 'budget' });
 }
 // this family's share of the month's AI spend (checked after checkFamily, so famId is valid)
 async function checkFamilyBudget(auth, famId) {
@@ -107,22 +120,61 @@ async function checkFamilyBudget(auth, famId) {
   const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
   if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
 }
-// once a month, when the AI spend passes 80% of the monthly cap: a line in the server log (red dot for the app admins, and the alert email)
+// once a day, when the AI spend passes 80% of the daily cap: a line in the server log (red dot for the app admins, and the alert email)
 async function spendAlert() {
-  const ref = db.doc(`meta/ai_spend_${monthKey()}`);
+  const ref = db.doc(`meta/ai_day_${dayKey()}`);
   const hit = await db.runTransaction(async t => { const d = (await t.get(ref)).data() || {};
-    if ((d.usd || 0) < MONTHLY_CAP_USD * 0.8 || d.alert80) return 0; t.set(ref, { alert80: Date.now() }, { merge: true }); return d.usd; });
-  if (hit) await serverLog({ fn: 'ask', kind: 'budget', code: '80%', msg: `AI spend this month: $${hit.toFixed(2)} of the $${MONTHLY_CAP_USD} cap`, ms: 0 });
+    if ((d.usd || 0) < DAILY_CAP_USD * 0.8 || d.alert80) return 0; t.set(ref, { alert80: Date.now() }, { merge: true }); return d.usd; });
+  if (hit) await serverLog({ fn: 'ask', kind: 'budget', code: '80%', msg: `AI spend today: $${hit.toFixed(2)} of the $${DAILY_CAP_USD} daily cap`, ms: 0 });
 }
-async function addSpend(model, usage, famId) {
-  const [pi, po] = PRICE[model] || PRICE['claude-sonnet-5-5'];
-  const inTok = (usage?.input_tokens || 0) + (usage?.cache_creation_input_tokens || 0) * 1.25 + (usage?.cache_read_input_tokens || 0) * 0.1;
-  const usd = (inTok * pi + (usage?.output_tokens || 0) * po) / 1e6;
-  await db.doc(`meta/ai_spend_${monthKey()}`).set({ usd: FieldValue.increment(usd), calls: FieldValue.increment(1) }, { merge: true });
+function dayKey(d = new Date()) {             // Israel time, e.g. "2026-11-20"
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+}
+const famOk = f => typeof f === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(f);
+// the price of one answer: every attempt (usage.iterations when the API fell back) at the dearer of the asked and the served model
+function usdOf(model, u) {
+  const [pi, po] = priceOf(model);
+  const inTok = (u.input_tokens || 0) + (u.cache_creation_input_tokens || 0) * 1.25 + (u.cache_read_input_tokens || 0) * 0.1;
+  return (inTok * pi + (u.output_tokens || 0) * po) / 1e6;
+}
+function costOf(asked, msg) {
+  // each attempt names its model (usage.iterations); without one, the dearer of the asked and the served model
+  const served = msg.model || asked, m = priceOf(served)[1] > priceOf(asked)[1] ? served : asked;
+  const its = Array.isArray(msg.usage?.iterations) && msg.usage.iterations.length ? msg.usage.iterations : [msg.usage || {}];
+  return its.reduce((a, u) => a + usdOf((u && u.model) || m, u || {}), 0);
+}
+// Reserve the most a call can cost (its input estimate + max_tokens, at the dearest model it may run on) BEFORE the call,
+// so calls running in parallel can never pass a cap together; settle the real cost after. A reservation is kept in a
+// map on the month / day / family documents; one older than RES_TTL (a call that never returned) no longer counts.
+const RES_TTL = 15 * 60 * 1000;
+function liveRes(d) { let sum = 0; const stale = [], now = Date.now();
+  for (const [k, v] of Object.entries((d && d.res) || {})) { if (v && now - (+v.at || 0) < RES_TTL) sum += +v.usd || 0; else stale.push(k); }
+  return { sum, stale }; }
+async function reserve(auth, famId, usd, id) {
+  const admin = isAdminUser(auth), refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
+  if (famOk(famId)) refs.push([db.doc(`families/${famId}/usage/${monthKey()}`), admin ? Infinity : FAMILY_CAP_USD, 'family_budget']);
+  await db.runTransaction(async t => {
+    const snaps = await Promise.all(refs.map(([r]) => t.get(r)));
+    const live = snaps.map((sn, k) => { const d = sn.data() || {}, L = liveRes(d);
+      if ((d.usd || 0) + L.sum + usd > refs[k][1]) throw new HttpsError('resource-exhausted', refs[k][2], { reason: refs[k][2], ...(refs[k][2] === 'family_budget' ? { cap: FAMILY_CAP_USD } : {}) });
+      return L; });
+    snaps.forEach((sn, k) => { const r = refs[k][0], mine = { usd, at: Date.now() };
+      if (sn.exists) t.update(r, { [`res.${id}`]: mine, ...Object.fromEntries(live[k].stale.filter(x => /^[A-Za-z0-9]+$/.test(x)).map(x => [`res.${x}`, FieldValue.delete()])) });
+      else t.set(r, { res: { [id]: mine }, ...(k === 2 ? { month: monthKey() } : {}) }, { merge: true }); });
+  });
+}
+// the real cost: the month (total, calls, per step), the day, the family, the build (total and per step)
+async function settle(famId, id, step, buildId, usd, ran = true) {   // ran = false: the call never happened – only the reservation goes
+  const inc = FieldValue.increment, del = FieldValue.delete();
+  const per = ran ? { [`steps.${step}.usd`]: inc(usd), [`steps.${step}.calls`]: inc(1) } : {}, n = ran ? { usd: inc(usd), calls: inc(1) } : {};
+  const w = [db.doc(`meta/ai_spend_${monthKey()}`).update({ [`res.${id}`]: del, ...n, ...per }),
+    db.doc(`meta/ai_day_${dayKey()}`).update({ [`res.${id}`]: del, ...n })];
+  if (famOk(famId)) {
+    w.push(db.doc(`families/${famId}/usage/${monthKey()}`).update({ [`res.${id}`]: del, ...(ran ? { usd: inc(usd) } : {}), month: monthKey() }));
+    if (ran && typeof buildId === 'string' && /^[A-Za-z0-9]{1,40}$/.test(buildId)) w.push(db.doc(`families/${famId}/builds/${buildId}`).update({ usd: inc(usd), ...per }));
+  }
+  await Promise.all(w.map(p => p.catch(e => console.error('settle', e.message))));
   await spendAlert().catch(() => {});
-  if (typeof famId === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(famId))
-    await db.doc(`families/${famId}/usage/${monthKey()}`).set({ usd: FieldValue.increment(usd), month: monthKey() }, { merge: true });
-  return usd;
 }
 
 // Start a new practice set: uses one of this month's free builds, or one paid credit.
@@ -225,6 +277,8 @@ void grantCredits;   // called by the payment webhook once payments open
 const MAX_IMAGES = 6;
 const MAX_IMAGE_B64 = 5 * 1024 * 1024; // ~3.7 MB per image after base64
 const MAX_PDF_B64 = 8.2 * 1024 * 1024;  // a 6 MB PDF after base64 (callable requests are limited to 10 MB)
+const MAX_PDF_PAGES = 20;               // pages in all the PDFs of one call
+const pdfPages = b64 => (Buffer.from(b64, 'base64').toString('latin1').match(/\/Type\s*\/Page(?![s\w])/g) || []).length;
 
 function extractJson(text) {
   const t = String(text || '').replace(/```(?:json)?/gi, '').trim();
@@ -237,6 +291,28 @@ function extractJson(text) {
   throw new HttpsError('internal', 'The model did not return valid JSON.');
 }
 
+// Tests only (the Firebase emulator, and only when the test asks): a stand-in for Claude that answers every step in its
+// schema, so the whole build can be tested without a key and without spending. Never reachable in production.
+const FAKE_OK = () => process.env.FUNCTIONS_EMULATOR === 'true';
+function fakeAnswer(step, d) {
+  const ctx = d.ctx || {}, topics = (ctx.topics || []).map(String);
+  const q = (topic, k, tag) => ({ topic, question: `${tag} ${k + 1}`, options: [`נכון ${k + 1}`, `לא ${k + 1}א`, `לא ${k + 1}ב`, `לא ${k + 1}ג`], answer: 0,
+    explanation: 'כי זה נכון', core: false, emoji: '🍎', scene: [{ e: '🍎', x: 50, y: 50, s: 30 }] });
+  if (step === 'scan') return { detected_topics: topics, styles: 'שאלות בחירה קצרות', difficulty: 'רגיל', missing_from_parent_list: [] };
+  if (step === 'gen') { const out = []; let k = Number(d.seed) || 0;
+    for (const [t, n] of Object.entries(d.quota || {})) for (let j = 0; j < n; j++, k++) out.push(q(t, k, `${String(t).slice(0, 20)} · שאלה`));
+    return { title: d.nameIt ? 'מדפי העבודה' : '', questions: out }; }
+  if (step === 'pics') return { items: (d.items || []).map(x => ({ i: x.i, scene: [{ e: '🍐', x: 50, y: 50, s: 30 }], question: x.question, options: x.options, explanation: 'כי זה נכון' })) };
+  if (step === 'solve') return { results: (d.questions || []).map(x => ({ i: x.i, pick: (x.options || []).findIndex(o => /^נכון/.test(o) || /✓$/.test(o)), multiple_correct: false, problem: /!bad/.test(x.question) ? 'שאלה לא ברורה' : '' })) };
+  if (step === 'review') return { flags: (d.questions || []).filter(x => /!flag/.test(x.question) && !x.locked).map(x => ({ i: x.i, kind: 'clash', note: 'התנגשות' })) };
+  if (step === 'fix') return { items: (d.items || []).map((x, k) => ({ i: x.i, action: 'fix', question: { ...q(x.topic, k, 'תוקנה'), question: `תוקנה ${x.i}` } })) };
+  if (step === 'report') return { is_error: false, feedback: 'השאלה תקינה', category: 'none', corrected: null };
+  if (step === 'match') { const words = t => String(t).toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2);
+    return { map: (d.want || []).map(t => ({ topic: t, refs: (d.pool || []).filter(p => [p.title, ...(p.topics || [])].some(x => words(x).some(w => words(t).includes(w)))).map(p => p.ref) })) }; }
+  if (step === 'select') return { picks: (d.groups || []).map(g => ({ topic: g.topic, i: (g.questions || []).map((x, k) => x.i ?? k) })) };
+  return {};
+}
+
 exports.ask = onCall(
   {
     region: 'europe-west1',
@@ -247,67 +323,82 @@ exports.ask = onCall(
     maxInstances: 10
   },
   async function ask(request) {
-    // Only signed-in parents (Google) may spend AI credit; kid devices are anonymous.
+    // Only signed-in parents (Google or a verified email link) may spend AI credit; kid devices are anonymous.
     const auth = parentOnly(request);
 
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
-    const { prompt, images = [], tier = 'default', famId, buildId } = request.data || {};
-    if (typeof prompt !== 'string' || !prompt.trim() || prompt.length > 300000) {
-      throw new HttpsError('invalid-argument', `Missing or oversized prompt (${typeof prompt === 'string' ? prompt.length : typeof prompt} chars).`);
+    const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
+    const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
+    if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
+    if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
+    if (!Array.isArray(images) || images.length > MAX_IMAGES || (images.length && !step.images)) {
+      throw new HttpsError('invalid-argument', step.images ? `Up to ${MAX_IMAGES} files.` : 'This step takes no files.');
     }
-    if (!Array.isArray(images) || images.length > MAX_IMAGES) {
-      throw new HttpsError('invalid-argument', `Up to ${MAX_IMAGES} images.`);
-    }
-
-    await checkBudget();
-    if (!isAdminUser(auth)) await checkFamily(auth.uid, famId);
-    await checkFamilyBudget(auth, famId);
-    await claimCall(auth, famId, buildId);
-
-    const content = [];
+    const content = []; let pages = 0;
     for (const img of images) {
       if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
         throw new HttpsError('invalid-argument', 'Image too large.');
       }
       if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
-        if (img.data.length > MAX_PDF_B64) throw new HttpsError('invalid-argument', 'PDF too large.');
+        pages += pdfPages(img.data);
+        if (pages > MAX_PDF_PAGES) throw new HttpsError('invalid-argument', 'pdf_pages', { reason: 'pdf_pages', max: MAX_PDF_PAGES });
         content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
         continue;
       }
       const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
       content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });
     }
-    content.push({ type: 'text', text: prompt });
+    let text;
+    try { text = step.build(data, { images: images.length }); }
+    catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
+    content.push({ type: 'text', text });
 
-    const model = MODELS[tier] || MODELS.default;
-    const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
+    if (!isAdminUser(auth)) await checkFamily(auth.uid, famId);
+
+    // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
+    const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);
+    const inTok = (SYSTEM.length + text.length) / 2 + images.filter(i => i.type !== 'application/pdf').length * 1800 + pages * 3000 + 500;
+    const maxUsd = (inTok * 1.25 * dear[0] + step.max_tokens * dear[1]) / 1e6;
+    const callId = db.collection('_').doc().id;
+    await reserve(auth, famId, maxUsd, callId);                      // over a cap → refused before anything is counted
+    try { await claimCall(auth, famId, buildId); } catch (e) { await settle(famId, callId, name, null, 0, false); throw e; }
+
+    const fake = FAKE_OK() && request.data.fake === true;
     let msg;
     try {
-      // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call
-      msg = await client.beta.messages.create({
-        model,
-        max_tokens: tier === 'complex' ? 8000 : 16000,   // the answer check returns short JSON – a lower cap keeps it far from the 540 s limit
-        betas: ['server-side-fallback-2026-07-01'],
-        fallbacks: 'default',
-        system: 'You build exam practice for Israeli school children. Reply with valid JSON only: no prose, no code fences.',
-        messages: [{ role: 'user', content }]
-      });
+      if (fake) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
+      else {
+        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
+        const params = {
+          model,
+          max_tokens: step.max_tokens,
+          // the rules: one fixed system prompt, cached (every step of a build reuses it on the same model)
+          system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
+          messages: [{ role: 'user', content }],
+          output_config: { effort: step.effort, format: { type: 'json_schema', schema: step.schema } }
+        };
+        // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
+        if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
+        msg = await client.beta.messages.stream(params).finalMessage();
+      }
     } catch (e) {
+      await settle(famId, callId, name, buildId, 0, false);   // an API error before an answer is not billed
       if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
       if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
       if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
       throw e;
     }
-    await addSpend(msg.model || model, msg.usage, famId).catch(e => console.error('spend log', e));
+    await settle(famId, callId, name, buildId, costOf(model, msg));
+    { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
     if (msg.model && msg.model !== model) {   // the API answered on a fallback model
       await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
-      await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `asked ${model}, answered by ${msg.model}`, ms: 0 });
+      await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });
     }
     if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
     if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
-    const text = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    return { json: extractJson(text) };
+    const out = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    return { json: extractJson(out) };
   }
 );
 

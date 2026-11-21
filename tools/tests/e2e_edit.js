@@ -8,11 +8,14 @@ const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never la
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
   await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1200);
   await p.evaluate(async () => {
-    sample = { limits: async () => ({ images: true }), json: async (prompt, opts = {}) => { if (/NEW multiple-choice/.test(prompt)) window.__lastGen = { imgs: (opts.images || []).length, sheet: /worksheet photo/.test(prompt) };   // mocked AI
-      if (/Turn each practice question into a PICTURE/.test(prompt)) return { items: [] };
-      if (/independent checker/.test(prompt)) { const n = (prompt.match(/"i":/g) || []).length; return { results: [...Array(n).keys()].map(i => ({ i, pick: 0, multiple_correct: false, problem: '' })) }; }
-      const t = (prompt.match(/one of (\[[^\]]*\])/) || [])[1]; const topic = t ? JSON.parse(t)[0] : 'מדפי העבודה'; const n = +(prompt.match(/Write (\d+) NEW/) || [0, 6])[1];
-      return { questions: [...Array(n).keys()].map(i => ({ topic, question: `${topic} שאלה ${i + 1}?`, options: [`${i + 1}`, `${i + 2}x`, `${i + 3}y`, `${i + 4}z`], answer: 0, explanation: 'הסבר', emoji: '🧮', scene: null })) }; } };
+    sample = { limits: async () => ({ images: true }), json: async (step, d, opts = {}) => {   // mocked AI: one answer per step
+      if (step === 'gen') { window.__lastGen = { imgs: (opts.images || []).length, sheet: !!d.nameIt || (opts.images || []).length > 0 };
+        const n = Object.values(d.quota).reduce((a, x) => a + x, 0), topic = d.nameIt ? Object.keys(d.quota)[0] : d.chapter.topics[0];
+        return { title: d.nameIt ? 'מדפי העבודה' : '', questions: [...Array(n).keys()].map(i => ({ topic, question: `${topic} שאלה ${i + 1}?`, options: [`${i + 1}`, `${i + 2}x`, `${i + 3}y`, `${i + 4}z`], answer: 0, explanation: 'הסבר', emoji: '🧮', scene: null })) }; }
+      if (step === 'pics') return { items: [] };
+      if (step === 'solve') return { results: d.questions.map(x => ({ i: x.i, pick: 0, multiple_correct: false, problem: '' })) };
+      if (step === 'review') return { flags: [] };
+      return {}; } };
     kids.push({ id: 'k1', name: 'בן', grade: 6, color: '#2F6BFF' }); saveKids(); curSet = applyImport(await loadShare('math7-nov26'), kidById('k1')).set; renderReview(curSet); show('vReview'); });
   await p.waitForTimeout(800);
   let n0 = await p.evaluate(() => ({ q: curSet.questions.length, c: getChapters(curSet).length, c0: getChapters(curSet)[0].qs.length }));

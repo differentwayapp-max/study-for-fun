@@ -7,6 +7,8 @@
 //  6. catalog suggestions: typed fields; the admin list and the in-app catalog run no script from them
 //  7. the server writes a family's error log only for that family's own parents
 //  8. app admins need a verified address; the service worker never stores /share/ files
+//  9. a tutor reads and writes only the kids of the invitation, never a link secret; helpers and admins as before
+// 10. a new kid link: the old link and the phones that joined with it stop working
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_security.js"
 const { chromium } = require('playwright');
 const FS = 'http://127.0.0.1:8080', AU = 'http://127.0.0.1:9099', PROJ = 'study-for-fun-7b03c';
@@ -90,6 +92,71 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
   ok(await commit(a2, [upd(`families/${fam}/members/${a2.uid}`, { role: 'tutor', name: 'T2', kids: ['k1'], invite: 'INV1', at: Date.now() }),
     upd(`families/${fam}/invites/INV1`, { used: true, usedBy: a2.uid }, ['used', 'usedBy'])]) === 403, 'a second adult with the same invitation is refused');
   ok(await write(a3, `families/${fam}/members/${a3.uid}`, { role: 'tutor', name: 'T3', kids: ['k1'], invite: 'INV1', at: Date.now() }) === 403, '…also without the batch');
+
+  console.log('9. a tutor: only the kids of the invitation, never a link secret');
+  // a1 = the tutor of Noa (k1). The parent's data: a set for each kid, a tutor view for a1's invitation and one for another
+  await admin(`families/${fam}/sets/sN`, { set: { id: 'sN', kidId: 'k1', name: 'Noa', subject: 'math', questions: [] } });
+  await admin(`families/${fam}/sets/sB`, { set: { id: 'sB', kidId: 'k2', name: 'Ben', subject: 'math', questions: [] } });
+  await admin(`families/${fam}/tutorView/INV1`, { famName: 'F', kids: [{ id: 'k1', name: 'Noa', grade: 3, color: '#FF5C8A' }] });
+  await admin(`families/${fam}/tutorView/OTHER`, { famName: 'F', kids: [{ id: 'k2', name: 'Ben', grade: 5, color: '#2F6BFF' }] });
+  const rd = (u, path) => fetch(`${DOCS}/${path}`, { headers: u.H }).then(r => r.status);
+  const del = (u, path) => fetch(`${DOCS}/${path}`, { method: 'DELETE', headers: u.H }).then(r => r.status);
+  const query = (u, col, field, value) => fetch(`${DOCS}/families/${fam}:runQuery`, { method: 'POST', headers: u.H, body: JSON.stringify({ structuredQuery: { from: [{ collectionId: col }],
+    ...(field ? { where: { fieldFilter: { field: { fieldPath: field }, op: 'EQUAL', value: { stringValue: value } } } } : {}) } }) }).then(async r => r.ok ? ((await r.json())[0] || {}).document ? 'docs' : 'none' : r.status);
+  const T = a1;
+  ok(await rd(T, `families/${fam}`) === 403, 'cannot read the family document (kidTokens, inviteToken)');
+  ok(await rd(T, `families/${fam}/fam/kids`) === 403, 'cannot read the kids list (fam/kids)');
+  ok(await rd(T, `families/${fam}/devices`) === 403 && await rd(T, `families/${fam}/devices/${d.uid}`) === 403, 'cannot read devices (their link tokens)');
+  ok(await rd(T, `families/${fam}/invites`) === 403, 'cannot list invitations');
+  ok(await rd(T, `families/${fam}/members`) === 403, 'cannot list the other adults');
+  ok(await rd(T, `families/${fam}/members/${T.uid}`) === 200, '…reads its own membership');
+  ok(await rd(T, `families/${fam}/builds`) === 403, 'cannot read the builds');
+  ok(await rd(T, `families/${fam}/usage/${await p.evaluate(() => monthKeyIL())}`) !== 403, 'reads the monthly quota (to build)');
+  ok(await rd(T, `families/${fam}/progress/k2`) === 403, "cannot read Ben's progress");
+  ok(await rd(T, `families/${fam}/progress/k1`) === 200, "reads Noa's progress");
+  ok(await write(T, `families/${fam}/progress/k1`, { history: [{ at: 5, setId: 'sN', n: 1, right: 1 }], profile: { nick: 'Noa' } }) === 200, "writes Noa's progress");
+  ok(await write(T, `families/${fam}/progress/k2`, { history: [], profile: { nick: 'x' } }) === 403, "cannot write Ben's progress");
+  ok(await rd(T, `families/${fam}/sets/sB`) === 403, "cannot read Ben's practice set");
+  ok(await rd(T, `families/${fam}/sets/sN`) === 200, "reads Noa's practice set");
+  ok(await query(T, 'sets', 'set.kidId', 'k1') === 'docs', "asks for Noa's practice sets – allowed");
+  ok(await query(T, 'sets') === 403 && await query(T, 'sets', 'set.kidId', 'k2') === 403, 'asking for all the sets or for Ben\'s: refused');
+  ok(await write(T, `families/${fam}/sets/sT`, { set: { id: 'sT', kidId: 'k2', name: 'Ben', questions: [] } }) === 403, 'cannot make a practice set for Ben');
+  ok(await write(T, `families/${fam}/sets/sT`, { set: { id: 'sT', kidId: 'k1', name: 'Noa', questions: [] } }) === 200, 'makes a practice set for Noa');
+  ok(await write(T, `families/${fam}/sets/sN`, { set: { id: 'sN', kidId: 'k2', name: 'Ben', questions: [] } }) === 403, "cannot move Noa's practice set to Ben");
+  ok(await write(T, `families/${fam}/sets/sB`, { set: { id: 'sB', kidId: 'k1', name: 'Noa', questions: [] } }) === 403, "cannot take Ben's practice set for Noa");
+  ok(await del(T, `families/${fam}/sets/sN`) === 403, 'cannot delete a practice set (the parent / an admin only)');
+  ok(await rd(T, `families/${fam}/tutorView/INV1`) === 200, 'reads its own tutor view');
+  ok(await rd(T, `families/${fam}/tutorView/OTHER`) === 403, "cannot read another tutor's view");
+  ok(await write(T, `families/${fam}/tutorView/INV1`, { famName: 'F', kids: [{ id: 'k2', name: 'Ben' }] }) === 403, 'cannot widen its own view');
+  ok(await write(T, `families/${fam}/devices/${T.uid}`, { token: 'guess', kid: 'k1', at: Date.now() }) === 403, 'cannot join as a kid device');
+  ok(await write(T, `families/${fam}`, { kidTokens: { k1: 'mine' } }, '?updateMask.fieldPaths=kidTokens.k1') === 403, 'cannot set a kid link');
+  { const st = await user('stranger@t.local');
+    ok(await rd(st, `families/${fam}/invites`) === 403, 'a stranger who knows the family id (it is in every kid link) cannot list invitations'); }
+  // helpers and admins: as before
+  await admin(`families/${fam}/invites/INVH`, { role: 'helper', name: 'H', kids: [], by: fam, exp: Date.now() + 864e5, used: false });
+  const h = await user('helper9@t.local');
+  ok(await commit(h, [upd(`families/${fam}/members/${h.uid}`, { role: 'helper', name: 'H', kids: [], invite: 'INVH', at: Date.now() }),
+    upd(`families/${fam}/invites/INVH`, { used: true, usedBy: h.uid }, ['used', 'usedBy'])]) === 200, 'a helper joins');
+  { const hs = [await rd(h, `families/${fam}`), await rd(h, `families/${fam}/fam/kids`), await rd(h, `families/${fam}/progress/k2`), await rd(h, `families/${fam}/sets/sB`), await rd(h, `families/${fam}/devices`)];
+    ok(!hs.includes(403), 'a helper: reads the whole family, as before ' + hs.join(',')); }   // (404 = allowed, not there)
+  ok(await rd(h, `families/${fam}/invites`) === 403, '…but not the invitations list (parent and admins only)');
+  await admin(`families/${fam}/invites/INVA`, { role: 'admin', name: 'A', kids: [], by: fam, exp: Date.now() + 864e5, used: false });
+  const ad = await user('admin9@t.local');
+  await commit(ad, [upd(`families/${fam}/members/${ad.uid}`, { role: 'admin', name: 'A', kids: [], invite: 'INVA', at: Date.now() }), upd(`families/${fam}/invites/INVA`, { used: true, usedBy: ad.uid }, ['used', 'usedBy'])]);
+  ok(await rd(ad, `families/${fam}`) === 200 && await rd(ad, `families/${fam}/invites`) === 200 && await rd(ad, `families/${fam}/tutorView/INV1`) === 200, 'an admin: everything, as before');
+
+  console.log('10. a new kid link: the old one stops working');
+  const kn = await user(null);
+  ok(await write(kn, `families/${fam}/devices/${kn.uid}`, { token: t1, kid: 'k1', at: Date.now() }, '?currentDocument.exists=false') === 200, "a phone joins with Noa's link");
+  ok(await rd(kn, `families/${fam}/progress/k1`) === 200, '…and reads');
+  const nl = await p.evaluate(async () => window.__sffFamily.newKidLink('k1'));
+  const t1n = new URL(nl.url).searchParams.get('t');
+  ok(t1n && t1n !== t1 && nl.devices >= 1, `a new link (${nl.devices} phone(s) disconnected)`);
+  ok(await rd(kn, `families/${fam}/progress/k1`) === 403 && await rd(kn, `families/${fam}/sets/sN`) === 403, 'the old phone lost its access');
+  ok(await write(kn, `families/${fam}/devices/${kn.uid}`, { token: t1, kid: 'k1', at: Date.now() }) === 403, 'the old link no longer joins');
+  const kn2 = await user(null);
+  ok(await write(kn2, `families/${fam}/devices/${kn2.uid}`, { token: t1n, kid: 'k1', at: Date.now() }, '?currentDocument.exists=false') === 200
+    && await rd(kn2, `families/${fam}/progress/k1`) === 200, 'the new link works');
 
   console.log('2. AI budget: limited refunds, a cap per family');
   const ends = [];

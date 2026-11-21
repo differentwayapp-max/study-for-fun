@@ -36,7 +36,8 @@
 <main>
 
 <section id="contact-form" class="contact-layout">
-<form id="contact-form-el" novalidate class="form-card">
+<form id="contact-form-el" novalidate class="form-card" data-key="YOUR_WEB3FORMS_ACCESS_KEY" data-subject="פנייה מאתר D-Way">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 <div class="grid-240">
 <div class="field">
 <label for="c-name" class="label">שם מלא <span aria-hidden="true" class="req">*</span></label>
@@ -65,9 +66,11 @@
 <label for="c-msg" class="label">הודעה <span aria-hidden="true" class="req">*</span></label>
 <textarea id="c-msg" name="c-msg" rows="6" required class="input textarea"></textarea>
 </div>
-<button type="submit" class="btn-submit">פתיחת הודעת מייל מוכנה</button>
+<button type="submit" class="btn-submit" data-sending="שולחים…">שליחה</button>
 <p id="c-error" role="alert" hidden class="form-error">כדי להמשיך יש למלא שם מלא, כתובת דואר אלקטרוני תקינה והודעה.</p>
-<p class="form-note">לחיצה על הכפתור פותחת את תוכנת המייל שלכם עם כל הפרטים, מוכנה לשליחה אל differentway.app@gmail.com.</p>
+<p id="c-sent" role="status" hidden class="form-ok">תודה! הפנייה נשלחה, ונחזור אליכם בהקדם.</p>
+<p id="c-failed" role="alert" hidden class="form-error">השליחה לא הצליחה. אפשר לנסות שוב, או לכתוב לנו ישירות לכתובת differentway.app@gmail.com.</p>
+<p class="form-note">הפרטים יישלחו ישירות אל differentway.app@gmail.com.</p>
 </form>
 <div class="aside">
 <h2 class="founder-title">פנייה ישירה</h2>
@@ -86,24 +89,6 @@
 </footer>
 
 </div>
-<script>
-/* Contact form. For now it opens the visitor's email app with a ready message.
-   To send directly from the site, replace the body of the submit handler with a call to a form service. */
-(function () {
-  var L = {"subj": "פנייה מאתר D-Way", "name": "שם מלא", "org": "ארגון או חברה", "email": "דואר אלקטרוני", "phone": "טלפון", "subject": "נושא הפנייה", "msg": "הודעה"};
-  var form = document.getElementById("contact-form-el");
-  var err = document.getElementById("c-error");
-  function v(id) { return document.getElementById(id).value.trim(); }
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var name = v("c-name"), org = v("c-org"), email = v("c-email"), phone = v("c-phone"), subject = v("c-subject"), msg = v("c-msg");
-    var valid = name.length> 0 && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) && msg.length> 0;
-    err.hidden = valid;
-    if (!valid) { return; }
-    var body = [L.name + ": " + name, L.org + ": " + org, L.email + ": " + email, L.phone + ": " + phone, L.subject + ": " + subject, "", L.msg + ":", msg].join("\n");
-    window.location.href = "mailto:differentway.app@gmail.com?subject=" + encodeURIComponent(L.subj + (subject ? " - " + subject : "") + " (" + name + ")") + "&body=" + encodeURIComponent(body);
-  });
-})();
-</script>
+<script src="assets/contact.js"></script>
 </body>
 </html>

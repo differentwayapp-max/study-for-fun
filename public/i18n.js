@@ -204,7 +204,7 @@
     [/^🎉 כל התרגולים הסתיימו – מוסיפים תרגול מהקטלוג 📚$/, () => '🎉 All practice sets are finished – add one from the catalog 📚'],
     [/^🐞 דיווחים מהמשתמשים · (\d+)$/, (m, n) => `🐞 User reports · ${n}`],
     [/^🖥️ יומן שרת · (\d+)$/, (m, n) => `🖥️ Server log · ${n}`],
-    [/^⚠️ תקלות (\d+) · 🐢 קריאות איטיות (\d+) · 🔀 מודל חלופי (\d+)$/, (m, a, b, c) => `⚠️ Errors ${a} · 🐢 Slow calls ${b} · 🔀 Fallback model ${c}`],
+    [/^⚠️ תקלות (\d+) · 🐢 קריאות איטיות (\d+) · 🔀 מודל חלופי (\d+)(.*)$/, (m, a, b, c, t) => `⚠️ Errors ${a} · 🐢 Slow calls ${b} · 🔀 Fallback model ${c}` + t.replace('הוצאות AI', 'AI spend').replace('נתקע', 'Stuck').replace('קפיצה בתקלות', 'Error spike').replace('אזהרה מוקדמת', 'Early warning')],
     [/^(\d+) שאלות$/, (m, n) => `${n} questions`],
     [/^📋 מה לומדים בכיתה (.+) לפי התוכנית$/, (m, g) => `📋 What grade ${GR[g] || g} learns`],
     [/^＋ (?:הוספה ל(.+)|הוספה) · (\d+) שאלות$/, (m, k, b) => `＋ Add${k ? ' for ' + k : ''} · ${b} questions`],

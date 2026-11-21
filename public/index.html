@@ -1578,6 +1578,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       set: (c, id, data) => F.setDoc(F.doc(fdb, c, id), data),
       add: async (c, data) => (await F.addDoc(F.collection(fdb, c), data)).id,
       del: (c, id) => F.deleteDoc(F.doc(fdb, c, id)),
+      pending: ms => Promise.race([F.waitForPendingWrites(fdb).then(() => false), new Promise(r => setTimeout(() => r(true), ms))]),   // true: changes still waiting for the cloud
       newest: async (c, f) => { const q = await F.getDocs(F.query(F.collection(fdb, c), F.orderBy(f, 'desc'), F.limit(1))); return q.empty ? null : q.docs[0].data(); },
       addLimited: async (c, data, lim) => { const wb = F.writeBatch(fdb), ref = F.doc(F.collection(fdb, c));
         wb.set(F.doc(fdb, lim, uid), { at: F.serverTimestamp() }); wb.set(ref, data); await wb.commit(); return ref.id; }
@@ -1932,9 +1933,58 @@ async function logFail(where, e, subject, who){
   const rec={at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').slice(0,300),
     subject:String(subject||'').slice(0,40), ver:document.querySelector('meta[name="sff-ver"]')?.content||'', by:String(who||window.SFF_MYNAME||'').slice(0,40)};
   let saved=false; try{ const db=await window.claude.use('db'); await db.doc('errlog/'+rec.at+'-'+Math.random().toString(36).slice(2,7)).set(rec); saved=true; }catch(err){}
+  if(!saved && where!=='sound-check') errQueue(rec);                 // goes out on the next start that connects
   try{ const l=JSON.parse(localStorage.getItem('sff_errlog')||'[]'); l.unshift(rec); localStorage.setItem('sff_errlog',JSON.stringify(l.slice(0,30))); }catch(err){}
   return saved;
 }
+/* ---------- watching for trouble on this device (שליטה ובקרה) ----------
+   Every failure goes into the family's errlog; the server's watchdog (functions/index.js) looks across all families for
+   the same failure in many apps, and healthReport sends it to the hourly check. Here, on the device:
+   – an uncaught error or rejected promise anywhere in the app (js / promise)
+   – the cloud connection that never came up (stuck:start), or failed (cloud:fail)
+   – changes waiting to reach the cloud for over 30 minutes while online (stuck:sync)
+   – a new version that would not load even after the reload (stuck:version)
+   Each kind at most once an hour (stuck:version once a day), at most 20 a day per device. A record that cannot be saved
+   yet (no cloud connection) waits in localStorage (sff_errq) and goes out on the next start that connects. */
+const ERR_MEM=new Set();
+function errOnce(key, ttl=36e5){ try{ const now=Date.now(), day=new Date().toISOString().slice(0,10);
+    const m=JSON.parse(localStorage.getItem('sff_errseen')||'{}'); for(const k in m) if(now>m[k]) delete m[k];
+    if(m[key]) return false;
+    const c=JSON.parse(localStorage.getItem('sff_errday')||'{}'), n=c.d===day?c.n:0; if(n>=20) return false;
+    m[key]=now+ttl; localStorage.setItem('sff_errseen',JSON.stringify(m)); localStorage.setItem('sff_errday',JSON.stringify({d:day,n:n+1})); return true;
+  }catch(e){ if(ERR_MEM.has(key)||ERR_MEM.size>=20) return false; ERR_MEM.add(key); return true; } }
+function errRec(where, e){ return {at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').slice(0,300),
+  subject:'', ver:document.querySelector('meta[name="sff-ver"]')?.content||'', by:String(window.SFF_KID_DEVICE?'kid-device':(window.SFF_ROLE||'')).slice(0,40)}; }
+function errQueue(rec){ try{ const q=JSON.parse(localStorage.getItem('sff_errq')||'[]'); q.push(rec); localStorage.setItem('sff_errq',JSON.stringify(q.slice(-10))); }catch(e){} }
+// before the cloud is up (or when it never comes up) → the queue; afterwards → straight into errlog
+function reportFail(where, e){ let on=false; try{ on=!!DB; }catch(x){} if(on) logFail(where, e, '', errRec(where,e).by); else errQueue(errRec(where, e)); }
+async function flushErrQ(){ let q=[]; try{ q=JSON.parse(localStorage.getItem('sff_errq')||'[]'); localStorage.removeItem('sff_errq'); }catch(e){ return; }
+  for(const rec of q){ try{ await DB.doc('errlog/'+rec.at+'-'+Math.random().toString(36).slice(2,7)).set(rec); }catch(e){} } }
+window.addEventListener('error', ev=>{
+  const m=String(ev.message||''), f=String(ev.filename||'');
+  if(!m || /^Script error\.?$/i.test(m) || /ResizeObserver loop/i.test(m)) return;           // no details (another site's script) / a harmless browser notice
+  if(f && !f.startsWith(location.origin) && !/gstatic\.com\/firebasejs/.test(f)) return;        // a browser extension
+  const at=(f.split('/').pop()||'').split('?')[0]+':'+(ev.lineno||0);
+  if(errOnce('js|'+m.slice(0,80))) reportFail('js', {code:'error', message:m.slice(0,240)+' @'+at});
+});
+window.addEventListener('unhandledrejection', ev=>{
+  const r=ev.reason, m=String((r&&(r.message||r.code))||r||'').slice(0,240);
+  if(!m || /ResizeObserver loop/i.test(m)) return;
+  if(errOnce('promise|'+m.slice(0,80))) reportFail('promise', {code:String(r&&r.code||'rejection'), message:m});
+});
+// the cloud connection: not up after 25 s (and not waiting for a sign-in) → stuck at that stage
+setTimeout(()=>{ if(window.__sffDone || window.__sffCloudErr || document.getElementById('fbLogin')) return;
+  if(errOnce('stuck:start')) errQueue(errRec('stuck:start', {code:String(window.__sffStage||'start'), message:`cloud not ready after 25 s · stage ${window.__sffStage||'-'} · ${window.SFF_KID_DEVICE?'kid':'adult'} · online ${navigator.onLine} · ${navigator.userAgent.slice(0,120)}`})); }, 25000);
+// changes that wait for the cloud: checked every 5 minutes while the app is open (Firebase SDK only – the REST backup writes at once)
+let SYNC_T=null;
+function watchSync(){ if(SYNC_T || !window.__sffRoot?.pending) return;
+  SYNC_T=setInterval(async()=>{ if(!navigator.onLine || document.hidden) return;
+    let waiting=false; try{ waiting=await window.__sffRoot.pending(5000); }catch(e){ return; }
+    try{ if(!waiting){ localStorage.removeItem('sff_pend_since'); return; }
+      const since=Number(localStorage.getItem('sff_pend_since'))||Date.now(); localStorage.setItem('sff_pend_since',String(since));
+      const min=Math.round((Date.now()-since)/60e3);
+      if(min>=30 && errOnce('stuck:sync',6*36e5)) logFail('stuck:sync', {code:'pending', message:`changes waiting for the cloud ${min} min while online`}, '', errRec('',{}).by);
+    }catch(e){} }, 5*60e3); }
 async function openUsers(){
   show('vUsers'); $('uStats').innerHTML=''; document.querySelector('#vUsers h2').textContent='👥 משתמשים רשומים'; document.querySelector('#vUsers .hint').textContent='רק פרטי החשבון: שם, אימייל ותאריכים. בלי ילדים, תרגולים או התקדמות.'; $('uList').innerHTML='<p class="center">⏳</p>';
   let d; try{ d=await window.__sffAdminUsers(); }catch(e){ $('uList').innerHTML=`<p class="notice err">⚠️ ${esc(e.message||e)}</p>`; return; }
@@ -4169,10 +4219,10 @@ async function openServerLog(){
   let list=[]; try{ list=await window.__sffRoot.list('serverLog'); }catch(e){ toast('⚠️ אין הרשאה'); return; }
   list.sort((a,b)=>(Number(b.at)||0)-(Number(a.at)||0));
   try{ localStorage.setItem(SLOG_SEEN,String(Math.max(Date.now(),Number(list[0]&&list[0].at)||0))); }catch(e){} $('menuBtn').classList.remove('dot'); $('slDot')?.classList.add('hidden');
-  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰'};
+  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰',stuck:'⏳',spike:'📈',warn:'🔔'};
   const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
   box.innerHTML=`<div class="dlghead"><b>🖥️ יומן שרת · ${list.length}</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
-    <p class="hint" style="margin:0 0 8px">⚠️ תקלות ${n('error')} · 🐢 קריאות איטיות ${n('slow')} · 🔀 מודל חלופי ${n('fallback')}${n('budget')?` · 💰 הוצאות AI ${n('budget')}`:''}</p>`+
+    <p class="hint" style="margin:0 0 8px">⚠️ תקלות ${n('error')} · 🐢 קריאות איטיות ${n('slow')} · 🔀 מודל חלופי ${n('fallback')}${n('budget')?` · 💰 הוצאות AI ${n('budget')}`:''}${n('stuck')?` · ⏳ נתקע ${n('stuck')}`:''}${n('spike')?` · 📈 קפיצה בתקלות ${n('spike')}`:''}${n('warn')?` · 🔔 אזהרה מוקדמת ${n('warn')}`:''}</p>`+
     (list.length?list.slice(0,100).map(r=>`<div class="errrow"><div><b>${esc(new Date(Number(r.at)||0).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}))}</b> · ${ico[r.kind]||'•'} ${esc(r.fn||'')}${r.ms?` · ${Math.round((Number(r.ms)||0)/1000)} שנ'`:''}</div>
       <div class="hint" dir="ltr" translate="no">${esc(r.code||'')} ${esc(r.msg||'')}</div></div>`).join('')
       +`<button class="btn ghost small" style="margin-top:10px" id="slClear">🗑 לנקות את היומן</button>`:'<p class="hint center">אין רשומות 🎉</p>');
@@ -4315,6 +4365,7 @@ if(window.SFF_KID_DEVICE) setTimeout(()=>{ if(!CLOUD_SEEN) showCloudErr('stuck a
 async function cloudInit(){
   try{ DB=await window.claude?.use?.('db'); }catch(e){ DB=null; }
   if(!DB && window.__sffCloudErr) showCloudErr(window.__sffCloudErr);
+  if(!DB && window.__sffCloudErr && errOnce('cloud:fail')) errQueue(errRec('cloud:fail', {code:String(window.__sffStage||''), message:String(window.__sffCloudErr)+' · '+(window.__sffVia||'-')}));
   if(!DB && !window.SFF_KID_DEVICE && !document.getElementById('fbLogin') && window.__sffStage && window.__sffStage!=='ready'){
     const el=document.createElement('div'); el.id='fbLogin';
     el.innerHTML=`<div class="fbbox"><img src="${$('logoFull')?.src||''}" alt="Study for fun"><div style="font-size:3em;margin:6px 0">🔌</div>
@@ -4327,6 +4378,7 @@ async function cloudInit(){
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();
   if(!DB) return;
+  flushErrQ(); watchSync();
   if(window.SFF_ROLE==='tutor'){ tutorCloud(); return; }
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
@@ -4772,7 +4824,9 @@ setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduc
       try{
         const r=await fetch('/version.json?t='+Date.now(),{cache:'no-store'}); if(!r.ok) return;
         const v=(await r.json()).v; if(!v||v===mine) return;
-        if(sessionStorage.getItem('sff_reload_for')===v) return;            // tried already – don't loop
+        if(sessionStorage.getItem('sff_reload_for')===v){                  // tried already – don't loop; the reload did not bring the new version
+          if(window.errOnce && window.reportFail && errOnce('stuck:version|'+v, 864e5)) reportFail('stuck:version', {code:'old', message:mine+' still running, the site has '+v});
+          return; }
         if(!document.getElementById('vGame')?.classList.contains('hidden')) return;   // in a game: next time
         sessionStorage.setItem('sff_reload_for',v);
         try{ const ks=await caches.keys(); await Promise.all(ks.map(k=>caches.delete(k))); }catch(e){}

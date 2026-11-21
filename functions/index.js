@@ -233,7 +233,7 @@ async function claimCall(auth, famId, buildId) {
       const d = bd.data();
       if (!bd.exists || d.status !== 'running' || Date.now() - d.at > BUILD_HOURS * 36e5) throw new HttpsError('failed-precondition', 'build_closed', { reason: 'build_closed' });
       if (d.calls >= BUILD_CALLS) throw new HttpsError('resource-exhausted', 'build_calls', { reason: 'build_calls' });
-      tx.update(ref, { calls: FieldValue.increment(1) });
+      tx.update(ref, { calls: FieldValue.increment(1), last: Date.now() });   // last: the watchdog's "no AI call for 20 minutes"
     } else {
       const ref = db.doc(`families/${famId}/usage/${monthKey()}`), u = await tx.get(ref);
       if ((u.data()?.light || 0) >= LIGHT_CALLS) throw new HttpsError('resource-exhausted', 'light', { reason: 'light', limit: LIGHT_CALLS });
@@ -447,7 +447,7 @@ if (GMAIL_APP_PASSWORD) exports.mailServerAlerts = require('firebase-functions/v
     const to = String(cfg.reportMail || '').trim(), from = String(cfg.senderMail || to).trim();
     if (!MAIL_RE.test(to) || !MAIL_RE.test(from)) { console.log('mailServerAlerts: no address set'); return; }
     const clean = (v, n) => String(v || '').replace(/[\r\n]+/g, ' ').slice(0, n);
-    const name = { error: 'תקלות', slow: 'קריאות איטיות', fallback: 'מודל חלופי', budget: 'הוצאות AI' };
+    const name = { error: 'תקלות', slow: 'קריאות איטיות', fallback: 'מודל חלופי', budget: 'הוצאות AI', stuck: 'נתקע', spike: 'קפיצה בתקלות', warn: 'אזהרה מוקדמת' };
     const count = {}; rows.forEach(r => { count[r.kind] = (count[r.kind] || 0) + 1; });
     const lines = rows.slice(-60).map(r => `${new Date(r.at).toISOString().slice(0, 16).replace('T', ' ')}  ${clean(r.kind, 10)}  ${clean(r.fn, 20)}  ${clean(r.code, 40)}  ${clean(r.msg, 200)}`);
     const nodemailer = require('nodemailer');
@@ -458,4 +458,106 @@ if (GMAIL_APP_PASSWORD) exports.mailServerAlerts = require('firebase-functions/v
         + `\n\n${lines.join('\n')}\n\n—\nהיומן המלא באפליקציה: ☰ ← יומן שרת (השעות ב-UTC)` });
     await mark.set({ last }, { merge: true });
     console.log('mailServerAlerts: sent', rows.length);
+  });
+
+/* ---------- monitoring (שליטה ובקרה): find what is stuck or about to get stuck ----------
+   watchdog() runs every 15 minutes (and on every healthReport call). Each finding goes once into the server log
+   (red dot for the app admins, the hourly email, healthReport) – a key in meta/watchdog.seen keeps it from repeating.
+     stuck  – a build still 'running' with no AI call for STUCK_BUILD_MIN (it can still be resumed for BUILD_HOURS; after that
+              it is closed as 'stuck' and refunded like a failed build);
+              an AI call that reserved its cost and never settled (the function died or timed out)
+     spike  – the same failure in the users' apps (families/{f}/errlog) SPIKE_N times in an hour, or in SPIKE_FAMS families
+     warn   – many builds failing today; a family near its monthly AI cap
+   No personal data: a family is shown only as a short hash, never kid names (errlog.by is never read out). */
+const STUCK_BUILD_MIN = 20, SPIKE_N = 5, SPIKE_FAMS = 3;
+const famTag = f => require('crypto').createHash('sha256').update(String(f)).digest('hex').slice(0, 6);
+const isNoise = r => !r || r.code === 'ok' || String(r.where || '').startsWith('server:');   // sound check "ok"; server errors are in serverLog already
+async function closeBuild(ref, status) {   // the same refund rule as endBuild(ok = false)
+  return db.runTransaction(async (tx) => {
+    const bd = await tx.get(ref); if (!bd.exists || bd.data().status !== 'running') return null;
+    const d = bd.data(), famRef = ref.parent.parent, usageRef = famRef.collection('usage').doc(d.month || monthKey());
+    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
+    const refund = (d.calls || 0) <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
+    tx.update(ref, { status, endedAt: Date.now(), refunded: refund });
+    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
+    if (refund && d.kind === 'paid') tx.set(famRef.collection('billing').doc('main'), { credits: FieldValue.increment(1) }, { merge: true });
+    return { ...d, refund };
+  });
+}
+async function watchdog() {
+  const now = Date.now(), stateRef = db.doc('meta/watchdog'), seen = ((await stateRef.get()).data() || {}).seen || {}, fresh = {}, out = [];
+  const once = async (key, entry) => { if (seen[key] || fresh[key]) return; fresh[key] = now; out.push(entry); await serverLog({ fn: 'watchdog', ms: 0, ...entry }); };
+  // 1. builds that stopped moving: idle STUCK_BUILD_MIN → reported (the parent can still resume it from the kid's card);
+  //    past BUILD_HOURS (its token is dead) → closed as 'stuck', refunded like a failed build
+  const running = await db.collectionGroup('builds').where('status', '==', 'running').get();
+  for (const b of running.docs) {
+    const d = b.data(), idle = now - (d.last || d.at || now), tag = `${d.calls || 0} calls · ${String(d.subject || '').slice(0, 40)} · family ${famTag(b.ref.parent.parent.id)}`;
+    if (now - (d.at || now) > BUILD_HOURS * 36e5) { const c = await closeBuild(b.ref, 'stuck');
+      if (c) await once('buildclosed:' + b.id, { kind: 'stuck', code: 'build_abandoned', msg: `build never finished – closed after ${BUILD_HOURS}h · ${tag}${c.refund ? ' · refunded' : ''}` }); }
+    else if (idle >= STUCK_BUILD_MIN * 60e3)
+      await once('build:' + b.id, { kind: 'stuck', code: 'build', msg: `build stopped: no AI call for ${Math.round(idle / 60e3)} min · ${tag}` });
+  }
+  // 2. AI calls that reserved their cost and never came back (older than RES_TTL)
+  const day = (await db.doc(`meta/ai_day_${dayKey()}`).get()).data() || {};
+  for (const [id, v] of Object.entries(day.res || {})) if (v && now - (+v.at || 0) >= RES_TTL)
+    await once('res:' + id, { kind: 'stuck', code: 'ai_call', msg: `an AI call never returned (reserved $${(+v.usd || 0).toFixed(2)} at ${new Date(+v.at || 0).toISOString().slice(11, 16)} UTC)` });
+  // 3. the same failure in many apps within the last hour
+  const errs = (await db.collectionGroup('errlog').where('at', '>', now - 3600e3).get()).docs;
+  const groups = {};
+  for (const e of errs) { const r = e.data(); if (isNoise(r)) continue;
+    const k = `${String(r.where || '').slice(0, 40)}|${String(r.code || '').slice(0, 40)}`, g = groups[k] || (groups[k] = { n: 0, fams: new Set(), msg: '', ver: new Set() });
+    g.n++; g.fams.add(e.ref.parent.parent.id); g.msg = String(r.msg || '').slice(0, 160); if (r.ver) g.ver.add(String(r.ver).slice(0, 20)); }
+  const hour = new Date(now).toISOString().slice(0, 13);
+  for (const [k, g] of Object.entries(groups)) if (g.n >= SPIKE_N || g.fams.size >= SPIKE_FAMS)
+    await once(`spike:${k}:${hour}`, { kind: 'spike', code: k.slice(0, 60), msg: `${g.n}× in the last hour, ${g.fams.size} families, ${[...g.ver].join(',')}: ${g.msg}` });
+  // 4. early warnings: builds failing today; a family close to its monthly AI cap
+  const ended = (await db.collectionGroup('builds').where('endedAt', '>', now - 24 * 3600e3).get()).docs.map(d => d.data());
+  const bad = ended.filter(d => d.status === 'failed' || d.status === 'stuck').length;
+  if (bad >= 3 && bad / ended.length >= 0.3)
+    await once('buildrate:' + dayKey(), { kind: 'warn', code: 'builds_failing', msg: `${bad} of ${ended.length} builds in the last 24h failed or got stuck` });
+  const usage = (await db.collectionGroup('usage').where('month', '==', monthKey()).get()).docs;
+  for (const u of usage) { const usd = u.data().usd || 0;
+    if (usd >= FAMILY_CAP_USD * 0.8) await once(`famcap:${u.ref.parent.parent.id}:${monthKey()}`, { kind: 'warn', code: 'family_cap', msg: `family ${famTag(u.ref.parent.parent.id)} used $${usd.toFixed(2)} of its $${FAMILY_CAP_USD} monthly AI cap – its next builds will stop` }); }
+  // keep the "already reported" keys for 3 days
+  const keep = Object.fromEntries(Object.entries({ ...seen, ...fresh }).filter(([, t]) => now - t < 3 * 86400e3));
+  await stateRef.set({ seen: keep, at: now });
+  return { findings: out, ended, running: running.size };
+}
+exports.watchdog = require('firebase-functions/v2/scheduler').onSchedule({ schedule: 'every 15 minutes', region: 'europe-west1', retryCount: 0 },
+  async () => { const r = await watchdog(); console.log('watchdog:', r.findings.length, 'new'); });
+
+/* ---------- healthReport: the app's state for the hourly check in Claude (a scheduled task) ----------
+   GET with "Authorization: Bearer <HEALTH_KEY>" (a secret; the scheduled task's environment sends it). Runs the watchdog,
+   then returns what is new since the last report (or ?since=<ms>, at most 7 days back): the server log, the users'
+   failures grouped by place and code, today's builds, the AI spend. No names, no question text, no kid data.
+   Off until HEALTH_KEY exists in Secret Manager: then ENABLE_HEALTH=1 in functions/.env and deploy (the emulator: always on,
+   the key from functions/.secret.local). */
+const HEALTH_KEY = (process.env.ENABLE_HEALTH === '1' || process.env.FUNCTIONS_EMULATOR === 'true') ? defineSecret('HEALTH_KEY') : null;
+if (HEALTH_KEY) exports.healthReport = require('firebase-functions/v2/https').onRequest({ region: 'europe-west1', secrets: [HEALTH_KEY], maxInstances: 1, invoker: 'public' },
+  async (req, res) => {
+    const want = String(HEALTH_KEY.value() || ''), got = String(req.get('authorization') || '').replace(/^Bearer\s+/i, '');
+    const same = want.length >= 16 && got.length === want.length && require('crypto').timingSafeEqual(Buffer.from(got), Buffer.from(want));
+    if (!same) { res.status(401).json({ error: 'unauthorized' }); return; }
+    try {
+      const now = Date.now(), mark = db.doc('meta/healthReport'), last = ((await mark.get()).data() || {}).last || now - 3600e3;
+      const q = Number(req.query.since), since = Math.max(now - 7 * 86400e3, q > 0 ? q : last);
+      const wd = await watchdog();
+      const log = (await db.collection('serverLog').where('at', '>', since).orderBy('at').limit(300).get()).docs.map(d => d.data())
+        .map(r => ({ at: new Date(r.at).toISOString(), kind: r.kind, fn: r.fn, code: r.code, msg: r.msg, ms: r.ms }));
+      const errs = (await db.collectionGroup('errlog').where('at', '>', since).get()).docs;
+      const groups = {};
+      for (const e of errs) { const r = e.data(); if (isNoise(r)) continue;
+        const k = `${String(r.where || '').slice(0, 40)}|${String(r.code || '').slice(0, 40)}`;
+        const g = groups[k] || (groups[k] = { where: String(r.where || '').slice(0, 40), code: String(r.code || '').slice(0, 40), count: 0, families: new Set(), versions: new Set(), last: 0, sample: '' });
+        g.count++; g.families.add(famTag(e.ref.parent.parent.id)); if (r.ver) g.versions.add(String(r.ver).slice(0, 20));
+        if ((+r.at || 0) >= g.last) { g.last = +r.at || 0; g.sample = String(r.msg || '').slice(0, 300); } }
+      const clientErrors = Object.values(groups).sort((a, b) => b.count - a.count).slice(0, 50)
+        .map(g => ({ ...g, families: g.families.size, versions: [...g.versions], last: new Date(g.last).toISOString() }));
+      const day = (await db.doc(`meta/ai_day_${dayKey()}`).get()).data() || {};
+      const builds = { running: wd.running, last24h: {} }; wd.ended.forEach(d => { builds.last24h[d.status] = (builds.last24h[d.status] || 0) + 1; });
+      await mark.set({ last: now }, { merge: true });
+      const problems = log.filter(r => r.kind !== 'fallback').length + clientErrors.length;
+      res.json({ now: new Date(now).toISOString(), since: new Date(since).toISOString(), problems, newFindings: wd.findings, serverLog: log, clientErrors, builds,
+        aiSpendToday: { usd: +(day.usd || 0).toFixed(2), cap: DAILY_CAP_USD } });
+    } catch (e) { console.error('healthReport', e); res.status(500).json({ error: String(e.message || e).slice(0, 200) }); }
   });

@@ -9,6 +9,7 @@ Kids practise for school tests through games; a parent picks or builds practice 
 - `functions/prompts.js` – every AI prompt, built on the server from structured data: the steps (scan, gen, pics, solve, review, fix, report, match, select) with model, effort, max_tokens, input size limits and the JSON schema of the answer; the rules (`BUILD_RULES`, `PIC_RULE`, `COPY_RULE`) in one cached system prompt. In the emulator a test can ask for a fake AI (`window.SFF_FAKE_AI`, `data.fake`).
 - `firestore.rules` – who reads/writes what (owner, admin, helper, tutor, kid device, app admins).
 - `tools/sets/*.py` + `tools/build_set.py` – hand-built catalog practice sets → `public/share/`. `tools/pic_rules.py` – the picture never gives the answer away (a naming question shows the thing to name; any other question shows all the options or its data, never the right option alone); no emoji newer than 2019. `SFF_DRY=1 python3 -I tools/build_set.py <file>` checks a set without writing.
+- First-run intro (`INTRO` in index.html, drawn in HTML from the store-screens design): a new parent sees screens 1,3,4,5,7,8 (seen → `users/{uid}.intro`), a kid phone 2 and 6 (localStorage; no storage → none); ☰ → איך זה עובד. The same screens make the Google Play pictures: `node tools/store_shots.js` (app served) → `store/play/` + `store/play/en/` (`/?intro=<1-8|feature>&shot=1`). Test: `e2e_intro.js`.
 - `android/` – Trusted Web Activity for Google Play (signing key is NOT in the repo). `store/` – store listing text and images.
 
 ## Run the tests

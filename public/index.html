@@ -2159,6 +2159,12 @@ function stepClock(){ if(stepT) return; stepT=setInterval(()=>{ const run=[...do
     if(!t){ t=document.createElement('span'); t.className='tm'; t.setAttribute('translate','no'); li.querySelector('.d').after(t); }
     t.textContent=`⏱ ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }); },1000); }
 let BUILDS=[], CUR_BUILD=null;
+// while a build runs, the screen does not turn itself off (Wake Lock – iOS 16.4+, Android); a lock by the button still stops it
+let WAKE=null;
+async function wakeSync(){ const want=BUILDS.some(b=>b.state==='run')&&!document.hidden;
+  try{ if(want&&!WAKE&&navigator.wakeLock){ WAKE=await navigator.wakeLock.request('screen'); WAKE.addEventListener('release',()=>{ WAKE=null; }); }
+    else if(!want&&WAKE){ const w=WAKE; WAKE=null; await w.release(); } }catch(e){ WAKE=null; } }
+document.addEventListener('visibilitychange',wakeSync); setInterval(wakeSync,3000);
 async function askCancelBuild(){ if(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true})) cancelBuild(); }
 function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; endCp(CUR_BUILD.cp); BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
 function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
@@ -2207,7 +2213,7 @@ async function build(resume){
   $('bTitle').textContent='⏳ בונים את התרגול…'; $('bSub').classList.remove('hidden'); $('bActs').innerHTML=`<button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button>`;
   $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
   const cp=resume||{v:1, at:Date.now(), fam:window.__sffFamily?.famId||'', in:I, token:null, done:{}, calls:0};
-  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B;
+  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B; wakeSync();
   show('vBuild');
 
   // one build from this month's quota (3 free per family, then paid credits)

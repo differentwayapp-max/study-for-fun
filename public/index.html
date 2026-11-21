@@ -16,6 +16,7 @@
 </script>
 <meta name="sff-ver" content="sff-v143">
 <script src="/i18n.js?v=sff-v143"></script>
+<script src="/build-core.js?v=sff-v143"></script>
 <script>
 /* Math inside Hebrew ("מה חסר? _ + 20 = 90") is wrapped in Unicode isolates U+2066…U+2069. iPhone Safari ignores them and
    shows "90 = 20 + _", so every such run is drawn in a real left-to-right element instead. */
@@ -1162,7 +1163,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <div class="lmascot" id="lMascot"></div>
       <div class="dots3"><i></i><i></i><i></i></div>
       <h2 id="bTitle">⏳ בונים את התרגול…</h2>
-      <p class="sub" id="bSub" style="margin:0 auto 12px;max-width:420px">זה לוקח בערך 5–15 דקות. אפשר לעבור למסכים אחרים באפליקציה – כשהתרגול יהיה מוכן הוא יופיע בכרטיס של הילד, ונודיע לך. רק לא לסגור את האפליקציה עצמה עד שזה נגמר.</p>
+      <p class="sub" id="bSub" style="margin:0 auto 12px;max-width:420px">זה לוקח בערך 5–15 דקות. אפשר לסגור את האפליקציה ולכבות את המסך – הבנייה ממשיכה, והתרגול יופיע בכרטיס של הילד כשיהיה מוכן.</p>
       <div class="actions" id="bActs" style="justify-content:center;flex-wrap:wrap"><button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button></div>
       <ul class="steps" id="steps"></ul>
       <div id="buildErr" class="notice err hidden" style="margin-top:12px"></div>
@@ -1393,13 +1394,21 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     if (W.SFF_REST_EMU) { const FN = await import(base + 'firebase-functions.js'); FN.connectFunctionsEmulator(fns, '127.0.0.1', 5001); }   // tests only
     const callAsk = httpsCallable(fns, 'ask', { timeout: 540000 });
     const callStart = httpsCallable(fns, 'startBuild'), callEnd = httpsCallable(fns, 'endBuild'), callUsers = httpsCallable(fns, 'adminUsers');
+    const callSubmit = httpsCallable(fns, 'submitBuild', { timeout: 540000 }), callResume = httpsCallable(fns, 'resumeBuild');
+    const buildErr = e => { const d = e.details || {}, c = String(e.code || '');
+      return { code: d.reason || (c.includes('unavailable') || c.includes('deadline') || /network|fetch|load failed|internet/i.test(e.message || '') ? 'network' : c.includes('permission-denied') ? 'not_granted' : 'error'), ...d, message: e.message }; };
     W.__sffAdminUsers = async () => (await callUsers({})).data;
     if (W.SFF_REST_EMU) W.__sffAskRaw = d => callAsk(d).then(r => r.data);   // tests only (local emulators): a raw call, to see the server refuse it
     // a new practice set = one build: this month's free builds, then paid credits (see functions/index.js)
     W.__sffAI = {
       start: async subject => { try { return (await callStart({ famId: W.__sffFamily?.famId, subject })).data; }
         catch (e) { const d = e.details || {}; throw { code: d.reason || 'error', ...d, message: e.message }; } },
-      end: (buildId, ok) => callEnd({ famId: W.__sffFamily?.famId, buildId, ok: !!ok }).then(r => r.data).catch(e => ({ error: String(e.message || e) }))
+      end: (buildId, ok, o = {}) => callEnd({ famId: W.__sffFamily?.famId, buildId, ok: !!ok, ...o }).then(r => r.data).catch(e => ({ error: String(e.message || e) })),
+      // a new practice set, built on the server: the form and the files go once (the files are read there and then, never kept)
+      submit: async (input, blobs) => { const images = await Promise.all((blobs || []).slice(0, 6).map(toB64));
+        try { return (await callSubmit({ famId: W.__sffFamily?.famId, input, images, ...(W.SFF_FAKE_AI ? { fake: true, test: W.SFF_BUILD_TEST || null } : {}) })).data; }
+        catch (e) { throw buildErr(e); } },
+      resume: async buildId => { try { return (await callResume({ famId: W.__sffFamily?.famId, buildId })).data; } catch (e) { throw buildErr(e); } }
     };
 
     // A kid link looks like  https://<site>/?f=<familyId>&t=<inviteToken>#kid-<kidId>
@@ -1786,7 +1795,6 @@ function cleanHist(h){
     ...(Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length&&h.qk.every(x=>typeof x==='string'&&/^[0-9a-z]{1,8}(:[0-9a-z]{1,8})?$/.test(x))?{qk:h.qk.slice(0,200)}:{}),
     ...(typeof h.src==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(h.src)?{src:h.src}:{})};
 }
-const GRADES = ["א'","ב'","ג'","ד'","ה'","ו'","ז'","ח'","ט'","י'","י\"א","י\"ב"];
 function track(gi){ // grade index 0..11
   if(gi<=2) return {name:'גוששים', young:true};
   if(gi<=5) return {name:'חוקרים', young:false};
@@ -2044,10 +2052,7 @@ async function aiTester(){ try{ const e=String(window.SFF_EMAIL||'').trim().toLo
   return (window.SFF_AI_TESTERS||[]).includes(h); }catch(e){ return false; } }
 async function ask(step, data, opts={}){
   if(!sample) throw {code:'not_granted', message:'AI not available'};
-  const b=CUR_BUILD; const call=sample.json(step, data, opts);
-  const r=await (b&&b.stale ? Promise.race([call, b.stale]) : call);      // a call cut off by a locked screen is dropped (see screenOff)
-  if(b && b.cancel) throw {code:'cancel'};
-  return r;
+  return sample.json(step, data, opts);
 }
 
 /* ---------- navigation ---------- */
@@ -2141,342 +2146,125 @@ function setStep(id,state,detail){
   if(detail) li.querySelector('.d').textContent=detail;
 }
 
-let BUILDS=[], CUR_BUILD=null;
-async function askCancelBuild(){ if(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true})) cancelBuild(); }
-function cancelBuild(){ if(CUR_BUILD){ CUR_BUILD.cancel=true; endCp(CUR_BUILD.cp); BUILDS=BUILDS.filter(x=>x!==CUR_BUILD); CUR_BUILD=null; } W.step=4; show('vWizard'); wizRender(); }
 function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
 
-// the student and the test – the server builds every prompt from this (functions/prompts.js)
-function aiCtx(gi, subject, topics, extra={}){ return {gi:+gi||0, grade:GRADES[+gi||0], subject:String(subject||'').replace(/^🎯\s*/,''), topics:(topics||[]).slice(0,30), ...extra}; }
-const setAiCtx=set=>aiCtx(set.grade, set.subject, set.topics);
-const qSend=(q,i,extra={})=>({i, topic:q.topic||'', question:q.question, options:q.options, answer:q.answer, explanation:q.explanation||'', emoji:q.emoji||'', scene:q.scene||null, ...extra});
-const isPool=q=>!!q.srcq;            // a ready, already-checked question (srcq = its source) – never re-solved or changed
 const MAX_TOPICS=30;
 
-// a build keeps what every step produced (this phone), so a build that stopped goes on from there with the same build
-const CP_KEY='sff_build_cp', BUILD_MS=3*36e5-10*60e3;          // the server's build token lives 3 hours
-function cpSave(cp){ try{ localStorage.setItem(CP_KEY, JSON.stringify(cp)); }catch(e){} }
-function cpLoad(){ try{ return JSON.parse(localStorage.getItem(CP_KEY)||'null'); }catch(e){ return null; } }
-function endCp(cp, ok){ try{ localStorage.removeItem(CP_KEY); }catch(e){} if(cp&&cp.token&&window.__sffAI) window.__sffAI.end(cp.token.buildId, !!ok); }
-// after a reload: a build that stopped (and can still go on) shows on its kid's card with "▶ להמשיך"
-function restoreBuild(){ const cp=cpLoad(); if(!cp||!cp.in||BUILDS.some(b=>b.cp&&b.cp.at===cp.at)) return;
-  if(cp.fam!==(window.__sffFamily?.famId||'') || !cp.token || Date.now()-cp.at>BUILD_MS){ endCp(cp,false); return; }
-  BUILDS.push({id:'b'+cp.at, kidId:cp.in.kidId, subject:cp.in.subject, state:'err', cp}); if(!$('vKids').classList.contains('hidden')) renderKids(); }
-function resumeBuild(id, bg){ const b=BUILDS.find(x=>x.id===id); if(!b||!b.cp) return; BUILDS=BUILDS.filter(x=>x!==b);
-  if(Date.now()-b.cp.at>BUILD_MS){ endCp(b.cp,false); toast('⏳ עבר יותר מדי זמן – בונים מחדש'); renderKids(); return; }
-  build(b.cp, bg); }
-
-// a build runs on this phone, one AI call after another. A locked screen (or another app) stops the page and its calls:
-// while a build runs the screen is kept on (Wake Lock, where the browser has it); a call that was going on while the screen
-// was off for SCREEN_OFF_MS or more is dropped on return, and the build goes on by itself from its last saved step.
-const SCREEN_OFF_MS=30e3, AUTO_RESUMES=6;
-let HIDE_N=0, HIDE_AT=0, WAKE=null;
-const buildRunning=()=>BUILDS.some(b=>b.state==='run');
+/* ---------- a new practice set is built on the server ----------
+   The phone sends the form and the files once (submitBuild – the files are read right then and never kept) and may then
+   be closed, even with the screen off: the server builds the set step by step (functions/index.js: runBuild) and writes it
+   to the family, so it reaches the kid's card on every phone. This phone only shows how far a build got – the family's
+   builds of the last day, read live (families/{f}/builds → BUILDS). */
+let BUILDS=[], CUR_BUILD=null;        // CUR_BUILD: the build on the build screen ('send' while the form is being sent)
+let WAKE=null;                        // the screen stays on while the form and the files are being sent
 async function wakeOn(){ try{ if(!WAKE && navigator.wakeLock && !document.hidden){ WAKE=await navigator.wakeLock.request('screen'); WAKE.addEventListener('release',()=>{ WAKE=null; }); } }catch(e){ WAKE=null; } }
-function wakeOff(){ if(buildRunning()) return; try{ WAKE&&WAKE.release(); }catch(e){} WAKE=null; }
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){ HIDE_N++; HIDE_AT=Date.now(); return; }
-  if(buildRunning()){ wakeOn(); if(Date.now()-HIDE_AT>=SCREEN_OFF_MS) BUILDS.filter(b=>b.state==='run').forEach(b=>b.kick&&b.kick()); }
-  BUILDS.filter(b=>b.auto).forEach(b=>{ b.auto=false; resumeBuild(b.id, true); });
-});
-
-async function build(resume, bg){
-  if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
-  let I;
-  if(resume) I=resume.in;
-  else {
-    const gi=+$('fGrade').value, subject=$('fSubject').value, topics=$('fTopics').value.split('\n').map(s=>s.trim()).filter(Boolean);
-    const perRound=Math.max(5,Math.min(20,+$('fRound').value||defRound(gi,subject)));
-    I={name:$('fName').value.trim()||'הילד/ה', reinf:W.reinf||null, gi, subject, topics, perRound, kidId:W.kidId,
-      chapters:(W.chapters||defChapters(topics,perRound)).map(c=>({title:c.title,topics:c.topics,count:Math.max(5,Math.min(20,c.count))})),
-      text:$('fText').value.trim().slice(0,8000), link:$('fLink').value.trim().slice(0,300), pages:$('fPages').value.trim().slice(0,200),
-      examDate:$('fExam').value||'', dailyGoal:Math.max(1,Math.min(10,+$('fGoal').value||2))};
-    const err=$('formErr'); err.className='notice err hidden'; err.style.background='';
-    const no=t=>{ err.textContent=t; err.classList.remove('hidden'); };
-    if(!I.topics.length) return no('צריך להזין לפחות נושא אחד.');
-    if(I.topics.length>MAX_TOPICS) return no(`עד ${MAX_TOPICS} נושאים בתרגול אחד – אפשר לבנות עוד תרגול לשאר.`);
-    if(!I.kidId) return no('בחרו ילד/ה בשלב הראשון.');
-  }
-  const {gi, subject, topics, chapters}=I, grade=GRADES[gi];
-
-  $('steps').innerHTML = STEPS.map(([id,t,d],i)=>`<li id="st_${id}" data-n="${i+1}"><div class="ic">${i+1}</div><div><div class="t">${t}</div><div class="d">${d}</div></div></li>`).join('');
-  $('buildErr').classList.add('hidden'); $('buildBack').classList.add('hidden');
-  $('bTitle').textContent='⏳ בונים את התרגול…'; $('bSub').classList.remove('hidden'); $('bActs').innerHTML=`<button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button>`;
-  $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
-  const cp=resume||{v:1, at:Date.now(), fam:window.__sffFamily?.famId||'', in:I, token:null, done:{}, calls:0};
-  const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B;
-  B.stale=new Promise((_,rej)=>{ B.kick=()=>rej({code:'screen_off', message:'screen off'}); }); B.stale.catch(()=>{});
-  const hideN=HIDE_N; wakeOn();
-  if(!bg) show('vBuild');
-
-  // one build from this month's quota (3 free per family, then paid credits)
-  if(!cp.token){
-    try{ cp.token = window.__sffAI ? await window.__sffAI.start(subject) : null; }
-    catch(e){ BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null; show('vForm'); showQuotaErr(e); return; }
-  }
-  cpSave(cp);
-  const imgs=resume?[]:images.map(i=>i.blob);                     // the files are read once (scan); a resumed build does not need them
-  const askB=async (step,data,o={})=>{ const r=await ask(step,data,{...o,buildId:cp.token?.buildId}); cp.calls++; return r; };
-  const ctx=aiCtx(gi, subject, topics, {pages:I.pages, link:I.link});
-  const save=()=>cpSave(cp);
-  let failStep='scan';
-  try{
-    /* 1. scan */
-    setStep('scan','run');
-    if(!cp.done.scan){
-      cp.profile={detected_topics:[],styles:'',difficulty:'',missing_from_parent_list:[]};
-      if(I.text || imgs.length) cp.profile = (await askB('scan', {ctx, text:I.text}, imgs.length&&canImages?{images:imgs}:{})) || cp.profile;
-      cp.done.scan=1; save();
-    }
-    const profile=cp.profile;
-    setStep('scan','done', (I.text||imgs.length||profile.detected_topics?.length)?`נמצאו ${profile.detected_topics?.length||0} נושאים בחומר. ${profile.styles||''}`:'לא הועלה חומר – השאלות ייבנו לפי הנושאים והכיתה בלבד');
-
-    /* 2. questions – one call per chapter (with checked questions from the pool where they fit, up to half a chapter) */
-    failStep='gen'; setStep('gen','run');
-    if(!cp.done.pool){ try{ cp.pool=await poolPick(askB, ctx, I, profile); }catch(e){ if(e?.code==='cancel') throw e; cp.pool={}; } cp.done.pool=1; save(); }
-    cp.gen=cp.gen||[];
-    for(let ci=0;ci<chapters.length;ci++){
-      if(cp.gen[ci]) continue;
-      const ch=chapters[ci], taken=(cp.pool&&cp.pool[ci])||[]; setStep('gen','run',`פרק ${ci+1} מתוך ${chapters.length}…`);
-      const need=Math.max(1,ch.count-taken.length), before=cp.gen.flat().concat(taken);
-      const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:ch.title, topics:ch.topics, quota:distribute(need, ch.topics),
-        avoid:before.map(q=>q.question).slice(-120), styles:profile.styles, difficulty:profile.difficulty});
-      cp.gen[ci]=taken.map(q=>({...q,ch:ci})).concat(g.qs); save();
-    }
-    let qs=cp.gen.flat().concat(cp.extra||[]);
-    setStep('gen','done',`${chapters.length} פרקים · ${qs.length} שאלות`);
-
-    /* 3. coverage – every topic gets questions */
-    failStep='cover'; setStep('cover','run');
-    if(!cp.done.cover){
-      cp.extra=cp.extra||[];
-      for(const t of topics){
-        if(qs.some(q=>q.topic===t)) continue;
-        const ci=Math.max(0,chapters.findIndex(c=>c.topics.includes(t)));
-        const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:t, topics:[t], quota:{[t]:3}, avoid:qs.map(q=>q.question).slice(-120)});
-        cp.extra=cp.extra.concat(g.qs); qs=qs.concat(g.qs); save();
-      }
-      cp.done.cover=1; save();
-    }
-    const missingTopics = topics.filter(t=>!qs.some(q=>q.topic===t));
-
-    /* pictures – only for questions that do not follow the picture rules yet */
-    setStep('cover','run','🖼️ תמונות…');
-    if(!cp.done.pics){ qs=await picturePass(qs, ctx, askB, null, q=>!isPool(q)&&needsPic(q)); cp.qs=qs; cp.done.pics=1; save(); } else qs=cp.qs;
-    setStep('cover', missingTopics.length?'fail':'done', missingTopics.length?`חסר: ${missingTopics.join(', ')}`:'✓ כל הנושאים · 🖼️ תמונות');
-
-    /* 4. QA – the whole set solved blind once; every chapter reviewed with its answers; fixes checked again */
-    failStep='qa'; setStep('qa','run');
-    if(!cp.done.qa){ cp.qa=await qaSet(qs, ctx, askB, {onProgress:t=>setStep('qa','run',t)}); cp.done.qa=1; save(); }
-    const qa=cp.qa; qs=qa.questions;
-    setStep('qa','done',`נבדקו ${qa.checked} · עברו ${qa.passed} · תוקנו ${qa.fixed} · הוסרו ${qa.dropped}`);
-
-    const coverage={}; topics.forEach(t=>coverage[t]=qs.filter(q=>q.topic===t).length);
-    const set={id:'s'+Date.now(), ...(I.reinf?{reinf:I.reinf}:{}), name:I.name, grade:gi, subject:I.reinf?'🎯 '+subject:subject, topics, questions:qs, source:{link:I.link,pages:I.pages}, examDate:I.examDate, dailyGoal:I.dailyGoal, perRound:I.perRound, kidId:I.kidId, chapters,
-      qa:{checked:qa.checked,passed:qa.passed,fixed:qa.fixed,dropped:qa.dropped,log:qa.log}, coverage, suggestions:(profile.missing_from_parent_list||[]).filter(t=>!topics.includes(t)), created:Date.now()};
-    poolRemember(I.kidId, qs);
-    endCp(cp, true);
-    sets.unshift(set); store.save(); BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null; wakeOff();
-    if(!$('vBuild').classList.contains('hidden')){ curSet=set; renderReview(set); show('vReview'); }
-    else { toast(`✓ ${esc(subject)} מוכן`, ()=>{ curSet=set; go('kids'); renderReview(set); show('vReview'); }); if(!$('vKids').classList.contains('hidden')) renderKids(); }
-  }catch(e){
-    if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); endCp(cp,false); wakeOff(); return; }
-    if(CUR_BUILD===B) CUR_BUILD=null;
-    B.state='err'; wakeOff();
-    // the screen was off (or the app in the background) during this try: not a real failure – go on by itself
-    const byScreen = e?.code==='screen_off' || HIDE_N!==hideN;
-    // a build that failed at the very start is given back (the server's refund rule); a longer one can go on from here
-    const canGoOn = cp.token && (cp.calls>3 || byScreen) && !['budget','family_budget','quota','build_calls','build_closed','not_granted'].includes(e?.code) && Date.now()-cp.at<BUILD_MS;
-    if(canGoOn) cpSave(cp); else endCp(cp,false);
-    if(canGoOn && byScreen && (cp.auto||0)<AUTO_RESUMES){
-      cp.auto=(cp.auto||0)+1; cpSave(cp); setStep(failStep,'run','📱 המסך כבה – ממשיכים מאיפה שנעצר…');
-      if(document.hidden) B.auto=true; else setTimeout(()=>resumeBuild(B.id, true), 500);
-      return;
-    }
-    setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
-    const msg = e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
-      : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
-      : e?.code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
-      : e?.code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
-      : e?.code==='pdf_pages' ? `קובץ ה-PDF ארוך מדי – עד ${e.max||20} עמודים. אפשר לשלוח רק את העמודים של המבחן.`
-      : 'משהו השתבש בבנייה: '+(e?.message||e);
-    $('buildErr').innerHTML=esc(msg)+(canGoOn?'<br><b>מה שכבר נבנה נשמר.</b>':''); $('buildErr').classList.remove('hidden'); $('buildBack').classList.remove('hidden');
-    $('bTitle').textContent='⚠️ הבנייה נעצרה'; $('bSub').classList.add('hidden');
-    $('bActs').innerHTML=(canGoOn?`<button class="btn big" onclick="resumeBuild('${B.id}')">▶ להמשיך מאיפה שנעצר</button>`:'')+`<button class="btn ghost" onclick="go('kids')">🏠 למסך הבית</button>`;
-    if(!canGoOn) B.cp=null;
-    if(!$('vKids').classList.contains('hidden')) renderKids();
-    if($('vBuild').classList.contains('hidden')) toast(`⚠️ ${esc(subject)}`, ()=>{ show('vBuild'); });
-  }
+function wakeOff(){ try{ WAKE&&WAKE.release(); }catch(e){} WAKE=null; }
+async function askCancelBuild(){ if(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true})) cancelBuild(); }
+function cancelBuild(){ const id=CUR_BUILD; CUR_BUILD=null; if(id&&id!=='send') endBuildSrv(id,{cancel:true}); W.step=4; show('vWizard'); wizRender(); }
+function endBuildSrv(id, o){ const b=BUILDS.find(x=>x.id===id); if(b){ if(o.cancel) b.status='cancelled'; if(o.dismiss) b.hidden=true; }
+  if(!$('vKids').classList.contains('hidden')) renderKids();
+  if(window.__sffAI) window.__sffAI.end(id, false, o); }
+async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
+  if(b.status==='running'){ if(!(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true}))) return;
+    endBuildSrv(id,{cancel:true}); }
+  else endBuildSrv(id,{dismiss:true}); }
+function buildErrMsg(code, e={}){
+  return code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
+    : code==='build_calls'||code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
+    : code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
+    : code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
+    : code==='pdf_pages' ? `קובץ ה-PDF ארוך מדי – עד ${e.max||20} עמודים. אפשר לשלוח רק את העמודים של המבחן.`
+    : code==='network' ? 'החיבור נקטע בזמן השליחה. אם הבנייה כבר התחילה, היא ממשיכה בשרת והתרגול יופיע בכרטיס של הילד.'
+    : 'משהו השתבש בבנייה: '+(e.message||code||'');
 }
-
-/* one chapter's questions (a build, more questions, a new chapter, suggested topics, coverage) */
-async function genChapter(askFn, ctx, o){
-  const r=await askFn('gen', {ctx, chapter:{i:o.ci||0, n:o.n||1, title:o.title||'', topics:o.topics||[]}, quota:o.quota, avoid:(o.avoid||[]).slice(-120),
-    styles:o.styles||'', difficulty:o.difficulty||'', nameIt:!!o.nameIt}, o.images&&o.images.length&&canImages?{images:o.images}:{});
-  const tp=o.nameIt?Object.keys(o.quota):(o.topics||[]);
-  return {title:String(r?.title||'').slice(0,40), qs:clean(r?.questions, tp).map(q=>({...q,ch:o.ci||0}))};
-}
-
-/* ---------- the pool of ready questions (internal – never shown or named to the parent) ----------
-   Before a chapter is written, checked questions from the ready practice sets of the same subject and grade that fit the
-   chapter's topics may fill up to half of it. Per child: never from a ready set the child already has, never a question
-   the child already answered correctly (any set, also a deleted one – matched by the question's text), never a question
-   an earlier build already gave this child. */
-function solvedKeys(kidId){ const k=new Set();
+// what the pool of ready questions must not give this kid (the server picks them – functions/index.js: readyChapters): the
+// ready sets the kid has, the ready questions it already got, and every question it already answered correctly (any set,
+// also a deleted one – this phone's history)
+function poolSkip(kidId){ const k=kidById(kidId), mine=sets.filter(s=>s.kidId===kidId), solved=new Set();
   history.filter(h=>h.kidId===kidId&&Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length).forEach(h=>h.qr.forEach((x,n)=>{
-    if(String(x).split('.')[1]==='1') k.add(String(h.qk[n]).split(':')[0]); }));
-  return k; }
-function poolUsed(kidId){ const k=kidById(kidId);
-  return new Set([...((k&&k.cq)||[]), ...sets.filter(s=>s.kidId===kidId).flatMap(s=>s.questions.map(q=>q.srcq).filter(Boolean))]); }
-function poolRemember(kidId, qs){ const k=kidById(kidId), add=qs.map(q=>q.srcq).filter(Boolean); if(!k||!add.length) return;
-  k.cq=[...new Set([...(k.cq||[]), ...add])].slice(-3000); saveKids(); }
-async function poolChapters(kidId, gi, subject){
-  let L=[]; try{ const r=await fetch('/share/catalog.json'); L=r.ok?((await r.json()).sets||[]):[]; }catch(e){ return []; }
-  const base=String(subject).replace(/^🎯\s*/,''), have=new Set(sets.filter(s=>s.kidId===kidId&&s.src).map(s=>String(s.src).replace(/_/g,'-')));
-  const used=poolUsed(kidId), solved=solvedKeys(kidId), out=[];
-  for(const x of L.filter(x=>x.status==='ready'&&x.grade===gi&&x.subject===base&&!have.has(x.id)).slice(0,4)){
-    let p; try{ p=await loadShare(x.id); }catch(e){ continue; }
-    (p.chapters||[]).forEach((c,ci)=>{ if(c&&typeof c.text==='string'&&c.text.trim()) return;           // reading passages need their text
-      const qs=p.qs.filter(q=>q.ch===ci).map(q=>({...q, srcq:x.id+':'+tkey(q.question)})).filter(q=>!used.has(q.srcq)&&!solved.has(tkey(q.question)));
-      if(qs.length>=2) out.push({ref:x.id+'#'+ci, title:String(c.title||'').slice(0,120), topics:(c.topics||[]).slice(0,20), qs}); });
-  }
-  return out.slice(0,150);
-}
-async function poolPick(askFn, ctx, I, profile){
-  const out={}, pool=await poolChapters(I.kidId, I.gi, I.subject); if(!pool.length) return out;
-  const want=[...new Set([...I.topics, ...(profile.detected_topics||[])])].slice(0,40);
-  const m=await askFn('match', {ctx, want, pool:pool.map(c=>({ref:c.ref,title:c.title,topics:c.topics}))});
-  const refs=t=>(((m&&m.map)||[]).find(x=>x.topic===t)||{}).refs||[];
-  const groups=[]; let total=0;
-  I.chapters.forEach((ch,ci)=>{ const seen=new Set(), cand=[];
-    ch.topics.forEach(t=>refs(t).forEach(r=>{ const c=pool.find(x=>x.ref===r); if(c) c.qs.forEach(q=>{ if(!seen.has(q.srcq)){ seen.add(q.srcq); cand.push({...q,topic:t}); } }); }));
-    const c80=cand.slice(0,80); if(c80.length && groups.length<12 && total+c80.length<=400){ total+=c80.length; groups.push({ci, topic:ch.topics.join(' + ').slice(0,120), cand:c80}); } });
-  if(!groups.length) return out;
-  const r=await askFn('select', {ctx, groups:groups.map(g=>({topic:g.topic, questions:g.cand.map((q,i)=>({i,question:q.question,answer:String(q.options[q.answer])}))}))});
-  const taken=new Set();
-  groups.forEach((g,k)=>{ const p=((r&&r.picks)||[]).find(x=>x.topic===g.topic)||((r&&r.picks)||[])[k]; if(!p||!Array.isArray(p.i)) return;
-    const max=Math.floor(I.chapters[g.ci].count/2);
-    const pick=[...new Set(p.i)].map(i=>g.cand[i]).filter(q=>q&&!taken.has(q.srcq)).sort(()=>Math.random()-.5).slice(0,max);
-    pick.forEach(q=>taken.add(q.srcq));
-    if(pick.length) out[g.ci]=pick.map(({topic,question,options,answer,explanation,emoji,scene,core,srcq})=>({topic,question,options,answer,explanation,emoji:emoji||'',...(scene?{scene}:{}),...(core?{core:true}:{}),ch:g.ci,srcq})); });
-  return out;
-}
+    if(String(x).split('.')[1]==='1') solved.add(String(h.qk[n]).split(':')[0]); }));
+  return {have:[...new Set(mine.filter(s=>s.src).map(s=>String(s.src).replace(/_/g,'-')))].slice(-200),
+    used:[...new Set([...((k&&k.cq)||[]), ...mine.flatMap(s=>s.questions.map(q=>q.srcq).filter(Boolean))])].slice(-4000), solved:[...solved].slice(-6000)}; }
+function buildSteps(){ $('steps').innerHTML = STEPS.map(([id,t,d],i)=>`<li id="st_${id}" data-n="${i+1}"><div class="ic">${i+1}</div><div><div class="t">${t}</div><div class="d">${d}</div></div></li>`).join(''); }
 
-function distribute(n, topics){
-  const per={}; const base=Math.floor(n/topics.length); let rem=n-base*topics.length;
-  topics.forEach(t=>{per[t]=Math.max(1,base+(rem>0?1:0)); if(rem>0) rem--;});
-  return per;
-}
-const TOO_NEW_SEQ=['🧑‍🌾','🧑‍🍳','🧑‍🏫','🧑‍🎓','🧑‍⚕️','🧑‍💻','🧑‍🚀','🧑‍🎨','🧑‍🔧','🧑‍🚒'];
-const TOO_NEW=new Set([...'🪑🪭🛝🪁🪀🟦🟥🟫🟩🟪🟧🟨🟢🩻🪼🫏🪿🪸🫧🧇🦘🩶🪢🫖🪴🪨🪵🛖🫐🫒🫑🫓🫔🫕🦬🦣🦫🦤🪶🦭🪲🪳🪰🪱🫀🫁🥷🫂🪄🪅🪆🧋🛻🛼🪃🪓🪔🪕🦯🦽🦾🧃🧉🧊🧄🧅🦩🦥🦦🦨🦪🧆🧈🧏🧍🧎🪐🪂🤿🥽🥼🦺🩰🩱🩲🩳🩸🩹🩺']);
-const tooNew=e=>TOO_NEW_SEQ.includes(e)||[...String(e)].some(c=>TOO_NEW.has(c));
-function cleanScene(sc){
-  if(!Array.isArray(sc)||!sc.length) return null;
-  sc=sc.filter(it=>!(it&&tooNew(it.e))); if(!sc.length) return null;
-  const n=v=>Math.max(0,Math.min(100,+v||0));
-  const out=sc.slice(0,12).filter(it=>it&&typeof it.e==='string'&&([...it.e].length<=4||(it.e.length<=16&&!PIC_CH.test(it.e)))).map(it=>({e:it.e.trim(),x:n(it.x),y:n(it.y),s:Math.max(10,Math.min(90,+it.s||40))}));
-  return out.length?out:null;
-}
-function clean(arr, topics){
-  if(!Array.isArray(arr)) return [];
-  return arr.filter(q=>q && typeof q.question==='string' && Array.isArray(q.options) && q.options.length===4
-      && Number.isInteger(+q.answer) && +q.answer>=0 && +q.answer<4 && new Set(q.options.map(o=>String(o).trim())).size===4)
-    .map(q=>({topic: topics.includes(q.topic)?q.topic:(topics.find(t=>t.toLowerCase()===String(q.topic||'').toLowerCase())||topics[0]),
-      question:String(q.question).trim(), options:q.options.map(o=>String(o).trim()), answer:+q.answer, explanation:String(q.explanation||'').trim(), emoji:(typeof q.emoji==='string'&&[...q.emoji].length<=4)?q.emoji.trim():'', ...(cleanScene(q.scene)?{scene:cleanScene(q.scene)}:{}), ...(Number.isInteger(q.ch)?{ch:q.ch}:{}), ...(q.core===true?{core:true}:{})}));
-}
+async function build(){
+  if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
+  const gi=+$('fGrade').value, subject=$('fSubject').value, topics=$('fTopics').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const perRound=Math.max(5,Math.min(20,+$('fRound').value||defRound(gi,subject)));
+  const I={name:$('fName').value.trim()||'הילד/ה', reinf:W.reinf||null, gi, subject, topics, perRound, kidId:W.kidId,
+    chapters:(W.chapters||defChapters(topics,perRound)).map(c=>({title:c.title,topics:c.topics,count:Math.max(5,Math.min(20,c.count))})),
+    text:$('fText').value.trim().slice(0,8000), link:$('fLink').value.trim().slice(0,300), pages:$('fPages').value.trim().slice(0,200),
+    examDate:$('fExam').value||'', dailyGoal:Math.max(1,Math.min(10,+$('fGoal').value||2))};
+  const err=$('formErr'); err.className='notice err hidden'; err.style.background='';
+  const no=t=>{ err.textContent=t; err.classList.remove('hidden'); };
+  if(!I.topics.length) return no('צריך להזין לפחות נושא אחד.');
+  if(I.topics.length>MAX_TOPICS) return no(`עד ${MAX_TOPICS} נושאים בתרגול אחד – אפשר לבנות עוד תרגול לשאר.`);
+  if(!I.kidId) return no('בחרו ילד/ה בשלב הראשון.');
+  I.skip=poolSkip(I.kidId);
 
-/* picture pass: every question gets a scene and a short stem that does not give the answer away */
-const words=t=>String(t||'').trim().split(/\s+/).filter(Boolean).length;
-const needsPic=q=>!q.scene || words(q.question)>6 || words(q.explanation)>14 || q.options.some(o=>words(o)>4) || q.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase());
-// The rules for questions and pictures (BUILD_RULES, PIC_RULE, COPY_RULE) are in functions/prompts.js – the server puts them
-// in every AI call (one cached system prompt).
-async function picturePass(qs, ctx, askFn=ask, onProgress, want=needsPic){
-  for(let round=0; round<2; round++){                       // a second round for any question still without a picture
-  const idx=qs.map((q,i)=>(isPool(q)?false:round?noPic(q):want(q))?i:-1).filter(i=>i>=0); if(!idx.length) break;
-  for(let k=0;k<idx.length;k+=12){
-    if(onProgress) onProgress(k, idx.length);
-    const part=idx.slice(k,k+12);
-    const r=await askFn('pics', {ctx, items:part.map(i=>({i, question:qs[i].question, options:qs[i].options, answer:qs[i].answer}))});
-    (Array.isArray(r?.items)?r.items:[]).forEach(it=>{ const q=qs[it.i]; if(!q||!part.includes(it.i)) return;
-      const sc=cleanScene(it.scene); if(sc) q.scene=sc;
-      if(Array.isArray(it.options)&&it.options.length===4&&it.options.every(o=>typeof o==='string'&&o.trim())&&new Set(it.options.map(o=>o.trim())).size===4) q.options=it.options.map(o=>o.trim());
-      if(typeof it.question==='string' && it.question.trim() && !it.question.toLowerCase().includes(String(q.options[q.answer]).toLowerCase())) q.question=it.question.trim();
-      if(typeof it.explanation==='string' && it.explanation.trim() && words(it.explanation)<=16) q.explanation=it.explanation.trim(); });
+  buildSteps(); $('buildErr').classList.add('hidden'); $('buildBack').classList.add('hidden');
+  $('bTitle').textContent='⏳ שולחים את החומר…'; $('bSub').textContent='רגע – לא לסגור את האפליקציה עד שהחומר נשלח.'; $('bSub').classList.remove('hidden');
+  $('bActs').innerHTML=''; setStep('scan','run');
+  $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
+  CUR_BUILD='send'; show('vBuild'); wakeOn();
+  let r;
+  try{ r=await window.__sffAI.submit(I, canImages?images.map(i=>i.blob):[]); }
+  catch(e){
+    wakeOff(); if(CUR_BUILD!=='send') return; CUR_BUILD=null;
+    if(['quota','budget','family_budget'].includes(e?.code)){ show('vForm'); showQuotaErr(e); return; }
+    logFail('build:send', e, subject); setStep('scan','fail'); showBuildErr(buildErrMsg(e?.code, e), false); return;
   }
-  }
-  return qs;
+  wakeOff();
+  if(CUR_BUILD!=='send'){ endBuildSrv(r.buildId,{cancel:true}); return; }          // cancelled while it was being sent
+  CUR_BUILD=r.buildId;
+  if(!BUILDS.some(b=>b.id===r.buildId)) BUILDS.push({id:r.buildId, srv:1, status:'running', kidId:I.kidId, subject, at:Date.now(), prog:r.prog||{}});
+  renderBuild();
 }
-// the rules a program can check by itself, before any AI review (the reviewer is asked only about the rest)
-const ansOf=q=>String(q.options[q.answer]).trim();
-function codeChecks(qs){
-  const bad=[], seen={}, val=a=>String(a).replace(/[\s⁦-⁩]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,'');
-  const add=(i,why)=>{ if(!bad.some(b=>b.i===i)) bad.push({i,why}); };
-  qs.forEach((q,i)=>{
-    if(q.emoji && tooNew(q.emoji)) q.emoji='';                                   // an emoji older phones cannot show: just dropped
-    const a=ansOf(q), t=String(q.question).toLowerCase().replace(/[⁦-⁩]/g,'');
-    if(words(a)>3) add(i,'התשובה ארוכה מ-3 מילים');
-    if(!/^[\d\s.,/−+×÷:=%-]+$/.test(a) && a.length>=2 && !needOpts(q) && new RegExp('(^|[^\\p{L}])'+a.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^\\p{L}]|$)','u').test(t)) add(i,'השאלה מסגירה את התשובה');
-    const k=String(q.question).trim().toLowerCase(); if(seen[k]!=null) add(i,'אותה שאלה מופיעה פעמיים'); seen[k]=i;
-    const j=qs.findIndex((o,k2)=>k2<i && (o.ch??0)===(q.ch??0) && ansOf(o)!==a && val(ansOf(o))===val(a) && /\d/.test(a));
-    if(j>=0 && !needOpts(q)) add(i,`התשובה "${a}" היא אותו ערך כמו התשובה "${ansOf(qs[j])}" של שאלה אחרת בפרק – לכתוב אותן באותה צורה`);
-  });
-  return bad;
+// the build screen of CUR_BUILD, from what the server wrote on its build
+function renderBuild(){
+  const b=BUILDS.find(x=>x.id===CUR_BUILD); if(!b||!$('st_scan')) return;
+  const P=b.prog||{}; STEPS.forEach(([id])=>{ const p=P[id]; setStep(id, p?p.s:'', p?p.d:''); });
+  if(b.status==='running'){
+    $('buildErr').classList.add('hidden'); $('buildBack').classList.add('hidden');
+    $('bTitle').textContent='⏳ בונים את התרגול…'; $('bSub').classList.remove('hidden');
+    $('bSub').textContent='זה לוקח בערך 5–15 דקות. אפשר לסגור את האפליקציה ולכבות את המסך – הבנייה ממשיכה, והתרגול יופיע בכרטיס של הילד כשיהיה מוכן.';
+    if(!$('bActs').querySelector('.btn')) $('bActs').innerHTML=`<button class="btn big" onclick="go('kids')">✓ לסגור ולהמשיך באפליקציה</button><button class="btn ghost small" onclick="askCancelBuild()">✕ לבטל את הבנייה</button>`;
+  } else if(b.status==='done'){
+    const s=b.setId&&getSet(b.setId);
+    if(s){ CUR_BUILD=null; curSet=s; renderReview(s); show('vReview'); }
+    else { $('bTitle').textContent='✓ התרגול מוכן'; $('bActs').innerHTML=''; }          // the set itself is on its way
+  } else if(b.status==='failed'){ const st=STEPS.find(([id])=>P[id]&&P[id].s==='run'); if(st) setStep(st[0],'fail'); showBuildErr(buildErrMsg(b.err), !!b.resumable); }
 }
-// QA of new questions: the whole list solved blind once (40 per call), every chapter reviewed with its answers (the
-// questions already in the chapter – o.context – and the pool's come along "locked": seen for clashes, never changed),
-// the flagged ones fixed per chapter, every fix solved blind again and reviewed again with its chapter.
-async function qaSet(qs, ctx, askFn=ask, o={}){
-  const log=[]; let fixed=0, dropped=0; const prog=o.onProgress||(()=>{}), context=o.context||[];
-  const solve=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
-      const r=await askFn('solve', {ctx, questions:part.map(([q,i])=>qSend(q,i))}); out.push(...(Array.isArray(r?.results)?r.results:[])); } return out; };
-  const review=async list=>{ const out=[]; for(let k=0;k<list.length;k+=40){ const part=list.slice(k,k+40);
-      const r=await askFn('review', {ctx, questions:part.map(([q,i,locked])=>qSend(q,i,locked?{locked:true}:{}))}); out.push(...(Array.isArray(r?.flags)?r.flags:[])); } return out; };
-  const open=qs.map((q,i)=>[q,i]).filter(([q])=>!isPool(q));
-  const chs=[...new Set(qs.map(q=>q.ch??0))];
-  // the chapter as the games see it: its new questions (index i) and the locked ones (index 1000+)
-  const chapterList=(ch, list)=>list.map((q,i)=>[q,i,isPool(q)||q._lock]).filter(([q])=>(q.ch??0)===ch)
-    .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true]));
-  prog('בודקים את התשובות…');
-  const res=await solve(open), byI=Object.fromEntries(res.map(r=>[+r.i,r]));
-  const bad=codeChecks(qs).filter(b=>!isPool(qs[b.i]));
-  open.forEach(([q,i])=>{ if(bad.some(b=>b.i===i)) return; const r=byI[i];
-    if(!r){ bad.push({i,why:'הבודק לא החזיר תשובה'}); return; }
-    if(r.pick!==q.answer || r.multiple_correct || (r.problem&&r.problem.trim()))
-      bad.push({i,why: r.pick!==q.answer?`הבודק בחר תשובה ${+r.pick+1} במקום ${q.answer+1}`:(r.multiple_correct?'יותר מתשובה נכונה אחת':r.problem)}); });
-  for(let n=0;n<chs.length;n++){ prog(`פרק ${n+1} מתוך ${chs.length}…`);
-    (await review(chapterList(chs[n], qs))).forEach(f=>{ const i=+f.i; if(!Number.isInteger(i)||i>=1000||!qs[i]||isPool(qs[i])||bad.some(b=>b.i===i)) return;
-      if(f.kind==='clash'&&needOpts(qs[i])) return; bad.push({i, why:String(f.note||f.kind).slice(0,200)}); }); }
-  const out=qs.slice();
-  if(bad.length){
-    const fixedIdx=[];
-    for(const ch of chs){ const mine=bad.filter(b=>(qs[b.i].ch??0)===ch); if(!mine.length) continue;
-      prog('מתקנים…');
-      const others=qs.map((q,i)=>[q,i]).filter(([q,i])=>(q.ch??0)===ch&&!mine.some(b=>b.i===i)).map(([q,i])=>qSend(q,i)).concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>qSend(q,1000+k))).slice(0,40);
-      const fx=await askFn('fix', {ctx, items:mine.slice(0,40).map(b=>qSend(qs[b.i],b.i,{why:b.why})), others});
-      const items=Array.isArray(fx?.items)?fx.items:[];
-      mine.forEach(b=>{ const it=items.find(x=>+x.i===b.i);
-        const cq=it&&it.action==='fix'&&it.question ? clean([it.question], [qs[b.i].topic, ...new Set(qs.map(q=>q.topic))])[0] : null;
-        if(cq){ out[b.i]={...cq, ch:qs[b.i].ch}; fixedIdx.push(b.i); }
-        else { out[b.i]=null; dropped++; log.push({q:qs[b.i].question, why:b.why, result:'הוסרה'}); } });
-    }
-    if(fixedIdx.length){
-      // every fix: solved blind again, then reviewed again together with its chapter (a fix must not create a clash)
-      prog('בודקים את התיקונים…');
-      const re=await solve(fixedIdx.map(i=>[out[i],i])), reBy=Object.fromEntries(re.map(r=>[+r.i,r]));
-      const why=i=>bad.find(b=>b.i===i).why, fail=new Set();
-      fixedIdx.forEach(i=>{ const r=reBy[i]; if(!(r && r.pick===out[i].answer && !r.multiple_correct && !(r.problem&&r.problem.trim()))) fail.add(i); });
-      const cur=out.map(q=>q&&{...q}); fixedIdx.forEach(i=>{ if(cur[i]&&!fail.has(i)) cur[i]._fix=1; });
-      for(const ch of new Set(fixedIdx.filter(i=>!fail.has(i)).map(i=>out[i].ch??0))){
-        const list=cur.map((q,i)=>[q,i]).filter(([q])=>q&&(q.ch??0)===ch).map(([q,i])=>[q,i,!q._fix])
-          .concat(context.filter(q=>(q.ch??0)===ch).map((q,k)=>[q,1000+k,true]));
-        (await review(list)).forEach(f=>{ const i=+f.i; if(fixedIdx.includes(i)&&!(f.kind==='clash'&&needOpts(out[i]))) fail.add(i); });
-      }
-      fixedIdx.forEach(i=>{ if(fail.has(i)){ out[i]=null; dropped++; log.push({q:qs[i].question, why:why(i), result:'הוסרה (התיקון לא עבר בדיקה חוזרת)'}); }
-        else { out[i]={...out[i],fixed:true}; fixed++; log.push({q:out[i].question, why:why(i), result:'תוקנה ואומתה'}); } });
-    }
-  }
-  return {questions:out.filter(Boolean), checked:qs.length, passed:qs.length-bad.length, fixed, dropped, log};
+function showBuildErr(msg, canGoOn){
+  $('buildErr').innerHTML=esc(msg)+(canGoOn?'<br><b>מה שכבר נבנה נשמר.</b>':''); $('buildErr').classList.remove('hidden'); $('buildBack').classList.remove('hidden');
+  $('bTitle').textContent='⚠️ הבנייה נעצרה'; $('bSub').classList.add('hidden');
+  $('bActs').innerHTML=(canGoOn?`<button class="btn big" onclick="resumeBuild('${CUR_BUILD}')">▶ להמשיך מאיפה שנעצר</button>`:'')+`<button class="btn ghost" onclick="go('kids')">🏠 למסך הבית</button>`;
 }
+function openBuild(id){ if(!BUILDS.some(b=>b.id===id)) return; CUR_BUILD=id; buildSteps(); $('bActs').innerHTML='';
+  const b=BUILDS.find(x=>x.id===id); $('lMascot').innerHTML=mascot('happy',(kidById(b.kidId)||{}).color||'#2F6BFF'); show('vBuild'); renderBuild(); }
+// a build that stopped goes on from its last saved step, on the same build
+async function resumeBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
+  b.status='running'; b.err=null; openBuild(id);
+  try{ await window.__sffAI.resume(id); }
+  catch(e){ b.status='failed'; b.err=e?.code; b.resumable=false; if(CUR_BUILD===id) renderBuild(); if(!$('vKids').classList.contains('hidden')) renderKids(); } }
+// the family's builds of the last day, live
+function watchBuilds(by){                       // by: a tutor reads only the builds it started (firestore.rules)
+  try{ const c=DB.collection('builds'); (by?c.where('by','==',by):c.where('at','>',Date.now()-24*36e5)).onSnapshot(q=>{
+    BUILDS=q.docs.map(d=>({id:d.id,...d.data()})).filter(b=>b.srv&&b.at>Date.now()-24*36e5);
+    BUILDS.forEach(b=>{ if(b.status==='done'&&b.setId) builtNote(b); });
+    if(CUR_BUILD&&CUR_BUILD!=='send'&&!$('vBuild').classList.contains('hidden')) renderBuild();
+    if(!$('vKids').classList.contains('hidden')) renderKids();
+  },()=>{}); }catch(e){}
+}
+// a finished build: once per phone, a note that opens the new practice set
+function builtNote(b){ let seen=[]; try{ seen=JSON.parse(localStorage.getItem('sff_bdone')||'[]'); }catch(e){}
+  if(seen.includes(b.id)||Date.now()-(b.endedAt||0)>6*36e5) return;
+  try{ localStorage.setItem('sff_bdone',JSON.stringify(seen.concat(b.id).slice(-30))); }catch(e){}
+  if(CUR_BUILD===b.id&&!$('vBuild').classList.contains('hidden')) return;
+  toast(`✓ ${esc(String(b.subject||''))} מוכן`, ()=>{ const s=getSet(b.setId); if(s){ curSet=s; go('kids'); renderReview(s); show('vReview'); } }); }
+// a build started on this phone by an older version of the app (it ran here): closed, its free build given back by the usual rule
+function oldBuildCleanup(){ try{ const cp=JSON.parse(localStorage.getItem('sff_build_cp')||'null'); localStorage.removeItem('sff_build_cp');
+  if(cp&&cp.token&&cp.token.buildId&&window.__sffAI) window.__sffAI.end(cp.token.buildId,false); }catch(e){} }
 
 /* ---------- review ---------- */
 // every word of the source list (set.words) should be a correct answer somewhere
@@ -2608,7 +2396,6 @@ function workShow(step, sub){ const w=$('workBox'); if(!w) return; w.classList.r
 function workDone(text, err){ if($('vReview').classList.contains('hidden')) toast((err?'⚠️ ':'✅ ')+text); const w=$('workBox'); if(!w) return; w.classList.remove('hidden'); w.classList.toggle('err',!!err); w.classList.toggle('done',!err);
   w.innerHTML=`<span style="font-size:1.4em">${err?'⚠️':'✅'}</span><div><b>${esc(text)}</b></div><button class="btn ghost small" onclick="$('workBox').classList.add('hidden')" aria-label="סגירה">✕</button>`; }
 // questions without any picture (catalog sets are checked when they are built – never touched here)
-const noPic=q=>!Array.isArray(q.scene)||!q.scene.length;
 function missingPics(set){ return set&&!set.demo&&!(set.src&&set.shared&&!set.edited) ? set.questions.filter(noPic) : []; }
 async function fixPictures(){
   const set=curSet; if(PIC_BUSY||!set||!sample) return; const n0=missingPics(set).length; if(!n0) return;
@@ -2877,9 +2664,6 @@ let delT=null;
 async function delSet(){ if(!curSet||curSet.demo) return; const id=curSet.id;
   if(!(await askSure({ico:'🗑',title:'למחוק את התרגול?',text:'התרגול וההתקדמות בו יימחקו מהאפליקציה.',yes:'מחיקה',danger:true}))) return;
   removeSet(id); curSet=null; go('kids'); toast('🗑 ✓'); }
-async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
-  if(b.state!=='err' && !(await askSure({ico:'✕',title:'לבטל את הבנייה?',text:'התרגול לא ייבנה, ומה שכבר נכתב יימחק.',yes:'ביטול הבנייה',no:'להמשיך לבנות',danger:true}))) return;
-  b.cancel=true; if(b.cp) endCp(b.cp,false); if(CUR_BUILD===b) CUR_BUILD=null; BUILDS=BUILDS.filter(x=>x!==b); renderKids(); }
 
 /* ---------- art (inline SVG – no external images) ---------- */
 function starPts(cx,cy,R,r){let p=[];for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r:R;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}return p.join(' ');}
@@ -3037,7 +2821,8 @@ function renderKids(){
     const act=ss.filter(x=>!setDone(x)).sort((a,b)=>(!!b.reinf)-(!!a.reinf)), fin=ss.filter(x=>setDone(x));
     const rows=act.map(x=>row(x)).join('')+(act.length?'':`<p class="hint center" style="margin:4px 0">${ss.length?'🎉 כל התרגולים הסתיימו – ':''}מוסיפים תרגול מהקטלוג 📚</p>`)
       +(fin.length?`<details class="donesec"><summary>✓ תרגולים שהסתיימו · ${fin.length}</summary><div class="donelist">${fin.map(x=>row(x,setDone(x))).join('')}</div></details>`:'');
-    const pend=BUILDS.filter(b=>b.kidId===k.id).map(b=>`<div class="prow pending"><span class="subjico" style="background:#fff">${b.state==='err'?'⚠️':'⏳'}</span><span><span class="t">${esc(b.subject)}</span><span class="hint">${b.state==='err'?'':'~15 דק׳'}</span></span>${b.state==='err'?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}${b.state==='err'&&b.cp?`<button class="btn small" onclick="resumeBuild('${b.id}')">▶ להמשיך</button>`:''}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`).join('');
+    const pend=BUILDS.filter(b=>b.kidId===k.id&&!b.hidden&&(b.status==='running'||b.status==='failed')).map(b=>{ const err=b.status==='failed';
+      return `<div class="prow pending"><span class="subjico" style="background:#fff">${err?'⚠️':'⏳'}</span><span onclick="openBuild('${b.id}')" style="cursor:pointer"><span class="t">${esc(b.subject)}</span><span class="hint">${err?'':'~15 דק׳'}</span></span>${err?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}${err&&b.resumable?`<button class="btn small" onclick="resumeBuild('${b.id}')">▶ להמשיך</button>`:''}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`; }).join('');
     return `<div class="card herocard kidhero">
       <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small kmore" onclick="kidMenu(this,'${k.id}')" aria-label="עוד" aria-haspopup="menu">⋯</button></span></div>
       <div class="overall"><div style="position:relative;width:120px;height:120px">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:1.6em">${Math.round(pct*100)}%</b></div>
@@ -3429,10 +3214,6 @@ function rdChunk(){
   }catch(e){ RD.on=false; rdPaint(); }
 }
 const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
-// questions that only make sense next to their options ("Which is correct?", "מה נכון?", "מה מהבאים…") – choice only
-const OPTS_EN=/\bcorrect\b|\b(is|are) (correct|true|right|wrong|false)\b|^which (one|of these)\b|\bof these\b|odd one|doesn't belong|does not belong/i, OPTS_NOT=/\bNOT\b/;
-const OPTS_HE=/(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שיי?ך|יוצא דופן|יוצאת דופן|אינו |אינה |אינם |אינן |איננה|כתוב נכון|כתובה נכון|כתובות נכון|מבין אלה|מאלה|איזה משפט נכון|באיזו מילה יש|יש טעות|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן/;
-const needOpts=q=>{ const t=String(q.question).replace(/[\u2066-\u2069]/g,'').replace(/[\u0591-\u05C7]/g,''); return OPTS_EN.test(t)||OPTS_NOT.test(t)||OPTS_HE.test(t); };
 function modePool(set,id){
   const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q)&&!needOpts(q));
   if(id==='memory') return qs.filter(q=>shortA(q) && (!(q.scene||q.emoji) || cueTxt(q) || GENERIC_Q.test(q.question.trim())));   // a long question would hide its text on the small card
@@ -3610,7 +3391,6 @@ const SEG=window.Intl&&Intl.Segmenter?new Intl.Segmenter():null;
 function sceneItems(sc){ return sc.flatMap(it=>{ if(!PIC_CH.test(it.e)) return [it]; const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
   if(g.length<2) return [it]; const n=g.length, s=Math.min(it.s,125/n), step=Math.min(92/n,s/1.6*1.35), c=Math.min(Math.max(it.x,4+step*(n-1)/2),96-step*(n-1)/2);
   return g.map((e,j)=>({e,x:+(c+(j-(n-1)/2)*step).toFixed(1),y:it.y,s})); }); }
-const PIC_CH=/[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\u{1F000}-\u{1FAFF}\uFE0F\u20E3]/u;   // arrows (→) and math signs (−) are text
 function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true" translate="no"><i class="ground"></i>${sceneItems(sc).map(it=>{ const tx=!PIC_CH.test(it.e);
   const he=tx&&/[\u0590-\u05FF]/.test(it.e); return `<span class="${tx?'tx':''}${he?' he':''}" dir="${he?'rtl':tx?'ltr':'auto'}" style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`; }).join('')}</div>`; }
 function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
@@ -4006,8 +3786,6 @@ function resetKid(id){
   sets.filter(s=>kidOfSet(s)===k).forEach(s=>{ delete s.order; delete s.pos; }); store.save();
   pushProgress(id); resetKidForm(); renderKids(); toast(`↺ ${esc(k.name)} ✓`);
 }
-// a short key of a text (question / option) – history keeps it next to the index, so an updated set still finds them
-const tkey=t=>{ let h=2166136261; for(const c of String(t).replace(/[\s⁦-⁩]/g,'')){ h^=c.codePointAt(0); h=Math.imul(h,16777619)>>>0; } return h.toString(36); };
 function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
 function recordSession(by, right, n){
   const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
@@ -4320,6 +4098,7 @@ function rerender(){
   if(!$('vKids').classList.contains('hidden')) renderKids();
   else if(!$('vKid').classList.contains('hidden')) renderKidSets();
   else if(!$('vStats').classList.contains('hidden')){ fillStatsFilters(); renderStats(); }
+  else if(!$('vBuild').classList.contains('hidden')&&CUR_BUILD&&CUR_BUILD!=='send') renderBuild();      // a finished build waits for its set
 }
 function showCloudErr(msg){
   if(!window.SFF_KID_DEVICE) return;
@@ -4351,7 +4130,7 @@ async function cloudInit(){
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();
   if(!DB) return;
-  if(window.SFF_ROLE==='tutor'){ tutorCloud(); return; }
+  if(window.SFF_ROLE==='tutor'){ tutorCloud(); ME&&ME.id().then(watchBuilds).catch(()=>{}); return; }
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];
@@ -4373,6 +4152,7 @@ async function cloudInit(){
     storeSaveLocal(); rerender();
   },e=>showCloudErr(e&&e.message));
   DB.collection('progress').onSnapshot(q=>progDocs(q.docs),()=>{});
+  if(!window.SFF_KID_DEVICE) watchBuilds();
 }
 function progDocs(docs){
     let changed=false;
@@ -4781,7 +4561,7 @@ cloudInit().then(()=>{ const m=window.SFF_INVITE_MSG; if(!m) return;
     if(m==='joined'){ toast(`✓ הצטרפת למשפחה של ${esc((window.__sffFamily||{}).famName||'')}`); go('family'); }
     else if(String(m).startsWith('bad')) toast('⚠️ ההזמנה כבר נוצלה או שפג תוקפה – בקשו הזמנה חדשה');
     if(window.SFF_ROLE&&window.SFF_ROLE!=='owner'&&$('footDel')) $('footDel').innerHTML='<span class="di">🚪</span>יציאה מהמשפחה';
-  }).then(openPendingAdd).then(()=>{ setTimeout(autoUpdateSets,2500); setTimeout(restoreBuild,3000); });
+  }).then(openPendingAdd).then(()=>{ setTimeout(autoUpdateSets,2500); setTimeout(oldBuildCleanup,3000); });
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
 // after a soft reload: keep the spinner until the cloud data is in, then fade it away
 (function(){ const h=document.documentElement; if(!h.classList.contains('soft')) return; const t0=Date.now(); $('splash')?.remove();

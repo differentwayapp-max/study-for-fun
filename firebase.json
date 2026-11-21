@@ -81,7 +81,10 @@
         ".git",
         "*.local"
       ],
-      "runtime": "nodejs22"
+      "runtime": "nodejs22",
+      "predeploy": [
+        "cp \"$PROJECT_DIR/public/build-core.js\" \"$RESOURCE_DIR/build-core.js\""
+      ]
     }
   ],
   "emulators": {

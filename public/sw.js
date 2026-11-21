@@ -6,6 +6,7 @@ const SHELL = [
   '/index.html',
   '/firebase-config.js',
   '/i18n.js',
+  '/build-core.js',
   '/kid-rest.js',
   '/manifest.webmanifest',
   '/icons/icon-192.png',

@@ -176,7 +176,8 @@ service cloud.firestore {
       // monthly quota and paid credits – written only by the server (Cloud Functions), read by the family's adults
       match /usage/{month} { allow read: if isAdult(familyId); allow write: if false; }
       match /billing/{doc} { allow read: if isAdult(familyId); allow write: if false; }
-      match /builds/{id} { allow read: if isFull(familyId); allow write: if false; }
+      // a build: the parent and the helpers; a tutor sees only the builds it started (its own build screen)
+      match /builds/{id} { allow read: if isFull(familyId) || (isTutor(familyId) && resource.data.by == request.auth.uid); allow write: if false; }
       // failure log (what failed and why – no prompt text): adults add entries and read them; a kid's phone adds
       // entries too (a sound check on the kid's own phone), but cannot read them
       match /errlog/{id} {

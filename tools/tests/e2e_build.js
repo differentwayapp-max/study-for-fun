@@ -77,7 +77,9 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   await p.screenshot({ path: `${OUT}/build_done.png` });
 
   console.log('4. costs');
-  const builds = await list(`families/${fam}/builds`), done = builds.filter(x => x.status === 'done');
+  // the build is marked done by a call the app does not wait for – wait for it here (up to 15 s)
+  let builds = []; for (let i = 0; i < 30; i++) { builds = await list(`families/${fam}/builds`); if (builds.some(x => x.status === 'done')) break; await new Promise(r => setTimeout(r, 500)); }
+  const done = builds.filter(x => x.status === 'done');
   const bd = done[done.length - 1] || {};
   ok(done.length === 1 && bd.usd > 0 && bd.steps && bd.steps.gen.calls >= 5 && bd.steps.match && bd.steps.select && bd.steps.solve && bd.steps.review, 'the build has its cost: total and per step ' + JSON.stringify(Object.keys(bd.steps || {})));
   const month = await p.evaluate(() => monthKeyIL()), m = await get(`meta/ai_spend_${month}`), u = await get(`families/${fam}/usage/${month}`);

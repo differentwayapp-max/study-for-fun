@@ -17,11 +17,12 @@ async function serverLog(entry) {
     if (ok) await d.collection('serverLog').add({ at: Date.now(), ...entry });
   } catch (_) {}
 }
-const SLOW_MS = 7 * 60 * 1000;
+const SLOW_MS = 5 * 60 * 1000;                // a call this slow is noted in the server log
+const AI_TIMEOUT_MS = 7 * 60 * 1000;          // one AI request at most (the function itself is killed at 9 minutes)
 const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   const t = Date.now(), name = (fn.name || 'call');
   try { const r = await fn(req); const ms = Date.now() - t; console.log(`${name} ok ${ms}ms`);
-    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – close to the 9-minute limit', ms });
+    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – over 5 minutes (an AI request stops at 7)', ms });
     return r; }
   catch (e) {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
@@ -369,7 +370,9 @@ exports.ask = onCall(
     try {
       if (fake) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
       else {
-        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
+        // the SDK's own limit (10 minutes, 2 retries by default) is longer than this function's 9 minutes – then a slow call was
+        // killed with no error and no log. 7 minutes, no retry: a slow call ends here as an error, logged, and the app can go on.
+        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim(), timeout: AI_TIMEOUT_MS, maxRetries: 0 });
         const params = {
           model,
           max_tokens: step.max_tokens,
@@ -380,10 +383,16 @@ exports.ask = onCall(
         };
         // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
         if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
-        msg = await client.beta.messages.stream(params).finalMessage();
+        // the whole answer, streamed, within AI_TIMEOUT_MS (the SDK's timeout alone may cover only the start of a stream)
+        const ac = new AbortController(), tm = setTimeout(() => ac.abort(), AI_TIMEOUT_MS);
+        try { msg = await client.beta.messages.stream(params, { signal: ac.signal }).finalMessage(); }
+        catch (e) { if (ac.signal.aborted) { const t = new Error('ai_slow'); t.aiSlow = true; throw t; } throw e; }
+        finally { clearTimeout(tm); }
       }
     } catch (e) {
-      await settle(famId, callId, name, buildId, 0, false);   // an API error before an answer is not billed
+      // an API error before an answer is not billed; a request stopped for slowness may have been – counted at its most
+      if (e && e.aiSlow) await settle(famId, callId, name, buildId, maxUsd); else await settle(famId, callId, name, buildId, 0, false);
+      if (e && e.aiSlow || e instanceof Anthropic.APIConnectionTimeoutError) { console.error('Anthropic timeout', name); throw new HttpsError('deadline-exceeded', 'ai_slow', { reason: 'ai_slow', step: name }); }
       if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
       if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
       if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }

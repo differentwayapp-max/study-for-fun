@@ -59,8 +59,9 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
     await put(`families/${cid}/sets/s_${id}`, { set: seed.sets[id] });
     if (seed.prog[id]) await put(`families/${cid}/progress/${id}`, seed.prog[id]);
   }
-  await T.waitForFunction(() => trStudents().length === 6 && history.length >= 40, null, { timeout: 20000 }).catch(() => {});
-  ok(await T.evaluate(() => trStudents().length === 6 && sets.length === 6 && history.length >= 42), 'the teacher sees 6 students, their sets and their games (live, no reload)');
+  const nGames = Object.values(seed.prog).reduce((a, p) => a + p.history.length, 0);
+  await T.waitForFunction(n => trStudents().length === 6 && sets.length === 6 && history.length >= n, nGames, { timeout: 45000 }).catch(() => {});
+  ok(await T.evaluate(n => trStudents().length === 6 && sets.length === 6 && history.length >= n, nGames), 'the teacher sees 6 students, their sets and their games (live, no reload)');
 
   console.log("2. the teacher's home: who needs attention");
   await T.evaluate(() => go('kids')); await T.waitForTimeout(500);

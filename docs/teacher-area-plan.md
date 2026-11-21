@@ -1,0 +1,366 @@
+# אזור למורים – תכנון
+
+מסמך תכנון בלבד. לא שיניתי קוד. כל עובדה על הקוד הקיים נבדקה בקבצים: `firestore.rules`, `showLogin` ו-bootstrap המשפחות ב-`public/index.html`, ו-`startBuild`/`endBuild`/`claimCall`/`reserve` ב-`functions/index.js`.
+
+## 0. מה קיים היום (רלוונטי לתכנון)
+
+- **משפחה** = `families/{uid של ההורה המייסד}`. `isOwner(f)` הוא `request.auth.uid == f`, בלי קריאה למסמך.
+- **מסמך המשפחה** מכיל:
+  - `inviteToken`;
+  - `kidTokens.{kidId}` (הסוד של כל קישור ילד);
+  - `name`.
+  - המסמך קריא רק למבוגרים (`isAdult`).
+- **מכשיר ילד:**
+  - כניסה אנונימית.
+  - `devices/{uid}` = `{token, kid, at}`. ההצטרפות מותרת רק עם `kidTokens[kid]`.
+  - **המכשיר קורא את כל `fam/kids`, את כל `sets` ואת כל `progress/*` של המשפחה.** הוא כותב רק את ה-progress של הילד שלו.
+- **מבוגרים נוספים:**
+  - `members/{uid}` עם role מסוג admin, helper או tutor, דרך `invites/{code}` חד-פעמי.
+  - **ב-rules, tutor קורא את כל המשפחה.** ההגבלה ל"ילדים שנבחרו" קיימת רק בממשק.
+- **`users/{uid}`:**
+  - `fams[]`, `terms`, `intro`.
+  - בכל כניסה של מבוגר נוצרת לו משפחה משלו (`families/{uid}`).
+  - המשפחה הפעילה נשמרת ב-`sff_active_fam`. מעבר בין משפחות = soft reload (`switchTo`).
+- **מכשיר ילד מחזיק קישור אחד בלבד** (`sff_fam`, `sff_tok`, `sff_lock`).
+  - קישור ילד של משפחה אחרת שנפתח בטלפון שמחובר ל-Google **מנתק את חשבון ה-Google** (התנאי `firstUser.uid !== f`).
+- **תרגולים:** כל תרגול שייך לילד אחד (`kidId`, `name` = שם הילד). הוספה ל-3 ילדים יוצרת 3 עותקים.
+- **היסטוריה:** `progress/{kidId}` = `{history (עד 300 משחקים), profile}`. כל משחק כולל `qr`, `qk` ו-topics, ולכן מסמך של ילד פעיל יכול להגיע למאות KB.
+- **מכסות בשרת:** הכול לפי `famId`:
+  - `families/{f}/usage/{month}`: builds, light, usd, res;
+  - `billing/main`, `builds/{id}`;
+  - `FAMILY_CAP_USD = 8`.
+  - `checkFamily` מקבל רק `uid == famId` או member.
+
+## 1. ההמלצה שלך – מה נכון ומה צריך לשנות
+
+**בגדול נכונה, והיא עדיפה על אוסף נפרד** (`classes/{id}`). אוסף נפרד היה מחייב לשכפל את כל ה-rules ואת כל נתיבי הקוד בלקוח (`DB.collection('sets')`, `progress`, `devices`, קישורי ילד). כך הקבוצה מקבלת את המנגנונים הקיימים בחינם.
+
+**חמישה שינויים נדרשים:**
+
+1. **`isOwner` דרך `get()`: רק לקבוצות, רק עם מזהה בן 20 תווים, ו-`ownerUid`/`kind` לא ניתנים לשינוי.**
+   - uid של Firebase הוא באורך 28 תווים, ומזהה אקראי של Firestore באורך 20. לכן `autoId(id)` ביצירת קבוצה מבטיח שאי אפשר ליצור "קבוצה" על ה-uid של הורה קיים או עתידי.
+   - משפחה רגילה לא תוכל לקבל `ownerUid`. אחרת הורה יכול "להעניק" למישהו אחר בעלות על המשפחה שלו.
+   - הבדיקה `uid == f` נשארת ראשונה, כך שמשפחה רגילה לא משלמת על `get()` נוסף.
+2. **בכיתה, מכשיר של תלמיד לא יכול לקרוא את כל הכיתה.**
+   - היום מכשיר קורא את `fam/kids` (שמות כל הילדים) ואת `progress` של כולם. במשפחה זה בסדר, אבל בכיתה של 35 ילדים זרים זו חשיפה של קטינים.
+   - בכיתה מכשיר יקרא רק את הרשומה שלו (`kidpub/{kidId}`) ואת ה-progress שלו.
+3. **תרגולים בכיתה משותפים, לא עותק לכל ילד.**
+   - בכיתה, `set` אחד עם `to: 'all' | [kidIds]` ו-`due`.
+   - 35 עותקים של תרגול היו 35 מסמכים כבדים, וגם היו שומרים את שם הילד בתוך התרגול.
+4. **המכסה ותקרת העלות לפי המורה, לא לפי הקבוצה.**
+   - אחרת מורה עם 5 קבוצות מקבל 25 בניות ו-40$.
+   - המונים יישמרו ב-`teachers/{uid}/usage/{month}` (בשרת בלבד).
+5. **מפת החום לא תקרא את ה-history של 35 ילדים** (עד 300 משחקים כל אחד, כמה MB לטלפון).
+   - פונקציית שרת תסכם כל משחק למסמך קטן אחד: `fam/board`.
+
+**הורה עוקב:**
+- `guardians/{parentUid}` טוב, אבל **הוא לא member ולא `isAdult`**. מסמך הקבוצה מכיל את `kidTokens` של כל התלמידים, ו-`isAdult` פותח אותו.
+- ה-guardian נוצר רק דרך פונקציית שרת של הסכמה, לא בכתיבה ישירה מהלקוח.
+
+**ילד שכבר במשפחה:** רשומת ילד נפרדת בכיתה. נכון.
+
+## 2. מודל הנתונים
+
+```
+families/{classId}                       classId = מזהה אקראי של 20 תווים
+  kind: 'class'                          (משפחה רגילה: בלי השדה)
+  ownerUid: <uid המורה>                  לא ניתן לשינוי
+  teach: 'class' | 'private'            אותם מסכים, מילים שונות
+  name: "ד'2 – חשבון" | "התלמידים שלי"
+  grade, subject                         ברירת מחדל לבנייה ולקטלוג
+  inviteToken, kidTokens.{kidId}         כמו היום (קריא רק למורה ולמורים שותפים)
+  createdAt, archived?: bool
+
+  /fam/kids        { list: [{id, name, grade, color}] }      רק המורה (ולא מכשירי התלמידים)
+  /fam/info        { teacher, className, subject }          קריא ל-guardians ולמכשירים – מה שמוצג להם
+  /fam/board       { kids: {kidId: {nick, last, days7, ch: {setId: {ci: [pct, stars, n]}}, pts}}, at }
+                   נכתב רק על ידי השרת (סיכום אחרי כל משחק)
+  /kidpub/{kidId}  { list: [{id, name, grade, color}] }      המכשיר של אותו תלמיד בלבד (מחליף את fam/kids אצלו)
+  /consents/{kidId}  { status: 'pending'|'digital'|'paper'|'revoked', letterV, at, by,
+                       parentName?, parentUid?, note? }       המורה קורא; השרת כותב digital/revoked; המורה כותב paper
+  /consentReq/{code} { kid, exp, used }                      נוצר על ידי המורה; נקרא על ידי השרת בלבד
+  /guardians/{parentUid} { kids: [kidId], at, consent }      נוצר רק בשרת (giveConsent)
+  /sets/{setId}    התרגול הקיים + to: 'all' | [kidId…], due, ass: {by, at}   (בלי kidId ובלי שם ילד)
+  /progress/{kidId}  כמו היום
+  /devices/{uid}     כמו היום
+  /notes/{kidId}     { text, at }                            הערות פרטיות: רק המורה והמורים השותפים
+  /reports/{kidId}/items/{id} { text, at, period, by }     דוח להורה: המורה כותב; ה-guardian של הילד קורא
+  /members/{uid}     מורה שותף/ה (role admin), דרך invites הקיים
+  /builds, /errlog   כמו היום
+
+teachers/{uid}/usage/{month}  { builds, light, usd, res, refunds }   השרת בלבד; המורה קורא
+users/{uid}   + roles: ['teacher'], teach: 'class'|'private', classes: [classId…], follows: [classId…]
+```
+
+**שימו לב:**
+- **מסך "מה דורש את תשומת לבי":** מחושב בלקוח מ-`fam/board` בלבד:
+  - תקועים = שני משחקים אחרונים באותו פרק מתחת ל-50%;
+  - לא תרגלו = 0 ימים בשבוע, או מפגרים מול ה-`due`;
+  - מתקדמים = כוכבים חדשים השבוע.
+- **הקשר בין ההורה לכיתה** מגיע מ-`users/{uid}.follows`, בלי למנות את כל הכיתה.
+
+## 3. השינויים ב-firestore.rules
+
+```
+function famDoc(f) { return get(famPath(f)).data; }
+function isClass(f) { return famDoc(f).get('kind', '') == 'class'; }
+// owner: the founding parent (as today) – or the teacher of a class
+function isOwner(f) { return google() && (request.auth.uid == f
+  || (isClass(f) && famDoc(f).ownerUid == request.auth.uid)); }
+function isGuardian(f, kid) { return google()
+  && exists(/databases/$(database)/documents/families/$(f)/guardians/$(request.auth.uid))
+  && kid in get(/databases/$(database)/documents/families/$(f)/guardians/$(request.auth.uid)).data.kids; }
+function isGuardianAny(f) { return google() && exists(/databases/$(database)/documents/families/$(f)/guardians/$(request.auth.uid)); }
+function consented(f, kid) { return get(/databases/$(database)/documents/families/$(f)/consents/$(kid)).data.status in ['digital','paper']; }
+
+match /families/{familyId} {
+  allow read: if isAdult(familyId);                                   // ללא שינוי – guardian לא כאן
+  // משפחה רגילה – בדיוק כמו היום, ואסור להכניס לה kind/ownerUid
+  allow create: if (isOwner(familyId) && !('kind' in request.resource.data) && !('ownerUid' in request.resource.data))
+  // קבוצה של מורה: מזהה אקראי, הבעלים הוא היוצר
+    || (google() && autoId(familyId) && request.resource.data.kind == 'class'
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['kind','ownerUid','teach','name','grade','subject','inviteToken','kidTokens','createdAt']));
+  allow update: if isAdmin(familyId)
+    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['kind','ownerUid']);
+  allow delete: if isOwner(familyId);
+
+  match /devices/{uid} {
+    // כמו היום + בקבוצה: רק לתלמיד שההורה שלו הסכים
+    allow create, update: if <התנאי הקיים> && (!isClass(familyId) || consented(familyId, request.resource.data.kid));
+  }
+  match /fam/{docId} {
+    allow read: if isAdult(familyId)
+      || (isDevice(familyId) && (!isClass(familyId) || docId == 'info'))
+      || (docId == 'info' && isGuardianAny(familyId));
+    allow write: if isAdmin(familyId) && docId != 'board';             // board – השרת בלבד
+  }
+  match /kidpub/{kidId} {
+    allow read: if isAdult(familyId) || (isDevice(familyId) && deviceKid(familyId) == kidId);
+    allow write: if isAdmin(familyId);
+  }
+  match /sets/{setId} {                                                 // בקבוצה: guardian קורא, לא כותב
+    allow read: if isAdult(familyId) || isDevice(familyId) || (isClass(familyId) && isGuardianAny(familyId));
+    ...הכתיבה כמו היום
+  }
+  match /progress/{kidId} {
+    allow read: if isAdult(familyId)
+      || (isDevice(familyId) && (!isClass(familyId) || deviceKid(familyId) == kidId))
+      || isGuardian(familyId, kidId);
+    ...הכתיבה כמו היום
+  }
+  match /consents/{kidId} { allow read: if isAdult(familyId);
+    allow write: if isAdmin(familyId) && request.resource.data.status in ['pending','paper']
+      && request.resource.data.keys().hasOnly(['status','letterV','at','by','note']); }   // digital/revoked – השרת
+  match /consentReq/{code} { allow create, delete: if isAdmin(familyId); allow read: if isAdult(familyId); }
+  match /guardians/{uid} { allow read: if isAdult(familyId) || (google() && request.auth.uid == uid);
+    allow delete: if isAdmin(familyId) || (google() && request.auth.uid == uid); allow create, update: if false; }
+  match /notes/{kidId} { allow read, write: if isAdmin(familyId); }
+  match /reports/{kidId}/items/{id} { allow read: if isAdult(familyId) || isGuardian(familyId, kidId);
+    allow write: if isAdmin(familyId); }
+}
+```
+
+**אחרי השינוי:**
+- **משפחה רגילה:** `isClass(f)` מחזיר false, וכל תנאי חדש מסתיים כמו היום.
+- **מחיר:** `isClass` מוסיף `get()` של מסמך המשפחה. Firestore לא מחייב פעמיים על אותו מסמך באותה בקשה, ו-`kidToken` כבר קורא אותו היום.
+- **מגבלת 10 `get`/`exists` לבקשה:**
+  - הנתיב הכבד הוא כתיבת progress של מכשיר בכיתה: משפחה, members, devices, device kid ו-consent, כלומר כ-5 קריאות.
+  - בתוך המגבלה, אבל צריך בדיקה.
+
+## 4. השרת (functions/index.js)
+
+- **`checkFamily(uid, famId)`:** מכיר גם `kind=='class' && ownerUid==uid`.
+- **`usageScope(famId)`:** מחזיר `{ref: teachers/{ownerUid}/usage/{month}, free: TEACHER_FREE_BUILDS, cap: TEACHER_CAP_USD}` לקבוצה, ואת הערכים הקיימים למשפחה.
+  - `startBuild`, `endBuild`, `claimCall` (light) ו-`reserve`/`settle` משתמשים בו.
+  - `TEACHER_FREE_BUILDS = 5` ו-`TEACHER_CAP_USD` הם קבועים בשרת בלבד.
+  - הלקוח מקבל רק `used/free` בתשובה, כמו היום.
+- **`giveConsent({classId, code, accept, parentName})`** (callable, הורה מחובר):
+  - בודק את הקוד: לא בשימוש, לא פג תוקף.
+  - כותב `consents/{kid}` = digital, עם `letterV` (גרסת המכתב), שעה ו-uid.
+  - יוצר `guardians/{uid}` ומוסיף ל-`users/{uid}.follows`.
+  - מסמן את הקוד כמשומש.
+- **`revokeConsent({classId, kid})`** (ההורה):
+  - מסמן revoked.
+  - מוחק את `devices` של הילד ואת `kidTokens[kid]`, כך שהקישור מפסיק לעבוד.
+  - מוחק את ה-guardian.
+  - מה קורה ל-progress: ראו שאלה 5 בשאלות הפתוחות.
+- **`onProgressWrite`** (טריגר Firestore, רק כש-`kind=='class'`): מסכם את המשחק האחרון ל-`fam/board`. כ-35 כתיבות ביום לכיתה פעילה, עלות זניחה.
+- **התראות:** אין התראות push היום. דוח להורה = כתיבה ל-`reports` ושליחה בוואטסאפ, כמו שאר השיתופים באפליקציה.
+
+## 5. מסכים וזרימות
+
+| מסך / זרימה | מה הוא עושה | מה נלקח מהקוד הקיים |
+|---|---|---|
+| כניסה: כרטיס שלישי "אני מורה" | Google או מייל, כמו הורה. שומר `users.roles` | `showLogin` (מוסיפים `.fbcard`), תנאי השימוש, `askConsent`. **מייל מחייב להפעיל Email link ב-Firebase** (היום `EMAIL_LINK=false`) |
+| בחירה ראשונה: מורה לכיתה או מורה פרטי/ת | שאלה אחת, ואחריה "פותחים קבוצה" (שם, כיתה, מקצוע) | עיצוב האשף, `GRADES`, רשימת המקצועות |
+| מחליף קבוצות | רשימת הקבוצות (ומשפחה, אם יש) בראש המסך | `SFF_FAMS` ו-`switchTo` (soft reload), עם קבוצות מ-`users.classes` |
+| הוספת תלמידים | שם (מומלץ שם פרטי ואות), כיתה. מצב: "ממתין להסכמה" | כרטיס "➕ ילד/ה" + `consents` |
+| הסכמת הורים | לכל תלמיד: "📩 לשלוח מכתב הסכמה" (קישור וואטסאפ עם קוד) או "📄 סימון: התקבל טופס מודפס". קישור הילד נפתח רק אחרי הסכמה | `openKidLink`/`klWa` (וואטסאפ), `invites` (קוד חד-פעמי) |
+| מסך ההסכמה להורה | `/?consent=<classId>.<code>`: המכתב (מורה, קבוצה, מה נאסף, מה ההורה רואה), כניסה ואישור, ואפשרות "לעקוב אחרי הילד" | מסך הכניסה, `TERMS_VERSION` כמודל ל-`letterV` |
+| בית המורה: "מה דורש את תשומת לבי היום" | שלוש רשימות: תקועים, לא תרגלו, מתקדמים. לחיצה פותחת כרטיס תלמיד | `fam/board`. החישוב דומה ל-`kidStreak`/`trophyDays`/`PASS` |
+| מפת חום | תלמידים × פרקים של משימה, צבע לפי %. בטלפון: רשימה עם פס קטן לכל תלמיד. המפה המלאה רק מ-900px | `PASS=.7`, צבעי "לחזק / כמעט / שולט" ממסך המעקב |
+| כרטיס תלמיד | משימות, % לפי פרק, טעויות, הערות פרטיות, "דוח להורה" | מסך המעקב (`renderStats`, `openMistakes`) מצומצם לילד אחד |
+| משימה ב-3 צעדים | מה (קטלוג / בנייה עם AI / תרגול קיים) ← למי (כולם / קבוצה / בחירה) ← עד מתי (`due` = `examDate`) | הקטלוג, האשף ו-`build()`, `defGoalCh` (חלוקה לימים) |
+| דוח קצר להורה | טקסט מוכן מ-board (אפשר לערוך). נשמר ב-`reports` ונשלח בוואטסאפ | דפוס `wa.me` הקיים. אופציונלי: שלב AI `report2` (שיחה light) |
+| הצד של הילד | הבית מציג רק את המשימות של הילד, עם תאריך יעד. אם הילד גם במשפחה: מתג "🏠 בית / 🏫 כיתה" | מסלול הילד והמשחקים בלי שינוי. `sff_links` חדש (כמה קישורים במכשיר) |
+| הורה עוקב | "📚 הכיתה של נועה": משימות, % לפי משימה, דוחות. קריאה בלבד | כרטיס הילד במסך המעקב, לקריאה בלבד |
+| ☰ למורה | קבוצות, מורה שותף/ה (invites עם role admin), תנאי שימוש, מדריך | הדרואר הקיים (`pside`) |
+| היכרות למורה | 3–4 מסכים | `INTRO` (מסכי ההיכרות שנבנו עכשיו) |
+
+## 6. סיכונים
+
+**אבטחה**
+- **פרצה ב-`isOwner`:** זו הפונקציה עם ההשפעה הרחבה ביותר. נדרשים מבחני rules שמוכיחים שמשפחה רגילה לא השתנתה:
+  - אי אפשר ליצור קבוצה על uid של מישהו;
+  - אי אפשר להוסיף או לשנות `ownerUid`;
+  - מורה של קבוצה א' לא קורא קבוצה ב'.
+- **`kidTokens` במסמך הקבוצה:** guardian או מכשיר שיקבלו `isAdult` יראו את הקישורים של כל הכיתה. לכן guardian לא נכנס ל-members.
+- **קישור ילד שדלף** = גישה כמו של הילד: המשימות, השם שלו, ולוח האלופים אם הופעל.
+  - אפשר להחליף קישור (כמו היום, דרך `kidTokens`).
+  - שווה לשקול מגבלת מכשירים לתלמיד (בשרת, כי rules לא סופרים).
+- **התנאי שמנתק חשבון Google בקישור ילד** (`firstUser.uid !== f`):
+  - מורה שפותח קישור של תלמיד שלו לבדיקה, או הורה עוקב שפותח את הקישור בטלפון שלו, ינותקו.
+  - צריך לבדוק גם את `ownerUid`, ולהוסיף "תצוגה כילד" מתוך האפליקציה (כמו מצב הנעילה היום).
+- **ה-role tutor הקיים במשפחות** קורא ב-rules את כל המשפחה, כולל ילדים שלא נבחרו. זה סותר את דרישה 5 ברוח.
+  - מורים פרטיים יעברו לאזור החדש.
+  - כדאי לתקן את ה-rules של tutor בנפרד, או להסיר את ה-role.
+
+**פרטיות קטינים**
+- הסכמת הורה לפני כל איסוף: אין קישור ילד ואין progress בלי `consents.status` תקין. זה נאכף ב-rules, לא רק בממשק.
+- מינימום מידע:
+  - שם פרטי ואות;
+  - בלי תמונות (תמונות אווטאר כבר נחסמות היום);
+  - בלי אימייל לילד.
+- הורה עוקב רואה רק את הילד שלו, בלי `fam/kids` ובלי `notes`.
+- תלמידים לא רואים זה את זה. לוח אלופים כיתתי רק אם המורה מפעיל, ורק בכינוי. ראו שאלה 3.
+- זמן שמירה ומחיקה: סוף שנה, ארכוב, מחיקה, ומחיקה כשההורה מבטל את ההסכמה.
+- צריך לעדכן את מדיניות הפרטיות ואת תנאי השימוש, ולהכין מכתב הסכמה עם גרסה. **מומלץ ייעוץ משפטי** לפני הפעלה: זה מידע על קטינים, מורה שפועל/ת אולי מטעם בית ספר, ומי "בעל המאגר".
+
+**ביצועים (35 תלמידים)**
+- **בלי סיכום בשרת:** 35 מסמכי progress, כל אחד עד 300 משחקים, כלומר כמה MB בכל פתיחה בטלפון, ו-35 מאזינים פתוחים.
+- **עם `fam/board`:** מסמך אחד, בערך 35 × (10 פרקים × 3 מספרים) ≈ 15–30KB. מגבלת מסמך היא 1MB, כך שיש מקום גם ל-40 תלמידים × 3 משימות פעילות.
+  - משימות שהסתיימו יוצאות מה-board לארכיון.
+- **ציור:** 35 × 10 = 350 תאים זה קל. במסך צר מציגים רשימה ולא טבלה.
+- **כתיבה:** כל משחק = כתיבת progress ופונקציה אחת. בלי בעיה.
+- **תרגולים משותפים** (`to`) חוסכים 35 עותקים של כל משימה.
+
+## 7. שלבים ובדיקות
+
+**שלב 1 – כניסת מורה וקבוצות**
+- **מה נבנה:**
+  - כרטיס "אני מורה";
+  - בחירה: כיתה או פרטי;
+  - יצירת קבוצה (`kind:'class'`, `ownerUid`, מזהה אקראי);
+  - `users.classes`, מחליף קבוצות;
+  - `isOwner` ו-`checkFamily` מורחבים;
+  - הוספת תלמידים (עדיין בלי קישור).
+- **בדיקות:**
+  - `e2e_teacher.js`:
+    - מורה פותח 2 קבוצות;
+    - מורה שהוא גם הורה: המשפחה שלו לא השתנתה;
+    - מעבר בין קבוצה למשפחה.
+  - `local_rules`/`e2e_security`, הרחבה:
+    - קבוצה על uid של מישהו – נדחה;
+    - `ownerUid` במשפחה רגילה – נדחה;
+    - שינוי `ownerUid` – נדחה;
+    - מורה א' לא קורא קבוצה ב'.
+  - כל בדיקות המשפחה הקיימות עוברות בלי שינוי: e2e_family, e2e_security, e2e_users, e2e_quota.
+  - qa_screens: מסכי הכניסה והקבוצה בעברית ובאנגלית, ברוחב 360 ו-320.
+
+**שלב 2 – הסכמת הורים**
+- **מה נבנה:**
+  - `consents` ו-`consentReq`;
+  - מכתב הסכמה עם גרסה, ומסך הסכמה להורה;
+  - `giveConsent` ו-`revokeConsent`;
+  - סימון טופס מודפס;
+  - קישור ילד רק אחרי הסכמה (rules על `devices`).
+- **בדיקות:**
+  - `e2e_consent.js`:
+    - בלי הסכמה, הצטרפות מכשיר נדחית;
+    - הסכמה דיגיטלית: המכשיר מצטרף;
+    - טופס מודפס: מצטרף;
+    - קוד בשימוש או שפג תוקפו נדחה;
+    - ביטול הסכמה: הקישור מפסיק לעבוד וה-guardian נמחק;
+    - הורה לא יכול לכתוב `consents` ישירות.
+  - i18n של המכתב.
+
+**שלב 3 – מסכי המורה**
+- **מה נבנה:**
+  - `onProgressWrite` ו-`fam/board`;
+  - `kidpub` ו-rules שמגבילים את מכשירי הכיתה;
+  - בית "תשומת לב", מפת חום, כרטיס תלמיד, הערות פרטיות.
+- **בדיקות:**
+  - `e2e_class_privacy.js`:
+    - מכשיר תלמיד לא קורא את `fam/kids`, את ה-progress של חבר או את `notes`;
+    - קורא את `kidpub` שלו בלבד.
+  - `e2e_class_board.js`: 35 תלמידים מדומים ו-10 פרקים.
+    - ה-board מתעדכן אחרי משחק;
+    - זמן פתיחה וכמות קריאות נמדדים, עם יעד (למשל 3 קריאות בפתיחה);
+    - צילום ב-360 וב-1200.
+  - local: חישוב "תקועים / לא תרגלו / מתקדמים" על נתונים קבועים.
+
+**שלב 4 – משימות ומכסת AI**
+- **מה נבנה:**
+  - משימה ב-3 צעדים;
+  - תרגול משותף עם `to` ו-`due`;
+  - בצד הילד: רק המשימות שלו;
+  - `usageScope`, `TEACHER_FREE_BUILDS = 5`, `TEACHER_CAP_USD`.
+- **בדיקות:**
+  - `e2e_assign.js`: משימה לקבוצת ילדים מופיעה רק אצלם, ותאריך היעד מחלק פרקים לימים.
+  - `e2e_quota_teacher.js` (עם functions):
+    - 5 בניות עוברות, השישית נדחית, גם כשהבניות מפוזרות על 2 קבוצות;
+    - תקרת העלות משותפת לכל הקבוצות;
+    - המשפחה של אותו אדם נשארת עם 3 בניות משלה;
+    - החזר בנייה שנכשלה עובד.
+  - e2e_build עם AI מדומה בתוך קבוצה.
+
+**שלב 5 – הורה עוקב ומכשיר עם שני קישורים**
+- **מה נבנה:**
+  - מסך "הכיתה של הילד" לקריאה בלבד;
+  - `users.follows`;
+  - `sff_links` ומתג בית/כיתה במכשיר הילד;
+  - תיקון התנאי שמנתק חשבון Google בקישור ילד.
+- **בדיקות:**
+  - `e2e_guardian.js`:
+    - ההורה רואה את הילד שלו;
+    - לא רואה ילד אחר, `fam/kids`, `notes` או מסמך הקבוצה (`kidTokens`);
+    - לא כותב כלום.
+  - `e2e_kid_two_links.js`:
+    - מכשיר עם משפחה וכיתה עובר ביניהן;
+    - ההתקדמות נשמרת בכל אחת בנפרד;
+    - מורה שפותח קישור של תלמיד לא מנותק.
+  - e2e_kid_rest ו-e2e_kid_nostorage במצב כיתה. שימו לב: הבדיקה הקיימת לא באמת חוסמת אחסון. מצאתי את זה בשלב ההיכרות, וצריך לתקן אותה קודם.
+
+**שלב 6 – דוח וליטוש**
+- **מה נבנה:**
+  - דוח קצר להורה: טקסט מוכן לעריכה, שמירה ב-`reports` ושליחה בוואטסאפ;
+  - היכרות למורה;
+  - מדריך, תנאים ופרטיות;
+  - תרגום מלא.
+- **בדיקות:**
+  - `e2e_report.js`: ה-guardian של הילד רואה את הדוח, הורה אחר לא.
+  - qa_screens מלא לכל מסכי המורה וההורה העוקב, בעברית ובאנגלית, ברוחב 360 ו-320 ובמסך רחב.
+  - e2e_terms אם גרסת התנאים משתנה.
+  - סקירת אבטחה של כל ה-diff.
+
+## 8. שאלות פתוחות – צריכות החלטה
+
+1. **הסכמה דיגיטלית:** האם ההורה חייב להיכנס (Google או מייל) כדי לאשר?
+   - **ההמלצה שלי: כן.** כך יש זהות מאומתת, אפשר לבטל, ומקבלים מיד גם מעקב.
+   - האפשרות האחרת: שם ותיבת סימון על קישור, בלי חשבון. ראיה חלשה.
+2. **נוסח מכתב ההסכמה**, עדכון מדיניות הפרטיות והתנאים, וייעוץ משפטי.
+   - האם מורה לכיתה פועל/ת מטעם בית הספר? זה משנה מי בעל המאגר ואולי מחייב אישור של בית הספר.
+3. **תלמידים בכיתה רואים זה את זה?**
+   - לוח אלופים כיתתי: כבוי כברירת מחדל? רק כינוי?
+   - ההמלצה: כבוי, ואם מופעל – רק כינוי.
+4. **איפה משחק ילד בלי טלפון משלו?**
+   - אם בטלפון של ההורה: ההורה העוקב צריך "מצב ילד" שכותב התקדמות, וזו לא קריאה בלבד.
+   - לאשר?
+5. **ביטול הסכמה:** למחוק מיד את ההתקדמות של הילד בקבוצה, או רק לנתק? ומה קורה בסוף השנה?
+6. **תקרת עלות למורה:** כמה? ההצעה: 12$ ל-5 בניות. ומה גודל קבוצה מקסימלי (35? 40?) וכמה קבוצות למורה?
+7. **מניעת ניצול:** "מורה" יכול לפתוח קבוצה רק כדי לקבל עוד 5 בניות לילד שלו. לחייב לפחות תלמיד אחד עם הסכמה לפני בנייה ראשונה, או לקבל את זה?
+8. **מייל בלי Google:** צריך להפעיל Email link ב-Firebase. בלי זה, מורים בלי Google לא ייכנסו.
+9. **ה-role tutor הקיים במשפחות:** להשאיר (ולתקן את ה-rules שלו), או להעביר מורים פרטיים לאזור החדש ולהסיר אותו?
+10. **מורה שאין לו ילדים:** לא ליצור לו משפחה ריקה (היום כל מבוגר מקבל אחת)?
+11. **מורה שותף/ה לקבוצה** (שתי מורות לאותה כיתה): נדרש כבר בגרסה הראשונה?

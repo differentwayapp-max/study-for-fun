@@ -53,7 +53,8 @@ const { SYSTEM, STEPS, Bad } = require('./prompts');
 // Every family gets FREE_BUILDS new practice sets a month. More need a paid credit (PRICE_ILS each),
 // added to families/{f}/billing/main.credits by the payment provider's webhook once payments open.
 // Small AI edits outside a build (fix a question, add pictures) are capped by LIGHT_CALLS a month.
-// The whole app stops calling the AI once this month's estimated spend reaches MONTHLY_CAP_USD.
+// The whole app stops calling the AI for the day once the day's estimated spend reaches DAILY_CAP_USD (no monthly cap for now:
+// MONTHLY_CAP_USD = Infinity; the month is still recorded in meta/ai_spend_<month>).
 const FREE_BUILDS = 3;
 const PRICE_ILS = 5;
 const LIGHT_CALLS = 40;
@@ -65,8 +66,8 @@ const LIGHT_CALLS = 40;
 //   = 1+1+1+10+30+34+5+10+10+10+10 = 122. A typical build (6 chapters × 10 questions) makes ~30 calls.
 const BUILD_CALLS = 125;
 const BUILD_HOURS = 3;                        // a build token is valid this long
-const MONTHLY_CAP_USD = 40;
-const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel time) – a runaway day cannot use the month
+const MONTHLY_CAP_USD = Infinity;            // no monthly cap for now (the owner's decision); the daily cap protects
+const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel time)
 // One family may use at most this much of the month's AI budget (3 normal builds cost far less),
 // so a single account can never use up the whole app's budget. Admins have no family limit.
 const FAMILY_CAP_USD = 8;
@@ -110,7 +111,8 @@ async function checkFamily(uid, famId) {
 }
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
-  if ((g.data()?.usd || 0) >= MONTHLY_CAP_USD) throw new HttpsError('resource-exhausted', 'budget', { reason: 'budget' });
+  const day = await db.doc(`meta/ai_day_${dayKey()}`).get();
+  if ((g.data()?.usd || 0) >= MONTHLY_CAP_USD || (day.data()?.usd || 0) >= DAILY_CAP_USD) throw new HttpsError('resource-exhausted', 'budget', { reason: 'budget' });
 }
 // this family's share of the month's AI spend (checked after checkFamily, so famId is valid)
 async function checkFamilyBudget(auth, famId) {
@@ -118,12 +120,12 @@ async function checkFamilyBudget(auth, famId) {
   const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
   if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
 }
-// once a month, when the AI spend passes 80% of the monthly cap: a line in the server log (red dot for the app admins, and the alert email)
+// once a day, when the AI spend passes 80% of the daily cap: a line in the server log (red dot for the app admins, and the alert email)
 async function spendAlert() {
-  const ref = db.doc(`meta/ai_spend_${monthKey()}`);
+  const ref = db.doc(`meta/ai_day_${dayKey()}`);
   const hit = await db.runTransaction(async t => { const d = (await t.get(ref)).data() || {};
-    if ((d.usd || 0) < MONTHLY_CAP_USD * 0.8 || d.alert80) return 0; t.set(ref, { alert80: Date.now() }, { merge: true }); return d.usd; });
-  if (hit) await serverLog({ fn: 'ask', kind: 'budget', code: '80%', msg: `AI spend this month: $${hit.toFixed(2)} of the $${MONTHLY_CAP_USD} cap`, ms: 0 });
+    if ((d.usd || 0) < DAILY_CAP_USD * 0.8 || d.alert80) return 0; t.set(ref, { alert80: Date.now() }, { merge: true }); return d.usd; });
+  if (hit) await serverLog({ fn: 'ask', kind: 'budget', code: '80%', msg: `AI spend today: $${hit.toFixed(2)} of the $${DAILY_CAP_USD} daily cap`, ms: 0 });
 }
 function dayKey(d = new Date()) {             // Israel time, e.g. "2026-11-20"
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);

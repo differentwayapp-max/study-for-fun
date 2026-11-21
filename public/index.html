@@ -1845,7 +1845,7 @@ function showQuotaErr(e){
   if(e?.code!=='quota') logFail('build:start', e, W.subject);
   W.step=4; wizRender();
   if(e?.code==='quota'){ const el=$('quotaLine'); el.innerHTML=quotaHtml({used:e.used??QUOTA.free, credits:e.credits||0}); el.className='quota out'; $('btnBuild').disabled=true; return; }
-  wizErr((e?.code==='budget'||e?.code==='family_budget') ? 'בניית תרגולים חדשים עצרה לחודש הזה. אפשר להוסיף תרגול מוכן מהקטלוג.' : 'לא הצלחנו להתחיל את הבנייה: '+(e?.message||e));
+  wizErr(e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. אפשר להוסיף תרגול מוכן מהקטלוג, או לנסות שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. אפשר להוסיף תרגול מוכן מהקטלוג.' : 'לא הצלחנו להתחיל את הבנייה: '+(e?.message||e));
 }
 /* ---------- failure log: families/{f}/errlog – what failed, where, why (no prompt text) ---------- */
 async function logFail(where, e, subject, who){
@@ -2194,7 +2194,7 @@ async function build(resume){
     const canGoOn = cp.token && cp.calls>3 && !['budget','family_budget','quota','build_calls','build_closed','not_granted'].includes(e?.code) && Date.now()-cp.at<BUILD_MS;
     if(canGoOn) cpSave(cp); else endCp(cp,false);
     setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
-    const msg = (e?.code==='budget'||e?.code==='family_budget') ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
+    const msg = e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
       : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
       : e?.code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
       : e?.code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'

@@ -4720,7 +4720,7 @@ function letterHtml(L, teacher, group){
   return box; }
 function joinShell(){ let el=$('joinPage'); if(!el){ el=document.createElement('div'); el.id='joinPage'; el.setAttribute('translate','yes'); document.body.appendChild(el); }
   el.innerHTML=`<div class="jbox"><img src="${$('logoFull')?.src||''}" alt="Study for fun" class="jlogo"><div id="jBody"><p class="center">⏳</p></div>
-    <div class="jfoot"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">${EN()?'עברית':'EN'}</button></div></div>`;
+    <div class="jfoot"><button class="btn ghost small" onclick="toggleLang()" translate="no">${EN()?'עברית':'English'}</button></div></div>`;
   return $('jBody'); }
 const joinErrTxt=c=>c==='link_closed'?'המורה סגר/ה את הקישור הזה. בקשו מהמורה קישור חדש.':c==='link_expired'?'תוקף הקישור הזה הסתיים. בקשו מהמורה קישור חדש.'
   :c==='link_bad'?'הקישור הזה לא תקין או שהוחלף. בקשו מהמורה את הקישור העדכני.':c==='no_signature'?'צריך לחתום בתוך המסגרת.'

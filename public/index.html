@@ -4570,13 +4570,17 @@ function introShow(dir){
 // the screen is drawn at 360 px wide; it is scaled to the phone: as wide as the screen, as tall as the space between the bars
 function introFit(el, minH){
   const st=el.querySelector('.istage'), c=el.querySelector('.icard0'); if(!st||!c) return;
-  c.style.height='auto'; const need=Math.max(minH||0, c.scrollHeight), W=st.clientWidth, H=st.clientHeight;
+  c.style.height='auto'; c.style.transform='none';
+  // the content's height: the text and cards (a phone picture may run off the bottom – it is cut, like in the design)
+  const top=c.getBoundingClientRect().top, flow=Math.max(0,...[...c.children].filter(x=>!x.classList.contains('iphone')).map(x=>x.getBoundingClientRect().bottom-top))+18;
+  const need=Math.max(minH||0, flow), W=st.clientWidth, H=st.clientHeight;
   const k=Math.min(W/360, 1.3, Math.max(H/need, .88));      // never smaller than 88% – a short phone scrolls the rest
   c.style.transform=`scale(${k})`; c.style.height=Math.max(need, H/k)+'px'; st.style.overflowY=need*k>H+1?'auto':'hidden';
   const sp=st.querySelector('.ispace')||st.appendChild(Object.assign(document.createElement('div'),{className:'ispace'})); sp.style.height=(Math.max(need, H/k)*k)+'px';
   c.style.left=Math.max(0,(W-360*k)/2)+'px';
 }
-window.addEventListener('resize',()=>{ const el=$('intro'); if(el) introFit(el, INTRO[el.dataset.key]?.(IN.kid).h); });
+const introRefit=()=>{ const el=$('intro'); if(el) introFit(el, INTRO[el.dataset.key]?.(IN.kid).h); };
+window.addEventListener('resize',introRefit); try{ document.fonts.ready.then(introRefit); document.fonts.addEventListener('loadingdone',introRefit); }catch(e){}
 function introGo(k){ if(k<0||k>=IN.list.length||k===IN.i) return; const d=k>IN.i?1:-1; IN.i=k; introShow(d); }
 // swipe: to the left goes on (Hebrew: to the right – the screens run from right to left)
 function introSwipe(el){ let x0=null,y0=0;

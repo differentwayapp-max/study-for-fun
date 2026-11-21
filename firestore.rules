@@ -18,7 +18,12 @@ rules_version = '2';
 //   families/{f}/usage/{YYYY-MM}  { builds, light } · billing/main { credits } · builds/{id}  – server only
 // families/{classId}             a teacher's group: kind 'class', ownerUid = the teacher, a random 20-character id (never a
 //                                uid – those are 28), made only by the server (createClass: at most 10 a teacher); kind and
-//                                ownerUid never change. Until parents' consent exists (stage 2): no kid devices, no other adults.
+//                                ownerUid never change. No other adults (no invitations).
+//   /consents/{kid}              a parent's consent (digital: signed in the app and approved by the teacher; paper: a signed
+//                                form the teacher marked) – a kid phone joins a group only with one; server only
+//   /joinReqs/{id}, /joinLink/main   parents' requests and the group's link – the teacher reads them; server only
+//   /kidpub/{kid}                the one student a student's phone may read (instead of fam/kids); fam/info – the group's name
+//   A student's phone in a group reads only its own student, progress and practice sets – never the other students.
 // teachers/{uid}                 { classes: [...] } – the server's count of a teacher's groups (read by that teacher)
 // meta/ai_spend_{YYYY-MM}        estimated AI spend this month (server only) · meta/ai_day_{date} (daily cap)
 //
@@ -55,6 +60,8 @@ service cloud.firestore {
     function tutorKids(f) { return get(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)).data.get('kids', []); }
     function tutorHas(f, kid) { return isTutor(f) && kid is string && kid in tutorKids(f); }
     function setKid(d) { return d.get('set', {}).get('kidId', null); }
+    function consented(f, kid) { return kid is string
+      && get(/databases/$(database)/documents/families/$(f)/consents/$(kid)).data.status in ['digital', 'paper']; }
     function isDevice(f) {
       return signedIn() && exists(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid));
     }
@@ -130,7 +137,7 @@ service cloud.firestore {
         // join (or move the phone to another kid of the family) only with that kid's link token
         allow create, update: if signedIn()
           && request.auth.uid == uid
-          && !isClass(familyId)                     // a group: kid phones join only after parents' consent (stage 2)
+          && (!isClass(familyId) || consented(familyId, request.resource.data.kid))   // a group: only with a parent's consent
           && request.resource.data.keys().hasOnly(['token', 'kid', 'at'])
           && request.resource.data.kid is string
           && request.resource.data.token is string
@@ -139,9 +146,17 @@ service cloud.firestore {
       }
 
       match /fam/{docId} {
-        allow read: if isFull(familyId) || isDevice(familyId);
-        allow write: if isAdmin(familyId);
+        // a group: a student's phone reads only the group's name (fam/info), never the students (fam/kids); the server writes both
+        allow read: if isFull(familyId) || (isDevice(familyId) && (!isClass(familyId) || docId == 'info'));
+        allow write: if isAdmin(familyId) && !isClass(familyId);
       }
+      match /kidpub/{kidId} {
+        allow read: if isFull(familyId) || (isDevice(familyId) && deviceKid(familyId) == kidId);
+        allow write: if false;
+      }
+      match /consents/{kidId} { allow read: if isAdmin(familyId); allow write: if false; }
+      match /joinReqs/{id} { allow read: if isAdmin(familyId); allow write: if false; }
+      match /joinLink/{id} { allow read: if isAdmin(familyId); allow write: if false; }
 
       // a tutor's own small view of the family (see the top)
       match /tutorView/{code} {
@@ -153,14 +168,16 @@ service cloud.firestore {
       // a tutor: only practice sets of the tutor's kids, and never moved to another kid (old and new kid both the tutor's)
       // (a tutor's query must ask for those kids only – rules don't filter)
       match /sets/{setId} {
-        allow read: if isFull(familyId) || isDevice(familyId) || tutorHas(familyId, setKid(resource.data));
+        allow read: if isFull(familyId) || tutorHas(familyId, setKid(resource.data))
+          || (isDevice(familyId) && (!isClass(familyId) || setKid(resource.data) == deviceKid(familyId)));   // a group: its own student's
         allow create: if isFull(familyId) || tutorHas(familyId, setKid(request.resource.data));
         allow update: if isFull(familyId) || (tutorHas(familyId, setKid(resource.data)) && tutorHas(familyId, setKid(request.resource.data)));
         allow delete: if isAdmin(familyId);
       }
 
       match /progress/{kidId} {
-        allow read: if isFull(familyId) || isDevice(familyId) || tutorHas(familyId, kidId);
+        allow read: if isFull(familyId) || tutorHas(familyId, kidId)
+          || (isDevice(familyId) && (!isClass(familyId) || deviceKid(familyId) == kidId));                   // a group: its own only
         allow write: if (isFull(familyId) || tutorHas(familyId, kidId) || (isDevice(familyId) && deviceKid(familyId) in [null, kidId]))
           && request.resource.data.keys().hasOnly(['history', 'profile']);
         allow delete: if isAdmin(familyId);

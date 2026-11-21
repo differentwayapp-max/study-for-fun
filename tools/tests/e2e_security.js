@@ -10,6 +10,7 @@
 //  9. a tutor reads and writes only the kids of the invitation, never a link secret; helpers and admins as before
 // 10. a new kid link: the old link and the phones that joined with it stop working
 // 11. teachers' groups: made by the server only (random id, ≤ 10), kind/ownerUid fixed, one teacher never sees another's
+// 12. a group: a phone joins only with a parent's consent and reads only its own student; requests/consents: the teacher, by the server
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_security.js"
 const { chromium } = require('playwright');
 const FS = 'http://127.0.0.1:8080', AU = 'http://127.0.0.1:9099', PROJ = 'study-for-fun-7b03c';
@@ -183,7 +184,7 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     ok(await write(tA, `families/${A}`, { ownerUid: tB.uid }, '?updateMask.fieldPaths=ownerUid') === 403, "changing a group's ownerUid: refused");
     ok(await write(tA, `families/${A}`, { kind: 'family' }, '?updateMask.fieldPaths=kind') === 403, "changing a group's kind: refused");
     ok(await write(tA, `families/${A}`, { name: 'ד\'2 – חשבון' }, '?updateMask.fieldPaths=name') === 200, 'the teacher renames the group');
-    ok(await rd2(tA, `families/${A}`) === 200 && await write(tA, `families/${A}/fam/kids`, { list: [] }) === 200, 'the teacher reads and writes the group');
+    ok(await rd2(tA, `families/${A}`) === 200 && await write(tA, `families/${A}/sets/s1`, { set: { id: 's1', kidId: 'k1', questions: [] } }) === 200, 'the teacher reads the group and writes its practice sets (the students list: the server only)');
     ok(await rd2(tA, `families/${B}`) === 403 && await rd2(tA, `families/${B}/fam/kids`) === 403 && await write(tA, `families/${B}/fam/kids`, { list: [] }) === 403, "teacher A cannot read or write teacher B's group");
     ok(await rd2(par, `families/${A}`) === 403 && await rd2(par, `families/${A}/fam/kids`) === 403, 'a parent cannot read a group');
     ok(await write(tA, `families/${A}/invites/I1`, { role: 'admin', name: '', kids: [], by: tA.uid, exp: Date.now() + 864e5, used: false }) === 403, 'no other adults in a group (no invitations)');
@@ -191,6 +192,43 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     ok(await rd2(tA, `teachers/${tA.uid}`) === 200 && await rd2(tB, `teachers/${tA.uid}`) === 403 && await write(tA, `teachers/${tA.uid}`, { classes: [] }) === 403, "the server's group count: read by its teacher, written by no one");
     let last; for (let i = 0; i < 10; i++) last = await call(tA, 'createClass', { teach: 'class', name: 'g' + i, grade: 1 });
     ok(String(last) === 'ERR:class_limit', 'at most 10 groups a teacher: ' + JSON.stringify(last));
+
+  console.log('12. a group: parents\' consent and students\' phones');
+  {
+    const FN = 'http://127.0.0.1:5001/study-for-fun-7b03c/europe-west1';
+    const call = (u, name, data) => fetch(`${FN}/${name}`, { method: 'POST', headers: u.H, body: JSON.stringify({ data }) })
+      .then(async r => { const j = await r.json().catch(() => ({})); return r.ok ? 'ok' : ((j.error && j.error.details && j.error.details.reason) || (j.error && j.error.status) || r.status); });
+    const rd3 = (u, path) => fetch(`${DOCS}/${path}`, { headers: u.H }).then(r => r.status);
+    const ok3 = st => st !== 403;
+    const tc = await user('teacher12@t.local'), C = 'GrpTestAbcdefghij123';
+    await admin(`families/${C}`, { kind: 'class', ownerUid: tc.uid, name: 'G', grade: 3, kidTokens: { kA: 'TOKA', kP: 'TOKP', kB: 'TOKB' }, createdAt: Date.now() });
+    await admin(`families/${C}/fam/info`, { kind: 'class', name: 'G', teacher: 'T' });
+    await admin(`families/${C}/fam/kids`, { list: [{ id: 'kA', name: 'A' }, { id: 'kB', name: 'B' }, { id: 'kP', name: 'P' }] });
+    await admin(`families/${C}/consents/kA`, { status: 'digital', letterV: '0.9' });
+    await admin(`families/${C}/consents/kB`, { status: 'paper', letterV: '0.9' });
+    await admin(`families/${C}/consents/kP`, { status: 'pending' });
+    await admin(`families/${C}/kidpub/kA`, { list: [{ id: 'kA', name: 'A' }] }); await admin(`families/${C}/kidpub/kB`, { list: [{ id: 'kB', name: 'B' }] });
+    await admin(`families/${C}/progress/kB`, { history: [], profile: { nick: 'B' } });
+    await admin(`families/${C}/sets/sA`, { set: { id: 'sA', kidId: 'kA', questions: [] } }); await admin(`families/${C}/sets/sB`, { set: { id: 'sB', kidId: 'kB', questions: [] } });
+    await admin(`families/${C}/joinReqs/R1abcdefghij12345678`, { parentName: 'X', kidName: 'Y', status: 'pending', keyHash: 'h' });
+    const dP = await user(null), dA = await user(null), dX = await user(null);
+    ok(await write(dP, `families/${C}/devices/${dP.uid}`, { token: 'TOKP', kid: 'kP', at: Date.now() }, '?currentDocument.exists=false') === 403, 'a phone cannot join a group for a student with no consent (even with a link token)');
+    ok(await write(dA, `families/${C}/devices/${dA.uid}`, { token: 'TOKA', kid: 'kA', at: Date.now() }, '?currentDocument.exists=false') === 200, '…with a consent it joins');
+    ok(await rd3(dA, `families/${C}/fam/kids`) === 403, "a student's phone cannot read the students list (fam/kids)");
+    ok(ok3(await rd3(dA, `families/${C}/fam/info`)) && ok3(await rd3(dA, `families/${C}/kidpub/kA`)) && await rd3(dA, `families/${C}/kidpub/kB`) === 403, '…reads the group name and its own student only');
+    ok(await rd3(dA, `families/${C}/progress/kB`) === 403 && ok3(await rd3(dA, `families/${C}/progress/kA`)), "…its own progress, not a classmate's");
+    ok(await rd3(dA, `families/${C}/sets/sB`) === 403 && ok3(await rd3(dA, `families/${C}/sets/sA`)), "…its own practice sets, not a classmate's");
+    ok(await rd3(dA, `families/${C}/joinReqs`) === 403 && await rd3(dA, `families/${C}/consents/kA`) === 403 && await rd3(dA, `families/${C}/joinLink/main`) === 403, '…no requests, consents or the group link');
+    ok(await write(dA, `families/${C}/progress/kB`, { history: [], profile: {} }) === 403 && await write(dA, `families/${C}/progress/kA`, { history: [], profile: {} }) === 200, "…writes its own progress only");
+    ok(await rd3(dX, `families/${C}/joinReqs/R1abcdefghij12345678`) === 403 && await rd3(dX, `families/${C}/joinReqs`) === 403, 'an anonymous phone (a parent) cannot read requests');
+    ok(String(await call(dX, 'joinStatus', { classId: C, reqId: 'R1abcdefghij12345678', statusKey: 'wrong' })) === 'not_found', 'a wrong status key shows nothing');
+    ok(await write(tc, `families/${C}/consents/kP`, { status: 'paper' }) === 403 && await write(tc, `families/${C}/joinReqs/R1abcdefghij12345678`, { status: 'approved' }) === 403, 'the teacher cannot write consents or requests directly (only through the server)');
+    ok(await write(tc, `families/${C}/fam/kids`, { list: [] }) === 403, "…nor the group's students list");
+    ok(ok3(await rd3(tc, `families/${C}/consents/kA`)) && ok3(await rd3(tc, `families/${C}/joinReqs`)), 'the teacher reads the consents and the requests');
+    ok(await rd3(par, `families/${C}/consents/kA`) === 403, 'a parent of a family cannot read a group');
+    ok(String(await call(tc, 'startBuild', { famId: C, subject: 'x' })) === 'teacher_ai_soon' && String(await call(tc, 'ask', { famId: C, step: 'match', data: {} })) === 'teacher_ai_soon', 'no AI building in a group (until the teachers\' quota)');
+    ok(String(await call(tc, 'approveJoin', { classId: B, reqId: 'R1abcdefghij12345678' })) !== 'ok' && String(await call(tB, 'revokeConsent', { classId: C, kidId: 'kA' })) !== 'ok', "a teacher cannot approve or remove in another teacher's group");
+  }
   }
   console.log('2. AI budget: limited refunds, a cap per family');
   const ends = [];

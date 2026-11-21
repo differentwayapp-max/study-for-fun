@@ -43,7 +43,7 @@ const { defineSecret, defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const Anthropic = require('@anthropic-ai/sdk').default;
 admin.initializeApp();
-const { getFirestore, FieldValue } = require('firebase-admin/firestore');
+const { getFirestore, FieldValue, FieldPath } = require('firebase-admin/firestore');
 const db = getFirestore();
 
 const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY');
@@ -112,6 +112,13 @@ async function checkFamily(uid, famId) {
   const f = await db.doc(`families/${famId}`).get();
   if (f.exists && f.data().kind === 'class' && f.data().ownerUid === uid) return;
   throw new HttpsError('permission-denied', 'Not a member of this family.');
+}
+// a teacher's group: no AI building until the teachers' own quota exists (stage 4) – otherwise every group would bring its
+// own 3 free builds (10 groups = 30). The app shows "בניית AI למורים – בקרוב".
+async function noClassAI(famId) {
+  if (typeof famId !== 'string' || !/^[A-Za-z0-9_-]{6,128}$/.test(famId)) return;
+  const f = await db.doc(`families/${famId}`).get();
+  if (f.exists && f.data().kind === 'class') throw new HttpsError('failed-precondition', 'teacher_ai_soon', { reason: 'teacher_ai_soon' });
 }
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
@@ -197,11 +204,247 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   await db.runTransaction(async tx => {
     const t = await tx.get(tref), have = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
     if (have.length >= MAX_CLASSES) throw new HttpsError('resource-exhausted', 'class_limit', { reason: 'class_limit', max: MAX_CLASSES });
-    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
+    // the teacher's name is shown to the parents on the consent page; fam/info is all a student's phone reads of the group
+    const teacherName = String(auth.token.name || (auth.token.email || '').split('@')[0] || '').replace(/[<>]/g, '').slice(0, 60);
+    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teacherName, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
+    tx.set(db.doc(`families/${cref.id}/fam/info`), { kind: 'class', teacher: teacherName, name, grade, subject });
     tx.set(tref, { classes: FieldValue.arrayUnion(cref.id), at: Date.now() }, { merge: true });
     tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach }, { merge: true });
   });
   return { classId: cref.id };
+});
+
+// A teacher's group goes: everything in it (students, progress, consents, requests, sets), and it leaves the teacher's
+// count (teachers/{uid}) and list (users/{uid}.classes) – only here, so the count of 10 always comes down with it.
+exports.deleteClass = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function deleteClass(request) {
+  const auth = parentOnly(request);
+  const id = request.data && request.data.classId;
+  if (typeof id !== 'string' || !/^[A-Za-z0-9]{20}$/.test(id)) throw new HttpsError('invalid-argument', 'Missing group.');
+  const ref = db.doc(`families/${id}`), f = await ref.get();
+  if (!f.exists || f.data().kind !== 'class' || f.data().ownerUid !== auth.uid) throw new HttpsError('permission-denied', 'Not your group.');
+  await db.recursiveDelete(ref);
+  await db.doc(`teachers/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id), at: Date.now() }, { merge: true });
+  await db.doc(`users/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id) }, { merge: true });
+  return { ok: true };
+});
+
+/* ---------- parents' consent for a teacher's group (stage 2) ----------
+   The teacher sends ONE link for the group (/?join=<classId>.<code>, 30 days, can be closed or replaced). A parent opens it
+   with no account (anonymous sign-in), reads the letter, fills the form and signs with a finger → requestJoin keeps a
+   pending request (families/{c}/joinReqs/{id}) and gives back a secret status key (the parent's own link
+   /?req=<classId>.<id>.<key>; only its hash is kept). Only the teacher's approval (approveJoin) makes a student
+   (fam/kids + kidpub/{kid}), the consent (consents/{kid}, status 'digital') and the kid's link (kidTokens[kid]); a paper
+   form signed at school is marked by the teacher (addStudent / markPaper → status 'paper'). Without such a consent no kid
+   phone can join (firestore.rules). The parent or the teacher can withdraw it (revokeConsent): the student's progress,
+   phones and link go. Everything here is written by the server only. */
+const JOIN_DAYS = 30, MAX_STUDENTS = 40, MAX_PENDING = 60, REQ_PER_HOUR = 5;
+const KID_COLORS = ['#2F6BFF', '#FF5C8A', '#24C78E', '#F2A63B', '#B9A7FF', '#14A774', '#E5484D'];
+const hex = n => require('crypto').randomBytes(n).toString('hex');
+const sha = s => require('crypto').createHash('sha256').update(String(s)).digest('hex');
+const txt = (v, n) => typeof v === 'string' ? v.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, n) : '';
+const classIdOk = id => typeof id === 'string' && /^[A-Za-z0-9]{20}$/.test(id);
+const kidIdOk = id => typeof id === 'string' && /^[A-Za-z0-9_-]{2,40}$/.test(id);
+function signedIn(request) { if (!request.auth) throw new HttpsError('unauthenticated', 'Sign in first.'); return request.auth; }
+async function teacherOf(auth, classId) {
+  if (!classIdOk(classId)) throw new HttpsError('invalid-argument', 'Missing group.');
+  const ref = db.doc(`families/${classId}`), f = await ref.get();
+  if (!f.exists || f.data().kind !== 'class' || (f.data().ownerUid !== auth.uid && !isAdminUser(auth))) throw new HttpsError('permission-denied', 'Not your group.');
+  return { ref, d: f.data() };
+}
+async function groupByLink(classId, code) {
+  if (!classIdOk(classId) || typeof code !== 'string' || !/^[a-f0-9]{8,40}$/.test(code)) throw new HttpsError('failed-precondition', 'link_bad', { reason: 'link_bad' });
+  const [f, l] = await Promise.all([db.doc(`families/${classId}`).get(), db.doc(`families/${classId}/joinLink/main`).get()]);
+  if (!f.exists || f.data().kind !== 'class' || !l.exists || l.data().code !== code) throw new HttpsError('failed-precondition', 'link_bad', { reason: 'link_bad' });
+  if (!l.data().open) throw new HttpsError('failed-precondition', 'link_closed', { reason: 'link_closed' });
+  if (l.data().exp < Date.now()) throw new HttpsError('failed-precondition', 'link_expired', { reason: 'link_expired' });
+  return f.data();
+}
+// a signature: a small PNG (≤ ~20KB) drawn on a transparent canvas – a blank one (every pixel transparent) is refused
+function sigOk(sig) {
+  if (typeof sig !== 'string' || !sig.startsWith('data:image/png;base64,') || sig.length > 28000) return false;
+  try {
+    const b = Buffer.from(sig.slice(22), 'base64');
+    if (b.readUInt32BE(12) !== 0x49484452) return false;                      // IHDR
+    const w = b.readUInt32BE(16), h = b.readUInt32BE(20), depth = b[24], type = b[25];
+    if (w < 50 || h < 20 || w > 1200 || h > 600 || depth !== 8 || type !== 6) return false;   // 8-bit RGBA
+    const parts = []; let o = 8;
+    while (o + 8 <= b.length) { const len = b.readUInt32BE(o), kind = b.toString('ascii', o + 4, o + 8); if (kind === 'IDAT') parts.push(b.subarray(o + 8, o + 8 + len)); o += 12 + len; }
+    const raw = require('zlib').inflateSync(Buffer.concat(parts)), row = 1 + w * 4;
+    let ink = 0;
+    for (let y = 0; y < h && ink < 30; y++) for (let x = 1; x < row; x++) if (raw[y * row + x]) { ink++; if (ink >= 30) break; }
+    return ink >= 30;
+  } catch (_) { return false; }
+}
+function letterVOk(v) { return typeof v === 'string' && /^[0-9]{1,2}\.[0-9]{1,2}$/.test(v); }
+async function newStudent(tx, ref, d, kidName, consent) {
+  const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef), list = (ks.exists && Array.isArray(ks.data().list)) ? ks.data().list : [];
+  if (list.length >= MAX_STUDENTS) throw new HttpsError('resource-exhausted', 'class_full', { reason: 'class_full', max: MAX_STUDENTS });
+  const id = 'k' + hex(5), kid = { id, name: txt(kidName, 30), grade: Number.isInteger(d.grade) ? d.grade : 0, color: KID_COLORS[list.length % KID_COLORS.length] };
+  return { id, kid, list, kidsRef, consent };
+}
+function writeStudent(tx, ref, s, withLink) {
+  tx.set(s.kidsRef, { list: [...s.list, s.kid] });
+  tx.set(db.doc(`${ref.path}/kidpub/${s.id}`), { list: [s.kid] });
+  tx.set(db.doc(`${ref.path}/consents/${s.id}`), s.consent);
+  if (withLink) tx.update(ref, new FieldPath('kidTokens', s.id), hex(16));
+}
+
+// the teacher's group link: get (made the first time), new (the old one stops working), close, open
+exports.joinLink = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function joinLink(request) {
+  const auth = parentOnly(request); const { classId, action = 'get' } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  const lref = db.doc(`${ref.path}/joinLink/main`);
+  return db.runTransaction(async tx => {
+    const l = await tx.get(lref), now = Date.now(); let d = l.exists ? l.data() : null;
+    const fresh = () => ({ code: hex(8), exp: now + JOIN_DAYS * 864e5, open: true, at: now });
+    if (!d || action === 'new' || (action === 'open' && d.exp < now)) d = fresh();
+    else if (action === 'close') d = { ...d, open: false };
+    else if (action === 'open') d = { ...d, open: true };
+    tx.set(lref, d);
+    return { code: d.code, exp: d.exp, open: d.open };
+  });
+});
+
+// what a parent sees before signing: the teacher, the group (a closed / old / wrong link: refused)
+exports.joinInfo = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinInfo(request) {
+  signedIn(request); const { classId, code } = request.data || {};
+  const d = await groupByLink(classId, code);
+  return { teacher: d.teacherName || '', name: d.name || '', grade: d.grade, subject: d.subject || '', teach: d.teach };
+});
+
+// a parent's request: the letter's version, the parent's and the kid's names, a way to reach them (optional), the signature
+exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function requestJoin(request) {
+  const auth = signedIn(request); const r = request.data || {};
+  const d = await groupByLink(r.classId, r.code);
+  const parentName = txt(r.parentName, 60), kidName = txt(r.kidName, 30), contact = txt(r.contact, 80);
+  if (parentName.length < 2 || kidName.length < 2 || r.agree !== true || !letterVOk(r.letterV)) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
+  if (!sigOk(r.sig)) throw new HttpsError('invalid-argument', 'no_signature', { reason: 'no_signature' });
+  // at most REQ_PER_HOUR requests an hour from one phone, and MAX_PENDING waiting in a group
+  const lim = db.doc(`joinLimits/${auth.uid}`);
+  await db.runTransaction(async tx => { const l = await tx.get(lim), now = Date.now(), t = ((l.exists && l.data().t) || []).filter(x => now - x < 36e5);
+    if (t.length >= REQ_PER_HOUR) throw new HttpsError('resource-exhausted', 'too_many', { reason: 'too_many' });
+    tx.set(lim, { t: [...t, now] }); });
+  const reqs = db.collection(`families/${r.classId}/joinReqs`);
+  const waiting = (await reqs.where('status', '==', 'pending').count().get()).data().count;
+  if (waiting >= MAX_PENDING) throw new HttpsError('resource-exhausted', 'too_many_waiting', { reason: 'too_many_waiting' });
+  const key = hex(18), ref = reqs.doc();
+  await ref.set({ parentName, kidName, contact, sig: r.sig, letterV: r.letterV, at: Date.now(), status: 'pending', keyHash: sha(key), by: auth.uid });
+  return { reqId: ref.id, statusKey: key, teacher: d.teacherName || '', name: d.name || '' };
+});
+
+// the parent's own status page (with the secret key): waiting / approved (+ the kid's link) / rejected (+ why) / withdrawn
+exports.joinStatus = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinStatus(request) {
+  signedIn(request); const { classId, reqId, statusKey } = request.data || {};
+  const nf = () => new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+  if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId) || typeof statusKey !== 'string') throw nf();
+  const [q, f] = await Promise.all([db.doc(`families/${classId}/joinReqs/${reqId}`).get(), db.doc(`families/${classId}`).get()]);
+  if (!q.exists || !f.exists || q.data().keyHash !== sha(statusKey)) throw nf();
+  const R = q.data(), F = f.data(), out = { status: R.status, kidName: R.kidName, parentName: R.parentName, teacher: F.teacherName || '', name: F.name || '', at: R.at, letterV: R.letterV };
+  if (R.status === 'rejected') out.reason = R.reason || '';
+  if (R.status === 'approved' && R.kidId) { const tok = (F.kidTokens || {})[R.kidId]; if (tok) { out.kidId = R.kidId; out.token = tok; } }
+  return out;
+});
+
+// the teacher approves: a new student (with the consent and the kid's link) – or one more parent of a student already there
+exports.approveJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function approveJoin(request) {
+  const auth = parentOnly(request); const { classId, reqId, attachTo } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('invalid-argument', 'Missing request.');
+  const qref = db.doc(`${ref.path}/joinReqs/${reqId}`);
+  return db.runTransaction(async tx => {
+    const [q, f] = await Promise.all([tx.get(qref), tx.get(ref)]);
+    if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
+    const R = q.data(), now = Date.now(), parent = { parentName: R.parentName, contact: R.contact || '', sig: R.sig, letterV: R.letterV, at: R.at, reqId, approvedAt: now };
+    let kidId;
+    if (attachTo) {                                            // a second parent of the same student
+      if (!kidIdOk(attachTo)) throw new HttpsError('invalid-argument', 'Missing student.');
+      const cref = db.doc(`${ref.path}/consents/${attachTo}`), c = await tx.get(cref);
+      if (!c.exists || !['digital', 'paper'].includes(c.data().status)) throw new HttpsError('failed-precondition', 'no_student', { reason: 'no_student' });
+      tx.update(cref, { parents: FieldValue.arrayUnion(parent) }); kidId = attachTo;
+    } else {
+      const s = await newStudent(tx, ref, f.data(), R.kidName, { status: 'digital', letterV: R.letterV, at: R.at, parentName: R.parentName, contact: R.contact || '', sig: R.sig, reqId, approvedBy: auth.uid, approvedAt: now, parents: [parent] });
+      writeStudent(tx, ref, s, true); kidId = s.id;
+    }
+    tx.update(qref, { status: 'approved', kidId, sig: FieldValue.delete(), doneAt: now });   // the signature stays with the consent only
+    return { kidId };
+  });
+});
+
+exports.rejectJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function rejectJoin(request) {
+  const auth = parentOnly(request); const { classId, reqId, reason } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('invalid-argument', 'Missing request.');
+  const qref = db.doc(`${ref.path}/joinReqs/${reqId}`), q = await qref.get();
+  if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
+  await qref.update({ status: 'rejected', reason: txt(reason, 200), sig: FieldValue.delete(), doneAt: Date.now() });   // a rejected signature is not kept
+  return { ok: true };
+});
+
+// a student added by the teacher: with a signed paper form (status 'paper' + the kid's link) or waiting for one (no link)
+exports.addStudent = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function addStudent(request) {
+  const auth = parentOnly(request); const { classId, kidName, paper } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (txt(kidName, 30).length < 2) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
+  const P = paper && typeof paper === 'object' ? paper : null, now = Date.now();
+  if (P && (txt(P.parentName, 60).length < 2 || !/^\d{4}-\d{2}-\d{2}$/.test(String(P.signedAt || '')))) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
+  return db.runTransaction(async tx => {
+    const f = await tx.get(ref);
+    const consent = P ? { status: 'paper', parentName: txt(P.parentName, 60), signedAt: P.signedAt, letterV: letterVOk(P.letterV) ? P.letterV : '', markedBy: auth.uid, markedAt: now, at: now }
+      : { status: 'pending', at: now };
+    const s = await newStudent(tx, ref, f.data(), kidName, consent);
+    writeStudent(tx, ref, s, !!P);
+    return { kidId: s.id };
+  });
+});
+exports.markPaper = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function markPaper(request) {
+  const auth = parentOnly(request); const { classId, kidId, parentName, signedAt, letterV } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (!kidIdOk(kidId) || txt(parentName, 60).length < 2 || !/^\d{4}-\d{2}-\d{2}$/.test(String(signedAt || ''))) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
+  const cref = db.doc(`${ref.path}/consents/${kidId}`);
+  return db.runTransaction(async tx => {
+    const c = await tx.get(cref);
+    if (!c.exists || c.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
+    const now = Date.now();
+    tx.set(cref, { status: 'paper', parentName: txt(parentName, 60), signedAt, letterV: letterVOk(letterV) ? letterV : '', markedBy: auth.uid, markedAt: now, at: c.data().at || now });
+    tx.update(ref, new FieldPath('kidTokens', kidId), hex(16));
+    return { ok: true };
+  });
+});
+
+// withdrawn – by the parent (the status key) or the teacher: the student's progress, phones and link go; a waiting request
+// is simply withdrawn. The consent record keeps who and when, not the signatures.
+async function dropStudent(classId, kidId, by) {
+  const ref = db.doc(`families/${classId}`), now = Date.now();
+  const devs = await db.collection(`${ref.path}/devices`).where('kid', '==', kidId).get();
+  const reqs = await db.collection(`${ref.path}/joinReqs`).where('kidId', '==', kidId).get();
+  await db.runTransaction(async tx => {
+    const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef);
+    const list = ((ks.exists && ks.data().list) || []).filter(k => k && k.id !== kidId);
+    tx.set(kidsRef, { list });
+    tx.delete(db.doc(`${ref.path}/kidpub/${kidId}`));
+    tx.delete(db.doc(`${ref.path}/progress/${kidId}`));
+    devs.docs.forEach(d => tx.delete(d.ref));
+    reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now }));
+    tx.update(ref, new FieldPath('kidTokens', kidId), FieldValue.delete());
+    tx.set(db.doc(`${ref.path}/consents/${kidId}`), { status: 'revoked', revokedBy: by, revokedAt: now });
+  });
+}
+exports.revokeConsent = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function revokeConsent(request) {
+  const auth = signedIn(request); const { classId, kidId, reqId, statusKey } = request.data || {};
+  if (statusKey) {                                             // the parent, from the status page
+    if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+    const qref = db.doc(`families/${classId}/joinReqs/${reqId}`), q = await qref.get();
+    if (!q.exists || q.data().keyHash !== sha(statusKey)) throw new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+    const R = q.data();
+    if (R.status === 'pending') { await qref.update({ status: 'withdrawn', sig: FieldValue.delete(), doneAt: Date.now() }); return { ok: true }; }
+    if (R.status !== 'approved' || !R.kidId) return { ok: true };
+    await dropStudent(classId, R.kidId, 'parent');
+    return { ok: true };
+  }
+  const a = parentOnly(request); await teacherOf(a, classId);   // the teacher takes a student out of the group
+  if (!kidIdOk(kidId)) throw new HttpsError('invalid-argument', 'Missing student.');
+  await dropStudent(classId, kidId, 'teacher');
+  return { ok: true };
 });
 
 // Every AI call is part of a build (buildId) or a small edit counted in the monthly "light" calls.
@@ -397,6 +640,7 @@ exports.ask = onCall(
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
+    await noClassAI(famId);
     const json = await runStep({ admin: isAdminUser(auth), uid: auth.uid, famId, buildId, name, data, images, fake: request.data.fake === true });
     return { json };
   }
@@ -517,6 +761,7 @@ exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   const auth = parentOnly(request);
   const { famId, subject = '' } = request.data || {};
   await checkFamily(auth.uid, famId);
+  await noClassAI(famId);
   await checkBudget();
   await checkFamilyBudget(auth, famId);
   return openBuild(auth, famId, subject);
@@ -542,6 +787,7 @@ exports.submitBuild = onCall({ region: 'europe-west1', invoker: 'public', secret
     const auth = parentOnly(request);
     const { famId, input, images = [], fake, test } = request.data || {};
     await checkFamily(auth.uid, famId);
+    await noClassAI(famId);
     const I = cleanInput(input);
     if (auth.uid !== famId && !isAdminUser(auth)) {                 // a tutor builds only for the kids of its invitation
       const m = (await db.doc(`families/${famId}/members/${auth.uid}`).get()).data() || {};
@@ -576,6 +822,7 @@ exports.resumeBuild = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   const auth = parentOnly(request);
   const { famId, buildId } = request.data || {};
   await checkFamily(auth.uid, famId);
+  await noClassAI(famId);
   if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
   const ref = buildRef(famId, buildId);
   const run = await db.runTransaction(async tx => {

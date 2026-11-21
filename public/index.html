@@ -538,6 +538,27 @@ body.ishot{background:#fff;margin:0;padding:0;overflow:hidden}
 .thome .tempty{margin-top:18px;border:2px dashed #CFCBE6;border-radius:18px;padding:18px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
 .thome .tempty .sub{margin:0;max-width:360px}
 #dFams .ditem.on{background:#EEF3FF}
+/* parents' consent (a group's link) and the teacher's side */
+#joinPage{position:fixed;inset:0;z-index:59;overflow:auto;background:var(--sky);padding:16px 14px 40px}
+#joinPage .jbox{max-width:620px;margin:0 auto}#joinPage .jlogo{display:block;width:min(60vw,240px);margin:6px auto 14px}
+#joinPage .card{margin-bottom:12px}#joinPage .jhead h2{margin:2px 0 0}
+#joinPage .jletter{max-height:52vh;overflow:auto;line-height:1.6}#joinPage .jletter h1{font-size:1.25em;margin:0 0 4px}#joinPage .jletter h2{font-size:1.05em;margin:14px 0 2px}
+#joinPage .jletter .muted{color:var(--ink2);font-size:.85em}#joinPage .jletter p{margin:4px 0}
+#joinPage .jform label{display:block;margin:12px 0 4px}#joinPage .jform input[type=text]{width:100%}
+#joinPage .jagree{display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-weight:500}
+.sigbox{position:relative;border:2px dashed var(--ink);border-radius:14px;background:#fff}.sigbox canvas{display:block;width:100%;height:auto;aspect-ratio:3/1;touch-action:none}
+.sigtools{text-align:end;margin-top:4px}.sigtools .linkbtn{min-height:44px;padding:0 6px}
+#joinPage .jstat{text-align:center}#joinPage .jstat .big{font-size:2.6em}#joinPage .jstat .btn{margin-top:8px}
+#joinPage .jkeep{margin-top:16px;border-top:2px dashed #CFCBE6;padding-top:12px;text-align:center}#joinPage .jfoot{text-align:center;margin-top:10px}
+.linkbtn.danger{color:var(--bad)}
+.tsec{margin-top:16px;text-align:start}.tsec h3{margin:0 0 8px}
+.treq{border:2px solid #E3E1F2;border-radius:16px;padding:10px 12px;margin-bottom:8px}.treq .tr1{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+img.tsig{display:block;max-width:100%;height:64px;margin:6px 0;border:1px solid #E3E1F2;border-radius:10px;background:#fff}
+.tstud{display:flex;align-items:center;gap:10px;width:100%;border:0;border-bottom:1px solid #EEEAFB;background:none;padding:8px 2px;font:inherit;color:inherit;cursor:pointer;text-align:start}.tstud b{flex:1}
+.cbadge{border-radius:99px;padding:2px 10px;font-size:.85em;font-weight:600;background:#EEEAFB;white-space:nowrap}.cbadge.c-digital{background:#DDF8EC}.cbadge.c-paper{background:#E4F1FF}.cbadge.c-pending{background:#FFF2C9}
+#tDlg{position:fixed;inset:0;background:rgba(27,42,74,.45);display:grid;place-items:center;padding:16px;z-index:65;overflow:auto}#tDlg.hidden{display:none}
+.tdlg{max-width:460px;width:100%;margin:0;text-align:center;max-height:92vh;overflow:auto}.tdlg label{text-align:start}.tdlg input{width:100%}.tpar{margin-top:10px;text-align:start}.tpar .hint{display:block}
+.tqr{width:180px;margin:8px auto}.tqr svg{width:100%;height:auto;display:block}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
 .mhowto{text-align:center;font-family:var(--display);font-weight:600;color:var(--ink2);margin:2px 0 8px}
 .nameleft{display:block;min-height:1em;font-size:.8em;color:var(--ink2);margin-top:2px}
@@ -1373,11 +1394,13 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
-const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (terms.html) – change both together
+const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
   let finished = false; const finish = api => { if (finished || W.__sffDone) return; finished = true; W.__sffDone = true; W.__sffResolve(api); };
+  const linkJoin = v => { const m = /^([A-Za-z0-9]{20})\.([a-f0-9]{8,40})$/.exec(v || ''); return m ? { classId: m[1], code: m[2] } : null; };
+  const linkReq = v => { const m = /^([A-Za-z0-9]{20})\.([A-Za-z0-9]{20})\.([a-f0-9]{16,64})$/.exec(v || ''); return m ? { classId: m[1], reqId: m[2], key: m[3] } : null; };
   async function restFallback(why) {
     if (finished || W.__sffDone || !W.SFF_KID_REST) return;
     W.__sffDone = true; finished = true;
@@ -1410,6 +1433,10 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     const buildErr = e => { const d = e.details || {}, c = String(e.code || '');
       return { code: d.reason || (c.includes('unavailable') || c.includes('deadline') || /network|fetch|load failed|internet/i.test(e.message || '') ? 'network' : c.includes('permission-denied') ? 'not_granted' : 'error'), ...d, message: e.message }; };
     const callClass = httpsCallable(fns, 'createClass');
+    const callDelClass = httpsCallable(fns, 'deleteClass');
+    // the teacher's group: the parents' link, requests, students and consents – all through the server
+    const classCall = n => { const f = httpsCallable(fns, n); return async d => { try { return (await f({ classId: W.__sffFamily?.famId, ...d })).data; } catch (e) { const x = e.details || {}; throw { code: x.reason || String(e.code || 'error').replace(/^functions\//, ''), message: e.message }; } }; };
+    W.__sffClass = { link: classCall('joinLink'), approve: classCall('approveJoin'), reject: classCall('rejectJoin'), addStudent: classCall('addStudent'), markPaper: classCall('markPaper'), revoke: classCall('revokeConsent') };
     // a teacher's new group (the server makes it: a random id, at most 10 a teacher)
     W.__sffNewClass = async o => { try { return (await callClass(o)).data.classId; } catch (e) { const d = e.details || {}; throw { code: d.reason || 'error', ...d, message: e.message }; } };
     W.__sffAdminUsers = async () => (await callUsers({})).data;
@@ -1441,6 +1468,18 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       W.history.replaceState(null, '', location.origin + '/');              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
     }
     let firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
+    // ---- a parent opening a teacher's group link (?join=<group>.<code>) or the personal status link (?req=<group>.<id>.<key>):
+    //      no account needed (an anonymous sign-in, or the account already on this phone); only these pages open
+    { const jq = linkJoin(qp.get('join')), rq = linkReq(qp.get('req'));
+      if (jq || rq) {
+        W.__sffStage = 'join'; W.SFF_JOIN_MODE = true;
+        if (!firstUser) await A.signInAnonymously(auth);
+        const wrap = n => { const f = httpsCallable(fns, n); return async d => { try { return (await f(d)).data; } catch (e) { const x = e.details || {}; throw { code: x.reason || String(e.code || 'error').replace(/^functions\//, ''), message: e.message }; } }; };
+        W.__sffJoin = { info: wrap('joinInfo'), request: wrap('requestJoin'), status: wrap('joinStatus'), revoke: wrap('revokeConsent') };
+        document.getElementById('sffLoad')?.remove();
+        W.sffJoinPage(jq ? { mode: 'join', ...jq } : { mode: 'req', ...rq });
+        await new Promise(() => {});                   // the app itself does not open on these links
+      } }
     let role, uid, famId;
     // A kid link of a family, opened on a phone signed in to a *different* Google account (e.g. the kid once tapped
     // "Sign in with Google"): the link wins – sign that account out and continue as this family's kid device.
@@ -1524,7 +1563,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
           let r = 'owner', m = null;
           if (classIds.includes(fid)) {        // a teacher's group: its own document says who the teacher is
             const cs = await F.getDoc(F.doc(fdb, `families/${fid}`)); const cd = cs.exists() ? cs.data() : null;
-            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '' }, token: cd.inviteToken });
+            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '', teacher: cd.teacherName || '' }, token: cd.inviteToken });
             continue;
           }
           if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
@@ -1600,7 +1639,9 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
         switchTo: fid => { LS.setItem('sff_active_fam', fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
       if (role === 'parent') W.__sffDeleteAccount = async () => {
-      for (const fam of [`families/${uid}`, ...(W.SFF_FAMS || []).filter(x => x.kind === 'class').map(x => `families/${x.id}`)]) {
+      // the teacher's groups: by the server (it also takes them off the teacher's count of groups)
+      for (const x of (W.SFF_FAMS || []).filter(x => x.kind === 'class')) await callDelClass({ classId: x.id }).catch(e => console.warn('deleteClass', e && e.message));
+      for (const fam of [`families/${uid}`]) {
         for (const sub of ['sets', 'progress', 'devices', 'fam', 'members', 'invites', 'errlog', 'tutorView']) {
           const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`)).catch(() => null);
           if (q) await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
@@ -2268,7 +2309,7 @@ async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
     endBuildSrv(id,{cancel:true}); }
   else endBuildSrv(id,{dismiss:true}); }
 function buildErrMsg(code, e={}){
-  return code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
+  return code==='teacher_ai_soon' ? 'בניית AI למורים – בקרוב.' : code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
     : code==='build_calls'||code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
     : code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
     : code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
@@ -2644,7 +2685,7 @@ function renderCatalog(){
      +CAT_SUBJ.map(s=>{ const mine=here.filter(x=>x.subject===s), noProg=s==='אנגלית'&&g<2;
        const nT=mine.reduce((a,x)=>a+((x.tags||[]).length||0),0);
        return `<button class="subjtile ${mine.length?'':'off'}" onclick="CAT.subj=${esc(JSON.stringify(s))};renderCatalog();scrollTo(0,0)">${ico(s)}<b>${esc(s)}</b><span class="hint">${mine.length?`✓ ${mine.length===1?'תרגול מוכן':mine.length+' תרגולים מוכנים'}`:noProg?'לא נלמד כמקצוע':'בקרוב'}</span></button>`; }).join('')+`</div>`
-     +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
+     +`<div class="aibox">${isClassMode()?'🛠️ <b>בניית AI למורים – בקרוב</b>':sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
     return;
   }
   // 2) one subject: tick the topics of the test, then add
@@ -2664,9 +2705,9 @@ function renderCatalog(){
   $('catList').innerHTML=`<button class="linkbtn catback" onclick="CAT.subj='';renderCatalog()">‹ כל המקצועות</button>
     <div class="catsubh">${ico(sub)}<b>${esc(sub)} · כיתה ${GRADES[g]}</b></div>`
    +(mine.length?mine.map(block).join('')+currList(sub,false)
-      +`<div class="aibox">${sample?`<button class="btn" onclick="buildInSubject(${esc(JSON.stringify(sub))})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`
+      +`<div class="aibox">${isClassMode()?'🛠️ <b>בניית AI למורים – בקרוב</b>':sample?`<button class="btn" onclick="buildInSubject(${esc(JSON.stringify(sub))})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`
      :`<div class="card soonc">${noProg?`<p class="sub" style="margin:0">${esc((cur[sub]||[])[0]||'')}</p>`:`<p class="sub" style="margin:0 0 8px">עוד אין תרגול מוכן. מה לומדים בכיתה ${GRADES[g]}:</p><ul class="currl">${(cur[sub]||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
-        ${sample?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum(${esc(JSON.stringify(sub))},${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`);
+        ${sample&&!isClassMode()?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum(${esc(JSON.stringify(sub))},${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`);
 }
 // a subject with ready sets: the builder, with that subject already chosen
 function buildInSubject(sub){ const k=kidById(CAT.kid)||null; openWizard(k?k.id:null); if(SUBJECTS.includes(sub)) W.subject=sub; wizRender(); }
@@ -2914,12 +2955,9 @@ function renderTeacherHome(){
   const C=window.SFF_CLASS||{}, cls=C.teach!=='private', subj=C.subject?` · ${esc(C.subject)}`:'';
   $('kidCar').innerHTML=`<div class="card thome">
     <div class="thead"><span class="tico">${cls?'🏫':'🧑‍🏫'}</span><div><h2>${esc(C.name||'')}</h2><div class="hint">${cls?'מורה לכיתה':'מורה פרטי/ת'} · כיתה ${GRADES[+C.grade||0]}${subj}</div></div></div>
-    <div class="tempty"><div style="font-size:2.4em">👋</div><b>עוד אין תלמידים</b>
-      <p class="sub">שולחים להורים קישור אחד, הם מאשרים את ההשתתפות של הילד/ה, ואתם מאשרים כל בקשה. רק אחרי האישור נפתח לתלמיד/ה קישור אישי.</p>
-      <button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div></div>`;
-  $('kidCarDots').innerHTML='';
+    ${teacherBody()}</div>`;
+  $('kidCarDots').innerHTML=''; fillSigs($('kidCar'));
 }
-function inviteStudents(){ toast('🔜 בקרוב: קישור הסכמה להורים'); }
 function renderKids(){
   if(isClassMode()){ renderTeacherHome(); return; }
   if(window.SFF_ROLE==='tutor' && window.SFF_TUTOR_WAIT && !kids.length){
@@ -4199,7 +4237,7 @@ async function ownerUnlock(){
 const QUEUE={};
 function qwrite(key, fn){ if(window.__sffDeleting) return Promise.resolve(); const prev=QUEUE[key]||Promise.resolve(); const p=prev.then(fn).catch(()=>{}); QUEUE[key]=p; return p; }
 const sent={};
-function pushKids(){ if(!DB||!IS_OWNER||!canManage()) return;
+function pushKids(){ if(!DB||!IS_OWNER||!canManage()||isClassMode()) return;   // a group's students are written by the server
   const list=kids.map(({id,name,grade,color,resetAt,cq})=>({id,name,grade,color,...(resetAt?{resetAt}:{}),...(Array.isArray(cq)&&cq.length?{cq:cq.slice(-3000)}:{})}));
   const j=JSON.stringify(list); if(sent.kids===j) return; sent.kids=j;
   qwrite('kids',()=>DB.doc('fam/kids').set({list})); syncTutorViewsSoon(); }
@@ -4250,11 +4288,17 @@ async function cloudInit(){
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();
   if(!DB) return;
+  if(window.SFF_KID_DEVICE){ let inf=null, denied=false; try{ inf=await DB.doc('fam/info').get(); }catch(e){ denied=true; }
+    const fam=lsGet('sff_fam');
+    if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ lsSet('sff_cls',fam); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
+    // this phone was a student's in a group and no longer may read it (consent withdrawn): nothing of the group stays here
+    if(denied && fam && lsGet('sff_cls')===fam){ classKidGone(); showCloudErr('kid: permission-denied'); return; } }
+  if(isClassMode()) classCloud();
   if(window.SFF_ROLE==='tutor'){ tutorCloud(); ME&&ME.id().then(watchBuilds).catch(()=>{}); return; }
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];
-    if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else { if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt;
+    if(IS_OWNER&&!isClassMode()){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else { if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt;
       if(Array.isArray(r.cq)&&r.cq.length) l.cq=[...new Set([...(l.cq||[]),...r.cq.filter(x=>typeof x==='string')])].slice(-3000); } }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
     saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender(); syncTutorViewsSoon();   // (it writes a tutor's view only when it differs)
@@ -4344,7 +4388,7 @@ async function renderFamily(){
   if(isClassMode()){ const C=window.SFF_CLASS||{};
     el.innerHTML=`${fams.length>1?`<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>`:''}
       <div class="card"><h3 class="fh">${C.teach==='private'?'🧑‍🏫':'🏫'} ${esc(C.name||'')}</h3><p class="hint" style="margin:0">${C.teach==='private'?'מורה פרטי/ת':'מורה לכיתה'} · כיתה ${GRADES[+C.grade||0]}${C.subject?' · '+esc(C.subject):''}</p></div>
-      <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">עוד אין תלמידים. הזמנת התלמידים (עם הסכמת ההורים) תגיע בקרוב.</p></div>
+      <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">${kids.length?`${kids.length} תלמידים · הרשימה וההסכמות בלשונית התלמידים`:'עוד אין תלמידים'}</p></div>
       <button class="addline" onclick="newClass()">＋ קבוצה חדשה</button>`;
     return; }
   const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>` : '';
@@ -4652,6 +4696,206 @@ function introFeature(){
         <div style="margin-top:auto;background:#FFF2C9;color:#946200;border-radius:12px;padding:10px;font-size:12px;font-weight:700;text-align:center">עוד 5 ימים למבחן</div></div>
     </div></div>`;
 }
+
+
+/* ---------- parents' consent for a teacher's group (stage 2) ----------
+   A parent opens the group's link (/?join=<group>.<code>) with no account: the letter (public/consent.json, built from
+   tools/docs/consent-*.md), the form and a finger signature → a waiting request, and a personal status page
+   (/?req=<group>.<request>.<key>) that shows the kid's link once the teacher approved. The teacher: one link for the group
+   (+ QR + a WhatsApp text), the waiting requests (approve / attach to a student / reject), the students with their consent,
+   a printable form and a student added with a signed paper form. Every change goes through the server (functions). */
+const CONSENT_VERSION='0.9';      // the version line of tools/docs/consent-he.md (public/consent.json "v") – raise both together
+let CONSENT=null;
+async function consentLetter(){ if(CONSENT) return CONSENT;
+  try{ const r=await fetch('/consent.json?v='+CONSENT_VERSION); CONSENT=r.ok?await r.json():null; }catch(e){ CONSENT=null; }
+  if(CONSENT&&CONSENT.v!==CONSENT_VERSION) console.warn('consent.json is version',CONSENT.v,'– CONSENT_VERSION is',CONSENT_VERSION);
+  return CONSENT; }
+const todayTxt=()=>{ const d=new Date(); return `${d.getDate()}.${d.getMonth()+1}.${d.getFullYear()}`; };
+// the letter, in the app's language, with the teacher, the group and today's date put in as text
+function letterHtml(L, teacher, group){
+  const box=document.createElement('div'); box.innerHTML=(L&&L[EN()?'en':'he']||{}).html||'';
+  box.querySelectorAll('.ph-teacher').forEach(e=>e.textContent=teacher||''); box.querySelectorAll('.ph-group').forEach(e=>e.textContent=group||'');
+  box.querySelectorAll('.ph-date').forEach(e=>e.textContent=todayTxt());
+  box.querySelectorAll('a[href]').forEach(a=>{ a.target='_blank'; a.rel='noopener'; });
+  return box; }
+function joinShell(){ let el=$('joinPage'); if(!el){ el=document.createElement('div'); el.id='joinPage'; el.setAttribute('translate','yes'); document.body.appendChild(el); }
+  el.innerHTML=`<div class="jbox"><img src="${$('logoFull')?.src||''}" alt="Study for fun" class="jlogo"><div id="jBody"><p class="center">⏳</p></div>
+    <div class="jfoot"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">${EN()?'עברית':'EN'}</button></div></div>`;
+  return $('jBody'); }
+const joinErrTxt=c=>c==='link_closed'?'המורה סגר/ה את הקישור הזה. בקשו מהמורה קישור חדש.':c==='link_expired'?'תוקף הקישור הזה הסתיים. בקשו מהמורה קישור חדש.'
+  :c==='link_bad'?'הקישור הזה לא תקין או שהוחלף. בקשו מהמורה את הקישור העדכני.':c==='no_signature'?'צריך לחתום בתוך המסגרת.'
+  :c==='too_many'?'נשלחו יותר מדי בקשות מהטלפון הזה. נסו שוב בעוד שעה.':c==='too_many_waiting'?'יש כרגע יותר מדי בקשות שממתינות למורה. נסו שוב מאוחר יותר.'
+  :c==='bad_input'?'צריך למלא את השמות ולסמן שקראתם.':c==='not_found'?'הקישור הזה לא נמצא.':'משהו השתבש. נסו שוב.';
+// the parent's page: the letter + the form + the signature
+async function sffJoinPage(o){
+  const body=joinShell();
+  if(o.mode==='req') return joinStatusPage(o);
+  let info; try{ info=await window.__sffJoin.info({classId:o.classId, code:o.code}); }
+  catch(e){ body.innerHTML=`<div class="card center"><div style="font-size:2.4em">🔗</div><h2>${esc(sffT?sffT(joinErrTxt(e.code)):joinErrTxt(e.code))}</h2></div>`; return; }
+  const L=await consentLetter();
+  body.innerHTML=`<div class="card jhead"><div class="hint">🧑‍🏫 ${esc(info.teacher||'')}</div><h2>${esc(info.name||'')}</h2>
+      <p class="sub" style="margin:4px 0 0">מזמין/ה את ילדכם להצטרף לקבוצה. קראו את המכתב, מלאו את הפרטים וחתמו למטה.</p></div>
+    <div class="card jletter" id="jLetter"></div>
+    <div class="card jform">
+      <label for="jParent">שם ההורה</label><input id="jParent" type="text" maxlength="60" autocomplete="name">
+      <label for="jKid">שם הילד/ה</label><input id="jKid" type="text" maxlength="30" placeholder="נועה כ."><div class="hint">שם פרטי + אות ראשונה של שם המשפחה</div>
+      <label for="jContact">טלפון או מייל <span class="hint">(רשות)</span></label><input id="jContact" type="text" maxlength="80" dir="ltr" inputmode="email">
+      <label class="toggle jagree"><input type="checkbox" id="jAgree"><span>קראתי, ואני מסכימ/ה שילדי/ילדתי יצטרף/תצטרף לקבוצה לפי מה שכתוב במכתב.</span></label>
+      <label>חתימה <span class="hint">– באצבע, בתוך המסגרת</span></label>
+      <div class="sigbox"><canvas id="jSig" width="360" height="120" aria-label="חתימה"></canvas></div>
+      <div class="sigtools"><button class="linkbtn" id="jClear" type="button">🧽 ניקוי החתימה</button></div>
+      <button class="btn big" id="jSend" type="button" style="width:100%;justify-content:center;margin-top:14px">✓ שליחה למורה</button>
+      <div class="hint" id="jErr" style="margin-top:8px;color:var(--bad)"></div>
+      <p class="hint" style="margin:8px 0 0">אחרי השליחה תקבלו קישור אישי לבדיקת הסטטוס. המורה יאשר/תאשר את הבקשה, ואז יופיע הקישור של הילד/ה.</p></div>`;
+  $('jLetter').appendChild(letterHtml(L, info.teacher, info.name));
+  const sig=sigPad($('jSig')); $('jClear').onclick=()=>sig.clear();
+  $('jSend').onclick=async()=>{ const err=m=>{ $('jErr').textContent=window.sffT?sffT(m):m; };
+    const parentName=$('jParent').value.trim(), kidName=$('jKid').value.trim(), contact=$('jContact').value.trim();
+    if(parentName.length<2){ err('צריך את שם ההורה.'); $('jParent').focus(); return; }
+    if(kidName.length<2){ err('צריך את שם הילד/ה.'); $('jKid').focus(); return; }
+    if(!$('jAgree').checked){ err('צריך לסמן שקראתם ואתם מסכימים.'); return; }
+    if(sig.empty()){ err('צריך לחתום בתוך המסגרת.'); return; }
+    $('jSend').disabled=true; err('');
+    try{ const r=await window.__sffJoin.request({classId:o.classId, code:o.code, parentName, kidName, contact, sig:sig.png(), letterV:CONSENT_VERSION, agree:true});
+      const st={mode:'req', classId:o.classId, reqId:r.reqId, key:r.statusKey, fresh:true};
+      try{ window.history.replaceState(null,'',`/?req=${o.classId}.${r.reqId}.${r.statusKey}`); }catch(e){}
+      joinStatusPage(st); }
+    catch(e){ $('jSend').disabled=false; err(joinErrTxt(e.code)); } };
+}
+// a finger signature on a transparent canvas → a small PNG; empty until something is drawn
+function sigPad(cv){ const g=cv.getContext('2d'); let down=false, ink=0, last=null;
+  g.lineWidth=2.6; g.lineCap='round'; g.lineJoin='round'; g.strokeStyle='#1B2A4A';
+  const at=e=>{ const r=cv.getBoundingClientRect(), t=e.touches?e.touches[0]:e; return [(t.clientX-r.left)*cv.width/r.width, (t.clientY-r.top)*cv.height/r.height]; };
+  const start=e=>{ e.preventDefault(); down=true; last=at(e); }, end=()=>{ down=false; last=null; };
+  const move=e=>{ if(!down) return; e.preventDefault(); const p=at(e); g.beginPath(); g.moveTo(last[0],last[1]); g.lineTo(p[0],p[1]); g.stroke(); ink+=Math.hypot(p[0]-last[0],p[1]-last[1]); last=p; };
+  cv.addEventListener('pointerdown',start); cv.addEventListener('pointermove',move); window.addEventListener('pointerup',end); cv.addEventListener('pointerleave',end);
+  cv.addEventListener('touchstart',start,{passive:false}); cv.addEventListener('touchmove',move,{passive:false}); cv.addEventListener('touchend',end);
+  return { empty:()=>ink<40, clear:()=>{ g.clearRect(0,0,cv.width,cv.height); ink=0; }, png:()=>cv.toDataURL('image/png') }; }
+// the parent's own status page
+async function joinStatusPage(o){
+  const body=$('jBody')||joinShell(); body.innerHTML='<p class="center">⏳</p>';
+  let s; try{ s=await window.__sffJoin.status({classId:o.classId, reqId:o.reqId, statusKey:o.key}); }
+  catch(e){ body.innerHTML=`<div class="card center"><div style="font-size:2.4em">🔗</div><h2>${esc(sffT?sffT(joinErrTxt(e.code)):joinErrTxt(e.code))}</h2></div>`; return; }
+  const me=`${location.origin}/?req=${o.classId}.${o.reqId}.${o.key}`, head=`<div class="hint">🧑‍🏫 ${esc(s.teacher||'')} · ${esc(s.name||'')}</div>`;
+  const keep=`<div class="jkeep"><b>📌 שמרו את הקישור האישי הזה</b><div class="hint">בו תראו מתי המורה אישר/ה, ומשם אפשר לבטל.</div>
+    <input type="text" readonly class="tinyurl" value="${esc(me)}" dir="ltr"><div class="actions" style="justify-content:center">
+    <a class="btn wa small" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(me)}">💬 לשלוח לעצמי בוואטסאפ</a>
+    <button class="btn ghost small" onclick="navigator.clipboard?.writeText(${esc(JSON.stringify(me))}).then(()=>toast('✓'))">📋 העתקה</button></div></div>`;
+  let main;
+  if(s.status==='pending') main=`<div class="jstat wait"><div class="big">⏳</div><h2>ממתין לאישור המורה</h2><p class="sub">הבקשה ל${esc(s.kidName)} התקבלה. כשהמורה יאשר/תאשר – יופיע כאן הקישור של הילד/ה.</p>
+      <button class="btn ghost small" onclick="joinStatusPage(${esc(JSON.stringify(o))})">🔄 בדיקה שוב</button></div>${keep}
+      <button class="linkbtn danger" style="margin-top:14px" onclick="joinRevoke(${esc(JSON.stringify(o))},true)">ביטול הבקשה</button>`;
+  else if(s.status==='approved' && s.token){ const kl=`${location.origin}/?f=${o.classId}&t=${s.token}&k=${encodeURIComponent(s.kidId)}#kid-${s.kidId}`;
+    main=`<div class="jstat ok"><div class="big">✅</div><h2>המורה אישר/ה</h2><p class="sub">זה הקישור האישי של ${esc(s.kidName)} לקבוצה. פותחים אותו בטלפון של הילד/ה – בלי סיסמה.</p>
+      <input type="text" readonly class="tinyurl" value="${esc(kl)}" dir="ltr" id="jKidLink">
+      <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(`${s.kidName}, זה הקישור שלך לתרגול 🎮\n${kl}`)}">💬 שליחה לילד/ה בוואטסאפ</a>
+      <button class="btn ghost" disabled style="margin-top:8px">👀 רוצים לעקוב אחרי ההתקדמות? (בקרוב)</button></div>${keep}
+      <button class="linkbtn danger" style="margin-top:14px" onclick="joinRevoke(${esc(JSON.stringify(o))},false)">ביטול ההסכמה</button>`; }
+  else if(s.status==='rejected') main=`<div class="jstat no"><div class="big">✋</div><h2>המורה לא אישר/ה את הבקשה</h2>${s.reason?`<p class="sub">${esc(s.reason)}</p>`:''}<p class="hint">אפשר לפנות למורה ישירות.</p></div>`;
+  else main=`<div class="jstat no"><div class="big">🗑</div><h2>${s.status==='withdrawn'?'הבקשה בוטלה':'ההסכמה בוטלה'}</h2><p class="sub">${s.status==='withdrawn'?'':'הקישור של הילד/ה כבר לא פעיל, וההתקדמות בקבוצה נמחקה.'}</p></div>`;
+  body.innerHTML=`<div class="card jhead">${head}</div><div class="card">${main}</div>`;
+}
+async function joinRevoke(o, pending){
+  if(!(await askSure({ico:'🗑',title:pending?'לבטל את הבקשה?':'לבטל את ההסכמה?',text:pending?'הבקשה תימחק, והחתימה לא תישמר.':'הקישור של הילד/ה יפסיק לעבוד, וההתקדמות בקבוצה תימחק.',yes:pending?'ביטול הבקשה':'ביטול ההסכמה',no:'חזרה',danger:true}))) return;
+  try{ await window.__sffJoin.revoke({classId:o.classId, reqId:o.reqId, statusKey:o.key}); }catch(e){ toast('⚠️ '+(e.code||'')); }
+  joinStatusPage(o); }
+
+/* the teacher's side */
+const CLS={reqs:[], consents:{}, link:null};
+function classCloud(){ if(!DB||!isClassMode()) return;
+  DB.collection('joinReqs').onSnapshot(q=>{ CLS.reqs=q.docs.map(d=>({id:d.id,...d.data()})); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
+  DB.collection('consents').onSnapshot(q=>{ CLS.consents=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{}); }
+const fmtDT=t=>{ try{ return new Date(t).toLocaleDateString(EN()?'en-GB':'he-IL'); }catch(e){ return ''; } };
+const CBADGE={digital:['✅','דיגיטלי'], paper:['📄','נייר'], pending:['⏳','ממתין']};
+function teacherBody(){
+  const pend=CLS.reqs.filter(r=>r.status==='pending').sort((a,b)=>a.at-b.at), studs=kids.filter(k=>CLS.consents[k.id]&&CLS.consents[k.id].status!=='revoked');
+  const reqs=pend.length?`<div class="tsec"><h3>📥 בקשות ממתינות (${pend.length})</h3>${pend.map(r=>`<div class="treq" data-id="${esc(r.id)}">
+      <div class="tr1"><b>${esc(r.kidName)}</b><span class="hint">${esc(r.parentName)} · ${fmtDT(r.at)}</span></div>
+      <img class="tsig" alt="חתימה" data-sig="${esc(r.id)}">
+      <div class="actions"><button class="btn small" onclick="tApprove('${esc(r.id)}')">✅ לאשר</button>
+        ${studs.length?`<button class="btn ghost small" onclick="tAttach('${esc(r.id)}')">🔗 חיבור לתלמיד/ה קיים/ת</button>`:''}
+        <button class="btn ghost small" onclick="tReject('${esc(r.id)}')">❌ דחייה</button></div></div>`).join('')}</div>`:'';
+  const list=studs.length?`<div class="tsec"><h3>🧒 התלמידים (${studs.length})</h3>${studs.map(k=>{ const c=CLS.consents[k.id]||{}, b=CBADGE[c.status]||['',''];
+      return `<button class="tstud" onclick="tStudent('${esc(k.id)}')">${avatarHtml(k,36)}<b>${esc(k.name)}</b><span class="cbadge c-${esc(c.status||'')}">${b[0]} ${b[1]}</span></button>`; }).join('')}</div>`
+    :`<div class="tempty"><div style="font-size:2.4em">👋</div><b>עוד אין תלמידים</b>
+      <p class="sub">שולחים להורים קישור אחד, הם מאשרים את ההשתתפות של הילד/ה, ואתם מאשרים כל בקשה. רק אחרי האישור נפתח לתלמיד/ה קישור אישי.</p></div>`;
+  return reqs+list+`<div class="actions" style="justify-content:center;margin-top:14px"><button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button>
+    <button class="btn ghost" onclick="tAddStudent()">➕ הוספת תלמיד/ה (טופס מודפס)</button></div>`; }
+function fillSigs(root){ (root||document).querySelectorAll('img[data-sig]').forEach(im=>{ const id=im.dataset.sig, r=CLS.reqs.find(x=>x.id===id)||null;
+  const src=r?r.sig:(CLS.consents[id]||{}).sig; if(typeof src==='string'&&src.startsWith('data:image/png;base64,')) im.src=src; else im.remove(); }); }
+const cls=()=>window.__sffClass;
+async function tCall(fn, d){ try{ return await cls()[fn](d); }catch(e){ toast('⚠️ '+(e.code==='class_full'?'אפשר עד 40 תלמידים בקבוצה':e.code==='not_pending'?'הבקשה כבר טופלה':(e.code||e.message))); throw e; } }
+async function tApprove(id){ await tCall('approve',{reqId:id}).catch(()=>{}); }
+async function tReject(id){ const why=prompt(window.sffT?sffT('סיבה (לא חובה) – ההורה יראה אותה:'):'סיבה (לא חובה) – ההורה יראה אותה:',''); if(why===null) return; await tCall('reject',{reqId:id, reason:why}).catch(()=>{}); }
+function tAttach(id){ const r=CLS.reqs.find(x=>x.id===id); if(!r) return;
+  const studs=kids.filter(k=>['digital','paper'].includes((CLS.consents[k.id]||{}).status));
+  tDialog(`<h2>🔗 לאיזה תלמיד/ה?</h2><p class="sub">ההסכמה של ${esc(r.parentName)} תצורף לתלמיד/ה (למשל הורה שני).</p>
+    <div class="chipsel" style="justify-content:center">${studs.map(k=>`<button onclick="tCall('approve',{reqId:'${esc(id)}',attachTo:'${esc(k.id)}'}).then(tClose,()=>{})">${esc(k.name)}</button>`).join('')}</div>`); }
+function tStudent(kid){ const k=kidById(kid), c=CLS.consents[kid]||{}; if(!k) return; const b=CBADGE[c.status]||['',''];
+  const ps=(c.parents&&c.parents.length?c.parents:[c]).filter(p=>p&&p.parentName);
+  tDialog(`<h2>${esc(k.name)}</h2><div class="cbadge c-${esc(c.status||'')}" style="display:inline-block">${b[0]} ${b[1]}</div>
+    ${ps.map(p=>`<div class="tpar"><b>${esc(p.parentName)}</b><span class="hint">${c.status==='paper'?`טופס חתום · ${esc(c.signedAt||'')}`:`${fmtDT(p.at)}${p.contact?' · '+esc(p.contact):''}`}${p.letterV||c.letterV?` · גרסת מכתב ${esc(p.letterV||c.letterV)}`:''}</span>
+      ${p.sig?`<img class="tsig" alt="חתימה" src="">`:''}</div>`).join('')||'<p class="hint">עוד אין הסכמה.</p>'}
+    <div class="actions" style="justify-content:center;margin-top:12px">
+      ${c.status==='pending'?`<button class="btn" onclick="tPaper('${esc(kid)}')">📄 סימון: התקבל טופס חתום</button>`:`<button class="btn" onclick="tClose();openKidLink('${esc(kid)}')">🔗 הקישור של ${esc(k.name)}</button>`}
+      <button class="btn ghost danger" onclick="tRemove('${esc(kid)}')">הוצאה מהקבוצה</button></div>`);
+  const ims=[...$('tDlg').querySelectorAll('img.tsig')]; ps.filter(p=>p.sig).forEach((p,i)=>{ if(ims[i]&&String(p.sig).startsWith('data:image/png;base64,')) ims[i].src=p.sig; }); }
+async function tRemove(kid){ const k=kidById(kid); if(!(await askSure({ico:'🗑',title:`להוציא את ${k?k.name:''} מהקבוצה?`,text:'הקישור של התלמיד/ה יפסיק לעבוד, וההתקדמות בקבוצה תימחק.',yes:'הוצאה',no:'ביטול',danger:true}))) return;
+  await tCall('revoke',{kidId:kid}).then(tClose,()=>{}); }
+function tPaperForm(kid){ return `<label for="tpParent">שם ההורה שחתם/ה</label><input id="tpParent" type="text" maxlength="60">
+  <label for="tpDate">תאריך החתימה</label><input id="tpDate" type="date" value="${new Date().toISOString().slice(0,10)}">`; }
+function tPaper(kid){ tDialog(`<h2>📄 התקבל טופס חתום</h2>${tPaperForm(kid)}<button class="btn big" style="width:100%;justify-content:center;margin-top:12px" onclick="tPaperGo('${esc(kid)}')">✓ שמירה</button>`); }
+async function tPaperGo(kid){ const parentName=$('tpParent').value.trim(), signedAt=$('tpDate').value; if(parentName.length<2||!signedAt){ toast('👆 שם ההורה ותאריך'); return; }
+  await tCall('markPaper',{kidId:kid, parentName, signedAt, letterV:CONSENT_VERSION}).then(tClose,()=>{}); }
+function tAddStudent(){ tDialog(`<h2>➕ תלמיד/ה חדש/ה</h2><label for="taName">שם התלמיד/ה</label><input id="taName" type="text" maxlength="30" placeholder="נועה כ.">
+  <label class="toggle" style="margin-top:12px"><input type="checkbox" id="taPaper" onchange="$('taPP').classList.toggle('hidden',!this.checked)"><span>התקבל טופס הסכמה חתום</span></label>
+  <div id="taPP" class="hidden">${tPaperForm()}</div><p class="hint">בלי טופס חתום התלמיד/ה ממתין/ה, ואין לו/ה קישור.</p>
+  <button class="btn big" style="width:100%;justify-content:center;margin-top:8px" onclick="tAddGo()">✓ הוספה</button>`); }
+async function tAddGo(){ const kidName=$('taName').value.trim(); if(kidName.length<2){ toast('👆 שם התלמיד/ה'); return; }
+  let paper=null; if($('taPaper').checked){ const parentName=$('tpParent').value.trim(), signedAt=$('tpDate').value; if(parentName.length<2||!signedAt){ toast('👆 שם ההורה ותאריך'); return; } paper={parentName, signedAt, letterV:CONSENT_VERSION}; }
+  await tCall('addStudent',{kidName, paper}).then(tClose,()=>{}); }
+function tDialog(html){ let d=$('tDlg'); if(!d){ d=document.createElement('div'); d.id='tDlg'; d.onclick=e=>{ if(e.target===d) tClose(); }; document.body.appendChild(d); }
+  d.innerHTML=`<div class="card herocard tdlg"><div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="tClose()" aria-label="סגירה">✕</button></div>${html}</div>`; d.classList.remove('hidden'); }
+function tClose(){ $('tDlg')?.classList.add('hidden'); }
+// the group's link: QR, WhatsApp text, a new link, close / open, the printable form
+async function inviteStudents(action){
+  tDialog('<p class="center">⏳</p>');
+  let L; try{ L=await cls().link({action:action||'get'}); }catch(e){ tDialog(`<p>⚠️ ${esc(e.code||e.message||'')}</p>`); return; }
+  const C=window.SFF_CLASS||{}, url=`${location.origin}/?join=${window.__sffFamily.famId}.${L.code}`;
+  const msg=`${EN()?'Hello parents 👋':'שלום הורים 👋'}\n${EN()?`To join our group "${C.name}" in Study for fun, please open the link, read the letter and sign:`:`כדי להצטרף לקבוצה "${C.name}" ב-Study for fun, פתחו את הקישור, קראו את המכתב וחתמו:`}\n${url}`;
+  tDialog(`<h2>📨 הזמנת תלמידים</h2><p class="sub">קישור אחד לכל ההורים בקבוצה. כל הורה קורא את מכתב ההסכמה, חותם/ת, ואתם מאשרים כל בקשה.</p>
+    <div id="tQR" class="tqr"></div>
+    <input type="text" readonly class="tinyurl" value="${esc(url)}" dir="ltr">
+    <div class="hint">${L.open?`🟢 הקישור פתוח · בתוקף עד ${fmtDT(L.exp)}`:'🔴 הקישור סגור – הורים לא יכולים לשלוח בקשות'}</div>
+    <div class="actions" style="justify-content:center;margin-top:10px">
+      <a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(msg)}">💬 שליחה לקבוצת ההורים</a>
+      <button class="btn ghost" onclick="navigator.clipboard?.writeText(${esc(JSON.stringify(url))}).then(()=>toast('✓'))">📋 העתקה</button></div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn ghost small" onclick="tNewLink()">🔄 קישור חדש</button>
+      <button class="btn ghost small" onclick="inviteStudents('${L.open?'close':'open'}')">${L.open?'⛔ סגירת הקישור':'🟢 פתיחת הקישור'}</button>
+      <button class="btn ghost small" onclick="tPrint()">📄 טופס להדפסה</button></div>`);
+  qrInto($('tQR'), url); }
+async function tNewLink(){ if(!(await askSure({ico:'🔄',title:'ליצור קישור חדש?',text:'הקישור הקודם יפסיק לעבוד. בקשות שכבר נשלחו נשארות.',yes:'קישור חדש',no:'ביטול'}))) return; inviteStudents('new'); }
+function tPrint(){ const C=window.SFF_CLASS||{}, t=(window.__sffFamily&&window.SFF_CLASS&&window.SFF_CLASS.teacher)||window.SFF_MYNAME||'';
+  window.open(`/consent.html?lang=${EN()?'en':'he'}&t=${encodeURIComponent(t)}&g=${encodeURIComponent(C.name||'')}&print=1`,'_blank','noopener'); }
+// a QR code for the link (public/qrcode.js – qrcode-generator 1.4.4 by Kazuhiko Arase, MIT, served by the app itself – loaded
+// only here; without it the link and the WhatsApp text still work)
+function qrInto(el, text){ if(!el) return; const draw=()=>{ try{ const q=qrcode(0,'M'); q.addData(text); q.make(); el.innerHTML=q.createSvgTag({cellSize:4,margin:2,scalable:true}); }catch(e){ el.remove(); } };
+  if(window.qrcode) return draw(); const s=document.createElement('script');
+  s.src='/qrcode.js';
+  s.onload=draw; s.onerror=()=>el.remove(); document.head.appendChild(s); }
+
+/* a student's phone in a group: only its own student, its own progress and its own practice sets (firestore.rules) */
+// the consent was withdrawn (or the student taken out): nothing of the group stays on this phone
+function classKidGone(){ kids=[]; sets=[]; history=[]; try{ saveKidsLocal(); storeSaveLocal(); saveHistoryLocal(); }catch(e){} rerender(); }
+function classKidCloud(me){
+  DB.doc('kidpub/'+me).onSnapshot(snap=>{ CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
+    const remote=snap.exists?(snap.data().list||[]):[];
+    kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; });
+    saveKidsLocal(); applyLock(); rerender(); },e=>{ classKidGone(); showCloudErr('kid: '+(e&&(e.code||e.message))); });
+  DB.collection('sets').where('set.kidId','==',me).onSnapshot(q=>{ const remote=q.docs.map(d=>d.data().set).filter(Boolean), old=sets;
+    sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); },()=>{});
+  DB.doc('progress/'+me).onSnapshot(snap=>{ if(snap.exists) progDocs([{id:me, data:()=>snap.data()}]); },()=>{}); }
 
 /* kid link dialog */
 async function openKidLink(id){ const k=kidById(id); if(!k) return; $('linkDlg').dataset.kid=id; $('klNew').classList.toggle('hidden',!canManage());

@@ -3,81 +3,142 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>D-Way</title>
-<meta name="description" content="D-Way – אפליקציות שהופכות למידה לחוויה. Study for fun: תרגול למבחנים דרך משחקים.">
-<meta name="theme-color" content="#1B2A4A">
-<link rel="icon" href="/logo.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>D-Way Family Lab · עמוד הבית</title>
+<meta name="description" content="D-Way Family Lab: שיטות וכלים מעולם התוכן של פיתוח ארגוני לעסקים, בהתאמה לבית ולחיי המשפחה.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#1B2A4A;--ink2:#4A4870;--sky:#E4F1FF;--sun:#F2A63B;--paper:#fff;--line:2px solid var(--ink)}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{font-family:Rubik,system-ui,sans-serif;color:var(--ink);background:var(--sky);line-height:1.6}
-a{color:inherit}
-.wrap{max-width:860px;margin:0 auto;padding:0 16px}
-header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
-.brand{display:flex;align-items:center;gap:10px;font-family:Fredoka,Rubik,sans-serif;font-weight:700;font-size:1.5rem;text-decoration:none}
-.brand img{width:38px;height:auto}
-.lang{border:var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 3px 0 var(--ink)}
-.hero{padding:36px 0 28px}
-h1{font-family:Fredoka,Rubik,sans-serif;font-size:clamp(2rem,6vw,3rem);line-height:1.15;margin:0 0 12px}
-.hero p{font-size:1.15rem;color:var(--ink2);margin:0;max-width:52ch}
-h2{font-family:Fredoka,Rubik,sans-serif;font-size:1.4rem;margin:28px 0 14px}
-.card{display:flex;gap:18px;align-items:center;background:var(--paper);border:var(--line);border-radius:22px;padding:20px;box-shadow:0 5px 0 var(--ink)}
-.card img{width:84px;height:84px;border-radius:20px;flex:none}
-.card h3{margin:0 0 4px;font-family:Fredoka,Rubik,sans-serif;font-size:1.35rem}
-.card p{margin:0 0 12px;color:var(--ink2)}
-.btn{display:inline-block;background:var(--sun);border:var(--line);border-radius:999px;padding:8px 20px;font-weight:600;text-decoration:none;box-shadow:0 3px 0 var(--ink)}
-.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
-.soon{margin-top:14px;color:var(--ink2);font-size:.95rem}
-footer{margin:48px 0 0;padding:20px 0 32px;border-top:2px solid rgba(27,42,74,.15);font-size:.92rem;color:var(--ink2);display:flex;flex-wrap:wrap;gap:8px 18px}
-@media (max-width:520px){.card{flex-direction:column;align-items:flex-start}}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Rubik:wght@500;700;800&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <a class="brand" href="/"><img src="/logo.svg" alt="">D-Way</a>
-    <button class="lang" id="lang" type="button">English</button>
-  </header>
+<div dir="rtl" class="page">
 
-  <section class="hero">
-    <h1 data-he="אפליקציות שהופכות למידה לחוויה" data-en="Apps that make learning fun">אפליקציות שהופכות למידה לחוויה</h1>
-    <p data-he="אנחנו בונים כלים פשוטים ושמחים לילדים ולהורים – כדי שהתרגול לפני המבחן יהיה משחק, וההורה יידע בדיוק במה לעזור." data-en="We build simple, cheerful tools for kids and parents – so practising before a test feels like a game, and parents know exactly where to help.">אנחנו בונים כלים פשוטים ושמחים לילדים ולהורים – כדי שהתרגול לפני המבחן יהיה משחק, וההורה יידע בדיוק במה לעזור.</p>
-  </section>
-
-  <h2 data-he="האפליקציות שלנו" data-en="Our apps">האפליקציות שלנו</h2>
-  <div class="card">
-    <img src="/study-for-fun.png" alt="Study for fun">
-    <div>
-      <h3>Study for fun</h3>
-      <p data-he="תרגול למבחנים באנגלית, מתמטיקה, שפה ומדעים – דרך משחקים. ההורה בוחר או בונה את החומר ורואה את ההתקדמות." data-en="Practise for school tests in English, maths, Hebrew and science – through games. Parents pick or build the material and follow the progress.">תרגול למבחנים באנגלית, מתמטיקה, שפה ומדעים – דרך משחקים. ההורה בוחר או בונה את החומר ורואה את ההתקדמות.</p>
-      <a class="btn" href="https://study.d-way.app/" data-he="לאפליקציה" data-en="Open the app">לאפליקציה</a>
-    </div>
-  </div>
-  <p class="soon" data-he="אפליקציות נוספות בדרך…" data-en="More apps on the way…">אפליקציות נוספות בדרך…</p>
-
-  <footer>
-    <span>© <span id="y">2026</span> D-Way</span>
-    <a href="mailto:differentway.app@gmail.com" data-he="יצירת קשר" data-en="Contact">יצירת קשר</a>
-    <a href="https://study.d-way.app/privacy.html" data-he="מדיניות פרטיות" data-en="Privacy policy">מדיניות פרטיות</a>
-    <a href="https://study.d-way.app/terms.html" data-he="תנאי שימוש" data-en="Terms of use">תנאי שימוש</a>
-  </footer>
+<div id="top" class="top">
+<header class="site-header">
+<div class="header-in">
+<nav aria-label="ניווט ראשי" class="main-nav">
+<a href="en/index.html" dir="ltr" lang="en" class="lang-btn">English</a>
+<a href="index.html" class="nav-link" aria-current="page">דף הבית</a>
+<a href="founders.html" class="nav-link">הצוות המייסד</a>
+<a href="contact.html" class="nav-link">יצירת קשר</a>
+</nav>
+<a href="index.html" dir="ltr" aria-label="D-Way Family Lab" class="brand"><svg aria-hidden="true" viewBox="0 0 100 100" width="46" height="46" class="brand-mark"><path d="M24 84 V16 H50 A34 34 0 0 1 50 84 H44" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="47" cy="52" r="10" fill="#F26B5B"></circle><circle cx="63" cy="61" r="6" fill="#F26B5B"></circle></svg><span class="brand-text"><span class="brand-name">D-Way</span><span class="brand-tag">FAMILY LAB</span></span></a>
 </div>
-<script>
-document.getElementById('y').textContent = new Date().getFullYear();
-function setLang(l){
-  document.documentElement.lang = l; document.documentElement.dir = l === 'he' ? 'rtl' : 'ltr';
-  document.querySelectorAll('[data-he]').forEach(e => e.textContent = e.dataset[l]);
-  document.getElementById('lang').textContent = l === 'he' ? 'English' : 'עברית';
-  try { localStorage.setItem('lang', l); } catch (e) {}
-}
-document.getElementById('lang').onclick = () => setLang(document.documentElement.lang === 'he' ? 'en' : 'he');
-let saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
-if (saved === 'en' || (!saved && !/^he\b/.test(navigator.language || ''))) setLang('en');
-</script>
+</header>
+
+<section class="hero">
+<div class="hero-text">
+<h1 class="hero-title">כלי ניהול מקצועיים לחיי המשפחה</h1>
+<p class="hero-lead">D-Way Family Lab מתאימה לבית ולמשפחה שיטות וכלים מעולם התוכן של פיתוח ארגוני לעסקים, כדי לחלוק את האחריות בבית אחרת, עם פחות עומס ויותר שיתוף פעולה.</p>
+<a href="contact.html" class="btn-coral">לתיאום פגישה</a>
+</div>
+<div class="hero-art">
+<svg aria-hidden="true" viewBox="0 0 100 100" class="svg-fluid"><path d="M24 84 V16 H50 A34 34 0 0 1 50 84 H44" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="47" cy="52" r="10" fill="#F26B5B"></circle><circle cx="63" cy="61" r="6" fill="#F26B5B"></circle></svg>
+</div>
+</section>
+</div>
+
+<main>
+
+<section id="story" class="story">
+<div class="story-row">
+<div class="story-text">
+<p class="eyebrow"><span aria-hidden="true" class="dot"></span>למה D-Way</p>
+<h2 class="section-title narrow">נבנה עבור משפחות, מתוך הצורך הקיים</h2>
+<div class="story-paras">
+<p>בעשור האחרון, ובעיקר בישראל, האתגר של משפחות הנדרשות לאזן בין בית לעבודה התעצם לנוכח המשברים העולמיים.</p>
+<p>ב‑D-Way הקמנו, מתוך המציאות הזאת, סט של כלים ממוחשבים המתחברים באופן טבעי לצרכים ולאופן היישום של העולם החדש.</p>
+</div>
+</div>
+<div class="story-art">
+<svg role="img" aria-label="איור של משפחה מחייכת משחקת יחד במשחק לוח סביב שולחן" viewBox="0 0 400 320" class="svg-fluid"><circle cx="200" cy="165" r="150" fill="#E7EAF0"></circle><polygon points="70.0,60.0 72.6,66.4 79.5,66.9 74.3,71.4 75.9,78.1 70.0,74.5 64.1,78.1 65.7,71.4 60.5,66.9 67.4,66.4" fill="#F2A63B"></polygon><polygon points="330.0,75.0 332.4,80.7 338.6,81.2 333.9,85.3 335.3,91.3 330.0,88.0 324.7,91.3 326.1,85.3 321.4,81.2 327.6,80.7" fill="#2BB3A3"></polygon><circle cx="120" cy="44" r="5" fill="#F26B5B"></circle><circle cx="286" cy="40" r="6" fill="#3FA7D6"></circle><path d="M 53 236 V 181 A 31 31 0 0 1 115 181 V 236 Z" fill="#1B2A4A"></path><circle cx="84" cy="119" r="24" fill="#1B2A4A"></circle><circle cx="75.84" cy="116.12" r="2.4" fill="#FFFFFF"></circle><circle cx="92.16" cy="116.12" r="2.4" fill="#FFFFFF"></circle><path d="M 73.92 124.28 Q 84 136.28 94.08 124.28" stroke="#FFFFFF" stroke-width="2.64" stroke-linecap="round" fill="none"></path><path d="M 286 236 V 182 A 30 30 0 0 1 346 182 V 236 Z" fill="#F26B5B"></path><circle cx="316" cy="121" r="24" fill="#F26B5B"></circle><circle cx="307.84" cy="118.12" r="2.4" fill="#1B2A4A"></circle><circle cx="324.16" cy="118.12" r="2.4" fill="#1B2A4A"></circle><path d="M 305.92 126.28 Q 316 138.28 326.08 126.28" stroke="#1B2A4A" stroke-width="2.64" stroke-linecap="round" fill="none"></path><path d="M 147 192 L 119 150" stroke="#F2A63B" stroke-width="10" stroke-linecap="round" fill="none"></path><path d="M 181 192 L 209 150" stroke="#F2A63B" stroke-width="10" stroke-linecap="round" fill="none"></path><path d="M 141 236 V 199 A 23 23 0 0 1 187 199 V 236 Z" fill="#F2A63B"></path><circle cx="164" cy="150" r="19" fill="#F2A63B"></circle><circle cx="157.54" cy="147.72" r="1.9" fill="#1B2A4A"></circle><circle cx="170.46" cy="147.72" r="1.9" fill="#1B2A4A"></circle><path d="M 156.02 154.18 Q 164 163.68 171.98 154.18" stroke="#1B2A4A" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M 216 236 V 196 A 24 24 0 0 1 264 196 V 236 Z" fill="#2BB3A3"></path><circle cx="240" cy="145" r="20" fill="#2BB3A3"></circle><circle cx="233.2" cy="142.6" r="2" fill="#1B2A4A"></circle><circle cx="246.8" cy="142.6" r="2" fill="#1B2A4A"></circle><path d="M 231.6 149.4 Q 240 159.4 248.4 149.4" stroke="#1B2A4A" stroke-width="2.4" stroke-linecap="round" fill="none"></path><path d="M 258 186 L 276 150" stroke="#2BB3A3" stroke-width="10" stroke-linecap="round" fill="none"></path><polygon points="280.0,125.0 283.4,133.3 292.4,134.0 285.6,139.8 287.6,148.5 280.0,143.8 272.4,148.5 274.4,139.8 267.6,134.0 276.6,133.3" fill="#F2A63B"></polygon><rect x="40" y="222" width="320" height="22" rx="11" fill="#1B2A4A"></rect><rect x="72" y="244" width="14" height="46" rx="4" fill="#1B2A4A"></rect><rect x="314" y="244" width="14" height="46" rx="4" fill="#1B2A4A"></rect><path d="M 132 222 L 150 196 L 262 196 L 280 222 Z" fill="#FFFFFF"></path><path d="M 140 219 L 153 199 L 175 199 L 168 219 Z" fill="#F26B5B"></path><path d="M 174 219 L 180.5 199 L 202.5 199 L 202 219 Z" fill="#F2A63B"></path><path d="M 208 219 L 208 199 L 230 199 L 236 219 Z" fill="#2BB3A3"></path><path d="M 242 219 L 235.5 199 L 257.5 199 L 270 219 Z" fill="#3FA7D6"></path><rect x="96" y="200" width="22" height="22" rx="5" fill="#FFFFFF"></rect><circle cx="102" cy="206" r="2.4" fill="#1B2A4A"></circle><circle cx="112" cy="216" r="2.4" fill="#1B2A4A"></circle><circle cx="107" cy="211" r="2.4" fill="#1B2A4A"></circle><rect x="36" y="288" width="328" height="6" rx="3" fill="#1B2A4A"></rect></svg>
+</div>
+</div>
+<div aria-hidden="true" class="connector-row"><span class="connector"></span></div>
+<div id="vision" class="vision">
+<div class="vision-head">
+<p class="eyebrow on-dark"><span aria-hidden="true" class="dot"></span>החזון</p>
+<p class="vision-title">החזון של D-Way הוא להפוך את הזמן המשפחתי לזמן איכות, עם יותר אנרגיה חיובית, יותר שיתוף פעולה ופחות חיכוכים.</p>
+<p class="vision-sub">הדרך לשם: פתרונות המבוססים על אוטומציה ועל כלים מעולמות המשחוק לניהול חיי המשפחה, באופן פשוט ואפקטיבי.</p>
+</div>
+<div class="pillars">
+<div class="pillar">
+<h3 class="pillar-title">אחריות משותפת</h3>
+<p class="on-dark-text">כל אחד מבני הבית יודע מה באחריותו, והעומס אינו מוטל על אדם אחד.</p>
+</div>
+<div class="pillar">
+<h3 class="pillar-title">שינוי ברוח חיובית</h3>
+<p class="on-dark-text">הטמעה וליווי של תהליך השינוי ברוח חיובית, בעזרת כלים מעולמות המשחוק.</p>
+</div>
+<div class="pillar">
+<h3 class="pillar-title">אוטומציה</h3>
+<p class="on-dark-text">תזכורות, מעקב ותיאום נעשים באופן אוטומטי, ומשחררים את ההורים מהמעקב השוטף.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about" class="about-section">
+<div class="about-in">
+<div class="about-top">
+<div class="about-head">
+<p class="eyebrow"><span aria-hidden="true" class="dot"></span>החברה</p>
+<h2 class="about-title">שיטות וכלים מעולם התוכן של פיתוח ארגוני לעסקים, בהתאמה לבית</h2>
+</div>
+<p class="about-p">D-Way היא חברה ישראלית המפתחת, מפעילה ומשווקת פתרונות דיגיטליים בתחומי המשפחה, ההורות והפנאי. הפתרונות מותאמים לבית ולחיי המשפחה, ונשענים על מערכות מתקדמות המייעלות את התהליך ומייצרות נוחות ופשטות.</p>
+</div>
+<div class="how">
+<p class="eyebrow"><span aria-hidden="true" class="dot"></span>איך</p>
+<p class="how-text">אנחנו נותנים למשפחה כלים שיתופיים, המאפשרים שיקוף נכון ומדויק ושליטה לכל בני הבית, בהתאם לגיל ולרמת האחריות, בצורה אינטראקטיבית וחווייתית.</p>
+</div>
+<div class="grid-460">
+<div class="grid-200">
+<div class="card">
+<span aria-hidden="true" class="bar"></span>
+<h3 class="card-title">העצמה ואחריות</h3>
+<p class="card-p">העצמה וסיוע בלקיחת אחריות לכל השותפים לבית.</p>
+</div>
+<div class="card">
+<span aria-hidden="true" class="bar"></span>
+<h3 class="card-title">הטמעת תהליכים</h3>
+<p class="card-p">החלטות משפחתיות שהופכות לשגרה ומחזיקות לאורך זמן.</p>
+</div>
+</div>
+<div class="grid-200">
+<div class="card">
+<span aria-hidden="true" class="bar"></span>
+<h3 class="card-title">משחוק</h3>
+<p class="card-p">מנגנוני משחק שמעודדים התמדה ומעורבות של ילדים והורים.</p>
+</div>
+<div class="card">
+<span aria-hidden="true" class="bar"></span>
+<h3 class="card-title">הובלת שינוי</h3>
+<p class="card-p">שינוי הרגלים בתהליך שיתופי, שכל בני המשפחה שותפים לו.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="sep-top">
+<div class="cta-in">
+<p class="eyebrow"><span aria-hidden="true" class="dot"></span>יצירת קשר</p>
+<h2 class="section-title">נשמח להיפגש</h2>
+<p class="cta-lead">לתיאום פגישה, לפניות עסקיות ולהצעות לשיתוף פעולה, ניתן לפנות אלינו בדואר אלקטרוני.</p>
+<a dir="ltr" href="mailto:differentway.app@gmail.com" class="email-pill">differentway.app@gmail.com</a>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="footer-in">
+<span dir="ltr">© 2026 D-Way Family Lab</span>
+<span>כל הזכויות שמורות</span>
+</div>
+</footer>
+
+</div>
 </body>
 </html>

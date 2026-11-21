@@ -16,7 +16,7 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));
-  await p.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
+  await p.context().addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
     window.SFF_AI_ENABLED = true; window.SFF_TEST_GOOGLE = { sub: 'bld1', email: 'bld1@t.local', email_verified: true, name: 'הורה' }; localStorage.setItem('sff_lang', 'he'); });
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
   await p.waitForFunction(() => window.SFF_ROLE && window.__sffAI && typeof sample !== 'undefined' && sample, null, { timeout: 25000 }); await p.waitForTimeout(1000);
@@ -53,27 +53,38 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   await p.click('#wReady .linkbtn'); await p.waitForTimeout(300);
   ok(await p.evaluate(() => document.getElementById('wReady').classList.contains('hidden')), '"build a new one" hides it');
 
-  console.log('3. a build');
-  const calls = [];
-  await p.exposeFunction('__logStep', s => calls.push(s));
-  await p.evaluate(() => { const j = sample.json; sample.json = async (s, d, o) => { window.__logStep(s); if (window.__failOnce === s) { window.__failOnce = null; throw { code: 'error', message: 'test: network' }; } return j(s, d, o); }; });
-  const runBuild = async (topics, failAt) => {
-    await p.evaluate(([t, f]) => { window.__failOnce = f; openWizard('k1'); W.subject = 'אנגלית'; $('fTopics').value = t; W.step = 4; wizRender(); build(); }, [topics, failAt || null]);
+  console.log('3. a build – on the server');
+  const runBuild = async (topics, test) => {
+    await p.evaluate(([t, x]) => { window.SFF_BUILD_TEST = x; openWizard('k1'); W.subject = 'אנגלית'; $('fTopics').value = t; W.step = 4; wizRender(); build(); }, [topics, test || null]);
+    await p.waitForFunction(() => CUR_BUILD && CUR_BUILD !== 'send', null, { timeout: 60000 });
+    return p.evaluate(() => CUR_BUILD);
   };
-  const newSet = n => p.waitForFunction(n => sets.filter(s => s.kidId === 'k1' && !s.src).length >= n, n, { timeout: 120000 });
-  await runBuild('Rhymes & sounds\nShort vowels\nMagic e\nColors\nAnimals'); await newSet(1); await p.waitForTimeout(1500);
+  const newSet = n => p.waitForFunction(n => sets.filter(s => s.kidId === 'k1' && !s.src).length >= n, n, { timeout: 180000 });
+  const bdoc = id => get(`families/${fam}/builds/${id}`);
+  // more than this month's 3 free builds: paid credits
+  await fetch(`${DOCS}/families/${fam}/billing/main`, { method: 'PATCH', headers: { ...H, 'Content-Type': 'application/json' }, body: JSON.stringify({ fields: { credits: { integerValue: '5' } } }) });
+  const T5 = 'Rhymes & sounds\nShort vowels\nMagic e\nColors\nAnimals';
+  const id1 = await runBuild(T5);
+  await p.waitForFunction(() => /אפשר לסגור את האפליקציה ולכבות את המסך/.test(document.getElementById('bSub').textContent), null, { timeout: 20000 });
+  ok(true, 'the build screen says the phone may be closed');
+  await p.screenshot({ path: `${OUT}/build_running.png` });
+  await newSet(1); await p.waitForTimeout(2500);
   const r1 = await p.evaluate(solved => { const s = sets.find(s => s.kidId === 'k1' && !s.src), C = s.chapters;
     return { n: s.questions.length, pool: s.questions.filter(q => q.srcq).map(q => q.srcq), perCh: C.map((c, i) => [s.questions.filter(q => q.ch === i && q.srcq).length, c.count]),
       solvedBack: s.questions.some(q => q.question === solved), shared: setPayload(s).questions.some(q => 'srcq' in q), cq: (kidById('k1').cq || []).length,
-      screen: document.getElementById('vReview').innerText + ' ' + JSON.stringify(s.qa), qa: s.qa }; }, solvedQ);
+      screen: document.getElementById('vReview').innerText + ' ' + JSON.stringify(s.qa), qa: s.qa, onReview: !document.getElementById('vReview').classList.contains('hidden') }; }, solvedQ);
   console.log(JSON.stringify({ n: r1.n, pool: r1.pool.length, perCh: r1.perCh, qa: { ...r1.qa, log: r1.qa.log.length } }));
   ok(r1.n > 0 && r1.pool.length > 0, `the set was built (${r1.n} questions, ${r1.pool.length} of them ready ones)`);
+  ok(r1.onReview, 'the phone that waited on the build screen opens the new set');
   ok(r1.perCh.every(([k, c]) => k <= Math.floor(c / 2)), 'ready questions: at most half of each chapter');
   ok(!r1.solvedBack, 'a question the kid already answered correctly (in a deleted set) is not taken');
   ok(!r1.shared, 'the shared copy carries no source marks');
-  ok(r1.cq === r1.pool.length, 'the kid remembers which ready questions it got');
+  ok(r1.cq === r1.pool.length, `the kid remembers which ready questions it got (${r1.cq})`);
   ok(!/קטלוג|catalog/i.test(r1.screen), 'nothing on the practice screen or in the check log mentions where questions came from');
   ok(r1.qa.checked >= r1.n && r1.qa.passed >= r1.pool.length, 'ready questions are counted as checked and passed like the others');
+  const b1 = await bdoc(id1);
+  ok(b1.status === 'done' && !!b1.setId, 'the build is done and names its set');
+  ok(!(await list(`families/${fam}/builds/${id1}/log`)).length && !(await list(`families/${fam}/builds/${id1}/state`)).length, 'the form and the log are deleted when the build is done');
   await p.screenshot({ path: `${OUT}/build_done.png` });
 
   console.log('4. costs');
@@ -88,21 +99,41 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   const day = (await list('meta')).find(x => /^ai_day_/.test(x.id));
   ok(day && day.usd > 0, 'the day has its own total (daily cap)');
 
-  console.log('5. a second build for the same kid, and a build that stopped');
-  calls.length = 0;
-  await runBuild('Rhymes & sounds\nShort vowels\nMagic e\nColors\nAnimals', 'review');
+  console.log('5. a step that fails is tried again by the server; a build that stopped goes on with "▶ continue"');
+  await p.evaluate(() => go('kids'));
+  const id2 = await runBuild(T5, { failAt: 'review' });
+  await newSet(2); await p.waitForTimeout(1500);
+  const b2 = await bdoc(id2);
+  ok(b2.status === 'done' && b2.testFailed, 'a failed step (network) is tried again by itself and the build finishes');
+  ok(b2.steps.gen.calls === 5, `what was done before is not asked again (${b2.steps.gen.calls} chapters written for 5)`);
+  const r2 = await p.evaluate(() => { const S = sets.filter(s => s.kidId === 'k1' && !s.src); const a = new Set(S[1].questions.map(q => q.srcq).filter(Boolean)); return S[0].questions.filter(q => q.srcq && a.has(q.srcq)).length; });
+  ok(r2 === 0, 'the second build gives the kid no ready question the first one gave');
+  // a step that stops the build (the AI declined): the build waits; "▶ continue" goes on from its log
+  const id3 = await runBuild(T5, { stopAt: 'solve' });
   await p.waitForFunction(() => /להמשיך מאיפה שנעצר/.test(document.getElementById('bActs').textContent), null, { timeout: 120000 });
   await p.screenshot({ path: `${OUT}/build_stopped.png` });
-  const before = calls.slice(), genBefore = before.filter(s => s === 'gen').length;
-  ok(await p.evaluate(() => !!localStorage.getItem('sff_build_cp')), 'what was built so far is kept');
-  calls.length = 0;
-  await p.click('#bActs .btn.big'); await newSet(2); await p.waitForTimeout(1500);
-  ok(!calls.includes('gen') && !calls.includes('scan') && !calls.includes('match') && calls.includes('review'), `going on: only the steps left run (${[...new Set(calls)].join(',')}; before: ${genBefore} chapters written)`);
-  const r2 = await p.evaluate(() => { const S = sets.filter(s => s.kidId === 'k1' && !s.src); const a = new Set(S[1].questions.map(q => q.srcq).filter(Boolean)); return { again: S[0].questions.filter(q => q.srcq && a.has(q.srcq)).length, cp: !!localStorage.getItem('sff_build_cp') }; });
-  ok(r2.again === 0, 'the second build gives the kid no ready question the first one gave');
-  ok(!r2.cp, 'when the build is done nothing is kept');
-  const b2 = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done');
-  ok(b2.length === 2, 'the stopped build finished on the same build (no extra build used): ' + b2.length);
+  const b3a = await bdoc(id3);
+  ok(b3a.status === 'failed' && b3a.resumable && b3a.err === 'refusal', 'the build stopped and can go on: ' + JSON.stringify({ s: b3a.status, err: b3a.err, r: b3a.resumable }));
+  ok(await p.evaluate(() => kids.length && /▶ להמשיך/.test((go('kids'), document.getElementById('vKids').innerText))), 'the kid\'s card shows the stopped build with "▶ continue"');
+  await p.evaluate(id => resumeBuild(id), id3);
+  await newSet(3); await p.waitForTimeout(1500);
+  const b3 = await bdoc(id3);
+  ok(b3.status === 'done' && b3.steps.gen.calls === 5 , `it went on from where it stopped, on the same build (${b3.steps.gen.calls} chapters)`);
+
+  console.log('6. the phone is closed in the middle of a build');
+  const ctx2 = p.context();
+  const id4 = await runBuild(T5, { yieldMs: 1 });      // every AI step in a task of its own: the log is replayed again and again
+  await p.waitForTimeout(1500); await p.close();
+  let b4 = {}; for (let k = 0; k < 120 && b4.status !== 'done'; k++) { await new Promise(r => setTimeout(r, 1500)); b4 = await bdoc(id4) || {}; }
+  ok(b4.status === 'done' && b4.setId, 'the build finished with no phone open');
+  ok(b4.run > 10 && b4.steps.gen.calls === 5, `${b4.run} tasks one after another, nothing asked twice (${b4.steps.gen.calls} chapters)`);
+  ok(!!(await get(`families/${fam}/sets/${b4.setId}`)), 'the set is in the family');
+  const p2 = await ctx2.newPage(); p2.on('pageerror', e => errs.push(e.message));
+  await p2.goto('http://localhost:8765/', { waitUntil: 'load' });
+  await p2.waitForFunction(id => typeof sets !== 'undefined' && sets.some(s => s.id === id), b4.setId, { timeout: 30000 });
+  ok(true, 'the phone opened again: the new set is on the kid\'s card');
+  const tot = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done').length;
+  ok(tot === 4, 'four builds, each on its own build (no extra build used): ' + tot);
   ok(!errs.length, 'no page errors ' + JSON.stringify(errs));
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

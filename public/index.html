@@ -2583,9 +2583,12 @@ function renderCatalog(){
   $('catList').innerHTML=`<button class="linkbtn catback" onclick="CAT.subj='';renderCatalog()">‹ כל המקצועות</button>
     <div class="catsubh">${ico(sub)}<b>${esc(sub)} · כיתה ${GRADES[g]}</b></div>`
    +(mine.length?mine.map(block).join('')+currList(sub,false)
+      +`<div class="aibox">${sample?`<button class="btn" onclick="buildInSubject(${esc(JSON.stringify(sub))})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`
      :`<div class="card soonc">${noProg?`<p class="sub" style="margin:0">${esc((cur[sub]||[])[0]||'')}</p>`:`<p class="sub" style="margin:0 0 8px">עוד אין תרגול מוכן. מה לומדים בכיתה ${GRADES[g]}:</p><ul class="currl">${(cur[sub]||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
         ${sample?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum(${esc(JSON.stringify(sub))},${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`);
 }
+// a subject with ready sets: the builder, with that subject already chosen
+function buildInSubject(sub){ const k=kidById(CAT.kid)||null; openWizard(k?k.id:null); if(SUBJECTS.includes(sub)) W.subject=sub; wizRender(); }
 // a subject with no ready set: open the builder with that grade's curriculum topics filled in
 function buildFromCurriculum(sub, g){ const k=kidById(CAT.kid)||kids.find(x=>x.grade===g)||null; const topics=((CURR&&CURR.grades[g])||{})[sub]||[];
   openWizard(k?k.id:null); W.subject=sub; $('fTopics').value=topics.join('\n'); wizRender(); toast('📋 הנושאים מתוכנית הלימודים נוספו – אפשר לערוך'); }

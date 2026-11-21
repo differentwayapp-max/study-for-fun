@@ -17,11 +17,12 @@ async function serverLog(entry) {
     if (ok) await d.collection('serverLog').add({ at: Date.now(), ...entry });
   } catch (_) {}
 }
-const SLOW_MS = 7 * 60 * 1000;
+const SLOW_MS = 5 * 60 * 1000;                // a call this slow is noted in the server log
+const AI_TIMEOUT_MS = 7 * 60 * 1000;          // one AI request at most (the function itself is killed at 9 minutes)
 const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   const t = Date.now(), name = (fn.name || 'call');
   try { const r = await fn(req); const ms = Date.now() - t; console.log(`${name} ok ${ms}ms`);
-    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – close to the 9-minute limit', ms });
+    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – over 5 minutes (an AI request stops at 7)', ms });
     return r; }
   catch (e) {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
@@ -153,8 +154,8 @@ const RES_TTL = 15 * 60 * 1000;
 function liveRes(d) { let sum = 0; const stale = [], now = Date.now();
   for (const [k, v] of Object.entries((d && d.res) || {})) { if (v && now - (+v.at || 0) < RES_TTL) sum += +v.usd || 0; else stale.push(k); }
   return { sum, stale }; }
-async function reserve(auth, famId, usd, id) {
-  const admin = isAdminUser(auth), refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
+async function reserve(admin, famId, usd, id) {
+  const refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
   if (famOk(famId)) refs.push([db.doc(`families/${famId}/usage/${monthKey()}`), admin ? Infinity : FAMILY_CAP_USD, 'family_budget']);
   await db.runTransaction(async t => {
     const snaps = await Promise.all(refs.map(([r]) => t.get(r)));
@@ -180,31 +181,6 @@ async function settle(famId, id, step, buildId, usd, ran = true) {   // ran = fa
   await spendAlert().catch(() => {});
 }
 
-// Start a new practice set: uses one of this month's free builds, or one paid credit.
-exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function startBuild(request) {
-  const auth = parentOnly(request);
-  const { famId, subject = '' } = request.data || {};
-  await checkFamily(auth.uid, famId);
-  await checkBudget();
-  await checkFamilyBudget(auth, famId);
-  const month = monthKey(), adminUser = isAdminUser(auth);
-  const usageRef = db.doc(`families/${famId}/usage/${month}`), billRef = db.doc(`families/${famId}/billing/main`);
-  const buildRef = db.collection(`families/${famId}/builds`).doc();
-  return db.runTransaction(async (tx) => {
-    const [u, b] = await Promise.all([tx.get(usageRef), tx.get(billRef)]);
-    const used = u.data()?.builds || 0, credits = b.data()?.credits || 0;
-    let kind;
-    if (adminUser) kind = 'admin';
-    else if (used < FREE_BUILDS) kind = 'free';
-    else if (credits > 0) kind = 'paid';
-    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: FREE_BUILDS, credits, price: PRICE_ILS });
-    tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
-    if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
-    tx.set(buildRef, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month });
-    return { buildId: buildRef.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: FREE_BUILDS, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS };
-  });
-});
-
 // A teacher's new group: families/{random 20-character id} with kind 'class' and ownerUid – made here only, so the id is never
 // someone's uid and a teacher has at most MAX_CLASSES groups (counted in teachers/{uid}, which no client can write).
 const MAX_CLASSES = 10;
@@ -228,31 +204,10 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   return { classId: cref.id };
 });
 
-// End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back
-// – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
-exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
-  const auth = parentOnly(request);
-  const { famId, buildId, ok } = request.data || {};
-  await checkFamily(auth.uid, famId);
-  if (typeof buildId !== 'string' || !buildId) throw new HttpsError('invalid-argument', 'Missing build.');
-  const buildRef = db.doc(`families/${famId}/builds/${buildId}`);
-  return db.runTransaction(async (tx) => {
-    const bd = await tx.get(buildRef);
-    if (!bd.exists || bd.data().status !== 'running') return { refunded: false };
-    const d = bd.data(), usageRef = db.doc(`families/${famId}/usage/${d.month}`);
-    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
-    const refund = !ok && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
-    tx.update(buildRef, { status: ok ? 'done' : 'failed', endedAt: Date.now(), refunded: refund });
-    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
-    if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
-    return { refunded: refund };
-  });
-});
-
 // Every AI call is part of a build (buildId) or a small edit counted in the monthly "light" calls.
-async function claimCall(auth, famId, buildId) {
-  if (isAdminUser(auth)) return;
-  await checkFamily(auth.uid, famId);
+async function claimCall(admin, uid, famId, buildId) {
+  if (admin) return;
+  if (uid) await checkFamily(uid, famId);
   await db.runTransaction(async (tx) => {
     if (buildId) {
       const ref = db.doc(`families/${famId}/builds/${buildId}`), bd = await tx.get(ref);
@@ -339,6 +294,94 @@ function fakeAnswer(step, d) {
   return {};
 }
 
+// the files sent with a step (photos, PDFs of worksheets) → the model's content blocks; every size limit checked here
+function filesContent(images, allowed) {
+  if (!Array.isArray(images) || images.length > MAX_IMAGES || (images.length && !allowed)) {
+    throw new HttpsError('invalid-argument', allowed ? `Up to ${MAX_IMAGES} files.` : 'This step takes no files.');
+  }
+  const content = []; let pages = 0;
+  for (const img of images) {
+    if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
+      throw new HttpsError('invalid-argument', 'Image too large.');
+    }
+    if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
+      pages += pdfPages(img.data);
+      if (pages > MAX_PDF_PAGES) throw new HttpsError('invalid-argument', 'pdf_pages', { reason: 'pdf_pages', max: MAX_PDF_PAGES });
+      content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
+      continue;
+    }
+    const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
+    content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });
+  }
+  return { content, pages };
+}
+
+// One AI step: the step's checks, its most possible cost reserved, the call (or the emulator's fake), the real cost settled.
+// admin: no family limits · uid: the parent asking (null when the server's build runner asks – the build was checked when sent)
+async function runStep({ admin, uid, famId, buildId, name, data = {}, images = [], fake = false }) {
+  const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
+  if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
+  if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
+  const { content, pages } = filesContent(images, step.images);
+  let text;
+  try { text = step.build(data, { images: images.length }); }
+  catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
+  content.push({ type: 'text', text });
+
+  if (!admin && uid) await checkFamily(uid, famId);
+
+  // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
+  const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);
+  const inTok = (SYSTEM.length + text.length) / 2 + images.filter(i => i.type !== 'application/pdf').length * 1800 + pages * 3000 + 500;
+  const maxUsd = (inTok * 1.25 * dear[0] + step.max_tokens * dear[1]) / 1e6;
+  const callId = db.collection('_').doc().id;
+  await reserve(admin, famId, maxUsd, callId);                     // over a cap → refused before anything is counted
+  try { await claimCall(admin, uid, famId, buildId); } catch (e) { await settle(famId, callId, name, null, 0, false); throw e; }
+
+  let msg;
+  try {
+    if (fake && FAKE_OK()) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
+    else {
+      // the SDK's own limit (10 minutes, 2 retries by default) is longer than the 9-minute callable – then a slow call was
+      // killed with no error and no log. AI_TIMEOUT_MS, no retry: a slow call ends here as an error, logged.
+      const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim(), timeout: AI_TIMEOUT_MS, maxRetries: 0 });
+      const params = {
+        model,
+        max_tokens: step.max_tokens,
+        // the rules: one fixed system prompt, cached (every step of a build reuses it on the same model)
+        system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
+        messages: [{ role: 'user', content }],
+        output_config: { effort: step.effort, format: { type: 'json_schema', schema: step.schema } }
+      };
+      // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
+      if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
+      // the whole answer, streamed, within AI_TIMEOUT_MS (the SDK's timeout alone may cover only the start of a stream)
+      const ac = new AbortController(), tm = setTimeout(() => ac.abort(), AI_TIMEOUT_MS);
+      try { msg = await client.beta.messages.stream(params, { signal: ac.signal }).finalMessage(); }
+      catch (e) { if (ac.signal.aborted) { const t = new Error('ai_slow'); t.aiSlow = true; throw t; } throw e; }
+      finally { clearTimeout(tm); }
+    }
+  } catch (e) {
+    // an API error before an answer is not billed; a request stopped for slowness may have been – counted at its most
+    if (e && e.aiSlow) await settle(famId, callId, name, buildId, maxUsd); else await settle(famId, callId, name, buildId, 0, false);
+    if (e && e.aiSlow || e instanceof Anthropic.APIConnectionTimeoutError) { console.error('Anthropic timeout', name); throw new HttpsError('deadline-exceeded', 'ai_slow', { reason: 'ai_slow', step: name }); }
+    if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
+    if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
+    if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
+    throw e;
+  }
+  await settle(famId, callId, name, buildId, costOf(model, msg));
+  { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
+  if (msg.model && msg.model !== model) {   // the API answered on a fallback model
+    await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
+    await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });
+  }
+  if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
+  if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
+  const out = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+  return extractJson(out);
+}
+
 exports.ask = onCall(
   {
     region: 'europe-west1',
@@ -351,82 +394,323 @@ exports.ask = onCall(
   async function ask(request) {
     // Only signed-in parents (Google or a verified email link) may spend AI credit; kid devices are anonymous.
     const auth = parentOnly(request);
-
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
-    const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
-    if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
-    if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
-    if (!Array.isArray(images) || images.length > MAX_IMAGES || (images.length && !step.images)) {
-      throw new HttpsError('invalid-argument', step.images ? `Up to ${MAX_IMAGES} files.` : 'This step takes no files.');
-    }
-    const content = []; let pages = 0;
-    for (const img of images) {
-      if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
-        throw new HttpsError('invalid-argument', 'Image too large.');
-      }
-      if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
-        pages += pdfPages(img.data);
-        if (pages > MAX_PDF_PAGES) throw new HttpsError('invalid-argument', 'pdf_pages', { reason: 'pdf_pages', max: MAX_PDF_PAGES });
-        content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
-        continue;
-      }
-      const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
-      content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });
-    }
-    let text;
-    try { text = step.build(data, { images: images.length }); }
-    catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
-    content.push({ type: 'text', text });
-
-    if (!isAdminUser(auth)) await checkFamily(auth.uid, famId);
-
-    // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
-    const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);
-    const inTok = (SYSTEM.length + text.length) / 2 + images.filter(i => i.type !== 'application/pdf').length * 1800 + pages * 3000 + 500;
-    const maxUsd = (inTok * 1.25 * dear[0] + step.max_tokens * dear[1]) / 1e6;
-    const callId = db.collection('_').doc().id;
-    await reserve(auth, famId, maxUsd, callId);                      // over a cap → refused before anything is counted
-    try { await claimCall(auth, famId, buildId); } catch (e) { await settle(famId, callId, name, null, 0, false); throw e; }
-
-    const fake = FAKE_OK() && request.data.fake === true;
-    let msg;
-    try {
-      if (fake) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
-      else {
-        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
-        const params = {
-          model,
-          max_tokens: step.max_tokens,
-          // the rules: one fixed system prompt, cached (every step of a build reuses it on the same model)
-          system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
-          messages: [{ role: 'user', content }],
-          output_config: { effort: step.effort, format: { type: 'json_schema', schema: step.schema } }
-        };
-        // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
-        if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
-        msg = await client.beta.messages.stream(params).finalMessage();
-      }
-    } catch (e) {
-      await settle(famId, callId, name, buildId, 0, false);   // an API error before an answer is not billed
-      if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
-      if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
-      if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
-      throw e;
-    }
-    await settle(famId, callId, name, buildId, costOf(model, msg));
-    { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
-    if (msg.model && msg.model !== model) {   // the API answered on a fallback model
-      await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
-      await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });
-    }
-    if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
-    if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
-    const out = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    return { json: extractJson(out) };
+    const json = await runStep({ admin: isAdminUser(auth), uid: auth.uid, famId, buildId, name, data, images, fake: request.data.fake === true });
+    return { json };
   }
 );
+
+/* ---------- a new practice set, built on the server ----------
+   The phone sends the parent's form and the files once (submitBuild); the files are read right then (the scan step) and
+   never kept. The rest runs here, in a task queue (runBuild), one AI step after another, with the same code the app uses
+   (public/build-core.js: buildSet) – the parent may close the phone, even turn the screen off. Every answer goes into the
+   build's log (builds/{id}/log/{n}); a task that runs out of time hands over to the next one, and a failed task is tried
+   again (Cloud Tasks) – both replay the log, so nothing done is asked (or paid for) twice. The phone shows the build's
+   progress (builds/{id}.prog), and the finished set is written to the family (families/{f}/sets), with the progress
+   of the build, the log and the form deleted. A build that still fails can go on from its log (resumeBuild). */
+const core = (() => { try { return require('../public/build-core.js'); } catch (_) { return require('./build-core.js'); } })();
+const { onTaskDispatched } = require('firebase-functions/v2/tasks');
+const SITE_URL = defineString('SITE_URL', { default: 'https://study-for-fun-7b03c.web.app' });   // the catalog (ready practice sets)
+const RUN_QUEUE = 'locations/europe-west1/functions/runBuild';
+const RUN_ATTEMPTS = 4;                 // a task that fails is tried this many times (backoff 30 s → 5 min), then the build stops
+const YIELD_MS = 17 * 60 * 1000;
+const MAX_RUNS = BUILD_CALLS + 10;      // at least one new step per task – a build can never hand over for ever        // a task makes no new AI call after this – the next task goes on (tasks live 30 minutes)
+// errors that come back the same for the same data: written into the log (a replay gives the same answer), never retried by itself
+const SAME_AGAIN = new Set(['bad_input', 'refusal', 'too_long']);
+// errors that stop the build at once (no automatic retry); the parent may still try to go on unless it is closed for good
+const STOP_NOW = new Set(['budget', 'family_budget', 'build_calls', 'build_closed', 'replay_mismatch', 'bad_input', 'refusal', 'too_long']);
+const NOT_RESUMABLE = new Set(['build_calls', 'build_closed', 'replay_mismatch', 'bad_input']);
+const reasonOf = e => String((e && e.details && e.details.reason) || (e && /^[a-z_]{3,30}$/.test(e.message || '') ? e.message : (e && e.code) || 'error'));
+const ctl = (code, e) => Object.assign(new Error((e && e.message) || code), { code, ctl: true });   // not swallowed by buildSet
+const buildRef = (famId, buildId) => db.doc(`families/${famId}/builds/${buildId}`);
+const idOk = id => typeof id === 'string' && /^[A-Za-z0-9]{1,40}$/.test(id);
+
+// the parent's form, checked and cut to its limits (the same limits the wizard has)
+function cleanInput(x) {
+  const bad = f => { throw new HttpsError('invalid-argument', 'bad_input: ' + f, { reason: 'bad_input', field: f }); };
+  if (!x || typeof x !== 'object') bad('input');
+  const str = (v, n, f, need) => { if (v == null || v === '') { if (need) bad(f); return ''; } if (typeof v !== 'string') bad(f); const t = v.trim().slice(0, n); if (need && !t) bad(f); return t; };
+  const int = (v, lo, hi, f) => { v = +v; if (!Number.isInteger(v) || v < lo || v > hi) bad(f); return v; };
+  const list = (v, max, n, f) => { if (v == null) return []; if (!Array.isArray(v)) bad(f); return v.filter(t => typeof t === 'string' && t.length <= n).slice(-max); };
+  if (!Array.isArray(x.topics)) bad('topics');
+  const topics = [...new Set(x.topics.map(t => str(t, 120, 'topics')).filter(Boolean))];
+  if (!topics.length || topics.length > 30) bad('topics');
+  if (!Array.isArray(x.chapters) || !x.chapters.length || x.chapters.length > 10) bad('chapters');
+  const chapters = x.chapters.map(c => { if (!c || typeof c !== 'object' || !Array.isArray(c.topics)) bad('chapters');
+    const tp = c.topics.map(t => str(t, 120, 'chapters')).filter(Boolean).slice(0, 30); if (!tp.length) bad('chapters');
+    return { title: str(c.title, 80, 'chapters'), topics: tp, count: int(c.count, 5, 20, 'chapters') }; });
+  const kidId = str(x.kidId, 40, 'kidId', true); if (!/^[A-Za-z0-9_-]+$/.test(kidId)) bad('kidId');
+  const examDate = str(x.examDate, 10, 'examDate'); if (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate)) bad('examDate');
+  const sk = x.skip && typeof x.skip === 'object' ? x.skip : {};
+  return { name: str(x.name, 40, 'name') || 'הילד/ה', reinf: str(x.reinf, 60, 'reinf') || null, gi: int(x.gi, 0, 11, 'gi'), subject: str(x.subject, 60, 'subject', true),
+    topics, perRound: int(x.perRound, 5, 20, 'perRound'), kidId, chapters, text: str(x.text, 8000, 'text'), link: str(x.link, 300, 'link'),
+    pages: str(x.pages, 200, 'pages'), examDate, dailyGoal: int(x.dailyGoal, 1, 10, 'dailyGoal'),
+    // what the pool must not give this kid (the phone knows: its ready sets, the ready questions it got, what it answered correctly)
+    skip: { have: list(sk.have, 200, 60, 'skip'), used: list(sk.used, 4000, 80, 'skip'), solved: list(sk.solved, 6000, 16, 'skip') } };
+}
+
+// a new build: one of this month's free builds, or one paid credit (startBuild – the older app – and submitBuild)
+async function openBuild(auth, famId, subject, extra = {}) {
+  const month = monthKey(), adminUser = isAdminUser(auth);
+  const usageRef = db.doc(`families/${famId}/usage/${month}`), billRef = db.doc(`families/${famId}/billing/main`);
+  const ref = db.collection(`families/${famId}/builds`).doc();
+  return db.runTransaction(async (tx) => {
+    const [u, b] = await Promise.all([tx.get(usageRef), tx.get(billRef)]);
+    const used = u.data()?.builds || 0, credits = b.data()?.credits || 0;
+    let kind;
+    if (adminUser) kind = 'admin';
+    else if (used < FREE_BUILDS) kind = 'free';
+    else if (credits > 0) kind = 'paid';
+    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: FREE_BUILDS, credits, price: PRICE_ILS });
+    tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
+    if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
+    tx.set(ref, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month, ...extra });
+    return { buildId: ref.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: FREE_BUILDS, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS };
+  });
+}
+// End a running build (done / failed / cancelled). One that ended before it really started (≤ 3 AI calls, not done) gives its
+// free build / credit back – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
+async function closeBuild(famId, buildId, status, extra = {}) {
+  const ref = buildRef(famId, buildId);
+  return db.runTransaction(async (tx) => {
+    const bd = await tx.get(ref);
+    if (!bd.exists || bd.data().status !== 'running') return { refunded: false, closed: false };
+    const d = bd.data(), usageRef = db.doc(`families/${famId}/usage/${d.month}`);
+    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
+    const refund = status !== 'done' && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
+    tx.update(ref, { status, endedAt: Date.now(), refunded: refund, ...extra, ...(refund ? { resumable: false } : {}) });
+    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
+    if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
+    return { refunded: refund, closed: true };
+  });
+}
+// the form and the log of a build that is over (they hold the parent's pasted text and the questions on their way)
+async function cleanBuild(ref) {
+  for (const sub of ['log', 'state']) {
+    const docs = (await ref.collection(sub).listDocuments().catch(() => []));
+    for (let k = 0; k < docs.length; k += 400) { const b = db.batch(); docs.slice(k, k + 400).forEach(d => b.delete(d)); await b.commit().catch(() => {}); }
+  }
+}
+const logSet = (ref, n, step, v, err) => ref.collection('log').doc(String(n).padStart(4, '0')).set(err ? { n, step, err } : { n, step, v: JSON.stringify(v) });
+async function runQueue(famId, buildId, run) {
+  const emu = process.env.CLOUD_TASKS_EMULATOR_HOST;
+  if (FAKE_OK() && emu) {                  // the emulator: straight to its Cloud Tasks (the Admin SDK wants Google credentials even there)
+    const proj = process.env.GCLOUD_PROJECT || JSON.parse(process.env.FIREBASE_CONFIG || '{}').projectId;
+    const r = await fetch(`http://${emu}/projects/${proj}/locations/europe-west1/queues/runBuild/tasks`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task: { httpRequest: { url: '', oidcToken: { serviceAccountEmail: 'emulated@example.com' }, headers: { 'Content-Type': 'application/json' },
+        body: Buffer.from(JSON.stringify({ data: { famId, buildId, run } })).toString('base64') } } }) });
+    if (!r.ok) throw new Error('enqueue ' + r.status + ' ' + (await r.text()).slice(0, 200));
+    return;
+  }
+  const { getFunctions } = require('firebase-admin/functions');
+  await getFunctions().taskQueue(RUN_QUEUE).enqueue({ famId, buildId, run }, { dispatchDeadlineSeconds: 1800 });
+}
+// a line in the family's failure log (the parent's ☰ → דיווחים, and the app admins) – no prompt text
+async function famErr(famId, where, code, msg) {
+  try { await db.collection(`families/${famId}/errlog`).add({ at: Date.now(), where, code: String(code).slice(0, 60), msg: String(msg || '').slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
+}
+
+// Start a new practice set (the older app, which runs the build itself): uses one of this month's free builds, or one paid credit.
+exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function startBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, subject = '' } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  await checkBudget();
+  await checkFamilyBudget(auth, famId);
+  return openBuild(auth, famId, subject);
+});
+
+// End a build: ok / failed (the older app), cancel (the parent cancelled), dismiss (a stopped build off the kid's card).
+exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, buildId, ok, cancel, dismiss } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
+  const ref = buildRef(famId, buildId), d = (await ref.get()).data();
+  if (!d) return { refunded: false };
+  if (dismiss) { if (d.status !== 'running') { await ref.update({ hidden: true }); if (d.srv) await cleanBuild(ref); } return { refunded: false }; }
+  const r = await closeBuild(famId, buildId, cancel ? 'cancelled' : ok ? 'done' : 'failed');
+  if (d.srv && cancel) await cleanBuild(ref);
+  return { refunded: r.refunded };
+});
+
+// The phone sends a new build: the form and the files. The files are read now (the scan step) – the rest runs in runBuild.
+exports.submitBuild = onCall({ region: 'europe-west1', invoker: 'public', secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 540, memory: '512MiB', maxInstances: 10 },
+  async function submitBuild(request) {
+    const auth = parentOnly(request);
+    const { famId, input, images = [], fake, test } = request.data || {};
+    await checkFamily(auth.uid, famId);
+    const I = cleanInput(input);
+    if (auth.uid !== famId && !isAdminUser(auth)) {                 // a tutor builds only for the kids of its invitation
+      const m = (await db.doc(`families/${famId}/members/${auth.uid}`).get()).data() || {};
+      if (m.role === 'tutor' && !(Array.isArray(m.kids) && m.kids.includes(I.kidId))) throw new HttpsError('permission-denied', 'Not this tutor\'s kid.');
+    }
+    filesContent(images, true);                                      // the files' limits, before anything is counted
+    await checkBudget();
+    await checkFamilyBudget(auth, famId);
+    const isFake = FAKE_OK() && fake === true;
+    I.files = images.length;
+    const t = await openBuild(auth, famId, I.subject, { srv: true, kidId: I.kidId, run: 1, prog: {},
+      ...(isFake ? { fake: true, test: test && typeof test === 'object' ? JSON.parse(JSON.stringify(test)) : null } : {}) });
+    const ref = buildRef(famId, t.buildId);
+    try {
+      await ref.collection('state').doc('input').set({ I: JSON.stringify(I) });
+      if (I.text || images.length) {
+        const v = await runStep({ admin: t.kind === 'admin', uid: null, famId, buildId: t.buildId, name: 'scan', images, fake: isFake,
+          data: { ctx: core.aiCtx(I.gi, I.subject, I.topics, { pages: I.pages, link: I.link }), text: I.text } });
+        await logSet(ref, 0, 'scan', v);
+      }
+      await runQueue(famId, t.buildId, 1);
+    } catch (e) {
+      await closeBuild(famId, t.buildId, 'failed', { err: reasonOf(e), resumable: false });
+      await cleanBuild(ref);
+      throw e;
+    }
+    return { ...t, prog: { scan: { s: 'run', d: '' } } };
+  });
+
+// A build that stopped goes on from its log (the parent: "▶ להמשיך"), on the same build – within its 3 hours.
+exports.resumeBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function resumeBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, buildId } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
+  const ref = buildRef(famId, buildId);
+  const run = await db.runTransaction(async tx => {
+    const d = (await tx.get(ref)).data();
+    if (!d || !d.srv || d.status !== 'failed' || !d.resumable || d.refunded || Date.now() - d.at > BUILD_HOURS * 36e5 - 10 * 60e3) {
+      throw new HttpsError('failed-precondition', 'build_closed', { reason: 'build_closed' });
+    }
+    tx.update(ref, { status: 'running', run: (d.run || 1) + 1, err: FieldValue.delete(), resumable: FieldValue.delete(), endedAt: FieldValue.delete() });
+    return (d.run || 1) + 1;
+  });
+  // the step that stopped the build is asked again (an answer that "came back the same" may come back fine this time)
+  const last = await ref.collection('log').orderBy('n', 'desc').limit(1).get();
+  if (!last.empty && last.docs[0].data().err) await last.docs[0].ref.delete();
+  await runQueue(famId, buildId, run);
+  return { ok: true };
+});
+
+// the ready chapters of the catalog that may fill a chapter of this build (public/share – the same files the app reads)
+async function readyChapters(I, gi, subject) {
+  const site = SITE_URL.value().replace(/\/$/, '');
+  let L = [];
+  try { const r = await fetch(`${site}/share/catalog.json`); L = r.ok ? ((await r.json()).sets || []) : []; } catch (_) { return []; }
+  const base = String(subject).replace(/^🎯\s*/, ''), have = new Set(I.skip.have), used = new Set(I.skip.used), solved = new Set(I.skip.solved), out = [];
+  for (const x of L.filter(x => x.status === 'ready' && x.grade === gi && x.subject === base && !have.has(x.id)).slice(0, 4)) {
+    let p;
+    try { const r = await fetch(`${site}/share/${encodeURIComponent(x.id)}.txt`); const raw = r.ok ? (await r.text()).trim() : '';
+      if (!raw.startsWith('SFF1:')) continue;
+      p = JSON.parse(Buffer.from(raw.slice(5), 'base64').toString('utf8')); p.qs = core.clean(p.questions, p.topics); if (!p.qs.length) continue; }
+    catch (_) { continue; }
+    (p.chapters || []).forEach((c, ci) => { if (c && typeof c.text === 'string' && c.text.trim()) return;          // reading passages need their text
+      const qs = p.qs.filter(q => q.ch === ci).map(q => ({ ...q, srcq: x.id + ':' + core.tkey(q.question) })).filter(q => !used.has(q.srcq) && !solved.has(core.tkey(q.question)));
+      if (qs.length >= 2) out.push({ ref: x.id + '#' + ci, title: String(c.title || '').slice(0, 120), topics: (c.topics || []).slice(0, 20), qs }); });
+  }
+  let r = out.slice(0, 150);
+  while (r.length && JSON.stringify(r).length > 800e3) r = r.slice(0, Math.floor(r.length * 0.8));   // one log entry < 1 MB
+  return r;
+}
+// the same random choices every time a build is replayed
+function seeded(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  return () => { h = (h + 0x6D2B79F5) >>> 0; let t = h; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+// what the build screen shows: the four steps (state + a short detail), written at most every 1.5 s, in order
+function progressWriter(ref, start) {
+  let prog = { ...(start || {}) }, last = 0, chain = Promise.resolve(), dirty = false;
+  const write = () => { if (!dirty) return chain; dirty = false; last = Date.now(); const p = prog; chain = chain.then(() => ref.update({ prog: p })).catch(() => {}); return chain; };
+  const f = (id, s, d) => { prog = { ...prog, [id]: { s, d: d ? String(d).slice(0, 200) : '' } }; dirty = true; if (Date.now() - last > 1500) write(); };
+  f.flush = () => { dirty = true; return write(); };
+  return f;
+}
+// the kid now has these ready questions (the pool never gives them again – also after the set is deleted)
+async function rememberPool(famId, kidId, qs) {
+  const add = qs.map(q => q.srcq).filter(Boolean); if (!add.length) return;
+  const ref = db.doc(`families/${famId}/fam/kids`);
+  await db.runTransaction(async tx => { const d = (await tx.get(ref)).data(); if (!d || !Array.isArray(d.list)) return;
+    const list = d.list.map(k => k && k.id === kidId ? { ...k, cq: [...new Set([...(Array.isArray(k.cq) ? k.cq : []), ...add])].slice(-3000) } : k);
+    tx.update(ref, { list }); }).catch(e => console.warn('rememberPool', e.message));
+}
+
+// One run of a build: the log is replayed, new steps are asked until the set is done or this task's time is up.
+exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 1800, memory: '512MiB', maxInstances: 20,
+  retryConfig: { maxAttempts: RUN_ATTEMPTS, minBackoffSeconds: 30, maxBackoffSeconds: 300 }, rateLimits: { maxConcurrentDispatches: 20 } },
+  async function runBuild(req) {
+    const { famId, buildId, run } = req.data || {};
+    if (!famOk(famId) || !idOk(buildId)) return;
+    const ref = buildRef(famId, buildId), b = (await ref.get()).data();
+    if (!b || !b.srv) return;
+    if (b.status === 'cancelled') { await cleanBuild(ref); return; }
+    if (b.status !== 'running' || b.run !== run) return;          // done, stopped, or an older task of this build
+    if (run > MAX_RUNS) { await closeBuild(famId, buildId, 'failed', { err: 'build_calls', resumable: false }); return; }
+    const t0 = Date.now(), lastTry = (req.retryCount || 0) >= RUN_ATTEMPTS - 1;
+    const test = (b.fake && FAKE_OK() && b.test) || {};
+    const yieldMs = test.yieldMs || YIELD_MS;
+    const progress = progressWriter(ref, b.prog);
+    try {
+      const input = (await ref.collection('state').doc('input').get()).data();
+      if (!input) throw ctl('replay_mismatch');
+      const I = JSON.parse(input.I);
+      const log = (await ref.collection('log').orderBy('n').get()).docs.map(d => d.data());
+      let n = 0, made = 0;
+      // one entry of the log: given back as it was (a replay), or made now and written
+      const next = async (step, make) => {
+        const k = n++;
+        if (k < log.length) { const e = log[k]; if (e.step !== step) throw ctl('replay_mismatch'); if (e.err) throw Object.assign(new Error(e.err), { code: e.err }); return JSON.parse(e.v); }
+        if (made && Date.now() - t0 > yieldMs) throw ctl('yield');           // every task makes at least one new step
+        made++;
+        let v;
+        try { v = await make(); }
+        catch (e) { const code = reasonOf(e);
+          if (SAME_AGAIN.has(code)) { await logSet(ref, k, step, null, code); throw Object.assign(new Error(code), { code }); }
+          throw ctl(code, e); }
+        await logSet(ref, k, step, v);
+        return v;
+      };
+      const askB = (step, data) => next(step, async () => {
+        // tests only (the emulator's fake AI): a step that fails once – a network error, or one that stops the build
+        if (test.failAt === step && !b.testFailed) { b.testFailed = true; await ref.update({ testFailed: true }); throw new HttpsError('internal', 'test: network'); }
+        if (test.stopAt === step && !b.testStopped) { b.testStopped = true; await ref.update({ testStopped: true }); throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' }); }
+        return runStep({ admin: b.kind === 'admin', uid: null, famId, buildId, name: step, data, fake: !!b.fake });
+      });
+      const set = await core.buildSet(I, askB, { progress, rand: seeded(buildId), pool: (kidId, gi, subject) => next('~pool', () => readyChapters(I, gi, subject)) });
+      await progress.flush();
+      if ((await ref.get()).data()?.status !== 'running') { await cleanBuild(ref); return; }     // cancelled at the last moment
+      const setId = 's' + b.at;
+      await db.doc(`families/${famId}/sets/${setId}`).set({ set: JSON.parse(JSON.stringify({ id: setId, ...set, created: Date.now() })) });
+      await rememberPool(famId, I.kidId, set.questions);
+      await closeBuild(famId, buildId, 'done', { setId });
+      await cleanBuild(ref);
+    } catch (e) {
+      await progress.flush();
+      if (e.code === 'yield') { await ref.update({ run: run + 1 }); await runQueue(famId, buildId, run + 1); return; }
+      const now = (await ref.get()).data() || {};
+      if (now.status !== 'running') { if (now.status === 'cancelled') await cleanBuild(ref); return; }     // cancelled meanwhile
+      const code = reasonOf(e);
+      if (!STOP_NOW.has(code) && !lastTry) { console.warn(`runBuild ${buildId} try ${(req.retryCount || 0) + 1}: ${code} ${e.message}`); throw e; }   // tried again
+      console.warn(`runBuild ${buildId} stopped: ${code} ${e.message}`);
+      await serverLog({ fn: 'runBuild', kind: 'error', code: code.slice(0, 60), msg: String(e.message || e).slice(0, 300), ms: Date.now() - t0 });
+      await famErr(famId, 'server:build', code, e.message);
+      await closeBuild(famId, buildId, 'failed', { err: code, resumable: !NOT_RESUMABLE.has(code) });
+    }
+  });
+
+// Every 6 hours: the form and the log of a build that is over are deleted (a stopped build the parent never went back to,
+// or one past its 3 hours); a build still "running" after its 3 hours (its task chain was lost) is stopped.
+exports.cleanBuilds = require('firebase-functions/v2/scheduler').onSchedule({ schedule: 'every 6 hours', region: 'europe-west1', retryCount: 0 },
+  async () => {
+    const q = await db.collectionGroup('state').limit(500).get(), seen = new Set();
+    for (const d of q.docs) {
+      const ref = d.ref.parent.parent;                                // only families/{f}/builds/{id}/state – never anything else
+      if (!ref || ref.parent.id !== 'builds' || !/^families\/[^/]+\/builds\/[^/]+$/.test(ref.path) || seen.has(ref.path)) continue; seen.add(ref.path);
+      const b = (await ref.get()).data(), famId = ref.parent.parent && ref.parent.parent.id;
+      const old = !b || Date.now() - (b.at || 0) > BUILD_HOURS * 36e5;
+      if (b && b.status === 'running' && !old) continue;
+      if (b && b.status === 'running' && famId) await closeBuild(famId, ref.id, 'failed', { err: 'build_closed', resumable: false });
+      if (!b || b.status !== 'failed' || old) await cleanBuild(ref);
+    }
+  });
 
 /* ---------- a user's bug report / idea → an email to the D-WAY team ----------
    The addresses live in adminConfig/main (only the app admins can read or write it, from the admin screen in the app);

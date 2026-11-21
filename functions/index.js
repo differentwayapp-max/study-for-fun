@@ -66,7 +66,7 @@ const LIGHT_CALLS = 40;
 const BUILD_CALLS = 125;
 const BUILD_HOURS = 3;                        // a build token is valid this long
 const MONTHLY_CAP_USD = 40;
-const DAILY_CAP_USD = 12;                     // the whole app, per day (Israel time) – a runaway day cannot use the month
+const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel time) – a runaway day cannot use the month
 // One family may use at most this much of the month's AI budget (3 normal builds cost far less),
 // so a single account can never use up the whole app's budget. Admins have no family limit.
 const FAMILY_CAP_USD = 8;
@@ -388,6 +388,7 @@ exports.ask = onCall(
       throw e;
     }
     await settle(famId, callId, name, buildId, costOf(model, msg));
+    { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
     if (msg.model && msg.model !== model) {   // the API answered on a fallback model
       await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
       await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });

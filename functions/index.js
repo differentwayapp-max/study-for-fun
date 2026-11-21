@@ -233,9 +233,9 @@ exports.deleteClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
    with no account (anonymous sign-in), reads the letter, fills the form and signs with a finger → requestJoin keeps a
    pending request (families/{c}/joinReqs/{id}) and gives back a secret status key (the parent's own link
    /?req=<classId>.<id>.<key>; only its hash is kept). Only the teacher's approval (approveJoin) makes a student
-   (fam/kids + kidpub/{kid}), the consent (consents/{kid}, status 'digital') and the kid's link (kidTokens[kid]); a paper
-   form signed at school is marked by the teacher (addStudent / markPaper → status 'paper'). Without such a consent no kid
-   phone can join (firestore.rules). The parent or the teacher can withdraw it (revokeConsent): the student's progress,
+   (fam/kids + kidpub/{kid}), the consent (consents/{kid}, status 'digital') and the kid's link (kidTokens[kid]) – the
+   teacher never types in a student list, and there are no paper forms. Without such a consent no kid phone can join
+   (firestore.rules). The parent or the teacher can withdraw it (revokeConsent): the student's progress,
    phones and link go. Everything here is written by the server only. */
 const JOIN_DAYS = 30, MAX_STUDENTS = 40, MAX_PENDING = 60, REQ_PER_HOUR = 5;
 const KID_COLORS = ['#2F6BFF', '#FF5C8A', '#24C78E', '#F2A63B', '#B9A7FF', '#14A774', '#E5484D'];
@@ -359,7 +359,7 @@ exports.approveJoin = onCall({ region: 'europe-west1', invoker: 'public', maxIns
     if (attachTo) {                                            // a second parent of the same student
       if (!kidIdOk(attachTo)) throw new HttpsError('invalid-argument', 'Missing student.');
       const cref = db.doc(`${ref.path}/consents/${attachTo}`), c = await tx.get(cref);
-      if (!c.exists || !['digital', 'paper'].includes(c.data().status)) throw new HttpsError('failed-precondition', 'no_student', { reason: 'no_student' });
+      if (!c.exists || c.data().status !== 'digital') throw new HttpsError('failed-precondition', 'no_student', { reason: 'no_student' });
       tx.update(cref, { parents: FieldValue.arrayUnion(parent) }); kidId = attachTo;
     } else {
       const s = await newStudent(tx, ref, f.data(), R.kidName, { status: 'digital', letterV: R.letterV, at: R.at, parentName: R.parentName, contact: R.contact || '', sig: R.sig, reqId, approvedBy: auth.uid, approvedAt: now, parents: [parent] });
@@ -378,37 +378,6 @@ exports.rejectJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
   await qref.update({ status: 'rejected', reason: txt(reason, 200), sig: FieldValue.delete(), doneAt: Date.now() });   // a rejected signature is not kept
   return { ok: true };
-});
-
-// a student added by the teacher: with a signed paper form (status 'paper' + the kid's link) or waiting for one (no link)
-exports.addStudent = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function addStudent(request) {
-  const auth = parentOnly(request); const { classId, kidName, paper } = request.data || {};
-  const { ref } = await teacherOf(auth, classId);
-  if (txt(kidName, 30).length < 2) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
-  const P = paper && typeof paper === 'object' ? paper : null, now = Date.now();
-  if (P && (txt(P.parentName, 60).length < 2 || !/^\d{4}-\d{2}-\d{2}$/.test(String(P.signedAt || '')))) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
-  return db.runTransaction(async tx => {
-    const f = await tx.get(ref);
-    const consent = P ? { status: 'paper', parentName: txt(P.parentName, 60), signedAt: P.signedAt, letterV: letterVOk(P.letterV) ? P.letterV : '', markedBy: auth.uid, markedAt: now, at: now }
-      : { status: 'pending', at: now };
-    const s = await newStudent(tx, ref, f.data(), kidName, consent);
-    writeStudent(tx, ref, s, !!P);
-    return { kidId: s.id };
-  });
-});
-exports.markPaper = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function markPaper(request) {
-  const auth = parentOnly(request); const { classId, kidId, parentName, signedAt, letterV } = request.data || {};
-  const { ref } = await teacherOf(auth, classId);
-  if (!kidIdOk(kidId) || txt(parentName, 60).length < 2 || !/^\d{4}-\d{2}-\d{2}$/.test(String(signedAt || ''))) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
-  const cref = db.doc(`${ref.path}/consents/${kidId}`);
-  return db.runTransaction(async tx => {
-    const c = await tx.get(cref);
-    if (!c.exists || c.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
-    const now = Date.now();
-    tx.set(cref, { status: 'paper', parentName: txt(parentName, 60), signedAt, letterV: letterVOk(letterV) ? letterV : '', markedBy: auth.uid, markedAt: now, at: c.data().at || now });
-    tx.update(ref, new FieldPath('kidTokens', kidId), hex(16));
-    return { ok: true };
-  });
 });
 
 // withdrawn – by the parent (the status key) or the teacher: the student's progress, phones and link go; a waiting request

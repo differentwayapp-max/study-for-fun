@@ -29,7 +29,7 @@ The questions and explanations are built with artificial intelligence and checke
 ## 🧑‍🏫 Teachers and groups
 
 - A class teacher or a private tutor can open a group and invite students to it.
-- A student joins a group only after a parent's consent: a signature on the consent form in the app, or a signed paper form the teacher marks as received. The teacher approves every request.
+- The teacher sends the parents a link to the group. A student joins only after a parent has read and signed the consent letter in the app and the teacher has approved the request. Teachers do not add students themselves.
 - The teacher sees only what happens in their own group – not the child's family, other children or private practice sets.
 - The teacher is responsible for choosing suitable practice sets for the students, and for keeping the students' privacy according to the law and the school's guidelines.
 - A parent can withdraw consent at any time, and the child's progress in the group is deleted.

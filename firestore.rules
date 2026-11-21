@@ -19,8 +19,8 @@ rules_version = '2';
 // families/{classId}             a teacher's group: kind 'class', ownerUid = the teacher, a random 20-character id (never a
 //                                uid – those are 28), made only by the server (createClass: at most 10 a teacher); kind and
 //                                ownerUid never change. No other adults (no invitations).
-//   /consents/{kid}              a parent's consent (digital: signed in the app and approved by the teacher; paper: a signed
-//                                form the teacher marked) – a kid phone joins a group only with one; server only
+//   /consents/{kid}              a parent's consent (signed in the app, approved by the teacher – the only way a student joins)
+//                                – a kid phone joins a group only with one; server only
 //   /joinReqs/{id}, /joinLink/main   parents' requests and the group's link – the teacher reads them; server only
 //   /kidpub/{kid}                the one student a student's phone may read (instead of fam/kids); fam/info – the group's name
 //   A student's phone in a group reads only its own student, progress and practice sets – never the other students.
@@ -61,7 +61,7 @@ service cloud.firestore {
     function tutorHas(f, kid) { return isTutor(f) && kid is string && kid in tutorKids(f); }
     function setKid(d) { return d.get('set', {}).get('kidId', null); }
     function consented(f, kid) { return kid is string
-      && get(/databases/$(database)/documents/families/$(f)/consents/$(kid)).data.status in ['digital', 'paper']; }
+      && get(/databases/$(database)/documents/families/$(f)/consents/$(kid)).data.status == 'digital'; }
     function isDevice(f) {
       return signedIn() && exists(/databases/$(database)/documents/families/$(f)/devices/$(request.auth.uid));
     }

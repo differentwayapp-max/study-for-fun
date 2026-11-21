@@ -4,7 +4,7 @@
 //    the progress is saved; the consent keeps the letter's version and the signature;
 // 2. a second parent of the same kid is attached to the student; a rejected request shows its reason and no link;
 // 3. a closed, replaced or expired link is refused; an empty signature is refused; at most 5 requests an hour from a phone;
-// 4. a paper form: no link before the teacher marks it, a link after;
+// 4. students come only from parents' signed requests – the teacher has no way to add one;
 // 5. withdrawing (the parent, the teacher): the link stops, the progress goes;
 // 6. no AI building in a group (until the teachers' quota). Screenshots (OUT): Hebrew + English, 360 and 320.
 const { chromium } = require('playwright');
@@ -118,18 +118,18 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const link3 = await T.inputValue('#tDlg input.tinyurl'); await T.evaluate(() => tClose());
   ok(link3 !== link2, 'opening an expired link gives a new one');
 
-  console.log('7. a paper form');
-  await T.evaluate(() => tAddStudent()); await T.fill('#taName', 'יואב ל.'); await T.click('#tDlg .btn.big'); await T.waitForTimeout(2500);
-  const yo = (await doc(`families/${cid}/fam/kids`)).list.find(k => k.name === 'יואב ל.');
-  ok(yo && (await doc(`families/${cid}/consents/${yo.id}`)).status === 'pending' && !((await doc(`families/${cid}`)).kidTokens || {})[yo.id], 'a student without a signed form: waiting, no link');
-  await T.evaluate(id => tStudent(id), yo.id); await T.waitForTimeout(400); await T.screenshot({ path: `${OUT}/c_student_wait_he.png` });
-  await T.evaluate(id => tPaper(id), yo.id); await T.fill('#tpParent', 'מיכל לוי'); await T.click('#tDlg .btn.big'); await T.waitForTimeout(2500);
-  const CY = await doc(`families/${cid}/consents/${yo.id}`);
-  ok(CY.status === 'paper' && CY.parentName === 'מיכל לוי' && /^\d{4}-\d{2}-\d{2}$/.test(CY.signedAt) && !!((await doc(`families/${cid}`)).kidTokens || {})[yo.id], 'marked "signed form received": status paper, and the kid has a link');
-  await T.evaluate(() => { tClose(); go('kids'); }); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/c_students2_he.png`, fullPage: true });
-  const pc = await ctx(), PR = await page(pc, `${APP}consent.html?lang=he&t=${encodeURIComponent('דנה לוי')}&g=${encodeURIComponent("ד'2 – אנגלית")}`, 'print'); await PR.waitForTimeout(800);
-  ok(/דנה לוי/.test(await PR.textContent('body')) && /חתימה/.test(await PR.textContent('body')), 'the printable form: the letter with the teacher and the group, and lines to sign');
-  await PR.screenshot({ path: `${OUT}/c_print_he.png`, fullPage: true });
+  console.log('7. students come only from parents');
+  await T.evaluate(() => { tClose(); go('kids'); }); await T.waitForTimeout(800);
+  ok(await T.evaluate(() => !document.querySelector('[onclick*="tAddStudent"],[onclick*="tPaper"]') && typeof tAddStudent === 'undefined'), 'the teacher has no "add a student" (only parents add their children)');
+  await T.evaluate(() => inviteStudents()); await T.waitForSelector('#tDlg input.tinyurl'); await T.waitForTimeout(600);
+  ok(await T.evaluate(() => !/הדפסה/.test(document.getElementById('tDlg').innerText)), 'no paper form to print'); await T.evaluate(() => tClose());
+  ok(String(await (await fetch('http://127.0.0.1:5001/study-for-fun-7b03c/europe-west1/addStudent', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"data":{}}' })).status) === '404', 'the server has no way to add a student by hand');
+  // one of the waiting requests (step 6) is approved – a second student, for the teacher's "take out" below
+  const w = (await list(`families/${cid}/joinReqs`)).find(x => x.status === 'pending');
+  await T.evaluate(id => tApprove(id), w.id); await T.waitForTimeout(2500);
+  const yo = (await doc(`families/${cid}/fam/kids`)).list.find(k => k.name === w.kidName);
+  ok(!!yo, 'a waiting request approved: a second student');
+  await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/c_students2_he.png`, fullPage: true });
 
   console.log('8. withdrawing');
   await P1.p.reload({ waitUntil: 'load' }); await P1.p.waitForSelector('#jKidLink', { timeout: 20000 });

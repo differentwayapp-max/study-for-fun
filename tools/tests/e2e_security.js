@@ -205,7 +205,7 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     await admin(`families/${C}/fam/info`, { kind: 'class', name: 'G', teacher: 'T' });
     await admin(`families/${C}/fam/kids`, { list: [{ id: 'kA', name: 'A' }, { id: 'kB', name: 'B' }, { id: 'kP', name: 'P' }] });
     await admin(`families/${C}/consents/kA`, { status: 'digital', letterV: '0.9' });
-    await admin(`families/${C}/consents/kB`, { status: 'paper', letterV: '0.9' });
+    await admin(`families/${C}/consents/kB`, { status: 'digital', letterV: '0.9' });
     await admin(`families/${C}/consents/kP`, { status: 'pending' });
     await admin(`families/${C}/kidpub/kA`, { list: [{ id: 'kA', name: 'A' }] }); await admin(`families/${C}/kidpub/kB`, { list: [{ id: 'kB', name: 'B' }] });
     await admin(`families/${C}/progress/kB`, { history: [], profile: { nick: 'B' } });
@@ -222,7 +222,7 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     ok(await write(dA, `families/${C}/progress/kB`, { history: [], profile: {} }) === 403 && await write(dA, `families/${C}/progress/kA`, { history: [], profile: {} }) === 200, "…writes its own progress only");
     ok(await rd3(dX, `families/${C}/joinReqs/R1abcdefghij12345678`) === 403 && await rd3(dX, `families/${C}/joinReqs`) === 403, 'an anonymous phone (a parent) cannot read requests');
     ok(String(await call(dX, 'joinStatus', { classId: C, reqId: 'R1abcdefghij12345678', statusKey: 'wrong' })) === 'not_found', 'a wrong status key shows nothing');
-    ok(await write(tc, `families/${C}/consents/kP`, { status: 'paper' }) === 403 && await write(tc, `families/${C}/joinReqs/R1abcdefghij12345678`, { status: 'approved' }) === 403, 'the teacher cannot write consents or requests directly (only through the server)');
+    ok(await write(tc, `families/${C}/consents/kP`, { status: 'digital' }) === 403 && await write(tc, `families/${C}/joinReqs/R1abcdefghij12345678`, { status: 'approved' }) === 403, 'the teacher cannot write consents or requests directly (only through the server)');
     ok(await write(tc, `families/${C}/fam/kids`, { list: [] }) === 403, "…nor the group's students list");
     ok(ok3(await rd3(tc, `families/${C}/consents/kA`)) && ok3(await rd3(tc, `families/${C}/joinReqs`)), 'the teacher reads the consents and the requests');
     ok(await rd3(par, `families/${C}/consents/kA`) === 403, 'a parent of a family cannot read a group');

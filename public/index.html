@@ -1152,6 +1152,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
       <button class="btn ghost" style="width:100%;justify-content:center;margin-top:8px" onclick="copyKidLink()">📋 העתקה</button>
       <input id="klUrl" type="text" readonly class="tinyurl">
       <div class="hint" id="klMsg" style="margin-top:6px"></div>
+      <button class="btn ghost small" id="klNew" style="margin-top:10px" onclick="newKidLink()">🔄 החלפת קישור</button>
     </div>
   </div>
 
@@ -1489,9 +1490,14 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       const famInfo = [];
       for (const fid of famIds) {
         try {
-          const fsn = await F.getDoc(F.doc(fdb, `families/${fid}`)); if (!fsn.exists()) continue;
           let r = 'owner', m = null;
           if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
+          if (r === 'tutor') {        // a tutor sees only the kids of the invitation: the family's small view for the tutor (no link secrets)
+            const tv = m.invite ? await F.getDoc(F.doc(fdb, `families/${fid}/tutorView/${m.invite}`)).catch(() => null) : null;
+            famInfo.push({ id: fid, name: (tv && tv.exists() && tv.data().famName) || '', role: r, member: m, token: '', tv: !!(tv && tv.exists()) });
+            continue;
+          }
+          const fsn = await F.getDoc(F.doc(fdb, `families/${fid}`)); if (!fsn.exists()) continue;
           famInfo.push({ id: fid, name: fsn.data().name || '', role: r, member: m, token: fsn.data().inviteToken });
         } catch (e) {}
       }
@@ -1506,6 +1512,7 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
       W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { intro: Date.now() }, { merge: true }).catch(() => {});
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
       W.SFF_FAMS = famInfo.map(({ id, name, role }) => ({ id, name, role }));
+      W.SFF_TUTOR_WAIT = cur.role === 'tutor' && !cur.tv;      // invited before the tutor view existed: the parent opens the app once
       let token = cur.token;
       W.SFF_APP_URL = `${location.origin}/?f=${famId}&t=${token}`;
       // 4. family management (rules decide what each role may really do)
@@ -1521,8 +1528,24 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
           if (!t) { t = rnd(16); await F.updateDoc(fr, new F.FieldPath('kidTokens', kid), t); }
           return `${location.origin}/?f=${famId}&t=${t}&k=${encodeURIComponent(kid)}#kid-${kid}`;
         },
-        invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false }); return `${location.origin}/?invite=${famId}.${code}`; },
-        remove: async muid => F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`)),
+        invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false });
+          if (role === 'tutor' && W.tutorViewOf) await F.setDoc(F.doc(fdb, `families/${famId}/tutorView/${code}`), W.tutorViewOf(kids || []));
+          return `${location.origin}/?invite=${famId}.${code}`; },
+        remove: async muid => { const m = await F.getDoc(F.doc(fdb, `families/${famId}/members/${muid}`)).catch(() => null);
+          await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`));
+          if (m && m.exists() && m.data().role === 'tutor' && m.data().invite) await F.deleteDoc(F.doc(fdb, `families/${famId}/tutorView/${m.data().invite}`)).catch(() => {}); },
+        // the tutors' views: the tutor's kids (name, grade, color) and the family name – written by the parent / an admin
+        syncTutorViews: async view => {
+          const ms = (await F.getDocs(F.collection(fdb, `families/${famId}/members`))).docs.map(d => d.data()).filter(m => m.role === 'tutor' && m.invite);
+          for (const m of ms) { const want = view(m.kids || []), ref = F.doc(fdb, `families/${famId}/tutorView/${m.invite}`), now = await F.getDoc(ref).catch(() => null);
+            if (!now || !now.exists() || JSON.stringify(now.data()) !== JSON.stringify(want)) await F.setDoc(ref, want); }
+          return ms.length; },
+        // a new link for a kid: the old one stops working and the phones that joined with it lose their access
+        newKidLink: async kid => {
+          const t = rnd(16); await F.updateDoc(F.doc(fdb, `families/${famId}`), new F.FieldPath('kidTokens', kid), t);
+          const ds = await F.getDocs(F.query(F.collection(fdb, `families/${famId}/devices`), F.where('kid', '==', kid)));
+          await Promise.all(ds.docs.map(d => F.deleteDoc(d.ref)));
+          return { url: `${location.origin}/?f=${famId}&t=${t}&k=${encodeURIComponent(kid)}#kid-${kid}`, devices: ds.size }; },
         leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); W.sffSoftReload('רגע…'); },
         switchTo: fid => { LS.setItem('sff_active_fam', fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
@@ -1579,7 +1602,9 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
         metadata: { fromCache: q.metadata.fromCache, hasPendingWrites: q.metadata.hasPendingWrites } });
       return { path, doc: id => docRef(path + '/' + id),
         get: async () => qs(await F.getDocs(c)),
-        onSnapshot: (next, error) => F.onSnapshot(c, q => next(qs(q)), e => errOut(e)(error)) };
+        onSnapshot: (next, error) => F.onSnapshot(c, q => next(qs(q)), e => errOut(e)(error)),
+        where: (f, op, v) => { const q = F.query(c, F.where(f, op, v));
+          return { get: async () => qs(await F.getDocs(q)), onSnapshot: (next, error) => F.onSnapshot(q, x => next(qs(x)), e => errOut(e)(error)) }; } };
     }
     const dbApi = { doc: docRef, collection: colRef };
 
@@ -2974,6 +2999,10 @@ async function qaAllSets(){
   QA_ALL_BUSY=false; renderKids();
 }
 function renderKids(){
+  if(window.SFF_ROLE==='tutor' && window.SFF_TUTOR_WAIT && !kids.length){
+    $('kidCar').innerHTML=`<div class="card center" style="padding:26px 18px"><div style="font-size:2.6em">⏳</div><h2 style="margin:8px 0 6px">עוד רגע תראו את הילדים</h2>
+      <p class="sub" style="margin:0">ההורה צריך/ה לפתוח את האפליקציה פעם אחת – ואז הילדים שהוזמנתם אליהם יופיעו כאן.</p></div>`;
+    $('kidCarDots').innerHTML=''; return; }
   const slides=visibleKids().map(k=>{
     const ss=kidSets(k), pct=ss.length?ss.reduce((a,x)=>a+setProgress(x),0)/ss.length:0;
     const row=(x,why)=>{ const [c,ico]=subjStyle(x.subject); const dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), base=String(x.subject).replace(/^🎯\s*/,'');
@@ -4251,7 +4280,7 @@ const sent={};
 function pushKids(){ if(!DB||!IS_OWNER||!canManage()) return;
   const list=kids.map(({id,name,grade,color,resetAt,cq})=>({id,name,grade,color,...(resetAt?{resetAt}:{}),...(Array.isArray(cq)&&cq.length?{cq:cq.slice(-3000)}:{})}));
   const j=JSON.stringify(list); if(sent.kids===j) return; sent.kids=j;
-  qwrite('kids',()=>DB.doc('fam/kids').set({list})); }
+  qwrite('kids',()=>DB.doc('fam/kids').set({list})); syncTutorViewsSoon(); }
 let pushT=null;
 function pushSets(){ if(!DB||!IS_OWNER) return; clearTimeout(pushT); pushT=setTimeout(()=>{
   sets.forEach(s=>{ const {order,pos,cloud,...body}=s; const j=JSON.stringify(body); if(sent['s:'+s.id]===j) return; sent['s:'+s.id]=j;
@@ -4298,13 +4327,14 @@ async function cloudInit(){
   try{ IS_OWNER = ME ? !!(await ME.isOwner()) : false; }catch(e){ IS_OWNER=false; }
   applyLock();
   if(!DB) return;
+  if(window.SFF_ROLE==='tutor'){ tutorCloud(); return; }
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];
     if(IS_OWNER){ remote.forEach(r=>{ const l=kidById(r.id); if(!l) kids.push({...r}); else { if((r.resetAt||0)>(l.resetAt||0)) l.resetAt=r.resetAt;
       if(Array.isArray(r.cq)&&r.cq.length) l.cq=[...new Set([...(l.cq||[]),...r.cq.filter(x=>typeof x==='string')])].slice(-3000); } }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
-    saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender();
+    saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender(); syncTutorViewsSoon();   // (it writes a tutor's view only when it differs)
   },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
   DB.collection('sets').onSnapshot(q=>{
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
@@ -4318,9 +4348,11 @@ async function cloudInit(){
     else { const old=sets; sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
     storeSaveLocal(); rerender();
   },e=>showCloudErr(e&&e.message));
-  DB.collection('progress').onSnapshot(q=>{
+  DB.collection('progress').onSnapshot(q=>progDocs(q.docs),()=>{});
+}
+function progDocs(docs){
     let changed=false;
-    q.docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);
+    docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);
       (Array.isArray(p.history)?p.history:[]).map(cleanHist).filter(Boolean).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
       if(k && IS_OWNER && p.profile){ const nick=cleanNick(p.profile.nick), ava=cleanAvatar(p.profile.avatar);
         if(p.profile.nick!==undefined&&k.nick!==nick){k.nick=nick;changed=true;} if(ava&&JSON.stringify(k.avatar)!==JSON.stringify(ava)){k.avatar=ava;changed=true;}
@@ -4328,8 +4360,36 @@ async function cloudInit(){
     });
     if(applyResets()) changed=true;
     if(changed){ history.sort((a,b)=>b.at-a.at); saveHistoryLocal(); saveKidsLocal(); rerender(); }
-  },()=>{});
 }
+// a tutor: only the kids of the invitation – the family's small view for the tutor (names), those kids' practice sets
+// (asked for kid by kid – the rules allow nothing else) and their progress. Never the family document or the kids list.
+function tutorCloud(){
+  const M=window.SFF_MEMBER||{}, mine=Array.isArray(M.kids)?M.kids.filter(x=>typeof x==='string'):[];
+  // a phone that kept the whole family from before: keep only the tutor's kids here
+  kids=kids.filter(k=>mine.includes(k.id)); sets=sets.filter(s=>mine.includes(s.kidId)); history=history.filter(h=>mine.includes(h.kidId));
+  saveKidsLocal(); storeSaveLocal(); saveHistoryLocal();
+  if(M.invite) DB.doc('tutorView/'+M.invite).onSnapshot(snap=>{ CLOUD_SEEN=true; window.SFF_TUTOR_WAIT=!snap.exists;
+    const tv=snap.exists?(snap.data()||{}):{};
+    kids=(Array.isArray(tv.kids)?tv.kids:[]).filter(r=>r&&mine.includes(r.id)).map(r=>{ const l=kidById(r.id); return {id:r.id,name:String(r.name||'').slice(0,20),grade:+r.grade||0,color:r.color||'#2F6BFF',nick:l?.nick??null,avatar:l?.avatar??null}; });
+    saveKidsLocal(); rerender(); },()=>{ window.SFF_TUTOR_WAIT=true; rerender(); });
+  else { window.SFF_TUTOR_WAIT=true; rerender(); }
+  const per={}, fresh={};
+  mine.forEach(id=>{
+    DB.collection('sets').where('set.kidId','==',id).onSnapshot(q=>{
+      per[id]=q.docs.map(d=>d.data().set).filter(Boolean); fresh[id]=!(q.metadata&&q.metadata.fromCache);
+      const remote=Object.values(per).flat(), ids=new Set(remote.map(r=>r.id));
+      if(mine.every(k=>fresh[k])) sets=sets.filter(s=>ids.has(s.id) || (!s.cloud && Date.now()-(s.created||0)<3600e3));
+      remote.forEach(r=>{ const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
+      pushSets(); storeSaveLocal(); rerender(); },()=>{});
+    DB.doc('progress/'+id).onSnapshot(snap=>{ if(snap.exists) progDocs([{id, data:()=>snap.data()}]); },()=>{});
+  });
+}
+// what a tutor sees of the family: the tutor's kids (name, grade, color) and the family name – nothing else
+function tutorViewOf(ids){ return {famName:String(window.__sffFamily?.famName||'').slice(0,60),
+  kids:kids.filter(k=>(ids||[]).includes(k.id)).map(({id,name,grade,color})=>({id,name,grade:+grade||0,color:color||'#2F6BFF'}))}; }
+let tvT=null;
+function syncTutorViewsSoon(){ if(!DB||!canManage()||!window.__sffFamily?.syncTutorViews) return; clearTimeout(tvT);
+  tvT=setTimeout(()=>window.__sffFamily.syncTutorViews(tutorViewOf).catch(()=>{}),1500); }
 
 /* delete the parent's account and all family data */
 function openDelAcc(){ $('delAccTxt').value=''; $('delAccGo').disabled=true; $('delAccMsg').textContent=''; $('delAccDlg').classList.remove('hidden'); }
@@ -4355,9 +4415,9 @@ async function renderFamily(){
   const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||'')}</button>`).join('')}</div>` : '';
   const kidRows=visibleKids().map(k=>{ const played=history.some(h=>h.kidId===k.id);
     return `<div class="frow">${avatarHtml(k,44)}<div class="who"><b>${esc(k.name)}</b><span class="hint">כיתה ${GRADES[k.grade]} · ${played?'📱 משחק/ת':'⚪ עוד לא התחיל/ה'}</span></div>
-      <button class="btn small" onclick="openKidLink('${k.id}')">🔗 לשלוח ל${esc(k.name)}</button></div>`; }).join('') || `<p class="hint">עוד אין ילדים${canManage()?' – מוסיפים בלשונית 👧 ילדים':''}</p>`;
+      ${isTutor()?'':`<button class="btn small" onclick="openKidLink('${k.id}')">🔗 לשלוח ל${esc(k.name)}</button>`}</div>`; }).join('') || `<p class="hint">עוד אין ילדים${canManage()?' – מוסיפים בלשונית 👧 ילדים':''}</p>`;
   el.innerHTML=`${sw}
-    <div class="card"><h3 class="fh">🧒 הילדים <span class="hint">קישור אישי לטלפון של כל ילד</span></h3>${kidRows}</div>
+    <div class="card"><h3 class="fh">🧒 הילדים ${isTutor()?'':'<span class="hint">קישור אישי לטלפון של כל ילד</span>'}</h3>${kidRows}</div>
     <div class="card"><h3 class="fh">👩‍👦 המבוגרים <span class="hint">כניסה עם Google</span></h3><div id="famAdults"><p class="hint">⏳</p></div>
       ${F&&canManage()?`<button class="addline" onclick="openInvite()">＋ הזמנת מבוגר</button>`:''}
       ${F&&window.SFF_ROLE&&window.SFF_ROLE!=='owner'?`<button class="linkbtn" style="margin-top:10px" onclick="leaveFamily()">🚪 יציאה מהמשפחה</button>`:''}</div>`;
@@ -4652,15 +4712,24 @@ function introFeature(){
 }
 
 /* kid link dialog */
-async function openKidLink(id){ const k=kidById(id); if(!k) return;
+async function openKidLink(id){ const k=kidById(id); if(!k) return; $('linkDlg').dataset.kid=id; $('klNew').classList.toggle('hidden',!canManage());
   $('klAva').innerHTML=avatarHtml(k,80); $('klName').textContent=`${k.name} · כיתה ${GRADES[k.grade]}`;
   $('klFor').textContent=`לטלפון של ${k.name} בלבד · בלי סיסמה`;
   $('klUrl').value='⏳'; $('klWa').removeAttribute('href'); $('klMsg').textContent=''; $('linkDlg').classList.remove('hidden');
   let url;
   try{ url=window.__sffFamily&&window.__sffFamily.kidLink ? await window.__sffFamily.kidLink(k.id) : `${window.SFF_APP_URL||APP_URL}#kid-${k.id}`; }
-  catch(e){ $('klUrl').value=''; $('klMsg').textContent='⚠️ רק ההורה שפתח את המשפחה יכול ליצור קישור'; return; }
+  catch(e){ $('klUrl').value=''; $('klMsg').textContent='⚠️ רק ההורה שפתח את המשפחה יכול ליצור קישור'; $('klWa').classList.add('hidden'); return; }
+  $('klWa').classList.remove('hidden');
   $('klWa').href='https://wa.me/?text='+encodeURIComponent(`${k.name}, זה הקישור שלך לתרגול 🎮\n${url}`);
   $('klUrl').value=url; }
+// a new link: the old one stops working, and phones that joined with it lose their access (they need the new link)
+async function newKidLink(){ const k=kidById($('linkDlg').dataset.kid); if(!k||!window.__sffFamily?.newKidLink) return;
+  if(!(await askSure({ico:'🔄',title:`להחליף את הקישור של ${k.name}?`,text:`הקישור הישן יפסיק לעבוד, והטלפון של ${k.name} יצטרך את הקישור החדש. ההתקדמות נשמרת.`,yes:'להחליף',no:'ביטול'}))) return;
+  $('klUrl').value='⏳'; $('klMsg').textContent='';
+  try{ const r=await window.__sffFamily.newKidLink(k.id);
+    $('klUrl').value=r.url; $('klWa').href='https://wa.me/?text='+encodeURIComponent(`${k.name}, זה הקישור החדש שלך לתרגול 🎮\n${r.url}`);
+    $('klMsg').textContent='✓ קישור חדש. שלחו אותו שוב לטלפון של '+k.name; }
+  catch(e){ $('klMsg').textContent='⚠️ '+(e.code||e.message||e); } }
 async function copyKidLink(){ try{ await navigator.clipboard.writeText($('klUrl').value); $('klMsg').textContent='✓'; }catch(e){ $('klUrl').select(); $('klMsg').textContent='⌘C'; } }
 
 applyLock();

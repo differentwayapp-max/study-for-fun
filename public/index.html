@@ -2044,7 +2044,8 @@ async function aiTester(){ try{ const e=String(window.SFF_EMAIL||'').trim().toLo
   return (window.SFF_AI_TESTERS||[]).includes(h); }catch(e){ return false; } }
 async function ask(step, data, opts={}){
   if(!sample) throw {code:'not_granted', message:'AI not available'};
-  const b=CUR_BUILD; const r=await sample.json(step, data, opts);
+  const b=CUR_BUILD; const call=sample.json(step, data, opts);
+  const r=await (b&&b.stale ? Promise.race([call, b.stale]) : call);      // a call cut off by a locked screen is dropped (see screenOff)
   if(b && b.cancel) throw {code:'cancel'};
   return r;
 }
@@ -2161,11 +2162,25 @@ function endCp(cp, ok){ try{ localStorage.removeItem(CP_KEY); }catch(e){} if(cp&
 function restoreBuild(){ const cp=cpLoad(); if(!cp||!cp.in||BUILDS.some(b=>b.cp&&b.cp.at===cp.at)) return;
   if(cp.fam!==(window.__sffFamily?.famId||'') || !cp.token || Date.now()-cp.at>BUILD_MS){ endCp(cp,false); return; }
   BUILDS.push({id:'b'+cp.at, kidId:cp.in.kidId, subject:cp.in.subject, state:'err', cp}); if(!$('vKids').classList.contains('hidden')) renderKids(); }
-function resumeBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b||!b.cp) return; BUILDS=BUILDS.filter(x=>x!==b);
+function resumeBuild(id, bg){ const b=BUILDS.find(x=>x.id===id); if(!b||!b.cp) return; BUILDS=BUILDS.filter(x=>x!==b);
   if(Date.now()-b.cp.at>BUILD_MS){ endCp(b.cp,false); toast('⏳ עבר יותר מדי זמן – בונים מחדש'); renderKids(); return; }
-  build(b.cp); }
+  build(b.cp, bg); }
 
-async function build(resume){
+// a build runs on this phone, one AI call after another. A locked screen (or another app) stops the page and its calls:
+// while a build runs the screen is kept on (Wake Lock, where the browser has it); a call that was going on while the screen
+// was off for SCREEN_OFF_MS or more is dropped on return, and the build goes on by itself from its last saved step.
+const SCREEN_OFF_MS=30e3, AUTO_RESUMES=6;
+let HIDE_N=0, HIDE_AT=0, WAKE=null;
+const buildRunning=()=>BUILDS.some(b=>b.state==='run');
+async function wakeOn(){ try{ if(!WAKE && navigator.wakeLock && !document.hidden){ WAKE=await navigator.wakeLock.request('screen'); WAKE.addEventListener('release',()=>{ WAKE=null; }); } }catch(e){ WAKE=null; } }
+function wakeOff(){ if(buildRunning()) return; try{ WAKE&&WAKE.release(); }catch(e){} WAKE=null; }
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){ HIDE_N++; HIDE_AT=Date.now(); return; }
+  if(buildRunning()){ wakeOn(); if(Date.now()-HIDE_AT>=SCREEN_OFF_MS) BUILDS.filter(b=>b.state==='run').forEach(b=>b.kick&&b.kick()); }
+  BUILDS.filter(b=>b.auto).forEach(b=>{ b.auto=false; resumeBuild(b.id, true); });
+});
+
+async function build(resume, bg){
   if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
   let I;
   if(resume) I=resume.in;
@@ -2190,7 +2205,9 @@ async function build(resume){
   $('lMascot').innerHTML=mascot('happy',(kidById(I.kidId)||{}).color||'#2F6BFF');
   const cp=resume||{v:1, at:Date.now(), fam:window.__sffFamily?.famId||'', in:I, token:null, done:{}, calls:0};
   const B={id:'b'+cp.at, kidId:I.kidId, subject, state:'run', cp}; BUILDS.push(B); CUR_BUILD=B;
-  show('vBuild');
+  B.stale=new Promise((_,rej)=>{ B.kick=()=>rej({code:'screen_off', message:'screen off'}); }); B.stale.catch(()=>{});
+  const hideN=HIDE_N; wakeOn();
+  if(!bg) show('vBuild');
 
   // one build from this month's quota (3 free per family, then paid credits)
   if(!cp.token){
@@ -2259,15 +2276,23 @@ async function build(resume){
       qa:{checked:qa.checked,passed:qa.passed,fixed:qa.fixed,dropped:qa.dropped,log:qa.log}, coverage, suggestions:(profile.missing_from_parent_list||[]).filter(t=>!topics.includes(t)), created:Date.now()};
     poolRemember(I.kidId, qs);
     endCp(cp, true);
-    sets.unshift(set); store.save(); BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null;
+    sets.unshift(set); store.save(); BUILDS=BUILDS.filter(x=>x!==B); if(CUR_BUILD===B) CUR_BUILD=null; wakeOff();
     if(!$('vBuild').classList.contains('hidden')){ curSet=set; renderReview(set); show('vReview'); }
     else { toast(`✓ ${esc(subject)} מוכן`, ()=>{ curSet=set; go('kids'); renderReview(set); show('vReview'); }); if(!$('vKids').classList.contains('hidden')) renderKids(); }
   }catch(e){
-    if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); endCp(cp,false); return; }
+    if(e?.code==='cancel'||B.cancel){ BUILDS=BUILDS.filter(x=>x!==B); endCp(cp,false); wakeOff(); return; }
     if(CUR_BUILD===B) CUR_BUILD=null;
+    B.state='err'; wakeOff();
+    // the screen was off (or the app in the background) during this try: not a real failure – go on by itself
+    const byScreen = e?.code==='screen_off' || HIDE_N!==hideN;
     // a build that failed at the very start is given back (the server's refund rule); a longer one can go on from here
-    const canGoOn = cp.token && cp.calls>3 && !['budget','family_budget','quota','build_calls','build_closed','not_granted'].includes(e?.code) && Date.now()-cp.at<BUILD_MS;
+    const canGoOn = cp.token && (cp.calls>3 || byScreen) && !['budget','family_budget','quota','build_calls','build_closed','not_granted'].includes(e?.code) && Date.now()-cp.at<BUILD_MS;
     if(canGoOn) cpSave(cp); else endCp(cp,false);
+    if(canGoOn && byScreen && (cp.auto||0)<AUTO_RESUMES){
+      cp.auto=(cp.auto||0)+1; cpSave(cp); setStep(failStep,'run','📱 המסך כבה – ממשיכים מאיפה שנעצר…');
+      if(document.hidden) B.auto=true; else setTimeout(()=>resumeBuild(B.id, true), 500);
+      return;
+    }
     setStep(failStep,'fail'); logFail('build:'+failStep, e, subject);
     const msg = e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
       : e?.code==='build_calls'||e?.code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
@@ -2277,7 +2302,6 @@ async function build(resume){
       : 'משהו השתבש בבנייה: '+(e?.message||e);
     $('buildErr').innerHTML=esc(msg)+(canGoOn?'<br><b>מה שכבר נבנה נשמר.</b>':''); $('buildErr').classList.remove('hidden'); $('buildBack').classList.remove('hidden');
     $('bTitle').textContent='⚠️ הבנייה נעצרה'; $('bSub').classList.add('hidden');
-    B.state='err';
     $('bActs').innerHTML=(canGoOn?`<button class="btn big" onclick="resumeBuild('${B.id}')">▶ להמשיך מאיפה שנעצר</button>`:'')+`<button class="btn ghost" onclick="go('kids')">🏠 למסך הבית</button>`;
     if(!canGoOn) B.cp=null;
     if(!$('vKids').classList.contains('hidden')) renderKids();

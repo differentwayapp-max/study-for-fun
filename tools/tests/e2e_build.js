@@ -56,7 +56,7 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   console.log('3. a build');
   const calls = [];
   await p.exposeFunction('__logStep', s => calls.push(s));
-  await p.evaluate(() => { const j = sample.json; sample.json = async (s, d, o) => { window.__logStep(s); if (window.__failOnce === s) { window.__failOnce = null; throw { code: 'error', message: 'test: network' }; } return j(s, d, o); }; });
+  await p.evaluate(() => { const j = sample.json; sample.json = async (s, d, o) => { window.__logStep(s); if (window.__failOnce === s) { window.__failOnce = null; throw { code: 'error', message: 'test: network' }; } if (window.__hangOnce === s) { window.__hangOnce = null; window.__hung = true; return new Promise(() => {}); } return j(s, d, o); }; });
   const runBuild = async (topics, failAt) => {
     await p.evaluate(([t, f]) => { window.__failOnce = f; openWizard('k1'); W.subject = 'אנגלית'; $('fTopics').value = t; W.step = 4; wizRender(); build(); }, [topics, failAt || null]);
   };
@@ -101,6 +101,21 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   ok(!r2.cp, 'when the build is done nothing is kept');
   const b2 = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done');
   ok(b2.length === 2, 'the stopped build finished on the same build (no extra build used): ' + b2.length);
+
+  console.log('6. the screen goes off in the middle of a build (iPhone: the call never comes back)');
+  calls.length = 0;
+  await p.evaluate(() => { window.__hangOnce = 'review'; });
+  await runBuild('Rhymes & sounds\nShort vowels\nMagic e\nColors\nAnimals');
+  await p.waitForFunction(() => window.__hung, null, { timeout: 120000 });
+  ok(await p.evaluate(() => buildRunning()), 'the build waits for an answer that will not come');
+  calls.length = 0;
+  // the screen was off for 40 seconds and is on again
+  await p.evaluate(() => { HIDE_N++; HIDE_AT = Date.now() - 40e3; document.dispatchEvent(new Event('visibilitychange')); });
+  await newSet(3); await p.waitForTimeout(1500);
+  ok(!calls.includes('gen') && !calls.includes('scan') && calls.includes('review'), `it goes on by itself from where it stopped, no button (${[...new Set(calls)].join(',')})`);
+  const b3 = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done');
+  ok(b3.length === 3, 'on the same build (no extra build used): ' + b3.length);
+  ok(await p.evaluate(() => !localStorage.getItem('sff_build_cp') && !buildRunning()), 'nothing is left running or kept');
   ok(!errs.length, 'no page errors ' + JSON.stringify(errs));
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

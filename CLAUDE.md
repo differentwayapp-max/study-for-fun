@@ -43,3 +43,13 @@ When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in inde
   A non-Google provider needs an SMTP host setting added to `mailBugReport`.
   The same switch also turns on `mailServerAlerts`: once an hour, anything new in the server log (errors, slow calls,
   fallbacks, AI spend past 80% of the cap) is emailed as one message. Until then app admins see a red dot on ☰ (`checkServerLog`).
+- Teacher area (plan: `docs/teacher-area-plan.md`):
+  - Legal review before the consent stage goes live: the consent letter text (`letterV`), the privacy policy and terms for
+    classes, and who owns the database when a class teacher works on behalf of a school.
+  - Email sign-in for teachers (and parents without Google): Firebase Console → Authentication → Sign-in method →
+    Add new provider → Email/Password → turn on "Email link (passwordless sign-in)" → Save; then Authentication →
+    Settings → Authorized domains: check that study-for-fun-7b03c.web.app (and any custom domain) is listed.
+    Then set `EMAIL_LINK=true` in index.html and deploy.
+  - `tools/tests/e2e_kid_nostorage.js` does not really block storage in Chromium (it overrides `Window.prototype`; the
+    working form is `Object.defineProperty(window, 'localStorage', {get(){throw …}, configurable:true})`, as in
+    e2e_intro.js) – fix it before the following-parent stage.

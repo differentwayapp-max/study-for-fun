@@ -94,7 +94,14 @@
         const docs = ((j && j.documents) || []).map(d => wrapDoc(d.name.split('/').pop(), decF(d.fields)));
         return { docs, size: docs.length, empty: !docs.length, docChanges: () => [], metadata: { fromCache: false, hasPendingWrites: false } };
       };
-      return { path, doc: id => docRef(path + '/' + id), get,
+      // a query by one field (a student's phone in a teacher's group asks only for its own practice sets)
+      const where = (f, op, v) => { const q = async () => {
+          const j = await call('POST', `families/${famId}:runQuery`, { structuredQuery: { from: [{ collectionId: path }],
+            where: { fieldFilter: { field: { fieldPath: f }, op: op === '==' ? 'EQUAL' : op === 'array-contains' ? 'ARRAY_CONTAINS' : op, value: enc(v) } } } });
+          const docs = (Array.isArray(j) ? j : []).filter(r => r.document).map(r => wrapDoc(r.document.name.split('/').pop(), decF(r.document.fields)));
+          return { docs, size: docs.length, empty: !docs.length, docChanges: () => [], metadata: { fromCache: false, hasPendingWrites: false } }; };
+        return { get: q, onSnapshot: (next, error) => { let last = ''; poll(async () => { try { const r = await q(); const k = JSON.stringify(r.docs.map(d => [d.id, d.data()])); if (k !== last) { last = k; next(r); } } catch (e) { error && error(e); } }); return () => {}; } }; };
+      return { path, doc: id => docRef(path + '/' + id), get, where,
         onSnapshot: (next, error) => { let last = ''; poll(async () => { try { const q = await get(); const k = JSON.stringify(q.docs.map(d => [d.id, d.data()])); if (k !== last) { last = k; next(q); } } catch (e) { error && error(e); } }); return () => {}; } };
     }
     const dbApi = { doc: docRef, collection: colRef };

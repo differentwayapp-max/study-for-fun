@@ -65,7 +65,7 @@ You can build a practice set from the test material itself.
 - Upload a photo of worksheets or a PDF file.
 - Tap **Build the practice set**.
 
-Building takes about 5–15 minutes. You can move to other screens, but don't close the app until it finishes.
+Building takes about 5–15 minutes. Wait only until the material is sent (a few seconds); then you can close the app and turn the screen off – the build goes on, and the practice set will appear on the kid's card when it is ready.
 
 **Limit:** up to 3 new practice sets a month per family. Adding from the catalog is not limited.
 

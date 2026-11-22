@@ -1,6 +1,7 @@
 // Terms of use + user guide: the pages open in Hebrew and English (no sideways scroll, the contents links work),
 // the side menu links to both, the sign-in box blocks "I'm a parent" until ticked, and the consent is kept with the account.
 // Run inside the emulators (firestore, auth). OUT=dir for screenshots.
+const TV = (require('fs').readFileSync(__dirname + '/../../public/index.html', 'utf8').match(/const TERMS_VERSION = '([^']+)'/) || [])[1];   // the current terms version
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
@@ -48,7 +49,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(2000);
     const t = await p.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null);
-    ok(t && t.v === '2026-11-17' && t.at > 0, 'consent kept with the account: ' + JSON.stringify(t));
+    ok(t && t.v === TV && t.at > 0, 'consent kept with the account: ' + JSON.stringify(t));
     // 4. a parent who signed in before the terms existed: one-time approval when the app opens
     await p.evaluate(async () => { localStorage.removeItem('sff_terms_ok'); await window.__sffRoot.set('users', window.SFF_UID, { terms: { v: 'old', at: 1 } }); });
     await ctx.addInitScript(() => { window.SFF_TEST_ASK_CONSENT = 1; });
@@ -59,7 +60,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     await p.click('#fbAgree'); await p.click('#fbOk');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1500);
     const t2 = await p.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null);
-    ok(t2 && t2.v === '2026-11-17', 'approval kept with the account: ' + JSON.stringify(t2));
+    ok(t2 && t2.v === TV, 'approval kept with the account: ' + JSON.stringify(t2));
     await p.click('#menuBtn'); await p.waitForTimeout(300);
     const links = await p.evaluate(() => [...document.querySelectorAll('#sideMenu a.ditem')].map(a => a.getAttribute('href')));
     ok(links.includes('/guide.html') && links.includes('/terms.html'), 'side menu: ' + links.join(', '));

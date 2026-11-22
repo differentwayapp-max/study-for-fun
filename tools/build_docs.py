@@ -1,20 +1,29 @@
 """Build the user guide and the terms of use pages from their Markdown texts.
 
 Usage:  python3 -I tools/build_docs.py
-Reads   tools/docs/guide-he.md, guide-en.md, terms-he.md, terms-en.md
-Writes  public/guide.html, public/terms.html  (same look as privacy.html; Hebrew + English, ?lang=he|en picks the language;
-        the guide gets a clickable table of contents; the terms page shows its "In short" part on top).
+Reads   tools/docs/guide-he.md, guide-en.md, terms-he.md, terms-en.md, consent-he.md, consent-en.md
+Writes  public/guide.html, public/terms.html, public/consent.html  (same look as privacy.html; Hebrew + English, ?lang=he|en
+        picks the language; the guide gets a clickable table of contents; the terms page shows its "In short" part on top),
+        and public/consent.json – the parents' consent letter for the app: {v, he: {title, html}, en: {...}}.
+        In the letter, {שם המורה}/{teacher name}, {שם הקבוצה}/{group name} and {תאריך}/{date} become empty
+        <span class="ph-teacher|ph-group|ph-date"> that the app (or ?t=…&g=… on consent.html) fills in as plain text.
+        The letter's version is the "גרסה X.Y" line of consent-he.md – CONSENT_VERSION in index.html must be the same.
 The terms version (TERMS_VERSION in index.html) is the date in terms-he.md – change both together.
 Only a small Markdown subset is used: #, ##, ### headings, "- " lists, **bold**, paragraphs. All text is HTML-escaped.
 """
-import html, pathlib, re
+import html, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DOCS = ROOT / "tools" / "docs"
 
 
+PH = {"{שם המורה}": "teacher", "{teacher name}": "teacher", "{שם הקבוצה}": "group", "{group name}": "group", "{תאריך}": "date", "{date}": "date"}
+
+
 def inline(t):
     t = html.escape(t, quote=False)
+    for k, v in PH.items():
+        t = t.replace(html.escape(k, quote=False), f'<span class="ph-{v}"></span>')
     t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
     # the privacy policy is mentioned by name – link it (same language)
     t = re.sub(r"(מדיניות הפרטיות|privacy policy)", r'<a href="/privacy.html">\1</a>', t)
@@ -115,11 +124,23 @@ def card(lang, text, kind):
     return f'  <div class="card" data-l="{lang}" dir="{dir_}">\n{head}\n{body}\n  </div>', title
 
 
-for kind in ("guide", "terms"):
+for kind in ("guide", "terms", "consent"):
     he, t_he = card("he", (DOCS / f"{kind}-he.md").read_text(encoding="utf-8"), kind)
     en, t_en = card("en", (DOCS / f"{kind}-en.md").read_text(encoding="utf-8"), kind)
     strip = lambda t: re.sub(r"\s*–\s*Study for fun$", "", re.sub(r"^[^\w֐-׿]+", "", t)).strip()
     page = PAGE.format(title_he=html.escape(strip(t_he)), cards=he + "\n" + en,
-                       t_he=repr(strip(t_he)).replace("'", '"'), t_en=repr(strip(t_en)).replace("'", '"'))
+                       t_he=json.dumps(strip(t_he), ensure_ascii=False), t_en=json.dumps(strip(t_en), ensure_ascii=False))
+    if kind == "consent":
+        # the letter to read: the placeholders are filled from ?t=<teacher>&g=<group> (as text) and today's date
+        page = page.replace("</body>", """<style>.ph-teacher:empty::before,.ph-group:empty::before{content:'______'}@media print{.top{display:none}body{background:#fff}.card{border:0;box-shadow:none}}</style>
+<script>(function(){ const q=new URLSearchParams(location.search), d=new Date();
+  const put=(c,v)=>document.querySelectorAll('.ph-'+c).forEach(e=>{ e.textContent=v; });
+  if(q.get('t')) put('teacher',q.get('t').slice(0,60)); if(q.get('g')) put('group',q.get('g').slice(0,60));
+  put('date',d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()); })();</script>
+</body>""")
+        ver = re.search(r"גרסה\s+([0-9.]+)", (DOCS / "consent-he.md").read_text(encoding="utf-8")).group(1)
+        body = lambda c: re.sub(r'^\s*<div class="card"[^>]*>\n', "", c).rsplit("</div>", 1)[0]
+        (ROOT / "public" / "consent.json").write_text(json.dumps({"v": ver, "he": {"title": strip(t_he), "html": body(he)}, "en": {"title": strip(t_en), "html": body(en)}}, ensure_ascii=False), encoding="utf-8")
+        print("public/consent.json (v" + ver + ")")
     (ROOT / "public" / f"{kind}.html").write_text(page, encoding="utf-8")
     print(f"public/{kind}.html")

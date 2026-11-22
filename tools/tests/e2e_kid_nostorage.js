@@ -17,12 +17,13 @@ const put = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: 
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] }); const errs = [];
   for (const [name, tok] of [['right link', 'TOK1'], ['wrong link', 'BAD']]) {
     const c = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type()==='error') errs.push('console: '+m.text().slice(150,420)); }); p.on('requestfailed', r => errs.push('failed: '+r.url().slice(0,80)+' '+(r.failure()||{}).errorText));
-    await p.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; delete window.WebAssembly; for (const n of ['localStorage','sessionStorage']) Object.defineProperty(Window.prototype, n, { get(){ throw new DOMException('denied','SecurityError'); }, configurable: true }); });
+    await p.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; delete window.WebAssembly; for (const n of ['localStorage','sessionStorage']) Object.defineProperty(window, n, { get(){ throw new DOMException('denied','SecurityError'); }, configurable: true }); });   // on window itself: Chrome's storage is not on Window.prototype, so a getter there blocks nothing
     // like Lockdown Mode: the module script never runs
     await p.route('http://localhost:8765/?**', async r => { const res = await r.fetch(); r.fulfill({ response: res, body: (await res.text()).replace('<script type="module">', '<script type="text/x-blocked">') }); });
     await p.goto(`http://localhost:8765/?f=FAM1&t=${tok}#kid-k1`, { waitUntil: 'load' }); await p.waitForTimeout(9000);
-    const st = await p.evaluate(() => ({ via: window.__sffVia, stage: window.__sffStage, kids: kids.length, sets: sets.filter(s => !s.demo).length, err: window.__sffCloudErr || window.__sffJoinErr || '' }));
+    const st = await p.evaluate(() => ({ ns: window.SFF_NO_STORAGE, via: window.__sffVia, stage: window.__sffStage, kids: kids.length, sets: sets.filter(s => !s.demo).length, err: window.__sffCloudErr || window.__sffJoinErr || '' }));
     console.log(name.padEnd(10), JSON.stringify(st)); console.log('   errs:', errs.slice(0,5).join(' | '));
+    if (!String(st.ns || '').includes('l')) throw new Error(name + ': storage not blocked – the in-memory fallback did not run (SFF_NO_STORAGE=' + st.ns + ')');
     if (name === 'right link') {
       await p.screenshot({ path: `${process.env.OUT || require('os').tmpdir()}/e2e_home.png` });
       await p.click('#subCar .play'); await p.waitForTimeout(800);

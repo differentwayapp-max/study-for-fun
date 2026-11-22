@@ -17,11 +17,12 @@ async function serverLog(entry) {
     if (ok) await d.collection('serverLog').add({ at: Date.now(), ...entry });
   } catch (_) {}
 }
-const SLOW_MS = 7 * 60 * 1000;
+const SLOW_MS = 5 * 60 * 1000;                // a call this slow is noted in the server log
+const AI_TIMEOUT_MS = 7 * 60 * 1000;          // one AI request at most (the function itself is killed at 9 minutes)
 const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
   const t = Date.now(), name = (fn.name || 'call');
   try { const r = await fn(req); const ms = Date.now() - t; console.log(`${name} ok ${ms}ms`);
-    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – close to the 9-minute limit', ms });
+    if (ms > SLOW_MS) await serverLog({ fn: name, kind: 'slow', code: 'ok', msg: 'slow call – over 5 minutes (an AI request stops at 7)', ms });
     return r; }
   catch (e) {
     console.warn(`${name} failed: ${e.code || ''} ${e.message || e} ${Date.now() - t}ms`);
@@ -42,7 +43,7 @@ const { defineSecret, defineString } = require('firebase-functions/params');
 const admin = require('firebase-admin');
 const Anthropic = require('@anthropic-ai/sdk').default;
 admin.initializeApp();
-const { getFirestore, FieldValue } = require('firebase-admin/firestore');
+const { getFirestore, FieldValue, FieldPath } = require('firebase-admin/firestore');
 const db = getFirestore();
 
 const ANTHROPIC_API_KEY = defineSecret('ANTHROPIC_API_KEY');
@@ -71,7 +72,12 @@ const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel 
 // One family may use at most this much of the month's AI budget (3 normal builds cost far less),
 // so a single account can never use up the whole app's budget. Admins have no family limit.
 const FAMILY_CAP_USD = 8;
-const REFUNDS_PER_MONTH = 2;                  // failed-at-the-start builds given back per family per month
+const REFUNDS_PER_MONTH = 2;
+// A teacher's quota is the teacher's – for all their groups together (teachers/{uid}/usage/{month}), never per group, and
+// apart from any family of their own. The first build is free to try; after that only with MIN_STUDENTS approved students.
+const TEACHER_FREE_BUILDS = 5;
+const TEACHER_CAP_USD = 12;
+const MIN_STUDENTS = 3;                  // failed-at-the-start builds given back per family per month
 // USD per 1M tokens: [input, output] – the models the steps use AND the models the API may fall back to on a refusal,
 // so a fallback is never counted at a cheaper rate. An unknown model is counted at the most expensive rate here.
 const PRICE = {
@@ -102,12 +108,15 @@ function parentOnly(request) {
   }
   return auth;
 }
-// the caller must be the family's founder or an adult member of it
+// the caller must be the family's founder or an adult member of it – or the teacher of a group (kind 'class', ownerUid)
 async function checkFamily(uid, famId) {
   if (typeof famId !== 'string' || !/^[A-Za-z0-9_-]{6,128}$/.test(famId)) throw new HttpsError('invalid-argument', 'Missing family.');
   if (uid === famId) return;
   const m = await db.doc(`families/${famId}/members/${uid}`).get();
-  if (!m.exists) throw new HttpsError('permission-denied', 'Not a member of this family.');
+  if (m.exists) return;
+  const f = await db.doc(`families/${famId}`).get();
+  if (f.exists && f.data().kind === 'class' && f.data().ownerUid === uid) return;
+  throw new HttpsError('permission-denied', 'Not a member of this family.');
 }
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
@@ -117,8 +126,8 @@ async function checkBudget() {
 // this family's share of the month's AI spend (checked after checkFamily, so famId is valid)
 async function checkFamilyBudget(auth, famId) {
   if (isAdminUser(auth)) return;
-  const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
-  if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
+  const sc = await scopeOf(famId), u = await sc.usage().get();
+  if ((u.data()?.usd || 0) >= sc.cap) throw new HttpsError('resource-exhausted', sc.capReason, { reason: sc.capReason, cap: sc.cap });
 }
 // once a day, when the AI spend passes 80% of the daily cap: a line in the server log (red dot for the app admins, and the alert email)
 async function spendAlert() {
@@ -131,6 +140,19 @@ function dayKey(d = new Date()) {             // Israel time, e.g. "2026-11-20"
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
 }
 const famOk = f => typeof f === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(f);
+// Whose quota a family id counts against: a family's own (families/{f}/usage), or a group's teacher (teachers/{owner}/usage).
+// kind and ownerUid never change (rules + the server), so the answer is kept for the life of the instance.
+const SCOPES = new Map();
+async function scopeOf(famId) {
+  if (!famOk(famId)) return null;
+  let s = SCOPES.get(famId);
+  if (!s) { const f = await db.doc(`families/${famId}`).get(), d = f.exists ? f.data() : {};
+    s = d.kind === 'class' && typeof d.ownerUid === 'string' ? { cls: true, owner: d.ownerUid } : { cls: false };
+    if (f.exists) SCOPES.set(famId, s); }
+  return s.cls
+    ? { ...s, usage: (m = monthKey()) => db.doc(`teachers/${s.owner}/usage/${m}`), free: TEACHER_FREE_BUILDS, cap: TEACHER_CAP_USD, capReason: 'teacher_budget' }
+    : { ...s, usage: (m = monthKey()) => db.doc(`families/${famId}/usage/${m}`), free: FREE_BUILDS, cap: FAMILY_CAP_USD, capReason: 'family_budget' };
+}
 // the price of one answer: every attempt (usage.iterations when the API fell back) at the dearer of the asked and the served model
 function usdOf(model, u) {
   const [pi, po] = priceOf(model);
@@ -150,13 +172,14 @@ const RES_TTL = 15 * 60 * 1000;
 function liveRes(d) { let sum = 0; const stale = [], now = Date.now();
   for (const [k, v] of Object.entries((d && d.res) || {})) { if (v && now - (+v.at || 0) < RES_TTL) sum += +v.usd || 0; else stale.push(k); }
   return { sum, stale }; }
-async function reserve(auth, famId, usd, id) {
-  const admin = isAdminUser(auth), refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
-  if (famOk(famId)) refs.push([db.doc(`families/${famId}/usage/${monthKey()}`), admin ? Infinity : FAMILY_CAP_USD, 'family_budget']);
+async function reserve(admin, famId, usd, id) {
+  const refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
+  const sc = await scopeOf(famId);
+  if (sc) refs.push([sc.usage(), admin ? Infinity : sc.cap, sc.capReason]);
   await db.runTransaction(async t => {
     const snaps = await Promise.all(refs.map(([r]) => t.get(r)));
     const live = snaps.map((sn, k) => { const d = sn.data() || {}, L = liveRes(d);
-      if ((d.usd || 0) + L.sum + usd > refs[k][1]) throw new HttpsError('resource-exhausted', refs[k][2], { reason: refs[k][2], ...(refs[k][2] === 'family_budget' ? { cap: FAMILY_CAP_USD } : {}) });
+      if ((d.usd || 0) + L.sum + usd > refs[k][1]) throw new HttpsError('resource-exhausted', refs[k][2], { reason: refs[k][2], ...(k === 2 ? { cap: sc.cap } : {}) });
       return L; });
     snaps.forEach((sn, k) => { const r = refs[k][0], mine = { usd, at: Date.now() };
       if (sn.exists) t.update(r, { [`res.${id}`]: mine, ...Object.fromEntries(live[k].stale.filter(x => /^[A-Za-z0-9]+$/.test(x)).map(x => [`res.${x}`, FieldValue.delete()])) });
@@ -169,73 +192,259 @@ async function settle(famId, id, step, buildId, usd, ran = true) {   // ran = fa
   const per = ran ? { [`steps.${step}.usd`]: inc(usd), [`steps.${step}.calls`]: inc(1) } : {}, n = ran ? { usd: inc(usd), calls: inc(1) } : {};
   const w = [db.doc(`meta/ai_spend_${monthKey()}`).update({ [`res.${id}`]: del, ...n, ...per }),
     db.doc(`meta/ai_day_${dayKey()}`).update({ [`res.${id}`]: del, ...n })];
-  if (famOk(famId)) {
-    w.push(db.doc(`families/${famId}/usage/${monthKey()}`).update({ [`res.${id}`]: del, ...(ran ? { usd: inc(usd) } : {}), month: monthKey() }));
+  const sc = await scopeOf(famId).catch(() => null);
+  if (sc) {
+    w.push(sc.usage().update({ [`res.${id}`]: del, ...(ran ? { usd: inc(usd) } : {}), month: monthKey() }));
     if (ran && typeof buildId === 'string' && /^[A-Za-z0-9]{1,40}$/.test(buildId)) w.push(db.doc(`families/${famId}/builds/${buildId}`).update({ usd: inc(usd), ...per }));
   }
   await Promise.all(w.map(p => p.catch(e => console.error('settle', e.message))));
   await spendAlert().catch(() => {});
 }
 
-// Start a new practice set: uses one of this month's free builds, or one paid credit.
-exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function startBuild(request) {
+// A teacher's new group: families/{random 20-character id} with kind 'class' and ownerUid – made here only, so the id is never
+// someone's uid and a teacher has at most MAX_CLASSES groups (counted in teachers/{uid}, which no client can write).
+const MAX_CLASSES = 10;
+exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function createClass(request) {
   const auth = parentOnly(request);
-  const { famId, subject = '' } = request.data || {};
-  await checkFamily(auth.uid, famId);
-  await checkBudget();
-  await checkFamilyBudget(auth, famId);
-  const month = monthKey(), adminUser = isAdminUser(auth);
-  const usageRef = db.doc(`families/${famId}/usage/${month}`), billRef = db.doc(`families/${famId}/billing/main`);
-  const buildRef = db.collection(`families/${famId}/builds`).doc();
-  return db.runTransaction(async (tx) => {
-    const [u, b] = await Promise.all([tx.get(usageRef), tx.get(billRef)]);
-    const used = u.data()?.builds || 0, credits = b.data()?.credits || 0;
-    let kind;
-    if (adminUser) kind = 'admin';
-    else if (used < FREE_BUILDS) kind = 'free';
-    else if (credits > 0) kind = 'paid';
-    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: FREE_BUILDS, credits, price: PRICE_ILS });
-    tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
-    if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
-    tx.set(buildRef, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month });
-    return { buildId: buildRef.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: FREE_BUILDS, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS };
+  const d = request.data || {};
+  const teach = d.teach === 'private' ? 'private' : d.teach === 'class' ? 'class' : null;
+  const name = typeof d.name === 'string' ? d.name.replace(/[<>]/g, '').trim().slice(0, 40) : '';
+  const grade = Number.isInteger(d.grade) && d.grade >= 0 && d.grade <= 11 ? d.grade : null;
+  const subject = typeof d.subject === 'string' ? d.subject.replace(/[<>]/g, '').trim().slice(0, 40) : '';
+  if (!teach || !name || grade === null) throw new HttpsError('invalid-argument', 'bad_input');
+  const tref = db.doc(`teachers/${auth.uid}`), cref = db.collection('families').doc();      // a random 20-character id
+  const tok = () => require('crypto').randomBytes(18).toString('hex');
+  await db.runTransaction(async tx => {
+    const t = await tx.get(tref), have = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+    if (have.length >= MAX_CLASSES) throw new HttpsError('resource-exhausted', 'class_limit', { reason: 'class_limit', max: MAX_CLASSES });
+    // the teacher's name is shown to the parents on the consent page; fam/info is all a student's phone reads of the group
+    const teacherName = String(auth.token.name || (auth.token.email || '').split('@')[0] || '').replace(/[<>]/g, '').slice(0, 60);
+    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teacherName, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
+    tx.set(db.doc(`families/${cref.id}/fam/info`), { kind: 'class', teacher: teacherName, name, grade, subject });
+    tx.set(tref, { classes: FieldValue.arrayUnion(cref.id), at: Date.now() }, { merge: true });
+    tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach }, { merge: true });
+  });
+  return { classId: cref.id };
+});
+
+// A teacher's group goes: everything in it (students, progress, consents, requests, sets), and it leaves the teacher's
+// count (teachers/{uid}) and list (users/{uid}.classes) – only here, so the count of 10 always comes down with it.
+exports.deleteClass = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function deleteClass(request) {
+  const auth = parentOnly(request);
+  const id = request.data && request.data.classId;
+  if (typeof id !== 'string' || !/^[A-Za-z0-9]{20}$/.test(id)) throw new HttpsError('invalid-argument', 'Missing group.');
+  const ref = db.doc(`families/${id}`), f = await ref.get();
+  if (!f.exists || f.data().kind !== 'class' || f.data().ownerUid !== auth.uid) throw new HttpsError('permission-denied', 'Not your group.');
+  await db.recursiveDelete(ref);
+  await db.doc(`teachers/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id), at: Date.now() }, { merge: true });
+  await db.doc(`users/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id) }, { merge: true });
+  return { ok: true };
+});
+
+/* ---------- parents' consent for a teacher's group (stage 2) ----------
+   The teacher sends ONE link for the group (/?join=<classId>.<code>, 30 days, can be closed or replaced). A parent opens it
+   with no account (anonymous sign-in), reads the letter, fills the form and signs with a finger → requestJoin keeps a
+   pending request (families/{c}/joinReqs/{id}) and gives back a secret status key (the parent's own link
+   /?req=<classId>.<id>.<key>; only its hash is kept). Only the teacher's approval (approveJoin) makes a student
+   (fam/kids + kidpub/{kid}), the consent (consents/{kid}, status 'digital') and the kid's link (kidTokens[kid]) – the
+   teacher never types in a student list, and there are no paper forms. Without such a consent no kid phone can join
+   (firestore.rules). The parent or the teacher can withdraw it (revokeConsent): the student's progress,
+   phones and link go. Everything here is written by the server only. */
+const JOIN_DAYS = 30, MAX_STUDENTS = 40, MAX_PENDING = 60, REQ_PER_HOUR = 5;
+const KID_COLORS = ['#2F6BFF', '#FF5C8A', '#24C78E', '#F2A63B', '#B9A7FF', '#14A774', '#E5484D'];
+const hex = n => require('crypto').randomBytes(n).toString('hex');
+const sha = s => require('crypto').createHash('sha256').update(String(s)).digest('hex');
+const txt = (v, n) => typeof v === 'string' ? v.replace(/[<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, n) : '';
+const classIdOk = id => typeof id === 'string' && /^[A-Za-z0-9]{20}$/.test(id);
+const kidIdOk = id => typeof id === 'string' && /^[A-Za-z0-9_-]{2,40}$/.test(id);
+function signedIn(request) { if (!request.auth) throw new HttpsError('unauthenticated', 'Sign in first.'); return request.auth; }
+async function teacherOf(auth, classId) {
+  if (!classIdOk(classId)) throw new HttpsError('invalid-argument', 'Missing group.');
+  const ref = db.doc(`families/${classId}`), f = await ref.get();
+  if (!f.exists || f.data().kind !== 'class' || (f.data().ownerUid !== auth.uid && !isAdminUser(auth))) throw new HttpsError('permission-denied', 'Not your group.');
+  return { ref, d: f.data() };
+}
+async function groupByLink(classId, code) {
+  if (!classIdOk(classId) || typeof code !== 'string' || !/^[a-f0-9]{8,40}$/.test(code)) throw new HttpsError('failed-precondition', 'link_bad', { reason: 'link_bad' });
+  const [f, l] = await Promise.all([db.doc(`families/${classId}`).get(), db.doc(`families/${classId}/joinLink/main`).get()]);
+  if (!f.exists || f.data().kind !== 'class' || !l.exists || l.data().code !== code) throw new HttpsError('failed-precondition', 'link_bad', { reason: 'link_bad' });
+  if (!l.data().open) throw new HttpsError('failed-precondition', 'link_closed', { reason: 'link_closed' });
+  if (l.data().exp < Date.now()) throw new HttpsError('failed-precondition', 'link_expired', { reason: 'link_expired' });
+  return f.data();
+}
+// a signature: a small PNG (≤ ~20KB) drawn on a transparent canvas – a blank one (every pixel transparent) is refused
+function sigOk(sig) {
+  if (typeof sig !== 'string' || !sig.startsWith('data:image/png;base64,') || sig.length > 28000) return false;
+  try {
+    const b = Buffer.from(sig.slice(22), 'base64');
+    if (b.readUInt32BE(12) !== 0x49484452) return false;                      // IHDR
+    const w = b.readUInt32BE(16), h = b.readUInt32BE(20), depth = b[24], type = b[25];
+    if (w < 50 || h < 20 || w > 1200 || h > 600 || depth !== 8 || type !== 6) return false;   // 8-bit RGBA
+    const parts = []; let o = 8;
+    while (o + 8 <= b.length) { const len = b.readUInt32BE(o), kind = b.toString('ascii', o + 4, o + 8); if (kind === 'IDAT') parts.push(b.subarray(o + 8, o + 8 + len)); o += 12 + len; }
+    const raw = require('zlib').inflateSync(Buffer.concat(parts)), row = 1 + w * 4;
+    let ink = 0;
+    for (let y = 0; y < h && ink < 30; y++) for (let x = 1; x < row; x++) if (raw[y * row + x]) { ink++; if (ink >= 30) break; }
+    return ink >= 30;
+  } catch (_) { return false; }
+}
+function letterVOk(v) { return typeof v === 'string' && /^[0-9]{1,2}\.[0-9]{1,2}$/.test(v); }
+async function newStudent(tx, ref, d, kidName, consent) {
+  const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef), list = (ks.exists && Array.isArray(ks.data().list)) ? ks.data().list : [];
+  if (list.length >= MAX_STUDENTS) throw new HttpsError('resource-exhausted', 'class_full', { reason: 'class_full', max: MAX_STUDENTS });
+  const id = 'k' + hex(5), kid = { id, name: txt(kidName, 30), grade: Number.isInteger(d.grade) ? d.grade : 0, color: KID_COLORS[list.length % KID_COLORS.length] };
+  return { id, kid, list, kidsRef, consent };
+}
+function writeStudent(tx, ref, s, withLink) {
+  tx.set(s.kidsRef, { list: [...s.list, s.kid] });
+  tx.set(db.doc(`${ref.path}/kidpub/${s.id}`), { list: [s.kid] });
+  tx.set(db.doc(`${ref.path}/consents/${s.id}`), s.consent);
+  if (withLink) tx.update(ref, new FieldPath('kidTokens', s.id), hex(16));
+}
+
+// the teacher's group link: get (made the first time), new (the old one stops working), close, open
+exports.joinLink = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function joinLink(request) {
+  const auth = parentOnly(request); const { classId, action = 'get' } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  const lref = db.doc(`${ref.path}/joinLink/main`);
+  return db.runTransaction(async tx => {
+    const l = await tx.get(lref), now = Date.now(); let d = l.exists ? l.data() : null;
+    const fresh = () => ({ code: hex(8), exp: now + JOIN_DAYS * 864e5, open: true, at: now });
+    if (!d || action === 'new' || (action === 'open' && d.exp < now)) d = fresh();
+    else if (action === 'close') d = { ...d, open: false };
+    else if (action === 'open') d = { ...d, open: true };
+    tx.set(lref, d);
+    return { code: d.code, exp: d.exp, open: d.open };
   });
 });
 
-// End a build. A build that failed before it really started (≤ 3 AI calls) gives its free build / credit back
-// – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
-exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
-  const auth = parentOnly(request);
-  const { famId, buildId, ok } = request.data || {};
-  await checkFamily(auth.uid, famId);
-  if (typeof buildId !== 'string' || !buildId) throw new HttpsError('invalid-argument', 'Missing build.');
-  const buildRef = db.doc(`families/${famId}/builds/${buildId}`);
-  return db.runTransaction(async (tx) => {
-    const bd = await tx.get(buildRef);
-    if (!bd.exists || bd.data().status !== 'running') return { refunded: false };
-    const d = bd.data(), usageRef = db.doc(`families/${famId}/usage/${d.month}`);
-    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
-    const refund = !ok && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
-    tx.update(buildRef, { status: ok ? 'done' : 'failed', endedAt: Date.now(), refunded: refund });
-    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
-    if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
-    return { refunded: refund };
+// what a parent sees before signing: the teacher, the group (a closed / old / wrong link: refused)
+exports.joinInfo = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinInfo(request) {
+  signedIn(request); const { classId, code } = request.data || {};
+  const d = await groupByLink(classId, code);
+  return { teacher: d.teacherName || '', name: d.name || '', grade: d.grade, subject: d.subject || '', teach: d.teach };
+});
+
+// a parent's request: the letter's version, the parent's and the kid's names, a way to reach them (optional), the signature
+exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function requestJoin(request) {
+  const auth = signedIn(request); const r = request.data || {};
+  const d = await groupByLink(r.classId, r.code);
+  const parentName = txt(r.parentName, 60), kidName = txt(r.kidName, 30), contact = txt(r.contact, 80);
+  if (parentName.length < 2 || kidName.length < 2 || r.agree !== true || !letterVOk(r.letterV)) throw new HttpsError('invalid-argument', 'bad_input', { reason: 'bad_input' });
+  if (!sigOk(r.sig)) throw new HttpsError('invalid-argument', 'no_signature', { reason: 'no_signature' });
+  // at most REQ_PER_HOUR requests an hour from one phone, and MAX_PENDING waiting in a group
+  const lim = db.doc(`joinLimits/${auth.uid}`);
+  await db.runTransaction(async tx => { const l = await tx.get(lim), now = Date.now(), t = ((l.exists && l.data().t) || []).filter(x => now - x < 36e5);
+    if (t.length >= REQ_PER_HOUR) throw new HttpsError('resource-exhausted', 'too_many', { reason: 'too_many' });
+    tx.set(lim, { t: [...t, now] }); });
+  const reqs = db.collection(`families/${r.classId}/joinReqs`);
+  const waiting = (await reqs.where('status', '==', 'pending').count().get()).data().count;
+  if (waiting >= MAX_PENDING) throw new HttpsError('resource-exhausted', 'too_many_waiting', { reason: 'too_many_waiting' });
+  const key = hex(18), ref = reqs.doc();
+  await ref.set({ parentName, kidName, contact, sig: r.sig, letterV: r.letterV, at: Date.now(), status: 'pending', keyHash: sha(key), by: auth.uid });
+  return { reqId: ref.id, statusKey: key, teacher: d.teacherName || '', name: d.name || '' };
+});
+
+// the parent's own status page (with the secret key): waiting / approved (+ the kid's link) / rejected (+ why) / withdrawn
+exports.joinStatus = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinStatus(request) {
+  signedIn(request); const { classId, reqId, statusKey } = request.data || {};
+  const nf = () => new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+  if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId) || typeof statusKey !== 'string') throw nf();
+  const [q, f] = await Promise.all([db.doc(`families/${classId}/joinReqs/${reqId}`).get(), db.doc(`families/${classId}`).get()]);
+  if (!q.exists || !f.exists || q.data().keyHash !== sha(statusKey)) throw nf();
+  const R = q.data(), F = f.data(), out = { status: R.status, kidName: R.kidName, parentName: R.parentName, teacher: F.teacherName || '', name: F.name || '', at: R.at, letterV: R.letterV };
+  if (R.status === 'rejected') out.reason = R.reason || '';
+  if (R.status === 'approved' && R.kidId) { const tok = (F.kidTokens || {})[R.kidId]; if (tok) { out.kidId = R.kidId; out.token = tok; } }
+  return out;
+});
+
+// the teacher approves: a new student (with the consent and the kid's link) – or one more parent of a student already there
+exports.approveJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function approveJoin(request) {
+  const auth = parentOnly(request); const { classId, reqId, attachTo } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('invalid-argument', 'Missing request.');
+  const qref = db.doc(`${ref.path}/joinReqs/${reqId}`);
+  return db.runTransaction(async tx => {
+    const [q, f] = await Promise.all([tx.get(qref), tx.get(ref)]);
+    if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
+    const R = q.data(), now = Date.now(), parent = { parentName: R.parentName, contact: R.contact || '', sig: R.sig, letterV: R.letterV, at: R.at, reqId, approvedAt: now };
+    let kidId;
+    if (attachTo) {                                            // a second parent of the same student
+      if (!kidIdOk(attachTo)) throw new HttpsError('invalid-argument', 'Missing student.');
+      const cref = db.doc(`${ref.path}/consents/${attachTo}`), c = await tx.get(cref);
+      if (!c.exists || c.data().status !== 'digital') throw new HttpsError('failed-precondition', 'no_student', { reason: 'no_student' });
+      tx.update(cref, { parents: FieldValue.arrayUnion(parent) }); kidId = attachTo;
+    } else {
+      const s = await newStudent(tx, ref, f.data(), R.kidName, { status: 'digital', letterV: R.letterV, at: R.at, parentName: R.parentName, contact: R.contact || '', sig: R.sig, reqId, approvedBy: auth.uid, approvedAt: now, parents: [parent] });
+      writeStudent(tx, ref, s, true); kidId = s.id;
+    }
+    tx.update(qref, { status: 'approved', kidId, sig: FieldValue.delete(), doneAt: now });   // the signature stays with the consent only
+    return { kidId };
   });
+});
+
+exports.rejectJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function rejectJoin(request) {
+  const auth = parentOnly(request); const { classId, reqId, reason } = request.data || {};
+  const { ref } = await teacherOf(auth, classId);
+  if (typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('invalid-argument', 'Missing request.');
+  const qref = db.doc(`${ref.path}/joinReqs/${reqId}`), q = await qref.get();
+  if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
+  await qref.update({ status: 'rejected', reason: txt(reason, 200), sig: FieldValue.delete(), doneAt: Date.now() });   // a rejected signature is not kept
+  return { ok: true };
+});
+
+// withdrawn – by the parent (the status key) or the teacher: the student's progress, phones and link go; a waiting request
+// is simply withdrawn. The consent record keeps who and when, not the signatures.
+async function dropStudent(classId, kidId, by) {
+  const ref = db.doc(`families/${classId}`), now = Date.now();
+  const devs = await db.collection(`${ref.path}/devices`).where('kid', '==', kidId).get();
+  const reqs = await db.collection(`${ref.path}/joinReqs`).where('kidId', '==', kidId).get();
+  const sets = await db.collection(`${ref.path}/sets`).where('set.kidId', '==', kidId).get();   // the student's practice sets carry the name
+  await db.runTransaction(async tx => {
+    const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef);
+    const list = ((ks.exists && ks.data().list) || []).filter(k => k && k.id !== kidId);
+    tx.set(kidsRef, { list });
+    tx.delete(db.doc(`${ref.path}/kidpub/${kidId}`));
+    tx.delete(db.doc(`${ref.path}/progress/${kidId}`));
+    tx.delete(db.doc(`${ref.path}/notes/${kidId}`));               // the teacher's private notes
+    devs.docs.forEach(d => tx.delete(d.ref));
+    sets.docs.forEach(d => tx.delete(d.ref));
+    reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now }));
+    tx.update(ref, new FieldPath('kidTokens', kidId), FieldValue.delete());
+    tx.set(db.doc(`${ref.path}/consents/${kidId}`), { status: 'revoked', revokedBy: by, revokedAt: now });
+  });
+}
+exports.revokeConsent = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function revokeConsent(request) {
+  const auth = signedIn(request); const { classId, kidId, reqId, statusKey } = request.data || {};
+  if (statusKey) {                                             // the parent, from the status page
+    if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+    const qref = db.doc(`families/${classId}/joinReqs/${reqId}`), q = await qref.get();
+    if (!q.exists || q.data().keyHash !== sha(statusKey)) throw new HttpsError('not-found', 'not_found', { reason: 'not_found' });
+    const R = q.data();
+    if (R.status === 'pending') { await qref.update({ status: 'withdrawn', sig: FieldValue.delete(), doneAt: Date.now() }); return { ok: true }; }
+    if (R.status !== 'approved' || !R.kidId) return { ok: true };
+    await dropStudent(classId, R.kidId, 'parent');
+    return { ok: true };
+  }
+  const a = parentOnly(request); await teacherOf(a, classId);   // the teacher takes a student out of the group
+  if (!kidIdOk(kidId)) throw new HttpsError('invalid-argument', 'Missing student.');
+  await dropStudent(classId, kidId, 'teacher');
+  return { ok: true };
 });
 
 // Every AI call is part of a build (buildId) or a small edit counted in the monthly "light" calls.
-async function claimCall(auth, famId, buildId) {
-  if (isAdminUser(auth)) return;
-  await checkFamily(auth.uid, famId);
+async function claimCall(admin, uid, famId, buildId) {
+  if (admin) return;
+  if (uid) await checkFamily(uid, famId);
   await db.runTransaction(async (tx) => {
     if (buildId) {
       const ref = db.doc(`families/${famId}/builds/${buildId}`), bd = await tx.get(ref);
       const d = bd.data();
       if (!bd.exists || d.status !== 'running' || Date.now() - d.at > BUILD_HOURS * 36e5) throw new HttpsError('failed-precondition', 'build_closed', { reason: 'build_closed' });
       if (d.calls >= BUILD_CALLS) throw new HttpsError('resource-exhausted', 'build_calls', { reason: 'build_calls' });
-      tx.update(ref, { calls: FieldValue.increment(1), last: Date.now() });   // last: the watchdog's "no AI call for 20 minutes"
+      tx.update(ref, { calls: FieldValue.increment(1), last: Date.now() });   // last: the watchdog's "no AI call for 30 minutes"
     } else {
-      const ref = db.doc(`families/${famId}/usage/${monthKey()}`), u = await tx.get(ref);
+      const ref = (await scopeOf(famId)).usage(), u = await tx.get(ref);
       if ((u.data()?.light || 0) >= LIGHT_CALLS) throw new HttpsError('resource-exhausted', 'light', { reason: 'light', limit: LIGHT_CALLS });
       tx.set(ref, { light: FieldValue.increment(1), month: monthKey() }, { merge: true });
     }
@@ -313,6 +522,93 @@ function fakeAnswer(step, d) {
   return {};
 }
 
+// the files sent with a step (photos, PDFs of worksheets) → the model's content blocks; every size limit checked here
+function filesContent(images, allowed) {
+  if (!Array.isArray(images) || images.length > MAX_IMAGES || (images.length && !allowed)) {
+    throw new HttpsError('invalid-argument', allowed ? `Up to ${MAX_IMAGES} files.` : 'This step takes no files.');
+  }
+  const content = []; let pages = 0;
+  for (const img of images) {
+    if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
+      throw new HttpsError('invalid-argument', 'Image too large.');
+    }
+    if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
+      pages += pdfPages(img.data);
+      if (pages > MAX_PDF_PAGES) throw new HttpsError('invalid-argument', 'pdf_pages', { reason: 'pdf_pages', max: MAX_PDF_PAGES });
+      content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
+      continue;
+    }
+    const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
+    content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });
+  }
+  return { content, pages };
+}
+
+// One AI step: the step's checks, its most possible cost reserved, the call (or the emulator's fake), the real cost settled.
+// admin: no family limits · uid: the parent asking (null when the server's build runner asks – the build was checked when sent)
+async function runStep({ admin, uid, famId, buildId, name, data = {}, images = [], fake = false }) {
+  const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
+  if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
+  if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
+  if (!admin && uid) await checkFamily(uid, famId);              // whose family / group first – before anything about the data
+  const { content, pages } = filesContent(images, step.images);
+  let text;
+  try { text = step.build(data, { images: images.length }); }
+  catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
+  content.push({ type: 'text', text });
+
+  // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
+  const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);
+  const inTok = (SYSTEM.length + text.length) / 2 + images.filter(i => i.type !== 'application/pdf').length * 1800 + pages * 3000 + 500;
+  const maxUsd = (inTok * 1.25 * dear[0] + step.max_tokens * dear[1]) / 1e6;
+  const callId = db.collection('_').doc().id;
+  await reserve(admin, famId, maxUsd, callId);                     // over a cap → refused before anything is counted
+  try { await claimCall(admin, uid, famId, buildId); } catch (e) { await settle(famId, callId, name, null, 0, false); throw e; }
+
+  let msg;
+  try {
+    if (fake && FAKE_OK()) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
+    else {
+      // the SDK's own limit (10 minutes, 2 retries by default) is longer than the 9-minute callable – then a slow call was
+      // killed with no error and no log. AI_TIMEOUT_MS, no retry: a slow call ends here as an error, logged.
+      const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim(), timeout: AI_TIMEOUT_MS, maxRetries: 0 });
+      const params = {
+        model,
+        max_tokens: step.max_tokens,
+        // the rules: one fixed system prompt, cached (every step of a build reuses it on the same model)
+        system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
+        messages: [{ role: 'user', content }],
+        output_config: { effort: step.effort, format: { type: 'json_schema', schema: step.schema } }
+      };
+      // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
+      if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
+      // the whole answer, streamed, within AI_TIMEOUT_MS (the SDK's timeout alone may cover only the start of a stream)
+      const ac = new AbortController(), tm = setTimeout(() => ac.abort(), AI_TIMEOUT_MS);
+      try { msg = await client.beta.messages.stream(params, { signal: ac.signal }).finalMessage(); }
+      catch (e) { if (ac.signal.aborted) { const t = new Error('ai_slow'); t.aiSlow = true; throw t; } throw e; }
+      finally { clearTimeout(tm); }
+    }
+  } catch (e) {
+    // an API error before an answer is not billed; a request stopped for slowness may have been – counted at its most
+    if (e && e.aiSlow) await settle(famId, callId, name, buildId, maxUsd); else await settle(famId, callId, name, buildId, 0, false);
+    if (e && e.aiSlow || e instanceof Anthropic.APIConnectionTimeoutError) { console.error('Anthropic timeout', name); throw new HttpsError('deadline-exceeded', 'ai_slow', { reason: 'ai_slow', step: name }); }
+    if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
+    if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
+    if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
+    throw e;
+  }
+  await settle(famId, callId, name, buildId, costOf(model, msg));
+  { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
+  if (msg.model && msg.model !== model) {   // the API answered on a fallback model
+    await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
+    await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });
+  }
+  if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
+  if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
+  const out = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+  return extractJson(out);
+}
+
 exports.ask = onCall(
   {
     region: 'europe-west1',
@@ -325,82 +621,336 @@ exports.ask = onCall(
   async function ask(request) {
     // Only signed-in parents (Google or a verified email link) may spend AI credit; kid devices are anonymous.
     const auth = parentOnly(request);
-
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
-    const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
-    if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
-    if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
-    if (!Array.isArray(images) || images.length > MAX_IMAGES || (images.length && !step.images)) {
-      throw new HttpsError('invalid-argument', step.images ? `Up to ${MAX_IMAGES} files.` : 'This step takes no files.');
-    }
-    const content = []; let pages = 0;
-    for (const img of images) {
-      if (!img || typeof img.data !== 'string' || img.data.length > (img.type === 'application/pdf' ? MAX_PDF_B64 : MAX_IMAGE_B64)) {
-        throw new HttpsError('invalid-argument', 'Image too large.');
-      }
-      if (img.type === 'application/pdf') {                         // a worksheet or a class presentation as a PDF
-        pages += pdfPages(img.data);
-        if (pages > MAX_PDF_PAGES) throw new HttpsError('invalid-argument', 'pdf_pages', { reason: 'pdf_pages', max: MAX_PDF_PAGES });
-        content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: img.data } });
-        continue;
-      }
-      const media = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(img.type) ? img.type : 'image/jpeg';
-      content.push({ type: 'image', source: { type: 'base64', media_type: media, data: img.data } });
-    }
-    let text;
-    try { text = step.build(data, { images: images.length }); }
-    catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
-    content.push({ type: 'text', text });
-
-    if (!isAdminUser(auth)) await checkFamily(auth.uid, famId);
-
-    // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
-    const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);
-    const inTok = (SYSTEM.length + text.length) / 2 + images.filter(i => i.type !== 'application/pdf').length * 1800 + pages * 3000 + 500;
-    const maxUsd = (inTok * 1.25 * dear[0] + step.max_tokens * dear[1]) / 1e6;
-    const callId = db.collection('_').doc().id;
-    await reserve(auth, famId, maxUsd, callId);                      // over a cap → refused before anything is counted
-    try { await claimCall(auth, famId, buildId); } catch (e) { await settle(famId, callId, name, null, 0, false); throw e; }
-
-    const fake = FAKE_OK() && request.data.fake === true;
-    let msg;
-    try {
-      if (fake) msg = { model, stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 800 }, content: [{ type: 'text', text: JSON.stringify(fakeAnswer(name, data)) }] };
-      else {
-        const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY.value().trim() });
-        const params = {
-          model,
-          max_tokens: step.max_tokens,
-          // the rules: one fixed system prompt, cached (every step of a build reuses it on the same model)
-          system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
-          messages: [{ role: 'user', content }],
-          output_config: { effort: step.effort, format: { type: 'json_schema', schema: step.schema } }
-        };
-        // fallbacks: if the model declines a request, the API re-runs it on a fallback model in the same call (Haiku has none)
-        if (FALLBACK_TO[model]) { params.betas = ['server-side-fallback-2026-07-01']; params.fallbacks = 'default'; }
-        msg = await client.beta.messages.stream(params).finalMessage();
-      }
-    } catch (e) {
-      await settle(famId, callId, name, buildId, 0, false);   // an API error before an answer is not billed
-      if (e instanceof Anthropic.RateLimitError) throw new HttpsError('resource-exhausted', 'rate_limited');
-      if (e instanceof Anthropic.AuthenticationError) { console.error('Anthropic key rejected'); throw new HttpsError('internal', 'AI request failed (401).'); }
-      if (e instanceof Anthropic.APIError) { console.error('Anthropic API error', e.status, String(e.message).slice(0, 300)); throw new HttpsError('internal', `AI request failed (${e.status}).`); }
-      throw e;
-    }
-    await settle(famId, callId, name, buildId, costOf(model, msg));
-    { const u = msg.usage || {}; console.log(`ask ${name} ${msg.model || model} in=${u.input_tokens || 0} out=${u.output_tokens || 0} cw=${u.cache_creation_input_tokens || 0} cr=${u.cache_read_input_tokens || 0} usd=${costOf(model, msg).toFixed(4)} ${msg.stop_reason}`); }
-    if (msg.model && msg.model !== model) {   // the API answered on a fallback model
-      await db.doc(`meta/ai_spend_${monthKey()}`).set({ fallbacks: FieldValue.increment(1) }, { merge: true }).catch(() => {});
-      await serverLog({ fn: 'ask', kind: 'fallback', code: String(msg.model).slice(0, 60), msg: `${name}: asked ${model}, answered by ${msg.model}`, ms: 0 });
-    }
-    if (msg.stop_reason === 'refusal') throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' });
-    if (msg.stop_reason === 'max_tokens') throw new HttpsError('resource-exhausted', 'too_long', { reason: 'too_long' });
-    const out = (msg.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
-    return { json: extractJson(out) };
+    const json = await runStep({ admin: isAdminUser(auth), uid: auth.uid, famId, buildId, name, data, images, fake: request.data.fake === true });
+    return { json };
   }
 );
+
+/* ---------- a new practice set, built on the server ----------
+   The phone sends the parent's form and the files once (submitBuild); the files are read right then (the scan step) and
+   never kept. The rest runs here, in a task queue (runBuild), one AI step after another, with the same code the app uses
+   (public/build-core.js: buildSet) – the parent may close the phone, even turn the screen off. Every answer goes into the
+   build's log (builds/{id}/log/{n}); a task that runs out of time hands over to the next one, and a failed task is tried
+   again (Cloud Tasks) – both replay the log, so nothing done is asked (or paid for) twice. The phone shows the build's
+   progress (builds/{id}.prog), and the finished set is written to the family (families/{f}/sets), with the progress
+   of the build, the log and the form deleted. A build that still fails can go on from its log (resumeBuild). */
+const core = (() => { try { return require('../public/build-core.js'); } catch (_) { return require('./build-core.js'); } })();
+const { onTaskDispatched } = require('firebase-functions/v2/tasks');
+const SITE_URL = defineString('SITE_URL', { default: 'https://study-for-fun-7b03c.web.app' });   // the catalog (ready practice sets)
+const RUN_QUEUE = 'locations/europe-west1/functions/runBuild';
+const RUN_ATTEMPTS = 4;                 // a task that fails is tried this many times (backoff 30 s → 5 min), then the build stops
+const YIELD_MS = 17 * 60 * 1000;
+const MAX_RUNS = BUILD_CALLS + 10;      // at least one new step per task – a build can never hand over for ever        // a task makes no new AI call after this – the next task goes on (tasks live 30 minutes)
+// errors that come back the same for the same data: written into the log (a replay gives the same answer), never retried by itself
+const SAME_AGAIN = new Set(['bad_input', 'refusal', 'too_long']);
+// errors that stop the build at once (no automatic retry); the parent may still try to go on unless it is closed for good
+const STOP_NOW = new Set(['budget', 'family_budget', 'build_calls', 'build_closed', 'replay_mismatch', 'bad_input', 'refusal', 'too_long']);
+const NOT_RESUMABLE = new Set(['build_calls', 'build_closed', 'replay_mismatch', 'bad_input']);
+const reasonOf = e => String((e && e.details && e.details.reason) || (e && /^[a-z_]{3,30}$/.test(e.message || '') ? e.message : (e && e.code) || 'error'));
+const ctl = (code, e) => Object.assign(new Error((e && e.message) || code), { code, ctl: true });   // not swallowed by buildSet
+const buildRef = (famId, buildId) => db.doc(`families/${famId}/builds/${buildId}`);
+const idOk = id => typeof id === 'string' && /^[A-Za-z0-9]{1,40}$/.test(id);
+
+// the parent's form, checked and cut to its limits (the same limits the wizard has)
+function cleanInput(x) {
+  const bad = f => { throw new HttpsError('invalid-argument', 'bad_input: ' + f, { reason: 'bad_input', field: f }); };
+  if (!x || typeof x !== 'object') bad('input');
+  const str = (v, n, f, need) => { if (v == null || v === '') { if (need) bad(f); return ''; } if (typeof v !== 'string') bad(f); const t = v.trim().slice(0, n); if (need && !t) bad(f); return t; };
+  const int = (v, lo, hi, f) => { v = +v; if (!Number.isInteger(v) || v < lo || v > hi) bad(f); return v; };
+  const list = (v, max, n, f) => { if (v == null) return []; if (!Array.isArray(v)) bad(f); return v.filter(t => typeof t === 'string' && t.length <= n).slice(-max); };
+  if (!Array.isArray(x.topics)) bad('topics');
+  const topics = [...new Set(x.topics.map(t => str(t, 120, 'topics')).filter(Boolean))];
+  if (!topics.length || topics.length > 30) bad('topics');
+  if (!Array.isArray(x.chapters) || !x.chapters.length || x.chapters.length > 10) bad('chapters');
+  const chapters = x.chapters.map(c => { if (!c || typeof c !== 'object' || !Array.isArray(c.topics)) bad('chapters');
+    const tp = c.topics.map(t => str(t, 120, 'chapters')).filter(Boolean).slice(0, 30); if (!tp.length) bad('chapters');
+    return { title: str(c.title, 80, 'chapters'), topics: tp, count: int(c.count, 5, 20, 'chapters') }; });
+  const kidId = str(x.kidId, 40, 'kidId', true); if (!/^[A-Za-z0-9_-]+$/.test(kidId)) bad('kidId');
+  const examDate = str(x.examDate, 10, 'examDate'); if (examDate && !/^\d{4}-\d{2}-\d{2}$/.test(examDate)) bad('examDate');
+  const sk = x.skip && typeof x.skip === 'object' ? x.skip : {};
+  return { name: str(x.name, 40, 'name') || 'הילד/ה', reinf: str(x.reinf, 60, 'reinf') || null, gi: int(x.gi, 0, 11, 'gi'), subject: str(x.subject, 60, 'subject', true),
+    topics, perRound: int(x.perRound, 5, 20, 'perRound'), kidId, chapters, text: str(x.text, 8000, 'text'), link: str(x.link, 300, 'link'),
+    pages: str(x.pages, 200, 'pages'), examDate, dailyGoal: int(x.dailyGoal, 1, 10, 'dailyGoal'),
+    // what the pool must not give this kid (the phone knows: its ready sets, the ready questions it got, what it answered correctly)
+    skip: { have: list(sk.have, 200, 60, 'skip'), used: list(sk.used, 4000, 80, 'skip'), solved: list(sk.solved, 6000, 16, 'skip') } };
+}
+
+// a new build: one of this month's free builds, or one paid credit (startBuild – the older app – and submitBuild)
+async function openBuild(auth, famId, subject, extra = {}) {
+  const month = monthKey(), adminUser = isAdminUser(auth), sc = await scopeOf(famId);
+  const usageRef = sc.usage(month), billRef = sc.cls ? null : db.doc(`families/${famId}/billing/main`);
+  const tRef = sc.cls ? db.doc(`teachers/${sc.owner}`) : null;
+  // a teacher: one build to try with no students; from the second on, at least MIN_STUDENTS approved students in their groups
+  const students = sc.cls && !adminUser ? await approvedStudents(sc.owner) : 0;
+  const ref = db.collection(`families/${famId}/builds`).doc();
+  return db.runTransaction(async (tx) => {
+    const [u, b, t] = await Promise.all([tx.get(usageRef), billRef ? tx.get(billRef) : null, tRef ? tx.get(tRef) : null]);
+    const used = u.data()?.builds || 0, credits = (b && b.data()?.credits) || 0, ever = (t && t.data()?.builds) || 0;
+    let kind;
+    if (adminUser) kind = 'admin';
+    else if (sc.cls && ever >= 1 && students < MIN_STUDENTS) throw new HttpsError('failed-precondition', 'need_students', { reason: 'need_students', min: MIN_STUDENTS, students });
+    else if (used < sc.free) kind = 'free';
+    else if (credits > 0) kind = 'paid';
+    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: sc.free, credits, price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) });
+    tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
+    if (tRef && kind !== 'admin') tx.set(tRef, { builds: FieldValue.increment(1) }, { merge: true });
+    if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
+    tx.set(ref, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month, ...extra });
+    return { buildId: ref.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: sc.free, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) };
+  });
+}
+// a teacher's approved students, in all their groups (a parent signed, the teacher approved)
+async function approvedStudents(owner) {
+  const t = await db.doc(`teachers/${owner}`).get(), ids = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+  const n = await Promise.all(ids.map(c => db.collection(`families/${c}/consents`).where('status', '==', 'digital').count().get().then(r => r.data().count).catch(() => 0)));
+  return n.reduce((a, b) => a + b, 0);
+}
+// End a running build (done / failed / cancelled). One that ended before it really started (≤ 3 AI calls, not done) gives its
+// free build / credit back – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
+async function closeBuild(famId, buildId, status, extra = {}) {
+  const ref = buildRef(famId, buildId);
+  return db.runTransaction(async (tx) => {
+    const bd = await tx.get(ref);
+    if (!bd.exists || bd.data().status !== 'running') return { refunded: false, closed: false };
+    const d = bd.data(), sc = await scopeOf(famId), usageRef = sc.usage(d.month);
+    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
+    const refund = status !== 'done' && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
+    tx.update(ref, { status, endedAt: Date.now(), refunded: refund, ...extra, ...(refund ? { resumable: false } : {}) });
+    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
+    if (refund && sc.cls && d.kind === 'free') tx.set(db.doc(`teachers/${sc.owner}`), { builds: FieldValue.increment(-1) }, { merge: true });
+    if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
+    return { refunded: refund, closed: true };
+  });
+}
+// the form and the log of a build that is over (they hold the parent's pasted text and the questions on their way)
+async function cleanBuild(ref) {
+  for (const sub of ['log', 'state']) {
+    const docs = (await ref.collection(sub).listDocuments().catch(() => []));
+    for (let k = 0; k < docs.length; k += 400) { const b = db.batch(); docs.slice(k, k + 400).forEach(d => b.delete(d)); await b.commit().catch(() => {}); }
+  }
+}
+const logSet = (ref, n, step, v, err) => ref.collection('log').doc(String(n).padStart(4, '0')).set(err ? { n, step, err } : { n, step, v: JSON.stringify(v) });
+async function runQueue(famId, buildId, run) {
+  const emu = process.env.CLOUD_TASKS_EMULATOR_HOST;
+  if (FAKE_OK() && emu) {                  // the emulator: straight to its Cloud Tasks (the Admin SDK wants Google credentials even there)
+    const proj = process.env.GCLOUD_PROJECT || JSON.parse(process.env.FIREBASE_CONFIG || '{}').projectId;
+    const r = await fetch(`http://${emu}/projects/${proj}/locations/europe-west1/queues/runBuild/tasks`, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task: { httpRequest: { url: '', oidcToken: { serviceAccountEmail: 'emulated@example.com' }, headers: { 'Content-Type': 'application/json' },
+        body: Buffer.from(JSON.stringify({ data: { famId, buildId, run } })).toString('base64') } } }) });
+    if (!r.ok) throw new Error('enqueue ' + r.status + ' ' + (await r.text()).slice(0, 200));
+    return;
+  }
+  const { getFunctions } = require('firebase-admin/functions');
+  await getFunctions().taskQueue(RUN_QUEUE).enqueue({ famId, buildId, run }, { dispatchDeadlineSeconds: 1800 });
+}
+// a line in the family's failure log (the parent's ☰ → דיווחים, and the app admins) – no prompt text
+async function famErr(famId, where, code, msg) {
+  try { await db.collection(`families/${famId}/errlog`).add({ at: Date.now(), where, code: String(code).slice(0, 60), msg: String(msg || '').slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
+}
+
+// Start a new practice set (the older app, which runs the build itself): uses one of this month's free builds, or one paid credit.
+exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function startBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, subject = '' } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  await checkBudget();
+  await checkFamilyBudget(auth, famId);
+  return openBuild(auth, famId, subject);
+});
+
+// End a build: ok / failed (the older app), cancel (the parent cancelled), dismiss (a stopped build off the kid's card).
+exports.endBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function endBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, buildId, ok, cancel, dismiss } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
+  const ref = buildRef(famId, buildId), d = (await ref.get()).data();
+  if (!d) return { refunded: false };
+  if (dismiss) { if (d.status !== 'running') { await ref.update({ hidden: true }); if (d.srv) await cleanBuild(ref); } return { refunded: false }; }
+  const r = await closeBuild(famId, buildId, cancel ? 'cancelled' : ok ? 'done' : 'failed');
+  if (d.srv && cancel) await cleanBuild(ref);
+  return { refunded: r.refunded };
+});
+
+// The phone sends a new build: the form and the files. The files are read now (the scan step) – the rest runs in runBuild.
+exports.submitBuild = onCall({ region: 'europe-west1', invoker: 'public', secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 540, memory: '512MiB', maxInstances: 10 },
+  async function submitBuild(request) {
+    const auth = parentOnly(request);
+    const { famId, input, images = [], fake, test } = request.data || {};
+    await checkFamily(auth.uid, famId);
+    const I = cleanInput(input);
+    if (auth.uid !== famId && !isAdminUser(auth)) {                 // a tutor builds only for the kids of its invitation
+      const m = (await db.doc(`families/${famId}/members/${auth.uid}`).get()).data() || {};
+      if (m.role === 'tutor' && !(Array.isArray(m.kids) && m.kids.includes(I.kidId))) throw new HttpsError('permission-denied', 'Not this tutor\'s kid.');
+    }
+    filesContent(images, true);                                      // the files' limits, before anything is counted
+    await checkBudget();
+    await checkFamilyBudget(auth, famId);
+    const isFake = FAKE_OK() && fake === true;
+    I.files = images.length;
+    const t = await openBuild(auth, famId, I.subject, { srv: true, kidId: I.kidId, run: 1, prog: {},
+      ...(isFake ? { fake: true, test: test && typeof test === 'object' ? JSON.parse(JSON.stringify(test)) : null } : {}) });
+    const ref = buildRef(famId, t.buildId);
+    try {
+      await ref.collection('state').doc('input').set({ I: JSON.stringify(I) });
+      if (I.text || images.length) {
+        const v = await runStep({ admin: t.kind === 'admin', uid: null, famId, buildId: t.buildId, name: 'scan', images, fake: isFake,
+          data: { ctx: core.aiCtx(I.gi, I.subject, I.topics, { pages: I.pages, link: I.link }), text: I.text } });
+        await logSet(ref, 0, 'scan', v);
+      }
+      await runQueue(famId, t.buildId, 1);
+    } catch (e) {
+      await closeBuild(famId, t.buildId, 'failed', { err: reasonOf(e), resumable: false });
+      await cleanBuild(ref);
+      throw e;
+    }
+    return { ...t, prog: { scan: { s: 'run', d: '' } } };
+  });
+
+// A build that stopped goes on from its log (the parent: "▶ להמשיך"), on the same build – within its 3 hours.
+exports.resumeBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function resumeBuild(request) {
+  const auth = parentOnly(request);
+  const { famId, buildId } = request.data || {};
+  await checkFamily(auth.uid, famId);
+  if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
+  const ref = buildRef(famId, buildId);
+  const run = await db.runTransaction(async tx => {
+    const d = (await tx.get(ref)).data();
+    if (!d || !d.srv || d.status !== 'failed' || !d.resumable || d.refunded || Date.now() - d.at > BUILD_HOURS * 36e5 - 10 * 60e3) {
+      throw new HttpsError('failed-precondition', 'build_closed', { reason: 'build_closed' });
+    }
+    tx.update(ref, { status: 'running', run: (d.run || 1) + 1, err: FieldValue.delete(), resumable: FieldValue.delete(), endedAt: FieldValue.delete() });
+    return (d.run || 1) + 1;
+  });
+  // the step that stopped the build is asked again (an answer that "came back the same" may come back fine this time)
+  const last = await ref.collection('log').orderBy('n', 'desc').limit(1).get();
+  if (!last.empty && last.docs[0].data().err) await last.docs[0].ref.delete();
+  await runQueue(famId, buildId, run);
+  return { ok: true };
+});
+
+// the ready chapters of the catalog that may fill a chapter of this build (public/share – the same files the app reads)
+async function readyChapters(I, gi, subject) {
+  const site = SITE_URL.value().replace(/\/$/, '');
+  let L = [];
+  try { const r = await fetch(`${site}/share/catalog.json`); L = r.ok ? ((await r.json()).sets || []) : []; } catch (_) { return []; }
+  const base = String(subject).replace(/^🎯\s*/, ''), have = new Set(I.skip.have), used = new Set(I.skip.used), solved = new Set(I.skip.solved), out = [];
+  for (const x of L.filter(x => x.status === 'ready' && x.grade === gi && x.subject === base && !have.has(x.id)).slice(0, 4)) {
+    let p;
+    try { const r = await fetch(`${site}/share/${encodeURIComponent(x.id)}.txt`); const raw = r.ok ? (await r.text()).trim() : '';
+      if (!raw.startsWith('SFF1:')) continue;
+      p = JSON.parse(Buffer.from(raw.slice(5), 'base64').toString('utf8')); p.qs = core.clean(p.questions, p.topics); if (!p.qs.length) continue; }
+    catch (_) { continue; }
+    (p.chapters || []).forEach((c, ci) => { if (c && typeof c.text === 'string' && c.text.trim()) return;          // reading passages need their text
+      const qs = p.qs.filter(q => q.ch === ci).map(q => ({ ...q, srcq: x.id + ':' + core.tkey(q.question) })).filter(q => !used.has(q.srcq) && !solved.has(core.tkey(q.question)));
+      if (qs.length >= 2) out.push({ ref: x.id + '#' + ci, title: String(c.title || '').slice(0, 120), topics: (c.topics || []).slice(0, 20), qs }); });
+  }
+  let r = out.slice(0, 150);
+  while (r.length && JSON.stringify(r).length > 800e3) r = r.slice(0, Math.floor(r.length * 0.8));   // one log entry < 1 MB
+  return r;
+}
+// the same random choices every time a build is replayed
+function seeded(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  return () => { h = (h + 0x6D2B79F5) >>> 0; let t = h; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+// what the build screen shows: the four steps (state + a short detail), written at most every 1.5 s, in order
+function progressWriter(ref, start) {
+  let prog = { ...(start || {}) }, last = 0, chain = Promise.resolve(), dirty = false;
+  const write = () => { if (!dirty) return chain; dirty = false; last = Date.now(); const p = prog; chain = chain.then(() => ref.update({ prog: p, progAt: last })).catch(() => {}); return chain; };   // progAt: the watchdog's "no progress"
+  const f = (id, s, d) => { prog = { ...prog, [id]: { s, d: d ? String(d).slice(0, 200) : '' } }; dirty = true; if (Date.now() - last > 1500) write(); };
+  f.flush = () => { dirty = true; return write(); };
+  return f;
+}
+// the kid now has these ready questions (the pool never gives them again – also after the set is deleted)
+async function rememberPool(famId, kidId, qs) {
+  const add = qs.map(q => q.srcq).filter(Boolean); if (!add.length) return;
+  const ref = db.doc(`families/${famId}/fam/kids`);
+  await db.runTransaction(async tx => { const d = (await tx.get(ref)).data(); if (!d || !Array.isArray(d.list)) return;
+    const list = d.list.map(k => k && k.id === kidId ? { ...k, cq: [...new Set([...(Array.isArray(k.cq) ? k.cq : []), ...add])].slice(-3000) } : k);
+    tx.update(ref, { list }); }).catch(e => console.warn('rememberPool', e.message));
+}
+
+// One run of a build: the log is replayed, new steps are asked until the set is done or this task's time is up.
+exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 1800, memory: '512MiB', maxInstances: 20,
+  retryConfig: { maxAttempts: RUN_ATTEMPTS, minBackoffSeconds: 30, maxBackoffSeconds: 300 }, rateLimits: { maxConcurrentDispatches: 20 } },
+  async function runBuild(req) {
+    const { famId, buildId, run } = req.data || {};
+    if (!famOk(famId) || !idOk(buildId)) return;
+    const ref = buildRef(famId, buildId), b = (await ref.get()).data();
+    if (!b || !b.srv) return;
+    if (b.status === 'cancelled') { await cleanBuild(ref); return; }
+    if (b.status !== 'running' || b.run !== run) return;          // done, stopped, or an older task of this build
+    if (run > MAX_RUNS) { await closeBuild(famId, buildId, 'failed', { err: 'build_calls', resumable: false }); return; }
+    const t0 = Date.now(), lastTry = (req.retryCount || 0) >= RUN_ATTEMPTS - 1;
+    const test = (b.fake && FAKE_OK() && b.test) || {};
+    const yieldMs = test.yieldMs || YIELD_MS;
+    const progress = progressWriter(ref, b.prog);
+    try {
+      const input = (await ref.collection('state').doc('input').get()).data();
+      if (!input) throw ctl('replay_mismatch');
+      const I = JSON.parse(input.I);
+      const log = (await ref.collection('log').orderBy('n').get()).docs.map(d => d.data());
+      let n = 0, made = 0;
+      // one entry of the log: given back as it was (a replay), or made now and written
+      const next = async (step, make) => {
+        const k = n++;
+        if (k < log.length) { const e = log[k]; if (e.step !== step) throw ctl('replay_mismatch'); if (e.err) throw Object.assign(new Error(e.err), { code: e.err }); return JSON.parse(e.v); }
+        if (made && Date.now() - t0 > yieldMs) throw ctl('yield');           // every task makes at least one new step
+        made++;
+        let v;
+        try { v = await make(); }
+        catch (e) { const code = reasonOf(e);
+          if (SAME_AGAIN.has(code)) { await logSet(ref, k, step, null, code); throw Object.assign(new Error(code), { code }); }
+          throw ctl(code, e); }
+        await logSet(ref, k, step, v);
+        return v;
+      };
+      const askB = (step, data) => next(step, async () => {
+        // tests only (the emulator's fake AI): a step that fails once – a network error, or one that stops the build
+        if (test.failAt === step && !b.testFailed) { b.testFailed = true; await ref.update({ testFailed: true }); throw new HttpsError('internal', 'test: network'); }
+        if (test.stopAt === step && !b.testStopped) { b.testStopped = true; await ref.update({ testStopped: true }); throw new HttpsError('failed-precondition', 'refusal', { reason: 'refusal' }); }
+        return runStep({ admin: b.kind === 'admin', uid: null, famId, buildId, name: step, data, fake: !!b.fake });
+      });
+      const set = await core.buildSet(I, askB, { progress, rand: seeded(buildId), pool: (kidId, gi, subject) => next('~pool', () => readyChapters(I, gi, subject)) });
+      await progress.flush();
+      if ((await ref.get()).data()?.status !== 'running') { await cleanBuild(ref); return; }     // cancelled at the last moment
+      const setId = 's' + b.at;
+      if ((await scopeOf(famId)).cls) { delete set.kidId; delete set.name; set.grp = 1; }   // a group's: one shared set, given out as an assignment
+      await db.doc(`families/${famId}/sets/${setId}`).set({ set: JSON.parse(JSON.stringify({ id: setId, ...set, created: Date.now() })) });
+      await rememberPool(famId, I.kidId, set.questions);
+      await closeBuild(famId, buildId, 'done', { setId });
+      await cleanBuild(ref);
+    } catch (e) {
+      await progress.flush();
+      if (e.code === 'yield') { await ref.update({ run: run + 1 }); await runQueue(famId, buildId, run + 1); return; }
+      const now = (await ref.get()).data() || {};
+      if (now.status !== 'running') { if (now.status === 'cancelled') await cleanBuild(ref); return; }     // cancelled meanwhile
+      const code = reasonOf(e);
+      if (!STOP_NOW.has(code) && !lastTry) { console.warn(`runBuild ${buildId} try ${(req.retryCount || 0) + 1}: ${code} ${e.message}`); throw e; }   // tried again
+      console.warn(`runBuild ${buildId} stopped: ${code} ${e.message}`);
+      await serverLog({ fn: 'runBuild', kind: 'error', code: code.slice(0, 60), msg: String(e.message || e).slice(0, 300), ms: Date.now() - t0 });
+      await famErr(famId, 'server:build', code, e.message);
+      await closeBuild(famId, buildId, 'failed', { err: code, resumable: !NOT_RESUMABLE.has(code) });
+    }
+  });
+
+// Every 6 hours: the form and the log of a build that is over are deleted (a stopped build the parent never went back to,
+// or one past its 3 hours); a build still "running" after its 3 hours (its task chain was lost) is stopped.
+exports.cleanBuilds = require('firebase-functions/v2/scheduler').onSchedule({ schedule: 'every 6 hours', region: 'europe-west1', retryCount: 0 },
+  async () => {
+    const q = await db.collectionGroup('state').limit(500).get(), seen = new Set();
+    for (const d of q.docs) {
+      const ref = d.ref.parent.parent;                                // only families/{f}/builds/{id}/state – never anything else
+      if (!ref || ref.parent.id !== 'builds' || !/^families\/[^/]+\/builds\/[^/]+$/.test(ref.path) || seen.has(ref.path)) continue; seen.add(ref.path);
+      const b = (await ref.get()).data(), famId = ref.parent.parent && ref.parent.parent.id;
+      const old = !b || Date.now() - (b.at || 0) > BUILD_HOURS * 36e5;
+      if (b && b.status === 'running' && !old) continue;
+      if (b && b.status === 'running' && famId) await closeBuild(famId, ref.id, 'failed', { err: 'build_closed', resumable: false });
+      if (!b || b.status !== 'failed' || old) await cleanBuild(ref);
+    }
+  });
 
 /* ---------- a user's bug report / idea → an email to the D-WAY team ----------
    The addresses live in adminConfig/main (only the app admins can read or write it, from the admin screen in the app);
@@ -463,39 +1013,31 @@ if (GMAIL_APP_PASSWORD) exports.mailServerAlerts = require('firebase-functions/v
 /* ---------- monitoring (שליטה ובקרה): find what is stuck or about to get stuck ----------
    watchdog() runs every 15 minutes (and on every healthReport call). Each finding goes once into the server log
    (red dot for the app admins, the hourly email, healthReport) – a key in meta/watchdog.seen keeps it from repeating.
-     stuck  – a build still 'running' with no AI call for STUCK_BUILD_MIN (it can still be resumed for BUILD_HOURS; after that
-              it is closed as 'stuck' and refunded like a failed build);
+     stuck  – a build still 'running' with no AI call and no progress for STUCK_BUILD_MIN (a server task hands over after
+              17 min and retries back off up to 5 min, so 30 min means stuck); one past BUILD_HOURS is closed now (failed,
+              build_closed – what cleanBuilds would do within 6 h; refunded by closeBuild's rule, a group's on its teacher);
               an AI call that reserved its cost and never settled (the function died or timed out)
      spike  – the same failure in the users' apps (families/{f}/errlog) SPIKE_N times in an hour, or in SPIKE_FAMS families
-     warn   – many builds failing today; a family near its monthly AI cap
-   No personal data: a family is shown only as a short hash, never kid names (errlog.by is never read out). */
-const STUCK_BUILD_MIN = 20, SPIKE_N = 5, SPIKE_FAMS = 3;
+     warn   – many builds failing today; a family (families/{f}/usage, $8) or a teacher (teachers/{uid}/usage – all their
+              groups together, $12) near the monthly AI cap
+   No personal data: a family, a group or a teacher is shown only as a short hash – never a kid's, a teacher's or a group's
+   name (errlog.by, family / group names, consents are never read out). */
+const STUCK_BUILD_MIN = 30, SPIKE_N = 5, SPIKE_FAMS = 3;
 const famTag = f => require('crypto').createHash('sha256').update(String(f)).digest('hex').slice(0, 6);
 const isNoise = r => !r || r.code === 'ok' || String(r.where || '').startsWith('server:');   // sound check "ok"; server errors are in serverLog already
-async function closeBuild(ref, status) {   // the same refund rule as endBuild(ok = false)
-  return db.runTransaction(async (tx) => {
-    const bd = await tx.get(ref); if (!bd.exists || bd.data().status !== 'running') return null;
-    const d = bd.data(), famRef = ref.parent.parent, usageRef = famRef.collection('usage').doc(d.month || monthKey());
-    const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
-    const refund = (d.calls || 0) <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
-    tx.update(ref, { status, endedAt: Date.now(), refunded: refund });
-    if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
-    if (refund && d.kind === 'paid') tx.set(famRef.collection('billing').doc('main'), { credits: FieldValue.increment(1) }, { merge: true });
-    return { ...d, refund };
-  });
-}
 async function watchdog() {
   const now = Date.now(), stateRef = db.doc('meta/watchdog'), seen = ((await stateRef.get()).data() || {}).seen || {}, fresh = {}, out = [];
   const once = async (key, entry) => { if (seen[key] || fresh[key]) return; fresh[key] = now; out.push(entry); await serverLog({ fn: 'watchdog', ms: 0, ...entry }); };
-  // 1. builds that stopped moving: idle STUCK_BUILD_MIN → reported (the parent can still resume it from the kid's card);
-  //    past BUILD_HOURS (its token is dead) → closed as 'stuck', refunded like a failed build
+  // 1. builds that stopped moving – a family's or a group's (families/{f}/builds; a group's quota is its teacher's)
   const running = await db.collectionGroup('builds').where('status', '==', 'running').get();
   for (const b of running.docs) {
-    const d = b.data(), idle = now - (d.last || d.at || now), tag = `${d.calls || 0} calls · ${String(d.subject || '').slice(0, 40)} · family ${famTag(b.ref.parent.parent.id)}`;
-    if (now - (d.at || now) > BUILD_HOURS * 36e5) { const c = await closeBuild(b.ref, 'stuck');
-      if (c) await once('buildclosed:' + b.id, { kind: 'stuck', code: 'build_abandoned', msg: `build never finished – closed after ${BUILD_HOURS}h · ${tag}${c.refund ? ' · refunded' : ''}` }); }
+    const famId = b.ref.parent.parent.id, d = b.data(), sc = await scopeOf(famId).catch(() => null);
+    const idle = now - Math.max(d.last || 0, d.progAt || 0, d.at || now);
+    const tag = `${d.srv ? 'server' : 'phone'} build · ${d.calls || 0} calls · ${String(d.subject || '').slice(0, 40)} · ${sc && sc.cls ? 'group ' + famTag(famId) + ' (teacher ' + famTag(sc.owner) + ')' : 'family ' + famTag(famId)}`;
+    if (now - (d.at || now) > BUILD_HOURS * 36e5) { const c = await closeBuild(famId, b.id, 'failed', { err: 'build_closed', resumable: false });
+      if (c.closed) await once('buildclosed:' + b.id, { kind: 'stuck', code: 'build_abandoned', msg: `build never finished – closed after ${BUILD_HOURS}h · ${tag}${c.refunded ? ' · refunded' : ''}` }); }
     else if (idle >= STUCK_BUILD_MIN * 60e3)
-      await once('build:' + b.id, { kind: 'stuck', code: 'build', msg: `build stopped: no AI call for ${Math.round(idle / 60e3)} min · ${tag}` });
+      await once('build:' + b.id, { kind: 'stuck', code: 'build', msg: `build stopped: no AI call or progress for ${Math.round(idle / 60e3)} min · ${tag}` });
   }
   // 2. AI calls that reserved their cost and never came back (older than RES_TTL)
   const day = (await db.doc(`meta/ai_day_${dayKey()}`).get()).data() || {};
@@ -510,14 +1052,16 @@ async function watchdog() {
   const hour = new Date(now).toISOString().slice(0, 13);
   for (const [k, g] of Object.entries(groups)) if (g.n >= SPIKE_N || g.fams.size >= SPIKE_FAMS)
     await once(`spike:${k}:${hour}`, { kind: 'spike', code: k.slice(0, 60), msg: `${g.n}× in the last hour, ${g.fams.size} families, ${[...g.ver].join(',')}: ${g.msg}` });
-  // 4. early warnings: builds failing today; a family close to its monthly AI cap
+  // 4. early warnings: builds failing today; a family or a teacher close to the monthly AI cap
   const ended = (await db.collectionGroup('builds').where('endedAt', '>', now - 24 * 3600e3).get()).docs.map(d => d.data());
-  const bad = ended.filter(d => d.status === 'failed' || d.status === 'stuck').length;
+  const bad = ended.filter(d => d.status === 'failed').length;
   if (bad >= 3 && bad / ended.length >= 0.3)
     await once('buildrate:' + dayKey(), { kind: 'warn', code: 'builds_failing', msg: `${bad} of ${ended.length} builds in the last 24h failed or got stuck` });
   const usage = (await db.collectionGroup('usage').where('month', '==', monthKey()).get()).docs;
-  for (const u of usage) { const usd = u.data().usd || 0;
-    if (usd >= FAMILY_CAP_USD * 0.8) await once(`famcap:${u.ref.parent.parent.id}:${monthKey()}`, { kind: 'warn', code: 'family_cap', msg: `family ${famTag(u.ref.parent.parent.id)} used $${usd.toFixed(2)} of its $${FAMILY_CAP_USD} monthly AI cap – its next builds will stop` }); }
+  for (const u of usage) { const usd = u.data().usd || 0, owner = u.ref.parent.parent, teacher = owner.parent.id === 'teachers';
+    if (!teacher && owner.parent.id !== 'families') continue;
+    const cap = teacher ? TEACHER_CAP_USD : FAMILY_CAP_USD, who = `${teacher ? 'teacher' : 'family'} ${famTag(owner.id)}`;
+    if (usd >= cap * 0.8) await once(`cap:${owner.path}:${monthKey()}`, { kind: 'warn', code: teacher ? 'teacher_cap' : 'family_cap', msg: `${who} used $${usd.toFixed(2)} of the $${cap} monthly AI cap – the next builds will stop` }); }
   // keep the "already reported" keys for 3 days
   const keep = Object.fromEntries(Object.entries({ ...seen, ...fresh }).filter(([, t]) => now - t < 3 * 86400e3));
   await stateRef.set({ seen: keep, at: now });

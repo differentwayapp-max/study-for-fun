@@ -6,7 +6,8 @@
 //    a topic's page (who needs help, the hardest questions and the wrong answer chosen most), the students × topics map;
 // 4. a student's card: topics, last mistakes, a private note (saved for the teacher only);
 // 5. live: a student's new game shows up without a reload; the printable report has no names;
-// 6. the mastery maths on fixed data. Screenshots (OUT): Hebrew + English, 360, 320 and a wide screen.
+// 6. the mastery maths on fixed data. Screenshots (OUT): Hebrew + English, 360, 320 and a wide screen;
+// 7. performance: 40 students × 300 games – how much is read at opening and how long until the report shows (360, CPU ×4).
 const { chromium } = require('playwright');
 const APP = 'http://localhost:8765/', OUT = process.env.OUT || require('os').tmpdir();
 const FS = 'http://127.0.0.1:8080', PROJ = 'study-for-fun-7b03c', DOCS = `${FS}/v1/projects/${PROJ}/databases/(default)/documents`;
@@ -144,6 +145,49 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
     await p.evaluate(() => { TR.topic = null; tStudent('k2'); }); await p.waitForTimeout(600); await p.screenshot({ path: `${OUT}/r_card_${tag}.png` });
     if (lang === 'en') { const heb = await p.evaluate(() => { const t = [...document.querySelectorAll('#tReport, #tDlg')].map(e => { const c = e.cloneNode(true); c.querySelectorAll('[translate="no"],textarea').forEach(x => x.remove()); c.querySelectorAll('*').forEach(x => x.insertAdjacentText('afterend', '\n')); return c.textContent; }).join('\n'); return (t.match(/[^\n]*[֐-׿][^\n]*/g) || []).filter(l => !/נועה|יונתן|מאיה|איתי|אורי|תמר|ד'2|הורה של/.test(l)); });
       ok(heb.length === 0, 'English: no Hebrew left in the report and the card' + (heb.length ? ' – ' + heb.slice(0, 5).join(' | ') : '')); }
+    await c.close();
+  }
+  console.log('8. performance: 40 students × 300 games (the largest history), 360 wide, CPU slowed ×4');
+  {
+    const PG = { sub: 'teacherPerf', email: 'teacherperf@t.local', email_verified: true, name: 'מורה' };
+    const c0 = await ctx({ google: PG }); const p0 = await c0.newPage(); p0.on('pageerror', e => errs.push('perf: ' + e.message));
+    await p0.goto(APP, { waitUntil: 'load' }); await p0.waitForSelector('#fbTeach'); await p0.click('#fbTeach'); await p0.waitForSelector('#tsClass'); await p0.click('#tsClass');
+    await p0.fill('#tsName', 'גדולה'); await p0.click('#tsGo'); await p0.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await p0.waitForTimeout(800);
+    const big = await p0.evaluate(() => window.__sffFamily.famId); await c0.close();
+    // a game like the app writes it: 10 questions, their keys, 1–2 topics
+    const TOP = ['חיבור', 'חיסור', 'כפל', 'חילוק', 'שברים', 'מדידות', 'גאומטריה', 'בעיות מילוליות'], now = Date.now();
+    const rk = n => Math.random().toString(36).slice(2, 2 + n);
+    const game = (kid, i) => { const t1 = TOP[i % 8], t2 = TOP[(i + 3) % 8], qr = [], qk = []; let right = 0; const by = { [t1]: { r: 0, n: 0 }, [t2]: { r: 0, n: 0 } };
+      for (let q = 0; q < 10; q++) { const okk = Math.random() < .7, t = q < 6 ? t1 : t2; by[t].n++; if (okk) { by[t].r++; right++; } qr.push((i * 3 + q) % 90 + '.' + (okk ? 1 : 0) + (okk ? '' : '.' + q % 4)); qk.push(rk(8) + (okk ? '' : ':' + rk(6))); }
+      return { at: now - i * 3 * 3600e3, kidId: kid, kid: 'תלמיד ' + kid, subject: 'מתמטיקה', grade: 3, setId: 's_' + kid, retry: false, topic: 'פרק ' + (i % 12), ch: i % 12, right, n: 10, score: right * 10, mode: 'choice', qr, qk, topics: by }; };
+    const N = 40, G = 300, ids = Array.from({ length: N }, (_, i) => 'p' + i);
+    await put(`families/${big}/fam/kids`, { list: ids.map((id, i) => ({ id, name: 'תלמיד ' + (i + 1), grade: 3, color: '#2F6BFF' })) });
+    let bytes = 0;
+    for (const id of ids) { await put(`families/${big}/consents/${id}`, { status: 'digital', letterV: '0.9', at: now });
+      const prog = { history: Array.from({ length: G }, (_, i) => game(id, i)), profile: { nick: id } }; bytes += JSON.stringify(prog).length;
+      const st = await put(`families/${big}/progress/${id}`, prog); if (st !== 200) console.log('    progress write', id, st); }
+    console.log(`    seeded ${N} students × ${G} games – ${(bytes / 1024 / 1024).toFixed(1)} MB of progress (JSON)`);
+    const c = await ctx({ google: PG, w: 360, h: 720 }); const p = await c.newPage(); p.on('pageerror', e => errs.push('perf: ' + e.message));
+    const cdp = await c.newCDPSession(p); await cdp.send('Network.enable'); await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+    const url = {}; let fsBytes = 0, allBytes = 0;
+    cdp.on('Network.requestWillBeSent', e => { url[e.requestId] = e.request.url; });
+    cdp.on('Network.dataReceived', e => { allBytes += e.dataLength; if (/:8080\//.test(url[e.requestId] || '')) fsBytes += e.dataLength; });
+    await p.goto(APP, { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 30000 });
+    const t0 = Date.now(); await p.click('#fbTeach');
+    await p.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 60000 }); const tIn = Date.now() - t0;
+    await p.waitForFunction(n => typeof history !== 'undefined' && history.length >= n, N * G, { timeout: 180000 }).catch(() => {});
+    const tData = Date.now() - t0;
+    const tR = await p.evaluate(() => { const a = performance.now(); go('stats'); return performance.now() - a; });
+    await p.waitForSelector('#tReport .trrow', { timeout: 60000 }).catch(() => {}); const tShown = Date.now() - t0;
+    const info = await p.evaluate(() => ({ games: history.length, rows: document.querySelectorAll('#tReport .trrow').length, played: document.querySelectorAll('.trsum b')[1]?.textContent,
+      ls: (() => { let n = 0; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); n += (localStorage.getItem(k) || '').length; } return n; })() }));
+    const tHome = await p.evaluate(() => { const a = performance.now(); go('kids'); return performance.now() - a; });
+    const tMap = await p.evaluate(() => { const a = performance.now(); go('stats'); TR.view = 'map'; renderTeacherStats(); const d = performance.now() - a; TR.view = 'topics'; return d; });
+    global.PERF = { fsMB: fsBytes / 1048576, allMB: allBytes / 1048576, tIn, tData, tShown, tR, tHome, tMap, ...info };
+    console.log(`    read at opening: Firestore ${(fsBytes / 1048576).toFixed(2)} MB (all requests ${(allBytes / 1048576).toFixed(2)} MB, the emulator sends it uncompressed)`);
+    console.log(`    signed in → the group: ${(tIn / 1000).toFixed(1)} s; → all ${info.games} games in: ${(tData / 1000).toFixed(1)} s; → the report on screen: ${(tShown / 1000).toFixed(1)} s`);
+    console.log(`    drawing (CPU ×4): the report ${tR.toFixed(0)} ms, the map ${tMap.toFixed(0)} ms, the teacher's home (attention) ${tHome.toFixed(0)} ms; ${info.rows} topics, ${info.played} practised; localStorage ${(info.ls / 1048576).toFixed(2)} MB`);
+    ok(info.games >= N * G && info.rows === 8, `the report with 40 × 300 games: ${info.rows} topics`);
     await c.close();
   }
   ok(!errs.length, 'no page errors' + (errs.length ? ': ' + errs.slice(0, 3).join(' | ') : ''));

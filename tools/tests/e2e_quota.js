@@ -1,5 +1,8 @@
 // Monthly quota on local emulators (functions + firestore + auth):
 // 3 free practice sets, the 4th is refused, a failed start gives the build back, the daily $100 cap stops AI calls (no monthly cap).
+// A teacher (stage 4): 5 builds a month for all their groups together (the 6th refused, spread over 2 groups); the second build
+// only with 3 approved students; the $12 cap shared by the groups; a teacher who is also a parent keeps the family's own 3;
+// a failed build given back; the teacher reads the counter and cannot write it; another teacher cannot build in the group.
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_quota.js"
 const { chromium } = require('playwright');
 const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
@@ -38,5 +41,56 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   await p.evaluate(async () => { await fetch('about:blank').catch(()=>{}); sample = await window.claude.use('sample'); kids.push({ id: 'k1', name: 'נועה', grade: 6, color: '#FF5C8A' }); saveKids(); openWizard('k1'); W.step = 4; wizRender(); }); await p.waitForTimeout(800);
   console.log('quota line:', await p.evaluate(() => document.getElementById('quotaLine').innerText.replace(/\s+/g, ' ')));
   await p.screenshot({ path: process.env.OUT + '/quota.png' }); void fam;
+
+  console.log('a teacher: 5 builds a month, for all their groups together');
+  {
+    const AU = 'http://127.0.0.1:9099', PROJ = 'study-for-fun-7b03c', DOCS = `http://127.0.0.1:8080/v1/projects/${PROJ}/databases/(default)/documents`, FN = `http://127.0.0.1:5001/${PROJ}/europe-west1`;
+    const enc = x => x === null ? { nullValue: null } : typeof x === 'string' ? { stringValue: x } : typeof x === 'boolean' ? { booleanValue: x } : typeof x === 'number' ? (Number.isInteger(x) ? { integerValue: String(x) } : { doubleValue: x })
+      : Array.isArray(x) ? { arrayValue: { values: x.map(enc) } } : { mapValue: { fields: Object.fromEntries(Object.entries(x).map(([k, v]) => [k, enc(v)])) } };
+    const admin = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' }, body: JSON.stringify({ fields: enc(obj).mapValue.fields }) });
+    const user = async email => { let r = await fetch(`${AU}/identitytoolkit.googleapis.com/v1/accounts:signUp?key=x`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password: 'pw123456', returnSecureToken: true }) }).then(r => r.json());
+      await fetch(`${AU}/identitytoolkit.googleapis.com/v1/projects/${PROJ}/accounts:update`, { method: 'POST', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' }, body: JSON.stringify({ localId: r.localId, emailVerified: true }) });
+      r = await fetch(`${AU}/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=x`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password: 'pw123456', returnSecureToken: true }) }).then(r => r.json());
+      return { uid: r.localId, H: { Authorization: 'Bearer ' + r.idToken, 'Content-Type': 'application/json' } }; };
+    const call = (u, name, data) => fetch(`${FN}/${name}`, { method: 'POST', headers: u.H, body: JSON.stringify({ data }) }).then(async r => { const j = await r.json().catch(() => ({})); return r.ok ? j.result : { err: (j.error && j.error.details && j.error.details.reason) || (j.error && j.error.status) || r.status, ...(j.error && j.error.details || {}) }; });
+    const month = await p.evaluate(() => monthKeyIL());
+    await admin(`meta/ai_day_${day}`, { usd: 0 }); await admin(`meta/ai_spend_${month}`, { usd: 0 });   // the daily cap above was reached on purpose
+    const T = await user('teacherq@t.local'), T2 = await user('teacherq2@t.local');
+    const A = (await call(T, 'createClass', { teach: 'class', name: 'א', grade: 3, subject: 'אנגלית' })).classId, B = (await call(T, 'createClass', { teach: 'class', name: 'ב', grade: 4, subject: 'אנגלית' })).classId;
+    ok(A && B, 'a teacher with 2 groups');
+    const s1 = await call(T, 'startBuild', { famId: A, subject: 'אנגלית' });
+    ok(s1.kind === 'free' && s1.used === 1 && s1.free === 5 && s1.teacher, 'the first build, with no students: free, 1 of 5');
+    const s2 = await call(T, 'startBuild', { famId: B, subject: 'אנגלית' });
+    ok(s2.err === 'need_students' && s2.min === 3, 'the second, with no approved students: refused – "need_students" (3)');
+    await admin(`families/${A}/consents/k1`, { status: 'digital' }); await admin(`families/${A}/consents/k2`, { status: 'digital' }); await admin(`families/${B}/consents/k3`, { status: 'pending' });
+    ok((await call(T, 'startBuild', { famId: A, subject: 'x' })).err === 'need_students', '2 approved + 1 waiting is not enough');
+    await admin(`families/${B}/consents/k3`, { status: 'digital' });
+    const runs = []; for (const g of [B, A, B, A, B]) runs.push(await call(T, 'startBuild', { famId: g, subject: 'אנגלית' }));
+    ok(runs.slice(0, 4).every(r => r.kind === 'free') && runs[3].used === 5, '3 approved students in 2 groups: builds 2–5 pass, spread over both groups: ' + runs.slice(0, 4).map(r => r.used).join(','));
+    ok(runs[4].err === 'quota' && runs[4].free === 5 && runs[4].teacher === true && runs[4].used === 5, 'the 6th is refused (quota, 5 – no paid builds for teachers), though asked in the other group');
+    const u = await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}`, { headers: T.H }).then(r => r.json());
+    ok(+u.fields.builds.integerValue === 5, 'counted in teachers/{uid}/usage/{month}: 5 (not per group)');
+    const fa = await fetch(`${DOCS}/families/${A}/usage/${month}`, { headers: { Authorization: 'Bearer owner' } });
+    ok(fa.status === 404, 'nothing counted on the groups themselves');
+    // a failed build is given back (at most 2 a month, like a family)
+    const back = await call(T, 'endBuild', { famId: A, buildId: runs[3].buildId, ok: false });
+    const again = await call(T, 'startBuild', { famId: B, subject: 'x' });
+    ok(back.refunded === true && again.kind === 'free' && again.used === 5, 'a failed build is given back – one more build passes');
+    // the teacher reads the counter, cannot write it; another teacher can do neither, nor build in the group
+    ok((await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}?updateMask.fieldPaths=builds`, { method: 'PATCH', headers: T.H, body: JSON.stringify({ fields: { builds: { integerValue: '0' } } }) })).status === 403, 'the teacher cannot change the counter');
+    ok((await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}`, { headers: T2.H })).status === 403, 'another teacher cannot read it');
+    ok((await call(T2, 'startBuild', { famId: A, subject: 'x' })).err === 'PERMISSION_DENIED', 'another teacher cannot build in the group');
+    // the $12 cap is the teacher's, shared by the groups
+    await admin(`teachers/${T.uid}/usage/${month}`, { builds: 1, usd: 11.999, month });
+    const capA = await call(T, 'ask', { famId: A, step: 'match', data: { ctx: { gi: 0, grade: "א'", subject: 'מתמטיקה', topics: ['חיבור'] }, want: ['חיבור'], pool: [{ ref: 'a', title: 'חיבור', topics: ['חיבור'] }] } });
+    const capB = await call(T, 'startBuild', { famId: B, subject: 'x' });
+    ok(capA.err === 'teacher_budget' && capA.cap === 12, 'at $12 (counted for the teacher): an AI call in group A is refused – teacher_budget');
+    await admin(`teachers/${T.uid}/usage/${month}`, { builds: 1, usd: 12, month });
+    ok((await call(T, 'startBuild', { famId: B, subject: 'x' })).err === 'teacher_budget', '…and a new build in group B too' + (capB.err ? '' : ''));
+    // a teacher who is also a parent: the family keeps its own 3 builds
+    await admin(`families/${T.uid}`, { inviteToken: 'x'.repeat(18), name: 'הורה ומורה', createdAt: Date.now() });
+    const fam = await call(T, 'startBuild', { famId: T.uid, subject: 'מתמטיקה' });
+    ok(fam.kind === 'free' && fam.used === 1 && fam.free === 3 && !fam.teacher, 'the same person as a parent: the family\'s own quota (1 of 3), apart from the teacher\'s');
+  }
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

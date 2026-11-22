@@ -2397,7 +2397,7 @@ async function build(){
   if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
   const gi=+$('fGrade').value, subject=$('fSubject').value, topics=$('fTopics').value.split('\n').map(s=>s.trim()).filter(Boolean);
   const perRound=Math.max(5,Math.min(20,+$('fRound').value||defRound(gi,subject)));
-  const I={name:$('fName').value.trim()||'הילד/ה', reinf:W.reinf||null, gi, subject, topics, perRound, kidId:W.kidId,
+  const I={name:$('fName').value.trim()||'הילד/ה', reinf:W.reinf||null, gi, subject, topics, perRound, kidId:isClassMode()?'grp':W.kidId,   // a group's: no kid (the server drops it)
     chapters:(W.chapters||defChapters(topics,perRound)).map(c=>({title:c.title,topics:c.topics,count:Math.max(5,Math.min(20,c.count))})),
     text:$('fText').value.trim().slice(0,8000), link:$('fLink').value.trim().slice(0,300), pages:$('fPages').value.trim().slice(0,200),
     examDate:$('fExam').value||'', dailyGoal:Math.max(1,Math.min(10,+$('fGoal').value||2))};

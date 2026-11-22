@@ -550,13 +550,12 @@ async function runStep({ admin, uid, famId, buildId, name, data = {}, images = [
   const step = Object.prototype.hasOwnProperty.call(STEPS, name) ? STEPS[name] : null;
   if (!step) throw new HttpsError('invalid-argument', 'Unknown step.');
   if (!data || typeof data !== 'object') throw new HttpsError('invalid-argument', 'Missing data.');
+  if (!admin && uid) await checkFamily(uid, famId);              // whose family / group first – before anything about the data
   const { content, pages } = filesContent(images, step.images);
   let text;
   try { text = step.build(data, { images: images.length }); }
   catch (e) { if (e instanceof Bad) throw new HttpsError('invalid-argument', 'bad_input: ' + e.message, { reason: 'bad_input', field: e.message }); throw e; }
   content.push({ type: 'text', text });
-
-  if (!admin && uid) await checkFamily(uid, famId);
 
   // the most this call can cost: input (system + data + files, estimated high) and max_tokens, at the dearest model it may run on
   const model = step.model, dear = [model, ...(FALLBACK_TO[model] || [])].map(priceOf).reduce((a, p) => p[1] > a[1] ? p : a);

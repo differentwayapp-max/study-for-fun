@@ -248,6 +248,9 @@
     'בחרו תרגול – הוא יינתן כמשימה': 'Pick a practice set – it will be given as an assignment', 'לא הצלחנו לפתוח את התרגול': "We couldn't open the practice set",
     'תרגול מהטעויות – משימה אישית': 'Practice from the mistakes – a personal assignment', 'עוד אין טעויות לתרגל 🎉': 'No mistakes to practise yet 🎉', 'תרגול מהטעויות': 'Practice from the mistakes',
     'מהמורה': 'From your teacher', 'חזרה': 'Review',
+    'שולחים תרגול על מה שלמדתם היום בכיתה – כמשחק – ורואים מי עשה': 'Send practice on what you learned in class today – as a game – and see who did it',
+    'שולחים תרגול על מה שלמדתם היום בשיעור – כמשחק – ורואים מי עשה': 'Send practice on what you learned in the lesson today – as a game – and see who did it',
+    'אנגלית ד׳': 'English, grade 4',
     'בניית תרגולים חדשים עצרה לחודש הזה. אפשר לתת משימה מהקטלוג.': 'Building new practice sets has stopped for this month. You can give an assignment from the catalog.',
     'בניית תרגולים חדשים עצרה לחודש הזה.': 'Building new practice sets has stopped for this month.',
     'ראשון': 'Sunday', 'שני': 'Monday', 'שלישי': 'Tuesday', 'רביעי': 'Wednesday', 'חמישי': 'Thursday', 'שישי': 'Friday', 'שבת': 'Saturday'

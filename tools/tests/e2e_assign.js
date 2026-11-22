@@ -136,7 +136,13 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
   await T.evaluate(id => { const s = getSet(id); sets = sets.filter(x => x !== s); store.save(); rerender(); }, one.id); await T.waitForTimeout(2500);
   ok(await get(`families/${cid}/sets/${one.id}`) === 404, 'deleted: gone from the group');
 
-  console.log('8. screenshots: English, 320');
+  console.log('8. the quota message, and screenshots: English, 320');
+  { const uid = await T.evaluate(() => window.SFF_UID), mk = await T.evaluate(() => monthKeyIL());
+    await put(`teachers/${uid}/usage/${mk}`, { builds: 5, month: mk });
+    await T.evaluate(() => { tClose(); openWizard(null); W.subject = 'אנגלית'; wizRender(); }); await T.waitForTimeout(1500);
+    const q = await T.evaluate(() => ({ t: document.getElementById('quotaLine').innerText, off: document.getElementById('btnBuild').disabled }));
+    ok(/ניצלת את 5 הבניות של החודש – מתחדש ב-/.test(q.t) && !/₪|תשלום/.test(q.t), 'all 5 used: "ניצלת את 5 הבניות של החודש – מתחדש ב-1 לחודש" (no payment) – ' + q.t.trim());
+    await T.screenshot({ path: `${OUT}/a_quota_he360.png` }); }
   for (const [w, lang] of [[360, 'en'], [320, 'he'], [320, 'en']]) {
     const tag = lang + w, X = await teacher({ w, h: w === 320 ? 640 : 740, lang }); const p = X.p;
     await p.waitForFunction(() => trStudents().length === 4, null, { timeout: 20000 }).catch(() => {});
@@ -145,6 +151,9 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
     await p.evaluate(() => asgFromCatalog('en3-0e3c80', ['Animals'])); await p.waitForSelector('#tDlg .aradio', { timeout: 10000 }); await p.evaluate(() => { ASG.to = 'pick'; ASG.pick = new Set(asgNeed(ASG.base)); asgRender(); }); await p.waitForTimeout(400);
     await p.screenshot({ path: `${OUT}/a_step2_${tag}.png` });
     await p.evaluate(() => asgNext2()); await p.waitForTimeout(400); await p.screenshot({ path: `${OUT}/a_step3_${tag}.png` });
+    await p.evaluate(() => { tClose(); openWizard(null); W.subject = 'אנגלית'; wizRender(); }); await p.waitForTimeout(1500); await p.screenshot({ path: `${OUT}/a_quota_${tag}.png` });
+    if (lang === 'en') { const qt = await p.evaluate(() => document.getElementById('quotaLine').innerText); ok(/You've used this month's 5 builds/.test(qt), `${tag}: the quota message in English – ${qt.trim()}`); }
+    await p.evaluate(() => go('kids'));
     const wide = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
     const heb = lang === 'en' ? await p.evaluate(() => { const c = document.getElementById('tDlg').cloneNode(true); c.querySelectorAll('[translate="no"],bdi').forEach(x => x.remove()); return (c.innerText.match(/[^\n]*[֐-׿][^\n]*/g) || []); }) : [];
     ok(!wide && !heb.length, `${tag}: no sideways scroll${lang === 'en' ? ', no Hebrew left in the steps' + (heb.length ? ' – ' + heb.slice(0, 4).join(' | ') : '') : ''}`);

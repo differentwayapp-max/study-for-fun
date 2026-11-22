@@ -48,7 +48,3 @@ You can also ask to see or correct the details that are kept.
 ## Contact
 
 Questions about the group – to the teacher. Questions about the app and privacy – at the address in the privacy policy.
-
-☐ I have read this, and I agree that my child will join the group {group name} of {teacher name}, as described here.
-
-Parent's name: ______  Child's name: ______  Date: ______  Signature: ______

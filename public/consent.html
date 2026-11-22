@@ -75,8 +75,6 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
 <p>אפשר גם לבקש לראות או לתקן את הפרטים השמורים.</p>
 <h2 id="he-s7">יצירת קשר</h2>
 <p>שאלות על הקבוצה – למורה. שאלות על האפליקציה ועל הפרטיות – בכתובת שב<a href="/privacy.html">מדיניות הפרטיות</a>.</p>
-<p>☐ קראתי, ואני מסכימ/ה שילדי/ילדתי יצטרף/תצטרף לקבוצה <span class="ph-group"></span> של <span class="ph-teacher"></span>, לפי מה שכתוב כאן.</p>
-<p>שם ההורה: ______  שם הילד/ה: ______  תאריך: ______  חתימה: ______</p>
   </div>
   <div class="card" data-l="en" dir="ltr">
 <h1>Parent's consent to join a practice group</h1>
@@ -112,8 +110,6 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
 <p>You can also ask to see or correct the details that are kept.</p>
 <h2 id="en-s7">Contact</h2>
 <p>Questions about the group – to the teacher. Questions about the app and privacy – at the address in the <a href="/privacy.html">privacy policy</a>.</p>
-<p>☐ I have read this, and I agree that my child will join the group <span class="ph-group"></span> of <span class="ph-teacher"></span>, as described here.</p>
-<p>Parent's name: ______  Child's name: ______  Date: ______  Signature: ______</p>
   </div>
 </main>
 <script>
@@ -126,6 +122,6 @@ function setLang(l){ document.documentElement.lang=l; document.documentElement.d
 <script>(function(){ const q=new URLSearchParams(location.search), d=new Date();
   const put=(c,v)=>document.querySelectorAll('.ph-'+c).forEach(e=>{ e.textContent=v; });
   if(q.get('t')) put('teacher',q.get('t').slice(0,60)); if(q.get('g')) put('group',q.get('g').slice(0,60));
-  put('date',d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()); if(q.get('print')) setTimeout(()=>print(),600); })();</script>
+  put('date',d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()); })();</script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 // 3. a closed, replaced or expired link is refused; an empty signature is refused; at most 5 requests an hour from a phone;
 // 4. students come only from parents' signed requests – the teacher has no way to add one;
 // 5. withdrawing (the parent, the teacher): the link stops, the progress goes;
-// 6. no AI building in a group (until the teachers' quota). Screenshots (OUT): Hebrew + English, 360 and 320.
+// 6. AI building in a group counts on the teacher's own quota. Screenshots (OUT): Hebrew + English, 360 and 320.
 const { chromium } = require('playwright');
 const APP = 'http://localhost:8765/', OUT = process.env.OUT || require('os').tmpdir();
 const FS = 'http://127.0.0.1:8080', PROJ = 'study-for-fun-7b03c', DOCS = `${FS}/v1/projects/${PROJ}/databases/(default)/documents`;
@@ -147,10 +147,9 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok((await doc(`families/${cid}/consents/${yo.id}`)).status === 'revoked' && !(await doc(`families/${cid}/fam/kids`)).list.some(k => k.id === yo.id), 'the teacher takes a student out: the same');
   ok(!(await doc(`families/${cid}/notes/${yo.id}`)) && !(await doc(`families/${cid}/sets/sx_${yo.id}`)), "…and the teacher's note and the student's practice sets are deleted too");
 
-  console.log('9. no AI building in a group (yet)');
-  const ai = await T.evaluate(async () => { const a = await (async () => { try { await window.__sffAI.start('אנגלית'); return 'started'; } catch (e) { return e.code; } })();
-    const b = await (async () => { try { await (await window.claude.use('sample')).json('match', { ctx: { gi: 3, grade: "ד'", subject: 'אנגלית', topics: ['x'] }, want: ['x'], pool: [] }); return 'ok'; } catch (e) { return e.code; } })(); return [a, b]; });
-  ok(ai[0] === 'teacher_ai_soon' && ai[1] === 'teacher_ai_soon', 'a build and an AI call in a group are refused: ' + ai.join());
+  console.log('9. AI building in a group: the teacher\'s own quota (stage 4)');
+  const ai = await T.evaluate(async () => { try { const r = await window.__sffAI.start('אנגלית'); return [r.kind, r.free, r.teacher]; } catch (e) { return [e.code]; } });
+  ok(ai[0] === 'free' && ai[1] === 5 && ai[2] === true, 'a build in a group: one of the teacher\'s 5 builds a month: ' + ai.join());
 
   console.log('10. English, and small phones');
   for (const [w, h] of [[360, 720], [320, 560]]) for (const lang of ['he', 'en']) {

@@ -230,7 +230,12 @@ const upd = (path, obj, mask) => ({ update: { name: `${ROOT}/${path}`, fields: e
     ok(await write(tc, `families/${C}/fam/kids`, { list: [] }) === 403, "…nor the group's students list");
     ok(ok3(await rd3(tc, `families/${C}/consents/kA`)) && ok3(await rd3(tc, `families/${C}/joinReqs`)), 'the teacher reads the consents and the requests');
     ok(await rd3(par, `families/${C}/consents/kA`) === 403, 'a parent of a family cannot read a group');
-    ok(String(await call(tc, 'startBuild', { famId: C, subject: 'x' })) === 'teacher_ai_soon' && String(await call(tc, 'ask', { famId: C, step: 'match', data: {} })) === 'teacher_ai_soon', 'no AI building in a group (until the teachers\' quota)');
+    ok(String(await call(tB, 'startBuild', { famId: C, subject: 'x' })) === 'PERMISSION_DENIED' && String(await call(tB, 'ask', { famId: C, step: 'match', data: {} })) === 'PERMISSION_DENIED'
+      && String(await call(tB, 'submitBuild', { famId: C, input: {} })) === 'PERMISSION_DENIED', "a teacher cannot build or call the AI in another teacher's group");
+    ok(await write(tc, `teachers/${tc.uid}/usage/2026-01`, { builds: 0 }) === 403 && await write(tc, `teachers/${tc.uid}`, { builds: 0 }) === 403, "a teacher cannot write their own AI quota (the server only)");
+    ok(await rd3(tB, `teachers/${tc.uid}/usage/2026-01`) === 403, "…nor read another teacher's");
+    ok(await write(dA, `families/${C}/sets/sA`, { set: { id: 'sA', kidId: 'kA', questions: [] } }) === 403 && await write(dA, `families/${C}/sets/zz`, { set: { id: 'zz', to: 'all' } }) === 403, "a student's phone writes no practice set or assignment");
+    ok(await write(tc, `families/${C}/sets/zz`, { set: { id: 'zz', to: ['kA'], toMap: { kB: true } } }) === 403, "an assignment's toMap must name only its students (no reaching a kid it wasn't given to)");
     ok(String(await call(tc, 'approveJoin', { classId: B, reqId: 'R1abcdefghij12345678' })) !== 'ok' && String(await call(tB, 'revokeConsent', { classId: C, kidId: 'kA' })) !== 'ok', "a teacher cannot approve or remove in another teacher's group");
   }
   }

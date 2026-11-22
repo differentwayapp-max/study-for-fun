@@ -4,7 +4,8 @@
 // 3. a build: ready questions fill up to half a chapter – never one the kid already answered correctly, never from a set the
 //    kid has, never again in a second build; nothing on screen or in the shared copy tells where they came from;
 // 4. the cost of every step is recorded on the build and in the month; no reservation is left behind;
-// 5. a build that stopped goes on from where it stopped (the steps already done are not asked again). OUT=dir for screenshots.
+// 5. a build that stopped goes on from where it stopped (the steps already done are not asked again);
+// 6. a teacher builds in a group: one shared set (no kid's id or name), counted on the teacher, given out as an assignment. OUT=dir for screenshots.
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();
 const PROJ = 'study-for-fun-7b03c', DOCS = `http://127.0.0.1:8080/v1/projects/${PROJ}/databases/(default)/documents`, H = { Authorization: 'Bearer owner' };
@@ -134,6 +135,31 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   ok(true, 'the phone opened again: the new set is on the kid\'s card');
   const tot = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done').length;
   ok(tot === 4, 'four builds, each on its own build (no extra build used): ' + tot);
+
+  console.log("6. a build in a teacher's group");
+  {
+    const tc = await b.newContext({ viewport: { width: 390, height: 844 } }); const t = await tc.newPage(); t.on('pageerror', e => errs.push('teacher: ' + e.message));
+    await tc.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
+      window.SFF_AI_ENABLED = true; window.SFF_TEST_GOOGLE = { sub: 'bldT', email: 'bldt@t.local', email_verified: true, name: 'מורה' }; localStorage.setItem('sff_lang', 'he'); });
+    await t.goto('http://localhost:8765/', { waitUntil: 'load' }); await t.waitForSelector('#fbTeach'); await t.click('#fbTeach'); await t.waitForSelector('#tsClass'); await t.click('#tsClass');
+    await t.fill('#tsName', "ד'2 – אנגלית"); await t.click('#tsGo'); await t.waitForFunction(() => window.SFF_KIND === 'class' && typeof sample !== 'undefined' && sample, null, { timeout: 30000 }); await t.waitForTimeout(1200);
+    const cid = await t.evaluate(() => window.__sffFamily.famId), uid = await t.evaluate(() => window.SFF_UID), mk = await t.evaluate(() => monthKeyIL());
+    await t.evaluate(() => { openWizard(null); W.subject = 'אנגלית'; wizRender(); }); await t.waitForTimeout(1200);
+    ok(await t.evaluate(() => /🏫/.test(document.getElementById('wKids').innerText) && !document.getElementById('quotaLine').classList.contains('hidden') && /נשארו 5 בניות החודש/.test(document.getElementById('quotaLine').innerText)),
+      'the wizard in a group: built for the group, "נשארו 5 בניות החודש"');
+    await t.screenshot({ path: `${OUT}/build_group_quota.png` });
+    await t.evaluate(() => { document.getElementById('fTopics').value = 'Colors\nAnimals'; W.step = 4; wizRender(); build(); });
+    await t.waitForFunction(() => sets.some(s => s.grp && !s.to), null, { timeout: 180000 }).catch(() => {});
+    const g = (await list(`families/${cid}/sets`)).map(d => d.set).find(x => x && x.grp);
+    ok(g && !('kidId' in g) && !('name' in g) && g.questions.length > 0, "the set is the group's: no kid's id or name, " + (g && g.questions.length) + ' questions');
+    const tu = await get(`teachers/${uid}/usage/${mk}`);
+    ok(tu && tu.builds === 1 && tu.usd > 0 && !(await get(`families/${cid}/usage/${mk}`)), `counted on the teacher: 1 build, $${tu && tu.usd && tu.usd.toFixed(3)} – nothing on the group`);
+    await t.evaluate(id => asgOpen(id), g && g.id); await t.waitForSelector('#tDlg .aradio', { timeout: 5000 });
+    await t.evaluate(() => { asgNext2(); ASG.due = isoDay(5); asgSave(); }); await t.waitForTimeout(2500);
+    const after = (await list(`families/${cid}/sets`)).map(d => d.set).find(x => x && g && x.id === g.id);
+    ok(after && after.to === 'all' && after.due && after.grp, 'given out as an assignment to the whole group – the same set, not a copy');
+    await tc.close();
+  }
   ok(!errs.length, 'no page errors ' + JSON.stringify(errs));
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

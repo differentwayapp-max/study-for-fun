@@ -184,7 +184,7 @@
     'רואים רק את התלמידים שההורה בחר': 'You see only the students the parent chose', 'אפשר להוסיף ולשנות תרגולים בעצמך': 'You can add and change practice sets yourself',
     'מגיעים לשיעור': 'Come to the lesson', 'כשכבר יודעים מה לחזק': 'already knowing what to strengthen',
     'דקה לפני השיעור רואים מה התלמיד תרגל, איפה הצליח ובאיזה נושא הוא עדיין נתקע': 'A minute before the lesson, see what the student practised, where they did well and which topic still trips them up',
-    'מאז השיעור הקודם: 3 תחנות': 'Since the last lesson: 3 stations', 'נתקעת ב:': 'Stuck on:', 'כבר יושב:': 'Already solid:',
+    'מאז השיעור הקודם: 3 תחנות': 'Since the last lesson: 3 stations', 'נתקעת ב:': 'Stuck on:', 'נתקע/ה ב:': 'Stuck on:', 'השבוע של התלמיד/ה': "The student's week", 'התלמיד/ה': 'The student', 'כבר יושב:': 'Already solid:',
     'כך השיעור מתחיל ישר מהנקודה הנכונה': 'So the lesson starts right at the right point',
     'החומר מהשיעור': "The lesson's material", 'הופך לשיעורי בית כיפיים': 'becomes fun homework',
     'מצלמים את הדף שעבדתם עליו או מעלים PDF – והתלמיד מקבל אותו כמשחק': 'Take a photo of the page you worked on or upload a PDF – and the student gets it as a game',
@@ -238,7 +238,7 @@
   // patterns for text with numbers or names in it
   const P = [
     [/^המשפחה של (.+) הזמינה אותך\. מעכשיו רואים יחד מה (.+) יודע\/ת, ונותנים תרגול כיפי עד השיעור הבא$/, (m, n) => `${n}'s family invited you. From now on you see together what ${n} knows, and give fun practice until the next lesson`],
-    [/^לכרטיס של (.+)$/, (m, n) => `To ${n}'s card`], [/^מבחן ב-(.+)$/, (m, d) => `Test on ${d}`], [/^לשלוח ל-(\d+) תלמידים$/, (m, n) => `Send to ${n} students`],
+    [/^לכרטיס של (.+)$/, (m, n) => `To ${n}'s card`], [/^השבוע של (.+)$/, (m, n) => `${n}'s week`], [/^מבחן ב-(.+)$/, (m, d) => `Test on ${d}`], [/^לשלוח ל-(\d+) תלמידים$/, (m, n) => `Send to ${n} students`],
     [/^(\d+) הימים האחרונים$/, (m, n) => `Last ${n} days`], [/^(\d+) החודשים האחרונים$/, (m, n) => `Last ${n} months`],
     [/^לפני (\d+) ימים$/, (m, n) => `${n} days ago`],
     [/^ההפנמה של כל תלמיד: (\d+) השאלות האחרונות שלו בנושא\. מתעדכן מיד כשתלמיד מסיים משחק\.$/, (m, n) => `Each student's mastery: their last ${n} questions on the topic. Updated as soon as a student finishes a game.`],

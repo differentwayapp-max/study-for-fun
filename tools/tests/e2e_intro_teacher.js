@@ -5,6 +5,7 @@
 // 2. a private teacher: the same screens in a private teacher's words, purple; no "כל הכיתה" / "קבוצת חיזוק"; the last
 //    screen's "לפתוח קבוצה" goes on to the group's form;
 // 3. an invited tutor: the Tutor series with the student's name and the family, the first time only (users/{uid}.introTutor);
+//    the student's name on all five screens (never "נועה"), no date that has passed, a message never over the buttons;
 //    "לכרטיס של בן" opens the students' screen; ☰ → איך זה עובד: the last screen;
 // 4. a parent: the parent's screens only – none of the teachers'. English: no Hebrew left. Screenshots (OUT): he/en, 360/320.
 const { chromium } = require('playwright');
@@ -96,7 +97,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok((await shown(po) || {}).key === 'main', 'the parent: the parent\'s series (screen 1)');
   await po.click('#intro .iskip'); await po.waitForTimeout(800);
   await po.evaluate(async () => { kids.push({ id: 'k1', name: 'נועה', grade: 6, color: '#FF5C8A' }, { id: 'k2', name: 'בן', grade: 4, color: '#2F6BFF' }); saveKids();
-    applyImport(await loadShare('en7-nov26'), kidById('k2')); });
+    applyImport(await loadShare('en7-nov26'), kidById('k2'));
+    const d = new Date(Date.now() + 5 * 864e5), s = sets.find(x => x.kidId === 'k2'); s.examDate = d.toISOString().slice(0, 10); store.save(); });   // a test 5 days ahead
   await po.waitForTimeout(3000);
   const inv = await po.evaluate(() => window.__sffFamily.invite('tutor', 'דנה', ['k2']));
   const uo = await get(`users/${await po.evaluate(() => window.SFF_UID)}`);
@@ -106,10 +108,25 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await pt.waitForSelector('#intro', { timeout: 15000 }).catch(() => {});
   s = await shown(pt);
   ok(s && s.key === 't1' && s.n === 5 && /בן/.test(s.text) && /המשפחה של בן הזמינה אותך/.test(s.text) && /כיתה ה'/.test(s.text) && !/נועה/.test(s.text), 'the Tutor series, with the student (בן, grade ה׳) – not the other kid: ' + (s && s.text.split('\n').slice(2, 4).join(' / ')));
+  // a message over the intro (the "joined the family" one, and any other): never over its buttons
+  await pt.evaluate(() => toast('✓ בדיקה של הודעה')); await pt.waitForTimeout(300);
+  const lap = await pt.evaluate(() => { const hit = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    const ts = [...document.querySelectorAll('.toast')].map(t => t.getBoundingClientRect()), bs = [...document.querySelectorAll('#intro .inext, #intro .iskip, #intro .idots button')].map(x => x.getBoundingClientRect());
+    return { n: ts.length, lap: ts.some(t => bs.some(x => hit(t, x))) }; });
+  ok(!lap.lap && await pt.evaluate(() => TOAST_Q.length >= 1), `t1: no message over the intro (${lap.n} on screen) – the "joined" message and any other wait for it to close (${await pt.evaluate(() => TOAST_Q.length)} waiting)`);
+  // the invited student's name on all five screens (never the design's "נועה"); no date that has passed
+  const texts = []; for (let i = 0; i < 5; i++) { await pt.evaluate(i => introGo(i), i); await pt.waitForTimeout(250); texts.push(await pt.evaluate(() => document.getElementById('intro').innerText)); }
+  ok(texts.every(t => /בן/.test(t)) && !texts.some(t => /נועה/.test(t)), 'בן on every screen (t1–t5), נועה on none: ' + texts.map(t => /בן/.test(t) ? '✓' : '✗').join(''));
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const dates = [...texts.join('\n').matchAll(/(?<![\d.])(\d{1,2})\.(\d{1,2})(?![\d.%])/g)].map(m => { let d = new Date(now.getFullYear(), +m[2] - 1, +m[1]); if (d < now - 182 * 864e5) d = new Date(now.getFullYear() + 1, +m[2] - 1, +m[1]); return [m[0], d]; });
+  ok(dates.length > 0 && dates.every(([, d]) => d >= now), 'the test date (5 days ahead) is shown, and no date that has passed: ' + (dates.map(x => x[0]).join(', ') || 'no dates'));
+  ok(/מבחן ·/.test(texts[3]) === (await pt.evaluate(() => !!tCtx().exam)), 't4: the test chip only when the student has a test ahead – ' + (texts[3].match(/מבחן · [\d.]+/) || ['no chip'])[0]);
+  await pt.evaluate(() => introGo(0)); await pt.waitForTimeout(250);
   const wt = await walk(pt, 'it_tutor_he360');
   ok(wt.keys.join() === 't1,t2,t3,t4,t5' && !wt.bad.length, 'the screens: ' + wt.keys.join() + ' ' + wt.bad.join(' ; '));
   ok(/לכרטיס של בן/.test(await pt.textContent('#intro .icta2')), 'the last button: "לכרטיס של בן"');
   await pt.click('#intro .icta2'); await pt.waitForTimeout(800);
+  ok(await pt.evaluate(() => [...document.querySelectorAll('.toast')].some(t => /בדיקה של הודעה/.test(t.textContent))), '…the waiting message shows once the intro closes');
   ok(!(await pt.$('#intro')) && await pt.evaluate(() => !document.getElementById('vKids').classList.contains('hidden')), '…opens the students\' screen');
   const ut = await get(`users/${await pt.evaluate(() => window.SFF_UID)}`);
   ok(ut && ut.introTutor > 0 && !('intro' in ut) && !('introTeacher' in ut), 'kept in users/{uid}.introTutor');
@@ -120,7 +137,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await pt2.screenshot({ path: `${OUT}/it_tutor_menu.png` });
   await ct.close();
   // the same tutor intro in English and at 320 (a fresh tutor each time)
-  for (const [w, lang, sub] of [[360, 'en', 'introTutorE'], [320, 'he', 'introTutorS']]) {
+  for (const [w, lang, sub] of [[360, 'en', 'introTutorE'], [320, 'he', 'introTutorS'], [320, 'en', 'introTutorSE']]) {
     const inv2 = await po.evaluate(() => window.__sffFamily.invite('tutor', 'מורה', ['k2']));
     const c = await ctx(sub, { w, h: w === 320 ? 640 : 740, lang }), p = await page(c, inv2);
     await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo'); await p.waitForFunction(() => window.SFF_ROLE === 'tutor', null, { timeout: 25000 }); await p.waitForSelector('#intro', { timeout: 15000 }).catch(() => {});

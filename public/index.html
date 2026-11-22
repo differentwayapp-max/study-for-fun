@@ -2326,7 +2326,12 @@ function stepClock(){ if(stepT) return; stepT=setInterval(()=>{ const run=[...do
   run.forEach(li=>{ const s=Math.max(0,Math.round((Date.now()-(+li.dataset.t0||Date.now()))/1000)); let t=li.querySelector('.tm');
     if(!t){ t=document.createElement('span'); t.className='tm'; t.setAttribute('translate','no'); li.querySelector('.d').after(t); }
     t.textContent=`⏱ ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }); },1000); }
-function toast(html,onclick){ const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
+// a message while an intro screen is open waits for it to close (it would cover the intro's text or buttons)
+var TOAST_Q=[];
+function toast(html,onclick){ if(document.getElementById('intro')){ TOAST_Q.push([html,onclick]); return; }
+  const t=document.createElement('div'); t.className='toast'; t.innerHTML=html; t._cb=onclick; t.onclick=()=>{t.remove(); onclick&&onclick();}; document.body.appendChild(t); setTimeout(()=>t.remove(),9000); }
+function toastHold(){ document.querySelectorAll('.toast').forEach(t=>{ TOAST_Q.push([t.innerHTML,t._cb]); t.remove(); }); }
+function toastFlush(){ if(document.getElementById('intro')) return; const q=TOAST_Q; TOAST_Q=[]; q.forEach(([h,c])=>toast(h,c)); }
 
 const MAX_TOPICS=30;
 
@@ -4655,7 +4660,8 @@ Object.assign(IC,{
 // the tutor's family and students (names from the invitation), and the words of a teacher's group
 function tCtx(){
   const ks=(typeof visibleKids==='function'?visibleKids():[]).slice(0,3), F=window.__sffFamily, fam=((window.SFF_FAMS||[]).find(f=>F&&f.id===F.famId)||{}).name||'';
-  return {ks, one:ks.length===1?ks[0]:null, fam, priv:IN.mode==='private'};
+  const nm=ks.length?String(ks[0].name||''):'', ex=sets.filter(s=>!s.demo&&ks.some(k=>k.id===s.kidId)&&s.examDate&&daysLeft(s.examDate)>=0).map(s=>s.examDate).sort()[0]||null;
+  return {ks, one:ks.length===1?ks[0]:null, nm, exam:ex, fam, priv:IN.mode==='private'};
 }
 // a translated sentence with a name in it: the name kept apart, so its direction doesn't scramble the sentence
 const iName=(t,n)=>esc(t).split(esc(n)).join(`<bdi>${esc(n)}</bdi>`);
@@ -4675,32 +4681,32 @@ Object.assign(INTRO,{
       <div style="height:1px;background:#EEEAFB"></div><div style="font-size:12px;font-weight:700;color:#4A4870">התלמידים שלך כאן</div>
       ${C.ks.map(row).join('')}</div>
     <div class="ifeats">${iFeat(IC.eye,'רואים רק את התלמידים שההורה בחר','#3B2E86','#B9A7FF')}${iFeat(IC.plus,'אפשר להוסיף ולשנות תרגולים בעצמך','#3B2E86','#B9A7FF')}</div>`}; },
-  t2:()=>({bg:'#EDE9FF', h:600, html:`${iTag('למורה הפרטי','background:#2A2068;color:#fff')}
+  t2:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#EDE9FF', h:600, html:`${iTag('למורה הפרטי','background:#2A2068;color:#fff')}
     <h1 style="font-size:32px">מגיעים לשיעור<br><span style="color:#5B47D6">כשכבר יודעים מה לחזק</span></h1>
     <p style="color:#4A4870">דקה לפני השיעור רואים מה התלמיד תרגל, איפה הצליח ובאיזה נושא הוא עדיין נתקע</p>
     ${iPhone('top:310px;width:276px;height:430px;background:#fff;padding:20px 16px;gap:12px',`
-      <div style="display:flex;align-items:center;gap:10px">${iAva('נועה','#FFE4EC','#B3264F',38,16)}<div style="flex:1"><b style="font-size:14px">נועה</b><div style="font-size:11px;color:#4A4870">מאז השיעור הקודם: 3 תחנות</div></div></div>
-      <div style="background:#FFE3E4;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:13px;color:#A3262B">נתקעת ב:</b>
+      <div style="display:flex;align-items:center;gap:10px">${iAva(nm,'#FFE4EC','#B3264F',38,16)}<div style="flex:1"><b style="font-size:14px" translate="no"><bdi>${esc(nm)}</bdi></b><div style="font-size:11px;color:#4A4870">מאז השיעור הקודם: 3 תחנות</div></div></div>
+      <div style="background:#FFE3E4;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:13px;color:#A3262B">נתקע/ה ב:</b>
         <div class="irow" style="font-size:13px"><span>מילות שאלה</span><b style="color:#A3262B">58%</b></div>
         <div class="ichips" style="margin:0;justify-content:flex-start" dir="ltr" translate="no"><span style="background:#fff">where</span><span style="background:#fff">which</span><span style="background:#fff">whose</span></div></div>
       <div style="background:#DDF8EC;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:13px;color:#0B6B4A">כבר יושב:</b>
         <div class="irow" style="font-size:13px"><span>אוצר מילים – בית</span><b style="color:#0B6B4A">92%</b></div><div class="irow" style="font-size:13px"><span translate="no">Present Simple</span><b style="color:#0B6B4A">80%</b></div></div>
-      <div style="display:flex;align-items:center;gap:8px;background:#EDE9FF;border-radius:14px;padding:10px 12px;font-size:12px;font-weight:500">${IC.sv('#5B47D6',18,IC.bulb)}<span>כך השיעור מתחיל ישר מהנקודה הנכונה</span></div>`)}`}),
-  t3:()=>({bg:'#5B47D6', dark:1, h:600, html:`${iTag('למורה הפרטי','background:rgba(255,255,255,.18)')}
+      <div style="display:flex;align-items:center;gap:8px;background:#EDE9FF;border-radius:14px;padding:10px 12px;font-size:12px;font-weight:500">${IC.sv('#5B47D6',18,IC.bulb)}<span>כך השיעור מתחיל ישר מהנקודה הנכונה</span></div>`)}`}; },
+  t3:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#5B47D6', dark:1, h:600, html:`${iTag('למורה הפרטי','background:rgba(255,255,255,.18)')}
     <h1 style="font-size:32px">החומר מהשיעור<br><span style="color:#FFD98A">הופך לשיעורי בית כיפיים</span></h1>
     <p style="color:#E6E0FF">מצלמים את הדף שעבדתם עליו או מעלים PDF – והתלמיד מקבל אותו כמשחק</p>
     <div class="icard" style="margin-top:22px">
       <div style="display:flex;gap:10px"><div class="isrc" style="background:#FFF3CC;border-color:#F2A63B;color:#6B4700">${IC.sv('#946200',24,IC.cam)}צילום</div><div class="isrc" style="background:#EAF0FF;border-color:#2F6BFF;color:#1E4FD6">${IC.sv('#1E4FD6',24,IC.pdf)}<span translate="no">PDF</span></div></div>
       <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:700;color:#4A4870">מה לתרגל?<div style="font-size:14px;font-weight:400;border:2px solid #D5DEF2;border-radius:12px;padding:10px;color:#1B2A4A">מילות שאלה + 20 מילים מעמ׳ 42</div></div>
-      <div class="irow" style="font-size:13px"><span style="font-weight:700">בשביל</span><span style="background:#FFE4EC;color:#B3264F;border-radius:99px;padding:4px 12px;font-weight:700">נועה</span></div>
+      <div class="irow" style="font-size:13px"><span style="font-weight:700">בשביל</span><span style="background:#FFE4EC;color:#B3264F;border-radius:99px;padding:4px 12px;font-weight:700" translate="no"><bdi>${esc(nm)}</bdi></span></div>
       <div style="background:#5B47D6;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:15px">לבנות תרגול</div></div>
-    <div style="margin-top:14px;display:flex;align-items:center;gap:8px;font-size:13px;color:#E6E0FF">${IC.sv('#FFD98A',18,IC.ok,2.2)}<span>כל שאלה נבדקת לפני שהיא מגיעה לתלמיד</span></div>`}),
-  t4:()=>{ const r=(bg,ic,t,v,c,last)=>`<div class="irow" style="gap:10px;font-size:13px;padding:6px 0;${last?'':'border-bottom:1px solid #EEF2F7'}"><span class="iava" style="width:28px;height:28px;border-radius:8px;background:${bg}">${ic}</span><span style="flex:1">${t}</span>${v}</div>`;
+    <div style="margin-top:14px;display:flex;align-items:center;gap:8px;font-size:13px;color:#E6E0FF">${IC.sv('#FFD98A',18,IC.ok,2.2)}<span>כל שאלה נבדקת לפני שהיא מגיעה לתלמיד</span></div>`}; },
+  t4:()=>{ const C=tCtx(), r=(bg,ic,t,v,c,last)=>`<div class="irow" style="gap:10px;font-size:13px;padding:6px 0;${last?'':'border-bottom:1px solid #EEF2F7'}"><span class="iava" style="width:28px;height:28px;border-radius:8px;background:${bg}">${ic}</span><span style="flex:1">${t}</span>${v}</div>`;
     return {bg:'#24C78E', h:600, html:`${iTag('למורה הפרטי','background:#2A2068;color:#fff')}
     <h1 style="font-size:32px">התלמיד מתרגל<br>גם בין השיעורים</h1>
     <p>התרגול מתחלק עד יום המבחן. ההורה, את/ה והתלמיד רואים אותה התקדמות</p>
     <div class="icard" style="margin-top:22px;gap:4px">
-      <div class="irow" style="margin-bottom:6px"><b style="font-size:14px">השבוע של נועה</b><span style="background:#1B2A4A;color:#fff;border-radius:10px;padding:4px 9px;font-size:12px;font-weight:700">מבחן · 26.11</span></div>
+      <div class="irow" style="margin-bottom:6px"><b style="font-size:14px">${C.nm?`<span translate="no">${iName(iT(`השבוע של ${C.nm}`),C.nm)}</span>`:'השבוע של התלמיד/ה'}</b>${C.exam?`<span style="background:#1B2A4A;color:#fff;border-radius:10px;padding:4px 9px;font-size:12px;font-weight:700">מבחן · ${fmtDate(C.exam)}</span>`:''}</div>
       ${r('#DDF8EC',IC.star('#14A774',16),'א׳ · אוצר מילים','<b style="color:#0B6B4A">92%</b>')}${r('#DDF8EC',IC.star('#14A774',16),'ב׳ · <span translate="no">Present Simple</span>','<b style="color:#0B6B4A">80%</b>')}
       ${r('#FFF2C9',IC.sv('#946200',16,IC.again,2.4),'ג׳ · מילות שאלה','<b style="color:#946200">58%</b>')}${r('#5B47D6',IC.sv('#fff',15,IC.cap,2.2),'ד׳ · התרגול שלך מהשיעור','<span style="color:#4A4870;font-size:12px">מחר</span>',1)}</div>
     <div class="istats"><div><b style="font-size:14px;color:#BFF0DC">פחות "לא הספקתי"</b><span style="color:#fff">יודעים אם התרגול נעשה</span></div><div><b style="font-size:14px;color:#BFF0DC">ההורים רואים</b><span style="color:#fff">את ההשקעה שלך</span></div></div>`}; },
@@ -4806,7 +4812,7 @@ function introCard(key,K,shot){ const s=INTRO[key](K,shot); return {s, html:`<di
 function openIntro(kid){ IN.kid=!!kid; IN.mode=null; IN.only=false; IN.list=INTRO_SETS[kid?'kid':'parent']; IN.i=0; introShow(); }
 function introShow(dir){
   const key=IN.list[IN.i], n=IN.list.length, last=IN.i===n-1, {s,html}=introCard(key,IN.kid);
-  let el=$('intro'); if(!el){ el=document.createElement('div'); el.id='intro'; el.className='intro'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); introSwipe(el); }
+  let el=$('intro'); if(!el){ toastHold(); el=document.createElement('div'); el.id='intro'; el.className='intro'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); document.body.appendChild(el); introSwipe(el); }
   el.style.background=s.bg; el.classList.toggle('dark',!!s.dark); el.dataset.key=key;
   const T=!!IN.mode;      // a teacher's series: its last screen has its own button (the student's card / a new group) and "אחר כך"
   el.innerHTML=`<div class="itop"><span class="ipos">${n>1?`${IN.i+1}/${n}`:''}</span>${last?(T&&IN.only?`<button class="iskip" onclick="introEnd()" aria-label="סגירה">✕</button>`:''):`<button class="iskip" onclick="introEnd()">דלג</button>`}</div>
@@ -4839,7 +4845,7 @@ function introSwipe(el){ let x0=null,y0=0;
   el.addEventListener('touchend',e=>{ if(x0==null) return; const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; x0=null;
     if(Math.abs(dx)<50||Math.abs(dx)<Math.abs(dy)) return; const rtl=document.documentElement.dir!=='ltr';
     introGo(IN.i+((dx<0)!==rtl?1:-1)); },{passive:true}); }
-function introEnd(){ $('intro')?.remove();
+function introEnd(){ $('intro')?.remove(); setTimeout(toastFlush,250);
   if(IN.mode){ const f=IN.mode==='tutor'?'introTutor':'introTeacher', r=IN.res; IN.mode=null; IN.res=null;
     if(f==='introTutor') window.SFF_INTRO_TUTOR=true; else window.SFF_INTRO_TEACHER=true;
     try{ localStorage.setItem(f==='introTutor'?'sff_intro_tutor':'sff_intro_teacher','1'); }catch(e){} window.__sffIntroField&&window.__sffIntroField(f); r&&r(); return; }

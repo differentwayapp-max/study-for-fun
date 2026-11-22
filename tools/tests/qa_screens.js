@@ -1,5 +1,7 @@
 // Full screen walk (emulators): every screen in Hebrew and English at phone width – 360 and 320 (iPhone "large icons" /
 // Display Zoom, small phones; QA_WIDTHS=360 for one width). At 320 the choice game must fit one screen (320×560).
+// Also the teacher area (sign-in with 3 cards, the first choice, the group form, the teacher's home, ☰, the group screen,
+// the report tab with no students yet, ☰ → איך זה עובד). The report with students: e2e_class_report.js; the intro: e2e_intro_teacher.js.
 // Checks: page errors, sideways overflow, a way back, Hebrew UI text left untranslated in English. Screenshots → OUT.
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();   /* screenshots never land in the repo */ const findings = [];
@@ -61,6 +63,34 @@ const SCREENS = [
       if (name === 'game-choice' && !r.fits) findings.push(`${tag} ${name}: the answers go below the screen`);
     }
     if (errs.length) findings.push(`${tag}: page errors: ${[...new Set(errs)].slice(0, 5).join(' || ')}`);
+    await p.context().close();
+  }
+  // the teacher area: the sign-in screen (3 cards), the first choice, the group form, the teacher's home, ☰ and the group screen
+  for (const W of (process.env.QA_WIDTHS || '360,320').split(',').map(Number)) for (const lang of ['he', 'en']) {
+    const tag = W === 360 ? lang : `${lang}${W}`;
+    const p = await (await b.newContext({ viewport: { width: W, height: W === 320 ? 560 : 720 }, deviceScaleFactor: 1 })).newPage();
+    const errs = []; p.on('pageerror', e => errs.push(e.message));
+    await p.addInitScript(([l, t]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
+      window.SFF_TEST_GOOGLE = { sub: 'qat' + t, email: 'qat' + t + '@t.local', email_verified: true, name: 'מורה' }; localStorage.setItem('sff_lang', l); }, [lang, tag]);
+    const check = async name => { const r = await p.evaluate(lang => {
+        const vis = el => el && el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden'; let heb = [];
+        if (lang === 'en') { const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+          while ((n = w.nextNode())) { const t = n.textContent.trim(); if (!/[\u0590-\u05FF]{2,}/.test(t)) continue; const el = n.parentElement; if (!vis(el) || el.closest('[translate="no"],#dName,#dSub,.thead h2,#hdrTitle')) continue; heb.push(t.slice(0, 40)); } }
+        return { wide: document.documentElement.scrollWidth > innerWidth + 1, heb: [...new Set(heb)].slice(0, 6) }; }, lang);
+      await p.screenshot({ path: `${OUT}/${tag}_${name}.png` });
+      if (r.wide) findings.push(`${tag} ${name}: page wider than the phone (sideways scroll)`);
+      if (r.heb.length) findings.push(`${tag} ${name}: Hebrew left in English: ${r.heb.join(' | ')}`); };
+    try {
+      await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 15000 }); await check('t-login');
+      await p.click('#fbTeach'); await p.waitForSelector('#tsClass', { timeout: 20000 }); await check('t-choose');
+      await p.click('#tsClass'); await p.fill('#tsName', lang === 'en' ? 'Grade 4, class 2 – Math' : "ד'2 – חשבון"); await check('t-form');
+      await p.click('#tsGo'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(2000); await check('t-home');
+      await p.click('#menuBtn'); await p.waitForTimeout(500); await check('t-menu'); await p.evaluate(() => closeMenu());
+      await p.evaluate(() => go('family')); await p.waitForTimeout(800); await check('t-group');
+      await p.evaluate(() => go('stats')); await p.waitForTimeout(600); await check('t-report');
+      await p.evaluate(() => { openHowItWorks(); }); await p.waitForTimeout(500); await check('t-howto'); await p.evaluate(() => introEnd());
+    } catch (e) { findings.push(`${tag} teacher: ${e.message.slice(0, 120)}`); }
+    if (errs.length) findings.push(`${tag} teacher: page errors: ${[...new Set(errs)].slice(0, 5).join(' || ')}`);
     await p.context().close();
   }
   console.log(findings.length ? 'FINDINGS\n' + findings.join('\n') : 'no findings'); await b.close();

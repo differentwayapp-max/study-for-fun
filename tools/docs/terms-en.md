@@ -26,9 +26,17 @@ The questions and explanations are built with artificial intelligence and checke
 - There are no ads in the app.
 - Full details in the privacy policy.
 
+## 🧑‍🏫 Teachers and groups
+
+- A class teacher or a private tutor can open a group and invite students to it.
+- The teacher sends the parents a link to the group. A student joins only after a parent has read and signed the consent letter in the app and the teacher has approved the request. Teachers do not add students themselves.
+- The teacher sees only what happens in their own group – not the child's family, other children or private practice sets.
+- The teacher is responsible for choosing suitable practice sets for the students, and for keeping the students' privacy according to the law and the school's guidelines.
+- A parent can withdraw consent at any time, and the child's progress in the group is deleted.
+
 ## ⚖️ Limitation of liability
 
 - Subject to any law, we are not liable for indirect or consequential damage, including a low grade or a lost opportunity, resulting from reliance on the content.
 - Nothing here limits liability that cannot be limited or excluded by law.
 
-Last updated: 17 November 2026
+Last updated: 21 November 2026

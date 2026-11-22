@@ -997,7 +997,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 
       <div class="wstep" data-step="1">
         <h2>למי ובאיזה מקצוע?</h2>
-        <label>ילד/ה</label>
+        <label id="wKidsLbl">ילד/ה</label>
         <div class="chipsel" id="wKids"></div>
         <div id="wKidQuick" class="kidform hidden" style="margin-top:12px">
           <div class="row" style="grid-template-columns:1.2fr 1fr auto;align-items:end">
@@ -2051,6 +2051,7 @@ function wizRender(){
   $('wNext').classList.toggle('hidden',W.step===4); $('btnBuild').classList.toggle('hidden',W.step!==4);
   document.querySelector('.aioff-btn')?.classList.toggle('show',W.step===4);
   // a group: the set is built for the whole group (one shared set, given out afterwards as an assignment)
+  $('wKidsLbl').textContent=window.sffT?sffT(isClassMode()?'קבוצה':'ילד/ה'):(isClassMode()?'קבוצה':'ילד/ה');
   if(isClassMode()) $('wKids').innerHTML=`<button class="on" type="button">🏫 ${esc((window.SFF_CLASS||{}).name||'הקבוצה')}</button>`; else $('wKids').innerHTML=kids.map(k=>`<button class="${W.kidId===k.id?'on':''}" onclick="W.kidId='${k.id}';wizRender()"><span class="dotc" style="background:${k.color}"></span>${esc(k.name)} · ${GRADES[k.grade]}</button>`).join('')+`<button class="add" onclick="$('wKidQuick').classList.toggle('hidden');$('qkName').focus()">＋ ילד/ה חדש/ה</button>`;
   $('wSubj').innerHTML=SUBJECTS.map(x=>`<button class="${W.subject===x?'on':''}" onclick='W.subject=${JSON.stringify(x)};wizRender()'>${subjStyle(x)[1]} ${esc(x)}</button>`).join('');
   document.querySelectorAll('.srccard')[2].classList.toggle('on',!$('srcLink').classList.contains('hidden'));
@@ -5329,8 +5330,10 @@ function asgCatalog(){ ASG.mode='cat'; tClose(); openCatalog(null); toast('בח�
 function asgExisting(){ ASG.step=1.5; asgRender(); }
 function asgAI(){ ASG.mode='ai'; tClose(); openWizard(null); }
 // the catalog's "add" while giving an assignment: the set becomes the assignment's (no kid)
-async function asgFromCatalog(id, pick){ let p; try{ p=pickTopics(await loadShare(id), pick); }catch(e){ toast('⚠️ לא הצלחנו לפתוח את התרגול'); return; }
-  ASG.base=asgCopy(p); ASG.step=2; ASG.mode=null; go('kids'); setTimeout(asgRender,200); }
+async function asgFromCatalog(id, pick){ let raw, p; try{ raw=await loadShare(id); p=pickTopics(raw, pick); }catch(e){ toast('⚠️ לא הצלחנו לפתוח את התרגול'); return; }
+  ASG.base=asgCopy(p);                                       // some of the set's topics: they name the assignment (the set's own title otherwise)
+  if((p.topics||[]).length && (p.topics||[]).length<(raw.topics||[]).length) ASG.base.title=p.topics.slice(0,4).join(' · ')+(p.topics.length>4?' …':'');
+  ASG.step=2; ASG.mode=null; go('kids'); setTimeout(asgRender,200); }
 function asgSave(){ const A=ASG; if(!A||!A.base||!A.due||daysLeft(A.due)<0){ toast('בחרו תאריך יעד'); return; }
   const to=A.to==='all'?'all':A.to==='one'?[A.one]:[...A.pick], b=A.base, now=Date.now(), uid=window.SFF_UID||'';
   const body={...asgCopy(b), to, ...(to==='all'?{}:{toMap:Object.fromEntries(to.map(id=>[id,true]))}), due:A.due, examDate:A.due, dailyGoal:defGoalCh(roundsTotal(b),A.due).goal, ass:{by:uid, at:now}, created:now, cloud:false};

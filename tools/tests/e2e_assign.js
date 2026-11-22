@@ -92,6 +92,7 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
   ok(await put(`families/${cid}/sets/x1`, { set: { id: 'x1', to: 'all', questions: [] } }, null, dev.H) === 403 && await put(`families/${cid}/sets/${all.id}`, { set: { id: all.id, to: 'all' } }, null, dev.H) === 403, '…and cannot write a set');
   ok(await put(`families/${cid}/sets/x2`, { set: { id: 'x2', to: 'all', kidId: 'k1', name: 'נועה', questions: [] } }) === 200 && await T.evaluate(async () => { try { await DB.collection('sets').doc('x3').set({ set: { id: 'x3', to: 'all', kidId: 'k1', name: 'נועה' } }); return 'ok'; } catch (e) { return e.code || 'err'; } }) !== 'ok',
     'rules: the teacher cannot write a shared set with a kid\'s id or name in it');
+  await fetch(`${DOCS}/families/${cid}/sets/x2`, { method: 'DELETE', headers: { Authorization: 'Bearer owner' } });   // (the rules check's set – not a real one)
 
   console.log("4. progress: the teacher's home");
   // נועה finishes the assignment to all; יונתן plays one chapter

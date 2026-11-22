@@ -589,6 +589,16 @@ body:not(.cls) #tReport{display:none}body.cls #vStats>:not(#tReport){display:non
 .tnames{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.tnames button{min-height:36px;border:1.5px solid var(--ink);border-radius:99px;background:#fff;padding:4px 12px;font:inherit;font-weight:500;color:inherit;cursor:pointer}
 .tkstats{margin-top:12px;text-align:start}.tbars{display:flex;flex-direction:column;gap:8px}.tbars .mbar{height:10px}.th3{margin:14px 0 4px;font-size:1em}
 .tnote{display:block;margin-top:14px;text-align:start;font-weight:600}#tNote{width:100%;margin:6px 0;font:inherit;border:2px solid #D5DEF2;border-radius:12px;padding:8px}
+/* a group's assignments (the teacher's home, the 3 steps, the student's home) */
+.tasg{display:flex;flex-direction:column;gap:6px;width:100%;min-height:44px;border:2px solid #E3E1F2;border-radius:16px;background:#fff;padding:10px 12px;margin-bottom:8px;font:inherit;color:inherit;text-align:start;cursor:pointer}
+.tasg .mbar{height:10px}.twait{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;background:#FFF8E1;border-radius:14px;padding:8px 12px;margin-bottom:8px;text-align:start}
+.asteps{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:4px 0 10px;font-size:.85em}.asteps span{border-radius:99px;padding:3px 10px;background:#EEEAFB;color:var(--ink2)}.asteps .on{background:var(--ink);color:#fff}.asteps .ok{background:#DDF8EC;color:#0B6B4A}
+.aopts{display:flex;flex-direction:column;gap:8px;text-align:start;margin:8px 0}.aopt{display:flex;flex-direction:column;gap:2px;min-height:56px;border:var(--line);border-radius:16px;background:#fff;padding:10px 14px;font:inherit;color:inherit;text-align:start;cursor:pointer}.aopt span{font-size:.85em;color:var(--ink2)}
+.aradio{display:flex;align-items:center;gap:10px;min-height:44px;border:2px solid #E3E1F2;border-radius:14px;padding:6px 12px;cursor:pointer}.aradio input{width:20px;height:20px;flex:none}
+.asel{justify-content:flex-start;margin:6px 0}.asel button{min-height:40px}.alab{display:block;text-align:start;margin-top:10px;font-weight:600}#asgDue{width:100%;min-height:44px}
+.asgbar{display:flex;flex-direction:column;gap:8px;margin:0 0 10px}.asgbar:empty{display:none}
+.kasg{display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:var(--line);border-radius:18px;background:#FFF8E1;padding:10px 14px;font:inherit;color:inherit;text-align:start;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.kasg .kt{font-size:.85em;font-weight:600}.kasg b{font-size:1.05em}.kasg .kp{display:flex;align-items:center;gap:8px;font-size:.85em}.kasg .kp .mbar{flex:1;height:10px}.kasg.late{background:#FFE3E4}
 #trPrint{display:none}
 @media print{body>*:not(#trPrint){display:none!important}#trPrint{display:block!important;padding:12mm;font-family:var(--body);color:#000}#trPrint table{width:100%;border-collapse:collapse;margin-top:10px}#trPrint th,#trPrint td{border:1px solid #999;padding:6px;text-align:start}}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
@@ -1263,6 +1273,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     <div id="cloudErr" class="notice err hidden" style="margin-bottom:12px"></div>
     <div class="whoami" id="whoami"></div>
     <button class="mebar" id="meBar" onclick="openProfile()"></button>
+    <div id="asgBar" class="asgbar"></div>
     <div class="carhead"><button class="arrow nx" onclick="carStep('subCar',1)" aria-label="הבא">›</button><div class="cardots" id="subCarDots"></div><button class="arrow pv" onclick="carStep('subCar',-1)" aria-label="הקודם">‹</button></div>
     <div class="car" id="subCar"></div>
     <div id="kidDone"></div>
@@ -1630,6 +1641,9 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       LS.setItem('sff_data_fam', famId);
       W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
       W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { intro: Date.now() }, { merge: true }).catch(() => {});
+      // a teacher's AI quota – for all their groups together (teachers/{uid}/usage/{month}: the server writes, the teacher reads)
+      W.__sffTeacherUsage = async () => { const m = W.monthKeyIL ? W.monthKeyIL() : new Date().toISOString().slice(0, 7);
+        const u = await F.getDoc(F.doc(fdb, `teachers/${uid}/usage/${m}`)); return { used: (u.exists() && u.data().builds) || 0, free: 5 }; };
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
       W.SFF_FAMS = famInfo.map(({ id, name, role, kind }) => ({ id, name, role, kind: kind || 'family' }));
       W.SFF_KIND = cur.kind || 'family'; W.SFF_CLASS = cur.kind === 'class' ? { name: cur.name, ...cur.cls } : null;
@@ -1999,7 +2013,7 @@ if(!kids.length && sets.length){ // migrate older practices
   sets.forEach(x=>{ const k=kids.find(k=>k.name===x.name); if(k) x.kidId=k.id; }); saveKids(); store.save();
 }
 const kidById=id=>kids.find(k=>k.id===id);
-const kidOfSet=s=>kidById(s.kidId)||kids.find(k=>k.name===s.name);
+const kidOfSet=s=>kidById(s.kidId)||kids.find(k=>k.name===s.name)||(s.to&&window.SFF_KID_DEVICE&&kids.length===1?kids[0]:undefined);   // a group's assignment on the student's phone
 let KF={id:null,color:KID_COLORS[0]}, delArm=null;
 function gradeOptions(sel){ sel.innerHTML=GRADES.map((g,i)=>`<option value="${i}">כיתה ${g}</option>`).join(''); }
 
@@ -2036,7 +2050,8 @@ function wizRender(){
   $('wBack').classList.toggle('hidden',W.step===1);
   $('wNext').classList.toggle('hidden',W.step===4); $('btnBuild').classList.toggle('hidden',W.step!==4);
   document.querySelector('.aioff-btn')?.classList.toggle('show',W.step===4);
-  $('wKids').innerHTML=kids.map(k=>`<button class="${W.kidId===k.id?'on':''}" onclick="W.kidId='${k.id}';wizRender()"><span class="dotc" style="background:${k.color}"></span>${esc(k.name)} · ${GRADES[k.grade]}</button>`).join('')+`<button class="add" onclick="$('wKidQuick').classList.toggle('hidden');$('qkName').focus()">＋ ילד/ה חדש/ה</button>`;
+  // a group: the set is built for the whole group (one shared set, given out afterwards as an assignment)
+  if(isClassMode()) $('wKids').innerHTML=`<button class="on" type="button">🏫 ${esc((window.SFF_CLASS||{}).name||'הקבוצה')}</button>`; else $('wKids').innerHTML=kids.map(k=>`<button class="${W.kidId===k.id?'on':''}" onclick="W.kidId='${k.id}';wizRender()"><span class="dotc" style="background:${k.color}"></span>${esc(k.name)} · ${GRADES[k.grade]}</button>`).join('')+`<button class="add" onclick="$('wKidQuick').classList.toggle('hidden');$('qkName').focus()">＋ ילד/ה חדש/ה</button>`;
   $('wSubj').innerHTML=SUBJECTS.map(x=>`<button class="${W.subject===x?'on':''}" onclick='W.subject=${JSON.stringify(x)};wizRender()'>${subjStyle(x)[1]} ${esc(x)}</button>`).join('');
   document.querySelectorAll('.srccard')[2].classList.toggle('on',!$('srcLink').classList.contains('hidden'));
   document.querySelectorAll('.srccard')[3].classList.toggle('on',!$('srcText').classList.contains('hidden'));
@@ -2067,14 +2082,18 @@ function toggleSrc(id){ $(id).classList.toggle('hidden'); wizRender(); }
 function quickAddKid(){ const n=$('qkName').value.trim(); if(!n) return; const k={id:'k'+Date.now(),name:n,grade:+$('qkGrade').value,color:KID_COLORS[kids.length%5]}; kids.push(k); saveKids(); W.kidId=k.id; $('qkName').value=''; $('wKidQuick').classList.add('hidden'); wizRender(); }
 /* ---------- monthly quota: 3 new practice sets per family, then 5 ₪ each (payments open later) ---------- */
 const QUOTA={free:3, price:5};
+const qFree=()=>isClassMode()?5:QUOTA.free;            // a teacher: TEACHER_FREE_BUILDS (functions/index.js), for all their groups together
 function monthKeyIL(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit'}).format(new Date()).slice(0,7); }catch(e){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'); } }
 function nextMonthTxt(){ const d=new Date(); return `1.${(d.getMonth()+1)%12+1}`; }
 async function getQuota(){
+  if(isClassMode()){ try{ const u=await window.__sffTeacherUsage(); return {used:u.used, credits:0}; }catch(e){ return null; } }
   try{ const db=await window.claude.use('db'); const [u,b]=await Promise.all([db.doc('usage/'+monthKeyIL()).get(), db.doc('billing/main').get()]);
     const ud=u.exists?u.data():{}, bd=b.exists?b.data():{}; return {used:ud.builds||0, credits:bd.credits||0}; }catch(e){ return null; }
 }
 const EN=()=>!!(window.SFF_LANG&&SFF_LANG()==='en');
 function quotaHtml(q){
+  if(isClassMode()){ const L=Math.max(0,qFree()-q.used);
+    return L>0?`<span>🎁 נשארו ${L} בניות החודש</span>`:`<b>ניצלת את ${qFree()} הבניות של החודש – מתחדש ב-${nextMonthTxt()}</b>`; }
   const left=Math.max(0,QUOTA.free-q.used);
   if(left>0) return EN()?`🎁 <b>${left} of ${QUOTA.free}</b> free practice sets left this month${q.credits?` · plus ${q.credits} paid`:''}`:`🎁 נשארו לכם <b>${left} מתוך ${QUOTA.free}</b> תרגולים חינם החודש${q.credits?` · ועוד ${q.credits} ששולמו`:''}`;
   if(q.credits>0) return EN()?`🎟️ You've used the ${QUOTA.free} free sets. You have <b>${q.credits}</b> paid ones left.`:`🎟️ השתמשתם ב-${QUOTA.free} התרגולים החינמיים. יש לכם עוד <b>${q.credits}</b> ששולמו.`;
@@ -2083,13 +2102,15 @@ function quotaHtml(q){
 }
 async function loadQuota(){ const el=$('quotaLine'); if(!sample){ el.classList.add('hidden'); return; }
   const q=await getQuota(); if(!q){ el.classList.add('hidden'); return; }
-  el.innerHTML=quotaHtml(q); el.classList.remove('hidden'); el.classList.toggle('out', q.used>=QUOTA.free && !q.credits);
-  $('btnBuild').disabled = q.used>=QUOTA.free && !q.credits;
+  el.innerHTML=quotaHtml(q); el.classList.remove('hidden'); el.classList.toggle('out', q.used>=qFree() && !q.credits);
+  $('btnBuild').disabled = q.used>=qFree() && !q.credits;
 }
 function showQuotaErr(e){
   if(e?.code!=='quota') logFail('build:start', e, W.subject);
   W.step=4; wizRender();
-  if(e?.code==='quota'){ const el=$('quotaLine'); el.innerHTML=quotaHtml({used:e.used??QUOTA.free, credits:e.credits||0}); el.className='quota out'; $('btnBuild').disabled=true; return; }
+  if(e?.code==='quota'){ const el=$('quotaLine'); el.innerHTML=quotaHtml({used:e.used??qFree(), credits:e.credits||0}); el.className='quota out'; $('btnBuild').disabled=true; return; }
+  if(e?.code==='need_students'){ wizErr(`כדי להמשיך לבנות, צריך לפחות ${e.min||3} תלמידים שהצטרפו. בינתיים אפשר לתת משימה מהקטלוג.`); return; }
+  if(e?.code==='teacher_budget'){ wizErr('בניית תרגולים חדשים עצרה לחודש הזה. אפשר לתת משימה מהקטלוג.'); return; }
   wizErr(e?.code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. אפשר להוסיף תרגול מוכן מהקטלוג, או לנסות שוב מחר.' : e?.code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. אפשר להוסיף תרגול מוכן מהקטלוג.' : 'לא הצלחנו להתחיל את הבנייה: '+(e?.message||e));
 }
 /* ---------- failure log: families/{f}/errlog – what failed, where, why (no prompt text) ---------- */
@@ -2161,7 +2182,7 @@ function wizErr(t){ const e=$('formErr'); e.className='notice err'; e.style.back
 function wizGo(d){
   $('formErr').className='notice err hidden';
   if(d>0){
-    if(W.step===1 && !W.kidId) return wizErr('בחרו לאיזה ילד התרגול (או הוסיפו ילד חדש).');
+    if(W.step===1 && !W.kidId && !isClassMode()) return wizErr('בחרו לאיזה ילד התרגול (או הוסיפו ילד חדש).');
     if(W.step===1 && !W.subject) return wizErr('בחרו מקצוע.');
     if(W.step===2 && !$('fTopics').value.trim()) return wizErr('כתבו לפחות נושא אחד למבחן.');
   }
@@ -2178,7 +2199,7 @@ function defGoalCh(n, exam){
   return {goal, why:`${n} פרקים עד ${fmtDate(new Date(new Date(exam).getTime()-864e5).toISOString().slice(0,10))} + חזרה ביום שלפני`};
 }
 function wizSummary(){
-  const k=kidById(W.kidId), topics=$('fTopics').value.split('\n').map(x=>x.trim()).filter(Boolean), exam=$('fExam').value;
+  const k=kidById(W.kidId)||(isClassMode()?{id:null,name:'',grade:+((window.SFF_CLASS||{}).grade)||0}:null), topics=$('fTopics').value.split('\n').map(x=>x.trim()).filter(Boolean), exam=$('fExam').value;
   $('fName').value=k.name; $('fGrade').value=k.grade; $('fSubject').value=W.subject;
   if(!W.edited.fRound) $('fRound').value=defRound(k.grade,W.subject);
   const round=+$('fRound').value||defRound(k.grade,W.subject);
@@ -2354,7 +2375,7 @@ async function dropBuild(id){ const b=BUILDS.find(x=>x.id===id); if(!b) return;
     endBuildSrv(id,{cancel:true}); }
   else endBuildSrv(id,{dismiss:true}); }
 function buildErrMsg(code, e={}){
-  return code==='teacher_ai_soon' ? 'בניית AI למורים – בקרוב.' : code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
+  return code==='need_students' ? `כדי להמשיך לבנות, צריך לפחות ${e.min||3} תלמידים שהצטרפו.` : code==='teacher_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה.' : code==='budget' ? 'בניית תרגולים חדשים עצרה להיום. נסו שוב מחר.' : code==='family_budget' ? 'בניית תרגולים חדשים עצרה לחודש הזה. נסו שוב בחודש הבא.'
     : code==='build_calls'||code==='build_closed' ? 'הבנייה ארוכה מהרגיל ונעצרה. אפשר לנסות שוב עם פחות פרקים.'
     : code==='rate_limited' ? 'יותר מדי בקשות ברצף. חכו דקה ונסו שוב.'
     : code==='not_granted' ? 'לא ניתן אישור לשימוש ב-Claude מהדף הזה.'
@@ -2396,7 +2417,7 @@ async function build(){
   try{ r=await window.__sffAI.submit(I, canImages?images.map(i=>i.blob):[]); }
   catch(e){
     wakeOff(); if(CUR_BUILD!=='send') return; CUR_BUILD=null;
-    if(['quota','budget','family_budget'].includes(e?.code)){ show('vForm'); showQuotaErr(e); return; }
+    if(['quota','budget','family_budget','teacher_budget','need_students'].includes(e?.code)){ show('vForm'); showQuotaErr(e); return; }
     logFail('build:send', e, subject); setStep('scan','fail'); showBuildErr(buildErrMsg(e?.code, e), false); return;
   }
   wakeOff();
@@ -2712,7 +2733,7 @@ async function catLoad(id){ if(catSet(id)) return; try{ CAT.p[id]=await loadShar
 function catPick(id){ CAT.pick=CAT.pick||{}; return CAT.pick[id]=CAT.pick[id]||new Set(); }
 function catToggle(id, t, on){ const P=catPick(id); on?P.add(t):P.delete(t); renderCatalog(); }
 function catAll(id){ const p=catSet(id), P=catPick(id), all=P.size===p.topics.length; p.topics.forEach(t=>all?P.delete(t):P.add(t)); renderCatalog(); }
-function catAdd(id){ const P=[...catPick(id)]; if(!P.length) return; const k=kidById(CAT.kid); openAddDialog(id, k?k.id:null, P); }
+function catAdd(id){ const P=[...catPick(id)]; if(!P.length) return; if(isClassMode()){ if(!ASG) ASG={step:1, base:null, to:'all', pick:new Set(), one:'', due:isoDay(7), review:false}; asgFromCatalog(id,P); return; }   /* a group: every set is given as an assignment */ const k=kidById(CAT.kid); openAddDialog(id, k?k.id:null, P); }
 function renderCatalog(){
   const k=kidById(CAT.kid), L=CAT.list||[];
   if(CAT.grade==null) CAT.grade=k?k.grade:0;
@@ -2730,7 +2751,7 @@ function renderCatalog(){
      +CAT_SUBJ.map(s=>{ const mine=here.filter(x=>x.subject===s), noProg=s==='אנגלית'&&g<2;
        const nT=mine.reduce((a,x)=>a+((x.tags||[]).length||0),0);
        return `<button class="subjtile ${mine.length?'':'off'}" onclick="CAT.subj=${esc(JSON.stringify(s))};renderCatalog();scrollTo(0,0)">${ico(s)}<b>${esc(s)}</b><span class="hint">${mine.length?`✓ ${mine.length===1?'תרגול מוכן':mine.length+' תרגולים מוכנים'}`:noProg?'לא נלמד כמקצוע':'בקרוב'}</span></button>`; }).join('')+`</div>`
-     +`<div class="aibox">${isClassMode()?'🛠️ <b>בניית AI למורים – בקרוב</b>':sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
+     +`<div class="aibox">${sample?`<button class="btn" onclick="openWizard(${k?`'${k.id}'`:'null'})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`;
     return;
   }
   // 2) one subject: tick the topics of the test, then add
@@ -2750,7 +2771,7 @@ function renderCatalog(){
   $('catList').innerHTML=`<button class="linkbtn catback" onclick="CAT.subj='';renderCatalog()">‹ כל המקצועות</button>
     <div class="catsubh">${ico(sub)}<b>${esc(sub)} · כיתה ${GRADES[g]}</b></div>`
    +(mine.length?mine.map(block).join('')+currList(sub,false)
-      +`<div class="aibox">${isClassMode()?'🛠️ <b>בניית AI למורים – בקרוב</b>':sample?`<button class="btn" onclick="buildInSubject(${esc(JSON.stringify(sub))})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`
+      +`<div class="aibox">${sample?`<button class="btn" onclick="buildInSubject(${esc(JSON.stringify(sub))})">✨ בנייה מהחומר שלכם</button>`:'🛠️ חסר תרגול? <b>בנייה עם AI מהחומר שלכם – בקרוב</b>'}</div>`
      :`<div class="card soonc">${noProg?`<p class="sub" style="margin:0">${esc((cur[sub]||[])[0]||'')}</p>`:`<p class="sub" style="margin:0 0 8px">עוד אין תרגול מוכן. מה לומדים בכיתה ${GRADES[g]}:</p><ul class="currl">${(cur[sub]||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
         ${sample&&!isClassMode()?`<button class="btn" style="margin-top:10px" onclick="buildFromCurriculum(${esc(JSON.stringify(sub))},${g})">✨ לבנות תרגול לפי הנושאים האלה</button>`:''}`}</div>`);
 }
@@ -2896,9 +2917,10 @@ function defChapters(topics, round){
   return out;
 }
 function getChapters(s){
-  if(Array.isArray(s.chapters) && s.chapters.length && s.questions.some(q=>q.ch!=null))
-    return s.chapters.map((c,i)=>({...c, qs:s.questions.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
-  const per=s.perRound||10, qs=s.questions, n=Math.max(1,Math.ceil(qs.length/per)), out=[];
+  const QS=Array.isArray(s.questions)?s.questions:[];        // a broken set (no questions) never stops the screen
+  if(Array.isArray(s.chapters) && s.chapters.length && QS.some(q=>q.ch!=null))
+    return s.chapters.map((c,i)=>({...c, qs:QS.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
+  const per=s.perRound||10, qs=QS, n=Math.max(1,Math.ceil(qs.length/per)), out=[];
   for(let i=0;i<n;i++){ const part=qs.slice(i*per,(i+1)*per); out.push({title:[...new Set(part.map(q=>q.topic))].join(' + '),topics:[...new Set(part.map(q=>q.topic))],count:part.length,qs:part}); }
   return out;
 }
@@ -2909,7 +2931,7 @@ function roundsTotal(s){ return getChapters(s).length; }
 function roundsDone(s){ return chaptersDone(s).size; }
 // finished: the test date passed, every station is done, or the parent opened a focused (🎯) practice for it
 function setDone(s){ if(!s||s.demo) return null;
-  if(s.examDate && daysLeft(s.examDate)<0) return 'exam';
+  if(s.examDate && daysLeft(s.examDate)<0 && !s.to) return 'exam';          // an assignment past its date stays, marked
   if(!s.reinf && sets.some(x=>x!==s && x.reinf===s.id)) return 'focus';
   if(roundsDone(s)>=roundsTotal(s)) return 'done';
   return null; }
@@ -2966,7 +2988,7 @@ function daysStrip(s){
   }
   return `<div class="days">${out.join('')}</div>`;
 }
-function kidSets(k){ return sets.filter(x=>kidOfSet(x)===k); }
+function kidSets(k){ return sets.filter(x=>kidOfSet(x)===k && !(x.ass&&x.ass.start&&daysLeft(x.ass.start)>0)); }   // a review assignment shows from its day
 function kidStreak(k){ const ids=new Set(kidSets(k).map(x=>x.id)); const days=new Set(history.filter(h=>ids.has(h.setId)).map(h=>dayKey(h.at)));
   let n=0; const d=new Date(); if(!days.has(d.toDateString())) d.setDate(d.getDate()-1); while(days.has(d.toDateString())){ n++; d.setDate(d.getDate()-1); } return n; }
 function kidTrophies(k){ return kidSets(k).reduce((a,x)=>a+trophyDays(x),0); }
@@ -3165,6 +3187,7 @@ function renderKidSets(){
   $('whoami').innerHTML = kids.length>1 ? kids.map(k=>`<button class="${k.id===activeKid?'on':''}" onclick="activeKid='${k.id}';renderKidSets()">${avatarHtml(k,34)}${esc(kidName(k))}</button>`).join('') : '';
   $('meBar').classList.toggle('hidden',!me); if(me) $('meBar').innerHTML=`${avatarHtml(me,52)}<span>${esc(kidName(me))}</span><span class="pen">✎</span>`;
   const mine = me ? kidSets(me) : sets;
+  kidAsgBar(window.SFF_KID_DEVICE&&me?me:null);
   // a kid's phone never shows the example: it says what is happening (and how far the connection got)
   if(!mine.length && locked()) kidKick();
   if(!mine.length && locked()){
@@ -4336,7 +4359,7 @@ async function cloudInit(){
   if(!DB) return;
   if(window.SFF_KID_DEVICE){ let inf=null, denied=false; try{ inf=await DB.doc('fam/info').get(); }catch(e){ denied=true; }
     const fam=lsGet('sff_fam');
-    if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ lsSet('sff_cls',fam); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
+    if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ lsSet('sff_cls',fam); window.SFF_CLS_INFO=inf.data(); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
     // this phone was a student's in a group and no longer may read it (consent withdrawn): nothing of the group stays here
     if(denied && fam && lsGet('sff_cls')===fam){ classKidGone(); showCloudErr('kid: permission-denied'); return; } }
   if(isClassMode()) classCloud();
@@ -4644,7 +4667,7 @@ const IN={list:[],i:0,kid:false,mode:null};
    the same screens in a tutor's words and purple (both kept in users/{uid}.introTeacher). The parent's `intro` is never touched.
    ☰ → איך זה עובד shows the last screen of the series. A screen (or a part of one) whose feature isn't built yet stays behind
    TSTAGE and comes on with its stage – every claim here is checked against the app: keep them true. */
-const TSTAGE={assign:false, classAI:false, parentReport:false};   // stage 4 (assignments), the teachers' AI quota, stage 6 (report to a parent)
+const TSTAGE={assign:true, classAI:true, parentReport:false};   // stage 4 (assignments), the teachers' AI quota, stage 6 (report to a parent)
 Object.assign(IC,{
   cap:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2 2 10 2 12 0v-5"/>',
   eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
@@ -4750,8 +4773,8 @@ Object.assign(INTRO,{
     <p style="color:#E4ECFF">${pv?'שולחים תרגול על מה שלמדתם היום בשיעור – כמשחק – ורואים מי עשה':'שולחים תרגול על מה שלמדתם היום בכיתה – כמשחק – ורואים מי עשה'}</p>
     <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:10px">
       ${st(1,'מה?',opts(['מהקטלוג',...(TSTAGE.classAI?['מצילום החומר']:[]),'תרגול קיים'],0)+'<div style="font-size:12px;color:#4A4870">אנגלית ד׳ · <span translate="no">Unit 4 – My House</span></div>')}
-      ${st(2,'למי?',opts(pv?['כל התלמידים','בחירה']:['כל הכיתה','קבוצת חיזוק','בחירה'],0))}
-      ${st(3,'מתי?',opts(['עד השיעור הבא','השבוע','סוף היחידה','לפני מבחן'],0))}</div>
+      ${st(2,'למי?',opts(pv?['כל התלמידים','בחירה','תלמיד/ה אחד/ת']:['כל הכיתה','מי שצריך חיזוק','בחירה'],0))}
+      ${st(3,'מתי?',opts(['עד יום שישי','בעוד שבוע','בעוד שבועיים','תאריך אחר'],0))}</div>
     <div class="icta" style="background:#F2A63B;color:#1B2A4A;border-radius:14px;font-weight:800">${pv?'לשלוח ל-6 תלמידים':'לשלוח ל-32 תלמידים'}</div>`}; },
   s4:()=>{ const pv=IN.mode==='private', P=iPal(pv);
     const bar=(w,v,c,tc)=>`<div><div class="irow" dir="ltr"><span style="font-weight:700" translate="no">${w}</span><b style="color:${tc}">${v}%</b></div><div class="ibar" dir="ltr"><div style="width:${v}%;background:${c}"></div></div></div>`;
@@ -5041,7 +5064,7 @@ function teacherBody(){
       return `<button class="tstud" onclick="tStudent('${esc(k.id)}')">${avatarHtml(k,36)}<b><bdi>${esc(k.name)}</bdi></b><span class="cbadge c-${esc(c.status||'')}">${b[0]} ${b[1]}</span></button>`; }).join('')}</div>`
     :`<div class="tempty"><div style="font-size:2.4em">👋</div><b>עוד אין תלמידים</b>
       <p class="sub">שולחים להורים קישור אחד, הם מאשרים את ההשתתפות של הילד/ה, ואתם מאשרים כל בקשה. רק אחרי האישור נפתח לתלמיד/ה קישור אישי.</p></div>`;
-  return teacherAttention()+reqs+list+`<div class="actions" style="justify-content:center;margin-top:14px"><button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div>`; }
+  return teacherAttention()+(trStudents().length?teacherAssignments():'')+reqs+list+`<div class="actions" style="justify-content:center;margin-top:14px"><button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div>`; }
 function fillSigs(root){ (root||document).querySelectorAll('img[data-sig]').forEach(im=>{ const id=im.dataset.sig, r=CLS.reqs.find(x=>x.id===id)||null;
   const src=r?r.sig:(CLS.consents[id]||{}).sig; if(typeof src==='string'&&src.startsWith('data:image/png;base64,')) im.src=src; else im.remove(); }); }
 const cls=()=>window.__sffClass;
@@ -5058,6 +5081,7 @@ function tStudent(kid){ const k=kidById(kid), c=CLS.consents[kid]||{}; if(!k) re
     ${ps.map(p=>`<div class="tpar"><b>${esc(p.parentName)}</b><span class="hint">${fmtDT(p.at)}${p.contact?' · '+esc(p.contact):''}${p.letterV||c.letterV?` · גרסת מכתב ${esc(p.letterV||c.letterV)}`:''}</span>
       ${p.sig?`<img class="tsig" alt="חתימה" src="">`:''}</div>`).join('')||'<p class="hint">עוד אין הסכמה.</p>'}
     <div class="tkstats">${kidCardStats(kid)}</div>
+    ${history.some(h=>h.kidId===kid&&h.right<h.n)?`<button class="btn small" style="margin-top:8px" onclick="tMistakes('${esc(kid)}')">🎯 תרגול מהטעויות – משימה אישית</button>`:''}
     <label class="tnote" for="tNote">📝 הערה פרטית (רק את/ה רואה)</label><textarea id="tNote" data-kid="${esc(kid)}" maxlength="2000" rows="3" oninput="this.dataset.touched=1"></textarea>
     <button class="btn ghost small" onclick="tNoteSave('${esc(kid)}')">שמירת ההערה</button>
     <div class="actions" style="justify-content:center;margin-top:12px">
@@ -5216,6 +5240,125 @@ async function tNoteLoad(kid){ const ta=$('tNote'); if(!ta||!DB) return;
   try{ const d=await DB.doc('notes/'+kid).get(); if($('tNote')===ta&&ta.dataset.kid===kid&&!ta.dataset.touched) ta.value=d.exists?String(d.data().text||''):''; }catch(e){} }
 async function tNoteSave(kid){ const ta=$('tNote'); if(!ta||!DB) return; const text=ta.value.slice(0,2000);
   try{ if(text.trim()) await DB.doc('notes/'+kid).set({text, at:Date.now()}); else await DB.doc('notes/'+kid).delete(); toast('✓ נשמר'); }catch(e){ toast('⚠️ '+(e.code||e.message)); } }
+/* ---------- a group's assignments (stage 4) ----------
+   One shared practice set per assignment: sets/{id} with to: 'all' | [kidId…], due (and examDate = due, so the chapters are
+   spread over the days like a test date), ass: {by, at, closed?, mist?, review?, start?} – never a kid's id or name in it
+   (firestore.rules: sharedOk). A student's phone reads only the assignments given to all or to that student (setForKid) –
+   it asks set.to == 'all' and set.toMap.<its id> == true (toMap: the same students as to, so the rules can prove the query).
+   The teacher gives one out in 3 steps: what (the catalog / a set already in the group / a new AI build) → to whom (all /
+   a choice, with "need strengthening" from the report / one student) → by when (+ "core facts again in two weeks"). */
+const isAsg=s=>!!(s&&s.to);
+const asgKids=s=>s.to==='all'?trStudents().map(k=>k.id):(Array.isArray(s.to)?s.to.filter(id=>trStudents().some(k=>k.id===id)):[]);
+const asgLive=s=>isAsg(s)&&!(s.ass&&s.ass.closed)&&!(s.ass&&s.ass.start&&daysLeft(s.ass.start)>0);
+function chDoneFor(s,kid){ return new Set(history.filter(h=>h.setId===s.id&&h.kidId===kid&&h.mode!=='memory'&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
+function asgState(s){ const tot=roundsTotal(s), st={done:[],mid:[],none:[]};
+  asgKids(s).forEach(id=>{ const k=kidById(id); if(!k) return; const d=chDoneFor(s,id).size, any=history.some(h=>h.setId===s.id&&h.kidId===id);
+    (d>=tot?st.done:any?st.mid:st.none).push(k); }); return st; }
+const WD=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+const isoDay=(n=0)=>{ const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
+const dueTxt=d=>{ if(!d) return ''; const n=daysLeft(d); return n<0?'התאריך עבר':n===0?'עד היום':n===1?'עד מחר':n<7?`עד יום ${WD[new Date(d+'T00:00:00').getDay()]}`:`עד ${fmtDate(d)}`; };
+const asgTitle=s=>String(s.title||s.subject||'').replace(/^🎯\s*/,'');
+// the teacher's home: the open assignments – how many finished, a bar; a set just built waits to be given out
+function teacherAssignments(){
+  const A=sets.filter(s=>isAsg(s)&&!(s.ass&&s.ass.closed)).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
+  const waiting=sets.filter(s=>s.grp&&!s.to);
+  const row=s=>{ const st=asgState(s), n=st.done.length+st.mid.length+st.none.length, late=s.due&&daysLeft(s.due)<0, soon=s.ass&&s.ass.start&&daysLeft(s.ass.start)>0;
+    return `<button class="tasg" onclick="tAsg('${esc(s.id)}')"><div class="tr1"><b translate="no" dir="auto">${esc(asgTitle(s))}</b><span class="hint ${late?'bad':''}">${soon?`מתחיל ב-${fmtDate(s.ass.start)}`:dueTxt(s.due)}</span></div>
+      <div class="mbar" aria-hidden="true"><span style="width:${n?st.done.length/n*100:0}%;background:#24C78E"></span><span style="width:${n?st.mid.length/n*100:0}%;background:#F2A63B"></span></div>
+      <span class="hint">${st.done.length}/${n} סיימו${st.mid.length?` · ${st.mid.length} באמצע`:''}${s.to==='all'?'':' · '+(n===1?'אישי':'קבוצה נבחרת')}</span></button>`; };
+  return `<div class="tsec"><h3>📚 משימות</h3>${A.map(row).join('')||'<p class="hint">עוד אין משימות פתוחות.</p>'}
+    ${waiting.map(s=>`<div class="twait"><span>✨ <b translate="no" dir="auto">${esc(asgTitle(s))}</b> – תרגול חדש שנבנה</span><button class="btn small" onclick="asgOpen('${esc(s.id)}')">לתת כמשימה</button></div>`).join('')}
+    <div class="actions" style="justify-content:center"><button class="btn" onclick="asgOpen()">＋ משימה חדשה</button></div></div>`;
+}
+// one assignment: who finished, who is in the middle, who did not start; close / delete
+function tAsg(id){ const s=getSet(id); if(!s) return; const st=asgState(s), tot=roundsTotal(s);
+  const grp=(t,l,cls)=>`<div class="tatt ${cls}"><b>${t} · ${l.length}</b>${l.length?`<div class="tnames">${l.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi>${cls==='a-o'?` · ${chDoneFor(s,k.id).size}/${tot}`:''}</button>`).join('')}</div>`:''}</div>`;
+  tDialog(`<h2 translate="no" dir="auto">${esc(asgTitle(s))}</h2><p class="hint">${s.ass&&s.ass.start&&daysLeft(s.ass.start)>0?`מתחיל ב-${fmtDate(s.ass.start)} · `:''}${dueTxt(s.due)} · ${tot} פרקים${s.ass&&s.ass.mist?' · תרגול מהטעויות':''}${s.ass&&s.ass.review?' · חזרה':''}</p>
+    ${grp('סיימו',st.done,'a-g')}${grp('באמצע',st.mid,'a-o')}${grp('עוד לא התחילו',st.none,'a-r')}
+    <div class="actions" style="justify-content:center;margin-top:12px">${s.ass&&s.ass.closed?'':`<button class="btn ghost" onclick="asgClose('${esc(id)}')">סגירת המשימה</button>`}
+      <button class="btn ghost danger" onclick="asgDelete('${esc(id)}')">מחיקה</button></div>
+    <p class="hint">סגירה: המשימה יורדת מראש המסך של התלמידים, והתרגול נשאר להם. מחיקה: התרגול יורד מכולם.</p>`); }
+function asgClose(id){ const s=getSet(id); if(!s) return; s.ass={...(s.ass||{}),closed:Date.now()}; store.save(); tClose(); rerender(); toast('✓ המשימה נסגרה'); }
+async function asgDelete(id){ const s=getSet(id); if(!s) return;
+  if(!(await askSure({ico:'🗑',title:'למחוק את המשימה?',text:'התרגול יורד מכל התלמידים. ההתקדמות שלהם נשמרת בדוח.',yes:'מחיקה',no:'ביטול',danger:true}))) return;
+  sets=sets.filter(x=>x.id!==id); store.save(); tClose(); rerender(); }
+// the 3 steps
+let ASG=null;
+async function asgOpen(baseId){ ASG={step:1, base:null, to:'all', pick:new Set(), one:'', due:isoDay(7), review:false};
+  const b=baseId&&getSet(baseId); if(b){ ASG.base=b; ASG.step=2; } asgRender(); }
+function asgCopy(p){ return {subject:p.subject||'', title:p.title||'', grade:+((window.SFF_CLASS||{}).grade)||+p.grade||0, perRound:p.perRound||0, topics:p.topics||[],
+  questions:JSON.parse(JSON.stringify(p.qs||p.questions||[])), chapters:p.chapters||null, words:Array.isArray(p.words)?p.words:[], group:p.group||'', src:p.src||'', ver:p.ver||'',
+  qa:p.qa?{...p.qa,log:[]}:{checked:(p.qs||p.questions||[]).length,passed:(p.qs||p.questions||[]).length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[], compete:false}; }
+async function asgUsage(){ try{ const u=await window.__sffTeacherUsage?.(); return u; }catch(e){ return null; } }
+async function asgRender(){ const A=ASG; if(!A) return; const N=trStudents().length;
+  const dots=`<div class="asteps">${['מה','למי','עד מתי'].map((t,i)=>`<span class="${i+1===A.step?'on':i+1<A.step?'ok':''}">${i+1}. ${t}</span>`).join('')}</div>`;
+  if(A.step===1){ const have=sets.filter(s=>s.grp||isAsg(s)), u=await asgUsage(), left=u?Math.max(0,u.free-u.used):null;
+    tDialog(`<h2>📚 משימה חדשה</h2>${dots}<p class="sub">מה התלמידים יתרגלו?</p>
+      <div class="aopts"><button class="aopt" onclick="asgCatalog()"><b>📚 מהקטלוג</b><span>תרגולים מוכנים לפי כיתה ומקצוע</span></button>
+        <button class="aopt" onclick="asgAI()"><b>✨ בנייה מהחומר שלך</b><span>מצלמים דף או מעלים PDF${left!=null?` · נשארו ${left} בניות החודש`:''}</span></button>
+        ${have.length?`<button class="aopt" onclick="asgExisting()"><b>📂 תרגול שכבר בקבוצה</b><span>${have.length} תרגולים</span></button>`:''}</div>`); return; }
+  if(A.step===1.5){ const have=sets.filter(s=>s.grp||isAsg(s));
+    tDialog(`<h2>📂 תרגול שכבר בקבוצה</h2>${dots}<div class="aopts">${have.map(s=>`<button class="aopt" onclick="ASG.base=getSet('${esc(s.id)}');ASG.step=2;asgRender()"><b translate="no" dir="auto">${esc(asgTitle(s))}</b><span>${roundsTotal(s)} פרקים · ${s.questions.length} שאלות${isAsg(s)?' · '+dueTxt(s.due):''}</span></button>`).join('')}</div>
+      <button class="linkbtn" onclick="ASG.step=1;asgRender()">› חזרה</button>`); return; }
+  if(A.step===2){ const studs=trStudents(), need=asgNeed(A.base), chips=studs.map(k=>`<button class="${A.pick.has(k.id)?'on':''}" onclick="asgToggle('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi>${need.includes(k.id)?' 🎯':''}</button>`).join('');
+    tDialog(`<h2>👥 למי?</h2>${dots}<p class="hint" translate="no" dir="auto">${esc(asgTitle(A.base))}</p>
+      <div class="aopts"><label class="aradio"><input type="radio" name="asgTo" ${A.to==='all'?'checked':''} onchange="ASG.to='all';asgRender()"><span><b>${(window.SFF_CLASS||{}).teach==='private'?'כל התלמידים':'כל הקבוצה'}</b> · ${N} תלמידים</span></label>
+        <label class="aradio"><input type="radio" name="asgTo" ${A.to==='pick'?'checked':''} onchange="ASG.to='pick';asgRender()"><span><b>בחירת תלמידים</b>${A.to==='pick'?` · ${A.pick.size} נבחרו`:''}</span></label>
+        ${A.to==='pick'?`${need.length?`<button class="btn ghost small" onclick="ASG.pick=new Set(asgNeed(ASG.base));asgRender()">🎯 מי שצריך חיזוק (${need.length})</button>`:''}<div class="chipsel asel">${chips}</div>`:''}
+        <label class="aradio"><input type="radio" name="asgTo" ${A.to==='one'?'checked':''} onchange="ASG.to='one';asgRender()"><span><b>תלמיד/ה אחד/ת</b></span></label>
+        ${A.to==='one'?`<select id="asgOne" onchange="ASG.one=this.value">${studs.map(k=>`<option value="${esc(k.id)}" ${A.one===k.id?'selected':''}>${esc(k.name)}</option>`).join('')}</select>`:''}</div>
+      <div class="actions" style="justify-content:center"><button class="btn" onclick="asgNext2()">הבא ›</button></div>
+      ${A.base&&A.base.grp&&!A.base.to?'':`<button class="linkbtn" onclick="ASG.step=1;asgRender()">› חזרה</button>`}`);
+    if(A.to==='one'&&!A.one&&studs[0]) ASG.one=studs[0].id; return; }
+  if(A.step===3){ const core=(A.base.questions||[]).filter(q=>q.core).length, quick=[[2,'בעוד יומיים'],[(5-new Date().getDay()+7)%7||7,'עד יום שישי'],[7,'בעוד שבוע'],[14,'בעוד שבועיים']];
+    tDialog(`<h2>📅 עד מתי?</h2>${dots}<p class="hint" translate="no" dir="auto">${esc(asgTitle(A.base))}</p>
+      <div class="chipsel asel">${quick.map(([n,t])=>`<button class="${A.due===isoDay(n)?'on':''}" onclick="ASG.due=isoDay(${n});asgRender()">${t}</button>`).join('')}</div>
+      <label class="alab" for="asgDue">תאריך יעד</label><input type="date" id="asgDue" value="${A.due}" min="${isoDay(0)}" onchange="ASG.due=this.value;asgRender()">
+      <p class="hint">${roundsTotal(A.base)} פרקים · ${defGoalCh(roundsTotal(A.base),A.due).goal} ביום – ${dueTxt(A.due)}</p>
+      ${core?`<label class="toggle"><input type="checkbox" ${A.review?'checked':''} onchange="ASG.review=this.checked"><span>🔁 חזרה על העובדות המרכזיות בעוד שבועיים (${core} שאלות)</span></label>`:''}
+      <div class="actions" style="justify-content:center"><button class="btn big" id="asgGo" onclick="asgSave()">✓ לתת את המשימה</button></div>
+      <button class="linkbtn" onclick="ASG.step=2;asgRender()">› חזרה</button>`); }
+}
+function asgToggle(id){ ASG.pick.has(id)?ASG.pick.delete(id):ASG.pick.add(id); asgRender(); }
+// "need strengthening": struggling (under 60%) in a topic of this subject in the last 30 days (the report of stage 3)
+function asgNeed(base){ const studs=trStudents(); if(!studs.length) return [];
+  let R=classReport(history, studs, {days:30, subj:base&&base.subject||''}); if(!R.topics.length) R=classReport(history, studs, {days:30});
+  return studs.filter(k=>Object.values(R.by[k.id]||{}).some(x=>mastLvl(x.pct)==='r')).map(k=>k.id); }
+function asgNext2(){ const A=ASG; if(A.to==='pick'&&!A.pick.size){ toast('בחרו לפחות תלמיד/ה אחד/ת'); return; } if(A.to==='one'&&!A.one) A.one=($('asgOne')||{}).value||''; if(A.to==='one'&&!A.one) return; A.step=3; asgRender(); }
+function asgCatalog(){ ASG.mode='cat'; tClose(); openCatalog(null); toast('בחרו תרגול – הוא יינתן כמשימה'); }
+function asgExisting(){ ASG.step=1.5; asgRender(); }
+function asgAI(){ ASG.mode='ai'; tClose(); openWizard(null); }
+// the catalog's "add" while giving an assignment: the set becomes the assignment's (no kid)
+async function asgFromCatalog(id, pick){ let p; try{ p=pickTopics(await loadShare(id), pick); }catch(e){ toast('⚠️ לא הצלחנו לפתוח את התרגול'); return; }
+  ASG.base=asgCopy(p); ASG.step=2; ASG.mode=null; go('kids'); setTimeout(asgRender,200); }
+function asgSave(){ const A=ASG; if(!A||!A.base||!A.due||daysLeft(A.due)<0){ toast('בחרו תאריך יעד'); return; }
+  const to=A.to==='all'?'all':A.to==='one'?[A.one]:[...A.pick], b=A.base, now=Date.now(), uid=window.SFF_UID||'';
+  const body={...asgCopy(b), to, ...(to==='all'?{}:{toMap:Object.fromEntries(to.map(id=>[id,true]))}), due:A.due, examDate:A.due, dailyGoal:defGoalCh(roundsTotal(b),A.due).goal, ass:{by:uid, at:now}, created:now, cloud:false};
+  // a set built for the group and not yet given out becomes this assignment; anything else is copied (its students keep theirs)
+  if(b.id&&b.grp&&!b.to){ Object.assign(b, body); delete b.kidId; delete b.name; if(to==='all') delete b.toMap; }
+  else sets.unshift({id:'a'+now, ...body});
+  if(A.review){ const core=(b.questions||[]).filter(q=>q.core).map(q=>({...JSON.parse(JSON.stringify(q)), ch:0}));
+    if(core.length) sets.unshift({id:'a'+now+'r', ...asgCopy({...b, questions:core}), title:'🔁 '+asgTitle(b), chapters:[{title:'חזרה על העובדות המרכזיות'}], to, due:isoDay(17), examDate:isoDay(17), dailyGoal:1,
+      ...(to==='all'?{}:{toMap:body.toMap}), ass:{by:uid, at:now, review:1, start:isoDay(14)}, created:now+1, cloud:false}); }
+  store.save(); ASG=null; tClose(); go('kids'); rerender(); toast('✓ המשימה נשלחה'); }
+// a student's card → a short practice from the questions they got wrong (no AI), as a personal assignment for a week
+function tMistakes(kid){ const k=kidById(kid); if(!k) return; const seen=new Set(), qs=[], subj={};
+  history.filter(h=>h.kidId===kid).sort((a,b)=>b.at-a.at).some(h=>{ const set=sets.find(s=>s.id===h.setId); if(!set||!Array.isArray(h.qr)||h.mode==='memory') return false;
+    qrEntries(set,h).forEach(({i,ok})=>{ const q=set.questions[i], key=q&&tkey(q.question); if(ok||!q||seen.has(key)) return; seen.add(key);
+      qs.push({...JSON.parse(JSON.stringify(q)), ch:0}); subj[set.subject]=(subj[set.subject]||0)+1; }); return qs.length>=12; });
+  if(!qs.length){ toast('עוד אין טעויות לתרגל 🎉'); return; }
+  const subject=Object.entries(subj).sort((a,b)=>b[1]-a[1])[0][0], now=Date.now(), due=isoDay(7);
+  sets.unshift({id:'a'+now+'m', subject, title:'🎯 תרגול מהטעויות', grade:k.grade||0, perRound:Math.min(10,qs.length), topics:[...new Set(qs.map(q=>q.topic).filter(Boolean))], questions:qs.slice(0,12),
+    chapters:[{title:'תרגול מהטעויות'}], words:[], group:'', src:'', ver:'', qa:{checked:qs.length,passed:qs.length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[], compete:false,
+    to:[kid], toMap:{[kid]:true}, due, examDate:due, dailyGoal:1, ass:{by:window.SFF_UID||'', at:now, mist:1}, created:now, cloud:false});
+  store.save(); tClose(); rerender(); toast(`✓ נשלח ל${k.name}: ${Math.min(12,qs.length)} שאלות מהטעויות`); }
+// a student's phone: the teacher's assignments at the top of the home screen
+function kidAsgBar(me){ const el=$('asgBar'); if(!el) return; const A=me?sets.filter(s=>asgLive(s)):[];
+  if(!A.length){ el.innerHTML=''; return; }
+  const T=(window.SFF_CLS_INFO||{}).teacher||'';
+  el.innerHTML=A.sort((a,b)=>String(a.due).localeCompare(String(b.due))).map(s=>{ const tot=roundsTotal(s), d=Math.min(chaptersDone(s).size,tot), late=s.due&&daysLeft(s.due)<0;
+    return `<button class="kasg ${late?'late':''}" onclick="openRoad('${esc(s.id)}')"><span class="kt">📚 ${T?`מהמורה <bdi>${esc(T)}</bdi>`:'מהמורה'} – ${late?'⏰ התאריך עבר':dueTxt(s.due)}</span>
+      <b translate="no" dir="auto">${esc(asgTitle(s))}</b><span class="kp"><span class="mbar"><span style="width:${tot?d/tot*100:0}%;background:${d>=tot?'#24C78E':'#2F6BFF'}"></span></span><span>${d}/${tot}</span></span></button>`; }).join(''); }
 // the group's link: QR, WhatsApp text, a new link, close / open, the printable form
 async function inviteStudents(action){
   tDialog('<p class="center">⏳</p>');
@@ -5249,8 +5392,11 @@ function classKidCloud(me){
     const remote=snap.exists?(snap.data().list||[]):[];
     kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; });
     saveKidsLocal(); applyLock(); rerender(); },e=>{ classKidGone(); showCloudErr('kid: '+(e&&(e.code||e.message))); });
-  DB.collection('sets').where('set.kidId','==',me).onSnapshot(q=>{ const remote=q.docs.map(d=>d.data().set).filter(Boolean), old=sets;
-    sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); },()=>{});
+  // its own sets, and the group's assignments for all or for this student – each asked exactly as firestore.rules allow it
+  const parts={}, merge=()=>{ const old=sets, byId=new Map(); Object.values(parts).flat().forEach(r=>byId.set(r.id,r));
+    sets=[...byId.values()].map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); };
+  [['own',['set.kidId','==',me]],['all',['set.to','==','all']],['mine',[`set.toMap.${me}`,'==',true]]].forEach(([k,w])=>
+    DB.collection('sets').where(...w).onSnapshot(q=>{ parts[k]=q.docs.map(d=>d.data().set).filter(Boolean); merge(); },()=>{}));
   DB.doc('progress/'+me).onSnapshot(snap=>{ if(snap.exists) progDocs([{id:me, data:()=>snap.data()}]); },()=>{}); }
 
 /* kid link dialog */

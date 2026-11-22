@@ -72,7 +72,12 @@ const DAILY_CAP_USD = 100;                    // the whole app, per day (Israel 
 // One family may use at most this much of the month's AI budget (3 normal builds cost far less),
 // so a single account can never use up the whole app's budget. Admins have no family limit.
 const FAMILY_CAP_USD = 8;
-const REFUNDS_PER_MONTH = 2;                  // failed-at-the-start builds given back per family per month
+const REFUNDS_PER_MONTH = 2;
+// A teacher's quota is the teacher's – for all their groups together (teachers/{uid}/usage/{month}), never per group, and
+// apart from any family of their own. The first build is free to try; after that only with MIN_STUDENTS approved students.
+const TEACHER_FREE_BUILDS = 5;
+const TEACHER_CAP_USD = 12;
+const MIN_STUDENTS = 3;                  // failed-at-the-start builds given back per family per month
 // USD per 1M tokens: [input, output] – the models the steps use AND the models the API may fall back to on a refusal,
 // so a fallback is never counted at a cheaper rate. An unknown model is counted at the most expensive rate here.
 const PRICE = {
@@ -113,13 +118,6 @@ async function checkFamily(uid, famId) {
   if (f.exists && f.data().kind === 'class' && f.data().ownerUid === uid) return;
   throw new HttpsError('permission-denied', 'Not a member of this family.');
 }
-// a teacher's group: no AI building until the teachers' own quota exists (stage 4) – otherwise every group would bring its
-// own 3 free builds (10 groups = 30). The app shows "בניית AI למורים – בקרוב".
-async function noClassAI(famId) {
-  if (typeof famId !== 'string' || !/^[A-Za-z0-9_-]{6,128}$/.test(famId)) return;
-  const f = await db.doc(`families/${famId}`).get();
-  if (f.exists && f.data().kind === 'class') throw new HttpsError('failed-precondition', 'teacher_ai_soon', { reason: 'teacher_ai_soon' });
-}
 async function checkBudget() {
   const g = await db.doc(`meta/ai_spend_${monthKey()}`).get();
   const day = await db.doc(`meta/ai_day_${dayKey()}`).get();
@@ -128,8 +126,8 @@ async function checkBudget() {
 // this family's share of the month's AI spend (checked after checkFamily, so famId is valid)
 async function checkFamilyBudget(auth, famId) {
   if (isAdminUser(auth)) return;
-  const u = await db.doc(`families/${famId}/usage/${monthKey()}`).get();
-  if ((u.data()?.usd || 0) >= FAMILY_CAP_USD) throw new HttpsError('resource-exhausted', 'family_budget', { reason: 'family_budget', cap: FAMILY_CAP_USD });
+  const sc = await scopeOf(famId), u = await sc.usage().get();
+  if ((u.data()?.usd || 0) >= sc.cap) throw new HttpsError('resource-exhausted', sc.capReason, { reason: sc.capReason, cap: sc.cap });
 }
 // once a day, when the AI spend passes 80% of the daily cap: a line in the server log (red dot for the app admins, and the alert email)
 async function spendAlert() {
@@ -142,6 +140,19 @@ function dayKey(d = new Date()) {             // Israel time, e.g. "2026-11-20"
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
 }
 const famOk = f => typeof f === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(f);
+// Whose quota a family id counts against: a family's own (families/{f}/usage), or a group's teacher (teachers/{owner}/usage).
+// kind and ownerUid never change (rules + the server), so the answer is kept for the life of the instance.
+const SCOPES = new Map();
+async function scopeOf(famId) {
+  if (!famOk(famId)) return null;
+  let s = SCOPES.get(famId);
+  if (!s) { const f = await db.doc(`families/${famId}`).get(), d = f.exists ? f.data() : {};
+    s = d.kind === 'class' && typeof d.ownerUid === 'string' ? { cls: true, owner: d.ownerUid } : { cls: false };
+    if (f.exists) SCOPES.set(famId, s); }
+  return s.cls
+    ? { ...s, usage: (m = monthKey()) => db.doc(`teachers/${s.owner}/usage/${m}`), free: TEACHER_FREE_BUILDS, cap: TEACHER_CAP_USD, capReason: 'teacher_budget' }
+    : { ...s, usage: (m = monthKey()) => db.doc(`families/${famId}/usage/${m}`), free: FREE_BUILDS, cap: FAMILY_CAP_USD, capReason: 'family_budget' };
+}
 // the price of one answer: every attempt (usage.iterations when the API fell back) at the dearer of the asked and the served model
 function usdOf(model, u) {
   const [pi, po] = priceOf(model);
@@ -163,11 +174,12 @@ function liveRes(d) { let sum = 0; const stale = [], now = Date.now();
   return { sum, stale }; }
 async function reserve(admin, famId, usd, id) {
   const refs = [[db.doc(`meta/ai_spend_${monthKey()}`), MONTHLY_CAP_USD, 'budget'], [db.doc(`meta/ai_day_${dayKey()}`), DAILY_CAP_USD, 'budget']];
-  if (famOk(famId)) refs.push([db.doc(`families/${famId}/usage/${monthKey()}`), admin ? Infinity : FAMILY_CAP_USD, 'family_budget']);
+  const sc = await scopeOf(famId);
+  if (sc) refs.push([sc.usage(), admin ? Infinity : sc.cap, sc.capReason]);
   await db.runTransaction(async t => {
     const snaps = await Promise.all(refs.map(([r]) => t.get(r)));
     const live = snaps.map((sn, k) => { const d = sn.data() || {}, L = liveRes(d);
-      if ((d.usd || 0) + L.sum + usd > refs[k][1]) throw new HttpsError('resource-exhausted', refs[k][2], { reason: refs[k][2], ...(refs[k][2] === 'family_budget' ? { cap: FAMILY_CAP_USD } : {}) });
+      if ((d.usd || 0) + L.sum + usd > refs[k][1]) throw new HttpsError('resource-exhausted', refs[k][2], { reason: refs[k][2], ...(k === 2 ? { cap: sc.cap } : {}) });
       return L; });
     snaps.forEach((sn, k) => { const r = refs[k][0], mine = { usd, at: Date.now() };
       if (sn.exists) t.update(r, { [`res.${id}`]: mine, ...Object.fromEntries(live[k].stale.filter(x => /^[A-Za-z0-9]+$/.test(x)).map(x => [`res.${x}`, FieldValue.delete()])) });
@@ -180,8 +192,9 @@ async function settle(famId, id, step, buildId, usd, ran = true) {   // ran = fa
   const per = ran ? { [`steps.${step}.usd`]: inc(usd), [`steps.${step}.calls`]: inc(1) } : {}, n = ran ? { usd: inc(usd), calls: inc(1) } : {};
   const w = [db.doc(`meta/ai_spend_${monthKey()}`).update({ [`res.${id}`]: del, ...n, ...per }),
     db.doc(`meta/ai_day_${dayKey()}`).update({ [`res.${id}`]: del, ...n })];
-  if (famOk(famId)) {
-    w.push(db.doc(`families/${famId}/usage/${monthKey()}`).update({ [`res.${id}`]: del, ...(ran ? { usd: inc(usd) } : {}), month: monthKey() }));
+  const sc = await scopeOf(famId).catch(() => null);
+  if (sc) {
+    w.push(sc.usage().update({ [`res.${id}`]: del, ...(ran ? { usd: inc(usd) } : {}), month: monthKey() }));
     if (ran && typeof buildId === 'string' && /^[A-Za-z0-9]{1,40}$/.test(buildId)) w.push(db.doc(`families/${famId}/builds/${buildId}`).update({ usd: inc(usd), ...per }));
   }
   await Promise.all(w.map(p => p.catch(e => console.error('settle', e.message))));
@@ -431,7 +444,7 @@ async function claimCall(admin, uid, famId, buildId) {
       if (d.calls >= BUILD_CALLS) throw new HttpsError('resource-exhausted', 'build_calls', { reason: 'build_calls' });
       tx.update(ref, { calls: FieldValue.increment(1) });
     } else {
-      const ref = db.doc(`families/${famId}/usage/${monthKey()}`), u = await tx.get(ref);
+      const ref = (await scopeOf(famId)).usage(), u = await tx.get(ref);
       if ((u.data()?.light || 0) >= LIGHT_CALLS) throw new HttpsError('resource-exhausted', 'light', { reason: 'light', limit: LIGHT_CALLS });
       tx.set(ref, { light: FieldValue.increment(1), month: monthKey() }, { merge: true });
     }
@@ -612,7 +625,6 @@ exports.ask = onCall(
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
-    await noClassAI(famId);
     const json = await runStep({ admin: isAdminUser(auth), uid: auth.uid, famId, buildId, name, data, images, fake: request.data.fake === true });
     return { json };
   }
@@ -669,22 +681,33 @@ function cleanInput(x) {
 
 // a new build: one of this month's free builds, or one paid credit (startBuild – the older app – and submitBuild)
 async function openBuild(auth, famId, subject, extra = {}) {
-  const month = monthKey(), adminUser = isAdminUser(auth);
-  const usageRef = db.doc(`families/${famId}/usage/${month}`), billRef = db.doc(`families/${famId}/billing/main`);
+  const month = monthKey(), adminUser = isAdminUser(auth), sc = await scopeOf(famId);
+  const usageRef = sc.usage(month), billRef = sc.cls ? null : db.doc(`families/${famId}/billing/main`);
+  const tRef = sc.cls ? db.doc(`teachers/${sc.owner}`) : null;
+  // a teacher: one build to try with no students; from the second on, at least MIN_STUDENTS approved students in their groups
+  const students = sc.cls && !adminUser ? await approvedStudents(sc.owner) : 0;
   const ref = db.collection(`families/${famId}/builds`).doc();
   return db.runTransaction(async (tx) => {
-    const [u, b] = await Promise.all([tx.get(usageRef), tx.get(billRef)]);
-    const used = u.data()?.builds || 0, credits = b.data()?.credits || 0;
+    const [u, b, t] = await Promise.all([tx.get(usageRef), billRef ? tx.get(billRef) : null, tRef ? tx.get(tRef) : null]);
+    const used = u.data()?.builds || 0, credits = (b && b.data()?.credits) || 0, ever = (t && t.data()?.builds) || 0;
     let kind;
     if (adminUser) kind = 'admin';
-    else if (used < FREE_BUILDS) kind = 'free';
+    else if (sc.cls && ever >= 1 && students < MIN_STUDENTS) throw new HttpsError('failed-precondition', 'need_students', { reason: 'need_students', min: MIN_STUDENTS, students });
+    else if (used < sc.free) kind = 'free';
     else if (credits > 0) kind = 'paid';
-    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: FREE_BUILDS, credits, price: PRICE_ILS });
+    else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: sc.free, credits, price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) });
     tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
+    if (tRef && kind !== 'admin') tx.set(tRef, { builds: FieldValue.increment(1) }, { merge: true });
     if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
     tx.set(ref, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month, ...extra });
-    return { buildId: ref.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: FREE_BUILDS, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS };
+    return { buildId: ref.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: sc.free, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) };
   });
+}
+// a teacher's approved students, in all their groups (a parent signed, the teacher approved)
+async function approvedStudents(owner) {
+  const t = await db.doc(`teachers/${owner}`).get(), ids = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+  const n = await Promise.all(ids.map(c => db.collection(`families/${c}/consents`).where('status', '==', 'digital').count().get().then(r => r.data().count).catch(() => 0)));
+  return n.reduce((a, b) => a + b, 0);
 }
 // End a running build (done / failed / cancelled). One that ended before it really started (≤ 3 AI calls, not done) gives its
 // free build / credit back – at most REFUNDS_PER_MONTH times a month, so "start, call, fail on purpose" cannot repeat for free.
@@ -693,11 +716,12 @@ async function closeBuild(famId, buildId, status, extra = {}) {
   return db.runTransaction(async (tx) => {
     const bd = await tx.get(ref);
     if (!bd.exists || bd.data().status !== 'running') return { refunded: false, closed: false };
-    const d = bd.data(), usageRef = db.doc(`families/${famId}/usage/${d.month}`);
+    const d = bd.data(), sc = await scopeOf(famId), usageRef = sc.usage(d.month);
     const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
     const refund = status !== 'done' && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
     tx.update(ref, { status, endedAt: Date.now(), refunded: refund, ...extra, ...(refund ? { resumable: false } : {}) });
     if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
+    if (refund && sc.cls && d.kind === 'free') tx.set(db.doc(`teachers/${sc.owner}`), { builds: FieldValue.increment(-1) }, { merge: true });
     if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
     return { refunded: refund, closed: true };
   });
@@ -733,7 +757,6 @@ exports.startBuild = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   const auth = parentOnly(request);
   const { famId, subject = '' } = request.data || {};
   await checkFamily(auth.uid, famId);
-  await noClassAI(famId);
   await checkBudget();
   await checkFamilyBudget(auth, famId);
   return openBuild(auth, famId, subject);
@@ -759,7 +782,6 @@ exports.submitBuild = onCall({ region: 'europe-west1', invoker: 'public', secret
     const auth = parentOnly(request);
     const { famId, input, images = [], fake, test } = request.data || {};
     await checkFamily(auth.uid, famId);
-    await noClassAI(famId);
     const I = cleanInput(input);
     if (auth.uid !== famId && !isAdminUser(auth)) {                 // a tutor builds only for the kids of its invitation
       const m = (await db.doc(`families/${famId}/members/${auth.uid}`).get()).data() || {};
@@ -794,7 +816,6 @@ exports.resumeBuild = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   const auth = parentOnly(request);
   const { famId, buildId } = request.data || {};
   await checkFamily(auth.uid, famId);
-  await noClassAI(famId);
   if (!idOk(buildId)) throw new HttpsError('invalid-argument', 'Missing build.');
   const ref = buildRef(famId, buildId);
   const run = await db.runTransaction(async tx => {
@@ -897,6 +918,7 @@ exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPI
       await progress.flush();
       if ((await ref.get()).data()?.status !== 'running') { await cleanBuild(ref); return; }     // cancelled at the last moment
       const setId = 's' + b.at;
+      if ((await scopeOf(famId)).cls) { delete set.kidId; delete set.name; set.grp = 1; }   // a group's: one shared set, given out as an assignment
       await db.doc(`families/${famId}/sets/${setId}`).set({ set: JSON.parse(JSON.stringify({ id: setId, ...set, created: Date.now() })) });
       await rememberPool(famId, I.kidId, set.questions);
       await closeBuild(famId, buildId, 'done', { setId });

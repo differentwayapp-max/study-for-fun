@@ -232,11 +232,39 @@
     'עד השיעור הבא': 'By the next lesson', 'השבוע': 'This week', 'סוף היחידה': 'End of the unit', 'לפני מבחן': 'Before a test',
     'דוח קצר להורה נכתב לבד מהנתונים – עורכים ושולחים בוואטסאפ': 'A short report for the parent writes itself from the data – edit and send on WhatsApp'
   }).forEach(([k, v]) => { if (!(k in T)) T[k] = v; });
+
+  /* a group's assignments (stage 4) and the teacher's builds */
+  Object.entries({
+    'משימות': 'Assignments', 'עוד אין משימות פתוחות.': 'No open assignments yet.', 'תרגול חדש שנבנה': 'a new practice set was built', 'לתת כמשימה': 'Give as an assignment',
+    'משימה חדשה': 'New assignment', 'התאריך עבר': 'Past the date', 'עד היום': 'Due today', 'עד מחר': 'Due tomorrow', 'סיימו': 'Finished', 'באמצע': 'In the middle',
+    'אישי': 'personal', 'קבוצה נבחרת': 'chosen students', 'עוד לא התחילו': 'Not started yet', 'סגירת המשימה': 'Close the assignment',
+    'סגירה: המשימה יורדת מראש המסך של התלמידים, והתרגול נשאר להם. מחיקה: התרגול יורד מכולם.': "Close: the assignment leaves the top of the students' screen, and they keep the practice set. Delete: the set is removed from everyone.",
+    'המשימה נסגרה': 'The assignment was closed', 'למחוק את המשימה?': 'Delete the assignment?', 'התרגול יורד מכל התלמידים. ההתקדמות שלהם נשמרת בדוח.': "The set is removed from all students. Their progress stays in the report.",
+    'מה': 'What', 'עד מתי': 'By when', 'מה התלמידים יתרגלו?': 'What will the students practise?', 'תרגולים מוכנים לפי כיתה ומקצוע': 'Ready practice sets by grade and subject',
+    'בנייה מהחומר שלך': 'Build from your own material', 'מצלמים דף או מעלים PDF': 'Take a photo of a page or upload a PDF', 'תרגול שכבר בקבוצה': 'A set already in the group',
+    'כל הקבוצה': 'The whole group', 'בחירת תלמידים': 'Choose students', 'מי שצריך חיזוק': 'Those who need strengthening', 'תלמיד/ה אחד/ת': 'One student',
+    'בחרו לפחות תלמיד/ה אחד/ת': 'Choose at least one student', 'בעוד יומיים': 'In 2 days', 'עד יום שישי': 'By Friday', 'בעוד שבוע': 'In a week', 'בעוד שבועיים': 'In 2 weeks',
+    'תאריך אחר': 'Another date', 'תאריך יעד': 'Due date', 'לתת את המשימה': 'Give the assignment', 'בחרו תאריך יעד': 'Choose a due date', 'המשימה נשלחה': 'The assignment was sent',
+    'בחרו תרגול – הוא יינתן כמשימה': 'Pick a practice set – it will be given as an assignment', 'לא הצלחנו לפתוח את התרגול': "We couldn't open the practice set",
+    'תרגול מהטעויות – משימה אישית': 'Practice from the mistakes – a personal assignment', 'עוד אין טעויות לתרגל 🎉': 'No mistakes to practise yet 🎉', 'תרגול מהטעויות': 'Practice from the mistakes',
+    'מהמורה': 'From your teacher', 'חזרה': 'Review',
+    'בניית תרגולים חדשים עצרה לחודש הזה. אפשר לתת משימה מהקטלוג.': 'Building new practice sets has stopped for this month. You can give an assignment from the catalog.',
+    'בניית תרגולים חדשים עצרה לחודש הזה.': 'Building new practice sets has stopped for this month.',
+    'ראשון': 'Sunday', 'שני': 'Monday', 'שלישי': 'Tuesday', 'רביעי': 'Wednesday', 'חמישי': 'Thursday', 'שישי': 'Friday', 'שבת': 'Saturday'
+  }).forEach(([k, v]) => { if (!(k in T)) T[k] = v; });
   Object.keys(GR).forEach(g => { T[g] = 'Grade ' + GR[g]; });
 
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    [/^עד יום (ראשון|שני|שלישי|רביעי|חמישי|שישי|שבת)$/, (m, d) => `Due ${T[d]}`], [/^עד (\d{1,2}\.\d{1,2})$/, (m, d) => `Due ${d}`], [/^מתחיל ב-(.+)$/, (m, d) => `Starts ${d}`],
+    [/^(\d+)\/(\d+) סיימו$/, (m, a, b) => `${a}/${b} finished`], [/^(\d+) באמצע$/, (m, n) => `${n} in the middle`], [/^(\d+) פרקים$/, (m, n) => `${n} chapters`],
+    [/^(\d+) שאלות$/, (m, n) => `${n} questions`], [/^(\d+) תרגולים$/, (m, n) => `${n} practice sets`], [/^(\d+) נבחרו$/, (m, n) => `${n} chosen`],
+    [/^(\d+) ביום – (.+)$/, (m, n, r) => `${n} a day – ${tr(r)}`], [/^נשארו (\d+) בניות החודש$/, (m, n) => `${n} builds left this month`],
+    [/^ניצלת את (\d+) הבניות של החודש – מתחדש ב-(.+)$/, (m, n, d) => `You've used this month's ${n} builds – renewed on ${d}`],
+    [/^כדי להמשיך לבנות, צריך לפחות (\d+) תלמידים שהצטרפו\.(.*)$/, (m, n, r) => `To keep building, you need at least ${n} students who joined.${r.trim() ? ' You can give an assignment from the catalog meanwhile.' : ''}`],
+    [/^חזרה על העובדות המרכזיות בעוד שבועיים \((\d+) שאלות$/, (m, n) => `Core facts again in two weeks (${n} questions`],
+    [/^נשלח ל(.+): (\d+) שאלות מהטעויות$/, (m, k, n) => `Sent to ${k}: ${n} questions from the mistakes`],
     [/^המשפחה של (.+) הזמינה אותך\. מעכשיו רואים יחד מה (.+) יודע\/ת, ונותנים תרגול כיפי עד השיעור הבא$/, (m, n) => `${n}'s family invited you. From now on you see together what ${n} knows, and give fun practice until the next lesson`],
     [/^לכרטיס של (.+)$/, (m, n) => `To ${n}'s card`], [/^השבוע של (.+)$/, (m, n) => `${n}'s week`], [/^מבחן ב-(.+)$/, (m, d) => `Test on ${d}`], [/^לשלוח ל-(\d+) תלמידים$/, (m, n) => `Send to ${n} students`],
     [/^(\d+) הימים האחרונים$/, (m, n) => `Last ${n} days`], [/^(\d+) החודשים האחרונים$/, (m, n) => `Last ${n} months`],

@@ -60,6 +60,12 @@ service cloud.firestore {
     function tutorKids(f) { return get(/databases/$(database)/documents/families/$(f)/members/$(request.auth.uid)).data.get('kids', []); }
     function tutorHas(f, kid) { return isTutor(f) && kid is string && kid in tutorKids(f); }
     function setKid(d) { return d.get('set', {}).get('kidId', null); }
+    // a group's assignment: one shared set for 'all' its students or a list of them – no kid's id or name in it
+    function setTo(d) { return d.get('set', {}).get('to', null); }
+    // a phone asks exactly this (to == 'all', or toMap.<its kid> == true) – a list query is allowed only when the rule can be proved from it
+    function setForKid(d, kid) { return kid is string && (setTo(d) == 'all' || d.get('set', {}).get('toMap', {}).get(kid, false) == true); }
+    function sharedOk(d) { return !('to' in d.get('set', {})) || (!('kidId' in d.set) && !('name' in d.set)
+      && (d.set.to == 'all' || (d.set.to is list && d.set.to.size() <= 40 && d.set.get('toMap', {}).keys().hasOnly(d.set.to)))); }
     function consented(f, kid) { return kid is string
       && get(/databases/$(database)/documents/families/$(f)/consents/$(kid)).data.status == 'digital'; }
     function isDevice(f) {
@@ -119,7 +125,10 @@ service cloud.firestore {
       allow read, update, delete: if appAdmin();
     }
 
-    match /teachers/{uid} { allow read: if google() && request.auth.uid == uid; allow write: if false; }
+    match /teachers/{uid} { allow read: if google() && request.auth.uid == uid; allow write: if false;
+      // a teacher's AI quota (all their groups together) – the server writes it, the teacher reads it
+      match /usage/{month} { allow read: if google() && request.auth.uid == uid; allow write: if false; }
+    }
 
     match /users/{uid} {
       allow read, write: if google() && request.auth.uid == uid;
@@ -172,10 +181,11 @@ service cloud.firestore {
       // a tutor: only practice sets of the tutor's kids, and never moved to another kid (old and new kid both the tutor's)
       // (a tutor's query must ask for those kids only – rules don't filter)
       match /sets/{setId} {
+        // a group's student phone: its own student's sets, and the assignments given to all or to that student
         allow read: if isFull(familyId) || tutorHas(familyId, setKid(resource.data))
-          || (isDevice(familyId) && (!isClass(familyId) || setKid(resource.data) == deviceKid(familyId)));   // a group: its own student's
-        allow create: if isFull(familyId) || tutorHas(familyId, setKid(request.resource.data));
-        allow update: if isFull(familyId) || (tutorHas(familyId, setKid(resource.data)) && tutorHas(familyId, setKid(request.resource.data)));
+          || (isDevice(familyId) && (!isClass(familyId) || setKid(resource.data) == deviceKid(familyId) || setForKid(resource.data, deviceKid(familyId))));
+        allow create: if (isFull(familyId) && sharedOk(request.resource.data)) || tutorHas(familyId, setKid(request.resource.data));
+        allow update: if (isFull(familyId) && sharedOk(request.resource.data)) || (tutorHas(familyId, setKid(resource.data)) && tutorHas(familyId, setKid(request.resource.data)));
         allow delete: if isAdmin(familyId);
       }
 

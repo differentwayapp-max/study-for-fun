@@ -1,5 +1,5 @@
 // The first-run intro screens, on the emulators (firestore, auth) with the real rules:
-// 1. a new parent (after the sign-in and the terms) gets screens 1, 3, 4, 5, 7, 8; swipe goes on; every button ≥ 44 px;
+// 1. a new parent (after the sign-in and the terms) gets 7 screens – the opening, the material, the test day, progress, focused practice (right after progress), sharing, safety; swipe goes on; every button ≥ 44 px;
 //    "דלג" closes it and it never comes back – not after a reload and not on another phone (kept in users/{uid}.intro);
 //    ☰ → איך זה עובד opens it again; English: no Hebrew left on it;
 // 2. a kid phone, the first time from its link: only screens 2 and 6 – no parent text, no "להורה" tags; "יאללה למפה" ends it;
@@ -26,13 +26,13 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   console.log('1. a new parent');
   const c1 = await parent(), p1 = await open(c1);
   let s = await shown(p1);
-  ok(s && s.key === 'main' && s.n === 6, 'the intro opens on screen 1, with 6 screens: ' + JSON.stringify(s && { key: s.key, n: s.n }));
+  ok(s && s.key === 'main' && s.n === 7, 'the intro opens on screen 1, with 7 screens: ' + JSON.stringify(s && { key: s.key, n: s.n }));
   const small = await p1.evaluate(() => [...document.querySelectorAll('#intro button')].filter(x => { const r = x.getBoundingClientRect(); return r.height < 44 || r.width < 24; }).map(x => x.outerHTML.slice(0, 60)));
   ok(!small.length, 'every button is at least 44 px tall ' + JSON.stringify(small));
   await p1.screenshot({ path: `${OUT}/intro_parent_1.png` });
   const keys = ['main'];
-  for (let i = 0; i < 5; i++) { await p1.click('#intro .inext'); await p1.waitForTimeout(300); keys.push((await shown(p1)).key); }
-  ok(keys.join() === 'main,build,testday,progress,share,safe', 'the parent screens: ' + keys.join());
+  for (let i = 0; i < 6; i++) { await p1.click('#intro .inext'); await p1.waitForTimeout(300); keys.push((await shown(p1)).key); }
+  ok(keys.join() === 'main,build,testday,progress,focus,share,safe', 'the parent screens: ' + keys.join());
   ok(/מתחילים/.test(await p1.textContent('#intro .inext')) && !(await p1.$('#intro .iskip')), 'the last screen: "מתחילים" (no "דלג")');
   // swipe (Hebrew: a swipe to the right goes on, to the left goes back)
   const swipe = dx => p1.evaluate(dx => { const el = document.getElementById('intro'), t = (x) => [new Touch({ identifier: 1, target: el, clientX: x, clientY: 400 })];
@@ -51,10 +51,10 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(!(await shown(p2)), 'another phone (empty storage), same account: not again');
   await p2.evaluate(() => openMenu()); await p2.waitForTimeout(300);
   await p2.click('#sideMenu .ditem:has-text("איך זה עובד")'); await p2.waitForTimeout(400);
-  s = await shown(p2); ok(s && s.key === 'main' && s.n === 6, '☰ → איך זה עובד opens it again');
+  s = await shown(p2); ok(s && s.key === 'main' && s.n === 7, '☰ → איך זה עובד opens it again');
   const c3 = await parent('en', 'intro-en'), p3 = await open(c3);
   const heb = [];
-  for (let i = 0; i < 6; i++) { heb.push(...await p3.evaluate(() => (document.getElementById('intro').innerText.match(/[֐-׿][^\n]*/g) || []))); if (i < 5) { await p3.click('#intro .inext'); await p3.waitForTimeout(250); } }
+  for (let i = 0; i < 7; i++) { heb.push(...await p3.evaluate(() => (document.getElementById('intro').innerText.match(/[֐-׿][^\n]*/g) || []))); if (i < 6) { await p3.click('#intro .inext'); await p3.waitForTimeout(250); } }
   ok(!heb.length, 'English: every screen translated ' + JSON.stringify(heb));
   await p3.screenshot({ path: `${OUT}/intro_parent_en_last.png` });
 

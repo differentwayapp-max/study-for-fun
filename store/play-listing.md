@@ -26,6 +26,9 @@ Study for fun – למידה חוויתית של מקצועות הליבה: אנ
 הילד רואה מה כבר יודע ובאילו נושאים כדאי לעשות חזרה, ומתרגל אותם בלחיצה.
 ההורה רואה את ההתקדמות של כל ילד, את המילים והנושאים לחיזוק.
 
+🎯 תרגול ממוקד – בדיוק מה שחסר
+התרגול הסתיים? האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה. התרגול הממוקד מחכה לילד ראשון, וההורה רואה מה כבר תוקן ומה עוד לחזק.
+
 👨‍👩‍👧 כל המשפחה מלווה
 אפשר לשתף בן/בת זוג, סבא וסבתא או מורה פרטי במעקב ההתקדמות ובחיזוק.
 
@@ -33,14 +36,15 @@ Study for fun – למידה חוויתית של מקצועות הליבה: אנ
 התרגול נבנה לפי החומר הספציפי של המבחן, והמפה מחלקת את הפרקים עד תאריך המבחן.
 ⭐ פרק שעברו בו 70% ומעלה מקבל כוכב. פרק שלא הצליח נשאר פתוח לתרגול חוזר.
 
-הילד נכנס עם קישור אישי – בלי אימייל לילד, בלי פרסומות ובלי רכישות.
+🛡️ בטוח לילדים
+אפס פרסומות, אף פעם ולאף ילד. הילד לא יכול לקנות כלום – אין רכישות בטלפון של הילד. הילד נכנס עם קישור אישי – בלי אימייל ובלי סיסמה. ממשק בעברית ובאנגלית.
 
 by D-WAY
 
 ## English (optional second language)
 Short: Playful learning in English, math, language and science – tailored to the test material and date.
 
-Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Parents follow each kid's progress and can invite other adults. Kids join with a personal link – no email for kids, no ads, no in-app purchases.
+Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Focused practice: when a set is done, the app builds a practice set from the kid's mistakes only – free, in one tap; it waits for the kid first, and the parent sees what's fixed. Parents follow each kid's progress and can invite other adults. Safe for kids: no ads, ever; no purchases on the kid's phone; kids join with a personal link – no email or password; Hebrew and English.
 
 ---
 
@@ -86,7 +90,7 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 
 ## תמונות לחנות
 נוצרות מתוך מסכי ההיכרות של האפליקציה (מקור אחד לשניהם): מגישים את האפליקציה (`python3 -m http.server 8765 --directory public &`) ומריצים `node tools/store_shots.js`.
-- **Phone screenshots** (1080×2160, לפי הסדר): `store/play/phone_1_main.png` … `phone_8_safe.png`. באנגלית: `store/play/en/`.
+- **Phone screenshots** (1080×2160, לפי הסדר): `store/play/phone_1_main.png` … `phone_8_share.png`. באנגלית: `store/play/en/`.
   1 פתיחה · 2 משחק · 3 תרגול לפי החומר · 4 יום המבחן · 5 מעקב · 6 תחרות בין האחים · 7 שיתוף מורה ומשפחה · 8 בטוח לילדים.
 - **Feature graphic** (1024×500): `store/play/feature_1024x500.png` (באנגלית: `store/play/en/feature_1024x500.png`).
 - **App icon** (512×512): `store/play/icon_512.png`.

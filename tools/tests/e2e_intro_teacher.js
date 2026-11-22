@@ -151,11 +151,11 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   console.log('4. a parent never sees the teachers\' screens');
   const cp = await ctx('introParent2', { name: 'הורה' }), pp = await page(cp);
   await pp.waitForTimeout(2500); if (await pp.$('#fbGo')) await pp.click('#fbGo'); await pp.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await pp.waitForTimeout(1500);
-  const keysP = []; for (let i = 0; i < 6; i++) { const x = await shown(pp); if (!x) break; keysP.push(x.key); if (i < 5) { await pp.click('#intro .inext'); await pp.waitForTimeout(250); } }
-  ok(keysP.join() === 'main,build,testday,progress,share,safe', "the parent's 6 screens only: " + keysP.join());
+  const keysP = []; for (let i = 0; i < 7; i++) { const x = await shown(pp); if (!x) break; keysP.push(x.key); if (i < 6) { await pp.click('#intro .inext'); await pp.waitForTimeout(250); } }
+  ok(keysP.join() === 'main,build,testday,progress,focus,share,safe', "the parent's 7 screens only: " + keysP.join());
   await pp.click('#intro .inext'); await pp.waitForTimeout(600);
   await pp.evaluate(() => { openHowItWorks(); }); await pp.waitForTimeout(300); s = await shown(pp);
-  ok(s && s.key === 'main' && s.n === 6, '☰ → איך זה עובד: the parent\'s series, as before');
+  ok(s && s.key === 'main' && s.n === 7, '☰ → איך זה עובד: the parent\'s series, as before');
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));
   await b.close();
 })().catch(e => { console.error(e); process.exit(1); });

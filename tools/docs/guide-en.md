@@ -122,11 +122,17 @@ On the feedback screen:
 - **🔎 See the mistakes** – every question the kid got wrong, and what they answered instead.
 - **Success by topic** – Strengthen (under 60%), Almost there (60%–80%), Mastered (80% or more). A status is set only with at least 3 questions in the topic.
 
-### 🎯 Review set
+### 🎯 Focused practice
 
-- Below the topics worth strengthening, tap **✨ Practice set for these topics**.
-- A focused practice set is built on the weak topics only. It's marked 🎯 and listed first.
-- A review set counts toward the limit of 3 practice sets a month.
+The app builds a practice set from your kid's mistakes only – free, in one tap.
+
+- **Where:** on the practice set's card in the progress screen, and at the top of the kid's home (on a parent's phone) – when a set is done, or when an open set has collected mistakes.
+- **One button:**
+  - There are words or questions the kid got wrong – **🎯 Focused practice** is ready at once, with no AI, and doesn't use a monthly build.
+  - There are only topics to strengthen – **✨ Focused practice for the topics** builds a new set with AI on those topics, counted in the month's builds.
+- The focused set is marked 🎯 and comes first for the kid. The parent sees what's already fixed ("Fixed: … ✓").
+- The original set moves to "✓ Finished practice sets" marked "🎯 moved to focused practice". When the focused set is done too, a new one can be built from what's left.
+- "Later" hides the card for every adult in the family. New mistakes bring it back.
 
 ### Finished practice sets
 

@@ -53,7 +53,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await P1.p.screenshot({ path: `${OUT}/c_status_wait_he.png` });
   const [rid, key] = reqUrl.split('?req=')[1].split('.').slice(1);
   const R = await doc(`families/${cid}/joinReqs/${rid}`);
-  ok(R && R.status === 'pending' && R.letterV === '0.9' && /^data:image\/png;base64,/.test(R.sig) && R.sig.length < 28000 && !('statusKey' in R) && R.keyHash && R.keyHash !== key, `the request: waiting, letter 0.9, a small PNG signature (${R && R.sig.length} chars), only the key's hash kept`);
+  ok(R && R.status === 'pending' && R.letterV === '0.91' && /^data:image\/png;base64,/.test(R.sig) && R.sig.length < 28000 && !('statusKey' in R) && R.keyHash && R.keyHash !== key, `the request: waiting, letter 0.9, a small PNG signature (${R && R.sig.length} chars), only the key's hash kept`);
   ok(await P1.p.evaluate(() => !window.SFF_ROLE && !document.getElementById('fbLogin')), 'the parent never sees the sign-in or the app');
 
   console.log('3. the teacher approves');
@@ -62,7 +62,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await T.screenshot({ path: `${OUT}/c_requests_he.png` });
   await T.click('.treq .btn:not(.ghost)'); await T.waitForTimeout(2500);
   const kidsL = (await doc(`families/${cid}/fam/kids`)).list, kid = kidsL[0], C1 = await doc(`families/${cid}/consents/${kid.id}`), F = await doc(`families/${cid}`);
-  ok(kidsL.length === 1 && kid.name === 'נועה כ.' && C1.status === 'digital' && C1.letterV === '0.9' && /^data:image/.test(C1.sig) && C1.reqId === rid && C1.approvedBy && C1.parentName === 'רונית כהן', 'a student with a digital consent (letter 0.9, the signature, who approved)');
+  ok(kidsL.length === 1 && kid.name === 'נועה כ.' && C1.status === 'digital' && C1.letterV === '0.91' && /^data:image/.test(C1.sig) && C1.reqId === rid && C1.approvedBy && C1.parentName === 'רונית כהן', 'a student with a digital consent (letter 0.9, the signature, who approved)');
   ok(!!(F.kidTokens || {})[kid.id] && !!(await doc(`families/${cid}/kidpub/${kid.id}`)), "the kid's link and the kid's own record were made");
   ok(!(await doc(`families/${cid}/joinReqs/${rid}`)).sig, 'the request no longer keeps the signature (the consent does)');
   await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/c_students_he.png` });

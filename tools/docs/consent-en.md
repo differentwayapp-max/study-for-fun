@@ -1,6 +1,6 @@
 # Parent's consent to join a practice group
 
-Version 0.9 (draft) · {date}
+Version 0.91 (draft) · {date}
 
 Hello,
 
@@ -28,10 +28,6 @@ The link is sent to you after the teacher approves the request.
 - The app's administrators – only for support and fixing problems.
 
 Other students and other parents do **not** see your child's details. The details are not sold and are not used for advertising.
-
-## Artificial intelligence
-
-The teacher may build practice sets with the help of artificial intelligence. Only the study material is sent for this – **not** any details about children.
 
 ## How long the details are kept
 

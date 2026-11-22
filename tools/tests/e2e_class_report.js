@@ -67,9 +67,15 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
   console.log("2. the teacher's home: who needs attention");
   await T.evaluate(() => go('kids')); await T.waitForTimeout(500);
   const att = await T.evaluate(() => [...document.querySelectorAll('.tatt')].map(x => x.textContent.replace(/\s+/g, ' ').trim()));
-  ok(att.length === 3 && /נתקעו · 1/.test(att[0]) && /מאיה/.test(att[0]), 'stuck: מאיה (twice in a row under 50% on the same chapter) – ' + att[0]);
+  ok(att.length === 3 && /כדאי לחזק · 1/.test(att[0]) && /מאיה/.test(att[0]), 'stuck: מאיה (twice in a row under 50% on the same chapter) – ' + att[0]);
   ok(/לא תרגלו השבוע · 2/.test(att[1]) && /איתי/.test(att[1]) && /אורי/.test(att[1]), "didn't practise this week: איתי (9+ days ago) and אורי (never)");
-  ok(/מתקדמים יפה/.test(att[2]) && /נועה/.test(att[2]) && !/יונתן/.test(att[2]), 'doing well: נועה, not יונתן');
+  ok(/סיימו את התרגיל בהצלחה · 0/.test(att[2]), 'finished the set successfully: nobody yet (נועה plays well but hasn\'t passed every chapter) – ' + att[2]);
+  // נועה passes every chapter of her set (in the page only – taken out again after)
+  const att2 = await T.evaluate(() => { const s = getSet('s_k1'), now = Date.now(), add = getChapters(s).map((c, i) => ({ at: now - 600e3 + i, kidId: 'k1', kid: '', subject: s.subject, grade: s.grade, setId: s.id, retry: false, topic: c.title || '', ch: i, right: 9, n: 10, score: 90, mode: 'choice', fake: 1 }));
+    history.unshift(...add); go('kids'); const r = [...document.querySelectorAll('.tatt')].map(x => x.textContent.replace(/\s+/g, ' ').trim());
+    history = history.filter(h => !h.fake); return r; });
+  ok(/סיימו את התרגיל בהצלחה · 1/.test(att2[2]) && /נועה/.test(att2[2]) && !/יונתן/.test(att2[2]), 'finished successfully: נועה once every chapter is passed – ' + att2[2]);
+  await T.evaluate(() => go('kids')); await T.waitForTimeout(300);
   await T.screenshot({ path: `${OUT}/r_home_he.png`, fullPage: true });
 
   console.log('3. the report by topic');

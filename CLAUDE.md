@@ -53,7 +53,7 @@ When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in inde
 - Teacher area (plan: `docs/teacher-area-plan.md`):
   - Legal review before the consent stage goes live: the consent letter text (`letterV`), the privacy policy and terms for
     classes, and who owns the database when a class teacher works on behalf of a school. The current letter
-    (`tools/docs/consent-he.md`, version 0.9) is a DRAFT written by Claude – when the final text is approved, replace it,
+    (`tools/docs/consent-he.md`, version 0.91 – the AI paragraph removed) is a DRAFT written by Claude – when the final text is approved, replace it,
     raise its version line AND `CONSENT_VERSION` in index.html, and rebuild the docs.
   - Email sign-in for teachers (and parents without Google): Firebase Console → Authentication → Sign-in method →
     Add new provider → Email/Password → turn on "Email link (passwordless sign-in)" → Save; then Authentication →

@@ -131,12 +131,12 @@ for kind in ("guide", "terms", "consent"):
     page = PAGE.format(title_he=html.escape(strip(t_he)), cards=he + "\n" + en,
                        t_he=json.dumps(strip(t_he), ensure_ascii=False), t_en=json.dumps(strip(t_en), ensure_ascii=False))
     if kind == "consent":
-        # a printable letter: the placeholders are filled from ?t=<teacher>&g=<group> (as text) and today's date
+        # the letter to read: the placeholders are filled from ?t=<teacher>&g=<group> (as text) and today's date
         page = page.replace("</body>", """<style>.ph-teacher:empty::before,.ph-group:empty::before{content:'______'}@media print{.top{display:none}body{background:#fff}.card{border:0;box-shadow:none}}</style>
 <script>(function(){ const q=new URLSearchParams(location.search), d=new Date();
   const put=(c,v)=>document.querySelectorAll('.ph-'+c).forEach(e=>{ e.textContent=v; });
   if(q.get('t')) put('teacher',q.get('t').slice(0,60)); if(q.get('g')) put('group',q.get('g').slice(0,60));
-  put('date',d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()); if(q.get('print')) setTimeout(()=>print(),600); })();</script>
+  put('date',d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear()); })();</script>
 </body>""")
         ver = re.search(r"גרסה\s+([0-9.]+)", (DOCS / "consent-he.md").read_text(encoding="utf-8")).group(1)
         body = lambda c: re.sub(r'^\s*<div class="card"[^>]*>\n', "", c).rsplit("</div>", 1)[0]

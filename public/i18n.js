@@ -281,7 +281,7 @@
     [/^כדאי לעקוב אחרי מה שעוד לא יושב ולבנות תרגול ממוקד – בדיוק לפי הקצב של (.+)\.$/, (m, n) => `It's worth following what isn't solid yet and building focused practice – right at ${n}'s pace.`],
     [/^(\d+) (מילים|מילה|שאלות|שאלה) לחזק · (.+)$/, (m, n, u, x) => `${n} ${/מיל/.test(u) ? (n === '1' ? 'word' : 'words') : (n === '1' ? 'question' : 'questions')} to strengthen · ${tr(x)}`],
     [/^מהטעויות של (.+)$/, (m, n) => `From ${n}'s mistakes`], [/^מוכן מיד · בחינם · מופיע ל(.+) ראשון$/, (m, n) => `Ready at once · free · comes first for ${n}`],
-    [/^ועוד (\d+) נושאים לחזק ב(.+) ›$/, (m, n, x) => `and ${n} more topics to strengthen in ${tr(x)} ›`],
+    [/^ועוד (\d+) נושאים לחזק ב(.+) ›$/, (m, n, x) => `and ${n} more topics to strengthen in ${tr(x)} ›`], [/^ועוד נושא אחד לחזק ב(.+) ›$/, (m, x) => `and one more topic to strengthen in ${tr(x)} ›`],
     [/^(.+) טעה\/תה ב-(.+)$/, (m, n, w) => `${n} got ${w} wrong`],
     [/^לחיצה אחת – ותרגול רק על (המילים|השאלות) האלה מחכה ל(.+) ראשון$/, (m, u, n) => `One tap – and practice on just these ${u === 'המילים' ? 'words' : 'questions'} waits for ${n} first`],
     [/^לראות מה לחזק אצל (.+)$/, (m, n) => `See what ${n} should strengthen`],

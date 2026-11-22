@@ -4237,7 +4237,7 @@ function sayWord(t){ rdStop(); if(mutedNote()) return; try{ const u=new SpeechSy
    a focused set right away, with no AI and no monthly build (makeFocus); only weak topics → "✨ תרגול ממוקד לנושאים" (an AI
    build, buildReinforce). A focused set is marked reinf: <its source>; the source then counts as done (setDone → 'focus'). */
 const FOCUS_LINE='האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה';
-const fT=(str,...names)=>{ let t=esc(window.sffT?sffT(str):str); names.filter(Boolean).forEach(n=>{ const e=esc(n); t=t.split(e).join(`<bdi>${e}</bdi>`); }); return `<span translate="no">${t}</span>`; };
+const fT=(str,...names)=>{ let t=esc(window.sffT?sffT(str):str); names.filter(Boolean).forEach(n=>{ const e=esc(n), shown=esc(window.sffT?sffT(n):n); t=t.split(e).join(`<bdi>${shown}</bdi>`); }); /* the name as the rest of the screen shows it */ return `<span translate="no">${t}</span>`; };
 function focusOf(set, H=history){
   if(!set||set.demo) return {items:[],qs:[],topics:[],goodN:0,pct:null,played:false};
   const HS=H.filter(h=>h.setId===set.id);
@@ -4310,12 +4310,12 @@ function focusCardFor(me){
   const open=mine.filter(s=>!setDone(s)&&!s.reinf&&!sets.some(x=>x.reinf===s.id)).map(s=>({s,F:focusOf(s)})).filter(x=>x.F.items.length)
     .filter(x=>!(x.s.focusSeen&&x.F.items.length<=(+x.s.focusSeen.n||0))).sort((a,b)=>b.F.items.length-a.F.items.length);
   if(!open.length) return '';
-  const {s,F}=open[0], subj=esc(String(s.subject).replace(/^🎯\s*/,'')), more=mine.filter(x=>x!==s&&!setDone(x)&&x.subject!==s.subject).map(x=>({x,F:focusOf(x)})).filter(y=>y.F.topics.length||y.F.items.length)[0];
+  const {s,F}=open[0], subj=esc(String(s.subject).replace(/^🎯\s*/,'')), more=mine.filter(x=>x!==s&&!x.reinf&&!setDone(x)&&x.subject!==s.subject).map(x=>({x,F:focusOf(x)})).filter(y=>y.F.topics.length||y.F.items.length)[0];
   return `<div class="card fcard f2" data-set="${esc(s.id)}"><div class="fhead2"><span class="ftgt">${IC.sv('#1B2A4A',22,IC.target,2.2)}</span><div><b>${fT(`${F.items.length} ${focusUnit(s,F.items.length)} לחזק · ${String(s.subject).replace(/^🎯\s*/,'')}`)}</b>
       <div class="fsub">${fT(`מהטעויות של ${kidName(me)}`, kidName(me))}</div></div></div>
     <div class="fwords" dir="ltr" translate="no">${F.items.slice(0,4).map(x=>`<span>${esc(x.label)}</span>`).join('')}</div>
     ${focusBtn(s,F,{label:fT(`תרגול ממוקד ל${kidName(me)}`, kidName(me)), line:fT(`מוכן מיד · בחינם · מופיע ל${kidName(me)} ראשון`, kidName(me))})}
-    ${more?`<button class="linkbtn fmore" onclick="openFocusIn('${esc(more.x.id)}')">${fT(`ועוד ${more.F.topics.length||more.F.items.length} נושאים לחזק ב${String(more.x.subject).replace(/^🎯\s*/,'')} ›`)}</button>`:''}
+    ${more?`<button class="linkbtn fmore" onclick="openFocusIn('${esc(more.x.id)}')">${(()=>{ const n=more.F.topics.length||more.F.items.length, sub=String(more.x.subject).replace(/^🎯\s*/,''); return fT(n===1?`ועוד נושא אחד לחזק ב${sub} ›`:`ועוד ${n} נושאים לחזק ב${sub} ›`); })()}</button>`:''}
     <button class="linkbtn" onclick="focusLater('${esc(s.id)}','open',${F.items.length})">אחר כך</button></div>`;
 }
 // "אחר כך": kept on the set, so every adult of the family sees the same (the set is synced)

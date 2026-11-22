@@ -494,7 +494,7 @@ html[lang=en] .ifeat h1{font-size:52px!important}
 .ibrand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.5px;color:#F2A63B}
 .itag{border-radius:99px;padding:5px 12px;font-size:13px;font-weight:700;margin-top:4px}
 .igrid{margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;text-align:start}
-.igrid>div{border-radius:16px;padding:14px 12px;display:flex;flex-direction:column;gap:6px}.igrid b{font-size:16px}.igrid span{font-size:12px}
+.igrid>div{border-radius:16px;padding:14px 12px;display:flex;flex-direction:column;gap:6px}.igrid>.iwide{grid-column:1 / -1;flex-direction:row;align-items:center;gap:10px;padding:10px 12px}.igrid>.iwide svg{flex:none}.igrid>.iwide>div{display:flex;flex-direction:column;gap:2px}.igrid b{font-size:16px}.igrid span{font-size:12px}
 .iphone{position:absolute;left:50%;transform:translateX(-50%);border:7px solid #0D1830;border-radius:34px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;text-align:start}
 .irow{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .inode{position:absolute;width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-weight:800}
@@ -599,6 +599,25 @@ body:not(.cls) #tReport{display:none}body.cls #vStats>:not(#tReport){display:non
 .asgbar{display:flex;flex-direction:column;gap:8px;margin:0 0 10px}.asgbar:empty{display:none}
 .kasg{display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:var(--line);border-radius:18px;background:#FFF8E1;padding:10px 14px;font:inherit;color:inherit;text-align:start;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
 .kasg .kt{font-size:.85em;font-weight:600}.kasg b{font-size:1.05em}.kasg .kp{display:flex;align-items:center;gap:8px;font-size:.85em}.kasg .kp .mbar{flex:1;height:10px}.kasg.late{background:#FFE3E4}
+/* תרגול ממוקד: the button, the kid's card at home, "חדש!" */
+.focusbtn{width:100%;justify-content:center;margin-top:12px;min-height:48px}.focusline{text-align:center;margin-top:6px}.ffoot{margin-top:4px}
+.fcard{padding:0;overflow:hidden;text-align:start;border-color:#FF5C8A;box-shadow:0 0 0 3px #FF5C8A}.fcard.f2{border-color:#F2A63B;box-shadow:inset 0 0 0 2px #F2A63B;background:#FFF3CC;padding:14px}
+.fhead{background:#FF5C8A;color:#3A0716;padding:12px 14px;display:flex;align-items:center;gap:10px}.fhead svg{flex:none}.fhead b{font-size:1.1em}.fsub{font-size:.85em}
+.fbody{padding:12px 14px;display:flex;flex-direction:column;gap:8px}.fbody p{margin:0;line-height:1.5}.fbody .btn{width:100%;justify-content:center;min-height:44px}.fbody .linkbtn,.fcard .linkbtn{align-self:center;min-height:44px}
+.ftops{display:flex;flex-direction:column;gap:6px;font-size:.9em}.ftop{display:flex;align-items:center;gap:8px}.ftop>span:first-child{flex:1}.fbar{width:70px;height:7px;background:#EAF0FF;border-radius:9px;flex:none}.fbar i{display:block;height:7px;border-radius:9px}
+.fgood{font-size:.85em;color:#0B6B4A;font-weight:700}.fall{font-size:1.2em;font-weight:700;text-align:center;margin:6px 0}
+.fwords{display:flex;flex-wrap:wrap;gap:6px;font-weight:700;font-size:.9em}.fwords span{border-radius:99px;padding:3px 10px;background:#fff}.fwords .r{background:#FFE3E4;color:#A3262B}.fwords .o{background:#FFF2C9;color:#6B4700}
+.fhead2{display:flex;align-items:center;gap:10px;margin-bottom:10px}.ftgt{width:40px;height:40px;border-radius:12px;background:#F2A63B;display:flex;align-items:center;justify-content:center;flex:none}
+.fcard.f2 .fsub{color:#6B4700}.fcard.f2 .btn{width:100%;justify-content:center;min-height:44px}.fcard.f2 .linkbtn{display:block;margin:2px auto 0}.fmore{color:#6B4700;font-weight:700}
+.hero.focusc{box-shadow:0 0 0 4px #B9A7FF,0 6px 0 var(--ink)}.ffixed{display:inline-block;margin-top:6px;background:#DDF8EC;color:#0B6B4A;border-radius:99px;padding:3px 10px;font-size:.8em;font-weight:700}
+.fnew{position:fixed;inset:0;z-index:80;background:rgba(27,42,74,.45);display:flex;align-items:flex-end;justify-content:center}
+.fnewsheet{width:100%;max-width:520px;background:#fff;border-radius:28px 28px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:12px;animation:fnup .25s ease-out}
+@keyframes fnup{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.fnewtag{background:#FF5C8A;color:#fff;border-radius:99px;padding:4px 12px;font-size:.85em;font-weight:800}.fnewico{width:64px;height:64px;border-radius:20px;background:#B9A7FF;display:flex;align-items:center;justify-content:center}
+.fnewh{font-size:1.6em;line-height:1.15}.fnewp{text-align:center;color:#4A4870;max-width:320px;line-height:1.5}.fnewp b{color:var(--ink)}
+.fnewsteps{width:100%;display:flex;flex-direction:column;gap:8px}.fnewsteps>div{display:flex;align-items:center;gap:10px;background:#F4F7FC;border-radius:14px;padding:10px 12px;font-size:.9em;text-align:start}
+.fnewsteps i{width:28px;height:28px;border-radius:50%;font-style:normal;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.fnewsteps .n1{background:#FFE3E4;color:#A3262B}.fnewsteps .n2{background:#EDE9FF;color:#3B2E86}.fnewsteps .n3{background:#DDF8EC;color:#0B6B4A}
+.fnewsheet .btn{width:100%;justify-content:center;min-height:48px}.fnewsheet .linkbtn{min-height:44px}
 #trPrint{display:none}
 @media print{body>*:not(#trPrint){display:none!important}#trPrint{display:block!important;padding:12mm;font-family:var(--body);color:#000}#trPrint table{width:100%;border-collapse:collapse;margin-top:10px}#trPrint th,#trPrint td{border:1px solid #999;padding:6px;text-align:start}}
 .revtag{display:table;margin:6px auto 0;padding:3px 12px;border-radius:999px;background:var(--lilac);color:var(--ink);font-family:var(--display);font-weight:600;font-size:.9em}
@@ -1274,6 +1293,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     <div class="whoami" id="whoami"></div>
     <button class="mebar" id="meBar" onclick="openProfile()"></button>
     <div id="asgBar" class="asgbar"></div>
+    <div id="focusCard"></div>
     <div class="carhead"><button class="arrow nx" onclick="carStep('subCar',1)" aria-label="הבא">›</button><div class="cardots" id="subCarDots"></div><button class="arrow pv" onclick="carStep('subCar',-1)" aria-label="הקודם">‹</button></div>
     <div class="car" id="subCar"></div>
     <div id="kidDone"></div>
@@ -1641,6 +1661,9 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       LS.setItem('sff_data_fam', famId);
       W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
       W.__sffOnbDone = () => F.setDoc(F.doc(fdb, `users/${uid}`), { intro: Date.now() }, { merge: true }).catch(() => {});
+      // what's new, shown once to a parent who already knows the app (users/{uid}.news.<name> – the parent's `intro` stays)
+      W.SFF_NEWS = (us && us.exists() && us.data().news) || {};
+      W.__sffNewsSeen = k => F.setDoc(F.doc(fdb, `users/${uid}`), { news: { [k]: Date.now() } }, { merge: true }).catch(() => {});
       // a teacher's AI quota – for all their groups together (teachers/{uid}/usage/{month}: the server writes, the teacher reads)
       W.__sffTeacherUsage = async () => { const m = W.monthKeyIL ? W.monthKeyIL() : new Date().toISOString().slice(0, 7);
         const u = await F.getDoc(F.doc(fdb, `teachers/${uid}/usage/${m}`)); return { used: (u.exists() && u.data().builds) || 0, free: 5 }; };
@@ -2936,7 +2959,7 @@ function setDone(s){ if(!s||s.demo) return null;
   if(!s.reinf && sets.some(x=>x!==s && x.reinf===s.id)) return 'focus';
   if(roundsDone(s)>=roundsTotal(s)) return 'done';
   return null; }
-const DONE_LBL={exam:'🏁 המבחן עבר', done:'⭐ הושלם', focus:'🎯 עבר לממוקד'};
+const DONE_LBL={exam:'🏁 המבחן עבר', done:'⭐ הושלם', focus:'🎯 עבר לתרגול ממוקד'};
 function setProgress(s){ return Math.min(1, roundsDone(s)/roundsTotal(s)); }
 function nextChapter(s){ const d=chaptersDone(s), n=roundsTotal(s); for(let i=0;i<n;i++) if(!d.has(i)) return i; return -1; } // -1 = review of everything
 function chapterQs(s,ch){ const C=getChapters(s); if(ch>=0&&C[ch]) return C[ch].qs; return shuffle(s.questions).slice(0,s.perRound||10); }
@@ -3036,7 +3059,7 @@ function renderKids(){
     const ss=kidSets(k), pct=ss.length?ss.reduce((a,x)=>a+setProgress(x),0)/ss.length:0;
     const row=(x,why)=>{ const [c,ico]=subjStyle(x.subject); const dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), base=String(x.subject).replace(/^🎯\s*/,'');
       return `<button class="prow ${x.reinf?'focus':''} ${why?'fin':''}" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}${x.reinf?'<i class="tgt" aria-hidden="true">🎯</i>':''}</span>
-        <span><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">ממוקד</span>':''}${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}</span>${why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
+        <span><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}</span>${why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
         <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),why?'#B9C0D4':'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`; };
     // active first (focused practice on top), finished ones folded away below
     const act=ss.filter(x=>!setDone(x)).sort((a,b)=>(!!b.reinf)-(!!a.reinf)), fin=ss.filter(x=>setDone(x));
@@ -3189,6 +3212,7 @@ function renderKidSets(){
   $('meBar').classList.toggle('hidden',!me); if(me) $('meBar').innerHTML=`${avatarHtml(me,52)}<span>${esc(kidName(me))}</span><span class="pen">✎</span>`;
   const mine = me ? kidSets(me) : sets;
   kidAsgBar(window.SFF_KID_DEVICE&&me?me:null);
+  $('focusCard').innerHTML=focusCardFor(me); fillQuotaLines();
   // a kid's phone never shows the example: it says what is happening (and how far the connection got)
   if(!mine.length && locked()) kidKick();
   if(!mine.length && locked()){
@@ -3215,9 +3239,10 @@ function renderKidSets(){
     for(let i=0;i<tot;i++) nodes.push(`<button class="n ${dn.has(i)?'done':i===nx?'now':''}" onclick="openModes(getSet('${s.id}'),${i})" aria-label="פרק ${i+1}">${dn.has(i)?'★':i+1}</button>`);
     nodes.push(`<button class="n rev ${nx<0?'now':''}" onclick="openModes(getSet('${s.id}'),-1)" aria-label="חזרה">🔁</button>`, `<span class="n fin">${s.examDate?'🏁':'🏆'}</span>`);
     const pips=Array.from({length:g},(_,i)=>`<span class="pip ${i<done?'on':''}">${i<done?'★':''}</span>`).join('');
-    return `<div class="card herocard hero" style="background:${c};color:${fg}">
+    const fx=s.reinf?focusFixed(s):[];
+    return `<div class="card herocard hero${s.reinf?' focusc':''}" style="background:${c};color:${fg}">
       <div class="top"><div class="ico">${ico}</div>${s.examDate?`<span class="flagtag">🏁 ${Math.max(0,daysLeft(s.examDate))}</span>`:'<span></span>'}</div>
-      <h2>${s.reinf?'<span class="tgt">🎯</span> ':''}${esc(String(s.subject).replace(/^🎯\s*/,''))}</h2>${s.reinf?'<div class="demotag">תרגול ממוקד</div>':''}${s.demo?`<div class="demotag">🎲 דוגמה – ${me?`עוד אין תרגול ל${esc(kidName(me))}`:'עוד אין תרגול'}</div>`:''}
+      <h2>${s.reinf?'<span class="tgt">🎯</span> ':''}${esc(String(s.subject).replace(/^🎯\s*/,''))}</h2>${s.reinf?`<div class="demotag">🎯 תרגול ממוקד</div>${fx.length?`<div class="ffixed">תוקנו: <bdi translate="no">${fx.slice(0,3).map(esc).join(', ')}</bdi> ✓</div>`:''}`:''}${s.demo?`<div class="demotag">🎲 דוגמה – ${me?`עוד אין תרגול ל${esc(kidName(me))}`:'עוד אין תרגול'}</div>`:''}
       <div class="ringplay">${ringSvg(setProgress(s),dark?'#1B2A4A':'#F2A63B',dark?'#ffffff88':'#ffffff44')}<button class="play" onclick="openRoad('${s.id}')" aria-label="לשחק">${PLAY}</button></div>
       <div class="cardcount">🗺️ ${Math.min(dn.size,tot)}/${tot}</div>
       <div class="daypips">${pips}<span>${done>=g?'🏆':''}</span></div>
@@ -4068,10 +4093,11 @@ function renderSetCards(H){
       <div class="sprog"><div class="rdbar"><i style="width:${Math.round(Math.min(dnS.size,C.length)/Math.max(1,C.length)*100)}%;background:${sc}"></i></div>
         <div class="hint">${Math.min(dnS.size,C.length)}/${C.length} פרקים · ${qn?Math.round(qr/qn*100):0}% הצלחה · ${qn} שאלות</div></div>
       ${rows.length?`<h4 class="ssec">🎯 נושאים</h4><div class="trows">${rows.map(x=>`<div class="trow"><b dir="auto">${esc(x.t)}</b><span class="tbar"><i style="width:${Math.round(x.p*100)}%;background:${TOPIC_CLR[x.status]}"></i></span><span class="tp">${Math.round(x.p*100)}%</span><span class="pill ${TOPIC_LBL[x.status][0]}">${TOPIC_LBL[x.status][1]}</span><span class="tt">${x.trend}</span></div>`).join('')}</div>
-        ${weakT.length&&sample?`<div class="actions" style="margin-top:8px"><button class="btn small" onclick="buildReinforceIdx(${REINF.push([set.subject,weakT.map(w=>w.t),set.grade,(kidOfSet(set)||{}).name||set.name,set.id])-1})">✨ סט חיזוק לנושאים האלה</button></div>`:''}`:''}`;
+`:''}`;
     const ms=mistakesOf(set,history), mo=ms.filter(m=>!m.fixed).length, mf=ms.length-mo;
     const mbtn=ms.length?`<button class="btn ghost mistbtn" onclick="openMistakes('${set.id}')">🔎 לראות את הטעויות · ${mo}${mf?` <span class="hint">(ועוד ${mf} תוקנו)</span>`:''}</button>`:'';
-    if(!HS.some(h=>Array.isArray(h.qr)&&h.qr.length)) return `<div class="card wcard scard">${head}${mbtn}</div>`;
+    const FB=set.reinf?'':`<div class="ffoot">${focusBtn(set,focusOf(set))}</div>`;   // the one button: from the mistakes, or the weak topics
+    if(!HS.some(h=>Array.isArray(h.qr)&&h.qr.length)) return `<div class="card wcard scard" data-set="${esc(set.id)}">${head}${mbtn}${FB}</div>`;
     const st=WSTAT[set.id]=WSTAT[set.id]||{tab:'all',sel:null}; st.items=wordStats(set,H);
     const cats=['vocab','grammar','unseen'].filter(c=>st.items.some(x=>x.cat===c));
     const items=st.items.filter(x=>st.tab==='all'||x.cat===st.tab);
@@ -4082,7 +4108,7 @@ function renderSetCards(H){
     const sel=weak.find(x=>x.label===st.sel)||null;
     const kid=kidOfSet(set), en=isEnSet(set);
     const tabName={all:'הכול',vocab:'אוצר מילים',grammar:'דקדוק',unseen:'Unseen'};
-    return `<div class="card wcard scard">${head}${mbtn}<h4 class="ssec">${en?'🔤 מילים לחיזוק':'❓ שאלות לחזרה'}</h4>
+    return `<div class="card wcard scard" data-set="${esc(set.id)}">${head}${mbtn}<h4 class="ssec">${en?'🔤 מילים לחיזוק':'❓ שאלות לחזרה'}</h4>
       ${cats.length>1&&en?`<div class="wtabs">${['all',...cats].map(c=>`<button class="${st.tab===c?'on':''}" onclick="WSTAT['${set.id}'].tab='${c}';WSTAT['${set.id}'].sel=null;renderStats()">${tabName[c]}</button>`).join('')}</div>`:''}
       ${weak.length?`<div class="wlist">${weak.map(x=>`<button class="wchip ${wState(x)} ${sel===x?'sel':''}" dir="ltr" onclick="WSTAT['${set.id}'].sel=${esc(JSON.stringify(x.label))};renderStats()"><i>✗${x.bad}</i>${esc(x.label)}</button>`).join('')}</div>
         <div class="wlegend"><span><i class="dot r"></i>טעות 2+</span><span><i class="dot o"></i>טעות אחת</span></div>`
@@ -4094,10 +4120,10 @@ function renderSetCards(H){
         <div class="wrow">${sel.seq.slice(-8).map(([m,ok])=>`<span>${MODE_ICO[m]||'🎮'} ${ok?'✓':'✗'}</span>`).join('')}</div>
         ${Object.keys(sel.picks).length?`<div class="hint" style="margin-top:8px">ענתה במקום: ${Object.entries(sel.picks).sort((a,b)=>b[1]-a[1]).map(([w,c])=>`<b dir="ltr">${esc(w)}</b> ×${c}`).join(' · ')}</div>`:''}
         <div class="hint" style="margin-top:6px" dir="auto">❓ ${esc(sel.q.question)}</div></div>`:(weak.length?`<p class="hint" style="margin:8px 0 0">👆 לחיצה על מילה = פירוט</p>`:'')}
-      ${weak.length&&kid?`<button class="btn" style="width:100%;justify-content:center;margin-top:12px" onclick="makeWordDrill('${set.id}')">🎯 סט חיזוק · ${weak.length} ${weak.length===1?'מילה':'מילים'}</button>`:''}
       <div class="wgood"><b>✅ יושבות טוב · ${good.length}</b>${good.length?`<div class="wlist">${good.sort((a,b)=>b.ok-a.ok).slice(0,12).map(x=>`<span class="wchip g" dir="ltr">${esc(x.label)}</span>`).join('')}${good.length>12?`<span class="wchip g">+${good.length-12}</span>`:''}</div>`:''}
-        ${notYet?`<div class="hint" style="margin-top:6px">⬜ עוד לא תורגלו: ${notYet}</div>`:''}</div>
+        ${notYet?`<div class="hint" style="margin-top:6px">⬜ עוד לא תורגלו: ${notYet}</div>`:''}</div>${FB}
     </div>`; }).join('');
+  fillQuotaLines();
 }
 /* ---------- the kid's actual mistakes in one practice set: question, what they answered, the right answer ---------- */
 function mistakesOf(set, HS){
@@ -4205,22 +4231,127 @@ async function openServerLog(){
 }
 async function delBug(id,btn){ try{ await window.__sffRoot.del('bugReports',id); btn.closest('.errrow').remove(); }catch(e){ toast('⚠️'); } }
 function sayWord(t){ rdStop(); if(mutedNote()) return; try{ const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); sayU(u); }catch(e){} }
-// a small practice set (for the same child) with exactly the words that had mistakes – no AI needed
-function makeWordDrill(setId){
-  const set=getSet(setId), st=WSTAT[setId]; if(!set||!st) return;
-  const weakKeys=new Set(st.items.filter(x=>x.bad&&(st.tab==='all'||x.cat===st.tab)).map(x=>x.label.toLowerCase()));
-  const qs=set.questions.filter(q=>weakKeys.has(String(q.options[q.answer]).trim().toLowerCase()) && !passageOf(set,q))
-    .map(({ch,...q})=>({...q, ch:0}));
-  if(!qs.length){ toast('📖 Unseen → ▶'); return; }
-  const id='r'+set.id, old=sets.find(x=>x.id===id);
-  const topics=[...new Set(qs.map(q=>q.topic))];
+/* ---------- תרגול ממוקד: what to strengthen, built from the kid's own mistakes ----------
+   focusOf(set) is the one place that says what is left to strengthen in a practice set – the progress screen, the kid's card at
+   home (an adult's) and "חדש!" all use it, never the progress screen's state. The one button: mistakes on words / questions →
+   a focused set right away, with no AI and no monthly build (makeFocus); only weak topics → "✨ תרגול ממוקד לנושאים" (an AI
+   build, buildReinforce). A focused set is marked reinf: <its source>; the source then counts as done (setDone → 'focus'). */
+const FOCUS_LINE='האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה';
+const fT=(str,...names)=>{ let t=esc(window.sffT?sffT(str):str); names.filter(Boolean).forEach(n=>{ const e=esc(n); t=t.split(e).join(`<bdi>${e}</bdi>`); }); return `<span translate="no">${t}</span>`; };
+function focusOf(set, H=history){
+  if(!set||set.demo) return {items:[],qs:[],topics:[],goodN:0,pct:null,played:false};
+  const HS=H.filter(h=>h.setId===set.id);
+  const items=wordStats(set,HS).filter(x=>x.bad).sort((a,b)=>b.bad-a.bad||b.last-a.last);
+  const keys=new Set(items.map(x=>x.label.toLowerCase()));
+  const qs=set.questions.filter(q=>keys.has(String(q.options[q.answer]).trim().toLowerCase())&&!passageOf(set,q));
+  const rows=topicRows(HS), topics=rows.filter(x=>x.status==='weak'||x.status==='mid');
+  const qn=HS.reduce((a,h)=>a+h.n,0), qr=HS.reduce((a,h)=>a+h.right,0);
+  return {items:items.filter(x=>qs.some(q=>String(q.options[q.answer]).trim().toLowerCase()===x.label.toLowerCase())), qs, topics, goodN:rows.filter(x=>x.status==='good').length,
+    pct:qn?Math.round(qr/qn*100):null, played:HS.length>0};
+}
+const focusUnit=(set,n)=>isEnSet(set)?(n===1?'מילה':'מילים'):(n===1?'שאלה':'שאלות');
+// the one button (+ its line): a focused set from the mistakes, or – only weak topics – a focused build for the topics
+function focusBtn(set, F, o={}){
+  const kid=kidOfSet(set); if(!kid) return '';
+  if(F.items.length) return `<button class="btn focusbtn ${o.cls||''}" onclick="makeFocus('${esc(set.id)}')">🎯 ${o.label||`תרגול ממוקד · ${F.items.length} ${focusUnit(set,F.items.length)}`}</button>
+    <div class="hint focusline">${o.line||FOCUS_LINE}</div>`;
+  if(F.topics.length&&sample&&canManage()) return `<button class="btn focusbtn ${o.cls||''}" onclick="focusTopics('${esc(set.id)}')">✨ תרגול ממוקד לנושאים</button>
+    <div class="hint focusline qleft">בנייה לפי הנושאים לחיזוק</div>`;
+  return '';
+}
+function focusTopics(setId){ const set=getSet(setId); if(!set) return; const F=focusOf(set), kid=kidOfSet(set);
+  buildReinforce(set.subject, F.topics.map(w=>w.t), set.grade, (kid||{}).name||set.name, set.id); }
+// the monthly builds left, on the lines of the topic buttons
+async function fillQuotaLines(){ const els=document.querySelectorAll('.qleft'); if(!els.length) return; const q=await getQuota(); if(!q) return;
+  const left=Math.max(0,qFree()-q.used)+(q.credits||0); els.forEach(e=>{ e.textContent=`בנייה לפי הנושאים · נשארו ${left} בניות החודש`; }); }
+// a small practice set for the same kid with exactly the words / questions that had mistakes – no AI, ready at once, listed first
+function makeFocus(setId, quiet){
+  const set=getSet(setId); if(!set) return null; const F=focusOf(set);
+  const qs=F.qs.map(({ch,...q})=>({...q, ch:0}));
+  if(!qs.length){ toast('📖 Unseen → ▶'); return null; }
+  const id='r'+set.id, old=sets.find(x=>x.id===id), topics=[...new Set(qs.map(q=>q.topic))];
   const body={kidId:set.kidId, name:set.name, grade:set.grade, subject:'🎯 '+String(set.subject).replace(/^🎯\s*/,''), topics, questions:qs,
-    chapters:[{title:'🎯 חיזוק', topics, count:qs.length}], examDate:set.examDate||'', dailyGoal:1, perRound:qs.length, compete:false, shared:true, reinf:set.id,
+    chapters:[{title:'🎯 תרגול ממוקד', topics, count:qs.length}], examDate:set.examDate&&daysLeft(set.examDate)>=0?set.examDate:'', dailyGoal:1, perRound:qs.length, compete:false, shared:true, reinf:set.id,
     qa:{checked:qs.length,passed:qs.length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[]};
   if(old){ Object.assign(old, body, {updated:Date.now()}); delete old.order; delete old.pos; }
   else sets.unshift({id, created:Date.now(), ...body});
-  store.save(); toast(`🎯 ✓ ${qs.length}`); renderStats();
+  store.save(); if(!quiet) toast(`🎯 תרגול ממוקד · ${qs.length} ${focusUnit(set,qs.length)} ✓`);
+  rerender(); return id;
 }
+// a focused set's words / questions the kid answered right in it: "תוקנו: which, kitchen ✓"
+function focusFixed(fs){ const done=new Set();
+  history.filter(h=>h.setId===fs.id&&Array.isArray(h.qr)&&h.mode!=='memory').forEach(h=>qrEntries(fs,h).forEach(({i,ok})=>{ const q=fs.questions[i]; if(ok&&q) done.add(String(q.options[q.answer]).trim()); }));
+  return [...done]; }
+// the progress screen: the set's card, scrolled to (from the home card and "חדש!")
+function openFocusIn(setId){ const set=getSet(setId), kid=set&&kidOfSet(set); go('stats');
+  setTimeout(()=>{ if(kid&&$('sKid')){ fillStatsFilters(); $('sKid').value=kid.name; renderStats(); }
+    const el=document.querySelector(`.scard[data-set="${CSS.escape(setId)}"]`); if(el) el.scrollIntoView({block:'start'}); },120); }
+/* the kid's card at home, an adult's (a parent, a helper, a tutor – its own kids): one card, two states
+   1. "התרגול הסתיים!" – the kid's latest set that ended (done / the test passed), not one that went on to a focused set
+   2. "N מילים לחזק" – an open set with mistakes and no focused set yet; back only when there are new mistakes */
+function focusCardFor(me){
+  if(!me||window.SFF_KID_DEVICE||isClassMode()) return '';
+  const mine=sets.filter(s=>!s.demo&&kidOfSet(s)===me), last=s=>Math.max(0,...history.filter(h=>h.setId===s.id).map(h=>h.at));
+  const fin=mine.filter(s=>['done','exam'].includes(setDone(s))&&!s.finSeen&&last(s)>0).sort((a,b)=>last(b)-last(a))[0];
+  const name=esc(kidName(me));
+  if(fin){ const F=focusOf(fin), why=setDone(fin), subj=esc(String(fin.subject).replace(/^🎯\s*/,'')), top=F.topics.slice(0,2);
+    const has=F.items.length||F.topics.length;
+    return `<div class="card fcard f1" data-set="${esc(fin.id)}"><div class="fhead">${IC.sv('#3A0716',26,IC.cup)}<div><b>${why==='exam'?'המבחן עבר!':'התרגול הסתיים!'}</b>
+        <div class="fsub">${fT(`${kidName(me)} סיים/ה את ${String(fin.subject).replace(/^🎯\s*/,'')} עם ${F.pct??0}% הצלחה`, kidName(me))}</div></div></div>
+      <div class="fbody">${has?`<p>${fT(`כדאי לעקוב אחרי מה שעוד לא יושב ולבנות תרגול ממוקד – בדיוק לפי הקצב של ${kidName(me)}.`, kidName(me))}</p>
+        ${top.length?`<div class="ftops">${top.map(t=>`<div class="ftop"><span dir="auto" translate="no">${esc(t.t)}</span><span class="fbar"><i style="width:${Math.round(t.p*100)}%;background:${t.status==='weak'?'#E5484D':'#F2A63B'}"></i></span><span class="pill ${t.status==='weak'?'bad':'warn'}">${t.status==='weak'?'לחזק':'כמעט שם'}</span></div>`).join('')}
+          ${F.goodN?`<div class="fgood">ועוד ${F.goodN} נושאים שכבר יושבים טוב</div>`:''}</div>`:''}
+        ${F.items.length?`<div class="fwords" dir="ltr" translate="no">${F.items.slice(0,4).map(x=>`<span class="${wState(x)}">${esc(x.label)}</span>`).join('')}</div>`:''}
+        ${focusBtn(fin,F)}
+        <button class="btn ghost" onclick="openFocusIn('${esc(fin.id)}')">לראות את ההתקדמות</button>`
+        :`<p class="fall">🌟 הכול יושב!</p><button class="btn" onclick="openCatalog('${esc(me.id)}')">📚 לתרגול חדש מהקטלוג</button>`}
+        <button class="linkbtn" onclick="focusLater('${esc(fin.id)}','fin')">אחר כך</button></div></div>`; }
+  // 2. an open set with mistakes, no focused set yet – the subject with the most to strengthen
+  const open=mine.filter(s=>!setDone(s)&&!s.reinf&&!sets.some(x=>x.reinf===s.id)).map(s=>({s,F:focusOf(s)})).filter(x=>x.F.items.length)
+    .filter(x=>!(x.s.focusSeen&&x.F.items.length<=(+x.s.focusSeen.n||0))).sort((a,b)=>b.F.items.length-a.F.items.length);
+  if(!open.length) return '';
+  const {s,F}=open[0], subj=esc(String(s.subject).replace(/^🎯\s*/,'')), more=mine.filter(x=>x!==s&&!setDone(x)&&x.subject!==s.subject).map(x=>({x,F:focusOf(x)})).filter(y=>y.F.topics.length||y.F.items.length)[0];
+  return `<div class="card fcard f2" data-set="${esc(s.id)}"><div class="fhead2"><span class="ftgt">${IC.sv('#1B2A4A',22,IC.target,2.2)}</span><div><b>${fT(`${F.items.length} ${focusUnit(s,F.items.length)} לחזק · ${String(s.subject).replace(/^🎯\s*/,'')}`)}</b>
+      <div class="fsub">${fT(`מהטעויות של ${kidName(me)}`, kidName(me))}</div></div></div>
+    <div class="fwords" dir="ltr" translate="no">${F.items.slice(0,4).map(x=>`<span>${esc(x.label)}</span>`).join('')}</div>
+    ${focusBtn(s,F,{label:fT(`תרגול ממוקד ל${kidName(me)}`, kidName(me)), line:fT(`מוכן מיד · בחינם · מופיע ל${kidName(me)} ראשון`, kidName(me))})}
+    ${more?`<button class="linkbtn fmore" onclick="openFocusIn('${esc(more.x.id)}')">${fT(`ועוד ${more.F.topics.length||more.F.items.length} נושאים לחזק ב${String(more.x.subject).replace(/^🎯\s*/,'')} ›`)}</button>`:''}
+    <button class="linkbtn" onclick="focusLater('${esc(s.id)}','open',${F.items.length})">אחר כך</button></div>`;
+}
+// "אחר כך": kept on the set, so every adult of the family sees the same (the set is synced)
+function focusLater(id, kind, n){ const s=getSet(id); if(!s) return;
+  if(kind==='fin') s.finSeen=Date.now(); else s.focusSeen={at:Date.now(), n:+n||0};
+  store.save(); rerender(); }
+/* "חדש! תרגול ממוקד" – once, for a parent who already went through the intro (not a new one: the intro shows it), never on a
+   kid's phone, a teacher's group or for a tutor. With a kid's real mistakes when there are any (up to 3), else in general. */
+let FOCUS_NEW=false;
+function maybeFocusNew(n=0){
+  if(FOCUS_NEW||window.SFF_KID_DEVICE||isClassMode()||!['owner','admin'].includes(window.SFF_ROLE)) return;
+  if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
+  if(!window.SFF_ONB_DONE || (window.SFF_NEWS||{}).focus) return;
+  try{ if(localStorage.getItem('sff_news_focus')) return; }catch(e){}
+  if($('intro')||$('focusNew')) { if(n<20) setTimeout(()=>maybeFocusNew(n+1),1500); return; }
+  if(!sets.some(s=>!s.demo) && n<6){ setTimeout(()=>maybeFocusNew(n+1),1500); return; }      // the family's sets are still on their way
+  FOCUS_NEW=true;
+  let best=null; visibleKids().forEach(k=>sets.filter(s=>!s.demo&&kidOfSet(s)===k&&!s.reinf).forEach(s=>{ const F=focusOf(s); if(F.items.length&&(!best||F.items.length>best.F.items.length)) best={k,s,F}; }));
+  const el=document.createElement('div'); el.id='focusNew'; el.className='fnew';
+  const nm0=best?kidName(best.k):'', w=best?best.F.items.slice(0,3).map(x=>x.label).join(', '):'';
+  el.innerHTML=`<div class="fnewsheet" role="dialog" aria-modal="true" aria-label="חדש: תרגול ממוקד"><span class="fnewtag">חדש!</span>
+    <span class="fnewico">${IC.sv('#1B1440',36,IC.target,2)}</span><b class="fnewh">תרגול ממוקד</b>
+    <span class="fnewp">${esc(FOCUS_LINE)}.</span>
+    <div class="fnewsteps">${best?`<div><i class="n1">1</i><span>${fT(`${nm0} טעה/תה ב-${w}`, nm0, w)}</span></div>
+      <div><i class="n2">2</i><span>${fT(`לחיצה אחת – ותרגול רק על ${isEnSet(best.s)?'המילים':'השאלות'} האלה מחכה ל${nm0} ראשון`, nm0)}</span></div>`
+      :`<div><i class="n1">1</i><span>הילד משחק, והאפליקציה זוכרת כל מילה ושאלה שטעה בה</span></div>
+      <div><i class="n2">2</i><span>לחיצה אחת – ותרגול רק על הטעויות מחכה לו ראשון</span></div>`}
+      <div><i class="n3">3</i><span>רואים מה תוקן – ומה עוד לחזק</span></div></div>
+    ${best?`<button class="btn big" onclick="focusNewGo('${esc(best.s.id)}')">${fT(`לראות מה לחזק אצל ${nm0}`, nm0)}</button>`:''}
+    <button class="${best?'linkbtn':'btn big'}" onclick="focusNewClose()">הבנתי</button></div>`;
+  document.body.appendChild(el);
+}
+function focusNewSeen(){ try{ localStorage.setItem('sff_news_focus','1'); }catch(e){} window.SFF_NEWS={...(window.SFF_NEWS||{}),focus:Date.now()}; window.__sffNewsSeen&&window.__sffNewsSeen('focus'); }
+function focusNewClose(){ $('focusNew')?.remove(); focusNewSeen(); }
+function focusNewGo(setId){ focusNewClose(); openFocusIn(setId); }
+function makeWordDrill(setId){ return makeFocus(setId); }
 function fillStatsFilters(){
   const kids=[...new Set(history.map(h=>h.kid))], subs=[...new Set(history.map(h=>h.subject))];
   const keep=(id,vals,all)=>{const el=$(id),cur=el.value; el.innerHTML=`<option value="">${all}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join(''); if(vals.includes(cur)) el.value=cur;};
@@ -4548,6 +4679,7 @@ const IC={
   cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
   spark:'<path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
   ok:'<path d="M5 12l5 5 9-10"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
   spk:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/>',
   again:'<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/>',
   flag:'<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>',
@@ -4567,7 +4699,7 @@ const iAva=(nm,bg,c,sz=40,fs=16,x='')=>`<span translate="no" class="iava" style=
 const iTag=(t,st,K)=>K?'':`<span class="itag" style="${st}">${t}</span>`;
 const iPhone=(st,inner)=>`<div class="iphone" style="${st}">${inner}</div>`;
 const INTRO={
-  main:K=>({bg:'#1B2A4A', dark:1, h:600, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
+  main:K=>({bg:'#1B2A4A', dark:1, h:666, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
     <h1>לומדים למבחן<br><span style="color:#F2A63B">כמו במשחק</span></h1>
     <p style="color:#D5DEF2">תרגול לפי החומר של המבחן, עד יום המבחן – והילד פשוט נהנה</p>
     <div class="igrid">
@@ -4575,8 +4707,9 @@ const INTRO={
       <div style="background:#F2A63B;color:#1B2A4A">${IC.sv('#1B2A4A',26,IC.doc)}<b>החומר שלכם</b><span>מצלמים דף – יש תרגול</span></div>
       <div style="background:#24C78E;color:#0E2E22">${IC.sv('#0E2E22',26,IC.bars)}<b>מעקב להורה</b><span>מה יודע, מה לחזק</span></div>
       <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>אחים, סבתא, מורה</span></div>
+      <div class="iwide" style="background:#B9A7FF;color:#1B1440">${IC.sv('#1B1440',26,IC.target,2.2)}<div><b>תרגול ממוקד</b><span>נבנה לבד מהטעויות – רק מה שעוד לא יושב</span></div></div>
     </div>
-    ${iPhone('top:490px;width:250px;height:290px;background:#E4F1FF;padding:18px 16px',`
+    ${iPhone('top:560px;width:250px;height:290px;background:#E4F1FF;padding:18px 16px',`
       <div class="irow" style="color:#1B2A4A;font-size:12px;font-weight:700"><span>המפה של נועה</span><span style="background:#FFF2C9;color:#946200;border-radius:99px;padding:3px 9px">עוד 5 ימים</span></div>
       <div style="position:relative;height:200px" dir="ltr">
         <svg width="204" height="200" viewBox="0 0 204 200" style="position:absolute;inset:0" aria-hidden="true"><path d="M30 180 C 120 170, 170 140, 150 105 S 40 80, 60 45 S 160 20, 175 12" fill="none" stroke="#B9C9EE" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round"/></svg>
@@ -4619,14 +4752,27 @@ const INTRO={
   progress:K=>{ const bar=(t,v,c,tc)=>`<div><div class="irow"><span>${t}</span><b style="color:${tc}">${v}%</b></div><div class="ibar"><div style="width:${v}%;background:${c}"></div></div></div>`;
     return {bg:'#E4F1FF', h:620, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
     <h1 style="font-size:32px">יודעים בדיוק<br><span style="color:#2F6BFF">מה כבר יושב</span></h1>
-    <p style="color:#4A4870">רואים את ההתקדמות של כל ילד בכל נושא – ובלחיצה בונים סט חיזוק בדיוק למה שצריך</p>
+    <p style="color:#4A4870">ההורה רואה את ההתקדמות של כל ילד. הילד רואה מה לחזק – ומתרגל את זה בלחיצה</p>
     ${iPhone('top:320px;width:276px;height:440px;background:#fff;padding:20px 16px;gap:12px',`
       <div style="display:flex;align-items:center;gap:10px">${iAva('נועה','#FFE4EC','#B3264F')}<div style="flex:1"><b style="font-size:15px">נועה · כיתה ד׳</b><div style="font-size:11px;color:#4A4870">תרגלה היום · 4 ימים ברצף</div></div>
         <span style="display:flex;align-items:center;gap:3px;font-weight:800;color:#946200;font-size:14px">${IC.star('#F2A63B',16)}3/5</span></div>
       <div class="ibars">${bar('אוצר מילים – בית',92,'#14A774','#0B6B4A')}${bar('Present Simple',80,'#14A774','#0B6B4A')}${bar('מילות שאלה',58,'#F2A63B','#946200')}</div>
-      <div style="background:#FFF2C9;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px"><b style="font-size:13px;color:#6B4700">מילים לחיזוק</b>
+      <div style="background:#FFF2C9;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px"><b style="font-size:13px;color:#6B4700">לחיזוק</b>
         <div class="ichips" style="margin:0;justify-content:flex-start" dir="ltr" translate="no"><span style="background:#fff">where</span><span style="background:#fff">which</span><span style="background:#fff">kitchen</span></div></div>
-      <div style="background:#2F6BFF;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px">סט חיזוק לנושאים האלה</div>`)}`}; },
+      <div style="background:#2F6BFF;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px">תרגול ממוקד · רק את אלה</div>`)}`}; },
+  focus:K=>{ const row=(t,v,c,lbl,bg,tc)=>`<div class="irow" style="gap:8px;font-size:12px"><span style="flex:1">${t}</span><b style="color:${c}">${v}%</b><span style="background:${bg};color:${tc};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">${lbl}</span></div>`;
+    const step=(t,on)=>`<span style="${on?'background:#1B2A4A;color:#fff':'background:#fff'};border-radius:12px;padding:8px 6px;flex:1;text-align:center">${t}</span>`, arr=IC.sv('#3A0716',14,'<path d="M15 6l-6 6 6 6"/>',2.4);
+    return {bg:'#FF5C8A', h:640, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
+    <h1 style="font-size:31px">התרגול הסתיים?<br><span style="color:#fff">עכשיו מחזקים בדיוק<br>את מה שחסר</span></h1>
+    <p style="color:#3A0716;font-size:14px;max-width:300px">במסך המעקב רואים מה כבר יושב ומה עוד לא – ובלחיצה אחת בונים תרגול ממוקד רק על זה, בקצב של הילד</p>
+    <div class="icard" style="margin-top:16px;gap:9px;padding:14px">
+      <div class="irow"><b style="font-size:14px">אנגלית · נועה</b><span style="background:#DDF8EC;color:#0B6B4A;border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700">הושלם · 5/5 פרקים</span></div>
+      <div style="display:flex;flex-direction:column;gap:6px">${row('אוצר מילים – בית',92,'#0B6B4A','שולטת','#DDF8EC','#0B6B4A')}${row('<span translate="no">Present Simple</span>',76,'#946200','כמעט שם','#FFF2C9','#6B4700')}${row('מילות שאלה',55,'#A3262B','לחזק','#FFE3E4','#A3262B')}</div>
+      <div style="height:1px;background:#EEF2F7"></div><div style="font-size:12px;font-weight:700;color:#4A4870">מילים לחיזוק</div>
+      <div class="ichips" style="margin:0;justify-content:flex-start;font-size:13px" dir="ltr" translate="no"><span style="background:#FFE3E4;color:#A3262B">✗2 where</span><span style="background:#FFE3E4;color:#A3262B">✗2 whose</span><span style="background:#FFF2C9;color:#6B4700">✗1 which</span></div>
+      <div style="background:#1B2A4A;color:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px">${IC.sv('#F2A63B',18,IC.target,2.2)}<span>תרגול ממוקד · 3 מילים</span></div>
+      <div style="text-align:center;font-size:11px;color:#4A4870">מוכן מיד, ולא מנצל בנייה חודשית</div></div>
+    <div style="margin-top:14px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:11px;font-weight:700;color:#3A0716">${step('מתרגלים')}${arr}${step('עוקבים')}${arr}${step('ממקדים',1)}${arr}${step('שוב')}</div>`}; },
   compete:K=>{ const col=(nm,c,place,pts,h,top,big)=>`<div class="ipod">${top?`<svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><path d="M2 20L4 4l7 7 4-9 4 9 7-7 2 16z" fill="#F2A63B" stroke="#3A0716" stroke-width="1.5" stroke-linejoin="round"/></svg>`:''}
       ${iAva(nm,'#fff',c,big?60:50,big?24:20,big?'box-shadow:0 0 0 4px #F2A63B':'')}<b style="font-size:${big?15:14}px">${nm}</b>
       <div style="height:${h}px;${big?'background:#1B2A4A;color:#fff':'background:#fff;color:#4A4870'}"><b style="font-size:${big?32:26}px;${big?'color:#F2A63B':''}">${place}</b><span>${pts} נקודות</span></div></div>`;
@@ -4659,8 +4805,8 @@ const INTRO={
       ${it(IC.link,'#B9A7FF','כניסה בקישור אישי','בלי אימייל ובלי סיסמה לילד')}${it(IC.globe,'#7FB0FF','עברית ואנגלית','ממשק בשתי השפות')}
     </div>${shot?'<div style="margin-top:22px;background:#F2A63B;color:#1B2A4A;border-radius:99px;padding:13px 28px;font-weight:800;font-size:16px">מתחילים בחינם</div>':''}`}; }
 };
-const INTRO_SETS={parent:['main','build','testday','progress','share','safe'], kid:['play','compete']};
-const INTRO_ALL=['main','play','build','testday','progress','compete','share','safe'];   // the store order 1–8
+const INTRO_SETS={parent:['main','build','testday','progress','focus','share','safe'], kid:['play','compete']};
+const INTRO_ALL=['main','play','build','focus','progress','testday','compete','share'];   // the store order 1–8 ("safe" is in the store's description)
 const IN={list:[],i:0,kid:false,mode:null};
 /* ---------- the teachers' intro (the "store screens + intro" canvas: Tutor1–5, School1–6) ----------
    An invited tutor (role tutor): t1–t5, the first time in the family after the invitation (kept in users/{uid}.introTutor).
@@ -4909,7 +5055,7 @@ function maybeKidIntro(){
   try{ if(localStorage.getItem('sff_kid_intro')) return; localStorage.setItem('sff_kid_intro_t','1'); if(localStorage.getItem('sff_kid_intro_t')!=='1') return; localStorage.removeItem('sff_kid_intro_t'); }catch(e){ return; }
   openIntro(true);
 }
-(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(maybeOnb,400); setTimeout(maybeTutorIntro,900); } else if(++n>240) clearInterval(t); },500); })();
+(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(maybeOnb,400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
   const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };

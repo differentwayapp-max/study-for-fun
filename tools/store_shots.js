@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const path = require('path'), fs = require('fs');
 const APP = process.env.APP || 'http://localhost:8765/';
 const ROOT = path.join(__dirname, '..', 'store', 'play');
-const NAMES = ['1_main', '2_play', '3_build', '4_testday', '5_progress', '6_compete', '7_share', '8_safe'];
+const NAMES = ['1_main', '2_play', '3_build', '4_focus', '5_progress', '6_testday', '7_compete', '8_share'];   // INTRO_ALL's order ("safe" → the description)
 (async () => {
   const b = await chromium.launch();
   for (const lang of ['he', 'en']) {

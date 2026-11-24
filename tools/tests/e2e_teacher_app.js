@@ -73,6 +73,29 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(await T.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.worlds?.sort().join() === 'private,school'), 'the account keeps both worlds (users/{uid}.worlds, by the server)');
   await T.evaluate(() => window.__sffFamily.switchTo(window.SFF_FAMS.find(f => f.teach !== 'private').id)); await T.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1500);
   ok(await T.evaluate(() => !document.documentElement.classList.contains('wpriv')), 'back to the class: blue again');
+  // the group tab's own "new" button: the world open now – never "which kind?"
+  await T.evaluate(() => go('family')); await T.waitForSelector('#grpNew', { timeout: 10000 });
+  ok(/כיתה חדשה/.test(await T.textContent('#grpNew')), 'the group tab: "＋ כיתה חדשה" (in a class)');
+  await T.click('#grpNew'); await T.waitForSelector('#tsName', { timeout: 10000 });
+  ok(await T.evaluate(() => !document.getElementById('tsClass') && !document.getElementById('tsPriv')), '…straight to the class\'s form (no "school or private?")');
+  await T.click('#tsCancel'); await T.waitForTimeout(400);
+  ok(await T.evaluate(() => { newClass(); const r = !document.getElementById('tsClass') && !!document.getElementById('tsName'); document.getElementById('tsCancel')?.click(); return r; }), 'any "new group" with no world given: the world open now');
+  // the main screen: choosing the class (the owner's decision, 25.11)
+  await T.evaluate(() => go('kids')); await T.waitForTimeout(300);
+  const bk = await T.evaluate(() => ({ vis: !document.getElementById('topBack').classList.contains('hidden'), t: document.getElementById('topBack').textContent }));
+  ok(bk.vis && /הקבוצות/.test(bk.t), 'in a group: "‹ הקבוצות" at the top – ' + bk.t);
+  await T.click('#topBack'); await T.waitForSelector('#vPlaces:not(.hidden) .plcard .pln', { timeout: 10000 });
+  const PL = await T.evaluate(() => ({ text: document.getElementById('vPlaces').innerText, cards: document.querySelectorAll('#vPlaces .plcard').length, nav: getComputedStyle(document.getElementById('bNav')).display }));
+  ok(PL.cards === 2 && /בית הספר/.test(PL.text) && /תלמידים פרטיים/.test(PL.text) && /מדעים/.test(PL.text) && /יום ג/.test(PL.text) && /כיתה חדשה/.test(PL.text) && /קבוצה פרטית חדשה/.test(PL.text) && PL.nav === 'none',
+    '…the class picker: both worlds, a card each, "new" in each; no bottom tabs');
+  ok(/באיזו קבוצה עובדים עכשיו/.test(PL.text) && /עוד אין תלמידים|\d+ תלמידים|תלמיד\/ה אחד\/ת/.test(PL.text), 'the picker says what to do, and how many students each class has');
+  await T.screenshot({ path: `${OUT}/ta_places_he.png` });
+  const T3 = await page(tc, APP + 'teach'); await T3.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await T3.waitForSelector('#vPlaces:not(.hidden) .plcard', { timeout: 15000 });
+  ok(await T3.evaluate(() => !document.getElementById('vPlaces').classList.contains('hidden') && document.getElementById('vKids').classList.contains('hidden')), 'opening the teachers\' app: the class picker first');
+  await T3.evaluate(() => [...document.querySelectorAll('#vPlaces .plcard')].find(b => /יום ג/.test(b.textContent)).click());
+  await T3.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'private' && !document.getElementById('vKids').classList.contains('hidden'), null, { timeout: 25000 });
+  ok(true, 'tap a card: into that group (its home)');
+  await T3.close();
   await T.evaluate(() => go('kids')); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/ta_home_school.png` });
 
   console.log('2. the same teacher in the family app');
@@ -127,6 +150,10 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   M = await menu(E);
   ok(!heb(M.all).filter(w => !/התלמידים|שלי|^עב$/.test(w)).length && /Private students/.test(M.text) && /New private group/.test(M.text) && /Add school classes too/.test(M.text) && /families app/.test(M.all) && /Private tutor/.test(M.sub), '☰ in English: no Hebrew left (but the group\'s name) ' + heb(M.all).join(' '));
   await shotMenu(E, 'ta_menu_en.png');
+  await E.evaluate(() => { closeMenu(); openPlaces(); }); await E.waitForTimeout(1500);
+  const pe = await E.evaluate(() => document.getElementById('vPlaces').innerText);
+  ok(/Which group/.test(pe) && /Private students/.test(pe) && !heb(pe).filter(w => !/התלמידים|שלי|^עב$/.test(w)).length, 'the picker in English: ' + heb(pe).join(' '));
+  await E.screenshot({ path: `${OUT}/ta_places_en.png` });
 
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));
   await b.close();

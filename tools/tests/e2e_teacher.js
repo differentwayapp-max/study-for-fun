@@ -40,7 +40,9 @@ const doc = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bearer
   await p1.screenshot({ path: `${OUT}/t_home_he.png` });
 
   console.log('2. a second group, reload, switching');
-  await p1.evaluate(() => { newClass(); }); await setup(p1, 'private', 'התלמידים שלי');
+  // the private world added (the owner's decision, 25.11: a new group knows its world – no "which kind?")
+  await p1.evaluate(() => { newClass('private'); }); await p1.waitForSelector('#tsName', { timeout: 20000 });
+  ok(!(await p1.$('#tsClass')), 'a new private group: straight to its form'); await p1.fill('#tsName', 'התלמידים שלי'); await p1.selectOption('#tsSubj', { index: 1 }); await p1.click('#tsGo');
   await p1.waitForFunction(() => window.SFF_ROLE && window.SFF_CLASS && window.SFF_CLASS.teach === 'private', null, { timeout: 25000 }); await p1.waitForTimeout(1500);
   const s2 = await p1.evaluate(() => ({ fam: window.__sffFamily.famId, n: (window.SFF_FAMS || []).length, name: window.SFF_CLASS.name }));
   ok(s2.fam !== s1.fam && s2.n === 2 && s2.name === 'התלמידים שלי', 'a second group (private), now active; 2 groups');

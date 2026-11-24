@@ -50,7 +50,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const uid1 = await p1.evaluate(() => window.SFF_UID), u1 = await get(`users/${uid1}`);
   ok(u1 && u1.introTeacher > 0 && !('intro' in u1) && !('introTutor' in u1), 'kept in users/{uid}.introTeacher – the parent\'s "intro" untouched: ' + JSON.stringify(Object.keys(u1 || {})));
   ok(!(await p1.$('#intro')), 'no intro over the group');
-  await p1.evaluate(() => { newClass(); }); await p1.waitForSelector('#tsClass', { timeout: 8000 }); await p1.click('#tsClass'); await p1.waitForTimeout(600);
+  await p1.evaluate(() => { newClass(); }); await p1.waitForSelector('#tsName', { timeout: 8000 }); await p1.waitForTimeout(600);   // (the world is known: no "which kind?")
   ok(!(await p1.$('#intro')) && !!(await p1.$('#tsName')), 'a second group: straight to the form, no intro');
   await p1.click('#tsCancel').catch(() => {}); await p1.waitForTimeout(300);
   const p1b = await page(c1); await p1b.waitForTimeout(2500); if (await p1b.$('#fbTeach')) await p1b.click('#fbTeach');
@@ -58,8 +58,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(!(await p1b.$('#intro')), 'opened again: no intro');
   await p1b.evaluate(() => { openHowItWorks(); }); await p1b.waitForTimeout(400); s = await shown(p1b);
   ok(s && s.key === 's6' && s.n === 1 && /לפתוח קבוצה/.test(s.text), '☰ → איך זה עובד: the last screen, "לפתוח קבוצה"');
-  await p1b.click('#intro .icta2'); await p1b.waitForSelector('#tsClass', { timeout: 8000 }).catch(() => {});
-  ok(!!(await p1b.$('#tsClass')), '…its button opens a new group (the first choice, then the form)');
+  await p1b.click('#intro .icta2'); await p1b.waitForSelector('#tsName', { timeout: 8000 }).catch(() => {});
+  ok(!!(await p1b.$('#tsName')) && !(await p1b.$('#tsClass')), '…its button opens a new group of the same world (straight to the form)');
   await c1.close();
   // 320 wide + English
   for (const [w, lang, sub] of [[320, 'he', 'introT1b'], [360, 'en', 'introT1c']]) {

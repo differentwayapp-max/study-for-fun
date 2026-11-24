@@ -139,7 +139,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(ce2 && /to strengthen/.test(ce2.text) && !heb(ce2.text).length, 'English card 2: ' + (ce2 && ce2.text.slice(0, 70)) + ' ' + heb(ce2 ? ce2.text : '').join(' '));
   ok(await pe.evaluate(() => { go('stats'); return !/review set|סט חיזוק/i.test(document.body.innerText); }), 'no "review set" in English either');
   // "חדש!" in English (a fresh look: the flag cleared on this phone only)
-  await pe.evaluate(() => { FOCUS_NEW = false; window.SFF_NEWS = {}; localStorage.removeItem('sff_news_focus'); go('kids'); maybeFocusNew(9); }); await pe.waitForTimeout(1500);
+  await pe.evaluate(() => { document.getElementById('intro')?.remove(); FOCUS_NEW = false; window.SFF_NEWS = {};   /* (a new sign-in: its explanation screens closed first) */ localStorage.removeItem('sff_news_focus'); go('kids'); maybeFocusNew(9); }); await pe.waitForTimeout(1500);
   await pe.screenshot({ path: `${OUT}/f_new_en.png` });
   const ne = await pe.evaluate(() => (document.getElementById('focusNew') || {}).innerText || '');
   ok(/New!/.test(ne) && /Focused practice/.test(ne) && !heb(ne).length, 'English "New!": ' + ne.replace(/\s+/g, ' ').slice(0, 80));

@@ -1,6 +1,6 @@
 // The first-run intro screens, on the emulators (firestore, auth) with the real rules:
 // 1. a new parent (after the sign-in and the terms) gets 7 screens – the opening, the material, the test day, progress, focused practice (right after progress), sharing, safety; swipe goes on; every button ≥ 44 px;
-//    "דלג" closes it and it never comes back – not after a reload and not on another phone (kept in users/{uid}.intro);
+//    "דלג" closes it and it does not come back after a reload (kept in users/{uid}.intro) – a new sign-in (another phone) shows it again;
 //    ☰ → איך זה עובד opens it again; English: no Hebrew left on it;
 // 2. a kid phone, the first time from its link: only screens 2 and 6 – no parent text, no "להורה" tags; "יאללה למפה" ends it;
 //    the next time: not again;
@@ -48,7 +48,9 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await p1.reload({ waitUntil: 'load' }); await p1.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p1.waitForTimeout(2000);
   ok(!(await shown(p1)), 'after a reload: not again');
   const c2 = await parent(), p2 = await open(c2);
-  ok(!(await shown(p2)), 'another phone (empty storage), same account: not again');
+  // (the owner's decision, 24.11: every sign-in shows the screens again – another phone is a new sign-in)
+  s = await shown(p2); ok(s && s.key === 'main', 'another phone, same account (a new sign-in): the screens again');
+  await p2.click('#intro .iskip').catch(() => {}); await p2.waitForTimeout(600);
   await p2.evaluate(() => openMenu()); await p2.waitForTimeout(300);
   await p2.click('#sideMenu .ditem:has-text("איך זה עובד")'); await p2.waitForTimeout(400);
   s = await shown(p2); ok(s && s.key === 'main' && s.n === 7, '☰ → איך זה עובד opens it again');

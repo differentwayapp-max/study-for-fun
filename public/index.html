@@ -5130,7 +5130,7 @@ function maybeKidIntro(){
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
   const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };
-  lab('bnKids','🧒','תלמידים'); lab('bnFam','🏫','קבוצה');
+  lab('bnKids','🧒','תלמידים'); lab('bnFam',(window.SFF_CLASS||{}).teach==='private'?'👩‍🏫':'🏫','קבוצה');
   const m=document.querySelector(`#sideMenu .ditem[onclick="closeMenu();go('family')"] .dl`); if(m) m.textContent=window.sffT?sffT('הקבוצה'):'הקבוצה';
   const v=NAV_STACK[NAV_STACK.length-1]; if(v){ const t=viewTitle(v); $('topTitle').textContent=window.sffT?sffT(t):t; }
   try{ rerender(); }catch(e){} }

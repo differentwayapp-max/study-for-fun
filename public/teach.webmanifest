@@ -1,0 +1,20 @@
+{
+  "id": "/teach",
+  "name": "Study for fun – מורים",
+  "short_name": "SFF מורים",
+  "description": "מעקב ותרגול לכיתה, לקבוצה ולתלמידים פרטיים – by D-WAY",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/teach",
+  "scope": "/teach",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1B2A4A",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

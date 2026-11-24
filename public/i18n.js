@@ -203,7 +203,7 @@
     'כל הכיתה מתרגלת': 'The whole class practises', 'כל התלמידים שלך מתרגלים': 'All your students practise', 'ואת/ה רואה הכול': 'and you see it all',
     'פותחים קבוצה לכל כיתה ומקצוע, משתפים קישור – וההורים מצרפים את הילדים בעצמם': 'Open a group for each class and subject, share a link – and the parents add their kids themselves',
     'פותחים קבוצה לתלמידים שלך, שולחים קישור לכל הורה – וההורים מצרפים את הילדים בעצמם': 'Open a group for your students, send a link to each parent – and the parents add their kids themselves',
-    'הקבוצות שלי': 'My groups', 'ד׳2 – אנגלית': 'Grade 4, class 2 – English', 'ד׳3 – אנגלית': 'Grade 4, class 3 – English', 'ה׳1 – מדעים': 'Grade 5, class 1 – Science',
+    'הקבוצות שלי': 'My groups', 'למורים ולמורים פרטיים': 'For teachers and private tutors', 'ד׳2 – אנגלית': 'Grade 4, class 2 – English', 'ד׳3 – אנגלית': 'Grade 4, class 3 – English', 'ה׳1 – מדעים': 'Grade 5, class 1 – Science',
     'ד׳2': '4-2', 'ד׳3': '4-3', 'ה׳1': '5-1', 'מת׳': 'Ma', 'התלמידים שלי – אנגלית': 'My students – English', 'התלמידים שלי – מתמטיקה': 'My students – Math',
     'קישור אחד לכיתה': 'One link for the class', 'קישור אחד לכל התלמידים': 'One link for all your students', 'וההורים עושים את השאר': 'and the parents do the rest',
     'מפרסמים בקבוצת ההורים או תולים ברקוד בכיתה. כל הורה מצרף את הילד שלו וחותם באצבע – בלי להירשם': "Post it in the parents' group or hang a QR code in class. Each parent adds their own kid and signs with a finger – no sign-up",
@@ -247,7 +247,7 @@
     'תאריך אחר': 'Another date', 'תאריך יעד': 'Due date', 'לתת את המשימה': 'Give the assignment', 'בחרו תאריך יעד': 'Choose a due date', 'המשימה נשלחה': 'The assignment was sent',
     'בחרו תרגול – הוא יינתן כמשימה': 'Pick a practice set – it will be given as an assignment', 'לא הצלחנו לפתוח את התרגול': "We couldn't open the practice set",
     'תרגול מהטעויות – משימה אישית': 'Practice from the mistakes – a personal assignment', 'עוד אין טעויות לתרגל 🎉': 'No mistakes to practise yet 🎉', 'תרגול מהטעויות': 'Practice from the mistakes',
-    'מהמורה': 'From your teacher', 'חזרה': 'Review', 'כדאי לחזק': 'Worth strengthening', 'סיימו את התרגיל בהצלחה': 'Finished the practice set successfully', 'סיימו בהצלחה': 'Finished successfully', 'נבחרו': 'chosen', 'קבוצה': 'Group',
+    'מהמורה': 'From your teacher', 'חזרה': 'Review', 'כניסה למורים': 'Teachers sign in', '👨‍👩‍👧 הורה? לאפליקציה למשפחות ›': '👨‍👩‍👧 A parent? To the families app ›', '🧑‍🏫 מורה? לאפליקציה למורים ›': '🧑‍🏫 A teacher? To the teachers app ›', 'כיתה, קבוצה או תלמידים פרטיים – וגם מורה פרטי/ת שמשפחה הזמינה': 'A class, a group or private students – or a private tutor a family invited', 'הקבוצות שלי': 'My groups', 'לאפליקציה למשפחות': 'To the families app', 'לאפליקציה למורים': 'To the teachers app', 'כדאי לחזק': 'Worth strengthening', 'סיימו את התרגיל בהצלחה': 'Finished the practice set successfully', 'סיימו בהצלחה': 'Finished successfully', 'נבחרו': 'chosen', 'קבוצה': 'Group',
     'שולחים תרגול על מה שלמדתם היום בכיתה – כמשחק – ורואים מי עשה': 'Send practice on what you learned in class today – as a game – and see who did it',
     'שולחים תרגול על מה שלמדתם היום בשיעור – כמשחק – ורואים מי עשה': 'Send practice on what you learned in the lesson today – as a game – and see who did it',
     'אנגלית ד׳': 'English, grade 4',
@@ -277,6 +277,7 @@
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    [/^🧑‍🏫 התלמידים ממשפחת (.+)$/, (m, n) => `🧑‍🏫 The ${n} family's kids`],
     [/^(.+) סיים\/ה את (.+) עם (\d+)% הצלחה$/, (m, n, x, v) => `${n} finished ${tr(x)} with ${v}% success`],
     [/^כדאי לעקוב אחרי מה שעוד לא יושב ולבנות תרגול ממוקד – בדיוק לפי הקצב של (.+)\.$/, (m, n) => `It's worth following what isn't solid yet and building focused practice – right at ${n}'s pace.`],
     [/^(\d+) (מילים|מילה|שאלות|שאלה) לחזק · (.+)$/, (m, n, u, x) => `${n} ${/מיל/.test(u) ? (n === '1' ? 'word' : 'words') : (n === '1' ? 'question' : 'questions')} to strengthen · ${tr(x)}`],

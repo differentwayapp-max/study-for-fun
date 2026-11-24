@@ -13,6 +13,15 @@
     ],
     "headers": [
       {
+        "source": "/teach",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
         "source": "/",
         "headers": [
           {
@@ -41,6 +50,15 @@
       },
       {
         "source": "/manifest.webmanifest",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/manifest+json"
+          }
+        ]
+      },
+      {
+        "source": "/teach.webmanifest",
         "headers": [
           {
             "key": "Content-Type",

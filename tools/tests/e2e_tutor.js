@@ -45,7 +45,7 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   const T = await open('tutor', inv);
   await T.p.evaluate(() => { window.__sffFamily.switchTo(window.__sffFamily.famId); });   // keeps the active family; reload below brings the old cache in
   await T.p.waitForTimeout(500);
-  await T.p.evaluate(o => { for (const [k, v] of Object.entries(o)) if (v) localStorage.setItem(k, v); localStorage.setItem('sff_data_fam', localStorage.getItem('sff_active_fam')); }, old);
+  await T.p.evaluate(o => { for (const [k, v] of Object.entries(o)) if (v) localStorage.setItem(k, v); localStorage.setItem('sff_data_fam', localStorage.getItem('sff_active_teach') || localStorage.getItem('sff_active_fam')); }, old);   // the invitation opened the teachers' app
   await T.p.reload({ waitUntil: 'load' }); await T.p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await T.p.waitForTimeout(4000);
   const st = await T.p.evaluate(() => ({ role: window.SFF_ROLE, kids: kids.map(k => k.name).join(), sets: sets.filter(s => !s.demo).map(s => s.kidId).join(), hist: history.filter(h => h.kidId !== 'k2').length, wait: !!window.SFF_TUTOR_WAIT }));
   ok(st.role === 'tutor' && st.kids === 'בן' && st.sets === 'k2' && !st.hist && !st.wait, 'sees Ben only – his kids, sets and progress: ' + JSON.stringify(st));

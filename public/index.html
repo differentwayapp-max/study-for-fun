@@ -57,9 +57,12 @@ d.addEventListener('touchmove',function(e){if(e.touches&&e.touches.length>1)e.pr
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script>/* The installable-app file (manifest) says "start at /". A kid link must NOT load it: then "Add to Home Screen"
    keeps the kid's own address (/?f=…&t=…&k=…) and the icon always opens the kid's practice. Parents get the manifest. */
-(function(){ try{ var q=new URLSearchParams(location.search), kid=(q.get('f')&&q.get('t'))||/^#kid-/.test(location.hash);
-  if(!kid){ try{ kid=!!(localStorage.getItem('sff_fam')&&localStorage.getItem('sff_tok')&&localStorage.getItem('sff_unlock')!=='1'); }catch(e){} }
-  if(!kid){ var l=document.createElement('link'); l.rel='manifest'; l.href='/manifest.webmanifest'; document.head.appendChild(l); }
+/* /teach is the teachers' app: the same code, server and accounts, only teachers' screens; never a kid device */
+(function(){ var T=/^\/teach(\/|$)/.test(location.pathname); window.SFF_APP=T?'teach':'family'; window.SFF_HOME=T?'/teach':'/';
+  if(T){ document.title='Study for fun · מורים'; document.documentElement.classList.add('teachapp'); }
+  try{ var q=new URLSearchParams(location.search), kid=!T&&((q.get('f')&&q.get('t'))||/^#kid-/.test(location.hash));
+  if(!kid&&!T){ try{ kid=!!(localStorage.getItem('sff_fam')&&localStorage.getItem('sff_tok')&&localStorage.getItem('sff_unlock')!=='1'); }catch(e){} }
+  if(!kid){ var l=document.createElement('link'); l.rel='manifest'; l.href=T?'/teach.webmanifest':'/manifest.webmanifest'; document.head.appendChild(l); }
 }catch(e){} })();</script>
 <script src="/firebase-config.js?v=sff-v148"></script>
 <link rel="icon" href="data:image/png;base64,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">
@@ -1421,6 +1424,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   (function(){
     try{
       const q=new URLSearchParams(location.search), LSx=localStorage;
+      if(window.SFF_APP==='teach') return;
       const f=q.get('f')||LSx.getItem('sff_fam'), t=q.get('t')||LSx.getItem('sff_tok');
       if(q.get('f')&&q.get('t')) LSx.removeItem('sff_unlock');   // a freshly opened kid link wins
       const hk=(location.hash.match(/^#kid-([A-Za-z0-9-]+)$/)||[])[1];
@@ -1457,6 +1461,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const cfg = window.SFF_FIREBASE_CONFIG, V = window.SFF_FIREBASE_SDK || '10.14.1';
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
+  const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
 const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together
   W.__sffStage = 'module';
@@ -1520,7 +1525,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     // A kid link looks like  https://<site>/?f=<familyId>&t=<inviteToken>#kid-<kidId>
     const qp = new URLSearchParams(location.search);
     if (qp.get('f') && qp.get('t')) { LS.setItem('sff_fam', qp.get('f')); LS.setItem('sff_tok', qp.get('t')); }   // the address itself is kept (see above)
-    const kidFam = LS.getItem('sff_fam'), kidTok = LS.getItem('sff_tok');
+    const kidFam = TEACH ? null : LS.getItem('sff_fam'), kidTok = TEACH ? null : LS.getItem('sff_tok');
 
     W.__sffStage = 'auth';
     if (A.isSignInWithEmailLink && A.isSignInWithEmailLink(auth, location.href)) {
@@ -1529,7 +1534,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         if (!mail) mail = prompt(W.sffT ? W.sffT('לאיזה מייל נשלח הקישור?') : 'לאיזה מייל נשלח הקישור?') || '';
         await A.signInWithEmailLink(auth, mail.trim(), location.href); LS.removeItem('sff_link_mail');
       } catch (e) { W.__sffMailErr = String(e.code || e.message || e); }
-      W.history.replaceState(null, '', location.origin + '/');              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
+      W.history.replaceState(null, '', location.origin + W.SFF_HOME);              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
     }
     let firstUser = await new Promise(res => { const off = A.onAuthStateChanged(auth, u => { off(); res(u); }); });
     // ---- a parent opening a teacher's group link (?join=<group>.<code>) or the personal status link (?req=<group>.<id>.<key>):
@@ -1570,7 +1575,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     } else {
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
-      if (!u && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
+      if (!u && !TEACH && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
       if (!u) { u = await showLogin(); if (W.onbCover) W.onbCover(); }   // just signed in: no flash of the app before the welcome screens
       uid = u.uid; role = 'parent';
       const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => b.toString(16).padStart(2, '0')).join('');
@@ -1596,19 +1601,21 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
               await wb.commit();
             }
             await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayUnion(ifam) }, { merge: true });
-            LS.setItem('sff_active_fam', ifam); inviteMsg = 'joined';
+            LS.setItem(ACT, ifam); inviteMsg = 'joined';
           }
         } catch (e) { inviteMsg = 'bad:' + (e && e.message || e); }
       }
       // 2. the adult's own family – a parent always has one; someone who signed in as a teacher gets none (☰ adds one later)
       let want = null; try { want = LS.getItem('sff_want'); LS.removeItem('sff_want'); } catch (e) {}
+      if (TEACH) want = 'teacher';
       const us0 = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null), ud0 = (us0 && us0.exists() && us0.data()) || {};
       const teacherNow = want === 'teacher' || (want !== 'parent' && Array.isArray(ud0.roles) && ud0.roles.includes('teacher'));
       const own = F.doc(fdb, `families/${uid}`), ownSnap = await F.getDoc(own);
       if (!ownSnap.exists() && teacherNow) { /* a teacher: no empty family */ }
       else if (!ownSnap.exists() || !ownSnap.data().inviteToken) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName }, { merge: true });
       else if (!ownSnap.data().name) await F.setDoc(own, { name: myName }, { merge: true });
-      if (want === 'teacher' && !(Array.isArray(ud0.roles) && ud0.roles.includes('teacher'))) await F.setDoc(F.doc(fdb, `users/${uid}`), { roles: F.arrayUnion('teacher') }, { merge: true }).catch(() => {});
+      /* (the teachers' app: the server marks a teacher when the first group is made – just opening it changes nothing) */
+      if (want === 'teacher' && !TEACH && !(Array.isArray(ud0.roles) && ud0.roles.includes('teacher'))) await F.setDoc(F.doc(fdb, `users/${uid}`), { roles: F.arrayUnion('teacher') }, { merge: true }).catch(() => {});
       W.SFF_TEACHER = teacherNow || (Array.isArray(ud0.roles) && ud0.roles.includes('teacher'));
       // the teachers' intro: seen once, each in its own field (the parent's `intro` is not touched)
       W.SFF_INTRO_TEACHER = !!ud0.introTeacher; W.SFF_INTRO_TUTOR = !!ud0.introTutor;
@@ -1644,15 +1651,17 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
           famInfo.push({ id: fid, name: fd.name || '', role: r, member: m, token: fd.inviteToken });
         } catch (e) {}
       }
+      // the teachers' app: only groups and the families that invited this adult as a private tutor (the own family stays in the family app)
+      if (TEACH) famInfo.splice(0, famInfo.length, ...famInfo.filter(x => x.kind === 'class' || x.role === 'tutor'));
       // a teacher with no group yet (just chose "I'm a teacher", or has nothing else): the first group now
-      if (W.SFF_TEACHER && !famInfo.some(x => x.kind === 'class') && (want === 'teacher' || !famInfo.length)) {
+      if (W.SFF_TEACHER && !famInfo.some(x => x.kind === 'class') && (TEACH ? !famInfo.length : (want === 'teacher' || !famInfo.length))) {
         for (;;) {
           const o = await teacherSetup(null);
-          try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject }, token: '' }); LS.setItem('sff_active_fam', cid); break; }
+          try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject }, token: '' }); LS.setItem(ACT, cid); break; }
           catch (e) { alert((W.sffT ? W.sffT('לא הצלחנו לפתוח את הקבוצה') : 'לא הצלחנו לפתוח את הקבוצה') + ' (' + (e.code || e.message) + ')'); }
         }
       }
-      let active = LS.getItem('sff_active_fam'); if (!famInfo.some(x => x.id === active)) active = uid;
+      let active = LS.getItem(ACT); if (!famInfo.some(x => x.id === active)) active = uid;
       const cur = famInfo.find(x => x.id === active) || famInfo[0];
       famId = cur.id;
       // the data kept on this device belongs to one family – never mix families
@@ -1688,7 +1697,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         },
         invite: async (role, name, kids) => { const code = rnd(8); await F.setDoc(F.doc(fdb, `families/${famId}/invites/${code}`), { role, name: name || '', kids: kids || [], by: uid, exp: Date.now() + 7 * 864e5, used: false });
           if (role === 'tutor' && W.tutorViewOf) await F.setDoc(F.doc(fdb, `families/${famId}/tutorView/${code}`), W.tutorViewOf(kids || []));
-          return `${location.origin}/?invite=${famId}.${code}`; },
+          return `${location.origin}${role === 'tutor' ? '/teach' : '/'}?invite=${famId}.${code}`; },
         remove: async muid => { const m = await F.getDoc(F.doc(fdb, `families/${famId}/members/${muid}`)).catch(() => null);
           await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${muid}`));
           if (m && m.exists() && m.data().role === 'tutor' && m.data().invite) await F.deleteDoc(F.doc(fdb, `families/${famId}/tutorView/${m.data().invite}`)).catch(() => {}); },
@@ -1704,12 +1713,12 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
           const ds = await F.getDocs(F.query(F.collection(fdb, `families/${famId}/devices`), F.where('kid', '==', kid)));
           await Promise.all(ds.docs.map(d => F.deleteDoc(d.ref)));
           return { url: `${location.origin}/?f=${famId}&t=${t}&k=${encodeURIComponent(kid)}#kid-${kid}`, devices: ds.size }; },
-        leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem('sff_active_fam'); W.sffSoftReload('רגע…'); },
+        leave: async () => { await F.deleteDoc(F.doc(fdb, `families/${famId}/members/${uid}`)); await F.setDoc(F.doc(fdb, `users/${uid}`), { fams: F.arrayRemove(famId) }, { merge: true }); LS.removeItem(ACT); W.sffSoftReload('רגע…'); },
         // a teacher who is also a parent: the own family, made now (a teacher gets none at sign-in)
         addOwnFamily: async () => { const own = F.doc(fdb, `families/${uid}`);
           if (!(await F.getDoc(own)).exists()) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName });
           W.__sffFamily.switchTo(uid); },
-        switchTo: fid => { LS.setItem('sff_active_fam', fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
+        switchTo: fid => { LS.setItem(ACT, fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
       if (role === 'parent') W.__sffDeleteAccount = async () => {
       // the teacher's groups: by the server (it also takes them off the teacher's count of groups)
@@ -1859,7 +1868,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">איך תשתמשו באפליקציה?</h2>
           <div class="tsw"><button class="fbcard" id="tsClass" type="button"><span class="e">🏫</span><b>מורה לכיתה</b><span class="hint">כיתה שלמה, עד 40 תלמידים</span></button>
             <button class="fbcard" id="tsPriv" type="button"><span class="e">🧑‍🏫</span><b>מורה פרטי/ת</b><span class="hint">התלמידים הפרטיים שלי</span></button></div>
-          <div class="hint">אותם מסכים לשניהם. אפשר לפתוח כמה קבוצות.</div></div>`;
+          <div class="hint">אותם מסכים לשניהם. אפשר לפתוח כמה קבוצות.</div>${TEACH && !pre ? '<a class="fbother" id="tsFam" href="/">👨‍👩‍👧 הורה? לאפליקציה למשפחות ›</a>' : ''}</div>`;
         // the first time: the teacher's intro (class / private) before the group's form
         const pick = teach => { let seen = !!W.SFF_INTRO_TEACHER; try { seen = seen || !!LS.getItem('sff_intro_teacher'); } catch (e) {}
           if (seen || !W.sffTeacherIntro || (W.SFF_TEST_GOOGLE && !W.SFF_TEST_ONB)) return step2(teach);
@@ -1903,6 +1912,11 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         <div class="notice fbkidmsg hidden" id="fbKidMsg"><b>🔗 צריך את הקישור האישי שלך</b><div>ההורה שולח/ת אותו בוואטסאפ מהאפליקציה. לוחצים עליו, ומשחקים. בלי סיסמה ובלי Google.</div></div>
         <div class="hint" id="fbErr"></div>
         <div style="margin-top:14px"><button class="btn ghost small langbtn" onclick="toggleLang()" translate="no">EN</button></div></div>`;
+      if (TEACH) { el.querySelector('.fbq').textContent = 'כניסה למורים'; el.querySelector('#fbKid').classList.add('hidden'); el.querySelector('#fbTeach').classList.add('hidden');
+        const g = el.querySelector('#fbGo'); g.classList.add('teach'); g.innerHTML = '<span class="e">🧑‍🏫</span><b>כניסה עם Google</b><span class="hint">למורים ולמורים פרטיים</span>';   /* one card: everyone here signs in as a teacher */
+        el.querySelector('.fbwho').insertAdjacentHTML('afterend', '<a class="fbother" href="/">👨‍👩‍👧 הורה? לאפליקציה למשפחות ›</a>');
+        el.querySelector('.fbwho').insertAdjacentHTML('beforeend', '<div class="hint fbtsub">כיתה, קבוצה או תלמידים פרטיים – וגם מורה פרטי/ת שמשפחה הזמינה</div>'); }
+      else el.querySelector('.fbwho').insertAdjacentHTML('afterend', '<a class="fbother" href="/teach">🧑‍🏫 מורה? לאפליקציה למורים ›</a>');
       document.body.appendChild(el);
       el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); el.querySelector('#fbGo').classList.remove('on'); el.querySelector('#fbTeach').classList.remove('on'); };
       // parent or teacher: the same sign-in; the choice is kept until the account opens (a teacher gets no empty family)
@@ -1925,7 +1939,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); LS.setItem('sff_link_mail', mail); } catch (e) {}
         try {
           const { getAuth, sendSignInLinkToEmail } = await import(base + 'firebase-auth.js');
-          await sendSignInLinkToEmail(getAuth(), mail, { url: location.origin + '/?mail=1', handleCodeInApp: true });
+          await sendSignInLinkToEmail(getAuth(), mail, { url: location.origin + W.SFF_HOME + '?mail=1', handleCodeInApp: true });
           el.querySelector('#fbEmail').innerHTML = `<div class="notice ok"><b>📬 שלחנו קישור ל-<span dir="ltr">${mail.replace(/[<>&"]/g, '')}</span></b><div>פותחים את המייל <b>בטלפון הזה</b> ולוחצים על הקישור. לא הגיע? בודקים בספאם.</div></div>`;
           err.textContent = '';
         } catch (e) { err.textContent = '⚠️ ' + (e.code || e.message); }
@@ -1953,6 +1967,8 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   #fbLogin img{width:min(70vw,300px)}
   #fbLogin .fbq{margin:0;font-family:var(--display)}
   #fbLogin .fbwho{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(100%,440px)}
+  .teachapp #fbLogin .fbwho{grid-template-columns:1fr;width:min(100%,280px)} .teachapp #fbLogin .fbtsub{text-align:center;font-size:.86em}
+  #fbLogin .fbother{display:block;margin-top:12px;font-weight:700;color:var(--blue,#2F6BFF);text-decoration:none}
   #fbLogin .fbbox{max-width:100%}
   #fbLogin .fbcard.teach{background:#EDE9FF}
   @media(max-width:360px){ #fbLogin .fbwho{gap:7px} #fbLogin .fbcard{padding:12px 4px} #fbLogin .fbcard .e{font-size:34px} #fbLogin .fbcard b{font-size:1em} #fbLogin .fbcard .hint{font-size:.72em} }
@@ -4416,10 +4432,11 @@ function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||'
   const F=window.__sffFamily, own=window.SFF_ROLE==='owner';
   const famTxt=F&&F.famName?(isClassMode()?'🏫 '+F.famName:own?'🏠 המשפחה שלי':'👨‍👩‍👧 מחובר/ת למשפחה של '+F.famName):'';
   { const fams=window.SFF_FAMS||[], T=!!window.SFF_TEACHER, box=$('dFams'), ownFam=fams.some(f=>f.kind!=='class'&&f.role==='owner');
-    const show=F&&(fams.length>1||T); box.classList.toggle('hidden',!show);
-    if(show) box.innerHTML=`<h4>${T?'הקבוצות והמשפחות':'המשפחות'}</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
+    const TA=window.SFF_APP==='teach', show=F&&(fams.length>1||T||TA); box.classList.toggle('hidden',!show);
+    if(show) box.innerHTML=`<h4>${TA?'הקבוצות שלי':T?'הקבוצות והמשפחות':'המשפחות'}</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
       ${T?`<button class="ditem" onclick="newClass()"><span class="di">➕</span><span class="dl">קבוצה חדשה</span></button>`:''}
-      ${T&&!ownFam?`<button class="ditem" onclick="closeMenu();window.__sffFamily.addOwnFamily()"><span class="di">🏠</span><span class="dl">משפחה משלי (גם הורה)</span></button>`:''}</div>`; }   // a member sees whose family it is – not someone else's name as if it were theirs
+      ${TA?`<a class="ditem" id="dOtherApp" href="/"><span class="di">👨‍👩‍👧</span><span class="dl">לאפליקציה למשפחות</span></a>`
+        :T?`${ownFam?'':`<button class="ditem" onclick="closeMenu();window.__sffFamily.addOwnFamily()"><span class="di">🏠</span><span class="dl">משפחה משלי (גם הורה)</span></button>`}<a class="ditem" id="dOtherApp" href="/teach"><span class="di">🧑‍🏫</span><span class="dl">לאפליקציה למורים</span></a>`:''}</div>`; }   // a member sees whose family it is – not someone else's name as if it were theirs
   $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), esc(famTxt)].filter(Boolean).join('<br>');
   $('dVer').textContent=(EN()?'Version ':'גרסה ')+(document.querySelector('meta[name="sff-ver"]')?.content||'').replace(/^sff-v/,''); m.classList.remove('hidden'); }
 function closeMenu(){ $('sideMenu').classList.add('hidden'); }
@@ -4568,7 +4585,7 @@ async function deleteAccount(){
   try{
     if(typeof window.__sffDeleteAccount==='function') await window.__sffDeleteAccount();
     Object.keys(localStorage).filter(k=>k.startsWith('sff_')).forEach(k=>localStorage.removeItem(k));
-    msg.textContent='✓ נמחק'; setTimeout(()=>location.replace('/'),900);
+    msg.textContent='✓ נמחק'; setTimeout(()=>location.replace(window.SFF_HOME||'/'),900);
   }catch(e){ window.__sffDeleting=false; b.disabled=false; msg.textContent='⚠️ '+(e&&e.message?e.message:'לא הצליח – נסו שוב'); }
 }
 
@@ -4579,7 +4596,7 @@ const visibleKids=()=>isTutor()&&window.SFF_MEMBER&&Array.isArray(window.SFF_MEM
 const ROLES={owner:['👑','מנהל/ת','הכול'],admin:['👑','מנהל/ת','הכול'],helper:['💛','מלווה','לראות התקדמות ולהוסיף תרגולים'],tutor:['📚','מורה','רק הילדים שנבחרו']};
 const roleBadge=r=>{ const x=ROLES[r]||ROLES.helper; return `<span class="rbadge r-${r==='owner'?'admin':r}">${x[0]} ${x[1]}</span>`; };
 // the families and groups this adult belongs to (the switcher, in ☰ and on the family screen)
-function famLabel(f){ return f.kind==='class'?`${'🏫'} ${esc(f.name||'')}`:f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||''); }
+function famLabel(f){ return f.kind==='class'?`${'🏫'} ${esc(f.name||'')}`:f.role==='tutor'?'🧑‍🏫 התלמידים ממשפחת '+esc(f.name||''):f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||''); }
 async function newClass(){ closeMenu(); const o=await window.sffTeacherSetup?.(true); if(!o) return;
   try{ const id=await window.__sffNewClass(o); window.__sffFamily.switchTo(id); }
   catch(e){ toast(e.code==='class_limit'?'⚠️ אפשר עד 10 קבוצות':'⚠️ '+(e.code||e.message)); } }
@@ -4631,7 +4648,7 @@ async function makeInvite(){
     const url=await window.__sffFamily.invite(INV.role,name,INV.role==='tutor'?INV.kids:[]);
     $('invUrl').value=url; $('invIco').textContent=ROLES[INV.role][0];
     $('invWho').textContent=name||'מבוגר/ת'; $('invRole').textContent=`${ROLES[INV.role][1]} · ${INV.role==='tutor'?INV.kids.map(id=>(kidById(id)||{}).name).join(', '):ROLES[INV.role][2]}`;
-    $('invWa').href='https://wa.me/?text='+encodeURIComponent(`${name?name+', ':''}הזמנה להצטרף ל-Study for fun ולעקוב אחרי התרגול של הילדים 💛\n${url}`);
+    $('invWa').href='https://wa.me/?text='+encodeURIComponent(INV.role==='tutor'?`${name?name+', ':''}הזמנה לעקוב אחרי התרגול של ${INV.kids.map(id=>(kidById(id)||{}).name).join(', ')} באפליקציה למורים של Study for fun 🧑‍🏫\n${url}`:`${name?name+', ':''}הזמנה להצטרף ל-Study for fun ולעקוב אחרי התרגול של הילדים 💛\n${url}`);
     $('invForm').classList.add('hidden'); $('invDone').classList.remove('hidden'); $('invMsg').textContent='';
   }catch(e){ toast('⚠️ '+esc(e.message||e)); }
 }

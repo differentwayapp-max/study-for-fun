@@ -59,10 +59,15 @@ d.addEventListener('touchmove',function(e){if(e.touches&&e.touches.length>1)e.pr
    keeps the kid's own address (/?f=…&t=…&k=…) and the icon always opens the kid's practice. Parents get the manifest. */
 /* /teach is the teachers' app: the same code, server and accounts, only teachers' screens; never a kid device */
 (function(){ var T=/^\/teach(\/|$)/.test(location.pathname); window.SFF_APP=T?'teach':'family'; window.SFF_HOME=T?'/teach':'/';
-  if(T){ document.title='Study for fun · מורים'; document.documentElement.classList.add('teachapp'); }
+  if(T){ document.title='Study for fun · מורים'; document.documentElement.classList.add('teachapp','booting'); }   /* "booting": nothing half-made shows until the group is in */
   try{ var q=new URLSearchParams(location.search), kid=!T&&((q.get('f')&&q.get('t'))||/^#kid-/.test(location.hash));
   if(!kid&&!T){ try{ kid=!!(localStorage.getItem('sff_fam')&&localStorage.getItem('sff_tok')&&localStorage.getItem('sff_unlock')!=='1'); }catch(e){} }
   if(!kid){ var l=document.createElement('link'); l.rel='manifest'; l.href=T?'/teach.webmanifest':'/manifest.webmanifest'; document.head.appendChild(l); }
+  /* the two apps share this phone's storage: what one app kept is never shown by the other (a class's students as "kids") */
+  try{ var LSx=localStorage, da=LSx.getItem('sff_data_app'); if(!kid&&da&&da!==window.SFF_APP){ ['sff_kids','sff_sets','sff_history','sff_data_fam'].forEach(function(k){ LSx.removeItem(k); }); }
+    if(!kid) LSx.setItem('sff_data_app', window.SFF_APP);
+    /* the family app with nothing kept yet: "רגע…" until the account opens (no empty family screen first) */
+    if(!T&&!kid&&!LSx.getItem('sff_kids')&&!/[?&](join|req|intro)=/.test(location.search)) document.documentElement.classList.add('booting'); }catch(e){}
 }catch(e){} })();</script>
 <script src="/firebase-config.js?v=sff-v153"></script>
 <link rel="icon" href="data:image/png;base64,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">
@@ -113,6 +118,8 @@ body:not(.kidside) #logoMark{display:none}
 @media(max-width:560px){.logo img{height:38px}#logoMark{height:40px}}
 #sffLoad{display:none;position:fixed;inset:0;z-index:60;place-items:center;background:rgba(244,247,255,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:ldIn .2s ease-out}
 html.soft #sffLoad{display:grid}html.soft #splash{display:none}
+html.booting #sffLoad{display:grid;background:#F4F7FF;-webkit-backdrop-filter:none;backdrop-filter:none;animation:none}
+html.booting body:has(#fbLogin) #sffLoad,html.booting body:has(#intro) #sffLoad{display:none}
 #sffLoad .ldc{display:flex;flex-direction:column;align-items:center;gap:12px;background:#fff;border:var(--line,3px solid #1B2A4A);border-radius:24px;box-shadow:0 5px 0 #1B2A4A;padding:22px 30px;font-family:var(--display);font-size:1.05em;color:#1B2A4A}
 #sffLoad .ring{width:46px;height:46px;border-radius:50%;border:5px solid #E3E8F5;border-top-color:#2F6BFF;border-right-color:#F2A63B;animation:ldSpin .8s linear infinite}
 @keyframes ldSpin{to{transform:rotate(360deg)}}@keyframes ldIn{from{opacity:0}}
@@ -2022,7 +2029,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   html[dir=ltr] body.thapp.thgroup .thfab{transform:translateX(-50%)}
   body.thapp.thgroup #vKids,body.thapp.thgroup #vTStud,body.thapp.thgroup #vTAsg,body.thapp.thgroup #vTLes{padding-bottom:90px}
   .thsel{border:0;background:none;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:44px;padding:0 4px}
-  .thbell{display:none} body.thgroup .thbell{display:grid;place-items:center;position:relative;grid-column:3;justify-self:end;border:0;background:none;font-size:1.3em;min-width:44px;min-height:44px;cursor:pointer}
+  .thbell{display:none} body.thgroup.thtab .thbell{display:none!important} body.thgroup .thbell{display:grid;place-items:center;position:relative;grid-column:3;justify-self:end;border:0;background:none;font-size:1.3em;min-width:44px;min-height:44px;cursor:pointer}
   .thbell i{position:absolute;top:4px;inset-inline-end:2px;background:#E5484D;color:#fff;font-style:normal;font-size:.55em;font-weight:700;border-radius:999px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px}
   body.thapp.cls #vKids .carhead{display:none}
   .thhome{display:flex;flex-direction:column;gap:14px}
@@ -2186,6 +2193,7 @@ function todayGoal(s){ const g=s.dailyGoal||2; return s.examDate&&daysLeft(s.exa
 /* ---------- wizard ---------- */
 let W={step:1,kidId:null,subject:null,edited:{}};
 const SUBJECTS=['אנגלית','מתמטיקה','עברית / לשון','מדעים','היסטוריה','אחר'];
+const SUBJ_CHIP={'אנגלית':'🔤','מתמטיקה':'➗','עברית / לשון':'📖','מדעים':'🔬','היסטוריה':'🏛️','אחר':'⭐'}, SUBJ_LBL={'עברית / לשון':'עברית'};
 function openWizard(kidId){
   W={step:1,kidId:kidId||(kids.length===1?kids[0].id:null),subject:null,edited:{},chapters:null,chKey:'',chEdited:{}};
   ['fTopics','fText','fLink','fPages','fExam','fRound','fGoal','fCount'].forEach(id=>$(id).value='');
@@ -2203,7 +2211,9 @@ function wizRender(){
   // a group: the set is built for the whole group (one shared set, given out afterwards as an assignment)
   $('wKidsLbl').textContent=window.sffT?sffT(isClassMode()?'קבוצה':'ילד/ה'):(isClassMode()?'קבוצה':'ילד/ה');
   if(isClassMode()) $('wKids').innerHTML=`<button class="on" type="button">🏫 ${esc((window.SFF_CLASS||{}).name||'הקבוצה')}</button>`; else $('wKids').innerHTML=kids.map(k=>`<button class="${W.kidId===k.id?'on':''}" onclick="W.kidId='${k.id}';wizRender()"><span class="dotc" style="background:${k.color}"></span>${esc(k.name)} · ${GRADES[k.grade]}</button>`).join('')+`<button class="add" onclick="$('wKidQuick').classList.toggle('hidden');$('qkName').focus()">＋ ילד/ה חדש/ה</button>`;
-  $('wSubj').innerHTML=SUBJECTS.map(x=>`<button class="${W.subject===x?'on':''}" onclick='W.subject=${JSON.stringify(x)};wizRender()'>${subjStyle(x)[1]} ${esc(x)}</button>`).join('');
+  /* a group: only the group's own subject (chosen already); the chips: a picture, and the subject's short name */
+  const gS=isClassMode()&&(window.SFF_CLASS||{}).subject, subjList=gS&&SUBJECTS.includes(gS)&&gS!=='אחר'?[gS]:SUBJECTS; if(subjList.length===1) W.subject=subjList[0];
+  $('wSubj').innerHTML=subjList.map(x=>`<button class="${W.subject===x?'on':''}" onclick='W.subject=${JSON.stringify(x)};wizRender()'><span aria-hidden="true">${SUBJ_CHIP[x]||'⭐'}</span> ${esc(SUBJ_LBL[x]||x)}</button>`).join('');
   document.querySelectorAll('.srccard')[2].classList.toggle('on',!$('srcLink').classList.contains('hidden'));
   document.querySelectorAll('.srccard')[3].classList.toggle('on',!$('srcText').classList.contains('hidden'));
   if(W.step===4) wizSummary();
@@ -2420,15 +2430,18 @@ function chrome(v){
   const t=viewTitle(v); $('topTitle').textContent=window.sffT?sffT(t):t;
   try{ sessionStorage.setItem('sff_view',JSON.stringify({v, set:curSet&&curSet.id, road:typeof ROAD_SET!=='undefined'?ROAD_SET:null, kid:activeKid})); }catch(e){}
   const up=TAPP()&&GROUP_ROOTS.includes(v)&&isClassMode();       /* a group's tab: the group selector (→ the class picker) on top */
-  $('topBack').classList.toggle('hidden', up||ROOT_VIEWS.includes(v)||NAV_STACK.length<2);
-  $('topBack').textContent=window.sffT?sffT('‹ חזרה'):'‹ חזרה';
+  const tab=up&&v!=='vKids', pl=TAPP()&&v==='vPlaces'&&isClassMode()&&!!window.SFF_ROLE;   /* a group's other tabs: "‹ היום" (the bell is on "today"); the picker: back to the group */
+  $('topBack').classList.toggle('hidden', (tab||pl)?false:(up||ROOT_VIEWS.includes(v)||NAV_STACK.length<2));
+  $('topBack').textContent=window.sffT?sffT(tab?'‹ היום':'‹ חזרה'):(tab?'‹ היום':'‹ חזרה'); document.body.classList.toggle('thtab', tab);
   document.body.classList.toggle('thgroup', up); if(up) thTop();
   [['bnTStud','vTStud'],['bnTAsg','vTAsg'],['bnTLes','vTLes']].forEach(([b,w])=>$(b)?.classList.toggle('on',v===w));
   document.body.classList.toggle('inplaces', v==='vPlaces');
   [['bnKids','vKids'],['bnStats','vStats'],['bnFam','vFamily'],['knHome','vKid'],['knMe','vMe']].forEach(([b,w])=>$(b)?.classList.toggle('on',(NAV_STACK[0]===w&&NAV_STACK.length===1)||v===w));
 }
 function goBack(){
+  if(TAPP()&&!$('vPlaces').classList.contains('hidden')&&isClassMode()) return go('kids');   /* the picker → the group open now */
   if(TAPP()&&NAV_STACK[NAV_STACK.length-1]==='vStats'&&typeof TR!=='undefined'&&TR.topic){ TR.topic=null; renderTeacherStats(); return; }   /* a topic's page → the topics */
+  if(TAPP()&&isClassMode()&&NAV_STACK.length<=1&&GROUP_ROOTS.includes(NAV_STACK[0])&&NAV_STACK[0]!=='vKids') return go('kids');   /* a tab → today */
   if(TAPP()&&NAV_STACK.length<=1&&GROUP_ROOTS.includes(NAV_STACK[0])){ if(NAV_STACK[0]!=='vKids') return go('kids'); return openPlaces(); }   /* a tab → "today" → the picker */
   const from=NAV_STACK.pop(); const t=NAV_STACK.pop()||'vKids';
   if(t==='vKids' && from==='vReview') closeReview();          // back on the card of the kid this practice set belongs to
@@ -2446,9 +2459,9 @@ function backAction(){
   const td=$('tDlg'); if(td&&!td.classList.contains('hidden')){ tBack(); return true; }
   for(const id of ['moreDlg','delAccDlg','linkDlg','invDlg']) if($(id)&&!$(id).classList.contains('hidden')){ $(id).classList.add('hidden'); return true; }
   const ts=document.querySelector('#fbLogin.tsetup'); if(ts){ const b=ts.querySelector('#tsCancel,#tsBack'); if(b){ b.click(); return true; } return false; }
-  if(TAPP()&&isClassMode()&&GROUP_ROOTS.includes(NAV_STACK[NAV_STACK.length-1])){ goBack(); return true; }   /* a group's tab → today → the picker */
+  if(TAPP()&&isClassMode()&&GROUP_ROOTS.includes(NAV_STACK[NAV_STACK.length-1])&&NAV_STACK[NAV_STACK.length-1]!=='vKids'){ goBack(); return true; }   /* a group's tab → today (today is the app's first screen) */
   if(!$('topBack').classList.contains('hidden')){ goBack(); return true; }
-  return false;
+  return false;   /* (the group's "today": the phone leaves the app – it is the app's first screen) */
 }
 (function phoneBack(){ if(window.SFF_APP!=='teach') return; const H=window.history;
   const arm=()=>{ try{ if(!(H.state&&H.state.sffBack)) H.pushState({sffBack:1},''); }catch(e){} };
@@ -4711,6 +4724,7 @@ async function cloudInit(){
     saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender(); syncTutorViewsSoon();   // (it writes a tutor's view only when it differs)
   },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
   DB.collection('sets').onSnapshot(q=>{
+    window.__setsGot=true;
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
     if(IS_OWNER){
       const ids=new Set(remote.map(r=>r.id)), fresh=!(q.metadata&&q.metadata.fromCache);
@@ -4726,7 +4740,7 @@ async function cloudInit(){
   if(!window.SFF_KID_DEVICE) watchBuilds();
 }
 function progDocs(docs){
-    let changed=false;
+    let changed=false; window.__progGot=true;
     docs.forEach(d=>{ const p=d.data(); const k=kidById(d.id);
       (Array.isArray(p.history)?p.history:[]).map(cleanHist).filter(Boolean).forEach(h=>{ if(!history.some(x=>x.at===h.at&&x.setId===h.setId)){ history.push(h); changed=true; } });
       if(k && IS_OWNER && p.profile){ const nick=cleanNick(p.profile.nick), ava=cleanAvatar(p.profile.avatar);
@@ -5426,8 +5440,8 @@ async function joinRevoke(o, pending){
 /* the teacher's side */
 const CLS={reqs:[], consents:{}, link:null, sched:{}};
 function classCloud(){ if(!DB||!isClassMode()) return;
-  DB.collection('joinReqs').onSnapshot(q=>{ CLS.reqs=q.docs.map(d=>({id:d.id,...d.data()})); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
-  DB.collection('consents').onSnapshot(q=>{ CLS.consents=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
+  DB.collection('joinReqs').onSnapshot(q=>{ CLS.gotR=true; CLS.reqs=q.docs.map(d=>({id:d.id,...d.data()})); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
+  DB.collection('consents').onSnapshot(q=>{ CLS.gotC=true; CLS.consents=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
   if((window.SFF_CLASS||{}).teach==='private') DB.collection('sched').onSnapshot(q=>{ CLS.sched=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{}); }
 const fmtDT=t=>{ try{ return new Date(t).toLocaleDateString(EN()?'en-GB':'he-IL'); }catch(e){ return ''; } };
 const CBADGE={digital:['✅','הורה חתם/ה']};
@@ -5544,7 +5558,7 @@ function trCounts(t){ return `${t.g} שולטים · ${t.o} בדרך · ${t.r} �
 // the report screen (the "מעקב" tab of a group)
 function renderTeacherStats(){
   const el=$('tReport'); if(!el) return;
-  if(TAPP()&&!$('vStats').classList.contains('hidden')){ const t=TR.topic?'‹ חזרה':'‹ הקבוצות'; $('topBack').textContent=window.sffT?sffT(t):t; }
+  if(TAPP()&&!$('vStats').classList.contains('hidden')){ const t=TR.topic?'‹ חזרה':'‹ היום'; $('topBack').textContent=window.sffT?sffT(t):t; }
   const studs=trStudents();
   if(!studs.length){ el.innerHTML=`<div class="card center"><div class="big">📊</div><h3 style="margin:6px 0">עוד אין תלמידים בקבוצה</h3><p class="sub" style="margin:0">כשתלמידים יצטרפו ויתרגלו – יופיע כאן איך החומר נקלט, נושא אחרי נושא.</p></div>`; return; }
   const subjs=[...new Set(history.filter(h=>studs.some(k=>k.id===h.kidId)).map(h=>h.subject).filter(Boolean))];
@@ -6036,6 +6050,13 @@ cloudInit().then(()=>{ const m=window.SFF_INVITE_MSG; if(!m) return;
     if(window.SFF_APP!=='teach'&&window.SFF_ROLE&&window.SFF_ROLE!=='owner'&&$('footDel')) $('footDel').innerHTML='<span class="di">🚪</span>יציאה מהמשפחה';
   }).then(openPendingAdd).then(()=>{ setTimeout(autoUpdateSets,2500); setTimeout(oldBuildCleanup,3000); });
 setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduce)').matches?500:1900);
+// the teachers' app: after the logo, "רגע…" until the account, the group's students, requests, sets and games are in – then the
+// one right screen (never the family's screen, an empty group's steps or a home still filling in). The sign-in and the
+// explanation screens show above it. At most 20 s.
+(function bootGate(){ const h=document.documentElement; if(!h.classList.contains('booting')) return; const t0=Date.now();
+  const ready=()=>{ if(!window.SFF_ROLE) return false; if(!isClassMode()) return true;
+    return document.body.classList.contains('thapp') && CLS.gotC && CLS.gotR && window.__setsGot && (window.__progGot || Date.now()-t0>8000); };
+  const t=setInterval(()=>{ if(ready()||Date.now()-t0>20000){ clearInterval(t); try{ if(isClassMode()) renderKids(); }catch(e){} requestAnimationFrame(()=>h.classList.remove('booting')); } },80); })();
 // after a soft reload: keep the spinner until the cloud data is in, then fade it away
 (function(){ const h=document.documentElement; if(!h.classList.contains('soft')) return; const t0=Date.now(); $('splash')?.remove();
   if(window.__sffSoftMsg && window.__sffSoftMsg!=='1') window.sffLoading(window.__sffSoftMsg);

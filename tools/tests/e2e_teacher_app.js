@@ -99,9 +99,20 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(true, 'tap a card: into that group (its home)');
   await T3.close();
   // back, everywhere (the owner's request): the phone's back button and a back on every screen and dialog
-  await T.evaluate(() => enterPlace(window.__sffFamily.famId)); await T.waitForTimeout(500);
+  // every screen has a back (the owner's request, 27.11): the tabs → "‹ היום", the picker → "‹ חזרה" to the group; the phone's back does the same
+  for (const [tab, view] of [['stud', 'vTStud'], ['asg', 'vTAsg'], ['rep', 'vStats']]) {
+    await T.evaluate(t => thTab(t), tab); await T.waitForTimeout(300);
+    const bk = await T.evaluate(() => ({ vis: !document.getElementById('topBack').classList.contains('hidden'), t: document.getElementById('topBack').textContent }));
+    ok(bk.vis && /היום/.test(bk.t), `${view}: "‹ היום" on top`);
+    if (tab === 'rep') { await T.goBack(); await T.waitForTimeout(500); } else { await T.click('#topBack'); await T.waitForTimeout(300); }
+    ok(await T.evaluate(() => !document.getElementById('vKids').classList.contains('hidden') && location.pathname === '/teach'), `…back to "today"${tab === 'rep' ? ' (the phone\'s back too)' : ''}`); }
+  await T.evaluate(() => openPlaces()); await T.waitForTimeout(400);
+  ok(await T.evaluate(() => !document.getElementById('topBack').classList.contains('hidden')), 'the picker: "‹ חזרה" to the group');
   await T.goBack(); await T.waitForTimeout(600);
-  ok(await T.evaluate(() => !document.getElementById('vPlaces').classList.contains('hidden') && location.pathname === '/teach'), 'the phone\'s back in a group: to the class picker (not out of the app)');
+  ok(await T.evaluate(() => !document.getElementById('vKids').classList.contains('hidden') && location.pathname === '/teach'), 'the phone\'s back on the picker: to the group\'s today (not out of the app)');
+  // building for a group: only the group's own subject, chosen already; the chips have a picture, not letters ("אב", "Ab")
+  const sj = await T.evaluate(() => { openWizard(null); wizRender(); const b = [...document.querySelectorAll('#wSubj button')].map(x => x.innerText.trim()); const r = { b, subj: (window.SFF_CLASS || {}).subject, chosen: W.subject }; show('vKids'); go('kids'); return r; });
+  ok(sj.b.length === 1 && sj.b[0].includes(sj.subj.replace(' / לשון', '')) && sj.chosen === sj.subj && !/^(אב|Ab|\+−) /.test(sj.b[0]), 'a group\'s build: only its subject (' + sj.b.join(' | ') + '), chosen');
   await T.evaluate(() => enterPlace(window.__sffFamily.famId)); await T.waitForTimeout(400);
   await T.evaluate(() => openMenu()); await T.waitForTimeout(300); await T.goBack(); await T.waitForTimeout(500);
   ok(await T.evaluate(() => document.getElementById('sideMenu').classList.contains('hidden') && !document.getElementById('vKids').classList.contains('hidden')), 'the phone\'s back with ☰ open: closes the menu only');

@@ -89,7 +89,7 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
   ok(/Letters & sounds/.test(act) && /סיימו 10/.test(act) && /באמצע 13/.test(act) && /לא התחילו 4/.test(act), 'the active assignment: done 10 · in the middle 13 · not started 4 – ' + act);
   ok(await T.evaluate(() => document.querySelectorAll('.thtop').length >= 1), 'where the class stands: the weakest topics');
   const nav = await T.evaluate(() => ({ tabs: [...document.querySelectorAll('#bNav button')].map(b => b.innerText.replace(/\s+/g, ' ').trim()), fab: getComputedStyle(document.getElementById('thFab')).display, sel: document.querySelector('.thsel')?.innerText, bell: document.querySelector('.thbell i')?.textContent }));
-  ok(nav.tabs.join('|').replace(/[^֐-׿|]/g, '') === 'היום|תלמידים|משימות|דוחות' && nav.fab !== 'none' && /ד'2/.test(nav.sel) && nav.bell === '3', 'the tabs: היום · תלמידים · משימות · דוחות, the floating "+ משימה חדשה", the group selector and the bell (3)');
+  ok(nav.tabs.join('|').replace(/[^֐-׿|]/g, '') === 'היום|תלמידים|המשימות|דוחות' && nav.fab !== 'none' && /ד'2/.test(nav.sel) && nav.bell === '3', 'the tabs: היום · תלמידים · משימות · דוחות, the floating "+ משימה חדשה", the group selector and the bell (3)');
   await T.screenshot({ path: `${OUT}/th_school_he360.png`, fullPage: true });
   await T.click('.thbell'); await T.waitForTimeout(500);
   ok(await T.evaluate(() => !document.getElementById('vTStud').classList.contains('hidden') && document.querySelectorAll('#vTStud .treq').length === 3), 'the bell → the students tab with the 3 requests');
@@ -143,7 +143,7 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
   ok(await T.evaluate(() => !document.querySelector('.thstep') && !!document.querySelector('.thopen .thring')), 'a first student and a first assignment → the full home, by itself');
 
   console.log('4. screenshots: English, 320');
-  for (const [w, lang] of [[360, 'en'], [320, 'he'], [320, 'en']]) {
+  for (const [w, lang] of [[360, 'he'], [360, 'en'], [320, 'he'], [320, 'en']]) {
     const c = await ctx({ w, h: 1700, lang, dpr: 2 }), p = await c.newPage(); p.on('pageerror', e => errs.push(`${lang}${w}: ` + e.message));
     for (const [id, tag] of [[cid, 'school'], [pid, 'private'], [nid, 'new']]) {
       await p.addInitScript(i => { try { localStorage.setItem('sff_active_teach', i); } catch (e) {} }, id);

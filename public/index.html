@@ -5285,7 +5285,7 @@ function maybeKidIntro(){
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
   if(TAPP()){ const pv=(window.SFF_CLASS||{}).teach==='private', B=(id,ico,t,on)=>`<button id="${id}" onclick="${on}"><span>${ico}</span>${t}</button>`;
-    $('bNav').innerHTML=B('bnKids','🏠','היום',"go('kids')")+(pv?B('bnTLes','🗓','שיעורים',"thTab('les')")+B('bnTStud','🧒','תלמידים',"thTab('stud')"):B('bnTStud','🧒','תלמידים',"thTab('stud')")+B('bnTAsg','📚','משימות',"thTab('asg')"))+B('bnStats','📊','דוחות',"go('stats')");
+    $('bNav').innerHTML=B('bnKids','🏠','היום',"go('kids')")+(pv?B('bnTLes','🗓','שיעורים',"thTab('les')")+B('bnTStud','🧒','תלמידים',"thTab('stud')"):B('bnTStud','🧒','תלמידים',"thTab('stud')")+B('bnTAsg','📚','המשימות',"thTab('asg')"))+B('bnStats','📊','דוחות',"go('stats')");
     $('thFab').textContent=pv?'＋ תרגול לתלמיד/ה':'＋ משימה חדשה'; document.body.classList.add('thapp');
     const v=NAV_STACK[NAV_STACK.length-1]; if(v) chrome(v); try{ rerender(); }catch(e){} return; }
   const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };
@@ -5689,14 +5689,14 @@ function thStuckTopic(H, studs, now=Date.now()){ const since=now-14*TDAY, by={},
   const best=Object.entries(by).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]))[0];
   if(!best) return null; const ks=best[1].sort((a,b)=>(A.stuck.includes(b)?1:0)-(A.stuck.includes(a)?1:0));
   return {topic:best[0], kids:ks}; }
-const thNames=ks=>{ const n=ks.slice(0,3).map(k=>`<bdi>${esc(k.name)}</bdi>`).join(', '); return ks.length>3?`${n} ${fT(`ועוד ${ks.length-3}`)}`:n; };
+const thNames=ks=>{ const n=ks.slice(0,3).map(k=>`<bdi translate="no">${esc(k.name)}</bdi>`).join(', '); return ks.length>3?`${n} ${fT(`ועוד ${ks.length-3}`)}`:n; };
 // "3 things for today": in a fixed order of urgency, at most 3
 function thToday(H, studs, now=Date.now()){
   const out=[], A=thCache().A, pend=CLS.reqs.filter(r=>r.status==='pending');
   const st=thStuckTopic(H, studs, now);
   if(st&&st.kids.length) out.push({k:'stuck', ico:'🧩', t:fT(st.kids.length===1?`תלמיד/ה אחד/ת נתקע/ה ב${st.topic}`:`${st.kids.length} תלמידים נתקעו ב${st.topic}`, st.topic), d:thNames(st.kids),
     b:st.kids.length===1?'שליחת תרגול ממוקד':fT(`שליחת תרגול ממוקד ל-${st.kids.length}`), go:`thFocus(${esc(JSON.stringify(st.kids.map(k=>k.id)))})`});
-  if(pend.length) out.push({k:'reqs', ico:'📥', t:pend.length===1?'בקשת הצטרפות אחת מחכה':fT(`${pend.length} בקשות הצטרפות מחכות`), d:pend.slice(0,3).map(r=>`<bdi>${esc(r.kidName)}</bdi>`).join(', '), b:'לאשר את הבקשות', go:`thTab('stud')`});
+  if(pend.length) out.push({k:'reqs', ico:'📥', t:pend.length===1?'בקשת הצטרפות אחת מחכה':fT(`${pend.length} בקשות הצטרפות מחכות`), d:pend.slice(0,3).map(r=>`<bdi translate="no">${esc(r.kidName)}</bdi>`).join(', '), b:'לאשר את הבקשות', go:`thTab('stud')`});
   const soon=sets.filter(s=>asgLive(s)&&s.due&&daysLeft(s.due)>=0&&daysLeft(s.due)<=3).map(s=>({s, st:asgState(s)})).filter(x=>x.st.none.length).sort((a,b)=>String(a.s.due).localeCompare(String(b.s.due)))[0];
   if(soon){ const n=daysLeft(soon.s.due); out.push({k:'remind', ico:'⏰', t:fT(`${soon.st.none.length} עוד לא התחילו את המשימה`), d:`<bdi translate="no" dir="auto">${esc(asgTitle(soon.s))}</bdi> · ${n===0?fT('היום אחרון'):n===1?fT('נשאר יום אחד'):fT(`נשארו ${n} ימים`)}`,
     b:'תזכורת להורים בוואטסאפ', href:thRemindUrl(soon.s)}); }
@@ -5709,7 +5709,7 @@ function thRemindUrl(s){ const t=`${EN()?'A reminder 🙂':'תזכורת 🙂'}\
   return 'https://wa.me/?text='+encodeURIComponent(t); }
 function thFocus(ids){ asgOpen(); ASG.to=ids.length===1?'one':'pick'; ASG.pick=new Set(ids); ASG.one=ids.length===1?ids[0]:''; asgRender(); }
 function thIdle(){ const A=classAttention(history, trStudents());
-  tDialog(`<h2>💤 לא תרגלו השבוע</h2><div class="tnames">${A.idle.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi></button>`).join('')}</div>`); }
+  tDialog(`<h2>💤 לא תרגלו השבוע</h2><div class="tnames">${A.idle.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi translate="no">${esc(k.name)}</bdi></button>`).join('')}</div>`); }
 const TH_LVL={g:'שולט/ת',o:'כמעט',r:'צריך/ה עזרה',n:'לא תרגל/ה'};
 // the school's world
 function thSchool(){
@@ -5727,7 +5727,7 @@ function thSchool(){
     :`<div class="thtodo t-ok"><span class="thi" aria-hidden="true">✨</span><div class="thtt"><b>הכול מסודר להיום</b><span>אפשר לתת משימה חדשה</span></div><button class="btn small" onclick="asgOpen()">משימה חדשה</button></div>`}</div>`;
   const S=thStates(history, studs), cnt={g:0,o:0,r:0,n:0}; studs.forEach(k=>cnt[S[k.id].lvl]++);
   const glance=`<div class="thsec"><div class="thh"><h3>הכיתה במבט אחד</h3><button class="linkbtn" onclick="thTab('rep')">דוח מלא ›</button></div>
-    <div class="thdots">${studs.map(k=>{ const l=S[k.id].lvl; return `<button class="thdot l-${l}" onclick="tStudent('${esc(k.id)}')" aria-label="${esc(k.name)} – ${TH_LVL[l]}"><i>${esc(thInit(k.name))}</i><small><bdi>${esc(thFirst(k.name))}</bdi></small></button>`; }).join('')}</div>
+    <div class="thdots">${studs.map(k=>{ const l=S[k.id].lvl; return `<button class="thdot l-${l}" onclick="tStudent('${esc(k.id)}')" aria-label="${esc(k.name)} – ${TH_LVL[l]}"><i>${esc(thInit(k.name))}</i><small><bdi translate="no">${esc(thFirst(k.name))}</bdi></small></button>`; }).join('')}</div>
     <div class="thleg">${['g','o','r','n'].map(l=>`<span><i class="l-${l}"></i>${fT(`${TH_LVL[l]} · ${cnt[l]}`)}</span>`).join('')}</div></div>`;
   const live=sets.filter(s=>asgLive(s)).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
   const a0=live[0];
@@ -5779,19 +5779,19 @@ function thPrivate(){
     <div class="thbtns"><button class="btn" onclick="thTab('les')">קביעת שיעור קבוע</button></div></div>`;
   else { const k=nx.k, sc=S[k.id], L=sinceLesson(k.id, sc, now), no=lessonNo(sc, now);
     open=`<div class="thopen"><div class="thtx"><span class="thdate">${fT(`השיעור הבא · ${dayLbl(nx.t)} ${hhmm(nx.t)} · ${inTxt(nx.t-now)}`)}</span>
-      <div class="thwho"><span class="thav">${esc(thInit(k.name))}</span><div><h2><bdi>${esc(k.name)}</bdi></h2><span>${fT(`כיתה ${GRADES[+(k.grade??C.grade)||0]}${C.subject?` · ${C.subject}`:''}${no?` · שיעור ${no}`:''}`)}</span></div></div>
+      <div class="thwho"><span class="thav">${esc(thInit(k.name))}</span><div><h2><bdi translate="no">${esc(k.name)}</bdi></h2><span>${fT(`כיתה ${GRADES[+(k.grade??C.grade)||0]}${C.subject?` · ${C.subject}`:''}${no?` · שיעור ${no}`:''}`)}</span></div></div>
       <p class="thsince">${fT(`מאז השיעור הקודם: ${L.games} משחקים${L.pct!=null?` · ${L.pct}% נכונות`:''}${L.streak===1?' · יום אחד ברצף':L.streak?` · ${L.streak} ימים ברצף`:''}`)}</p>
       ${L.weak?`<p>${fT(`כדאי לעבוד היום על ${L.weak.t} – טעה/תה ב-${L.weak.bad} מתוך ${L.weak.n}.${L.strong?` שולט/ת כבר ב${L.strong}.`:''}`, L.weak.t, L.strong)}</p>`:L.games?'<p>הכול יושב – אפשר להתקדם לחומר חדש.</p>':'<p>עוד לא תרגל/ה מאז השיעור הקודם.</p>'}</div>
       <div class="thbtns"><button class="btn" onclick="thMist('${esc(k.id)}')">הטעויות לשיעור</button><button class="btn ghost" onclick="thNote('${esc(k.id)}')">הערה לשיעור</button></div></div>`; }
   const wk=[0,1,2,3,4].map(d=>{ const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k, t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
-    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi>${esc(thFirst(x.k.name))}</bdi><small><bdi>${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('');
+    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi translate="no">${esc(thFirst(x.k.name))}</bdi><small><bdi translate="no">${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('');
   const week=`<div class="thsec"><div class="thh"><h3>השבוע שלי</h3><button class="linkbtn" onclick="thTab('les')">שיעורים ›</button></div><div class="thweek">${wk}</div></div>`;
   const cards=studs.map(k=>{ const g=history.filter(h=>h.kidId===k.id).sort((a,b)=>b.at-a.at), last=g[0], m=kidMastery(g.filter(h=>h.at>=now-14*TDAY)), xs=Object.values(m);
     const pct=xs.length?Math.round(xs.reduce((s,x)=>s+x.pct,0)/xs.length):0, idleD=last?Math.floor((now-last.at)/TDAY):null;
     const w1=thWeek(history,[k],now), stuck=classAttention(history,[k],now).stuck.length;
     const tag=!last||idleD>=7?['n','לא תרגל/ה']:stuck?['r','נתקע/ה']:w1.trend!=null&&w1.trend>=5?['g','משתפר/ת']:['o','יציב/ה'];
     const line=!last?'עוד לא תרגל/ה':idleD>=2?fT(`לא תרגל/ה ${idleD} ימים`):fT(`תרגל/ה ${idleD===0?'היום':'אתמול'} · ${trName(last.topic,last)}`, trName(last.topic,last));
-    return `<button class="thkid" onclick="tStudent('${esc(k.id)}')"><span class="thkr">${thRing(pct,52,'#5B47D6','#EDE9FF',6)}<b><bdi>${pct}%</bdi></b></span><span class="thtt"><b><bdi>${esc(k.name)}</bdi></b><span>${line}</span></span><span class="thtag g-${tag[0]}">${tag[1]}</span></button>`; }).join('');
+    return `<button class="thkid" onclick="tStudent('${esc(k.id)}')"><span class="thkr">${thRing(pct,52,'#5B47D6','#EDE9FF',6)}<b><bdi>${pct}%</bdi></b></span><span class="thtt"><b><bdi translate="no">${esc(k.name)}</bdi></b><span>${line}</span></span><span class="thtag g-${tag[0]}">${tag[1]}</span></button>`; }).join('');
   const kidsSec=`<div class="thsec"><div class="thh"><h3>${fT(`התלמידים · ${studs.length}`)}</h3><button class="linkbtn" onclick="inviteStudents()">הזמנת תלמיד/ה ›</button></div>${cards}</div>`;
   const month=new Date(); month.setDate(1); month.setHours(0,0,0,0); const noUpd=studs.filter(k=>!((S[k.id]||{}).upd>=month.getTime()));
   const upd=noUpd.length?`<div class="thsec"><div class="thtodo t-upd"><span class="thi" aria-hidden="true">💬</span><div class="thtt"><b>${noUpd.length===1?'הורה אחד עוד לא קיבל/ה עדכון החודש':fT(`${noUpd.length} הורים עוד לא קיבלו עדכון החודש`)}</b><span>עדכון קצר מוכן – עורכים ושולחים בוואטסאפ</span></div><button class="btn small" onclick="thUpd()">לעדכונים</button></div></div>`:'';
@@ -5800,10 +5800,10 @@ function thPrivate(){
 function thMist(kid){ const k=kidById(kid), L=sinceLesson(kid, (CLS.sched||{})[kid]), out=[], seen=new Set();
   L.list.forEach(h=>{ const set=sets.find(s=>s.id===h.setId); if(!set||!Array.isArray(h.qr)||h.mode==='memory') return;
     qrEntries(set,h).forEach(({i,ok,pick})=>{ const q=set.questions[i]; if(!q||ok||seen.has(tkey(q.question))) return; seen.add(tkey(q.question)); out.push({q, pick}); }); });
-  tDialog(`<h2>הטעויות לשיעור · <bdi>${esc(k?k.name:'')}</bdi></h2><p class="hint">מאז השיעור הקודם${L.prev?` (${fmtDT(L.prev)})`:''} · <bdi>${out.length}</bdi> שאלות</p>
+  tDialog(`<h2>הטעויות לשיעור · <bdi translate="no">${esc(k?k.name:'')}</bdi></h2><p class="hint">מאז השיעור הקודם${L.prev?` (${fmtDT(L.prev)})`:''} · <bdi>${out.length}</bdi> שאלות</p>
     ${out.map(({q,pick})=>`<div class="mrow"><div dir="auto" translate="no">${esc(q.question)}</div><div class="mans bad"><span>✗</span> <span dir="auto" translate="no">${esc(Number.isInteger(pick)?q.options[pick]:'')}</span></div><div class="mans ok"><span>✓</span> <span dir="auto" translate="no">${esc(q.options[q.answer])}</span></div></div>`).join('')||'<p>אין טעויות מאז השיעור הקודם 🎉</p>'}
     <div class="actions" style="justify-content:center"><button class="btn ghost small" onclick="thLessonDone('${esc(kid)}')">✓ היה שיעור היום</button></div>`); }
-function thNote(kid){ const k=kidById(kid); tDialog(`<h2>📝 הערה לשיעור · <bdi>${esc(k?k.name:'')}</bdi></h2><p class="hint">רק את/ה רואה</p>
+function thNote(kid){ const k=kidById(kid); tDialog(`<h2>📝 הערה לשיעור · <bdi translate="no">${esc(k?k.name:'')}</bdi></h2><p class="hint">רק את/ה רואה</p>
   <textarea id="tNote" data-kid="${esc(kid)}" maxlength="2000" rows="5" oninput="this.dataset.touched=1"></textarea><button class="btn" onclick="tNoteSave('${esc(kid)}')">שמירה</button>`); tNoteLoad(kid); }
 async function schedSave(kid, patch){ const cur=(CLS.sched||{})[kid]||{}, d={slots:cur.slots||[], from:cur.from||Date.now(), last:cur.last||0, upd:cur.upd||0, ...patch};
   d.slots=(d.slots||[]).slice(0,7).map(s=>({d:+s.d, t:String(s.t).slice(0,5)}));
@@ -5811,7 +5811,7 @@ async function schedSave(kid, patch){ const cur=(CLS.sched||{})[kid]||{}, d={slo
 function thLessonDone(kid){ schedSave(kid,{last:Date.now()}).then(ok=>{ if(ok){ tClose(); toast('✓ נשמר'); } }); }
 // the fixed lessons of a student (in the student's card and in "שיעורים")
 function schedEditor(kid){ const sl=((CLS.sched||{})[kid]||{}).slots||[];
-  return `<div class="tsched" data-kid="${esc(kid)}"><b>🗓 שיעור קבוע</b>${sl.map((s,i)=>`<div class="tslot"><span>יום ${WD[+s.d]} · <bdi>${esc(s.t)}</bdi></span><button class="linkbtn" aria-label="הסרה" onclick="schedDel('${esc(kid)}',${i})">✕</button></div>`).join('')||'<p class="hint">עוד לא נקבע</p>'}
+  return `<div class="tsched" data-kid="${esc(kid)}"><b>🗓 שיעור קבוע</b>${sl.map((s,i)=>`<div class="tslot"><span>יום ${WD[+s.d]} · <bdi translate="no">${esc(s.t)}</bdi></span><button class="linkbtn" aria-label="הסרה" onclick="schedDel('${esc(kid)}',${i})">✕</button></div>`).join('')||'<p class="hint">עוד לא נקבע</p>'}
     <div class="tslot add"><select id="sd_${esc(kid)}" aria-label="יום">${WD.slice(0,6).map((w,i)=>`<option value="${i}">${w}</option>`).join('')}</select><input id="st_${esc(kid)}" type="time" value="17:00" aria-label="שעה"><button class="btn small" onclick="schedAdd('${esc(kid)}')">＋ הוספה</button></div></div>`; }
 function schedAdd(kid){ const d=+$('sd_'+kid).value, t=$('st_'+kid).value||'17:00', cur=((CLS.sched||{})[kid]||{}).slots||[];
   schedSave(kid,{slots:[...cur,{d,t}]}).then(ok=>{ if(ok&&!$('tDlg')?.classList.contains('hidden')&&$('tDlg').querySelector('.tsched')) tStudent(kid); if(ok&&!$('vTLes').classList.contains('hidden')) thLesView(); }); }
@@ -5819,8 +5819,8 @@ function schedDel(kid,i){ const cur=[...(((CLS.sched||{})[kid]||{}).slots||[])];
   schedSave(kid,{slots:cur}).then(ok=>{ if(ok&&!$('tDlg')?.classList.contains('hidden')&&$('tDlg').querySelector('.tsched')) tStudent(kid); if(ok&&!$('vTLes').classList.contains('hidden')) thLesView(); }); }
 function thLesView(){ show('vTLes'); const studs=trStudents();
   $('tLesBody').innerHTML=`<div class="card thome"><div class="thsec"><h3>השבוע שלי</h3><div class="thweek">${[0,1,2,3,4].map(d=>{ const S=CLS.sched||{}; const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k,t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
-    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi>${esc(thFirst(x.k.name))}</bdi><small><bdi>${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('')}</div></div>
-    <div class="thsec"><h3>השיעורים הקבועים</h3>${studs.map(k=>`<div class="thles"><b><bdi>${esc(k.name)}</bdi></b>${schedEditor(k.id)}</div>`).join('')||'<p class="hint">עוד אין תלמידים</p>'}</div></div>`; }
+    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi translate="no">${esc(thFirst(x.k.name))}</bdi><small><bdi translate="no">${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('')}</div></div>
+    <div class="thsec"><h3>השיעורים הקבועים</h3>${studs.map(k=>`<div class="thles"><b><bdi translate="no">${esc(k.name)}</bdi></b>${schedEditor(k.id)}</div>`).join('')||'<p class="hint">עוד אין תלמידים</p>'}</div></div>`; }
 // the parents' monthly update: a short text per student, ready to edit, sent by WhatsApp (to the number the parent gave, if any)
 function thUpdText(k){ const g=history.filter(h=>h.kidId===k.id&&h.at>=Date.now()-30*TDAY), m=kidMastery(g.sort((a,b)=>b.at-a.at)), ts=Object.entries(m).sort((a,b)=>b[1].pct-a[1].pct);
   const good=ts.filter(([,x])=>x.pct>=MAST_HI).slice(0,2).map(([t])=>t), weak=ts.filter(([,x])=>x.pct<MAST_LO).slice(-2).map(([t])=>t);
@@ -5828,7 +5828,7 @@ function thUpdText(k){ const g=history.filter(h=>h.kidId===k.id&&h.at>=Date.now(
 function thUpd(){ const studs=trStudents(), S=CLS.sched||{};
   const phone=k=>{ const c=CLS.consents[k.id]||{}; const ps=(c.parents&&c.parents.length?c.parents:[c]); const n=ps.map(p=>String(p&&p.contact||'').replace(/[^\d+]/g,'')).find(x=>x.replace(/\D/g,'').length>=9)||''; return n.replace(/^0/,'972').replace(/^\+/,''); };
   tDialog(`<h2>💬 עדכון להורים</h2><p class="hint">עורכים ושולחים. נשמר מתי נשלח – כדי לדעת למי עוד לא.</p>
-    ${studs.map(k=>{ const u=(S[k.id]||{}).upd; return `<div class="thupd"><b><bdi>${esc(k.name)}</bdi></b>${u?`<span class="hint">נשלח ${fmtDT(u)}</span>`:''}<textarea id="up_${esc(k.id)}" rows="5" maxlength="1500">${esc(thUpdText(k))}</textarea>
+    ${studs.map(k=>{ const u=(S[k.id]||{}).upd; return `<div class="thupd"><b><bdi translate="no">${esc(k.name)}</bdi></b>${u?`<span class="hint">נשלח ${fmtDT(u)}</span>`:''}<textarea id="up_${esc(k.id)}" rows="5" maxlength="1500">${esc(thUpdText(k))}</textarea>
       <button class="btn small wa" onclick="thUpdSend('${esc(k.id)}','${esc(phone(k))}')">שליחה בוואטסאפ</button></div>`; }).join('')}`); }
 function thUpdSend(kid, ph){ const t=$('up_'+kid).value; window.open(`https://wa.me/${ph}?text=${encodeURIComponent(t)}`,'_blank','noopener'); schedSave(kid,{upd:Date.now()}); }
 /* ---------- a group with no students yet: 3 steps (both worlds) ---------- */

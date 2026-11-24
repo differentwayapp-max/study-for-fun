@@ -170,6 +170,11 @@ service cloud.firestore {
       match /notes/{kidId} { allow read, delete: if isClass(familyId) && isOwner(familyId);
         allow create, update: if isClass(familyId) && isOwner(familyId) && request.resource.data.keys().hasOnly(['text','at'])
           && request.resource.data.text is string && request.resource.data.text.size() <= 2000 && request.resource.data.at is number; }
+      // a private group's fixed lessons and "the parents' update was sent" – the teacher only (as the notes)
+      match /sched/{kidId} { allow read, delete: if isClass(familyId) && isOwner(familyId);
+        allow create, update: if isClass(familyId) && isOwner(familyId) && request.resource.data.keys().hasOnly(['slots','from','last','upd'])
+          && request.resource.data.slots is list && request.resource.data.slots.size() <= 7
+          && request.resource.data.from is number && request.resource.data.last is number && request.resource.data.upd is number; }
 
       // a tutor's own small view of the family (see the top)
       match /tutorView/{code} {

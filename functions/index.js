@@ -408,6 +408,7 @@ async function dropStudent(classId, kidId, by) {
     tx.delete(db.doc(`${ref.path}/kidpub/${kidId}`));
     tx.delete(db.doc(`${ref.path}/progress/${kidId}`));
     tx.delete(db.doc(`${ref.path}/notes/${kidId}`));               // the teacher's private notes
+    tx.delete(db.doc(`${ref.path}/sched/${kidId}`));               // the private group's fixed lessons
     devs.docs.forEach(d => tx.delete(d.ref));
     sets.docs.forEach(d => tx.delete(d.ref));
     reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now }));

@@ -1307,6 +1307,11 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 
   <!-- PARENT: the family – kids (their links) and the adults who help -->
   <section id="vFamily" class="hidden"><div id="famBody"></div></section>
+  <!-- TEACHERS' APP: a group's tabs (students · assignments · lessons) -->
+  <section id="vTStud" class="hidden"><div id="tStudBody"></div></section>
+  <section id="vTAsg" class="hidden"><div id="tAsgBody"></div></section>
+  <section id="vTLes" class="hidden"><div id="tLesBody"></div></section>
+  <button id="thFab" class="thfab" onclick="asgOpen()">＋ משימה חדשה</button>
 
   <!-- ADMIN: registered accounts (no family data) -->
   <section id="vUsers" class="hidden">
@@ -2012,6 +2017,64 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   .plcard.priv .plico{background:#EDE9FF} .pltx{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0} .pltx b{font-size:1.08em} .pltx small{color:var(--ink2);font-size:.85em}
   .pltx .pln{color:#0B6B4A;font-weight:700} .pltx .pln.none{color:var(--ink2);font-weight:500} .plnew{border:2px dashed #AFC3EA;border-radius:16px;background:transparent;padding:12px;font:inherit;font-weight:700;color:var(--ink2);cursor:pointer}
   .pladd{display:block;margin:16px auto 0}
+  /* the teachers' app home */
+  .thfab{display:none} body.thapp.thgroup .thfab{display:flex;position:fixed;inset-inline-start:50%;transform:translateX(50%);bottom:calc(74px + env(safe-area-inset-bottom));z-index:30;background:#F2A63B;color:#1B2A4A;border:var(--line);border-radius:999px;box-shadow:0 4px 0 var(--ink);padding:12px 20px;font:inherit;font-family:var(--display);font-weight:700;min-height:48px;align-items:center;cursor:pointer}
+  html[dir=ltr] body.thapp.thgroup .thfab{transform:translateX(-50%)}
+  body.thapp.thgroup #vKids,body.thapp.thgroup #vTStud,body.thapp.thgroup #vTAsg,body.thapp.thgroup #vTLes{padding-bottom:90px}
+  .thsel{border:0;background:none;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:44px;padding:0 4px}
+  .thbell{display:none} body.thgroup .thbell{display:grid;place-items:center;position:relative;grid-column:3;justify-self:end;border:0;background:none;font-size:1.3em;min-width:44px;min-height:44px;cursor:pointer}
+  .thbell i{position:absolute;top:4px;inset-inline-end:2px;background:#E5484D;color:#fff;font-style:normal;font-size:.55em;font-weight:700;border-radius:999px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 4px}
+  body.thapp.cls #vKids .carhead{display:none}
+  .thhome{display:flex;flex-direction:column;gap:14px}
+  .thopen{background:var(--blue);color:#fff;border:var(--line);border-radius:24px;box-shadow:0 5px 0 var(--ink);padding:16px;display:grid;grid-template-columns:1fr auto;gap:10px 12px;align-items:center}
+  .wpriv .thopen{background:#5B47D6}
+  .thopen .thtx{grid-column:1} .thopen h2{margin:2px 0 4px;font-size:1.3em;color:#fff} .thopen p{margin:4px 0;line-height:1.45} .thdate{font-size:.85em;opacity:.92;font-weight:600}
+  .thring{position:relative;width:84px;height:84px;grid-column:2;grid-row:1} .thring>b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.15em;line-height:1}
+  .thring small{font-size:.55em;font-weight:500;margin-top:2px}
+  .thstats{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:6px}
+  .thst{background:rgba(255,255,255,.16);border-radius:14px;padding:8px 6px;text-align:center;display:flex;flex-direction:column} .thst b{font-size:1.15em} .thst span{font-size:.74em;opacity:.95}
+  .thbtns{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap} .thopen .btn{background:#fff;color:var(--ink)} .thopen .btn.ghost{background:transparent;color:#fff;border-color:#fff}
+  .thsec{background:#fff;border:var(--line);border-radius:22px;box-shadow:0 4px 0 var(--ink);padding:14px} .thsec>h3,.thh h3{margin:0 0 10px;font-size:1.05em}
+  .thh{display:flex;justify-content:space-between;align-items:baseline;gap:8px} .thh .linkbtn{min-height:44px}
+  .thtodo{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;padding:12px;border:2px solid #E3E9F7;border-radius:18px;margin-bottom:8px}
+  .thtodo .thi{font-size:1.6em;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;background:#F1F5FF}
+  .thtodo .thtt{display:flex;flex-direction:column;gap:2px;min-width:0} .thtt span{color:var(--ink2);font-size:.86em}
+  .thtodo .btn{grid-column:1/-1;justify-content:center;min-height:44px}
+  .t-stuck .thi{background:#FFE3EC} .t-reqs .thi{background:#E4F1FF} .t-remind .thi{background:#FFF2C9} .t-idle .thi{background:#EEF0F5} .t-done .thi,.t-ok .thi{background:#DDF8EC} .t-upd .thi{background:#EDE9FF}
+  .thdots{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px 6px;justify-items:center}
+  .thdot{display:flex;flex-direction:column;align-items:center;gap:3px;border:0;background:none;padding:0;cursor:pointer;font:inherit;min-width:44px}
+  .thdot i{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;border:2px solid var(--ink);color:var(--ink)}
+  .thdot small{font-size:.68em;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2)}
+  .thdot.l-g i,.thleg .l-g{background:#24C78E} .thdot.l-o i,.thleg .l-o{background:#FFD66B} .thdot.l-r i,.thleg .l-r{background:#C2185B} .thdot.l-r i{color:#fff}
+  .thdot.l-n i,.thleg .l-n{background:#fff;border:2px dashed #5B6478} .thdot.l-x i{background:#E3E7EF;border-color:#E3E7EF}
+  .thleg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:.82em;color:var(--ink2)} .thleg i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-inline-end:5px;vertical-align:-2px;border:2px solid var(--ink)}
+  .thasg,.thtop,.thkid,.threc{display:block;width:100%;text-align:start;background:none;border:0;font:inherit;color:var(--ink);cursor:pointer;padding:6px 0}
+  .thasg .tr1{display:flex;justify-content:space-between;gap:8px} .thdue{background:#FFF2C9;color:#7A5200;border-radius:999px;padding:2px 10px;font-size:.8em;font-weight:700;white-space:nowrap}
+  .thbar{display:flex;height:12px;border-radius:999px;overflow:hidden;background:#E3E9F7;margin:8px 0 6px;border:2px solid var(--ink)} .thbar span{display:block;height:100%}
+  .thnums{display:flex;gap:12px;font-size:.84em;color:var(--ink2);flex-wrap:wrap}
+  .thtop{display:grid;grid-template-columns:minmax(0,1.2fr) 1fr auto;gap:8px;align-items:center;min-height:44px} .thtop .tn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .thtop .tb{height:10px;border-radius:999px;background:#EEF0F5;overflow:hidden} .thtop .tb span{display:block;height:100%}
+  .thwho{display:flex;gap:10px;align-items:center;margin:8px 0} .thwho span{font-size:.86em} .thav{width:48px;height:48px;border-radius:50%;background:#fff;color:#5B47D6;display:grid;place-items:center;font-weight:800;font-size:1.3em;flex:none}
+  .thsince{background:rgba(255,255,255,.16);border-radius:12px;padding:8px 10px}
+  .thweek{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px} .thday{border:2px solid #E3E9F7;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;gap:4px;align-items:center;min-height:70px}
+  .thday.on{border-color:#5B47D6;background:#EDE9FF} .thday button{border:0;background:#fff;border-radius:10px;padding:4px;font:inherit;font-size:.78em;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-height:44px;width:100%}
+  .thday button small{color:var(--ink2)}
+  .thkid{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border-top:2px solid #F1F2F7;padding:10px 0;min-height:56px} .thkid:first-of-type{border-top:0}
+  .thkr{position:relative;width:52px;height:52px} .thkr b{position:absolute;inset:0;display:grid;place-items:center;font-size:.72em}
+  .thkid .thtt{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:start} .thkid .thtt span{color:var(--ink2);font-size:.84em}
+  .thtag{border-radius:999px;padding:3px 10px;font-size:.78em;font-weight:700;white-space:nowrap} .g-g{background:#DDF8EC;color:#0B6B4A} .g-r{background:#FFE3EC;color:#9C1048} .g-o{background:#EEF0F5;color:#3A4560} .g-n{background:#fff;color:#3A4560;border:2px dashed #5B6478}
+  .thstep{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 0;border-top:2px solid #F1F2F7} .thstep:first-child{border-top:0}
+  .thsn{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid var(--ink);background:#fff} .thstep.done .thsn{background:#24C78E;color:#0B3D2B}
+  .thsb{display:flex;flex-direction:column;gap:8px;min-width:0} .thstep.done .thsb>b{color:#0B6B4A}
+  .thinv{display:flex;gap:10px;align-items:center} .thinv .tqr{width:110px;flex:none} .thinv ol{margin:0;padding-inline-start:18px;font-size:.84em}
+  .thprog{grid-column:1/-1;height:12px;border-radius:999px;background:rgba(255,255,255,.3);overflow:hidden;margin:6px 0} .thprog span{display:block;height:100%;background:#fff}
+  .threc{border:2px solid #E3E9F7;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:2px;min-height:44px}
+  .thsoon{opacity:.75} .thdots.dim .thdot i{background:#E3E7EF;border-color:#E3E7EF}
+  .tsched{border:2px solid #EDE9FF;border-radius:14px;padding:10px;margin:10px 0;display:flex;flex-direction:column;gap:6px;text-align:start}
+  .tslot{display:flex;justify-content:space-between;align-items:center;gap:8px} .tslot.add{flex-wrap:wrap;justify-content:flex-start} .tslot select,.tslot input{min-height:44px;border:2px solid #D5DEF2;border-radius:10px;padding:0 8px;font:inherit}
+  .thles{border-top:2px solid #F1F2F7;padding:10px 0} .thupd{display:flex;flex-direction:column;gap:6px;border-top:2px solid #F1F2F7;padding:10px 0} .thupd textarea{width:100%;font:inherit;border:2px solid #D5DEF2;border-radius:12px;padding:8px}
+  @media(max-width:340px){ .thdots{grid-template-columns:repeat(5,minmax(0,1fr))} .thopen{grid-template-columns:1fr} .thring{grid-column:1;grid-row:auto;justify-self:center} .thweek{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
   .tdtop{display:flex;justify-content:space-between;align-items:center} .tdtop .tback{font-weight:700}
   html.wpriv body{--blue:#5B47D6;--blue-d:#43329F;--sky:#F1EEFF;--lilac:#B9A7FF}   /* the private students' world: purple */
   #dFams h4.dworld.school{color:#1E4FD6} #dFams h4.dworld.private{color:#5B47D6} #dFams .dadd{margin-top:10px}
@@ -2338,14 +2401,15 @@ async function ask(step, data, opts={}){
 
 /* ---------- navigation ---------- */
 // which screen is "above" which: the back button (‹ חזרה) goes there; the bottom tabs are the roots
-const ROOT_VIEWS=['vKids','vStats','vFamily','vKid','vPlaces'];
-const TAPP=()=>window.SFF_APP==='teach', GROUP_ROOTS=['vKids','vStats','vFamily'];   /* the teachers' app: a group's tabs sit under the class picker */
+const ROOT_VIEWS=['vKids','vStats','vFamily','vKid','vPlaces','vTStud','vTAsg','vTLes'];
+const TAPP=()=>window.SFF_APP==='teach', GROUP_ROOTS=['vKids','vStats','vFamily','vTStud','vTAsg','vTLes'];   /* the teachers' app: a group's tabs sit under the class picker */
 let NAV_STACK=[];
 function viewTitle(v){
   const kidOf=s=>s&&(kidOfSet(s)||{}).name||'', sub=s=>s?String(s.subject).replace(/^🎯\s*/,''):'';
   const rs=typeof ROAD_SET!=='undefined'&&getSet(ROAD_SET);
   if(isClassMode()&&(v==='vKids'||v==='vFamily')) return v==='vKids'?((window.SFF_CLASS||{}).name||''):'הקבוצה';
   if(v==='vPlaces') return 'הקבוצות שלי';
+  if(v==='vTStud') return 'תלמידים'; if(v==='vTAsg') return 'משימות'; if(v==='vTLes') return 'שיעורים';
   return ({vKids:'ילדים',vStats:'מעקב התקדמות',vFamily:'המשפחה והמבוגרים',vCat:'קטלוג תרגולים',vWizard:'תרגול חדש',vBuild:'בונים תרגול',vAdmin:'ניהול',vUsers:'משתמשים',
     vReview:curSet?`${sub(curSet)} · ${kidOf(curSet)}`:'תרגול',vKid:(kidById(activeKid)||{}).name?kidName(kidById(activeKid)):'',vRoad:rs?sub(rs):'',vMe:'מה אני יודע',vProfile:'הדמות שלי',
     vModes:curSet?sub(curSet):'',vTopics:'נושאים'})[v]||'';
@@ -2355,15 +2419,17 @@ function chrome(v){
   document.body.classList.toggle('ingame', v==='vGame'||v==='vEnd');
   const t=viewTitle(v); $('topTitle').textContent=window.sffT?sffT(t):t;
   try{ sessionStorage.setItem('sff_view',JSON.stringify({v, set:curSet&&curSet.id, road:typeof ROAD_SET!=='undefined'?ROAD_SET:null, kid:activeKid})); }catch(e){}
-  const up=TAPP()&&GROUP_ROOTS.includes(v);            /* a group's tab → back to the class picker */
-  $('topBack').classList.toggle('hidden', !up&&(ROOT_VIEWS.includes(v)||NAV_STACK.length<2));
-  $('topBack').textContent=(up?'‹ הקבוצות':'‹ חזרה'); if(window.sffT) $('topBack').textContent=sffT($('topBack').textContent);
+  const up=TAPP()&&GROUP_ROOTS.includes(v)&&isClassMode();       /* a group's tab: the group selector (→ the class picker) on top */
+  $('topBack').classList.toggle('hidden', up||ROOT_VIEWS.includes(v)||NAV_STACK.length<2);
+  $('topBack').textContent=window.sffT?sffT('‹ חזרה'):'‹ חזרה';
+  document.body.classList.toggle('thgroup', up); if(up) thTop();
+  [['bnTStud','vTStud'],['bnTAsg','vTAsg'],['bnTLes','vTLes']].forEach(([b,w])=>$(b)?.classList.toggle('on',v===w));
   document.body.classList.toggle('inplaces', v==='vPlaces');
   [['bnKids','vKids'],['bnStats','vStats'],['bnFam','vFamily'],['knHome','vKid'],['knMe','vMe']].forEach(([b,w])=>$(b)?.classList.toggle('on',(NAV_STACK[0]===w&&NAV_STACK.length===1)||v===w));
 }
 function goBack(){
   if(TAPP()&&NAV_STACK[NAV_STACK.length-1]==='vStats'&&typeof TR!=='undefined'&&TR.topic){ TR.topic=null; renderTeacherStats(); return; }   /* a topic's page → the topics */
-  if(TAPP()&&NAV_STACK.length<=1&&GROUP_ROOTS.includes(NAV_STACK[0])) return openPlaces();
+  if(TAPP()&&NAV_STACK.length<=1&&GROUP_ROOTS.includes(NAV_STACK[0])){ if(NAV_STACK[0]!=='vKids') return go('kids'); return openPlaces(); }   /* a tab → "today" → the picker */
   const from=NAV_STACK.pop(); const t=NAV_STACK.pop()||'vKids';
   if(t==='vKids' && from==='vReview') closeReview();          // back on the card of the kid this practice set belongs to
   else if(t==='vKids') go('kids'); else if(t==='vStats') go('stats'); else if(t==='vFamily') go('family'); else if(t==='vKid') go('kid');
@@ -2389,7 +2455,7 @@ function backAction(){
   arm(); })();
 function show(v){
   try{ chrome(v); }catch(e){}
-  ['vPlaces','vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vFamily','vModes','vGame','vEnd','vAdmin','vStats','vUsers'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
+  ['vPlaces','vTStud','vTAsg','vTLes','vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vFamily','vModes','vGame','vEnd','vAdmin','vStats','vUsers'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
   window.scrollTo(0,0);
 }
 function go(mode){
@@ -3131,6 +3197,9 @@ const isClassMode=()=>window.SFF_KIND==='class';
 const classWord=()=>window.SFF_CLASS&&window.SFF_CLASS.teach==='private'?'התלמידים שלי':'הכיתה';
 function renderTeacherHome(){
   const C=window.SFF_CLASS||{}, cls=C.teach!=='private', subj=C.subject?` · ${esc(C.subject)}`:'';
+  if(TAPP()){ TH_C=null; const fresh=!(trStudents().length&&sets.some(isAsg));     /* no students or no assignment yet: the 3 steps */
+    $('kidCar').innerHTML=`<div class="thhome">${fresh?thNewGroup():cls?thSchool():thPrivate()}</div>`; $('kidCarDots').innerHTML='';
+    if(fresh) thLinkFill(); thTop(); return; }
   $('kidCar').innerHTML=`<div class="card thome">
     <div class="thead"><span class="tico">${cls?'🏫':'🧑‍🏫'}</span><div><h2>${esc(C.name||'')}</h2><div class="hint">${cls?'מורה לכיתה':'מורה פרטי/ת'} · כיתה ${GRADES[+C.grade||0]}${subj}</div></div></div>
     ${teacherBody()}</div>`;
@@ -4525,7 +4594,6 @@ let PLACE_N={};
 async function renderPlaces(){
   const el=$('placesBody'); if(!el) return;
   if(!window.SFF_ROLE){ el.innerHTML='<div class="card center"><p class="hint" style="margin:0">רגע…</p></div>'; setTimeout(renderPlaces,400); return; }
-  if(window.__sffNewPlace){ window.__sffNewPlace=false; return go('kids'); }       /* a first group just made: straight in */
   const fams=window.SFF_FAMS||[], WD=window.SFF_WORLDS||[], F=window.__sffFamily||{}, nm=(window.SFF_MYNAME||'').split(/\s+/)[0];
   const card=f=>{ const cls=f.kind==='class', priv=f.teach==='private', ico=cls?(priv?'👩‍🏫':'🏫'):'🧑‍🏫';
     const what=cls?[priv?'קבוצה פרטית':'כיתה', f.grade!=null&&f.grade!==''?'כיתה '+GRADES[+f.grade||0]:'', f.subject||''].filter(Boolean).join(' · '):'בהזמנת המשפחה';
@@ -5216,6 +5284,10 @@ function maybeKidIntro(){
 (function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(()=>{ if(!freshIntro()) maybeOnb(); },400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
+  if(TAPP()){ const pv=(window.SFF_CLASS||{}).teach==='private', B=(id,ico,t,on)=>`<button id="${id}" onclick="${on}"><span>${ico}</span>${t}</button>`;
+    $('bNav').innerHTML=B('bnKids','🏠','היום',"go('kids')")+(pv?B('bnTLes','🗓','שיעורים',"thTab('les')")+B('bnTStud','🧒','תלמידים',"thTab('stud')"):B('bnTStud','🧒','תלמידים',"thTab('stud')")+B('bnTAsg','📚','משימות',"thTab('asg')"))+B('bnStats','📊','דוחות',"go('stats')");
+    $('thFab').textContent=pv?'＋ תרגול לתלמיד/ה':'＋ משימה חדשה'; document.body.classList.add('thapp');
+    const v=NAV_STACK[NAV_STACK.length-1]; if(v) chrome(v); try{ rerender(); }catch(e){} return; }
   const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };
   lab('bnKids','🧒','תלמידים'); lab('bnFam',(window.SFF_CLASS||{}).teach==='private'?'👩‍🏫':'🏫','קבוצה');
   const m=document.querySelector(`#sideMenu .ditem[onclick="closeMenu();go('family')"] .dl`); if(m) m.textContent=window.sffT?sffT('הקבוצה'):'הקבוצה';
@@ -5351,13 +5423,14 @@ async function joinRevoke(o, pending){
   joinStatusPage(o); }
 
 /* the teacher's side */
-const CLS={reqs:[], consents:{}, link:null};
+const CLS={reqs:[], consents:{}, link:null, sched:{}};
 function classCloud(){ if(!DB||!isClassMode()) return;
   DB.collection('joinReqs').onSnapshot(q=>{ CLS.reqs=q.docs.map(d=>({id:d.id,...d.data()})); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
-  DB.collection('consents').onSnapshot(q=>{ CLS.consents=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{}); }
+  DB.collection('consents').onSnapshot(q=>{ CLS.consents=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{});
+  if((window.SFF_CLASS||{}).teach==='private') DB.collection('sched').onSnapshot(q=>{ CLS.sched=Object.fromEntries(q.docs.map(d=>[d.id,d.data()])); if(!$('vKids').classList.contains('hidden')) renderKids(); },()=>{}); }
 const fmtDT=t=>{ try{ return new Date(t).toLocaleDateString(EN()?'en-GB':'he-IL'); }catch(e){ return ''; } };
 const CBADGE={digital:['✅','הורה חתם/ה']};
-function teacherBody(){
+function teacherBody(only){
   const pend=CLS.reqs.filter(r=>r.status==='pending').sort((a,b)=>a.at-b.at), studs=kids.filter(k=>CLS.consents[k.id]&&CLS.consents[k.id].status!=='revoked');
   const reqs=pend.length?`<div class="tsec"><h3>📥 בקשות ממתינות (${pend.length})</h3>${pend.map(r=>`<div class="treq" data-id="${esc(r.id)}">
       <div class="tr1"><b>${esc(r.kidName)}</b><span class="hint">${esc(r.parentName)} · ${fmtDT(r.at)}</span></div>
@@ -5369,6 +5442,7 @@ function teacherBody(){
       return `<button class="tstud" onclick="tStudent('${esc(k.id)}')">${avatarHtml(k,36)}<b><bdi>${esc(k.name)}</bdi></b><span class="cbadge c-${esc(c.status||'')}">${b[0]} ${b[1]}</span></button>`; }).join('')}</div>`
     :`<div class="tempty"><div style="font-size:2.4em">👋</div><b>עוד אין תלמידים</b>
       <p class="sub">שולחים להורים קישור אחד, הם מאשרים את ההשתתפות של הילד/ה, ואתם מאשרים כל בקשה. רק אחרי האישור נפתח לתלמיד/ה קישור אישי.</p></div>`;
+  if(only) return reqs+list+`<div class="actions" style="justify-content:center;margin-top:14px"><button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div>`;
   return teacherAttention()+(trStudents().length?teacherAssignments():'')+reqs+list+`<div class="actions" style="justify-content:center;margin-top:14px"><button class="btn big" onclick="inviteStudents()">📨 הזמנת תלמידים</button></div>`; }
 function fillSigs(root){ (root||document).querySelectorAll('img[data-sig]').forEach(im=>{ const id=im.dataset.sig, r=CLS.reqs.find(x=>x.id===id)||null;
   const src=r?r.sig:(CLS.consents[id]||{}).sig; if(typeof src==='string'&&src.startsWith('data:image/png;base64,')) im.src=src; else im.remove(); }); }
@@ -5385,7 +5459,7 @@ function tStudent(kid){ const k=kidById(kid), c=CLS.consents[kid]||{}; if(!k) re
   tDialog(`<h2><bdi>${esc(k.name)}</bdi></h2><div class="cbadge c-${esc(c.status||'')}" style="display:inline-block">${b[0]} ${b[1]}</div>
     ${ps.map(p=>`<div class="tpar"><b>${esc(p.parentName)}</b><span class="hint">${fmtDT(p.at)}${p.contact?' · '+esc(p.contact):''}${p.letterV||c.letterV?` · גרסת מכתב ${esc(p.letterV||c.letterV)}`:''}</span>
       ${p.sig?`<img class="tsig" alt="חתימה" src="">`:''}</div>`).join('')||'<p class="hint">עוד אין הסכמה.</p>'}
-    <div class="tkstats">${kidCardStats(kid)}</div>
+    <div class="tkstats">${kidCardStats(kid)}</div>${(window.SFF_CLASS||{}).teach==='private'?schedEditor(kid):''}
     ${history.some(h=>h.kidId===kid&&h.right<h.n)?`<button class="btn small" style="margin-top:8px" onclick="tMistakes('${esc(kid)}')">🎯 תרגול מהטעויות – משימה אישית</button>`:''}
     <label class="tnote" for="tNote">📝 הערה פרטית (רק את/ה רואה)</label><textarea id="tNote" data-kid="${esc(kid)}" maxlength="2000" rows="3" oninput="this.dataset.touched=1"></textarea>
     <button class="btn ghost small" onclick="tNoteSave('${esc(kid)}')">שמירת ההערה</button>
@@ -5579,6 +5653,207 @@ function teacherAssignments(){
     ${waiting.map(s=>`<div class="twait"><span>✨ <b translate="no" dir="auto">${esc(asgTitle(s))}</b> – תרגול חדש שנבנה</span><button class="btn small" onclick="asgOpen('${esc(s.id)}')">לתת כמשימה</button></div>`).join('')}
     <div class="actions" style="justify-content:center"><button class="btn" onclick="asgOpen()">＋ משימה חדשה</button></div></div>`;
 }
+/* ---------- the teachers' app: the home ("היום") – in 5 seconds: how the group is doing and what to do today ----------
+   Everything from what the phone already holds (history, sets, the consents); no extra reads. The school's world (blue) and
+   the private world (purple – html.wpriv) each have their own home; a group with no students yet gets the 3 steps. */
+const TDAY=864e5;
+let TH_C=null;                                             /* the home's working data, made once per render */
+function thCache(){ if(TH_C) return TH_C; const by={}; history.forEach(h=>{ (by[h.kidId]=by[h.kidId]||[]).push(h); }); Object.values(by).forEach(g=>g.sort((a,b)=>b.at-a.at));
+  return TH_C={by, A:classAttention(history, trStudents())}; }
+const thGames=kid=>thCache().by[kid]||[];
+const thPct=(r,n)=>n?Math.round(r/n*100):null;
+const thSum=(g,f)=>g.reduce((s,h)=>s+(+h[f]||0),0);
+const thFirst=n=>String(n||'').trim().split(/\s+/)[0]||'';
+const thInit=n=>[...String(n||'').trim()][0]||'?';
+const thGreet=(d=new Date())=>{ const h=d.getHours(); return h>=5&&h<12?'בוקר טוב':h>=12&&h<17?'צהריים טובים':'ערב טוב'; };
+function thRing(p, size=64, col='var(--blue)', bg='#E3E9F7', w=8){ const r=(size-w)/2, c=2*Math.PI*r, f=Math.max(0,Math.min(1,(p||0)/100));
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${bg}" stroke-width="${w}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${(c*f).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`; }
+// the last 7 days against the 7 before: who practised, questions, games, right answers
+function thWeek(H, studs, now=Date.now()){ const ids=new Set(studs.map(k=>k.id)), a=now-7*TDAY, b=a-7*TDAY;
+  const cur=H.filter(h=>ids.has(h.kidId)&&h.at>=a), prev=H.filter(h=>ids.has(h.kidId)&&h.at>=b&&h.at<a);
+  const pct=thPct(thSum(cur,'right'),thSum(cur,'n')), pp=thPct(thSum(prev,'right'),thSum(prev,'n'));
+  return {played:new Set(cur.map(h=>h.kidId)).size, q:thSum(cur,'n'), games:cur.length, pct, trend:pct!=null&&pp!=null?pct-pp:null}; }
+// each student's state for the circles: the topics of the open assignments (else the last 14 days), the report's thresholds
+function thStates(H, studs, now=Date.now()){
+  const live=sets.filter(asgLive), T=new Set(live.flatMap(s=>(s.questions||[]).map(q=>trName(q.topic,{subject:s.subject}))));
+  const since=now-14*TDAY, out={};
+  studs.forEach(k=>{ const g=thGames(k.id);
+    const m=kidMastery(T.size?g:g.filter(h=>h.at>=since)), xs=Object.entries(m).filter(([t])=>!T.size||T.has(t)).map(([,x])=>x);
+    const pct=xs.length?Math.round(xs.reduce((s,x)=>s+x.pct,0)/xs.length):null; out[k.id]={pct, lvl:mastLvl(pct)}; });
+  return out; }
+// students stuck on the same topic (the report's "under 60%" in their recent games, with classAttention's stuck first)
+function thStuckTopic(H, studs, now=Date.now()){ const since=now-14*TDAY, by={}, A=thCache().A;
+  studs.forEach(k=>{ const m=kidMastery(thGames(k.id).filter(h=>h.at>=since));
+    Object.entries(m).forEach(([t,x])=>{ if(x.pct<MAST_LO){ (by[t]=by[t]||[]).push(k); } }); });
+  const best=Object.entries(by).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0]))[0];
+  if(!best) return null; const ks=best[1].sort((a,b)=>(A.stuck.includes(b)?1:0)-(A.stuck.includes(a)?1:0));
+  return {topic:best[0], kids:ks}; }
+const thNames=ks=>{ const n=ks.slice(0,3).map(k=>`<bdi>${esc(k.name)}</bdi>`).join(', '); return ks.length>3?`${n} ${fT(`ועוד ${ks.length-3}`)}`:n; };
+// "3 things for today": in a fixed order of urgency, at most 3
+function thToday(H, studs, now=Date.now()){
+  const out=[], A=thCache().A, pend=CLS.reqs.filter(r=>r.status==='pending');
+  const st=thStuckTopic(H, studs, now);
+  if(st&&st.kids.length) out.push({k:'stuck', ico:'🧩', t:fT(st.kids.length===1?`תלמיד/ה אחד/ת נתקע/ה ב${st.topic}`:`${st.kids.length} תלמידים נתקעו ב${st.topic}`, st.topic), d:thNames(st.kids),
+    b:st.kids.length===1?'שליחת תרגול ממוקד':fT(`שליחת תרגול ממוקד ל-${st.kids.length}`), go:`thFocus(${esc(JSON.stringify(st.kids.map(k=>k.id)))})`});
+  if(pend.length) out.push({k:'reqs', ico:'📥', t:pend.length===1?'בקשת הצטרפות אחת מחכה':fT(`${pend.length} בקשות הצטרפות מחכות`), d:pend.slice(0,3).map(r=>`<bdi>${esc(r.kidName)}</bdi>`).join(', '), b:'לאשר את הבקשות', go:`thTab('stud')`});
+  const soon=sets.filter(s=>asgLive(s)&&s.due&&daysLeft(s.due)>=0&&daysLeft(s.due)<=3).map(s=>({s, st:asgState(s)})).filter(x=>x.st.none.length).sort((a,b)=>String(a.s.due).localeCompare(String(b.s.due)))[0];
+  if(soon){ const n=daysLeft(soon.s.due); out.push({k:'remind', ico:'⏰', t:fT(`${soon.st.none.length} עוד לא התחילו את המשימה`), d:`<bdi translate="no" dir="auto">${esc(asgTitle(soon.s))}</bdi> · ${n===0?fT('היום אחרון'):n===1?fT('נשאר יום אחד'):fT(`נשארו ${n} ימים`)}`,
+    b:'תזכורת להורים בוואטסאפ', href:thRemindUrl(soon.s)}); }
+  if(A.idle.length) out.push({k:'idle', ico:'💤', t:A.idle.length===1?'תלמיד/ה אחד/ת לא תרגל/ה השבוע':fT(`${A.idle.length} לא תרגלו השבוע`), d:thNames(A.idle), b:'לרשימה', go:`thIdle()`});
+  const done=sets.filter(s=>isAsg(s)&&!(s.ass&&s.ass.closed)).map(s=>({s, st:asgState(s)})).find(x=>{ const n=x.st.done.length+x.st.mid.length+x.st.none.length; return n&&x.st.done.length===n; });
+  if(done){ const n=done.st.done.length; out.push({k:'done', ico:'🎉', t:fT(`כל הכבוד! ${n}/${n} סיימו`), d:`<bdi translate="no" dir="auto">${esc(asgTitle(done.s))}</bdi>`, b:'משימה הבאה', go:`asgOpen()`}); }
+  return out.slice(0,3); }
+// a reminder for the parents' group: the assignment and its date – never a kid's name (no kid is shamed in the group)
+function thRemindUrl(s){ const t=`${EN()?'A reminder 🙂':'תזכורת 🙂'}\n${EN()?`The assignment "${asgTitle(s)}" in Study for fun is due ${fmtDate(s.due)}.`:`המשימה "${asgTitle(s)}" ב-Study for fun – עד ${fmtDate(s.due)}.`}\n${EN()?'Whoever has not started yet – now is a good time.':'מי שעוד לא התחיל/ה – זה הזמן.'}`;
+  return 'https://wa.me/?text='+encodeURIComponent(t); }
+function thFocus(ids){ asgOpen(); ASG.to=ids.length===1?'one':'pick'; ASG.pick=new Set(ids); ASG.one=ids.length===1?ids[0]:''; asgRender(); }
+function thIdle(){ const A=classAttention(history, trStudents());
+  tDialog(`<h2>💤 לא תרגלו השבוע</h2><div class="tnames">${A.idle.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi></button>`).join('')}</div>`); }
+const TH_LVL={g:'שולט/ת',o:'כמעט',r:'צריך/ה עזרה',n:'לא תרגל/ה'};
+// the school's world
+function thSchool(){
+  const C=window.SFF_CLASS||{}, studs=trStudents(), N=studs.length, W=thWeek(history, studs), A=thCache().A, now=new Date();
+  const need=A.stuck.length, ring=N?Math.round(W.played/N*100):0;
+  const date=now.toLocaleDateString(EN()?'en-GB':'he-IL',{weekday:'long', day:'numeric', month:'long'});
+  const stat=(v,l)=>`<div class="thst"><b>${v}</b><span>${l}</span></div>`;
+  const open=`<div class="thopen"><div class="thtx"><span class="thdate">${esc(date)}</span><h2>${fT(`${thGreet(now)}, ${thFirst(window.SFF_MYNAME)}`, thFirst(window.SFF_MYNAME))}</h2>
+      <p>${fT(`השבוע ${W.played} מתוך ${N} תלמידים תרגלו.`)} ${need?fT(`${need} מהם צריכים אותך היום.`):fT('כולם בדרך הנכונה.')}</p></div>
+      <div class="thring" role="img" aria-label="${ring}%">${thRing(ring,84,'#fff','rgba(255,255,255,.28)',9)}<b><bdi>${ring}%</bdi><small>תרגלו</small></b></div>
+      <div class="thstats">${stat(`<bdi>${W.q}</bdi>`,'שאלות')}${stat(`<bdi>${W.games}</bdi>`,'משחקים')}${W.pct!=null?stat(`<bdi>${W.pct}%</bdi>`,'נכונות'):''}${W.trend!=null?stat(`<bdi dir="ltr">${W.trend>0?'+':''}${W.trend}%</bdi>`,'מול שבוע שעבר'):''}</div></div>`;
+  const T=thToday(history, studs);
+  const today=`<div class="thsec"><h3>${T.length?'מה לעשות היום':'היום'}</h3>${T.length?T.map(x=>`<div class="thtodo t-${x.k}"><span class="thi" aria-hidden="true">${x.ico}</span><div class="thtt"><b>${x.t}</b><span>${x.d}</span></div>
+      ${x.href?`<a class="btn small wa" target="_blank" rel="noopener" href="${esc(x.href)}">${x.b}</a>`:`<button class="btn small" onclick="${x.go}">${x.b}</button>`}</div>`).join('')
+    :`<div class="thtodo t-ok"><span class="thi" aria-hidden="true">✨</span><div class="thtt"><b>הכול מסודר להיום</b><span>אפשר לתת משימה חדשה</span></div><button class="btn small" onclick="asgOpen()">משימה חדשה</button></div>`}</div>`;
+  const S=thStates(history, studs), cnt={g:0,o:0,r:0,n:0}; studs.forEach(k=>cnt[S[k.id].lvl]++);
+  const glance=`<div class="thsec"><div class="thh"><h3>הכיתה במבט אחד</h3><button class="linkbtn" onclick="thTab('rep')">דוח מלא ›</button></div>
+    <div class="thdots">${studs.map(k=>{ const l=S[k.id].lvl; return `<button class="thdot l-${l}" onclick="tStudent('${esc(k.id)}')" aria-label="${esc(k.name)} – ${TH_LVL[l]}"><i>${esc(thInit(k.name))}</i><small><bdi>${esc(thFirst(k.name))}</bdi></small></button>`; }).join('')}</div>
+    <div class="thleg">${['g','o','r','n'].map(l=>`<span><i class="l-${l}"></i>${fT(`${TH_LVL[l]} · ${cnt[l]}`)}</span>`).join('')}</div></div>`;
+  const live=sets.filter(s=>asgLive(s)).sort((a,b)=>String(a.due).localeCompare(String(b.due)));
+  const a0=live[0];
+  const active=a0?(()=>{ const st=asgState(a0), n=st.done.length+st.mid.length+st.none.length||1, w=x=>(x/n*100).toFixed(1);
+    return `<div class="thsec"><div class="thh"><h3>המשימה הפעילה</h3>${live.length>1?`<button class="linkbtn" onclick="thTab('asg')">${live.length===2?fT('עוד משימה אחת ›'):fT(`עוד ${live.length-1} משימות ›`)}</button>`:''}</div>
+      <button class="thasg" onclick="tAsg('${esc(a0.id)}')"><div class="tr1"><b translate="no" dir="auto">${esc(asgTitle(a0))}</b><span class="thdue">${dueTxt(a0.due)}</span></div>
+        <span class="hint">${fT(a0.to==='all'?'כל הכיתה':`${n} תלמידים`)} · ${fT(`${(a0.questions||[]).length} שאלות`)}</span>
+        <div class="thbar" aria-hidden="true"><span style="width:${w(st.done.length)}%;background:#24C78E"></span><span style="width:${w(st.mid.length)}%;background:#FFD66B"></span><span style="width:${w(st.none.length)}%;background:#E3E9F7"></span></div>
+        <span class="thnums"><span>${fT(`סיימו ${st.done.length}`)}</span><span>${fT(`באמצע ${st.mid.length}`)}</span><span>${fT(`לא התחילו ${st.none.length}`)}</span></span></button></div>`; })():'';
+  const R=classReport(history, studs, {days:30}), weak=R.topics.filter(t=>t.avg!=null).slice(0,4);
+  const stand=weak.length?`<div class="thsec"><div class="thh"><h3>איפה הכיתה עומדת</h3><button class="linkbtn" onclick="thTab('rep')">לדוח ›</button></div>
+    ${weak.map(t=>`<button class="thtop" onclick="TR.view='topics';TR.topic=${esc(JSON.stringify(t.name))};thTab('rep')"><span class="tn" translate="no" dir="auto">${esc(t.name)}</span>
+      <span class="tb"><span style="width:${t.avg}%;background:${MCOL[mastLvl(t.avg)]}"></span></span><b><bdi>${t.avg}%</bdi></b></button>`).join('')}</div>`:'';
+  return open+today+glance+active+stand; }
+// the top row of a group's tab: which group (tap → the class picker) and the bell (the requests waiting)
+function thTop(){ if(!TAPP()||!isClassMode()||!document.body.classList.contains('thgroup')) return; const C=window.SFF_CLASS||{}, n=CLS.reqs.filter(r=>r.status==='pending').length;
+  $('topTitle').innerHTML=`<button class="thsel" onclick="openPlaces()" aria-label="${esc(window.sffT?sffT('החלפת קבוצה'):'החלפת קבוצה')}"><bdi translate="no">${esc(C.name||'')}</bdi>${C.subject?` · ${esc(C.subject)}`:''} <span aria-hidden="true">▾</span></button>`;
+  let bell=$('thBell'); if(!bell){ bell=document.createElement('button'); bell.id='thBell'; bell.className='thbell'; bell.onclick=()=>thTab('stud'); $('topTitle').after(bell); }
+  bell.innerHTML=`<span aria-hidden="true">🔔</span>${n?`<i>${n}</i>`:''}`; bell.setAttribute('aria-label', window.sffT?sffT(n?`${n} בקשות ממתינות`:'אין בקשות ממתינות'):(n?`${n} בקשות ממתינות`:'אין בקשות ממתינות')); }
+// the bottom tabs and the floating "new" (the teachers' app)
+function thTab(t){ if(t==='today') go('kids'); else if(t==='rep'){ go('stats'); } else if(t==='stud'){ thStudView(); } else if(t==='asg'){ thAsgView(); } else if(t==='les'){ thLesView(); } }
+function thStudView(){ show('vTStud'); const pend=CLS.reqs.filter(r=>r.status==='pending'); const C=window.SFF_CLASS||{};
+  $('tStudBody').innerHTML=`<div class="card thome">${teacherBody(true)}<div class="actions" style="justify-content:center;margin-top:10px"><button class="btn ghost small" onclick="go('family')">⚙️ הגדרות הקבוצה</button></div></div>`; fillSigs($('tStudBody')); }
+function thAsgView(){ show('vTAsg'); const all=sets.filter(isAsg).sort((a,b)=>(a.ass&&a.ass.closed?1:0)-(b.ass&&b.ass.closed?1:0)||String(a.due).localeCompare(String(b.due)));
+  $('tAsgBody').innerHTML=`<div class="card thome">${teacherAssignments(true)}${all.filter(s=>s.ass&&s.ass.closed).length?`<div class="tsec"><h3>משימות שנסגרו</h3>${all.filter(s=>s.ass&&s.ass.closed).map(s=>`<button class="tasg" onclick="tAsg('${esc(s.id)}')"><div class="tr1"><b translate="no" dir="auto">${esc(asgTitle(s))}</b><span class="hint">נסגרה</span></div></button>`).join('')}</div>`:''}</div>`; }
+/* ---------- the private world: fixed lessons (families/{group}/sched/{kid} = {slots:[{d,t}], from, last, upd} – the teacher only) ---------- */
+const WDS=['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
+const slotAt=(base,sl)=>{ const [hh,mm]=String(sl.t||'00:00').split(':').map(Number); const d=new Date(base); d.setHours(hh||0,mm||0,0,0); d.setDate(d.getDate()+((+sl.d-d.getDay()+7)%7)); return d.getTime(); };
+// the next lesson of a student from now (this week, or the week after – a slot earlier today than now rolls to next week)
+function nextLesson(sc, now=Date.now()){ let best=null; ((sc&&sc.slots)||[]).forEach(sl=>{ let t=slotAt(now,sl); if(t<=now) t+=7*TDAY; if(!best||t<best) best=t; }); return best; }
+// the last lesson: the latest fixed slot that passed, or "there was a lesson today" (marked by hand)
+function prevLesson(sc, now=Date.now()){ let best=(sc&&+sc.last)||0; ((sc&&sc.slots)||[]).forEach(sl=>{ let t=slotAt(now,sl); if(t>now) t-=7*TDAY; if(!(sc.from)||t>=sc.from) best=Math.max(best,t); }); return best||null; }
+function lessonNo(sc, now=Date.now()){ if(!sc||!sc.from) return null; let n=0; ((sc.slots)||[]).forEach(sl=>{ for(let t=slotAt(sc.from,sl); t<=now; t+=7*TDAY) if(t>=sc.from) n++; }); return n+1; }
+const inTxt=ms=>{ const m=Math.round(ms/60000); if(m<60) return `בעוד ${Math.max(1,m)} דקות`; const h=Math.round(m/60); if(h<24) return h===1?'בעוד שעה':h===2?'בעוד שעתיים':`בעוד ${h} שעות`; const d=Math.round(h/24); return d===1?'מחר':`בעוד ${d} ימים`; };
+const dayLbl=t=>{ const d=new Date(t), n=new Date(); const same=(a,b)=>a.toDateString()===b.toDateString(); const tm=new Date(n.getTime()+TDAY);
+  return same(d,n)?'היום':same(d,tm)?'מחר':`ביום ${WD[d.getDay()]}`; };
+const hhmm=t=>{ const d=new Date(t); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); };
+function streakDays(g, now=Date.now()){ const days=new Set(g.map(h=>new Date(h.at).toDateString())); let n=0, d=new Date(now); if(!days.has(d.toDateString())) d=new Date(now-TDAY);
+  while(days.has(d.toDateString())){ n++; d=new Date(d.getTime()-TDAY); } return n; }
+// since the last lesson: games, right answers, days in a row, the weakest and the strongest topic
+function sinceLesson(kid, sc, now=Date.now()){ const p=prevLesson(sc, now)||0, g=history.filter(h=>h.kidId===kid&&h.at>p).sort((a,b)=>b.at-a.at);
+  const m=kidMastery(g), ts=Object.entries(m).sort((a,b)=>a[1].pct-b[1].pct), w=ts[0], s=ts.filter(([,x])=>x.pct>=MAST_HI).pop();
+  return {prev:p||null, games:g.length, pct:thPct(thSum(g,'right'),thSum(g,'n')), streak:streakDays(g, now), weak:w&&w[1].pct<MAST_HI?{t:w[0], bad:Math.round(w[1].n-w[1].r), n:Math.round(w[1].n)}:null, strong:s?s[0]:null, list:g}; }
+function thPrivate(){
+  const C=window.SFF_CLASS||{}, studs=trStudents(), now=Date.now(), S=CLS.sched||{};
+  const nx=studs.map(k=>({k, t:nextLesson(S[k.id], now)})).filter(x=>x.t).sort((a,b)=>a.t-b.t)[0];
+  let open;
+  if(!nx) open=`<div class="thopen"><div class="thtx"><h2>מתי השיעורים?</h2><p>קובעים לכל תלמיד/ה שיעור קבוע – ואז כאן יופיע השיעור הבא, ומה כדאי לעבוד עליו בו.</p></div>
+    <div class="thbtns"><button class="btn" onclick="thTab('les')">קביעת שיעור קבוע</button></div></div>`;
+  else { const k=nx.k, sc=S[k.id], L=sinceLesson(k.id, sc, now), no=lessonNo(sc, now);
+    open=`<div class="thopen"><div class="thtx"><span class="thdate">${fT(`השיעור הבא · ${dayLbl(nx.t)} ${hhmm(nx.t)} · ${inTxt(nx.t-now)}`)}</span>
+      <div class="thwho"><span class="thav">${esc(thInit(k.name))}</span><div><h2><bdi>${esc(k.name)}</bdi></h2><span>${fT(`כיתה ${GRADES[+(k.grade??C.grade)||0]}${C.subject?` · ${C.subject}`:''}${no?` · שיעור ${no}`:''}`)}</span></div></div>
+      <p class="thsince">${fT(`מאז השיעור הקודם: ${L.games} משחקים${L.pct!=null?` · ${L.pct}% נכונות`:''}${L.streak===1?' · יום אחד ברצף':L.streak?` · ${L.streak} ימים ברצף`:''}`)}</p>
+      ${L.weak?`<p>${fT(`כדאי לעבוד היום על ${L.weak.t} – טעה/תה ב-${L.weak.bad} מתוך ${L.weak.n}.${L.strong?` שולט/ת כבר ב${L.strong}.`:''}`, L.weak.t, L.strong)}</p>`:L.games?'<p>הכול יושב – אפשר להתקדם לחומר חדש.</p>':'<p>עוד לא תרגל/ה מאז השיעור הקודם.</p>'}</div>
+      <div class="thbtns"><button class="btn" onclick="thMist('${esc(k.id)}')">הטעויות לשיעור</button><button class="btn ghost" onclick="thNote('${esc(k.id)}')">הערה לשיעור</button></div></div>`; }
+  const wk=[0,1,2,3,4].map(d=>{ const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k, t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
+    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi>${esc(thFirst(x.k.name))}</bdi><small><bdi>${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('');
+  const week=`<div class="thsec"><div class="thh"><h3>השבוע שלי</h3><button class="linkbtn" onclick="thTab('les')">שיעורים ›</button></div><div class="thweek">${wk}</div></div>`;
+  const cards=studs.map(k=>{ const g=history.filter(h=>h.kidId===k.id).sort((a,b)=>b.at-a.at), last=g[0], m=kidMastery(g.filter(h=>h.at>=now-14*TDAY)), xs=Object.values(m);
+    const pct=xs.length?Math.round(xs.reduce((s,x)=>s+x.pct,0)/xs.length):0, idleD=last?Math.floor((now-last.at)/TDAY):null;
+    const w1=thWeek(history,[k],now), stuck=classAttention(history,[k],now).stuck.length;
+    const tag=!last||idleD>=7?['n','לא תרגל/ה']:stuck?['r','נתקע/ה']:w1.trend!=null&&w1.trend>=5?['g','משתפר/ת']:['o','יציב/ה'];
+    const line=!last?'עוד לא תרגל/ה':idleD>=2?fT(`לא תרגל/ה ${idleD} ימים`):fT(`תרגל/ה ${idleD===0?'היום':'אתמול'} · ${trName(last.topic,last)}`, trName(last.topic,last));
+    return `<button class="thkid" onclick="tStudent('${esc(k.id)}')"><span class="thkr">${thRing(pct,52,'#5B47D6','#EDE9FF',6)}<b><bdi>${pct}%</bdi></b></span><span class="thtt"><b><bdi>${esc(k.name)}</bdi></b><span>${line}</span></span><span class="thtag g-${tag[0]}">${tag[1]}</span></button>`; }).join('');
+  const kidsSec=`<div class="thsec"><div class="thh"><h3>${fT(`התלמידים · ${studs.length}`)}</h3><button class="linkbtn" onclick="inviteStudents()">הזמנת תלמיד/ה ›</button></div>${cards}</div>`;
+  const month=new Date(); month.setDate(1); month.setHours(0,0,0,0); const noUpd=studs.filter(k=>!((S[k.id]||{}).upd>=month.getTime()));
+  const upd=noUpd.length?`<div class="thsec"><div class="thtodo t-upd"><span class="thi" aria-hidden="true">💬</span><div class="thtt"><b>${noUpd.length===1?'הורה אחד עוד לא קיבל/ה עדכון החודש':fT(`${noUpd.length} הורים עוד לא קיבלו עדכון החודש`)}</b><span>עדכון קצר מוכן – עורכים ושולחים בוואטסאפ</span></div><button class="btn small" onclick="thUpd()">לעדכונים</button></div></div>`:'';
+  return open+week+kidsSec+upd; }
+// the mistakes since the last lesson – to go over in the lesson
+function thMist(kid){ const k=kidById(kid), L=sinceLesson(kid, (CLS.sched||{})[kid]), out=[], seen=new Set();
+  L.list.forEach(h=>{ const set=sets.find(s=>s.id===h.setId); if(!set||!Array.isArray(h.qr)||h.mode==='memory') return;
+    qrEntries(set,h).forEach(({i,ok,pick})=>{ const q=set.questions[i]; if(!q||ok||seen.has(tkey(q.question))) return; seen.add(tkey(q.question)); out.push({q, pick}); }); });
+  tDialog(`<h2>הטעויות לשיעור · <bdi>${esc(k?k.name:'')}</bdi></h2><p class="hint">מאז השיעור הקודם${L.prev?` (${fmtDT(L.prev)})`:''} · <bdi>${out.length}</bdi> שאלות</p>
+    ${out.map(({q,pick})=>`<div class="mrow"><div dir="auto" translate="no">${esc(q.question)}</div><div class="mans bad"><span>✗</span> <span dir="auto" translate="no">${esc(Number.isInteger(pick)?q.options[pick]:'')}</span></div><div class="mans ok"><span>✓</span> <span dir="auto" translate="no">${esc(q.options[q.answer])}</span></div></div>`).join('')||'<p>אין טעויות מאז השיעור הקודם 🎉</p>'}
+    <div class="actions" style="justify-content:center"><button class="btn ghost small" onclick="thLessonDone('${esc(kid)}')">✓ היה שיעור היום</button></div>`); }
+function thNote(kid){ const k=kidById(kid); tDialog(`<h2>📝 הערה לשיעור · <bdi>${esc(k?k.name:'')}</bdi></h2><p class="hint">רק את/ה רואה</p>
+  <textarea id="tNote" data-kid="${esc(kid)}" maxlength="2000" rows="5" oninput="this.dataset.touched=1"></textarea><button class="btn" onclick="tNoteSave('${esc(kid)}')">שמירה</button>`); tNoteLoad(kid); }
+async function schedSave(kid, patch){ const cur=(CLS.sched||{})[kid]||{}, d={slots:cur.slots||[], from:cur.from||Date.now(), last:cur.last||0, upd:cur.upd||0, ...patch};
+  d.slots=(d.slots||[]).slice(0,7).map(s=>({d:+s.d, t:String(s.t).slice(0,5)}));
+  try{ await DB.doc('sched/'+kid).set(d); (CLS.sched=CLS.sched||{})[kid]=d; rerender(); return true; }catch(e){ toast('⚠️ '+(e.code||e.message)); return false; } }
+function thLessonDone(kid){ schedSave(kid,{last:Date.now()}).then(ok=>{ if(ok){ tClose(); toast('✓ נשמר'); } }); }
+// the fixed lessons of a student (in the student's card and in "שיעורים")
+function schedEditor(kid){ const sl=((CLS.sched||{})[kid]||{}).slots||[];
+  return `<div class="tsched" data-kid="${esc(kid)}"><b>🗓 שיעור קבוע</b>${sl.map((s,i)=>`<div class="tslot"><span>יום ${WD[+s.d]} · <bdi>${esc(s.t)}</bdi></span><button class="linkbtn" aria-label="הסרה" onclick="schedDel('${esc(kid)}',${i})">✕</button></div>`).join('')||'<p class="hint">עוד לא נקבע</p>'}
+    <div class="tslot add"><select id="sd_${esc(kid)}" aria-label="יום">${WD.slice(0,6).map((w,i)=>`<option value="${i}">${w}</option>`).join('')}</select><input id="st_${esc(kid)}" type="time" value="17:00" aria-label="שעה"><button class="btn small" onclick="schedAdd('${esc(kid)}')">＋ הוספה</button></div></div>`; }
+function schedAdd(kid){ const d=+$('sd_'+kid).value, t=$('st_'+kid).value||'17:00', cur=((CLS.sched||{})[kid]||{}).slots||[];
+  schedSave(kid,{slots:[...cur,{d,t}]}).then(ok=>{ if(ok&&!$('tDlg')?.classList.contains('hidden')&&$('tDlg').querySelector('.tsched')) tStudent(kid); if(ok&&!$('vTLes').classList.contains('hidden')) thLesView(); }); }
+function schedDel(kid,i){ const cur=[...(((CLS.sched||{})[kid]||{}).slots||[])]; cur.splice(i,1);
+  schedSave(kid,{slots:cur}).then(ok=>{ if(ok&&!$('tDlg')?.classList.contains('hidden')&&$('tDlg').querySelector('.tsched')) tStudent(kid); if(ok&&!$('vTLes').classList.contains('hidden')) thLesView(); }); }
+function thLesView(){ show('vTLes'); const studs=trStudents();
+  $('tLesBody').innerHTML=`<div class="card thome"><div class="thsec"><h3>השבוע שלי</h3><div class="thweek">${[0,1,2,3,4].map(d=>{ const S=CLS.sched||{}; const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k,t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
+    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi>${esc(thFirst(x.k.name))}</bdi><small><bdi>${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('')}</div></div>
+    <div class="thsec"><h3>השיעורים הקבועים</h3>${studs.map(k=>`<div class="thles"><b><bdi>${esc(k.name)}</bdi></b>${schedEditor(k.id)}</div>`).join('')||'<p class="hint">עוד אין תלמידים</p>'}</div></div>`; }
+// the parents' monthly update: a short text per student, ready to edit, sent by WhatsApp (to the number the parent gave, if any)
+function thUpdText(k){ const g=history.filter(h=>h.kidId===k.id&&h.at>=Date.now()-30*TDAY), m=kidMastery(g.sort((a,b)=>b.at-a.at)), ts=Object.entries(m).sort((a,b)=>b[1].pct-a[1].pct);
+  const good=ts.filter(([,x])=>x.pct>=MAST_HI).slice(0,2).map(([t])=>t), weak=ts.filter(([,x])=>x.pct<MAST_LO).slice(-2).map(([t])=>t);
+  return `שלום 👋 עדכון קצר על ${k.name} החודש:\nתרגל/ה ${g.length} פעמים${ts.length?` – ${ts.slice(0,4).map(([t])=>t).join(', ')}`:''}.\n${good.length?`חזק/ה ב: ${good.join(', ')}.\n`:''}${weak.length?`כדאי לחזק: ${weak.join(', ')}.\n`:''}נמשיך כך 💪`; }
+function thUpd(){ const studs=trStudents(), S=CLS.sched||{};
+  const phone=k=>{ const c=CLS.consents[k.id]||{}; const ps=(c.parents&&c.parents.length?c.parents:[c]); const n=ps.map(p=>String(p&&p.contact||'').replace(/[^\d+]/g,'')).find(x=>x.replace(/\D/g,'').length>=9)||''; return n.replace(/^0/,'972').replace(/^\+/,''); };
+  tDialog(`<h2>💬 עדכון להורים</h2><p class="hint">עורכים ושולחים. נשמר מתי נשלח – כדי לדעת למי עוד לא.</p>
+    ${studs.map(k=>{ const u=(S[k.id]||{}).upd; return `<div class="thupd"><b><bdi>${esc(k.name)}</bdi></b>${u?`<span class="hint">נשלח ${fmtDT(u)}</span>`:''}<textarea id="up_${esc(k.id)}" rows="5" maxlength="1500">${esc(thUpdText(k))}</textarea>
+      <button class="btn small wa" onclick="thUpdSend('${esc(k.id)}','${esc(phone(k))}')">שליחה בוואטסאפ</button></div>`; }).join('')}`); }
+function thUpdSend(kid, ph){ const t=$('up_'+kid).value; window.open(`https://wa.me/${ph}?text=${encodeURIComponent(t)}`,'_blank','noopener'); schedSave(kid,{upd:Date.now()}); }
+/* ---------- a group with no students yet: 3 steps (both worlds) ---------- */
+function thNewGroup(){ const C=window.SFF_CLASS||{}, pend=CLS.reqs.filter(r=>r.status!=='rejected'), studs=trStudents(), hasAsg=sets.some(isAsg);
+  const s2=pend.length>0||studs.length>0, s3=hasAsg, n=1+(s2?1:0)+(s3?1:0);
+  const step=(i,done,t,body)=>`<div class="thstep ${done?'done':''}"><span class="thsn">${done?'✓':`<bdi>${i}</bdi>`}</span><div class="thsb"><b>${t}</b>${body||''}</div></div>`;
+  const rec=(READY_CAT||[]).filter(x=>x.subject===C.subject||!C.subject).sort((a,b)=>Math.abs((+a.grade||0)-(+C.grade||0))-Math.abs((+b.grade||0)-(+C.grade||0))).slice(0,3);
+  if(!READY_CAT) fetch('/share/catalog.json').then(r=>r.ok?r.json():{sets:[]}).then(j=>{ READY_CAT=j.sets||[]; rerender(); }).catch(()=>{ READY_CAT=[]; });
+  return `<div class="thopen"><div class="thtx"><h2>${3-n===0?'הכול מוכן':3-n===1?'עוד צעד אחד והכיתה מתרגלת':'עוד 2 צעדים והכיתה מתרגלת'}</h2>
+      <div class="thprog" aria-label="${n}/3"><span style="width:${n/3*100}%"></span></div><span class="thdate">${fT(`${n} מתוך 3`)}</span></div></div>
+    <div class="thsec">${step(1,true,'פתחת את הקבוצה')}
+      ${step(2,s2,'מזמינים את ההורים',`<div class="thinv"><div id="thQR" class="tqr" aria-label="QR"></div><ol class="hint"><li>ההורה קורא/ת את המכתב</li><li>ממלא/ת וחותמ/ת</li><li>את/ה מאשר/ת – והילד/ה מקבל/ת קישור</li></ol></div>
+        <div class="actions"><a class="btn small wa" id="thWa" target="_blank" rel="noopener" href="#">שליחה בוואטסאפ</a><button class="btn ghost small" onclick="thCopy()">העתקת הקישור</button></div>
+        <span class="hint">הקישור פתוח 30 יום · אפשר לסגור או להחליף אותו בכל רגע</span><button class="linkbtn" onclick="inviteStudents()">ניהול הקישור ›</button>`)}
+      ${step(3,s3,'משימה ראשונה – מוכנה עוד לפני שהתלמידים מצטרפים',`${rec.map(x=>`<button class="threc" onclick="asgOpen();ASG.mode='cat';asgFromCatalog('${esc(x.id)}')"><b translate="no" dir="auto">${esc(String(x.title||x.subject))}</b><span class="hint">${fT(`${x.subject} · כיתה ${GRADES[+x.grade||0]}`)}</span></button>`).join('')}
+        <button class="btn ghost small" onclick="asgOpen();asgAI()">בנייה מהחומר שלכם – ניסיון אחד חינם</button>`)}</div>
+    <div class="thsec thsoon"><h3>מה יופיע כאן בקרוב</h3><div class="thdots dim">${Array.from({length:12},()=>'<span class="thdot l-x"><i></i></span>').join('')}</div>
+      <p class="hint">כל בוקר: מי נתקע, מי לא תרגל ומי התקדם – ומה כדאי לעשות היום, בלחיצה אחת.</p></div>`; }
+let TH_LINK=null;
+async function thLinkFill(){ const C=window.SFF_CLASS||{};
+  try{ if(!TH_LINK) TH_LINK=await cls().link({action:'get'}); }catch(e){ return; }
+  const url=`${location.origin}/?join=${window.__sffFamily.famId}.${TH_LINK.code}`; window.__thUrl=url;
+  const msg=`${EN()?'Hello parents 👋':'שלום הורים 👋'}\n${EN()?`To join "${C.name}" in Study for fun, open the link, read the letter and sign:`:`כדי להצטרף לקבוצה "${C.name}" ב-Study for fun, פתחו את הקישור, קראו את המכתב וחתמו:`}\n${url}`;
+  if($('thWa')) $('thWa').href='https://wa.me/?text='+encodeURIComponent(msg); if($('thQR')&&!$('thQR').innerHTML) qrInto($('thQR'), url); }
+function thCopy(){ if(window.__thUrl) navigator.clipboard?.writeText(window.__thUrl).then(()=>toast('✓ הועתק')); }
 // one assignment: who finished, who is in the middle, who did not start; close / delete
 function tAsg(id){ const s=getSet(id); if(!s) return; const st=asgState(s), tot=roundsTotal(s);
   const grp=(t,l,cls)=>`<div class="tatt ${cls}"><b>${t} · ${l.length}</b>${l.length?`<div class="tnames">${l.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi>${cls==='a-o'?` · ${chDoneFor(s,k.id).size}/${tot}`:''}</button>`).join('')}</div>`:''}</div>`;
@@ -5742,6 +6017,7 @@ function restoreView(){
   const set=st.set&&getSet(st.set), road=st.road&&getSet(st.road);
   switch(st.v){
     case 'vPlaces': openPlaces(); return true;
+    case 'vTStud': case 'vTAsg': case 'vTLes': go('kids'); return true;
     case 'vStats': go('stats'); return true;
     case 'vFamily': go('family'); return true;
     case 'vKid': go('kid'); return true;
@@ -5752,7 +6028,7 @@ function restoreView(){
     default: return false;
   }
 }
-try{ if(window.SFF_APP==='teach'&&!sessionStorage.getItem('sff_view')) openPlaces(); else if(!restoreView()) go(locked()?'kid':'kids'); }catch(e){ go(locked()?'kid':'kids'); }
+try{ if(!restoreView()) go(locked()?'kid':'kids'); }catch(e){ go(locked()?'kid':'kids'); }
 cloudInit().then(()=>{ const m=window.SFF_INVITE_MSG; if(!m) return;
     if(m==='joined'){ toast(`✓ הצטרפת למשפחה של ${esc((window.__sffFamily||{}).famName||'')}`); go('family'); }
     else if(String(m).startsWith('bad')) toast('⚠️ ההזמנה כבר נוצלה או שפג תוקפה – בקשו הזמנה חדשה');

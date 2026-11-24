@@ -64,9 +64,11 @@ const doc = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bearer
   const pt = await page(c1); await pt.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 });
   ok(await pt.evaluate(() => window.SFF_FAMS.length === 2 && window.SFF_FAMS.every(f => f.kind === 'class')), 'the teachers\' app: still the two groups (the family not among them)');
   await pt.close();
-  const pl = await page(await ctx('someone'), APP); await pl.waitForSelector('#fbTeach', { timeout: 15000 }); await pl.click('#fbTeach');
+  const pl = await page(await ctx('someone'), APP); await pl.waitForSelector('#fbTeachAd', { timeout: 15000 });
+  ok(await pl.evaluate(() => { const v = x => { const e = document.querySelector(x); return !!e && e.offsetParent !== null; }; return v('#fbKid') && v('#fbGo') && !v('#fbTeach') && /מורה\? יש לנו אפליקציה בשבילך/.test(document.querySelector('.fbad').innerText); }), 'the family app\'s sign-in: a kid or a parent only, and an invitation for teachers below');
+  await pl.screenshot({ path: `${OUT}/t_family_login_he.png` }); await pl.click('#fbTeachAd');
   await pl.waitForURL(/\/teach$/, { timeout: 10000 }).catch(() => {});
-  ok(/\/teach$/.test(pl.url()), 'the family app\'s "I\'m a teacher": to the teachers\' app (' + pl.url().replace(APP, '/') + ')');
+  ok(/\/teach$/.test(pl.url()), 'the teachers\' invitation: to the teachers\' app (' + pl.url().replace(APP, '/') + ')');
 
   console.log('4. a parent with a family signs in as a teacher');
   const cm = await ctx('mom'), pm = await page(cm, APP);

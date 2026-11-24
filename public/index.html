@@ -1963,7 +1963,11 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         const g = el.querySelector('#fbGo'); g.classList.add('teach'); g.innerHTML = '<span class="e">🧑‍🏫</span><b>כניסה עם Google</b><span class="hint">למורים ולמורים פרטיים</span>';   /* one card: everyone here signs in as a teacher */
         el.querySelector('.fbwho').insertAdjacentHTML('afterend', '<a class="fbother" href="/">👨‍👩‍👧 הורה? לאפליקציה למשפחות ›</a>');
         el.querySelector('.fbwho').insertAdjacentHTML('beforeend', '<div class="hint fbtsub">כיתה, קבוצה או תלמידים פרטיים – וגם מורה פרטי/ת שמשפחה הזמינה</div>'); }
-      else el.querySelector('.fbwho').insertAdjacentHTML('afterend', '<a class="fbother" href="/teach">🧑‍🏫 מורה? לאפליקציה למורים ›</a>');
+      /* the family app: a kid or a parent only – teachers are invited to their own app, below (the owner's decision, 27.11) */
+      else { el.querySelector('#fbTeach').classList.add('hidden'); el.querySelector('.fbwho').classList.add('two');
+        el.querySelector('#fbErr').insertAdjacentHTML('afterend', `<div class="fbad"><span class="e" aria-hidden="true">🧑‍🏫</span><b>מורה? יש לנו אפליקציה בשבילך</b>
+          <span class="t">תרגול חוויתי במקום שיעורי בית – לכיתה או לתלמידים פרטיים. רואים מי תרגל, מי נתקע ומה כדאי לעשות היום.</span>
+          <a id="fbTeachAd" href="/teach">לאפליקציה למורים ›</a></div>`); }
       document.body.appendChild(el);
       el.querySelector('#fbKid').onclick = () => { el.querySelector('#fbKidMsg').classList.remove('hidden'); el.querySelector('#fbKid').classList.add('on'); el.querySelector('#fbGo').classList.remove('on'); el.querySelector('#fbTeach').classList.remove('on'); };
       // parent or teacher: the same sign-in; the choice is kept until the account opens (a teacher gets no empty family)
@@ -2086,6 +2090,10 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   html.wpriv body{--blue:#5B47D6;--blue-d:#43329F;--sky:#F1EEFF;--lilac:#B9A7FF}   /* the private students' world: purple */
   #dFams h4.dworld.school{color:#1E4FD6} #dFams h4.dworld.private{color:#5B47D6} #dFams .dadd{margin-top:10px}
   .dplace .dl{display:flex;flex-direction:column;gap:1px;text-align:start} .dplace .dl small{font-size:.78em;color:var(--muted,#5b6478);font-weight:500}
+  #fbLogin .fbwho.two{grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,340px)}
+  #fbLogin .fbad{margin-top:18px;width:min(100%,380px);box-sizing:border-box;background:#EDE9FF;border:2px solid #5B47D6;border-radius:22px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;text-align:start}
+  #fbLogin .fbad .e{font-size:38px;grid-row:span 2} #fbLogin .fbad b{font-size:1.02em;color:var(--ink)} #fbLogin .fbad .t{font-size:.84em;color:#3B2E86;line-height:1.4}
+  #fbLogin .fbad a{grid-column:1/-1;margin-top:8px;background:#5B47D6;color:#fff;text-align:center;border-radius:14px;padding:12px;font-weight:700;text-decoration:none;box-shadow:0 4px 0 #2A2068;min-height:44px;box-sizing:border-box}
   #fbLogin .fbother{display:block;margin-top:12px;font-weight:700;color:var(--blue,#2F6BFF);text-decoration:none}
   #fbLogin .fbbox{max-width:100%}
   #fbLogin .fbcard.teach{background:#EDE9FF}

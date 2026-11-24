@@ -62,7 +62,10 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(names === 'דנה המורה:tutor, סבתא רותי:helper', 'adults: ' + names);
   const tutorUid = await T.p.evaluate(() => window.SFF_UID);
   await O.p.evaluate(async u => window.__sffFamily.remove(u), tutorUid);
-  await T.p.reload({ waitUntil: 'load' }); await T.p.waitForFunction(() => window.SFF_ROLE); await T.p.waitForTimeout(1000);
+  // (the invitation opened the teachers' app: with no place left there, it asks for a first group – the family app has her own family)
+  await T.p.reload({ waitUntil: 'load' }); await T.p.waitForSelector('#tsClass', { timeout: 30000 }).catch(() => {});
+  ok(await T.p.evaluate(() => window.SFF_APP === 'teach' && !!document.getElementById('tsClass') && !!document.getElementById('tsFam')), 'the removed tutor, in the teachers\' app: no place left – a first group, or the family app');
+  await T.p.goto(APP, { waitUntil: 'load' }); await T.p.waitForFunction(() => window.SFF_ROLE); await T.p.waitForTimeout(1000);
   ok(await T.p.evaluate(() => window.__sffFamily.famId) === tutorUid, 'the removed tutor is back to her own family only');
 
   console.log('6. the kid\'s phone still works');

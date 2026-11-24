@@ -130,7 +130,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(!(await pt.$('#intro')) && await pt.evaluate(() => !document.getElementById('vKids').classList.contains('hidden')), '…opens the students\' screen');
   const ut = await get(`users/${await pt.evaluate(() => window.SFF_UID)}`);
   ok(ut && ut.introTutor > 0 && !('intro' in ut) && !('introTeacher' in ut), 'kept in users/{uid}.introTutor');
-  const pt2 = await page(ct); await pt2.waitForTimeout(2500); if (await pt2.$('#fbGo')) await pt2.click('#fbGo'); await pt2.waitForFunction(() => window.SFF_ROLE === 'tutor', null, { timeout: 25000 }); await pt2.waitForTimeout(4000);
+  const pt2 = await page(ct, APP + 'teach'); await pt2.waitForTimeout(2500);   // the tutor's place is in the teachers' app if (await pt2.$('#fbGo')) await pt2.click('#fbGo'); await pt2.waitForFunction(() => window.SFF_ROLE === 'tutor', null, { timeout: 25000 }); await pt2.waitForTimeout(4000);
   ok(!(await pt2.$('#intro')), 'opened again: no intro');
   await pt2.evaluate(() => { openHowItWorks(); }); await pt2.waitForTimeout(400); s = await shown(pt2);
   ok(s && s.key === 't5' && s.n === 1, '☰ → איך זה עובד: the tutor\'s last screen');

@@ -1988,6 +1988,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   .plcard.priv .plico{background:#EDE9FF} .pltx{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0} .pltx b{font-size:1.08em} .pltx small{color:var(--ink2);font-size:.85em}
   .pltx .pln{color:#0B6B4A;font-weight:700} .pltx .pln.none{color:var(--ink2);font-weight:500} .plnew{border:2px dashed #AFC3EA;border-radius:16px;background:transparent;padding:12px;font:inherit;font-weight:700;color:var(--ink2);cursor:pointer}
   .pladd{display:block;margin:16px auto 0}
+  .tdtop{display:flex;justify-content:space-between;align-items:center} .tdtop .tback{font-weight:700}
   html.wpriv body{--blue:#5B47D6;--blue-d:#43329F;--sky:#F1EEFF;--lilac:#B9A7FF}   /* the private students' world: purple */
   #dFams h4.dworld.school{color:#1E4FD6} #dFams h4.dworld.private{color:#5B47D6} #dFams .dadd{margin-top:10px}
   .dplace .dl{display:flex;flex-direction:column;gap:1px;text-align:start} .dplace .dl small{font-size:.78em;color:var(--muted,#5b6478);font-weight:500}
@@ -2337,6 +2338,7 @@ function chrome(v){
   [['bnKids','vKids'],['bnStats','vStats'],['bnFam','vFamily'],['knHome','vKid'],['knMe','vMe']].forEach(([b,w])=>$(b)?.classList.toggle('on',(NAV_STACK[0]===w&&NAV_STACK.length===1)||v===w));
 }
 function goBack(){
+  if(TAPP()&&NAV_STACK[NAV_STACK.length-1]==='vStats'&&typeof TR!=='undefined'&&TR.topic){ TR.topic=null; renderTeacherStats(); return; }   /* a topic's page → the topics */
   if(TAPP()&&NAV_STACK.length<=1&&GROUP_ROOTS.includes(NAV_STACK[0])) return openPlaces();
   const from=NAV_STACK.pop(); const t=NAV_STACK.pop()||'vKids';
   if(t==='vKids' && from==='vReview') closeReview();          // back on the card of the kid this practice set belongs to
@@ -2345,6 +2347,22 @@ function goBack(){
   else if(t==='vRoad'&&typeof ROAD_SET!=='undefined'&&getSet(ROAD_SET)) openRoad(ROAD_SET);
   else go(document.body.classList.contains('kidside')?'kid':'kids');
 }
+// the back that the phone's own back button does (the teachers' app): close what is open on top, else one screen back;
+// false = nothing to go back to (the class picker) – the phone then leaves the app as usual
+function backAction(){
+  if(!$('sideMenu').classList.contains('hidden')){ closeMenu(); return true; }
+  if(typeof SURE_RES!=='undefined'&&SURE_RES){ sureAns(false); return true; }
+  if($('intro')) { const k=$('intro').querySelector('.iskip'); if(k) k.click(); else $('intro').remove(); return true; }   /* as "דלג" */
+  const td=$('tDlg'); if(td&&!td.classList.contains('hidden')){ tBack(); return true; }
+  for(const id of ['moreDlg','delAccDlg','linkDlg','invDlg']) if($(id)&&!$(id).classList.contains('hidden')){ $(id).classList.add('hidden'); return true; }
+  const ts=document.querySelector('#fbLogin.tsetup'); if(ts){ const b=ts.querySelector('#tsCancel,#tsBack'); if(b){ b.click(); return true; } return false; }
+  if(!$('topBack').classList.contains('hidden')){ goBack(); return true; }
+  return false;
+}
+(function phoneBack(){ if(window.SFF_APP!=='teach') return; const H=window.history;
+  const arm=()=>{ try{ if(!(H.state&&H.state.sffBack)) H.pushState({sffBack:1},''); }catch(e){} };
+  window.addEventListener('popstate',()=>{ let done=false; try{ done=backAction(); }catch(e){} if(done) arm(); else try{ H.back(); }catch(e){} });
+  arm(); })();
 function show(v){
   try{ chrome(v); }catch(e){}
   ['vPlaces','vProfile','vTopics','vKids','vWizard','vBuild','vReview','vKid','vRoad','vMe','vCat','vFamily','vModes','vGame','vEnd','vAdmin','vStats','vUsers'].forEach(x=>$(x).classList.toggle('hidden',x!==v));
@@ -5355,8 +5373,10 @@ function tStudent(kid){ const k=kidById(kid), c=CLS.consents[kid]||{}; if(!k) re
 async function tRemove(kid){ const k=kidById(kid); if(!(await askSure({ico:'🗑',title:`להוציא את ${k?k.name:''} מהקבוצה?`,text:'הקישור של התלמיד/ה יפסיק לעבוד, וההתקדמות בקבוצה תימחק.',yes:'הוצאה',no:'ביטול',danger:true}))) return;
   await tCall('revoke',{kidId:kid}).then(tClose,()=>{}); }
 function tDialog(html){ let d=$('tDlg'); if(!d){ d=document.createElement('div'); d.id='tDlg'; d.onclick=e=>{ if(e.target===d) tClose(); }; document.body.appendChild(d); }
-  d.innerHTML=`<div class="card herocard tdlg"><div style="display:flex;justify-content:flex-end"><button class="btn ghost small" onclick="tClose()" aria-label="סגירה">✕</button></div>${html}</div>`; d.classList.remove('hidden'); }
+  d.innerHTML=`<div class="card herocard tdlg"><div class="tdtop"><button class="linkbtn tback" onclick="tBack()">› חזרה</button><button class="btn ghost small" onclick="tClose()" aria-label="סגירה">✕</button></div>${html}</div>`; d.classList.remove('hidden'); }
 function tClose(){ $('tDlg')?.classList.add('hidden'); }
+/* a dialog's back: its own "back a step" when it has one (the new assignment's steps), else close it */
+function tBack(){ const d=$('tDlg'); const step=d&&[...d.querySelectorAll('.linkbtn:not(.tback)')].find(b=>/^\s*›\s*חזרה\s*$/.test(b.textContent)||/^\s*›\s*Back\s*$/i.test(b.textContent)); if(step) step.click(); else tClose(); }
 /* ---------- a group's teacher: what was learned, by topic (stage 3) ----------
    Everything here is worked out on the teacher's phone from the students' progress it already reads (live: each game a
    student finishes shows up at once) – nothing is sent anywhere. A student's mastery of a topic = the right answers in
@@ -5426,6 +5446,7 @@ function trCounts(t){ return `${t.g} שולטים · ${t.o} בדרך · ${t.r} �
 // the report screen (the "מעקב" tab of a group)
 function renderTeacherStats(){
   const el=$('tReport'); if(!el) return;
+  if(TAPP()&&!$('vStats').classList.contains('hidden')){ const t=TR.topic?'‹ חזרה':'‹ הקבוצות'; $('topBack').textContent=window.sffT?sffT(t):t; }
   const studs=trStudents();
   if(!studs.length){ el.innerHTML=`<div class="card center"><div class="big">📊</div><h3 style="margin:6px 0">עוד אין תלמידים בקבוצה</h3><p class="sub" style="margin:0">כשתלמידים יצטרפו ויתרגלו – יופיע כאן איך החומר נקלט, נושא אחרי נושא.</p></div>`; return; }
   const subjs=[...new Set(history.filter(h=>studs.some(k=>k.id===h.kidId)).map(h=>h.subject).filter(Boolean))];

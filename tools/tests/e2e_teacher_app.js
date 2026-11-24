@@ -96,6 +96,26 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   await T3.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'private' && !document.getElementById('vKids').classList.contains('hidden'), null, { timeout: 25000 });
   ok(true, 'tap a card: into that group (its home)');
   await T3.close();
+  // back, everywhere (the owner's request): the phone's back button and a back on every screen and dialog
+  await T.evaluate(() => enterPlace(window.__sffFamily.famId)); await T.waitForTimeout(500);
+  await T.goBack(); await T.waitForTimeout(600);
+  ok(await T.evaluate(() => !document.getElementById('vPlaces').classList.contains('hidden') && location.pathname === '/teach'), 'the phone\'s back in a group: to the class picker (not out of the app)');
+  await T.evaluate(() => enterPlace(window.__sffFamily.famId)); await T.waitForTimeout(400);
+  await T.evaluate(() => openMenu()); await T.waitForTimeout(300); await T.goBack(); await T.waitForTimeout(500);
+  ok(await T.evaluate(() => document.getElementById('sideMenu').classList.contains('hidden') && !document.getElementById('vKids').classList.contains('hidden')), 'the phone\'s back with ☰ open: closes the menu only');
+  await T.evaluate(() => { asgOpen(); }); await T.waitForSelector('#tDlg:not(.hidden) .tback', { timeout: 8000 });
+  ok(await T.evaluate(() => /חזרה/.test(document.querySelector('#tDlg .tback').textContent)), 'the new assignment: "› חזרה" at its top');
+  await T.click('#tDlg .tback'); await T.waitForTimeout(300);
+  ok(await T.evaluate(() => document.getElementById('tDlg').classList.contains('hidden')), '…on its first step it closes the dialog');
+  // a dialog with its own "back a step": the top back does that step (not close)
+  await T.evaluate(() => { window.__stepBack = 0; tDialog('<p>שלב 2</p><button class="linkbtn" onclick="window.__stepBack=1">› חזרה</button>'); }); await T.click('#tDlg .tback'); await T.waitForTimeout(200);
+  ok(await T.evaluate(() => window.__stepBack === 1 && !document.getElementById('tDlg').classList.contains('hidden')), 'a dialog with steps: the top "› חזרה" goes one step back');
+  await T.evaluate(() => tDialog('<p>כרטיס תלמיד</p>')); await T.goBack(); await T.waitForTimeout(500);
+  ok(await T.evaluate(() => document.getElementById('tDlg').classList.contains('hidden') && !document.getElementById('vKids').classList.contains('hidden')), 'the phone\'s back on a dialog (no steps): closes it');
+  await T.evaluate(() => { go('stats'); TR.topic = 'x'; renderTeacherStats(); }); await T.waitForTimeout(300);
+  const tb = await T.evaluate(() => document.getElementById('topBack').textContent);
+  await T.evaluate(() => goBack()); await T.waitForTimeout(300);
+  ok(/חזרה/.test(tb) && await T.evaluate(() => TR.topic === null && !document.getElementById('vStats').classList.contains('hidden')), 'a topic\'s page in the report: the top "‹ חזרה" goes to the topics (' + tb + ')');
   await T.evaluate(() => go('kids')); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/ta_home_school.png` });
 
   console.log('2. the same teacher in the family app');

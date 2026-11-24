@@ -4960,7 +4960,7 @@ Object.assign(INTRO,{
     const opts=(a,on)=>`<div style="display:flex;gap:6px;font-size:12px;font-weight:700;flex-wrap:wrap">${a.map((x,i)=>`<span style="border-radius:10px;padding:6px 10px;${i===on?`background:${P.acc};color:#fff`:`background:${P.light2}`}">${x}</span>`).join('')}</div>`;
     const st=(n,t,body)=>`<div class="icard" style="padding:12px 14px;gap:8px"><div style="display:flex;align-items:center;gap:8px"><span class="iava" style="width:26px;height:26px;background:${P.acc};color:#fff;font-size:13px">${n}</span><b style="font-size:14px">${t}</b></div>${body}</div>`;
     return {bg:P.acc, dark:1, h:640, html:`${iTag(P.tag,'background:rgba(255,255,255,.18)')}
-    <h1 style="font-size:32px">שיעורי בית<br><span style="color:#FFD98A">שבאמת עושים</span></h1>
+    <h1 style="font-size:32px">תרגול חוויתי<br><span style="color:#FFD98A">במקום שיעורי בית</span></h1>
     <p style="color:#E4ECFF">${pv?'שולחים תרגול על מה שלמדתם היום בשיעור – כמשחק – ורואים מי עשה':'שולחים תרגול על מה שלמדתם היום בכיתה – כמשחק – ורואים מי עשה'}</p>
     <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:10px">
       ${st(1,'מה?',opts(['מהקטלוג',...(TSTAGE.classAI?['מצילום החומר']:[]),'תרגול קיים'],0)+'<div style="font-size:12px;color:#4A4870">אנגלית ד׳ · <span translate="no">Unit 4 – My House</span></div>')}

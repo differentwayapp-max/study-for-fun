@@ -227,7 +227,7 @@
     'שולחים קישור להורים': 'Send a link to the parents', 'כל הורה מצרף את הילד שלו, את/ה מאשר/ת': 'Each parent adds their own kid, you approve',
     'מוסיפים תרגול ראשון': 'Add a first practice set', 'שולחים שיעורי בית ראשונים': 'Send the first homework',
     'על מה שלמדתם השבוע – מהקטלוג': 'On what you learned this week – from the catalog', 'על מה שלמדתם השבוע – מהקטלוג או מהחומר שלכם': 'On what you learned this week – from the catalog or your own material',
-    'שיעורי בית': 'Homework', 'שבאמת עושים': 'that really gets done', 'מה?': 'What?', 'למי?': 'Who?', 'מתי?': 'When?', 'מהקטלוג': 'From the catalog', 'מצילום החומר': 'From a photo of the material',
+    'שיעורי בית': 'Homework', 'שבאמת עושים': 'that really gets done', 'תרגול חוויתי': 'Engaging practice', 'במקום שיעורי בית': 'instead of homework', 'מה?': 'What?', 'למי?': 'Who?', 'מתי?': 'When?', 'מהקטלוג': 'From the catalog', 'מצילום החומר': 'From a photo of the material',
     'תרגול קיים': 'An existing set', 'כל הכיתה': 'The whole class', 'כל התלמידים': 'All students', 'קבוצת חיזוק': 'A support group', 'בחירה': 'Pick',
     'עד השיעור הבא': 'By the next lesson', 'השבוע': 'This week', 'סוף היחידה': 'End of the unit', 'לפני מבחן': 'Before a test',
     'דוח קצר להורה נכתב לבד מהנתונים – עורכים ושולחים בוואטסאפ': 'A short report for the parent writes itself from the data – edit and send on WhatsApp'

@@ -119,7 +119,12 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   await T.evaluate(() => go('kids')); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/ta_home_school.png` });
 
   console.log('2. the same teacher in the family app');
-  const T2 = await page(tc, APP); await ready(T2);
+  // (the family app shows only families – the owner's decision, 26.11): a teacher with none gets a choice
+  const T2 = await page(tc, APP); await T2.waitForSelector('#fcTeach', { timeout: 25000 });
+  ok(await T2.evaluate(() => !!document.getElementById('fcFam') && !window.SFF_ROLE), 'the family app, for a teacher with no family: "to the teachers\' app" / "open a family" – no classes');
+  await T2.screenshot({ path: `${OUT}/ta_famchoice_he.png` });
+  await T2.click('#fcFam'); await ready(T2);
+  ok(await T2.evaluate(() => window.SFF_KIND === 'family' && window.SFF_FAMS.length === 1), '"open a family": the teacher\'s own family – the only place in the family app');
   M = await menu(T2);
   ok(await T2.evaluate(() => window.SFF_APP === 'family') && M.other === '/teach' && M.otherIn === 'dGrpAcc' && /לאפליקציה למורים/.test(M.all), '☰ in the family app: "to the teachers\' app" (under account)');
   await shotMenu(T2, 'ta_fam_menu_he.png');

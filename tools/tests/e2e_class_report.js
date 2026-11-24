@@ -28,8 +28,8 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
 
   console.log('1. a group with students, sets and games');
   const tc = await ctx({ google: GOOGLE }); const T = await tc.newPage(); T.on('pageerror', e => errs.push('teacher: ' + e.message));
-  await T.goto(APP, { waitUntil: 'load' });
-  await T.waitForSelector('#fbTeach'); await T.click('#fbTeach'); await T.waitForSelector('#tsClass'); await T.click('#tsClass');
+  await T.goto(APP + 'teach', { waitUntil: 'load' });
+  await T.waitForSelector('#fbGo'); await T.click('#fbGo'); await T.waitForSelector('#tsClass'); await T.click('#tsClass');
   await T.fill('#tsName', "ד'2 – אנגלית"); await T.click('#tsGo'); await T.waitForFunction(() => window.SFF_ROLE && window.SFF_KIND === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1200);
   const cid = await T.evaluate(() => window.__sffFamily.famId);
   // the set and the games are made in the page (the app's own key function), written as the server would (emulator owner)
@@ -141,7 +141,7 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
   console.log('7. screenshots: English, 320 and a wide screen');
   for (const [w, lang, tag] of [[360, 'en', 'en360'], [320, 'he', 'he320'], [1200, 'he', 'wide']]) {
     const c = await ctx({ google: GOOGLE, w, h: w > 900 ? 900 : 760, lang }); const p = await c.newPage(); p.on('pageerror', e => errs.push(tag + ': ' + e.message));
-    await p.goto(APP, { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 20000 }); await p.click('#fbTeach'); await p.waitForFunction(() => window.SFF_KIND === 'class' && typeof trStudents === 'function' && trStudents().length === 6 && history.length > 40, null, { timeout: 30000 }).catch(async () => console.log('    (not ready)', await p.evaluate(() => [window.SFF_KIND, window.SFF_ROLE, typeof trStudents === 'function' && trStudents().length, history.length, sets.length])));
+    await p.goto(APP + 'teach', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo'); await p.waitForFunction(() => window.SFF_KIND === 'class' && typeof trStudents === 'function' && trStudents().length === 6 && history.length > 40, null, { timeout: 30000 }).catch(async () => console.log('    (not ready)', await p.evaluate(() => [window.SFF_KIND, window.SFF_ROLE, typeof trStudents === 'function' && trStudents().length, history.length, sets.length])));
     await p.waitForTimeout(800); await p.evaluate(() => go('kids')); await p.waitForTimeout(500); await p.screenshot({ path: `${OUT}/r_home_${tag}.png`, fullPage: true });
     await p.evaluate(() => go('stats')); await p.waitForTimeout(600); await p.screenshot({ path: `${OUT}/r_topics_${tag}.png`, fullPage: true });
     await p.evaluate(() => { TR.view = 'map'; renderTeacherStats(); }); await p.waitForTimeout(300); await p.screenshot({ path: `${OUT}/r_map_${tag}.png`, fullPage: true });
@@ -157,7 +157,7 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
   {
     const PG = { sub: 'teacherPerf', email: 'teacherperf@t.local', email_verified: true, name: 'מורה' };
     const c0 = await ctx({ google: PG }); const p0 = await c0.newPage(); p0.on('pageerror', e => errs.push('perf: ' + e.message));
-    await p0.goto(APP, { waitUntil: 'load' }); await p0.waitForSelector('#fbTeach'); await p0.click('#fbTeach'); await p0.waitForSelector('#tsClass'); await p0.click('#tsClass');
+    await p0.goto(APP + 'teach', { waitUntil: 'load' }); await p0.waitForSelector('#fbGo'); await p0.click('#fbGo'); await p0.waitForSelector('#tsClass'); await p0.click('#tsClass');
     await p0.fill('#tsName', 'גדולה'); await p0.click('#tsGo'); await p0.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await p0.waitForTimeout(800);
     const big = await p0.evaluate(() => window.__sffFamily.famId); await c0.close();
     // a game like the app writes it: 10 questions, their keys, 1–2 topics
@@ -178,8 +178,8 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
     const url = {}; let fsBytes = 0, allBytes = 0;
     cdp.on('Network.requestWillBeSent', e => { url[e.requestId] = e.request.url; });
     cdp.on('Network.dataReceived', e => { allBytes += e.dataLength; if (/:8080\//.test(url[e.requestId] || '')) fsBytes += e.dataLength; });
-    await p.goto(APP, { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 30000 });
-    const t0 = Date.now(); await p.click('#fbTeach');
+    await p.goto(APP + 'teach', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 30000 });
+    const t0 = Date.now(); await p.click('#fbGo');
     await p.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 60000 }); const tIn = Date.now() - t0;
     await p.waitForFunction(n => typeof history !== 'undefined' && history.length >= n, N * G, { timeout: 180000 }).catch(() => {});
     const tData = Date.now() - t0;

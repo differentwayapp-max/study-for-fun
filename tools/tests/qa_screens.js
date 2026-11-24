@@ -81,8 +81,8 @@ const SCREENS = [
       if (r.wide) findings.push(`${tag} ${name}: page wider than the phone (sideways scroll)`);
       if (r.heb.length) findings.push(`${tag} ${name}: Hebrew left in English: ${r.heb.join(' | ')}`); };
     try {
-      await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 15000 }); await check('t-login');
-      await p.click('#fbTeach'); await p.waitForSelector('#tsClass', { timeout: 20000 }); await check('t-choose');
+      await p.goto('http://localhost:8765/teach', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 15000 }); await check('t-login');
+      await p.click('#fbGo'); await p.waitForSelector('#tsClass', { timeout: 20000 }); await check('t-choose');
       await p.click('#tsClass'); await p.fill('#tsName', lang === 'en' ? 'Grade 4, class 2 – Math' : "ד'2 – חשבון"); await check('t-form');
       await p.click('#tsGo'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(2000); await check('t-home');
       await p.click('#menuBtn'); await p.waitForTimeout(500); await check('t-menu'); await p.evaluate(() => closeMenu());

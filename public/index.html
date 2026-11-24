@@ -1656,8 +1656,19 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       }
       // the teachers' app: only groups and the families that invited this adult as a private tutor (the own family stays in the family app)
       if (TEACH) famInfo.splice(0, famInfo.length, ...famInfo.filter(x => x.kind === 'class' || x.role === 'tutor'));
+      /* the family app: only families – a teacher's classes and private students are in the teachers' app (the owner's decision, 26.11) */
+      else famInfo.splice(0, famInfo.length, ...famInfo.filter(x => x.kind !== 'class' && x.role !== 'tutor'));
+      /* an adult with no family here (a teacher): to the teachers' app, or open a family of their own */
+      if (!TEACH && !famInfo.length) {
+        const c = await familyChoice();
+        if (c === 'teach') { location.replace('/teach'); await new Promise(() => {}); }
+        const own = F.doc(fdb, `families/${uid}`), os = await F.getDoc(own);
+        const tok = os.exists() && os.data().inviteToken || rnd(18);
+        if (!os.exists()) await F.setDoc(own, { inviteToken: tok, createdAt: Date.now(), name: myName });
+        famInfo.push({ id: uid, name: myName, role: 'owner', member: null, token: tok }); LS.setItem(ACT, uid);
+      }
       // a teacher with no group yet (just chose "I'm a teacher", or has nothing else): the first group now
-      if (W.SFF_TEACHER && !famInfo.some(x => x.kind === 'class') && (TEACH ? !famInfo.length : (want === 'teacher' || !famInfo.length))) {
+      if (TEACH && W.SFF_TEACHER && !famInfo.length) {
         for (;;) {
           const o = await teacherSetup(null);
           try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject }, token: '' }); LS.setItem(ACT, cid); W.__sffNewPlace = true; break; }
@@ -1905,6 +1916,19 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     });
   }
   W.sffTeacherSetup = teacherSetup;
+  // the family app, for an adult with no family in it (a teacher): the teachers' app, or a family of their own
+  function familyChoice() {
+    return new Promise(resolve => {
+      const el = document.createElement('div'); el.id = 'fbLogin'; el.className = 'tsetup fchoice';
+      el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">האפליקציה למשפחות</h2>
+        <div class="hint" style="max-width:min(92vw,400px)">כאן הורים מנהלים את התרגול של הילדים שלהם. הכיתות והתלמידים שלך נמצאים באפליקציה למורים.</div>
+        <div class="tsw"><button class="fbcard" id="fcTeach" type="button"><span class="e">🧑‍🏫</span><b>לאפליקציה למורים</b><span class="hint">הכיתות והתלמידים שלי</span></button>
+          <button class="fbcard" id="fcFam" type="button"><span class="e">👨‍👩‍👧</span><b>לפתוח משפחה</b><span class="hint">יש לי ילדים שמתרגלים</span></button></div></div>`;
+      document.getElementById('sffLoad')?.remove(); document.body.appendChild(el);
+      el.querySelector('#fcTeach').onclick = () => { el.remove(); resolve('teach'); };
+      el.querySelector('#fcFam').onclick = () => { el.remove(); resolve('family'); };
+    });
+  }
   function showLogin() {
     return new Promise(resolve => {
       const logo = document.getElementById('logoFull')?.src || '';
@@ -1956,7 +1980,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         } catch (e) { err.textContent = '⚠️ ' + (e.code || e.message); }
       };
       el.querySelector('#fbGo').onclick = () => { pick('parent'); signIn(); };
-      el.querySelector('#fbTeach').onclick = () => { pick('teacher'); signIn(); };
+      el.querySelector('#fbTeach').onclick = () => { location.href = '/teach'; };   /* teachers sign in in their own app */
       const signIn = async () => {
         if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
           el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
@@ -4488,9 +4512,8 @@ function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||'
       box.innerHTML=(WD.includes('school')?sec('school',sch):'')+(WD.includes('private')?sec('private',prv):'')
         +(add.length?`<div class="dcard dadd">${add.map(w=>`<button class="ditem" onclick="newClass('${w}')"><span class="di">➕</span><span class="dl">${w==='private'?'להוסיף גם תלמידים פרטיים':'להוסיף גם כיתות בבית ספר'}</span></button>`).join('')}</div>`:'');
       $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), WD.map(w=>w==='private'?'מורה פרטי/ת':'מורה בבית ספר').join(' · ')].filter(Boolean).join('<br>'); }
-    else if(show) box.innerHTML=`<h4>${T?'הקבוצות והמשפחות':'המשפחות'}</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
-      ${T?`<button class="ditem" onclick="newClass()"><span class="di">➕</span><span class="dl">קבוצה חדשה</span></button>`:''}
-      ${T&&!ownFam?`<button class="ditem" onclick="closeMenu();window.__sffFamily.addOwnFamily()"><span class="di">🏠</span><span class="dl">משפחה משלי (גם הורה)</span></button>`:''}</div>`; }   // a member sees whose family it is – not someone else's name as if it were theirs
+    else if(show&&fams.length>1) box.innerHTML=`<h4>המשפחות</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
+      </div>`; else if(!TA) box.classList.add('hidden'); }   // a member sees whose family it is – not someone else's name as if it were theirs
   if(window.SFF_APP!=='teach') $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), esc(famTxt)].filter(Boolean).join('<br>');
   $('dVer').textContent=(EN()?'Version ':'גרסה ')+(document.querySelector('meta[name="sff-ver"]')?.content||'').replace(/^sff-v/,''); m.classList.remove('hidden'); }
 // the teachers' app's main screen: the classes and groups, by world – tap one to work in it

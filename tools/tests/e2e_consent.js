@@ -36,8 +36,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
 
   console.log('1. a teacher, a group, its link');
   const tc = await ctx({ google: { sub: 'teacherC', email: 'teacherc@t.local', email_verified: true, name: 'דנה לוי' } });
-  const T = await page(tc, APP, 'teacher');
-  await T.waitForSelector('#fbTeach'); await T.click('#fbTeach'); await T.waitForSelector('#tsClass'); await T.click('#tsClass');
+  const T = await page(tc, APP + 'teach', 'teacher');
+  await T.waitForSelector('#fbGo'); await T.click('#fbGo'); await T.waitForSelector('#tsClass'); await T.click('#tsClass');
   await T.fill('#tsName', "ד'2 – אנגלית"); await T.click('#tsGo'); await T.waitForFunction(() => window.SFF_ROLE && window.SFF_KIND === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1500);
   const cid = await T.evaluate(() => window.__sffFamily.famId);
   await T.evaluate(() => inviteStudents()); await T.waitForSelector('#tDlg input.tinyurl', { timeout: 15000 }); await T.waitForTimeout(800);
@@ -171,8 +171,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
     const s3 = await page(c, P3.p.url(), 'shot3'); await s3.waitForTimeout(3500); await s3.screenshot({ path: `${OUT}/c_status_no_${tag}.png` });
     await c.close();
   }
-  { const c = await ctx({ w: 360, h: 720, lang: 'en', google: { sub: 'teacherC', email: 'teacherc@t.local', email_verified: true, name: 'דנה לוי' } }), p = await page(c, APP, 'tEn');
-    await p.waitForSelector('#fbTeach', { timeout: 20000 }); await p.click('#fbTeach'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(2500);
+  { const c = await ctx({ w: 360, h: 720, lang: 'en', google: { sub: 'teacherC', email: 'teacherc@t.local', email_verified: true, name: 'דנה לוי' } }), p = await page(c, APP + 'teach', 'tEn');
+    await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(2500);
     await p.screenshot({ path: `${OUT}/c_teacher_en360.png`, fullPage: true });
     const hebH = await p.evaluate(() => [...document.querySelectorAll('#kidCar h3, #kidCar .btn, #kidCar .cbadge, #kidCar .tempty')].map(e => e.textContent).filter(t => /[\u0590-\u05FF]{2,}/.test(t)));
     ok(!hebH.length, "English: the teacher's home is translated " + JSON.stringify(hebH.slice(0, 3)));

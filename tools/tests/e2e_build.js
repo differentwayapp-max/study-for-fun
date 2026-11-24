@@ -141,7 +141,7 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
     const tc = await b.newContext({ viewport: { width: 390, height: 844 } }); const t = await tc.newPage(); t.on('pageerror', e => errs.push('teacher: ' + e.message));
     await tc.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
       window.SFF_AI_ENABLED = true; window.SFF_TEST_GOOGLE = { sub: 'bldT', email: 'bldt@t.local', email_verified: true, name: 'מורה' }; localStorage.setItem('sff_lang', 'he'); });
-    await t.goto('http://localhost:8765/', { waitUntil: 'load' }); await t.waitForSelector('#fbTeach'); await t.click('#fbTeach'); await t.waitForSelector('#tsClass'); await t.click('#tsClass');
+    await t.goto('http://localhost:8765/teach', { waitUntil: 'load' }); await t.waitForSelector('#fbGo'); await t.click('#fbGo'); await t.waitForSelector('#tsClass'); await t.click('#tsClass');
     await t.fill('#tsName', "ד'2 – אנגלית"); await t.click('#tsGo'); await t.waitForFunction(() => window.SFF_KIND === 'class' && typeof sample !== 'undefined' && sample, null, { timeout: 30000 }); await t.waitForTimeout(1200);
     const cid = await t.evaluate(() => window.__sffFamily.famId), uid = await t.evaluate(() => window.SFF_UID), mk = await t.evaluate(() => monthKeyIL());
     await t.evaluate(() => { openWizard(null); W.subject = 'אנגלית'; wizRender(); }); await t.waitForTimeout(1200);

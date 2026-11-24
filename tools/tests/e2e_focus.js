@@ -122,7 +122,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(await K.evaluate(() => !document.querySelector('#focusCard .fcard') && !document.getElementById('focusNew')), "the kid's phone: no card, no \"חדש!\"");
   await kc.close();
   const tc = await ctx({ google: { sub: 'focusT', email: 'focust@t.local', email_verified: true, name: 'מורה' }, onb: false }); const T = await tc.newPage(); T.on('pageerror', e => errs.push('teacher: ' + e.message));
-  await T.goto(APP, { waitUntil: 'load' }); await T.waitForSelector('#fbTeach'); await T.click('#fbTeach'); await T.waitForSelector('#tsClass'); await T.click('#tsClass'); await T.fill('#tsName', 'ג'); await T.click('#tsGo');
+  await T.goto(APP + 'teach', { waitUntil: 'load' }); await T.waitForSelector('#fbGo'); await T.click('#fbGo'); await T.waitForSelector('#tsClass'); await T.click('#tsClass'); await T.fill('#tsName', 'ג'); await T.click('#tsGo');
   await T.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await T.waitForTimeout(4000);
   ok(await T.evaluate(() => !document.getElementById('focusNew') && focusCardFor({ id: 'x', name: 'x' }) === ''), "a teacher's group: none of it");
   await tc.close();

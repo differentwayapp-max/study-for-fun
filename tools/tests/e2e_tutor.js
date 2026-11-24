@@ -23,6 +23,7 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
       [{ sub: who, email: who + '@test.local', email_verified: true, name: { owner: 'טליה', tutor: 'דנה המורה', old: 'מורה ותיק' }[who] || who }, lang, seed || null]);
     await p.goto(url, { waitUntil: 'load' }); await p.waitForTimeout(2500);
     if (await p.$('#fbGo')) await p.click('#fbGo');
+    await p.waitForTimeout(1500); if (await p.$('#fcFam')) await p.click('#fcFam');   // (the family app, for an adult with no family: open one)
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(2500);
     await p.evaluate(() => document.getElementById('intro')?.remove());
     return { c, p };
@@ -66,7 +67,7 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(await O.p.evaluate(id => !!getSet(id), built), 'the tutor\'s new practice set reached the parent');
 
   console.log('4. English');
-  const TE = await open('tutor', APP, 'en', { sff_active_fam: fam });
+  const TE = await open('tutor', APP + 'teach', 'en', { sff_active_teach: fam });   // a tutor's place: the teachers' app
   ok(await TE.p.evaluate(() => window.SFF_ROLE === 'tutor' && kids.map(k => k.name).join() === 'בן'), 'English: the tutor view');
   await TE.p.evaluate(() => go('kids')); await TE.p.waitForTimeout(800); await TE.p.screenshot({ path: `${OUT}/tutor_home_en.png` });
   await TE.p.evaluate(() => go('stats')); await TE.p.waitForTimeout(800); await TE.p.screenshot({ path: `${OUT}/tutor_stats_en.png` });
@@ -77,7 +78,8 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   const xuid = await X.p.evaluate(() => window.SFF_UID);
   await put(`families/${fam}/members/${xuid}`, { role: 'tutor', name: 'מורה ותיק', kids: ['k1'], invite: 'OLDCODE', at: Date.now() });
   await put(`users/${xuid}`, { fams: [fam] });
-  await X.p.evaluate(f => window.__sffFamily.switchTo(f), fam); await X.p.waitForFunction(() => window.SFF_ROLE === 'tutor', null, { timeout: 20000 }); await X.p.waitForTimeout(3000);
+  await X.p.evaluate(f => localStorage.setItem('sff_active_teach', f), fam); await X.p.goto(APP + 'teach', { waitUntil: 'load' });   // the tutor's place is in the teachers' app
+  await X.p.waitForFunction(() => window.SFF_ROLE === 'tutor', null, { timeout: 20000 }); await X.p.waitForTimeout(3000);
   const msg = await X.p.evaluate(() => document.getElementById('kidCar').innerText);
   ok(/ההורה צריך\/ה לפתוח את האפליקציה פעם אחת/.test(msg) && await X.p.evaluate(() => !kids.length), 'a clear message, no kids, no broken screen');
   await X.p.screenshot({ path: `${OUT}/tutor_wait_he.png` });

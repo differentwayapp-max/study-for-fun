@@ -33,8 +33,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
     return { keys, bad }; };
 
   console.log('1. a class teacher');
-  const c1 = await ctx('introT1', { name: 'דנה לוי' }), p1 = await page(c1);
-  await p1.waitForSelector('#fbTeach', { timeout: 20000 }); await p1.click('#fbTeach'); await p1.waitForSelector('#tsClass', { timeout: 20000 }); await p1.click('#tsClass');
+  const c1 = await ctx('introT1', { name: 'דנה לוי' }), p1 = await page(c1, APP + 'teach');
+  await p1.waitForSelector('#fbGo', { timeout: 20000 }); await p1.click('#fbGo'); await p1.waitForSelector('#tsClass', { timeout: 20000 }); await p1.click('#tsClass');
   await p1.waitForSelector('#intro', { timeout: 8000 }).catch(() => {});
   let s = await shown(p1);
   ok(s && s.key === 's1' && s.n === 6 && /למורה בבית הספר/.test(s.text) && /כל הכיתה מתרגלת/.test(s.text), 'after "מורה לכיתה": the School series, 6 screens (with homework – stage 4): ' + JSON.stringify(s && { key: s.key, n: s.n }));
@@ -53,7 +53,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await p1.evaluate(() => { newClass(); }); await p1.waitForSelector('#tsName', { timeout: 8000 }); await p1.waitForTimeout(600);   // (the world is known: no "which kind?")
   ok(!(await p1.$('#intro')) && !!(await p1.$('#tsName')), 'a second group: straight to the form, no intro');
   await p1.click('#tsCancel').catch(() => {}); await p1.waitForTimeout(300);
-  const p1b = await page(c1); await p1b.waitForTimeout(2500); if (await p1b.$('#fbTeach')) await p1b.click('#fbTeach');
+  const p1b = await page(c1, APP + 'teach'); await p1b.waitForTimeout(2500);
   await p1b.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await p1b.waitForTimeout(2500);
   ok(!(await p1b.$('#intro')), 'opened again: no intro');
   await p1b.evaluate(() => { openHowItWorks(); }); await p1b.waitForTimeout(400); s = await shown(p1b);
@@ -63,8 +63,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await c1.close();
   // 320 wide + English
   for (const [w, lang, sub] of [[320, 'he', 'introT1b'], [360, 'en', 'introT1c']]) {
-    const c = await ctx(sub, { w, h: w === 320 ? 640 : 740, lang }), p = await page(c);
-    await p.waitForSelector('#fbTeach', { timeout: 20000 }); await p.click('#fbTeach'); await p.waitForSelector('#tsClass', { timeout: 20000 }); await p.click('#tsClass'); await p.waitForSelector('#intro', { timeout: 8000 }).catch(() => {});
+    const c = await ctx(sub, { w, h: w === 320 ? 640 : 740, lang }), p = await page(c, APP + 'teach');
+    await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo'); await p.waitForSelector('#tsClass', { timeout: 20000 }); await p.click('#tsClass'); await p.waitForSelector('#intro', { timeout: 8000 }).catch(() => {});
     const r = await walk(p, `it_class_${lang}${w}`);
     ok(r.keys.length === 6 && !r.bad.length, `${lang} ${w}: 6 screens, buttons ≥ 44 px, nothing wider than the screen ${r.bad.join(' ; ')}`);
     if (lang === 'en') { let heb = []; const N = await p.evaluate(() => IN.list.length); for (let i = 0; i < N; i++) { await p.evaluate(i => introGo(i), i); await p.waitForTimeout(400); heb.push(...await p.evaluate(() => document.getElementById('intro').innerText.split('\n').filter(l => /[\u0590-\u05FF]/.test(l)))); }
@@ -73,8 +73,8 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   }
 
   console.log('2. a private teacher');
-  const c2 = await ctx('introT2', { name: 'רון' }), p2 = await page(c2);
-  await p2.waitForSelector('#fbTeach', { timeout: 20000 }); await p2.click('#fbTeach'); await p2.waitForSelector('#tsPriv', { timeout: 20000 }); await p2.click('#tsPriv'); await p2.waitForSelector('#intro', { timeout: 8000 }).catch(() => {});
+  const c2 = await ctx('introT2', { name: 'רון' }), p2 = await page(c2, APP + 'teach');
+  await p2.waitForSelector('#fbGo', { timeout: 20000 }); await p2.click('#fbGo'); await p2.waitForSelector('#tsPriv', { timeout: 20000 }); await p2.click('#tsPriv'); await p2.waitForSelector('#intro', { timeout: 8000 }).catch(() => {});
   s = await shown(p2);
   ok(s && s.key === 's1' && /למורה הפרטי/.test(s.text) && /כל התלמידים שלך מתרגלים/.test(s.text), 'after "מורה פרטי/ת": the private words – ' + (s && s.text.split('\n').slice(1, 4).join(' / ')));
   ok(await p2.evaluate(() => getComputedStyle(document.getElementById('intro')).backgroundColor) === 'rgb(42, 32, 104)', 'purple, like the tutor\'s screens');

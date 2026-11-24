@@ -27,7 +27,7 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
     await c.addInitScript(([E, g, l]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
   const GOOGLE = { sub: 'teacherA4', email: 'teachera4@t.local', email_verified: true, name: 'דנה לוי' };
   const teacher = async (o = {}) => { const c = await ctx({ google: GOOGLE, ...o }), p = await c.newPage(); p.on('pageerror', e => errs.push('teacher: ' + e.message + ' @ ' + String(e.stack || '').split('\n').slice(1, 3).join(' ')));
-    await p.goto(APP, { waitUntil: 'load' }); await p.waitForSelector('#fbTeach', { timeout: 20000 }); await p.click('#fbTeach');
+    await p.goto(APP + 'teach', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo');   // the teachers' app
     if (o.first) { await p.waitForSelector('#tsClass'); await p.click('#tsClass'); await p.fill('#tsName', "ד'2 – אנגלית"); await p.click('#tsGo'); }
     await p.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 30000 }); await p.waitForTimeout(1500); return { c, p }; };
 

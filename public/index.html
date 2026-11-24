@@ -1533,6 +1533,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         let mail = LS.getItem('sff_link_mail');
         if (!mail) mail = prompt(W.sffT ? W.sffT('לאיזה מייל נשלח הקישור?') : 'לאיזה מייל נשלח הקישור?') || '';
         await A.signInWithEmailLink(auth, mail.trim(), location.href); LS.removeItem('sff_link_mail');
+        try { sessionStorage.setItem('sff_fresh', '1'); } catch (e) {}   /* a new sign-in: the explanation screens once more */
       } catch (e) { W.__sffMailErr = String(e.code || e.message || e); }
       W.history.replaceState(null, '', location.origin + W.SFF_HOME);              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
     }
@@ -1576,7 +1577,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       // ---- parent: Google sign-in
       let u = firstUser && !firstUser.isAnonymous ? firstUser : null;
       if (!u && !TEACH && (W.SFF_KID_DEVICE || /^#kid-/.test(location.hash) || LS.getItem('sff_lock'))) { showKidNoLink(); throw new Error('kid device without a family link'); }
-      if (!u) { u = await showLogin(); if (W.onbCover) W.onbCover(); }   // just signed in: no flash of the app before the welcome screens
+      if (!u) { u = await showLogin(); if (W.onbCover) W.onbCover(); try { sessionStorage.setItem('sff_fresh', '1'); } catch (e) {} }   /* (kept through the app's own reloads, used once) */   // just signed in: no flash of the app before the welcome screens
       uid = u.uid; role = 'parent';
       const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => b.toString(16).padStart(2, '0')).join('');
       const myName = u.displayName || (u.email || '').split('@')[0] || 'הורה';
@@ -1872,6 +1873,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         // the first time: the teacher's intro (class / private) before the group's form
         const pick = teach => { let seen = !!W.SFF_INTRO_TEACHER; try { seen = seen || !!LS.getItem('sff_intro_teacher'); } catch (e) {}
           if (seen || !W.sffTeacherIntro || (W.SFF_TEST_GOOGLE && !W.SFF_TEST_ONB)) return step2(teach);
+          try { sessionStorage.removeItem('sff_fresh'); } catch (e) {}   /* shown here – not again once the group opens */
           el.style.display = 'none'; W.sffTeacherIntro(teach).then(() => { el.style.display = ''; step2(teach); }); };
         el.querySelector('#tsClass').onclick = () => pick('class'); el.querySelector('#tsPriv').onclick = () => pick('private');
       };
@@ -5057,6 +5059,18 @@ function onbDecide(joined, uid){
   if(window.SFF_ONB_DONE || introSeen() || $('intro')) return;
   ONB_SHOWN=true; openIntro(false);
 }
+// every sign-in with Google (or an email link) – a parent or a teacher – shows their explanation screens again (the owner's decision, 24.11);
+// just opening the app does not. The flag lives in this tab's session, so the app's own reloads after the sign-in keep it; used once.
+function freshIntro(){
+  let f=false; try{ f=!!sessionStorage.getItem('sff_fresh'); sessionStorage.removeItem('sff_fresh'); }catch(e){}
+  if(!f || $('intro') || window.SFF_KID_DEVICE || window.SFF_JOIN_MODE) return false;
+  if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return false;           // tests: not in the way
+  if(isTutor()){ if(window.SFF_TUTOR_WAIT) return false; TINTRO=true; let n=0;
+    const t=setInterval(()=>{ if((visibleKids().length&&n>=6)||++n>20){ clearInterval(t); if(!$('intro')) openTeacherIntro('tutor'); } },500); return true; }
+  if(isClassMode()){ openTeacherIntro((window.SFF_CLASS||{}).teach==='private'?'private':'class'); return true; }
+  if(['owner','admin'].includes(window.SFF_ROLE)){ ONB_SHOWN=true; openIntro(false); return true; }
+  return false;
+}
 function maybeOnb(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;                 // tests: not in the way
   if(ONB_SHOWN || $('intro') || window.SFF_KID_DEVICE) return;
@@ -5072,7 +5086,7 @@ function maybeKidIntro(){
   try{ if(localStorage.getItem('sff_kid_intro')) return; localStorage.setItem('sff_kid_intro_t','1'); if(localStorage.getItem('sff_kid_intro_t')!=='1') return; localStorage.removeItem('sff_kid_intro_t'); }catch(e){ return; }
   openIntro(true);
 }
-(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(maybeOnb,400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
+(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(()=>{ if(!freshIntro()) maybeOnb(); },400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
   const lab=(id,ico,t)=>{ const b=$(id); if(b) b.innerHTML=`<span>${ico}</span>${t}`; };

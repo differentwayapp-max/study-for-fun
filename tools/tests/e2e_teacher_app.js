@@ -69,9 +69,11 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
     && M.text.indexOf('מדעים') < M.text.indexOf('תלמידים פרטיים') && M.text.indexOf('תלמידים פרטיים') < M.text.indexOf('יום ג'), '☰: both worlds apart – the class under school, the private group under private');
   ok(/מורה בבית ספר · מורה פרטי\/ת/.test(M.sub), 'who you are: both worlds – ' + M.sub.replace(/\s+/g, ' '));
   await shotMenu(T, 'ta_menu2_he.png');
+  await T.evaluate(() => { closeMenu(); go('kids'); }); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/ta_home_private.png` });
   ok(await T.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.worlds?.sort().join() === 'private,school'), 'the account keeps both worlds (users/{uid}.worlds, by the server)');
   await T.evaluate(() => window.__sffFamily.switchTo(window.SFF_FAMS.find(f => f.teach !== 'private').id)); await T.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1500);
   ok(await T.evaluate(() => !document.documentElement.classList.contains('wpriv')), 'back to the class: blue again');
+  await T.evaluate(() => go('kids')); await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/ta_home_school.png` });
 
   console.log('2. the same teacher in the family app');
   const T2 = await page(tc, APP); await ready(T2);

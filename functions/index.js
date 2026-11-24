@@ -147,10 +147,11 @@ async function scopeOf(famId) {
   if (!famOk(famId)) return null;
   let s = SCOPES.get(famId);
   if (!s) { const f = await db.doc(`families/${famId}`).get(), d = f.exists ? f.data() : {};
-    s = d.kind === 'class' && typeof d.ownerUid === 'string' ? { cls: true, owner: d.ownerUid } : { cls: false };
+    s = d.kind === 'class' && typeof d.ownerUid === 'string' ? { cls: true, owner: d.ownerUid, priv: d.teach === 'private' } : { cls: false };
     if (f.exists) SCOPES.set(famId, s); }
   return s.cls
-    ? { ...s, usage: (m = monthKey()) => db.doc(`teachers/${s.owner}/usage/${m}`), free: TEACHER_FREE_BUILDS, cap: TEACHER_CAP_USD, capReason: 'teacher_budget' }
+    /* a teacher's two worlds keep apart: the school's classes (usage/{month}) and the private students (usage/{month}-private) */
+    ? { ...s, usage: (m = monthKey()) => db.doc(`teachers/${s.owner}/usage/${m}${s.priv ? '-private' : ''}`), free: TEACHER_FREE_BUILDS, cap: TEACHER_CAP_USD, capReason: 'teacher_budget' }
     : { ...s, usage: (m = monthKey()) => db.doc(`families/${famId}/usage/${m}`), free: FREE_BUILDS, cap: FAMILY_CAP_USD, capReason: 'family_budget' };
 }
 // the price of one answer: every attempt (usage.iterations when the API fell back) at the dearer of the asked and the served model
@@ -222,7 +223,7 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
     tx.set(cref, { kind: 'class', ownerUid: auth.uid, teacherName, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
     tx.set(db.doc(`families/${cref.id}/fam/info`), { kind: 'class', teacher: teacherName, name, grade, subject });
     tx.set(tref, { classes: FieldValue.arrayUnion(cref.id), at: Date.now() }, { merge: true });
-    tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach }, { merge: true });
+    tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach, worlds: FieldValue.arrayUnion(teach === 'private' ? 'private' : 'school') }, { merge: true });
   });
   return { classId: cref.id };
 });
@@ -684,11 +685,12 @@ async function openBuild(auth, famId, subject, extra = {}) {
   const usageRef = sc.usage(month), billRef = sc.cls ? null : db.doc(`families/${famId}/billing/main`);
   const tRef = sc.cls ? db.doc(`teachers/${sc.owner}`) : null;
   // a teacher: one build to try with no students; from the second on, at least MIN_STUDENTS approved students in their groups
-  const students = sc.cls && !adminUser ? await approvedStudents(sc.owner) : 0;
+  const students = sc.cls && !adminUser ? await approvedStudents(sc.owner, sc.priv) : 0;
+  const EVER = sc.priv ? 'buildsPriv' : 'builds';                     /* the first build to try: once in each world */
   const ref = db.collection(`families/${famId}/builds`).doc();
   return db.runTransaction(async (tx) => {
     const [u, b, t] = await Promise.all([tx.get(usageRef), billRef ? tx.get(billRef) : null, tRef ? tx.get(tRef) : null]);
-    const used = u.data()?.builds || 0, credits = (b && b.data()?.credits) || 0, ever = (t && t.data()?.builds) || 0;
+    const used = u.data()?.builds || 0, credits = (b && b.data()?.credits) || 0, ever = (t && t.data()?.[EVER]) || 0;
     let kind;
     if (adminUser) kind = 'admin';
     else if (sc.cls && ever >= 1 && students < MIN_STUDENTS) throw new HttpsError('failed-precondition', 'need_students', { reason: 'need_students', min: MIN_STUDENTS, students });
@@ -696,15 +698,16 @@ async function openBuild(auth, famId, subject, extra = {}) {
     else if (credits > 0) kind = 'paid';
     else throw new HttpsError('resource-exhausted', 'quota', { reason: 'quota', used, free: sc.free, credits, price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) });
     tx.set(usageRef, { builds: FieldValue.increment(kind === 'admin' ? 0 : 1), month }, { merge: true });
-    if (tRef && kind !== 'admin') tx.set(tRef, { builds: FieldValue.increment(1) }, { merge: true });
+    if (tRef && kind !== 'admin') tx.set(tRef, { [EVER]: FieldValue.increment(1) }, { merge: true });
     if (kind === 'paid') tx.set(billRef, { credits: FieldValue.increment(-1) }, { merge: true });
     tx.set(ref, { by: auth.uid, at: Date.now(), kind, calls: 0, status: 'running', subject: String(subject).slice(0, 60), month, ...extra });
     return { buildId: ref.id, kind, used: used + (kind === 'admin' ? 0 : 1), free: sc.free, credits: credits - (kind === 'paid' ? 1 : 0), price: PRICE_ILS, ...(sc.cls ? { teacher: true } : {}) };
   });
 }
 // a teacher's approved students, in all their groups (a parent signed, the teacher approved)
-async function approvedStudents(owner) {
-  const t = await db.doc(`teachers/${owner}`).get(), ids = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+async function approvedStudents(owner, priv) {      /* in the same world only (the school's classes / the private groups) */
+  const t = await db.doc(`teachers/${owner}`).get(), all = (t.exists && Array.isArray(t.data().classes)) ? t.data().classes : [];
+  const ids = (await Promise.all(all.map(c => scopeOf(c).then(x => x && x.cls && !!x.priv === !!priv ? c : null).catch(() => null)))).filter(Boolean);
   const n = await Promise.all(ids.map(c => db.collection(`families/${c}/consents`).where('status', '==', 'digital').count().get().then(r => r.data().count).catch(() => 0)));
   return n.reduce((a, b) => a + b, 0);
 }
@@ -720,7 +723,7 @@ async function closeBuild(famId, buildId, status, extra = {}) {
     const refund = status !== 'done' && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
     tx.update(ref, { status, endedAt: Date.now(), refunded: refund, ...extra, ...(refund ? { resumable: false } : {}) });
     if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
-    if (refund && sc.cls && d.kind === 'free') tx.set(db.doc(`teachers/${sc.owner}`), { builds: FieldValue.increment(-1) }, { merge: true });
+    if (refund && sc.cls && d.kind === 'free') tx.set(db.doc(`teachers/${sc.owner}`), { [sc.priv ? 'buildsPriv' : 'builds']: FieldValue.increment(-1) }, { merge: true });
     if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
     return { refunded: refund, closed: true };
   });

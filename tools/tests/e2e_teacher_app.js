@@ -46,11 +46,32 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(!(await exists(`families/${tuid}`)), 'no family made for the teacher');
   ok(await T.evaluate(() => !!localStorage.getItem('sff_active_teach') && !localStorage.getItem('sff_active_fam')), 'the open place is kept for the teachers\' app only (sff_active_teach)');
   let M = await menu(T);
-  ok(!M.hidden && /הקבוצות והתלמידים שלי/.test(M.text) && /מדעים/.test(M.text) && /כיתה/.test(M.text) && /קבוצה חדשה/.test(M.text) && !/משפחה משלי/.test(M.all), '☰: my groups and students (the group, "כיתה"), a new group – no "my own family"');
+  ok(!M.hidden && /🏫 בית הספר/.test(M.text) && /מדעים/.test(M.text) && /כיתה חדשה/.test(M.text) && !/👩‍🏫 תלמידים פרטיים/.test(M.text) && /להוסיף גם תלמידים פרטיים/.test(M.text) && !/משפחה משלי/.test(M.all),
+    '☰: the school world (the class, "a new class"), "add private students too" – no private world yet, no "my own family"');
   ok(M.order.join() === 'dtop,dwho,dFams,dGrpHelp,dGrpAcc,dVer', '☰ in order: who you are, my groups and students, help, account – ' + M.order.join());
   ok(!M.fam && !M.sound && M.howIn === 'dGrpHelp' && M.langIn === 'dGrpAcc' && M.otherIn === 'dGrpAcc' && M.other === '/', 'no family items and no sound check; "how it works" under help; language and "to the families app" under account');
-  ok(/חשבון מורה · קבוצה אחת/.test(M.sub), 'who you are: ' + M.sub.replace(/\s+/g, ' '));
+  ok(/מורה בבית ספר/.test(M.sub) && !/פרטי/.test(M.sub), 'who you are: ' + M.sub.replace(/\s+/g, ' '));
+  ok(await T.evaluate(() => !document.documentElement.classList.contains('wpriv')), 'the school world: blue (not the private purple)');
   await shotMenu(T, 'ta_menu_he.png');
+  // a new class: straight to its form – never "which kind?" again
+  await T.evaluate(() => [...document.querySelectorAll('#dFams .ditem')].find(b => /כיתה חדשה/.test(b.textContent)).click()); await T.waitForSelector('#tsName', { timeout: 10000 });
+  ok(await T.evaluate(() => !document.getElementById('tsClass') && !document.getElementById('tsPriv') && !!document.getElementById('tsCancel')), '"כיתה חדשה": straight to the class\'s form (no "school or private?")');
+  await T.click('#tsCancel'); await T.waitForTimeout(400);
+  // the private world, added from the menu: its own group, purple, both worlds in the menu
+  await menu(T); await T.evaluate(() => [...document.querySelectorAll('#dFams .ditem')].find(b => /להוסיף גם תלמידים פרטיים/.test(b.textContent)).click());
+  await T.waitForSelector('#tsName', { timeout: 10000 });
+  ok(await T.evaluate(() => !document.getElementById('tsClass')), '"add private students too": straight to the private group\'s form');
+  await T.fill('#tsName', 'השיעורים של יום ג׳'); await T.click('#tsGo');
+  await T.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'private', null, { timeout: 25000 }); await T.waitForTimeout(2500);
+  M = await menu(T);
+  ok(await T.evaluate(() => document.documentElement.classList.contains('wpriv') && window.SFF_WORLD === 'private'), 'the private group opens – purple');
+  ok(/🏫 בית הספר/.test(M.text) && /👩‍🏫 תלמידים פרטיים/.test(M.text) && /יום ג/.test(M.text) && /קבוצה פרטית/.test(M.text) && /קבוצה פרטית חדשה/.test(M.text) && !/להוסיף גם/.test(M.text)
+    && M.text.indexOf('מדעים') < M.text.indexOf('תלמידים פרטיים') && M.text.indexOf('תלמידים פרטיים') < M.text.indexOf('יום ג'), '☰: both worlds apart – the class under school, the private group under private');
+  ok(/מורה בבית ספר · מורה פרטי\/ת/.test(M.sub), 'who you are: both worlds – ' + M.sub.replace(/\s+/g, ' '));
+  await shotMenu(T, 'ta_menu2_he.png');
+  ok(await T.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.worlds?.sort().join() === 'private,school'), 'the account keeps both worlds (users/{uid}.worlds, by the server)');
+  await T.evaluate(() => window.__sffFamily.switchTo(window.SFF_FAMS.find(f => f.teach !== 'private').id)); await T.waitForFunction(() => (window.SFF_CLASS || {}).teach === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1500);
+  ok(await T.evaluate(() => !document.documentElement.classList.contains('wpriv')), 'back to the class: blue again');
 
   console.log('2. the same teacher in the family app');
   const T2 = await page(tc, APP); await ready(T2);
@@ -75,7 +96,8 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   const us = await U.evaluate(() => ({ app: window.SFF_APP, role: window.SFF_ROLE, kids: kids.map(k => k.name).join(), setup: !!document.getElementById('tsClass'), fams: window.SFF_FAMS.length }));
   ok(us.app === 'teach' && us.role === 'tutor' && us.kids === 'בן' && !us.setup && us.fams === 1, 'the tutor: the teachers\' app, Ben only, no group asked for – ' + JSON.stringify(us));
   M = await menu(U);
-  ok(/מורה פרטי למשפחה/.test(M.text) && /קבוצה חדשה/.test(M.text) && /מורה פרטי למשפחה אחת/.test(M.sub) && !/המשפחה והמבוגרים/.test(M.all) && /בן/.test(M.text) && /מחיקת חשבון/.test(M.all) && !/יציאה מהמשפחה/.test(M.all), '☰: the tutor\'s place – the student (בן), "private tutor for a family", "delete account", a new group of their own; no family items');
+  ok(/👩‍🏫 תלמידים פרטיים/.test(M.text) && /בהזמנת המשפחה/.test(M.text) && /קבוצה פרטית חדשה/.test(M.text) && /להוסיף גם כיתות בבית ספר/.test(M.text) && !/🏫 בית הספר/.test(M.text) && /מורה פרטי/.test(M.sub)
+    && await U.evaluate(() => document.documentElement.classList.contains('wpriv')) && !/המשפחה והמבוגרים/.test(M.all) && /בן/.test(M.text) && /מחיקת חשבון/.test(M.all) && !/יציאה מהמשפחה/.test(M.all), '☰: the tutor\'s place – the student (בן), "private tutor for a family", "delete account", a new group of their own; no family items');
   await shotMenu(U, 'ta_tutor_menu_he.png');
 
   console.log('4. a parent who opens /teach');
@@ -101,7 +123,7 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(!heb(st).length, 'the first-group screen in English ' + heb(st).join(' '));
   await E.click('#tsPriv'); await E.click('#tsGo'); await ready(E, () => window.SFF_KIND === 'class' && window.SFF_ROLE);
   M = await menu(E);
-  ok(!heb(M.all).filter(w => !/התלמידים|שלי|^עב$/.test(w)).length && /My groups and students/.test(M.text) && /families app/.test(M.all) && /Teacher account/.test(M.sub), '☰ in English: no Hebrew left (but the group\'s name) ' + heb(M.all).join(' '));
+  ok(!heb(M.all).filter(w => !/התלמידים|שלי|^עב$/.test(w)).length && /Private students/.test(M.text) && /New private group/.test(M.text) && /Add school classes too/.test(M.text) && /families app/.test(M.all) && /Private tutor/.test(M.sub), '☰ in English: no Hebrew left (but the group\'s name) ' + heb(M.all).join(' '));
   await shotMenu(E, 'ta_menu_en.png');
 
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));

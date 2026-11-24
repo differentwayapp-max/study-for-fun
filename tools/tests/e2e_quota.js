@@ -2,7 +2,7 @@
 // 3 free practice sets, the 4th is refused, a failed start gives the build back, the daily $100 cap stops AI calls (no monthly cap).
 // A teacher (stage 4): 5 builds a month for all their groups together (the 6th refused, spread over 2 groups); the second build
 // only with 3 approved students; the $12 cap shared by the groups; a teacher who is also a parent keeps the family's own 3;
-// a failed build given back; the teacher reads the counter and cannot write it; another teacher cannot build in the group.
+// a failed build given back; the private world counts apart from the school's; the teacher reads the counter and cannot write it; another teacher cannot build in the group.
 // firebase emulators:exec --only functions,firestore,auth --project study-for-fun-7b03c "node tools/tests/e2e_quota.js"
 const { chromium } = require('playwright');
 const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
@@ -91,6 +91,15 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
     await admin(`families/${T.uid}`, { inviteToken: 'x'.repeat(18), name: 'הורה ומורה', createdAt: Date.now() });
     const fam = await call(T, 'startBuild', { famId: T.uid, subject: 'מתמטיקה' });
     ok(fam.kind === 'free' && fam.used === 1 && fam.free === 3 && !fam.teacher, 'the same person as a parent: the family\'s own quota (1 of 3), apart from the teacher\'s');
+    // the private world keeps apart from the school's (the owner's decision, 25.11): its own 5, its own first try, its own students and its own $12
+    const P = (await call(T, 'createClass', { teach: 'private', name: 'פרטי', grade: 4, subject: 'אנגלית' })).classId;
+    const schoolN = async () => +(await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}`, { headers: T.H }).then(r => r.json())).fields.builds.integerValue, before = await schoolN();
+    const p1 = await call(T, 'startBuild', { famId: P, subject: 'אנגלית' });
+    ok(p1.kind === 'free' && p1.used === 1 && p1.free === 5 && p1.teacher, 'a private group: its own quota (1 of 5) – though the school\'s is used up and at its $12');
+    const p2 = await call(T, 'startBuild', { famId: P, subject: 'אנגלית' });
+    ok(p2.err === 'need_students' && p2.students === 0, 'its second build: its own students count (the school\'s 3 do not) – need_students');
+    const up = await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}-private`, { headers: T.H }).then(r => r.json()), us2 = await fetch(`${DOCS}/teachers/${T.uid}/usage/${month}`, { headers: T.H }).then(r => r.json());
+    ok(+up.fields.builds.integerValue === 1 && +us2.fields.builds.integerValue === before, `counted apart: usage/{month}-private 1, the school's usage/{month} unchanged (${before}) – the teacher reads both`);
   }
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

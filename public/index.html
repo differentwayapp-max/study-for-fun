@@ -1676,10 +1676,16 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       W.__sffNewsSeen = k => F.setDoc(F.doc(fdb, `users/${uid}`), { news: { [k]: Date.now() } }, { merge: true }).catch(() => {});
       // a teacher's AI quota – for all their groups together (teachers/{uid}/usage/{month}: the server writes, the teacher reads)
       W.__sffTeacherUsage = async () => { const m = W.monthKeyIL ? W.monthKeyIL() : new Date().toISOString().slice(0, 7);
-        const u = await F.getDoc(F.doc(fdb, `teachers/${uid}/usage/${m}`)); return { used: (u.exists() && u.data().builds) || 0, free: 5 }; };
+        const u = await F.getDoc(F.doc(fdb, `teachers/${uid}/usage/${m}${(W.SFF_CLASS || {}).teach === 'private' ? '-private' : ''}`));   /* each world its own quota */ return { used: (u.exists() && u.data().builds) || 0, free: 5 }; };
       W.SFF_ROLE = cur.role; W.SFF_MEMBER = cur.member; W.SFF_UID = uid; W.SFF_EMAIL = (auth.currentUser && auth.currentUser.email) || ''; W.SFF_MYNAME = myName; W.SFF_INVITE_MSG = inviteMsg;
       W.SFF_FAMS = famInfo.map(({ id, name, role, kind, cls, kidNames }) => ({ id, name, role, kind: kind || 'family', teach: cls && cls.teach || '', kids: kidNames || [] }));
       W.SFF_KIND = cur.kind || 'family'; W.SFF_CLASS = cur.kind === 'class' ? { name: cur.name, ...cur.cls } : null;
+      { const wd = new Set(((us && us.exists() && us.data().worlds) || []).filter(x => x === 'school' || x === 'private'));
+        famInfo.forEach(x => { if (x.kind === 'class') wd.add(x.cls && x.cls.teach === 'private' ? 'private' : 'school'); else if (x.role === 'tutor') wd.add('private'); });
+        W.SFF_WORLDS = [...wd];
+        /* the private world looks its own (purple, as in its explanation screens) */
+        W.SFF_WORLD = cur.kind === 'class' ? (cur.cls && cur.cls.teach === 'private' ? 'private' : 'school') : cur.role === 'tutor' ? 'private' : '';
+        if (TEACH && W.SFF_WORLD === 'private') document.documentElement.classList.add('wpriv'); }
       W.SFF_TUTOR_WAIT = cur.role === 'tutor' && !cur.tv;      // invited before the tutor view existed: the parent opens the app once
       let token = cur.token;
       W.SFF_APP_URL = `${location.origin}/?f=${famId}&t=${token}`;
@@ -1862,14 +1868,14 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     });
   }
   // a teacher's group: first "class teacher / private tutor", then the group's name, grade and subject
-  function teacherSetup(pre) {
+  function teacherSetup(pre, world) {
     return new Promise(resolve => {
       const el = document.createElement('div'); el.id = 'fbLogin'; el.className = 'tsetup';
       const step1 = () => {
         el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">איך תשתמשו באפליקציה?</h2>
-          <div class="tsw"><button class="fbcard" id="tsClass" type="button"><span class="e">🏫</span><b>מורה לכיתה</b><span class="hint">כיתה שלמה, עד 40 תלמידים</span></button>
-            <button class="fbcard" id="tsPriv" type="button"><span class="e">🧑‍🏫</span><b>מורה פרטי/ת</b><span class="hint">התלמידים הפרטיים שלי</span></button></div>
-          <div class="hint">אותם מסכים לשניהם. אפשר לפתוח כמה קבוצות.</div>${TEACH && !pre ? '<a class="fbother" id="tsFam" href="/">👨‍👩‍👧 הורה? לאפליקציה למשפחות ›</a>' : ''}</div>`;
+          <div class="tsw"><button class="fbcard" id="tsClass" type="button"><span class="e">🏫</span><b>מורה בבית ספר</b><span class="hint">כיתות שלמות, עד 40 תלמידים</span></button>
+            <button class="fbcard" id="tsPriv" type="button"><span class="e">👩‍🏫</span><b>מורה פרטי/ת</b><span class="hint">התלמידים הפרטיים שלי</span></button></div>
+          <div class="hint">אפשר להוסיף את השני מאוחר יותר, מהתפריט.</div>${TEACH && !pre ? '<a class="fbother" id="tsFam" href="/">👨‍👩‍👧 הורה? לאפליקציה למשפחות ›</a>' : ''}</div>`;
         // the first time: the teacher's intro (class / private) before the group's form
         const pick = teach => { let seen = !!W.SFF_INTRO_TEACHER; try { seen = seen || !!LS.getItem('sff_intro_teacher'); } catch (e) {}
           if (seen || !W.sffTeacherIntro || (W.SFF_TEST_GOOGLE && !W.SFF_TEST_ONB)) return step2(teach);
@@ -1892,7 +1898,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
         el.querySelector('#tsBack')?.addEventListener('click', step1);
         el.querySelector('#tsCancel')?.addEventListener('click', () => { el.remove(); resolve(null); });
       };
-      document.body.appendChild(el); step1();
+      document.body.appendChild(el); if (world) step2(world === 'private' ? 'private' : 'class'); else step1();
     });
   }
   W.sffTeacherSetup = teacherSetup;
@@ -1971,6 +1977,8 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   #fbLogin .fbwho{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:min(100%,440px)}
   .teachapp #fbLogin .fbwho{grid-template-columns:1fr;width:min(100%,280px)} .teachapp #fbLogin .fbtsub{text-align:center;font-size:.86em}
   .teachapp #dGrpFam,.teachapp #dGrpSet,.teachapp #dSound{display:none!important}
+  html.wpriv body{--blue:#5B47D6;--blue-d:#43329F;--sky:#F1EEFF;--lilac:#B9A7FF}   /* the private students' world: purple */
+  #dFams h4.dworld.school{color:#1E4FD6} #dFams h4.dworld.private{color:#5B47D6} #dFams .dadd{margin-top:10px}
   .dplace .dl{display:flex;flex-direction:column;gap:1px;text-align:start} .dplace .dl small{font-size:.78em;color:var(--muted,#5b6478);font-weight:500}
   #fbLogin .fbother{display:block;margin-top:12px;font-weight:700;color:var(--blue,#2F6BFF);text-decoration:none}
   #fbLogin .fbbox{max-width:100%}
@@ -4438,10 +4446,13 @@ function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||'
   { const fams=window.SFF_FAMS||[], T=!!window.SFF_TEACHER, box=$('dFams'), ownFam=fams.some(f=>f.kind!=='class'&&f.role==='owner');
     const TA=window.SFF_APP==='teach', show=F&&(fams.length>1||T||TA); box.classList.toggle('hidden',!show);
     menuArrange(TA, T);
-    if(show&&TA){ box.innerHTML=`<h4>הקבוצות והתלמידים שלי</h4><div class="dcard">${fams.map(f=>placeItem(f,F.famId)).join('')}
-      <button class="ditem" onclick="newClass()"><span class="di">➕</span><span class="dl">קבוצה חדשה</span></button></div>`;
-      const nc=fams.filter(f=>f.kind==='class').length, nt=fams.filter(f=>f.role==='tutor').length;
-      $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), ['חשבון מורה', nc?(nc===1?'קבוצה אחת':`${nc} קבוצות`):'', nt?(nt===1?'מורה פרטי למשפחה אחת':`מורה פרטי ל-${nt} משפחות`):''].filter(Boolean).join(' · ')].filter(Boolean).join('<br>'); }
+    if(show&&TA){ const WD=window.SFF_WORLDS||[], sch=fams.filter(f=>f.kind==='class'&&f.teach!=='private'), prv=fams.filter(f=>(f.kind==='class'&&f.teach==='private')||f.role==='tutor');
+      const sec=(w,list)=>`<h4 class="dworld ${w}">${w==='private'?'👩‍🏫 תלמידים פרטיים':'🏫 בית הספר'}</h4><div class="dcard">${list.map(f=>placeItem(f,F.famId)).join('')}
+        <button class="ditem" onclick="newClass('${w}')"><span class="di">➕</span><span class="dl">${w==='private'?'קבוצה פרטית חדשה':'כיתה חדשה'}</span></button></div>`;
+      const add=['school','private'].filter(w=>!WD.includes(w));
+      box.innerHTML=(WD.includes('school')?sec('school',sch):'')+(WD.includes('private')?sec('private',prv):'')
+        +(add.length?`<div class="dcard dadd">${add.map(w=>`<button class="ditem" onclick="newClass('${w}')"><span class="di">➕</span><span class="dl">${w==='private'?'להוסיף גם תלמידים פרטיים':'להוסיף גם כיתות בבית ספר'}</span></button>`).join('')}</div>`:'');
+      $('dSub').innerHTML=[esc(window.SFF_EMAIL||''), WD.map(w=>w==='private'?'מורה פרטי/ת':'מורה בבית ספר').join(' · ')].filter(Boolean).join('<br>'); }
     else if(show) box.innerHTML=`<h4>${T?'הקבוצות והמשפחות':'המשפחות'}</h4><div class="dcard">${fams.map(f=>`<button class="ditem ${f.id===F.famId?'on':''}" onclick="closeMenu();${f.id===F.famId?'':`window.__sffFamily.switchTo('${f.id}')`}"><span class="dl">${famLabel(f)}</span>${f.id===F.famId?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`).join('')}
       ${T?`<button class="ditem" onclick="newClass()"><span class="di">➕</span><span class="dl">קבוצה חדשה</span></button>`:''}
       ${T&&!ownFam?`<button class="ditem" onclick="closeMenu();window.__sffFamily.addOwnFamily()"><span class="di">🏠</span><span class="dl">משפחה משלי (גם הורה)</span></button>`:''}</div>`; }   // a member sees whose family it is – not someone else's name as if it were theirs
@@ -4449,7 +4460,7 @@ function openMenu(){ const m=$('sideMenu'); $('dLogo').src=$('logoFull')?.src||'
   $('dVer').textContent=(EN()?'Version ':'גרסה ')+(document.querySelector('meta[name="sff-ver"]')?.content||'').replace(/^sff-v/,''); m.classList.remove('hidden'); }
 // a place in the teachers' app: what it is, said exactly (a class / private students / a family's private tutor); names are content
 function placeItem(f,cur){ const on=f.id===cur, cls=f.kind==='class', priv=f.teach==='private';
-  const ico=cls?(priv?'👩‍🏫':'🏫'):'🧑‍🏫', sub=cls?(priv?'תלמידים פרטיים':'כיתה'):'מורה פרטי למשפחה';
+  const ico=cls?(priv?'👩‍🏫':'🏫'):'🧑‍🏫', sub=cls?(priv?'קבוצה פרטית':'כיתה'):'בהזמנת המשפחה';
   return `<button class="ditem dplace ${on?'on':''}" onclick="closeMenu();${on?'':`window.__sffFamily.switchTo('${esc(f.id)}')`}"><span class="di">${ico}</span><span class="dl"><bdi translate="no">${esc(cls?(f.name||''):((f.kids||[]).join(', ')||f.name||''))}</bdi><small>${sub}</small></span>${on?'<span class="dval">✓</span>':'<span class="dchev" aria-hidden="true">‹</span>'}</button>`; }
 // the menu's parts, once: the teachers' app moves "how it works" to help and the language to the account, and drops the family's items;
 // both apps link to the other one in the account part (a teacher in the family app, everyone in the teachers' app)
@@ -4624,7 +4635,11 @@ const ROLES={owner:['👑','מנהל/ת','הכול'],admin:['👑','מנהל/ת'
 const roleBadge=r=>{ const x=ROLES[r]||ROLES.helper; return `<span class="rbadge r-${r==='owner'?'admin':r}">${x[0]} ${x[1]}</span>`; };
 // the families and groups this adult belongs to (the switcher, in ☰ and on the family screen)
 function famLabel(f){ return f.kind==='class'?`${'🏫'} ${esc(f.name||'')}`:f.role==='tutor'?'🧑‍🏫 התלמידים ממשפחת '+esc(f.name||''):f.role==='owner'?'🏠 המשפחה שלי':'👨‍👩‍👧 המשפחה של '+esc(f.name||''); }
-async function newClass(){ closeMenu(); const o=await window.sffTeacherSetup?.(true); if(!o) return;
+// a new group in a world (the school's classes / the private students) – the world is known, so no "which kind?";
+// a world the teacher has not worked in yet: its explanation screens first
+async function newClass(world){ closeMenu(); world=world==='private'||world==='school'?world:null;   /* (the family app's "new group": still asks) */
+  if(world&&!(window.SFF_WORLDS||[]).includes(world)&&window.sffTeacherIntro&&!(window.SFF_TEST_GOOGLE&&!window.SFF_TEST_ONB)){ try{ await window.sffTeacherIntro(world==='private'?'private':'class'); }catch(e){} }
+  const o=await window.sffTeacherSetup?.(true, world); if(!o) return;
   try{ const id=await window.__sffNewClass(o); window.__sffFamily.switchTo(id); }
   catch(e){ toast(e.code==='class_limit'?'⚠️ אפשר עד 10 קבוצות':'⚠️ '+(e.code||e.message)); } }
 async function renderFamily(){

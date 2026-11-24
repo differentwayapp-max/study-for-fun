@@ -18,7 +18,12 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   const page = async (c, url) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   const ready = (p, f = () => window.SFF_ROLE) => p.waitForFunction(f, null, { timeout: 25000 }).then(() => p.waitForTimeout(2500));
   const menu = async p => { await p.evaluate(() => { document.getElementById('intro')?.remove(); openMenu(); }); await p.waitForTimeout(400);
-    return p.evaluate(() => ({ text: document.getElementById('dFams').innerText, hidden: document.getElementById('dFams').classList.contains('hidden'), other: document.getElementById('dOtherApp')?.getAttribute('href') || '' })); };
+    return p.evaluate(() => { const vis = id => { const e = document.getElementById(id); return !!e && e.offsetParent !== null; }, panel = document.querySelector('#sideMenu .dpanel');
+      const order = [...panel.children].filter(e => e.offsetParent !== null).map(e => e.id || e.className.split(' ')[0]);
+      return { text: document.getElementById('dFams').innerText, all: panel.innerText, sub: document.getElementById('dSub').innerText, hidden: document.getElementById('dFams').classList.contains('hidden'),
+        other: document.getElementById('dOtherApp')?.getAttribute('href') || '', otherIn: document.getElementById('dOtherApp')?.closest('.dgrp')?.id || '', order,
+        fam: vis('dGrpFam'), sound: vis('dSound'), howIn: document.getElementById('dHow').closest('.dgrp').id, langIn: document.getElementById('dLang').closest('.dgrp').id }; }); };
+  const shotMenu = async (p, file) => { await p.setViewportSize({ width: 390, height: 1300 }); await p.waitForTimeout(300); await p.screenshot({ path: `${OUT}/${file}` }); await p.setViewportSize({ width: 390, height: 844 }); };
 
   console.log('1. a new teacher at /teach');
   const tc = await ctx('teachA', 'רונית המורה'), T = await page(tc, APP + 'teach');
@@ -41,14 +46,17 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(!(await exists(`families/${tuid}`)), 'no family made for the teacher');
   ok(await T.evaluate(() => !!localStorage.getItem('sff_active_teach') && !localStorage.getItem('sff_active_fam')), 'the open place is kept for the teachers\' app only (sff_active_teach)');
   let M = await menu(T);
-  ok(!M.hidden && /הקבוצות שלי/.test(M.text) && /מדעים/.test(M.text) && /קבוצה חדשה/.test(M.text) && !/משפחה משלי/.test(M.text) && M.other === '/', '☰: my groups, a new group, "to the families app" – no "my own family"');
-  await T.screenshot({ path: `${OUT}/ta_menu_he.png` });
+  ok(!M.hidden && /הקבוצות והתלמידים שלי/.test(M.text) && /מדעים/.test(M.text) && /כיתה/.test(M.text) && /קבוצה חדשה/.test(M.text) && !/משפחה משלי/.test(M.all), '☰: my groups and students (the group, "כיתה"), a new group – no "my own family"');
+  ok(M.order.join() === 'dtop,dwho,dFams,dGrpHelp,dGrpAcc,dVer', '☰ in order: who you are, my groups and students, help, account – ' + M.order.join());
+  ok(!M.fam && !M.sound && M.howIn === 'dGrpHelp' && M.langIn === 'dGrpAcc' && M.otherIn === 'dGrpAcc' && M.other === '/', 'no family items and no sound check; "how it works" under help; language and "to the families app" under account');
+  ok(/חשבון מורה · קבוצה אחת/.test(M.sub), 'who you are: ' + M.sub.replace(/\s+/g, ' '));
+  await shotMenu(T, 'ta_menu_he.png');
 
   console.log('2. the same teacher in the family app');
   const T2 = await page(tc, APP); await ready(T2);
   M = await menu(T2);
-  ok(await T2.evaluate(() => window.SFF_APP === 'family') && M.other === '/teach' && /לאפליקציה למורים/.test(M.text), '☰ in the family app: "to the teachers\' app"');
-  await T2.screenshot({ path: `${OUT}/ta_fam_menu_he.png` });
+  ok(await T2.evaluate(() => window.SFF_APP === 'family') && M.other === '/teach' && M.otherIn === 'dGrpAcc' && /לאפליקציה למורים/.test(M.all), '☰ in the family app: "to the teachers\' app" (under account)');
+  await shotMenu(T2, 'ta_fam_menu_he.png');
   await T2.close();
 
   console.log("3. a parent invites a private tutor – the link opens the teachers' app");
@@ -67,8 +75,8 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   const us = await U.evaluate(() => ({ app: window.SFF_APP, role: window.SFF_ROLE, kids: kids.map(k => k.name).join(), setup: !!document.getElementById('tsClass'), fams: window.SFF_FAMS.length }));
   ok(us.app === 'teach' && us.role === 'tutor' && us.kids === 'בן' && !us.setup && us.fams === 1, 'the tutor: the teachers\' app, Ben only, no group asked for – ' + JSON.stringify(us));
   M = await menu(U);
-  ok(/התלמידים ממשפחת/.test(M.text) && /קבוצה חדשה/.test(M.text), '☰: "the kids of the family of …" and a new group of their own');
-  await U.screenshot({ path: `${OUT}/ta_tutor_menu_he.png` });
+  ok(/מורה פרטי למשפחה/.test(M.text) && /קבוצה חדשה/.test(M.text) && /מורה פרטי למשפחה אחת/.test(M.sub) && !/המשפחה והמבוגרים/.test(M.all) && /בן/.test(M.text) && /מחיקת חשבון/.test(M.all) && !/יציאה מהמשפחה/.test(M.all), '☰: the tutor\'s place – the student (בן), "private tutor for a family", "delete account", a new group of their own; no family items');
+  await shotMenu(U, 'ta_tutor_menu_he.png');
 
   console.log('4. a parent who opens /teach');
   const P = await page(oc, APP + 'teach'); await P.waitForSelector('#fbGo, #tsClass', { timeout: 20000 });
@@ -93,8 +101,8 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
   ok(!heb(st).length, 'the first-group screen in English ' + heb(st).join(' '));
   await E.click('#tsPriv'); await E.click('#tsGo'); await ready(E, () => window.SFF_KIND === 'class' && window.SFF_ROLE);
   M = await menu(E);
-  ok(!heb(M.text).filter(w => !/התלמידים|שלי/.test(w)).length && /My groups/.test(M.text) && /families app/.test(M.text), '☰ in English: ' + M.text.replace(/\s+/g, ' '));
-  await E.screenshot({ path: `${OUT}/ta_menu_en.png` });
+  ok(!heb(M.all).filter(w => !/התלמידים|שלי|^עב$/.test(w)).length && /My groups and students/.test(M.text) && /families app/.test(M.all) && /Teacher account/.test(M.sub), '☰ in English: no Hebrew left (but the group\'s name) ' + heb(M.all).join(' '));
+  await shotMenu(E, 'ta_menu_en.png');
 
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));
   await b.close();

@@ -203,7 +203,7 @@
     'כל הכיתה מתרגלת': 'The whole class practises', 'כל התלמידים שלך מתרגלים': 'All your students practise', 'ואת/ה רואה הכול': 'and you see it all',
     'פותחים קבוצה לכל כיתה ומקצוע, משתפים קישור – וההורים מצרפים את הילדים בעצמם': 'Open a group for each class and subject, share a link – and the parents add their kids themselves',
     'פותחים קבוצה לתלמידים שלך, שולחים קישור לכל הורה – וההורים מצרפים את הילדים בעצמם': 'Open a group for your students, send a link to each parent – and the parents add their kids themselves',
-    'הקבוצות שלי': 'My groups', 'למורים ולמורים פרטיים': 'For teachers and private tutors', 'ד׳2 – אנגלית': 'Grade 4, class 2 – English', 'ד׳3 – אנגלית': 'Grade 4, class 3 – English', 'ה׳1 – מדעים': 'Grade 5, class 1 – Science',
+    'הקבוצות שלי': 'My groups', 'הקבוצות והתלמידים שלי': 'My groups and students', 'תלמידים פרטיים': 'Private students', 'מורה פרטי למשפחה': 'Private tutor for a family', 'חשבון מורה': 'Teacher account', 'קבוצה אחת': '1 group', 'מורה פרטי למשפחה אחת': 'private tutor for 1 family', 'עזרה': 'Help', 'חשבון': 'Account', 'יימחקו לצמיתות: הקבוצות שלך, התלמידים, המשימות וההתקדמות שלהם – וגם המשפחה שלך באפליקציה למשפחות, אם יש. אי אפשר לשחזר.': 'Deleted for good: your groups, the students, their assignments and progress – and your family in the families app, if there is one. This cannot be undone.', 'יימחקו לצמיתות: הילדים, התרגולים, ההתקדמות והפידבק – גם מהטלפונים של הילדים, וגם הקבוצות שלך כמורה. אי אפשר לשחזר.': "Deleted for good: the kids, the practice sets, the progress and the feedback – from the kids' phones too, and your groups as a teacher. This cannot be undone.", 'למורים ולמורים פרטיים': 'For teachers and private tutors', 'ד׳2 – אנגלית': 'Grade 4, class 2 – English', 'ד׳3 – אנגלית': 'Grade 4, class 3 – English', 'ה׳1 – מדעים': 'Grade 5, class 1 – Science',
     'ד׳2': '4-2', 'ד׳3': '4-3', 'ה׳1': '5-1', 'מת׳': 'Ma', 'התלמידים שלי – אנגלית': 'My students – English', 'התלמידים שלי – מתמטיקה': 'My students – Math',
     'קישור אחד לכיתה': 'One link for the class', 'קישור אחד לכל התלמידים': 'One link for all your students', 'וההורים עושים את השאר': 'and the parents do the rest',
     'מפרסמים בקבוצת ההורים או תולים ברקוד בכיתה. כל הורה מצרף את הילד שלו וחותם באצבע – בלי להירשם': "Post it in the parents' group or hang a QR code in class. Each parent adds their own kid and signs with a finger – no sign-up",
@@ -277,6 +277,7 @@
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    [/^(\d+) קבוצות$/, (m, n) => `${n} groups`], [/^מורה פרטי ל-(\d+) משפחות$/, (m, n) => `private tutor for ${n} families`],
     [/^🧑‍🏫 התלמידים ממשפחת (.+)$/, (m, n) => `🧑‍🏫 The ${n} family's kids`],
     [/^(.+) סיים\/ה את (.+) עם (\d+)% הצלחה$/, (m, n, x, v) => `${n} finished ${tr(x)} with ${v}% success`],
     [/^כדאי לעקוב אחרי מה שעוד לא יושב ולבנות תרגול ממוקד – בדיוק לפי הקצב של (.+)\.$/, (m, n) => `It's worth following what isn't solid yet and building focused practice – right at ${n}'s pace.`],

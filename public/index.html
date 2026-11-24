@@ -2446,6 +2446,7 @@ function backAction(){
   const td=$('tDlg'); if(td&&!td.classList.contains('hidden')){ tBack(); return true; }
   for(const id of ['moreDlg','delAccDlg','linkDlg','invDlg']) if($(id)&&!$(id).classList.contains('hidden')){ $(id).classList.add('hidden'); return true; }
   const ts=document.querySelector('#fbLogin.tsetup'); if(ts){ const b=ts.querySelector('#tsCancel,#tsBack'); if(b){ b.click(); return true; } return false; }
+  if(TAPP()&&isClassMode()&&GROUP_ROOTS.includes(NAV_STACK[NAV_STACK.length-1])){ goBack(); return true; }   /* a group's tab → today → the picker */
   if(!$('topBack').classList.contains('hidden')){ goBack(); return true; }
   return false;
 }

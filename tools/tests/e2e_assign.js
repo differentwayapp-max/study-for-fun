@@ -102,7 +102,7 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
   await play(K1.p, all.id, 'k1', 'all'); await play(K2.p, all.id, 'k2', [0]);
   await K1.p.waitForTimeout(2500);
   await T.evaluate(() => go('kids')); await T.waitForFunction(id => { const s = getSet(id); return s && asgState(s).done.length === 1 && asgState(s).mid.length === 1; }, all.id, { timeout: 20000 }).catch(() => {});
-  const st = await T.evaluate(id => { const s = getSet(id), x = asgState(s); return { done: x.done.map(k => k.id), mid: x.mid.map(k => k.id), none: x.none.map(k => k.id), row: [...document.querySelectorAll('.tasg')].map(e => e.innerText.replace(/\s+/g, ' ')) }; }, all.id);
+  const st = await T.evaluate(id => { const s = getSet(id), x = asgState(s); return { done: x.done.map(k => k.id), mid: x.mid.map(k => k.id), none: x.none.map(k => k.id), row: (thTab('asg'), [...document.querySelectorAll('#vTAsg .tasg')]).map(e => e.innerText.replace(/\s+/g, ' ')) }; }, all.id);
   ok(st.done.join() === 'k1' && st.mid.join() === 'k2' && st.none.length === 2, `the assignment to all: finished נועה, in the middle יונתן, not started 2`);
   ok(st.row.some(r => /1\/4 סיימו/.test(r) && /1 באמצע/.test(r)), 'the teacher\'s home: "1/4 סיימו · 1 באמצע" with a bar – ' + (st.row[0] || '').slice(0, 70));
   ok(await K1.p.evaluate(() => /\d+\/\d+/.test(document.getElementById('asgBar').innerText) && document.querySelector('.kasg .mbar span').style.width === '100%'), 'נועה\'s home: the bar is full');

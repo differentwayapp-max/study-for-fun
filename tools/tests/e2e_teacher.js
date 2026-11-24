@@ -36,7 +36,7 @@ const doc = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bearer
   ok(!(await doc(`families/${s1.uid}`)), 'no empty family for a teacher');
   const ud = await doc(`users/${s1.uid}`);
   ok(ud && (ud.fields.roles.arrayValue.values || []).some(v => v.stringValue === 'teacher') && (ud.fields.classes.arrayValue.values || []).length === 1, 'the account: roles teacher, classes [1]');
-  ok(/עוד אין תלמידים/.test(s1.home) && /הזמנת תלמידים/.test(s1.home) && !s1.intro, "the teacher's home: no students yet + invite students; no parents' intro");
+  ok(/פתחת את הקבוצה/.test(s1.home) && /מזמינים את ההורים/.test(s1.home) && !s1.intro, "the teacher's home (a new group): the 3 steps – opened, invite the parents; no parents' intro");
   await p1.screenshot({ path: `${OUT}/t_home_he.png` });
 
   console.log('2. a second group, reload, switching');

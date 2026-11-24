@@ -57,8 +57,9 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(await P1.p.evaluate(() => !window.SFF_ROLE && !document.getElementById('fbLogin')), 'the parent never sees the sign-in or the app');
 
   console.log('3. the teacher approves');
+  await T.waitForFunction(() => CLS.reqs.some(r => r.status === 'pending'), null, { timeout: 15000 }).catch(() => {}); await T.evaluate(() => thTab('stud'));   // the requests: the students tab
   await T.waitForSelector('.treq', { timeout: 15000 }); await T.waitForTimeout(500);
-  ok(/בקשות ממתינות \(1\)/.test(await T.textContent('#kidCar')) && await T.evaluate(() => !!document.querySelector('.treq img.tsig[src^="data:image/png"]')), 'the teacher: "waiting requests (1)" with the signature');
+  ok(/בקשות ממתינות \(1\)/.test(await T.textContent('#tStudBody')) && await T.evaluate(() => !!document.querySelector('.treq img.tsig[src^="data:image/png"]')), 'the teacher: "waiting requests (1)" with the signature');
   await T.screenshot({ path: `${OUT}/c_requests_he.png` });
   await T.click('.treq .btn:not(.ghost)'); await T.waitForTimeout(2500);
   const kidsL = (await doc(`families/${cid}/fam/kids`)).list, kid = kidsL[0], C1 = await doc(`families/${cid}/consents/${kid.id}`), F = await doc(`families/${cid}`);

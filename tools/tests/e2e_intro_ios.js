@@ -15,7 +15,7 @@ const SERIES = [['parent', '(openIntro(false),0)'], ['kid', '(openIntro(true),0)
 const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'compete'], tutor: ['t3'], class: ['s2'], private: ['s3'] };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
-  const errs = [], table = {}, bad = [];
+  const errs = [], table = {}, bad = [], tags = [];
   const check = p => p.evaluate(() => {
     const el = document.getElementById('intro'), st = el.querySelector('.istage'), c = el.querySelector('.icard0'), sb = st.getBoundingClientRect().bottom;
     const k = new DOMMatrix(getComputedStyle(c).transform).a;
@@ -44,6 +44,7 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
         const n = await p.evaluate(() => IN.list.length);
         for (let i = 0; i < n; i++) {
           await p.evaluate(i => { if (IN.i !== i) introGo(i); }, i); await p.waitForTimeout(260);
+          if (await p.evaluate(() => !!document.querySelector('#intro .itag'))) tags.push(`${lang} ${ser}:${await p.evaluate(() => IN.list[IN.i])}`);
           const r = await check(p), must = w >= 390 || h >= 664, hEnd = r.scroll ? await endHint(p) : false;
           const fits = !r.low.length && !r.scroll, hinted = r.scroll && r.hint && !hEnd && !r.lowEnd;
           const pass = (fits || (!must && hinted)) && !r.small.length && !r.font.length && (lang === 'he' || !r.heb.length);
@@ -57,6 +58,7 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
     await p.evaluate('document.getElementById("intro")?.remove()'); await c.close();
   }
   console.log('the screens: Hebrew and English, 5 sizes, 5 series');
+  ok(!tags.length, 'no "for the parent / for the kid / for the private tutor" tag in the app (only in the store\'s pictures) ' + JSON.stringify([...new Set(tags)]));
   ok(!bad.length, 'every screen fits (from 390×664 up: with no scrolling; smaller: scrolling only with the hint), buttons ≥ 44 px, the explanation ≥ 12 px, English has no Hebrew' + (bad.length ? '\n    ' + bad.join('\n    ') : ''));
   require('fs').writeFileSync(`${OUT}/ios_table.json`, JSON.stringify(table, null, 1));
 

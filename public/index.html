@@ -4945,7 +4945,8 @@ const IC={
 };
 const iT=s=>window.sffT?sffT(s):s;                                       // names: the avatar letter follows the language
 const iAva=(nm,bg,c,sz=40,fs=16,x='')=>`<span translate="no" class="iava" style="width:${sz}px;height:${sz}px;background:${bg};color:${c};font-size:${fs}px;${x}">${esc(iT(nm)[0])}</span>`;
-const iTag=(t,st,K)=>K?'':`<span class="itag" style="${st}">${t}</span>`;
+let INTRO_SHOT=false;                                                    // the "for the parent / for the kid" tag: only in the store's pictures (in the app each series is already its reader's)
+const iTag=(t,st,K)=>K||!INTRO_SHOT?'':`<span class="itag" style="${st}">${t}</span>`;
 const iPhone=(st,inner)=>`<div class="iphone" style="${st}">${inner}</div>`;
 const INTRO={
   main:K=>({bg:'#1B2A4A', dark:1, h:666, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
@@ -5258,7 +5259,7 @@ function maybeTutorIntro(){
   try{ if(localStorage.getItem('sff_intro_tutor')) return; }catch(e){}
   TINTRO=true; let n=0; const t=setInterval(()=>{ if((visibleKids().length&&n>=6)||++n>20){ clearInterval(t); if(!$('intro')) openTeacherIntro('tutor'); } },500);
 }
-function introCard(key,K,shot){ const s=INTRO[key](K,shot); return {s, html:`<div class="icard0 ${s.dark?'dark':''}" dir="${document.documentElement.dir||'rtl'}" style="background:${s.bg}">${s.html}</div>`}; }
+function introCard(key,K,shot){ INTRO_SHOT=!!shot; const s=INTRO[key](K,shot); INTRO_SHOT=false; return {s, html:`<div class="icard0 ${s.dark?'dark':''}" dir="${document.documentElement.dir||'rtl'}" style="background:${s.bg}">${s.html}</div>`}; }
 function openIntro(kid){ IN.kid=!!kid; IN.mode=null; IN.only=false; IN.list=INTRO_SETS[kid?'kid':'parent']; IN.i=0; introShow(); }
 function introShow(dir){
   const key=IN.list[IN.i], n=IN.list.length, last=IN.i===n-1, {s,html}=introCard(key,IN.kid);

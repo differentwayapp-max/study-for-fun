@@ -22,7 +22,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
     await c.addInitScript(([s, l, E, nm]) => { window.SFF_REST_EMU = E; window.SFF_TEST_ONB = 1; window.SFF_TEST_GOOGLE = { sub: s, email: s + '@t.local', email_verified: true, name: nm }; localStorage.setItem('sff_lang', l); },
       [sub, o.lang || 'he', EMU, o.name || 'מורה']); return c; };
   const page = async (c, url = APP) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
-  const shown = p => p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots button').length || 1, text: el.innerText } : null; });
+  const shown = p => p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots i').length || 1, text: el.innerText } : null; });
   const small = p => p.evaluate(() => [...document.querySelectorAll('#intro button')].filter(x => { const r = x.getBoundingClientRect(); return r.height < 44 || r.width < 24; }).map(x => x.outerHTML.slice(0, 50)));
   const over = p => p.evaluate(() => { const st = document.querySelector('#intro .istage'), c = document.querySelector('#intro .icard0'); return Math.round(c.getBoundingClientRect().width - st.clientWidth); });
   // walk a series to its end: each screen – buttons, width, a screenshot
@@ -151,11 +151,11 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   console.log('4. a parent never sees the teachers\' screens');
   const cp = await ctx('introParent2', { name: 'הורה' }), pp = await page(cp);
   await pp.waitForTimeout(2500); if (await pp.$('#fbGo')) await pp.click('#fbGo'); await pp.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await pp.waitForTimeout(1500);
-  const keysP = []; for (let i = 0; i < 7; i++) { const x = await shown(pp); if (!x) break; keysP.push(x.key); if (i < 6) { await pp.click('#intro .inext'); await pp.waitForTimeout(250); } }
-  ok(keysP.join() === 'main,build,testday,progress,focus,share,safe', "the parent's 7 screens only: " + keysP.join());
+  const keysP = []; for (let i = 0; i < 4; i++) { const x = await shown(pp); if (!x) break; keysP.push(x.key); if (i < 3) { await pp.click('#intro .inext'); await pp.waitForTimeout(250); } }
+  ok(keysP.join() === 'main,material,track,start', "the parent's 4 screens only: " + keysP.join());
   await pp.click('#intro .inext'); await pp.waitForTimeout(600);
   await pp.evaluate(() => { openHowItWorks(); }); await pp.waitForTimeout(300); s = await shown(pp);
-  ok(s && s.key === 'main' && s.n === 7, '☰ → איך זה עובד: the parent\'s series, as before');
+  ok(s && s.key === 'main' && s.n === 4, '☰ → איך זה עובד: the parent\'s series, as before');
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));
   await b.close();
 })().catch(e => { console.error(e); process.exit(1); });

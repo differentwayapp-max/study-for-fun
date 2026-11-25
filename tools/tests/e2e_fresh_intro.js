@@ -13,7 +13,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
       { sub: who, email: who + '@test.local', email_verified: true, name }); return c; };
   const page = async (c, url) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   const intro = async (p, ms = 15000) => { await p.waitForSelector('#intro', { timeout: ms }).catch(() => {});
-    return p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots button').length || 1 } : null; }); };
+    return p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots i').length || 1 } : null; }); };
   const close = async p => { await p.click('#intro .iskip').catch(() => p.evaluate(() => document.getElementById('intro')?.remove())); await p.waitForTimeout(800); };
   const signIn = async p => { await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo'); };
   const signOut = async p => { await p.evaluate(() => document.getElementById('fbOut').click()); await p.waitForSelector('#sureYes:visible', { timeout: 5000 }); await p.click('#sureYes');

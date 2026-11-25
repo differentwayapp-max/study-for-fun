@@ -1,5 +1,6 @@
 // The first-run intro screens, on the emulators (firestore, auth) with the real rules:
-// 1. a new parent (after the sign-in and the terms) gets 7 screens – the opening, the material, the test day, progress, focused practice (right after progress), sharing, safety; swipe goes on; every button ≥ 44 px;
+// 1. a new parent (after the sign-in and the terms) gets 4 screens – the opening, "your material, up to test day", "see what's solid – and
+//    strengthen it" (focused practice), "start in 3 steps"; the store keeps its 8 (INTRO_ALL); swipe goes on; every button ≥ 44 px;
 //    "דלג" closes it and it does not come back after a reload (kept in users/{uid}.intro) – a new sign-in (another phone) shows it again;
 //    ☰ → איך זה עובד opens it again; English: no Hebrew left on it;
 // 2. a kid phone, the first time from its link: only screens 2 and 6 – no parent text, no "להורה" tags; "יאללה למפה" ends it;
@@ -21,25 +22,33 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const open = async c => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message));
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1500); return p; };
-  const shown = p => p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots button').length, text: el.innerText } : null; });
+  const shown = p => p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots i').length, text: el.innerText } : null; });
 
   console.log('1. a new parent');
   const c1 = await parent(), p1 = await open(c1);
   let s = await shown(p1);
-  ok(s && s.key === 'main' && s.n === 7, 'the intro opens on screen 1, with 7 screens: ' + JSON.stringify(s && { key: s.key, n: s.n }));
-  const small = await p1.evaluate(() => [...document.querySelectorAll('#intro button')].filter(x => { const r = x.getBoundingClientRect(); return r.height < 44 || r.width < 24; }).map(x => x.outerHTML.slice(0, 60)));
-  ok(!small.length, 'every button is at least 44 px tall ' + JSON.stringify(small));
+  ok(s && s.key === 'main' && s.n === 4, 'the intro opens on screen 1, with 4 screens: ' + JSON.stringify(s && { key: s.key, n: s.n }));
+  const small = await p1.evaluate(() => [...document.querySelectorAll('#intro button')].filter(x => x.offsetParent !== null).filter(x => { const r = x.getBoundingClientRect(); return r.height < 44 || r.width < 44; }).map(x => x.outerHTML.slice(0, 60)));
+  ok(!small.length, 'every button is at least 44 × 44 px ' + JSON.stringify(small));
   await p1.screenshot({ path: `${OUT}/intro_parent_1.png` });
   const keys = ['main'];
-  for (let i = 0; i < 6; i++) { await p1.click('#intro .inext'); await p1.waitForTimeout(300); keys.push((await shown(p1)).key); }
-  ok(keys.join() === 'main,build,testday,progress,focus,share,safe', 'the parent screens: ' + keys.join());
+  for (let i = 0; i < 3; i++) { await p1.click('#intro .inext'); await p1.waitForTimeout(300); keys.push((await shown(p1)).key); }
+  ok(keys.join() === 'main,material,track,start', 'the parent screens: ' + keys.join());
+  const [txt, FL] = await p1.evaluate(() => [IN.list.map(k => introCard(k).html).join(' '), FOCUS_LINE]);
+  ok(/החומר שלכם<br>עד יום המבחן/.test(txt) && /או בוחרים תרגול מוכן מהקטלוג – בלי לחכות/.test(txt) && txt.includes(FL) && /תרגול ממוקד · 3 מילים/.test(txt) && /אחר כך תראו מה תוקן ✓/.test(txt)
+    && /מוסיפים ילד/.test(txt) && /שולחים לילד קישור/.test(txt) && /בלי פרסומות/.test(txt) && /בלי רכישות לילד/.test(txt) && /סבתא או מורה/.test(txt), 'the texts of the new screens (FOCUS_LINE on "רואים מה יושב")');
+  ok(!/[\u{1F300}-\u{1FAFF}]/u.test(txt.replace(/IC\./g, '')), 'no emoji on the parent\'s screens (line icons)');
+  const store = await p1.evaluate(() => INTRO_ALL.join() + '|' + ['build', 'testday', 'progress', 'focus', 'share', 'safe'].every(k => typeof INTRO[k] === 'function'));
+  ok(store === 'main,play,build,focus,progress,testday,compete,share|true', 'the store keeps its 8 screens: ' + store);
   ok(/מתחילים/.test(await p1.textContent('#intro .inext')) && !(await p1.$('#intro .iskip')), 'the last screen: "מתחילים" (no "דלג")');
   // swipe (Hebrew: a swipe to the right goes on, to the left goes back)
   const swipe = dx => p1.evaluate(dx => { const el = document.getElementById('intro'), t = (x) => [new Touch({ identifier: 1, target: el, clientX: x, clientY: 400 })];
     el.dispatchEvent(new TouchEvent('touchstart', { touches: t(200), changedTouches: t(200) })); el.dispatchEvent(new TouchEvent('touchend', { touches: [], changedTouches: t(200 + dx) })); }, dx);
+  await p1.click('#intro .iback'); await p1.waitForTimeout(300); const bk = (await shown(p1)).key; await p1.click('#intro .inext'); await p1.waitForTimeout(300);
+  ok(bk === 'track', 'the back arrow at the top: the screen before (' + bk + ')');
   await swipe(-120); await p1.waitForTimeout(300); const back = (await shown(p1)).key;
   await swipe(120); await p1.waitForTimeout(300); const fwd = (await shown(p1)).key;
-  ok(back === 'share' && fwd === 'safe', `swipe: left goes back (${back}), right goes on (${fwd})`);
+  ok(back === 'track' && fwd === 'start', `swipe: left goes back (${back}), right goes on (${fwd})`);
   await p1.evaluate(() => introGo(0)); await p1.waitForTimeout(200);
   await p1.click('#intro .iskip'); await p1.waitForTimeout(800);
   ok(!(await shown(p1)), '"דלג" closes it');
@@ -53,10 +62,10 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await p2.click('#intro .iskip').catch(() => {}); await p2.waitForTimeout(600);
   await p2.evaluate(() => openMenu()); await p2.waitForTimeout(300);
   await p2.click('#sideMenu .ditem:has-text("איך זה עובד")'); await p2.waitForTimeout(400);
-  s = await shown(p2); ok(s && s.key === 'main' && s.n === 7, '☰ → איך זה עובד opens it again');
+  s = await shown(p2); ok(s && s.key === 'main' && s.n === 4, '☰ → איך זה עובד opens the same 4 screens');
   const c3 = await parent('en', 'intro-en'), p3 = await open(c3);
   const heb = [];
-  for (let i = 0; i < 7; i++) { heb.push(...await p3.evaluate(() => (document.getElementById('intro').innerText.match(/[֐-׿][^\n]*/g) || []))); if (i < 6) { await p3.click('#intro .inext'); await p3.waitForTimeout(250); } }
+  for (let i = 0; i < 4; i++) { heb.push(...await p3.evaluate(() => (document.getElementById('intro').innerText.match(/[֐-׿][^\n]*/g) || []))); if (i < 3) { await p3.click('#intro .inext'); await p3.waitForTimeout(250); } }
   ok(!heb.length, 'English: every screen translated ' + JSON.stringify(heb));
   await p3.screenshot({ path: `${OUT}/intro_parent_en_last.png` });
 

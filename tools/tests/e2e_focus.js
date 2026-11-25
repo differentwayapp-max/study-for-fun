@@ -1,5 +1,5 @@
 // תרגול ממוקד – focused practice, on the emulators (functions, firestore, auth):
-// 1. a new parent sees the intro (focus right after progress), not "חדש!";
+// 1. a new parent sees the intro (focused practice on "רואים מה יושב – ומחזקים בלחיצה", screen 3 of 4), not "חדש!";
 // 2. a parent who already knows the app: "חדש! תרגול ממוקד" once, with the kid's real mistakes – then never again;
 // 3. the kid's card at home (an adult's): a set that ended with mistakes → "התרגול הסתיים!" with the right words; the one button
 //    makes a focused set at once (no build used), the card goes and the focused set is first; "תוקנו ✓" after a right answer;
@@ -33,7 +33,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   console.log('1. a new parent: the intro, with "תרגול ממוקד" – not "חדש!"');
   const c1 = await ctx({ google: PAR }); let p = await parent(c1);
   const keys = await p.evaluate(() => IN.list.join());
-  ok(keys === 'main,build,testday,progress,focus,share,safe', 'the parent\'s intro: ' + keys);
+  ok(keys === 'main,material,track,start', 'the parent\'s intro: ' + keys);
   await p.evaluate(() => introEnd()); await p.waitForTimeout(4500);
   ok(!(await p.$('#focusNew')), 'a new parent does not get "חדש!" (the intro showed it)');
 
@@ -144,11 +144,11 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const ne = await pe.evaluate(() => (document.getElementById('focusNew') || {}).innerText || '');
   ok(/New!/.test(ne) && /Focused practice/.test(ne) && !heb(ne).length, 'English "New!": ' + ne.replace(/\s+/g, ' ').slice(0, 80));
   await ce.close();
-  // the intro screens (opening + focus), Hebrew and English
+  // the intro screens (opening + focused practice: "track"), Hebrew and English
   for (const lang of ['he', 'en']) { const c = await b.newContext({ viewport: { width: 360, height: 740 } }); await c.addInitScript(l => localStorage.setItem('sff_lang', l), lang); const q = await c.newPage();
     await q.goto(APP, { waitUntil: 'load' }); await q.waitForTimeout(1200); await q.evaluate(() => { document.getElementById('fbLogin')?.remove(); openIntro(false); });
     await q.waitForTimeout(400); await q.screenshot({ path: `${OUT}/f_intro_main_${lang}.png` });
-    await q.evaluate(() => introGo(IN.list.indexOf('focus'))); await q.waitForTimeout(400); await q.screenshot({ path: `${OUT}/f_intro_focus_${lang}.png` }); await c.close(); }
+    await q.evaluate(() => introGo(IN.list.indexOf('track'))); await q.waitForTimeout(400); await q.screenshot({ path: `${OUT}/f_intro_focus_${lang}.png` }); await c.close(); }
   ok(!errs.length, 'no page errors ' + errs.slice(0, 3).join(' | '));
   await b.close();
 })().catch(e => { console.error(e); process.exit(1); });

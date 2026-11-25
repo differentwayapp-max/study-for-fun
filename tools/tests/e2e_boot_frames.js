@@ -11,7 +11,10 @@ const put = (path, obj) => fetch(`${DOCS}/${path}`, { method: 'PATCH', headers: 
 const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
-  const ctx = async (who, name) => { const c = await b.newContext({ viewport: { width: 360, height: 740 } });
+  // SLOW=1: a phone – the processor ×4 slower and every request 400 ms away (the owner still saw screens jump, 28.11)
+  const slow = async p => { if (!process.env.SLOW) return; const c = await p.context().newCDPSession(p); await c.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+    await c.send('Network.enable'); await c.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 1.5e6 / 8 * 10, uploadThroughput: 750e3 / 8 * 10 }); };
+  const ctx = async (who, name) => { const c = await b.newContext({ viewport: { width: 360, height: 740 } }); c.on('page', p => slow(p).catch(() => {}));
     await c.addInitScript(g => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); },
       { sub: who, email: who + '@t.local', email_verified: true, name }); return c; };
   // what the screen shows now – a short label of each visible part

@@ -6068,10 +6068,12 @@ setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduc
 // the teachers' app: after the logo, "רגע…" until the account, the group's students, requests, sets and games are in – then the
 // one right screen (never the family's screen, an empty group's steps or a home still filling in). The sign-in and the
 // explanation screens show above it. At most 20 s.
-(function bootGate(){ const h=document.documentElement; if(!h.classList.contains('booting')) return; const t0=Date.now(); window.__bootGateOn=true;
+(function bootGate(){ const h=document.documentElement; if(!h.classList.contains('booting')) return; let t0=Date.now(); window.__bootGateOn=true;
   const ready=()=>{ if(!window.SFF_ROLE||!window.__introDecided) return false; if(!isClassMode()) return true;
     return document.body.classList.contains('thapp') && CLS.gotC && CLS.gotR && window.__setsGot && (window.__progGot || Date.now()-t0>8000); };
-  const t=setInterval(()=>{ if(ready()||Date.now()-t0>20000){ clearInterval(t); window.__bootGateOn=false; try{ if(isClassMode()) renderKids(); }catch(e){} requestAnimationFrame(()=>{ if(!h.classList.contains('bootcover')) h.classList.remove('booting'); }); } },80); })();
+  /* the time on the sign-in, the first group's form or the explanation screens does not count (a slow sign-in once ran it out – 28.11) */
+  const t=setInterval(()=>{ if(document.getElementById('fbLogin')||document.getElementById('intro')) t0=Date.now();
+    if(ready()||Date.now()-t0>30000){ clearInterval(t); window.__bootGateOn=false; try{ if(isClassMode()) renderKids(); }catch(e){} requestAnimationFrame(()=>{ if(!h.classList.contains('bootcover')) h.classList.remove('booting'); }); } },80); })();
 // after a soft reload: keep the spinner until the cloud data is in, then fade it away
 (function(){ const h=document.documentElement; if(!h.classList.contains('soft')) return; const t0=Date.now(); $('splash')?.remove();
   if(window.__sffSoftMsg && window.__sffSoftMsg!=='1') window.sffLoading(window.__sffSoftMsg);

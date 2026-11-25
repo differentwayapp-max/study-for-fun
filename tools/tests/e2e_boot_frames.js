@@ -76,6 +76,30 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const s6 = await record(F, APP, 'parent_signin_intro', () => !!document.getElementById('intro'), async p => { if (await p.$('#fbLogin #fbGo')) await p.click('#fbLogin #fbGo'); });
   await F.waitForSelector('#intro', { timeout: 15000 }).catch(() => {});
   const bad = (seen, okRe) => seen.filter(x => !okRe.test(x.replace(/^\s*\d+ ms\s+/, '')));
+  // a teacher signing in with the explanation screens on (as on a real phone – the owner's report 28.11: stuck on a cover, then a half-made app)
+  const tn = await ctx('bootNewT', 'רונית', true), TN = await tn.newPage(); TN.on('pageerror', e => console.log('    page error:', e.message));
+  // a slow sign-in (25 s on the sign-in screen) – the loading screen still covers the app after it
+  const sl = await ctx('bootSlowT', 'דנה לוי'), SL = await sl.newPage(); await SL.goto(APP + 'teach'); await SL.waitForSelector('#fbLogin #fbGo'); await SL.waitForTimeout(25000);
+  await SL.click('#fbLogin #fbGo'); await SL.waitForTimeout(150);
+  ok(await SL.evaluate(() => !!document.getElementById('fbLogin') || document.documentElement.classList.contains('booting')), 'after 25 s on the sign-in screen: the next screen or "רגע…" – never the app half-made');
+  await SL.close();
+  const s7 = await record(TN, APP + 'teach', 'new_teacher_signin_onb', () => !!document.querySelector('#fbLogin #tsClass'), async p => { if (await p.$('#fbLogin #fbGo')) await p.click('#fbLogin #fbGo'); });
+  await TN.click('#tsClass').catch(() => {}); await TN.waitForSelector('#intro', { timeout: 15000 }).catch(() => {});
+  const s7b = await frame(TN); console.log('    after "מורה בבית ספר":', s7b);
+  ok(/INTRO:s1/.test(s7b), 'a new teacher: "class teacher" → the class teacher\'s explanation screens (' + s7b + ')');
+  await TN.evaluate(() => document.querySelector('#intro .iskip')?.click()); await TN.waitForSelector('#tsName', { timeout: 10000 }).catch(() => {});
+  ok(await TN.evaluate(() => !!document.getElementById('tsName')), '…then the group\'s form');
+  await TN.fill('#tsName', 'ג׳1'); await TN.click('#tsGo');
+  await TN.waitForFunction(() => window.SFF_ROLE && document.querySelector('.thhome') && !document.documentElement.classList.contains('booting'), null, { timeout: 30000 }).catch(() => {});
+  const s7c = await frame(TN); console.log('    then:', s7c);
+  ok(/home:new/.test(s7c) && /NAV:🏠היום/.test(s7c) && !/LOAD|INTRO/.test(s7c), 'a new teacher: the new group\'s home, the teachers\' tabs');
+  const to = await ctx('bootT', 'דנה לוי', true), TO = await to.newPage(); TO.on('pageerror', e => console.log('    page error:', e.message));
+  const s8 = await record(TO, APP + 'teach', 'teacher_signin_onb', () => !!document.getElementById('intro'), async p => { if (await p.$('#fbLogin #fbGo')) await p.click('#fbLogin #fbGo'); });
+  ok(s8.some(x => /INTRO:s1/.test(x)) && !bad(s8, /^(|\(navigating\)|SPLASH.*|LOAD:.*|LOGIN:.*|INTRO:.*)$/).length, 'a teacher signing in: the loading screen, then the explanation screens');
+  await TO.evaluate(() => document.querySelector('#intro .iskip')?.click());
+  await TO.waitForFunction(() => !document.getElementById('intro') && !document.documentElement.classList.contains('booting'), null, { timeout: 30000 }).catch(() => {}); await TO.waitForTimeout(800);
+  const s8c = await frame(TO); console.log('    after the screens:', s8c);
+  ok(/home:school/.test(s8c) && /NAV:🏠היום/.test(s8c), '…then the group\'s home');
   const T_OK = /^(|\(navigating\)|SPLASH.*|LOAD:.*|SOFT.*|LOGIN:.*|vKids ; home:school ; T:ד'2 · אנגלית ▾ ; NAV:.*)$/;   /* the loading screen, the sign-in, then only the teacher's full home */
   for (const [lab, s] of [['teacher_reopen', s1], ['teacher_reload_same_tab', s1b], ['teacher_reload2', s1c], ['teacher_signin', s3], ['teacher_back_to_teach', s5]]) {
     const b2 = bad(s, T_OK); ok(!b2.length, `${lab}: only the loading screen, then the teacher's home ${b2.length ? '– also: ' + b2.slice(0, 4).join(' | ') : ''}`); }

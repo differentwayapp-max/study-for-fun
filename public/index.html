@@ -493,7 +493,7 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .intro .imore.on{display:flex}
 .intro .imore button{pointer-events:auto;width:44px;height:44px;border-radius:50%;border:0;background:#1B2A4A;color:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
 .intro.dark .imore button{background:#fff;color:#1B2A4A}
-.icard0.ilow .iphone,.icard0.ilow .iopt,.icard0.icut .iopt{display:none!important}
+.icard0.ilow .iphone,.icard0.inop .iphone,.icard0.ilow .iopt,.icard0.icut .iopt{display:none!important}
 .intro .ispace{width:1px;pointer-events:none}
 .intro .icard0{position:absolute;top:0;transform-origin:0 0;min-height:0}
 .intro .ibot{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 20px max(10px,env(safe-area-inset-bottom))}
@@ -511,12 +511,16 @@ html[lang=en] .ifeat h1{font-size:52px!important}
 .icard0 p{margin:12px 0 0;font-size:15px;line-height:1.45;text-align:center;max-width:290px}
 .icard0 b{font-weight:700}
 .ibrand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;letter-spacing:.5px;color:#F2A63B}
-.itag{border-radius:99px;padding:5px 12px;font-size:13px;font-weight:700;margin-top:4px}
 .igrid{margin-top:22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;text-align:start}
 .igrid>div{border-radius:16px;padding:14px 12px;display:flex;flex-direction:column;gap:6px}.igrid>.iwide{grid-column:1 / -1;flex-direction:row;align-items:center;gap:10px;padding:10px 12px}.igrid>.iwide svg{flex:none}.igrid>.iwide>div{display:flex;flex-direction:column;gap:2px}.igrid b{font-size:16px}.igrid span{font-size:12px}
+.imap{width:100%;flex:none;margin-bottom:22px;background:#fff;border-radius:20px;padding:14px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;color:#1B2A4A;text-align:start}
+.imaprow{position:relative;display:flex;justify-content:space-between;align-items:flex-start}
+.imapl{position:absolute;top:17px;inset-inline:22px;height:4px;background:#D5DEF2;border-radius:4px}
+.imapl.on{inset-inline-end:auto;width:46%;background:#24C78E}
+.imaps{position:relative;display:flex;flex-direction:column;align-items:center;gap:5px;width:50px;font-size:11px;font-weight:700}
+.imapc{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .iphone{position:absolute;left:50%;transform:translateX(-50%);border:7px solid #0D1830;border-radius:34px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;text-align:start}
 .irow{display:flex;justify-content:space-between;align-items:center;gap:6px}
-.inode{position:absolute;width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-weight:800}
 .iava{border-radius:50%;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
 .ichips{margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:12px;font-weight:700}.ichips span{border-radius:99px;padding:5px 10px}
 .iround{width:30px;height:30px;border-radius:50%;background:#EAF0FF;display:flex;align-items:center;justify-content:center}
@@ -540,7 +544,6 @@ html[lang=en] .ifeat h1{font-size:52px!important}
 .iperson{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #EEEAFB}
 .iperson>span:last-child{border-radius:99px;padding:4px 9px;font-size:11px;font-weight:700;white-space:nowrap}
 .icta{margin-top:14px;width:100%;color:#fff;border-radius:16px;padding:14px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px}
-.isafe{background:#24365C;border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;text-align:start}.isafe b{font-size:15px}.isafe small{display:block;font-size:12px;color:#B9C6E4}
 .icard0.dark .istep{color:#1B2A4A}.istep .inum{width:40px;height:40px;border-radius:50%;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none}
 .ifeats{margin-top:14px;width:100%;display:flex;flex-direction:column;gap:10px}.ifeat2{border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-size:13px;text-align:start}.ifeat2 svg{flex:none}
 .isrc{flex:1;height:86px;border-radius:14px;border:2px dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:700}
@@ -4913,10 +4916,10 @@ function openPracticeShare(set){
 function shareCatalog(id){ const x=(CAT.list||[]).find(e=>e.id===id); if(x) openPracticeShare({subject:x.subject,grade:x.grade,src:x.id}); }
 
 /* ---------- first-run intro screens (the design in the "store screens + intro" canvas) ----------
-   Parents (right after the sign-in and the terms): screens 1, 3, 4, 5, 7, 8. A kid phone (first time from its link): 2 and 6 only –
-   no parent text, no "for parents" tags. Shown once: a parent's is kept with the account (users/{uid}.intro), a kid's in
+   Parents (right after the sign-in and the terms): main, material, track, start. A kid phone (first time from its link): play and
+   compete only – no parent text. No "for whom" tag on any screen (each series is already its reader's). Shown once: a parent's is kept with the account (users/{uid}.intro), a kid's in
    localStorage (no storage – e.g. Lockdown Mode – no intro). "דלג" counts as seen. Back any time: ☰ → איך זה עובד.
-   The same screens make the store pictures: /?intro=<1-8|feature>&shot=1 (tools/store_shots.js). Drawn in HTML, no pictures
+   The same screens make the store pictures: /?intro=<1-5|feature>&shot=1 (tools/store_shots.js). Drawn in HTML, no pictures
    (light, works offline, translated by i18n.js). Every claim here is checked against the app – keep them true. */
 const IC={
   star:(c,s=18,f=1)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" ${f?`fill="${c}"`:`fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"`} aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.7 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>`,
@@ -4926,7 +4929,6 @@ const IC={
   bars:'<path d="M3 20h18"/><path d="M6 16V11M11 16V7M16 16v-3M20 16V5"/>',
   ppl:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14c3 0 6 1.5 6 4.5"/>',
   cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
-  spark:'<path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
   ok:'<path d="M5 12l5 5 9-10"/>',
   target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
   spk:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 8a5 5 0 0 1 0 8"/>',
@@ -4935,21 +4937,22 @@ const IC={
   cup:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v4M8 21h8M9 18h6"/>',
   fire:'<path d="M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-8z"/>',
   circ:'<path d="M7 11l3 3 7-7"/><path d="M20 12a8 8 0 1 1-4-6.9"/>',
-  link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
-  shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
   noad:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
-  nocart:'<path d="M3 4h2l2.5 11h11L21 7H6.5"/><circle cx="9" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/><path d="M4 2l16 18"/>',
-  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
-  down:'<svg width="14" height="22" viewBox="0 0 14 22" aria-hidden="true"><path d="M7 2v16M2 13l5 6 5-6" stroke="#1B2A4A" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>',
   apple:s=>`<svg width="${s}" height="${s}" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18c-4-6-12-6-16-1-6 7-3 22 4 29 4 4 8 4 12 2 4 2 8 2 12-2 7-7 10-22 4-29-4-5-12-5-16 1z" fill="#E5484D"/><path d="M32 18c0-5 2-9 6-11" stroke="#6B3E1E" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M34 12c5-3 10-1 12 2-5 2-9 1-12-2z" fill="#24C78E"/></svg>`
 };
 const iT=s=>window.sffT?sffT(s):s;                                       // names: the avatar letter follows the language
 const iAva=(nm,bg,c,sz=40,fs=16,x='')=>`<span translate="no" class="iava" style="width:${sz}px;height:${sz}px;background:${bg};color:${c};font-size:${fs}px;${x}">${esc(iT(nm)[0])}</span>`;
-let INTRO_SHOT=false;                                                    // the "for the parent / for the kid" tag: only in the store's pictures (in the app each series is already its reader's)
-const iTag=(t,st,K)=>K||!INTRO_SHOT?'':`<span class="itag" style="${st}">${t}</span>`;
 const iPhone=(st,inner)=>`<div class="iphone" style="${st}">${inner}</div>`;
+// the opening screen's map card (the canvas's Main): 5 stations, right to left – part of the content, never a cut phone
+const iMap=()=>{ const sv=(c,inner)=>`<span class="imapc" style="${c}">${inner}</span>`, star=IC.star('#fff',18),
+    st=(cl,t,c,x='')=>`<div class="imaps" style="${x}">${c}<span>${t}</span></div>`;
+  return `<div class="imap">
+    <div class="irow" style="font-size:13px;font-weight:700"><span>המפה של נועה · אנגלית</span><span style="background:#FFF2C9;color:#946200;border-radius:99px;padding:3px 9px;font-size:12px;white-space:nowrap">עוד 3 ימים למבחן</span></div>
+    <div class="imaprow"><span class="imapl" aria-hidden="true"></span><span class="imapl on" aria-hidden="true"></span>
+      ${st(0,'פרק 1',sv('background:#24C78E',star))}${st(0,'פרק 2',sv('background:#24C78E',star))}${st(0,'היום',sv('background:#2F6BFF;color:#fff;font-size:16px;box-shadow:0 0 0 4px #C9D9FF','3'),'font-weight:800;color:#2F6BFF')}${st(0,'פרק 4',sv('background:#EAF0FF;font-size:15px','4'),'color:#4A4870')}${st(0,'מבחן',sv('background:#FF5C8A',IC.sv('#fff',17,IC.flag,2.2)),'color:#B3264F')}</div>
+    <div style="font-size:12px;color:#4A4870;text-align:center">כל תחנה – משחק אחר · כוכב = עברה את הפרק</div></div>`; };
 const INTRO={
-  main:K=>({bg:'#1B2A4A', dark:1, h:666, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
+  main:K=>({bg:'#1B2A4A', dark:1, html:`<div class="ibrand">${IC.star('#F2A63B',20,0)}<span translate="no">STUDY FOR FUN</span></div>
     <h1>לומדים למבחן<br><span style="color:#F2A63B">כמו במשחק</span></h1>
     <p style="color:#D5DEF2">תרגול לפי החומר של המבחן, עד יום המבחן – והילד פשוט נהנה</p>
     <div class="igrid">
@@ -4959,107 +4962,34 @@ const INTRO={
       <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>אחים, סבתא, מורה</span></div>
       <div class="iwide" style="background:#B9A7FF;color:#1B1440">${IC.sv('#1B1440',26,IC.target,2.2)}<div><b>תרגול ממוקד</b><span>נבנה לבד מהטעויות – רק מה שעוד לא יושב</span></div></div>
     </div>
-    ${iPhone('top:560px;width:250px;height:290px;background:#E4F1FF;padding:18px 16px',`
-      <div class="irow" style="color:#1B2A4A;font-size:12px;font-weight:700"><span>המפה של נועה</span><span style="background:#FFF2C9;color:#946200;border-radius:99px;padding:3px 9px">עוד 5 ימים</span></div>
-      <div style="position:relative;height:200px" dir="ltr">
-        <svg width="204" height="200" viewBox="0 0 204 200" style="position:absolute;inset:0" aria-hidden="true"><path d="M30 180 C 120 170, 170 140, 150 105 S 40 80, 60 45 S 160 20, 175 12" fill="none" stroke="#B9C9EE" stroke-width="5" stroke-dasharray="2 10" stroke-linecap="round"/></svg>
-        <div class="inode" style="left:13px;top:160px;background:#24C78E">${IC.star('#fff')}</div>
-        <div class="inode" style="left:130px;top:86px;background:#24C78E">${IC.star('#fff')}</div>
-        <div class="inode" style="left:32px;top:28px;width:44px;height:44px;background:#2F6BFF;border-width:4px;box-shadow:0 0 0 6px rgba(47,107,255,.25);color:#fff;font-size:16px">3</div>
-        <div class="inode" style="left:166px;top:-6px;width:32px;height:32px;background:#D5DEF2;color:#4A4870;font-size:13px">4</div>
-      </div>`)}`}),
-  play:K=>({bg:'#2F6BFF', dark:1, h:580, html:`${iTag('לילד','background:rgba(255,255,255,.18)',K)}
+    <div style="flex:1 0 18px" aria-hidden="true"></div>${iMap()}`}),
+  play:K=>({bg:'#2F6BFF', dark:1, html:`
     <h1>כל תחנה –<br>משחק אחר</h1>
     <p style="color:#E4ECFF">שאלות עם תמונות, זיכרון, התאמה וסידור אותיות – עם הקראה באנגלית</p>
     <div class="ichips"><span style="background:#fff;color:#2F6BFF">שאלות</span><span style="background:#F2A63B;color:#1B2A4A">זיכרון</span><span style="background:#24C78E;color:#0E2E22">התאמה</span><span style="background:#FF5C8A;color:#3A0716">איות</span></div>
-    ${iPhone('top:360px;width:270px;height:400px;background:#fff;padding:20px 16px;gap:12px;color:#1B2A4A',`
+    ${iPhone('bottom:18px;width:270px;height:396px;background:#fff;padding:20px 16px;gap:12px;color:#1B2A4A',`
       <div class="irow" style="font-size:12px;font-weight:700"><span>תחנה 3 · 6/10</span><span style="color:#2F6BFF" translate="no">English</span></div>
       <div style="height:6px;background:#EAF0FF;border-radius:9px"><div style="width:60%;height:6px;background:#2F6BFF;border-radius:9px"></div></div>
       <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-top:4px" translate="no"><b style="font-size:19px" dir="ltr">What is this?</b><span class="iround">${IC.sv('#2F6BFF',16,IC.spk,2.2)}</span></div>
       <div style="height:96px;background:#FFF3CC;border-radius:18px;display:flex;align-items:center;justify-content:center">${IC.apple(70)}</div>
       <div class="iopts" dir="ltr" translate="no"><div>pear</div><div class="on">apple</div><div>grape</div><div>lemon</div></div>
       <div style="align-self:center;background:#14A774;color:#fff;border-radius:99px;padding:7px 14px;font-size:14px;font-weight:700">מעולה! 3 ברצף</div>`)}`}),
-  build:K=>({bg:'#F2A63B', html:`${iTag('להורה','background:rgba(27,42,74,.12)',K)}
-    <h1 style="font-size:32px">מצלמים את החומר<br>מקבלים תרגול</h1>
-    <p>דף מהמחברת, צילום של דף העבודה או PDF מהמורה – והתרגול נבנה בדיוק על מה שיהיה במבחן</p>
-    <div class="isteps">
-      <div class="istep"><span class="iico" style="background:#FFF3CC">${IC.sv('#946200',24,IC.cam)}</span><div><b>1. מצלמים</b><small>"מבחן בחלוקה – עמודים 42–47"</small></div></div>${IC.down}
-      <div class="istep"><span class="iico" style="background:#EAF0FF">${IC.sv('#2F6BFF',24,IC.spark)}</span><div><b>2. התרגול נבנה</b><small>5 פרקים · 45 שאלות · בדיקה כפולה</small></div></div>${IC.down}
-      <div class="istep" style="background:#1B2A4A;color:#fff"><span class="iico" style="background:#24C78E">${IC.sv('#0E2E22',24,IC.ok,2.4)}</span><div><b>3. הילד כבר משחק</b><small style="color:#D5DEF2">נשלח בקישור אישי לטלפון שלו</small></div></div>
-    </div>
-    <div style="margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:13px;font-weight:700">או בוחרים מוכן מהקטלוג</span>
-      <div class="ichips" style="margin:0"><span style="background:#fff">אנגלית</span><span style="background:#fff">מתמטיקה</span><span style="background:#fff">לשון</span><span style="background:#fff">מדעים</span></div></div>`}),
-  testday:K=>{ const d=(day,cls,inner,lbl,st='')=>`<div><span style="color:${cls}">${day}</span><span class="iday" style="${st}">${inner}</span><span>${lbl}</span></div>`;
-    return {bg:'#24C78E', html:`${iTag('להורה','background:rgba(14,46,34,.12)',K)}
-    <h1 style="font-size:32px">מגיעים מוכנים<br>ליום המבחן</h1>
-    <p>בוחרים תאריך – והפרקים מתחלקים לבד, קצת בכל יום. בלי לחץ של הרגע האחרון</p>
-    <div class="icard" style="margin-top:24px">
-      <div class="irow"><b style="font-size:15px">מבחן באנגלית</b><span style="background:#1B2A4A;color:#fff;border-radius:12px;padding:6px 10px;font-size:13px;font-weight:700">יום ה׳ · 26.11</span></div>
-      <div class="iweek">${d('א׳','#4A4870',IC.star('#fff',16),'פרק 1','background:#24C78E')}${d('ב׳','#4A4870',IC.star('#fff',16),'פרק 2','background:#24C78E')}${d('היום','#2F6BFF','3','פרק 3','background:#2F6BFF;color:#fff;box-shadow:0 0 0 3px #C9D9FF')}${d('ד׳','#4A4870','4','פרק 4','background:#EAF0FF;color:#4A4870')}${d('ה׳','#4A4870',IC.sv('#946200',16,IC.again,2.4),'חזרה','background:#FFF2C9')}${d('ו׳','#4A4870',IC.sv('#fff',16,IC.flag,2.2),'מבחן','background:#FF5C8A')}</div>
-    </div>
-    <div class="istats"><div>${IC.sv('#F2A63B',28,IC.cup)}<span>גביע על כל יום שעומדים ביעד</span></div><div><b>70%</b><span>ומעלה = כוכב. פחות? נשאר פתוח לתרגול</span></div></div>
-    <p style="margin-top:16px;font-size:13px;font-weight:500">שאלות מפרקים קודמים חוזרות בהמשך – כדי שהחומר לא יישכח</p>`}; },
-  progress:K=>{ const bar=(t,v,c,tc)=>`<div><div class="irow"><span>${t}</span><b style="color:${tc}">${v}%</b></div><div class="ibar"><div style="width:${v}%;background:${c}"></div></div></div>`;
-    return {bg:'#E4F1FF', h:620, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
-    <h1 style="font-size:32px">יודעים בדיוק<br><span style="color:#2F6BFF">מה כבר יושב</span></h1>
-    <p style="color:#4A4870">ההורה רואה את ההתקדמות של כל ילד. הילד רואה מה לחזק – ומתרגל את זה בלחיצה</p>
-    ${iPhone('top:320px;width:276px;height:440px;background:#fff;padding:20px 16px;gap:12px',`
-      <div style="display:flex;align-items:center;gap:10px">${iAva('נועה','#FFE4EC','#B3264F')}<div style="flex:1"><b style="font-size:15px">נועה · כיתה ד׳</b><div style="font-size:11px;color:#4A4870">תרגלה היום · 4 ימים ברצף</div></div>
-        <span style="display:flex;align-items:center;gap:3px;font-weight:800;color:#946200;font-size:14px">${IC.star('#F2A63B',16)}3/5</span></div>
-      <div class="ibars">${bar('אוצר מילים – בית',92,'#14A774','#0B6B4A')}${bar('Present Simple',80,'#14A774','#0B6B4A')}${bar('מילות שאלה',58,'#F2A63B','#946200')}</div>
-      <div style="background:#FFF2C9;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px"><b style="font-size:13px;color:#6B4700">לחיזוק</b>
-        <div class="ichips" style="margin:0;justify-content:flex-start" dir="ltr" translate="no"><span style="background:#fff">where</span><span style="background:#fff">which</span><span style="background:#fff">kitchen</span></div></div>
-      <div style="background:#2F6BFF;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:14px">תרגול ממוקד · רק את אלה</div>`)}`}; },
-  focus:K=>{ const row=(t,v,c,lbl,bg,tc)=>`<div class="irow" style="gap:8px;font-size:12px"><span style="flex:1">${t}</span><b style="color:${c}">${v}%</b><span style="background:${bg};color:${tc};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">${lbl}</span></div>`;
-    const step=(t,on)=>`<span style="${on?'background:#1B2A4A;color:#fff':'background:#fff'};border-radius:12px;padding:8px 6px;flex:1;text-align:center">${t}</span>`, arr=IC.sv('#3A0716',14,'<path d="M15 6l-6 6 6 6"/>',2.4);
-    return {bg:'#FF5C8A', h:640, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
-    <h1 style="font-size:31px">התרגול הסתיים?<br><span style="color:#fff">עכשיו מחזקים בדיוק<br>את מה שחסר</span></h1>
-    <p style="color:#3A0716;font-size:14px;max-width:300px">במסך המעקב רואים מה כבר יושב ומה עוד לא – ובלחיצה אחת בונים תרגול ממוקד רק על זה, בקצב של הילד</p>
-    <div class="icard" style="margin-top:16px;gap:9px;padding:14px">
-      <div class="irow"><b style="font-size:14px">אנגלית · נועה</b><span style="background:#DDF8EC;color:#0B6B4A;border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700">הושלם · 5/5 פרקים</span></div>
-      <div style="display:flex;flex-direction:column;gap:6px">${row('אוצר מילים – בית',92,'#0B6B4A','שולטת','#DDF8EC','#0B6B4A')}${row('<span translate="no">Present Simple</span>',76,'#946200','כמעט שם','#FFF2C9','#6B4700')}${row('מילות שאלה',55,'#A3262B','לחזק','#FFE3E4','#A3262B')}</div>
-      <div style="height:1px;background:#EEF2F7"></div><div style="font-size:12px;font-weight:700;color:#4A4870">מילים לחיזוק</div>
-      <div class="ichips" style="margin:0;justify-content:flex-start;font-size:13px" dir="ltr" translate="no"><span style="background:#FFE3E4;color:#A3262B">✗2 where</span><span style="background:#FFE3E4;color:#A3262B">✗2 whose</span><span style="background:#FFF2C9;color:#6B4700">✗1 which</span></div>
-      <div style="background:#1B2A4A;color:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px">${IC.sv('#F2A63B',18,IC.target,2.2)}<span>תרגול ממוקד · 3 מילים</span></div>
-      <div style="text-align:center;font-size:11px;color:#4A4870">מוכן מיד, ולא מנצל בנייה חודשית</div></div>
-    <div style="margin-top:14px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:4px;font-size:11px;font-weight:700;color:#3A0716">${step('מתרגלים')}${arr}${step('עוקבים')}${arr}${step('ממקדים',1)}${arr}${step('שוב')}</div>`}; },
   compete:K=>{ const col=(nm,c,place,pts,h,top,big)=>`<div class="ipod">${top?`<svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true"><path d="M2 20L4 4l7 7 4-9 4 9 7-7 2 16z" fill="#F2A63B" stroke="#3A0716" stroke-width="1.5" stroke-linejoin="round"/></svg>`:''}
       ${iAva(nm,'#fff',c,big?60:50,big?24:20,big?'box-shadow:0 0 0 4px #F2A63B':'')}<b style="font-size:${big?15:14}px">${nm}</b>
       <div style="height:${h}px;${big?'background:#1B2A4A;color:#fff':'background:#fff;color:#4A4870'}"><b style="font-size:${big?32:26}px;${big?'color:#F2A63B':''}">${place}</b><span>${pts} נקודות</span></div></div>`;
-    return {bg:'#FF5C8A', html:`${iTag('בין האחים','background:rgba(58,7,22,.12)',K)}
+    return {bg:'#FF5C8A', html:`
     <h1 style="font-size:32px">תחרות ידידותית<br>שמדרבנת לתרגל</h1>
     <p>לוח אלופים לאחים שמתרגלים את אותו תרגול – כל תרגול שמסיימים מוסיף נקודות${K?'':'. ההורה מפעיל ומכבה'}</p>
     <div class="ipodium">${col('יואב','#2F6BFF',2,110,96)}${col('נועה','#B3264F',1,140,140,1,1)}${col('תמר','#0B6B4A',3,90,72)}</div>
     <div class="icard iopt" style="border-radius:0 0 18px 18px;padding:14px;gap:10px;font-size:13px">
       <div style="display:flex;align-items:center;gap:10px">${IC.sv('#B3264F',20,IC.cup)}<span>גביע יומי = עוד 5 נקודות</span></div>
-      <div style="display:flex;align-items:center;gap:10px">${IC.sv('#B3264F',20,IC.circ)}<span>כולם צוברים – אף אחד לא "מפסיד"</span></div></div>`}; },
-  share:K=>{ const row=(nm,bg,c,sub,role,rst,last)=>`<div class="iperson" style="${last?'border:0':''}">${iAva(nm,bg,c)}<div style="flex:1"><b style="font-size:14px">${nm}</b><div style="font-size:12px;color:#4A4870">${sub}</div></div><span style="${rst}">${role}</span></div>`;
-    const rl='background:#EEEAFB;color:#3B2E86';
-    return {bg:'#B9A7FF', html:`${iTag('להורה','background:rgba(27,20,64,.12)',K)}
-    <h1 style="font-size:32px">כל מי שמלווה<br>באותו מקום</h1>
-    <p>מזמינים בקישור את בן/בת הזוג, סבא וסבתא או מורה פרטי – וכולם רואים מה לחזק</p>
-    <div class="icard" style="margin-top:24px;padding:8px 14px;gap:0">
-      ${row('שירה (אמא)','#EAF0FF','#2F6BFF','בונה תרגולים','מנהלת','background:#1B2A4A;color:#fff')}
-      ${row('אבא','#DDF6EC','#0B6B4A','רואה התקדמות ומוסיף תרגולים','מלווה',rl)}
-      ${row('סבתא רותי','#FFE4EC','#B3264F','רואה את ההתקדמות','מלווה',rl)}
-      ${row('דנה – מורה פרטית','#FFF3CC','#946200','רואה רק את הילדים שנבחרו','מורה','background:#FFF2C9;color:#6B4700',1)}
-    </div>
-    <div class="icta" style="background:#1B1440">${IC.sv('#fff',18,IC.link,2.2)}<span>הזמנה בקישור – בוואטסאפ</span></div>
-    <p style="margin-top:12px;font-size:13px;font-weight:500">המורה רואה רק את התלמידים שלו – לא את שאר המשפחה</p>`}; },
-  safe:(K,shot)=>{ const it=(ic,c,t,s)=>`<div class="isafe">${IC.sv(c,26,ic)}<div><b>${t}</b><small>${s}</small></div></div>`;
-    return {bg:'#1B2A4A', dark:1, html:`<div style="width:72px;height:72px;border-radius:24px;background:#24C78E;display:flex;align-items:center;justify-content:center;flex:none">${IC.sv('#0E2E22',38,IC.shield)}</div>
-    <h1 style="margin-top:18px;font-size:32px">שקט נפשי<br><span style="color:#24C78E">להורים</span></h1>
-    <p style="color:#D5DEF2">נבנה בשביל ילדים – בלי שום דבר שמסיח אותם מהלמידה</p>
-    <div style="margin-top:26px;width:100%;display:flex;flex-direction:column;gap:10px">
-      ${it(IC.noad,'#FF5C8A','אפס פרסומות','אף פעם, לאף ילד')}${it(IC.nocart,'#F2A63B','הילד לא יכול לקנות כלום','אין רכישות בטלפון של הילד')}
-      ${it(IC.link,'#B9A7FF','כניסה בקישור אישי','בלי אימייל ובלי סיסמה לילד')}${it(IC.globe,'#7FB0FF','עברית ואנגלית','ממשק בשתי השפות')}
-    </div>${shot?'<div style="margin-top:22px;background:#F2A63B;color:#1B2A4A;border-radius:99px;padding:13px 28px;font-weight:800;font-size:16px">מתחילים בחינם</div>':''}`}; }
+      <div style="display:flex;align-items:center;gap:10px">${IC.sv('#B3264F',20,IC.circ)}<span>כולם צוברים – אף אחד לא "מפסיד"</span></div></div>`}; }
 };
 /* the parent's intro: 4 screens (the canvas "היכרות ההורה – 4 מסכים במקום 7", Fam2–4): each drawn at 360 × 560, one picture, no phone frame.
-   The store keeps its 8 screens (INTRO_ALL) – build, testday, progress, focus, share and safe stay for it. */
+   The store shows main, play, material, track and family (INTRO_ALL); there material and track (drawn at 360 × 560) stand in the middle of the 720. */
 Object.assign(INTRO,{
   material:K=>{ const d=(day,c,st,inner,lbl)=>`<div><span style="color:${c}">${day}</span><span class="iday" style="width:32px;height:32px;${st}"${lbl?` aria-label="${lbl}"`:''}>${inner}</span></div>`;
-    return {bg:'#F2A63B', h:470, html:`${iTag('להורה','background:rgba(27,42,74,.12)',K)}
+    return {bg:'#F2A63B', html:`
     <h1 style="margin-top:12px;font-size:32px">החומר שלכם<br>עד יום המבחן</h1>
     <p style="margin-top:10px;max-width:300px">מצלמים את דף החומר ובוחרים תאריך – והתרגול מתחלק לבד, קצת בכל יום</p>
     <div class="icard" style="margin-top:18px;padding:14px;gap:12px">
@@ -5069,7 +4999,7 @@ Object.assign(INTRO,{
       <div class="iweek" style="gap:5px">${d('א׳','#4A4870','background:#24C78E',IC.star('#fff',15),'הושלם')}${d('ב׳','#4A4870','background:#24C78E',IC.star('#fff',15),'הושלם')}${d('היום','#2F6BFF','background:#2F6BFF;color:#fff;box-shadow:0 0 0 3px #C9D9FF','3')}${d('ד׳','#4A4870','background:#EAF0FF;color:#4A4870','4')}${d('ה׳','#4A4870','background:#FFF2C9',IC.sv('#946200',15,IC.again,2.4),'חזרה')}${d('ו׳','#4A4870','background:#FF5C8A',IC.sv('#fff',15,IC.flag,2.2),'מבחן')}</div></div>
     <p style="margin-top:14px;font-size:13px;font-weight:700">או בוחרים תרגול מוכן מהקטלוג – בלי לחכות</p>`}; },
   track:K=>{ const row=(t,v,c,lbl,bg,tc)=>`<div style="display:flex;align-items:center;gap:8px"><span style="flex:1">${t}</span><span style="width:64px;height:7px;background:#EAF0FF;border-radius:9px;flex:none" dir="ltr"><span style="display:block;width:${v}%;height:7px;background:${c};border-radius:9px"></span></span><span style="background:${bg};color:${tc};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">${lbl}</span></div>`;
-    return {bg:'#FF5C8A', h:500, html:`${iTag('להורה','background:#1B2A4A;color:#fff',K)}
+    return {bg:'#FF5C8A', html:`
     <h1 style="margin-top:12px;font-size:32px;color:#3A0716">רואים מה יושב<br><span style="color:#fff">ומחזקים בלחיצה</span></h1>
     <p style="margin-top:10px;max-width:300px;color:#3A0716">${FOCUS_LINE}</p>
     <div class="icard" style="margin-top:18px;padding:14px;gap:9px">
@@ -5080,14 +5010,27 @@ Object.assign(INTRO,{
       <div class="iopt" style="text-align:center;font-size:12px;color:#0B6B4A;font-weight:700">אחר כך תראו מה תוקן ✓</div></div>`}; },
   start:K=>{ const st=(n,t,s,on)=>`<div class="istep" style="padding:12px 14px;${on?'box-shadow:0 0 0 4px #F2A63B':''}"><span class="inum" style="width:38px;height:38px;font-size:17px;background:${on?'#F2A63B':'#EAF0FF'};color:${on?'#1B2A4A':'#1E4FD6'}">${n}</span><div><b>${t}</b><small>${s}</small></div></div>`,
       li=t=>`<span style="display:flex;align-items:center;gap:5px">${IC.sv('#24C78E',14,IC.ok,2.6)}${t}</span>`;
-    return {bg:'#1B2A4A', dark:1, h:450, html:`${iTag('להורה','background:#24C78E;color:#0E2E22',K)}
+    return {bg:'#1B2A4A', dark:1, html:`
     <h1 style="margin-top:12px;font-size:32px">מתחילים<br><span style="color:#F2A63B">ב-3 צעדים</span></h1>
     <p style="margin-top:10px;max-width:300px;color:#D5DEF2">פחות מ-2 דקות, והילד כבר משחק</p>
     <div style="margin-top:18px;width:100%;display:flex;flex-direction:column;gap:10px">${st(1,'מוסיפים ילד','שם וכיתה – זהו',1)}${st(2,'בוחרים תרגול','מוכן מהקטלוג, או מצלמים את החומר')}${st(3,'שולחים לילד קישור','בוואטסאפ – והוא נכנס בלי סיסמה')}</div>
     <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;color:#B9C6E4">${li('בלי פרסומות')}${li('בלי רכישות לילד')}${li('אפשר לצרף את בן/בת הזוג, סבתא או מורה')}</div>`}; }
 });
+/* the store's 5th screen (the canvas's StoreFamily – store only, not in any intro): siblings compete, adults follow, safe for kids */
+INTRO.family=K=>{ const kid=(nm,bg,c,place,pts,h,top)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">${iAva(nm,bg,c,top?44:38,top?18:16,top?'box-shadow:0 0 0 3px #F2A63B':'')}<b style="font-size:12px"><bdi>${esc(iT(nm))}</bdi></b>
+      <div style="width:100%;height:${h}px;background:${top?'#1B2A4A':'#EAF0FF'};border-radius:12px 12px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center"><b style="font-size:${top?22:place===2?18:16}px;color:${top?'#F2A63B':'#4A4870'}">${place}</b><span style="font-size:11px;color:${top?'#fff':'#4A4870'};font-weight:700">${pts} כוכבים</span></div></div>`,
+    adult=(t,l,bg,c)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px">${iAva(l,bg,c,40,16)}<span>${t}</span></div>`,
+    li=t=>`<span style="display:flex;align-items:center;gap:5px">${IC.sv('#1B1440',14,IC.ok,2.6)}${t}</span>`;
+  return {bg:'#B9A7FF', html:`<h1 style="margin-top:4px;font-size:32px;color:#1B1440">כל המשפחה<br>מתרגלת יחד</h1>
+    <p style="color:#1B1440;max-width:300px">אחים מתחרים בכיף על כוכבים – וסבתא, בן/בת הזוג או המורה הפרטי רואים את ההתקדמות</p>
+    <div class="icard" style="margin-top:22px;padding:14px 14px 0;gap:8px;border-radius:22px;color:#1B1440"><b style="font-size:13px;color:#4A4870">לוח האלופים · אנגלית</b>
+      <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px">${kid('יואב','#EAF0FF','#2F6BFF',2,11,58)}${kid('נועה','#FFE4EC','#B3264F',1,14,82,1)}${kid('תמר','#DDF6EC','#0B6B4A',3,9,42)}</div></div>
+    <div class="icard" style="margin-top:12px;padding:12px 14px;gap:10px;border-radius:22px;color:#1B1440"><b style="font-size:13px;color:#4A4870">עוקבים ומעודדים</b>
+      <div style="display:flex;justify-content:space-between;text-align:center;font-size:11px;font-weight:700">${adult('אמא','שירה','#EAF0FF','#2F6BFF')}${adult('אבא','אבא','#DDF6EC','#0B6B4A')}${adult('סבתא רותי','רותי','#FFE4EC','#B3264F')}${adult('דנה, מורה','דנה','#FFF3CC','#946200')}</div>
+      <div style="background:#1B1440;color:#fff;border-radius:12px;padding:10px;text-align:center;font-size:13px;font-weight:700">מזמינים בקישור – בוואטסאפ</div></div>
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;font-weight:700;color:#1B1440">${li('בלי פרסומות')}${li('בלי רכישות')}${li('בלי אימייל לילד')}</div>`}; };
 const INTRO_SETS={parent:['main','material','track','start'], kid:['play','compete']};
-const INTRO_ALL=['main','play','build','focus','progress','testday','compete','share'];   // the store order 1–8 ("safe" is in the store's description)
+const INTRO_ALL=['main','play','material','track','family'];   // the store's 5 screens, in order (the canvas's "חנות – 5 מסכים במקום 8")
 const IN={list:[],i:0,kid:false,mode:null};
 /* ---------- the teachers' intro (the "store screens + intro" canvas: Tutor1–5, School1–6) ----------
    An invited tutor (role tutor): t1–t5, the first time in the family after the invitation (kept in users/{uid}.introTutor).
@@ -5116,15 +5059,15 @@ function tCtx(){
 }
 // a translated sentence with a name in it: the name kept apart, so its direction doesn't scramble the sentence
 const iName=(t,n)=>esc(t).split(esc(n)).join(`<bdi>${esc(n)}</bdi>`);
-const iPal=p=>p?{dark:'#2A2068',acc:'#5B47D6',light:'#EDE9FF',light2:'#EDE9FF',sub:'#DCD5FF',chip:'#3B2E86',accTxt:'#3B2E86',tag:'למורה הפרטי',tagBg:'#B9A7FF',tagC:'#1B1440'}
-  :{dark:'#1B2A4A',acc:'#2F6BFF',light:'#E4F1FF',light2:'#EAF0FF',sub:'#D5DEF2',chip:'#24365C',accTxt:'#1E4FD6',tag:'למורה בבית הספר',tagBg:'#2F6BFF',tagC:'#fff'};
+const iPal=p=>p?{dark:'#2A2068',acc:'#5B47D6',light:'#EDE9FF',light2:'#EDE9FF',sub:'#DCD5FF',chip:'#3B2E86',accTxt:'#3B2E86'}
+  :{dark:'#1B2A4A',acc:'#2F6BFF',light:'#E4F1FF',light2:'#EAF0FF',sub:'#D5DEF2',chip:'#24365C',accTxt:'#1E4FD6'};
 const iStep=(n,t,s,on,P)=>`<div class="istep" style="${on?'box-shadow:0 0 0 4px #F2A63B':''}"><span class="inum" style="background:${n==='ok'?'#24C78E':on?'#F2A63B':P.light2};color:${on||n==='ok'?'#1B2A4A':P.accTxt}">${n==='ok'?IC.sv('#0E2E22',20,IC.ok,2.6):n}</span><div><b>${t}</b><small>${s}</small></div></div>`;
 const iFeat=(ic,t,bg,c)=>`<div class="ifeat2" style="background:${bg}">${IC.sv(c,20,ic)}<span>${t}</span></div>`;
 Object.assign(INTRO,{
   t1:()=>{ const C=tCtx(), P=iPal(1);
     const row=k=>{ const s=sets.find(x=>x.kidId===k.id&&!x.demo), ex=s&&s.examDate&&daysLeft(s.examDate)>=0?` · מבחן ב-${fmtDate(s.examDate)}`:'';
       return `<div class="iperson" style="border:0;padding:0">${iAva(k.name,'#FFE4EC','#B3264F',38,16)}<div style="flex:1"><b style="font-size:14px"><bdi>${esc(k.name)}</bdi> · <span>כיתה ${GRADES[+k.grade||0]}</span></b>${s?`<div style="font-size:12px;color:#4A4870">${esc(s.subject||'')}${ex}</div>`:''}</div></div>`; };
-    return {bg:P.dark, dark:1, h:620, html:`${iTag(P.tag,`background:${P.tagBg};color:${P.tagC}`)}
+    return {bg:P.dark, dark:1, html:`
     <h1 style="font-size:32px">השיעור ממשיך<br><span style="color:#B9A7FF">גם אחרי שהלכתם</span></h1>
     <p style="color:#DCD5FF">${C.one?`<span translate="no">${iName(iT(`המשפחה של ${C.one.name} הזמינה אותך. מעכשיו רואים יחד מה ${C.one.name} יודע/ת, ונותנים תרגול כיפי עד השיעור הבא`),C.one.name)}</span>`:'המשפחה הזמינה אותך. מעכשיו רואים יחד מה התלמידים שלך יודעים, ונותנים תרגול כיפי עד השיעור הבא'}</p>
     <div class="icard" style="margin-top:24px">
@@ -5132,10 +5075,10 @@ Object.assign(INTRO,{
       <div style="height:1px;background:#EEEAFB"></div><div style="font-size:12px;font-weight:700;color:#4A4870">התלמידים שלך כאן</div>
       ${C.ks.map(row).join('')}</div>
     <div class="ifeats iopt">${iFeat(IC.eye,'רואים רק את התלמידים שההורה בחר','#3B2E86','#B9A7FF')}${iFeat(IC.plus,'אפשר להוסיף ולשנות תרגולים בעצמך','#3B2E86','#B9A7FF')}</div>`}; },
-  t2:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#EDE9FF', h:600, html:`${iTag('למורה הפרטי','background:#2A2068;color:#fff')}
+  t2:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#EDE9FF', html:`
     <h1 style="font-size:32px">מגיעים לשיעור<br><span style="color:#5B47D6">כשכבר יודעים מה לחזק</span></h1>
     <p style="color:#4A4870">דקה לפני השיעור רואים מה התלמיד תרגל, איפה הצליח ובאיזה נושא הוא עדיין נתקע</p>
-    ${iPhone('top:310px;width:276px;height:430px;background:#fff;padding:20px 16px;gap:12px',`
+    ${iPhone('bottom:18px;width:276px;height:420px;background:#fff;padding:20px 16px;gap:12px',`
       <div style="display:flex;align-items:center;gap:10px">${iAva(nm,'#FFE4EC','#B3264F',38,16)}<div style="flex:1"><b style="font-size:14px" translate="no"><bdi>${esc(nm)}</bdi></b><div style="font-size:11px;color:#4A4870">מאז השיעור הקודם: 3 תחנות</div></div></div>
       <div style="background:#FFE3E4;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:13px;color:#A3262B">נתקע/ה ב:</b>
         <div class="irow" style="font-size:13px"><span>מילות שאלה</span><b style="color:#A3262B">58%</b></div>
@@ -5143,7 +5086,7 @@ Object.assign(INTRO,{
       <div style="background:#DDF8EC;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:13px;color:#0B6B4A">כבר יושב:</b>
         <div class="irow" style="font-size:13px"><span>אוצר מילים – בית</span><b style="color:#0B6B4A">92%</b></div><div class="irow" style="font-size:13px"><span translate="no">Present Simple</span><b style="color:#0B6B4A">80%</b></div></div>
       <div style="display:flex;align-items:center;gap:8px;background:#EDE9FF;border-radius:14px;padding:10px 12px;font-size:12px;font-weight:500">${IC.sv('#5B47D6',18,IC.bulb)}<span>כך השיעור מתחיל ישר מהנקודה הנכונה</span></div>`)}`}; },
-  t3:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#5B47D6', dark:1, h:600, html:`${iTag('למורה הפרטי','background:rgba(255,255,255,.18)')}
+  t3:()=>{ const C=tCtx(), nm=C.nm||'התלמיד/ה'; return {bg:'#5B47D6', dark:1, html:`
     <h1 style="font-size:32px">החומר מהשיעור<br><span style="color:#FFD98A">הופך לשיעורי בית כיפיים</span></h1>
     <p style="color:#E6E0FF">מצלמים את הדף שעבדתם עליו או מעלים PDF – והתלמיד מקבל אותו כמשחק</p>
     <div class="icard" style="margin-top:22px">
@@ -5153,7 +5096,7 @@ Object.assign(INTRO,{
       <div style="background:#5B47D6;color:#fff;border-radius:14px;padding:12px;text-align:center;font-weight:700;font-size:15px">לבנות תרגול</div></div>
     <div class="iopt" style="margin-top:14px;display:flex;align-items:center;gap:8px;font-size:13px;color:#E6E0FF">${IC.sv('#FFD98A',18,IC.ok,2.2)}<span>כל שאלה נבדקת לפני שהיא מגיעה לתלמיד</span></div>`}; },
   t4:()=>{ const C=tCtx(), r=(bg,ic,t,v,c,last)=>`<div class="irow" style="gap:10px;font-size:13px;padding:6px 0;${last?'':'border-bottom:1px solid #EEF2F7'}"><span class="iava" style="width:28px;height:28px;border-radius:8px;background:${bg}">${ic}</span><span style="flex:1">${t}</span>${v}</div>`;
-    return {bg:'#24C78E', h:600, html:`${iTag('למורה הפרטי','background:#2A2068;color:#fff')}
+    return {bg:'#24C78E', html:`
     <h1 style="font-size:32px">התלמיד מתרגל<br>גם בין השיעורים</h1>
     <p>התרגול מתחלק עד יום המבחן. ההורה, את/ה והתלמיד רואים אותה התקדמות</p>
     <div class="icard" style="margin-top:22px;gap:4px">
@@ -5162,7 +5105,7 @@ Object.assign(INTRO,{
       ${r('#FFF2C9',IC.sv('#946200',16,IC.again,2.4),'ג׳ · מילות שאלה','<b style="color:#946200">58%</b>')}${r('#5B47D6',IC.sv('#fff',15,IC.cap,2.2),'ד׳ · התרגול שלך מהשיעור','<span style="color:#4A4870;font-size:12px">מחר</span>',1)}</div>
     <div class="istats iopt"><div><b style="font-size:14px;color:#BFF0DC">פחות "לא הספקתי"</b><span style="color:#fff">יודעים אם התרגול נעשה</span></div><div><b style="font-size:14px;color:#BFF0DC">ההורים רואים</b><span style="color:#fff">את ההשקעה שלך</span></div></div>`}; },
   t5:()=>{ const C=tCtx(), P=iPal(1);
-    return {bg:P.dark, dark:1, h:520, html:`${iTag(P.tag,`background:${P.tagBg};color:${P.tagC}`)}
+    return {bg:P.dark, dark:1, html:`
     <h1 style="font-size:32px">מתחילים<br><span style="color:#F2A63B">ב-3 צעדים</span></h1>
     <p style="color:#DCD5FF">לוקח פחות מדקה, ואפשר לחזור לכאן תמיד מהתפריט ☰</p>
     <div class="isteps" style="gap:12px">${iStep('ok','נכנסת מקישור ההזמנה','עם חשבון Google – זהו, את/ה בפנים',0,P)}
@@ -5170,7 +5113,7 @@ Object.assign(INTRO,{
       ${iStep(3,'מוסיפים תרגול','מהקטלוג, או מצלמים את חומר השיעור',0,P)}</div>`}; },
   s1:()=>{ const P=iPal(IN.mode==='private'), pv=IN.mode==='private';
     const g=(lb,lbg,lc,t,s,on)=>`<div class="igrp" style="${on?`background:${P.light2};box-shadow:inset 0 0 0 2px ${P.acc}`:'border:1px solid #E3E9F5'}"><span class="iava" style="width:40px;height:40px;border-radius:12px;background:${lbg};color:${lc};font-size:13px">${lb}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div style="font-size:12px;color:#4A4870">${s}</div></div></div>`;
-    return {bg:P.dark, dark:1, h:640, html:`${iTag(P.tag,`background:${P.tagBg};color:${P.tagC}`)}
+    return {bg:P.dark, dark:1, html:`
     <h1 style="font-size:32px">${pv?'כל התלמידים שלך מתרגלים':'כל הכיתה מתרגלת'}<br><span style="color:#F2A63B">ואת/ה רואה הכול</span></h1>
     <p style="color:${P.sub}">${pv?'פותחים קבוצה לתלמידים שלך, שולחים קישור לכל הורה – וההורים מצרפים את הילדים בעצמם':'פותחים קבוצה לכל כיתה ומקצוע, משתפים קישור – וההורים מצרפים את הילדים בעצמם'}</p>
     <div class="icard" style="margin-top:22px;gap:10px;padding:14px"><div style="font-size:12px;font-weight:700;color:#4A4870">הקבוצות שלי</div>
@@ -5182,7 +5125,7 @@ Object.assign(INTRO,{
     const req=(k,p)=>`<div class="irow" style="gap:8px;padding:8px 0;border-top:1px solid #EEF2F7;font-size:13px"><div style="flex:1"><b>${k}</b><div style="font-size:11px;color:#4A4870">ההורה: ${p} · חתם/ה</div></div>
       <svg width="44" height="20" viewBox="0 0 44 20" aria-hidden="true" style="flex:none"><path d="M2 14c4-10 7-10 8-2s4 6 7-2 5-4 6 2 4 4 8-3 6 0 11 1" fill="none" stroke="${P.accTxt}" stroke-width="1.6" stroke-linecap="round"/></svg>
       <span class="iava" style="width:32px;height:32px;border-radius:10px;background:#14A774">${IC.sv('#fff',16,IC.ok,2.6)}</span><span class="iava" style="width:32px;height:32px;border-radius:10px;background:#EEF2F7">${IC.sv('#4A4870',14,IC.x,2.6)}</span></div>`;
-    return {bg:P.light, h:640, html:`${iTag(P.tag,`background:${P.dark};color:#fff`)}
+    return {bg:P.light, html:`
     <h1 style="font-size:32px">${pv?'קישור אחד לכל התלמידים':'קישור אחד לכיתה'}<br><span style="color:${P.acc}">וההורים עושים את השאר</span></h1>
     <p style="color:#4A4870">${pv?'שולחים את הקישור לכל הורה בוואטסאפ. כל הורה מצרף את הילד שלו וחותם באצבע – בלי להירשם':'מפרסמים בקבוצת ההורים או תולים ברקוד בכיתה. כל הורה מצרף את הילד שלו וחותם באצבע – בלי להירשם'}</p>
     <div class="icard" style="margin-top:20px;flex-direction:row;align-items:center;gap:14px;padding:14px">
@@ -5196,7 +5139,7 @@ Object.assign(INTRO,{
   s3:()=>{ const P=iPal(IN.mode==='private'), pv=IN.mode==='private';
     const opts=(a,on)=>`<div style="display:flex;gap:6px;font-size:12px;font-weight:700;flex-wrap:wrap">${a.map((x,i)=>`<span style="border-radius:10px;padding:6px 10px;${i===on?`background:${P.acc};color:#fff`:`background:${P.light2}`}">${x}</span>`).join('')}</div>`;
     const st=(n,t,body)=>`<div class="icard" style="padding:12px 14px;gap:8px"><div style="display:flex;align-items:center;gap:8px"><span class="iava" style="width:26px;height:26px;background:${P.acc};color:#fff;font-size:13px">${n}</span><b style="font-size:14px">${t}</b></div>${body}</div>`;
-    return {bg:P.acc, dark:1, h:640, html:`${iTag(P.tag,'background:rgba(255,255,255,.18)')}
+    return {bg:P.acc, dark:1, html:`
     <h1 style="font-size:32px">תרגול חוויתי<br><span style="color:#FFD98A">במקום שיעורי בית</span></h1>
     <p style="color:#E4ECFF">${pv?'שולחים תרגול על מה שלמדתם היום בשיעור – כמשחק – ורואים מי עשה':'שולחים תרגול על מה שלמדתם היום בכיתה – כמשחק – ורואים מי עשה'}</p>
     <div style="margin-top:20px;width:100%;display:flex;flex-direction:column;gap:10px">
@@ -5206,16 +5149,16 @@ Object.assign(INTRO,{
     <div class="icta" style="background:#F2A63B;color:#1B2A4A;border-radius:14px;font-weight:800">${pv?'לשלוח ל-6 תלמידים':'לשלוח ל-32 תלמידים'}</div>`}; },
   s4:()=>{ const pv=IN.mode==='private', P=iPal(pv);
     const bar=(w,v,c,tc)=>`<div><div class="irow" dir="ltr"><span style="font-weight:700" translate="no">${w}</span><b style="color:${tc}">${v}%</b></div><div class="ibar" dir="ltr"><div style="width:${v}%;background:${c}"></div></div></div>`;
-    return {bg:'#F2A63B', h:620, html:`${iTag(P.tag,`background:${P.dark};color:#fff`)}
+    return {bg:'#F2A63B', html:`
     <h1 style="font-size:32px">רואים בלייב<br>איך החומר נקלט</h1>
     <p>${pv?'הצלחות וטעויות של כל התלמידים, שאלה אחרי שאלה – ויודעים מה לחזק כבר בשיעור הבא':'הצלחות וטעויות של כל הכיתה, שאלה אחרי שאלה – ויודעים מה ללמד שוב כבר בשיעור הבא'}</p>
-    ${iPhone('top:300px;width:280px;height:440px;background:#fff;padding:18px 14px;gap:10px',`
+    ${iPhone('bottom:16px;width:280px;height:450px;background:#fff;padding:18px 14px;gap:10px',`
       <div class="irow"><b style="font-size:14px">${pv?'התלמידים שלי':'<span translate="no">Unit 4</span> · ד׳2'}</b><span style="display:flex;align-items:center;gap:5px;background:#FFE3E4;color:#A3262B;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:700"><span style="width:7px;height:7px;border-radius:50%;background:#E5484D"></span>בלייב</span></div>
       <div style="font-size:12px;font-weight:700;color:#4A4870">הצליחו בשאלה</div>
       <div class="ibars" style="gap:8px">${bar('kitchen',94,'#14A774','#0B6B4A')}${bar('bedroom',88,'#14A774','#0B6B4A')}${bar('which',52,'#F2A63B','#946200')}${bar('where',41,'#E5484D','#A3262B')}</div>
       <div style="display:flex;gap:6px;margin-top:2px;font-size:11px;font-weight:700"><span class="ichip3" style="background:#FFE3E4;color:#A3262B">כדאי לחזק · ${pv?1:3}</span><span class="ichip3" style="background:#FFF2C9;color:#6B4700">לא תרגלו · ${pv?1:4}</span><span class="ichip3" style="background:#DDF8EC;color:#0B6B4A">סיימו בהצלחה · ${pv?4:11}</span></div>`)}`}; },
   s5:()=>{ const pv=IN.mode==='private', P=iPal(pv), it=(ic,t)=>`<div style="display:flex;align-items:center;gap:10px">${IC.sv('#7FE3BE',18,ic)}<span>${t}</span></div>`;
-    return {bg:'#24C78E', h:560, html:`${iTag(P.tag,`background:${P.dark};color:#fff`)}
+    return {bg:'#24C78E', html:`
     <h1 style="font-size:32px">ההורים בתמונה<br>הפרטיות שמורה</h1>
     ${TSTAGE.parentReport?`<p>דוח קצר להורה נכתב לבד מהנתונים – עורכים ושולחים בוואטסאפ</p>
     <div class="icard" style="margin-top:22px;gap:10px;padding:14px"><div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#4A4870">${IC.sv('#4A4870',16,IC.report)}דוח להורים של מאיה כ.</div>
@@ -5225,7 +5168,7 @@ Object.assign(INTRO,{
     <div class="icard" style="margin-top:14px;background:#0E2E22;color:#fff;gap:9px;font-size:13px;padding:14px">
       ${it(IC.shield0,'תלמידים לא רואים זה את זה')}${it(IC.person,'הורה רואה רק את הילד שלו')}${it(IC.lines,'שם פרטי ואות – בלי אימייל ובלי תמונות')}${it(IC.noad,'בלי פרסומות ובלי רכישות')}</div>`}; },
   s6:()=>{ const pv=IN.mode==='private', P=iPal(pv);
-    return {bg:P.dark, dark:1, h:520, html:`${iTag(P.tag,`background:${P.tagBg};color:${P.tagC}`)}
+    return {bg:P.dark, dark:1, html:`
     <h1 style="font-size:32px">${pv?'הקבוצה הראשונה':'הכיתה הראשונה'}<br><span style="color:#F2A63B">ב-3 צעדים</span></h1>
     <p style="color:${P.sub}">אפשר לעצור בכל שלב ולהמשיך אחר כך. המסך הזה תמיד זמין מהתפריט ☰</p>
     <div class="isteps" style="gap:12px">${iStep(1,'פותחים קבוצה',pv?'שם, שכבה ומקצוע – למשל "התלמידים שלי – אנגלית"':'שם, שכבה ומקצוע – למשל "ד׳2 – אנגלית"',1,P)}
@@ -5259,7 +5202,7 @@ function maybeTutorIntro(){
   try{ if(localStorage.getItem('sff_intro_tutor')) return; }catch(e){}
   TINTRO=true; let n=0; const t=setInterval(()=>{ if((visibleKids().length&&n>=6)||++n>20){ clearInterval(t); if(!$('intro')) openTeacherIntro('tutor'); } },500);
 }
-function introCard(key,K,shot){ INTRO_SHOT=!!shot; const s=INTRO[key](K,shot); INTRO_SHOT=false; return {s, html:`<div class="icard0 ${s.dark?'dark':''}" dir="${document.documentElement.dir||'rtl'}" style="background:${s.bg}">${s.html}</div>`}; }
+function introCard(key,K,shot){ const s=INTRO[key](K,shot); return {s, html:`<div class="icard0 ${s.dark?'dark':''}" dir="${document.documentElement.dir||'rtl'}" style="background:${s.bg}">${s.html}</div>`}; }
 function openIntro(kid){ IN.kid=!!kid; IN.mode=null; IN.only=false; IN.list=INTRO_SETS[kid?'kid':'parent']; IN.i=0; introShow(); }
 function introShow(dir){
   const key=IN.list[IN.i], n=IN.list.length, last=IN.i===n-1, {s,html}=introCard(key,IN.kid);
@@ -5273,7 +5216,7 @@ function introShow(dir){
       ${T&&last?`<button class="inext icta2" onclick="introCta()">${introCtaLabel()}</button><button class="ilater" onclick="introEnd()">אחר כך</button>`
         :`<button class="inext" onclick="${last?'introEnd()':'introGo(IN.i+1)'}">${last?(IN.kid?'יאללה למפה':'מתחילים'):'הבא'}</button>`}</div>`;
   const mo=el.querySelector('.imore'); if(mo) mo.style.background=`linear-gradient(to bottom, transparent, ${s.bg} 70%)`;
-  introFit(el, s.h); queueMicrotask(()=>{ if(el.dataset.key===key) introFit(el, s.h); });   // again once English is in (it is translated right after)
+  introFit(el); queueMicrotask(()=>{ if(el.dataset.key===key) introFit(el); });   // again once English is in (it is translated right after)
   if(dir){ const rtl=document.documentElement.dir!=='ltr', x=((dir>0)!==rtl?1:-1)*60;   // the new screen comes from the side it was swiped from
     try{ el.querySelector('.istage').animate([{transform:`translateX(${x}px)`,opacity:0},{transform:'none',opacity:1}],{duration:220,easing:'ease-out'}); }catch(e){} }
 }
@@ -5281,32 +5224,34 @@ function introShow(dir){
 // A short phone (Safari with its address bar: an iPhone 14 has 664 px, an SE 548): first the parts marked "iopt" go (small notes),
 // below 520 px also the phone pictures; then the screen shrinks down to 72% – the explanation never under 12 px on the screen;
 // only then does it scroll, with a fade and an arrow at the bottom until the end (the owner's report: screens cut on an iPhone).
-function introFit(el, minH){
+function introFit(el){
   const st=el.querySelector('.istage'), c=el.querySelector('.icard0'); if(!st||!c) return;
   const W=st.clientWidth, H=st.clientHeight, kw=Math.min(W/360,1.3), KMIN=.72;
-  c.classList.remove('ilow','icut'); c.style.height='auto'; c.style.transform='none'; st.scrollTop=0;
+  c.classList.remove('ilow','icut','inop'); c.style.height='auto'; c.style.transform='none'; st.scrollTop=0;
   const ps=[...c.children].filter(x=>x.tagName==='P'); ps.forEach(x=>{ if('st' in x.dataset) x.style.fontSize=x.dataset.st; else x.dataset.st=x.style.fontSize; if(!x.dataset.f0) x.dataset.f0=parseFloat(getComputedStyle(x).fontSize); });
-  // the content's height: the text and cards (a phone picture may run off the bottom – it is cut, like in the design)
+  // the content's height: the text and cards (a phone picture is apart – it sits whole at the bottom, or isn't shown)
   const flowH=()=>{ const top=c.getBoundingClientRect().top; return Math.max(0,...[...c.children].filter(x=>!x.classList.contains('iphone')&&x.offsetParent!==null).map(x=>x.getBoundingClientRect().bottom-top))+16; };
-  if(H<520) c.classList.add('ilow');
-  if(flowH()*kw>H+1) c.classList.add('icut');
-  const pic=c.classList.contains('ilow')?0:(minH||0);
-  let flow=flowH(), k=kw;
-  for(let i=0;i<3;i++){
-    k=Math.max(KMIN, Math.min(kw, Math.max(pic?H/pic:kw, .88), H/flow));   // a picture shrinks the screen down to 88% only – the text down to 72%
-    let grew=false; ps.forEach(x=>{ const f=Math.max(+x.dataset.f0, Math.ceil(1200/k)/100); if(Math.abs(parseFloat(getComputedStyle(x).fontSize)-f)>.05){ x.style.fontSize=f+'px'; grew=true; } });
-    if(!grew) break; flow=flowH();
-  }
-  const need=Math.max(flow, pic);
+  if(H<520) c.classList.add('ilow');                                     // a short stage: no phone pictures, no optional parts
+  if(flowH()*kw>H+1) c.classList.add('icut');                            // the text alone doesn't fit: the optional parts go first
+  const ph=c.querySelector('.iphone'), phH=()=>ph&&ph.offsetParent!==null?ph.offsetHeight+14:0;   // the phone + 12 px above it + its bottom gap (the 16 of the flow counts in it)
+  const fit=()=>{ let flow=flowH(), k=kw;
+    for(let i=0;i<3;i++){
+      k=Math.max(KMIN, Math.min(kw, H/(flow+phH())));
+      let grew=false; ps.forEach(x=>{ const f=Math.max(+x.dataset.f0, Math.ceil(1200/k)/100); if(Math.abs(parseFloat(getComputedStyle(x).fontSize)-f)>.05){ x.style.fontSize=f+'px'; grew=true; } });
+      if(!grew) break; flow=flowH();
+    }
+    return {flow,k}; };
+  let {flow,k}=fit();
+  if(phH()&&(flow+phH())*k>H+1){ c.classList.add('inop'); ({flow,k}=fit()); }   // the phone never shows cut: no room – it isn't shown at all
   const more=(flow-16)*k>H+1;                                             // (the 16 px under the last card may be cut)
-  c.style.transform=`scale(${k})`; c.style.height=(more?Math.max(flow,Math.min(need,H/k)):H/k)+'px';   // fills the stage; a phone picture is cut at its bottom
+  c.style.transform=`scale(${k})`; c.style.height=(more?flow:H/k)+'px';  // fills the stage (a phone sits at its bottom)
   st.style.overflowY=more?'auto':'hidden';
   const sp=st.querySelector('.ispace')||st.appendChild(Object.assign(document.createElement('div'),{className:'ispace'})); sp.style.height=(more?flow*k:H)+'px';
   c.style.left=Math.max(0,(W-360*k)/2)+'px';
   const m=el.querySelector('.imore'); if(m){ const upd=()=>m.classList.toggle('on', more && st.scrollTop+st.clientHeight<st.scrollHeight-8); st.onscroll=upd; upd(); }
 }
 function introMore(){ const st=document.querySelector('#intro .istage'); if(st) st.scrollBy({top:Math.round(st.clientHeight*.6),behavior:'smooth'}); }
-const introRefit=()=>{ const el=$('intro'); if(el) introFit(el, INTRO[el.dataset.key]?.(IN.kid).h); };
+const introRefit=()=>{ const el=$('intro'); if(el) introFit(el); };
 window.addEventListener('resize',introRefit); try{ document.fonts.ready.then(introRefit); document.fonts.addEventListener('loadingdone',introRefit); }catch(e){}
 function introGo(k){ if(k<0||k>=IN.list.length||k===IN.i) return; const d=k>IN.i?1:-1; IN.i=k; introShow(d); }
 // swipe: to the left goes on (Hebrew: to the right – the screens run from right to left)
@@ -5386,12 +5331,12 @@ function classMode(){ if(!isClassMode()) return; document.body.classList.add('cl
   const m=document.querySelector(`#sideMenu .ditem[onclick="closeMenu();go('family')"] .dl`); if(m) m.textContent=window.sffT?sffT('הקבוצה'):'הקבוצה';
   const v=NAV_STACK[NAV_STACK.length-1]; if(v){ const t=viewTitle(v); $('topTitle').textContent=window.sffT?sffT(t):t; }
   try{ rerender(); }catch(e){} }
-// the store pictures: /?intro=<1-8|feature>&shot=1 – one screen at its design size, nothing else on top
+// the store pictures: /?intro=<1-5|feature>&shot=1 – one screen at its design size, nothing else on top
 (function introShot(){ let q; try{ q=new URLSearchParams(location.search); }catch(e){ return; } const v=q.get('intro'); if(!v||q.get('shot')!=='1') return;
   window.SFF_INTRO_SHOT=1; document.body.classList.add('ishot');
   const el=document.createElement('div'); el.id='introShot';
   if(v==='feature') el.innerHTML=introFeature();
-  else { const key=INTRO_ALL[(+v||1)-1]||'main'; el.innerHTML=introCard(key,false,true).html; el.firstChild.style.height='720px'; }
+  else { const key=INTRO_ALL[(+v||1)-1]||'main'; el.innerHTML=introCard(key,false,true).html; const c=el.firstChild; c.style.height='720px'; if(['material','track'].includes(key)){ c.style.justifyContent='center'; c.style.paddingTop='0'; } }   // drawn at 560: in the middle of the 720
   document.body.appendChild(el); })();
 function introFeature(){
   const bar=(w,c)=>`<div style="height:8px;background:#fff;border-radius:9px"><div style="width:${w}%;height:8px;background:${c};border-radius:9px"></div></div>`;

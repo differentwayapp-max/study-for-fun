@@ -1,6 +1,6 @@
 // The first-run intro screens, on the emulators (firestore, auth) with the real rules:
 // 1. a new parent (after the sign-in and the terms) gets 4 screens – the opening, "your material, up to test day", "see what's solid – and
-//    strengthen it" (focused practice), "start in 3 steps"; the store keeps its 8 (INTRO_ALL); swipe goes on; every button ≥ 44 px;
+//    strengthen it" (focused practice), "start in 3 steps"; the store has 5 (INTRO_ALL), with no "for whom" tag anywhere; swipe goes on; every button ≥ 44 px;
 //    "דלג" closes it and it does not come back after a reload (kept in users/{uid}.intro) – a new sign-in (another phone) shows it again;
 //    ☰ → איך זה עובד opens it again; English: no Hebrew left on it;
 // 2. a kid phone, the first time from its link: only screens 2 and 6 – no parent text, no "להורה" tags; "יאללה למפה" ends it;
@@ -38,8 +38,25 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(/החומר שלכם<br>עד יום המבחן/.test(txt) && /או בוחרים תרגול מוכן מהקטלוג – בלי לחכות/.test(txt) && txt.includes(FL) && /תרגול ממוקד · 3 מילים/.test(txt) && /אחר כך תראו מה תוקן ✓/.test(txt)
     && /מוסיפים ילד/.test(txt) && /שולחים לילד קישור/.test(txt) && /בלי פרסומות/.test(txt) && /בלי רכישות לילד/.test(txt) && /סבתא או מורה/.test(txt), 'the texts of the new screens (FOCUS_LINE on "רואים מה יושב")');
   ok(!/[\u{1F300}-\u{1FAFF}]/u.test(txt.replace(/IC\./g, '')), 'no emoji on the parent\'s screens (line icons)');
-  const store = await p1.evaluate(() => INTRO_ALL.join() + '|' + ['build', 'testday', 'progress', 'focus', 'share', 'safe'].every(k => typeof INTRO[k] === 'function'));
-  ok(store === 'main,play,build,focus,progress,testday,compete,share|true', 'the store keeps its 8 screens: ' + store);
+  const store = await p1.evaluate(() => INTRO_ALL.join() + '|' + ['build', 'testday', 'progress', 'focus', 'share', 'safe'].filter(k => k in INTRO).join() + '|' + typeof INTRO.compete + '|' + INTRO_SETS.parent.includes('family'));
+  ok(store === 'main,play,material,track,family||function|false', 'the store: 5 screens (main, play, material, track, family – family in no intro); the old keys gone, compete kept for the kid: ' + store);
+  // no "for whom" tag anywhere: every series (parent, kid, tutor, class, private) and the store's 5 pictures
+  const TAG = /להורה|לילד|למורה הפרטי|למורה בבית הספר|בין האחים|לאחים, לחברים ולכיתה/;
+  const tagged = await p1.evaluate(src => { const re = new RegExp(src), out = [], m0 = IN.mode, k0 = IN.kid;
+    const txt = h => { const d = document.createElement('div'); d.innerHTML = h; d.querySelectorAll('.itag').forEach(x => out.push('.itag')); return d.textContent; };
+    // a tag is a line of its own: the screen's text pieces, each checked whole (a sentence may say "מעקב להורה")
+    const pieces = h => { const d = document.createElement('div'); d.innerHTML = h; return [...d.querySelectorAll('*')].filter(x => !x.children.length).map(x => x.textContent.trim()); };
+    for (const [ser, mode, keys, kid] of [['parent', null, INTRO_SETS.parent, false], ['kid', null, INTRO_SETS.kid, true], ['tutor', 'tutor', ['t1', 't2', 't3', 't4', 't5'], false], ['class', 'class', ['s1', 's2', 's3', 's4', 's5', 's6'], false], ['private', 'private', ['s1', 's2', 's3', 's4', 's5', 's6'], false], ['store', null, INTRO_ALL, false]]) {
+      IN.mode = mode; IN.kid = kid;
+      for (const k of keys) { const h = introCard(k, kid, ser === 'store').html; txt(h); pieces(h).filter(t => re.test(t) && t.replace(re, '').trim() === '').forEach(t => out.push(`${ser}:${k} «${t}»`)); }
+    }
+    IN.mode = m0; IN.kid = k0; return out; }, TAG.source);
+  ok(!tagged.length, 'no "for whom" tag (להורה / לילד / למורה הפרטי / למורה בבית הספר / לאחים, לחברים ולכיתה) on any intro screen or store screen ' + JSON.stringify(tagged));
+  const shotTxt = [];
+  for (let i = 1; i <= 5; i++) { const q = await b.newPage(); await q.goto('http://localhost:8765/?intro=' + i + '&shot=1', { waitUntil: 'load' }); await q.waitForSelector('#introShot');
+    shotTxt.push(await q.evaluate(() => [...document.querySelectorAll('#introShot *')].filter(x => !x.children.length).map(x => x.textContent.trim()).concat(document.getElementById('introShot').innerText))); await q.close(); }
+  const shotTags = shotTxt.flat().filter(t => TAG.test(t) && t.replace(TAG, '').trim() === '');
+  ok(shotTxt.length === 5 && !shotTags.length && /כל המשפחה\s*מתרגלת יחד|whole family\s*practises together/i.test(shotTxt[4].join(' ')), 'the store pictures (/?intro=1–5&shot=1): no tag; 5 = the family ' + JSON.stringify(shotTags));
   ok(/מתחילים/.test(await p1.textContent('#intro .inext')) && !(await p1.$('#intro .iskip')), 'the last screen: "מתחילים" (no "דלג")');
   // swipe (Hebrew: a swipe to the right goes on, to the left goes back)
   const swipe = dx => p1.evaluate(dx => { const el = document.getElementById('intro'), t = (x) => [new Touch({ identifier: 1, target: el, clientX: x, clientY: 400 })];

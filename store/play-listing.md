@@ -44,7 +44,11 @@ by D-WAY
 ## English (optional second language)
 Short: Playful learning in English, math, language and science – tailored to the test material and date.
 
-Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Focused practice: when a set is done, the app builds a practice set from the kid's mistakes only – free, in one tap; it waits for the kid first, and the parent sees what's fixed. Parents follow each kid's progress and can invite other adults. Safe for kids: no ads, ever; no purchases on the kid's phone; kids join with a personal link – no email or password; Hebrew and English.
+Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Parents follow each kid's progress and can invite other adults – a partner, grandparents or a private tutor; siblings compete for stars on a friendly leaderboard.
+
+🎯 Focused practice – exactly what's missing: when a set is done, the app builds a practice set from the kid's mistakes only – free, in one tap. It waits for the kid first, and the parent sees what's fixed.
+
+🛡️ Safe for kids: no ads, ever, for any kid. No purchases on the kid's phone. Kids join with a personal link – no email and no password. Hebrew and English.
 
 ---
 
@@ -90,10 +94,11 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 
 ## תמונות לחנות
 נוצרות מתוך מסכי ההיכרות של האפליקציה (מקור אחד לשניהם): מגישים את האפליקציה (`python3 -m http.server 8765 --directory public &`) ומריצים `node tools/store_shots.js`.
-- **Phone screenshots** (1080×2160, לפי הסדר): `store/play/phone_1_main.png` … `phone_8_share.png`. באנגלית: `store/play/en/`.
-  1 פתיחה · 2 משחק · 3 תרגול לפי החומר · 4 יום המבחן · 5 מעקב · 6 תחרות בין האחים · 7 שיתוף מורה ומשפחה · 8 בטוח לילדים.
-- **Feature graphic** (1024×500): `store/play/feature_1024x500.png` (באנגלית: `store/play/en/feature_1024x500.png`).
+- **Phone screenshots** (1080×2160, 5, לפי הסדר): `store/play/phone_1_main.png`, `phone_2_play.png`, `phone_3_material.png`, `phone_4_track.png`, `phone_5_family.png`. באנגלית: `store/play/en/` (אותם שמות).
+  1 פתיחה – הכול במבט אחד (כולל תרגול ממוקד) · 2 משחק – מה הילד רואה · 3 החומר שלכם, עד יום המבחן · 4 רואים מה יושב ומחזקים בלחיצה (תרגול ממוקד) · 5 כל המשפחה מתרגלת יחד (תחרות בין האחים, מבוגרים שמלווים, בטוח לילדים).
+  בלי תגיות "למי זה מיועד" (להורה / לילד). הסקריפט בודק לפני כל צילום ששום דבר לא חורג מ-360×720 ושאין תגית.
+- **Feature graphic** (1024×500): `store/play/feature_1024x500.png` (באנגלית: `store/play/en/feature_1024x500.png`). לא משתנה עם המסכים – נוצרת מחדש רק עם `FEATURE=1 node tools/store_shots.js`.
 - **App icon** (512×512): `store/play/icon_512.png`.
 - כל טענה בתמונות נבדקה מול הקוד. משנים טקסט ב-`INTRO` ב-index.html (ובתרגום ב-i18n.js) ומריצים שוב את הסקריפט.
 
-⚠️ כשייפתח תשלום על תרגולים נוספים (קרדיטים ב-startBuild): לעדכן כאן את "בלי רכישות" בתיאור ובאנגלית ("no in-app purchases"), ובטופס IARC "רכישות דיגיטליות? כן". במסך 8 כתוב "אין רכישות בטלפון של הילד" – זה נשאר נכון, כי התשלום הוא רק אצל ההורה.
+⚠️ כשייפתח תשלום על תרגולים נוספים (קרדיטים ב-startBuild): לעדכן כאן את "בלי רכישות" בתיאור ובאנגלית ("no in-app purchases"), ובטופס IARC "רכישות דיגיטליות? כן". במסך 5 כתוב "בלי רכישות", ובמסך 4 של ההיכרות "בלי רכישות לילד" – זה נשאר נכון, כי התשלום הוא רק אצל ההורה.

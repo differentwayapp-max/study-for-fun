@@ -5260,12 +5260,19 @@ function introEnd(){ $('intro')?.remove(); setTimeout(toastFlush,250);
   try{ localStorage.setItem('sff_intro_done','1'); }catch(e){} window.__sffOnbDone&&window.__sffOnbDone(); }
 
 // right after the sign-in screen: a plain cover (no flash of the app), until the account says whether the intro comes
+// (the owner's report, 28.11: a cartoon face, then the kids for a second, then the explanation screens) – now the same plain
+// "רגע…" as at opening, kept until it is known whether the explanation screens come; they open over it, the app after them
 function onbCover(){
   if(window.SFF_TEST_GOOGLE && !window.SFF_TEST_ONB) return;
-  if($('intro')||$('onbWait')) return;
-  const d=document.createElement('div'); d.id='onbWait'; d.className='onb'; d.style.cssText='background:#1B2A4A;justify-content:center';
-  d.innerHTML=`<div style="width:140px;height:140px">${mascot('happy','#2F6BFF')}</div>`; document.body.appendChild(d);
-  setTimeout(()=>$('onbWait')?.remove(), 12000);                              // never stuck behind it
+  if($('intro')) return;
+  document.documentElement.classList.add('booting','bootcover');
+  setTimeout(()=>introDecided(true), 12000);                                  // never stuck behind it
+}
+function introDecided(force){
+  const done=()=>{ window.__introDecided=true; const h=document.documentElement;
+    if(h.classList.contains('bootcover')){ h.classList.remove('bootcover'); if(!window.__bootGateOn) h.classList.remove('booting'); } };
+  if(!force&&typeof TINTRO!=='undefined'&&TINTRO&&!$('intro')){ let n=0; const t=setInterval(()=>{ if($('intro')||++n>40){ clearInterval(t); done(); } },250); }   /* a tutor's series waits for the students' names */
+  else done();
 }
 let ONB_SHOWN=false;
 const introSeen=()=>{ try{ return !!(localStorage.getItem('sff_intro_done')||localStorage.getItem('sff_onb_done')); }catch(e){ return false; } };
@@ -5304,7 +5311,7 @@ function maybeKidIntro(){
   try{ if(localStorage.getItem('sff_kid_intro')) return; localStorage.setItem('sff_kid_intro_t','1'); if(localStorage.getItem('sff_kid_intro_t')!=='1') return; localStorage.removeItem('sff_kid_intro_t'); }catch(e){ return; }
   openIntro(true);
 }
-(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(()=>{ if(!freshIntro()) maybeOnb(); },400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
+(function waitRole(){ let n=0; const t=setInterval(()=>{ if(window.SFF_ROLE){ clearInterval(t); classMode(); setTimeout(()=>{ if(!freshIntro()) maybeOnb(); setTimeout(introDecided,60); },400); setTimeout(maybeTutorIntro,900); setTimeout(maybeFocusNew,3000); } else if(++n>240) clearInterval(t); },500); })();
 // a teacher's group: the same app, the words of a group (students, the group)
 function classMode(){ if(!isClassMode()) return; document.body.classList.add('cls');
   if(TAPP()){ const pv=(window.SFF_CLASS||{}).teach==='private', B=(id,ico,t,on)=>`<button id="${id}" onclick="${on}"><span>${ico}</span>${t}</button>`;
@@ -6061,10 +6068,10 @@ setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduc
 // the teachers' app: after the logo, "רגע…" until the account, the group's students, requests, sets and games are in – then the
 // one right screen (never the family's screen, an empty group's steps or a home still filling in). The sign-in and the
 // explanation screens show above it. At most 20 s.
-(function bootGate(){ const h=document.documentElement; if(!h.classList.contains('booting')) return; const t0=Date.now();
-  const ready=()=>{ if(!window.SFF_ROLE) return false; if(!isClassMode()) return true;
+(function bootGate(){ const h=document.documentElement; if(!h.classList.contains('booting')) return; const t0=Date.now(); window.__bootGateOn=true;
+  const ready=()=>{ if(!window.SFF_ROLE||!window.__introDecided) return false; if(!isClassMode()) return true;
     return document.body.classList.contains('thapp') && CLS.gotC && CLS.gotR && window.__setsGot && (window.__progGot || Date.now()-t0>8000); };
-  const t=setInterval(()=>{ if(ready()||Date.now()-t0>20000){ clearInterval(t); try{ if(isClassMode()) renderKids(); }catch(e){} requestAnimationFrame(()=>h.classList.remove('booting')); } },80); })();
+  const t=setInterval(()=>{ if(ready()||Date.now()-t0>20000){ clearInterval(t); window.__bootGateOn=false; try{ if(isClassMode()) renderKids(); }catch(e){} requestAnimationFrame(()=>{ if(!h.classList.contains('bootcover')) h.classList.remove('booting'); }); } },80); })();
 // after a soft reload: keep the spinner until the cloud data is in, then fade it away
 (function(){ const h=document.documentElement; if(!h.classList.contains('soft')) return; const t0=Date.now(); $('splash')?.remove();
   if(window.__sffSoftMsg && window.__sffSoftMsg!=='1') window.sffLoading(window.__sffSoftMsg);

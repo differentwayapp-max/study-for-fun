@@ -14,9 +14,9 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   // SLOW=1: a phone – the processor ×4 slower and every request 400 ms away (the owner still saw screens jump, 28.11)
   const slow = async p => { if (!process.env.SLOW) return; const c = await p.context().newCDPSession(p); await c.send('Emulation.setCPUThrottlingRate', { rate: 4 });
     await c.send('Network.enable'); await c.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 1.5e6 / 8 * 10, uploadThroughput: 750e3 / 8 * 10 }); };
-  const ctx = async (who, name) => { const c = await b.newContext({ viewport: { width: 360, height: 740 } }); c.on('page', p => slow(p).catch(() => {}));
-    await c.addInitScript(g => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); },
-      { sub: who, email: who + '@t.local', email_verified: true, name }); return c; };
+  const ctx = async (who, name, onb) => { const c = await b.newContext({ viewport: { width: 360, height: 740 } }); c.on('page', p => slow(p).catch(() => {}));
+    await c.addInitScript(([g, o]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; if (o) window.SFF_TEST_ONB = true; localStorage.setItem('sff_lang', 'he'); },
+      [{ sub: who, email: who + '@t.local', email_verified: true, name }, !!onb]); return c; };
   // what the screen shows now – a short label of each visible part
   const frame = p => p.evaluate(() => { const vis = el => { if (!el || !el.isConnected) return false; for (let e = el; e; e = e.parentElement) { const c = getComputedStyle(e); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity === 0) return false; } return el.getBoundingClientRect().height > 0; };
     const out = []; const sp = document.getElementById('splash'); if (sp && vis(sp)) out.push('SPLASH');
@@ -71,11 +71,16 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   // the same teacher opens the family app, then back to the teachers' app (one browser – the two apps share it)
   const B1 = await tc.newPage(); const s4 = await record(B1, APP, 'teacher_opens_family_app', () => !!document.getElementById('fcTeach') || window.SFF_ROLE);
   await B1.close(); const B2 = await tc.newPage(); const s5 = await record(B2, APP + 'teach', 'teacher_back_to_teach', () => window.SFF_ROLE && document.querySelector('.thhome'));
+  // a parent signs in (an iPhone, the owner's report 28.11): the loading screen, then the explanation screens – no cartoon cover, no kids before them
+  const fc = await ctx('bootP', 'טליה', true), F = await fc.newPage();
+  const s6 = await record(F, APP, 'parent_signin_intro', () => !!document.getElementById('intro'), async p => { if (await p.$('#fbLogin #fbGo')) await p.click('#fbLogin #fbGo'); });
+  await F.waitForSelector('#intro', { timeout: 15000 }).catch(() => {});
   const bad = (seen, okRe) => seen.filter(x => !okRe.test(x.replace(/^\s*\d+ ms\s+/, '')));
-  const T_OK = /^(|\(navigating\)|SPLASH.*|LOAD:.*|SOFT.*|LOGIN:[^;]*|vKids ; home:school ; T:ד'2 · אנגלית ▾ ; NAV:.*)$/;   /* the loading screen, the sign-in, then only the teacher's full home */
+  const T_OK = /^(|\(navigating\)|SPLASH.*|LOAD:.*|SOFT.*|LOGIN:.*|vKids ; home:school ; T:ד'2 · אנגלית ▾ ; NAV:.*)$/;   /* the loading screen, the sign-in, then only the teacher's full home */
   for (const [lab, s] of [['teacher_reopen', s1], ['teacher_reload_same_tab', s1b], ['teacher_reload2', s1c], ['teacher_signin', s3], ['teacher_back_to_teach', s5]]) {
     const b2 = bad(s, T_OK); ok(!b2.length, `${lab}: only the loading screen, then the teacher's home ${b2.length ? '– also: ' + b2.slice(0, 4).join(' | ') : ''}`); }
   const b4 = bad(s4, /^(|\(navigating\)|SPLASH.*|LOAD:.*|LOGIN:האפליקציה למשפחות.*)$/); ok(!b4.length, `teacher_opens_family_app: the loading screen, then the choice ${b4.length ? '– also: ' + b4.slice(0, 4).join(' | ') : ''}`);
+  const b6 = bad(s6, /^(|\(navigating\)|SPLASH.*|LOAD:.*|LOGIN:.*|INTRO:.*)$/); ok(!b6.length && s6.some(x => /INTRO:/.test(x)) && !s6.some(x => /onbWait/.test(x)), `parent_signin_intro: the loading screen, then the explanation screens ${b6.length ? '– also: ' + b6.slice(0, 4).join(' | ') : ''}`);
   const b3 = bad(s2, /^(|\(navigating\)|SPLASH.*|LOAD:.*|SOFT.*|.*kids:נועה.*)$/); ok(!b3.length, `parent_reopen: only the loading screen, then the kids ${b3.length ? '– also: ' + b3.slice(0, 4).join(' | ') : ''}`);
   await b.close();
 })().catch(e => { console.error('FAIL', e); process.exit(1); });

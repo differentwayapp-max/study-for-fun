@@ -2621,6 +2621,7 @@ async function build(){
   if(I.topics.length>MAX_TOPICS) return no(`עד ${MAX_TOPICS} נושאים בתרגול אחד – אפשר לבנות עוד תרגול לשאר.`);
   if(!I.kidId) return no('בחרו ילד/ה בשלב הראשון.');
   I.skip=poolSkip(I.kidId);
+  const src=I.reinf&&getSet(I.reinf); if(src) I.mat=reinfMat(src, I.topics);   // a focused build: only the source's own words / facts
 
   buildSteps(); $('buildErr').classList.add('hidden'); $('buildBack').classList.add('hidden');
   $('bTitle').textContent='⏳ שולחים את החומר…'; $('bSub').textContent='רגע – לא לסגור את האפליקציה עד שהחומר נשלח.'; $('bSub').classList.remove('hidden');
@@ -3569,7 +3570,7 @@ function pickMode(set, ch){
     if(w.length){ const lastW=(history.find(h=>h.setId===set.id&&h.ch===ch&&w.includes(h.mode))||{}).mode; return w.length>1&&lastW===w[0]?w[1]:w[0]; } }
   if(false) cand=['spell',...cand.filter(m=>m!=='spell')];             // the one writing session of this practice set
   const qs=ch>=0?c.qs:set.questions;
-  cand=cand.filter(m=>{ const n=modePool({questions:qs,chapters:set.chapters},m).length;
+  cand=cand.filter(m=>{ const mp=modePool({questions:qs,chapters:set.chapters},m), n=(m==='memory'||m==='match')?noClash(mp,m).length:mp.length;   // a clash → another game for the station
     return n>=MIN[m] && ((m!=='memory'&&m!=='match') || ch<0 || n===qs.length); });
   if(!cand.length) return 'choice';
   // variety: not the game just played, and the one used least lately in this practice set; the same chapter gets a new game when replayed
@@ -3728,6 +3729,7 @@ function startGame(set, onlyQs, mode, ch, topic){
   if(ch==null && !onlyQs) ch=nextChapter(set);
   const base = onlyQs || chapterQs(set,ch);
   let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q],chapters:set.chapters},mode).length);
+  if(mode==='memory'||mode==='match') pool=noClash(pool,mode);
   if(pool.length<MIN[mode]){ mode='choice'; pool=base; }
   const per=set.perRound||10;
   const whole = !onlyQs && ch!=null;                                        // a station on the map → the whole chapter
@@ -3917,6 +3919,16 @@ const optKey=(q,k)=>q.options.some(o=>/\d/.test(o))?'אבגד'[k]:String(k+1);
 /* --- 3. match with lines --- */
 // Two questions with the same answer: either answer card is right for either question.
 const ansKey=q=>{ const a=String(q.options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim(); return a.length>1?a.toLowerCase():a; };   // one letter keeps its case (D ≠ d)
+/* Cards that look the same must have the same answer: in memory / match a question card shows only its picture (and its text
+   when short), so two questions whose cards look alike (the same picture, the same text), or whose answers are the same value in
+   another form ("20 ₪" / "20"), could each take the other's answer card. A later one of such a pair stays out of this game. */
+const cardFace=(q,mode)=>{ const pic=q.scene?q.scene.map(x=>x.e).sort().join(''):(q.emoji||''), t=String(q.question).trim().toLowerCase().replace(/\s+/g,' ');
+  return pic+'|'+(cueTxt(q,mode==='match'?14:undefined)?t:''); };
+const ansVal=q=>{ const a=String(q.options[q.answer]).replace(/[\s⁦-⁩]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,''); return /\d/.test(a)?a:null; };
+function noClash(qs, mode){ const out=[];
+  qs.forEach(q=>{ const f=cardFace(q,mode), v=ansVal(q), k=ansKey(q);
+    if(!out.some(o=>ansKey(o)!==k && (cardFace(o,mode)===f || (v!=null&&ansVal(o)===v)))) out.push(q); });
+  return out; }
 function matchStart(){ G.round=0; matchRound(); }
 function matchRound(){
   G.mtparts=evenSplit(G.qs.length,5); const [mf,mt]=G.mtparts[G.round], slice=G.qs.slice(mf,mt);
@@ -4460,11 +4472,19 @@ async function fillQuotaLines(){ const els=document.querySelectorAll('.qleft'); 
 // a small practice set for the same kid with exactly the words / questions that had mistakes – no AI, ready at once, listed first
 function makeFocus(setId, quiet){
   const set=getSet(setId); if(!set) return null; const F=focusOf(set);
-  const qs=F.qs.map(({ch,...q})=>({...q, ch:0}));
+  // one station per chapter of the source: the questions of a chapter were checked together (no two answers fit one card),
+  // questions of different chapters never were – so they never meet in one memory / match game
+  // (a word's other questions – the same answer, so never a clash – go with it to the chapter where it was missed)
+  const C=getChapters(set), inCh=q=>Math.max(0,C.findIndex(c=>c.qs.includes(q))), home={};
+  F.items.forEach(x=>{ home[ansKey(x.q)]=inCh(x.q); });
+  const srcCh=q=>home[ansKey(q)]??inCh(q), used=[...new Set(F.qs.map(srcCh))].sort((a,b)=>a-b);
+  const qs=F.qs.map(q=>[srcCh(q),q]).sort((a,b)=>a[0]-b[0]).map(([c,{ch,...q}])=>({...q, ch:used.indexOf(c)}));
   if(!qs.length){ toast('📖 Unseen → ▶'); return null; }
   const id='r'+set.id, old=sets.find(x=>x.id===id), topics=[...new Set(qs.map(q=>q.topic))];
+  const chapters=used.length<2?[{title:'🎯 תרגול ממוקד', topics, count:qs.length}]
+    :used.map((c,k)=>{ const mine=qs.filter(q=>q.ch===k), tp=[...new Set(mine.map(q=>q.topic))]; return {title:'🎯 '+String((C[c]&&C[c].title)||tp.join(' + ')).slice(0,60), topics:tp, count:mine.length}; });
   const body={kidId:set.kidId, name:set.name, grade:set.grade, subject:'🎯 '+String(set.subject).replace(/^🎯\s*/,''), topics, questions:qs,
-    chapters:[{title:'🎯 תרגול ממוקד', topics, count:qs.length}], examDate:set.examDate&&daysLeft(set.examDate)>=0?set.examDate:'', dailyGoal:1, perRound:qs.length, compete:false, shared:true, reinf:set.id,
+    chapters, examDate:set.examDate&&daysLeft(set.examDate)>=0?set.examDate:'', dailyGoal:Math.min(10,chapters.length), perRound:qs.length, compete:false, shared:true, reinf:set.id,
     qa:{checked:qs.length,passed:qs.length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[]};
   if(old){ Object.assign(old, body, {updated:Date.now()}); delete old.order; delete old.pos; }
   else sets.unshift({id, created:Date.now(), ...body});
@@ -4582,6 +4602,10 @@ function buildReinforceIdx(k){ buildReinforce(...REINF[k]); }
 function trophyCountFiltered(H){ const per={}; H.forEach(h=>{const k=h.setId+'|'+new Date(h.at).toDateString(); per[k]=(per[k]||0)+1;});
   return Object.entries(per).filter(([k,c])=>{const st=getSet(k.split('|')[0]); return c>=((st&&st.dailyGoal)||2);}).length; }
 function avg(a){ return a.reduce((x,y)=>x+y,0)/a.length; }
+// a focused build's material: the source set's own questions of these topics ("question → answer") – the AI asks only about
+// them (no new words, no catalog questions), so every word in it is one the kid met in the test's material
+function reinfMat(src, topics){ const T=new Set(topics), mine=src.questions.filter(q=>T.has(q.topic)), qs=mine.length?mine:src.questions;
+  return [...new Set(qs.map(q=>`${String(q.question).trim()} → ${String(q.options[q.answer]).trim()}`.slice(0,200)))].slice(0,150); }
 function buildReinforce(subject, topics, grade, kid, fromId){
   if(!sample){ toast('🛠️ בניית תרגול חדש עם AI תיפתח בקרוב'); return; }
   const k=kids.find(x=>x.name===kid);

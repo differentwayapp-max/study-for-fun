@@ -136,6 +136,19 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   const tot = (await list(`families/${fam}/builds`)).filter(x => x.status === 'done').length;
   ok(tot === 4, 'four builds, each on its own build (no extra build used): ' + tot);
 
+  console.log('7. "✨ תרגול ממוקד לנושאים": a focused build gets the source set\'s own words – no ready questions from the catalog');
+  { await p2.waitForFunction(() => window.SFF_ROLE && window.__sffAI && typeof sample !== 'undefined' && sample, null, { timeout: 25000 }); await p2.waitForTimeout(1500); await p2.evaluate(() => document.getElementById('onb')?.remove());
+    const src = await p2.evaluate(() => { const s = sets.find(s => s.kidId === 'k1' && !s.src && !s.reinf); return { id: s.id, topics: s.topics.slice(0, 2), n: s.questions.filter(q => s.topics.slice(0, 2).includes(q.topic)).length }; });
+    const before = await p2.evaluate(() => sets.length);
+    await p2.evaluate(src => { buildReinforce('אנגלית', src.topics, 3, kidById('k1').name, src.id); W.step = 4; wizRender(); build(); }, src);
+    await p2.waitForFunction(() => CUR_BUILD && CUR_BUILD !== 'send', null, { timeout: 60000 }); const idR = await p2.evaluate(() => CUR_BUILD);
+    await p2.waitForFunction(id => sets.some(s => s.reinf === id), src.id, { timeout: 180000 }).catch(() => {});
+    const f = await p2.evaluate(id => { const s = sets.find(s => s.reinf === id); return s && { n: s.questions.length, srcq: s.questions.filter(q => q.srcq).length, subject: s.subject }; }, src.id);
+    const bR = await bdoc(idR);
+    ok(f && f.n > 0 && f.srcq === 0 && /^🎯/.test(f.subject), `the focused set: ${f && f.n} questions, ${f && f.srcq} ready ones from the catalog (the source had ${src.n} on these topics)`);
+    ok(bR && bR.steps && bR.steps.gen && !bR.steps.match && !bR.steps.select, 'no catalog steps on the build (' + Object.keys((bR && bR.steps) || {}).join(',') + ')');
+  }
+
   console.log("6. a build in a teacher's group");
   {
     const tc = await b.newContext({ viewport: { width: 390, height: 844 } }); const t = await tc.newPage(); t.on('pageerror', e => errs.push('teacher: ' + e.message));

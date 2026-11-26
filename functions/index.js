@@ -676,6 +676,8 @@ function cleanInput(x) {
   return { name: str(x.name, 40, 'name') || 'הילד/ה', reinf: str(x.reinf, 60, 'reinf') || null, gi: int(x.gi, 0, 11, 'gi'), subject: str(x.subject, 60, 'subject', true),
     topics, perRound: int(x.perRound, 5, 20, 'perRound'), kidId, chapters, text: str(x.text, 8000, 'text'), link: str(x.link, 300, 'link'),
     pages: str(x.pages, 200, 'pages'), examDate, dailyGoal: int(x.dailyGoal, 1, 10, 'dailyGoal'),
+    // a focused build (reinf): the source set's own questions of the weak topics – the only words / facts it may ask about
+    mat: list(x.mat, 150, 200, 'mat'),
     // what the pool must not give this kid (the phone knows: its ready sets, the ready questions it got, what it answered correctly)
     skip: { have: list(sk.have, 200, 60, 'skip'), used: list(sk.used, 4000, 80, 'skip'), solved: list(sk.solved, 6000, 16, 'skip') } };
 }

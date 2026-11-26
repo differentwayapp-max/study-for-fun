@@ -15,11 +15,17 @@ const isPool=q=>!!q.srcq;            // a ready, already-checked question (srcq 
 
 async function genChapter(askFn, ctx, o){
   const r=await askFn('gen', {ctx, chapter:{i:o.ci||0, n:o.n||1, title:o.title||'', topics:o.topics||[]}, quota:o.quota, avoid:(o.avoid||[]).slice(-120),
-    styles:o.styles||'', difficulty:o.difficulty||'', nameIt:!!o.nameIt}, o.images&&o.images.length&&canImages?{images:o.images}:{});
+    styles:o.styles||'', difficulty:o.difficulty||'', nameIt:!!o.nameIt, ...(o.mat&&o.mat.length?{mat:o.mat.slice(0,150)}:{})}, o.images&&o.images.length&&canImages?{images:o.images}:{});
   const tp=o.nameIt?Object.keys(o.quota):(o.topics||[]);
   return {title:String(r?.title||'').slice(0,40), qs:clean(r?.questions, tp).map(q=>({...q,ch:o.ci||0}))};
 }
 
+// a focused build: a question whose answer is a word that is not in the material stays out (the AI was told so – this makes
+// sure). Numbers and answers of several words are kept (a sum, a short phrase); when that would leave under half, all stay.
+function matOnly(qs, mat){
+  const txt=' '+mat.join(' ').toLowerCase().replace(/[^\p{L}\p{N}']+/gu,' ')+' ';
+  const ok=q=>{ const a=String(q.options[q.answer]).trim().toLowerCase(); return /\d/.test(a) || /\s/.test(a) || txt.includes(' '+a.replace(/[^\p{L}\p{N}']+/gu,' ').trim()+' '); };
+  const keep=qs.filter(ok); return keep.length*2>=qs.length?keep:qs; }
 async function poolPick(askFn, ctx, I, profile, poolFn, rand=Math.random){
   const out={}, pool=await poolFn(I.kidId, I.gi, I.subject); if(!pool.length) return out;
   const want=[...new Set([...I.topics, ...(profile.detected_topics||[])])].slice(0,40);
@@ -192,13 +198,15 @@ async function buildSet(I, askB, env={}){
 
   /* 2. questions – one call per chapter (with checked questions from the pool where they fit, up to half a chapter) */
   P('gen','run');
-  let pool={}; try{ pool=await poolPick(askB, ctx, I, profile, env.pool||(async()=>[]), env.rand||Math.random); }catch(e){ if(e&&e.ctl) throw e; pool={}; }
+  // a focused build (reinf + mat): only the source's own words / facts – no ready questions from the catalog (other words)
+  const mat=Array.isArray(I.mat)&&I.mat.length?I.mat:null;
+  let pool={}; if(!mat) try{ pool=await poolPick(askB, ctx, I, profile, env.pool||(async()=>[]), env.rand||Math.random); }catch(e){ if(e&&e.ctl) throw e; pool={}; }
   const gen=[];
   for(let ci=0;ci<chapters.length;ci++){
     const ch=chapters[ci], taken=pool[ci]||[]; P('gen','run',`פרק ${ci+1} מתוך ${chapters.length}…`);
     const need=Math.max(1,ch.count-taken.length), before=gen.flat().concat(taken);
     const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:ch.title, topics:ch.topics, quota:distribute(need, ch.topics),
-      avoid:before.map(q=>q.question).slice(-120), styles:profile.styles, difficulty:profile.difficulty});
+      avoid:before.map(q=>q.question).slice(-120), styles:profile.styles, difficulty:profile.difficulty, mat});
     gen[ci]=taken.map(q=>({...q,ch:ci})).concat(g.qs);
   }
   let qs=gen.flat();
@@ -209,9 +217,10 @@ async function buildSet(I, askB, env={}){
   for(const t of topics){
     if(qs.some(q=>q.topic===t)) continue;
     const ci=Math.max(0,chapters.findIndex(c=>c.topics.includes(t)));
-    const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:t, topics:[t], quota:{[t]:3}, avoid:qs.map(q=>q.question).slice(-120)});
+    const g=await genChapter(askB, ctx, {ci, n:chapters.length, title:t, topics:[t], quota:{[t]:3}, avoid:qs.map(q=>q.question).slice(-120), mat});
     qs=qs.concat(g.qs);
   }
+  if(mat) qs=matOnly(qs, mat);
   const missingTopics=topics.filter(t=>!qs.some(q=>q.topic===t));
   /* pictures – only for questions that do not follow the picture rules yet */
   P('cover','run','🖼️ תמונות…');
@@ -228,5 +237,5 @@ async function buildSet(I, askB, env={}){
     qa:{checked:qa.checked,passed:qa.passed,fixed:qa.fixed,dropped:qa.dropped,log:qa.log}, coverage, suggestions:(profile.missing_from_parent_list||[]).filter(t=>!topics.includes(t))};
 }
 
-if(typeof module!=='undefined' && module.exports) module.exports={GRADES, aiCtx, qSend, isPool, genChapter, poolPick, distribute, tooNew, cleanScene, clean, words, needsPic,
+if(typeof module!=='undefined' && module.exports) module.exports={GRADES, matOnly, aiCtx, qSend, isPool, genChapter, poolPick, distribute, tooNew, cleanScene, clean, words, needsPic,
   picturePass, codeChecks, qaSet, noPic, needOpts, PIC_CH, tkey, buildSet};

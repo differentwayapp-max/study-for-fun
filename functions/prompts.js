@@ -95,11 +95,14 @@ Read it carefully and describe it:
       if (!total || total > MAX_Q) bad('quota: 1-40 questions');
       const avoid = A(d.avoid, 120, 'avoid', q => S(q, 300, 'avoid'));
       const styles = S(d.styles, 400, 'styles'), difficulty = S(d.difficulty, 300, 'difficulty');
+      const mat = A(d.mat, 150, 'mat', m => S(m, 200, 'mat'));
       const chI = d.chapter && d.chapter.i != null ? I(d.chapter.i, 0, 99, 'chapter') : 0, chN = d.chapter && d.chapter.n != null ? I(d.chapter.n, 1, 100, 'chapters') : 1;
       return `${c.text}
 ${styles ? 'Match the style of the sample material: ' + styles : ''} ${difficulty ? 'Difficulty: ' + difficulty : ''}
 ${n.images ? `The parent attached ${n.images} worksheet photo(s)/PDF(s): base the questions on the material, words and exercise types shown there (in your own words).\n` : ''}${B(d.nameIt) ? 'This is a NEW chapter built only from the attached worksheet(s): give it a short Hebrew "title" (2-4 words) that names the material.' : `This is chapter ${chI + 1} of ${chN} (${JSON.stringify(title)}, topics: ${JSON.stringify(chTopics)}); "title": "".`}
-Write NEW multiple-choice practice questions – do not repeat or rephrase these questions: ${JSON.stringify(avoid)}.
+${mat.length ? `FOCUSED PRACTICE of the test material: the child practises ONLY what was in the material – these questions and answers ("question → answer") from it: ${JSON.stringify(mat)}.
+Every question asks about one of these words / facts, and its correct answer is a word or fact from this list – NEVER a word, name or fact that is not in it (the child has not learnt it). Ask about them in new ways (another picture, another sentence, the other direction). Distractors: prefer other words from this list; otherwise very common words of the grade.
+` : ''}Write NEW multiple-choice practice questions – do not repeat or rephrase these questions: ${JSON.stringify(avoid)}.
 Quota per topic: ${JSON.stringify(quota)}.
 Rules: exactly 4 options, exactly one correct; distractors plausible but clearly wrong; suited to grade ${c.grade}; no trick questions; vary positions of the correct answer.
 ${c.lang}

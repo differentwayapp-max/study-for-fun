@@ -258,7 +258,7 @@
 
   /* תרגול ממוקד – focused practice: the button, the kid's card at home, "New!", the intro screen */
   Object.entries({
-    'תרגול ממוקד': 'Focused practice', 'האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה': "The app builds a practice set from your kid's mistakes only – free, in one tap",
+    'תרגול ממוקד': 'Focused practice', 'מזהים בדיוק באילו נושאים נדרש חיזוק. בלחיצת כפתור, האפליקציה בונה תרגול ייעודי שמתאים במיוחד לנושאים האלה.': 'See exactly which topics need strengthening. One tap, and the app builds a dedicated practice made just for those topics.', 'האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה': "The app builds a practice set from your kid's mistakes only – free, in one tap",
     'תרגול ממוקד לנושאים': 'Focused practice for the topics', 'בנייה לפי הנושאים לחיזוק': 'Built for the topics to strengthen', 'עבר לתרגול ממוקד': 'moved to focused practice',
     'נבנה לבד מהטעויות – רק מה שעוד לא יושב': "Built from the mistakes – only what isn't solid yet",
     'ההורה רואה את ההתקדמות של כל ילד. הילד רואה מה לחזק – ומתרגל את זה בלחיצה': 'The parent sees each kid\'s progress. The kid sees what to strengthen – and practises it in one tap',

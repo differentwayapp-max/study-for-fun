@@ -34,9 +34,9 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const keys = ['main'];
   for (let i = 0; i < 3; i++) { await p1.click('#intro .inext'); await p1.waitForTimeout(300); keys.push((await shown(p1)).key); }
   ok(keys.join() === 'main,material,track,start', 'the parent screens: ' + keys.join());
-  const [txt, FL] = await p1.evaluate(() => [IN.list.map(k => introCard(k).html).join(' '), FOCUS_LINE]);
+  const [txt, FL] = await p1.evaluate(() => [IN.list.map(k => introCard(k).html).join(' '), TRACK_LINE]);
   ok(/החומר שלכם<br>עד יום המבחן/.test(txt) && /או בוחרים תרגול מוכן מהקטלוג – בלי לחכות/.test(txt) && txt.includes(FL) && /תרגול ממוקד · 3 מילים/.test(txt) && /אחר כך תראו מה תוקן ✓/.test(txt)
-    && /מוסיפים ילד/.test(txt) && /שולחים לילד קישור/.test(txt) && /בלי פרסומות/.test(txt) && /בלי רכישות לילד/.test(txt) && /סבתא או מורה/.test(txt), 'the texts of the new screens (FOCUS_LINE on "רואים מה יושב")');
+    && /מוסיפים ילד/.test(txt) && /שולחים לילד קישור/.test(txt) && /בלי פרסומות/.test(txt) && /בלי רכישות לילד/.test(txt) && /סבתא או מורה/.test(txt), 'the texts of the new screens (TRACK_LINE on "רואים מה יושב")');
   ok(!/[\u{1F300}-\u{1FAFF}]/u.test(txt.replace(/IC\./g, '')), 'no emoji on the parent\'s screens (line icons)');
   const store = await p1.evaluate(() => INTRO_ALL.join() + '|' + ['build', 'testday', 'progress', 'focus', 'share', 'safe'].filter(k => k in INTRO).join() + '|' + typeof INTRO.compete + '|' + INTRO_SETS.parent.includes('family'));
   ok(store === 'main,play,material,track,family||function|false', 'the store: 5 screens (main, play, material, track, family – family in no intro); the old keys gone, compete kept for the kid: ' + store);

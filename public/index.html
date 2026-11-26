@@ -4442,6 +4442,7 @@ function sayWord(t){ rdStop(); if(mutedNote()) return; try{ const u=new SpeechSy
    a focused set right away, with no AI and no monthly build (makeFocus); only weak topics → "✨ תרגול ממוקד לנושאים" (an AI
    build, buildReinforce). A focused set is marked reinf: <its source>; the source then counts as done (setDone → 'focus'). */
 const FOCUS_LINE='האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה';
+const TRACK_LINE='מזהים בדיוק באילו נושאים נדרש חיזוק. בלחיצת כפתור, האפליקציה בונה תרגול ייעודי שמתאים במיוחד לנושאים האלה.';   // the intro's "רואים מה יושב" only
 const fT=(str,...names)=>{ let t=esc(window.sffT?sffT(str):str); names.filter(Boolean).forEach(n=>{ const e=esc(n), shown=esc(window.sffT?sffT(n):n); t=t.split(e).join(`<bdi>${shown}</bdi>`); }); /* the name as the rest of the screen shows it */ return `<span translate="no">${t}</span>`; };
 function focusOf(set, H=history){
   if(!set||set.demo) return {items:[],qs:[],topics:[],goodN:0,pct:null,played:false};
@@ -5025,7 +5026,7 @@ Object.assign(INTRO,{
   track:K=>{ const row=(t,v,c,lbl,bg,tc)=>`<div style="display:flex;align-items:center;gap:8px"><span style="flex:1">${t}</span><span style="width:64px;height:7px;background:#EAF0FF;border-radius:9px;flex:none" dir="ltr"><span style="display:block;width:${v}%;height:7px;background:${c};border-radius:9px"></span></span><span style="background:${bg};color:${tc};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">${lbl}</span></div>`;
     return {bg:'#FF5C8A', html:`
     <h1 style="margin-top:12px;font-size:32px;color:#3A0716">רואים מה יושב<br><span style="color:#fff">ומחזקים בלחיצה</span></h1>
-    <p style="margin-top:10px;max-width:300px;color:#3A0716">${FOCUS_LINE}</p>
+    <p style="margin-top:10px;max-width:300px;color:#3A0716">${TRACK_LINE}</p>
     <div class="icard" style="margin-top:18px;padding:14px;gap:9px">
       <div class="irow"><b style="font-size:14px">אנגלית · <bdi translate="no">${esc(iT('נועה'))}</bdi></b><span style="font-size:12px;color:#4A4870">84% הצלחה</span></div>
       <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">${row('אוצר מילים – בית',92,'#14A774','שולטת','#DDF8EC','#0B6B4A')}${row('מילות שאלה',55,'#E5484D','לחזק','#FFE3E4','#A3262B')}</div>

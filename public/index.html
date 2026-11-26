@@ -4953,6 +4953,7 @@ const IC={
   doc:'<path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5"/>',
   bars:'<path d="M3 20h18"/><path d="M6 16V11M11 16V7M16 16v-3M20 16V5"/>',
   ppl:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14c3 0 6 1.5 6 4.5"/>',
+  book:'<path d="M4 19V5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h6M8 11h6"/>',
   cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
   ok:'<path d="M5 12l5 5 9-10"/>',
   target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
@@ -5013,16 +5014,21 @@ const INTRO={
 /* the parent's intro: 4 screens (the canvas "היכרות ההורה – 4 מסכים במקום 7", Fam2–4): each drawn at 360 × 560, one picture, no phone frame.
    The store shows main, play, material, track and family (INTRO_ALL); there material and track (drawn at 360 × 560) stand in the middle of the 720. */
 Object.assign(INTRO,{
-  material:K=>{ const d=(day,c,st,inner,lbl)=>`<div><span style="color:${c}">${day}</span><span class="iday" style="width:32px;height:32px;${st}"${lbl?` aria-label="${lbl}"`:''}>${inner}</span></div>`;
+  material:K=>{ const d=(day,c,st,inner,lbl)=>`<div><span style="color:${c}">${day}</span><span class="iday" style="width:30px;height:30px;${st}"${lbl?` aria-label="${lbl}"`:''}>${inner}</span></div>`,
+      sub=(i,st)=>`<span style="${st};border-radius:12px;padding:10px;text-align:center">${String(SUBJECTS[i]).split(' / ').pop()}</span>`;   // the app's own subject names (לשון of "עברית / לשון")
     return {bg:'#F2A63B', html:`
-    <h1 style="margin-top:12px;font-size:32px">החומר שלכם<br>עד יום המבחן</h1>
-    <p style="margin-top:10px;max-width:300px">מצלמים את דף החומר ובוחרים תאריך – והתרגול מתחלק לבד, קצת בכל יום</p>
-    <div class="icard" style="margin-top:18px;padding:14px;gap:12px">
+    <h1 style="margin-top:0;font-size:31px">החומר שלכם<br>עד יום המבחן</h1>
+    <p style="margin-top:8px;max-width:310px"><b>תרגול שנבנה בדיוק לפי הצרכים שלכם:</b> מצלמים את דף החומר ובוחרים תאריך – והתרגול מתחלק לבד, קצת בכל יום</p>
+    <div class="icard" style="margin-top:14px;padding:12px;gap:10px;border-radius:20px">
       <div style="display:flex;align-items:center;gap:10px"><span class="iico" style="width:44px;height:44px;background:#FFF3CC">${IC.sv('#946200',24,IC.cam)}</span>
         <div style="flex:1"><b style="font-size:14px">אנגלית · <span translate="no">Unit 5</span></b><div style="font-size:12px;color:#4A4870">5 פרקים · נבנה מהצילום</div></div>
         <span style="background:#1B2A4A;color:#fff;border-radius:10px;padding:5px 9px;font-size:12px;font-weight:700;white-space:nowrap">מבחן · יום ה׳</span></div>
       <div class="iweek" style="gap:5px">${d('א׳','#4A4870','background:#24C78E',IC.star('#fff',15),'הושלם')}${d('ב׳','#4A4870','background:#24C78E',IC.star('#fff',15),'הושלם')}${d('היום','#2F6BFF','background:#2F6BFF;color:#fff;box-shadow:0 0 0 3px #C9D9FF','3')}${d('ד׳','#4A4870','background:#EAF0FF;color:#4A4870','4')}${d('ה׳','#4A4870','background:#FFF2C9',IC.sv('#946200',15,IC.again,2.4),'חזרה')}${d('ו׳','#4A4870','background:#FF5C8A',IC.sv('#fff',15,IC.flag,2.2),'מבחן')}</div></div>
-    <p style="margin-top:14px;font-size:13px;font-weight:700">או בוחרים תרגול מוכן מהקטלוג – בלי לחכות</p>`}; },
+    <div class="icard" style="margin-top:12px;padding:12px;gap:10px;border-radius:20px;background:#1B2A4A;color:#fff">
+      <div style="display:flex;align-items:center;gap:10px"><span class="iico" style="width:40px;height:40px;background:#24C78E">${IC.sv('#0E2E22',22,IC.book)}</span>
+        <div style="flex:1"><b style="font-size:15px">או תרגול מוכן מהקטלוג</b><div style="font-size:12px;color:#D5DEF2">לכל כיתה · נבנה ונבדק על ידי הצוות שלנו</div></div></div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-size:14px;font-weight:700">${sub(0,'background:#2F6BFF')}${sub(1,'background:#F2A63B;color:#1B2A4A')}${sub(2,'background:#FF5C8A;color:#3A0716')}${sub(3,'background:#24C78E;color:#0E2E22')}</div>
+      <div style="font-size:12px;color:#D5DEF2;text-align:center">מוסיפים בלחיצה – והילד מתחיל לשחק מיד</div></div>`}; },
   track:K=>{ const row=(t,v,c,lbl,bg,tc)=>`<div style="display:flex;align-items:center;gap:8px"><span style="flex:1">${t}</span><span style="width:64px;height:7px;background:#EAF0FF;border-radius:9px;flex:none" dir="ltr"><span style="display:block;width:${v}%;height:7px;background:${c};border-radius:9px"></span></span><span style="background:${bg};color:${tc};border-radius:99px;padding:2px 8px;font-size:11px;font-weight:700">${lbl}</span></div>`;
     return {bg:'#FF5C8A', html:`
     <h1 style="margin-top:12px;font-size:32px;color:#3A0716">רואים מה יושב<br><span style="color:#fff">ומחזקים בלחיצה</span></h1>

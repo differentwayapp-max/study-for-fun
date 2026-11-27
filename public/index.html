@@ -2079,7 +2079,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   .thtop .tb{height:10px;border-radius:999px;background:#EEF0F5;overflow:hidden} .thtop .tb span{display:block;height:100%}
   .thwho{display:flex;gap:10px;align-items:center;margin:8px 0} .thwho span{font-size:.86em} .thav{width:48px;height:48px;border-radius:50%;background:#fff;color:#5B47D6;display:grid;place-items:center;font-weight:800;font-size:1.3em;flex:none}
   .thsince{background:rgba(255,255,255,.16);border-radius:12px;padding:8px 10px}
-  .thweek{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px} .thday{border:2px solid #E3E9F7;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;gap:4px;align-items:center;min-height:70px}
+  .thweek{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px} .thday{border:2px solid #E3E9F7;border-radius:14px;padding:6px 4px;display:flex;flex-direction:column;gap:4px;align-items:center;min-height:70px}
   .thday.on{border-color:#5B47D6;background:#EDE9FF} .thday button{border:0;background:#fff;border-radius:10px;padding:4px;font:inherit;font-size:.78em;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-height:44px;width:100%}
   .thday button small{color:var(--ink2)}
   .thkid{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border-top:2px solid #F1F2F7;padding:10px 0;min-height:56px} .thkid:first-of-type{border-top:0}
@@ -5840,6 +5840,10 @@ function streakDays(g, now=Date.now()){ const days=new Set(g.map(h=>new Date(h.a
 function sinceLesson(kid, sc, now=Date.now()){ const p=prevLesson(sc, now)||0, g=history.filter(h=>h.kidId===kid&&h.at>p).sort((a,b)=>b.at-a.at);
   const m=kidMastery(g), ts=Object.entries(m).sort((a,b)=>a[1].pct-b[1].pct), w=ts[0], s=ts.filter(([,x])=>x.pct>=MAST_HI).pop();
   return {prev:p||null, games:g.length, pct:thPct(thSum(g,'right'),thSum(g,'n')), streak:streakDays(g, now), weak:w&&w[1].pct<MAST_HI?{t:w[0], bad:Math.round(w[1].n-w[1].r), n:Math.round(w[1].n)}:null, strong:s?s[0]:null, list:g}; }
+// "my week" (the private world's home and its lessons tab): Sunday–Friday (the days a fixed lesson can be set on – schedEditor), each day's lessons by time
+function thWeekStrip(studs, S=CLS.sched||{}){ const today=new Date().getDay();
+  return `<div class="thweek">${[0,1,2,3,4,5].map(d=>{ const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k, t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
+    return `<div class="thday ${today===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi translate="no">${esc(thFirst(x.k.name))}</bdi><small><bdi translate="no">${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('')}</div>`; }
 function thPrivate(){
   const C=window.SFF_CLASS||{}, studs=trStudents(), now=Date.now(), S=CLS.sched||{};
   const nx=studs.map(k=>({k, t:nextLesson(S[k.id], now)})).filter(x=>x.t).sort((a,b)=>a.t-b.t)[0];
@@ -5852,9 +5856,7 @@ function thPrivate(){
       <p class="thsince">${fT(`מאז השיעור הקודם: ${L.games} משחקים${L.pct!=null?` · ${L.pct}% נכונות`:''}${L.streak===1?' · יום אחד ברצף':L.streak?` · ${L.streak} ימים ברצף`:''}`)}</p>
       ${L.weak?`<p>${fT(`כדאי לעבוד היום על ${L.weak.t} – טעה/תה ב-${L.weak.bad} מתוך ${L.weak.n}.${L.strong?` שולט/ת כבר ב${L.strong}.`:''}`, L.weak.t, L.strong)}</p>`:L.games?'<p>הכול יושב – אפשר להתקדם לחומר חדש.</p>':'<p>עוד לא תרגל/ה מאז השיעור הקודם.</p>'}</div>
       <div class="thbtns"><button class="btn" onclick="thMist('${esc(k.id)}')">הטעויות לשיעור</button><button class="btn ghost" onclick="thNote('${esc(k.id)}')">הערה לשיעור</button></div></div>`; }
-  const wk=[0,1,2,3,4].map(d=>{ const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k, t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
-    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi translate="no">${esc(thFirst(x.k.name))}</bdi><small><bdi translate="no">${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('');
-  const week=`<div class="thsec"><div class="thh"><h3>השבוע שלי</h3><button class="linkbtn" onclick="thTab('les')">שיעורים ›</button></div><div class="thweek">${wk}</div></div>`;
+  const week=`<div class="thsec"><div class="thh"><h3>השבוע שלי</h3><button class="linkbtn" onclick="thTab('les')">שיעורים ›</button></div>${thWeekStrip(studs, S)}</div>`;
   const cards=studs.map(k=>{ const g=history.filter(h=>h.kidId===k.id).sort((a,b)=>b.at-a.at), last=g[0], m=kidMastery(g.filter(h=>h.at>=now-14*TDAY)), xs=Object.values(m);
     const pct=xs.length?Math.round(xs.reduce((s,x)=>s+x.pct,0)/xs.length):0, idleD=last?Math.floor((now-last.at)/TDAY):null;
     const w1=thWeek(history,[k],now), stuck=classAttention(history,[k],now).stuck.length;
@@ -5887,8 +5889,7 @@ function schedAdd(kid){ const d=+$('sd_'+kid).value, t=$('st_'+kid).value||'17:0
 function schedDel(kid,i){ const cur=[...(((CLS.sched||{})[kid]||{}).slots||[])]; cur.splice(i,1);
   schedSave(kid,{slots:cur}).then(ok=>{ if(ok&&!$('tDlg')?.classList.contains('hidden')&&$('tDlg').querySelector('.tsched')) tStudent(kid); if(ok&&!$('vTLes').classList.contains('hidden')) thLesView(); }); }
 function thLesView(){ show('vTLes'); const studs=trStudents();
-  $('tLesBody').innerHTML=`<div class="card thome"><div class="thsec"><h3>השבוע שלי</h3><div class="thweek">${[0,1,2,3,4].map(d=>{ const S=CLS.sched||{}; const ls=studs.flatMap(k=>((S[k.id]||{}).slots||[]).filter(sl=>+sl.d===d).map(sl=>({k,t:sl.t}))).sort((a,b)=>String(a.t).localeCompare(String(b.t)));
-    return `<div class="thday ${new Date().getDay()===d?'on':''}"><b>${WDS[d]}</b>${ls.map(x=>`<button onclick="tStudent('${esc(x.k.id)}')"><bdi translate="no">${esc(thFirst(x.k.name))}</bdi><small><bdi translate="no">${esc(x.t)}</bdi></small></button>`).join('')||'<span class="hint">–</span>'}</div>`; }).join('')}</div></div>
+  $('tLesBody').innerHTML=`<div class="card thome"><div class="thsec"><h3>השבוע שלי</h3>${thWeekStrip(studs)}</div>
     <div class="thsec"><h3>השיעורים הקבועים</h3>${studs.map(k=>`<div class="thles"><b><bdi translate="no">${esc(k.name)}</bdi></b>${schedEditor(k.id)}</div>`).join('')||'<p class="hint">עוד אין תלמידים</p>'}</div></div>`; }
 // the parents' monthly update: a short text per student, ready to edit, sent by WhatsApp (to the number the parent gave, if any)
 function thUpdText(k){ const g=history.filter(h=>h.kidId===k.id&&h.at>=Date.now()-30*TDAY), m=kidMastery(g.sort((a,b)=>b.at-a.at)), ts=Object.entries(m).sort((a,b)=>b[1].pct-a[1].pct);

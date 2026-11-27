@@ -86,6 +86,8 @@ service cloud.firestore {
     }
     // the server log (written only by the server): app admins read and clear it
     match /serverLog/{id} { allow read, delete: if appAdmin(); }
+    // the weekly exports (functions/index.js: runBackup) – written only by the server, read only by the app admins
+    match /backups/{id} { allow read: if appAdmin(); allow write: if false; }
     match /bugLimits/{uid} {
       allow read: if signedIn() && request.auth.uid == uid;
       allow create: if signedIn() && request.auth.uid == uid && request.resource.data.keys().hasOnly(['at']) && request.resource.data.at == request.time;

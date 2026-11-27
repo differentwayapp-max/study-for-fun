@@ -1090,6 +1090,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
         <button class="ditem " onclick="closeMenu();openBugList()" ><span class="di">🐞</span><span class="dl">דיווחים מהמשתמשים</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openErrLog()" ><span class="di">🧾</span><span class="dl">יומן תקלות</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openServerLog()" ><span class="di">🖥️</span><span class="dl">יומן שרת <span id="slDot" class="rdot hidden" aria-label="חדש"></span></span><span class="dchev" aria-hidden="true">‹</span></button>
+        <button class="ditem " onclick="closeMenu();openBackups()" ><span class="di">🗄️</span><span class="dl">גיבויים</span><span class="dchev" aria-hidden="true">‹</span></button>
         <button class="ditem " onclick="closeMenu();openAdminCfg()" ><span class="di">⚙️</span><span class="dl">הגדרות מנהל</span><span class="dchev" aria-hidden="true">‹</span></button>
       </div></div>
       <div class="dgrp pside"><h4>חשבון ופרטיות</h4><div class="dcard">
@@ -1399,6 +1400,8 @@ const TERMS_VERSION = '2026-11-17';   // the date in tools/docs/terms-*.md (term
     const buildErr = e => { const d = e.details || {}, c = String(e.code || '');
       return { code: d.reason || (c.includes('unavailable') || c.includes('deadline') || /network|fetch|load failed|internet/i.test(e.message || '') ? 'network' : c.includes('permission-denied') ? 'not_granted' : 'error'), ...d, message: e.message }; };
     W.__sffAdminUsers = async () => (await callUsers({})).data;
+    const callBackup = httpsCallable(fns, 'adminBackup', { timeout: 540000 });
+    W.__sffBackup = async d => { try { return (await callBackup(d)).data; } catch (e) { const x = e.details || {}; throw { code: x.reason || String(e.code || 'error'), message: e.message }; } };   // app admins only (the server checks)
     if (W.SFF_REST_EMU) W.__sffAskRaw = d => callAsk(d).then(r => r.data);   // tests only (local emulators): a raw call, to see the server refuse it
     // a new practice set = one build: this month's free builds, then paid credits (see functions/index.js)
     W.__sffAI = {
@@ -3992,7 +3995,7 @@ async function openServerLog(){
   let list=[]; try{ list=await window.__sffRoot.list('serverLog'); }catch(e){ toast('⚠️ אין הרשאה'); return; }
   list.sort((a,b)=>(Number(b.at)||0)-(Number(a.at)||0));
   try{ localStorage.setItem(SLOG_SEEN,String(Math.max(Date.now(),Number(list[0]&&list[0].at)||0))); }catch(e){} $('menuBtn').classList.remove('dot'); $('slDot')?.classList.add('hidden');
-  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰'};
+  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰',restore:'♻️'};
   const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
   box.innerHTML=`<div class="dlghead"><b>🖥️ יומן שרת · ${list.length}</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
     <p class="hint" style="margin:0 0 8px">⚠️ תקלות ${n('error')} · 🐢 קריאות איטיות ${n('slow')} · 🔀 מודל חלופי ${n('fallback')}${n('budget')?` · 💰 הוצאות AI ${n('budget')}`:''}</p>`+
@@ -4001,6 +4004,56 @@ async function openServerLog(){
       +`<button class="btn ghost small" style="margin-top:10px" id="slClear">🗑 לנקות את היומן</button>`:'<p class="hint center">אין רשומות 🎉</p>');
   const c=$('slClear'); if(c) c.addEventListener('click',async()=>{ for(const r of list){ try{ await window.__sffRoot.del('serverLog',r.id); }catch(e){} } openServerLog(); });
   $('moreDlg').classList.remove('hidden');
+}
+/* ---------- 🗄️ backups (app admins only – the server checks: adminBackup in functions/index.js) ----------
+   The setup as Google reports it, the weekly exports, "back up now", and restoring one family's content to a minute of the
+   last 7 days (a preview first; access – adults, kid links, devices – is never restored). */
+const bkDate=t=>t?new Date(t).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}):'–';
+const bkErrs={no_account:'⚠️ אין חשבון עם המייל הזה',bad_family:'⚠️ מייל או מזהה משפחה לא תקינים',account_deleted:'⚠️ החשבון נמחק – לא משחזרים חשבון שנמחק',
+  out_of_window:'⚠️ אפשר לשחזר רק לרגע מ-7 הימים האחרונים',no_family_then:'⚠️ המשפחה לא הייתה קיימת ברגע הזה',running:'⏳ גיבוי כבר רץ – נסו שוב בעוד כמה דקות'};
+const bkErr=e=>bkErrs[e&&e.code]||(/permission/i.test(String(e&&e.code))?'⚠️ אין הרשאה':'⚠️ '+(e&&e.message||'תקלה'));
+async function openBackups(){
+  const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
+  box.innerHTML=`<div class="dlghead"><b>🗄️ גיבויים</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div><p class="hint center">⏳ בודקים את ההגדרות…</p>`;
+  $('moreDlg').classList.remove('hidden');
+  let r; try{ r=await window.__sffBackup({action:'status'}); }catch(e){ box.querySelector('.hint').textContent=bkErr(e); return; }
+  const s=r.setup||{}, sc=s.schedules||[], daily=sc.find(x=>x.daily), weekly=sc.find(x=>x.weekday), ready=(s.backups||[]).filter(b=>b.state==='READY');
+  const row=(ok,label,val,err)=>`<div class="errrow"><div>${err?'⚠️':ok?'✅':'❌'} <b>${label}</b></div><div class="hint">${err?`<span dir="ltr" translate="no" title="${esc(err)}">${esc(err.length>110?err.slice(0,110)+'…':err)}</span>`:val}</div></div>`;
+  const st={done:'✅',running:'⏳',failed:'❌'}, kind={auto:'אוטומטי',manual:'ידני'};
+  const def=new Date(Date.now()-60*60000-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+  const min=new Date(Date.now()-7*864e5+15*60000-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16);
+  box.innerHTML=`<div class="dlghead"><b>🗄️ גיבויים</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
+    <p class="hint" style="margin:0 0 8px">רק מנהלי האפליקציה רואים את המסך הזה. ההגדרות נקראות ישירות מ-Google.</p>
+    <h4 style="margin:10px 0 4px">⚙️ ההגדרה</h4>
+    ${row(s.pitr,'שחזור לכל דקה ב-7 הימים האחרונים',s.pitr?'אפשר לשחזר מ-'+esc(bkDate(s.earliest)):'כבוי',s.dbErr)}
+    ${row(s.deleteProtection,'נעילה נגד מחיקת מסד הנתונים',s.deleteProtection?'פעילה':'כבויה',s.dbErr)}
+    ${row(!!daily,'גיבוי יומי',daily?`נשמר ${daily.days} ימים`:'לא מוגדר',s.schedErr)}
+    ${row(!!weekly,'גיבוי שבועי',weekly?`נשמר ${Math.round(weekly.days/7)} שבועות`:'לא מוגדר',s.schedErr)}
+    ${row(ready.length>0,'גיבויים מוכנים',ready.length?`${ready.length} · האחרון: ${esc(bkDate(ready[0].snapshot))}`:'עוד אין (הראשון נוצר יום אחרי ההפעלה)',s.backupsErr)}
+    ${row(!!(s.bucket&&s.bucket.deleteAfterDays&&s.bucket.publicBlocked),'מקום לייצוא השבועי',s.bucket?`<span dir="ltr" translate="no">${esc(s.bucket.name)} · ${esc(s.bucket.location)}</span> · נמחק אחרי ${s.bucket.deleteAfterDays||'–'} ימים · ${s.bucket.publicBlocked?'חסום לציבור':'⚠️ לא חסום לציבור'}`:'',s.bucketErr)}
+    <h4 style="margin:14px 0 4px">💾 ייצוא שבועי (מסד הנתונים + חשבונות הכניסה)</h4>
+    ${(r.runs||[]).length?r.runs.slice(0,8).map(b=>`<div class="errrow"><div>${st[b.state]||'•'} <b>${esc(bkDate(b.at))}</b> · ${kind[b.kind]||esc(b.kind||'')}${b.docs?` · ${b.docs} מסמכים`:''}${b.authUsers!=null?` · ${b.authUsers} חשבונות`:''}</div>${b.fsErr||b.authErr?`<div class="hint" dir="ltr" translate="no">${esc(b.fsErr||b.authErr)}</div>`:''}</div>`).join(''):'<p class="hint">עוד לא היה ייצוא</p>'}
+    <button class="btn ghost small" style="margin-top:8px" id="bkNow">💾 לגבות עכשיו</button> <span class="hint" id="bkNowMsg"></span>
+    <h4 style="margin:14px 0 4px">♻️ שחזור משפחה</h4>
+    <p class="hint" style="margin:0 0 6px">מחזיר את הילדים, התרגולים וההתקדמות של משפחה אחת למצב שהיה ברגע שבוחרים. מי שיש לו גישה (מבוגרים, קישורי ילדים, מכשירים) לא משתנה. קודם מוצגת בדיקה, ורק אחר כך משחזרים.</p>
+    <input id="bkFam" type="text" dir="ltr" autocomplete="off" style="width:100%;margin:0 0 6px" placeholder="המייל של ההורה שפתח את המשפחה">
+    <input id="bkAt" type="datetime-local" style="width:100%;margin:0 0 8px" value="${def}" min="${min}">
+    <button class="btn ghost small" id="bkCheck">🔍 בדיקה</button>
+    <div id="bkRes" style="margin-top:8px"></div>`;
+  $('bkNow').addEventListener('click',async()=>{ $('bkNowMsg').textContent='⏳'; try{ await window.__sffBackup({action:'now'}); $('bkNowMsg').textContent='✅ התחיל – מתעדכן כאן תוך כמה דקות'; }catch(e){ $('bkNowMsg').textContent=bkErr(e); } });
+  $('bkCheck').addEventListener('click',()=>bkRestore(false));
+}
+async function bkRestore(confirm){
+  const fam=$('bkFam').value.trim(), at=new Date($('bkAt').value).getTime(), out=$('bkRes');
+  if(!fam||!at){ out.innerHTML='<p class="hint">✍️ ממלאים מייל ותאריך</p>'; return; }
+  out.innerHTML='<p class="hint">⏳ קוראים את המצב של אז ושל עכשיו…</p>';
+  let r; try{ r=await window.__sffBackup({action:'restore',fam,at,confirm}); }catch(e){ out.innerHTML=`<p class="hint">${esc(bkErr(e))}</p>`; return; }
+  const c=x=>`${x.kids} ילדים · ${x.sets} תרגולים · ${x.progress} התקדמות`;
+  if(r.done){ out.innerHTML=`<div class="errrow"><div>${r.failed?'⚠️':'✅'} <b>שוחזר למצב של ${esc(bkDate(r.at))}</b></div><div class="hint">נכתבו ${r.write} · נמחקו ${r.del}${r.failed?` · נכשלו ${r.failed}`:''}<br>לביטול: לשחזר שוב את אותה משפחה ל-${esc(bkDate(r.undoAt))}.<br>טלפון של ילד שהיה בלי רשת עלול להחזיר התקדמות ישנה כשיתחבר.</div></div>`; return; }
+  out.innerHTML=`<div class="errrow"><div><b>אז (${esc(bkDate(r.at))}):</b> ${c(r.then)}</div><div><b>עכשיו:</b> ${c(r.now)}</div>
+    <div class="hint">${r.write||r.del?`ייכתבו ${r.write} מסמכים וימחקו ${r.del}`:'אין הבדל – אין מה לשחזר'}</div></div>
+    ${r.write||r.del?'<button class="btn small" id="bkGo" style="margin-top:6px">♻️ לשחזר</button>':''}`;
+  const go=$('bkGo'); if(go) go.addEventListener('click',async()=>{ if(await askSure({ico:'♻️',title:'לשחזר את המשפחה?',text:'מה שהשתנה במשפחה הזו מאז '+bkDate(r.at)+' יוחלף.',yes:'לשחזר',danger:true})) bkRestore(true); });
 }
 async function delBug(id,btn){ try{ await window.__sffRoot.del('bugReports',id); btn.closest('.errrow').remove(); }catch(e){ toast('⚠️'); } }
 function sayWord(t){ rdStop(); if(mutedNote()) return; try{ const u=new SpeechSynthesisUtterance(t); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); sayU(u); }catch(e){} }
@@ -4152,6 +4205,13 @@ async function cloudInit(){
   applyLock();
   if(!DB) return;
   if(window.SFF_ROLE==='tutor'){ tutorCloud(); ME&&ME.id().then(watchBuilds).catch(()=>{}); return; }
+  // an app admin restored this family from a backup (functions/index.js: restoreFamily): drop the copy kept on this phone and
+  // load the restored data – otherwise the merge below would write the old copy back. Once per restore (sff_restore_seen).
+  DB.doc('fam/restore').onSnapshot(snap=>{ const at=snap.exists?Number(snap.data().at)||0:0; if(!at) return;
+    try{ if((Number(localStorage.getItem('sff_restore_seen'))||0)>=at) return; localStorage.setItem('sff_restore_seen',String(at));
+      if(localStorage.getItem('sff_restore_seen')!==String(at)) return;      // no storage → no copy to drop (and never a reload loop)
+      ['sff_kids','sff_sets','sff_history'].forEach(k=>localStorage.removeItem(k)); }catch(e){ return; }
+    sffSoftReload('מעדכנים…'); },()=>{});
   DB.doc('fam/kids').onSnapshot(snap=>{
     CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];

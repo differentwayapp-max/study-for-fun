@@ -218,6 +218,158 @@ exports.adminUsers = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   return { parents: parents.map(({ uid, ...p }) => p), kidDevices, month };
 });
 
+/* ---------- backups (app admins only) ----------
+   Three layers: Firestore's own point-in-time recovery (any minute of the last 7 days) and its managed backups (daily,
+   kept 14 days; weekly, kept 12 weeks) – both set up once with gcloud – plus a weekly export of Firestore AND of the
+   sign-in accounts (Firestore backups don't hold them) to the bucket <project>-backups (another EU region; its files are
+   deleted after 90 days – the privacy policy says so). Each export is a document in backups/{id} (only app admins read
+   it); a failure → serverLog (the red dot on ☰).
+   adminBackup (☰ → 🗄️ גיבויים): the setup as it really is (read from Google, nothing assumed), the exports, "back up
+   now", and restoring ONE family's content as it was at a minute of the last 7 days. */
+const BACKUP_EVERY_DAYS = 7;
+const projectId = () => process.env.GCLOUD_PROJECT || JSON.parse(process.env.FIREBASE_CONFIG || '{}').projectId;
+const backupBucket = () => process.env.BACKUP_BUCKET || `${projectId()}-backups`;
+const dbPath = () => `projects/${projectId()}/databases/(default)`;
+let fsAdminC; const fsAdmin = () => fsAdminC || (fsAdminC = new (require('@google-cloud/firestore').v1.FirestoreAdminClient)());
+const tsMs = t => t ? Number(t.seconds || 0) * 1000 + Math.round((t.nanos || 0) / 1e6) : 0;
+const errMsg = e => String((e && e.message) || e).slice(0, 300);
+const stampOf = (t = new Date()) => t.toISOString().replace(/[:.]/g, '-').slice(0, 19);      // 2026-11-27T01-30-00
+
+// one export: the whole Firestore (runs on in the background – refreshBackups follows it) + the sign-in accounts (a file)
+async function runBackup(kind, by) {
+  const id = stampOf(), ref = db.doc(`backups/${id}`), bucket = backupBucket(), out = {};
+  await ref.set({ at: Date.now(), kind, by: by || '', state: 'running', bucket });
+  try {
+    const [op] = await fsAdmin().exportDocuments({ name: dbPath(), outputUriPrefix: `gs://${bucket}/firestore/${id}`, collectionIds: [] });
+    out.op = op.name;
+  } catch (e) { out.fsErr = errMsg(e); }
+  try {
+    const { getAuth } = require('firebase-admin/auth'), users = []; let token;
+    do {
+      const page = await getAuth().listUsers(1000, token); token = page.pageToken;
+      for (const u of page.users) users.push({ uid: u.uid, email: u.email || null, emailVerified: !!u.emailVerified, displayName: u.displayName || null,
+        disabled: !!u.disabled, providers: u.providerData.map(p => ({ providerId: p.providerId, uid: p.uid, email: p.email || null, displayName: p.displayName || null })),
+        created: u.metadata.creationTime, lastSignIn: u.metadata.lastSignInTime, claims: u.customClaims || null });
+    } while (token);
+    const body = require('zlib').gzipSync(JSON.stringify({ at: Date.now(), project: projectId(), users }));
+    await require('firebase-admin/storage').getStorage().bucket(bucket).file(`auth/${id}.json.gz`).save(body, { contentType: 'application/gzip', resumable: false });
+    out.authUsers = users.length; out.authBytes = body.length;
+  } catch (e) { out.authErr = errMsg(e); }
+  out.state = out.fsErr ? 'failed' : 'running';                     // the Firestore export finishes later (refreshBackups)
+  await ref.set(out, { merge: true });
+  if (out.fsErr || out.authErr) await serverLog({ fn: 'backup', kind: 'error', code: out.fsErr ? 'firestore_export' : 'auth_export', msg: out.fsErr || out.authErr, ms: 0 });
+  return { id, ...out };
+}
+// follows the exports still running: done / failed (→ serverLog); one not done after 12 hours is failed
+async function refreshBackups() {
+  const q = await db.collection('backups').where('state', '==', 'running').limit(20).get();
+  for (const d of q.docs) {
+    const b = d.data(), upd = {};
+    try {
+      if (!b.op) { if (Date.now() - (b.at || 0) > 600e3) Object.assign(upd, { state: 'failed', fsErr: 'no export was started' }); }
+      else {
+        const op = await fsAdmin().checkExportDocumentsProgress(b.op), m = op.metadata || {};
+        if (op.done) {
+          upd.end = tsMs(m.endTime) || Date.now();
+          upd.docs = Number((m.progressDocuments || {}).completedWork || 0); upd.bytes = Number((m.progressBytes || {}).completedWork || 0);
+          if (op.error) upd.fsErr = errMsg(op.error.message || JSON.stringify(op.error));
+          upd.state = (upd.fsErr || b.authErr) ? 'failed' : 'done';
+        } else if (Date.now() - (b.at || 0) > 12 * 36e5) Object.assign(upd, { state: 'failed', fsErr: 'the export did not finish in 12 hours' });
+      }
+    } catch (e) { if (Date.now() - (b.at || 0) > 12 * 36e5) Object.assign(upd, { state: 'failed', fsErr: errMsg(e) }); }
+    if (!upd.state) continue;
+    await d.ref.set(upd, { merge: true });
+    if (upd.state === 'failed' && upd.fsErr) await serverLog({ fn: 'backup', kind: 'error', code: 'firestore_export', msg: upd.fsErr, ms: 0 });
+  }
+}
+// every night (Israel time): follow the running exports; a new export when the last good one is BACKUP_EVERY_DAYS old
+exports.backupData = require('firebase-functions/v2/scheduler').onSchedule(
+  { schedule: '20 3 * * *', timeZone: 'Asia/Jerusalem', region: 'europe-west1', retryCount: 0, timeoutSeconds: 540, memory: '512MiB' },
+  async () => {
+    await refreshBackups();
+    const last = (await db.collection('backups').orderBy('at', 'desc').limit(20).get()).docs.map(d => d.data()).find(b => b.state !== 'failed');
+    if (!last || Date.now() - (last.at || 0) > (BACKUP_EVERY_DAYS - 0.5) * 864e5) await runBackup('auto');
+  });
+
+// the setup as Google reports it: point-in-time recovery, delete protection, the managed backup schedules and backups, the bucket
+async function backupSetup() {
+  const s = {}, c = fsAdmin();
+  try { const [g] = await c.getDatabase({ name: dbPath() });
+    Object.assign(s, { location: g.locationId, pitr: g.pointInTimeRecoveryEnablement === 'POINT_IN_TIME_RECOVERY_ENABLED', earliest: tsMs(g.earliestVersionTime),
+      deleteProtection: g.deleteProtectionState === 'DELETE_PROTECTION_ENABLED' }); } catch (e) { s.dbErr = errMsg(e); }
+  try { const [list] = await c.listBackupSchedules({ parent: dbPath() });
+    s.schedules = list.map(x => ({ daily: !!x.dailyRecurrence, weekday: x.weeklyRecurrence ? x.weeklyRecurrence.day : null,
+      days: Math.round(Number((x.retention || {}).seconds || 0) / 86400) })); } catch (e) { s.schedErr = errMsg(e); }
+  try { const [list] = await c.listBackups({ parent: `projects/${projectId()}/locations/-` });
+    s.backups = list.filter(x => /\/databases\/\(default\)$/.test(x.database || '')).map(x => ({ state: x.state, snapshot: tsMs(x.snapshotTime), expire: tsMs(x.expireTime) }))
+      .sort((a, b) => b.snapshot - a.snapshot).slice(0, 10); } catch (e) { s.backupsErr = errMsg(e); }
+  try { const b = require('firebase-admin/storage').getStorage().bucket(backupBucket()), [m] = await b.getMetadata();
+    const del = ((m.lifecycle || {}).rule || []).find(r => r.action && r.action.type === 'Delete' && r.condition && r.condition.age);
+    s.bucket = { name: m.name, location: m.location, deleteAfterDays: del ? Number(del.condition.age) : 0,
+      publicBlocked: (m.iamConfiguration || {}).publicAccessPrevention === 'enforced' }; } catch (e) { s.bucketErr = errMsg(e); }
+  return s;
+}
+
+// Restoring one family (its owner's email or its id) as it was at a minute of the last 7 days (point-in-time recovery).
+// Only the content: the family document, fam (the kids: fam/kids), sets, progress. Never who has access – members, devices,
+// invitations, tutorView and the kid links (kidTokens) stay as they are now, so a removed adult or a revoked kid link
+// never comes back – and never usage, billing or builds. A deleted account is never restored (the privacy policy).
+// Then fam/restore is marked: every open app of the family drops the copy it keeps on the phone and loads the restored
+// data (an app merges into its own copy otherwise, and would write the old data back). Undo: restore again to `undoAt`.
+const RESTORE_SUBS = ['fam', 'sets', 'progress'];
+const RESTORE_KEEP = ['kidTokens'];
+async function restoreFamily(d, by) {
+  const { getAuth } = require('firebase-admin/auth');
+  let famId = String(d.fam || '').trim();
+  if (famId.includes('@')) { try { famId = (await getAuth().getUserByEmail(famId)).uid; } catch (_) { throw new HttpsError('not-found', 'no_account', { reason: 'no_account' }); } }
+  if (!/^[A-Za-z0-9_-]{6,128}$/.test(famId)) throw new HttpsError('invalid-argument', 'bad_family', { reason: 'bad_family' });
+  try { await getAuth().getUser(famId); } catch (_) { throw new HttpsError('failed-precondition', 'account_deleted', { reason: 'account_deleted' }); }
+  const at = Math.floor(Number(d.at) / 60000) * 60000;               // older than an hour, the past is read at whole minutes
+  if (!(at > Date.now() - 7 * 864e5 + 10 * 60000 && at <= Date.now() - 60000)) throw new HttpsError('invalid-argument', 'out_of_window', { reason: 'out_of_window' });
+  const fam = db.doc(`families/${famId}`), mark = db.doc(`families/${famId}/fam/restore`);   // the mark: every open app of the family drops its own copy
+  const readAll = async get => { const out = new Map(), f = await get(fam); if (f.exists) out.set(fam.path, f.data());
+    for (const s of RESTORE_SUBS) (await get(fam.collection(s))).docs.forEach(x => { if (x.ref.path !== mark.path) out.set(x.ref.path, x.data()); }); return out; };
+  const { Timestamp } = require('firebase-admin/firestore');
+  const then = await db.runTransaction(t => readAll(r => t.get(r)), { readOnly: true, readTime: Timestamp.fromMillis(at) });
+  if (!then.has(fam.path)) throw new HttpsError('failed-precondition', 'no_family_then', { reason: 'no_family_then' });
+  const start = Date.now(), now = await readAll(r => r.get());
+  const same = (a, b) => JSON.stringify(a, Object.keys(a || {}).sort()) === JSON.stringify(b, Object.keys(b || {}).sort());
+  const count = m => ({ kids: ((m.get(`${fam.path}/fam/kids`) || {}).list || []).length, sets: [...m.keys()].filter(p => p.includes('/sets/')).length,
+    progress: [...m.keys()].filter(p => p.includes('/progress/')).length });
+  const famThen = { ...then.get(fam.path) }, famNow = now.get(fam.path) || {};
+  for (const k of RESTORE_KEEP) { if (k in famNow) famThen[k] = famNow[k]; else delete famThen[k]; }
+  then.set(fam.path, famThen);
+  const write = [...then.keys()].filter(p => !now.has(p) || !same(then.get(p), now.get(p))), del = [...now.keys()].filter(p => !then.has(p));
+  const res = { famId, at, then: count(then), now: count(now), write: write.length, del: del.length };
+  if (!d.confirm) return res;
+  const bw = db.bulkWriter(); let failed = 0; bw.onWriteError(e => { if (e.failedAttempts < 3) return true; failed++; return false; });
+  write.forEach(p => bw.set(db.doc(p), then.get(p)));
+  del.forEach(p => bw.delete(db.doc(p)));
+  await bw.close();
+  await mark.set({ at: Date.now(), to: at });                          // the apps (parents' and kids' phones) take the restored data, never push their old copy back
+  await serverLog({ fn: 'adminBackup', kind: 'restore', code: failed ? 'partial' : 'ok',
+    msg: `family …${famId.slice(-4)} restored to ${new Date(at).toISOString().slice(0, 16)}Z by ${by}: ${write.length} written, ${del.length} deleted${failed ? `, ${failed} failed` : ''}`, ms: Date.now() - start });
+  return { ...res, done: true, failed, undoAt: Math.floor(start / 60000) * 60000 };
+}
+
+exports.adminBackup = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 2, timeoutSeconds: 540, memory: '512MiB' }, async function adminBackup(request) {
+  const auth = parentOnly(request);
+  if (!isAdminUser(auth)) throw new HttpsError('permission-denied', 'Admins only.');
+  const d = request.data || {};
+  if (d.action === 'status') {
+    try { await refreshBackups(); } catch (_) {}
+    const runs = (await db.collection('backups').orderBy('at', 'desc').limit(15).get()).docs.map(x => ({ id: x.id, ...x.data() }));
+    return { setup: await backupSetup(), runs, everyDays: BACKUP_EVERY_DAYS };
+  }
+  if (d.action === 'now') {
+    const last = (await db.collection('backups').orderBy('at', 'desc').limit(1).get()).docs[0];
+    if (last && last.data().state === 'running' && Date.now() - (last.data().at || 0) < 15 * 60000) throw new HttpsError('failed-precondition', 'running', { reason: 'running' });
+    return runBackup('manual', auth.token.email);
+  }
+  if (d.action === 'restore') return restoreFamily(d, auth.token.email);
+  throw new HttpsError('invalid-argument', 'Unknown action.');
+});
+
 // For the payment webhook (not exposed yet): add paid practice sets to a family.
 async function grantCredits(famId, n, ref) {
   await db.runTransaction(async (tx) => {
@@ -731,7 +883,7 @@ if (GMAIL_APP_PASSWORD) exports.mailServerAlerts = require('firebase-functions/v
     const to = String(cfg.reportMail || '').trim(), from = String(cfg.senderMail || to).trim();
     if (!MAIL_RE.test(to) || !MAIL_RE.test(from)) { console.log('mailServerAlerts: no address set'); return; }
     const clean = (v, n) => String(v || '').replace(/[\r\n]+/g, ' ').slice(0, n);
-    const name = { error: 'תקלות', slow: 'קריאות איטיות', fallback: 'מודל חלופי', budget: 'הוצאות AI' };
+    const name = { error: 'תקלות', slow: 'קריאות איטיות', fallback: 'מודל חלופי', budget: 'הוצאות AI', restore: 'שחזור משפחה' };
     const count = {}; rows.forEach(r => { count[r.kind] = (count[r.kind] || 0) + 1; });
     const lines = rows.slice(-60).map(r => `${new Date(r.at).toISOString().slice(0, 16).replace('T', ' ')}  ${clean(r.kind, 10)}  ${clean(r.fn, 20)}  ${clean(r.code, 40)}  ${clean(r.msg, 200)}`);
     const nodemailer = require('nodemailer');

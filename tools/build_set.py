@@ -86,7 +86,9 @@ for ci, chap in enumerate(C):
     kind = (ns.get("KINDS") or {}).get(title, "")          # optional station type on the map (abc / gram / word / read / rev)
     chapters.append({"title": title, "topics": topics, "count": len(items), **({"text": text} if text else {}), **({"kind": kind} if kind else {})})
     if text and not 80 <= words(text) <= 300: errors.append(f"ch{ci+1}: passage has {words(text)} words")
-    for topic, q, opts, ans, expl, sc in items:
+    for topic, q, opts, ans, expl, sc, *lv in items:                 # an optional 7th field: 2 = a test-level question ("⭐ שלב מבחן")
+        lvl = lv[0] if lv else 1
+        if lvl not in (1, 2): errors.append(f"ch{ci+1} «{q}»: level must be 1 or 2")
         tag = f"ch{ci+1} «{q}» → {opts[ans]}"
         if topic not in SET["topics"]: errors.append(f"{tag}: unknown topic {topic}")
         if len(opts) != 4 or len({o.strip() for o in opts}) != 4: errors.append(f"{tag}: need 4 different options")
@@ -169,7 +171,7 @@ for ci, chap in enumerate(C):
             if it["x"] - hw < -1 or it["x"] + hw > 101 or it["y"] - hh < -1 or it["y"] + hh > 101: errors.append(f"{tag}: \"{it['e']}\" is outside the frame")
         is_core = _nq(q) in CORE_Q
         qs.append({"topic": topic, "question": q, "options": opts, "answer": ans, **({"core": True} if is_core else {}),
-                   "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci})
+                   "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci, **({"lvl": 2} if lvl == 2 else {})})
 
 # the answer's place among the option pictures must look random (it was always the left one)
 for (n_, slot_), c_ in answer_slot.items():

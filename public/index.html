@@ -836,6 +836,12 @@ body.noai #btnBuild,body.noai #qaAll,body.noai #noAI{display:none!important}
 .rdbar{height:10px;border:2px solid var(--ink);border-radius:99px;background:#EEF1F8;overflow:hidden;margin-top:4px}.rdbar i{display:block;height:100%}
 .rdst{flex:none;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;font-family:var(--display);font-weight:600;font-size:.8em;background:#fff}
 .rdst.ok{background:#E9E4FF;color:var(--ink)}.rdst.warn{background:#FFE9C2}
+.rdbar{position:relative}.rdbar .rdexp{position:absolute;top:-2px;bottom:-2px;width:3px;margin-inline-start:-1px;background:var(--ink);border-radius:2px;text-decoration:none}
+.rdready{flex:1 1 100%;display:flex;gap:10px;align-items:center;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:8px 10px}
+.rdpct{flex:none;width:64px;height:64px;border-radius:50%;border:5px solid var(--c);display:grid;place-content:center;text-align:center;line-height:1.05}
+.rdpct b{font-family:var(--display);font-size:1.2em}.rdpct span{font-size:.62em;color:#3c4a6b}
+.rdinfo{flex:1;min-width:0;font-size:.85em}.rdinfo .rdl{margin:1px 0}.rdweak{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-top:4px}
+.rdweak .chip{border:2px solid var(--ink);border-radius:999px;background:#FFF4E0;padding:1px 8px;font:inherit;font-size:.85em;cursor:pointer}
 .roadmap{background:#BFE6C8;border:var(--line);border-radius:24px;overflow:hidden}
 .roadmap svg{display:block;width:100%;height:auto}.roadmap text{font-family:var(--display)}
 .roadmap .st{cursor:pointer}.roadmap .st-now>circle:nth-child(2){animation:rdpulse 1.4s infinite;transform-box:fill-box;transform-origin:center}
@@ -3253,7 +3259,7 @@ function renderKids(){
     const ss=kidSets(k), pct=ss.length?ss.reduce((a,x)=>a+setProgress(x),0)/ss.length:0;
     const row=(x,why)=>{ const [c,ico]=subjStyle(x.subject); const dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), base=String(x.subject).replace(/^🎯\s*/,'');
       return `<button class="prow ${x.reinf?'focus':''} ${why?'fin':''}" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}${x.reinf?'<i class="tgt" aria-hidden="true">🎯</i>':''}</span>
-        <span><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}</span>${why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
+        <span><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}${daysLeft(x.examDate)>=0&&!x.reinf?(r=>r?` · <b style="color:${readyClr(r.pct)}">מוכנות ${r.pct}%</b>`:'')(examReady(x)):''}</span>`:''}</span>${why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
         <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),why?'#B9C0D4':'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`; };
     // active first (focused practice on top), finished ones folded away below
     const act=ss.filter(x=>!setDone(x)).sort((a,b)=>(!!b.reinf)-(!!a.reinf)), fin=ss.filter(x=>setDone(x));
@@ -3479,6 +3485,46 @@ function roadPlan(set){
   const ahead = dl!=null && dl>=1 && doneToday>perDay;
   return {C,N,dn,day,revDay,flagDay,dl,perDay,behind,ahead,dayOf,t0,DAY};
 }
+// readiness for the test (the test window's effort bar): per station, the right answers among the last MAST_N questions
+// of it that were answered (a question not answered yet counts as wrong – a station never played is 0%); the set's
+// readiness = the stations' average. From the per-question results of the games (qr ok/wrong + qk the question's key).
+function examReady(set, H=history){
+  const C=getChapters(set); if(!C.length||set.demo) return null;
+  const chOf={}; C.forEach((c,ci)=>c.qs.forEach(q=>{ chOf[tkey(q.question)]=ci; }));
+  const per=C.map(c=>({r:0,n:0,need:Math.min(MAST_N,c.qs.length)}));
+  H.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qk)&&Array.isArray(h.qr)).forEach(h=>h.qk.forEach((k,j)=>{   // newest game first
+    const ci=chOf[String(k).split(':')[0]], x=per[ci]; if(!x||x.n>=x.need) return;
+    x.n++; if(String(h.qr[j]||'').split('.')[1]==='1') x.r++; }));
+  per.forEach(x=>{ x.pct=Math.round(x.r/Math.max(1,x.need)*100); });
+  const pct=Math.round(per.reduce((a,x)=>a+x.pct,0)/per.length);
+  const weak=per.map((x,i)=>({...x,i})).filter(x=>x.n>0&&x.pct<MAST_HI).sort((a,b)=>a.pct-b.pct).slice(0,3);
+  return {pct, per, weak};
+}
+// the effort the test still needs: stations / questions / minutes a day, today's stations, and where the bar should be by today
+const Q_MIN=.4;                                  // about 25 seconds a question
+function examEffort(set, P){
+  const rest=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)), qs=rest.reduce((a,i)=>a+P.C[i].qs.length,0);
+  const days=P.dl!=null&&P.dl>=1?Math.max(1,P.dl-1):1;
+  const today=[...Array(P.N).keys()].filter(i=>P.day[i]<=0&&!P.dn.has(i)), todayQ=today.reduce((a,i)=>a+P.C[i].qs.length,0);
+  let expect=null;
+  if(set.examDate&&set.created&&P.dl!=null&&P.dl>=0){ const t0=new Date(set.created).setHours(0,0,0,0), t1=new Date(set.examDate+'T00:00:00').getTime()-864e5, now=new Date().setHours(0,0,0,0);
+    expect=t1>t0?Math.max(0,Math.min(1,(now-t0)/(t1-t0))):1; }
+  return {rest:rest.length, qs, min:Math.max(1,Math.ceil(qs*Q_MIN/days)), today, todayQ, expect};
+}
+const readyWord=p=>p>=MAST_HI?'מוכנים ✓':p>=MAST_LO?'כמעט שם':'עוד עבודה';
+const readyClr=p=>p>=MAST_HI?'var(--ok)':p>=MAST_LO?'var(--sun)':'var(--bad)';
+const sffTx=t=>window.sffT?sffT(t):t;
+// the readiness box under the map's header: readiness %, today's stations, the effort left until the test, the weakest stations
+function readyBox(set,P,R,E){
+  if(!R) return '';
+  const range=a=>a.length===1?`פרק ${a[0]+1}`:`פרקים ${a[0]+1}–${a[a.length-1]+1}`;
+  const lines=[];
+  if(E&&E.today.length) lines.push(`<div class="rdl">🎯 היום: ${range(E.today)} · כ-${E.todayQ} שאלות</div>`);
+  if(E&&E.rest&&P.dl>=1) lines.push(`<div class="rdl hint">עד המבחן: עוד ${E.rest} פרקים · כ-${E.qs} שאלות · כ-${E.min} דקות ביום</div>`);
+  const weak=R.weak.length?`<div class="rdweak"><span class="hint">לחזק:</span>${R.weak.map(w=>`<button class="chip" onclick="startStation('${esc(set.id)}',${w.i})">${esc(chName(P.C[w.i]))} · ${w.pct}%</button>`).join('')}</div>`:'';
+  return `<div class="rdready"><div class="rdpct" style="--c:${readyClr(R.pct)}"><b>${R.pct}%</b><span>מוכנות</span></div>
+    <div class="rdinfo"><div class="rdl"><b style="color:${readyClr(R.pct)}">${readyWord(R.pct)}</b></div>${lines.join('')}${weak}</div></div>`;
+}
 // on the example map: who this phone is, and what it found – so a screenshot tells what is missing
 function demoWhy(){
   const me=kidById(LOCK||activeKid), ver=document.querySelector('meta[name=sff-ver]')?.content||'';
@@ -3492,14 +3538,14 @@ function renderRoad(){
   const set=getSet(ROAD_SET); if(!set) return go('kid');
   const P=roadPlan(set), nx=nextChapter(set), [sc]=subjStyle(set.subject);
   // header
-  const doneN=Math.min(P.dn.size,P.N);
+  const doneN=Math.min(P.dn.size,P.N), R=examReady(set), E=R&&P.dl!=null&&P.dl>=0?examEffort(set,P):null;
   const status = P.dl==null ? '' : P.dl<0 ? '<span class="rdst">🏁 המבחן עבר</span>'
     : P.dn.size>=P.N ? '<span class="rdst ok">🌟 סיימת הכול!</span>'
     : P.ahead ? '<span class="rdst ok">⚡ מקדים!</span>'
     : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
   $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
     <div class="rdt"><b>🗺️ הדרך למבחן</b>${set.demo?' <span class="demotag">🎲 דוגמה</span>'+demoWhy():''}<div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
-    <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i></div></div>${status}`;
+    <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i>${E&&E.expect!=null&&doneN<P.N?`<s class="rdexp" style="inset-inline-start:${Math.round(E.expect*100)}%" title="${esc(sffTx('איפה כדאי להיות היום'))}"></s>`:''}</div></div>${status}${readyBox(set,P,R,E)}`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
   const goalDone=todays.every(i=>P.dn.has(i)), tried=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)&&best[i]!=null);

@@ -115,7 +115,7 @@
     'בנייה מהחומר שלכם': 'Build from your own material', 'חסר תרגול': 'Missing a practice set', 'בנייה עם AI מהחומר שלכם – בקרוב': 'Building with AI from your material – coming soon',
     'תאריך המבחן': 'Test date', '(לא חובה)': '(optional)', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
     'לתרגל אותן עכשיו': 'Practise them now', 'אני יודע': 'I know', 'אין מה לתרגל שוב – כל הכבוד': 'Nothing to practise again – well done', 'עוד לא שיחקת – מתחילים': "You haven't played yet – let's start",
-    'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
+    'מוכנות': 'Readiness', 'מוכנים': 'Ready', 'עוד עבודה': 'More work', 'איפה כדאי להיות היום': 'Where to be by today', 'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
     'חזרה על הטעויות': 'Mistakes review', 'יום המבחן': 'Test day', 'מחר': 'Tomorrow',
     'יום ראשון': 'Sunday', 'יום שני': 'Monday', 'יום שלישי': 'Tuesday', 'יום רביעי': 'Wednesday', 'יום חמישי': 'Thursday', 'יום שישי': 'Friday', 'יום שבת': 'Saturday',
     'צריך את הלינק מההורה': 'You need the link from your parent', 'בקשו מההורה לשלוח שוב את הלינק, ופתחו אותו בטלפון הזה': 'Ask your parent to send the link again, and open it on this phone',
@@ -288,6 +288,9 @@
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    [/^(🎯 )?היום: פרק (\d+) · כ-(\d+) שאלות$/, (m, e, a, q) => `${e || ''}Today: chapter ${a} · about ${q} questions`],
+    [/^(🎯 )?היום: פרקים (\d+)–(\d+) · כ-(\d+) שאלות$/, (m, e, a, b, q) => `${e || ''}Today: chapters ${a}–${b} · about ${q} questions`],
+    [/^עד המבחן: עוד (\d+) פרקים · כ-(\d+) שאלות · כ-(\d+) דקות ביום$/, (m, n, q, d) => `Until the test: ${n} more chapters · about ${q} questions · about ${d} minutes a day`],
     [/^(בוקר טוב|צהריים טובים|ערב טוב), (.+)$/, (m, g, n) => `${tr(g)}, ${n}`],
     [/^השבוע (\d+) מתוך (\d+) תלמידים תרגלו\.$/, (m, a, b) => `This week ${a} of ${b} students practised.`], [/^(\d+) מהם צריכים אותך היום\.$/, (m, n) => `${n} of them need you today.`],
     [/^ועוד (\d+)$/, (m, n) => `and ${n} more`], [/^(\d+) תלמידים נתקעו ב(.+)$/, (m, n, t) => `${n} students are stuck on ${t}`], [/^תלמיד\/ה אחד\/ת נתקע\/ה ב(.+)$/, (m, t) => `1 student is stuck on ${t}`],
@@ -375,6 +378,7 @@
     [/^(\d+) תמונות$/, (m, n) => `${n} photos`],
     [/^(\d+) תרגולים$/, (m, n) => `${n} rounds`],
     [/^(\d+)\/(\d+) פרקים$/, (m, a, b) => `${a}/${b} chapters`],
+    [/^לחזק:$/, () => 'Strengthen:'],
     [/^(\d+) פרקים ביום כדי להספיק$/, (m, n) => `${n} chapters a day to make it`],
     [/^(\d+)\/(\d+) משחקים$/, (m, a, b) => `${a}/${b} games`],
     [/^היום (\d+)\/(\d+) משחקים$/, (m, a, b) => `Today ${a}/${b} games`],

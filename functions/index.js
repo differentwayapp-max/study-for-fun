@@ -216,6 +216,8 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   const grade = Number.isInteger(d.grade) && d.grade >= 0 && d.grade <= 11 ? d.grade : null;
   const subject = typeof d.subject === 'string' ? d.subject.replace(/[<>]/g, '').trim().slice(0, 40) : '';
   if (!teach || !name || grade === null) throw new HttpsError('invalid-argument', 'bad_input');
+  // the group's school year: the year whose 1.9 deletes its students – this school year or the next (in July–August: the next)
+  const yrs = schoolYearsAt(Date.now()), yearEnds = yrs.choices.includes(d.yearEnds) ? d.yearEnds : yrs.def;
   const tref = db.doc(`teachers/${auth.uid}`), cref = db.collection('families').doc();      // a random 20-character id
   const tok = () => require('crypto').randomBytes(18).toString('hex');
   await db.runTransaction(async tx => {
@@ -223,12 +225,12 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
     if (have.length >= MAX_CLASSES) throw new HttpsError('resource-exhausted', 'class_limit', { reason: 'class_limit', max: MAX_CLASSES });
     // the teacher's name is shown to the parents on the consent page; fam/info is all a student's phone reads of the group
     const teacherName = String(auth.token.name || (auth.token.email || '').split('@')[0] || '').replace(/[<>]/g, '').slice(0, 60);
-    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teacherName, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now() });
+    tx.set(cref, { kind: 'class', ownerUid: auth.uid, teacherName, teach, name, grade, subject, inviteToken: tok(), kidTokens: {}, createdAt: Date.now(), yearEnds });
     tx.set(db.doc(`families/${cref.id}/fam/info`), { kind: 'class', teacher: teacherName, name, grade, subject });
     tx.set(tref, { classes: FieldValue.arrayUnion(cref.id), at: Date.now() }, { merge: true });
     tx.set(db.doc(`users/${auth.uid}`), { classes: FieldValue.arrayUnion(cref.id), roles: FieldValue.arrayUnion('teacher'), teach, worlds: FieldValue.arrayUnion(teach === 'private' ? 'private' : 'school') }, { merge: true });
   });
-  return { classId: cref.id };
+  return { classId: cref.id, yearEnds };
 });
 
 // A teacher's group goes: everything in it (students, progress, consents, requests, sets), and it leaves the teacher's
@@ -1095,12 +1097,13 @@ async function cleanJoinReqs(now) {
   }
   return n;
 }
-/* The end of the school year: a group keeps its students only until SCHOOL_YEAR_END (Israel time) – the privacy policy's promise
+/* The end of the school year: a group keeps its students only until the end of ITS school year – the privacy policy's promise
    ("until the end of the school year, until the teacher closes the group or the consent is withdrawn – whichever is first").
-   From YEAR_NOTICE the teacher sees it coming (the group's yearEnd – the app shows "on 1.9 the students and their progress will
-   be deleted – print a report before"); on SCHOOL_YEAR_END every group opened before YEAR_OPENED_BEFORE of that year loses its
-   students (wipeStudents) – the group and its own practice sets stay, with no kids. Nobody has to approve it. The owners may
-   pick other dates: here only. */
+   Every group has a school year (yearEnds: the year whose SCHOOL_YEAR_END deletes its students), chosen when it opens – this
+   school year or the next; from YEAR_OPENED_BEFORE (1.7) the default is the next, so a group opened in the summer for the coming
+   year is not emptied on 1.9. From YEAR_NOTICE of that year the teacher sees it coming (the group's yearEnd – "on 1.9 the
+   students and their progress will be deleted – print a report before"); on its SCHOOL_YEAR_END the students go (wipeStudents)
+   and the group, with its own practice sets, goes on into the next school year. Nobody has to approve it. The dates: here only. */
 const SCHOOL_YEAR_END = '09-01', YEAR_NOTICE = '08-01', YEAR_OPENED_BEFORE = '07-01';
 const ilDay = t => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t));   // "2026-09-01"
 const ilMidnight = (y, md) => { const t = Date.parse(`${y}-${md}T00:00:00Z`), off = (new Date(t).getTime() - Date.parse(new Date(t).toLocaleString('en-US', { timeZone: 'Asia/Jerusalem' }) + ' UTC')); return t + off; };
@@ -1117,18 +1120,22 @@ async function wipeStudents(classId, extra = {}) {
   await b.commit();
   await deleteAuthUsers(phones);
 }
+// the school year at a time: its end (the year of its 1.9), the two a new group may choose, and the default
+function schoolYearsAt(t) {
+  const [y, m, d] = ilDay(t).split('-'), md = `${m}-${d}`, cur = md >= SCHOOL_YEAR_END ? +y + 1 : +y;
+  return { cur, choices: [cur, cur + 1], def: md >= YEAR_OPENED_BEFORE && md < SCHOOL_YEAR_END ? cur + 1 : cur };
+}
+// a group's school year: its own (yearEnds, chosen when it opened), or – a group from before that – the default at its opening
+const groupYear = G => Number.isInteger(G.yearEnds) ? G.yearEnds : schoolYearsAt(G.createdAt || 0).def;
 async function cleanSchoolYear(now) {
-  const [y, m, d] = ilDay(now).split('-'), md = `${m}-${d}`;
-  if (md < YEAR_NOTICE) return 0;
-  const opened = ilMidnight(y, YEAR_OPENED_BEFORE), end = ilMidnight(y, SCHOOL_YEAR_END);
   let n = 0, last = null;
   for (;;) {
     let q = db.collection('families').where('kind', '==', 'class').orderBy(FieldPath.documentId()).limit(200); if (last) q = q.startAfter(last);
     const s = await q.get(); if (s.empty) break; last = s.docs[s.docs.length - 1];
-    for (const g of s.docs) { const G = g.data();
-      if ((G.createdAt || 0) >= opened || (G.yearWiped || 0) >= +y) continue;
-      if (md >= SCHOOL_YEAR_END) { await wipeStudents(g.id, { yearWiped: +y, yearEnd: FieldValue.delete() }); n++; }
-      else if (G.yearEnd !== end) await g.ref.update({ yearEnd: end });
+    for (const g of s.docs) { const G = g.data(), end = groupYear(G), endAt = ilMidnight(end, SCHOOL_YEAR_END);
+      // on its 1.9: the students go, and the group goes on into the next school year
+      if (now >= endAt) { await wipeStudents(g.id, { yearEnds: end + 1, yearEnd: FieldValue.delete(), yearWiped: end }); n++; }
+      else if (now >= ilMidnight(end, YEAR_NOTICE) && G.yearEnd !== endAt) await g.ref.update({ yearEnd: endAt });   // the teacher is told
     }
     if (s.size < 200) break;
   }

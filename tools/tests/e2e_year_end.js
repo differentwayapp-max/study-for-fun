@@ -1,9 +1,12 @@
 // A group's students are kept no longer than the privacy policy says, on the emulators (functions, firestore, auth):
-// 1. the end of the school year (the daily cleaning, run with made-up dates – testClean):
-//    5 August: a group opened before 1 July gets its yearEnd (1.9) – the teacher's home says so (print a report / delete now);
-//    a group opened after 1 July does not; 2 September: the students and all about them are deleted (the list, the consents,
-//    the progress, the phones and their sign-in accounts, the notes, the lessons, the requests, a per-student set) – the group
-//    and its shared assignment stay, with nobody in it; running it again changes nothing;
+// 0. opening a group: its school year is chosen in the form (this one / the next – in July–August the next by default), the
+//    form says when its students will be deleted, and once the group is open a message gives the date;
+// 1. the end of the school year (the daily cleaning, run with made-up dates – testClean), by each group's own school year:
+//    5 August: a group of the year ending on this 1.9 gets its yearEnd – the teacher's home says so (print a report / delete
+//    now); a group of next year does not (one opened in July before the year existed, too); 2 September: the students and
+//    all about them are deleted (the list, the consents, the progress, the phones and their sign-in accounts, the notes, the
+//    lessons, the requests, a per-student set) – the group and its shared assignment stay, with nobody in it, and the group
+//    moves on to the next school year; running it again changes nothing;
 // 2. "🗑 מחיקת הקבוצה" in the group's settings (the teachers' app): a report to print first, then "for good?" – nothing of the
 //    group is left, the student's phone's sign-in account is deleted, the teacher is in another group;
 // 3. the student's phone, opened again: "the link is not active", and nothing of the group is left on it.
@@ -20,12 +23,37 @@ const put = (path, obj, mask) => fetch(`${DOCS}/${path}${mask ? '?' + mask.map(m
 const get = async path => { const r = await fetch(`${DOCS}/${path}`, { headers: OWNER }); if (!r.ok) return null; const d = await r.json(); return Object.fromEntries(Object.entries(d.fields || {}).map(([k, x]) => [k, val(x)])); };
 const exists = async path => (await fetch(`${DOCS}/${path}`, { headers: OWNER })).ok;
 const authUsers = async ids => ((await (await fetch(`${AUTH}/identitytoolkit.googleapis.com/v1/projects/${PROJ}/accounts:lookup`, { method: 'POST', headers: OWNER, body: JSON.stringify({ localId: ids }) })).json()).users || []).map(u => u.localId);
+// the school years a group may choose now (as the app and the server work them out: from 1.9 the next year; in July–August the next by default)
+const schoolYearsNow = (t = Date.now()) => { const d = new Date(t), y = d.getFullYear(), md = (d.getMonth() + 1) * 100 + d.getDate(), cur = md >= 901 ? y + 1 : y; return { choices: [cur, cur + 1], def: md >= 701 && md < 901 ? cur + 1 : cur }; };
 const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: { now, only: ['schoolYear'] } }) })).json()).result;
 
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async g => { const c = await b.newContext({ viewport: { width: 390, height: 844 } }); await c.addInitScript(([E, g]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, [EMU, g]); return c; };
+  console.log('0. opening a group: its school year');
+  { const c0 = await b.newContext({ viewport: { width: 390, height: 844 } });
+    await c0.addInitScript(([E]) => { window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = { sub: 'yearN', email: 'yearn@t.local', email_verified: true, name: 'רונית' }; window.SFF_TEST_YEARNOTE = 1; localStorage.setItem('sff_lang', 'he'); }, [EMU]);
+    const N = await c0.newPage(); N.on('pageerror', e => errs.push('new: ' + e.message));
+    await N.goto(APP + 'teach', { waitUntil: 'load' }); await N.waitForSelector('#fbGo'); await N.click('#fbGo'); await N.waitForSelector('#tsClass'); await N.click('#tsClass'); await N.waitForSelector('#tsYear');
+    const f = await N.evaluate(() => ({ opts: [...document.querySelectorAll('#tsYear option')].map(o => [o.value, o.textContent, o.selected]), note: document.getElementById('tsYearNote').textContent }));
+    const exp = schoolYearsNow();
+    ok(f.opts.length === 2 && f.opts.map(o => +o[0]).join() === exp.choices.join() && +f.opts.find(o => o[2])[0] === exp.def && /תשפ/.test(f.opts[0][1]) && f.opts[0][1].includes(`\u2066${exp.choices[0] - 1}–${exp.choices[0]}\u2069`) && f.note.includes(`1.9.${exp.def}`),
+      `the form: the school year – ${f.opts.map(o => o[1] + (o[2] ? ' ✓' : '')).join(' / ')}; "${f.note}"`);
+    await N.selectOption('#tsYear', String(exp.choices[1])); await N.waitForTimeout(100);
+    ok((await N.textContent('#tsYearNote')).includes(`1.9.${exp.choices[1]}`), 'choosing next year: the date in the line changes with it');
+    await N.screenshot({ path: `${OUT}/year_form.png` });
+    await N.fill('#tsName', "ה'1"); await N.click('#tsGo'); await N.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 });
+    await N.waitForSelector('#sureDlg:not(.hidden)', { timeout: 10000 }).catch(() => {});
+    const pop = await N.evaluate(() => { const d = document.getElementById('sureDlg'); return d && !d.classList.contains('hidden') ? { t: d.innerText, no: !document.getElementById('sureNo').classList.contains('hidden') } : null; });
+    ok(pop && pop.t.includes(`1.9.${exp.choices[1]}`) && /יימחקו התלמידים/.test(pop.t) && !pop.no, 'the group opened: a message with the date its students will be deleted (one button)');
+    await N.screenshot({ path: `${OUT}/year_popup.png` });
+    const gN = await N.evaluate(() => window.__sffFamily.famId);
+    ok((await get(`families/${gN}`)).yearEnds === exp.choices[1], 'the group keeps its school year (yearEnds ' + exp.choices[1] + ')');
+    await N.click('#sureYes'); await N.evaluate(() => go('family')); await N.waitForTimeout(500);
+    ok(/שנת הלימודים/.test(await N.textContent('#famBody')) && (await N.textContent('#famBody')).includes(`1.9.${exp.choices[1]}`), "the group's settings show its school year and the date");
+    await c0.close(); }
+
   const tc = await ctx({ sub: 'yearT', email: 'yeart@t.local', email_verified: true, name: 'דנה לוי' }); const T = await tc.newPage(); T.on('pageerror', e => errs.push('teacher: ' + e.message));
   await T.goto(APP + 'teach', { waitUntil: 'load' }); await T.waitForSelector('#fbGo'); await T.click('#fbGo'); await T.waitForSelector('#tsClass'); await T.click('#tsClass');
   await T.fill('#tsName', "ג'1 – אנגלית"); await T.click('#tsGo'); await T.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await T.waitForTimeout(1200);
@@ -46,8 +74,8 @@ const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POS
   console.log('1. the end of the school year');
   const s1 = await student(g1, 'st1', 'יונתן');
   ok(!!s1.phone && (await authUsers([s1.phone])).length === 1, "the student's phone joined the group (its sign-in account and device)");
-  await put(`families/${g1}`, { createdAt: Date.parse('2026-03-01T08:00:00Z') }, ['createdAt']);                       // opened in March
-  await put(`families/${g2}`, { createdAt: Date.parse('2026-07-15T08:00:00Z') }, ['createdAt']);                       // opened after 1 July
+  await put(`families/${g1}`, { yearEnds: 2026 }, ['yearEnds']);                                                       // a group of the year 2025–2026
+  await put(`families/${g2}`, { createdAt: Date.parse('2026-07-15T08:00:00Z') }, ['createdAt', 'yearEnds']);          // from before school years: opened in July → next year
   await put(`families/${g1}/progress/st1`, { history: [] }); await put(`families/${g1}/notes/st1`, { text: 'מתקשה בקריאה', at: 1 });
   await put(`families/${g1}/sched/st1`, { day: 2, time: '16:00' }); await put(`families/${g1}/joinReqs/ReqYearAbcdefghij012`, { status: 'pending', parentName: 'x', kidName: 'y', at: Date.now() });
   await put(`families/${g1}/sets/sOld`, { set: { id: 'sOld', kidId: 'st1', name: 'יונתן', questions: [] } });
@@ -57,7 +85,7 @@ const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POS
   r = await clean(Date.parse('2026-08-05T09:00:00Z'));
   const G1a = await get(`families/${g1}`), G2a = await get(`families/${g2}`);
   ok(G1a.yearEnd === Date.parse('2026-08-31T21:00:00Z') && !G2a.yearEnd && r.schoolYear === 0 && (await get(`families/${g1}/fam/kids`)).list.length === 1,
-    '5 August: the group opened in March gets yearEnd = 1.9 (Israel midnight), the one opened in July not; nobody deleted yet');
+    '5 August: the group of 2025–2026 gets yearEnd = 1.9 (Israel midnight); the one opened in July (next year) not; nobody deleted yet');
   // the teacher's home (the notice is shown until yearEnd – moved to next week here, since today is past 1.9.2026)
   await put(`families/${g1}`, { yearEnd: Date.now() + 5 * 864e5 }, ['yearEnd']);
   await T.evaluate(id => window.__sffFamily.switchTo(id), g1); await T.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 }); await T.waitForTimeout(2500);
@@ -70,8 +98,8 @@ const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POS
   const G1b = await get(`families/${g1}`), A1 = (await get(`families/${g1}/sets/a1`)).set;
   ok(r.schoolYear === 1 && !left.length && (await get(`families/${g1}/fam/kids`)).list.length === 0 && Object.keys(G1b.kidTokens || {}).length === 0, '2 September: the students and all about them are deleted ' + (left.length ? 'LEFT: ' + left.join(', ') : ''));
   ok(!(await authUsers([s1.phone])).length, "…and the student's phone's sign-in account");
-  ok(G1b.kind === 'class' && G1b.yearWiped === 2026 && !G1b.yearEnd && A1 && A1.to.length === 0 && Object.keys(A1.toMap || {}).length === 0, 'the group and its assignment stay, with nobody in it');
-  ok(!!(await get(`families/${g2}`)) && (await clean(Date.parse('2026-09-03T06:00:00Z'))).schoolYear === 0, 'the group opened in July is untouched; running it again changes nothing');
+  ok(G1b.kind === 'class' && G1b.yearWiped === 2026 && G1b.yearEnds === 2027 && !G1b.yearEnd && A1 && A1.to.length === 0 && Object.keys(A1.toMap || {}).length === 0, 'the group and its assignment stay, with nobody in it – the group is now of 2026–2027');
+  ok(!(await get(`families/${g2}`)).yearWiped && (await clean(Date.parse('2026-09-03T06:00:00Z'))).schoolYear === 0, 'the group opened in July (next year) is untouched; running it again changes nothing');
 
   console.log('2. "🗑 מחיקת הקבוצה" in the group\'s settings');
   const s3 = await student(g3, 'st3', 'מאיה');

@@ -1552,7 +1552,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
     const classCall = n => { const f = httpsCallable(fns, n); return async d => { try { return (await f({ classId: W.__sffFamily?.famId, ...d })).data; } catch (e) { const x = e.details || {}; throw { code: x.reason || String(e.code || 'error').replace(/^functions\//, ''), message: e.message }; } }; };
     W.__sffClass = { link: classCall('joinLink'), approve: classCall('approveJoin'), reject: classCall('rejectJoin'),  revoke: classCall('revokeConsent') };
     // a teacher's new group (the server makes it: a random id, at most 10 a teacher)
-    W.__sffNewClass = async o => { try { return (await callClass(o)).data.classId; } catch (e) { const d = e.details || {}; throw { code: d.reason || 'error', ...d, message: e.message }; } };
+    W.__sffNewClass = async o => { try { const r = (await callClass(o)).data; try { sessionStorage.setItem('sff_yearnote', String(r.yearEnds || '')); } catch (e) {} return r.classId; } catch (e) { const d = e.details || {}; throw { code: d.reason || 'error', ...d, message: e.message }; } };
     W.__sffAdminUsers = async () => (await callUsers({})).data;
     if (W.SFF_REST_EMU) W.__sffAskRaw = d => callAsk(d).then(r => r.data);   // tests only (local emulators): a raw call, to see the server refuse it
     // a new practice set = one build: this month's free builds, then paid credits (see functions/index.js)
@@ -1691,7 +1691,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
           let r = 'owner', m = null;
           if (classIds.includes(fid)) {        // a teacher's group: its own document says who the teacher is
             const cs = await F.getDoc(F.doc(fdb, `families/${fid}`)); const cd = cs.exists() ? cs.data() : null;
-            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '', teacher: cd.teacherName || '', yearEnd: cd.yearEnd || 0 }, token: cd.inviteToken });
+            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '', teacher: cd.teacherName || '', yearEnd: cd.yearEnd || 0, yearEnds: cd.yearEnds || 0 }, token: cd.inviteToken });
             continue;
           }
           if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
@@ -1722,7 +1722,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
       if (TEACH && W.SFF_TEACHER && !famInfo.length) {
         for (;;) {
           const o = await teacherSetup(null);
-          try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject }, token: '' }); LS.setItem(ACT, cid); W.__sffNewPlace = true; break; }
+          try { const cid = await W.__sffNewClass(o); famInfo.push({ id: cid, name: o.name, role: 'owner', kind: 'class', cls: { teach: o.teach, grade: o.grade, subject: o.subject, yearEnds: o.yearEnds }, token: '' }); LS.setItem(ACT, cid); W.__sffNewPlace = true; break; }
           catch (e) { alert((W.sffT ? W.sffT('לא הצלחנו לפתוח את הקבוצה') : 'לא הצלחנו לפתוח את הקבוצה') + ' (' + (e.code || e.message) + ')'); }
         }
       }
@@ -1952,12 +1952,16 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
           <div class="tform"><label for="tsName">שם הקבוצה</label><input id="tsName" type="text" maxlength="40" placeholder="${cls ? "ד'2 – חשבון" : 'התלמידים שלי'}" value="${cls ? '' : (W.sffT ? W.sffT('התלמידים שלי') : 'התלמידים שלי')}">
             <div class="tgrid"><div><label for="tsGrade">כיתה</label><select id="tsGrade">${GRADES.map((g, i) => `<option value="${i}" ${i === 3 ? 'selected' : ''}>${g}</option>`).join('')}</select></div>
             <div><label for="tsSubj">מקצוע</label><select id="tsSubj">${SUBJECTS.map(x => `<option>${x}</option>`).join('')}</select></div></div>
+            <label for="tsYear">שנת הלימודים</label><select id="tsYear">${W.schoolYears().choices.map(e => `<option value="${e}" ${e === W.schoolYears().def ? 'selected' : ''}>${W.yearLabel(e)}</option>`).join('')}</select>
+            <div class="hint" id="tsYearNote"></div>
             <button class="btn big" id="tsGo" type="button">פתיחת הקבוצה</button>
             ${pre ? '<button class="btn ghost" id="tsCancel" type="button">ביטול</button>' : '<button class="linkbtn" id="tsBack" type="button">› חזרה</button>'}
             <div class="hint" id="tsErr"></div></div></div>`;
         el.querySelector('#tsGo').onclick = () => { const name = el.querySelector('#tsName').value.trim();
           if (!name) { el.querySelector('#tsErr').textContent = W.sffT ? W.sffT('צריך שם לקבוצה') : 'צריך שם לקבוצה'; el.querySelector('#tsName').focus(); return; }
-          el.remove(); resolve({ teach, name: name.slice(0, 40), grade: +el.querySelector('#tsGrade').value, subject: el.querySelector('#tsSubj').value }); };
+          el.remove(); resolve({ teach, name: name.slice(0, 40), grade: +el.querySelector('#tsGrade').value, subject: el.querySelector('#tsSubj').value, yearEnds: +el.querySelector('#tsYear').value }); };
+        const yNote = () => { const e = +el.querySelector('#tsYear').value, t = `ב-1.9.${e} יימחקו התלמידים וההתקדמות שלהם. הקבוצה והתרגולים יישארו.`; el.querySelector('#tsYearNote').textContent = W.sffT ? W.sffT(t) : t; };
+        el.querySelector('#tsYear').onchange = yNote; yNote();
         el.querySelector('#tsBack')?.addEventListener('click', step1);
         el.querySelector('#tsCancel')?.addEventListener('click', () => { el.remove(); resolve(null); });
       };
@@ -3249,6 +3253,19 @@ async function qaAllSets(){
 }
 const isClassMode=()=>window.SFF_KIND==='class';
 const classWord=()=>window.SFF_CLASS&&window.SFF_CLASS.teach==='private'?'התלמידים שלי':'הכיתה';
+/* a group's school year (yearEnds = the year whose 1.9 deletes its students): this school year or the next; in July–August
+   the default is the next (the server decides the same – schoolYearsAt) */
+function schoolYears(t=Date.now()){ const d=new Date(t), y=d.getFullYear(), md=(d.getMonth()+1)*100+d.getDate(), cur=md>=901?y+1:y;
+  return {choices:[cur,cur+1], def:md>=701&&md<901?cur+1:cur}; }
+// the Hebrew year a school year starts in (Sept 2026 → 5787 → תשפ״ז), in letters
+function hebYear(y){ let n=(y+3761)%1000, out=''; const H=[[400,'ת'],[300,'ש'],[200,'ר'],[100,'ק'],[90,'צ'],[80,'פ'],[70,'ע'],[60,'ס'],[50,'נ'],[40,'מ'],[30,'ל'],[20,'כ'],[10,'י'],[9,'ט'],[8,'ח'],[7,'ז'],[6,'ו'],[5,'ה'],[4,'ד'],[3,'ג'],[2,'ב'],[1,'א']];
+  for(const [v,c] of H){ if(n%100===15&&v===10){ out+='טו'; n-=15; break; } if(n%100===16&&v===10){ out+='טז'; n-=16; break; } while(n>=v){ out+=c; n-=v; } }
+  return out.length>1?out.slice(0,-1)+'״'+out.slice(-1):out+'׳'; }
+function yearLabel(end){ const r=`\u2066${end-1}–${end}\u2069`; return EN()?r:`${hebYear(end-1)} · ${r}`; }   // (the range left to right, also in Hebrew)
+// once, right after a group opened: when its students will be deleted (the date, as promised to the parents)
+function yearNoteOnce(){ let end=null; try{ end=+sessionStorage.getItem('sff_yearnote'); sessionStorage.removeItem('sff_yearnote'); }catch(e){}
+  if(!end||(window.SFF_TEST_GOOGLE&&!window.SFF_TEST_YEARNOTE)) return;
+  askSure({ico:'📅',title:`הקבוצה נפתחה לשנת הלימודים ${yearLabel(end)}`,text:`ב-1.9.${end} יימחקו התלמידים, ההסכמות וההתקדמות שלהם – כך מובטח להורים. הקבוצה והתרגולים יישארו לשנה הבאה. מ-1.8 תופיע תזכורת, ואפשר להדפיס דוח לפני.`,yes:'הבנתי',no:''}); }
 /* deleting the open group (the teachers' app): first a report to print, then "for good?" – the server deletes all of it
    (students, consents, progress, assignments, notes, the students' phones); then the teacher is in another group */
 function delGroup(){ const C=window.SFF_CLASS||{};
@@ -3269,7 +3286,7 @@ function yearEndNote(){ const t=(window.SFF_CLASS||{}).yearEnd; if(!t||Date.now(
 function renderTeacherHome(){
   const C=window.SFF_CLASS||{}, cls=C.teach!=='private', subj=C.subject?` · ${esc(C.subject)}`:'';
   if(TAPP()){ TH_C=null; const fresh=!(trStudents().length&&sets.some(isAsg));     /* no students or no assignment yet: the 3 steps */
-    $('kidCar').innerHTML=`<div class="thhome">${yearEndNote()}${fresh?thNewGroup():cls?thSchool():thPrivate()}</div>`; $('kidCarDots').innerHTML='';
+    $('kidCar').innerHTML=`<div class="thhome">${yearEndNote()}${fresh?thNewGroup():cls?thSchool():thPrivate()}</div>`; setTimeout(yearNoteOnce,400); $('kidCarDots').innerHTML='';
     if(fresh) thLinkFill(); thTop(); return; }
   $('kidCar').innerHTML=`<div class="card thome">
     <div class="thead"><span class="tico">${cls?'🏫':'🧑‍🏫'}</span><div><h2>${esc(C.name||'')}</h2><div class="hint">${cls?'מורה לכיתה':'מורה פרטי/ת'} · כיתה ${GRADES[+C.grade||0]}${subj}</div></div></div>
@@ -4922,6 +4939,7 @@ async function renderFamily(){
       <div class="card"><h3 class="fh">${C.teach==='private'?'🧑‍🏫':'🏫'} ${esc(C.name||'')}</h3><p class="hint" style="margin:0">${C.teach==='private'?'מורה פרטי/ת':'מורה לכיתה'} · כיתה ${GRADES[+C.grade||0]}${C.subject?' · '+esc(C.subject):''}</p></div>
       <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">${kids.length?`${kids.length} תלמידים · הרשימה וההסכמות בלשונית התלמידים`:'עוד אין תלמידים'}</p></div>
       <button class="addline" id="grpNew" onclick="newClass('${C.teach==='private'?'private':'school'}')">${C.teach==='private'?'＋ קבוצה פרטית חדשה':'＋ כיתה חדשה'}</button>
+      ${C.yearEnds?`<div class="card"><h3 class="fh">📅 שנת הלימודים ${esc(yearLabel(C.yearEnds))}</h3><p class="hint" style="margin:0">${fT(`ב-1.9.${C.yearEnds} יימחקו התלמידים וההתקדמות שלהם. הקבוצה והתרגולים יישארו.`)}</p></div>`:''}
       ${TAPP()?`<button class="linkbtn danger" id="grpDel" style="margin-top:16px" onclick="delGroup()">🗑 מחיקת הקבוצה</button>`:''}`;
     return; }
   const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>` : '';
@@ -4973,7 +4991,7 @@ async function removeMember(muid,btn){
 }
 let SURE_RES=null;
 function askSure({ico='❓',title,text='',yes='אישור',no='ביטול',danger=false}){ $('sureIco').textContent=ico; $('sureT').textContent=title; $('sureP').textContent=text; $('sureP').classList.toggle('hidden',!text);
-  $('sureYes').textContent=yes; $('sureNo').textContent=no; $('sureYes').classList.toggle('danger',danger); $('sureDlg').classList.remove('hidden'); setTimeout(()=>$('sureNo').focus(),30);
+  $('sureYes').textContent=yes; $('sureNo').textContent=no; $('sureNo').classList.toggle('hidden',!no); $('sureYes').classList.toggle('danger',danger); $('sureDlg').classList.remove('hidden'); setTimeout(()=>$('sureNo').focus(),30);
   return new Promise(r=>{ SURE_RES=r; }); }
 function sureAns(v){ $('sureDlg').classList.add('hidden'); const r=SURE_RES; SURE_RES=null; if(r) r(v); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&SURE_RES) sureAns(false); });

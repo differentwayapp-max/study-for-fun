@@ -65,11 +65,12 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const kidsL = (await doc(`families/${cid}/fam/kids`)).list, kid = kidsL[0], C1 = await doc(`families/${cid}/consents/${kid.id}`), F = await doc(`families/${cid}`);
   ok(kidsL.length === 1 && kid.name === 'נועה כ.' && C1.status === 'digital' && C1.letterV === '0.91' && /^data:image/.test(C1.sig) && C1.reqId === rid && C1.approvedBy && C1.parentName === 'רונית כהן', 'a student with a digital consent (letter 0.9, the signature, who approved)');
   ok(!!(F.kidTokens || {})[kid.id] && !!(await doc(`families/${cid}/kidpub/${kid.id}`)), "the kid's link and the kid's own record were made");
-  ok(!(await doc(`families/${cid}/joinReqs/${rid}`)).sig, 'the request no longer keeps the signature (the consent does)');
+  const R1 = await doc(`families/${cid}/joinReqs/${rid}`);
+  ok(!R1.sig && !R1.parentName && !R1.kidName && !('contact' in R1) && !R1.by && R1.status === 'approved' && R1.kidId === kid.id && R1.keyHash && R1.letterV && R1.doneAt, 'the approved request keeps no names, contact, signature or sender – only its status, the student, the key\'s hash, the letter\'s version, when');
   await T.waitForTimeout(800); await T.screenshot({ path: `${OUT}/c_students_he.png` });
   await P1.p.reload({ waitUntil: 'load' }); await P1.p.waitForSelector('#jKidLink', { timeout: 20000 });
   const kidLink = await P1.p.inputValue('#jKidLink');
-  ok(kidLink.includes(`?f=${cid}&t=${F.kidTokens[kid.id]}&k=${kid.id}`), 'the parent sees "approved" and the kid\'s link');
+  ok(kidLink.includes(`?f=${cid}&t=${F.kidTokens[kid.id]}&k=${kid.id}`) && /נועה כ\./.test(await P1.p.textContent('#jBody')), 'the parent sees "approved", the kid\'s name (from the student) and the kid\'s link');
   await P1.p.screenshot({ path: `${OUT}/c_status_ok_he.png` });
 
   console.log('4. the kid joins and plays');
@@ -93,7 +94,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await P3.p.reload({ waitUntil: 'load' }); await P3.p.waitForTimeout(3000);
   const t3 = await P3.p.textContent('#jBody');
   ok(/המורה לא אישר\/ה/.test(t3) && /הילד לא בכיתה שלי/.test(t3) && !(await P3.p.$('#jKidLink')), 'rejected: the parent sees the reason, no link');
-  ok(!(await doc(`families/${cid}/joinReqs/${rid3}`)).sig, "a rejected request's signature is deleted");
+  { const R3 = await doc(`families/${cid}/joinReqs/${rid3}`); ok(!R3.sig && !R3.parentName && !R3.kidName && !('contact' in R3) && !R3.by && R3.reason, "a rejected request keeps only its status and reason: no names, contact, signature"); }
   await P3.p.screenshot({ path: `${OUT}/c_status_no_he.png` });
 
   console.log('6. links, signatures, limits');
@@ -147,6 +148,26 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   await T.click('#tDlg .btn.danger'); await T.waitForTimeout(300); await T.click('#sureYes').catch(() => {}); await T.waitForTimeout(2500);
   ok((await doc(`families/${cid}/consents/${yo.id}`)).status === 'revoked' && !(await doc(`families/${cid}/fam/kids`)).list.some(k => k.id === yo.id), 'the teacher takes a student out: the same');
   ok(!(await doc(`families/${cid}/notes/${yo.id}`)) && !(await doc(`families/${cid}/sets/sx_${yo.id}`)), "…and the teacher's note and the student's practice sets are deleted too");
+
+  console.log('8b. requests that are over keep no names; old requests are deleted');
+  const strip = r => r && !r.sig && !r.parentName && !r.kidName && !('contact' in r) && !r.by && r.status && r.doneAt;
+  ok([rid, rid2, w.id].every(id => true) && strip(await doc(`families/${cid}/joinReqs/${rid}`)) && strip(await doc(`families/${cid}/joinReqs/${rid2}`)) && strip(await doc(`families/${cid}/joinReqs/${w.id}`)),
+    'withdrawn consent (the parent), a second parent, a student taken out (the teacher): the requests keep no names, contact, signature');
+  // a parent withdraws a waiting request
+  const P6 = await page(await ctx(), link3, 'parent6'); await P6.waitForSelector('#jSend', { timeout: 20000 });
+  const mine = await P6.evaluate(async ([cid, code, sig]) => window.__sffJoin.request({ classId: cid, code, parentName: 'הורה ו', kidName: 'ילד ו.', contact: '050-1', agree: true, letterV: '0.91', sig }), [cid, link3.split('.').pop(), inked]);
+  await P6.evaluate(async ([cid, m]) => window.__sffJoin.revoke({ classId: cid, reqId: m.reqId, statusKey: m.statusKey }), [cid, mine]);
+  const R6 = await doc(`families/${cid}/joinReqs/${mine.reqId}`);
+  ok(R6.status === 'withdrawn' && strip(R6), 'a waiting request withdrawn by the parent: no names, contact or signature left');
+  // the daily cleaning: a request nobody handled for 30 days and one that is over for 90 days go; recent ones stay
+  const pendNow = (await list(`families/${cid}/joinReqs`)).filter(x => x.status === 'pending');
+  const oldP = pendNow[0].id, keepP = pendNow[1] && pendNow[1].id;
+  await patch(`families/${cid}/joinReqs/${oldP}`, { at: Date.now() - 31 * 864e5 }, ['at']);
+  await patch(`families/${cid}/joinReqs/${rid3}`, { at: Date.now() - 100 * 864e5, doneAt: Date.now() - 91 * 864e5 }, ['at', 'doneAt']);
+  await patch(`families/${cid}/joinReqs/${rid2}`, { at: Date.now() - 40 * 864e5 }, ['at']);      // over, but only 40 days old: stays
+  const cl = await (await fetch('http://127.0.0.1:5001/study-for-fun-7b03c/europe-west1/testClean', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: { only: ['joinReqs'] } }) })).json();
+  ok(!(await doc(`families/${cid}/joinReqs/${oldP}`)) && !(await doc(`families/${cid}/joinReqs/${rid3}`)) && !!(await doc(`families/${cid}/joinReqs/${rid2}`)) && (!keepP || !!(await doc(`families/${cid}/joinReqs/${keepP}`))),
+    'the daily cleaning: a waiting request of 31 days and an old closed one are deleted, newer ones stay ' + JSON.stringify(cl.result));
 
   console.log('9. AI building in a group: the teacher\'s own quota (stage 4)');
   const ai = await T.evaluate(async () => { try { const r = await window.__sffAI.start('אנגלית'); return [r.kind, r.free, r.teacher]; } catch (e) { return [e.code]; } });

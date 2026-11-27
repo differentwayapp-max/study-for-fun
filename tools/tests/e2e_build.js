@@ -149,6 +149,31 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
     ok(bR && bR.steps && bR.steps.gen && !bR.steps.match && !bR.steps.select, 'no catalog steps on the build (' + Object.keys((bR && bR.steps) || {}).join(',') + ')');
   }
 
+  console.log('8. a build that is over keeps only its steps\' states; the leftovers are cleaned page by page; after 90 days it goes');
+  {
+    const all = await list(`families/${fam}/builds`), done = all.filter(x => x.status === 'done');
+    ok(done.length >= 3 && done.every(x => !x.prog || Object.values(x.prog).every(v => v && !v.d)), `finished builds keep no step details (the scan describes the material): ${done.length} builds`);
+    const H2 = { ...H, 'Content-Type': 'application/json' }, putB = (id, f) => fetch(`${DOCS}/families/${fam}/builds/${id}`, { method: 'PATCH', headers: H2, body: JSON.stringify({ fields: f }) });
+    const now = Date.now();
+    // two stopped builds that can still go on (their forms stay) sort before a finished one with a leftover form – one per page
+    await putB('aaStop1', { status: { stringValue: 'failed' }, resumable: { booleanValue: true }, at: { integerValue: String(now) }, prog: { mapValue: { fields: { scan: { mapValue: { fields: { s: { stringValue: 'done' }, d: { stringValue: 'Unit 5' } } } } } } } });
+    await putB('aaStop2', { status: { stringValue: 'failed' }, resumable: { booleanValue: true }, at: { integerValue: String(now) } });
+    await putB('zzDone', { status: { stringValue: 'done' }, at: { integerValue: String(now) }, prog: { mapValue: { fields: { scan: { mapValue: { fields: { s: { stringValue: 'done' }, d: { stringValue: 'Unit 5 – the material' } } } } } } } });
+    for (const id of ['aaStop1', 'aaStop2', 'zzDone']) await fetch(`${DOCS}/families/${fam}/builds/${id}/state/input`, { method: 'PATCH', headers: H2, body: JSON.stringify({ fields: { I: { stringValue: '{}' } } }) });
+    const tc = async (only, extra = {}) => (await (await fetch('http://127.0.0.1:5001/study-for-fun-7b03c/europe-west1/testClean', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: { only, ...extra } }) })).json()).result;
+    const r1 = await tc(['buildLeftovers'], { page: 1 });
+    const st = async id => (await list(`families/${fam}/builds/${id}/state`)).length;
+    const z = await get(`families/${fam}/builds/zzDone`);
+    ok(await st('zzDone') === 0 && await st('aaStop1') === 1 && await st('aaStop2') === 1 && z && Object.values(z.prog).every(v => !v.d), 'one build per page: the finished one after two stopped ones is still cleaned (its form, its details); the stopped ones keep theirs ' + JSON.stringify(r1));
+    // 90 days after it started a build goes (the quota is kept in usage/)
+    const month = new Date().toISOString().slice(0, 7), u0 = await get(`families/${fam}/usage/${month}`);
+    await putB('zzDone?updateMask.fieldPaths=at', { at: { integerValue: String(now - 91 * 864e5) } });
+    const r2 = await tc(['builds']);
+    ok(!(await get(`families/${fam}/builds/zzDone`)) && !!(await get(`families/${fam}/builds/aaStop1`)) && r2.builds >= 1, 'a build of 91 days is deleted, a recent one stays ' + JSON.stringify(r2));
+    const u1 = await get(`families/${fam}/usage/${month}`);
+    ok(u0 && u1 && u0.builds === u1.builds, `the month's count of builds is unchanged (${u1 && u1.builds})`);
+  }
+
   console.log("6. a build in a teacher's group");
   {
     const tc = await b.newContext({ viewport: { width: 390, height: 844 } }); const t = await tc.newPage(); t.on('pageerror', e => errs.push('teacher: ' + e.message));

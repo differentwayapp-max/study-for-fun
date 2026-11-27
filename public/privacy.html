@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מדיניות פרטיות · Study for fun</title>
 <meta name="robots" content="index">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="/fonts/fonts.css">
 <style>
 :root{--bg:#E4F1FF;--card:#fff;--ink:#1B2A4A;--muted:#5B6785;--sun:#F2A63B;--blue:#2F6BFF;--line:2px solid #1B2A4A}
 *{box-sizing:border-box}
@@ -36,7 +37,7 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
 
   <div class="card" data-l="he">
     <h1>מדיניות פרטיות</h1>
-    <div class="muted">Study for fun · by D-WAY · עודכן לאחרונה: 21 בנובמבר 2026</div>
+    <div class="muted">Study for fun · by D-WAY · עודכן לאחרונה: 27 בנובמבר 2026</div>
     <p>Study for fun היא אפליקציה לתרגול למבחנים דרך משחקים, לילדים בכיתות א'–י"ב. ההורה בונה תרגול לקראת מבחן, והילד משחק בו בטלפון. הדף הזה מסביר איזה מידע נשמר, למה, ומי יכול לראות אותו.</p>
 
     <h2>📋 איזה מידע נשמר</h2>
@@ -46,32 +47,37 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
       <li><b>ילדים:</b> שם פרטי או כינוי, כיתה וצבע שההורה בחר. הילד יכול לבחור לעצמו כינוי ודמות או חיה. אין העלאת תמונות של ילדים. אין צורך במייל או במספר טלפון של ילד.</li>
       <li><b>תרגולים:</b> מקצוע, תאריך מבחן, נושאים, השאלות והתשובות.</li>
       <li><b>חומר לימוד:</b> צילומי דפים, טקסט או קישור שההורה מעלה כדי לבנות תרגול. הם משמשים לבניית השאלות בלבד, וצילומי הדפים לא נשמרים אחרי הבנייה.</li>
-      <li><b>פעילות:</b> המשחקים ששוחקו, אילו שאלות נענו נכון ואילו לא (כולל התשובה שנבחרה), כוכבים, גביעים ותאריכים – כדי להציג להורה פידבק ולבנות סט חיזוק.</li>
+      <li><b>פעילות:</b> המשחקים ששוחקו, אילו שאלות נענו נכון ואילו לא (כולל התשובה שנבחרה), כוכבים, גביעים ותאריכים – כדי להציג להורה פידבק ולבנות תרגול ממוקד.</li>
       <li><b>מכשירים:</b> מזהה טכני אנונימי למכשיר של ילד שחובר בקישור, ומועד החיבור.</li>
+      <li><b>אישור התנאים:</b> לכל מבוגר – איזו גרסה של תנאי השימוש ושל מדיניות הפרטיות אישר/ה ומתי (נרשם בשרת, פעם אחת לכל גרסה).</li>
+      <li><b>מורה פרטי/ת:</b> הערות פרטיות על תלמיד/ה ומועדי השיעורים הקבועים – רק המורה רואה אותם.</li>
+      <li><b>שם המורה:</b> השם מחשבון Google של המורה מוצג להורים בדף ההצטרפות לקבוצה.</li>
+      <li><b>דיווח על תקלה או רעיון:</b> הטקסט שנכתב, שם המדווח/ת, איפה באפליקציה ואיזה דפדפן – רק צוות האפליקציה רואה.</li>
     </ul>
 
     <h2>🌍 איפה המידע נשמר ומי מעבד אותו</h2>
     <ul>
-      <li>המידע נשמר בשירות <b>Google Firebase</b>, בשרתים באירופה (בלגיה). הכניסה מתבצעת דרך Google.</li>
-      <li>כדי לבנות תרגול, חומר הלימוד נשלח לעיבוד אצל <b>Anthropic</b> (מודל Claude). נשלחים רק החומר, המקצוע, הכיתה והנושאים – <b>בלי שם הילד ובלי פרטים מזהים</b>. לפי תנאי Anthropic, מידע שנשלח דרך הממשק שלה אינו משמש לאימון המודלים.</li>
-      <li>במכשיר עצמו נשמר עותק של התרגולים וההתקדמות, כדי שהאפליקציה תעבוד גם בלי רשת.</li>
+      <li><b>Google Firebase</b> (אירופה – בלגיה): כל המידע נשמר שם, והכניסה מתבצעת דרך Google.</li>
+      <li><b>Anthropic</b> (מודל Claude, עיבוד בארצות הברית): כדי לבנות תרגול, חומר הלימוד נשלח לעיבוד <b>כמו שהוא</b> – כולל כל מה שמופיע על הדף המצולם – יחד עם המקצוע, הכיתה והנושאים. שם הילד לא נשלח. לכן <b>כסו שמות, תמונות פנים וציונים לפני הצילום</b> (האפליקציה מזכירה זאת במסך ההעלאה). לפי תנאי ה-API של Anthropic, המידע אינו משמש לאימון המודלים ונשמר אצלה לזמן מוגבל בלבד.</li>
+      <li><b>Gmail</b> (רק כשמשלוח מיילים לצוות פעיל): דיווחי תקלות נשלחים במייל לצוות האפליקציה.</li>
+      <li>במכשיר עצמו נשמר עותק של התרגולים וההתקדמות, כדי שהאפליקציה תעבוד גם בלי רשת. בהתנתקות, במחיקת חשבון, או כשהקישור של ילד מוחלף או מבוטל – העותק נמחק מהמכשיר.</li>
     </ul>
 
     <h2>👀 מי יכול לראות את המידע</h2>
     <ul>
       <li>רק ההורה, המבוגרים שההורה הזמין למשפחה, ומכשירים של ילדים שחוברו בקישור של אותה משפחה רואים את המידע שלה. משפחות אחרות לא יכולות לראות אותו. ההגבלה נאכפת בשרת.</li>
-      <li><b>מבוגרים שההורה מזמין</b> רואים את המידע של ילדי המשפחה – שמות, תרגולים, התקדמות ופידבק – לפי התפקיד: 👑 מנהל/ת – הכול; 💛 מלווה – צפייה והוספת תרגולים; 📚 מורה – באפליקציה מוצגים לו/לה רק הילדים שנבחרו, אבל מבחינה טכנית יש לו/לה הרשאת קריאה לכל המידע של המשפחה. הזמינו רק אנשים שאתם סומכים עליהם.</li>
+      <li><b>מבוגרים שההורה מזמין</b> רואים את המידע של ילדי המשפחה – שמות, תרגולים, התקדמות ופידבק – לפי התפקיד: 👑 מנהל/ת – הכול; 💛 מלווה – צפייה והוספת תרגולים; 📚 מורה פרטי/ת – רק הילדים שנבחרו בהזמנה: התרגולים וההתקדמות שלהם. ההגבלה נאכפת בשרת – המורה לא יכול/ה לקרוא את שאר המידע של המשפחה, את הקישורים של הילדים, את המכשירים, את ההזמנות או את המבוגרים האחרים. הזמינו רק אנשים שאתם סומכים עליהם.</li>
       <li>מבוגר מצטרף רק דרך הזמנה אישית מההורה (לאדם אחד, בתוקף 7 ימים, עם כניסת Google). ההורה רואה את כל המבוגרים בלשונית "משפחה" ויכול להסיר כל אחד מהם בכל רגע.</li>
       <li>מכשיר של ילד רואה את התרגולים של המשפחה, ושומר רק את ההתקדמות שלו.</li>
       <li>כשההורה משתף תרגול עם הורה אחר (קוד או קישור), נשלחות רק השאלות – בלי שם הילד ובלי ההתקדמות שלו.</li>
-      <li>מנהלת השירות ניגשת למידע רק לצורך תפעול, תמיכה ותיקון תקלות.</li>
+      <li>מנהלת השירות ניגשת למידע רק לצורך תפעול, תמיכה ותיקון תקלות. אין לה גישה דרך האפליקציה לקישורים, לבקשות או להסכמות של קבוצות של מורים, וכל עיון ברשימת המשתמשים נרשם.</li>
     </ul>
 
     <h2>🚫 מה אנחנו לא עושים</h2>
     <ul>
       <li>לא מוכרים ולא מעבירים מידע לאף גורם, מלבד שירותי האחסון והעיבוד שלמעלה.</li>
       <li>אין פרסומות ואין מעקב פרסומי.</li>
-      <li>לא משתמשים בכלי אנליטיקה באפליקציה.</li>
+      <li>לא משתמשים בכלי אנליטיקה באפליקציה, והאפליקציה לא טוענת תוכן משירותים אחרים מלבד Firebase והכניסה עם Google (גם הגופנים הם של האפליקציה עצמה).</li>
       <li>אין רכישות מתוך האפליקציה לילדים, ואין צ'אט או קשר עם משתמשים אחרים.</li>
     </ul>
 
@@ -81,20 +87,28 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
     <h2 id="groups">🧑‍🏫 מורים וקבוצות</h2>
     <p>מורה (לכיתה או פרטי/ת) יכול/ה לפתוח קבוצה. תלמיד/ה מצטרף/ת רק אחרי הסכמה של הורה, והמורה מאשר/ת כל הצטרפות.</p>
     <ul>
-      <li><b>מה נשמר בקבוצה:</b> שם פרטי ואות ראשונה של שם המשפחה של התלמיד/ה, ההתקדמות בתרגולי הקבוצה, ופרטי ההסכמה – שם ההורה, החתימה, דרך ליצור קשר (אם נמסרה), גרסת מכתב ההסכמה ומועד ההסכמה. אם המורה כותב/ת הערה פרטית על ההתקדמות של תלמיד/ה – רק המורה רואה אותה, והיא נמחקת עם יציאת התלמיד/ה מהקבוצה. תלמיד/ה נוסף/ה לקבוצה רק כשהורה חתם/ה באפליקציה והמורה אישר/ה.</li>
-      <li><b>מי רואה:</b> המורה של הקבוצה בלבד (ומנהלי האפליקציה לצורך תמיכה). תלמידים והורים אחרים לא רואים את הפרטים. הטלפון של התלמיד/ה רואה רק את התלמיד/ה עצמו/ה.</li>
+      <li><b>מה נשמר בקבוצה:</b> שם פרטי ואות ראשונה של שם המשפחה של התלמיד/ה, ההתקדמות בתרגולי הקבוצה, ופרטי ההסכמה – שם ההורה, החתימה, דרך ליצור קשר (אם נמסרה), גרסת מכתב ההסכמה ומועד ההסכמה. בקשת הצטרפות שהטיפול בה הסתיים (אושרה, נדחתה או בוטלה) לא שומרת שמות, פרטי קשר או חתימה – רק את הסטטוס והמועד. אם המורה כותב/ת הערה פרטית על ההתקדמות של תלמיד/ה – רק המורה רואה אותה, והיא נמחקת עם יציאת התלמיד/ה מהקבוצה. תלמיד/ה נוסף/ה לקבוצה רק כשהורה חתם/ה באפליקציה והמורה אישר/ה.</li>
+      <li><b>מי רואה:</b> המורה של הקבוצה בלבד. תלמידים והורים אחרים לא רואים את הפרטים. הטלפון של התלמיד/ה רואה רק את התלמיד/ה עצמו/ה. בדוח המודפס אין שמות, וקבוצה של פחות משלושה תלמידים מוצגת כ"פחות מ-3".</li>
       <li><b>הפרדה מהמשפחה:</b> המורה לא רואה את המשפחה של הילד/ה, ילדים אחרים או תרגולים פרטיים.</li>
-      <li><b>ביטול:</b> ההורה יכול/ה לבטל את ההסכמה בכל רגע מהקישור האישי שקיבל/ה, או דרך המורה. אז נמחקים ההתקדמות של הילד/ה בקבוצה, הקישור והחתימות. נשאר רק רישום שההסכמה בוטלה ומתי.</li>
-      <li><b>בקשה שנדחתה:</b> החתימה שלה נמחקת מיד.</li>
-      <li><b>כמה זמן:</b> עד סוף שנת הלימודים, עד שהמורה סוגר/ת את הקבוצה או עד ביטול ההסכמה – המוקדם מביניהם.</li>
+      <li><b>ביטול:</b> ההורה יכול/ה לבטל את ההסכמה בכל רגע מהקישור האישי שקיבל/ה, או דרך המורה. אז נמחקים ההתקדמות של הילד/ה בקבוצה, ההערות, הקישור, החתימות והחיבור של הטלפון של הילד/ה. נשאר רק רישום שההסכמה בוטלה ומתי.</li>
+      <li><b>בקשה שנדחתה:</b> השמות, פרטי הקשר והחתימה שלה נמחקים מיד.</li>
+      <li><b>בקשות הצטרפות:</b> בקשה שלא טופלה נמחקת אחרי 30 יום; בקשה שהטיפול בה הסתיים נמחקת אחרי 90 יום.</li>
+      <li><b>כמה זמן:</b> כל קבוצה שייכת לשנת לימודים אחת, שנבחרת כשהיא נפתחת (והמורה רואה את התאריך). עד סוף אותה שנת לימודים – ב-1 בספטמבר נמחקים התלמידים וכל המידע עליהם (המורה מקבל/ת על כך תזכורת מ-1 באוגוסט) – או קודם, אם המורה מוחק/ת את הקבוצה או ההורה מבטל/ת את ההסכמה.</li>
     </ul>
 
     <h2>⏳ כמה זמן המידע נשמר</h2>
-    <p>המידע נשמר כל עוד החשבון קיים, כדי שהילד יוכל להמשיך לתרגל ולראות את ההתקדמות שלו. ההיסטוריה מוגבלת ל-300 המשחקים האחרונים לכל ילד. ההורה יכול לאפס התקדמות, למחוק ילד או למחוק את כל החשבון בכל רגע.</p>
+    <p>המידע של המשפחה נשמר כל עוד החשבון קיים, כדי שהילד יוכל להמשיך לתרגל ולראות את ההתקדמות שלו. ההיסטוריה מוגבלת ל-300 המשחקים האחרונים לכל ילד. ההורה יכול לאפס התקדמות, למחוק ילד או למחוק את כל החשבון בכל רגע.</p>
+    <ul>
+      <li><b>בניית תרגול:</b> הטופס ויומן הבנייה נמחקים כשהבנייה מסתיימת; רשומת הבנייה עצמה (בלי תיאור החומר) נמחקת אחרי 90 יום.</li>
+      <li><b>קבוצה של מורה:</b> כמפורט למעלה – עד 1 בספטמבר של שנת הלימודים שלה, או עד שהמורה מוחק/ת אותה.</li>
+      <li><b>בקשות הצטרפות לקבוצה:</b> 30 יום (לא טופלה) או 90 יום (הסתיימה).</li>
+      <li><b>דיווחי תקלות:</b> 180 יום. <b>יומן השרת</b> (קודים ומספרים, בלי שמות): 90 יום.</li>
+    </ul>
 
     <h2 id="delete">🗑 מחיקת המידע</h2>
     <ul>
-      <li><b>כל החשבון:</b> במסך ההורה, בתחתית המסך ← "מחיקת חשבון". נמחקים הילדים, התרגולים, ההתקדמות וחשבון הכניסה – גם מהמכשירים של הילדים. המחיקה מיידית וסופית.</li>
+      <li><b>כל החשבון:</b> ☰ ← "מחיקת חשבון". המחיקה מתבצעת בשרת ונמחקים: המשפחה וכל מה שבה (הילדים, התרגולים, ההתקדמות, ההזמנות, הבניות), החיבור של הטלפונים של הילדים, כל הקבוצות שהחשבון מלמד בהן (התלמידים, ההסכמות, ההתקדמות וההערות), החברות במשפחות אחרות, אישורי התנאים, דיווחי תקלות והצעות שנשלחו – ובסוף חשבון הכניסה. המחיקה מיידית וסופית, וגם העותק שבמכשיר נמחק.</li>
+      <li><b>קבוצה של מורה:</b> בהגדרות הקבוצה ← "🗑 מחיקת הקבוצה" (אפשר להדפיס קודם דוח).</li>
       <li><b>ילד אחד:</b> בכרטיס הילד ← ✎ ← 🗑. נמחקים גם התרגולים וההתקדמות שלו.</li>
       <li><b>מבוגר שהוזמן:</b> ההורה מסיר אותו בלשונית "משפחה" (✕), או שהמבוגר עצמו לוחץ "יציאה מהמשפחה". מאותו רגע אין לו גישה למידע של המשפחה.</li>
       <li><b>איפוס התקדמות:</b> בכרטיס הילד ← ✎ ← "איפוס התקדמות".</li>
@@ -113,7 +127,7 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
 
   <div class="card" data-l="en" dir="ltr" style="text-align:left">
     <h1>Privacy policy</h1>
-    <div class="muted">Study for fun · by D-WAY · Last updated: November 21, 2026</div>
+    <div class="muted">Study for fun · by D-WAY · Last updated: November 27, 2026</div>
     <p>Study for fun is an app for practising for school tests through games, for kids in grades 1–12. A parent builds practice for an upcoming test, and the kid plays it on a phone. This page explains what information is stored, why, and who can see it.</p>
 
     <h2>📋 What we store</h2>
@@ -123,32 +137,37 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
       <li><b>Kids:</b> a first name or nickname, grade and colour chosen by the parent. A kid can choose a nickname and a character or animal. Photos of kids are not uploaded. No email or phone number is needed for a kid.</li>
       <li><b>Practice sets:</b> subject, test date, topics, questions and answers.</li>
       <li><b>Study material:</b> page photos, text or a link that the parent uploads to build a practice set. They are used only to build the questions; page photos are not kept after the build.</li>
-      <li><b>Activity:</b> games played, which questions were answered right or wrong (including the option chosen), stars, trophies and dates – to show the parent feedback and build a review set.</li>
+      <li><b>Activity:</b> games played, which questions were answered right or wrong (including the option chosen), stars, trophies and dates – to show the parent feedback and build focused practice.</li>
       <li><b>Devices:</b> an anonymous technical ID for a kid's device connected with a link, and when it was connected.</li>
+      <li><b>Approval of the terms:</b> for every adult – which version of the terms of use and of the privacy policy they approved, and when (recorded on the server, once per version).</li>
+      <li><b>Private tutors:</b> private notes on a student and the times of fixed lessons – seen only by the tutor.</li>
+      <li><b>The teacher's name:</b> the name from the teacher's Google account is shown to parents on the page for joining a group.</li>
+      <li><b>A bug report or an idea:</b> the text written, the sender's name, where in the app and which browser – seen only by the app's team.</li>
     </ul>
 
     <h2>🌍 Where it is stored and who processes it</h2>
     <ul>
-      <li>Data is stored with <b>Google Firebase</b> on servers in Europe (Belgium). Sign-in is handled by Google.</li>
-      <li>To build a practice set, the study material is processed by <b>Anthropic</b> (Claude model). Only the material, subject, grade and topics are sent – <b>never the kid's name or any identifying details</b>. Under Anthropic's terms, data sent through its API is not used to train its models.</li>
-      <li>The device keeps a copy of practice sets and progress so the app works offline.</li>
+      <li><b>Google Firebase</b> (Europe – Belgium): all the data is stored there, and sign-in is handled by Google.</li>
+      <li><b>Anthropic</b> (Claude model, processed in the United States): to build a practice set, the study material is sent for processing <b>as it is</b> – including everything that appears on a photographed page – together with the subject, grade and topics. The kid's name is not sent. So <b>cover names, faces and grades before taking the photo</b> (the app reminds you on the upload screen). Under Anthropic's API terms, the data is not used to train its models and is kept by Anthropic for a limited time only.</li>
+      <li><b>Gmail</b> (only when emailing the team is switched on): bug reports are emailed to the app's team.</li>
+      <li>The device keeps a copy of practice sets and progress so the app works offline. When you sign out, delete the account, or a kid's link is replaced or withdrawn, that copy is deleted from the device.</li>
     </ul>
 
     <h2>👀 Who can see it</h2>
     <ul>
       <li>Only the parent, the adults the parent invited to the family, and kids' devices connected with that family's link can see the family's data. Other families cannot. This is enforced on the server.</li>
-      <li><b>Adults the parent invites</b> see the family's kids' data – names, practice sets, progress and feedback – according to their role: 👑 Manager – everything; 💛 Helper – view and add practice sets; 📚 Tutor – the app shows only the chosen kids, but technically they have read access to all of the family's data. Only invite people you trust.</li>
+      <li><b>Adults the parent invites</b> see the family's kids' data – names, practice sets, progress and feedback – according to their role: 👑 Manager – everything; 💛 Helper – view and add practice sets; 📚 Private tutor – only the kids chosen in the invitation: their practice sets and progress. This is enforced on the server – a tutor cannot read the rest of the family's data, the kids' links, the devices, the invitations or the other adults. Only invite people you trust.</li>
       <li>An adult joins only through a personal invitation from the parent (one person, valid 7 days, Google sign-in). The parent sees every adult in the "Family" tab and can remove any of them at any time.</li>
       <li>A kid's device can see the family's practice sets and saves only its own progress.</li>
       <li>When a parent shares a practice set with another parent (code or link), only the questions are shared – never the kid's name or progress.</li>
-      <li>The service administrator accesses data only for operation, support and fixing problems.</li>
+      <li>The service administrator accesses data only for operation, support and fixing problems. She has no access through the app to teachers' groups' links, requests or consents, and every look at the list of accounts is logged.</li>
     </ul>
 
     <h2>🚫 What we don't do</h2>
     <ul>
       <li>We don't sell or share data with anyone, other than the storage and processing services above.</li>
       <li>No ads and no ad tracking.</li>
-      <li>No analytics tools in the app.</li>
+      <li>No analytics tools in the app, and the app loads nothing from other services besides Firebase and Google sign-in (its fonts are its own too).</li>
       <li>No in-app purchases for kids, and no chat or contact with other users.</li>
     </ul>
 
@@ -158,20 +177,28 @@ html[lang=he] [data-l=he], html[lang=en] [data-l=en]{display:block}
     <h2 id="groups-en">🧑‍🏫 Teachers and groups</h2>
     <p>A teacher (of a class, or a private tutor) can open a group. A student joins only after a parent's consent, and the teacher approves every request.</p>
     <ul>
-      <li><b>What a group keeps:</b> the student's first name and the first letter of the family name, the progress in the group's practice sets, and the consent – the parent's name, the signature, a way to get in touch (if given), the version of the consent letter and when it was given. A private note the teacher may write on a student's progress is seen only by the teacher, and is deleted when the student leaves the group. A student is added to a group only when a parent signed in the app and the teacher approved.</li>
-      <li><b>Who sees it:</b> only the group's teacher (and the app's administrators, for support). Other students and parents do not. A student's phone sees only that student.</li>
+      <li><b>What a group keeps:</b> the student's first name and the first letter of the family name, the progress in the group's practice sets, and the consent – the parent's name, the signature, a way to get in touch (if given), the version of the consent letter and when it was given. A join request that is over (approved, rejected or withdrawn) keeps no names, contact details or signature – only its status and date. A private note the teacher may write on a student's progress is seen only by the teacher, and is deleted when the student leaves the group. A student is added to a group only when a parent signed in the app and the teacher approved.</li>
+      <li><b>Who sees it:</b> only the group's teacher. Other students and parents do not. A student's phone sees only that student. A printed report has no names, and fewer than three students in a category show as "fewer than 3".</li>
       <li><b>Kept apart from the family:</b> the teacher does not see the child's family, other children or private practice sets.</li>
-      <li><b>Withdrawing:</b> the parent can withdraw consent at any time, with the personal link they received or through the teacher. The child's progress in the group, the link and the signatures are then deleted; only a record that the consent was withdrawn, and when, is kept.</li>
-      <li><b>A rejected request:</b> its signature is deleted at once.</li>
-      <li><b>How long:</b> until the end of the school year, until the teacher closes the group, or until the consent is withdrawn – whichever comes first.</li>
+      <li><b>Withdrawing:</b> the parent can withdraw consent at any time, with the personal link they received or through the teacher. The child's progress in the group, the notes, the link, the signatures and the child's phone's connection are then deleted; only a record that the consent was withdrawn, and when, is kept.</li>
+      <li><b>A rejected request:</b> its names, contact details and signature are deleted at once.</li>
+      <li><b>Join requests:</b> a request nobody handled is deleted after 30 days; one that is over, after 90 days.</li>
+      <li><b>How long:</b> every group belongs to one school year, chosen when it opens (the teacher sees the date). Until the end of that school year – on 1 September the students and everything about them are deleted (the teacher is reminded from 1 August) – or earlier, if the teacher deletes the group or the parent withdraws the consent.</li>
     </ul>
 
     <h2>⏳ How long data is kept</h2>
-    <p>Data is kept while the account exists, so the kid can keep practising and see their progress. History is limited to the last 300 games per kid. A parent can reset progress, delete a kid, or delete the whole account at any time.</p>
+    <p>The family's data is kept while the account exists, so the kid can keep practising and see their progress. History is limited to the last 300 games per kid. A parent can reset progress, delete a kid, or delete the whole account at any time.</p>
+    <ul>
+      <li><b>Building a practice set:</b> the form and the build's log are deleted when the build ends; the build's own record (without the description of the material) is deleted after 90 days.</li>
+      <li><b>A teacher's group:</b> as above – until 1 September of its school year, or until the teacher deletes it.</li>
+      <li><b>Requests to join a group:</b> 30 days (not handled) or 90 days (over).</li>
+      <li><b>Bug reports:</b> 180 days. <b>The server log</b> (codes and numbers, no names): 90 days.</li>
+    </ul>
 
     <h2 id="delete-en">🗑 Deleting your data</h2>
     <ul>
-      <li><b>The whole account:</b> on the parent screen, at the bottom → "Delete account". Kids, practice sets, progress and the sign-in account are deleted – from the kids' devices too. Deletion is immediate and permanent.</li>
+      <li><b>The whole account:</b> ☰ → "Delete account". It is done on the server, and deletes: the family and everything in it (kids, practice sets, progress, invitations, builds), the kids' phones' connections, every group the account teaches (students, consents, progress and notes), the memberships in other families, the approvals of the terms, bug reports and suggestions sent – and last, the sign-in account. Deletion is immediate and permanent, and the copy on the device is deleted too.</li>
+      <li><b>A teacher's group:</b> the group's settings → "🗑 Delete the group" (a report can be printed first).</li>
       <li><b>One kid:</b> kid card → ✎ → 🗑. Their practice sets and progress are deleted too.</li>
       <li><b>An invited adult:</b> the parent removes them in the "Family" tab (✕), or the adult taps "Leave the family". From that moment they have no access to the family's data.</li>
       <li><b>Reset progress:</b> kid card → ✎ → "Reset progress".</li>

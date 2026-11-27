@@ -91,7 +91,6 @@
     {
       "target": "company",
       "public": "company-site",
-      "cleanUrls": true,
       "headers": [
         {
           "source": "**/*.html",

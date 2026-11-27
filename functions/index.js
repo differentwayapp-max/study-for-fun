@@ -359,6 +359,11 @@ function sigOk(sig) {
     return ink >= 30;
   } catch (_) { return false; }
 }
+// a request that is over (approved / rejected / withdrawn / revoked) keeps no names, no way to reach the parent, no signature
+// and not who sent it: only its status, when, the student it became, the key's hash (the parent's status page) and the letter's
+// version. The names live on in the student and the consent (approved), or nowhere (the rest).
+const REQ_STRIP = () => ({ parentName: FieldValue.delete(), kidName: FieldValue.delete(), contact: FieldValue.delete(), sig: FieldValue.delete(), by: FieldValue.delete() });
+const JOINREQ_PENDING_DAYS = 30, JOINREQ_DONE_DAYS = 90;
 function letterVOk(v) { return typeof v === 'string' && /^[0-9]{1,2}\.[0-9]{1,2}$/.test(v); }
 async function newStudent(tx, ref, d, kidName, consent) {
   const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef), list = (ks.exists && Array.isArray(ks.data().list)) ? ks.data().list : [];
@@ -423,7 +428,8 @@ exports.joinStatus = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId) || typeof statusKey !== 'string') throw nf();
   const [q, f] = await Promise.all([db.doc(`families/${classId}/joinReqs/${reqId}`).get(), db.doc(`families/${classId}`).get()]);
   if (!q.exists || !f.exists || q.data().keyHash !== sha(statusKey)) throw nf();
-  const R = q.data(), F = f.data(), out = { status: R.status, kidName: R.kidName, parentName: R.parentName, teacher: F.teacherName || '', name: F.name || '', at: R.at, letterV: R.letterV };
+  const R = q.data(), F = f.data(), out = { status: R.status, kidName: R.kidName || '', parentName: R.parentName || '', teacher: F.teacherName || '', name: F.name || '', at: R.at, letterV: R.letterV };
+  if (R.status === 'approved' && R.kidId && !out.kidName) { const kp = await db.doc(`families/${classId}/kidpub/${R.kidId}`).get(); out.kidName = ((kp.exists && kp.data().list) || [])[0]?.name || ''; }   // (the request keeps no names once approved)
   if (R.status === 'rejected') out.reason = R.reason || '';
   if (R.status === 'approved' && R.kidId) { const tok = (F.kidTokens || {})[R.kidId]; if (tok) { out.kidId = R.kidId; out.token = tok; } }
   return out;
@@ -449,7 +455,7 @@ exports.approveJoin = onCall({ region: 'europe-west1', invoker: 'public', maxIns
       const s = await newStudent(tx, ref, f.data(), R.kidName, { status: 'digital', letterV: R.letterV, at: R.at, parentName: R.parentName, contact: R.contact || '', sig: R.sig, reqId, approvedBy: auth.uid, approvedAt: now, parents: [parent] });
       writeStudent(tx, ref, s, true); kidId = s.id;
     }
-    tx.update(qref, { status: 'approved', kidId, sig: FieldValue.delete(), doneAt: now });   // the signature stays with the consent only
+    tx.update(qref, { status: 'approved', kidId, doneAt: now, ...REQ_STRIP() });   // the names and the signature stay with the consent only
     return { kidId };
   });
 });
@@ -460,7 +466,7 @@ exports.rejectJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   if (typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId)) throw new HttpsError('invalid-argument', 'Missing request.');
   const qref = db.doc(`${ref.path}/joinReqs/${reqId}`), q = await qref.get();
   if (!q.exists || q.data().status !== 'pending') throw new HttpsError('failed-precondition', 'not_pending', { reason: 'not_pending' });
-  await qref.update({ status: 'rejected', reason: txt(reason, 200), sig: FieldValue.delete(), doneAt: Date.now() });   // a rejected signature is not kept
+  await qref.update({ status: 'rejected', reason: txt(reason, 200), doneAt: Date.now(), ...REQ_STRIP() });   // nothing of a rejected request is kept
   return { ok: true };
 });
 
@@ -481,7 +487,7 @@ async function dropStudent(classId, kidId, by) {
     tx.delete(db.doc(`${ref.path}/sched/${kidId}`));               // the private group's fixed lessons
     devs.docs.forEach(d => tx.delete(d.ref));
     sets.docs.forEach(d => tx.delete(d.ref));
-    reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now }));
+    reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now, ...REQ_STRIP() }));
     tx.update(ref, new FieldPath('kidTokens', kidId), FieldValue.delete());
     tx.set(db.doc(`${ref.path}/consents/${kidId}`), { status: 'revoked', revokedBy: by, revokedAt: now });
   });
@@ -493,7 +499,7 @@ exports.revokeConsent = onCall({ region: 'europe-west1', invoker: 'public', maxI
     const qref = db.doc(`families/${classId}/joinReqs/${reqId}`), q = await qref.get();
     if (!q.exists || q.data().keyHash !== sha(statusKey)) throw new HttpsError('not-found', 'not_found', { reason: 'not_found' });
     const R = q.data();
-    if (R.status === 'pending') { await qref.update({ status: 'withdrawn', sig: FieldValue.delete(), doneAt: Date.now() }); return { ok: true }; }
+    if (R.status === 'pending') { await qref.update({ status: 'withdrawn', doneAt: Date.now(), ...REQ_STRIP() }); return { ok: true }; }
     if (R.status !== 'approved' || !R.kidId) return { ok: true };
     await dropStudent(classId, R.kidId, 'parent');
     return { ok: true };
@@ -1027,6 +1033,48 @@ exports.cleanBuilds = require('firebase-functions/v2/scheduler').onSchedule({ sc
       if (!b || b.status !== 'failed' || old) await cleanBuild(ref);
     }
   });
+
+/* ---------- once a day: what is kept no longer than the privacy policy says ----------
+   dailyClean runs every cleaner below with today's time; testClean (the emulator only) runs them with a made-up time, so the
+   tests can check them. Each cleaner pages through all of it (never one fixed first page) and returns how many it removed;
+   the server log gets the numbers only. */
+// every document of a collection group older than `before` (by `field`), page after page
+async function* olderThan(group, field, before, page = 300) {
+  let last = null;
+  for (;;) {
+    let q = db.collectionGroup(group).where(field, '<', before).orderBy(field).limit(page);
+    if (last) q = q.startAfter(last);
+    const s = await q.get(); if (s.empty) return;
+    yield s.docs; last = s.docs[s.docs.length - 1];
+    if (s.size < page) return;
+  }
+}
+// join requests: one nobody handled goes after JOINREQ_PENDING_DAYS (its signature with it), one that is over after JOINREQ_DONE_DAYS
+async function cleanJoinReqs(now) {
+  let n = 0;
+  for await (const docs of olderThan('joinReqs', 'at', now - JOINREQ_PENDING_DAYS * 864e5)) {
+    const b = db.batch(); let k = 0;
+    for (const d of docs) { if (!/^families\/[^/]+\/joinReqs\/[^/]+$/.test(d.ref.path)) continue; const r = d.data();
+      if (r.status === 'pending' || (r.doneAt || r.at || 0) < now - JOINREQ_DONE_DAYS * 864e5) { b.delete(d.ref); k++; } }
+    if (k) await b.commit(); n += k;
+  }
+  return n;
+}
+const CLEANERS = { joinReqs: cleanJoinReqs };
+async function cleanAll(now, only) {
+  const out = {};
+  for (const [k, f] of Object.entries(CLEANERS)) { if (only && !only.includes(k)) continue;
+    try { out[k] = await f(now); } catch (e) { out[k] = 'error'; await serverLog({ fn: 'dailyClean', kind: 'error', code: k, msg: String(e.message || e).replace(/families\/[^\s'"]+/g, 'families/…').slice(0, 200) }); } }
+  return out;
+}
+exports.dailyClean = require('firebase-functions/v2/scheduler').onSchedule({ schedule: '17 3 * * *', timeZone: 'Asia/Jerusalem', region: 'europe-west1', retryCount: 0, timeoutSeconds: 540 },
+  async () => { const r = await cleanAll(Date.now()); await serverLog({ fn: 'dailyClean', kind: 'info', code: 'ok', msg: Object.entries(r).map(([k, v]) => `${k} ${v}`).join(' · ') }); });
+// the tests only (the emulator): the same cleaning, with a made-up time
+exports.testClean = onCall({ region: 'europe-west1', invoker: 'public' }, async function testClean(request) {
+  if (!FAKE_OK()) throw new HttpsError('permission-denied', 'emulator only');
+  const d = request.data || {};
+  return cleanAll(Number.isFinite(d.now) ? d.now : Date.now(), Array.isArray(d.only) ? d.only : null);
+});
 
 /* ---------- a user's bug report / idea → an email to the D-WAY team ----------
    The addresses live in adminConfig/main (only the app admins can read or write it, from the admin screen in the app);

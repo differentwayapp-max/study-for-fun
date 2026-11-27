@@ -12,9 +12,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   await ctx.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; localStorage.setItem('sff_lang', 'he'); });
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 15000 });
   await p.click('#fbEmailBtn'); await p.fill('#fbEmailIn', 'mom.mail@t.local');
-  await p.click('#fbEmailGo'); await p.waitForTimeout(400);
-  ok(/סמנו שקראתם/.test(await p.textContent('#fbErr')), 'without the terms tick: no link is sent');
-  await p.click('#fbAgree'); await p.click('#fbEmailGo'); await p.waitForTimeout(2500);
+  await p.click('#fbEmailGo'); await p.waitForTimeout(2500);
   const sent = await p.textContent('#fbEmail');
   ok(/שלחנו קישור/.test(sent), 'the screen says the link was sent');
   if (OUT) await p.screenshot({ path: `${OUT}/email_sent.png` });
@@ -22,9 +20,12 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const c = (codes.oobCodes || []).reverse().find(x => x.email === 'mom.mail@t.local' && x.requestType === 'EMAIL_SIGNIN');
   ok(!!c, 'Firebase sent the sign-in email');
   const u = new URL(c.oobLink), link = `http://localhost:8765/?mail=1&mode=signIn&oobCode=${u.searchParams.get('oobCode')}&apiKey=${u.searchParams.get('apiKey')}&lang=he`;
-  await p.goto(link, { waitUntil: 'load' }); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(1500);
+  await p.goto(link, { waitUntil: 'load' });
+  // a new adult: the terms + privacy approval, once, after the sign-in (recorded by the server)
+  await p.waitForSelector('#fbOk', { timeout: 25000 }); await p.click('#fbAgree'); await p.click('#fbOk');
+  await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }); await p.waitForTimeout(1500);
   const st = await p.evaluate(async () => ({ role: window.SFF_ROLE, email: window.SFF_EMAIL, url: location.href, terms: (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null,
-    write: await window.__sffRoot.set('users', window.SFF_UID, { probe: 1 }).then(() => 'ok', e => 'denied') }));
+    write: await window.__sffRoot.set('users', window.SFF_UID, { ...((await window.__sffRoot.get('users', window.SFF_UID)) || {}), probe: 1 }).then(() => 'ok', e => 'denied') }));   // (as the app writes: the rest kept – the terms record is the server's)
   console.log(JSON.stringify(st));
   ok(st.role === 'owner' && st.email === 'mom.mail@t.local', 'the link signs the parent in, with their own family');
   ok(!/oobCode/.test(st.url), 'the one-time link is removed from the address bar');

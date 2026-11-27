@@ -288,6 +288,7 @@
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    [/^(\d+) \(ועוד (\d+) תוקנו\)$/, (m, a, b) => `${a} (${b} more fixed)`],
     // the parent's tracking
     [/^(\d+) ימים$/, (m, n) => `${n} days`],
     [/^(\d+)\/(\d+) ימים$/, (m, a, b) => `${a}/${b} days`],

@@ -29,7 +29,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     out.oldPick = mistakesOf(s, history).find(x => x.i === s.questions.indexOf(G.qs[1] || s.questions[30])).lastWrong.pick;
     // later the kid answers it right → the button counts open mistakes only
     history.unshift({ at: Date.now() + 2, kidId: 'k1', setId: 'r1', ch: 1, right: 1, n: 1, mode: 'choice', qr: [`${qi}.1`], qk: [tkey(q.question)], topics: {} });
-    go('stats'); renderStats(); out.mbtn = document.querySelector('.mistbtn')?.textContent.replace(/\s+/g, ' ').trim();
+    statsKid('k1', 'r1'); out.mbtn = [...document.querySelectorAll('#sBody .srow')].find(e => /הטעויות/.test(e.textContent))?.textContent.replace(/\s+/g, ' ').trim();
     // 17: connect-with-lines
     out.lineColors = LINE_COLORS; startGame(s, null, 'match', 0); out.howto = $('gTop').textContent.trim();
     // 8: mute stops reading aloud

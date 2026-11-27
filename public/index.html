@@ -4713,10 +4713,10 @@ function statsSet(k,s){
     ${good.length?`<div class="strows">${good.map(row).join('')}</div>`:''}
     ${okW.length?`<div class="wlist" dir="${en?'ltr':'auto'}">${okW.map(x=>`<span class="wchip g" translate="no">${esc(x.label)}</span>`).join('')}</div>`:''}
     ${notYet?`<p class="hint" style="margin:8px 0 0">⬜ ${fT(`עוד לא תורגלו: ${notYet}`)}</p>`:''}</details>`;
-  const ms=mistakesOf(s,history), mo=ms.filter(m=>!m.fixed).length;
+  const ms=mistakesOf(s,history), mo=ms.filter(m=>!m.fixed).length, mf=ms.length-mo;
   const H14=HS.filter(h=>h.at>=now-14*864e5).length;
   return sum+what+sits
-    +(ms.length?`<button class="srow" onclick="openMistakes('${esc(s.id)}')"><b>🔎 ${esc(sffT?sffT('לראות את הטעויות'):'לראות את הטעויות')}</b><span class="hint">${mo}</span><span aria-hidden="true">›</span></button>`:'')
+    +(ms.length?`<button class="srow" onclick="openMistakes('${esc(s.id)}')"><b>🔎 ${esc(sffT?sffT('לראות את הטעויות'):'לראות את הטעויות')}</b><span class="hint">${mo}${mf?` (ועוד ${mf} תוקנו)`:''}</span><span aria-hidden="true">›</span></button>`:'')
     +`<button class="srow" onclick="openSetHistory('${esc(s.id)}')"><b>${esc(sffT?sffT('היסטוריה'):'היסטוריה')}</b><span class="hint">${fT(`${H14} משחקים ב-14 ימים`)}</span><span aria-hidden="true">›</span></button>`;
 }
 // a word / question with mistakes: in which games it was missed and what was answered instead

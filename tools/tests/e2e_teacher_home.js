@@ -112,7 +112,12 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
   const same = inH.getDay() === nowD.getDay();
   await put(`families/${pid}/sched/p1`, { slots: [{ d: inH.getDay(), t: hm(inH) }], from: Date.now() - 30 * 864e5, last: 0, upd: 0 });
   await put(`families/${pid}/sched/p2`, { slots: [{ d: (nowD.getDay() + 1) % 7, t: '16:00' }], from: Date.now() - 30 * 864e5, last: 0, upd: 0 });
-  await T.waitForFunction(() => Object.keys(CLS.sched || {}).length === 2, null, { timeout: 20000 }).catch(() => {}); await home(T);
+  // p3: a lesson on a Sunday–Thursday day that is neither today nor tomorrow, so "my week" (Sun–Thu) always has one, whatever the day
+  // (on Friday / Saturday the lessons above fall outside it) – and it never comes before p1's lesson in 3 hours
+  const busy = [nowD.getDay(), inH.getDay(), (nowD.getDay() + 1) % 7, (inH.getDay() + 1) % 7], p3d = [0, 1, 2, 3, 4].find(d => !busy.includes(d));
+  await put(`families/${pid}/sched/p3`, { slots: [{ d: p3d, t: '10:00' }], from: Date.now() - 30 * 864e5, last: 0, upd: 0 });
+  const wantWk = [0, 1, 2, 3, 4].map(d => [[inH.getDay(), 'ליאור'], [(nowD.getDay() + 1) % 7, 'מאיה'], [p3d, 'עמית']].filter(([x]) => x === d).map(([, n]) => n));
+  await T.waitForFunction(() => Object.keys(CLS.sched || {}).length === 3, null, { timeout: 20000 }).catch(() => {}); await home(T);
   const P = await T.evaluate(() => document.querySelector('.thopen').innerText.replace(/\s+/g, ' '));
   ok(/השיעור הבא/.test(P) && /ליאור/.test(P) && (same ? /היום/.test(P) : /מחר/.test(P)) && /בעוד (3 שעות|שעתיים)/.test(P), 'the next lesson: ליאור, today, in 3 hours – ' + P.slice(0, 90));
   ok(/מאז השיעור הקודם: 2 משחקים/.test(P), '"since the last lesson" counts only the games after it (2 of 3) – ' + (P.match(/מאז השיעור הקודם:[^.]*/) || [''])[0]);
@@ -121,7 +126,7 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
     const n = nextLesson({ slots: [{ d: d.getDay(), t }] }, now); return Math.round((n - now) / 3600e3); });
   ok(roll === 167, 'a lesson an hour ago → the next one in a week (167 hours): ' + roll);
   const wk = await T.evaluate(() => [...document.querySelectorAll('.thday')].map(d => d.innerText.replace(/\s+/g, ' ')));
-  ok(wk.length === 5 && wk.some(x => /ליאור/.test(x)) , 'my week: 5 days with the lessons – ' + wk.join(' | '));
+  ok(wk.length === 5 && wk.every((x, d) => ['ליאור', 'מאיה', 'עמית'].every(n => x.includes(n) === wantWk[d].includes(n))), 'my week: 5 days (Sun–Thu) with the lessons on their days – ' + wk.join(' | '));
   const kc = await T.evaluate(() => [...document.querySelectorAll('.thkid')].map(x => x.innerText.replace(/\s+/g, ' ')));
   ok(kc.length === 3 && kc.some(x => /עמית/.test(x) && /לא תרגל/.test(x)), 'the students\' cards: 3, "לא תרגל/ה" for one who never played');
   await T.screenshot({ path: `${OUT}/th_private_he360.png`, fullPage: true });

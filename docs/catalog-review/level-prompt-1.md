@@ -63,6 +63,14 @@
 - **sci8:** הגרף לא מציג מספרים על ציר y. אם צריך לקרוא ערך מגרף, מוסיפים מספרים לעזר `GRAPH`.
 - **סדר העבודה:** כל מקצוע מסיימים ובודקים לפני שעוברים לבא.
 
+## הערות מבדיקת שכבה ז' (סבב 9)
+- **שלוש דוגמאות מדוח en8 הן העתק של en7. לא להשתמש בהן:**
+  - «I ___ swim when I was five.»: במקום, «Last week I ___ finish the test in time.» ✔ was able to.
+  - «Look at those clouds! It ___ rain.»: במקום, «The glass is at the edge! It ___ fall.»
+  - «She answered every question ___ (correct).»: במקום, «The team played ___ (bad) and lost.» ✔ badly.
+- **עזרים שמחזירים 6 שדות** (`Q` וכו'): להוסיף להם פרמטר אופציונלי `lvl=1`, שמוסיף את השדה השביעי רק כש-`lvl == 2`.
+  - לוודא ש-`SFF_DRY` נותן אותו `ver` לשאלות הקיימות.
+
 ## בסוף
 - commit ו-push.
 - **לא להריץ `tools/deploy.sh`.**

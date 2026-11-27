@@ -8,10 +8,11 @@
 - **בבדיקה נמצא:**
   - דף עבודה אמיתי של כיתה ז' דורש הרבה יותר ממה שיש ב-math7 (`docs/grade-levels/math7.md`).
   - בכל ארבעת הסטים של ח' רוב השאלות הן שליפה או צעד אחד. מה שחסר מפורט בסעיף "התאמה לרמת כיתה ח'" בכל דוח ב-`docs/catalog-review/reviews-round8/`.
-- **נקודת ההתחלה:** עובדים מ-main העדכני. מביאים את הקבצים:
+- **נקודת ההתחלה:** עובדים על הענף `claude/friendly-goldberg-0w7hhg`, ולא על main. **מתחילים רק אחרי שסבב התיקונים של ח' (`fix-prompt-round8.md`) נדחף לענף**, כי הוא משנה את אותם קבצים.
   ```
-  git fetch origin claude/friendly-goldberg-0w7hhg && git checkout origin/claude/friendly-goldberg-0w7hhg -- docs .claude/skills/build-practice-set/SKILL.md tools/build_set.py tools/match_list.js
+  git fetch origin claude/friendly-goldberg-0w7hhg && git checkout claude/friendly-goldberg-0w7hhg && git pull
   ```
+  - אם ה-push נדחה (סשן פיתוח דוחף לאותו ענף): `git pull --no-rebase`, ואז push שוב.
 - **סימון רמה ב':** שדה שביעי בשאלה בקובץ הסט: `Q(...)` ואחריו `, 2`. כלומר `(topic, q, opts, ans, expl, sc, 2)`.
   - `build_set.py` כותב `"lvl": 2`.
   - **האפליקציה עוד לא מפרידה את הרמות** (שלב 3 בתוכנית, נבנה בנפרד). לכן **לא להעלות לאתר** עד שהשלב הזה נכנס.

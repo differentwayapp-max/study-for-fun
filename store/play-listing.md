@@ -89,6 +89,11 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 גוגל צריכים להיכנס לאפליקציה. בוחרים: "All or some functionality is restricted" ורושמים:
 "Parent area: sign in with any Google account. A sample practice set is in the catalog (📚). Kid view: from the parent area, open a kid → 'Kid link'."
 
+## מפתח העלאה ובנייה
+- מפתח ההעלאה (27.11): `studyforfun-upload.jks`, alias `upload`, SHA-256 `DF:D0:93:…:6A:D7` – נשמר אצל הבעלים (לא ב-git). לשים אותו ואת `upload.properties` ב-`android/keys/`.
+- בנייה בלי Android Studio: Android SDK (platform 36) + `ANDROID_HOME`, ואז `cd android && gradle bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. בכל גרסה חדשה להעלות את `versionCode` ב-`android/app/build.gradle`.
+- Google חותמים מחדש (Play App Signing): את ה-SHA-256 של "App signing key" (Play Console → Test and release → App integrity) להוסיף ל-`public/.well-known/assetlinks.json` ולפרוס – אחרת האפליקציה נפתחת עם שורת כתובת.
+
 ## בדיקה סגורה (Closed testing) – חשבון אישי
 > ההחלטה (27.11): מתחילים בחשבון אישי, כי העסק נרשם רק בינואר. אחרי הרישום: D-U-N-S → חשבון עסקי ב-Play Console → העברת האפליקציה (App transfer) לחשבון העסקי. שם החבילה, המשתמשים והדירוגים נשארים.
 

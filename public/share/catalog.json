@@ -216,49 +216,6 @@
    "status": "ready"
   },
   {
-   "id": "en8",
-   "ver": "dd670fd2c7",
-   "subject": "אנגלית",
-   "grade": 7,
-   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
-   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
-   "tags": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
-    "Unseen"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 4,
-   "words": 59,
-   "samples": [
-    {
-     "q": "She ___ her homework, so she can watch TV.",
-     "e": "👧📓"
-    },
-    {
-     "q": "I haven't finished my project ___.",
-     "e": "📋⏳"
-    },
-    {
-     "q": "I ___ to my grandma on the phone yesterday.",
-     "e": "👵📞"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "heb1",
    "ver": "ef905eb01a",
    "subject": "עברית / לשון",
@@ -428,48 +385,6 @@
     {
      "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
      "e": "🗣️📄"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "heb8",
-   "ver": "99f0ad1061",
-   "subject": "עברית / לשון",
-   "grade": 7,
-   "title": "הבנת הנקרא · סיכום ממזג · טיעון · תחביר ופסוקיות · פיסוק וציטוט · גזרות (גם פ״א ול״א) ובניינים · משקלים · שם המספר · משלב",
-   "desc": "חמישה קטעי קריאה (מאמר דעה, סיכום מחקר עם נתונים, טקסט מידעי ושני טקסטים להשוואה), סיכום ממזג, כתיבת טיעון ומילות קישור, חלקי המשפט ותיאורים, פסוקיות, גזרות, בניינים בכל הזמנים, משקלים, שם המספר, מילות יחס בנטייה, משלב, פיסוק (פסיק במשפט מאוחה ומורכב, ציטוט, סוגריים וקו מפריד) וגזרות פ״א ול״א",
-   "desc_en": "Five reading passages (op-eds, a research summary with data, an informational text and two texts to compare), merged summary, argument writing and connectors, sentence parts and adverbials, subordinate clauses, verb groups, binyanim in all tenses, noun patterns, number words, inflected prepositions, register, punctuation (commas in compound and complex sentences, quoting, brackets and the dash) and the פ״א / ל״א verb groups",
-   "tags": [
-    "טקסט טיעוני",
-    "טקסט מידעי",
-    "סיכום ממזג",
-    "טיעון",
-    "תיאורים",
-    "פסוקיות",
-    "גזרות",
-    "בניינים",
-    "משקלים",
-    "שם המספר",
-    "פיסוק",
-    "פ״א ול״א"
-   ],
-   "questions": 301,
-   "chapters": 29,
-   "reading": 5,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהי ההכללה של הפעולות בכרטיס?",
-     "e": "🧳קנה כרטיס, ארז"
-    },
-    {
-     "q": "מהי סוגיה?",
-     "e": "📝🔍"
-    },
-    {
-     "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
-     "e": "🌦️הואיל והגשם פסק,"
     }
    ],
    "status": "ready"
@@ -809,51 +724,6 @@
    "status": "ready"
   },
   {
-   "id": "math8",
-   "ver": "35aec78659",
-   "subject": "מתמטיקה",
-   "grade": 7,
-   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
-   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
-   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
-   "tags": [
-    "פונקציה קווית",
-    "שיפוע",
-    "כפל מקוצר",
-    "חוקי חזקות",
-    "אי-שוויונות",
-    "מערכת משוואות",
-    "פתרון גרפי",
-    "יחס ופרופורציה",
-    "אחוזים וריבית",
-    "הסתברות",
-    "חפיפת משולשים",
-    "שווה שוקיים",
-    "מרובעים מיוחדים",
-    "דמיון משולשים",
-    "פיתגורס"
-   ],
-   "questions": 405,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה השיפוע של ⁦y=3x+2⁩?",
-     "e": "y = 3x + 2"
-    },
-    {
-     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
-     "e": "(0,1)(2,5)"
-    },
-    {
-     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
-     "e": "y = 2x + 5"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci1",
    "ver": "4cbd223d56",
    "subject": "מדעים",
@@ -1155,53 +1025,6 @@
    "status": "ready"
   },
   {
-   "id": "sci8",
-   "ver": "c6fa712b48",
-   "subject": "מדעים",
-   "grade": 7,
-   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
-   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
-   "tags": [
-    "יסודות ותרכובות",
-    "האטום",
-    "נוסחאות כימיות",
-    "טבלה מחזורית",
-    "תגובה כימית",
-    "מעגלים חשמליים",
-    "בטיחות בחשמל",
-    "כוחות",
-    "חוקי ניוטון",
-    "מהירות",
-    "רבייה",
-    "מארג מזון",
-    "יחסי גומלין",
-    "התאמות לסביבה",
-    "שינוי האקלים",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 390,
-   "chapters": 37,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "יסוד הוא חומר הבנוי מ…",
-     "e": "🔵🔵"
-    },
-    {
-     "q": "באיזה זוג שני החומרים הם יסודות?",
-     "e": "💧🔩"
-    },
-    {
-     "q": "איפה נמצאים הפרוטונים?",
-     "e": "⚛️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en4-nov26",
    "ver": "6d2785e347",
    "subject": "אנגלית",
@@ -1450,6 +1273,183 @@
     {
      "q": "מה מספרת הפתיחה שבכרטיס?",
      "e": "📖לפני שנים רבות,"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb8",
+   "ver": "aaeb7efd94",
+   "subject": "עברית / לשון",
+   "grade": 7,
+   "title": "הבנת הנקרא · סיכום ממזג · טיעון · תחביר ופסוקיות · פיסוק וציטוט · גזרות (גם פ״א ול״א) ובניינים · משקלים · שם המספר · משלב",
+   "desc": "חמישה קטעי קריאה (מאמר דעה, סיכום מחקר עם נתונים, טקסט מידעי ושני טקסטים להשוואה), סיכום ממזג, כתיבת טיעון ומילות קישור, חלקי המשפט ותיאורים, פסוקיות, גזרות, בניינים בכל הזמנים, משקלים, שם המספר, מילות יחס בנטייה, משלב, פיסוק (פסיק במשפט מאוחה ומורכב, ציטוט, סוגריים וקו מפריד) וגזרות פ״א ול״א",
+   "desc_en": "Five reading passages (op-eds, a research summary with data, an informational text and two texts to compare), merged summary, argument writing and connectors, sentence parts and adverbials, subordinate clauses, verb groups, binyanim in all tenses, noun patterns, number words, inflected prepositions, register, punctuation (commas in compound and complex sentences, quoting, brackets and the dash) and the פ״א / ל״א verb groups",
+   "tags": [
+    "טקסט טיעוני",
+    "טקסט מידעי",
+    "סיכום ממזג",
+    "טיעון",
+    "תיאורים",
+    "פסוקיות",
+    "גזרות",
+    "בניינים",
+    "משקלים",
+    "שם המספר",
+    "פיסוק",
+    "פ״א ול״א"
+   ],
+   "questions": 301,
+   "chapters": 29,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהי ההכללה של הפעולות בכרטיס?",
+     "e": "🧳קנה כרטיס, ארז"
+    },
+    {
+     "q": "מהי סוגיה?",
+     "e": "📝🔍"
+    },
+    {
+     "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
+     "e": "🌦️הואיל והגשם פסק,"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math8",
+   "ver": "e8d937553f",
+   "subject": "מתמטיקה",
+   "grade": 7,
+   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
+   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
+   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
+   "tags": [
+    "פונקציה קווית",
+    "שיפוע",
+    "כפל מקוצר",
+    "חוקי חזקות",
+    "אי-שוויונות",
+    "מערכת משוואות",
+    "פתרון גרפי",
+    "יחס ופרופורציה",
+    "אחוזים וריבית",
+    "הסתברות",
+    "חפיפת משולשים",
+    "שווה שוקיים",
+    "מרובעים מיוחדים",
+    "דמיון משולשים",
+    "פיתגורס"
+   ],
+   "questions": 405,
+   "chapters": 39,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה השיפוע של ⁦y=3x+2⁩?",
+     "e": "y = 3x + 2"
+    },
+    {
+     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+     "e": "(0,1)(2,5)"
+    },
+    {
+     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+     "e": "y = 2x + 5"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en8",
+   "ver": "b6fd56755e",
+   "subject": "אנגלית",
+   "grade": 7,
+   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
+   "tags": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ],
+   "questions": 380,
+   "chapters": 37,
+   "reading": 4,
+   "words": 59,
+   "samples": [
+    {
+     "q": "She ___ her homework, so she can watch TV.",
+     "e": "👧📓"
+    },
+    {
+     "q": "I haven't finished my project ___.",
+     "e": "📋⏳"
+    },
+    {
+     "q": "We ___ about the trip the day before yesterday.",
+     "e": "🗣️🧳"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci8",
+   "ver": "2196e0b978",
+   "subject": "מדעים",
+   "grade": 7,
+   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
+   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
+   "tags": [
+    "יסודות ותרכובות",
+    "האטום",
+    "נוסחאות כימיות",
+    "טבלה מחזורית",
+    "תגובה כימית",
+    "מעגלים חשמליים",
+    "בטיחות בחשמל",
+    "כוחות",
+    "חוקי ניוטון",
+    "מהירות",
+    "רבייה",
+    "מארג מזון",
+    "יחסי גומלין",
+    "התאמות לסביבה",
+    "שינוי האקלים",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 390,
+   "chapters": 37,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "יסוד הוא חומר הבנוי מ…",
+     "e": "🔵🔵"
+    },
+    {
+     "q": "באיזה זוג שני החומרים הם יסודות?",
+     "e": "💧🔩"
+    },
+    {
+     "q": "איפה נמצאים הפרוטונים?",
+     "e": "⚛️"
     }
    ],
    "status": "ready"

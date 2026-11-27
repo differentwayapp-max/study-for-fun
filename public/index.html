@@ -732,7 +732,8 @@ body.noai #btnBuild,body.noai #qaAll,body.noai #noAI{display:none!important}
 .mehead .subjico{width:44px;height:44px;border-radius:12px;border:var(--line);display:grid;place-items:center;font-family:var(--display);font-weight:700}
 .mebtns{display:flex;flex-wrap:wrap;gap:8px}
 .catcard{margin-bottom:12px}.catcard.soon{opacity:.6}
-.catsub{margin:0 2px 4px;text-align:center}   /* the catalog's title is in the top bar ("קטלוג תרגולים" + "חזרה"): only this line, nothing sticky */
+.catsub{margin:0 2px 4px;text-align:center}
+.yearend{display:flex;flex-direction:column;gap:6px;background:#FFF6DB;border-color:#946200;text-align:center}.yearend b{font-family:var(--display)}   /* the catalog's title is in the top bar ("קטלוג תרגולים" + "חזרה"): only this line, nothing sticky */
 .catfor{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 2px}
 .gradebar{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 2px 8px;margin:4px 0 2px}
 .gbtn{flex:none;position:relative;min-width:48px;height:56px;padding:0 6px;border:var(--line);border-radius:16px;background:#fff;color:var(--ink);font-family:var(--display);font-weight:700;font-size:1.45em;cursor:pointer;box-shadow:0 3px 0 var(--ink)}
@@ -1689,7 +1690,7 @@ const PRIVACY_VERSION = '2026-11-21'; // the date at the top of privacy.html –
           let r = 'owner', m = null;
           if (classIds.includes(fid)) {        // a teacher's group: its own document says who the teacher is
             const cs = await F.getDoc(F.doc(fdb, `families/${fid}`)); const cd = cs.exists() ? cs.data() : null;
-            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '', teacher: cd.teacherName || '' }, token: cd.inviteToken });
+            if (cd && cd.kind === 'class' && cd.ownerUid === uid) famInfo.push({ id: fid, name: cd.name || '', role: 'owner', kind: 'class', cls: { teach: cd.teach, grade: cd.grade, subject: cd.subject || '', teacher: cd.teacherName || '', yearEnd: cd.yearEnd || 0 }, token: cd.inviteToken });
             continue;
           }
           if (fid !== uid) { const ms = await F.getDoc(F.doc(fdb, `families/${fid}/members/${uid}`)); if (!ms.exists()) continue; m = ms.data(); r = m.role; }
@@ -1788,6 +1789,8 @@ const PRIVACY_VERSION = '2026-11-21'; // the date at the top of privacy.html –
         addOwnFamily: async () => { const own = F.doc(fdb, `families/${uid}`);
           if (!(await F.getDoc(own)).exists()) await F.setDoc(own, { inviteToken: rnd(18), createdAt: Date.now(), name: myName });
           W.__sffFamily.switchTo(uid); },
+        // the teacher deletes the open group (the server: everything in it, the students' phones' accounts); then another group
+        deleteClass: async () => { await callDelClass({ classId: famId }); LS.removeItem(ACT); ['sff_kids', 'sff_sets', 'sff_history', 'sff_data_fam'].forEach(k => LS.removeItem(k)); },
         switchTo: fid => { LS.setItem(ACT, fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
       /* deleting the account is done by the server (deleteAccount: the own family, the groups taught, the memberships, the kids'
@@ -1808,7 +1811,7 @@ const PRIVACY_VERSION = '2026-11-21'; // the date at the top of privacy.html –
         await W.wipeLocal();
       };
     const out = document.getElementById('fbOut');
-      if (out) { out.classList.remove('hidden'); out.onclick = async () => { if (W.closeMenu) W.closeMenu(); if (W.askSure && !(await W.askSure({ ico: '🚪', title: 'בטוח שברצונך להתנתק?', text: 'כדי לחזור צריך להתחבר שוב עם Google. הנתונים נשמרים.', yes: 'התנתקות', danger: true }))) return; A.signOut(auth).then(() => location.reload()); }; }
+      if (out) { out.classList.remove('hidden'); out.onclick = async () => { if (W.closeMenu) W.closeMenu(); if (W.askSure && !(await W.askSure({ ico: '🚪', title: 'בטוח שברצונך להתנתק?', text: 'כדי לחזור צריך להתחבר שוב עם Google. הנתונים נשמרים.', yes: 'התנתקות', danger: true }))) return; W.__sffDeleting = true; try { await A.signOut(auth); } catch (e) {} await W.wipeLocal(); location.reload(); }; }   /* nothing of the account stays on this phone */
     }
 
     // ---- db adapter (same surface as the claude.ai db capability, the parts the app uses)
@@ -2181,7 +2184,7 @@ const store = {
   save(){ storeSaveLocal(); if(typeof pushSets==='function') pushSets(); }
 };
 store.load();
-function storeSaveLocal(){ try{ localStorage.setItem('sff_sets', JSON.stringify(sets)); }catch(e){} }
+function storeSaveLocal(){ if(window.__sffDeleting) return; try{ localStorage.setItem('sff_sets', JSON.stringify(sets)); }catch(e){} }
 
 /* demo set so kid mode works without AI */
 const DEMO = {id:'demo', name:'דוגמה', grade:5, perRound:3, subject:'אנגלית', created:Date.now(), demo:true,
@@ -2198,7 +2201,7 @@ const DEMO = {id:'demo', name:'דוגמה', grade:5, perRound:3, subject:'אנג
 /* ---------- kids ---------- */
 const KID_COLORS=['#2F6BFF','#FF5C8A','#24C78E','#F2A63B','#B9A7FF'];
 let kids=[]; try{ kids=JSON.parse(localStorage.getItem('sff_kids')||'[]'); }catch(e){}
-const saveKidsLocal=()=>{ try{ localStorage.setItem('sff_kids',JSON.stringify(kids)); }catch(e){} };
+const saveKidsLocal=()=>{ if(window.__sffDeleting) return; try{ localStorage.setItem('sff_kids',JSON.stringify(kids)); }catch(e){} };
 const saveKids=()=>{ saveKidsLocal(); if(typeof pushKids==='function') pushKids(); };
 if(!kids.length && sets.length){ // migrate older practices
   [...new Set(sets.map(x=>x.name))].forEach((n,i)=>{ const st=sets.find(x=>x.name===n); kids.push({id:'k'+Date.now()+i,name:n,grade:st.grade,color:KID_COLORS[i%5]}); });
@@ -3245,10 +3248,27 @@ async function qaAllSets(){
 }
 const isClassMode=()=>window.SFF_KIND==='class';
 const classWord=()=>window.SFF_CLASS&&window.SFF_CLASS.teach==='private'?'התלמידים שלי':'הכיתה';
+/* deleting the open group (the teachers' app): first a report to print, then "for good?" – the server deletes all of it
+   (students, consents, progress, assignments, notes, the students' phones); then the teacher is in another group */
+function delGroup(){ const C=window.SFF_CLASS||{};
+  tDialog(`<h2>🗑 מחיקת הקבוצה</h2><p class="sub">${fT(`יימחקו לצמיתות: התלמידים, ההסכמות, ההתקדמות, המשימות וההערות של ${C.name||''}. הטלפונים של התלמידים יתנתקו.`, C.name||'')}</p>
+    <p class="hint">כדאי להדפיס קודם דוח – אחר כך אי אפשר לשחזר.</p>
+    <div class="actions" style="justify-content:center;flex-wrap:wrap"><button class="btn ghost" onclick="tClose();go('stats');setTimeout(trPrint,400)">🖨 הדפסת דוח לפני</button>
+    <button class="btn danger" id="grpDelGo" onclick="delGroupGo()">🗑 למחוק את הקבוצה</button></div>`); }
+async function delGroupGo(){
+  if(!(await askSure({ico:'🗑',title:'למחוק את הקבוצה לצמיתות?',text:'אי אפשר לשחזר.',yes:'למחוק',danger:true}))) return;
+  const b=$('grpDelGo'); if(b){ b.disabled=true; b.textContent='⏳'; }
+  try{ await window.__sffFamily.deleteClass(); tClose(); toast('✓ הקבוצה נמחקה'); sffSoftReload('רגע…'); }
+  catch(e){ if(b){ b.disabled=false; b.textContent='🗑 למחוק את הקבוצה'; } toast('⚠️ לא הצלחנו למחוק – נסו שוב'); }
+}
+// before the end of the school year: the teacher is told the students and their progress will be deleted (the group's yearEnd)
+function yearEndNote(){ const t=(window.SFF_CLASS||{}).yearEnd; if(!t||Date.now()>=t) return ''; const d=new Date(t), dd=`${d.getDate()}.${d.getMonth()+1}`;
+  return `<div class="card yearend" id="yearEnd"><b>📅 ${fT(`ב-${dd} יימחקו התלמידים וההתקדמות שלהם`)}</b><span class="hint">${fT('כך מובטח להורים במדיניות הפרטיות. אפשר להדפיס דוח לפני.')}</span>
+    <div class="actions" style="justify-content:center;flex-wrap:wrap"><button class="btn small" onclick="go('stats');setTimeout(trPrint,400)">🖨 הדפסת דוח</button><button class="btn ghost small" onclick="delGroup()">🗑 למחוק עכשיו</button></div></div>`; }
 function renderTeacherHome(){
   const C=window.SFF_CLASS||{}, cls=C.teach!=='private', subj=C.subject?` · ${esc(C.subject)}`:'';
   if(TAPP()){ TH_C=null; const fresh=!(trStudents().length&&sets.some(isAsg));     /* no students or no assignment yet: the 3 steps */
-    $('kidCar').innerHTML=`<div class="thhome">${fresh?thNewGroup():cls?thSchool():thPrivate()}</div>`; $('kidCarDots').innerHTML='';
+    $('kidCar').innerHTML=`<div class="thhome">${yearEndNote()}${fresh?thNewGroup():cls?thSchool():thPrivate()}</div>`; $('kidCarDots').innerHTML='';
     if(fresh) thLinkFill(); thTop(); return; }
   $('kidCar').innerHTML=`<div class="card thome">
     <div class="thead"><span class="tico">${cls?'🏫':'🧑‍🏫'}</span><div><h2>${esc(C.name||'')}</h2><div class="hint">${cls?'מורה לכיתה':'מורה פרטי/ת'} · כיתה ${GRADES[+C.grade||0]}${subj}</div></div></div>
@@ -4258,7 +4278,7 @@ function resetKid(id){
   sets.filter(s=>kidOfSet(s)===k).forEach(s=>{ delete s.order; delete s.pos; }); store.save();
   pushProgress(id); resetKidForm(); renderKids(); toast(`↺ ${esc(k.name)} ✓`);
 }
-function saveHistoryLocal(){ try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
+function saveHistoryLocal(){ if(window.__sffDeleting) return; try{ localStorage.setItem('sff_history',JSON.stringify(history.slice(0,500))); }catch(e){} }
 function recordSession(by, right, n){
   const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
   if(rv.length){ right-=rv.filter(r=>r.ok).length; n-=rv.length; }
@@ -4785,7 +4805,7 @@ async function cloudInit(){
     const fam=lsGet('sff_fam');
     if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ lsSet('sff_cls',fam); window.SFF_CLS_INFO=inf.data(); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
     // this phone was a student's in a group and no longer may read it (consent withdrawn): nothing of the group stays here
-    if(denied && fam && lsGet('sff_cls')===fam){ classKidGone(); showCloudErr('kid: permission-denied'); return; } }
+    if(denied && fam && lsGet('sff_cls')===fam){ kidPhoneGone('kid: permission-denied'); return; } }
   if(isClassMode()) classCloud();
   if(window.SFF_ROLE==='tutor'){ tutorCloud(); ME&&ME.id().then(watchBuilds).catch(()=>{}); return; }
   DB.doc('fam/kids').onSnapshot(snap=>{
@@ -4795,7 +4815,7 @@ async function cloudInit(){
       if(Array.isArray(r.cq)&&r.cq.length) l.cq=[...new Set([...(l.cq||[]),...r.cq.filter(x=>typeof x==='string')])].slice(-3000); } }); if(!snap.exists&&kids.length) pushKids(); }
     else { kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; }); }
     saveKidsLocal(); applyLock(); if(applyResets()) kids.forEach(k=>pushProgress(k.id)); rerender(); syncTutorViewsSoon();   // (it writes a tutor's view only when it differs)
-  },e=>showCloudErr('kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:'')));
+  },e=>{ const m='kids: '+(e&&(e.code||e.message))+(window.__sffJoinErr?' · join '+window.__sffJoinErr:''); (window.SFF_KID_DEVICE&&deniedErr(e))?kidPhoneGone(m):showCloudErr(m); });
   DB.collection('sets').onSnapshot(q=>{
     window.__setsGot=true;
     const remote=q.docs.map(d=>d.data().set).filter(Boolean);
@@ -4901,7 +4921,8 @@ async function renderFamily(){
     el.innerHTML=`${fams.length>1?`<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>`:''}
       <div class="card"><h3 class="fh">${C.teach==='private'?'🧑‍🏫':'🏫'} ${esc(C.name||'')}</h3><p class="hint" style="margin:0">${C.teach==='private'?'מורה פרטי/ת':'מורה לכיתה'} · כיתה ${GRADES[+C.grade||0]}${C.subject?' · '+esc(C.subject):''}</p></div>
       <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">${kids.length?`${kids.length} תלמידים · הרשימה וההסכמות בלשונית התלמידים`:'עוד אין תלמידים'}</p></div>
-      <button class="addline" id="grpNew" onclick="newClass('${C.teach==='private'?'private':'school'}')">${C.teach==='private'?'＋ קבוצה פרטית חדשה':'＋ כיתה חדשה'}</button>`;
+      <button class="addline" id="grpNew" onclick="newClass('${C.teach==='private'?'private':'school'}')">${C.teach==='private'?'＋ קבוצה פרטית חדשה':'＋ כיתה חדשה'}</button>
+      ${TAPP()?`<button class="linkbtn danger" id="grpDel" style="margin-top:16px" onclick="delGroup()">🗑 מחיקת הקבוצה</button>`:''}`;
     return; }
   const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>` : '';
   const kidRows=visibleKids().map(k=>{ const played=history.some(h=>h.kidId===k.id);
@@ -6075,12 +6096,16 @@ function qrInto(el, text){ if(!el) return; const draw=()=>{ try{ const q=qrcode(
 
 /* a student's phone in a group: only its own student, its own progress and its own practice sets (firestore.rules) */
 // the consent was withdrawn (or the student taken out): nothing of the group stays on this phone
-function classKidGone(){ kids=[]; sets=[]; history=[]; try{ saveKidsLocal(); storeSaveLocal(); saveHistoryLocal(); }catch(e){} rerender(); }
+function classKidGone(){ kids=[]; sets=[]; history=[]; window.__sffDeleting=true; rerender(); wipeLocal(); }
+// a kid's phone that may no longer read its family / group (the link was replaced, the consent withdrawn, the group deleted):
+// nothing of it stays here – and the phone says the link is not active
+const deniedErr=e=>/permission|unauthenticated/i.test(String(e&&(e.code||e.message)||e));
+function kidPhoneGone(msg){ classKidGone(); LOCK=null; activeKid=null; const t=$('topTitle'); if(t) t.textContent=''; showCloudErr(msg); }
 function classKidCloud(me){
   DB.doc('kidpub/'+me).onSnapshot(snap=>{ CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);
     const remote=snap.exists?(snap.data().list||[]):[];
     kids=remote.map(r=>{ const l=kidById(r.id); return {...r, nick:l?.nick??null, avatar:l?.avatar??null}; });
-    saveKidsLocal(); applyLock(); rerender(); },e=>{ classKidGone(); showCloudErr('kid: '+(e&&(e.code||e.message))); });
+    saveKidsLocal(); applyLock(); rerender(); },e=>{ const m='kid: '+(e&&(e.code||e.message)); deniedErr(e)?kidPhoneGone(m):showCloudErr(m); });
   // its own sets, and the group's assignments for all or for this student – each asked exactly as firestore.rules allow it
   const parts={}, merge=()=>{ const old=sets, byId=new Map(); Object.values(parts).flat().forEach(r=>byId.set(r.id,r));
     sets=[...byId.values()].map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); };

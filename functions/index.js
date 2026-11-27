@@ -1060,7 +1060,46 @@ async function cleanJoinReqs(now) {
   }
   return n;
 }
-const CLEANERS = { joinReqs: cleanJoinReqs };
+/* The end of the school year: a group keeps its students only until SCHOOL_YEAR_END (Israel time) – the privacy policy's promise
+   ("until the end of the school year, until the teacher closes the group or the consent is withdrawn – whichever is first").
+   From YEAR_NOTICE the teacher sees it coming (the group's yearEnd – the app shows "on 1.9 the students and their progress will
+   be deleted – print a report before"); on SCHOOL_YEAR_END every group opened before YEAR_OPENED_BEFORE of that year loses its
+   students (wipeStudents) – the group and its own practice sets stay, with no kids. Nobody has to approve it. The owners may
+   pick other dates: here only. */
+const SCHOOL_YEAR_END = '09-01', YEAR_NOTICE = '08-01', YEAR_OPENED_BEFORE = '07-01';
+const ilDay = t => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(t));   // "2026-09-01"
+const ilMidnight = (y, md) => { const t = Date.parse(`${y}-${md}T00:00:00Z`), off = (new Date(t).getTime() - Date.parse(new Date(t).toLocaleString('en-US', { timeZone: 'Asia/Jerusalem' }) + ' UTC')); return t + off; };
+// a group's students and all about them go; the group, its link and its shared practice sets stay (no student in them)
+async function wipeStudents(classId, extra = {}) {
+  const ref = db.doc(`families/${classId}`), phones = await deviceUids(ref.path);
+  for (const sub of ['kidpub', 'consents', 'progress', 'devices', 'notes', 'sched', 'joinReqs', 'errlog']) await db.recursiveDelete(db.collection(`${ref.path}/${sub}`));
+  const sets = await db.collection(`${ref.path}/sets`).get(), b = db.batch();
+  sets.docs.forEach(d => { const x = (d.data() || {}).set || {};
+    if (x.kidId) b.delete(d.ref);                                                        // an old per-student set (it has the name)
+    else if (Array.isArray(x.to) || x.toMap) b.update(d.ref, { 'set.to': Array.isArray(x.to) ? [] : x.to || 'all', 'set.toMap': {} }); });
+  b.set(db.doc(`${ref.path}/fam/kids`), { list: [] });
+  b.update(ref, { kidTokens: {}, ...extra });
+  await b.commit();
+  await deleteAuthUsers(phones);
+}
+async function cleanSchoolYear(now) {
+  const [y, m, d] = ilDay(now).split('-'), md = `${m}-${d}`;
+  if (md < YEAR_NOTICE) return 0;
+  const opened = ilMidnight(y, YEAR_OPENED_BEFORE), end = ilMidnight(y, SCHOOL_YEAR_END);
+  let n = 0, last = null;
+  for (;;) {
+    let q = db.collection('families').where('kind', '==', 'class').orderBy(FieldPath.documentId()).limit(200); if (last) q = q.startAfter(last);
+    const s = await q.get(); if (s.empty) break; last = s.docs[s.docs.length - 1];
+    for (const g of s.docs) { const G = g.data();
+      if ((G.createdAt || 0) >= opened || (G.yearWiped || 0) >= +y) continue;
+      if (md >= SCHOOL_YEAR_END) { await wipeStudents(g.id, { yearWiped: +y, yearEnd: FieldValue.delete() }); n++; }
+      else if (G.yearEnd !== end) await g.ref.update({ yearEnd: end });
+    }
+    if (s.size < 200) break;
+  }
+  return n;
+}
+const CLEANERS = { joinReqs: cleanJoinReqs, schoolYear: cleanSchoolYear };
 async function cleanAll(now, only) {
   const out = {};
   for (const [k, f] of Object.entries(CLEANERS)) { if (only && !only.includes(k)) continue;

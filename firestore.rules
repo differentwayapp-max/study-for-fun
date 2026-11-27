@@ -131,7 +131,12 @@ service cloud.firestore {
     }
 
     match /users/{uid} {
-      allow read, write: if google() && request.auth.uid == uid;
+      // the adult's own document – except `terms` (which versions were approved, when): only the server writes it (acceptTerms)
+      allow read, delete: if google() && request.auth.uid == uid;
+      allow create: if google() && request.auth.uid == uid && !('terms' in request.resource.data);
+      allow update: if google() && request.auth.uid == uid && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['terms']);
+      // every approval of the terms / the privacy policy – written by the server only, never changed
+      match /consentLog/{id} { allow read: if google() && request.auth.uid == uid; allow write: if false; }
     }
 
     match /families/{familyId} {

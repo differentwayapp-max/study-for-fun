@@ -1504,7 +1504,8 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const W = window, LS = W.localStorage;
   const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
-const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together
+const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together; a new one is approved again
+const PRIVACY_VERSION = '2026-11-21'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
@@ -1572,9 +1573,10 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     W.__sffStage = 'auth';
     if (A.isSignInWithEmailLink && A.isSignInWithEmailLink(auth, location.href)) {
       try {
-        let mail = LS.getItem('sff_link_mail');
+        // the address, kept on this phone for a day only (an old plain string – before 27.11 – is read too)
+        let mail = ''; try { const m = JSON.parse(LS.getItem('sff_link_mail') || 'null'); mail = typeof m === 'string' ? m : (m && Date.now() - m.at < 864e5 ? m.mail : ''); } catch (e) { mail = LS.getItem('sff_link_mail') || ''; }
         if (!mail) mail = prompt(W.sffT ? W.sffT('לאיזה מייל נשלח הקישור?') : 'לאיזה מייל נשלח הקישור?') || '';
-        await A.signInWithEmailLink(auth, mail.trim(), location.href); LS.removeItem('sff_link_mail');
+        LS.removeItem('sff_link_mail'); await A.signInWithEmailLink(auth, mail.trim(), location.href);
         try { sessionStorage.setItem('sff_fresh', '1'); } catch (e) {}   /* a new sign-in: the explanation screens once more */
       } catch (e) { W.__sffMailErr = String(e.code || e.message || e); }
       W.history.replaceState(null, '', location.origin + W.SFF_HOME);              // the one-time link is not kept in the address bar (W.history: the app's own `history` is the games list)
@@ -1623,6 +1625,18 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       uid = u.uid; role = 'parent';
       const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => b.toString(16).padStart(2, '0')).join('');
       const myName = u.displayName || (u.email || '').split('@')[0] || 'הורה';
+      // 0. the terms of use + the privacy policy: approved ONCE per adult (again only when the terms' version changes), before
+      // anything is written – recorded by the server (acceptTerms: users/{uid}.terms + a line in users/{uid}/consentLog, the
+      // server's clock). Offline: kept on this phone (sff_terms_pending) and recorded the next time the app opens.
+      {
+        const ud = await F.getDoc(F.doc(fdb, `users/${uid}`)).then(x => x.exists() ? x.data() : {}).catch(() => ({}));
+        let pend = null; try { pend = JSON.parse(LS.getItem('sff_terms_pending') || 'null'); } catch (e) {}
+        const record = async a => { try { await httpsCallable(fns, 'acceptTerms')({ terms: a.v, privacy: PRIVACY_VERSION, app: TEACH ? 'teach' : 'family', clientAt: a.at }); LS.removeItem('sff_terms_pending'); }
+          catch (e) { console.warn('acceptTerms', e && e.code); try { LS.setItem('sff_terms_pending', JSON.stringify(a)); } catch (x) {} } };
+        if (ud.terms && ud.terms.v === TERMS_VERSION) { if (pend) LS.removeItem('sff_terms_pending'); }
+        else if (pend && pend.v === TERMS_VERSION && pend.uid === uid) await record(pend);
+        else await record({ ...(await askConsent(!ud.terms)), uid });
+      }
       // 1. an invitation to join another family
       let inviteMsg = null, inv = null;
       try { const raw = LS.getItem('sff_invite'); if (raw) { const [code, at] = raw.split('|'); if (Date.now() - (+at || 0) < 7 * 864e5) inv = code; LS.removeItem('sff_invite'); } } catch (e) {}
@@ -1665,11 +1679,6 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       W.__sffIntroField = f => F.setDoc(F.doc(fdb, `users/${uid}`), { [f]: Date.now() }, { merge: true }).catch(() => {});
       // 3. every family this adult belongs to, and the active one
       const us = await F.getDoc(F.doc(fdb, `users/${uid}`)).catch(() => null);
-      // the parent's consent to the terms (given on the sign-in screen) is kept with the account: version + when
-      // parents already signed in (or when the terms change) approve once, here – before the app opens
-      try { let tk = JSON.parse(LS.getItem('sff_terms_ok') || 'null'); const had = us && us.exists() && us.data().terms;
-        if ((!tk || tk.v !== TERMS_VERSION) && (!had || had.v !== TERMS_VERSION)) { tk = await askConsent(); LS.setItem('sff_terms_ok', JSON.stringify(tk)); }
-        if (tk && tk.v && (!had || had.v !== tk.v)) await F.setDoc(F.doc(fdb, `users/${uid}`), { terms: { v: String(tk.v).slice(0, 20), at: +tk.at || Date.now() } }, { merge: true }); } catch (e) {}
       W.SFF_ONB_DONE = !!(us && us.exists() && (us.data().intro || us.data().onb));
       if (W.onbDecide) W.onbDecide(inviteMsg === 'joined' || teacherNow, uid);   // an adult who joined by invitation (or a teacher) is not a new family
       const classIds = (((us && us.exists() && us.data().classes) || []).filter(x => typeof x === 'string'));
@@ -1900,12 +1909,12 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
   }
   // ---- parent sign-in screen
   // one-time approval of the terms of use and the privacy policy (both, one tick) for a parent who is already signed in
-  function askConsent() {
+  function askConsent(first) {
     if (W.SFF_TEST_GOOGLE && !W.SFF_TEST_ASK_CONSENT) return Promise.resolve({ v: TERMS_VERSION, at: Date.now() });   // tests: approved
     return new Promise(resolve => {
       const el = document.createElement('div'); el.id = 'fbLogin'; const lg = W.SFF_LANG ? W.SFF_LANG() : 'he';
       el.innerHTML = `<div class="fbbox"><img src="${document.getElementById('logoFull')?.src || ''}" alt="Study for fun"><h2 class="fbq">רגע לפני שממשיכים</h2>
-        <div class="hint" style="max-width:min(92vw,420px)">עדכנו את תנאי השימוש ואת מדיניות הפרטיות. כדי להמשיך להשתמש באפליקציה צריך לאשר אותם פעם אחת.</div>
+        <div class="hint" style="max-width:min(92vw,420px)">${first ? 'כדי להשתמש באפליקציה צריך לאשר את תנאי השימוש ואת מדיניות הפרטיות – פעם אחת בלבד.' : 'עדכנו את תנאי השימוש ואת מדיניות הפרטיות. כדי להמשיך להשתמש באפליקציה צריך לאשר אותם פעם אחת.'}</div>
         <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html?lang=${lg}" target="_blank" rel="noopener">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
         <button class="btn big" id="fbOk" type="button">המשך ←</button><div class="hint" id="fbErr"></div></div>`;
       document.body.appendChild(el);
@@ -1976,7 +1985,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
           <button class="fbcard" id="fbGo" type="button"><span class="e">👩</span><b>אני הורה</b><span class="hint">כניסה עם Google</span></button>
           <button class="fbcard teach" id="fbTeach" type="button"><span class="e">🧑‍🏫</span><b>אני מורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
-        <label class="fbterms" id="fbTerms"><input type="checkbox" id="fbAgree"><span>קראתי ואני מסכימ/ה ל<a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ול<a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a></span></label>
+        <div class="hint fbtermsl">בכניסה הראשונה תתבקשו לאשר את <a href="/terms.html" target="_blank" rel="noopener" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ואת <a href="/privacy.html" target="_blank" rel="noopener">מדיניות הפרטיות</a> – פעם אחת.</div>
         <button class="fbemailbtn hidden" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
         <div class="fbemail hidden" id="fbEmail"><input id="fbEmailIn" type="email" inputmode="email" autocomplete="email" placeholder="המייל שלך" dir="ltr">
           <button class="btn" id="fbEmailGo" type="button">שליחת קישור כניסה</button><div class="hint">נשלח קישור למייל. לוחצים עליו – ונכנסים. בלי סיסמה.</div></div>
@@ -1997,11 +2006,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       // parent or teacher: the same sign-in; the choice is kept until the account opens (a teacher gets no empty family)
       const pick = who => { ['#fbGo', '#fbTeach', '#fbKid'].forEach(x => el.querySelector(x).classList.remove('on')); el.querySelector('#fbKidMsg').classList.add('hidden');
         el.querySelector(who === 'teacher' ? '#fbTeach' : '#fbGo').classList.add('on'); try { LS.setItem('sff_want', who); } catch (e) {} };
-      // consent: the box starts unticked (tests with a fake Google account start ticked); the consent is kept with the account
-      const agree = el.querySelector('#fbAgree'); if (W.SFF_TEST_GOOGLE) agree.checked = true;
-      // "I'm a parent" first, then the tick: carry on to Google by itself (no second click)
-      agree.onchange = () => { el.querySelector('#fbTerms').classList.remove('need'); el.querySelector('#fbErr').textContent = '';
-        if (agree.checked && (el.querySelector('#fbGo').classList.contains('on') || el.querySelector('#fbTeach').classList.contains('on'))) signIn(); };
+      // (the terms are approved once per adult, after the sign-in – askConsent – not on every sign-in)
       // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
       // the email sign-in shows only once "Email link (passwordless sign-in)" is on in the Firebase console (tests turn it on)
       if (EMAIL_LINK || W.SFF_REST_EMU) el.querySelector('#fbEmailBtn').classList.remove('hidden');
@@ -2009,9 +2014,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       el.querySelector('#fbEmailGo').onclick = async () => {
         const mail = el.querySelector('#fbEmailIn').value.trim(), err = el.querySelector('#fbErr');
         if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(mail)) { err.textContent = W.sffT ? W.sffT('צריך כתובת מייל תקינה') : 'צריך כתובת מייל תקינה'; return; }
-        if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
-          el.querySelector('#fbTerms').classList.add('need'); err.textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
-        try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); LS.setItem('sff_link_mail', mail); } catch (e) {}
+        try { LS.setItem('sff_link_mail', JSON.stringify({ mail, at: Date.now() })); } catch (e) {}
         try {
           const { getAuth, sendSignInLinkToEmail } = await import(base + 'firebase-auth.js');
           await sendSignInLinkToEmail(getAuth(), mail, { url: location.origin + W.SFF_HOME + '?mail=1', handleCodeInApp: true });
@@ -2022,9 +2025,6 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
       el.querySelector('#fbGo').onclick = () => { pick('parent'); signIn(); };
       el.querySelector('#fbTeach').onclick = () => { location.href = '/teach'; };   /* teachers sign in in their own app */
       const signIn = async () => {
-        if (!agree.checked) { const m = 'כדי להמשיך, סמנו שקראתם ואתם מסכימים לתנאי השימוש';
-          el.querySelector('#fbTerms').classList.add('need'); el.querySelector('#fbErr').textContent = W.sffT ? W.sffT(m) : m; agree.focus(); return; }
-        try { LS.setItem('sff_terms_ok', JSON.stringify({ v: TERMS_VERSION, at: Date.now() })); } catch (e) {}
         try {
           const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = await import(base + 'firebase-auth.js');
           const r = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE)            // tests only: a fake Google account on the local emulator

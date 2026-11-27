@@ -44,8 +44,11 @@ Catalog set: `python3 -I tools/build_set.py tools/sets/<file>.py` (one emoji per
 Skills: `.claude/skills/build-practice-set` (all the rules for writing a set) and `.claude/skills/review-practice-set` (how to review and report). `node tools/match_list.js <id>` lists each chapter's match-game questions and answer cards. `tools/core_facts.json` marks each set's core facts (they come back as review questions in later stations, `reviewQs`).
 
 User guide + terms: edit `tools/docs/{guide,terms}-{he,en}.md`, then `python3 -I tools/build_docs.py` → `public/guide.html`, `public/terms.html`.
-When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in index.html – every parent then approves once again
-(kept in `users/{uid}.terms`). Test: `e2e_terms.js`.
+When the terms change, update the date in terms-*.md AND `TERMS_VERSION` in index.html – every adult then approves once again.
+The privacy policy's date goes in `PRIVACY_VERSION` (recorded with each approval; a change alone asks nothing again).
+Approval: ONCE per adult, after the sign-in (no tick box on the sign-in screen); recorded by the server only (`acceptTerms`):
+`users/{uid}.terms = {v, privacy, at}` + one line per approval in `users/{uid}/consentLog` (versions, server time, app, sign-in
+provider) – the phone cannot write either (rules). Offline: `sff_terms_pending`, recorded on the next open. Test: `e2e_terms.js`.
 
 ## Open tasks
 - Bug reports by email: reports are saved in `bugReports` (admins: ☰ → דיווחים מהמשתמשים). Emailing them is ready but OFF:

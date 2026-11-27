@@ -1,7 +1,9 @@
 // Terms of use + user guide: the pages open in Hebrew and English (no sideways scroll, the contents links work),
-// the side menu links to both, the sign-in box blocks "I'm a parent" until ticked, and the consent is kept with the account.
-// Run inside the emulators (firestore, auth). OUT=dir for screenshots.
-const TV = (require('fs').readFileSync(__dirname + '/../../public/index.html', 'utf8').match(/const TERMS_VERSION = '([^']+)'/) || [])[1];   // the current terms version
+// the side menu links to both. The terms + the privacy policy are approved ONCE per adult, after the sign-in (no tick box on
+// the sign-in screen); the server keeps the record (users/{uid}.terms + a line in consentLog per approval – versions, when);
+// the phone cannot write it; a new terms version asks once more. Run inside the emulators (functions, firestore, auth).
+const SRC = require('fs').readFileSync(__dirname + '/../../public/index.html', 'utf8');
+const TV = (SRC.match(/const TERMS_VERSION = '([^']+)'/) || [])[1], PV = (SRC.match(/const PRIVACY_VERSION = '([^']+)'/) || [])[1];   // the current versions
 const { chromium } = require('playwright');
 const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
@@ -24,43 +26,53 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     }
     await p.close();
   }
-  // 2. the sign-in box (a real sign-in screen: no fake Google account → the box starts unticked)
+  // 2. the sign-in screen: no tick box (the approval comes once, after the sign-in) – "I'm a parent" goes straight to Google
   {
     const ctx = await b.newContext({ viewport: { width: 360, height: 740 }, deviceScaleFactor: 2 }); const p = await ctx.newPage();
     await ctx.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; localStorage.setItem('sff_lang', 'he'); });
     let popup = false; ctx.on('page', () => { popup = true; });
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 15000 });
-    ok(!(await p.isChecked('#fbAgree')), 'the consent box starts unticked');
-    await p.click('#fbGo'); await p.waitForTimeout(600);
-    const msg = await p.textContent('#fbErr');
-    ok(/סמנו שקראתם/.test(msg) && !popup && !!(await p.$('#fbLogin')), '"I\'m a parent" without the tick: a message, no Google sign-in');
+    const line = await p.evaluate(() => { const l = document.querySelector('.fbtermsl'); return l ? { t: l.textContent, links: [...l.querySelectorAll('a')].map(a => a.getAttribute('href')) } : null; });
+    ok(!(await p.$('#fbAgree')) && line && /פעם אחת/.test(line.t) && line.links.join() === '/terms.html,/privacy.html', 'the sign-in screen: no tick box, a line with both links (' + (line && line.t) + ')');
     if (OUT) await p.screenshot({ path: `${OUT}/terms_signin.png` });
-    ok(await p.evaluate(() => document.getElementById('fbGo').classList.contains('on')), '"I\'m a parent" shows it was chosen');
-    await p.click('#fbAgree'); await p.waitForTimeout(1500);
+    await p.click('#fbGo'); await p.waitForTimeout(1500);
     const err = await p.textContent('#fbErr').catch(() => '');
-    ok(popup || /auth\//.test(err), 'ticking the terms after "I\'m a parent" carries on to Google by itself (' + (popup ? 'popup' : err) + ')');   // the emulator cannot open a real Google window
+    ok(popup || /auth\//.test(err), '"I\'m a parent" carries on to Google with no tick (' + (popup ? 'popup' : err) + ')');   // the emulator cannot open a real Google window
     await ctx.close();
   }
-  // 3. a parent who ticked and signed in: the consent is kept with the account; the menu has both links
+  // 3. a new parent: approves once, after the sign-in; the server keeps which versions and when; the next sign-in asks nothing
   {
     const ctx = await b.newContext({ viewport: { width: 360, height: 740 } }); const p = await ctx.newPage();
-    await ctx.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
+    await ctx.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_ASK_CONSENT = 1;
       window.SFF_TEST_GOOGLE = { sub: 'terms1', email: 'terms@t.local', email_verified: true, name: 'הורה' }; localStorage.setItem('sff_lang', 'he'); });
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
-    await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(2000);
-    const t = await p.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null);
-    ok(t && t.v === TV && t.at > 0, 'consent kept with the account: ' + JSON.stringify(t));
-    // 4. a parent who signed in before the terms existed: one-time approval when the app opens
-    await p.evaluate(async () => { localStorage.removeItem('sff_terms_ok'); await window.__sffRoot.set('users', window.SFF_UID, { terms: { v: 'old', at: 1 } }); });
-    await ctx.addInitScript(() => { window.SFF_TEST_ASK_CONSENT = 1; });
-    await p.reload({ waitUntil: 'load' }); await p.waitForSelector('#fbOk', { timeout: 20000 });
+    await p.waitForSelector('#fbOk', { timeout: 20000 });
+    ok(/פעם אחת בלבד/.test(await p.textContent('#fbLogin')), 'a new adult: "approve the terms and the privacy policy – just once"');
     await p.click('#fbOk'); await p.waitForTimeout(300);
-    ok(!!(await p.$('#fbOk')) && /סמנו שקראתם/.test(await p.textContent('#fbErr')), 'already signed in: the app waits for the approval');
+    ok(!!(await p.$('#fbOk')) && /סמנו שקראתם/.test(await p.textContent('#fbErr')), 'with no tick: the app waits for the approval');
     if (OUT) await p.screenshot({ path: `${OUT}/terms_consent.png` });
-    await p.click('#fbAgree'); await p.click('#fbOk');
+    const t0 = Date.now(); await p.click('#fbAgree'); await p.click('#fbOk');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1500);
-    const t2 = await p.evaluate(async () => (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null);
-    ok(t2 && t2.v === TV, 'approval kept with the account: ' + JSON.stringify(t2));
+    const rec = () => p.evaluate(async () => ({ terms: (await window.__sffRoot.get('users', window.SFF_UID))?.terms || null, log: (await window.__sffRoot.list(`users/${window.SFF_UID}/consentLog`)).sort((a, b) => a.at - b.at) }));
+    let r = await rec();
+    ok(r.terms && r.terms.v === TV && r.terms.privacy === PV && r.terms.at >= t0 - 5000, 'the account keeps the versions approved and when: ' + JSON.stringify(r.terms));
+    ok(r.log.length === 1 && r.log[0].terms === TV && r.log[0].privacy === PV && r.log[0].app === 'family' && r.log[0].provider === 'google.com' && r.log[0].at >= t0 - 5000, 'one line in the approvals log: ' + JSON.stringify(r.log[0]));
+    // the next time: nothing is asked (the box would show – SFF_TEST_ASK_CONSENT), and nothing is added
+    await p.reload({ waitUntil: 'load' }); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1200);
+    r = await rec();
+    ok(!(await p.$('#fbOk')) && r.log.length === 1, 'opening the app again: not asked again, still one line');
+    // the phone cannot write the record itself
+    const forge = await p.evaluate(async () => [await window.__sffRoot.set('users', window.SFF_UID, { terms: { v: '2099-01-01', at: 1 } }).then(() => 'ok', () => 'denied'),
+      await window.__sffRoot.add(`users/${window.SFF_UID}/consentLog`, { terms: '2099-01-01', at: 1 }).then(() => 'ok', () => 'denied')]);
+    ok(forge.join() === 'denied,denied', 'the phone cannot change the record or add to the log: ' + forge.join());
+    // the terms change (a new version): asked once more, a second line
+    await fetch(`http://127.0.0.1:8080/v1/projects/study-for-fun-7b03c/databases/(default)/documents/users/${await p.evaluate(() => window.SFF_UID)}?updateMask.fieldPaths=terms`, { method: 'PATCH',
+      headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' }, body: JSON.stringify({ fields: { terms: { mapValue: { fields: { v: { stringValue: '2026-01-01' } } } } } }) });
+    await p.reload({ waitUntil: 'load' }); await p.waitForSelector('#fbOk', { timeout: 20000 });
+    ok(/עדכנו את תנאי השימוש/.test(await p.textContent('#fbLogin')), 'a new version of the terms: "we updated the terms…", asked once more');
+    await p.click('#fbAgree'); await p.click('#fbOk'); await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(1500);
+    r = await rec();
+    ok(r.log.length === 2 && r.terms.v === TV, 'a second line in the log, the account on the new version');
     await p.click('#menuBtn'); await p.waitForTimeout(300);
     const links = await p.evaluate(() => [...document.querySelectorAll('#sideMenu a.ditem')].map(a => a.getAttribute('href')));
     ok(links.includes('/guide.html') && links.includes('/terms.html'), 'side menu: ' + links.join(', '));

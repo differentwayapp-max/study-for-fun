@@ -257,6 +257,22 @@ exports.deleteClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   return { ok: true };
 });
 
+/* The terms of use + the privacy policy: an adult approves them ONCE (and again only when a version changes). The record is
+   the server's: users/{uid}.terms = { v, privacy, at } – the versions approved last – and users/{uid}/consentLog/{auto},
+   one line per approval that is never changed: which version of each, when (the server's clock), in which app, how they
+   signed in (and the phone's own time, for reference). Only the server writes them (firestore.rules); the adult reads them. */
+const VER_OK = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+exports.acceptTerms = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function acceptTerms(request) {
+  const auth = parentOnly(request), d = request.data || {};
+  if (!VER_OK(d.terms) || !VER_OK(d.privacy)) throw new HttpsError('invalid-argument', 'bad_version');
+  const now = Date.now(), app = d.app === 'teach' ? 'teach' : 'family', clientAt = Number.isFinite(d.clientAt) ? Math.round(d.clientAt) : null;
+  const u = db.doc(`users/${auth.uid}`), b = db.batch();
+  b.set(u, { terms: { v: d.terms, privacy: d.privacy, at: now } }, { merge: true });
+  b.set(u.collection('consentLog').doc(), { terms: d.terms, privacy: d.privacy, at: now, app, provider: String(auth.token.firebase?.sign_in_provider || ''), clientAt });
+  await b.commit();
+  return { at: now };
+});
+
 /* Deleting an account – everything of this adult, on the server (the phone may not delete most of it): the own family with
    all in it (kids, sets, progress, phones, invitations, builds, usage, billing…) and its kids' phones' sign-in accounts; every
    group this adult teaches (as deleteClass); the teacher's record and quota; the account's own document; the memberships in

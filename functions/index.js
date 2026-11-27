@@ -230,16 +230,70 @@ exports.createClass = onCall({ region: 'europe-west1', invoker: 'public', maxIns
 
 // A teacher's group goes: everything in it (students, progress, consents, requests, sets), and it leaves the teacher's
 // count (teachers/{uid}) and list (users/{uid}.classes) – only here, so the count of 10 always comes down with it.
+// the kid phones of a family or a group: their anonymous sign-in accounts (devices/{uid} – the document id is the phone's uid)
+async function deviceUids(famPath) { return (await db.collection(`${famPath}/devices`).select().get()).docs.map(d => d.id); }
+async function deleteAuthUsers(uids) {
+  const { getAuth } = require('firebase-admin/auth'); let failed = 0;
+  for (let i = 0; i < uids.length; i += 1000) { const r = await getAuth().deleteUsers(uids.slice(i, i + 1000)); failed += r.failureCount; }
+  if (failed) throw new Error(`auth users not deleted: ${failed}`);
+}
+// a whole group goes (deleteClass, deleteAccount): its documents, its students' phones' accounts, and it leaves the teacher's
+// count (teachers/{uid}) and list (users/{uid}.classes) – the one place for it, so the count of 10 always comes down with it
+async function wipeClass(id, ownerUid) {
+  const ref = db.doc(`families/${id}`), phones = await deviceUids(ref.path);
+  await db.recursiveDelete(ref);
+  await deleteAuthUsers(phones);
+  await db.doc(`teachers/${ownerUid}`).set({ classes: FieldValue.arrayRemove(id), at: Date.now() }, { merge: true });
+  await db.doc(`users/${ownerUid}`).set({ classes: FieldValue.arrayRemove(id) }, { merge: true });
+  return phones.length;
+}
 exports.deleteClass = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function deleteClass(request) {
   const auth = parentOnly(request);
   const id = request.data && request.data.classId;
   if (typeof id !== 'string' || !/^[A-Za-z0-9]{20}$/.test(id)) throw new HttpsError('invalid-argument', 'Missing group.');
   const ref = db.doc(`families/${id}`), f = await ref.get();
   if (!f.exists || f.data().kind !== 'class' || f.data().ownerUid !== auth.uid) throw new HttpsError('permission-denied', 'Not your group.');
-  await db.recursiveDelete(ref);
-  await db.doc(`teachers/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id), at: Date.now() }, { merge: true });
-  await db.doc(`users/${auth.uid}`).set({ classes: FieldValue.arrayRemove(id) }, { merge: true });
+  await wipeClass(id, auth.uid);
   return { ok: true };
+});
+
+/* Deleting an account – everything of this adult, on the server (the phone may not delete most of it): the own family with
+   all in it (kids, sets, progress, phones, invitations, builds, usage, billing…) and its kids' phones' sign-in accounts; every
+   group this adult teaches (as deleteClass); the teacher's record and quota; the account's own document; the memberships in
+   other families (as a helper / a private tutor); the limits; bug reports and catalog suggestions they sent. Only when all of
+   that went is the sign-in account deleted – a failure stops here and says so, nothing is left orphaned behind a deleted login.
+   The sign-in must be recent (RECENT_LOGIN_MIN): the phone signs in again first. */
+const RECENT_LOGIN_MIN = 10;
+async function deleteWhere(col, field, val) {
+  let n = 0;
+  for (;;) { const q = await db.collection(col).where(field, '==', val).limit(300).get(); if (q.empty) return n;
+    const b = db.batch(); q.docs.forEach(d => b.delete(d.ref)); await b.commit(); n += q.size; }
+}
+exports.deleteAccount = onCall({ region: 'europe-west1', invoker: 'public', timeoutSeconds: 540, maxInstances: 5 }, async function deleteAccount(request) {
+  const auth = parentOnly(request), uid = auth.uid;
+  if (!(Date.now() / 1000 - (auth.token.auth_time || 0) < RECENT_LOGIN_MIN * 60)) throw new HttpsError('failed-precondition', 'recent_login', { reason: 'recent_login' });
+  const n = { classes: 0, phones: 0, memberships: 0, reports: 0 };
+  // 1. the groups this adult teaches (by the group's own ownerUid – also one missing from users/{uid}.classes)
+  for (const c of (await db.collection('families').where('ownerUid', '==', uid).get()).docs) { n.phones += await wipeClass(c.id, uid); n.classes++; }
+  // 2. the own family (its id is the uid) and its kids' phones
+  const own = db.doc(`families/${uid}`), ownPhones = await deviceUids(own.path);
+  await db.recursiveDelete(own);
+  await deleteAuthUsers(ownPhones); n.phones += ownPhones.length;
+  // 3. memberships in other families: the account's list of families, and every invitation this account used
+  const u = await db.doc(`users/${uid}`).get(), fams = new Set(((u.exists && u.data().fams) || []).filter(x => typeof x === 'string' && /^[A-Za-z0-9_-]{6,128}$/.test(x)));
+  (await db.collectionGroup('invites').where('usedBy', '==', uid).get()).docs.forEach(d => fams.add(d.ref.parent.parent.id));
+  fams.delete(uid);
+  for (const f of fams) { const m = db.doc(`families/${f}/members/${uid}`); if ((await m.get()).exists) { await m.delete(); n.memberships++; } }
+  // 4. the teacher's record and quota, the account's document, the limits, what they sent the app's team
+  await db.recursiveDelete(db.doc(`teachers/${uid}`));
+  await db.recursiveDelete(db.doc(`users/${uid}`));
+  await Promise.all([db.doc(`bugLimits/${uid}`).delete(), db.doc(`joinLimits/${uid}`).delete()]);
+  n.reports = await deleteWhere('bugReports', 'by', uid) + await deleteWhere('catalogSuggestions', 'by', uid);
+  // 5. last: the sign-in account
+  const { getAuth } = require('firebase-admin/auth');
+  await getAuth().deleteUser(uid);
+  await serverLog({ fn: 'deleteAccount', kind: 'info', code: 'ok', msg: `groups ${n.classes} · phones ${n.phones} · memberships ${n.memberships} · reports ${n.reports}` });
+  return { ok: true, ...n };
 });
 
 /* ---------- parents' consent for a teacher's group (stage 2) ----------

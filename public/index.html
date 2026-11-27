@@ -1534,6 +1534,7 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
     let fdb;
     try { fdb = F.initializeFirestore(app, { localCache: idbOK ? F.persistentLocalCache() : F.memoryLocalCache(), experimentalAutoDetectLongPolling: true }); }   // works offline
     catch (e) { try { fdb = F.initializeFirestore(app, { experimentalAutoDetectLongPolling: true }); } catch (e2) { fdb = F.getFirestore(app); } }
+    W.__sffFS = { fdb, F };                                           // wipeLocal closes it and clears its copy on this phone
     if (W.SFF_REST_EMU) { A.connectAuthEmulator(auth, W.SFF_REST_EMU.auth, { disableWarnings: true }); F.connectFirestoreEmulator(fdb, '127.0.0.1', 8080); }   // tests only
     const fns = getFunctions(app, W.SFF_FUNCTIONS_REGION || 'europe-west1');
     if (W.SFF_REST_EMU) { const FN = await import(base + 'firebase-functions.js'); FN.connectFunctionsEmulator(fns, '127.0.0.1', 5001); }   // tests only
@@ -1780,27 +1781,23 @@ const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (term
           W.__sffFamily.switchTo(uid); },
         switchTo: fid => { LS.setItem(ACT, fid); ['sff_kids', 'sff_sets', 'sff_history'].forEach(k => LS.removeItem(k)); LS.setItem('sff_data_fam', fid); W.sffSoftReload('עוברים משפחה…'); }
       };
+      /* deleting the account is done by the server (deleteAccount: the own family, the groups taught, the memberships, the kids'
+         phones, the sign-in account – all or nothing); it wants a recent sign-in, so an old one signs in again first.
+         A failure is shown, never swallowed. After it: signed out and nothing of the account left on this phone (wipeLocal). */
       if (role === 'parent') W.__sffDeleteAccount = async () => {
-      // the teacher's groups: by the server (it also takes them off the teacher's count of groups)
-      for (const x of (W.SFF_FAMS || []).filter(x => x.kind === 'class')) await callDelClass({ classId: x.id }).catch(e => console.warn('deleteClass', e && e.message));
-      for (const fam of [`families/${uid}`]) {
-        for (const sub of ['sets', 'progress', 'devices', 'fam', 'members', 'invites', 'errlog', 'tutorView']) {
-          const q = await F.getDocs(F.collection(fdb, `${fam}/${sub}`)).catch(() => null);
-          if (q) await Promise.all(q.docs.map(d => F.deleteDoc(d.ref)));
+        const call = httpsCallable(fns, 'deleteAccount', { timeout: 540000 });
+        const go = async () => { try { return (await call({})).data; } catch (e) { const x = e.details || {}; throw Object.assign(new Error(x.reason || e.message), { code: x.reason || String(e.code || '').replace(/^functions\//, '') }); } };
+        try { await go(); }
+        catch (e) {
+          if (e.code !== 'recent_login') throw e;
+          const p = auth.currentUser.providerData.some(x => x.providerId === 'google.com') ? new A.GoogleAuthProvider() : null;
+          if (!p) throw Object.assign(new Error(W.sffT ? W.sffT('צריך להתחבר שוב ואז למחוק') : 'צריך להתחבר שוב ואז למחוק'), { code: 'recent_login' });
+          await A.reauthenticateWithPopup(auth.currentUser, p); await auth.currentUser.getIdToken(true);
+          await go();
         }
-        await F.deleteDoc(F.doc(fdb, fam)).catch(() => {});
-      }
-      for (const x of (W.SFF_FAMS || [])) if (x.role !== 'owner') { try { await F.deleteDoc(F.doc(fdb, `families/${x.id}/members/${uid}`)); } catch (e) {} }
-      try { await F.deleteDoc(F.doc(fdb, `users/${uid}`)); } catch (e) {}
-      try { await auth.currentUser.delete(); }
-      catch (e) {
-        if (String(e.code).includes('requires-recent-login')) {
-          await A.reauthenticateWithPopup(auth.currentUser, new A.GoogleAuthProvider());
-          await auth.currentUser.delete();
-        } else throw e;
-      }
-      try { await F.terminate(fdb); await F.clearIndexedDbPersistence(fdb); } catch (e) {}
-    };
+        try { await A.signOut(auth); } catch (e) {}
+        await W.wipeLocal();
+      };
     const out = document.getElementById('fbOut');
       if (out) { out.classList.remove('hidden'); out.onclick = async () => { if (W.closeMenu) W.closeMenu(); if (W.askSure && !(await W.askSure({ ico: '🚪', title: 'בטוח שברצונך להתנתק?', text: 'כדי לחזור צריך להתחבר שוב עם Google. הנתונים נשמרים.', yes: 'התנתקות', danger: true }))) return; A.signOut(auth).then(() => location.reload()); }; }
     }
@@ -4856,6 +4853,16 @@ let tvT=null;
 function syncTutorViewsSoon(){ if(!DB||!canManage()||!window.__sffFamily?.syncTutorViews) return; clearTimeout(tvT);
   tvT=setTimeout(()=>window.__sffFamily.syncTutorViews(tutorViewOf).catch(()=>{}),1500); }
 
+/* nothing of the account left on this phone – signing out, deleting the account, a kid phone whose link was taken away:
+   every sff_* key that holds data (names, practice sets, progress, links, the error log…), sessionStorage, and Firestore's copy
+   on the phone (closed, then its IndexedDB cleared). Kept: only the phone's own preferences and "seen" marks (no data). */
+const SFF_KEEP=['sff_lang','sff_mute','sff_kid_intro','sff_kid_intro_t','sff_intro_done','sff_onb_done','sff_intro_tutor','sff_intro_teacher'];
+async function wipeLocal(){
+  try{ Object.keys(localStorage).filter(k=>k.startsWith('sff_')&&!SFF_KEEP.includes(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){}
+  try{ sessionStorage.clear(); }catch(e){}
+  const S=window.__sffFS; if(S){ try{ await S.F.terminate(S.fdb); }catch(e){} try{ await S.F.clearIndexedDbPersistence(S.fdb); }catch(e){} }
+  try{ if(indexedDB.databases) for(const d of await indexedDB.databases()) if(d.name&&/^firestore\//.test(d.name)) indexedDB.deleteDatabase(d.name); }catch(e){}
+}
 /* delete the parent's account and all family data */
 function openDelAcc(){ const g=(window.SFF_FAMS||[]).some(f=>f.kind==='class');
   $('delAccP').textContent=window.SFF_APP==='teach'?'יימחקו לצמיתות: הקבוצות שלך, התלמידים, המשימות וההתקדמות שלהם – וגם המשפחה שלך באפליקציה למשפחות, אם יש. אי אפשר לשחזר.'
@@ -4865,10 +4872,9 @@ async function deleteAccount(){
   const msg=$('delAccMsg'), b=$('delAccGo'); b.disabled=true; msg.textContent='⏳';
   window.__sffDeleting=true;   // no more syncing while the data is being removed
   try{
-    if(typeof window.__sffDeleteAccount==='function') await window.__sffDeleteAccount();
-    Object.keys(localStorage).filter(k=>k.startsWith('sff_')).forEach(k=>localStorage.removeItem(k));
+    if(typeof window.__sffDeleteAccount==='function') await window.__sffDeleteAccount(); else await wipeLocal();
     msg.textContent='✓ נמחק'; setTimeout(()=>location.replace(window.SFF_HOME||'/'),900);
-  }catch(e){ window.__sffDeleting=false; b.disabled=false; msg.textContent='⚠️ '+(e&&e.message?e.message:'לא הצליח – נסו שוב'); }
+  }catch(e){ window.__sffDeleting=false; b.disabled=false; msg.textContent='⚠️ '+(e&&e.code==='recent_login'?'צריך להתחבר שוב ואז למחוק':'המחיקה לא הושלמה – החשבון עדיין קיים. נסו שוב')+(e&&e.code&&e.code!=='recent_login'?` (${String(e.code).slice(0,40)})`:''); }
 }
 
 /* ---------- family: roles, kids' links, adults ---------- */

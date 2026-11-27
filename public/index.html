@@ -1248,7 +1248,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
     </div>
   </div>
   <div id="sureDlg" class="hidden dlgwrap" role="dialog" aria-modal="true" onclick="if(event.target===this)sureAns(false)">
-    <div class="card dlgsm suredlg"><div class="sureico" id="sureIco">🚪</div><h3 id="sureT"></h3><p class="hint" id="sureP"></p>
+    <div class="card dlgsm suredlg"><div class="sureico" id="sureIco">🚪</div><h3 id="sureT"></h3><p class="hint" id="sureP" style="white-space:pre-line"></p>
       <div class="surebtns"><button class="btn ghost" id="sureNo" onclick="sureAns(false)">ביטול</button><button class="btn" id="sureYes" onclick="sureAns(true)"></button></div></div>
   </div>
   <div id="invDlg" class="hidden dlgwrap">
@@ -1960,7 +1960,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
         el.querySelector('#tsGo').onclick = () => { const name = el.querySelector('#tsName').value.trim();
           if (!name) { el.querySelector('#tsErr').textContent = W.sffT ? W.sffT('צריך שם לקבוצה') : 'צריך שם לקבוצה'; el.querySelector('#tsName').focus(); return; }
           el.remove(); resolve({ teach, name: name.slice(0, 40), grade: +el.querySelector('#tsGrade').value, subject: el.querySelector('#tsSubj').value, yearEnds: +el.querySelector('#tsYear').value }); };
-        const yNote = () => { const e = +el.querySelector('#tsYear').value, t = `ב-1.9.${e} יימחקו התלמידים וההתקדמות שלהם. הקבוצה והתרגולים יישארו.`; el.querySelector('#tsYearNote').textContent = W.sffT ? W.sffT(t) : t; };
+        const yNote = () => { const t = W.yearDelTxt(+el.querySelector('#tsYear').value); el.querySelector('#tsYearNote').textContent = W.sffT ? W.sffT(t) : t; };
         el.querySelector('#tsYear').onchange = yNote; yNote();
         el.querySelector('#tsBack')?.addEventListener('click', step1);
         el.querySelector('#tsCancel')?.addEventListener('click', () => { el.remove(); resolve(null); });
@@ -3265,7 +3265,9 @@ function yearLabel(end){ const r=`\u2066${end-1}–${end}\u2069`; return EN()?r:
 // once, right after a group opened: when its students will be deleted (the date, as promised to the parents)
 function yearNoteOnce(){ let end=null; try{ end=+sessionStorage.getItem('sff_yearnote'); sessionStorage.removeItem('sff_yearnote'); }catch(e){}
   if(!end||(window.SFF_TEST_GOOGLE&&!window.SFF_TEST_YEARNOTE)) return;
-  askSure({ico:'📅',title:`הקבוצה נפתחה לשנת הלימודים ${yearLabel(end)}`,text:`ב-1.9.${end} יימחקו התלמידים, ההסכמות וההתקדמות שלהם – כך מובטח להורים. הקבוצה והתרגולים יישארו לשנה הבאה. מ-1.8 תופיע תזכורת, ואפשר להדפיס דוח לפני.`,yes:'הבנתי',no:''}); }
+  askSure({ico:'📅',title:'הקבוצה נפתחה',text:[`קבוצה זו נועדה לתרגול עבור שנת הלימודים ${yearLabel(end)}.`,yearDelTxt(end),PRINT_ANYTIME].map(t=>window.sffT?sffT(t):t).join('\n'),yes:'הבנתי',no:''}); }
+function yearDelTxt(end){ return `בהתאם למדיניות הפרטיות שלנו, כל נתוני התלמידים בקבוצה זו יימחקו ב-1.9.${end}.`; }
+const PRINT_ANYTIME='באפשרותך להדפיס דוח התקדמות בכל עת – בלשונית הדוחות או בהגדרות הקבוצה.';
 /* deleting the open group (the teachers' app): first a report to print, then "for good?" – the server deletes all of it
    (students, consents, progress, assignments, notes, the students' phones); then the teacher is in another group */
 function delGroup(){ const C=window.SFF_CLASS||{};
@@ -4939,7 +4941,8 @@ async function renderFamily(){
       <div class="card"><h3 class="fh">${C.teach==='private'?'🧑‍🏫':'🏫'} ${esc(C.name||'')}</h3><p class="hint" style="margin:0">${C.teach==='private'?'מורה פרטי/ת':'מורה לכיתה'} · כיתה ${GRADES[+C.grade||0]}${C.subject?' · '+esc(C.subject):''}</p></div>
       <div class="card"><h3 class="fh">🧒 התלמידים</h3><p class="hint">${kids.length?`${kids.length} תלמידים · הרשימה וההסכמות בלשונית התלמידים`:'עוד אין תלמידים'}</p></div>
       <button class="addline" id="grpNew" onclick="newClass('${C.teach==='private'?'private':'school'}')">${C.teach==='private'?'＋ קבוצה פרטית חדשה':'＋ כיתה חדשה'}</button>
-      ${C.yearEnds?`<div class="card"><h3 class="fh">📅 שנת הלימודים ${esc(yearLabel(C.yearEnds))}</h3><p class="hint" style="margin:0">${fT(`ב-1.9.${C.yearEnds} יימחקו התלמידים וההתקדמות שלהם. הקבוצה והתרגולים יישארו.`)}</p></div>`:''}
+      <div class="card" id="grpYear">${C.yearEnds?`<h3 class="fh">📅 שנת הלימודים ${esc(yearLabel(C.yearEnds))}</h3><p class="hint" style="margin:0 0 4px">${fT(`קבוצה זו נועדה לתרגול עבור שנת הלימודים ${yearLabel(C.yearEnds)}.`)} ${fT(yearDelTxt(C.yearEnds))}</p>`:''}
+        <p class="hint" style="margin:0 0 8px">${fT(PRINT_ANYTIME)}</p><button class="btn ghost small" id="grpPrint" onclick="trPrint()">🖨 הדפסת דוח התקדמות</button></div>
       ${TAPP()?`<button class="linkbtn danger" id="grpDel" style="margin-top:16px" onclick="delGroup()">🗑 מחיקת הקבוצה</button>`:''}`;
     return; }
   const sw = fams.length>1 ? `<div class="chipsel famsw">${fams.map(f=>`<button class="${F&&f.id===F.famId?'on':''}" onclick="window.__sffFamily.switchTo('${f.id}')">${famLabel(f)}</button>`).join('')}</div>` : '';

@@ -46,12 +46,16 @@ const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POS
     await N.fill('#tsName', "ה'1"); await N.click('#tsGo'); await N.waitForFunction(() => window.SFF_KIND === 'class', null, { timeout: 25000 });
     await N.waitForSelector('#sureDlg:not(.hidden)', { timeout: 10000 }).catch(() => {});
     const pop = await N.evaluate(() => { const d = document.getElementById('sureDlg'); return d && !d.classList.contains('hidden') ? { t: d.innerText, no: !document.getElementById('sureNo').classList.contains('hidden') } : null; });
-    ok(pop && pop.t.includes(`1.9.${exp.choices[1]}`) && /יימחקו התלמידים/.test(pop.t) && !pop.no, 'the group opened: a message with the date its students will be deleted (one button)');
+    ok(pop && /קבוצה זו נועדה לתרגול עבור שנת הלימודים תשפ/.test(pop.t) && /בהתאם למדיניות הפרטיות שלנו, כל נתוני התלמידים בקבוצה זו יימחקו/.test(pop.t) && pop.t.includes(`1.9.${exp.choices[1]}`) && /להדפיס דוח התקדמות בכל עת/.test(pop.t) && !pop.no,
+      'the group opened: "this group is for the school year…", "…the students\' data will be deleted on 1.9…", "you can print a progress report at any time" (one button)');
     await N.screenshot({ path: `${OUT}/year_popup.png` });
     const gN = await N.evaluate(() => window.__sffFamily.famId);
     ok((await get(`families/${gN}`)).yearEnds === exp.choices[1], 'the group keeps its school year (yearEnds ' + exp.choices[1] + ')');
     await N.click('#sureYes'); await N.evaluate(() => go('family')); await N.waitForTimeout(500);
-    ok(/שנת הלימודים/.test(await N.textContent('#famBody')) && (await N.textContent('#famBody')).includes(`1.9.${exp.choices[1]}`), "the group's settings show its school year and the date");
+    ok(/שנת הלימודים/.test(await N.textContent('#famBody')) && (await N.textContent('#famBody')).includes(`1.9.${exp.choices[1]}`) && await N.evaluate(() => !!document.getElementById('grpPrint')), "the group's settings: its school year, the date, and \"print a progress report\" (any time)");
+    await N.evaluate(() => { window.print = () => { window.__printed = true; }; document.getElementById('grpPrint').click(); }); await N.waitForTimeout(300);
+    ok(await N.evaluate(() => window.__printed === true && !!document.getElementById('trPrint')), 'the print button prints the report (with no students yet too)');
+    await N.screenshot({ path: `${OUT}/year_settings.png` });
     await c0.close(); }
 
   const tc = await ctx({ sub: 'yearT', email: 'yeart@t.local', email_verified: true, name: 'דנה לוי' }); const T = await tc.newPage(); T.on('pageerror', e => errs.push('teacher: ' + e.message));

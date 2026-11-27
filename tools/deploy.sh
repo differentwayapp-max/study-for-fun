@@ -19,7 +19,7 @@ git add -A && git commit -qm "${1:-Deploy $new}
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_018ARCFrnypinXbQosbA2nGK"
-firebase deploy --only hosting --non-interactive 2>&1 | sed 's/\x1b\[[0-9;?]*[A-Za-z]//g' | tail -1
+firebase deploy --only hosting:app --non-interactive 2>&1 | sed 's/\x1b\[[0-9;?]*[A-Za-z]//g' | tail -1
 echo "deployed $new"
 # 2. back up to GitHub (retry on network errors) – a failed push stops with an error, it is never silent
 pushed=0

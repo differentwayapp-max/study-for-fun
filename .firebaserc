@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "study-for-fun-7b03c"
+  },
+  "targets": {
+    "study-for-fun-7b03c": {
+      "hosting": {
+        "app": [
+          "study-for-fun-7b03c"
+        ],
+        "company": [
+          "d-way-app"
+        ]
+      }
+    }
   }
 }

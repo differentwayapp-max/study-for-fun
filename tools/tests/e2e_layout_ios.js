@@ -53,11 +53,12 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
     [['k1', 'נועה', 3, '#FF5C8A'], ['k2', 'יואב', 4, '#2F6BFF'], ['k3', 'תמר', 2, '#24C78E'], ['k4', 'אלכסנדרה', 5, '#F2A63B']].forEach(([id, name, grade, color]) => kids.push({ id, name, grade, color })); saveKids();
     const one = applyImport(await loadShare('en3'), kidById('k1')).set;
     const five = []; for (const s of ['en4', 'en3-0e3c80', 'en3-1cc43d', 'en4-20fa84', 'en4-23a979']) { const sh = await loadShare(s); sh.src = 'lay' + five.length; const x = applyImport(sh, kidById('k2')).set; x.id = 's' + Date.now() + five.length; five.push(x); }
+    five[0].examDate = new Date(Date.now() + 5 * 864e5).toISOString().slice(0, 10); five[0].created = Date.now() - 2 * 864e5;   // the map with a test: the readiness header
     store.save(); return { one: one.id, five: five.map(x => x.id) }; });
   const cnt = await p.evaluate(() => [kids.length, ...kids.map(k => kidSets(k).length)]);
   ok(cnt.join() === '4,1,5,0,0', 'נועה has 1 practice set, יואב 5, תמר and אלכסנדרה none: ' + cnt.join());
 
-  const fails = { kids: [], streak: [], cat: [], end: [] }, seen = new Set();
+  const fails = { kids: [], streak: [], cat: [], end: [], map: [] }, seen = new Set();
   for (const [w, h] of SIZES) for (const [mode, sa] of MODES) {
     const tag = `${w}×${h} ${mode}`;
     await p.setViewportSize({ width: w, height: h }); await p.evaluate(SETUP, [sa]); await p.waitForTimeout(250);
@@ -65,7 +66,7 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
     await p.evaluate(() => go('kids')); await p.waitForTimeout(400);
     const K = await p.evaluate(() => { window.scrollTo(0, 0); const nav = document.getElementById('bNav').getBoundingClientRect(), hd = document.querySelector('header').getBoundingClientRect();
       return [...document.querySelectorAll('#kidCar .slide')].map(s => { const c = s.querySelector('.kidhero'); if (!c) return null; const r = c.getBoundingClientRect(), add = c.querySelector('.khadd'), a = add && add.getBoundingClientRect();
-        const st = c.querySelector('.overall .m:last-child small'), sr = st && st.getBoundingClientRect();
+        const st = c.querySelector('.khsub'), sr = st && st.getBoundingClientRect();
         return { who: (c.querySelector('h2') || {}).textContent || 'form', bottom: Math.round(r.bottom), top: Math.round(r.top), navTop: Math.round(nav.top), hdB: Math.round(hd.bottom),
           add: a ? { top: Math.round(a.top), bottom: Math.round(a.bottom), vis: getComputedStyle(add).visibility } : null, streak: sr ? Math.round(sr.height) : 0, streakLH: st ? parseFloat(getComputedStyle(st).lineHeight) || 16 : 0 }; }).filter(Boolean); });
     K.forEach(k => { if (k.bottom > k.navTop || k.top < k.hdB || (k.add && (k.add.bottom > k.navTop || k.add.top < k.hdB))) fails.kids.push(`${tag} ${k.who}: card ${k.top}–${k.bottom}, + ${k.add && k.add.top + '–' + k.add.bottom}, bar at ${k.navTop}`);
@@ -85,12 +86,19 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
       ['מעקב – כל הילדים', "go('stats')", 'vStats'], ['מעקב – ילד אחד', "statsKid('k2')", 'vStats']];
     for (const [name, js, view] of screens) { await p.evaluate(js); await p.waitForTimeout(450); e = await p.evaluate(END, view); seen.add(name);
       if (!e.ok || !e.nav) fails.end.push(`${tag} ${name}: ${e.low} ends at ${e.lowB}, bar at ${e.navTop}${e.nav ? '' : ' (no bar)'}`); }
+    // the map's readiness header leaves at least two rows of the map on the screen (no scrolling)
+    await p.evaluate(id => openRoad(id), ids.five[0]); await p.waitForTimeout(500);
+    const M = await p.evaluate(() => { window.scrollTo(0, 0); const sv = document.querySelector('#rdMap svg'), r = sv.getBoundingClientRect(), k = r.width / 390, nav = document.getElementById('bNav').getBoundingClientRect();
+      const bottom = nav.height && nav.top < innerHeight ? nav.top : innerHeight; return { row2: Math.round(r.top + (228 + 12) * k), bottom: Math.round(bottom), meter: !!document.querySelector('#rdHdr .rmbar'), go: !!document.querySelector('#rdHdr .rmgo') }; });
+    if (!M.meter || !M.go || (h <= 548 && mode === 'safari' && M.row2 > M.bottom)) fails.map.push(`${tag}: the 2nd row ends at ${M.row2}, the screen at ${M.bottom}${M.meter ? '' : ' (no meter)'}${M.go ? '' : ' (no today button)'}`);
+    if (w === 375 && h === 548 && mode === 'safari') await shot(p, `map_${w}x${h}_safari`);
     await p.evaluate(() => { document.body.classList.remove('kidside'); go('kids'); });
   }
   await p.evaluate(SETUP, [null]);
   console.log('2. the screens, 7 sizes × (Safari, from the home screen)');
   ok(!fails.kids.length, 'ילדים: every kid\'s card ends above the bottom bar, "+ תרגול" seen with no scrolling' + (fails.kids.length ? '\n    ' + fails.kids.slice(0, 12).join('\n    ') : ''));
   ok(!fails.streak.length, '"ימים ברצף" on one line' + (fails.streak.length ? '\n    ' + fails.streak.slice(0, 8).join('\n    ') : ''));
+  ok(!fails.map.length, 'the map: the readiness header (meter + today button) leaves two rows of the map on the screen at 375×548 (Safari)' + (fails.map.length ? '\n    ' + fails.map.slice(0, 8).join('\n    ') : ''));
   ok(!fails.cat.length, 'the catalog: nothing half under a sticky element after 100 / 170 / 300 px' + (fails.cat.length ? '\n    ' + fails.cat.slice(0, 8).join('\n    ') : ''));
   const kidsCard = await p.evaluate(() => getComputedStyle(document.querySelector('.kidhero')).height.endsWith('px') && !/vh/.test(getComputedStyle(document.querySelector('.kidhero')).getPropertyValue('--kidh')));
   ok(kidsCard, 'the kid card\'s height is measured (no vh)');

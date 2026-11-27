@@ -882,7 +882,21 @@ body:not(.thapp) #sBody.withfocus{padding-bottom:78px}
 .rdbar{height:10px;border:2px solid var(--ink);border-radius:99px;background:#EEF1F8;overflow:hidden;margin-top:4px}.rdbar i{display:block;height:100%}
 .rdst{flex:none;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;font-family:var(--display);font-weight:600;font-size:.8em;background:#fff}
 .rdst.ok{background:#E9E4FF;color:var(--ink)}.rdst.warn{background:#FFE9C2}
-.rdbar{position:relative}.rdbar .rdexp{position:absolute;top:-2px;bottom:-2px;width:3px;margin-inline-start:-1px;background:var(--ink);border-radius:2px;text-decoration:none}
+.rdbar{position:relative}
+#rdHdr{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:14px}
+.rmtag.sm{display:none;margin-inline-start:auto;align-self:center;white-space:nowrap;font-size:.72em;padding:3px 8px}.rmword{white-space:nowrap}.rmtop{display:flex;justify-content:space-between;align-items:center;gap:6px 8px;flex-wrap:wrap}#rdHdr>*{min-width:0;max-width:100%}.rmtop>b{font-family:var(--display);font-size:1.1em;white-space:nowrap}
+.rmtag{background:#FFF2C9;color:#6B4700;border-radius:99px;padding:4px 10px;font-size:.8em;font-weight:700}
+.rmeter{display:flex;align-items:flex-end;gap:10px}.rmpct{font-family:var(--display);font-size:2.5em;line-height:1}.rmword{font-family:var(--display);font-size:1em}.rmsub{font-size:.75em;color:var(--ink2)}
+.rmbar{position:relative;height:16px;background:#EAF0FF;border-radius:99px}.rmbar>i{position:absolute;top:0;bottom:0;inset-inline-start:0;border-radius:99px}
+.rmbar .rdexp{position:absolute;top:-5px;bottom:-5px;width:3px;margin-inline-start:-1px;background:var(--ink);border-radius:2px;text-decoration:none}.rmbar .rdexp.hi{background:#14A774}
+.rmlbl{position:relative;height:15px;margin-top:-6px;font-size:.7em;font-weight:700}.rmlbl span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}[dir=rtl] .rmlbl span,html[dir=rtl] .rmlbl span{transform:translateX(50%)}.rmlbl .hi{color:#0B6B4A}
+.rmgo{display:flex;align-items:center;gap:12px;background:var(--ink);color:#fff;border:0;border-radius:16px;padding:10px 12px 10px 14px;min-height:56px;font:inherit;text-align:start;cursor:pointer;width:100%}
+.rmgo>svg{flex:none}.rmgo>span{flex:1;min-width:0;display:flex;flex-direction:column}.rmgo b{font-size:.95em}.rmgo small{font-size:.75em;color:#D5DEF2}
+.rmgo em{font-style:normal;background:#F2A63B;color:var(--ink);border-radius:12px;padding:8px 14px;font-weight:800;font-size:.88em;flex:none}
+.rmmore{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.78em}.rmmore .chip{border:0;border-radius:99px;background:#FFF2C9;color:#6B4700;padding:4px 10px;font:inherit;font-weight:700;cursor:pointer}
+.rmmin{color:var(--ink2);margin-inline-start:auto}
+@media (max-height:740px){ #rdHdr{position:relative;top:auto} }   /* a short phone: the header scrolls away with the page, so the map gets the screen */
+@media (max-height:620px){ #rdHdr{gap:7px;padding:10px 12px} .rmpct{font-size:1.7em} .rmeter{align-items:center} .rmsub,.rmmore{display:none} .rmtop.hasm{display:none} .rmtag.sm{display:inline-block} .rmgo{min-height:46px;padding:6px 8px 6px 10px} .rmgo>svg{width:20px;height:20px} .rmgo em{padding:6px 10px} .rmlbl{height:13px} }.rdbar .rdexp{position:absolute;top:-2px;bottom:-2px;width:3px;margin-inline-start:-1px;background:var(--ink);border-radius:2px;text-decoration:none}
 .rdready{flex:1 1 100%;display:flex;gap:10px;align-items:center;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:8px 10px}
 .rdpct{flex:none;width:64px;height:64px;border-radius:50%;border:5px solid var(--c);display:grid;place-content:center;text-align:center;line-height:1.05}
 .rdpct b{font-family:var(--display);font-size:1.2em}.rdpct span{font-size:.62em;color:#3c4a6b}
@@ -929,6 +943,12 @@ body:not(.thapp) #sBody.withfocus{padding-bottom:78px}
 .prow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border:var(--line);border-radius:18px;padding:10px 12px;background:#fff;cursor:pointer;box-shadow:0 3px 0 var(--ink);text-align:start;font:inherit;width:100%}
 .prow:active{transform:translateY(3px);box-shadow:none}
 .prow .subjico{width:44px;height:44px;font-size:1.05em}
+.kidhero:not(.addcard){padding:18px 16px}.kidhero .who svg{width:56px;height:56px}.kidhero .who h2{font-size:1.5em}.kidhero .who{gap:10px}.kidhero .kmore{padding-inline:10px}
+.kidhero .prow{gap:10px;padding:10px}.kidhero .prow .subjico{width:38px;height:38px}
+.prmid{display:flex;flex-direction:column;gap:3px;min-width:0}.prmid .rdl2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.76em}.prmid .rdl3{font-size:.8em;line-height:1.25}.prmid .nw{white-space:nowrap}
+.prring{position:relative;width:48px;height:48px;flex:none}.prring svg{width:100%;height:100%}.prring>span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}.prring b{font-size:.72em}.prring small{font-size:.5em;color:var(--ink2);margin-top:2px}
+.khsub{display:flex;align-items:center;gap:8px;white-space:nowrap}.khstat{font-family:var(--display);font-weight:700;font-size:.9em;white-space:nowrap}
+.rdlegend2{display:flex;gap:6px 12px;justify-content:center;flex-wrap:wrap;font-size:.72em;color:var(--ink2)}.rdlegend2>span{display:flex;align-items:center;gap:5px}.rdlegend2 i{width:10px;height:10px;border-radius:50%;display:inline-block}
 .prow .t{font-family:var(--display);font-weight:600;display:flex;gap:8px;align-items:center}
 .days{display:flex;gap:3px;margin-top:6px}
 .days i{flex:1;max-width:22px;height:12px;border-radius:99px;border:1.5px solid var(--ink);background:#fff}
@@ -1397,7 +1417,6 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   <!-- KID: the road to the test -->
   <section id="vRoad" class="hidden">
     <div class="roadhdr" id="rdHdr"></div>
-    <div class="rdlegend" id="rdLegend"></div>
     <div class="roadmap" id="rdMap"></div>
   </section>
 
@@ -3335,11 +3354,16 @@ function renderKids(){
       <p class="sub" style="margin:0">ההורה צריך/ה לפתוח את האפליקציה פעם אחת – ואז הילדים שהוזמנתם אליהם יופיעו כאן.</p></div>`;
     $('kidCarDots').innerHTML=''; return; }
   const slides=visibleKids().map(k=>{
-    const ss=kidSets(k), pct=ss.length?ss.reduce((a,x)=>a+setProgress(x),0)/ss.length:0;
+    const ss=kidSets(k); let anyReady=false;
     const row=(x,why)=>{ const [c,ico]=subjStyle(x.subject); const dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c), base=String(x.subject).replace(/^🎯\s*/,'');
       return `<button class="prow ${x.reinf?'focus':''} ${why?'fin':''}" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}${x.reinf?'<i class="tgt" aria-hidden="true">🎯</i>':''}</span>
-        <span><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}${daysLeft(x.examDate)>=0&&!x.reinf?(r=>r?` · <b style="color:${readyClr(r.pct)}">מוכנות ${r.pct}%</b>`:'')(examReady(x)):''}</span>`:''}</span>${why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
-        <span style="position:relative;width:46px;height:46px">${ringSvg(setProgress(x),why?'#B9C0D4':'#24C78E','#E3E1F2',46,6)}<b style="position:absolute;inset:0;display:grid;place-items:center;font-size:.72em">${Math.round(setProgress(x)*100)}%</b></span></button>`; };
+        ${(()=>{ const S=!why&&!x.reinf&&x.examDate&&daysLeft(x.examDate)>=0?rdState(x):null, dl=S&&daysLeft(x.examDate);
+          if(S) anyReady=true;
+          const lines=S?`<span class="hint rdl2">מבחן ב-${fmtDate(x.examDate)} · ${dl>1?`עוד ${dl} ימים`:dl===1?'מחר':'היום'}</span><b class="rdl3" style="color:${S.st.t}"><span>${S.word} ·</span> <span class="nw">${S.E&&S.E.today.length?`היום ${chRange(S.E.today)}`:'היעד של היום הושג'}</span></b>`
+            :`${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}`;
+          const v=S?S.R.pct/100:setProgress(x), clr=S?S.st.bar:why?'#B9C0D4':'#1B2A4A';
+          return `<span class="prmid"><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}</span>${lines}${S?'':why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
+        <span class="prring">${ringSvg(v,clr,'#EAF0FF',52,6)}<span><b>${Math.round(v*100)}%</b><small>${S?'מוכנות':'התקדמות'}</small></span></span></button>`; })()}`; };
     // active first (focused practice on top), finished ones folded away below
     const act=ss.filter(x=>!setDone(x)).sort((a,b)=>(!!b.reinf)-(!!a.reinf)), fin=ss.filter(x=>setDone(x));
     const rows=act.map(x=>row(x)).join('')+(act.length?'':`<p class="hint center" style="margin:4px 0">${ss.length?'🎉 כל התרגולים הסתיימו – ':''}מוסיפים תרגול מהקטלוג 📚</p>`)
@@ -3347,10 +3371,8 @@ function renderKids(){
     const pend=BUILDS.filter(b=>b.kidId===k.id&&!b.hidden&&(b.status==='running'||b.status==='failed')).map(b=>{ const err=b.status==='failed';
       return `<div class="prow pending"><span class="subjico" style="background:#fff">${err?'⚠️':'⏳'}</span><span onclick="openBuild('${b.id}')" style="cursor:pointer"><span class="t">${esc(b.subject)}</span><span class="hint">${err?'':'~15 דק׳'}</span></span>${err?'':'<span class="dots3" style="transform:scale(.6)"><i></i><i></i><i></i></span>'}${err&&b.resumable?`<button class="btn small" onclick="resumeBuild('${b.id}')">▶ להמשיך</button>`:''}<button class="btn ghost small" onclick="dropBuild('${b.id}')" aria-label="מחיקה">✕</button></div>`; }).join('');
     return `<div class="card herocard kidhero"><div class="khbody">
-      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="hint">כיתה ${GRADES[k.grade]}</span></div><span style="margin-inline-start:auto;display:flex;gap:6px"><button class="btn ghost small kmore" onclick="kidMenu(this,'${k.id}')" aria-label="עוד" aria-haspopup="menu">⋯</button></span></div>
-      <div class="overall"><div class="kring">${ringSvg(pct,k.color,'#E3E1F2',120,12)}<b>${Math.round(pct*100)}%</b></div>
-        <div class="m">🏆 ${kidTrophies(k)}<small>גביעים</small></div><div class="m">🔥 ${kidStreak(k)}<small>ימים ברצף</small></div></div>
-      <div style="display:flex;flex-direction:column;gap:10px">${pend}${rows}</div></div>
+      <div class="who">${avatarHtml(k,72)}<div><h2>${esc(k.name)}${k.nick?` <span class="hint">(${esc(k.nick)})</span>`:''}</h2><span class="khsub"><span class="hint">כיתה ${GRADES[k.grade]}</span><span class="khstat" title="${esc(sffTx('ימים ברצף'))}"><span aria-hidden="true">🔥</span> ${kidStreak(k)}</span><span class="khstat" title="${esc(sffTx('גביעים'))}"><span aria-hidden="true">🏆</span> ${kidTrophies(k)}</span></span></div><span style="display:flex;gap:6px;margin-inline-start:auto"><button class="btn ghost small kmore" onclick="kidMenu(this,'${k.id}')" aria-label="עוד" aria-haspopup="menu">⋯</button></span></div>
+      <div style="display:flex;flex-direction:column;gap:10px">${pend}${rows}</div>${anyReady?`<div class="rdlegend2"><span>מוכנות למבחן:</span><span><i style="background:#F2A63B"></i>בדרך</span><span><i style="background:#2F6BFF"></i>כמעט שם</span><span><i style="background:#24C78E"></i>מוכנים</span></div>`:''}</div>
       <button class="btn ${ss.length?'ghost':'big'} khadd" style="justify-content:center" onclick="openCatalog('${k.id}')">＋ תרגול ל${esc(k.name)}</button>
     </div>`; });
   if(canManage()) slides.push(`<div class="card herocard kidhero addcard" id="kidForm">
@@ -3591,19 +3613,22 @@ function examEffort(set, P){
     expect=t1>t0?Math.max(0,Math.min(1,(now-t0)/(t1-t0))):1; }
   return {rest:rest.length, qs, min:Math.max(1,Math.ceil(qs*Q_MIN/days)), today, todayQ, expect};
 }
-const readyWord=p=>p>=MAST_HI?'מוכנים ✓':p>=MAST_LO?'כמעט שם':'עוד עבודה';
-const readyClr=p=>p>=MAST_HI?'var(--ok)':p>=MAST_LO?'var(--sun)':'var(--bad)';
+// the readiness meter's levels for a kid's screen – orange / blue / green, never red
+const RDY={lo:{w:'בדרך',c:'#E58A00',t:'#B36B00',bar:'#F2A63B'}, mid:{w:'כמעט שם',c:'#2F6BFF',t:'#1F4FCC',bar:'#2F6BFF'}, hi:{w:'מוכנים ✓',c:'#0B8A5E',t:'#0B6B4A',bar:'#24C78E'}};
+const readyLvl=p=>p>=MAST_HI?'hi':p>=MAST_LO?'mid':'lo';
+const readyWord=p=>RDY[readyLvl(p)].w;
+const readyClr=p=>RDY[readyLvl(p)].bar;
 const sffTx=t=>window.sffT?sffT(t):t;
-// the readiness box under the map's header: readiness %, today's stations, the effort left until the test, the weakest stations
-function readyBox(set,P,R,E){
-  if(!R) return '';
-  const range=a=>a.length===1?`פרק ${a[0]+1}`:`פרקים ${a[0]+1}–${a[a.length-1]+1}`;
-  const lines=[];
-  if(E&&E.today.length) lines.push(`<div class="rdl">🎯 היום: ${range(E.today)} · כ-${E.todayQ} שאלות</div>`);
-  if(E&&E.rest&&P.dl>=1) lines.push(`<div class="rdl hint">עד המבחן: עוד ${E.rest} פרקים · כ-${E.qs} שאלות · כ-${E.min} דקות ביום</div>`);
-  const weak=R.weak.length?`<div class="rdweak"><span class="hint">לחזק:</span>${R.weak.map(w=>`<button class="chip" onclick="startStation('${esc(set.id)}',${w.i})">${esc(chName(P.C[w.i]))} · ${w.pct}%</button>`).join('')}</div>`:'';
-  return `<div class="rdready"><div class="rdpct" style="--c:${readyClr(R.pct)}"><b>${R.pct}%</b><span>מוכנות</span></div>
-    <div class="rdinfo"><div class="rdl"><b style="color:${readyClr(R.pct)}">${readyWord(R.pct)}</b></div>${lines.join('')}${weak}</div></div>`;
+// chapters in words – never "3–4" (a dash between numbers turns around in Hebrew)
+const chRange=a=>a.length===1?`פרק ${a[0]+1}`:a.length===2?`פרק ${a[0]+1} ופרק ${a[1]+1}`:`פרקים ${a[0]+1} עד ${a[a.length-1]+1}`;
+// one place for the readiness of a set with a test: the %, its level and word ("כדאי להאיץ" when behind), today's chapters,
+// where to be today on the bar (the time gone since the set was made, of the way to MAST_HI by the day before the test)
+function rdState(set, P){
+  const R=examReady(set); if(!R) return null; P=P||roadPlan(set);
+  const E=P.dl!=null&&P.dl>=0?examEffort(set,P):null, target=E&&E.expect!=null?Math.round(E.expect*MAST_HI):null;
+  const lvl=readyLvl(R.pct), lag=lvl!=='hi'&&P.dl!=null&&P.dl>=1&&P.dn.size<P.N&&(P.behind||(target!=null&&R.pct<target));
+  const st=lag?RDY.lo:RDY[lvl];
+  return {R,E,P,target,lvl,lag,word:lag?'כדאי להאיץ':st.w,st};
 }
 // on the example map: who this phone is, and what it found – so a screenshot tells what is missing
 function demoWhy(){
@@ -3618,19 +3643,29 @@ function renderRoad(){
   const set=getSet(ROAD_SET); if(!set) return go('kid');
   const P=roadPlan(set), nx=nextChapter(set), [sc]=subjStyle(set.subject);
   // header
-  const doneN=Math.min(P.dn.size,P.N), R=examReady(set), E=R&&P.dl!=null&&P.dl>=0?examEffort(set,P):null;
-  const status = P.dl==null ? '' : P.dl<0 ? '<span class="rdst">🏁 המבחן עבר</span>'
-    : P.dn.size>=P.N ? '<span class="rdst ok">🌟 סיימת הכול!</span>'
-    : P.ahead ? '<span class="rdst ok">⚡ מקדים!</span>'
-    : P.behind ? `<span class="rdst warn">⚠️ ${P.perDay} פרקים ביום כדי להספיק</span>` : '<span class="rdst ok">✓ בזמן</span>';
-  $('rdHdr').innerHTML=`<button class="btn ghost small" onclick="go('kid')" aria-label="חזרה">✕</button>
-    <div class="rdt"><b>🗺️ הדרך למבחן</b>${set.demo?' <span class="demotag">🎲 דוגמה</span>'+demoWhy():''}<div class="hint">${doneN}/${P.N} פרקים${set.examDate?' · '+daysLeftTxt(set.examDate):''}</div>
-    <div class="rdbar"><i style="width:${Math.round(doneN/Math.max(1,P.N)*100)}%;background:${sc}"></i>${E&&E.expect!=null&&doneN<P.N?`<s class="rdexp" style="inset-inline-start:${Math.round(E.expect*100)}%" title="${esc(sffTx('איפה כדאי להיות היום'))}"></s>`:''}</div></div>${status}${readyBox(set,P,R,E)}`;
+  const doneN=Math.min(P.dn.size,P.N), S=rdState(set,P), sid=esc(set.id);
+  const dl=P.dl, when=dl==null?'':dl<0?'המבחן עבר · ':dl===0?'המבחן היום · ':dl===1?'המבחן מחר · ':`עוד ${dl} ימים · `;
+  let meter='', go1='', more='';
+  if(S){ const {R,E,target,st}=S, pos=v=>Math.max(14,Math.min(86,v));
+    const marks=(target!=null&&doneN<P.N?`<s class="rdexp" style="inset-inline-start:${target}%"></s>`:'')+`<s class="rdexp hi" style="inset-inline-start:${MAST_HI}%"></s>`;
+    const lbl=(target!=null&&doneN<P.N?`<span style="inset-inline-start:${pos(target)}%">כדאי היום: ${target}%</span>`:'')+(target==null||Math.abs(target-MAST_HI)>=24||doneN>=P.N?`<span class="hi" style="inset-inline-start:${pos(MAST_HI)}%">מוכנים</span>`:'');
+    meter=`<div class="rmeter"><b class="rmpct" style="color:${st.c}">${R.pct}%</b><div><b class="rmword" style="color:${st.t}">${S.word}</b><div class="rmsub">מוכנות למבחן</div></div><span class="rmtag sm">${when}${doneN}/${P.N} פרקים</span></div>
+      <div class="rmbar" role="img" aria-label="${esc(sffTx(`מוכנות ${R.pct}%`))}"><i style="width:${R.pct}%;background:${st.bar}"></i>${marks}</div><div class="rmlbl">${lbl}</div>`;
+    const weak=R.weak.slice(0,2).map(w=>`<button class="chip" onclick="startStation('${sid}',${w.i})">${esc(chName(P.C[w.i]))} · ${w.pct}%</button>`).join('');
+    const mins=E&&E.rest&&dl>=1?`<span class="rmmin">עד המבחן: ~${E.min} דק׳ ביום</span>`:'';
+    if(weak||mins) more=`<div class="rmmore">${weak?`<span class="hint">לחזק:</span>${weak}`:''}${mins}</div>`;
+  }
+  // the one button: today's chapters (or the next / weakest one)
+  const E=S&&S.E, wk=S&&S.R.weak[0];
+  const btn=(t,sub,ch)=>`<button class="rmgo" onclick="startStation('${sid}',${ch})"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2A63B" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="#F2A63B"/></svg><span><b>${t}</b>${sub?`<small>${sub}</small>`:''}</span><em>יוצאים</em></button>`;
+  if(E&&E.today.length) go1=btn(`היום: ${chRange(E.today)}`,`כ-${E.todayQ} שאלות · כ-${Math.max(1,Math.ceil(E.todayQ*Q_MIN))} דקות`,E.today[0]);
+  else if(nx>=0&&nx<P.N) go1=btn(E&&dl>=1?'✓ היעד של היום הושלם':`הפרק הבא: ${chRange([nx])}`,E&&dl>=1?`אפשר להמשיך: ${chRange([nx])}`:'',nx);
+  else if(wk) go1=btn(`🌟 סיימת הכול!`,`לחזק: ${chRange([wk.i])}`,wk.i);
+  $('rdHdr').innerHTML=`<div class="rmtop${S?' hasm':''}"><b>הדרך למבחן</b><span class="rmtag">${when}${doneN}/${P.N} פרקים</span></div>${set.demo?'<div><span class="demotag">🎲 דוגמה</span>'+demoWhy()+'</div>':''}${meter}${go1}${more}`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
   const goalDone=todays.every(i=>P.dn.has(i)), tried=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)&&best[i]!=null);
   const items=[...Array(P.N).keys()].map(i=>({i,c:P.C[i]})); items.push({rev:true}); if(P.flagDay!=null) items.push({flag:true});
-  $('rdLegend').innerHTML=`<span class="lg ok">⭐ עברתי ${P.dn.size}</span>${tried.length?`<span class="lg again">↺ לנסות שוב ${tried.length}</span>`:''}<span class="lg todo">⚪ עוד ${P.N-P.dn.size-tried.length}</span>${goalAfter>=0?`<span class="lg goal">🏆 היעד של היום: פרק ${goalAfter+1}${goalDone?' ✓':''}</span>`:''}`;
   const COLS=3, W=390, RH=150, rtl=(window.SFF_LANG?SFF_LANG():'he')==='he', X=[74,195,316];
   const pos=k=>{ const r=Math.floor(k/COLS), c=k%COLS, cc=(r%2===0)===rtl?COLS-1-c:c; return {x:X[cc],y:78+r*RH}; };
   const pts=items.map((it,k)=>({...pos(k),it})), H=pts[pts.length-1].y+120;

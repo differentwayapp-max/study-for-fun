@@ -4828,7 +4828,7 @@ async function cloudInit(){
       pushSets(); }
     else { const old=sets; sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
     storeSaveLocal(); rerender();
-  },e=>showCloudErr(e&&e.message));
+  },e=>{ const m=e&&e.message; (window.SFF_KID_DEVICE&&deniedErr(e))?kidPhoneGone(m):showCloudErr(m); });
   DB.collection('progress').onSnapshot(q=>progDocs(q.docs),()=>{});
   if(!window.SFF_KID_DEVICE) watchBuilds();
 }
@@ -6099,7 +6099,7 @@ function qrInto(el, text){ if(!el) return; const draw=()=>{ try{ const q=qrcode(
 function classKidGone(){ kids=[]; sets=[]; history=[]; window.__sffDeleting=true; rerender(); wipeLocal(); }
 // a kid's phone that may no longer read its family / group (the link was replaced, the consent withdrawn, the group deleted):
 // nothing of it stays here – and the phone says the link is not active
-const deniedErr=e=>/permission|unauthenticated/i.test(String(e&&(e.code||e.message)||e));
+const deniedErr=e=>/permission|unauthenticated/i.test(e&&typeof e==='object'?`${e.code||''} ${e.message||''}`:String(e||''));   // (the adapter reports errors as 'unavailable' + the original in the message)
 function kidPhoneGone(msg){ classKidGone(); LOCK=null; activeKid=null; const t=$('topTitle'); if(t) t.textContent=''; showCloudErr(msg); }
 function classKidCloud(me){
   DB.doc('kidpub/'+me).onSnapshot(snap=>{ CLOUD_SEEN=true; setTimeout(maybeKidIntro,600);

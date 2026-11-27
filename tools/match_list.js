@@ -2,9 +2,10 @@
 // with their answers – so a reviewer can check that no answer card of the chapter also answers another question.
 // Usage: node tools/match_list.js <set id>   (reads public/share/<id>.txt, the last build)
 const fs = require('fs'), path = require('path'), id = process.argv[2], R = path.resolve(__dirname, '..') + '/';
+const { needOpts } = require(R + 'public/build-core.js');                     // the app's own rule (shared with the server)
 const src = fs.readFileSync(R + 'public/index.html', 'utf8').split('\n');
-const pick = n => src.find(l => l.startsWith(n)).replace(/^const /, 'var ');
-eval(pick('const OPTS_EN')); eval(pick('const OPTS_HE')); var needOpts; eval(pick('const needOpts')); var ansKey; eval(pick('const ansKey'));
+const pick = n => { const l = src.find(l => l.startsWith(n)); if (!l) throw new Error(n + ' not found in index.html'); return l.replace(/^const /, 'var '); };
+var ansKey; eval(pick('const ansKey'));
 const d = JSON.parse(Buffer.from(fs.readFileSync(R + 'public/share/' + id + '.txt', 'utf8').slice(5), 'base64'));
 const strip = t => String(t).replace(/[⁦-⁩]/g, '');
 d.chapters.forEach((c, ci) => {

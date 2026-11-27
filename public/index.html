@@ -1507,7 +1507,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
 const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together; a new one is approved again
-const PRIVACY_VERSION = '2026-11-21'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
+const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
@@ -4876,7 +4876,7 @@ function syncTutorViewsSoon(){ if(!DB||!canManage()||!window.__sffFamily?.syncTu
 /* nothing of the account left on this phone – signing out, deleting the account, a kid phone whose link was taken away:
    every sff_* key that holds data (names, practice sets, progress, links, the error log…), sessionStorage, and Firestore's copy
    on the phone (closed, then its IndexedDB cleared). Kept: only the phone's own preferences and "seen" marks (no data). */
-const SFF_KEEP=['sff_lang','sff_mute','sff_kid_intro','sff_kid_intro_t','sff_intro_done','sff_onb_done','sff_intro_tutor','sff_intro_teacher'];
+const SFF_KEEP=['sff_lang','sff_mute','sff_privacy_lang','sff_kid_intro','sff_kid_intro_t','sff_intro_done','sff_onb_done','sff_intro_tutor','sff_intro_teacher'];
 async function wipeLocal(){
   try{ Object.keys(localStorage).filter(k=>k.startsWith('sff_')&&!SFF_KEEP.includes(k)).forEach(k=>localStorage.removeItem(k)); }catch(e){}
   try{ sessionStorage.clear(); }catch(e){}

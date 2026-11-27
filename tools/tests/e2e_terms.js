@@ -26,6 +26,9 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     }
     await p.close();
   }
+  // the privacy policy's date (its English "Last updated") is PRIVACY_VERSION – recorded with every approval
+  { const m = (await (await fetch('http://localhost:8765/privacy.html')).text()).match(/Last updated: ([A-Za-z]+ \d+, \d{4})/), d = m && new Date(m[1] + ' 12:00 UTC');
+    ok(d && d.toISOString().slice(0, 10) === PV, `PRIVACY_VERSION (${PV}) is the policy's date (${m && m[1]})`); }
   // 2. the sign-in screen: no tick box (the approval comes once, after the sign-in) – "I'm a parent" goes straight to Google
   {
     const ctx = await b.newContext({ viewport: { width: 360, height: 740 }, deviceScaleFactor: 2 }); const p = await ctx.newPage();

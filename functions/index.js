@@ -800,15 +800,18 @@ async function closeBuild(famId, buildId, status, extra = {}) {
     const d = bd.data(), sc = await scopeOf(famId), usageRef = sc.usage(d.month);
     const refunds = (await tx.get(usageRef)).data()?.refunds || 0;
     const refund = status !== 'done' && d.calls <= 3 && d.kind !== 'admin' && refunds < REFUNDS_PER_MONTH;
-    tx.update(ref, { status, endedAt: Date.now(), refunded: refund, ...extra, ...(refund ? { resumable: false } : {}) });
+    tx.update(ref, { status, endedAt: Date.now(), refunded: refund, prog: bareProg(d.prog), ...extra, ...(refund ? { resumable: false } : {}) });
     if (refund) tx.set(usageRef, { refunds: FieldValue.increment(1), ...(d.kind === 'free' ? { builds: FieldValue.increment(-1) } : {}) }, { merge: true });
     if (refund && sc.cls && d.kind === 'free') tx.set(db.doc(`teachers/${sc.owner}`), { [sc.priv ? 'buildsPriv' : 'builds']: FieldValue.increment(-1) }, { merge: true });
     if (refund && d.kind === 'paid') tx.set(db.doc(`families/${famId}/billing/main`), { credits: FieldValue.increment(1) }, { merge: true });
     return { refunded: refund, closed: true };
   });
 }
+// a build that is over keeps of its progress only each step's state – not the details (the scan describes the material)
+const bareProg = p => Object.fromEntries(Object.entries(p && typeof p === 'object' ? p : {}).map(([k, v]) => [k, { s: (v && v.s) || '' }]));
 // the form and the log of a build that is over (they hold the parent's pasted text and the questions on their way)
 async function cleanBuild(ref) {
+  await ref.get().then(b => b.exists && b.data().status !== 'running' && b.data().prog ? ref.update({ prog: bareProg(b.data().prog) }) : null).catch(() => {});
   for (const sub of ['log', 'state']) {
     const docs = (await ref.collection(sub).listDocuments().catch(() => []));
     for (let k = 0; k < docs.length; k += 400) { const b = db.batch(); docs.slice(k, k + 400).forEach(d => b.delete(d)); await b.commit().catch(() => {}); }
@@ -1020,19 +1023,27 @@ exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPI
 
 // Every 6 hours: the form and the log of a build that is over are deleted (a stopped build the parent never went back to,
 // or one past its 3 hours); a build still "running" after its 3 hours (its task chain was lost) is stopped.
-exports.cleanBuilds = require('firebase-functions/v2/scheduler').onSchedule({ schedule: 'every 6 hours', region: 'europe-west1', retryCount: 0 },
-  async () => {
-    const q = await db.collectionGroup('state').limit(500).get(), seen = new Set();
-    for (const d of q.docs) {
+// the builds' forms and logs (families/{f}/builds/{id}/state), page after page – never only the same first page
+async function cleanBuildLeftovers(now, page = 300) {
+  let last = null, n = 0; const seen = new Set();
+  for (;;) {
+    let q = db.collectionGroup('state').orderBy(FieldPath.documentId()).limit(page); if (last) q = q.startAfter(last);
+    const s = await q.get(); if (s.empty) break; last = s.docs[s.docs.length - 1];
+    for (const d of s.docs) {
       const ref = d.ref.parent.parent;                                // only families/{f}/builds/{id}/state – never anything else
       if (!ref || ref.parent.id !== 'builds' || !/^families\/[^/]+\/builds\/[^/]+$/.test(ref.path) || seen.has(ref.path)) continue; seen.add(ref.path);
       const b = (await ref.get()).data(), famId = ref.parent.parent && ref.parent.parent.id;
-      const old = !b || Date.now() - (b.at || 0) > BUILD_HOURS * 36e5;
+      const old = !b || now - (b.at || 0) > BUILD_HOURS * 36e5;
       if (b && b.status === 'running' && !old) continue;
       if (b && b.status === 'running' && famId) await closeBuild(famId, ref.id, 'failed', { err: 'build_closed', resumable: false });
-      if (!b || b.status !== 'failed' || old) await cleanBuild(ref);
+      if (!b || b.status !== 'failed' || old) { await cleanBuild(ref); n++; }
     }
-  });
+    if (s.size < page) break;
+  }
+  return n;
+}
+exports.cleanBuilds = require('firebase-functions/v2/scheduler').onSchedule({ schedule: 'every 6 hours', region: 'europe-west1', retryCount: 0, timeoutSeconds: 540 },
+  async () => { await cleanBuildLeftovers(Date.now()); });
 
 /* ---------- once a day: what is kept no longer than the privacy policy says ----------
    dailyClean runs every cleaner below with today's time; testClean (the emulator only) runs them with a made-up time, so the
@@ -1099,11 +1110,20 @@ async function cleanSchoolYear(now) {
   }
   return n;
 }
-const CLEANERS = { joinReqs: cleanJoinReqs, schoolYear: cleanSchoolYear };
-async function cleanAll(now, only) {
+// a build's own document goes BUILD_KEEP_DAYS after it started (the quota and the refunds are counted in usage/, not here)
+const BUILD_KEEP_DAYS = 90;
+async function cleanOldBuilds(now) {
+  let n = 0;
+  for await (const docs of olderThan('builds', 'at', now - BUILD_KEEP_DAYS * 864e5)) {
+    for (const d of docs) { if (!/^families\/[^/]+\/builds\/[^/]+$/.test(d.ref.path) || d.data().status === 'running') continue; await db.recursiveDelete(d.ref); n++; }
+  }
+  return n;
+}
+const CLEANERS = { joinReqs: cleanJoinReqs, schoolYear: cleanSchoolYear, builds: cleanOldBuilds, buildLeftovers: (now, o) => cleanBuildLeftovers(now, o.page) };
+async function cleanAll(now, only, o = {}) {
   const out = {};
   for (const [k, f] of Object.entries(CLEANERS)) { if (only && !only.includes(k)) continue;
-    try { out[k] = await f(now); } catch (e) { out[k] = 'error'; await serverLog({ fn: 'dailyClean', kind: 'error', code: k, msg: String(e.message || e).replace(/families\/[^\s'"]+/g, 'families/…').slice(0, 200) }); } }
+    try { out[k] = await f(now, o); } catch (e) { out[k] = 'error'; await serverLog({ fn: 'dailyClean', kind: 'error', code: k, msg: String(e.message || e).replace(/families\/[^\s'"]+/g, 'families/…').slice(0, 200) }); } }
   return out;
 }
 exports.dailyClean = require('firebase-functions/v2/scheduler').onSchedule({ schedule: '17 3 * * *', timeZone: 'Asia/Jerusalem', region: 'europe-west1', retryCount: 0, timeoutSeconds: 540 },
@@ -1112,7 +1132,7 @@ exports.dailyClean = require('firebase-functions/v2/scheduler').onSchedule({ sch
 exports.testClean = onCall({ region: 'europe-west1', invoker: 'public' }, async function testClean(request) {
   if (!FAKE_OK()) throw new HttpsError('permission-denied', 'emulator only');
   const d = request.data || {};
-  return cleanAll(Number.isFinite(d.now) ? d.now : Date.now(), Array.isArray(d.only) ? d.only : null);
+  return cleanAll(Number.isFinite(d.now) ? d.now : Date.now(), Array.isArray(d.only) ? d.only : null, { page: Number.isInteger(d.page) && d.page > 0 ? d.page : undefined });
 });
 
 /* ---------- a user's bug report / idea → an email to the D-WAY team ----------

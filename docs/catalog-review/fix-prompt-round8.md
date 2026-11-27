@@ -7,6 +7,10 @@
   - תמונות שמסגירות את התשובה.
   - הרבה כפילויות מול כיתות נמוכות יותר.
 - **רמה:** כל ארבעת הסטים מתחת לרמה של מבחן אמיתי בכיתה ח'. **העמקת הרמה היא שלב ב'**, והיא ממתינה להחלטת הבעלים (ראו בסוף). **הסבב הזה מתקן רק את הממצאים.**
+- **נקודת ההתחלה:** עובדים מ-main העדכני. מביאים את הדוחות ואת התיקון של `tools/match_list.js`:
+  ```
+  git fetch origin claude/friendly-goldberg-0w7hhg && git checkout origin/claude/friendly-goldberg-0w7hhg -- docs/catalog-review docs/grade-levels tools/match_list.js .claude/skills/build-practice-set/SKILL.md
+  ```
 - **הממצאים המלאים:** `docs/catalog-review/reviews-round8/{math8,heb8,en8,sci8}.md`.
   - המזהים (`sci8#81`) הם מספר השאלה בקובץ הבנוי של sff-v159. מאתרים לפי טקסט השאלה.
   - כל תיקון מוצע בדוחות נבדק מול הכללים, אבל בודקים אותו שוב.

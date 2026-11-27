@@ -4,6 +4,7 @@
 | שדה | מה לרשום |
 |---|---|
 | שם האפליקציה | Study for fun |
+| שם המפתח (Developer name) | D-WAY Apps ("D-WAY" כבר תפוס ב-Play) |
 | שפת ברירת מחדל | עברית (iw-IL) |
 | אפליקציה או משחק | אפליקציה |
 | חינמית או בתשלום | חינמית |
@@ -55,14 +56,17 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 ## טופס "Data safety"
 | שאלה | תשובה |
 |---|---|
-| האם האפליקציה אוספת או משתפת מידע? | כן, אוספת. לא משתפת עם צד שלישי |
+| האם האפליקציה אוספת או משתפת מידע? | כן, אוספת. לא משתפת עם צד שלישי (ספקי שירות שמעבדים בשבילנו – Firebase, שירות ה-AI – לא נחשבים "שיתוף" בטופס) |
 | מוצפן בהעברה? | כן |
 | אפשר לבקש מחיקה? | כן (בתוך האפליקציה + הקישור למעלה) |
 | **מידע אישי → שם** | נאסף: שם פרטי של הילד (ההורה מקליד) ושם ההורה מחשבון Google. מטרה: פעולת האפליקציה. חובה |
 | **מידע אישי → אימייל** | נאסף: אימייל ההורה (כניסה עם Google). מטרה: ניהול חשבון. חובה |
 | **פעילות באפליקציה** | נאסף: תוצאות משחקים והתקדמות. מטרה: פעולת האפליקציה. חובה |
 | **מזהי מכשיר** | לא (כניסה אנונימית של Firebase בטלפון של הילד לא נחשבת מזהה פרסומי) |
-| מיקום, אנשי קשר, תמונות, אודיו | לא |
+| **תמונות וסרטונים + קבצים ומסמכים** | נאסף: צילומים וקבצים של חומר המבחן שההורה / המורה מעלים כדי לבנות תרגול. **מעובד באופן זמני (Processed ephemerally)** – נקרא בשרת (ובשירות ה-AI שבונה את השאלות) ונמחק, לא נשמר. מטרה: פעולת האפליקציה. רשות |
+| **פעילות באפליקציה → תוכן אחר שהמשתמש יצר** | נאסף: דיווח על תקלה (הטקסט שהמשתמש כותב), הערות של מורה על תלמיד, וחתימת הסכמה של הורה (ציור באצבע) בהצטרפות לקבוצה של מורה. מטרה: פעולת האפליקציה / תמיכה. רשות |
+| **מידע אישי → מזהים אחרים / דרך ליצירת קשר** | נאסף רק בבקשת הצטרפות לקבוצה של מורה: שם ההורה ודרך ליצור קשר (רשות). מטרה: פעולת האפליקציה |
+| מיקום, אנשי קשר, אודיו | לא |
 
 ## "Target audience and content"
 - גילאים: 6–8, 9–12, 13–15, 16–17 + הורים (18+).
@@ -85,7 +89,14 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 גוגל צריכים להיכנס לאפליקציה. בוחרים: "All or some functionality is restricted" ורושמים:
 "Parent area: sign in with any Google account. A sample practice set is in the catalog (📚). Kid view: from the parent area, open a kid → 'Kid link'."
 
+## מפתח העלאה ובנייה
+- מפתח ההעלאה (27.11): `studyforfun-upload.jks`, alias `upload`, SHA-256 `DF:D0:93:…:6A:D7` – נשמר אצל הבעלים (לא ב-git). לשים אותו ואת `upload.properties` ב-`android/keys/`.
+- בנייה בלי Android Studio: Android SDK (platform 36) + `ANDROID_HOME`, ואז `cd android && gradle bundleRelease` → `app/build/outputs/bundle/release/app-release.aab`. בכל גרסה חדשה להעלות את `versionCode` ב-`android/app/build.gradle`.
+- Google חותמים מחדש (Play App Signing): את ה-SHA-256 של "App signing key" (Play Console → Test and release → App integrity) להוסיף ל-`public/.well-known/assetlinks.json` ולפרוס – אחרת האפליקציה נפתחת עם שורת כתובת.
+
 ## בדיקה סגורה (Closed testing) – חשבון אישי
+> ההחלטה (27.11): מתחילים בחשבון אישי, כי העסק נרשם רק בינואר. אחרי הרישום: D-U-N-S → חשבון עסקי ב-Play Console → העברת האפליקציה (App transfer) לחשבון העסקי. שם החבילה, המשתמשים והדירוגים נשארים.
+
 1. Testing → Closed testing → Create track.
 2. Testers: מוסיפים רשימה של **12 כתובות Gmail לפחות** (כתובות של חשבון Google בטלפון האנדרואיד).
 3. מעלים את הקובץ study-for-fun-1.0.0.aab → Review → Start rollout.

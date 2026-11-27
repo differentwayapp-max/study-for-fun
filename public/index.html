@@ -732,6 +732,7 @@ body.noai #btnBuild,body.noai #qaAll,body.noai #noAI{display:none!important}
 .mebtns{display:flex;flex-wrap:wrap;gap:8px}
 .catcard{margin-bottom:12px}.catcard.soon{opacity:.6}
 .catsub{margin:0 2px 4px;text-align:center}
+.privnote{margin:0 0 10px;padding:8px 10px;border-radius:12px;background:#FFF6DB;color:#5B4100;font-size:.84em;line-height:1.4}
 .yearend{display:flex;flex-direction:column;gap:6px;background:#FFF6DB;border-color:#946200;text-align:center}.yearend b{font-family:var(--display)}   /* the catalog's title is in the top bar ("קטלוג תרגולים" + "חזרה"): only this line, nothing sticky */
 .catfor{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 2px}
 .gradebar{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 2px 8px;margin:4px 0 2px}
@@ -1081,6 +1082,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
 
       <div class="wstep hidden" data-step="3">
         <h2>דפי דוגמה <span class="hint" style="font-size:.6em">לא חובה</span></h2>
+        <p class="hint privnote">🔒 החומר נשלח לעיבוד אצל Anthropic. כסו שמות, תמונות פנים וציונים לפני הצילום.</p>
         <div class="srcgrid">
           <button class="srccard" type="button" onclick="$('fCam').click()"><span class="e">📷</span><b>צילום</b></button>
           <button class="srccard" type="button" onclick="$('fFiles').click()"><span class="e">🖼️</span><b>תמונות</b></button>
@@ -2318,7 +2320,7 @@ async function logFail(where, e, subject, who){
     try{ await sample.json('ping', {}, {ping:true}); ping='server answered'; }catch(p){ ping='server NOT reachable: '+String(p?.code||'')+' '+String(p?.message||''); }
     e={code:e?.code, message:String(e?.message||e)+' | ping: '+ping};
   }
-  const rec={at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').slice(0,300),
+  const rec={at:Date.now(), where:String(where).slice(0,40), code:String(e?.code||'').slice(0,40), msg:String(e?.message||e||'').replace(/\b(families|users|teachers)\/[^\s'"`,)]+/g,'$1/…').slice(0,300),   // no document paths (ids)
     subject:String(subject||'').slice(0,40), ver:document.querySelector('meta[name="sff-ver"]')?.content||'', by:String(who||window.SFF_MYNAME||'').slice(0,40)};
   let saved=false; try{ const db=await window.claude.use('db'); await db.doc('errlog/'+rec.at+'-'+Math.random().toString(36).slice(2,7)).set(rec); saved=true; }catch(err){}
   try{ const l=JSON.parse(localStorage.getItem('sff_errlog')||'[]'); l.unshift(rec); localStorage.setItem('sff_errlog',JSON.stringify(l.slice(0,30))); }catch(err){}
@@ -5712,6 +5714,8 @@ function trMap(R){
     <p class="hint" style="margin:0 6px 14px">ממוין לפי הממוצע, מהנמוך. לחיצה על שם פותחת את כרטיס התלמיד.</p>`;
 }
 // the printable report: the topics and the numbers – no student names
+// a printed report goes around: 1–2 students in a group could be told apart – shown as "fewer than 3"
+const few=n=>n>0&&n<3?'פחות מ-3':String(n);
 function trPrint(){
   const studs=trStudents(), R=classReport(history, studs, {days:TR.days, subj:TR.subj}), N=studs.length;
   let el=$('trPrint'); if(!el){ el=document.createElement('div'); el.id='trPrint'; document.body.appendChild(el); }
@@ -5719,7 +5723,7 @@ function trPrint(){
   el.innerHTML=`<h1>דוח הפנמה לפי נושא</h1><p>${esc((window.SFF_CLASS||{}).name||'')}${TR.subj?' · '+esc(TR.subj):''} · ${per} · ${fmtDT(Date.now())}</p>
     <p>${N} תלמידים · ${R.played} תרגלו · ממוצע הפנמה ${R.avg??'—'}%</p>${mLegend()}
     <table><thead><tr><th>נושא</th><th>ממוצע</th><th>שולטים</th><th>בדרך</th><th>מתקשים</th><th>לא תרגלו</th></tr></thead>
-    <tbody>${R.topics.map(t=>`<tr><td>${esc(t.name)}</td><td>${t.avg}%</td><td>${t.g}</td><td>${t.o}</td><td>${t.r}</td><td>${t.n}</td></tr>`).join('')}</tbody></table>
+    <tbody>${R.topics.map(t=>`<tr><td>${esc(t.name)}</td><td>${t.avg}%</td><td>${few(t.g)}</td><td>${few(t.o)}</td><td>${few(t.r)}</td><td>${few(t.n)}</td></tr>`).join('')}</tbody></table>
     <p class="hint">ההפנמה של כל תלמיד: ${MAST_N} השאלות האחרונות שלו בנושא. הדוח לא כולל שמות תלמידים.</p>`;
   setTimeout(()=>window.print(),50);
 }

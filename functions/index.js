@@ -10,7 +10,10 @@ const { onCall: onCallRaw, HttpsError } = require('firebase-functions/v2/https')
 // The app admins' server log (serverLog, read in the app: ☰ → ניהול האפליקציה → יומן שרת): failures, slow calls
 // (a timeout at 540 s cannot write anything – a call over 7 minutes is the warning) and model fallbacks.
 // No prompt text and no personal data; at most 500 entries a day, so nobody can flood it.
+// a log keeps the error's code and its message without document paths (families/…/… carries ids)
+const noPaths = m => String(m || '').replace(/\b(families|users|teachers|bugLimits|joinLimits)\/[^\s'"`,)]+/g, '$1/…');
 async function serverLog(entry) {
+  if (entry && entry.msg) entry = { ...entry, msg: noPaths(entry.msg).slice(0, 300) };
   try {
     const d = getFirestore(), cnt = d.doc(`meta/serverlog_${new Date().toISOString().slice(0, 10)}`);
     const ok = await d.runTransaction(async t => { const c = await t.get(cnt), n = (c.exists && c.data().n) || 0; if (n >= 500) return false; t.set(cnt, { n: n + 1 }, { merge: true }); return true; });
@@ -34,7 +37,7 @@ const onCall = (opts, fn) => onCallRaw(opts, async (req) => {
         // only into the caller's own family: the owner, or a member (a stranger's famId writes nothing)
         const member = fam === uid || (await getFirestore().doc(`families/${fam}/members/${uid}`).get()).exists;
         if (member) await getFirestore().collection(`families/${fam}/errlog`).add({ at: Date.now(), where: 'server:' + name, code: String(e.code || e.name || 'error'),
-        msg: String(e.message || e).slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
+        msg: noPaths(e.message || e).slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
     }
     throw e;
   }
@@ -242,6 +245,7 @@ async function deleteAuthUsers(uids) {
 async function wipeClass(id, ownerUid) {
   const ref = db.doc(`families/${id}`), phones = await deviceUids(ref.path);
   await db.recursiveDelete(ref);
+  await Promise.all(['req', 'read'].map(k => db.doc(`joinLimits/g_${id}_${k}`).delete()));
   await deleteAuthUsers(phones);
   await db.doc(`teachers/${ownerUid}`).set({ classes: FieldValue.arrayRemove(id), at: Date.now() }, { merge: true });
   await db.doc(`users/${ownerUid}`).set({ classes: FieldValue.arrayRemove(id) }, { merge: true });
@@ -322,6 +326,17 @@ exports.deleteAccount = onCall({ region: 'europe-west1', invoker: 'public', time
    (firestore.rules). The parent or the teacher can withdraw it (revokeConsent): the student's progress,
    phones and link go. Everything here is written by the server only. */
 const JOIN_DAYS = 30, MAX_STUDENTS = 40, MAX_PENDING = 60, REQ_PER_HOUR = 5;
+// per group too (not only per phone): new requests, and the pages a link opens (the letter, a parent's status)
+const GROUP_REQ_PER_HOUR = 20, GROUP_READS_PER_HOUR = 300;
+async function groupLimit(classId, kind, max) {
+  if (!classIdOk(classId)) return;
+  const ref = db.doc(`joinLimits/g_${classId}_${kind}`);
+  await db.runTransaction(async tx => { const l = await tx.get(ref), now = Date.now(), t = ((l.exists && l.data().t) || []).filter(x => now - x < 36e5);
+    if (t.length >= max) throw new HttpsError('resource-exhausted', 'too_many', { reason: 'too_many' });
+    tx.set(ref, { t: [...t, now] }); });
+}
+// App Check (only a real copy of the app may call these): ready, off until it is set up in the Firebase console (see CLAUDE.md)
+const APP_CHECK = false;
 const KID_COLORS = ['#2F6BFF', '#FF5C8A', '#24C78E', '#F2A63B', '#B9A7FF', '#14A774', '#E5484D'];
 const hex = n => require('crypto').randomBytes(n).toString('hex');
 const sha = s => require('crypto').createHash('sha256').update(String(s)).digest('hex');
@@ -329,10 +344,11 @@ const txt = (v, n) => typeof v === 'string' ? v.replace(/[<>]/g, '').replace(/\s
 const classIdOk = id => typeof id === 'string' && /^[A-Za-z0-9]{20}$/.test(id);
 const kidIdOk = id => typeof id === 'string' && /^[A-Za-z0-9_-]{2,40}$/.test(id);
 function signedIn(request) { if (!request.auth) throw new HttpsError('unauthenticated', 'Sign in first.'); return request.auth; }
+// only the group's own teacher – not the app's admins (they have no way into a group's link, requests or consents)
 async function teacherOf(auth, classId) {
   if (!classIdOk(classId)) throw new HttpsError('invalid-argument', 'Missing group.');
   const ref = db.doc(`families/${classId}`), f = await ref.get();
-  if (!f.exists || f.data().kind !== 'class' || (f.data().ownerUid !== auth.uid && !isAdminUser(auth))) throw new HttpsError('permission-denied', 'Not your group.');
+  if (!f.exists || f.data().kind !== 'class' || f.data().ownerUid !== auth.uid) throw new HttpsError('permission-denied', 'Not your group.');
   return { ref, d: f.data() };
 }
 async function groupByLink(classId, code) {
@@ -395,14 +411,15 @@ exports.joinLink = onCall({ region: 'europe-west1', invoker: 'public', maxInstan
 });
 
 // what a parent sees before signing: the teacher, the group (a closed / old / wrong link: refused)
-exports.joinInfo = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinInfo(request) {
+exports.joinInfo = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10, enforceAppCheck: APP_CHECK }, async function joinInfo(request) {
   signedIn(request); const { classId, code } = request.data || {};
+  await groupLimit(classId, 'read', GROUP_READS_PER_HOUR);
   const d = await groupByLink(classId, code);
   return { teacher: d.teacherName || '', name: d.name || '', grade: d.grade, subject: d.subject || '', teach: d.teach };
 });
 
 // a parent's request: the letter's version, the parent's and the kid's names, a way to reach them (optional), the signature
-exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function requestJoin(request) {
+exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10, enforceAppCheck: APP_CHECK }, async function requestJoin(request) {
   const auth = signedIn(request); const r = request.data || {};
   const d = await groupByLink(r.classId, r.code);
   const parentName = txt(r.parentName, 60), kidName = txt(r.kidName, 30), contact = txt(r.contact, 80);
@@ -413,6 +430,7 @@ exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxIns
   await db.runTransaction(async tx => { const l = await tx.get(lim), now = Date.now(), t = ((l.exists && l.data().t) || []).filter(x => now - x < 36e5);
     if (t.length >= REQ_PER_HOUR) throw new HttpsError('resource-exhausted', 'too_many', { reason: 'too_many' });
     tx.set(lim, { t: [...t, now] }); });
+  await groupLimit(r.classId, 'req', GROUP_REQ_PER_HOUR);
   const reqs = db.collection(`families/${r.classId}/joinReqs`);
   const waiting = (await reqs.where('status', '==', 'pending').count().get()).data().count;
   if (waiting >= MAX_PENDING) throw new HttpsError('resource-exhausted', 'too_many_waiting', { reason: 'too_many_waiting' });
@@ -422,8 +440,9 @@ exports.requestJoin = onCall({ region: 'europe-west1', invoker: 'public', maxIns
 });
 
 // the parent's own status page (with the secret key): waiting / approved (+ the kid's link) / rejected (+ why) / withdrawn
-exports.joinStatus = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10 }, async function joinStatus(request) {
+exports.joinStatus = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 10, enforceAppCheck: APP_CHECK }, async function joinStatus(request) {
   signedIn(request); const { classId, reqId, statusKey } = request.data || {};
+  await groupLimit(classId, 'read', GROUP_READS_PER_HOUR);
   const nf = () => new HttpsError('not-found', 'not_found', { reason: 'not_found' });
   if (!classIdOk(classId) || typeof reqId !== 'string' || !/^[A-Za-z0-9]{20}$/.test(reqId) || typeof statusKey !== 'string') throw nf();
   const [q, f] = await Promise.all([db.doc(`families/${classId}/joinReqs/${reqId}`).get(), db.doc(`families/${classId}`).get()]);
@@ -477,6 +496,7 @@ async function dropStudent(classId, kidId, by) {
   const devs = await db.collection(`${ref.path}/devices`).where('kid', '==', kidId).get();
   const reqs = await db.collection(`${ref.path}/joinReqs`).where('kidId', '==', kidId).get();
   const sets = await db.collection(`${ref.path}/sets`).where('set.kidId', '==', kidId).get();   // the student's practice sets carry the name
+  const asg = await db.collection(`${ref.path}/sets`).where(new FieldPath('set', 'toMap', kidId), '==', true).get();   // assignments given to this student
   await db.runTransaction(async tx => {
     const kidsRef = db.doc(`${ref.path}/fam/kids`), ks = await tx.get(kidsRef);
     const list = ((ks.exists && ks.data().list) || []).filter(k => k && k.id !== kidId);
@@ -487,10 +507,13 @@ async function dropStudent(classId, kidId, by) {
     tx.delete(db.doc(`${ref.path}/sched/${kidId}`));               // the private group's fixed lessons
     devs.docs.forEach(d => tx.delete(d.ref));
     sets.docs.forEach(d => tx.delete(d.ref));
+    asg.docs.forEach(d => { if (sets.docs.some(x => x.id === d.id)) return; const x = (d.data() || {}).set || {};
+      tx.update(d.ref, new FieldPath('set', 'toMap', kidId), FieldValue.delete(), ...(Array.isArray(x.to) ? ['set.to', FieldValue.arrayRemove(kidId)] : [])); });
     reqs.docs.forEach(d => tx.update(d.ref, { status: 'revoked', doneAt: now, ...REQ_STRIP() }));
     tx.update(ref, new FieldPath('kidTokens', kidId), FieldValue.delete());
     tx.set(db.doc(`${ref.path}/consents/${kidId}`), { status: 'revoked', revokedBy: by, revokedAt: now });
   });
+  await deleteAuthUsers(devs.docs.map(d => d.id));                 // the student's phones' sign-in accounts
 }
 exports.revokeConsent = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 5 }, async function revokeConsent(request) {
   const auth = signedIn(request); const { classId, kidId, reqId, statusKey } = request.data || {};
@@ -533,6 +556,7 @@ async function claimCall(admin, uid, famId, buildId) {
 exports.adminUsers = onCall({ region: 'europe-west1', invoker: 'public', maxInstances: 3 }, async function adminUsers(request) {
   const auth = parentOnly(request);
   if (!isAdminUser(auth)) throw new HttpsError('permission-denied', 'Admins only.');
+  await serverLog({ fn: 'adminUsers', kind: 'admin', code: 'ok', msg: `the accounts list was read by admin ${auth.uid}` });   // every look at the accounts list is kept
   const { getAuth } = require('firebase-admin/auth');
   const parents = [], month = monthKey(); let kidDevices = 0, token;
   do {
@@ -833,7 +857,7 @@ async function runQueue(famId, buildId, run) {
 }
 // a line in the family's failure log (the parent's ☰ → דיווחים, and the app admins) – no prompt text
 async function famErr(famId, where, code, msg) {
-  try { await db.collection(`families/${famId}/errlog`).add({ at: Date.now(), where, code: String(code).slice(0, 60), msg: String(msg || '').slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
+  try { await db.collection(`families/${famId}/errlog`).add({ at: Date.now(), where, code: String(code).slice(0, 60), msg: noPaths(msg).slice(0, 300), subject: '', ver: 'server', by: '' }); } catch (_) {}
 }
 
 // Start a new practice set (the older app, which runs the build itself): uses one of this month's free builds, or one paid credit.
@@ -1119,7 +1143,14 @@ async function cleanOldBuilds(now) {
   }
   return n;
 }
-const CLEANERS = { joinReqs: cleanJoinReqs, schoolYear: cleanSchoolYear, builds: cleanOldBuilds, buildLeftovers: (now, o) => cleanBuildLeftovers(now, o.page) };
+// bug reports after BUGREPORT_DAYS, the server log after SERVERLOG_DAYS
+const BUGREPORT_DAYS = 180, SERVERLOG_DAYS = 90;
+async function deleteOlder(col, days, now) {
+  let n = 0;
+  for (;;) { const q = await db.collection(col).where('at', '<', now - days * 864e5).limit(300).get(); if (q.empty) return n;
+    const b = db.batch(); q.docs.forEach(d => b.delete(d.ref)); await b.commit(); n += q.size; if (q.size < 300) return n; }
+}
+const CLEANERS = { bugReports: now => deleteOlder('bugReports', BUGREPORT_DAYS, now), serverLog: now => deleteOlder('serverLog', SERVERLOG_DAYS, now), joinReqs: cleanJoinReqs, schoolYear: cleanSchoolYear, builds: cleanOldBuilds, buildLeftovers: (now, o) => cleanBuildLeftovers(now, o.page) };
 async function cleanAll(now, only, o = {}) {
   const out = {};
   for (const [k, f] of Object.entries(CLEANERS)) { if (only && !only.includes(k)) continue;
@@ -1159,7 +1190,7 @@ if (GMAIL_APP_PASSWORD) exports.mailBugReport = onDocumentCreated({ document: 'b
     const nodemailer = require('nodemailer');
     const tr = nodemailer.createTransport({ service: 'gmail', auth: { user: from, pass: GMAIL_APP_PASSWORD.value().replace(/\s+/g, '') } });
     await tr.sendMail({ from: `Study for fun <${from}>`, to,
-      subject: `Study for fun – ${kind}${r.byName ? ' מ' + clean(r.byName, 40) : ''}`,
+      subject: `Study for fun – ${kind}`,                                       // (no name in the subject line)
       text: `${String(r.text || '').slice(0, 3000)}\n\n—\nסוג: ${kind}\nמסך: ${clean(r.where, 120)}\nגרסה: ${clean(r.ver, 20)}\nתפקיד: ${clean(r.role, 20)}\nמכשיר: ${clean(r.ua, 160)}\nזמן: ${new Date(r.at || Date.now()).toISOString()}` });
     await snap.ref.update({ mailed: Date.now() });
     console.log('mailBugReport: sent');

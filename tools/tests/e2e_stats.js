@@ -7,7 +7,7 @@
 //   button seen with no scrolling and above the bottom bar; back to everyone.
 // OUT=dir: level 1 and level 2, Hebrew and English, 390×844 and 375×667.
 const { chromium } = require('playwright');
-const APP = 'http://localhost:8765/', OUT = process.env.OUT || require('os').tmpdir();
+const APP = process.env.APP || 'http://localhost:8765/', OUT = process.env.OUT || require('os').tmpdir();
 const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
 const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
 const GOOGLE = { sub: 'statsP', email: 'statsp@t.local', email_verified: true, name: 'שירה' };
@@ -36,7 +36,7 @@ const GOOGLE = { sub: 'statsP', email: 'statsp@t.local', email_verified: true, n
     const d = new Date(Date.now() + 2 * 864e5); Y.examDate = d.toISOString().slice(0, 10);
     store.save(); return { A: A.id, M: M.id, Y: Y.id, examDay: d.getDay() }; });
   // נועה: today and yesterday, English with mistakes in chapter 0, a little in chapter 1; math well
-  await play(p, ids.A, 'k1', 0, 3, 0); await play(p, ids.A, 'k1', 0, 2, 3600e3); await play(p, ids.A, 'k1', 1, 1, day); await play(p, ids.M, 'k1', 0, 0, day + 1000); await play(p, ids.A, 'k1', 2, 0, 9 * day);
+  await play(p, ids.A, 'k1', 0, 6, 0); await play(p, ids.A, 'k1', 0, 5, 3600e3); await play(p, ids.A, 'k1', 1, 3, day); await play(p, ids.A, 'k1', 1, 2, day + 500); await play(p, ids.M, 'k1', 0, 0, day + 1000); await play(p, ids.A, 'k1', 2, 0, 9 * day);
   // יואב: 4 days ago, no mistakes
   await play(p, ids.Y, 'k2', 0, 0, 4 * day);
   await p.evaluate(() => go('stats')); await p.waitForTimeout(1200);
@@ -108,6 +108,7 @@ const GOOGLE = { sub: 'statsP', email: 'statsp@t.local', email_verified: true, n
     const cc = await ctx(lang, w, h), q = await open(cc); await q.waitForFunction(() => kids.length === 3 && history.length >= 6, null, { timeout: 20000 }).catch(() => {});
     await q.evaluate(() => go('stats')); await q.waitForTimeout(1200);
     if (OUT) await q.screenshot({ path: `${OUT}/stats_l1_${lang}_${w}x${h}.png` });
+    if (lang === 'en' && w === 390) console.log('    missing (en, level 1/2):', JSON.stringify(await q.evaluate(() => [...(window.__i18nMissing || [])].filter(x => /[֐-׿]/.test(x)).slice(-30))));
     if (lang === 'en') { const heb = await q.evaluate(() => (document.getElementById('sBody').innerText.match(/[^\s]*[֐-׿][^\s]*/g) || []).filter(w => !/נועה|יואב|תמר/.test(w))); ok(!heb.length, `en ${w}×${h} level 1: no Hebrew left ` + heb.slice(0, 6).join(' ')); }
     await q.evaluate(() => statsKid('k1')); await q.waitForTimeout(800);
     if (OUT) await q.screenshot({ path: `${OUT}/stats_l2_${lang}_${w}x${h}.png` });

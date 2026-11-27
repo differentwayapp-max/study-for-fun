@@ -4675,7 +4675,7 @@ function statsKidView(){
   const {act,fin,n}=stTabs(k), all=[...act,...fin];
   if(!all.length){ $('sBody').innerHTML=`<div class="card center"><p class="sub">${esc(sffT?sffT('עוד אין תרגולים'):'עוד אין תרגולים')}</p>${canManage()?`<button class="btn" onclick="openCatalog('${esc(k.id)}')">＋ תרגול</button>`:''}</div>`; $('sFocus').classList.add('hidden'); return; }
   let s=all.find(x=>x.id===ST.tab)||(ST.tab==='done'?null:act[0])||null; if(s) ST.tab=s.id; else if(!act.length) ST.tab='done';
-  const lbl=x=>{ const sub=String(x.subject).replace(/^🎯\s*/,''), m=n(x); return `${x.reinf?'🎯 ':''}${esc(sub)}${m?` · ${m} ${esc(sffT?sffT('לחזק'):'לחזק')}`:''}`; };
+  const lbl=x=>{ const sub=String(x.subject).replace(/^🎯\s*/,''), m=n(x); return `${x.reinf?'🎯 ':''}${m?fT(`${sub} · ${m} לחזק`):esc(sub)}`; };
   const doneOpen=fin.some(x=>x.id===ST.tab)||ST.tab==='done';
   const tabs=`<div class="stabs" role="tablist" aria-label="תרגול">${act.map(x=>`<button role="tab" aria-selected="${x===s}" class="${x===s?'on':''}" onclick="ST.tab='${esc(x.id)}';ST.sel=null;renderStats()">${lbl(x)}</button>`).join('')}
     ${fin.length?`<button role="tab" aria-selected="${doneOpen}" class="${doneOpen?'on':''}" onclick="ST.tab='done';ST.sel=null;renderStats()">✓ ${esc(sffT?sffT('הסתיימו'):'הסתיימו')} · ${fin.length}</button>`:''}</div>`;
@@ -4696,7 +4696,7 @@ function statsSet(k,s){
   const trend=diff==null||diff===0?'':`<span class="strend ${diff>0?'up':'down'}">${diff>0?'↑':'↓'} ${fT(`${Math.abs(diff)}% מהשבוע שעבר`)}</span>`;
   const exam=s.examDate&&daysLeft(s.examDate)>=0?` · ${fT(`מבחן ${examWhen(s)}`)}`:'';
   const sum=`<div class="card ssum"><div class="sring">${ringSvg(pct/100,sc,'#EAF0FF',64,8)}<b>${pct}%</b></div>
-    <div class="ssumt"><b dir="auto" translate="no">${esc(String(s.subject))}</b><span class="hint">${fT(`${dn}/${C.length} פרקים`)}${exam}</span>${trend}</div></div>`;
+    <div class="ssumt"><b dir="auto">${esc(String(s.subject))}</b><span class="hint">${fT(`${dn}/${C.length} פרקים`)}${exam}</span>${trend}</div></div>`;
   const rows=topicRows(HS), weak=rows.filter(x=>x.status==='weak'), mid=rows.filter(x=>x.status==='mid'), good=rows.filter(x=>x.status==='good'||x.status==='few');
   const items=wordStats(s,history), bad=items.filter(x=>x.bad).sort((a,b)=>b.bad-a.bad||b.last-a.last), okW=items.filter(x=>!x.bad);
   const sel=bad.find(x=>x.label===ST.sel)||null, en=isEnSet(s);
@@ -4730,7 +4730,7 @@ function wDetail(sel,en){ return `<div class="wdetail"><div class="wtop"><span c
 // the set's games, in a window (until the history screen – level 3 – is built)
 function openSetHistory(id){ const s=getSet(id); if(!s) return; const H=history.filter(h=>h.setId===id).slice(0,60);
   let d=$('histDlg'); if(!d){ d=document.createElement('div'); d.id='histDlg'; d.className='dlgwrap'; d.onclick=e=>{ if(e.target===d) d.classList.add('hidden'); }; document.body.appendChild(d); }
-  d.innerHTML=`<div class="card"><div class="dlghead"><b>${esc(sffT?sffT('היסטוריה'):'היסטוריה')} · <span dir="auto" translate="no">${esc(String(s.subject))}</span></b><button class="btn ghost small" onclick="$('histDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+  d.innerHTML=`<div class="card"><div class="dlghead"><b>${esc(sffT?sffT('היסטוריה'):'היסטוריה')} · <span dir="auto">${esc(String(s.subject))}</span></b><button class="btn ghost small" onclick="$('histDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
     ${H.length?`<table><thead><tr><th>${esc(sffT?sffT('מתי'):'מתי')}</th><th>${esc(sffT?sffT('משחק'):'משחק')}</th><th>${esc(sffT?sffT('תוצאה'):'תוצאה')}</th></tr></thead><tbody>${H.map(h=>{ const p=Math.round(h.right/Math.max(1,h.n)*100);
       return `<tr><td>${new Date(h.at).toLocaleString(EN()?'en-GB':'he-IL',{dateStyle:'short',timeStyle:'short'})}</td><td>${MODE_ICO[h.mode]||'🎮'}${h.retry?` <span class="hint">${esc(sffT?sffT('(חזרה על טעויות)'):'(חזרה על טעויות)')}</span>`:''}</td><td><span class="pill ${p>=80?'ok':p>=60?'warn':'bad'}">${h.right}/${h.n}</span></td></tr>`; }).join('')}</tbody></table>`
       :`<p class="hint center">${esc(sffT?sffT('עוד אין משחקים'):'עוד אין משחקים')}</p>`}</div>`;

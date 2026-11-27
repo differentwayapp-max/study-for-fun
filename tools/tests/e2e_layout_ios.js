@@ -81,7 +81,8 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
     // 3. the other screens of the family app
     const screens = [['ההתקדמות (מעקב)', "go('stats')", 'vStats'], ['המשפחה', "go('family')", 'vFamily'], ['האשף – תרגול חדש', "openWizard('k1')", 'vWizard'], ['האשף – שלב החומר', "openWizard('k1');W.step=3;wizRender()", 'vWizard'],
       ['מסך התרגול', `curSet=getSet(${JSON.stringify(ids.five[0])});renderReview(curSet);show('vReview')`, 'vReview'],
-      ['בית הילד', "activeKid='k2';go('kid')", 'vKid'], ['המפה', `openRoad(${JSON.stringify(ids.five[0])})`, 'vRoad'], ['מה אני יודע', "activeKid='k2';openMe()", 'vMe']];
+      ['בית הילד', "activeKid='k2';go('kid')", 'vKid'], ['המפה', `openRoad(${JSON.stringify(ids.five[0])})`, 'vRoad'], ['מה אני יודע', "activeKid='k2';openMe()", 'vMe'],
+      ['מעקב – כל הילדים', "go('stats')", 'vStats'], ['מעקב – ילד אחד', "statsKid('k2')", 'vStats']];
     for (const [name, js, view] of screens) { await p.evaluate(js); await p.waitForTimeout(450); e = await p.evaluate(END, view); seen.add(name);
       if (!e.ok || !e.nav) fails.end.push(`${tag} ${name}: ${e.low} ends at ${e.lowB}, bar at ${e.navTop}${e.nav ? '' : ' (no bar)'}`); }
     await p.evaluate(() => { document.body.classList.remove('kidside'); go('kids'); });

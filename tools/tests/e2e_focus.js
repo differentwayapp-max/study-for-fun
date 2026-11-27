@@ -110,9 +110,10 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   ok(C && /f1/.test(C.cls) && /🌟 הכול יושב!/.test(C.text) && /לתרגול חדש מהקטלוג/.test(C.text), 'a set with no mistakes: "🌟 הכול יושב!" + a new set from the catalog');
 
   console.log('7. the progress screen: the one button');
-  await p.evaluate(id => { const s = getSet(id); delete s.focusSeen; store.save(); go('stats'); }, ids.B); await p.waitForTimeout(800);
-  const st = await p.evaluate(id => { const c = document.querySelector(`.scard[data-set="${id}"]`); return c ? { btn: [...c.querySelectorAll('.focusbtn')].map(x => x.textContent.trim()), txt: c.innerText } : null; }, ids.B);
-  ok(st && st.btn.length === 1 && new RegExp('🎯 תרגול ממוקד · ' + nB2).test(st.btn[0]) && /בחינם, בלחיצה/.test(st.txt), 'one button on the set\'s card: ' + (st && st.btn.join(' | ')));
+  // (the progress screen is two levels now: the kid's page, a tab per set, one button pinned at the bottom – e2e_stats.js)
+  await p.evaluate(id => { const s = getSet(id); delete s.focusSeen; store.save(); openFocusIn(id); }, ids.B); await p.waitForTimeout(800);
+  const st = await p.evaluate(id => ({ tab: ST.tab, btn: [...document.querySelectorAll('#sFocus:not(.hidden) .sfbtn')].map(x => x.textContent.trim()) }), ids.B);
+  ok(st.tab === ids.B && st.btn.length === 1 && new RegExp('תרגול ממוקד ל.+ · ' + nB2).test(st.btn[0]), 'one button, pinned, on the set\'s tab: ' + st.btn.join(' | '));
   ok(await p.evaluate(() => !/סט חיזוק/.test(document.body.innerText)), 'no "סט חיזוק" anywhere (progress screen, home)');
 
   console.log("8. not on a kid's phone, not in a teacher's group");

@@ -390,176 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "math1",
-   "ver": "f36f1b373b",
-   "subject": "מתמטיקה",
-   "grade": 0,
-   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
-   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
-   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
-   "tags": [
-    "מספרים עד 100",
-    "מספרים סודרים",
-    "זוגי ואי-זוגי",
-    "פירוקי 10",
-    "חיבור וחיסור עד 20",
-    "כפל וחילוק ראשון",
-    "חצי",
-    "דיאגרמת תמונות",
-    "צורות",
-    "שעון"
-   ],
-   "questions": 377,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה תפוחים?",
-     "e": "🍎🍎"
-    },
-    {
-     "q": "איזה מספר בא אחרי ⁦12⁩?",
-     "e": "12, ?"
-    },
-    {
-     "q": "כמה בסך הכול?",
-     "e": "🔟🔟"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math2",
-   "ver": "50a7b4f9ce",
-   "subject": "מתמטיקה",
-   "grade": 1,
-   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
-   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
-   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
-   "tags": [
-    "מספרים עד 1,000",
-    "ישר המספרים",
-    "חיבור וחיסור עד 100",
-    "מאות שלמות",
-    "מספר חסר",
-    "לוח הכפל",
-    "חילוק",
-    "חצי ורבע",
-    "דיאגרמות",
-    "מצולעים",
-    "גופים",
-    "מדידות",
-    "שעון"
-   ],
-   "questions": 359,
-   "chapters": 35,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה בסך הכול?",
-     "e": "💯💯"
-    },
-    {
-     "q": "כתבו בספרות: שלוש מאות ושבעים",
-     "e": "שלוש מאות ושבעים"
-    },
-    {
-     "q": "מה חסר? ⁦100, 200, 300, _⁩",
-     "e": "100, 200, 300, ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math4",
-   "ver": "1fa8122ac3",
-   "subject": "מתמטיקה",
-   "grade": 3,
-   "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
-   "desc": "מספרים עד מיליונים, ארבע פעולות במאונך, כפל וחילוק ב-10, 100, 1,000, סדר פעולות, סימני התחלקות, שברים, מרובעים, משולשים, תיבה ופריסות, היקף ושטח, זמן ויחידות, טבלאות ודיאגרמות",
-   "desc_en": "Numbers to millions, the four operations (long multiplication and division), multiplying and dividing by 10, 100, 1,000, order of operations, divisibility, fractions, quadrilaterals, triangles, boxes and their nets, perimeter and area, time and units, tables and bar charts",
-   "tags": [
-    "מספרים גדולים",
-    "עיגול",
-    "כפל וחילוק ארוך",
-    "כפל וחילוק ב-10, 100, 1,000",
-    "סדר פעולות",
-    "סימני התחלקות",
-    "שברים",
-    "משולשים ומרובעים",
-    "תיבה ונפח",
-    "פריסות",
-    "היקף ושטח",
-    "זמן ויחידות",
-    "חקר נתונים"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה ערך הספרה 5 במספר ⁦352,184⁩?",
-     "e": "352,184"
-    },
-    {
-     "q": "מה ערך הספרה 2 במספר ⁦2,050,000⁩?",
-     "e": "2,050,000"
-    },
-    {
-     "q": "⁦87,654 ___ 87,564⁩",
-     "e": "87,654? 87,564"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math5",
-   "ver": "c9ff046d65",
-   "subject": "מתמטיקה",
-   "grade": 4,
-   "title": "שברים · עשרוניים · אחוזים · ראשוניים והתחלקות · משולשים ומרובעים · שטחים · ממוצע",
-   "desc": "צמצום והרחבה, השוואת שברים, מספר מעורב, חיבור וחיסור שברים, שבר כפול מספר שלם וחלק מכמות, שברים עשרוניים וכפל וחילוק ב-10, 100, 1000, אחוזים, מחלקים וראשוניים, סימני התחלקות, מרובעים, סוגי משולשים וסכום הזוויות, גובה ושטחים, גרפים וממוצע",
-   "desc_en": "Simplifying and comparing fractions, mixed numbers, adding fractions, a fraction times a whole number and a fraction of a quantity, decimals and multiplying or dividing them by 10, 100, 1000, first percents, divisors and primes, divisibility rules, quadrilaterals, kinds of triangles and their angle sum, heights and areas, graphs and the mean",
-   "tags": [
-    "צמצום והרחבה",
-    "השוואת שברים",
-    "מספר מעורב",
-    "חיבור שברים",
-    "חלק מכמות",
-    "שברים עשרוניים",
-    "עשרוניים × 10, 100, 1000",
-    "אחוזים",
-    "ראשוניים ופריקים",
-    "סימני התחלקות",
-    "מרובעים",
-    "משולשים וזוויות",
-    "שטחים",
-    "ממוצע וגרפים"
-   ],
-   "questions": 400,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "צמצמו את ⁦6/8⁩ ככל האפשר",
-     "e": "6/8"
-    },
-    {
-     "q": "הרחיבו את ⁦2/5⁩ פי ⁦3⁩",
-     "e": "2/5"
-    },
-    {
-     "q": "⁦3/4 ___ 2/3⁩",
-     "e": "3/4 ? 2/3"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math6",
    "ver": "8be0949841",
    "subject": "מתמטיקה",
@@ -1489,6 +1319,254 @@
     "Angles",
     "Triangles and quadrilaterals",
     "Measurement and time"
+   ]
+  },
+  {
+   "id": "math1",
+   "ver": "957ef156c5",
+   "subject": "מתמטיקה",
+   "grade": 0,
+   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
+   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
+   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
+   "tags": [
+    "מספרים עד 100",
+    "מספרים סודרים",
+    "זוגי ואי-זוגי",
+    "פירוקי 10",
+    "חיבור וחיסור עד 20",
+    "כפל וחילוק ראשון",
+    "חצי",
+    "דיאגרמת תמונות",
+    "צורות",
+    "שעון"
+   ],
+   "questions": 377,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה תפוחים?",
+     "e": "🍎🍎",
+     "q_en": "How many apples?"
+    },
+    {
+     "q": "איזה מספר בא אחרי ⁦12⁩?",
+     "e": "12, ?",
+     "q_en": "What number comes after 12?"
+    },
+    {
+     "q": "כמה בסך הכול?",
+     "e": "🔟🔟",
+     "q_en": "How many in all?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 1",
+   "title_en": "Numbers · Addition and subtraction · Shapes · Data · The clock",
+   "tags_en": [
+    "Numbers to 100",
+    "Ordinal numbers",
+    "Even and odd",
+    "Number bonds to 10",
+    "Addition and subtraction to 20",
+    "Multiplication and division – first steps",
+    "Half",
+    "Pictographs",
+    "Shapes",
+    "The clock"
+   ]
+  },
+  {
+   "id": "math2",
+   "ver": "2304b256a0",
+   "subject": "מתמטיקה",
+   "grade": 1,
+   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
+   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
+   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
+   "tags": [
+    "מספרים עד 1,000",
+    "ישר המספרים",
+    "חיבור וחיסור עד 100",
+    "מאות שלמות",
+    "מספר חסר",
+    "לוח הכפל",
+    "חילוק",
+    "חצי ורבע",
+    "דיאגרמות",
+    "מצולעים",
+    "גופים",
+    "מדידות",
+    "שעון"
+   ],
+   "questions": 359,
+   "chapters": 35,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה בסך הכול?",
+     "e": "💯💯",
+     "q_en": "How many in all?"
+    },
+    {
+     "q": "כתבו בספרות: שלוש מאות ושבעים",
+     "e": "שלוש מאות ושבעים",
+     "q_en": "Write in digits: three hundred seventy"
+    },
+    {
+     "q": "מה חסר? ⁦100, 200, 300, _⁩",
+     "e": "100, 200, 300, ?",
+     "q_en": "What is missing? 100, 200, 300, _"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 2",
+   "title_en": "Numbers to 1,000 · Addition and subtraction · Times tables · Polygons and 3D shapes · Clock",
+   "tags_en": [
+    "Numbers to 1,000",
+    "The number line",
+    "Addition and subtraction to 100",
+    "Whole hundreds",
+    "Missing number",
+    "Times tables",
+    "Division",
+    "Halves and quarters",
+    "Charts",
+    "Polygons",
+    "3D shapes",
+    "Measurement",
+    "Clock"
+   ]
+  },
+  {
+   "id": "math5",
+   "ver": "fef33d9da9",
+   "subject": "מתמטיקה",
+   "grade": 4,
+   "title": "שברים · עשרוניים · אחוזים · ראשוניים והתחלקות · משולשים ומרובעים · שטחים · ממוצע",
+   "desc": "צמצום והרחבה, השוואת שברים, מספר מעורב, חיבור וחיסור שברים, שבר כפול מספר שלם וחלק מכמות, שברים עשרוניים וכפל וחילוק ב-10, 100, 1000, אחוזים, מחלקים וראשוניים, סימני התחלקות, מרובעים, סוגי משולשים וסכום הזוויות, גובה ושטחים, גרפים וממוצע",
+   "desc_en": "Simplifying and comparing fractions, mixed numbers, adding fractions, a fraction times a whole number and a fraction of a quantity, decimals and multiplying or dividing them by 10, 100, 1000, first percents, divisors and primes, divisibility rules, quadrilaterals, kinds of triangles and their angle sum, heights and areas, graphs and the mean",
+   "tags": [
+    "צמצום והרחבה",
+    "השוואת שברים",
+    "מספר מעורב",
+    "חיבור שברים",
+    "חלק מכמות",
+    "שברים עשרוניים",
+    "עשרוניים × 10, 100, 1000",
+    "אחוזים",
+    "ראשוניים ופריקים",
+    "סימני התחלקות",
+    "מרובעים",
+    "משולשים וזוויות",
+    "שטחים",
+    "ממוצע וגרפים"
+   ],
+   "questions": 400,
+   "chapters": 39,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "צמצמו את ⁦6/8⁩ ככל האפשר",
+     "e": "6/8",
+     "q_en": "Simplify 6/8 completely"
+    },
+    {
+     "q": "הרחיבו את ⁦2/5⁩ פי ⁦3⁩",
+     "e": "2/5",
+     "q_en": "Expand 2/5 by a factor of 3"
+    },
+    {
+     "q": "⁦3/4 ___ 2/3⁩",
+     "e": "3/4 ? 2/3",
+     "q_en": "⁦3/4 ___ 2/3⁩"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 5",
+   "title_en": "Fractions · Decimals · Percent · Primes and divisibility · Triangles and quadrilaterals · Area · Mean",
+   "tags_en": [
+    "Simplifying and expanding",
+    "Comparing fractions",
+    "Mixed numbers",
+    "Adding fractions",
+    "Part of a quantity",
+    "Decimals",
+    "Decimals × 10, 100, 1000",
+    "Percent",
+    "Prime and composite numbers",
+    "Divisibility rules",
+    "Quadrilaterals",
+    "Triangles and angles",
+    "Area",
+    "Mean and graphs"
+   ]
+  },
+  {
+   "id": "math4",
+   "ver": "2981bc361c",
+   "subject": "מתמטיקה",
+   "grade": 3,
+   "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
+   "desc": "מספרים עד מיליונים, ארבע פעולות במאונך, כפל וחילוק ב-10, 100, 1,000, סדר פעולות, סימני התחלקות, שברים, מרובעים, משולשים, תיבה ופריסות, היקף ושטח, זמן ויחידות, טבלאות ודיאגרמות",
+   "desc_en": "Numbers to millions, the four operations (long multiplication and division), multiplying and dividing by 10, 100, 1,000, order of operations, divisibility, fractions, quadrilaterals, triangles, boxes and their nets, perimeter and area, time and units, tables and bar charts",
+   "tags": [
+    "מספרים גדולים",
+    "עיגול",
+    "כפל וחילוק ארוך",
+    "כפל וחילוק ב-10, 100, 1,000",
+    "סדר פעולות",
+    "סימני התחלקות",
+    "שברים",
+    "משולשים ומרובעים",
+    "תיבה ונפח",
+    "פריסות",
+    "היקף ושטח",
+    "זמן ויחידות",
+    "חקר נתונים"
+   ],
+   "questions": 380,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 5 במספר ⁦352,184⁩?",
+     "e": "352,184",
+     "q_en": "What is the value of the digit 5 in 352,184?"
+    },
+    {
+     "q": "מה ערך הספרה 2 במספר ⁦2,050,000⁩?",
+     "e": "2,050,000",
+     "q_en": "What is the value of the digit 2 in 2,050,000?"
+    },
+    {
+     "q": "⁦87,654 ___ 87,564⁩",
+     "e": "87,654? 87,564",
+     "q_en": "⁦87,654 ___ 87,564⁩"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 4",
+   "title_en": "Large numbers · Multiplication and division · Fractions · Geometry · Measurement · Data handling",
+   "tags_en": [
+    "Large numbers",
+    "Rounding",
+    "Multiplication and long division",
+    "Multiplying and dividing by 10, 100, 1,000",
+    "Order of operations",
+    "Divisibility rules",
+    "Fractions",
+    "Triangles and quadrilaterals",
+    "Rectangular prisms and volume",
+    "Nets",
+    "Perimeter and area",
+    "Time and units",
+    "Data handling"
    ]
   }
  ]

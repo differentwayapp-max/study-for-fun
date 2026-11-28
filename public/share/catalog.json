@@ -473,48 +473,6 @@
    "status": "ready"
   },
   {
-   "id": "math3",
-   "ver": "2c7ad6bc16",
-   "subject": "מתמטיקה",
-   "grade": 2,
-   "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
-   "desc": "מספרים עד 10,000, עיגול ואומדן, חיבור וחיסור במאונך, לוח הכפל, כפל וחילוק בעשרות ובמאות, כפל דו-ספרתי, חילוק דו-ספרתי, פי כמה, חילוק עם שארית, סדר פעולות, חצי שליש ורבע, זוויות, ישרים מקבילים ומאונכים, משולשים ומרובעים, אורך, משקל, ליטר וזמן",
-   "desc_en": "Numbers to 10,000, rounding and estimating, column addition and subtraction, times tables, multiplying and dividing whole tens and hundreds, 2-digit by 1-digit multiplication and division, times-as-many problems, division with remainder, order of operations, halves, thirds and quarters, angles, parallel and perpendicular lines, triangles and quadrilaterals, length, weight, litres and time",
-   "tags": [
-    "מספרים עד 10,000",
-    "עיגול ואומדן",
-    "חיבור וחיסור במאונך",
-    "לוח הכפל",
-    "כפל וחילוק",
-    "פי כמה",
-    "חילוק עם שארית",
-    "סדר פעולות",
-    "שברים",
-    "זוויות",
-    "משולשים ומרובעים",
-    "מדידות וזמן"
-   ],
-   "questions": 378,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה ערך הספרה 4 במספר ⁦4,725⁩?",
-     "e": "4,725"
-    },
-    {
-     "q": "איזה מספר כתוב בכרטיס?",
-     "e": "2 אלפים3 מאות"
-    },
-    {
-     "q": "איזה סימן מתאים? ⁦4,312 ___ 4,231⁩",
-     "e": "4,312 ? 4,231"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math4",
    "ver": "1fa8122ac3",
    "subject": "מתמטיקה",
@@ -1191,47 +1149,6 @@
    "status": "ready"
   },
   {
-   "id": "sci4",
-   "ver": "8fbd5a6055",
-   "subject": "מדעים",
-   "grade": 3,
-   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
-   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
-   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
-   "tags": [
-    "נפח ומסה",
-    "מצבי צבירה",
-    "מחזור המים",
-    "אוויר",
-    "שלד ושרירים",
-    "העור",
-    "מזג אוויר",
-    "ליתוספרה וביוספרה",
-    "בעלי חיים",
-    "מפתח מיון",
-    "מכונות פשוטות"
-   ],
-   "questions": 279,
-   "chapters": 27,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהו נפח?",
-     "e": "📦"
-    },
-    {
-     "q": "מה מודדים במאזניים?",
-     "e": "⚖️"
-    },
-    {
-     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
-     "e": "🧱💧"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "heb4",
    "ver": "4744227e0a",
    "subject": "עברית / לשון",
@@ -1453,6 +1370,126 @@
     }
    ],
    "status": "ready"
+  },
+  {
+   "id": "sci4",
+   "ver": "52674b3b8c",
+   "subject": "מדעים",
+   "grade": 3,
+   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
+   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
+   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
+   "tags": [
+    "נפח ומסה",
+    "מצבי צבירה",
+    "מחזור המים",
+    "אוויר",
+    "שלד ושרירים",
+    "העור",
+    "מזג אוויר",
+    "ליתוספרה וביוספרה",
+    "בעלי חיים",
+    "מפתח מיון",
+    "מכונות פשוטות"
+   ],
+   "questions": 279,
+   "chapters": 27,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהו נפח?",
+     "e": "📦",
+     "q_en": "What is the volume of an object?"
+    },
+    {
+     "q": "מה מודדים במאזניים?",
+     "e": "⚖️",
+     "q_en": "What do we measure with a balance?"
+    },
+    {
+     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
+     "e": "🧱💧",
+     "q_en": "Which state of matter has a fixed shape and a fixed volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 4",
+   "title_en": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
+   "tags_en": [
+    "Volume and mass",
+    "States of matter",
+    "The water cycle",
+    "Air",
+    "Skeleton and muscles",
+    "The skin",
+    "Weather",
+    "Lithosphere and biosphere",
+    "Animals",
+    "Classification keys",
+    "Simple machines"
+   ]
+  },
+  {
+   "id": "math3",
+   "ver": "53f096f3a0",
+   "subject": "מתמטיקה",
+   "grade": 2,
+   "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
+   "desc": "מספרים עד 10,000, עיגול ואומדן, חיבור וחיסור במאונך, לוח הכפל, כפל וחילוק בעשרות ובמאות, כפל דו-ספרתי, חילוק דו-ספרתי, פי כמה, חילוק עם שארית, סדר פעולות, חצי שליש ורבע, זוויות, ישרים מקבילים ומאונכים, משולשים ומרובעים, אורך, משקל, ליטר וזמן",
+   "desc_en": "Numbers to 10,000, rounding and estimating, column addition and subtraction, times tables, multiplying and dividing whole tens and hundreds, 2-digit by 1-digit multiplication and division, times-as-many problems, division with remainder, order of operations, halves, thirds and quarters, angles, parallel and perpendicular lines, triangles and quadrilaterals, length, weight, litres and time",
+   "tags": [
+    "מספרים עד 10,000",
+    "עיגול ואומדן",
+    "חיבור וחיסור במאונך",
+    "לוח הכפל",
+    "כפל וחילוק",
+    "פי כמה",
+    "חילוק עם שארית",
+    "סדר פעולות",
+    "שברים",
+    "זוויות",
+    "משולשים ומרובעים",
+    "מדידות וזמן"
+   ],
+   "questions": 378,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 4 במספר ⁦4,725⁩?",
+     "e": "4,725",
+     "q_en": "What is the value of the digit 4 in 4,725?"
+    },
+    {
+     "q": "איזה מספר כתוב בכרטיס?",
+     "e": "2 אלפים3 מאות",
+     "q_en": "What number is on the card?"
+    },
+    {
+     "q": "איזה סימן מתאים? ⁦4,312 ___ 4,231⁩",
+     "e": "4,312 ? 4,231",
+     "q_en": "Which sign fits? 4,312 ___ 4,231"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 3",
+   "title_en": "Numbers to 10,000 · Four operations · Fractions · Geometry · Measurement",
+   "tags_en": [
+    "Numbers to 10,000",
+    "Rounding and estimating",
+    "Column addition and subtraction",
+    "Times tables",
+    "Multiplication and division",
+    "How many times as many",
+    "Division with remainder",
+    "Order of operations",
+    "Fractions",
+    "Angles",
+    "Triangles and quadrilaterals",
+    "Measurement and time"
+   ]
   }
  ]
 }

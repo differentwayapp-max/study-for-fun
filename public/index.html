@@ -2319,7 +2319,7 @@ async function readyCard(){
   if(t!==READY_T) return;                                  // the parent changed the kid or the subject meanwhile
   const en=EN(), T=x=>window.sffT?sffT(x):x, sub=en?T(W.subject):W.subject, gr=en?String(k.grade+1):GRADES[k.grade];
   el.innerHTML=`<b class="readyhd">${en?`💡 We have a ready-made ${esc(sub)} practice for grade ${gr}`:`💡 יש לנו תרגול מוכן ל${esc(sub)} לכיתה ${gr}`}</b>`
-    +L.map(x=>`<div class="readyrow"><div><b dir="auto" translate="no">${esc(x.title||x.subject)}</b><div class="hint">${en?`${x.questions} questions · carefully built and checked by our team`:`${x.questions} שאלות · נבנה ונבדק בקפידה על ידי הצוות שלנו`}</div></div>
+    +L.map(x=>`<div class="readyrow"><div><b dir="auto" translate="no">${esc(catTitle(x))}</b><div class="hint">${en?`${x.questions} questions · carefully built and checked by our team`:`${x.questions} שאלות · נבנה ונבדק בקפידה על ידי הצוות שלנו`}</div></div>
       <button class="btn small" onclick="openAddDialog('${esc(x.id)}','${k.id}')">${en?'✓ Add the ready practice':'✓ להוסיף את התרגול המוכן'}</button></div>`).join('')
     +`<div class="hint">${en?`Adding it doesn't use any of your ${left} monthly builds.`:`הוספת התרגול לא מנצלת אף אחת מ-${left} הבניות החודשיות שלכם.`}</div>
     <button class="linkbtn" onclick='W.noReady=(W.noReady||[]).concat(${esc(JSON.stringify(key))});readyCard()'>${en?'Build a new one':'להמשיך לבנות תרגול חדש'}</button>`;
@@ -2338,6 +2338,27 @@ async function getQuota(){
     const ud=u.exists?u.data():{}, bd=b.exists?b.data():{}; return {used:ud.builds||0, credits:bd.credits||0}; }catch(e){ return null; }
 }
 const EN=()=>!!(window.SFF_LANG&&SFF_LANG()==='en');
+/* ---------- the English version of a set's content (tools/sets_en/<id>.json → the build → q.en, set.en) ----------
+   Hebrew stays the key everywhere (history, mastery, topics, focus, core facts); English is only what is SHOWN, in English mode.
+   q.en = {k: the Hebrew question it was translated from, q, o: 4 options in the same order, x, sc: {item index: card text}};
+   a question edited since (q.question !== q.en.k) shows in Hebrew. set.en = {labels: {Hebrew topic / chapter title / name: English}, texts: {chapter: passage}}. */
+const QV=new WeakMap();
+function qv(q){ if(!q||!q.en||q.en.k!==q.question||!EN()) return q; const c=QV.get(q); if(c) return c;
+  const e=q.en, sc=Array.isArray(q.scene)?q.scene.map((it,i)=>e.sc&&e.sc[i]!=null?{...it,e:String(e.sc[i])}:it):q.scene;
+  const v={...q, question:String(e.q||q.question), options:Array.isArray(e.o)&&e.o.length===q.options.length?e.o.map(String):q.options,
+    explanation:e.x!=null?String(e.x):q.explanation, ...(sc?{scene:sc,emoji:sc[0]?sc[0].e:q.emoji}:{})};
+  QV.set(q,v); return v; }
+// a label (topic, chapter title, set name) in the shown language: from the set's own labels, else from every set on the phone
+const setLbl=s=>EN()&&s&&s.en&&s.en.labels||null;
+let LBM=null, LBK='';
+function lblMap(){ const all=[...(typeof sets!=='undefined'&&Array.isArray(sets)?sets:[]), ...LB_EXTRA], k=all.map(x=>(x.id||x.src||'')+(x.ver||'')).join('|');
+  if(LBM&&k===LBK) return LBM; LBK=k; LBM=new Map();
+  all.forEach(x=>{ const m=x&&x.en&&x.en.labels; if(m) Object.entries(m).forEach(([h,e])=>{ if(!LBM.has(h)) LBM.set(h,e); });
+    if(x&&/עברית/.test(x.subject||'')) [...(x.topics||[]), ...((x.chapters||[]).map(c=>c&&c.title))].forEach(t=>{ if(t&&!LBM.has(t)) LBM.set(t,t); }); });   // a Hebrew set's labels stay Hebrew
+  return LBM; }
+const LB_EXTRA=[];   // sets on screen that are not the family's (a catalog preview)
+function lbl(t, s){ if(!EN()||t==null) return t; const m=setLbl(s); if(m&&m[t]) return m[t]; const g=lblMap().get(t); return g!=null?g:t; }
+window.sffLabel=t=>{ if(!EN()) return null; const g=lblMap().get(t); return g!=null?g:null; };   // i18n.js asks here before its own dictionary
 function quotaHtml(q){
   if(isClassMode()){ const L=Math.max(0,qFree()-q.used);
     return L>0?`<span>🎁 נשארו ${L} בניות החודש</span>`:`<b>ניצלת את ${qFree()} הבניות של החודש – מתחדש ב-${nextMonthTxt()}</b>`; }
@@ -2795,7 +2816,7 @@ function renderReview(set){
     + log.map(l=>`<div class="q"><div dir="auto" translate="no"><b>${esc(l.q)}</b></div><div class="hint">מה השתנה: <span translate="no">${esc(l.why)}</span></div><span class="pill ${l.result.startsWith('תוקנה')?'ok':'warn'}">${l.result.startsWith('תוקנה')?'✏️ תוקנה':'🗑 הוסרה'}</span></div>`).join('');
 }
 const REV_OPEN={};   // setId → the chapter open on the parent's practice screen
-function revQ(set,q){ const i=set.questions.indexOf(q);
+function revQ(set,q0){ const i=set.questions.indexOf(q0), q=qv(q0);
   return `<details class="rq"><summary><span class="qq" dir="auto" translate="no">${q.emoji?esc(q.emoji)+' ':''}${esc(q.question)}</span><span class="ans" dir="auto" translate="no">✓ ${esc(q.options[q.answer])}</span></summary>
     <ol translate="no">${q.options.map((o,k)=>`<li dir="auto" class="${k===q.answer?'correct':''}">${esc(o)}</li>`).join('')}</ol>
     <div class="hint" dir="auto"><span>💡 </span><span translate="no">${esc(q.explanation||'')}</span></div>
@@ -2921,6 +2942,9 @@ async function loadShare(raw){
   if(!raw.startsWith('SFF1:')) throw 0;
   const p=JSON.parse(decodeURIComponent(escape(atob(raw.slice(5)))));
   p.qs=clean(p.questions,p.topics); if(!p.qs.length) throw 0;
+  const enOf=new Map(); (p.questions||[]).forEach(q=>{ if(q&&q.en&&typeof q.en==='object') enOf.set(String(q.question).trim()+'\u0001'+(+q.answer), q.en); });   // clean() keeps only the Hebrew fields
+  if(enOf.size) p.qs.forEach(q=>{ const e=enOf.get(q.question+'\u0001'+q.answer); if(e) q.en=e; });
+  if(p.en&&typeof p.en!=='object') delete p.en;
   return p;
 }
 // add the practice set to a child (same source again → update in place, progress kept)
@@ -2928,9 +2952,9 @@ function applyImport(p, ik){
   const qs=p.qs, words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
   const qa={...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]};
   const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
-  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',pick:p.pick||null,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
+  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',pick:p.pick||null,topics:p.topics,questions:qs,chapters:p.chapters||null,en:p.en||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
     delete old.order; delete old.pos; store.save(); return {set:old, msg:`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`}; }
-  const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
+  const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,en:p.en||null,
     qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',ver:p.ver||'',pick:p.pick||null,words};
   sets.unshift(set); store.save(); return {set, msg:`נוסף: ${set.subject} · ${qs.length} שאלות ✓`};
 }
@@ -3022,7 +3046,7 @@ function renderCatalog(){
   $('catKids').parentElement.classList.toggle('hidden',!kids.length);
   $('catGrades').innerHTML=GRADES.slice(0,8).map((G,i)=>{ const n=L.filter(x=>x.grade===i&&x.status==='ready').length;
     return `<button role="tab" aria-selected="${i===g}" class="gbtn ${i===g?'on':''} ${n?'':'empty'}" onclick="CAT.grade=${i};CAT.subj='';renderCatalog()" aria-label="כיתה ${G}${n?`, ${n} תרגולים`:''}" translate="no">${EN()?i+1:G.replace(/'/,'')}${n?`<i class="n">${n}</i>`:''}</button>`; }).join('');
-  const cur=(CURR&&CURR.grades&&CURR.grades[g])||{}, here=L.filter(x=>x.grade===g&&x.status==='ready');
+  const cur=(CURR&&(EN()&&CURR.grades_en&&CURR.grades_en[g]||CURR.grades&&CURR.grades[g]))||{}, here=L.filter(x=>x.grade===g&&x.status==='ready');
   const ico=s=>{ const [c,i]=subjStyle(s), dark=['#F2A63B','#24C78E','#B9A7FF'].includes(c); return `<span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${i}</span>`; };
   const currList=(s,open)=>{ const t=cur[s]||[]; return t.length?`<details class="curr" ${open?'open':''}><summary>📋 מה לומדים בכיתה ${GRADES[g]} לפי התוכנית</summary><ul class="currl">${t.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''; };
   // 1) the grade: one big tile per subject
@@ -3041,9 +3065,9 @@ function renderCatalog(){
     const P=catPick(x.id), cnt=t=>p.qs.filter(q=>q.topic===t).length, n=P.size?pickTopics(p,[...P]).qs.length:0;
     const has=k&&sets.find(s=>s.kidId===k.id&&s.src&&s.src.replace(/_/g,'-')===x.id);
     return `<div class="card catcard">
-      <div class="catttl"><b dir="auto">${esc(x.title||x.subject)}</b></div>
+      <div class="catttl"><b dir="auto" translate="no">${esc(catTitle(x))}</b></div>
       <div class="pickhd"><span>✔️ סמנו את הנושאים שבמבחן</span><button class="linkbtn" onclick="catAll('${x.id}')">${P.size===p.topics.length?'ניקוי':'בחירת הכול'}</button></div>
-      <div class="picklist" role="group" aria-label="נושאים">${p.topics.map(t=>`<label class="pick ${P.has(t)?'on':''}"><input type="checkbox" ${P.has(t)?'checked':''} onchange='catToggle("${x.id}",${esc(JSON.stringify(t))},this.checked)'><span class="box" aria-hidden="true">✓</span><span class="t" dir="auto">${esc(t)}</span><span class="c">${cnt(t)} שאלות</span></label>`).join('')}</div>
+      <div class="picklist" role="group" aria-label="נושאים">${p.topics.map(t=>`<label class="pick ${P.has(t)?'on':''}"><input type="checkbox" ${P.has(t)?'checked':''} onchange='catToggle("${x.id}",${esc(JSON.stringify(t))},this.checked)'><span class="box" aria-hidden="true">✓</span><span class="t" dir="auto" translate="no">${esc(lbl(t,p))}</span><span class="c">${cnt(t)} שאלות</span></label>`).join('')}</div>
       ${has?`<p class="hint" style="margin:10px 2px 0">✓ כבר אצל ${esc(k.name)}${Array.isArray(has.pick)?` · ${has.pick.length} נושאים`:''} – הוספה תעדכן את הנושאים</p>`:''}
       <button class="btn big pickgo" ${P.size?'':'disabled'} onclick="catAdd('${x.id}')">${P.size?`＋ ${k?'הוספה ל'+esc(k.name):'הוספה'} · ${n} שאלות`:'👆 סמנו לפחות נושא אחד'}</button>
       <button class="linkbtn" style="display:block;margin:10px auto 0" onclick="shareCatalog('${x.id}')">💌 להזמין חברים עם התרגול הזה</button>
@@ -3081,8 +3105,8 @@ let reports=[]; try{ reports=JSON.parse(localStorage.getItem('sff_reports')||'[]
 const saveReports=()=>{ try{ localStorage.setItem('sff_reports',JSON.stringify(reports)); }catch(e){} };
 function openReport(set,i){
   if(!set||i<0) return;
-  REP={set,i}; const q=set.questions[i];
-  $('repQ').textContent=q.question+'  ✓ '+q.options[q.answer];
+  REP={set,i}; const q=set.questions[i], qd=qv(q);
+  $('repQ').textContent=qd.question+'  ✓ '+qd.options[qd.answer];
   $('repText').value=''; $('repResult').className='notice hidden'; $('repSend').disabled=false;
   $('repDlg').classList.remove('hidden');
 }
@@ -3199,7 +3223,7 @@ function defChapters(topics, round){
 function getChapters(s){
   const QS=Array.isArray(s.questions)?s.questions:[];        // a broken set (no questions) never stops the screen
   if(Array.isArray(s.chapters) && s.chapters.length && QS.some(q=>q.ch!=null))
-    return s.chapters.map((c,i)=>({...c, qs:QS.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
+    return s.chapters.map((c,i)=>({...c, ...(EN()&&c.title?{title:lbl(c.title,s), he:c.title}:{}), ...(c.text&&EN()&&s.en&&s.en.texts&&s.en.texts[i]?{text:s.en.texts[i]}:{}), qs:QS.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
   const per=s.perRound||10, qs=QS, n=Math.max(1,Math.ceil(qs.length/per)), out=[];
   for(let i=0;i<n;i++){ const part=qs.slice(i*per,(i+1)*per); out.push({title:[...new Set(part.map(q=>q.topic))].join(' + '),topics:[...new Set(part.map(q=>q.topic))],count:part.length,qs:part}); }
   return out;
@@ -3681,7 +3705,7 @@ function renderRoad(){
       <text x="${x}" y="${y+62}" font-size="14" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום!':'המבחן · '+fmtDate(set.examDate)}</text>`; return; }
     const isRev=!!it.rev, T=ROAD_T[isRev?'rev':chType(set,it.c)];
     const done=!isRev&&P.dn.has(it.i), again=!isRev&&!done&&best[it.i]!=null, now=isRev?nx<0:it.i===nx, r=now?40:34;
-    const emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
+    const emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&qv(it.c.qs[0]).emoji)||T.i);
     const go=`startStation('${set.id}',${isRev?-1:it.i})`;
     svg+=`<g class="st ${now?'st-now':''}" onclick="${go}"><circle cx="${x}" cy="${y+4}" r="${r}" fill="#1B2A4A"/>
       <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:'#fff'}" stroke="#1B2A4A" stroke-width="3.5"/>
@@ -3709,9 +3733,9 @@ function writingChapter(set){
   const C=getChapters(set), key=set.id+':'+(set.ver||'')+':'+set.questions.length; if(key in WRITE_CACHE) return WRITE_CACHE[key];
   let best=-1, bestScore=0;
   C.forEach((c,i)=>{ const t=chType(set,c); if(t!=='word'&&t!=='abc'||!c.qs.length) return;
-    const easy=c.qs.filter(q=>{ const a=String(q.options[q.answer]).trim(); return spellOK(q) && !a.includes(' ') && a.length>=3 && a.length<=6; });
+    const easy=c.qs.filter(q=>{ const a=String(qv(q).options[q.answer]).trim(); return spellOK(q) && !a.includes(' ') && a.length>=3 && a.length<=6; });
     if(easy.length<Math.max(4,c.qs.length*.7)) return;                     // the whole chapter must suit letter tiles
-    const pics=easy.filter(q=>q.scene||q.emoji).length, avg=easy.reduce((x,q)=>x+String(q.options[q.answer]).trim().length,0)/easy.length;
+    const pics=easy.filter(q=>q.scene||q.emoji).length, avg=easy.reduce((x,q)=>x+String(qv(q).options[q.answer]).trim().length,0)/easy.length;
     const score=easy.length/c.qs.length*10 + pics/c.qs.length*3 - avg*.5;
     if(score>bestScore){ bestScore=score; best=i; } });
   return WRITE_CACHE[key]=best;
@@ -3756,14 +3780,14 @@ function openMe(){
       ${items.length?'<p class="hint" style="margin:6px 0 0">👆 לוחצים על מילה כדי לראות מאיזו שאלה היא</p>':''}
       ${again.length?`<h3>🔁 פרקים לנסות שוב</h3><div class="mebtns">${again.map(i=>`<button class="btn small sun" onclick="startStation('${set.id}',${i})">פרק ${i+1} · ${Math.round(best[i]*100)}%</button>`).join('')}</div>`:''}
       <h3>💪 לתרגל שוב <span class="hint">${practise.length}</span></h3>
-      ${practise.length?`<div class="wlist">${practise.map(x=>`<button class="wchip ${x.bad>=2?'r':'o'}" dir="ltr" onclick="wordFrom(this,'${set.id}',${set.questions.indexOf(x.q)})"><i>✗${x.bad}</i>${esc(x.label)}</button>`).join('')}</div>
+      ${practise.length?`<div class="wlist">${practise.map(x=>`<button class="wchip ${x.bad>=2?'r':'o'}" dir="ltr" onclick="wordFrom(this,'${set.id}',${set.questions.indexOf(x.q)})"><i>✗${x.bad}</i>${esc(x.disp)}</button>`).join('')}</div>
         <button class="btn big" style="width:100%;justify-content:center;margin-top:12px" onclick="practiseWeak('${set.id}')">🎯 לתרגל אותן עכשיו</button>`:`<p class="sub" style="margin:4px 0 0">${items.length?'🌟 אין מה לתרגל שוב – כל הכבוד!':'▶ עוד לא שיחקת – מתחילים!'}</p>`}
       <h3>✅ אני יודע <span class="hint">${know.length}</span></h3>
-      ${know.length?`<div class="wlist">${know.map(x=>`<button class="wchip g" dir="ltr" onclick="wordFrom(this,'${set.id}',${set.questions.indexOf(x.q)})">${esc(x.label)}</button>`).join('')}</div>`:'<p class="hint" style="margin:4px 0 0">…</p>'}
+      ${know.length?`<div class="wlist">${know.map(x=>`<button class="wchip g" dir="ltr" onclick="wordFrom(this,'${set.id}',${set.questions.indexOf(x.q)})">${esc(x.disp)}</button>`).join('')}</div>`:'<p class="hint" style="margin:4px 0 0">…</p>'}
     </div>`; }).join('') : '<div class="card center"><p class="sub">▶</p></div>';
   show('vMe');
 }
-function wordFrom(btn,setId,i){ const s=getSet(setId), q=s&&s.questions[i]; if(!q) return;
+function wordFrom(btn,setId,i){ const s=getSet(setId), q=qv(s&&s.questions[i]); if(!q) return;
   popMenu(btn,[[`<span class="wfq" dir="auto">❓ ${esc(q.question)}</span><span class="wfa" dir="auto">✓ ${esc(q.options[q.answer])}</span>`,'']]); }
 function practiseWeak(setId){
   const set=getSet(setId); if(!set) return;
@@ -3781,8 +3805,8 @@ const MODES=[
   {id:'riddle', name:'חידות', desc:'מרכיבים את התשובה מאותיות – עם רמזים'},
   {id:'spell',  name:'איות', desc:'שומעים את המילה ומסדרים את האותיות'}
 ];
-const shortA=q=>q.options[q.answer].length<=40 && q.question.length<=110;
-const riddleOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=14 && /^[\p{L}\p{N} '\-]+$/u.test(a);};
+const shortA=q0=>{ const q=qv(q0); return q.options[q.answer].length<=40 && q.question.length<=110; };
+const riddleOK=q0=>{const q=qv(q0), a=q.options[q.answer].trim(); return a.length>=2 && a.length<=14 && /^[\p{L}\p{N} '\-]+$/u.test(a);};
 // reading passage (Unseen) that belongs to a question's chapter – those questions are played in "choice" only
 /* ---------- reading the passage aloud: pause, go on from the same word, the word being read is coloured ---------- */
 const RD={text:'',words:[],i:0,on:false,tok:0};
@@ -3815,17 +3839,18 @@ function rdChunk(){
     sayU(u);
   }catch(e){ RD.on=false; rdPaint(); }
 }
-const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; return c&&typeof c.text==='string'&&c.text.trim()?c.text:''; };
+const passageOf=(set,q)=>{ const c=set&&Array.isArray(set.chapters)&&Number.isInteger(q.ch)?set.chapters[q.ch]:null; if(!(c&&typeof c.text==='string'&&c.text.trim())) return '';
+  const en=EN()&&set.en&&set.en.texts&&set.en.texts[q.ch]; return en?String(en):c.text; };
 function modePool(set,id){
-  const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q)&&!needOpts(q));
-  if(id==='memory') return qs.filter(q=>shortA(q) && (!(q.scene||q.emoji) || cueTxt(q) || GENERIC_Q.test(q.question.trim())));   // a long question would hide its text on the small card
+  const qs=id==='choice'?set.questions:set.questions.filter(q=>!passageOf(set,q)&&!needOpts(qv(q)));
+  if(id==='memory') return qs.filter(q=>shortA(q) && (!(q.scene||q.emoji) || cueTxt(q) || GENERIC_Q.test(qv(q).question.trim())));   // a long question would hide its text on the small card
   if(id==='match') return qs.filter(shortA);
   if(id==='riddle') return qs.filter(riddleOK);
   if(id==='spell') return qs.filter(spellOK);
   return qs;
 }
-const spellOK=q=>{const a=q.options[q.answer].trim(); return a.length>=2 && a.length<=12 && /^[\p{L} ]+$/u.test(a) && [...a].filter(c=>c!==' ').length>=2;};
-const spellEasy=q=>{ const a=String(q.options[q.answer]).trim(); return spellOK(q) && !a.includes(' ') && a.length<=8; };
+const spellOK=q0=>{const q=qv(q0), a=q.options[q.answer].trim(); return a.length>=2 && a.length<=12 && /^[\p{L} ]+$/u.test(a) && [...a].filter(c=>c!==' ').length>=2;};
+const spellEasy=q=>{ const a=String(qv(q).options[q.answer]).trim(); return spellOK(q) && !a.includes(' ') && a.length<=8; };
 const MIN={choice:1,memory:3,match:3,riddle:2,spell:2};
 function recommended(set){ const g=set.grade; return g<=2?'memory':g<=5?'match':g<=8?'riddle':'choice'; }
 let PENDING_CH=null;
@@ -3859,7 +3884,7 @@ function readTiles(set){
 }
 /* ---------- choose a topic (or a mix) for the chosen game ---------- */
 let PENDING_MODE='choice';
-function topicPic(set,t){ const q=set.questions.find(x=>x.topic===t&&x.scene)||set.questions.find(x=>x.topic===t);
+function topicPic(set,t){ const q=qv(set.questions.find(x=>x.topic===t&&x.scene)||set.questions.find(x=>x.topic===t));
   return q ? (q.scene?sceneHtml(q.scene,'mini'):`<div class="pic" style="font-size:2.4em;margin:6px 0">${esc(q.emoji||'⭐')}</div>`) : ''; }
 function openTopics(set, mode){
   PENDING_MODE=mode;
@@ -3867,7 +3892,7 @@ function openTopics(set, mode){
   $('tTitle').innerHTML=`<span class="tart">${ART[mode]}</span>${m.name}`;
   const topics=[...new Set(set.questions.map(q=>q.topic))];
   const tiles=topics.map((t,i)=>{ const n=modePool({questions:set.questions.filter(q=>q.topic===t),chapters:set.chapters},mode).length, ok=n>=MIN[mode];
-    return `<button class="ttile" ${ok?'':'disabled'} onclick="startTopic('${set.id}',${i})">${topicPic(set,t)}<b dir="auto">${esc(t)}</b>${ok?'':'<span>🚫</span>'}</button>`; });
+    return `<button class="ttile" ${ok?'':'disabled'} onclick="startTopic('${set.id}',${i})">${topicPic(set,t)}<b dir="auto" translate="no">${esc(lbl(t,set))}</b>${ok?'':'<span>🚫</span>'}</button>`; });
   const nx=nextChapter(set);
   tiles.unshift(`<button class="ttile mix" onclick="startTopic('${set.id}',-1)"><div class="dice">🎲</div><b>מיקס</b>${nx>=0?`<span class="hint">פרק ${nx+1}</span>`:''}</button>`);
   $('topics').innerHTML=tiles.join('');
@@ -3946,7 +3971,7 @@ function showSheet(ok, text){
       <button class="btn ghost small" onclick="openReport(G.set, G.set.questions.indexOf(curQ()))" aria-label="דיווח על טעות">🚩</button>
       <button class="btn" onclick="nextQ()">${G.i+1<G.qs.length?'הבא ‹':'סיום 🏁'}</button>
     </div>
-    <div class="expl ${ok?'':'show'}" id="gExpl" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div>`;
+    <div class="expl ${ok?'':'show'}" id="gExpl" dir="auto"><b>למה?</b> ${esc(qv(q).explanation)}</div>`;
   if(G.res.length) $('gSheet').querySelector('.row2').insertAdjacentHTML('afterbegin',`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`);
   if(ok){ burst(); autoNext(); }
 }
@@ -3962,7 +3987,7 @@ function autoNext(){
 /* look back at answered questions (choice / riddle / spell) */
 function pastView(j){
   if(!G||!G.res[j]) return; G.tok=(G.tok||0)+1; G.view=j; rdStop(); try{speechSynthesis.cancel()}catch(e){}
-  const r=G.res[j], q=r.q, txt=passageOf(G.set,q), last=j===G.res.length-1;
+  const r=G.res[j], q=qv(r.q), txt=passageOf(G.set,q), last=j===G.res.length-1;
   $('gSheet').className='sheet';
   $('gCount').textContent=`↩ ${j+1} / ${G.qs.length}`;
   const opts = G.mode==='choice'
@@ -3988,7 +4013,7 @@ function nextQ(){ $('gSheet').className='sheet'; G.i++; if(G.i<G.qs.length) ({ch
 const shortTxt=(t,max=6)=>t.trim().split(/\s+/).length<=max;
 // the question text next to a picture – skipped when it only says "what is this?" (the picture says it)
 const GENERIC_Q=/^(what is this|what are these|who is (he|she|this)|מה זה|מי זה)\s*\??$/i;
-const cueTxt=(q,max)=>!(q.scene||q.emoji) || (shortTxt(q.question,max) && !GENERIC_Q.test(q.question.trim()));
+const cueTxt=(q0,max)=>{ const q=qv(q0); return !(q.scene||q.emoji) || (shortTxt(q.question,max) && !GENERIC_Q.test(q.question.trim())); };
 // several emoji in one item ("🍎🍎🍎") would run out of the frame and wrap: draw them one by one, side by side, sized to fit
 const SEG=window.Intl&&Intl.Segmenter?new Intl.Segmenter():null;
 function sceneItems(sc){ return sc.flatMap(it=>{ if(!PIC_CH.test(it.e)) return [it]; const g=SEG?[...SEG.segment(String(it.e))].map(x=>x.segment).filter(x=>x.trim()):[it.e];
@@ -3996,7 +4021,7 @@ function sceneItems(sc){ return sc.flatMap(it=>{ if(!PIC_CH.test(it.e)) return [
   return g.map((e,j)=>({e,x:+(c+(j-(n-1)/2)*step).toFixed(1),y:it.y,s})); }); }
 function sceneHtml(sc, cls=''){ return `<div class="scene ${cls}" aria-hidden="true" translate="no"><i class="ground"></i>${sceneItems(sc).map(it=>{ const tx=!PIC_CH.test(it.e);
   const he=tx&&/[\u0590-\u05FF]/.test(it.e); return `<span class="${tx?'tx':''}${he?' he':''}" dir="${he?'rtl':tx?'ltr':'auto'}" style="left:${it.x}%;top:${it.y}%;font-size:${it.s}cqh">${esc(it.e)}</span>`; }).join('')}</div>`; }
-function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
+function picOf(q, cls){ q=qv(q); if(Array.isArray(q.scene)&&q.scene.length) return sceneHtml(q.scene, cls); return q.emoji?`<div class="pic" aria-hidden="true">${esc(q.emoji)}</div>`:''; }
 
 /* --- 1. multiple choice with a quest path --- */
 function choiceStart(){ choiceRender(); }
@@ -4006,12 +4031,12 @@ function trackHtml(){
   return `<div class="track"><div class="road"></div>${stops}<span class="flag">🏁</span><div class="me" style="inset-inline-start:${pos(G.i)}">${mascot('happy')}</div></div>`;
 }
 function choiceRender(){
-  const q=curQ();
+  const q0=curQ(), q=qv(q0);
   $('gCount').textContent=`❓ ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   const txt=passageOf(G.set,q);
   const top=txt?passageHtml(txt):picOf(q);
-  $('gPlay').innerHTML=`${top}${G.rev&&G.rev.has(q)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
+  $('gPlay').innerHTML=`${top}${G.rev&&G.rev.has(q0)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
     <div class="opts ${!txt&&q.options.every(o=>String(o).length<=18)?'two':''}">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${optKey(q,k)}</span>${esc(o)}</button>`).join('')}</div>
     <div class="helpers">${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
   if(track(G.set.grade).young) speakQ();
@@ -4021,10 +4046,10 @@ function choicePick(k){
   const btns=[...document.querySelectorAll('#gPlay .opt')];
   btns.forEach((b,i)=>{b.disabled=true; if(i!==q.answer&&i!==k) b.classList.add('dim');});
   btns[q.answer].classList.add('right'); if(!ok) btns[k].classList.add('wrong');
-  G.res.push({q,ok,pick:k}); award(ok); sayAnswer(q);
+  G.res.push({q,ok,pick:k}); award(ok); sayAnswer(qv(q));
   $('gTop').innerHTML=trackHtml();
   const me=document.querySelector('.track .me'); if(me) requestAnimationFrame(()=>me.style.insetInlineStart=`${((G.i+1)/G.qs.length)*100}%`);
-  showSheet(ok, ok?PRAISE[Math.floor(Math.random()*PRAISE.length)]+(G.streak>=3?` ${G.streak} ברצף!`:'') : `כמעט! התשובה: ${q.options[q.answer]}`);
+  showSheet(ok, ok?PRAISE[Math.floor(Math.random()*PRAISE.length)]+(G.streak>=3?` ${G.streak} ברצף!`:'') : `כמעט! התשובה: ${qv(q).options[q.answer]}`);
 }
 
 /* --- 2. memory --- */
@@ -4038,7 +4063,7 @@ function memStart(){
   G.mem={cards, open:[], found:0, total:idx.length, miss:{}, seen:new Set(), lock:false};
   $('gTop').innerHTML='';
   memHud();
-  $('gPlay').innerHTML=`<div class="mem ${cards.length<=6?'few':''}">${cards.map((c,i)=>{const q=G.qs[c.p];
+  $('gPlay').innerHTML=`<div class="mem ${cards.length<=6?'few':''}">${cards.map((c,i)=>{const q=qv(G.qs[c.p]);
     const face = c.side==='q' ? `<div class="f qside" dir="auto">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<div class="em" style="font-size:3em">${esc(q.emoji)}</div>`:'')}${(cueTxt(q))?`<span style="font-size:.85em">${esc(q.question)}</span>`:''}</div>`
                               : (a=>`<div class="f aside" dir="auto" style="font-size:${a.length>12?'.85em':a.length>8?'1em':a.length>6?'1.12em':'1.3em'}">${esc(a)}</div>`)(String(q.options[q.answer]));
     return `<button class="mcard" id="mc${i}" onclick="memFlip(${i})" aria-label="קלף ${i+1}"><div class="in"><div class="b"><span>?</span></div>${face}</div></button>`}).join('')}</div>`;
@@ -4053,7 +4078,7 @@ function memFlip(i){
   if(A.side!==B.side && (A.p===B.p||ansKey(G.qs[A.p])===ansKey(G.qs[B.p]))){
     M.lock=true;
     setTimeout(()=>{ if(!$('mc'+a)) return; [a,b].forEach(x=>{$('mc'+x).classList.remove('up');$('mc'+x).classList.add('got')}); M.open=[]; M.lock=false; M.found++;
-      const qp=(A.side==='q'?A:B).p, q=G.qs[qp], ok=(M.miss[qp]||0)<=1; G.res.push({q,ok}); award(true); sayEn(q.options[q.answer]); burst(); memHud();
+      const qp=(A.side==='q'?A:B).p, q=G.qs[qp], ok=(M.miss[qp]||0)<=1; G.res.push({q,ok}); award(true); sayEn(qv(q).options[q.answer]); burst(); memHud();
       if(M.found===M.total) setTimeout(memDone,700); },350);
   } else {
     // a mistake only when the matching card was already seen – first looks at hidden cards are not mistakes
@@ -4076,16 +4101,16 @@ function memDone(){
 }
 
 // option labels: numbers 1-4 (letters looked like answers in language questions); letters when an option has a number in it
-const optKey=(q,k)=>q.options.some(o=>/\d/.test(o))?'אבגד'[k]:String(k+1);
+const optKey=(q,k)=>qv(q).options.some(o=>/\d/.test(o))?'אבגד'[k]:String(k+1);
 /* --- 3. match with lines --- */
 // Two questions with the same answer: either answer card is right for either question.
-const ansKey=q=>{ const a=String(q.options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim(); return a.length>1?a.toLowerCase():a; };   // one letter keeps its case (D ≠ d)
+const ansKey=q=>{ const a=String(qv(q).options[q.answer]).normalize('NFC').replace(/\s+/g,' ').trim(); return a.length>1?a.toLowerCase():a; };   // one letter keeps its case (D ≠ d)
 /* Cards that look the same must have the same answer: in memory / match a question card shows only its picture (and its text
    when short), so two questions whose cards look alike (the same picture, the same text), or whose answers are the same value in
    another form ("20 ₪" / "20"), could each take the other's answer card. A later one of such a pair stays out of this game. */
-const cardFace=(q,mode)=>{ const pic=q.scene?q.scene.map(x=>x.e).sort().join(''):(q.emoji||''), t=String(q.question).trim().toLowerCase().replace(/\s+/g,' ');
+const cardFace=(q0,mode)=>{ const q=qv(q0), pic=q.scene?q.scene.map(x=>x.e).sort().join(''):(q.emoji||''), t=String(q.question).trim().toLowerCase().replace(/\s+/g,' ');
   return pic+'|'+(cueTxt(q,mode==='match'?14:undefined)?t:''); };
-const ansVal=q=>{ const a=String(q.options[q.answer]).replace(/[\s⁦-⁩]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,''); return /\d/.test(a)?a:null; };
+const ansVal=q=>{ const a=String(qv(q).options[q.answer]).replace(/[\s⁦-⁩]/g,'').replace(/(₪|ש״ח|ס״מ|מ״מ|ק״מ|ק״ג|גרם|מטר|ליטר|מ״ל|%)$/,''); return /\d/.test(a)?a:null; };
 function noClash(qs, mode){ const out=[];
   qs.forEach(q=>{ const f=cardFace(q,mode), v=ansVal(q), k=ansKey(q);
     if(!out.some(o=>ansKey(o)!==k && (cardFace(o,mode)===f || (v!=null&&ansVal(o)===v)))) out.push(q); });
@@ -4099,8 +4124,8 @@ function matchRound(){
   $('gCount').textContent= rounds>1?`〰️ ${G.round+1}/${rounds}`:'';
   $('gPlay').innerHTML=`
     <div class="matchwrap" id="mw"><svg class="lines" id="mlines"></svg>
-      <div class="mcol q">${slice.map((q,i)=>`<button class="mitem" id="mq${i}" dir="auto" onclick="matchSel(${i})">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<span class="em" style="font-size:2em">${esc(q.emoji)}</span>`:'')}${(cueTxt(q,14))?`<span>${esc(q.question)}</span>`:''}</button>`).join('')}</div>
-      <div class="mcol a">${G.m.ans.map((qi,j)=>`<button class="mitem" id="ma${qi}" dir="auto" onclick="matchTo(${qi})">${esc(slice[qi].options[slice[qi].answer])}</button>`).join('')}</div>
+      <div class="mcol q">${slice.map(qv).map((q,i)=>`<button class="mitem" id="mq${i}" dir="auto" onclick="matchSel(${i})">${q.scene?sceneHtml(q.scene,'mini'):(q.emoji?`<span class="em" style="font-size:2em">${esc(q.emoji)}</span>`:'')}${(cueTxt(q,14))?`<span>${esc(q.question)}</span>`:''}</button>`).join('')}</div>
+      <div class="mcol a">${G.m.ans.map((qi,j)=>`<button class="mitem" id="ma${qi}" dir="auto" onclick="matchTo(${qi})">${esc(qv(slice[qi]).options[slice[qi].answer])}</button>`).join('')}</div>
     </div>`;
 }
 function matchSel(i){ if(G.m.done[i]) return; document.querySelectorAll('.mcol.q .mitem').forEach(b=>b.classList.remove('sel')); $('mq'+i).classList.add('sel'); G.m.sel=i; }
@@ -4121,7 +4146,7 @@ function matchTo(j){
   if(i===j||ansKey(M.slice[j])===ansKey(q)){
     M.done[i]=true; M.used[j]=true; drawLine(i,j,LINE_COLORS[i%5]); M.lines.push([i,j]);
     $('mq'+i).classList.remove('sel'); $('mq'+i).classList.add('done'); $('ma'+j).classList.add('done');
-    const ok=!M.first[i]; G.res.push({q,ok}); award(ok); sayEn(q.options[q.answer]); if(ok) burst(); M.sel=null;
+    const ok=!M.first[i]; G.res.push({q,ok}); award(ok); sayEn(qv(q).options[q.answer]); if(ok) burst(); M.sel=null;
     if(Object.keys(M.done).length===M.slice.length) setTimeout(matchRoundDone,600);
   } else {
     M.first[i]=true; G.streak=0; hud();
@@ -4136,14 +4161,14 @@ function matchRoundDone(){
   $('gSheet').className='sheet show good';
   $('gSheet').innerHTML=`<div class="verdict"><div class="face">${mascot('happy','#24C78E')}</div><div>${okN===G.m.slice.length?'כל הקווים נכונים מהניסיון הראשון!':`חיברת הכול! ${okN} מתוך ${G.m.slice.length} מהניסיון הראשון`}</div></div>
     <div class="row2"><button class="btn ghost small" onclick="$('gExpl').classList.toggle('show')">💡 הסברים</button><button class="btn" onclick="${more?"$('gSheet').className='sheet';G.round++;matchRound()":'endGame()'}">${more?'לסיבוב הבא':'לסיכום'}</button></div>
-    <div class="expl" id="gExpl" dir="auto">${G.m.slice.map(q=>`<div style="margin-bottom:6px"><b dir="auto">${esc(q.options[q.answer])}</b> – ${esc(q.explanation)}</div>`).join('')}</div>`;
+    <div class="expl" id="gExpl" dir="auto">${G.m.slice.map(qv).map(q=>`<div style="margin-bottom:6px"><b dir="auto">${esc(q.options[q.answer])}</b> – ${esc(q.explanation)}</div>`).join('')}</div>`;
 }
 
 /* --- 4. riddles: build the answer from letter tiles --- */
 function riddleStart(){ riddleRender(); }
 function riddleRender(){
   if(!(G.mode==='spell'?spellEasy:riddleOK)(curQ())) return choiceRender();   // long words / phrases stay multiple choice
-  const q=curQ(), ans=q.options[q.answer].trim();
+  const q0=curQ(), q=qv(q0), ans=q.options[q.answer].trim();
   const heb=/[֐-׿]/.test(ans), up=!heb && ans===ans.toUpperCase() && /[A-Z]/.test(ans);
   const chars=[...ans];
   const pool=heb?'אבגדהוזחטיכלמנסעפצקרשת':'abcdefghijklmnopqrstuvwxyz';
@@ -4154,7 +4179,7 @@ function riddleRender(){
   $('gCount').textContent=`${spell?'🔤':'🧩'} ${G.i+1}/${G.qs.length}`;
   $('gTop').innerHTML=trackHtml();
   $('gPlay').innerHTML=`
-    ${picOf(q)}${G.rev&&G.rev.has(q)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox short" dir="auto">${esc(q.question)}</div>
+    ${picOf(q)}${G.rev&&G.rev.has(q0)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox short" dir="auto">${esc(q.question)}</div>
     <div id="rSlots"></div><div id="rTiles"></div>
     <div class="helpers" style="justify-content:center">${spell?(EN_SAY(ans)?`<button class="btn small" onclick="sayEn(G.r.ans,true)" aria-label="השמעת המילה">🔊</button>`:''):`<button class="btn ghost small" onclick="riddleHint()">💡 רמז</button>`}<button class="btn ghost small" onclick="riddleClear()" aria-label="ניקוי">⌫</button>${spell?'':`<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button>`}<button class="btn ghost small" onclick="riddleGiveUp()">🤷</button>${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">›</button>`:''}</div>`;
   riddleDraw();
@@ -4208,7 +4233,7 @@ function endGame(){
   const modeName=MODES.find(m=>m.id===G.mode).name;
   $('eSub').innerHTML=`<span>✓ ${right}/${n}</span><span>⭐ ${G.score}</span>${G.best>1?`<span>🔥 ${G.best}</span>`:''}`;
   const by={}; G.res.forEach(r=>{by[r.q.topic]=by[r.q.topic]||[0,0]; by[r.q.topic][1]++; if(r.ok) by[r.q.topic][0]++;});
-  $('eTopics').innerHTML=Object.entries(by).map(([t,[a,b]])=>{const p=a/b; return `<span class="${p>=.8?'ok':p>=.5?'warn':'bad'}">${esc(t)} ${a}/${b}</span>`}).join('');
+  $('eTopics').innerHTML=Object.entries(by).map(([t,[a,b]])=>{const p=a/b; return `<span class="${p>=.8?'ok':p>=.5?'warn':'bad'}"><bdi translate="no">${esc(lbl(t,G.set))}</bdi> ${a}/${b}</span>`}).join('');
   const bonus=G.mode==='memory';
   $('eRetry').classList.toggle('hidden', right===n||bonus);
   const bq=bonusQs(); $('eBonus').classList.toggle('hidden', bonus||!bq);
@@ -4318,12 +4343,12 @@ function sayEn(text, force){
   rdStop(); try{ const u=new SpeechSynthesisUtterance(String(text).replace(/_+/g,' ')); u.lang='en-US'; u.rate=.85; u.voice=bestVoice('en-US'); sayU(u); }catch(e){}
 }
 // grammar (sentence with a blank) → the whole sentence; vocabulary → the word
-function sayAnswer(q){ const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
+function sayAnswer(q){ q=qv(q); const a=q.options[q.answer]; sayEn(/_{2,}/.test(q.question)&&EN_SAY(q.question) ? q.question.replace(/_{2,}/,a) : a); }
 function mutedNote(){ if(!MUTE) return false; toast('🔇 הצליל כבוי – לוחצים על 🔇 כדי להדליק'); return true; }
 function speakQ(){
   if(mutedNote()) return;
   try{
-    rdStop(); const q=curQ();
+    rdStop(); const q=qv(curQ());
     const u=new SpeechSynthesisUtterance(q.question);
     u.lang=/[a-zA-Z]{3}/.test(q.question)&&!/[֐-׿]/.test(q.question)?'en-US':'he-IL';
     u.rate=.9; u.voice=bestVoice(u.lang); sayU(u);
@@ -4428,9 +4453,9 @@ function wordStats(set, H){
   [...H].filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qr)).reverse().forEach(h=>qrEntries(set,h).forEach(({i,ok,pick})=>{
     const q=set.questions[i]; if(!q) return;
     const label=String(q.options[q.answer]).trim(), key=label.toLowerCase();
-    const x=by[key]=by[key]||{label,q,cat:wordCat(set,q),ok:0,bad:0,last:0,seq:[],picks:{}};
+    const x=by[key]=by[key]||{label,disp:String(qv(q).options[q.answer]).trim(),q,cat:wordCat(set,q),ok:0,bad:0,last:0,seq:[],picks:{}};
     ok?x.ok++:x.bad++; if(!ok) x.last=h.at; x.seq.push([h.mode||'choice',ok]);
-    if(!ok&&Number.isInteger(pick)&&q.options[pick]!=null){ const w=q.options[pick]; x.picks[w]=(x.picks[w]||0)+1; }
+    if(!ok&&Number.isInteger(pick)&&q.options[pick]!=null){ const w=qv(q).options[pick]; x.picks[w]=(x.picks[w]||0)+1; }
   }));
   return Object.values(by);
 }
@@ -4464,10 +4489,10 @@ function renderMistakes(){
   const list=MIST.tab==='open'?open:fixed, C=getChapters(set);
   $('mistBody').innerHTML=`<div class="dlghead"><b>🔎 הטעויות של ${esc((kid||{}).name||set.name)} · ${esc(set.subject)}</b><button class="btn ghost small" onclick="$('mistDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
     <div class="wtabs"><button class="${MIST.tab==='open'?'on':''}" onclick="MIST.tab='open';renderMistakes()">❗ עוד לא הצליח/ה · ${open.length}</button><button class="${MIST.tab==='fixed'?'on':''}" onclick="MIST.tab='fixed';renderMistakes()">✅ תוקן אחר כך · ${fixed.length}</button></div>
-    ${list.length?list.map(m=>{ const q=m.q, w=m.lastWrong, ch=Number.isInteger(q.ch)&&C[q.ch]?String(C[q.ch].title||'').replace(PG_RE,''):'';
+    ${list.length?list.map(m=>{ const q=qv(m.q), w=m.lastWrong, ch=Number.isInteger(q.ch)&&C[q.ch]?String(C[q.ch].title||'').replace(PG_RE,''):'';
       return `<div class="mist">
         ${q.scene?`<div class="mpic">${sceneHtml(q.scene,'mini')}</div>`:''}
-        <div class="mq"><div class="hint">${ch?esc(ch)+' · ':''}${esc(q.topic||'')}</div>
+        <div class="mq"><div class="hint" translate="no">${ch?esc(ch)+' · ':''}${esc(lbl(q.topic||'',set))}</div>
           <b dir="auto" translate="no">${esc(q.question)}</b>
           ${w.pick!=null&&q.options[w.pick]!=null?`<div class="mans bad"><span>✗ ענה/תה:</span> <span dir="auto" translate="no">${esc(q.options[w.pick])}</span></div>`:`<div class="mans bad">✗ טעות</div>`}
           <div class="mans ok"><span>✓ התשובה:</span> <span dir="auto" translate="no">${esc(q.options[q.answer])}</span></div>
@@ -4781,18 +4806,18 @@ function statsSet(k,s){
   const rows=topicRows(HS), weak=rows.filter(x=>x.status==='weak'), mid=rows.filter(x=>x.status==='mid'), good=rows.filter(x=>x.status==='good'||x.status==='few');
   const items=wordStats(s,history), bad=items.filter(x=>x.bad).sort((a,b)=>b.bad-a.bad||b.last-a.last), okW=items.filter(x=>!x.bad);
   const sel=bad.find(x=>x.label===ST.sel)||null, en=isEnSet(s);
-  const row=x=>`<div class="strow"><span dir="auto" translate="no">${esc(x.t)}</span><span class="tbar"><i style="width:${Math.round(x.p*100)}%;background:${TOPIC_CLR[x.status]}"></i></span><b class="${x.status}">${Math.round(x.p*100)}%</b></div>`;
+  const row=x=>`<div class="strow"><span dir="auto" translate="no">${esc(lbl(x.t,s))}</span><span class="tbar"><i style="width:${Math.round(x.p*100)}%;background:${TOPIC_CLR[x.status]}"></i></span><b class="${x.status}">${Math.round(x.p*100)}%</b></div>`;
   const what=`<div class="card swhat"><div class="swh"><h3>${esc(sffT?sffT('מה לחזק'):'מה לחזק')}</h3><button class="sinfo" aria-label="${esc(sffT?sffT('מה הצבעים אומרים'):'מה הצבעים אומרים')}" aria-expanded="${ST.info}" onclick="ST.info=!ST.info;renderStats()">ⓘ</button></div>
     ${ST.info?`<p class="hint sinfot">${esc(sffT?sffT('לחזק = מתחת ל-60% · כמעט שם = עד 80% · יושב טוב = 80% ומעלה'):'לחזק = מתחת ל-60% · כמעט שם = עד 80% · יושב טוב = 80% ומעלה')}</p>`:''}
     ${weak.length||mid.length?`<div class="strows">${[...weak,...mid].map(row).join('')}</div>`:`<p class="sub" style="margin:4px 0">${esc(sffT?sffT('🌟 אין נושאים לחזק'):'🌟 אין נושאים לחזק')}</p>`}
-    ${bad.length?`<div class="wlist swords" dir="${en?'ltr':'auto'}">${bad.map(x=>`<button class="wchip ${wState(x)} ${sel===x?'sel':''}" translate="no" onclick="ST.sel=${esc(JSON.stringify(x.label))};renderStats()">${esc(x.label)} <i>×${x.bad}</i></button>`).join('')}</div>
+    ${bad.length?`<div class="wlist swords" dir="${en?'ltr':'auto'}">${bad.map(x=>`<button class="wchip ${wState(x)} ${sel===x?'sel':''}" translate="no" onclick="ST.sel=${esc(JSON.stringify(x.label))};renderStats()">${esc(x.disp)} <i>×${x.bad}</i></button>`).join('')}</div>
       ${sel?wDetail(sel,en):`<p class="hint" style="margin:6px 0 0">${esc(sffT?sffT('לחיצה על מילה – באיזה משחק טעה/תה ומה ענה/תה'):'לחיצה על מילה – באיזה משחק טעה/תה ומה ענה/תה')}</p>`}`:''}</div>`;
   const all=s.words&&s.words.length?s.words:[...new Set(s.questions.map(q=>String(q.options[q.answer]).trim()))], seen=new Set(items.map(x=>x.label.toLowerCase()));
   const notYet=all.filter(w=>![...seen].some(l=>l===w.toLowerCase()||l.startsWith(w.toLowerCase()+' ')||l.endsWith(' '+w.toLowerCase()))).length;
   const goodN=good.length+okW.length;
-  const sits=`<details class="card sgood"><summary><b>${esc(sffT?sffT('יושב טוב'):'יושב טוב')} · ${goodN}</b>${okW.length?` <span class="hint" dir="${en?'ltr':'auto'}" translate="no">${esc(okW.slice(0,3).map(x=>x.label).join(', '))}${okW.length>3?'…':''}</span>`:''}</summary>
+  const sits=`<details class="card sgood"><summary><b>${esc(sffT?sffT('יושב טוב'):'יושב טוב')} · ${goodN}</b>${okW.length?` <span class="hint" dir="${en?'ltr':'auto'}" translate="no">${esc(okW.slice(0,3).map(x=>x.disp).join(', '))}${okW.length>3?'…':''}</span>`:''}</summary>
     ${good.length?`<div class="strows">${good.map(row).join('')}</div>`:''}
-    ${okW.length?`<div class="wlist" dir="${en?'ltr':'auto'}">${okW.map(x=>`<span class="wchip g" translate="no">${esc(x.label)}</span>`).join('')}</div>`:''}
+    ${okW.length?`<div class="wlist" dir="${en?'ltr':'auto'}">${okW.map(x=>`<span class="wchip g" translate="no">${esc(x.disp)}</span>`).join('')}</div>`:''}
     ${notYet?`<p class="hint" style="margin:8px 0 0">⬜ ${fT(`עוד לא תורגלו: ${notYet}`)}</p>`:''}</details>`;
   const ms=mistakesOf(s,history), mo=ms.filter(m=>!m.fixed).length, mf=ms.length-mo;
   const H14=HS.filter(h=>h.at>=now-14*864e5).length;
@@ -4801,13 +4826,13 @@ function statsSet(k,s){
     +`<button class="srow" onclick="openSetHistory('${esc(s.id)}')"><b>${esc(sffT?sffT('היסטוריה'):'היסטוריה')}</b><span class="hint">${fT(`${H14} משחקים ב-14 ימים`)}</span><span aria-hidden="true">›</span></button>`;
 }
 // a word / question with mistakes: in which games it was missed and what was answered instead
-function wDetail(sel,en){ return `<div class="wdetail"><div class="wtop"><span class="wemo">${esc(sel.q.emoji||'⭐')}</span><div><b dir="${en?'ltr':'auto'}" translate="no" style="font-size:1.25em">${esc(sel.label)}</b>
-    ${en&&EN_SAY(sel.label)?`<button class="btn ghost small" onclick="sayWord(${esc(JSON.stringify(sel.label))})" aria-label="השמעה">🔊</button>`:''}
-    <div class="hint" dir="auto" translate="no">${esc(sel.q.explanation||'')}</div></div></div>
+function wDetail(sel,en){ const q=qv(sel.q); return `<div class="wdetail"><div class="wtop"><span class="wemo">${esc(q.emoji||'⭐')}</span><div><b dir="${en?'ltr':'auto'}" translate="no" style="font-size:1.25em">${esc(sel.disp)}</b>
+    ${en&&EN_SAY(sel.disp)?`<button class="btn ghost small" onclick="sayWord(${esc(JSON.stringify(sel.disp))})" aria-label="השמעה">🔊</button>`:''}
+    <div class="hint" dir="auto" translate="no">${esc(q.explanation||'')}</div></div></div>
   <div class="wrow"><span>✗ ${sel.bad}</span><span>✓ ${sel.ok}</span><span>📅 ${whenTxt(sel.last)}</span></div>
   <div class="wrow">${sel.seq.slice(-8).map(([m,ok])=>`<span>${MODE_ICO[m]||'🎮'} ${ok?'✓':'✗'}</span>`).join('')}</div>
   ${Object.keys(sel.picks).length?`<div class="hint" style="margin-top:8px">${esc(sffT?sffT('ענה/תה במקום:'):'ענה/תה במקום:')} ${Object.entries(sel.picks).sort((a,b)=>b[1]-a[1]).map(([w,c])=>`<b dir="auto" translate="no">${esc(w)}</b> ×${c}`).join(' · ')}</div>`:''}
-  <div class="hint" style="margin-top:6px" dir="auto" translate="no">❓ ${esc(sel.q.question)}</div></div>`; }
+  <div class="hint" style="margin-top:6px" dir="auto" translate="no">❓ ${esc(q.question)}</div></div>`; }
 // the set's games, in a window (until the history screen – level 3 – is built)
 function openSetHistory(id){ const s=getSet(id); if(!s) return; const H=history.filter(h=>h.setId===id).slice(0,60);
   let d=$('histDlg'); if(!d){ d=document.createElement('div'); d.id='histDlg'; d.className='dlgwrap'; d.onclick=e=>{ if(e.target===d) d.classList.add('hidden'); }; document.body.appendChild(d); }
@@ -5836,8 +5861,8 @@ function hardQuestions(games, topic, max=5){
   const st={};
   games.forEach(h=>{ const set=sets.find(s=>s.id===h.setId); if(!set||!Array.isArray(h.qr)||h.mode==='memory') return;
     qrEntries(set,h).forEach(({i,ok,pick})=>{ const q=set.questions[i]; if(!q||trName(q.topic,h)!==topic) return;
-      const k=tkey(q.question), x=st[k]=st[k]||{q:q.question, ok:0, bad:0, picks:{}}; ok?x.ok++:x.bad++;
-      if(!ok&&Number.isInteger(pick)&&q.options[pick]!=null){ const w=String(q.options[pick]); x.picks[w]=(x.picks[w]||0)+1; } }); });
+      const k=tkey(q.question), x=st[k]=st[k]||{q:qv(q).question, ok:0, bad:0, picks:{}}; ok?x.ok++:x.bad++;
+      if(!ok&&Number.isInteger(pick)&&q.options[pick]!=null){ const w=String(qv(q).options[pick]); x.picks[w]=(x.picks[w]||0)+1; } }); });
   return Object.values(st).filter(x=>x.bad>0).map(x=>{ const top=Object.entries(x.picks).sort((a,b)=>b[1]-a[1])[0];
     return {q:x.q, pct:Math.round(x.ok/(x.ok+x.bad)*100), n:x.ok+x.bad, wrong:top&&top[1]>1?top[0]:null}; })
     .sort((a,b)=>a.pct-b.pct||b.n-a.n).slice(0,max);
@@ -5934,7 +5959,7 @@ function kidCardStats(kid){
   const g=history.filter(h=>h.kidId===kid).sort((a,b)=>b.at-a.at); if(!g.length) return '<p class="hint">עוד לא תרגל/ה.</p>';
   const m=kidMastery(g), ts=Object.entries(m).sort((a,b)=>a[1].pct-b[1].pct), wk=g.filter(h=>h.at>=Date.now()-7*864e5);
   const mist=[]; g.some(h=>{ const set=sets.find(s=>s.id===h.setId); if(set&&Array.isArray(h.qr)&&h.mode!=='memory') qrEntries(set,h).forEach(({i,ok,pick})=>{ const q=set.questions[i];
-    if(!ok&&q&&!mist.some(x=>x.q===q.question)) mist.push({q:q.question, a:q.options[q.answer], p:Number.isInteger(pick)?q.options[pick]:null}); }); return mist.length>=5; });
+    const d=qv(q); if(!ok&&q&&!mist.some(x=>x.q===d.question)) mist.push({q:d.question, a:d.options[q.answer], p:Number.isInteger(pick)?d.options[pick]:null}); }); return mist.length>=5; });
   return `<p class="hint">תרגל/ה לאחרונה ${fmtDT(g[0].at)} · ${wk.length} משחקים השבוע</p>
     <div class="tbars">${ts.map(([n,x])=>`<div><div class="tr1"><span translate="no" dir="auto">${esc(n)}</span><b>${x.pct}%</b></div><div class="mbar"><span style="width:${x.pct}%;background:${MCOL[mastLvl(x.pct)]}"></span></div></div>`).join('')}</div>
     ${mist.length?`<h3 class="th3">טעויות אחרונות</h3>${mist.slice(0,5).map(x=>`<div class="trq"><span translate="no" dir="auto">${esc(x.q)}</span><span class="hint">${x.p!=null?`ענה/תה <bdi translate="no">${esc(x.p)}</bdi> · `:''}התשובה: <bdi translate="no">${esc(x.a)}</bdi></span></div>`).join('')}`:''}`;
@@ -5960,6 +5985,7 @@ function asgState(s){ const tot=roundsTotal(s), st={done:[],mid:[],none:[]};
 const WD=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const isoDay=(n=0)=>{ const d=new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
 const dueTxt=d=>{ if(!d) return ''; const n=daysLeft(d); return n<0?'התאריך עבר':n===0?'עד היום':n===1?'עד מחר':n<7?`עד יום ${WD[new Date(d+'T00:00:00').getDay()]}`:`עד ${fmtDate(d)}`; };
+const catTitle=x=>String(EN()&&x.title_en||x.title||x.subject||'');   // a catalog entry's title in the shown language
 const asgTitle=s=>String(s.title||s.subject||'').replace(/^🎯\s*/,'');
 // the teacher's home: the open assignments – how many finished, a bar; a set just built waits to be given out
 function teacherAssignments(){
@@ -6121,7 +6147,7 @@ function thMist(kid){ const k=kidById(kid), L=sinceLesson(kid, (CLS.sched||{})[k
   L.list.forEach(h=>{ const set=sets.find(s=>s.id===h.setId); if(!set||!Array.isArray(h.qr)||h.mode==='memory') return;
     qrEntries(set,h).forEach(({i,ok,pick})=>{ const q=set.questions[i]; if(!q||ok||seen.has(tkey(q.question))) return; seen.add(tkey(q.question)); out.push({q, pick}); }); });
   tDialog(`<h2>הטעויות לשיעור · <bdi translate="no">${esc(k?k.name:'')}</bdi></h2><p class="hint">מאז השיעור הקודם${L.prev?` (${fmtDT(L.prev)})`:''} · <bdi>${out.length}</bdi> שאלות</p>
-    ${out.map(({q,pick})=>`<div class="mrow"><div dir="auto" translate="no">${esc(q.question)}</div><div class="mans bad"><span>✗</span> <span dir="auto" translate="no">${esc(Number.isInteger(pick)?q.options[pick]:'')}</span></div><div class="mans ok"><span>✓</span> <span dir="auto" translate="no">${esc(q.options[q.answer])}</span></div></div>`).join('')||'<p>אין טעויות מאז השיעור הקודם 🎉</p>'}
+    ${out.map(({q:q0,pick})=>{ const q=qv(q0); return `<div class="mrow"><div dir="auto" translate="no">${esc(q.question)}</div><div class="mans bad"><span>✗</span> <span dir="auto" translate="no">${esc(Number.isInteger(pick)?q.options[pick]:'')}</span></div><div class="mans ok"><span>✓</span> <span dir="auto" translate="no">${esc(q.options[q.answer])}</span></div></div>`; }).join('')||'<p>אין טעויות מאז השיעור הקודם 🎉</p>'}
     <div class="actions" style="justify-content:center"><button class="btn ghost small" onclick="thLessonDone('${esc(kid)}')">✓ היה שיעור היום</button></div>`); }
 function thNote(kid){ const k=kidById(kid); tDialog(`<h2>📝 הערה לשיעור · <bdi translate="no">${esc(k?k.name:'')}</bdi></h2><p class="hint">רק את/ה רואה</p>
   <textarea id="tNote" data-kid="${esc(kid)}" maxlength="2000" rows="5" oninput="this.dataset.touched=1"></textarea><button class="btn" onclick="tNoteSave('${esc(kid)}')">שמירה</button>`); tNoteLoad(kid); }
@@ -6163,7 +6189,7 @@ function thNewGroup(){ const C=window.SFF_CLASS||{}, pend=CLS.reqs.filter(r=>r.s
       ${step(2,s2,'מזמינים את ההורים',`<div class="thinv"><div id="thQR" class="tqr" aria-label="QR"></div><ol class="hint"><li>ההורה קורא/ת את המכתב</li><li>ממלא/ת וחותמ/ת</li><li>את/ה מאשר/ת – והילד/ה מקבל/ת קישור</li></ol></div>
         <div class="actions"><a class="btn small wa" id="thWa" target="_blank" rel="noopener noreferrer" href="#">שליחה בוואטסאפ</a><button class="btn ghost small" onclick="thCopy()">העתקת הקישור</button></div>
         <span class="hint">הקישור פתוח 30 יום · אפשר לסגור או להחליף אותו בכל רגע</span><button class="linkbtn" onclick="inviteStudents()">ניהול הקישור ›</button>`)}
-      ${step(3,s3,'משימה ראשונה – מוכנה עוד לפני שהתלמידים מצטרפים',`${rec.map(x=>`<button class="threc" onclick="asgOpen();ASG.mode='cat';asgFromCatalog('${esc(x.id)}')"><b translate="no" dir="auto">${esc(String(x.title||x.subject))}</b><span class="hint">${fT(`${x.subject} · כיתה ${GRADES[+x.grade||0]}`)}</span></button>`).join('')}
+      ${step(3,s3,'משימה ראשונה – מוכנה עוד לפני שהתלמידים מצטרפים',`${rec.map(x=>`<button class="threc" onclick="asgOpen();ASG.mode='cat';asgFromCatalog('${esc(x.id)}')"><b translate="no" dir="auto">${esc(catTitle(x))}</b><span class="hint">${fT(`${x.subject} · כיתה ${GRADES[+x.grade||0]}`)}</span></button>`).join('')}
         <button class="btn ghost small" onclick="asgOpen();asgAI()">בנייה מהחומר שלכם – ניסיון אחד חינם</button>`)}</div>
     <div class="thsec thsoon"><h3>מה יופיע כאן בקרוב</h3><div class="thdots dim">${Array.from({length:12},()=>'<span class="thdot l-x"><i></i></span>').join('')}</div>
       <p class="hint">כל בוקר: מי נתקע, מי לא תרגל ומי התקדם – ומה כדאי לעשות היום, בלחיצה אחת.</p></div>`; }

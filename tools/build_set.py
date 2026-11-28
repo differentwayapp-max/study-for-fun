@@ -62,6 +62,7 @@ def scene(s):
     return [{"e": e, "x": x, "y": y, "s": z} for e, x, y, z in s]
 
 errors, warns, qs, chapters = [], [], [], []
+SRC_OPTS = []   # each question's options in the source order (the English file lists them so)
 # core facts (tools/core_facts.json: set id → question texts): they come back in later stations as review questions, in another game
 _nq = lambda t: re.sub(r"[\s\u0591-\u05C7\u2066-\u2069]", "", str(t))
 try: CORE_Q = {_nq(t) for t in json.loads((pathlib.Path(__file__).resolve().parent / "core_facts.json").read_text(encoding="utf-8")).get(src.stem.replace("_", "-"), [])}
@@ -170,6 +171,7 @@ for ci, chap in enumerate(C):
             hw, hh = it["s"] * .62 / 1.6, it["s"] * .5                # half width / height of the emoji, in % of the frame
             if it["x"] - hw < -1 or it["x"] + hw > 101 or it["y"] - hh < -1 or it["y"] + hh > 101: errors.append(f"{tag}: \"{it['e']}\" is outside the frame")
         is_core = _nq(q) in CORE_Q
+        SRC_OPTS.append(src_opts)
         qs.append({"topic": topic, "question": q, "options": opts, "answer": ans, **({"core": True} if is_core else {}),
                    "explanation": expl, "emoji": scn[0]["e"], "scene": scn, "ch": ci, **({"lvl": 2} if lvl == 2 else {})})
 
@@ -212,6 +214,106 @@ try:
             elif _num_key(q["question"], q["options"][q["answer"]]) in _nums: warns.append(f"DUP vs {_e['id']} (same numbers, same answer): «{q['question']}» → {q['options'][q['answer']]}")
 except Exception as _ex: warns.append(f"duplicate check skipped: {_ex}")
 
+# ---------- the English version (tools/sets_en/<id>.json) – shown in the app's English mode; the Hebrew stays the key ----------
+HE_RE = re.compile(r"[֐-׿]")
+EN_PATH = pathlib.Path(__file__).resolve().parent / "sets_en" / f"{src.stem.replace('_', '-')}.json"
+EN_SUBJECT = SET["subject"] == "אנגלית"        # an English set keeps the Hebrew that is the exercise (translation, meaning hints)
+HEB_SUBJECT = SET["subject"].startswith("עברית")   # a Hebrew set: only its name gets English
+def q_hash(q):    # what the translation was made from: the question, its options (source order), explanation and picture text
+    i = qs.index(q)
+    return hashlib.sha1(json.dumps([q["question"], SRC_OPTS[i], q["explanation"], [it["e"] for it in q["scene"] if is_text(it["e"])]], ensure_ascii=False).encode()).hexdigest()[:8]
+import hashlib
+def en_entry(q):
+    i = qs.index(q)
+    return {"he": q["question"], "a": q["options"][q["answer"]], "h": q_hash(q), "ho": SRC_OPTS[i], "hx": q["explanation"],
+            "hsc": {str(k): it["e"] for k, it in enumerate(q["scene"]) if is_text(it["e"])}}
+def en_key(he, a): return he.strip() + "\u0001" + a.strip()
+EN = json.loads(EN_PATH.read_text(encoding="utf-8")) if EN_PATH.exists() else None
+EN_OUT = None
+if __import__("os").environ.get("SFF_EN_DUMP"):
+    # a skeleton for the translator: every question with its Hebrew, and the English already written (kept); then stop
+    old = {en_key(e.get("he", ""), e.get("a", "")): e for e in (EN or {}).get("questions", [])}
+    out = {"set": {"name": "", "title": "", "tags": [""] * len(SET.get("tags", []))} | ((EN or {}).get("set") or {}),
+           "set_he": {"name": SET["name"], "title": SET.get("title", ""), "tags": SET.get("tags", [])},
+           "labels": {t: ((EN or {}).get("labels") or {}).get(t, "") for t in list(dict.fromkeys(SET["topics"] + [c["title"] for c in chapters]))},
+           "texts": {str(i): ((EN or {}).get("texts") or {}).get(str(i), "") for i, c in enumerate(chapters) if c.get("text")},
+           "texts_he": {str(i): c["text"] for i, c in enumerate(chapters) if c.get("text")},
+           "questions": []}
+    for q in qs:
+        e = en_entry(q); o = old.get(en_key(e["he"], e["a"]), {})
+        keep = lambda t: "" if HE_RE.search(str(t)) else t      # text with no Hebrew (numbers, an English sentence) is copied as it is
+        out["questions"].append({**e, "q": o.get("q", keep(e["he"])), "o": o.get("o", [keep(x) for x in e["ho"]]), "x": o.get("x", keep(e["hx"])),
+                                 "sc": o.get("sc", {k: ("" if HE_RE.search(v) else re.sub(r"([\d?)])\s+:\s+([\d?(])", r"\1 ÷ \2", v)) for k, v in e["hsc"].items()
+                                                    if HE_RE.search(v) or re.search(r"[\d?)]\s+:\s+[\d?(]", v)}),   # a Hebrew card, or a division card ("24 : 4" → "24 ÷ 4"; a ratio stays ":")
+                                 **({"stale": True} if o and o.get("h") != e["h"] else {})})
+    dst = pathlib.Path(__import__("os").environ["SFF_EN_DUMP"]); dst.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"EN skeleton: {len(qs)} questions → {dst}"); sys.exit(0)
+if EN is not None:
+    en_err = lambda m: errors.append("EN " + m)
+    has_he = lambda t: bool(HE_RE.search(str(t)))
+    lim_q = ns.get("MAX_Q_WORDS_EN", -(-3 * ns.get("MAX_Q_WORDS", 6) // 2))
+    es = EN.get("set") or {}
+    if not str(es.get("name", "")).strip(): en_err("set: no English name")
+    if not HEB_SUBJECT:
+        if not str(es.get("title", "")).strip(): en_err("set: no English title")
+        if len(es.get("tags") or []) != len(SET.get("tags", [])): en_err("set: tags – one English tag for each tag")
+    labels = {k: v for k, v in (EN.get("labels") or {}).items() if str(v).strip()}
+    if not HEB_SUBJECT:
+        for t in list(dict.fromkeys(SET["topics"] + [c["title"] for c in chapters])):
+            if t not in labels: en_err(f"label missing: «{t}»")
+            elif not EN_SUBJECT and has_he(labels[t]): en_err(f"label «{t}» → «{labels[t]}» has Hebrew")
+    texts = {k: v for k, v in (EN.get("texts") or {}).items() if str(v).strip()}
+    for i, c in enumerate(chapters):
+        if c.get("text") and not HEB_SUBJECT and not EN_SUBJECT and str(i) not in texts: en_err(f"ch{i+1}: the reading passage has no English")
+    by = {en_key(e.get("he", ""), e.get("a", "")): e for e in EN.get("questions", [])}
+    used, n_en = set(), 0
+    for q in ([] if HEB_SUBJECT else qs):
+        k = en_key(q["question"], q["options"][q["answer"]]); e = by.get(k); i = qs.index(q)
+        tag = f"ch{q['ch']+1} «{q['question']}»"
+        if not e or not str(e.get("q", "")).strip(): en_err(f"{tag}: no English"); continue
+        used.add(k)
+        if e.get("h") != q_hash(q): en_err(f"{tag}: the Hebrew changed since it was translated – check the English, then dump again (h)"); continue
+        eo = [str(o).strip() for o in (e.get("o") or [])]
+        if len(eo) != 4 or len(set(eo)) != 4 or not all(eo): en_err(f"{tag}: need 4 different English options"); continue
+        eq, ex = str(e["q"]).strip(), str(e.get("x", "")).strip()
+        ea = eo[SRC_OPTS[i].index(q["options"][q["answer"]])]
+        if not EN_SUBJECT and any(has_he(t) for t in [eq, ex, *eo]): en_err(f"{tag}: Hebrew left in the English")
+        if words(eq) > lim_q: en_err(f"{tag}: English question > {lim_q} words")
+        if any(words(o) > 4 for o in eo): en_err(f"{tag}: English option > 4 words")
+        if words(ex) > 14: en_err(f"{tag}: English explanation > 14 words")
+        if not ns.get("ANSWER_IN_Q_OK") and re.search(r"(?<!\w)" + re.escape(ea.lower()) + r"(?!\w)", eq.lower()): en_err(f"{tag}: the English question gives the answer away ({ea})")
+        # the picture's text cards: each Hebrew card needs its English; only text cards may be replaced
+        sc = {str(a): str(b).strip() for a, b in (e.get("sc") or {}).items() if str(b).strip()}
+        for a, b in sc.items():
+            if not a.isdigit() or int(a) >= len(q["scene"]) or not is_text(q["scene"][int(a)]["e"]): en_err(f"{tag}: sc {a} is not a text card of the picture"); continue
+            if len(b) > 16: en_err(f"{tag}: English card too long \"{b}\"")
+            if "←" in b and not has_he(b): en_err(f"{tag}: English card with ← \"{b}\" – write it with →")
+            if not EN_SUBJECT and has_he(b): en_err(f"{tag}: Hebrew left on the card \"{b}\"")
+        if not EN_SUBJECT:
+            for k2, it in enumerate(q["scene"]):
+                if is_text(it["e"]) and has_he(it["e"]) and str(k2) not in sc: en_err(f"{tag}: the card \"{it['e']}\" has no English")
+        cards = [sc.get(str(k2), it["e"]) for k2, it in enumerate(q["scene"]) if is_text(it["e"])]
+        if len(cards) == 1 and cards[0].strip().lower() == ea.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
+            en_err(f"{tag}: the English card \"{cards[0]}\" is the answer")
+        q["en"] = {"k": q["question"].strip(), "q": eq, "o": [eo[SRC_OPTS[i].index(o)] for o in q["options"]], "x": ex, **({"sc": sc} if sc else {})}
+        n_en += 1
+    extra = [e.get("he") for k, e in by.items() if k not in used] if not HEB_SUBJECT else []
+    if extra: warns.append(f"EN: {len(extra)} English entr(ies) for questions not in the set (old?) – e.g. «{extra[0]}»")
+    # match / memory: the English answer cards of a chapter – two different answers that look the same in English
+    for ci in range(len(chapters)):
+        m, r = {}, {}
+        for q in qs:
+            if q["ch"] != ci or "en" not in q: continue
+            he, en = q["options"][q["answer"]].strip().lower(), q["en"]["o"][q["answer"]].strip().lower()
+            if en in m and m[en] != he: warns.append(f"EN ch{ci+1}: «{m[en]}» and «{he}» are both «{en}» in English – a match / memory line to either is accepted")
+            m.setdefault(en, he)
+            if he in r and r[he] != en: warns.append(f"EN ch{ci+1}: «{he}» is «{r[he]}» in one question and «{en}» in another – the same answer should be the same English text")
+            r.setdefault(he, en)
+    if str(es.get("name", "")).strip(): labels.setdefault(SET["name"], str(es["name"]).strip())   # the set's name (a catalog preview, the add screen)
+    EN_OUT = {"labels": labels, **({"texts": texts} if texts else {}), "name": str(es.get("name", "")).strip(), "title": str(es.get("title", "")).strip(),
+              "tags": [str(t).strip() for t in (es.get("tags") or [])]}
+    print(f"EN: {n_en}/{len(qs)} questions in English", file=sys.stderr)
+
 _missing = CORE_Q - {_nq(q["question"]) for q in qs}
 if _missing: warns.append(f"core_facts.json: {len(_missing)} question(s) not found in the set (reworded?)")
 if warns and not __import__("os").environ.get("SFF_QUIET"): print("\n".join("warning: " + w for w in warns), file=sys.stderr)
@@ -222,8 +324,8 @@ if __import__("os").environ.get("SFF_DRY"):   # check only, write nothing (safe 
 
 riddle = sum(1 for q in qs if re.fullmatch(r"[A-Za-z0-9 '\-]{2,14}", q["options"][q["answer"]]))
 import hashlib
-ver = hashlib.sha1(json.dumps([SET, chapters, qs], ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:10]   # changes only when the content changes
-payload = {"v": 1, "ver": ver, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs,
+ver = hashlib.sha1(json.dumps([SET, chapters, qs] + ([EN_OUT] if EN_OUT else []), ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:10]   # changes only when the content changes
+payload = {"v": 1, "ver": ver, "src": src.stem, **SET, "group": "", **({"words": word_list} if word_list else {}), "chapters": chapters, "questions": qs, **({"en": EN_OUT} if EN_OUT else {}),
            "qa": {"checked": len(qs), "passed": len(qs), "fixed": 0, "dropped": 0, **ns.get("QA", {})}}   # QA = {"fixed": n}: questions reworded after review
 code = "SFF1:" + base64.b64encode(json.dumps(payload, ensure_ascii=False).encode("utf-8")).decode()
 sid = src.stem.replace("_", "-") + "-" + secrets.token_hex(3)
@@ -243,10 +345,11 @@ code_name = src.stem.replace("_", "-")
 samples, seen_ch = [], set()
 for q in qs:                                   # one sample from different chapters, pictures first
     if q["ch"] in seen_ch or len(samples) >= 3 or ("text" in chapters[q["ch"]]): continue
-    seen_ch.add(q["ch"]); samples.append({"q": q["question"], "e": "".join(it["e"] for it in q["scene"][:2])})
+    seen_ch.add(q["ch"]); samples.append({"q": q["question"], "e": "".join(it["e"] for it in q["scene"][:2]), **({"q_en": q["en"]["q"]} if "en" in q else {})})
 entry = {"id": code_name, "ver": ver, "subject": SET["subject"], "grade": SET["grade"], "title": SET.get("title", SET["name"]),
          "desc": SET.get("desc", ""), "desc_en": SET.get("desc_en", ""), "tags": SET.get("tags", SET["topics"]), "questions": len(qs), "chapters": len(chapters),
-         "reading": sum(1 for c in chapters if c.get("text")), "words": len(word_list), "samples": samples, "status": "ready"}
+         "reading": sum(1 for c in chapters if c.get("text")), "words": len(word_list), "samples": samples, "status": "ready",
+         **({"name_en": EN_OUT["name"], "title_en": EN_OUT["title"] or EN_OUT["name"], "tags_en": EN_OUT["tags"] or SET.get("tags", SET["topics"])} if EN_OUT else {})}
 catalog["sets"] = [e for e in catalog["sets"] if e.get("id") != code_name] + [entry]
 cat_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"OK  words {len(word_list)}/{len(word_list)} practised")

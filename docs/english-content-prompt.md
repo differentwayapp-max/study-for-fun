@@ -60,7 +60,12 @@ Scale of the job (catalog sets in `public/share/catalog.json`):
 7. **AI-built sets (family builds):** out of scope for this job; a later step can make the build language follow the
    parent's interface language (`c.lang` in `functions/prompts.js`).
 
-### 3. How the English is stored and shown (stage A – app support, needs the owner's approval of code changes)
+### 3. How the English is stored and shown (stage A – DONE 28.11.2026, see CLAUDE.md "English version of the content")
+
+As built: `tools/sets_en/<id>.json` = `{set: {name, title, tags}, labels: {Hebrew: English}, texts: {chapter: passage},
+questions: [{he, a, h, q, o (source order), x, sc}]}`; make a skeleton with `SFF_EN_DUMP=<file> python3 -I tools/build_set.py
+tools/sets/<file>.py` (it fills text with no Hebrew and division cards, and keeps what is already translated; `stale: true`
+marks a question whose Hebrew changed). Pilot report: `docs/catalog-review/english-pilot.md`. The plan below is kept for reference.
 
 Content alone will not show: the app needs a small reading layer. Do this first, as its own reviewed commit, with tests.
 
@@ -228,6 +233,11 @@ hypothesis · משתנה בלתי תלוי / תלוי independent / dependent va
   "←", Latin point labels, English units). A card must not become exactly the answer in English; a number-only card stays.
 - Re-check every picture against the English question (the PIC rules): a picture that was fine for the Hebrew word may now
   point to a different English word, or to the answer.
+- **A table of cards is laid out right-to-left** (label on the right, its value on the left – sci4 "פרווה | יש"). The
+  cards keep their places, so in English give the LEFT card the label and the RIGHT card the value
+  ("Fur | Yes"), so it reads left-to-right. Same for any pair of cards read as one phrase.
+- Number-only cards are part of the job too: a division card "24 : 4" → "24 ÷ 4" (the skeleton fills it in; a ratio or
+  scale keeps ":", and a clock time "10:50" is never touched).
 - `OPTS` pictures are tied to the option index – the English options keep the source order, so the pictures still match.
 
 #### 4.7 Match / memory in English

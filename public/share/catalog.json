@@ -904,51 +904,6 @@
    "status": "ready"
   },
   {
-   "id": "math8",
-   "ver": "e8d937553f",
-   "subject": "מתמטיקה",
-   "grade": 7,
-   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
-   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
-   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
-   "tags": [
-    "פונקציה קווית",
-    "שיפוע",
-    "כפל מקוצר",
-    "חוקי חזקות",
-    "אי-שוויונות",
-    "מערכת משוואות",
-    "פתרון גרפי",
-    "יחס ופרופורציה",
-    "אחוזים וריבית",
-    "הסתברות",
-    "חפיפת משולשים",
-    "שווה שוקיים",
-    "מרובעים מיוחדים",
-    "דמיון משולשים",
-    "פיתגורס"
-   ],
-   "questions": 405,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה השיפוע של ⁦y=3x+2⁩?",
-     "e": "y = 3x + 2"
-    },
-    {
-     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
-     "e": "(0,1)(2,5)"
-    },
-    {
-     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
-     "e": "y = 2x + 5"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en8",
    "ver": "b6fd56755e",
    "subject": "אנגלית",
@@ -1638,6 +1593,73 @@
     "Living and non-living",
     "Properties of objects",
     "Technology"
+   ]
+  },
+  {
+   "id": "math8",
+   "ver": "e0317b9986",
+   "subject": "מתמטיקה",
+   "grade": 7,
+   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
+   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
+   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
+   "tags": [
+    "פונקציה קווית",
+    "שיפוע",
+    "כפל מקוצר",
+    "חוקי חזקות",
+    "אי-שוויונות",
+    "מערכת משוואות",
+    "פתרון גרפי",
+    "יחס ופרופורציה",
+    "אחוזים וריבית",
+    "הסתברות",
+    "חפיפת משולשים",
+    "שווה שוקיים",
+    "מרובעים מיוחדים",
+    "דמיון משולשים",
+    "פיתגורס"
+   ],
+   "questions": 405,
+   "chapters": 39,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה השיפוע של ⁦y=3x+2⁩?",
+     "e": "y = 3x + 2",
+     "q_en": "What is the slope of y=3x+2?"
+    },
+    {
+     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+     "e": "(0,1)(2,5)",
+     "q_en": "What is the slope of the line through (0,1) and (2,5)?"
+    },
+    {
+     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+     "e": "y = 2x + 5",
+     "q_en": "y=2x+5 crosses the y-axis at the point…"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 8",
+   "title_en": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
+   "tags_en": [
+    "Linear functions",
+    "Slope",
+    "Special products",
+    "Laws of exponents",
+    "Inequalities",
+    "Systems of equations",
+    "Graphical solution",
+    "Ratio and proportion",
+    "Percent and interest",
+    "Probability",
+    "Congruent triangles",
+    "Isosceles triangles",
+    "Special quadrilaterals",
+    "Similar triangles",
+    "The Pythagorean theorem"
    ]
   }
  ]

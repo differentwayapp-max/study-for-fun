@@ -283,7 +283,8 @@ if EN is not None:
         def noiso(t):   # English reads left to right: no direction marks (else "⁦5⁩" ≠ "5" in the games)
             t = re.sub(r"[\u2066-\u2069]", "", str(t)).strip()
             first = re.search(r"[A-Za-z\u0590-\u05FF]", t)   # the app shows it dir="auto": a text that starts in English is drawn left to right,
-            return t.replace("←", "→") if first and not HE_RE.match(first.group(0)) else t   # so the Hebrew "←" (= then) must point right
+            if not first: return t                                                      # so the Hebrew "←" (= then) must point right,
+            return t.replace("→", "←") if HE_RE.match(first.group(0)) else t.replace("←", "→")   # and a text that starts in Hebrew is drawn right to left: "←"
         eo = [noiso(o) for o in (e.get("o") or [])]
         if len(eo) != 4 or len(set(eo)) != 4 or not all(eo): en_err(f"{tag}: need 4 different English options"); continue
         eq, ex = noiso(e["q"]), noiso(e.get("x", ""))

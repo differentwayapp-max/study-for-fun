@@ -1,48 +1,6 @@
 {
  "sets": [
   {
-   "id": "en7",
-   "ver": "139eb49420",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
-   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
-   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
-   "tags": [
-    "Past Simple",
-    "Past Progressive",
-    "will / going to",
-    "Comparatives",
-    "as … as",
-    "Adverbs",
-    "too / enough",
-    "Modals",
-    "Quantifiers",
-    "Connectors",
-    "Band II words",
-    "Unseen"
-   ],
-   "questions": 372,
-   "chapters": 35,
-   "reading": 4,
-   "words": 58,
-   "samples": [
-    {
-     "q": "Yesterday I ___ my room.",
-     "e": "🧹🛏️"
-    },
-    {
-     "q": "Which day is in the past?",
-     "e": "📅⬅️"
-    },
-    {
-     "q": "Past of bring?",
-     "e": "🎒bring → ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "heb1",
    "ver": "ef905eb01a",
    "subject": "עברית / לשון",
@@ -387,49 +345,6 @@
     {
      "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
      "e": "🌦️הואיל והגשם פסק,"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en8",
-   "ver": "b6fd56755e",
-   "subject": "אנגלית",
-   "grade": 7,
-   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
-   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
-   "tags": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
-    "Unseen"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 4,
-   "words": 59,
-   "samples": [
-    {
-     "q": "She ___ her homework, so she can watch TV.",
-     "e": "👧📓"
-    },
-    {
-     "q": "I haven't finished my project ___.",
-     "e": "📋⏳"
-    },
-    {
-     "q": "We ___ about the trip the day before yesterday.",
-     "e": "🗣️🧳"
     }
    ],
    "status": "ready"
@@ -1159,128 +1074,6 @@
    ]
   },
   {
-   "id": "en4",
-   "ver": "87b2c04124",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "Sounds · Words · Sentences · Questions · Reading",
-   "desc": "אנגלית לכיתה ד' – כל השנה: חרוזים וצלילים, תנועות קצרות ו-magic e, sh ch th, ברכות ושיחה, מילים בסיסיות, משפטים קצרים (has, his/her, Do you like), מילות יחס, מילות שאלה וקטעי קריאה קצרים",
-   "desc_en": "Grade 4 English, the whole year: rhymes and sounds, short vowels and magic e, sh ch th, greetings and basic talk, core words, short sentences (has, his/her, Do you like), in/on/under/next to, question words and short reading passages",
-   "tags": [
-    "Rhymes",
-    "Short vowels",
-    "Magic e",
-    "sh ch th",
-    "Sight words",
-    "Greetings",
-    "Family",
-    "Colors & numbers",
-    "Body & clothes",
-    "Animals & food",
-    "Days",
-    "I am / I can",
-    "Do you like?",
-    "has / his / her",
-    "There is / are",
-    "in / on / under",
-    "Question words",
-    "Reading"
-   ],
-   "questions": 397,
-   "chapters": 38,
-   "reading": 3,
-   "words": 135,
-   "samples": [
-    {
-     "q": "Which word rhymes with sun?",
-     "e": "☀️sun",
-     "q_en": "Which word rhymes with sun?"
-    },
-    {
-     "q": "fl_g (דגל)",
-     "e": "🚩",
-     "q_en": "fl_g (דגל)"
-    },
-    {
-     "q": "b_x (קופסה)",
-     "e": "📦",
-     "q_en": "b_x (קופסה)"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 4",
-   "title_en": "Sounds · Words · Sentences · Questions · Reading",
-   "tags_en": [
-    "Rhymes",
-    "Short vowels",
-    "Magic e",
-    "sh ch th",
-    "Sight words",
-    "Greetings",
-    "Family",
-    "Colors & numbers",
-    "Body & clothes",
-    "Animals & food",
-    "Days",
-    "I am / I can",
-    "Do you like?",
-    "has / his / her",
-    "There is / are",
-    "in / on / under",
-    "Question words",
-    "Reading"
-   ]
-  },
-  {
-   "id": "en4-nov26",
-   "ver": "bf225c005e",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 144,
-   "chapters": 13,
-   "reading": 0,
-   "words": 36,
-   "samples": [
-    {
-     "q": "האות הקטנה?",
-     "e": "A",
-     "q_en": "The small letter?"
-    },
-    {
-     "q": "האות הגדולה?",
-     "e": "n",
-     "q_en": "The capital letter?"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB",
-     "q_en": "What comes next?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – ABC, Colors, Animals",
-   "title_en": "ABC · Colors · Animals",
-   "tags_en": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ]
-  },
-  {
    "id": "math2",
    "ver": "b3c680e83b",
    "subject": "מתמטיקה",
@@ -1403,69 +1196,6 @@
    ]
   },
   {
-   "id": "en3",
-   "ver": "378eee29ff",
-   "subject": "אנגלית",
-   "grade": 2,
-   "title": "ABC · First words · Short sentences",
-   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
-   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
-   "tags": [
-    "Rhymes",
-    "Letters & sounds",
-    "ABC order",
-    "Short words",
-    "Sight words",
-    "Family & body",
-    "Colors & numbers",
-    "Animals & food",
-    "School",
-    "I am / I have",
-    "Vowel sounds",
-    "Hello & my name",
-    "Reading sentences"
-   ],
-   "questions": 330,
-   "chapters": 31,
-   "reading": 0,
-   "words": 107,
-   "samples": [
-    {
-     "q": "Which word rhymes with cat?",
-     "e": "🐈cat",
-     "q_en": "Which word rhymes with cat?"
-    },
-    {
-     "q": "Which word starts like ball?",
-     "e": "⚽ball",
-     "q_en": "Which word starts like ball?"
-    },
-    {
-     "q": "איזו אות נקראת אֶם?",
-     "e": "אֶם",
-     "q_en": "Which letter is called אֶם?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 3",
-   "title_en": "ABC · First words · Short sentences",
-   "tags_en": [
-    "Rhymes",
-    "Letters & sounds",
-    "ABC order",
-    "Short words",
-    "Sight words",
-    "Family & body",
-    "Colors & numbers",
-    "Animals & food",
-    "School",
-    "I am / I have",
-    "Vowel sounds",
-    "Hello & my name",
-    "Reading sentences"
-   ]
-  },
-  {
    "id": "sci6",
    "ver": "2744027102",
    "subject": "מדעים",
@@ -1526,69 +1256,6 @@
     "Photosynthesis",
     "Habitats",
     "Technological systems"
-   ]
-  },
-  {
-   "id": "en5",
-   "ver": "d2ab20973b",
-   "subject": "אנגלית",
-   "grade": 4,
-   "title": "Grammar · Band I words · Reading",
-   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
-   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
-   "tags": [
-    "am / is / are",
-    "Present Simple",
-    "Present Progressive",
-    "can / there is",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Question words",
-    "Past: was / -ed",
-    "Past: went / ate",
-    "Telling the time",
-    "Band I words",
-    "Reading"
-   ],
-   "questions": 389,
-   "chapters": 32,
-   "reading": 3,
-   "words": 72,
-   "samples": [
-    {
-     "q": "My brother is eight, and I ___ eleven.",
-     "e": "👦11",
-     "q_en": "My brother is eight, and I ___ eleven."
-    },
-    {
-     "q": "I ___ a new bike.",
-     "e": "🚲",
-     "q_en": "I ___ a new bike."
-    },
-    {
-     "q": "He ___ football and scores goals.",
-     "e": "👦⚽",
-     "q_en": "He ___ football and scores goals."
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 5",
-   "title_en": "Grammar · Band I words · Reading",
-   "tags_en": [
-    "am / is / are",
-    "Present Simple",
-    "Present Progressive",
-    "can / there is",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Question words",
-    "Past: was / -ed",
-    "Past: went / ate",
-    "Telling the time",
-    "Band I words",
-    "Reading"
    ]
   },
   {
@@ -1805,57 +1472,207 @@
    ]
   },
   {
-   "id": "en7-nov26",
-   "ver": "7edcdd4d22",
+   "id": "en3",
+   "ver": "378eee29ff",
    "subject": "אנגלית",
-   "grade": 6,
-   "title": "Present Simple · Weather & Nature",
-   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
-   "desc_en": "Grammar, 112 worksheet words and a reading passage",
+   "grade": 2,
+   "title": "ABC · First words · Short sentences",
+   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
+   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
    "tags": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
    ],
-   "questions": 178,
-   "chapters": 13,
-   "reading": 1,
-   "words": 112,
+   "questions": 330,
+   "chapters": 31,
+   "reading": 0,
+   "words": 107,
    "samples": [
     {
-     "q": "She ___ to school.",
-     "e": "👧🏫",
-     "q_en": "She ___ to school."
+     "q": "Which word rhymes with cat?",
+     "e": "🐈cat",
+     "q_en": "Which word rhymes with cat?"
     },
     {
-     "q": "What is falling?",
-     "e": "🌧️",
-     "q_en": "What is falling?"
+     "q": "Which word starts like ball?",
+     "e": "⚽ball",
+     "q_en": "Which word starts like ball?"
     },
     {
-     "q": "She ___ like snow.",
-     "e": "👧❄️",
-     "q_en": "She ___ like snow."
+     "q": "איזו אות נקראת אֶם?",
+     "e": "אֶם",
+     "q_en": "Which letter is called אֶם?"
     }
    ],
    "status": "ready",
-   "name_en": "English – Present Simple + Words",
-   "title_en": "Present Simple · Weather & Nature",
+   "name_en": "English – Grade 3",
+   "title_en": "ABC · First words · Short sentences",
    "tags_en": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
+   ]
+  },
+  {
+   "id": "en4",
+   "ver": "d786143f72",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "Sounds · Words · Sentences · Questions · Reading",
+   "desc": "אנגלית לכיתה ד' – כל השנה: חרוזים וצלילים, תנועות קצרות ו-magic e, sh ch th, ברכות ושיחה, מילים בסיסיות, משפטים קצרים (has, his/her, Do you like), מילות יחס, מילות שאלה וקטעי קריאה קצרים",
+   "desc_en": "Grade 4 English, the whole year: rhymes and sounds, short vowels and magic e, sh ch th, greetings and basic talk, core words, short sentences (has, his/her, Do you like), in/on/under/next to, question words and short reading passages",
+   "tags": [
+    "Rhymes",
+    "Short vowels",
+    "Magic e",
+    "sh ch th",
+    "Sight words",
+    "Greetings",
+    "Family",
+    "Colors & numbers",
+    "Body & clothes",
+    "Animals & food",
+    "Days",
+    "I am / I can",
+    "Do you like?",
+    "has / his / her",
+    "There is / are",
+    "in / on / under",
+    "Question words",
+    "Reading"
+   ],
+   "questions": 397,
+   "chapters": 38,
+   "reading": 3,
+   "words": 135,
+   "samples": [
+    {
+     "q": "Which word rhymes with sun?",
+     "e": "☀️sun",
+     "q_en": "Which word rhymes with sun?"
+    },
+    {
+     "q": "fl_g (דגל)",
+     "e": "🚩",
+     "q_en": "fl_g (דגל)"
+    },
+    {
+     "q": "b_x (קופסה)",
+     "e": "📦",
+     "q_en": "b_x (קופסה)"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 4",
+   "title_en": "Sounds · Words · Sentences · Questions · Reading",
+   "tags_en": [
+    "Rhymes",
+    "Short vowels",
+    "Magic e",
+    "sh ch th",
+    "Sight words",
+    "Greetings",
+    "Family",
+    "Colors & numbers",
+    "Body & clothes",
+    "Animals & food",
+    "Days",
+    "I am / I can",
+    "Do you like?",
+    "has / his / her",
+    "There is / are",
+    "in / on / under",
+    "Question words",
+    "Reading"
+   ]
+  },
+  {
+   "id": "en5",
+   "ver": "f4147e6f9d",
+   "subject": "אנגלית",
+   "grade": 4,
+   "title": "Grammar · Band I words · Reading",
+   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
+   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
+   "tags": [
+    "am / is / are",
     "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Past: went / ate",
+    "Telling the time",
+    "Band I words",
+    "Reading"
+   ],
+   "questions": 389,
+   "chapters": 32,
+   "reading": 3,
+   "words": 72,
+   "samples": [
+    {
+     "q": "My brother is eight, and I ___ eleven.",
+     "e": "👦11",
+     "q_en": "My brother is eight, and I ___ eleven."
+    },
+    {
+     "q": "I ___ a new bike.",
+     "e": "🚲",
+     "q_en": "I ___ a new bike."
+    },
+    {
+     "q": "He ___ football and scores goals.",
+     "e": "👦⚽",
+     "q_en": "He ___ football and scores goals."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 5",
+   "title_en": "Grammar · Band I words · Reading",
+   "tags_en": [
+    "am / is / are",
+    "Present Simple",
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Past: went / ate",
+    "Telling the time",
+    "Band I words",
+    "Reading"
    ]
   },
   {
    "id": "en6",
-   "ver": "9eaa09138f",
+   "ver": "e9504738ec",
    "subject": "אנגלית",
    "grade": 5,
    "title": "Grammar · Past Simple · Time · Band I words · Reading",
@@ -1920,6 +1737,228 @@
     "Band I words",
     "Writing",
     "Reading"
+   ]
+  },
+  {
+   "id": "en4-nov26",
+   "ver": "bf225c005e",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 144,
+   "chapters": 13,
+   "reading": 0,
+   "words": 36,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A",
+     "q_en": "The small letter?"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n",
+     "q_en": "The capital letter?"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB",
+     "q_en": "What comes next?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – ABC, Colors, Animals",
+   "title_en": "ABC · Colors · Animals",
+   "tags_en": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ]
+  },
+  {
+   "id": "en7-nov26",
+   "ver": "7edcdd4d22",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Present Simple · Weather & Nature",
+   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
+   "desc_en": "Grammar, 112 worksheet words and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to school.",
+     "e": "👧🏫",
+     "q_en": "She ___ to school."
+    },
+    {
+     "q": "What is falling?",
+     "e": "🌧️",
+     "q_en": "What is falling?"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️",
+     "q_en": "She ___ like snow."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Present Simple + Words",
+   "title_en": "Present Simple · Weather & Nature",
+   "tags_en": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ]
+  },
+  {
+   "id": "en7",
+   "ver": "49c138c015",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
+   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
+   "tags": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ],
+   "questions": 372,
+   "chapters": 35,
+   "reading": 4,
+   "words": 58,
+   "samples": [
+    {
+     "q": "Yesterday I ___ my room.",
+     "e": "🧹🛏️",
+     "q_en": "Yesterday I ___ my room."
+    },
+    {
+     "q": "Which day is in the past?",
+     "e": "📅⬅️",
+     "q_en": "Which day is in the past?"
+    },
+    {
+     "q": "Past of bring?",
+     "e": "🎒bring → ?",
+     "q_en": "Past of bring?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 7",
+   "title_en": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "tags_en": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ]
+  },
+  {
+   "id": "en8",
+   "ver": "1df5de390a",
+   "subject": "אנגלית",
+   "grade": 7,
+   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
+   "tags": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ],
+   "questions": 380,
+   "chapters": 37,
+   "reading": 4,
+   "words": 59,
+   "samples": [
+    {
+     "q": "She ___ her homework, so she can watch TV.",
+     "e": "👧📓",
+     "q_en": "She ___ her homework, so she can watch TV."
+    },
+    {
+     "q": "I haven't finished my project ___.",
+     "e": "📋⏳",
+     "q_en": "I haven't finished my project ___."
+    },
+    {
+     "q": "We ___ about the trip the day before yesterday.",
+     "e": "🗣️🧳",
+     "q_en": "We ___ about the trip the day before yesterday."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 8",
+   "title_en": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "tags_en": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
    ]
   }
  ]

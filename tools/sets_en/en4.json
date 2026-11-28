@@ -633,7 +633,7 @@
    "he": "Which number has a long i, like bike?",
    "a": "five",
    "h": "caf52129",
-   "q": "Which number has a long i, like bike?",
+   "q": "Which of these has a long i, like bike?",
    "o": [
     "five",
     "big",
@@ -1449,7 +1449,7 @@
     "nine",
     "Dana"
    ],
-   "x": "from = מאיפה → the name of a place"
+   "x": "Where are you from? = מאיפה אתה? → a place"
   },
   {
    "he": "Good ___! Time to get up!",
@@ -1696,7 +1696,7 @@
     "purple",
     "brown"
    ],
-   "x": "Red + yellow = orange"
+   "x": "Red + yellow = orange (כתום)"
   },
   {
    "he": "Blue and yellow make ___.",
@@ -1709,7 +1709,7 @@
     "pink",
     "black"
    ],
-   "x": "Blue + yellow = green"
+   "x": "Blue + yellow = green (ירוק)"
   },
   {
    "he": "What color is the heart?",
@@ -3573,7 +3573,7 @@
     "Are",
     "Is"
    ],
-   "x": "Answer No, I can't → question with Can"
+   "x": "The answer No, I can't → the question with Can"
   },
   {
    "he": "He ___ a dog.",
@@ -3969,7 +3969,7 @@
    "he": "Which is only ONE thing?",
    "a": "ball",
    "h": "af97086a",
-   "q": "Which is only ONE thing?",
+   "q": "Which of these is only ONE thing?",
    "o": [
     "ball",
     "balls",
@@ -4817,7 +4817,7 @@
     "ten",
     "two"
    ],
-   "x": "twenty children = 20 children"
+   "x": "twenty children = 20 ילדים"
   },
   {
    "he": "Who is Ruth?",
@@ -4882,7 +4882,7 @@
     "one",
     "four"
    ],
-   "x": "three pencils = 3 pencils"
+   "x": "three pencils = 3 עפרונות"
   },
   {
    "he": "What color is Dana's notebook?",
@@ -5144,7 +5144,7 @@
     "purple",
     "black"
    ],
-   "x": "Bananas are yellow"
+   "x": "A banana is yellow (צהוב)"
   },
   {
    "he": "17 = ?",

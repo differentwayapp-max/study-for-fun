@@ -1,0 +1,5019 @@
+{
+ "set": {
+  "name": "English – Grade 8",
+  "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+  "tags": [
+   "Present Perfect",
+   "since / for",
+   "when / while",
+   "will / going to",
+   "If … will",
+   "Modals",
+   "who / which / that",
+   "Passive",
+   "used to",
+   "Connectors",
+   "Band II words",
+   "Word building",
+   "Unseen"
+  ]
+ },
+ "labels": {
+  "Present Perfect": "Present Perfect",
+  "Past Simple or Present Perfect?": "Past Simple or Present Perfect?",
+  "Past Progressive · when / while": "Past Progressive · when / while",
+  "Future: will · going to · plans": "Future: will · going to · plans",
+  "First conditional: If … will": "First conditional: If … will",
+  "Comparatives & superlatives": "Comparatives & superlatives",
+  "Modals: must · have to · should · might": "Modals: must · have to · should · might",
+  "Quantifiers": "Quantifiers",
+  "Relative pronouns: who · which · that": "Relative pronouns: who · which · that",
+  "Passive: is made · was built": "Passive: is made · was built",
+  "used to": "used to",
+  "Paragraphs & connectors": "Paragraphs & connectors",
+  "Words: environment & technology": "Words: environment & technology",
+  "Words: health & travel": "Words: health & travel",
+  "Words: media & feelings": "Words: media & feelings",
+  "Word building: un- · -ful · -tion": "Word building: un- · -ful · -tion",
+  "Unseen": "Unseen",
+  "Present Perfect: have / has + V3": "Present Perfect: have / has + V3",
+  "ever · never · already · yet · since · for": "ever · never · already · yet · since · for",
+  "been or gone? just · ago · so far": "been or gone? just · ago · so far",
+  "Past Progressive: was / were + -ing": "Past Progressive: was / were + -ing",
+  "when, while or during?": "when, while or during?",
+  "Future: will or going to?": "Future: will or going to?",
+  "Future: questions & negatives": "Future: questions & negatives",
+  "First conditional: If + present, will": "First conditional: If + present, will",
+  "First conditional: results": "First conditional: results",
+  "Irregular and long adjectives": "Irregular and long adjectives",
+  "as … as · the most · comparing facts": "as … as · the most · comparing facts",
+  "must · have to · should": "must · have to · should",
+  "might · advice · rules": "might · advice · rules",
+  "too much · too many · enough · few": "too much · too many · enough · few",
+  "Countable or uncountable?": "Countable or uncountable?",
+  "who · which · that": "who · which · that",
+  "Relative clauses: joining ideas": "Relative clauses: joining ideas",
+  "Passive: is made · are spoken": "Passive: is made · are spoken",
+  "Passive: was built · were written": "Passive: was built · were written",
+  "used to: things I did before": "used to: things I did before",
+  "used to: negatives & questions": "used to: negatives & questions",
+  "Word building: -tion · -ment · -ful · -less": "Word building: -tion · -ment · -ful · -less",
+  "Word building: un- · dis-": "Word building: un- · dis-",
+  "Writing a paragraph": "Writing a paragraph",
+  "although · however · therefore · in addition": "although · however · therefore · in addition",
+  "The environment": "The environment",
+  "Science & technology": "Science & technology",
+  "Health": "Health",
+  "Travel": "Travel",
+  "Media": "Media",
+  "More feelings": "More feelings",
+  "📖 Unseen: Screens and Sleep": "📖 Unseen: Screens and Sleep",
+  "📖 Unseen: Greetings from Iceland": "📖 Unseen: Greetings from Iceland",
+  "📖 Unseen: Where Have All the Bees Gone?": "📖 Unseen: Where Have All the Bees Gone?",
+  "📖 Unseen: The Story That Wasn't True": "📖 Unseen: The Story That Wasn't True",
+  "חזרה כללית": "General review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "She ___ her homework, so she can watch TV.",
+   "a": "has finished",
+   "h": "ebe37f4b",
+   "q": "She ___ her homework, so she can watch TV.",
+   "o": [
+    "has finished",
+    "have finished",
+    "has finish",
+    "having finished"
+   ],
+   "x": "she → has + V3: has finished"
+  },
+  {
+   "he": "They ___ (see) the new Spider-Man film.",
+   "a": "have seen",
+   "h": "772c2633",
+   "q": "They ___ (see) the new Spider-Man film.",
+   "o": [
+    "have seen",
+    "has seen",
+    "have saw",
+    "has saw"
+   ],
+   "x": "they → have + V3 (see-saw-seen)"
+  },
+  {
+   "he": "Third form (V3) of write?",
+   "a": "written",
+   "h": "35243399",
+   "q": "Third form (V3) of write?",
+   "o": [
+    "written",
+    "wrote",
+    "writed",
+    "writing"
+   ],
+   "x": "write – wrote – written"
+  },
+  {
+   "he": "Third form (V3) of go?",
+   "a": "gone",
+   "h": "0231ec8a",
+   "q": "Third form (V3) of go?",
+   "o": [
+    "gone",
+    "went",
+    "goed",
+    "going"
+   ],
+   "x": "go – went – gone"
+  },
+  {
+   "he": "Third form (V3) of eat?",
+   "a": "eaten",
+   "h": "942dbce1",
+   "q": "Third form (V3) of eat?",
+   "o": [
+    "eaten",
+    "ate",
+    "eated",
+    "eating"
+   ],
+   "x": "eat – ate – eaten"
+  },
+  {
+   "he": "Third form (V3) of buy?",
+   "a": "bought",
+   "h": "f2594fce",
+   "q": "Third form (V3) of buy?",
+   "o": [
+    "bought",
+    "buyed",
+    "boughten",
+    "buying"
+   ],
+   "x": "buy – bought – bought"
+  },
+  {
+   "he": "I have never ___ (ride) a horse.",
+   "a": "ridden",
+   "h": "c6e86fdf",
+   "q": "I have never ___ (ride) a horse.",
+   "o": [
+    "ridden",
+    "rode",
+    "ride",
+    "rided"
+   ],
+   "x": "ride – rode – ridden"
+  },
+  {
+   "he": "___ you ever been to Paris?",
+   "a": "Have",
+   "h": "222b307b",
+   "q": "___ you ever been to Paris?",
+   "o": [
+    "Have",
+    "Has",
+    "Did",
+    "Were"
+   ],
+   "x": "you → Have you ever been…?"
+  },
+  {
+   "he": "My brother ___ his phone. He can't find it.",
+   "a": "has lost",
+   "h": "905e510f",
+   "q": "My brother ___ his phone. He can't find it.",
+   "o": [
+    "has lost",
+    "have lost",
+    "has lose",
+    "is lost"
+   ],
+   "x": "he → has + V3: has lost"
+  },
+  {
+   "he": "Oops! She ___ an egg.",
+   "a": "has broken",
+   "h": "c3d68487",
+   "q": "Oops! She ___ an egg.",
+   "o": [
+    "has broken",
+    "have broken",
+    "has broke",
+    "has break"
+   ],
+   "x": "has + V3 (break-broke-broken)"
+  },
+  {
+   "he": "I haven't finished my project ___.",
+   "a": "yet",
+   "h": "734f2a5b",
+   "q": "I haven't finished my project ___.",
+   "o": [
+    "yet",
+    "already",
+    "since",
+    "ever"
+   ],
+   "x": "Negative, at the end of the sentence → yet (עדיין לא)"
+  },
+  {
+   "he": "We have ___ eaten lunch. We're full.",
+   "a": "already",
+   "h": "6152e972",
+   "q": "We have ___ eaten lunch. We're full.",
+   "o": [
+    "already",
+    "yet",
+    "ever",
+    "since"
+   ],
+   "x": "already = כבר"
+  },
+  {
+   "he": "I've ___ seen snow. I'd love to see it!",
+   "a": "never",
+   "h": "30fbfc5b",
+   "q": "I've ___ seen snow. I'd love to see it!",
+   "o": [
+    "never",
+    "ever",
+    "already",
+    "yet"
+   ],
+   "x": "never = אף פעם לא"
+  },
+  {
+   "he": "Is this the first time you've ___ flown?",
+   "a": "ever",
+   "h": "f4203c3a",
+   "q": "Is this the first time you've ___ flown?",
+   "o": [
+    "ever",
+    "yet",
+    "since",
+    "for"
+   ],
+   "x": "the first time + Present Perfect → ever"
+  },
+  {
+   "he": "She has lived here ___ 2020.",
+   "a": "since",
+   "h": "d21b64d1",
+   "q": "She has lived here ___ 2020.",
+   "o": [
+    "since",
+    "for",
+    "ago",
+    "yet"
+   ],
+   "x": "A starting point (a year) → since"
+  },
+  {
+   "he": "They have known each other ___ ten years.",
+   "a": "for",
+   "h": "904a25b2",
+   "q": "They have known each other ___ ten years.",
+   "o": [
+    "for",
+    "since",
+    "ago",
+    "already"
+   ],
+   "x": "A length of time → for"
+  },
+  {
+   "he": "I have been sick ___ Monday.",
+   "a": "since",
+   "h": "80e43c9b",
+   "q": "I have been sick ___ Monday.",
+   "o": [
+    "since",
+    "for",
+    "ago",
+    "yet"
+   ],
+   "x": "Monday = a starting point → since"
+  },
+  {
+   "he": "He has played the guitar ___ a long time.",
+   "a": "for",
+   "h": "41ffddb5",
+   "q": "He has played the guitar ___ a long time.",
+   "o": [
+    "for",
+    "since",
+    "ago",
+    "yet"
+   ],
+   "x": "a long time = a length of time → for"
+  },
+  {
+   "he": "How long ___ you lived in Haifa?",
+   "a": "have",
+   "h": "9392a825",
+   "q": "How long ___ you lived in Haifa?",
+   "o": [
+    "have",
+    "has",
+    "did",
+    "are"
+   ],
+   "x": "you → have + lived"
+  },
+  {
+   "he": "Which time goes with \"for\"?",
+   "a": "three weeks",
+   "h": "b316bd3d",
+   "q": "Which time goes with \"for\"?",
+   "o": [
+    "three weeks",
+    "last Sunday",
+    "2015",
+    "my birthday"
+   ],
+   "x": "for + a length of time: three weeks"
+  },
+  {
+   "he": "We ___ about the trip the day before yesterday.",
+   "a": "talked",
+   "h": "21e90a40",
+   "q": "We ___ about the trip the day before yesterday.",
+   "o": [
+    "talked",
+    "have talked",
+    "has talked",
+    "talk"
+   ],
+   "x": "The day before yesterday = a definite past time → Past Simple"
+  },
+  {
+   "he": "I ___ to London twice in my life.",
+   "a": "have been",
+   "h": "04e38ea0",
+   "q": "I ___ to London twice in my life.",
+   "o": [
+    "have been",
+    "was",
+    "am",
+    "go"
+   ],
+   "x": "in my life = experience → Present Perfect"
+  },
+  {
+   "he": "She ___ to Rome in 2019.",
+   "a": "went",
+   "h": "2ba800a4",
+   "q": "She ___ to Rome in 2019.",
+   "o": [
+    "went",
+    "has gone",
+    "has been",
+    "goes"
+   ],
+   "x": "in 2019 = a definite time → Past Simple"
+  },
+  {
+   "he": "___ your parents meet at school or at work?",
+   "a": "Did",
+   "h": "0fbc3dad",
+   "q": "___ your parents meet at school or at work?",
+   "o": [
+    "Did",
+    "Have",
+    "Has",
+    "Were"
+   ],
+   "x": "They met once, in the past → Past Simple: Did"
+  },
+  {
+   "he": "Which time word goes with Past Simple?",
+   "a": "ago",
+   "h": "d08b30e7",
+   "q": "Which time word goes with Past Simple?",
+   "o": [
+    "ago",
+    "yet",
+    "ever",
+    "since"
+   ],
+   "x": "ago = לפני → Past Simple"
+  },
+  {
+   "he": "Which time word goes with Present Perfect?",
+   "a": "yet",
+   "h": "7a425af8",
+   "q": "Which time word goes with Present Perfect?",
+   "o": [
+    "yet",
+    "ago",
+    "yesterday",
+    "last year"
+   ],
+   "x": "yet → Present Perfect"
+  },
+  {
+   "he": "When ___ you buy that phone?",
+   "a": "did",
+   "h": "6ffb665c",
+   "q": "When ___ you buy that phone?",
+   "o": [
+    "did",
+    "have",
+    "has",
+    "were"
+   ],
+   "x": "A When question → Past Simple"
+  },
+  {
+   "he": "He ___ his leg last week.",
+   "a": "broke",
+   "h": "c9debd75",
+   "q": "He ___ his leg last week.",
+   "o": [
+    "broke",
+    "has broken",
+    "breaks",
+    "have broken"
+   ],
+   "x": "last week → Past Simple"
+  },
+  {
+   "he": "We have ___ in Haifa since 2018.",
+   "a": "lived",
+   "h": "c7ea244a",
+   "q": "We have ___ in Haifa since 2018.",
+   "o": [
+    "lived",
+    "live",
+    "living",
+    "lives"
+   ],
+   "x": "since → Present Perfect: have + V3 (lived)"
+  },
+  {
+   "he": "Yesterday I ___ that film.",
+   "a": "saw",
+   "h": "792edd81",
+   "q": "Yesterday I ___ that film.",
+   "o": [
+    "saw",
+    "have seen",
+    "has seen",
+    "seen"
+   ],
+   "x": "yesterday → Past Simple: saw"
+  },
+  {
+   "he": "Dan isn't here. He ___ to the shop.",
+   "a": "has gone",
+   "h": "f95b1b88",
+   "q": "Dan isn't here. He ___ to the shop.",
+   "o": [
+    "has gone",
+    "has been",
+    "have gone",
+    "is go"
+   ],
+   "x": "has gone = went and is still there"
+  },
+  {
+   "he": "The bus has ___ left. We missed it!",
+   "a": "just",
+   "h": "cd0321c6",
+   "q": "The bus has ___ left. We missed it!",
+   "o": [
+    "just",
+    "yet",
+    "ever",
+    "ago"
+   ],
+   "x": "just = הרגע"
+  },
+  {
+   "he": "I've lost my key. – When ___ you lose it?",
+   "a": "did",
+   "h": "32af4e29",
+   "q": "I've lost my key. – When ___ you lose it?",
+   "o": [
+    "did",
+    "have",
+    "has",
+    "do"
+   ],
+   "x": "When → Past Simple: did"
+  },
+  {
+   "he": "She ___ a doctor since 2015.",
+   "a": "has been",
+   "h": "4d4c09f7",
+   "q": "She ___ a doctor since 2015.",
+   "o": [
+    "has been",
+    "was",
+    "is",
+    "were"
+   ],
+   "x": "since → has been"
+  },
+  {
+   "he": "Two years ___, we moved to Haifa.",
+   "a": "ago",
+   "h": "ae574ce4",
+   "q": "Two years ___, we moved to Haifa.",
+   "o": [
+    "ago",
+    "since",
+    "for",
+    "yet"
+   ],
+   "x": "לפני שנתיים = two years ago"
+  },
+  {
+   "he": "I ___ the dishes an hour ago.",
+   "a": "washed",
+   "h": "5351ef85",
+   "q": "I ___ the dishes an hour ago.",
+   "o": [
+    "washed",
+    "have washed",
+    "wash",
+    "has washed"
+   ],
+   "x": "an hour ago → Past Simple"
+  },
+  {
+   "he": "Which of these time phrases needs Past Simple?",
+   "a": "in 2010",
+   "h": "dcfbd5a7",
+   "q": "Which of these time phrases needs Past Simple?",
+   "o": [
+    "in 2010",
+    "since 2010",
+    "so far",
+    "yet"
+   ],
+   "x": "A definite year in the past → Past Simple"
+  },
+  {
+   "he": "Which of these uses Present Perfect?",
+   "a": "I have eaten",
+   "h": "f778060f",
+   "q": "Which of these uses Present Perfect?",
+   "o": [
+    "I have eaten",
+    "I ate",
+    "I was eating",
+    "I eat"
+   ],
+   "x": "have + V3 = Present Perfect"
+  },
+  {
+   "he": "It ___ a lot last winter.",
+   "a": "rained",
+   "h": "d6a4644e",
+   "q": "It ___ a lot last winter.",
+   "o": [
+    "rained",
+    "has rained",
+    "rains",
+    "have rained"
+   ],
+   "x": "last winter → Past Simple"
+  },
+  {
+   "he": "How many films ___ you seen this year?",
+   "a": "have",
+   "h": "287972bc",
+   "q": "How many films ___ you seen this year?",
+   "o": [
+    "have",
+    "did",
+    "has",
+    "are"
+   ],
+   "x": "seen = V3 → have"
+  },
+  {
+   "he": "At 8 p.m. yesterday, I ___ my homework.",
+   "a": "was doing",
+   "h": "c50a496e",
+   "q": "At 8 p.m. yesterday, I ___ my homework.",
+   "o": [
+    "was doing",
+    "were doing",
+    "have done",
+    "am doing"
+   ],
+   "x": "In the middle of a past action → was + -ing"
+  },
+  {
+   "he": "They ___ football when it started to rain.",
+   "a": "were playing",
+   "h": "17c4b411",
+   "q": "They ___ football when it started to rain.",
+   "o": [
+    "were playing",
+    "was playing",
+    "are playing",
+    "play"
+   ],
+   "x": "they → were + ing"
+  },
+  {
+   "he": "While she ___ (read), her phone rang.",
+   "a": "was reading",
+   "h": "f218f2eb",
+   "q": "While she ___ (read), her phone rang.",
+   "o": [
+    "was reading",
+    "were reading",
+    "is reading",
+    "reads"
+   ],
+   "x": "While + a long action → she was reading"
+  },
+  {
+   "he": "I was walking home ___ I saw an accident.",
+   "a": "when",
+   "h": "194b0c68",
+   "q": "I was walking home ___ I saw an accident.",
+   "o": [
+    "when",
+    "while",
+    "during",
+    "since"
+   ],
+   "x": "A short action that interrupted → when"
+  },
+  {
+   "he": "While we ___ eating, the lights went out.",
+   "a": "were",
+   "h": "77c9ebe3",
+   "q": "While we ___ eating, the lights went out.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "did"
+   ],
+   "x": "we → were + -ing (While + a long action)"
+  },
+  {
+   "he": "What were you doing at 9 last night?",
+   "a": "I was sleeping",
+   "h": "0c74bb6b",
+   "q": "What were you doing at 9 last night?",
+   "o": [
+    "I was sleeping",
+    "I am sleeping",
+    "I sleep",
+    "I have slept"
+   ],
+   "x": "A Past Progressive question → answer in it too"
+  },
+  {
+   "he": "The sun ___ and the birds were singing.",
+   "a": "was shining",
+   "h": "0d8333ce",
+   "q": "The sun ___ and the birds were singing.",
+   "o": [
+    "was shining",
+    "were shining",
+    "shines",
+    "is shining"
+   ],
+   "x": "the sun → was + ing"
+  },
+  {
+   "he": "I was cooking when he called. Which action was short?",
+   "a": "calling",
+   "h": "1feca02a",
+   "q": "I was cooking when he called. Which action was short?",
+   "o": [
+    "calling",
+    "cooking",
+    "both",
+    "neither"
+   ],
+   "x": "The short action is in Past Simple"
+  },
+  {
+   "he": "Which is correct? They ___.",
+   "a": "were sleeping",
+   "h": "643d408e",
+   "q": "Which is correct? They ___.",
+   "o": [
+    "were sleeping",
+    "was sleeping",
+    "sleeping",
+    "were sleep"
+   ],
+   "x": "they → were + ing"
+  },
+  {
+   "he": "She burned her hand while she ___ dinner.",
+   "a": "was cooking",
+   "h": "20220a6b",
+   "q": "She burned her hand while she ___ dinner.",
+   "o": [
+    "was cooking",
+    "were cooking",
+    "cooks",
+    "is cooking"
+   ],
+   "x": "while + was + ing"
+  },
+  {
+   "he": "___ I was swimming, I lost my ring.",
+   "a": "While",
+   "h": "f373d03e",
+   "q": "___ I was swimming, I lost my ring.",
+   "o": [
+    "While",
+    "During",
+    "Since",
+    "Because"
+   ],
+   "x": "While + a long action"
+  },
+  {
+   "he": "Our team scored twice ___ the second half.",
+   "a": "during",
+   "h": "66c4fb50",
+   "q": "Our team scored twice ___ the second half.",
+   "o": [
+    "during",
+    "while",
+    "when",
+    "because"
+   ],
+   "x": "During + a noun (the second half)"
+  },
+  {
+   "he": "We were watching TV when the doorbell ___.",
+   "a": "rang",
+   "h": "73e67ae4",
+   "q": "We were watching TV when the doorbell ___.",
+   "o": [
+    "rang",
+    "was ringing",
+    "rings",
+    "ringing"
+   ],
+   "x": "when + a short action → Past Simple: rang"
+  },
+  {
+   "he": "___ the film, my phone rang.",
+   "a": "During",
+   "h": "203e1415",
+   "q": "___ the film, my phone rang.",
+   "o": [
+    "During",
+    "While",
+    "When",
+    "Since"
+   ],
+   "x": "During + a noun (the film)"
+  },
+  {
+   "he": "I met Dana ___ I was waiting for the bus.",
+   "a": "while",
+   "h": "a5a34409",
+   "q": "I met Dana ___ I was waiting for the bus.",
+   "o": [
+    "while",
+    "during",
+    "for",
+    "since"
+   ],
+   "x": "while + a long action"
+  },
+  {
+   "he": "Mom was cooking while Dad ___ the table.",
+   "a": "was setting",
+   "h": "6ba1d423",
+   "q": "Mom was cooking while Dad ___ the table.",
+   "o": [
+    "was setting",
+    "were setting",
+    "is setting",
+    "sets"
+   ],
+   "x": "Two long actions at the same time"
+  },
+  {
+   "he": "When I arrived, my friends ___ for me.",
+   "a": "were waiting",
+   "h": "8d943711",
+   "q": "When I arrived, my friends ___ for me.",
+   "o": [
+    "were waiting",
+    "was waiting",
+    "wait",
+    "are waiting"
+   ],
+   "x": "friends = plural → were + -ing"
+  },
+  {
+   "he": "While I was reading, my sister ___ music.",
+   "a": "was playing",
+   "h": "960a2bca",
+   "q": "While I was reading, my sister ___ music.",
+   "o": [
+    "was playing",
+    "were playing",
+    "plays",
+    "is playing"
+   ],
+   "x": "my sister → was + ing"
+  },
+  {
+   "he": "It ___ when we left the house.",
+   "a": "was snowing",
+   "h": "348d5951",
+   "q": "It ___ when we left the house.",
+   "o": [
+    "was snowing",
+    "snowing",
+    "were snowing",
+    "snows"
+   ],
+   "x": "it → was + ing"
+  },
+  {
+   "he": "I broke my arm while I ___ down the mountain.",
+   "a": "was skiing",
+   "h": "875d9958",
+   "q": "I broke my arm while I ___ down the mountain.",
+   "o": [
+    "was skiing",
+    "were skiing",
+    "skiing",
+    "am skiing"
+   ],
+   "x": "I → was + ing"
+  },
+  {
+   "he": "The baby is yawning. She's ___ to fall asleep.",
+   "a": "going",
+   "h": "d35f0da3",
+   "q": "The baby is yawning. She's ___ to fall asleep.",
+   "o": [
+    "going",
+    "will",
+    "go",
+    "gone"
+   ],
+   "x": "We see a clear sign → is going to"
+  },
+  {
+   "he": "This bag looks heavy. – Let me help! I ___ carry it.",
+   "a": "will",
+   "h": "5b90e327",
+   "q": "This bag looks heavy. – Let me help! I ___ carry it.",
+   "o": [
+    "will",
+    "am going",
+    "going to",
+    "was"
+   ],
+   "x": "A decision made right now → will"
+  },
+  {
+   "he": "Robots are getting smarter. I think they ___ do housework one day.",
+   "a": "will",
+   "h": "2ec4074f",
+   "q": "Robots are getting smarter. I think they ___ do housework one day.",
+   "o": [
+    "will",
+    "are",
+    "going to",
+    "have"
+   ],
+   "x": "I think + a prediction → will"
+  },
+  {
+   "he": "We've bought the tickets. We ___ to visit Rome.",
+   "a": "are going",
+   "h": "532883c2",
+   "q": "We've bought the tickets. We ___ to visit Rome.",
+   "o": [
+    "are going",
+    "will",
+    "going",
+    "are go"
+   ],
+   "x": "A plan we already made → going to"
+  },
+  {
+   "he": "I promise I ___ use your phone without asking.",
+   "a": "won't",
+   "h": "4a0e5b68",
+   "q": "I promise I ___ use your phone without asking.",
+   "o": [
+    "won't",
+    "wasn't",
+    "am not",
+    "not"
+   ],
+   "x": "A promise → won't = will not"
+  },
+  {
+   "he": "I ___ my aunt tonight. It's in my diary.",
+   "a": "am meeting",
+   "h": "f7218bcd",
+   "q": "I ___ my aunt tonight. It's in my diary.",
+   "o": [
+    "am meeting",
+    "meet",
+    "met",
+    "have met"
+   ],
+   "x": "A fixed arrangement → am + -ing"
+  },
+  {
+   "he": "What ___ you going to study at university?",
+   "a": "are",
+   "h": "58eaabe5",
+   "q": "What ___ you going to study at university?",
+   "o": [
+    "are",
+    "will",
+    "do",
+    "have"
+   ],
+   "x": "you → are going to"
+  },
+  {
+   "he": "Someone's at the door. – Don't get up, I ___ open it!",
+   "a": "will",
+   "h": "544965ce",
+   "q": "Someone's at the door. – Don't get up, I ___ open it!",
+   "o": [
+    "will",
+    "did",
+    "have",
+    "was"
+   ],
+   "x": "A decision made right now → will"
+  },
+  {
+   "he": "\"We're flying to Eilat on Friday.\" It is about:",
+   "a": "a future plan",
+   "h": "32a13ff4",
+   "q": "\"We're flying to Eilat on Friday.\" It is about:",
+   "o": [
+    "a future plan",
+    "the past",
+    "a habit",
+    "a rule"
+   ],
+   "x": "on Friday → a future plan"
+  },
+  {
+   "he": "Which sentence is a prediction?",
+   "a": "It will rain",
+   "h": "d714508c",
+   "q": "Which sentence is a prediction?",
+   "o": [
+    "It will rain",
+    "I'm meeting Dan",
+    "Close the door",
+    "I went home"
+   ],
+   "x": "A prediction → will"
+  },
+  {
+   "he": "___ you help me with this heavy box?",
+   "a": "Will",
+   "h": "1c1ab72d",
+   "q": "___ you help me with this heavy box?",
+   "o": [
+    "Will",
+    "Are",
+    "Going",
+    "Have"
+   ],
+   "x": "A request → Will you…?"
+  },
+  {
+   "he": "She isn't ___ to come to the party.",
+   "a": "going",
+   "h": "ff5b5131",
+   "q": "She isn't ___ to come to the party.",
+   "o": [
+    "going",
+    "will",
+    "go",
+    "goes"
+   ],
+   "x": "isn't going to = doesn't plan to"
+  },
+  {
+   "he": "Don't worry. I'm sure you ___ pass the test.",
+   "a": "will",
+   "h": "607a16ff",
+   "q": "Don't worry. I'm sure you ___ pass the test.",
+   "o": [
+    "will",
+    "are",
+    "going",
+    "did"
+   ],
+   "x": "I'm sure + a prediction → will"
+  },
+  {
+   "he": "Are you ___ to visit Greece this summer?",
+   "a": "going",
+   "h": "065763fd",
+   "q": "Are you ___ to visit Greece this summer?",
+   "o": [
+    "going",
+    "go",
+    "will",
+    "goes"
+   ],
+   "x": "Are you going to…? = do you plan to?"
+  },
+  {
+   "he": "Where ___ you going to stay?",
+   "a": "are",
+   "h": "9e9010af",
+   "q": "Where ___ you going to stay?",
+   "o": [
+    "are",
+    "will",
+    "do",
+    "have"
+   ],
+   "x": "you → are going to"
+  },
+  {
+   "he": "By 2040, most cars ___ be electric – no more petrol!",
+   "a": "will",
+   "h": "dae29089",
+   "q": "By 2040, most cars ___ be electric – no more petrol!",
+   "o": [
+    "will",
+    "are going",
+    "did",
+    "have"
+   ],
+   "x": "A prediction far ahead → will"
+  },
+  {
+   "he": "Dana ___ her grandparents next weekend. She's packed already.",
+   "a": "is visiting",
+   "h": "f8de29fb",
+   "q": "Dana ___ her grandparents next weekend. She's packed already.",
+   "o": [
+    "is visiting",
+    "visited",
+    "was visiting",
+    "has visited"
+   ],
+   "x": "A future arrangement → is + -ing"
+  },
+  {
+   "he": "Watch out! You're ___ to fall!",
+   "a": "going",
+   "h": "f8e6cdeb",
+   "q": "Watch out! You're ___ to fall!",
+   "o": [
+    "going",
+    "will",
+    "go",
+    "did"
+   ],
+   "x": "We see it's about to happen → going to"
+  },
+  {
+   "he": "The forecast says it ___ rain tomorrow. Take an umbrella!",
+   "a": "will",
+   "h": "ae2d467b",
+   "q": "The forecast says it ___ rain tomorrow. Take an umbrella!",
+   "o": [
+    "will",
+    "is",
+    "was",
+    "does"
+   ],
+   "x": "A forecast → will"
+  },
+  {
+   "he": "I ___ forget your birthday again. I promise!",
+   "a": "won't",
+   "h": "8a8fb333",
+   "q": "I ___ forget your birthday again. I promise!",
+   "o": [
+    "won't",
+    "don't",
+    "am not",
+    "didn't"
+   ],
+   "x": "A promise → won't"
+  },
+  {
+   "he": "If it rains, we ___ stay home.",
+   "a": "will",
+   "h": "74b65d7f",
+   "q": "If it rains, we ___ stay home.",
+   "o": [
+    "will",
+    "would",
+    "are",
+    "did"
+   ],
+   "x": "If + present, will + verb"
+  },
+  {
+   "he": "If you ___ hard, you will pass.",
+   "a": "study",
+   "h": "6549348c",
+   "q": "If you ___ hard, you will pass.",
+   "o": [
+    "study",
+    "will study",
+    "studied",
+    "studies"
+   ],
+   "x": "After If → present, no will"
+  },
+  {
+   "he": "If she ___ late, she'll lose her place.",
+   "a": "is",
+   "h": "ebd3c22e",
+   "q": "If she ___ late, she'll lose her place.",
+   "o": [
+    "is",
+    "will be",
+    "was",
+    "be"
+   ],
+   "x": "After If → present: is"
+  },
+  {
+   "he": "If I see Tom, I ___ him.",
+   "a": "will tell",
+   "h": "89346f22",
+   "q": "If I see Tom, I ___ him.",
+   "o": [
+    "will tell",
+    "telling",
+    "told",
+    "am tell"
+   ],
+   "x": "The result → will + verb"
+  },
+  {
+   "he": "We'll go to the beach if the weather ___ nice.",
+   "a": "is",
+   "h": "d310f3e8",
+   "q": "We'll go to the beach if the weather ___ nice.",
+   "o": [
+    "is",
+    "will be",
+    "was",
+    "be"
+   ],
+   "x": "After if → present: is"
+  },
+  {
+   "he": "If you don't hurry, you ___ late.",
+   "a": "will be",
+   "h": "5e6f1c72",
+   "q": "If you don't hurry, you ___ late.",
+   "o": [
+    "will be",
+    "are",
+    "were",
+    "be"
+   ],
+   "x": "A future result → will be"
+  },
+  {
+   "he": "If you touch the fire, you ___ yourself.",
+   "a": "will burn",
+   "h": "bb2e4f55",
+   "q": "If you touch the fire, you ___ yourself.",
+   "o": [
+    "will burn",
+    "burned",
+    "burning",
+    "have burn"
+   ],
+   "x": "The result → will + verb"
+  },
+  {
+   "he": "If we ___ the bus, we'll take a taxi.",
+   "a": "miss",
+   "h": "453c15d2",
+   "q": "If we ___ the bus, we'll take a taxi.",
+   "o": [
+    "miss",
+    "will miss",
+    "missed",
+    "missing"
+   ],
+   "x": "After If → present"
+  },
+  {
+   "he": "If it ___, we'll go skiing.",
+   "a": "snows",
+   "h": "efc1fb08",
+   "q": "If it ___, we'll go skiing.",
+   "o": [
+    "snows",
+    "will snow",
+    "snowed",
+    "snowing"
+   ],
+   "x": "it → snows (present with -s)"
+  },
+  {
+   "he": "If I ___ time tomorrow, I'll call you.",
+   "a": "have",
+   "h": "80dda8fa",
+   "q": "If I ___ time tomorrow, I'll call you.",
+   "o": [
+    "have",
+    "will have",
+    "had",
+    "having"
+   ],
+   "x": "After If → present: have"
+  },
+  {
+   "he": "If you eat too much candy, ___.",
+   "a": "you'll feel sick",
+   "h": "69231349",
+   "q": "If you eat too much candy, ___.",
+   "o": [
+    "you'll feel sick",
+    "you felt sick",
+    "you feeling sick",
+    "you sick"
+   ],
+   "x": "The result → will + verb"
+  },
+  {
+   "he": "If they win the game, they ___ very happy.",
+   "a": "will be",
+   "h": "870a891c",
+   "q": "If they win the game, they ___ very happy.",
+   "o": [
+    "will be",
+    "are being",
+    "were",
+    "be"
+   ],
+   "x": "The result → will be"
+  },
+  {
+   "he": "If you ___ that vase into pieces, Mom will be angry.",
+   "a": "break",
+   "h": "08468116",
+   "q": "If you ___ that vase into pieces, Mom will be angry.",
+   "o": [
+    "break",
+    "will break",
+    "broke",
+    "breaking"
+   ],
+   "x": "After If → present"
+  },
+  {
+   "he": "If I ___ the competition, I'll buy a new bike.",
+   "a": "win",
+   "h": "b57f8547",
+   "q": "If I ___ the competition, I'll buy a new bike.",
+   "o": [
+    "win",
+    "will win",
+    "won",
+    "winning"
+   ],
+   "x": "After If → present: win"
+  },
+  {
+   "he": "If you ___ now, you'll catch the train.",
+   "a": "leave",
+   "h": "8a98c611",
+   "q": "If you ___ now, you'll catch the train.",
+   "o": [
+    "leave",
+    "left",
+    "will leave",
+    "leaving"
+   ],
+   "x": "After If → present: leave"
+  },
+  {
+   "he": "What ___ you do if it rains tomorrow?",
+   "a": "will",
+   "h": "658a5082",
+   "q": "What ___ you do if it rains tomorrow?",
+   "o": [
+    "will",
+    "did",
+    "are",
+    "would"
+   ],
+   "x": "First conditional → will"
+  },
+  {
+   "he": "If we don't recycle, there ___ more rubbish.",
+   "a": "will be",
+   "h": "662ffd80",
+   "q": "If we don't recycle, there ___ more rubbish.",
+   "o": [
+    "will be",
+    "is be",
+    "were",
+    "has"
+   ],
+   "x": "A future result → will be"
+  },
+  {
+   "he": "Plants ___ if you don't water them.",
+   "a": "will die",
+   "h": "64569971",
+   "q": "Plants ___ if you don't water them.",
+   "o": [
+    "will die",
+    "died",
+    "dying",
+    "dies"
+   ],
+   "x": "The result → will + verb"
+  },
+  {
+   "he": "\"If you study, you'll pass.\" Which part is the condition?",
+   "a": "studying",
+   "h": "a6a67752",
+   "q": "\"If you study, you'll pass.\" Which part is the condition?",
+   "o": [
+    "studying",
+    "passing",
+    "both",
+    "neither"
+   ],
+   "x": "The condition comes after If"
+  },
+  {
+   "he": "If he ___, we'll start without him.",
+   "a": "doesn't come",
+   "h": "acc5ea89",
+   "q": "If he ___, we'll start without him.",
+   "o": [
+    "doesn't come",
+    "won't come",
+    "didn't come",
+    "not comes"
+   ],
+   "x": "After If → present, negative"
+  },
+  {
+   "he": "Comparative of many?",
+   "a": "more",
+   "h": "1c057577",
+   "q": "Comparative of many?",
+   "o": [
+    "more",
+    "manier",
+    "most",
+    "much more"
+   ],
+   "x": "many – more – the most"
+  },
+  {
+   "he": "Superlative of bad?",
+   "a": "the worst",
+   "h": "43dd1a4c",
+   "q": "Superlative of bad?",
+   "o": [
+    "the worst",
+    "the baddest",
+    "the worse",
+    "the most bad"
+   ],
+   "x": "bad – worse – the worst"
+  },
+  {
+   "he": "This is the ___ day of my life!",
+   "a": "best",
+   "h": "c39c4c83",
+   "q": "This is the ___ day of my life!",
+   "o": [
+    "best",
+    "better",
+    "goodest",
+    "most good"
+   ],
+   "x": "the + the very best → best"
+  },
+  {
+   "he": "My cold is ___ (bad) today than yesterday.",
+   "a": "worse",
+   "h": "958e73a7",
+   "q": "My cold is ___ (bad) today than yesterday.",
+   "o": [
+    "worse",
+    "worst",
+    "badder",
+    "more bad"
+   ],
+   "x": "than → comparing: worse"
+  },
+  {
+   "he": "Eilat is ___ from Haifa than Tel Aviv is.",
+   "a": "farther",
+   "h": "fc0dde62",
+   "q": "Eilat is ___ from Haifa than Tel Aviv is.",
+   "o": [
+    "farther",
+    "farthest",
+    "more far",
+    "farer"
+   ],
+   "x": "far – farther – the farthest"
+  },
+  {
+   "he": "This phone is ___ (expensive) than that one.",
+   "a": "more expensive",
+   "h": "b7f9c08d",
+   "q": "This phone is ___ (expensive) than that one.",
+   "o": [
+    "more expensive",
+    "expensiver",
+    "most expensive",
+    "the expensive"
+   ],
+   "x": "A long word → more + expensive"
+  },
+  {
+   "he": "It's the ___ exciting film I've ever seen.",
+   "a": "most",
+   "h": "9165c4b6",
+   "q": "It's the ___ exciting film I've ever seen.",
+   "o": [
+    "most",
+    "more",
+    "best",
+    "much"
+   ],
+   "x": "the most + a long word"
+  },
+  {
+   "he": "A cheetah is ___ than a horse.",
+   "a": "faster",
+   "h": "c624b13c",
+   "q": "A cheetah is ___ than a horse.",
+   "o": [
+    "faster",
+    "fastest",
+    "more fast",
+    "the faster"
+   ],
+   "x": "than → fast + er"
+  },
+  {
+   "he": "Comparative of heavy?",
+   "a": "heavier",
+   "h": "830a3005",
+   "q": "Comparative of heavy?",
+   "o": [
+    "heavier",
+    "heavyer",
+    "more heavy",
+    "heaviest"
+   ],
+   "x": "y after a consonant → -ier"
+  },
+  {
+   "he": "Which pair is irregular?",
+   "a": "good – better",
+   "h": "782e0f26",
+   "q": "Which pair is irregular?",
+   "o": [
+    "good – better",
+    "tall – taller",
+    "big – bigger",
+    "nice – nicer"
+   ],
+   "x": "good – better: no -er added"
+  },
+  {
+   "he": "The box was ___ heavy that I couldn't lift it.",
+   "a": "so",
+   "h": "ea69efb2",
+   "q": "The box was ___ heavy that I couldn't lift it.",
+   "o": [
+    "so",
+    "such",
+    "too",
+    "very"
+   ],
+   "x": "so + adjective + that = כל כך … ש"
+  },
+  {
+   "he": "Look at the card. My bag isn't ___ yours.",
+   "a": "as heavy as",
+   "h": "3d3134ac",
+   "q": "Look at the card. My bag isn't ___ yours.",
+   "o": [
+    "as heavy as",
+    "as heavier as",
+    "heavy as",
+    "the heaviest"
+   ],
+   "x": "not as … as = לא … כמו"
+  },
+  {
+   "he": "This is the ___ (comfortable) bed I've ever slept in.",
+   "a": "most comfortable",
+   "h": "d995c614",
+   "q": "This is the ___ (comfortable) bed I've ever slept in.",
+   "o": [
+    "most comfortable",
+    "more comfortable",
+    "comfortablest",
+    "most comfortabler"
+   ],
+   "x": "A long word → the most comfortable"
+  },
+  {
+   "he": "Look at the card. Who is the oldest?",
+   "a": "Ben",
+   "h": "71f4cbd2",
+   "q": "Look at the card. Who is the oldest?",
+   "o": [
+    "Ben",
+    "Ana",
+    "Gil",
+    "all the same"
+   ],
+   "x": "15 is the highest age"
+  },
+  {
+   "he": "Look at the card. Who is younger than Gil?",
+   "a": "Ana",
+   "h": "d436c5a9",
+   "q": "Look at the card. Who is younger than Gil?",
+   "o": [
+    "Ana",
+    "Ben",
+    "nobody",
+    "both"
+   ],
+   "x": "13 is less than 14"
+  },
+  {
+   "he": "The more you practice, the ___ (good) you get.",
+   "a": "better",
+   "h": "1029ae28",
+   "q": "The more you practice, the ___ (good) you get.",
+   "o": [
+    "better",
+    "good",
+    "best",
+    "well"
+   ],
+   "x": "the more…, the better = ככל ש…"
+  },
+  {
+   "he": "This test was ___ (easy) than the last one.",
+   "a": "easier",
+   "h": "c34e99ee",
+   "q": "This test was ___ (easy) than the last one.",
+   "o": [
+    "easier",
+    "more easy",
+    "easiest",
+    "easyer"
+   ],
+   "x": "easy → easier"
+  },
+  {
+   "he": "She is the ___ student in our class.",
+   "a": "most intelligent",
+   "h": "e480f86b",
+   "q": "She is the ___ student in our class.",
+   "o": [
+    "most intelligent",
+    "intelligentest",
+    "more intelligent",
+    "most intelligenter"
+   ],
+   "x": "A long word → the most"
+  },
+  {
+   "he": "The new phone is much ___ (light) than the old one.",
+   "a": "lighter",
+   "h": "a4dc1046",
+   "q": "The new phone is much ___ (light) than the old one.",
+   "o": [
+    "lighter",
+    "lightest",
+    "light",
+    "more light"
+   ],
+   "x": "much + comparative: much lighter"
+  },
+  {
+   "he": "Who is ___ person in your family?",
+   "a": "the youngest",
+   "h": "734c3a09",
+   "q": "Who is ___ person in your family?",
+   "o": [
+    "the youngest",
+    "younger",
+    "youngest than",
+    "the younger"
+   ],
+   "x": "Of the whole family → the youngest"
+  },
+  {
+   "he": "Drivers ___ stop at a red light. There's no choice.",
+   "a": "must",
+   "h": "6c37ded0",
+   "q": "Drivers ___ stop at a red light. There's no choice.",
+   "o": [
+    "must",
+    "mustn't",
+    "might",
+    "don't have to"
+   ],
+   "x": "No choice = a duty → must"
+  },
+  {
+   "he": "It's only advice: you ___ revise tonight for the test.",
+   "a": "should",
+   "h": "a1508a1b",
+   "q": "It's only advice: you ___ revise tonight for the test.",
+   "o": [
+    "should",
+    "mustn't",
+    "has to",
+    "might"
+   ],
+   "x": "Only advice, not a duty → should"
+  },
+  {
+   "he": "You ___ touch the paintings. It's a rule, not advice.",
+   "a": "mustn't",
+   "h": "90acf55e",
+   "q": "You ___ touch the paintings. It's a rule, not advice.",
+   "o": [
+    "mustn't",
+    "must",
+    "should",
+    "have to"
+   ],
+   "x": "A rule = not allowed → mustn't"
+  },
+  {
+   "he": "No school tomorrow, so I ___ get up early.",
+   "a": "don't have to",
+   "h": "98f9f1ac",
+   "q": "No school tomorrow, so I ___ get up early.",
+   "o": [
+    "don't have to",
+    "mustn't",
+    "must",
+    "has to"
+   ],
+   "x": "No need → don't have to"
+  },
+  {
+   "he": "___ your brother have to wear a uniform?",
+   "a": "Does",
+   "h": "c1d6343e",
+   "q": "___ your brother have to wear a uniform?",
+   "o": [
+    "Does",
+    "Has",
+    "Must",
+    "Is"
+   ],
+   "x": "A question with have to → Does … have to?"
+  },
+  {
+   "he": "\"You mustn't run here.\" means:",
+   "a": "אסור לרוץ",
+   "h": "310d8e70",
+   "q": "\"You mustn't run here.\" means:",
+   "o": [
+    "אסור לרוץ",
+    "לא חייב לרוץ",
+    "כדאי לרוץ",
+    "אולי תרוץ"
+   ],
+   "x": "mustn't = אסור"
+  },
+  {
+   "he": "\"You don't have to come.\" means:",
+   "a": "לא חייב לבוא",
+   "h": "d6a1ea57",
+   "q": "\"You don't have to come.\" means:",
+   "o": [
+    "לא חייב לבוא",
+    "אסור לבוא",
+    "כדאי לבוא",
+    "אולי תבוא"
+   ],
+   "x": "don't have to = לא חייבים"
+  },
+  {
+   "he": "Yesterday I ___ stay after school.",
+   "a": "had to",
+   "h": "3f254a4d",
+   "q": "Yesterday I ___ stay after school.",
+   "o": [
+    "had to",
+    "must",
+    "have to",
+    "musted"
+   ],
+   "x": "The past of must / have to → had to"
+  },
+  {
+   "he": "It'll rain. Just advice: you ___ take an umbrella.",
+   "a": "should",
+   "h": "bd506bc2",
+   "q": "It'll rain. Just advice: you ___ take an umbrella.",
+   "o": [
+    "should",
+    "shouldn't",
+    "mustn't",
+    "might not"
+   ],
+   "x": "Only advice → should"
+  },
+  {
+   "he": "You ___ drink so much cola. It's advice, not a rule.",
+   "a": "shouldn't",
+   "h": "d2260f83",
+   "q": "You ___ drink so much cola. It's advice, not a rule.",
+   "o": [
+    "shouldn't",
+    "should",
+    "have to",
+    "might"
+   ],
+   "x": "Negative advice → shouldn't"
+  },
+  {
+   "he": "Take a coat. It ___ be cold later – nobody knows.",
+   "a": "might",
+   "h": "e6d5cac4",
+   "q": "Take a coat. It ___ be cold later – nobody knows.",
+   "o": [
+    "might",
+    "must",
+    "has to",
+    "should to"
+   ],
+   "x": "Nobody knows → possible: might"
+  },
+  {
+   "he": "I'm not sure. I ___ go to the party.",
+   "a": "might",
+   "h": "940f423a",
+   "q": "I'm not sure. I ___ go to the party.",
+   "o": [
+    "might",
+    "must",
+    "have to",
+    "should"
+   ],
+   "x": "Not sure → might = אולי"
+  },
+  {
+   "he": "\"might\" means:",
+   "a": "אולי",
+   "h": "3d31fa3c",
+   "q": "\"might\" means:",
+   "o": [
+    "אולי",
+    "חייב",
+    "אסור",
+    "צריך"
+   ],
+   "x": "might = אולי"
+  },
+  {
+   "he": "We ___ go to Eilat. It's possible, but we haven't decided.",
+   "a": "might",
+   "h": "1e434df7",
+   "q": "We ___ go to Eilat. It's possible, but we haven't decided.",
+   "o": [
+    "might",
+    "must",
+    "have to",
+    "mustn't"
+   ],
+   "x": "We haven't decided yet → might"
+  },
+  {
+   "he": "Which modal gives advice?",
+   "a": "should",
+   "h": "52918960",
+   "q": "Which modal gives advice?",
+   "o": [
+    "should",
+    "must",
+    "might",
+    "have to"
+   ],
+   "x": "should = כדאי → advice"
+  },
+  {
+   "he": "Which modal shows possibility?",
+   "a": "might",
+   "h": "e5dde8cb",
+   "q": "Which modal shows possibility?",
+   "o": [
+    "might",
+    "must",
+    "mustn't",
+    "have to"
+   ],
+   "x": "might = אולי → possibility"
+  },
+  {
+   "he": "You ___ to be 17 to drive a car.",
+   "a": "have",
+   "h": "e65cfe90",
+   "q": "You ___ to be 17 to drive a car.",
+   "o": [
+    "have",
+    "must",
+    "should",
+    "might"
+   ],
+   "x": "Only have comes before to"
+  },
+  {
+   "he": "Do I ___ to bring food on the trip?",
+   "a": "have",
+   "h": "fa2a3dd2",
+   "q": "Do I ___ to bring food on the trip?",
+   "o": [
+    "have",
+    "must",
+    "should",
+    "might"
+   ],
+   "x": "Do I have to…? = do I need to?"
+  },
+  {
+   "he": "Look at the sign. You ___ swim here.",
+   "a": "mustn't",
+   "h": "0dfcc5c4",
+   "q": "Look at the sign. You ___ swim here.",
+   "o": [
+    "mustn't",
+    "don't have to",
+    "might",
+    "should"
+   ],
+   "x": "The sign forbids it → mustn't"
+  },
+  {
+   "he": "My tooth hurts. – You ___ see a dentist.",
+   "a": "should",
+   "h": "42d41b40",
+   "q": "My tooth hurts. – You ___ see a dentist.",
+   "o": [
+    "should",
+    "mustn't",
+    "might not",
+    "don't have"
+   ],
+   "x": "Advice → should"
+  },
+  {
+   "he": "There are too ___ cars. The traffic is terrible!",
+   "a": "many",
+   "h": "dfb20abd",
+   "q": "There are too ___ cars. The traffic is terrible!",
+   "o": [
+    "many",
+    "much",
+    "little",
+    "few"
+   ],
+   "x": "cars are countable + more than needed → too many"
+  },
+  {
+   "he": "I drank too ___ coffee. I can't sleep.",
+   "a": "much",
+   "h": "c873c85f",
+   "q": "I drank too ___ coffee. I can't sleep.",
+   "o": [
+    "much",
+    "many",
+    "few",
+    "little"
+   ],
+   "x": "coffee is uncountable → too much"
+  },
+  {
+   "he": "Is the ice thick ___ to walk on?",
+   "a": "enough",
+   "h": "710a9a0f",
+   "q": "Is the ice thick ___ to walk on?",
+   "o": [
+    "enough",
+    "much",
+    "too",
+    "very"
+   ],
+   "x": "After an adjective: thick enough = עבה מספיק"
+  },
+  {
+   "he": "The hall is empty. Take ___ seat you like – just one.",
+   "a": "any",
+   "h": "45859607",
+   "q": "The hall is empty. Take ___ seat you like – just one.",
+   "o": [
+    "any",
+    "many",
+    "a few",
+    "much"
+   ],
+   "x": "any + singular = whichever you like"
+  },
+  {
+   "he": "I have ___ money – only five shekels.",
+   "a": "a little",
+   "h": "3db8152b",
+   "q": "I have ___ money – only five shekels.",
+   "o": [
+    "a little",
+    "a few",
+    "many",
+    "much"
+   ],
+   "x": "money is uncountable + a small amount → a little"
+  },
+  {
+   "he": "Very ___ people came. The hall was almost empty.",
+   "a": "few",
+   "h": "fd0904e2",
+   "q": "Very ___ people came. The hall was almost empty.",
+   "o": [
+    "few",
+    "little",
+    "much",
+    "a lot"
+   ],
+   "x": "few = מעט מאוד (countable)"
+  },
+  {
+   "he": "There's ___ water in the bottle. It's empty.",
+   "a": "no",
+   "h": "3725bb0e",
+   "q": "There's ___ water in the bottle. It's empty.",
+   "o": [
+    "no",
+    "any",
+    "some",
+    "many"
+   ],
+   "x": "no = none at all"
+  },
+  {
+   "he": "___ student got a book – all thirty of them!",
+   "a": "Every",
+   "h": "50aa43b3",
+   "q": "___ student got a book – all thirty of them!",
+   "o": [
+    "Every",
+    "All",
+    "Many",
+    "Few"
+   ],
+   "x": "Every + singular: every student"
+  },
+  {
+   "he": "How ___ time do we have?",
+   "a": "much",
+   "h": "f9060406",
+   "q": "How ___ time do we have?",
+   "o": [
+    "much",
+    "many",
+    "few",
+    "a few"
+   ],
+   "x": "time is uncountable → How much"
+  },
+  {
+   "he": "I need ___ minutes to get ready – maybe five.",
+   "a": "a few",
+   "h": "b640e1ca",
+   "q": "I need ___ minutes to get ready – maybe five.",
+   "o": [
+    "a few",
+    "a little",
+    "much",
+    "little"
+   ],
+   "x": "minutes are countable + a small number → a few"
+  },
+  {
+   "he": "Which noun is uncountable?",
+   "a": "information",
+   "h": "a975c772",
+   "q": "Which noun is uncountable?",
+   "o": [
+    "information",
+    "book",
+    "idea",
+    "apple"
+   ],
+   "x": "information – there's no informations"
+  },
+  {
+   "he": "Which noun is countable?",
+   "a": "egg",
+   "h": "5f675b3a",
+   "q": "Which noun is countable?",
+   "o": [
+    "egg",
+    "money",
+    "water",
+    "advice"
+   ],
+   "x": "egg – one egg, two eggs"
+  },
+  {
+   "he": "Can you give me some ___ about the trip?",
+   "a": "information",
+   "h": "a2d99785",
+   "q": "Can you give me some ___ about the trip?",
+   "o": [
+    "information",
+    "informations",
+    "an information",
+    "many information"
+   ],
+   "x": "information is uncountable: no -s and no an"
+  },
+  {
+   "he": "How ___ hours do you sleep?",
+   "a": "many",
+   "h": "a604d57e",
+   "q": "How ___ hours do you sleep?",
+   "o": [
+    "many",
+    "much",
+    "little",
+    "any"
+   ],
+   "x": "hours are countable → How many"
+  },
+  {
+   "he": "We can't bake today. There isn't ___ flour.",
+   "a": "much",
+   "h": "3dd678b2",
+   "q": "We can't bake today. There isn't ___ flour.",
+   "o": [
+    "much",
+    "a few",
+    "many",
+    "few"
+   ],
+   "x": "flour is uncountable → much"
+  },
+  {
+   "he": "We have ___ of time. Don't hurry!",
+   "a": "plenty",
+   "h": "a8eb2eed",
+   "q": "We have ___ of time. Don't hurry!",
+   "o": [
+    "plenty",
+    "many",
+    "much",
+    "few"
+   ],
+   "x": "plenty of = הרבה, more than enough"
+  },
+  {
+   "he": "The bus was full. There were too ___ people.",
+   "a": "many",
+   "h": "3703d928",
+   "q": "The bus was full. There were too ___ people.",
+   "o": [
+    "many",
+    "much",
+    "little",
+    "few"
+   ],
+   "x": "people are countable → too many"
+  },
+  {
+   "he": "I'd like ___ bread, please.",
+   "a": "some",
+   "h": "454fb36d",
+   "q": "I'd like ___ bread, please.",
+   "o": [
+    "some",
+    "many",
+    "a few",
+    "few"
+   ],
+   "x": "A request + uncountable → some"
+  },
+  {
+   "he": "There are only ___ apples on the table.",
+   "a": "a few",
+   "h": "545fe393",
+   "q": "There are only ___ apples on the table.",
+   "o": [
+    "a few",
+    "a little",
+    "much",
+    "no"
+   ],
+   "x": "Three apples = a few"
+  },
+  {
+   "he": "___ of my parents are teachers.",
+   "a": "Both",
+   "h": "15f33dd7",
+   "q": "___ of my parents are teachers.",
+   "o": [
+    "Both",
+    "Each",
+    "Every",
+    "Either"
+   ],
+   "x": "Both parents → Both … are"
+  },
+  {
+   "he": "The girl ___ lives next door is my friend.",
+   "a": "who",
+   "h": "171760a7",
+   "q": "The girl ___ lives next door is my friend.",
+   "o": [
+    "who",
+    "which",
+    "where",
+    "what"
+   ],
+   "x": "A person → who"
+  },
+  {
+   "he": "This is the book ___ I told you about.",
+   "a": "which",
+   "h": "b920d6cd",
+   "q": "This is the book ___ I told you about.",
+   "o": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "x": "A thing → which"
+  },
+  {
+   "he": "A dentist is a person ___ looks after your teeth.",
+   "a": "who",
+   "h": "00e31a8c",
+   "q": "A dentist is a person ___ looks after your teeth.",
+   "o": [
+    "who",
+    "which",
+    "where",
+    "when"
+   ],
+   "x": "A person → who"
+  },
+  {
+   "he": "I lost the watch ___ my dad gave me.",
+   "a": "which",
+   "h": "089e8bae",
+   "q": "I lost the watch ___ my dad gave me.",
+   "o": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "x": "A thing → that / which"
+  },
+  {
+   "he": "The cake ___ she made was delicious.",
+   "a": "which",
+   "h": "430daa2f",
+   "q": "The cake ___ she made was delicious.",
+   "o": [
+    "which",
+    "who",
+    "whom",
+    "where"
+   ],
+   "x": "A thing → which"
+  },
+  {
+   "he": "For people we use:",
+   "a": "who",
+   "h": "f6903bde",
+   "q": "For people we use:",
+   "o": [
+    "who",
+    "which",
+    "where",
+    "when"
+   ],
+   "x": "who → people"
+  },
+  {
+   "he": "For things and animals we use:",
+   "a": "which",
+   "h": "647d9418",
+   "q": "For things and animals we use:",
+   "o": [
+    "which",
+    "who",
+    "whose",
+    "when"
+   ],
+   "x": "which → things and animals"
+  },
+  {
+   "he": "\"that\" can be used for:",
+   "a": "people and things",
+   "h": "df559ccd",
+   "q": "\"that\" can be used for:",
+   "o": [
+    "people and things",
+    "only people",
+    "only things",
+    "only places"
+   ],
+   "x": "that → both people and things"
+  },
+  {
+   "he": "The man ___ car was stolen called the police.",
+   "a": "whose",
+   "h": "f07605ab",
+   "q": "The man ___ car was stolen called the police.",
+   "o": [
+    "whose",
+    "who",
+    "which",
+    "that"
+   ],
+   "x": "של מי → whose"
+  },
+  {
+   "he": "Look! There's the dog ___ bit me!",
+   "a": "which",
+   "h": "71f2137e",
+   "q": "Look! There's the dog ___ bit me!",
+   "o": [
+    "which",
+    "what",
+    "where",
+    "when"
+   ],
+   "x": "An animal → that / which"
+  },
+  {
+   "he": "I have a friend ___ speaks four languages.",
+   "a": "who",
+   "h": "ba840e2b",
+   "q": "I have a friend ___ speaks four languages.",
+   "o": [
+    "who",
+    "which",
+    "where",
+    "what"
+   ],
+   "x": "friend = a person → who"
+  },
+  {
+   "he": "We saw a film ___ was very scary.",
+   "a": "which",
+   "h": "95d6f1cb",
+   "q": "We saw a film ___ was very scary.",
+   "o": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "x": "film = a thing → which"
+  },
+  {
+   "he": "A machine which washes clothes is a ___.",
+   "a": "washing machine",
+   "h": "2fbb79b8",
+   "q": "A machine which washes clothes is a ___.",
+   "o": [
+    "washing machine",
+    "dishwasher",
+    "fridge",
+    "oven"
+   ],
+   "x": "מכונה שמכבסת בגדים = washing machine"
+  },
+  {
+   "he": "Water is a liquid ___ we all need.",
+   "a": "which",
+   "h": "29dc3087",
+   "q": "Water is a liquid ___ we all need.",
+   "o": [
+    "which",
+    "who",
+    "where",
+    "whose"
+   ],
+   "x": "liquid = a thing → which"
+  },
+  {
+   "he": "\"The boy which won is my brother.\" Fix it:",
+   "a": "which → who",
+   "h": "b668fd13",
+   "q": "\"The boy which won is my brother.\" Fix it:",
+   "o": [
+    "which → who",
+    "boy → boys",
+    "won → win",
+    "is → are"
+   ],
+   "x": "boy = a person → who"
+  },
+  {
+   "he": "The pizza ___ we ordered was cold.",
+   "a": "which",
+   "h": "dd643258",
+   "q": "The pizza ___ we ordered was cold.",
+   "o": [
+    "which",
+    "who",
+    "whose",
+    "where"
+   ],
+   "x": "pizza = a thing → which / that"
+  },
+  {
+   "he": "Is she the teacher ___ teaches you English?",
+   "a": "who",
+   "h": "64d96f42",
+   "q": "Is she the teacher ___ teaches you English?",
+   "o": [
+    "who",
+    "which",
+    "whose",
+    "where"
+   ],
+   "x": "A person → who / that"
+  },
+  {
+   "he": "Do you know anyone ___ can fix computers?",
+   "a": "who",
+   "h": "a1f1b2ff",
+   "q": "Do you know anyone ___ can fix computers?",
+   "o": [
+    "who",
+    "which",
+    "whose",
+    "where"
+   ],
+   "x": "anyone = a person → who"
+  },
+  {
+   "he": "These are the shoes ___ I bought yesterday.",
+   "a": "which",
+   "h": "b10458f4",
+   "q": "These are the shoes ___ I bought yesterday.",
+   "o": [
+    "which",
+    "who",
+    "whose",
+    "where"
+   ],
+   "x": "shoes = things → which"
+  },
+  {
+   "he": "My aunt, ___ lives in London, is a nurse.",
+   "a": "who",
+   "h": "7ec577e1",
+   "q": "My aunt, ___ lives in London, is a nurse.",
+   "o": [
+    "who",
+    "that",
+    "which",
+    "where"
+   ],
+   "x": "Between commas, a person → who (not that)"
+  },
+  {
+   "he": "Cheese ___ from milk.",
+   "a": "is made",
+   "h": "dbe55bdb",
+   "q": "Cheese ___ from milk.",
+   "o": [
+    "is made",
+    "makes",
+    "is make",
+    "made"
+   ],
+   "x": "Cheese doesn't make anything → is + V3: is made"
+  },
+  {
+   "he": "English ___ in many countries.",
+   "a": "is spoken",
+   "h": "bced06eb",
+   "q": "English ___ in many countries.",
+   "o": [
+    "is spoken",
+    "speaks",
+    "is speak",
+    "are spoken"
+   ],
+   "x": "A language doesn't speak → is spoken (speak-spoke-spoken)"
+  },
+  {
+   "he": "These phones ___ (make) in China.",
+   "a": "are made",
+   "h": "926e3bb3",
+   "q": "These phones ___ (make) in China.",
+   "o": [
+    "are made",
+    "is made",
+    "make",
+    "are make"
+   ],
+   "x": "phones = plural → are + V3"
+  },
+  {
+   "he": "Active: People grow oranges. Passive: Oranges ___.",
+   "a": "are grown",
+   "h": "e539d2de",
+   "q": "Active: People grow oranges. Passive: Oranges ___.",
+   "o": [
+    "are grown",
+    "grow",
+    "are grew",
+    "is grown"
+   ],
+   "x": "oranges = plural → are + V3 (grow-grew-grown)"
+  },
+  {
+   "he": "The classroom ___ every day.",
+   "a": "is cleaned",
+   "h": "187fbad6",
+   "q": "The classroom ___ every day.",
+   "o": [
+    "is cleaned",
+    "cleans",
+    "is cleaning",
+    "are cleaned"
+   ],
+   "x": "Someone cleans the classroom → is cleaned"
+  },
+  {
+   "he": "Which sentence is passive?",
+   "a": "Bread is baked.",
+   "h": "3b45838e",
+   "q": "Which sentence is passive?",
+   "o": [
+    "Bread is baked.",
+    "Mom bakes bread.",
+    "Mom is baking.",
+    "Bread smells good."
+   ],
+   "x": "is + V3: something is done to the bread"
+  },
+  {
+   "he": "Letters ___ every morning.",
+   "a": "are delivered",
+   "h": "b2f19389",
+   "q": "Letters ___ every morning.",
+   "o": [
+    "are delivered",
+    "deliver",
+    "are deliver",
+    "is delivered"
+   ],
+   "x": "Letters don't deliver → are delivered"
+  },
+  {
+   "he": "Is Hebrew ___ in Brazil? – No, it isn't.",
+   "a": "spoken",
+   "h": "b47ea3cb",
+   "q": "Is Hebrew ___ in Brazil? – No, it isn't.",
+   "o": [
+    "spoken",
+    "speak",
+    "spoke",
+    "speaking"
+   ],
+   "x": "A passive question: Is + V3"
+  },
+  {
+   "he": "Football ___ all over the world.",
+   "a": "is played",
+   "h": "4c69de40",
+   "q": "Football ___ all over the world.",
+   "o": [
+    "is played",
+    "plays",
+    "is play",
+    "are played"
+   ],
+   "x": "Football doesn't play → is played"
+  },
+  {
+   "he": "Passive in the present: am / is / are + ___",
+   "a": "V3",
+   "h": "f1e423bb",
+   "q": "Passive in the present: am / is / are + ___",
+   "o": [
+    "V3",
+    "V1",
+    "-ing",
+    "to + verb"
+   ],
+   "x": "Present passive: is/are + the third form"
+  },
+  {
+   "he": "The pyramids ___ thousands of years ago.",
+   "a": "were built",
+   "h": "b7a67828",
+   "q": "The pyramids ___ thousands of years ago.",
+   "o": [
+    "were built",
+    "built",
+    "was built",
+    "are built"
+   ],
+   "x": "ago + plural → were + V3 (build-built-built)"
+  },
+  {
+   "he": "This bridge ___ (build) in 1990.",
+   "a": "was built",
+   "h": "677b3dd6",
+   "q": "This bridge ___ (build) in 1990.",
+   "o": [
+    "was built",
+    "built",
+    "is built",
+    "were built"
+   ],
+   "x": "1990 = past, bridge is singular → was built"
+  },
+  {
+   "he": "Harry Potter ___ by J.K. Rowling.",
+   "a": "was written",
+   "h": "2707f239",
+   "q": "Harry Potter ___ by J.K. Rowling.",
+   "o": [
+    "was written",
+    "wrote",
+    "was wrote",
+    "is writing"
+   ],
+   "x": "write-wrote-written → was written"
+  },
+  {
+   "he": "The telephone ___ (invent) by Bell in 1876.",
+   "a": "was invented",
+   "h": "66ab85fa",
+   "q": "The telephone ___ (invent) by Bell in 1876.",
+   "o": [
+    "was invented",
+    "invented",
+    "is invented",
+    "were invented"
+   ],
+   "x": "The telephone didn't invent anything → was invented"
+  },
+  {
+   "he": "My bike ___ yesterday! I can't find it.",
+   "a": "was stolen",
+   "h": "972b68ae",
+   "q": "My bike ___ yesterday! I can't find it.",
+   "o": [
+    "was stolen",
+    "stole",
+    "was stole",
+    "is stealing"
+   ],
+   "x": "steal-stole-stolen → was stolen"
+  },
+  {
+   "he": "\"Romeo and Juliet\" was written ___ Shakespeare.",
+   "a": "by",
+   "h": "d76e75e8",
+   "q": "\"Romeo and Juliet\" was written ___ Shakespeare.",
+   "o": [
+    "by",
+    "from",
+    "with",
+    "of"
+   ],
+   "x": "Who did the action → by"
+  },
+  {
+   "he": "Active: Someone cleaned the room. Passive: The room ___.",
+   "a": "was cleaned",
+   "h": "5526e238",
+   "q": "Active: Someone cleaned the room. Passive: The room ___.",
+   "o": [
+    "was cleaned",
+    "cleaned",
+    "is cleaned",
+    "were cleaned"
+   ],
+   "x": "Past, room is singular → was + V3"
+  },
+  {
+   "he": "When ___ this photo taken? – Last summer.",
+   "a": "was",
+   "h": "02a5c5d7",
+   "q": "When ___ this photo taken? – Last summer.",
+   "o": [
+    "was",
+    "were",
+    "did",
+    "is"
+   ],
+   "x": "photo is singular, last summer → was … taken"
+  },
+  {
+   "he": "The windows ___ during the storm last night.",
+   "a": "were broken",
+   "h": "8c6a485d",
+   "q": "The windows ___ during the storm last night.",
+   "o": [
+    "were broken",
+    "broken",
+    "was broken",
+    "are broken"
+   ],
+   "x": "windows are plural, past → were + V3"
+  },
+  {
+   "he": "The thief ___ by the police.",
+   "a": "was caught",
+   "h": "de7d1abb",
+   "q": "The thief ___ by the police.",
+   "o": [
+    "was caught",
+    "caught",
+    "was catch",
+    "catches"
+   ],
+   "x": "catch-caught-caught → was caught"
+  },
+  {
+   "he": "When I was little, I ___ cry a lot.",
+   "a": "used to",
+   "h": "5cc3291b",
+   "q": "When I was little, I ___ cry a lot.",
+   "o": [
+    "used to",
+    "use to",
+    "am used",
+    "was use"
+   ],
+   "x": "A past habit that stopped → used to"
+  },
+  {
+   "he": "My dad ___ smoke, but he stopped.",
+   "a": "used to",
+   "h": "0657cad0",
+   "q": "My dad ___ smoke, but he stopped.",
+   "o": [
+    "used to",
+    "uses to",
+    "is used",
+    "use to"
+   ],
+   "x": "He did it once, but not today → used to"
+  },
+  {
+   "he": "I used to ___ in Eilat. Now my home is in Haifa.",
+   "a": "live",
+   "h": "e3981a97",
+   "q": "I used to ___ in Eilat. Now my home is in Haifa.",
+   "o": [
+    "live",
+    "lived",
+    "living",
+    "lives"
+   ],
+   "x": "After used to → the base form"
+  },
+  {
+   "he": "\"I used to play football.\" Do I play now?",
+   "a": "No, not now",
+   "h": "9bf7c9aa",
+   "q": "\"I used to play football.\" Do I play now?",
+   "o": [
+    "No, not now",
+    "Yes, every day",
+    "Yes, sometimes",
+    "Yes, always"
+   ],
+   "x": "used to = yes in the past, not today"
+  },
+  {
+   "he": "There ___ be a cinema here. Now it's a bank.",
+   "a": "used to",
+   "h": "eee6829b",
+   "q": "There ___ be a cinema here. Now it's a bank.",
+   "o": [
+    "used to",
+    "uses to",
+    "use",
+    "was use"
+   ],
+   "x": "It was here once, not today → used to"
+  },
+  {
+   "he": "\"used to\" means:",
+   "a": "פעם (וכבר לא)",
+   "h": "a6986f16",
+   "q": "\"used to\" means:",
+   "o": [
+    "פעם (וכבר לא)",
+    "עכשיו",
+    "בעתיד",
+    "אף פעם"
+   ],
+   "x": "used to → a past habit that changed"
+  },
+  {
+   "he": "Before phones, people ___ write letters.",
+   "a": "used to",
+   "h": "bc440eb2",
+   "q": "Before phones, people ___ write letters.",
+   "o": [
+    "used to",
+    "use to",
+    "are used",
+    "using to"
+   ],
+   "x": "A past habit → used to + the base form"
+  },
+  {
+   "he": "Grandma used to ___ us stories every night.",
+   "a": "tell",
+   "h": "cc79f106",
+   "q": "Grandma used to ___ us stories every night.",
+   "o": [
+    "tell",
+    "told",
+    "telling",
+    "tells"
+   ],
+   "x": "used to + the base form: tell"
+  },
+  {
+   "he": "She ___ have long hair, but now it's short.",
+   "a": "used to",
+   "h": "d092dc6b",
+   "q": "She ___ have long hair, but now it's short.",
+   "o": [
+    "used to",
+    "uses to",
+    "is used",
+    "use to"
+   ],
+   "x": "Long once, short today → used to"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "used to swim",
+   "h": "e079e759",
+   "q": "Which is correct?",
+   "o": [
+    "used to swim",
+    "use to swam",
+    "used to swam",
+    "used swimming"
+   ],
+   "x": "used to + the base form: swim"
+  },
+  {
+   "he": "I ___ like vegetables, but now I love them.",
+   "a": "didn't use to",
+   "h": "9b03cc6c",
+   "q": "I ___ like vegetables, but now I love them.",
+   "o": [
+    "didn't use to",
+    "didn't used to",
+    "not used to",
+    "don't use to"
+   ],
+   "x": "Negative: didn't use to (no d)"
+  },
+  {
+   "he": "___ you use to live in Tel Aviv?",
+   "a": "Did",
+   "h": "b9bb42bd",
+   "q": "___ you use to live in Tel Aviv?",
+   "o": [
+    "Did",
+    "Do",
+    "Were",
+    "Are"
+   ],
+   "x": "A question about the past → Did + use to"
+  },
+  {
+   "he": "\"Did you use to have a dog?\" Which answer is correct?",
+   "a": "Yes, I did",
+   "h": "40381e97",
+   "q": "\"Did you use to have a dog?\" Which answer is correct?",
+   "o": [
+    "Yes, I did",
+    "Yes, I used",
+    "Yes, I was",
+    "Yes, I do"
+   ],
+   "x": "Did you…? → Yes, I did"
+  },
+  {
+   "he": "He didn't ___ to wear glasses.",
+   "a": "use",
+   "h": "66b63ee8",
+   "q": "He didn't ___ to wear glasses.",
+   "o": [
+    "use",
+    "used",
+    "uses",
+    "using"
+   ],
+   "x": "After didn't → use, no d"
+  },
+  {
+   "he": "Thirty years ago, people ___ have smartphones.",
+   "a": "didn't use to",
+   "h": "4d9bd8fa",
+   "q": "Thirty years ago, people ___ have smartphones.",
+   "o": [
+    "didn't use to",
+    "used to",
+    "don't",
+    "aren't"
+   ],
+   "x": "There were no smartphones then → didn't use to"
+  },
+  {
+   "he": "My brother used to be shy, but now he's very ___.",
+   "a": "friendly",
+   "h": "02f0600c",
+   "q": "My brother used to be shy, but now he's very ___.",
+   "o": [
+    "friendly",
+    "shy",
+    "quiet",
+    "afraid"
+   ],
+   "x": "but = contrast → shy once, friendly today"
+  },
+  {
+   "he": "Where ___ your grandparents use to live?",
+   "a": "did",
+   "h": "3ca02e7d",
+   "q": "Where ___ your grandparents use to live?",
+   "o": [
+    "did",
+    "do",
+    "were",
+    "are"
+   ],
+   "x": "A question about the past → did + use to"
+  },
+  {
+   "he": "\"I didn't use to like tea.\" Do I like it now?",
+   "a": "Yes, I do",
+   "h": "02659278",
+   "q": "\"I didn't use to like tea.\" Do I like it now?",
+   "o": [
+    "Yes, I do",
+    "No, never",
+    "No, I don't",
+    "I hate it"
+   ],
+   "x": "I didn't like it once → I do today"
+  },
+  {
+   "he": "used to or Past Simple? I ___ to Paris last year.",
+   "a": "went",
+   "h": "659aa3e1",
+   "q": "used to or Past Simple? I ___ to Paris last year.",
+   "o": [
+    "went",
+    "used to go",
+    "use to go",
+    "was used"
+   ],
+   "x": "Only once, last year → Past Simple"
+  },
+  {
+   "he": "Dinosaurs ___ live on Earth.",
+   "a": "used to",
+   "h": "adbb471e",
+   "q": "Dinosaurs ___ live on Earth.",
+   "o": [
+    "used to",
+    "use to",
+    "uses to",
+    "are used"
+   ],
+   "x": "They lived once, not today → used to"
+  },
+  {
+   "he": "Noun of invent?",
+   "a": "invention",
+   "h": "f676b6ff",
+   "q": "Noun of invent?",
+   "o": [
+    "invention",
+    "inventful",
+    "inventment",
+    "inventless"
+   ],
+   "x": "invent + ion → noun: invention (המצאה)"
+  },
+  {
+   "he": "Noun of pollute?",
+   "a": "pollution",
+   "h": "3121b348",
+   "q": "Noun of pollute?",
+   "o": [
+    "pollution",
+    "pollutement",
+    "polluteful",
+    "pollutness"
+   ],
+   "x": "pollute → pollution = זיהום"
+  },
+  {
+   "he": "Noun of enjoy?",
+   "a": "enjoyment",
+   "h": "ed3ff555",
+   "q": "Noun of enjoy?",
+   "o": [
+    "enjoyment",
+    "enjoytion",
+    "enjoyful",
+    "enjoyness"
+   ],
+   "x": "enjoy + ment = enjoyment (הנאה)"
+  },
+  {
+   "he": "Noun of inform?",
+   "a": "information",
+   "h": "7d80582f",
+   "q": "Noun of inform?",
+   "o": [
+    "information",
+    "informful",
+    "informless",
+    "informent"
+   ],
+   "x": "inform + ation = information (מידע)"
+  },
+  {
+   "he": "govern + ___ = government",
+   "a": "-ment",
+   "h": "c3087ece",
+   "q": "govern + ___ = government",
+   "o": [
+    "-ment",
+    "-ful",
+    "-less",
+    "-tion"
+   ],
+   "x": "govern + ment = government (ממשלה)"
+  },
+  {
+   "he": "A rainbow is very ___.",
+   "a": "colorful",
+   "h": "9250b509",
+   "q": "A rainbow is very ___.",
+   "o": [
+    "colorful",
+    "colorless",
+    "uncolor",
+    "colortion"
+   ],
+   "x": "ful = full of → colorful = צבעוני"
+  },
+  {
+   "he": "Thank you! You were very ___.",
+   "a": "helpful",
+   "h": "190c61b7",
+   "q": "Thank you! You were very ___.",
+   "o": [
+    "helpful",
+    "helpless",
+    "unhelpful",
+    "helpment"
+   ],
+   "x": "help + ful = עוזר, מועיל"
+  },
+  {
+   "he": "This knife doesn't cut. It's ___.",
+   "a": "useless",
+   "h": "78d4d584",
+   "q": "This knife doesn't cut. It's ___.",
+   "o": [
+    "useless",
+    "useful",
+    "unuse",
+    "usement"
+   ],
+   "x": "less = without → useless = חסר תועלת"
+  },
+  {
+   "he": "A ___ hero is never afraid.",
+   "a": "fearless",
+   "h": "6172f2ce",
+   "q": "A ___ hero is never afraid.",
+   "o": [
+    "fearless",
+    "fearful",
+    "unfear",
+    "fearment"
+   ],
+   "x": "fear + less = without fear"
+  },
+  {
+   "he": "\"careless\" means:",
+   "a": "לא זהיר",
+   "h": "808be80b",
+   "q": "\"careless\" means:",
+   "o": [
+    "לא זהיר",
+    "זהיר מאוד",
+    "אכפתי",
+    "דאגה"
+   ],
+   "x": "less = without → without care"
+  },
+  {
+   "he": "Opposite of happy?",
+   "a": "unhappy",
+   "h": "98f0a348",
+   "q": "Opposite of happy?",
+   "o": [
+    "unhappy",
+    "dishappy",
+    "happyless",
+    "inhappy"
+   ],
+   "x": "un + happy = לא שמח"
+  },
+  {
+   "he": "Opposite of agree?",
+   "a": "disagree",
+   "h": "16215409",
+   "q": "Opposite of agree?",
+   "o": [
+    "disagree",
+    "unagree",
+    "agreeless",
+    "inagree"
+   ],
+   "x": "dis + agree = לא מסכים"
+  },
+  {
+   "he": "Opposite of appear?",
+   "a": "disappear",
+   "h": "ae7968d3",
+   "q": "Opposite of appear?",
+   "o": [
+    "disappear",
+    "unappear",
+    "appearless",
+    "inappear"
+   ],
+   "x": "dis + appear = להיעלם"
+  },
+  {
+   "he": "This shirt isn't comfortable. It's ___.",
+   "a": "uncomfortable",
+   "h": "cb6f470b",
+   "q": "This shirt isn't comfortable. It's ___.",
+   "o": [
+    "uncomfortable",
+    "discomfortable",
+    "comfortful",
+    "incomfortable"
+   ],
+   "x": "un + comfortable = לא נוח"
+  },
+  {
+   "he": "The door is ___ (לא נעולה). Come in!",
+   "a": "unlocked",
+   "h": "d0218781",
+   "q": "The door is ___ (לא נעולה). Come in!",
+   "o": [
+    "unlocked",
+    "dislocked",
+    "lockless",
+    "inlocked"
+   ],
+   "x": "un + locked = לא נעול"
+  },
+  {
+   "he": "He doesn't tell the truth. He is ___.",
+   "a": "dishonest",
+   "h": "05e65519",
+   "q": "He doesn't tell the truth. He is ___.",
+   "o": [
+    "dishonest",
+    "unhonest",
+    "honestless",
+    "inhonest"
+   ],
+   "x": "dis + honest = לא ישר"
+  },
+  {
+   "he": "\"unfair\" means:",
+   "a": "לא הוגן",
+   "h": "63228bea",
+   "q": "\"unfair\" means:",
+   "o": [
+    "לא הוגן",
+    "הוגן מאוד",
+    "יריד",
+    "הוגנות"
+   ],
+   "x": "un = לא → unfair = לא הוגן"
+  },
+  {
+   "he": "It's ___ to swim here. There are sharks!",
+   "a": "unsafe",
+   "h": "a6b37e3e",
+   "q": "It's ___ to swim here. There are sharks!",
+   "o": [
+    "unsafe",
+    "dissafe",
+    "safeless",
+    "insafe"
+   ],
+   "x": "un + safe = לא בטוח"
+  },
+  {
+   "he": "Which prefix makes obey negative?",
+   "a": "dis-",
+   "h": "9c141577",
+   "q": "Which prefix makes obey negative?",
+   "o": [
+    "dis-",
+    "un-",
+    "-less",
+    "-ful"
+   ],
+   "x": "disobey = לא לציית"
+  },
+  {
+   "he": "Opposite of careful?",
+   "a": "careless",
+   "h": "3be4170c",
+   "q": "Opposite of careful?",
+   "o": [
+    "careless",
+    "uncareful",
+    "discareful",
+    "carement"
+   ],
+   "x": "ful (with) ↔ less (without)"
+  },
+  {
+   "he": "Which sentence gives the main idea of a paragraph?",
+   "a": "topic sentence",
+   "h": "517eb502",
+   "q": "Which sentence gives the main idea of a paragraph?",
+   "o": [
+    "topic sentence",
+    "supporting sentence",
+    "concluding sentence",
+    "a title"
+   ],
+   "x": "The topic sentence = the main idea"
+  },
+  {
+   "he": "A sentence that gives details and examples is a:",
+   "a": "supporting sentence",
+   "h": "fc207093",
+   "q": "A sentence that gives details and examples is a:",
+   "o": [
+    "supporting sentence",
+    "topic sentence",
+    "title",
+    "question"
+   ],
+   "x": "A supporting sentence = details and examples"
+  },
+  {
+   "he": "The last sentence, which sums up, is the:",
+   "a": "concluding sentence",
+   "h": "8676f558",
+   "q": "The last sentence, which sums up, is the:",
+   "o": [
+    "concluding sentence",
+    "topic sentence",
+    "supporting sentence",
+    "first sentence"
+   ],
+   "x": "The concluding sentence ends the paragraph"
+  },
+  {
+   "he": "\"In addition, dogs protect our homes.\" This is a:",
+   "a": "supporting sentence",
+   "h": "48226ecc",
+   "q": "\"In addition, dogs protect our homes.\" This is a:",
+   "o": [
+    "supporting sentence",
+    "topic sentence",
+    "concluding sentence",
+    "title"
+   ],
+   "x": "It adds a reason → a supporting sentence"
+  },
+  {
+   "he": "A paragraph starts: \"Dogs make great pets.\" This is a:",
+   "a": "topic sentence",
+   "h": "25ecd6ce",
+   "q": "A paragraph starts: \"Dogs make great pets.\" This is a:",
+   "o": [
+    "topic sentence",
+    "supporting sentence",
+    "concluding sentence",
+    "question"
+   ],
+   "x": "A general idea at the start → a topic sentence"
+  },
+  {
+   "he": "\"To sum up, dogs are wonderful pets.\" This is a:",
+   "a": "concluding sentence",
+   "h": "630fdfca",
+   "q": "\"To sum up, dogs are wonderful pets.\" This is a:",
+   "o": [
+    "concluding sentence",
+    "topic sentence",
+    "supporting sentence",
+    "title"
+   ],
+   "x": "To sum up → a concluding sentence"
+  },
+  {
+   "he": "Which phrase introduces an example?",
+   "a": "for example",
+   "h": "295cdd43",
+   "q": "Which phrase introduces an example?",
+   "o": [
+    "for example",
+    "however",
+    "therefore",
+    "although"
+   ],
+   "x": "for example = לדוגמה"
+  },
+  {
+   "he": "Which phrase starts a conclusion?",
+   "a": "In conclusion",
+   "h": "252e6386",
+   "q": "Which phrase starts a conclusion?",
+   "o": [
+    "In conclusion",
+    "For example",
+    "In addition",
+    "However"
+   ],
+   "x": "In conclusion = לסיכום"
+  },
+  {
+   "he": "Which word adds another point?",
+   "a": "Moreover",
+   "h": "6c3d3eb8",
+   "q": "Which word adds another point?",
+   "o": [
+    "Moreover",
+    "However",
+    "Although",
+    "Therefore"
+   ],
+   "x": "Moreover = יתרה מזו, בנוסף"
+  },
+  {
+   "he": "Put the paragraph parts in order:",
+   "a": "A, C, B",
+   "h": "54e9dfe8",
+   "q": "Put the paragraph parts in order:",
+   "o": [
+    "A, C, B",
+    "A, B, C",
+    "C, A, B",
+    "B, C, A"
+   ],
+   "x": "Topic → details → conclusion"
+  },
+  {
+   "he": "The tickets were expensive. ___, we bought them.",
+   "a": "However",
+   "h": "469e1d26",
+   "q": "The tickets were expensive. ___, we bought them.",
+   "o": [
+    "However",
+    "Therefore",
+    "Although",
+    "Because"
+   ],
+   "x": "Contrast between two sentences → However"
+  },
+  {
+   "he": "He didn't study. ___, he failed the test.",
+   "a": "Therefore",
+   "h": "b62343d9",
+   "q": "He didn't study. ___, he failed the test.",
+   "o": [
+    "Therefore",
+    "However",
+    "Although",
+    "In addition"
+   ],
+   "x": "A result → Therefore = לכן"
+  },
+  {
+   "he": "___ she had a map, she got lost.",
+   "a": "Although",
+   "h": "7596c7cc",
+   "q": "___ she had a map, she got lost.",
+   "o": [
+    "Although",
+    "However",
+    "Therefore",
+    "In addition"
+   ],
+   "x": "למרות ש… → Although"
+  },
+  {
+   "he": "Swimming is fun. ___, it keeps you healthy.",
+   "a": "In addition",
+   "h": "21237fe2",
+   "q": "Swimming is fun. ___, it keeps you healthy.",
+   "o": [
+    "In addition",
+    "However",
+    "Although",
+    "Therefore"
+   ],
+   "x": "Adding another benefit → In addition"
+  },
+  {
+   "he": "\"therefore\" means:",
+   "a": "לכן",
+   "h": "b618e5d2",
+   "q": "\"therefore\" means:",
+   "o": [
+    "לכן",
+    "למרות ש",
+    "בנוסף",
+    "אולם"
+   ],
+   "x": "therefore = לכן"
+  },
+  {
+   "he": "\"Although it rained, we played.\" means:",
+   "a": "שיחקנו למרות הגשם",
+   "h": "3153c0ce",
+   "q": "\"Although it rained, we played.\" means:",
+   "o": [
+    "שיחקנו למרות הגשם",
+    "שיחקנו בגלל הגשם",
+    "לא שיחקנו בגשם",
+    "שיחקנו לפני הגשם"
+   ],
+   "x": "although = למרות ש"
+  },
+  {
+   "he": "\"in addition\" means:",
+   "a": "בנוסף",
+   "h": "67db6e4c",
+   "q": "\"in addition\" means:",
+   "o": [
+    "בנוסף",
+    "לכן",
+    "אולם",
+    "למרות ש"
+   ],
+   "x": "in addition = בנוסף"
+  },
+  {
+   "he": "The roads were icy. ___, the school was closed.",
+   "a": "Therefore",
+   "h": "aad04436",
+   "q": "The roads were icy. ___, the school was closed.",
+   "o": [
+    "Therefore",
+    "However",
+    "Although",
+    "But"
+   ],
+   "x": "A result → Therefore"
+  },
+  {
+   "he": "The film got great reviews. ___, I found it boring.",
+   "a": "However",
+   "h": "f1b1f685",
+   "q": "The film got great reviews. ___, I found it boring.",
+   "o": [
+    "However",
+    "Therefore",
+    "In addition",
+    "Because"
+   ],
+   "x": "Contrast → However"
+  },
+  {
+   "he": "Which connector shows a result?",
+   "a": "therefore",
+   "h": "c149a3fc",
+   "q": "Which connector shows a result?",
+   "o": [
+    "therefore",
+    "although",
+    "however",
+    "in addition"
+   ],
+   "x": "therefore = לכן → a result"
+  },
+  {
+   "he": "בצורת = ?",
+   "a": "drought",
+   "h": "3a9c2ff9",
+   "q": "בצורת = ?",
+   "o": [
+    "drought",
+    "flood",
+    "storm",
+    "desert"
+   ],
+   "x": "בצורת = drought"
+  },
+  {
+   "he": "שיטפון, הצפה = ?",
+   "a": "flood",
+   "h": "93bfed9e",
+   "q": "שיטפון, הצפה = ?",
+   "o": [
+    "flood",
+    "drought",
+    "fire",
+    "wave"
+   ],
+   "x": "שיטפון = flood"
+  },
+  {
+   "he": "Dinosaurs are ___ – there are none left.",
+   "a": "extinct",
+   "h": "c17a07ef",
+   "q": "Dinosaurs are ___ – there are none left.",
+   "o": [
+    "extinct",
+    "endangered",
+    "alive",
+    "wild"
+   ],
+   "x": "נכחדו = extinct"
+  },
+  {
+   "he": "Animals that live free in nature are called ___.",
+   "a": "wildlife",
+   "h": "4ff4d892",
+   "q": "Animals that live free in nature are called ___.",
+   "o": [
+    "wildlife",
+    "pets",
+    "farm animals",
+    "toys"
+   ],
+   "x": "חיות בר = wildlife"
+  },
+  {
+   "he": "בית גידול (של בעלי חיים) = ?",
+   "a": "habitat",
+   "h": "375b1823",
+   "q": "בית גידול (של בעלי חיים) = ?",
+   "o": [
+    "habitat",
+    "habit",
+    "harbor",
+    "hobby"
+   ],
+   "x": "בית גידול = habitat"
+  },
+  {
+   "he": "משאבים (מים, נפט, עצים) = ?",
+   "a": "resources",
+   "h": "8714f22b",
+   "q": "משאבים (מים, נפט, עצים) = ?",
+   "o": [
+    "resources",
+    "results",
+    "reasons",
+    "rules"
+   ],
+   "x": "משאבים = resources"
+  },
+  {
+   "he": "Sun and wind never run out. They are ___ energy sources.",
+   "a": "renewable",
+   "h": "fba78cf4",
+   "q": "Sun and wind never run out. They are ___ energy sources.",
+   "o": [
+    "renewable",
+    "extinct",
+    "harmful",
+    "polluted"
+   ],
+   "x": "מתחדשת = renewable"
+  },
+  {
+   "he": "אסון = ?",
+   "a": "disaster",
+   "h": "50693203",
+   "q": "אסון = ?",
+   "o": [
+    "disaster",
+    "danger",
+    "damage",
+    "desert"
+   ],
+   "x": "אסון = disaster"
+  },
+  {
+   "he": "Smoke from factories can ___ our lungs.",
+   "a": "harm",
+   "h": "73800586",
+   "q": "Smoke from factories can ___ our lungs.",
+   "o": [
+    "harm",
+    "help",
+    "save",
+    "heal"
+   ],
+   "x": "לפגוע = harm"
+  },
+  {
+   "he": "Many animals can't ___ without water.",
+   "a": "survive",
+   "h": "ff0ed46d",
+   "q": "Many animals can't ___ without water.",
+   "o": [
+    "survive",
+    "survey",
+    "serve",
+    "supply"
+   ],
+   "x": "לשרוד = survive"
+  },
+  {
+   "he": "מחקר = ?",
+   "a": "research",
+   "h": "2d12bb2a",
+   "q": "מחקר = ?",
+   "o": [
+    "research",
+    "result",
+    "report",
+    "rescue"
+   ],
+   "x": "מחקר = research"
+  },
+  {
+   "he": "להמציא = ?",
+   "a": "invent",
+   "h": "d5e9645a",
+   "q": "להמציא = ?",
+   "o": [
+    "invent",
+    "discover",
+    "prevent",
+    "explore"
+   ],
+   "x": "להמציא = invent"
+  },
+  {
+   "he": "לגלות (משהו שכבר קיים) = ?",
+   "a": "discover",
+   "h": "c45bcff2",
+   "q": "לגלות (משהו שכבר קיים) = ?",
+   "o": [
+    "discover",
+    "invent",
+    "develop",
+    "design"
+   ],
+   "x": "לגלות = discover"
+  },
+  {
+   "he": "Edison ___ the light bulb.",
+   "a": "invented",
+   "h": "fe69f3ec",
+   "q": "Edison ___ the light bulb.",
+   "o": [
+    "invented",
+    "discovered",
+    "explored",
+    "reported"
+   ],
+   "x": "המציא דבר חדש = invented"
+  },
+  {
+   "he": "מקוון, באינטרנט = ?",
+   "a": "online",
+   "h": "2776e8e3",
+   "q": "מקוון, באינטרנט = ?",
+   "o": [
+    "online",
+    "offline",
+    "on time",
+    "outside"
+   ],
+   "x": "באינטרנט = online"
+  },
+  {
+   "he": "תוכנה = ?",
+   "a": "software",
+   "h": "4f7ab8a5",
+   "q": "תוכנה = ?",
+   "o": [
+    "software",
+    "hardware",
+    "keyboard",
+    "network"
+   ],
+   "x": "תוכנה = software"
+  },
+  {
+   "he": "A machine that does human jobs is a ___.",
+   "a": "robot",
+   "h": "78cb1129",
+   "q": "A machine that does human jobs is a ___.",
+   "o": [
+    "robot",
+    "rocket",
+    "robber",
+    "ribbon"
+   ],
+   "x": "רובוט = robot"
+  },
+  {
+   "he": "Without Wi-Fi I can't ___ to the internet.",
+   "a": "connect",
+   "h": "56834305",
+   "q": "Without Wi-Fi I can't ___ to the internet.",
+   "o": [
+    "connect",
+    "collect",
+    "correct",
+    "protect"
+   ],
+   "x": "להתחבר = connect"
+  },
+  {
+   "he": "לפתח (מוצר, טכנולוגיה) = ?",
+   "a": "develop",
+   "h": "5b56d441",
+   "q": "לפתח (מוצר, טכנולוגיה) = ?",
+   "o": [
+    "develop",
+    "deliver",
+    "destroy",
+    "describe"
+   ],
+   "x": "לפתח = develop"
+  },
+  {
+   "he": "A small program on your phone is an ___.",
+   "a": "app",
+   "h": "78a25d1f",
+   "q": "A small program on your phone is an ___.",
+   "o": [
+    "app",
+    "ape",
+    "apple",
+    "aim"
+   ],
+   "x": "יישומון = app"
+  },
+  {
+   "he": "בריא = ?",
+   "a": "healthy",
+   "h": "7baafe2c",
+   "q": "בריא = ?",
+   "o": [
+    "healthy",
+    "wealthy",
+    "heavy",
+    "happy"
+   ],
+   "x": "בריא = healthy"
+  },
+  {
+   "he": "Fruit and vegetables are part of a healthy ___.",
+   "a": "diet",
+   "h": "b9dbcb92",
+   "q": "Fruit and vegetables are part of a healthy ___.",
+   "o": [
+    "diet",
+    "diary",
+    "dirt",
+    "deal"
+   ],
+   "x": "תזונה = diet"
+  },
+  {
+   "he": "פעילות גופנית = ?",
+   "a": "exercise",
+   "h": "6142a757",
+   "q": "פעילות גופנית = ?",
+   "o": [
+    "exercise",
+    "exam",
+    "exit",
+    "example"
+   ],
+   "x": "פעילות גופנית = exercise"
+  },
+  {
+   "he": "I have a pain in my head. It's a ___.",
+   "a": "headache",
+   "h": "d32bb718",
+   "q": "I have a pain in my head. It's a ___.",
+   "o": [
+    "headache",
+    "toothache",
+    "stomachache",
+    "backache"
+   ],
+   "x": "כאב ראש = headache"
+  },
+  {
+   "he": "The doctor gave me ___ for my cough.",
+   "a": "medicine",
+   "h": "a3b01ad6",
+   "q": "The doctor gave me ___ for my cough.",
+   "o": [
+    "medicine",
+    "magazine",
+    "machine",
+    "message"
+   ],
+   "x": "תרופה = medicine"
+  },
+  {
+   "he": "פצוע = ?",
+   "a": "injured",
+   "h": "5cb46cd8",
+   "q": "פצוע = ?",
+   "o": [
+    "injured",
+    "invited",
+    "involved",
+    "invented"
+   ],
+   "x": "פצוע = injured"
+  },
+  {
+   "he": "חום (כשחולים) = ?",
+   "a": "fever",
+   "h": "3d553540",
+   "q": "חום (כשחולים) = ?",
+   "o": [
+    "fever",
+    "flavor",
+    "favor",
+    "feather"
+   ],
+   "x": "חום גבוה = fever"
+  },
+  {
+   "he": "Smoking is ___ for your health.",
+   "a": "harmful",
+   "h": "33d94ba0",
+   "q": "Smoking is ___ for your health.",
+   "o": [
+    "harmful",
+    "helpful",
+    "healthy",
+    "careful"
+   ],
+   "x": "מזיק = harmful"
+  },
+  {
+   "he": "לנוח = ?",
+   "a": "rest",
+   "h": "32678243",
+   "q": "לנוח = ?",
+   "o": [
+    "rest",
+    "test",
+    "rush",
+    "race"
+   ],
+   "x": "לנוח = rest"
+  },
+  {
+   "he": "מחלה = ?",
+   "a": "disease",
+   "h": "9f48e9f0",
+   "q": "מחלה = ?",
+   "o": [
+    "disease",
+    "decrease",
+    "desert",
+    "degree"
+   ],
+   "x": "מחלה = disease"
+  },
+  {
+   "he": "להזמין מראש (חדר, כרטיס) = ?",
+   "a": "book",
+   "h": "750271de",
+   "q": "להזמין מראש (חדר, כרטיס) = ?",
+   "o": [
+    "book",
+    "borrow",
+    "bring",
+    "build"
+   ],
+   "x": "להזמין מראש = to book"
+  },
+  {
+   "he": "זר, של ארץ אחרת = ?",
+   "a": "foreign",
+   "h": "7ee4afaa",
+   "q": "זר, של ארץ אחרת = ?",
+   "o": [
+    "foreign",
+    "forest",
+    "famous",
+    "friendly"
+   ],
+   "x": "זר = foreign"
+  },
+  {
+   "he": "At the airport: Departures and ___.",
+   "a": "Arrivals",
+   "h": "fa225679",
+   "q": "At the airport: Departures and ___.",
+   "o": [
+    "Arrivals",
+    "Arrives",
+    "Passengers",
+    "Flights"
+   ],
+   "x": "נחיתות, הגעות = Arrivals"
+  },
+  {
+   "he": "המראה, יציאה = ?",
+   "a": "departure",
+   "h": "50391fe3",
+   "q": "המראה, יציאה = ?",
+   "o": [
+    "departure",
+    "delay",
+    "destination",
+    "direction"
+   ],
+   "x": "יציאה = departure"
+  },
+  {
+   "he": "Our ___ showed us the old city.",
+   "a": "guide",
+   "h": "5b0562fc",
+   "q": "Our ___ showed us the old city.",
+   "o": [
+    "guide",
+    "guest",
+    "gate",
+    "goal"
+   ],
+   "x": "מדריך טיולים = guide"
+  },
+  {
+   "he": "We went ___ – we saw museums and palaces.",
+   "a": "sightseeing",
+   "h": "acb5aa23",
+   "q": "We went ___ – we saw museums and palaces.",
+   "o": [
+    "sightseeing",
+    "shopping",
+    "sailing",
+    "skiing"
+   ],
+   "x": "סיור באתרים = sightseeing"
+  },
+  {
+   "he": "לחקור, לסייר = ?",
+   "a": "explore",
+   "h": "c5c2684e",
+   "q": "לחקור, לסייר = ?",
+   "o": [
+    "explore",
+    "explain",
+    "export",
+    "expect"
+   ],
+   "x": "לחקור = explore"
+  },
+  {
+   "he": "גבול (בין מדינות) = ?",
+   "a": "border",
+   "h": "ff49e599",
+   "q": "גבול (בין מדינות) = ?",
+   "o": [
+    "border",
+    "order",
+    "board",
+    "harbor"
+   ],
+   "x": "גבול = border"
+  },
+  {
+   "he": "נוף = ?",
+   "a": "view",
+   "h": "3d4df69b",
+   "q": "נוף = ?",
+   "o": [
+    "view",
+    "voice",
+    "visit",
+    "video"
+   ],
+   "x": "נוף = view"
+  },
+  {
+   "he": "מקומי = ?",
+   "a": "local",
+   "h": "8bf8d182",
+   "q": "מקומי = ?",
+   "o": [
+    "local",
+    "lovely",
+    "lonely",
+    "loud"
+   ],
+   "x": "מקומי = local"
+  },
+  {
+   "he": "פרסומת = ?",
+   "a": "advertisement",
+   "h": "6fe911b9",
+   "q": "פרסומת = ?",
+   "o": [
+    "advertisement",
+    "announcement",
+    "achievement",
+    "appointment"
+   ],
+   "x": "פרסומת = advertisement"
+  },
+  {
+   "he": "Instagram and TikTok are social ___.",
+   "a": "media",
+   "h": "da05a7c6",
+   "q": "Instagram and TikTok are social ___.",
+   "o": [
+    "media",
+    "medicine",
+    "meetings",
+    "machines"
+   ],
+   "x": "רשתות חברתיות = social media"
+  },
+  {
+   "he": "כתבה (בעיתון) = ?",
+   "a": "article",
+   "h": "b3959c3a",
+   "q": "כתבה (בעיתון) = ?",
+   "o": [
+    "article",
+    "artist",
+    "arrival",
+    "angle"
+   ],
+   "x": "כתבה = article"
+  },
+  {
+   "he": "The singer gave an ___ to a journalist.",
+   "a": "interview",
+   "h": "29afdfc3",
+   "q": "The singer gave an ___ to a journalist.",
+   "o": [
+    "interview",
+    "invention",
+    "invitation",
+    "instruction"
+   ],
+   "x": "ראיון = interview"
+  },
+  {
+   "he": "כותרת ראשית (בעיתון) = ?",
+   "a": "headline",
+   "h": "ac04727d",
+   "q": "כותרת ראשית (בעיתון) = ?",
+   "o": [
+    "headline",
+    "headache",
+    "deadline",
+    "hairline"
+   ],
+   "x": "כותרת = headline"
+  },
+  {
+   "he": "Millions watched the final ___ on TV, as it happened.",
+   "a": "live",
+   "h": "dba038ff",
+   "q": "Millions watched the final ___ on TV, as it happened.",
+   "o": [
+    "live",
+    "alive",
+    "life",
+    "lively"
+   ],
+   "x": "בשידור חי = live"
+  },
+  {
+   "he": "מגיש, מנחה (בטלוויזיה) = ?",
+   "a": "presenter",
+   "h": "e4fb03ae",
+   "q": "מגיש, מנחה (בטלוויזיה) = ?",
+   "o": [
+    "presenter",
+    "president",
+    "present",
+    "prisoner"
+   ],
+   "x": "מגיש = presenter"
+  },
+  {
+   "he": "Fake news is news that is ___.",
+   "a": "not true",
+   "h": "052bd533",
+   "q": "Fake news is news that is ___.",
+   "o": [
+    "not true",
+    "very new",
+    "very long",
+    "funny"
+   ],
+   "x": "fake = מזויף, not real"
+  },
+  {
+   "he": "צופים (בטלוויזיה) = ?",
+   "a": "viewers",
+   "h": "6a8257d9",
+   "q": "צופים (בטלוויזיה) = ?",
+   "o": [
+    "viewers",
+    "readers",
+    "listeners",
+    "writers"
+   ],
+   "x": "צופים = viewers"
+  },
+  {
+   "he": "A website where you share your thoughts is a ___.",
+   "a": "blog",
+   "h": "6a876614",
+   "q": "A website where you share your thoughts is a ___.",
+   "o": [
+    "blog",
+    "bag",
+    "bug",
+    "plug"
+   ],
+   "x": "יומן ברשת = blog"
+  },
+  {
+   "he": "I found my lost dog. Phew! I feel ___ (הוקל לי).",
+   "a": "relieved",
+   "h": "8adf8ad2",
+   "q": "I found my lost dog. Phew! I feel ___ (הוקל לי).",
+   "o": [
+    "relieved",
+    "jealous",
+    "bored",
+    "ashamed"
+   ],
+   "x": "הוקל לי = relieved"
+  },
+  {
+   "he": "מתוסכל = ?",
+   "a": "frustrated",
+   "h": "34a80e7a",
+   "q": "מתוסכל = ?",
+   "o": [
+    "frustrated",
+    "frightened",
+    "friendly",
+    "famous"
+   ],
+   "x": "מתוסכל = frustrated"
+  },
+  {
+   "he": "סקרן = ?",
+   "a": "curious",
+   "h": "451cf343",
+   "q": "סקרן = ?",
+   "o": [
+    "curious",
+    "careful",
+    "cruel",
+    "cheerful"
+   ],
+   "x": "סקרן = curious"
+  },
+  {
+   "he": "The noise all night made me ___ (מעוצבן).",
+   "a": "annoyed",
+   "h": "49ffed2c",
+   "q": "The noise all night made me ___ (מעוצבן).",
+   "o": [
+    "annoyed",
+    "relaxed",
+    "proud",
+    "grateful"
+   ],
+   "x": "מעוצבן = annoyed"
+  },
+  {
+   "he": "מבוהל מאוד = ?",
+   "a": "terrified",
+   "h": "84169684",
+   "q": "מבוהל מאוד = ?",
+   "o": [
+    "terrified",
+    "terrific",
+    "satisfied",
+    "surprised"
+   ],
+   "x": "מבוהל = terrified (terrific = נהדר)"
+  },
+  {
+   "he": "I got 100 on the test. I'm ___ with my work.",
+   "a": "satisfied",
+   "h": "47f6e662",
+   "q": "I got 100 on the test. I'm ___ with my work.",
+   "o": [
+    "satisfied",
+    "frustrated",
+    "ashamed",
+    "anxious"
+   ],
+   "x": "מרוצה = satisfied"
+  },
+  {
+   "he": "He cheated in the game and felt ___.",
+   "a": "ashamed",
+   "h": "c31ff0d9",
+   "q": "He cheated in the game and felt ___.",
+   "o": [
+    "ashamed",
+    "proud",
+    "curious",
+    "relieved"
+   ],
+   "x": "מתבייש = ashamed"
+  },
+  {
+   "he": "חרד, מודאג = ?",
+   "a": "anxious",
+   "h": "806fd7ec",
+   "q": "חרד, מודאג = ?",
+   "o": [
+    "anxious",
+    "angry",
+    "ancient",
+    "amazing"
+   ],
+   "x": "חרד = anxious"
+  },
+  {
+   "he": "עליז, שמח = ?",
+   "a": "cheerful",
+   "h": "2b57cd91",
+   "q": "עליז, שמח = ?",
+   "o": [
+    "cheerful",
+    "careful",
+    "colorful",
+    "useful"
+   ],
+   "x": "עליז = cheerful"
+  },
+  {
+   "he": "I couldn't believe the news. I was ___.",
+   "a": "shocked",
+   "h": "c57ff708",
+   "q": "I couldn't believe the news. I was ___.",
+   "o": [
+    "shocked",
+    "bored",
+    "calm",
+    "relaxed"
+   ],
+   "x": "בהלם = shocked"
+  },
+  {
+   "he": "What is the article mainly about?",
+   "a": "screens and sleep",
+   "h": "1229b5b2",
+   "q": "What is the article mainly about?",
+   "o": [
+    "screens and sleep",
+    "buying phones",
+    "school exams",
+    "healthy food"
+   ],
+   "x": "The whole text: screens harm sleep"
+  },
+  {
+   "he": "How many hours of sleep do teens need?",
+   "a": "8–10 hours",
+   "h": "4fb54eac",
+   "q": "How many hours of sleep do teens need?",
+   "o": [
+    "8–10 hours",
+    "6–7 hours",
+    "5 hours",
+    "12 hours"
+   ],
+   "x": "between eight and ten hours"
+  },
+  {
+   "he": "What does blue light tell the brain?",
+   "a": "it is daytime",
+   "h": "f0cdfc4f",
+   "q": "What does blue light tell the brain?",
+   "o": [
+    "it is daytime",
+    "it is night",
+    "it is cold",
+    "it is late"
+   ],
+   "x": "tells the brain that it is still daytime"
+  },
+  {
+   "he": "In paragraph 2, \"produces\" means:",
+   "a": "מייצר",
+   "h": "2e150c2a",
+   "q": "In paragraph 2, \"produces\" means:",
+   "o": [
+    "מייצר",
+    "מאבד",
+    "שומר",
+    "מודד"
+   ],
+   "x": "the body produces = הגוף מייצר"
+  },
+  {
+   "he": "When does the body repair itself?",
+   "a": "during sleep",
+   "h": "2a57243c",
+   "q": "When does the body repair itself?",
+   "o": [
+    "during sleep",
+    "during school",
+    "after meals",
+    "in the morning"
+   ],
+   "x": "the body repairs itself during sleep"
+  },
+  {
+   "he": "Where should your phone be at night?",
+   "a": "in another room",
+   "h": "3c2f89b8",
+   "q": "Where should your phone be at night?",
+   "o": [
+    "in another room",
+    "next to you",
+    "under the pillow",
+    "in your hand"
+   ],
+   "x": "leave your phone in another room"
+  },
+  {
+   "he": "\"Lack of sleep\" means:",
+   "a": "not enough sleep",
+   "h": "dc011fd9",
+   "q": "\"Lack of sleep\" means:",
+   "o": [
+    "not enough sleep",
+    "too much sleep",
+    "deep sleep",
+    "a short dream"
+   ],
+   "x": "lack = חוסר"
+  },
+  {
+   "he": "Tom sleeps six hours a night. He probably:",
+   "a": "can't concentrate",
+   "h": "8e9a1429",
+   "q": "Tom sleeps six hours a night. He probably:",
+   "o": [
+    "can't concentrate",
+    "feels very fresh",
+    "never gets sick",
+    "needs less sleep"
+   ],
+   "x": "Without enough sleep, it's hard to concentrate"
+  },
+  {
+   "he": "Which tip is NOT in the article?",
+   "a": "drink more water",
+   "h": "b5326506",
+   "q": "Which tip is NOT in the article?",
+   "o": [
+    "drink more water",
+    "read a book",
+    "use an alarm",
+    "fixed bedtime"
+   ],
+   "x": "The text says nothing about drinking water"
+  },
+  {
+   "he": "The writer's main purpose is to:",
+   "a": "give advice",
+   "h": "d51ebb37",
+   "q": "The writer's main purpose is to:",
+   "o": [
+    "give advice",
+    "tell a story",
+    "sell phones",
+    "make us laugh"
+   ],
+   "x": "The writer gives tips for good sleep"
+  },
+  {
+   "he": "What kind of text is this?",
+   "a": "a letter",
+   "h": "ad112015",
+   "q": "What kind of text is this?",
+   "o": [
+    "a letter",
+    "a news article",
+    "an advertisement",
+    "a poem"
+   ],
+   "x": "Dear Grandma… Love, Maya → a letter"
+  },
+  {
+   "he": "How long has the family been in Iceland?",
+   "a": "four days",
+   "h": "b01a7339",
+   "q": "How long has the family been in Iceland?",
+   "o": [
+    "four days",
+    "a week",
+    "two days",
+    "a month"
+   ],
+   "x": "We arrived four days ago"
+  },
+  {
+   "he": "What does Maya compare the landscape to?",
+   "a": "another planet",
+   "h": "e58782c9",
+   "q": "What does Maya compare the landscape to?",
+   "o": [
+    "another planet",
+    "a desert",
+    "a big city",
+    "the sea"
+   ],
+   "x": "looks like another planet"
+  },
+  {
+   "he": "Who is Einar?",
+   "a": "a local guide",
+   "h": "4773a868",
+   "q": "Who is Einar?",
+   "o": [
+    "a local guide",
+    "Maya's uncle",
+    "a fisherman",
+    "a pilot"
+   ],
+   "x": "a local guide called Einar"
+  },
+  {
+   "he": "How did Maya feel near the volcano?",
+   "a": "a little nervous",
+   "h": "c92dd67d",
+   "q": "How did Maya feel near the volcano?",
+   "o": [
+    "a little nervous",
+    "very bored",
+    "very angry",
+    "proud"
+   ],
+   "x": "I was a little nervous"
+  },
+  {
+   "he": "What happened while they were swimming?",
+   "a": "it started snowing",
+   "h": "bd4d7b1c",
+   "q": "What happened while they were swimming?",
+   "o": [
+    "it started snowing",
+    "Dad's glasses broke",
+    "they saw whales",
+    "a volcano erupted"
+   ],
+   "x": "We were swimming when it started to snow"
+  },
+  {
+   "he": "Why will Ben probably be hungry?",
+   "a": "won't eat fish",
+   "h": "1a1f989f",
+   "q": "Why will Ben probably be hungry?",
+   "o": [
+    "won't eat fish",
+    "no food left",
+    "he is sick",
+    "lost his money"
+   ],
+   "x": "Ben refuses to try the fish soup"
+  },
+  {
+   "he": "\"active\" volcanoes are volcanoes that:",
+   "a": "can still erupt",
+   "h": "4781699d",
+   "q": "\"active\" volcanoes are volcanoes that:",
+   "o": [
+    "can still erupt",
+    "are very old",
+    "are under snow",
+    "are very small"
+   ],
+   "x": "active = it can still erupt"
+  },
+  {
+   "he": "Einar says they ___ see whales.",
+   "a": "might not",
+   "h": "4c1144bb",
+   "q": "Einar says they ___ see whales.",
+   "o": [
+    "might not",
+    "will surely",
+    "must",
+    "have already"
+   ],
+   "x": "we might not see any = אולי לא"
+  },
+  {
+   "he": "Why did Maya write to Grandma?",
+   "a": "to share news",
+   "h": "92ffde31",
+   "q": "Why did Maya write to Grandma?",
+   "o": [
+    "to share news",
+    "to get money",
+    "to complain",
+    "to invite her"
+   ],
+   "x": "She tells Grandma about the trip"
+  },
+  {
+   "he": "This article is mainly about:",
+   "a": "why bees matter",
+   "h": "e432ff59",
+   "q": "This article is mainly about:",
+   "o": [
+    "why bees matter",
+    "making honey",
+    "dangerous insects",
+    "growing apples"
+   ],
+   "x": "The text explains why bees are important"
+  },
+  {
+   "he": "What do bees carry from flower to flower?",
+   "a": "pollen",
+   "h": "890fde98",
+   "q": "What do bees carry from flower to flower?",
+   "o": [
+    "pollen",
+    "honey",
+    "water",
+    "seeds"
+   ],
+   "x": "they carry pollen"
+  },
+  {
+   "he": "How much of our food depends on bees and insects?",
+   "a": "about one third",
+   "h": "af2fa123",
+   "q": "How much of our food depends on bees and insects?",
+   "o": [
+    "about one third",
+    "about half",
+    "almost all",
+    "very little"
+   ],
+   "x": "about one third of the food"
+  },
+  {
+   "he": "Which is NOT a reason for fewer bees?",
+   "a": "too much honey",
+   "h": "b6583c18",
+   "q": "Which is NOT a reason for fewer bees?",
+   "o": [
+    "too much honey",
+    "chemicals",
+    "fewer wild flowers",
+    "climate change"
+   ],
+   "x": "The text doesn't say honey is a reason"
+  },
+  {
+   "he": "\"dropped\" (paragraph 2) means:",
+   "a": "ירד",
+   "h": "63ea46c3",
+   "q": "\"dropped\" (paragraph 2) means:",
+   "o": [
+    "ירד",
+    "נעלם",
+    "גדל",
+    "נשבר"
+   ],
+   "x": "the number has dropped = המספר ירד"
+  },
+  {
+   "he": "Without bees, apples would become:",
+   "a": "more expensive",
+   "h": "b5cc245d",
+   "q": "Without bees, apples would become:",
+   "o": [
+    "more expensive",
+    "cheaper",
+    "bigger",
+    "sweeter"
+   ],
+   "x": "would become rare and expensive"
+  },
+  {
+   "he": "Why should you choose local plants?",
+   "a": "bees know them",
+   "h": "74013bb5",
+   "q": "Why should you choose local plants?",
+   "o": [
+    "bees know them",
+    "they are cheaper",
+    "they grow faster",
+    "they smell nicer"
+   ],
+   "x": "local bees know them best"
+  },
+  {
+   "he": "\"enormous\" in the last paragraph means:",
+   "a": "very big",
+   "h": "ae3a2cf5",
+   "q": "\"enormous\" in the last paragraph means:",
+   "o": [
+    "very big",
+    "very small",
+    "very fast",
+    "very old"
+   ],
+   "x": "tiny ≠ enormous → ענק"
+  },
+  {
+   "he": "The writer wants readers to:",
+   "a": "help protect bees",
+   "h": "a19c5070",
+   "q": "The writer wants readers to:",
+   "o": [
+    "help protect bees",
+    "buy more honey",
+    "avoid bees",
+    "become farmers"
+   ],
+   "x": "everyone can help → help the bees"
+  },
+  {
+   "he": "What can you put out for bees on hot days?",
+   "a": "water",
+   "h": "431884da",
+   "q": "What can you put out for bees on hot days?",
+   "o": [
+    "water",
+    "chemical sprays",
+    "some honey",
+    "a big garden"
+   ],
+   "x": "put out a small dish of water"
+  },
+  {
+   "he": "Where was the shark in the video?",
+   "a": "in a street",
+   "h": "efc751da",
+   "q": "Where was the shark in the video?",
+   "o": [
+    "in a street",
+    "in the ocean",
+    "in a pool",
+    "in a river"
+   ],
+   "x": "swimming down a city street"
+  },
+  {
+   "he": "Why did Omer believe the video?",
+   "a": "millions watched it",
+   "h": "3c15befc",
+   "q": "Why did Omer believe the video?",
+   "o": [
+    "millions watched it",
+    "Shira said so",
+    "news reported it",
+    "he saw sharks"
+   ],
+   "x": "two million views → he thought it was real"
+  },
+  {
+   "he": "Who is Shira?",
+   "a": "Omer's sister",
+   "h": "2f3f157c",
+   "q": "Who is Shira?",
+   "o": [
+    "Omer's sister",
+    "a news presenter",
+    "Omer's teacher",
+    "a journalist friend"
+   ],
+   "x": "his sister Shira, who studies journalism"
+  },
+  {
+   "he": "Where did the shark picture really come from?",
+   "a": "an older picture",
+   "h": "e52d499e",
+   "q": "Where did the shark picture really come from?",
+   "o": [
+    "an older picture",
+    "a news website",
+    "a flood video",
+    "Omer's phone"
+   ],
+   "x": "a different picture, taken years earlier"
+  },
+  {
+   "he": "\"reliable\" means:",
+   "a": "שאפשר לסמוך עליו",
+   "h": "14f45feb",
+   "q": "\"reliable\" means:",
+   "o": [
+    "שאפשר לסמוך עליו",
+    "מהיר",
+    "מפורסם",
+    "חדש"
+   ],
+   "x": "reliable website = אתר אמין"
+  },
+  {
+   "he": "How did Omer feel when he learned the truth?",
+   "a": "embarrassed",
+   "h": "fb582f7b",
+   "q": "How did Omer feel when he learned the truth?",
+   "o": [
+    "embarrassed",
+    "proud",
+    "bored",
+    "relieved"
+   ],
+   "x": "Omer felt embarrassed"
+  },
+  {
+   "he": "Why do some people make fake stories?",
+   "a": "to get attention",
+   "h": "9f291c99",
+   "q": "Why do some people make fake stories?",
+   "o": [
+    "to get attention",
+    "to help others",
+    "to learn English",
+    "to find sharks"
+   ],
+   "x": "to get attention or make money"
+  },
+  {
+   "he": "What did Omer learn?",
+   "a": "check before sharing",
+   "h": "c314a21c",
+   "q": "What did Omer learn?",
+   "o": [
+    "check before sharing",
+    "never use phones",
+    "sharks are dangerous",
+    "news is fake"
+   ],
+   "x": "Stop and check before you send"
+  },
+  {
+   "he": "The writer's main purpose is to:",
+   "a": "teach a lesson",
+   "h": "c4ddaf41",
+   "q": "The writer's main purpose is to:",
+   "o": [
+    "teach a lesson",
+    "sell a program",
+    "describe sharks",
+    "describe a city"
+   ],
+   "x": "The story teaches us to check the news"
+  },
+  {
+   "he": "\"views\" (paragraph 1) means:",
+   "a": "times watched",
+   "h": "75906fe0",
+   "q": "\"views\" (paragraph 1) means:",
+   "o": [
+    "times watched",
+    "nice places",
+    "opinions",
+    "pictures"
+   ],
+   "x": "two million views = watched two million times"
+  },
+  {
+   "he": "Have you done your homework ___?",
+   "a": "yet",
+   "h": "e3a90f1f",
+   "q": "Have you done your homework ___?",
+   "o": [
+    "yet",
+    "since",
+    "ago",
+    "never"
+   ],
+   "x": "A question, at the end of the sentence → yet"
+  },
+  {
+   "he": "Third form (V3) of take?",
+   "a": "taken",
+   "h": "cb18c93b",
+   "q": "Third form (V3) of take?",
+   "o": [
+    "taken",
+    "took",
+    "taked",
+    "taking"
+   ],
+   "x": "take – took – taken"
+  },
+  {
+   "he": "I ___ this book three times. I love it!",
+   "a": "have read",
+   "h": "71e3f789",
+   "q": "I ___ this book three times. I love it!",
+   "o": [
+    "have read",
+    "has read",
+    "am reading",
+    "reading"
+   ],
+   "x": "Experience up to now → have + V3"
+  },
+  {
+   "he": "We ___ the new museum when it opened in 2022.",
+   "a": "visited",
+   "h": "ced083f1",
+   "q": "We ___ the new museum when it opened in 2022.",
+   "o": [
+    "visited",
+    "visit",
+    "has visited",
+    "have visited"
+   ],
+   "x": "in 2022 = a definite time → Past Simple"
+  },
+  {
+   "he": "What ___ you doing when I called?",
+   "a": "were",
+   "h": "5e95fd8f",
+   "q": "What ___ you doing when I called?",
+   "o": [
+    "were",
+    "was",
+    "did",
+    "are"
+   ],
+   "x": "you → were + ing"
+  },
+  {
+   "he": "I've decided. I ___ learn to play the drums.",
+   "a": "am going to",
+   "h": "beebb052",
+   "q": "I've decided. I ___ learn to play the drums.",
+   "o": [
+    "am going to",
+    "will to",
+    "going",
+    "did"
+   ],
+   "x": "A decision made earlier → going to"
+  },
+  {
+   "he": "If you ___ me, I'll help you.",
+   "a": "call",
+   "h": "a841d51c",
+   "q": "If you ___ me, I'll help you.",
+   "o": [
+    "call",
+    "will call",
+    "called",
+    "calling"
+   ],
+   "x": "After If → present"
+  },
+  {
+   "he": "Of all my friends, Dan lives the ___ (far) from school.",
+   "a": "farthest",
+   "h": "38ed38a1",
+   "q": "Of all my friends, Dan lives the ___ (far) from school.",
+   "o": [
+    "farthest",
+    "farther",
+    "most far",
+    "farest"
+   ],
+   "x": "far – farther – the farthest"
+  },
+  {
+   "he": "Paper ___ from trees.",
+   "a": "is made",
+   "h": "d4b089f3",
+   "q": "Paper ___ from trees.",
+   "o": [
+    "is made",
+    "is make",
+    "makes",
+    "made"
+   ],
+   "x": "Paper doesn't make anything → is + V3: is made"
+  },
+  {
+   "he": "It's very late. We ___ go home now.",
+   "a": "should",
+   "h": "bd3adac8",
+   "q": "It's very late. We ___ go home now.",
+   "o": [
+    "should",
+    "might not",
+    "don't have to",
+    "mustn't"
+   ],
+   "x": "Advice → should"
+  },
+  {
+   "he": "How ___ brothers do you have?",
+   "a": "many",
+   "h": "11aa7753",
+   "q": "How ___ brothers do you have?",
+   "o": [
+    "many",
+    "much",
+    "little",
+    "a little"
+   ],
+   "x": "brothers are countable → How many"
+  },
+  {
+   "he": "The woman ___ helped us was very kind.",
+   "a": "who",
+   "h": "19c20130",
+   "q": "The woman ___ helped us was very kind.",
+   "o": [
+    "who",
+    "which",
+    "where",
+    "whose"
+   ],
+   "x": "A person → who"
+  },
+  {
+   "he": "I was tired. ___, I finished my work.",
+   "a": "However",
+   "h": "c7381333",
+   "q": "I was tired. ___, I finished my work.",
+   "o": [
+    "However",
+    "Therefore",
+    "In addition",
+    "Because"
+   ],
+   "x": "Contrast → However"
+  },
+  {
+   "he": "It was late, ___ we took a taxi.",
+   "a": "so",
+   "h": "acdf2bc0",
+   "q": "It was late, ___ we took a taxi.",
+   "o": [
+    "so",
+    "although",
+    "however",
+    "because"
+   ],
+   "x": "A result inside one sentence → so"
+  },
+  {
+   "he": "Polar bears may lose their ___ when ice melts.",
+   "a": "habitat",
+   "h": "b8f31837",
+   "q": "Polar bears may lose their ___ when ice melts.",
+   "o": [
+    "habitat",
+    "habit",
+    "hobby",
+    "harbor"
+   ],
+   "x": "The bears' habitat = the ice"
+  },
+  {
+   "he": "When he was young, my grandpa ___ work on a farm.",
+   "a": "used to",
+   "h": "1a404e92",
+   "q": "When he was young, my grandpa ___ work on a farm.",
+   "o": [
+    "used to",
+    "use to",
+    "was use",
+    "uses to"
+   ],
+   "x": "A past habit that stopped → used to"
+  },
+  {
+   "he": "Ask a ___ – he was born here and knows the way.",
+   "a": "local",
+   "h": "7d759bc5",
+   "q": "Ask a ___ – he was born here and knows the way.",
+   "o": [
+    "local",
+    "tourist",
+    "guest",
+    "foreigner"
+   ],
+   "x": "תושב המקום = a local"
+  },
+  {
+   "he": "I have a fever. I need to ___ in bed.",
+   "a": "rest",
+   "h": "847049bc",
+   "q": "I have a fever. I need to ___ in bed.",
+   "o": [
+    "rest",
+    "race",
+    "rush",
+    "test"
+   ],
+   "x": "לנוח במיטה = rest"
+  },
+  {
+   "he": "He forgot his keys again. He's so ___.",
+   "a": "careless",
+   "h": "8517b1ba",
+   "q": "He forgot his keys again. He's so ___.",
+   "o": [
+    "careless",
+    "careful",
+    "uncareful",
+    "careness"
+   ],
+   "x": "less = without → careless = לא זהיר"
+  },
+  {
+   "he": "Before the big test, I felt ___.",
+   "a": "anxious",
+   "h": "92f96a42",
+   "q": "Before the big test, I felt ___.",
+   "o": [
+    "anxious",
+    "cheerful",
+    "relieved",
+    "satisfied"
+   ],
+   "x": "Before a test → חרד = anxious"
+  }
+ ]
+}

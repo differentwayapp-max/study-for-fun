@@ -3,7 +3,7 @@
 > **For the owner (Hebrew summary):** this file is a ready prompt to give a new Claude Code session. It covers every
 > catalog practice set: math and science get a full English version; the English sets get English only where the Hebrew is
 > an instruction or an explanation; the Hebrew sets stay in Hebrew. Nothing was changed in the code while preparing it.
-> Before you run it, decide the points in §2 (each has a recommended default).
+> The owner approved all the defaults of §2 (28.11.2026).
 
 ---
 
@@ -39,7 +39,7 @@ Scale of the job (catalog sets in `public/share/catalog.json`):
 | English | en3–en8, en4-nov26, en7-nov26 | ≈ 2,650 | Hebrew instructions and explanations only (≈ 85% of explanations are Hebrew), §5 |
 | Hebrew | heb1–heb8 | ≈ 2,700 | **nothing in the content** (§6) |
 
-### 2. Decisions for the owner before starting (recommended default first)
+### 2. Decisions (approved by the owner, 28.11.2026 – apply them as written)
 
 1. **Spelling: American English** for all content (the English sets already use "color", "favorite", "center"; math terms
    "trapezoid", "math"). The interface dictionary uses some British forms ("practise") – leave the interface as it is.

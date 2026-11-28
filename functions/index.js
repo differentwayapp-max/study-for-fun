@@ -994,8 +994,8 @@ async function rememberPool(famId, kidId, qs) {
    After every server build that ended well:
    1. bankMeasure – how much the bank could have given this build: the build's topics matched (Haiku) against the bank's topic
       index of the same grade and subject; per chapter at most BANK_SHARE of its questions; the money is the build's own cost of
-      writing and checking (gen, pics, solve, review, fix) per question × those questions. On builds/{id}.bank and in
-      meta/qbank_<month>. Measured before this build's own questions go in.
+      writing and checking (gen, pics, solve, review, fix) per question × those questions. Only in meta/qbank_<month>
+      (server and app admins; never on the build, which the family's phones read). Measured before this build's own questions go in.
    2. bankAdd – the build's own questions that passed the checks go in, unless they are tied to the family: a ready catalog
       question (srcq), a reported one, one with a name of the family's kids, or one the bank step (Haiku) leaves out (a real
       person or place, the family's own material). A bank question keeps no family, kid, build or set id.
@@ -1096,11 +1096,10 @@ exports.bankWatch = require('firebase-functions/v2/firestore').onDocumentUpdated
 
 async function bankAfterBuild(famId, buildId, I, set, fake) {
   try {
-    const ref = buildRef(famId, buildId), b = (await ref.get()).data() || {};
+    const b = (await buildRef(famId, buildId).get()).data() || {};
     let m = { could: 0, of: 0, usd: 0, cost: 0 }, measured = true;
     try { m = await bankMeasure(I, set, b, fake); } catch (e) { measured = false; console.warn(`bank measure ${buildId}: ${e.message}`); }   // the questions still go in
     const a = await bankAdd(famId, I, set, fake);
-    await ref.update({ bank: { ...m, added: a.added, skipped: a.skipped } }).catch(() => {});
     const inc = FieldValue.increment;
     await bankMonth().set({ builds: inc(measured ? 1 : 0), qs: inc(m.of), could: inc(m.could), usd: inc(m.usd), cost: inc(m.cost), added: inc(a.added), skipped: inc(a.skipped) }, { merge: true });
   } catch (e) {

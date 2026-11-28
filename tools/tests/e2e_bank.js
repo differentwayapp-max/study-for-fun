@@ -29,20 +29,27 @@ const until = async (f, ms = 30000) => { const t = Date.now(); let v; while (!(v
   await p.evaluate(() => { kids.push({ id: 'k1', name: 'נועה', grade: 3, color: '#2F6BFF' }); saveKids(); });
   await p.waitForTimeout(1500);
 
+  // the bank's numbers are kept only in meta/qbank_<month> (never on the build, which the family's phones read):
+  // a build's numbers = the month's numbers after it, less the month's before it
+  const M0 = { builds: 0, qs: 0, could: 0, usd: 0, cost: 0, added: 0, skipped: 0 };
+  let monthBefore = M0;
   const runBuild = async topics => {
     await p.evaluate(t => { openWizard('k1'); W.subject = 'אנגלית'; $('fTopics').value = t; W.step = 4; wizRender(); build(); }, topics);
     await p.waitForFunction(() => CUR_BUILD && CUR_BUILD !== 'send', null, { timeout: 60000 });
     const id = await p.evaluate(() => CUR_BUILD);
-    // the bank runs right after the set is written: wait for its numbers on the build
-    const bd = await until(async () => { const d = await get(`families/${fam}/builds/${id}`); return d && d.status === 'done' && d.bank ? d : null; }, 180000);
-    return bd || {};
+    const bd = await until(async () => { const d = await get(`families/${fam}/builds/${id}`); return d && d.status === 'done' ? d : null; }, 180000) || {};
+    const mo = await until(async () => { const x = await get(`meta/qbank_${month}`); return x && x.builds > monthBefore.builds ? x : null; }, 60000) || {};
+    const bank = Object.fromEntries(Object.keys(M0).map(k => [k, Math.round(((mo[k] || 0) - (monthBefore[k] || 0)) * 1e6) / 1e6]));
+    monthBefore = { ...M0, ...mo };
+    return { ...bd, doc: bd, bank };
   };
   // "!private": the fake bank step leaves these out; "נועה": the kid's name
   const T = 'Short vowels\nMagic e\nPets !private\nנועה and colors';
 
   console.log('1. a build fills the bank');
   const b1 = await runBuild(T);
-  ok(b1.status === 'done' && b1.bank, 'the build is done and has its bank numbers ' + JSON.stringify(b1.bank));
+  ok(b1.status === 'done' && b1.bank.builds === 1, 'the build is done and the month has its bank numbers ' + JSON.stringify(b1.bank));
+  ok(!Object.keys(b1.doc).some(k => /bank/i.test(k)), 'nothing of the bank is on the build (the family\'s phones read it)');
   const set1 = await get(`families/${fam}/sets/${b1.setId}`);
   const qs1 = (set1 && set1.set && set1.set.questions) || [], own1 = qs1.filter(q => !q.srcq);
   let bank = await list('qbank');
@@ -62,11 +69,13 @@ const until = async (f, ms = 30000) => { const t = Date.now(); let v; while (!(v
 
   console.log('2. a second build on the same topics: the measure');
   const b2 = await runBuild(T);
-  ok(b2.bank.could > 0 && b2.bank.usd > 0 && b2.bank.usd <= b2.bank.cost, `the bank could have given ${b2.bank.could} of ${b2.bank.of} questions ($${b2.bank.usd} of $${b2.bank.cost})`);
+  ok(b2.bank.could > 0 && b2.bank.usd > 0 && b2.bank.usd <= b2.bank.cost, `the bank could have given ${b2.bank.could} of ${b2.bank.qs} questions ($${b2.bank.usd} of $${b2.bank.cost})`);
   const set2 = await get(`families/${fam}/sets/${b2.setId}`);
   ok(!set2.set.questions.some(q => /bank|qbank/.test(Object.keys(q).join(' '))), 'no build takes questions from the bank yet');
   const m = await get(`meta/qbank_${month}`);
-  ok(m && m.builds === 2 && m.could === b2.bank.could && m.added === (await list('qbank')).length, 'the month adds it up ' + JSON.stringify(m));
+  ok(m && m.builds === 2 && m.could === b1.bank.could + b2.bank.could && m.added === (await list('qbank')).length, 'the month adds it up ' + JSON.stringify(m));
+  const readMeta = await p.evaluate(async mk => { try { await window.__sffRoot.get('meta', 'qbank_' + mk); return 'read'; } catch (e) { return 'denied'; } }, month).catch(() => 'denied');
+  ok(readMeta === 'denied', 'a parent cannot read the bank\'s month numbers');
 
   console.log('3. a question the parent changes or deletes leaves the bank');
   const before = (await list('qbank')).filter(x => x.live).length;

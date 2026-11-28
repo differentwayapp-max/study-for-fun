@@ -1,0 +1,57 @@
+# The iPhone app (apple/): built on a Mac in the cloud – nobody needs a Mac.
+#  - every change under apple/ (or by hand): a build for the simulator, to check that it builds
+#  - by hand with "upload: true": a signed build sent to App Store Connect / TestFlight.
+#    Needs the repository secrets (Settings → Secrets and variables → Actions):
+#    APPLE_TEAM_ID, ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8 (App Store Connect → Users and Access → Integrations → API key, role App Manager)
+name: iOS
+on:
+  workflow_dispatch:
+    inputs:
+      upload: { description: 'Upload to TestFlight', type: boolean, default: false }
+      build: { description: 'Build number (higher than the last upload)', type: string, default: '' }
+  push:
+    paths: ['apple/**', '.github/workflows/ios.yml']
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash   # bash -eo pipefail: a failed xcodebuild fails the step even through | tail
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Xcode
+        run: sudo xcode-select -s "$(ls -d /Applications/Xcode_16*.app | sort -V | tail -1)" && xcodebuild -version
+      - name: Prepare
+        run: apple/setup-ios.sh
+      - name: Build for the simulator
+        if: ${{ !inputs.upload }}
+        working-directory: apple/ios/App
+        run: xcodebuild -project App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build | tail -40
+      - name: Archive and upload to TestFlight
+        if: ${{ inputs.upload }}
+        working-directory: apple/ios/App
+        env:
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+          KID: ${{ secrets.ASC_KEY_ID }}
+          ISS: ${{ secrets.ASC_ISSUER_ID }}
+          P8: ${{ secrets.ASC_KEY_P8 }}
+          BUILD: ${{ inputs.build }}
+        run: |
+          set -euo pipefail
+          KEY="$RUNNER_TEMP/AuthKey_$KID.p8"; printf '%s' "$P8" > "$KEY"
+          AUTH=(-allowProvisioningUpdates -authenticationKeyPath "$KEY" -authenticationKeyID "$KID" -authenticationKeyIssuerID "$ISS")
+          NUM="${BUILD:-$GITHUB_RUN_NUMBER}"
+          xcodebuild -project App.xcodeproj -scheme App -configuration Release -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/App.xcarchive" DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic CURRENT_PROJECT_VERSION="$NUM" \
+            "${AUTH[@]}" archive | tail -30
+          cat > "$RUNNER_TEMP/export.plist" <<PL
+          <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict><key>method</key><string>app-store-connect</string><key>destination</key><string>upload</string>
+          <key>teamID</key><string>$TEAM</string><key>signingStyle</key><string>automatic</string></dict></plist>
+          PL
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" -exportOptionsPlist "$RUNNER_TEMP/export.plist" \
+            -exportPath "$RUNNER_TEMP/out" "${AUTH[@]}" | tail -30
+          rm -f "$KEY"

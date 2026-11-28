@@ -2267,10 +2267,15 @@ GRADES.forEach((g,i)=>{const o=document.createElement('option');o.value=i;o.text
 let sample = null, canImages = false;
 let images = []; // {blob,url}
 let sets = [];
+// test-level questions (lvl 2, the test window's stage 3) live in set.qs2, never in set.questions: every regular game, the review,
+// the review questions, focused practice, match / memory, "עברתי", the map and the readiness meter read set.questions only.
+// A set that arrives with them mixed in (an old copy, another phone) is split here – the regular list is the set as before them.
+function splitLvl(s){ if(!s||!Array.isArray(s.questions)||!s.questions.some(q=>q&&q.lvl===2)) return s;
+  s.qs2=[...(Array.isArray(s.qs2)?s.qs2:[]),...s.questions.filter(q=>q&&q.lvl===2)]; s.questions=s.questions.filter(q=>!q||q.lvl!==2); return s; }
 let curSet = null;
 
 const store = {
-  load(){ try{ sets = JSON.parse(localStorage.getItem('sff_sets')||'[]'); }catch(e){ sets=[]; } },
+  load(){ try{ sets = JSON.parse(localStorage.getItem('sff_sets')||'[]'); }catch(e){ sets=[]; } sets.forEach(splitLvl); },
   save(){ storeSaveLocal(); if(typeof pushSets==='function') pushSets(); }
 };
 store.load();
@@ -2970,7 +2975,9 @@ async function loadShare(raw){
   else if(short && !raw.startsWith('SFF1:')){ const r=await fetch(`/share/${short[1]}.txt?t=${Date.now()}`); raw=r.ok?(await r.text()).trim():''; }
   if(!raw.startsWith('SFF1:')) throw 0;
   const p=JSON.parse(decodeURIComponent(escape(atob(raw.slice(5)))));
-  p.qs=clean(p.questions,p.topics); if(!p.qs.length) throw 0;
+  // test-level questions (lvl 2) are kept apart from the start – clean() drops the field, and a regular game must never get them
+  const all=Array.isArray(p.questions)?p.questions:[];
+  p.qs=clean(all.filter(q=>!q||q.lvl!==2),p.topics); p.qs2=clean(all.filter(q=>q&&q.lvl===2),p.topics).map(q=>({...q,lvl:2})); if(!p.qs.length) throw 0;
   return p;
 }
 // add the practice set to a child (same source again → update in place, progress kept)
@@ -2978,9 +2985,9 @@ function applyImport(p, ik){
   const qs=p.qs, words=Array.isArray(p.words)?p.words.filter(w=>typeof w==='string').slice(0,500):[];
   const qa={...(p.qa||{checked:qs.length,passed:qs.length,fixed:0,dropped:0}),log:[]};
   const old=sets.find(x=>x.kidId===ik.id && x.shared && (p.src ? (x.src===p.src || (!x.src && x.subject===p.subject && x.examDate===(p.examDate||''))) : false));
-  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',pick:p.pick||null,topics:p.topics,questions:qs,chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
+  if(old){ Object.assign(old,{src:p.src,ver:p.ver||'',pick:p.pick||null,topics:p.topics,questions:qs,qs2:p.qs2||[],chapters:p.chapters||null,words,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,perRound:p.perRound||0,qa,updated:Date.now()});
     delete old.order; delete old.pos; store.save(); return {set:old, msg:`עודכן: ${old.subject} · ${qs.length} שאלות ✓ (ההתקדמות נשמרה)`}; }
-  const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
+  const set={id:'s'+Date.now(),kidId:ik.id,name:ik.name,grade:ik.grade,perRound:p.perRound||0,subject:p.subject||'',topics:p.topics,questions:qs,qs2:p.qs2||[],examDate:p.examDate||'',dailyGoal:p.dailyGoal||2,group:p.group||'',compete:false,chapters:p.chapters||null,
     qa,coverage:{},suggestions:[],created:Date.now(),shared:true,src:p.src||'',ver:p.ver||'',pick:p.pick||null,words};
   sets.unshift(set); store.save(); return {set, msg:`נוסף: ${set.subject} · ${qs.length} שאלות ✓`};
 }
@@ -3247,7 +3254,7 @@ function defChapters(topics, round){
   return out;
 }
 function getChapters(s){
-  const QS=Array.isArray(s.questions)?s.questions:[];        // a broken set (no questions) never stops the screen
+  const QS=(Array.isArray(s.questions)?s.questions:[]).filter(q=>!q||q.lvl!==2);   // a broken set (no questions) never stops the screen; never a test-level question (set.qs2)
   if(Array.isArray(s.chapters) && s.chapters.length && QS.some(q=>q.ch!=null))
     return s.chapters.map((c,i)=>({...c, qs:QS.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
   const per=s.perRound||10, qs=QS, n=Math.max(1,Math.ceil(qs.length/per)), out=[];
@@ -5089,9 +5096,9 @@ async function cloudInit(){
       // a set that was in the cloud and is gone was deleted on another phone – drop it here too, don't upload it again
       // (sets from before this flag: gone from the cloud and older than an hour count as deleted)
       if(fresh) sets=sets.filter(s=>ids.has(s.id) || (!s.cloud && Date.now()-(s.created||0)<3600e3));
-      remote.forEach(r=>{ const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
+      remote.forEach(r=>{ splitLvl(r); const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
       pushSets(); }
-    else { const old=sets; sets=remote.map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
+    else { const old=sets; sets=remote.map(r=>{ splitLvl(r); const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); }
     storeSaveLocal(); rerender();
   },e=>{ const m=e&&e.message; (window.SFF_KID_DEVICE&&deniedErr(e))?kidPhoneGone(m):showCloudErr(m); });
   DB.collection('progress').onSnapshot(q=>progDocs(q.docs),()=>{});
@@ -5126,7 +5133,7 @@ function tutorCloud(){
       per[id]=q.docs.map(d=>d.data().set).filter(Boolean); fresh[id]=!(q.metadata&&q.metadata.fromCache);
       const remote=Object.values(per).flat(), ids=new Set(remote.map(r=>r.id));
       if(mine.every(k=>fresh[k])) sets=sets.filter(s=>ids.has(s.id) || (!s.cloud && Date.now()-(s.created||0)<3600e3));
-      remote.forEach(r=>{ const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
+      remote.forEach(r=>{ splitLvl(r); const l=sets.find(s=>s.id===r.id); if(l) l.cloud=true; else sets.push({...r,cloud:true}); });
       pushSets(); storeSaveLocal(); rerender(); },()=>{});
     DB.doc('progress/'+id).onSnapshot(snap=>{ if(snap.exists) progDocs([{id, data:()=>snap.data()}]); },()=>{});
   });
@@ -6264,7 +6271,7 @@ let ASG=null;
 async function asgOpen(baseId){ ASG={step:1, base:null, to:'all', pick:new Set(), one:'', due:isoDay(7), review:false};
   const b=baseId&&getSet(baseId); if(b){ ASG.base=b; ASG.step=2; } asgRender(); }
 function asgCopy(p){ return {subject:p.subject||'', title:p.title||'', grade:+((window.SFF_CLASS||{}).grade)||+p.grade||0, perRound:p.perRound||0, topics:p.topics||[],
-  questions:JSON.parse(JSON.stringify(p.qs||p.questions||[])), chapters:p.chapters||null, words:Array.isArray(p.words)?p.words:[], group:p.group||'', src:p.src||'', ver:p.ver||'',
+  questions:JSON.parse(JSON.stringify(p.qs||(p.questions||[]).filter(q=>!q||q.lvl!==2))), qs2:JSON.parse(JSON.stringify(p.qs2||(p.questions||[]).filter(q=>q&&q.lvl===2))), chapters:p.chapters||null, words:Array.isArray(p.words)?p.words:[], group:p.group||'', src:p.src||'', ver:p.ver||'',
   qa:p.qa?{...p.qa,log:[]}:{checked:(p.qs||p.questions||[]).length,passed:(p.qs||p.questions||[]).length,fixed:0,dropped:0,log:[]}, coverage:{}, suggestions:[], compete:false}; }
 async function asgUsage(){ try{ const u=await window.__sffTeacherUsage?.(); return u; }catch(e){ return null; } }
 async function asgRender(){ const A=ASG; if(!A) return; const N=trStudents().length;
@@ -6377,7 +6384,7 @@ function classKidCloud(me){
     saveKidsLocal(); applyLock(); rerender(); },e=>{ const m='kid: '+(e&&(e.code||e.message)); deniedErr(e)?kidPhoneGone(m):showCloudErr(m); });
   // its own sets, and the group's assignments for all or for this student – each asked exactly as firestore.rules allow it
   const parts={}, merge=()=>{ const old=sets, byId=new Map(); Object.values(parts).flat().forEach(r=>byId.set(r.id,r));
-    sets=[...byId.values()].map(r=>{ const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); };
+    sets=[...byId.values()].map(r=>{ splitLvl(r); const l=old.find(s=>s.id===r.id); return l?{...r,order:l.order,pos:l.pos}:r; }); storeSaveLocal(); rerender(); };
   [['own',['set.kidId','==',me]],['all',['set.to','==','all']],['mine',[`set.toMap.${me}`,'==',true]]].forEach(([k,w])=>
     DB.collection('sets').where(...w).onSnapshot(q=>{ parts[k]=q.docs.map(d=>d.data().set).filter(Boolean); merge(); },()=>{}));
   DB.doc('progress/'+me).onSnapshot(snap=>{ if(snap.exists) progDocs([{id:me, data:()=>snap.data()}]); },()=>{}); }

@@ -960,7 +960,8 @@ async function readyChapters(I, gi, subject) {
     let p;
     try { const r = await fetch(`${site}/share/${encodeURIComponent(x.id)}.txt`); const raw = r.ok ? (await r.text()).trim() : '';
       if (!raw.startsWith('SFF1:')) continue;
-      p = JSON.parse(Buffer.from(raw.slice(5), 'base64').toString('utf8')); p.qs = core.clean(p.questions, p.topics); if (!p.qs.length) continue; }
+      p = JSON.parse(Buffer.from(raw.slice(5), 'base64').toString('utf8'));
+      p.qs = core.clean((p.questions || []).filter(q => !q || q.lvl !== 2), p.topics); if (!p.qs.length) continue; }   // never a test-level question (lvl 2) in a regular chapter
     catch (_) { continue; }
     (p.chapters || []).forEach((c, ci) => { if (c && typeof c.text === 'string' && c.text.trim()) return;          // reading passages need their text
       const qs = p.qs.filter(q => q.ch === ci).map(q => ({ ...q, srcq: x.id + ':' + core.tkey(q.question) })).filter(q => !used.has(q.srcq) && !solved.has(core.tkey(q.question)));

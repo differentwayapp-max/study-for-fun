@@ -38,7 +38,7 @@ C.append(("Present Simple: he / she / it", [PS], [
  (PS, "Snow ___ in spring.", ["melt", "melts", "melting", "to melt"], 1, "השלג = it ← melts", [("☀️", 25, 25, 30), ("⛄", 60, 60, 46)]),
  (PS, "The farmer ___ apples to shops.", ["sell", "sells", "selling", "to sell"], 1, "farmer = he ← sells", [("👨‍🌾", 30, 55, 44), ("🍎", 62, 66, 22), ("🏪", 80, 35, 26)]),
  (PS, "Mom ___ eggs in a pan.", ["fry", "frys", "fries", "frying"], 2, "y אחרי עיצור ← ies", [("👩", 32, 55, 40), ("🍳", 70, 58, 38)]),
- Q2(PS, "Look! The cat ___ on my bed.", ["is sleeping", "sleeps", "sleep", "sleeping"], 0, "Look! ← קורה עכשיו: is + ing", ROW("🐈", "🛏️")),
+ Q2(PS, "Look! The cat ___ my milk!", ["is drinking", "drinks", "drink", "drinking"], 0, "Look! ← קורה עכשיו: is + ing", ROW("🐈", "🥛")),
  Q2(PS, "Every Friday, Mom ___ a cake for us.", ["bakes", "is baking", "bake", "baking"], 0, "every Friday = הרגל ← Present Simple", ROW("👩", "🎂", "📅")),
  Q2(PS, "Shh! Grandpa ___ the news right now.", ["is watching", "watches", "watch", "watching"], 0, "right now ← is + ing", ROW("👴", "📺")),
  Q2(PS, "Find the mistake: 'He go to school by bus.'", ["go → goes", "He → His", "by → in", "bus → buses"], 0, "he ← מוסיפים es: goes", ROW("👦", "🚌", "🏫")),
@@ -286,10 +286,9 @@ C.insert(_u, ("Present Simple: has, does, always…", [PS], [
  (PS, "The museum ___ at ten.", ["opens", "open", "opening", "to open"], 0, "the museum = it ← opens", [("🏛️", 45, 55, 46), ("🕙", 78, 25, 20)]),
  (PS, "My parents ___ in Haifa.", ["work", "works", "working", "to work"], 0, "parents = רבים ← בלי s", [("👫", 40, 58, 38), ("🏙️", 75, 50, 32)]),
  (PS, "She ___ English very well.", ["speaks", "speak", "speaking", "to speak"], 0, "she ← speaks", [("👧", 40, 55, 40), ("💬", 72, 35, 26)]),
- Q2(PS, "I usually ___ to school, but today it's raining.", ["walk", "am walking", "walks", "walking"], 0, "usually = הרגל ← Present Simple", ROW("🚶", "🏫", "🌧️")),
- Q2(PS, "She usually walks, but today she ___ the bus.", ["is taking", "takes", "take", "taking"], 0, "today, לא כרגיל ← is + ing", ROW("👧", "🚌")),
- Q2(PS, "Yesterday she walked, but she usually ___ the bus.", ["takes", "took", "is taking", "take"], 0, "usually = הרגל ← takes", ROW("👧", "🚌", "🚶")),
- Q2(PS, "Listen! The birds ___ in the garden.", ["are singing", "sing", "sings", "singing"], 0, "Listen! ← קורה עכשיו: are + ing", ROW("🐦", "🌳", "👂")),
+ Q2(PS, "I usually ___ the bus, but today I'm walking.", ["take", "am taking", "takes", "taking"], 0, "usually = הרגל ← Present Simple", ROW("🚌", "🚶")),
+ Q2(PS, "She usually takes the bus, but today she ___ .", ["is walking", "walks", "walk", "walking"], 0, "today, לא כרגיל ← is + ing", ROW("👧", "🚶")),
+ Q2(PS, "Listen! Your phone ___ in your bag.", ["is ringing", "rings", "ring", "ringing"], 0, "Listen! ← קורה עכשיו: is + ing", ROW("🎒", "📱", "👂")),
  Q2(PS, "My sister ___ her teeth twice a day.", ["brushes", "is brushing", "brush", "brushing"], 0, "twice a day = הרגל ← brushes", ROW("👧", "🦷")),
 ]))
 OLD_CODES = ["en7-nov26-9eaa62", "en7-nov26-333b7b", "en7-nov26-1adab8"]

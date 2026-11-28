@@ -1713,7 +1713,7 @@
    "he": "לנועה פי 2 גולות מדני. יחד 36. כמה לדני?",
    "a": "⁦12⁩",
    "h": "1e6f9a1a",
-   "q": "Noa has 2 times Dani's marbles. Together they have 36. How many does Dani have?",
+   "q": "Noa has twice as many marbles as Dani. Together they have 36. How many does Dani have?",
    "o": [
     "⁦12⁩",
     "⁦18⁩",
@@ -1799,7 +1799,7 @@
    "he": "גיל אמא פי 3 מגיל בתה. יחד 48 שנים. בת כמה הבת?",
    "a": "⁦12⁩",
    "h": "345c7ff2",
-   "q": "Mom is 3 times as old as her daughter. Together they are 48. How old is the daughter?",
+   "q": "Mom is 3 times her daughter's age. Their ages add up to 48. How old is the daughter?",
    "o": [
     "⁦12⁩",
     "⁦16⁩",
@@ -2103,7 +2103,7 @@
    "he": "גרף: ק״מ לפי שעות. כמה ק״מ אחרי 3 שעות?",
    "a": "⁦180⁩",
    "h": "5e9a7681",
-   "q": "Graph: km by hours. How many km after 3 hours?",
+   "q": "Graph: km by hour. How many km after 3 hours?",
    "o": [
     "⁦180⁩",
     "⁦120⁩",
@@ -2116,7 +2116,7 @@
    "he": "גרף: ק״מ לפי שעות. אחרי כמה שעות עברו 120 ק״מ?",
    "a": "⁦2⁩",
    "h": "cd5f3666",
-   "q": "Graph: km by hours. After how many hours were 120 km covered?",
+   "q": "Graph: km by hour. After how many hours were 120 km covered?",
    "o": [
     "⁦2⁩",
     "⁦3⁩",
@@ -2129,7 +2129,7 @@
    "he": "גרף: ק״מ לפי שעות. כמה ק״מ בין שעה 1 לשעה 4?",
    "a": "⁦180⁩",
    "h": "ceceb21b",
-   "q": "Graph: km by hours. How many km between hour 1 and hour 4?",
+   "q": "Graph: km by hour. How many km between hour 1 and hour 4?",
    "o": [
     "⁦180⁩",
     "⁦240⁩",
@@ -2142,7 +2142,7 @@
    "he": "גרף: ק״מ לפי שעות. איזו נקודה על הגרף?",
    "a": "⁦(2,120)⁩",
    "h": "70a0b8ac",
-   "q": "Graph: km by hours. Which point is on the graph?",
+   "q": "Graph: km by hour. Which point is on the graph?",
    "o": [
     "⁦(2,120)⁩",
     "⁦(120,2)⁩",
@@ -2181,7 +2181,7 @@
    "he": "גרף: חום לפי שעה. בכמה מעלות התחמם בין 2 ל-8?",
    "a": "⁦12°⁩",
    "h": "2879b486",
-   "q": "Graph: temperature by hour. How many degrees warmer did it get from 2 to 8?",
+   "q": "Graph: temperature by hour. How many degrees warmer did it get from hour 2 to hour 8?",
    "o": [
     "⁦12°⁩",
     "⁦4°⁩",
@@ -2458,7 +2458,7 @@
    "he": "בריכה מתמלאת 20 ליטר בשעה. כמה ליטר אחרי 3 שעות?",
    "a": "⁦60⁩",
    "h": "7cde4aa9",
-   "q": "A pool fills with 20 L per hour. How many liters after 3 hours?",
+   "q": "A pool fills at 20 L per hour. How many liters after 3 hours?",
    "o": [
     "⁦60⁩",
     "⁦23⁩",
@@ -2594,7 +2594,7 @@
    ],
    "x": "All the points are at the same height",
    "sc": {
-    "10": "Speed",
+    "10": "km/h",
     "11": "Hour"
    }
   },
@@ -3429,7 +3429,7 @@
     "Equal",
     "Larger for the rectangle",
     "Larger for the parallelogram",
-    "Impossible to tell"
+    "Can't tell"
    ],
    "x": "In both: base times height",
    "sc": {
@@ -3877,7 +3877,7 @@
    "he": "חיצונית ⁦100°⁩, שתי הרחוקות שוות. כל אחת?",
    "a": "⁦50°⁩",
    "h": "768070b6",
-   "q": "An exterior angle is 100° and the two remote angles are equal. What is each?",
+   "q": "An exterior angle is 100° and the two remote interior angles are equal. What is each?",
    "o": [
     "⁦50°⁩",
     "⁦80°⁩",
@@ -4146,7 +4146,7 @@
     "⁦290°⁩",
     "⁦20°⁩"
    ],
-   "x": "Neighboring angles in a parallelogram → 180-70=110",
+   "x": "Consecutive angles in a parallelogram add to 180°: 180-70=110",
    "sc": {
     "0": "Parallelogram"
    }
@@ -4233,12 +4233,12 @@
    "he": "זוויות קודקודיות הן…",
    "a": "שוות זו לזו",
    "h": "56fb33ce",
-   "q": "Vertical angles are…",
+   "q": "Vertical angles…",
    "o": [
-    "Equal to each other",
+    "Are equal",
     "Add up to 180°",
     "Add up to 90°",
-    "Always right angles"
+    "Are always right angles"
    ],
    "x": "Vertical angles are always equal",
    "sc": {
@@ -4352,12 +4352,12 @@
    "he": "ישרים מקבילים וחותך: זוויות מתאימות הן…",
    "a": "שוות",
    "h": "014dad1b",
-   "q": "Parallel lines and a transversal: corresponding angles are…",
+   "q": "Parallel lines and a transversal: corresponding angles…",
    "o": [
-    "Equal",
+    "Are equal",
     "Add up to 180°",
     "Add up to 90°",
-    "Always right angles"
+    "Are always right angles"
    ],
    "x": "Between parallel lines, corresponding angles are equal",
    "sc": {
@@ -4368,12 +4368,12 @@
    "he": "ישרים מקבילים וחותך: זוויות מתחלפות הן…",
    "a": "שוות",
    "h": "eed21683",
-   "q": "Parallel lines and a transversal: alternate angles are…",
+   "q": "Parallel lines and a transversal: alternate angles…",
    "o": [
-    "Equal",
+    "Are equal",
     "Add up to 180°",
     "Add up to 90°",
-    "Always right angles"
+    "Are always right angles"
    ],
    "x": "Between parallel lines, alternate angles are equal",
    "sc": {

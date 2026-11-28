@@ -1,0 +1,3112 @@
+{
+ "set": {
+  "name": "Science – Grade 1",
+  "title": "Weather · Senses · Plants and animals · Living and non-living",
+  "tags": [
+   "Weather",
+   "Energy",
+   "The senses",
+   "Health",
+   "Seasons",
+   "Day and night",
+   "Plants",
+   "Animals",
+   "Living and non-living",
+   "Properties of objects",
+   "Technology"
+  ]
+ },
+ "labels": {
+  "מזג אוויר וטמפרטורה": "Weather and temperature",
+  "אנרגיה: אור, חום וחשמל": "Energy: light, heat and electricity",
+  "החושים": "The senses",
+  "אורח חיים בריא": "Healthy living",
+  "עונות השנה": "The seasons",
+  "יום ולילה ותופעות חוזרות": "Day and night and things that repeat",
+  "צמחים": "Plants",
+  "בעלי חיים": "Animals",
+  "חי ודומם": "Living and non-living",
+  "תכונות של חפצים: קשה ורך, שקוף ואטום": "Properties of objects: hard and soft, transparent and opaque",
+  "טכנולוגיה: מענה לצרכים": "Technology: meeting our needs",
+  "איך מזג האוויר?": "What is the weather like?",
+  "מדחום ובגדים": "Thermometers and clothes",
+  "אור וחום": "Light and heat",
+  "חשמל בבטחה": "Using electricity safely",
+  "חמשת החושים": "The five senses",
+  "מה מרגישים?": "What do we sense?",
+  "אוכלים בריא": "Eating healthy",
+  "גוף נקי ופעיל": "A clean and active body",
+  "ארבע העונות": "The four seasons",
+  "עונות בישראל": "Seasons in Israel",
+  "יום ולילה": "Day and night",
+  "דברים שחוזרים": "Things that repeat",
+  "חלקי הצמח": "Parts of a plant",
+  "צמח גדל": "A plant grows",
+  "גוף בעלי החיים": "Animal bodies",
+  "בית, אוכל וגורים": "Homes, food and babies",
+  "חי או דומם?": "Living or non-living?",
+  "ממיינים: חי ודומם": "Sorting: living and non-living",
+  "קשה או רך?": "Hard or soft?",
+  "שקוף או אטום?": "Transparent or opaque?",
+  "כלים ושימושים": "Tools and their uses",
+  "המצאות וצרכים": "Inventions and needs",
+  "חזרה": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "איך מזג האוויר בתמונה?",
+   "a": "גשום",
+   "h": "b9ee651c",
+   "q": "What is the weather like in the picture?",
+   "o": [
+    "Rainy",
+    "Sunny",
+    "Snowy",
+    "Very hot"
+   ],
+   "x": "It is raining – rainy weather"
+  },
+  {
+   "he": "איך מזג האוויר בתמונה?",
+   "a": "מושלג",
+   "h": "f1c90a43",
+   "q": "What is the weather like in the picture?",
+   "o": [
+    "Snowy",
+    "Sunny",
+    "Rainy",
+    "Very hot"
+   ],
+   "x": "It is snowing – snowy weather"
+  },
+  {
+   "he": "מה יש בחוץ?",
+   "a": "רוח חזקה",
+   "h": "21f73d30",
+   "q": "What is happening outside?",
+   "o": [
+    "Strong wind",
+    "Snow",
+    "A rainbow",
+    "Hot sun"
+   ],
+   "x": "The wind blows the leaves around"
+  },
+  {
+   "he": "מה רואים בשמיים בסערה?",
+   "a": "ברק",
+   "h": "7621a395",
+   "q": "What do we see in the sky in a storm?",
+   "o": [
+    "Lightning",
+    "A rainbow",
+    "The moon",
+    "The sun"
+   ],
+   "x": "A storm has lightning and thunder"
+  },
+  {
+   "he": "מתי רואים קשת בענן?",
+   "a": "שמש אחרי גשם",
+   "h": "4c28ab0a",
+   "q": "When do we see a rainbow?",
+   "o": [
+    "Sun after rain",
+    "On a dark night",
+    "When it snows",
+    "When it is foggy"
+   ],
+   "x": "Sunlight passes through the raindrops"
+  },
+  {
+   "he": "יש עננים כהים. מה יקרה?",
+   "a": "אולי יירד גשם",
+   "h": "c6c9f48b",
+   "q": "There are dark clouds. What will happen?",
+   "o": [
+    "It may rain",
+    "It gets very hot",
+    "Night comes",
+    "Summer comes"
+   ],
+   "x": "Dark clouds usually bring rain"
+  },
+  {
+   "he": "איזה מזג אוויר הכי מתאים לים?",
+   "a": "חם ושמשי",
+   "h": "5e8f36d7",
+   "q": "Which weather is best for the beach?",
+   "o": [
+    "Hot and sunny",
+    "Cold and rainy",
+    "Stormy",
+    "Snowy"
+   ],
+   "x": "We go to the beach when it is hot and sunny"
+  },
+  {
+   "he": "מה קורה לאיש השלג בשמש?",
+   "a": "הוא נמס",
+   "h": "92dc3520",
+   "q": "What happens to a snowman in the sun?",
+   "o": [
+    "It melts",
+    "It grows",
+    "It freezes",
+    "Nothing"
+   ],
+   "x": "In the heat, snow melts and turns into water"
+  },
+  {
+   "he": "מה משאיר הגשם על המדרכה?",
+   "a": "שלוליות",
+   "h": "d345f70b",
+   "q": "What does rain leave on the sidewalk?",
+   "o": [
+    "Puddles",
+    "Snow",
+    "Sand",
+    "Leaves"
+   ],
+   "x": "Rainwater collects in puddles"
+  },
+  {
+   "he": "איפה בישראל יורד לפעמים שלג?",
+   "a": "בהר החרמון",
+   "h": "1014b29d",
+   "q": "Where in Israel does it sometimes snow?",
+   "o": [
+    "On Mount Hermon",
+    "At the Dead Sea",
+    "In Eilat",
+    "On the beach"
+   ],
+   "x": "Mount Hermon is Israel's highest mountain"
+  },
+  {
+   "he": "במה מודדים כמה חם בחוץ?",
+   "a": "מדחום",
+   "h": "eca7bca4",
+   "q": "What do we use to measure how hot it is?",
+   "o": [
+    "A thermometer",
+    "A ruler",
+    "A clock",
+    "A scale"
+   ],
+   "x": "A thermometer measures temperature"
+  },
+  {
+   "he": "המדחום מראה מספר גבוה. איך בחוץ?",
+   "a": "חם",
+   "h": "3a5cd27a",
+   "q": "The thermometer shows a high number. What is it like outside?",
+   "o": [
+    "Hot",
+    "Cold",
+    "Snowy",
+    "Frozen"
+   ],
+   "x": "A high number on the thermometer – hot"
+  },
+  {
+   "he": "המדחום מראה מספר נמוך. איך בחוץ?",
+   "a": "קר",
+   "h": "dda8405a",
+   "q": "The thermometer shows a low number. What is it like outside?",
+   "o": [
+    "Cold",
+    "Hot",
+    "Very hot",
+    "Heat wave"
+   ],
+   "x": "A low number on the thermometer – cold"
+  },
+  {
+   "he": "באיזה מזג אוויר לובשים מעיל?",
+   "a": "קר",
+   "h": "e9f7e175",
+   "q": "In what weather do we wear a coat?",
+   "o": [
+    "Cold",
+    "Very hot",
+    "Sunny and hot",
+    "Heat wave"
+   ],
+   "x": "A coat keeps us warm in the cold"
+  },
+  {
+   "he": "מה שמים על הידיים כשקר?",
+   "a": "כפפות",
+   "h": "ce652853",
+   "q": "What do we wear on our hands when it is cold?",
+   "o": [
+    "Gloves",
+    "Sunglasses",
+    "Sandals",
+    "A straw hat"
+   ],
+   "x": "Gloves keep our hands warm"
+  },
+  {
+   "he": "איזו חולצה לובשים ביום חם?",
+   "a": "חולצה קצרה",
+   "h": "b3a829aa",
+   "q": "What do we wear on a hot day?",
+   "o": [
+    "A T-shirt",
+    "A wool sweater",
+    "A thick long shirt",
+    "A flannel shirt"
+   ],
+   "x": "On hot days we wear light clothes"
+  },
+  {
+   "he": "מה פותחים מעל הראש כשיורד גשם?",
+   "a": "מטרייה",
+   "h": "676ffae3",
+   "q": "What do we open over our heads in the rain?",
+   "o": [
+    "An umbrella",
+    "Sunglasses",
+    "A fan",
+    "Sunscreen"
+   ],
+   "x": "An umbrella keeps us dry"
+  },
+  {
+   "he": "מה מגן על הראש מהשמש?",
+   "a": "כובע",
+   "h": "aae270f3",
+   "q": "What protects our head from the sun?",
+   "o": [
+    "A hat",
+    "A scarf",
+    "Gloves",
+    "Boots"
+   ],
+   "x": "A hat protects the head from the sun"
+  },
+  {
+   "he": "מה נועלים כשיש שלוליות?",
+   "a": "מגפיים",
+   "h": "be9157ec",
+   "q": "What do we wear when there are puddles?",
+   "o": [
+    "Boots",
+    "Sandals",
+    "Flip-flops",
+    "Slippers"
+   ],
+   "x": "Boots keep our feet dry"
+  },
+  {
+   "he": "מה לובשים כשהולכים לשחות?",
+   "a": "בגד ים",
+   "h": "66b36648",
+   "q": "What do we wear to go swimming?",
+   "o": [
+    "A swimsuit",
+    "A coat",
+    "A scarf",
+    "Gloves"
+   ],
+   "x": "We wear a swimsuit in the sea and the pool"
+  },
+  {
+   "he": "מה נותן לכדור הארץ אור וחום?",
+   "a": "השמש",
+   "h": "89b6c59e",
+   "q": "What gives the Earth light and heat?",
+   "o": [
+    "The sun",
+    "The moon",
+    "The clouds",
+    "The rain"
+   ],
+   "x": "The sun lights and warms the Earth"
+  },
+  {
+   "he": "מה מהם מאיר וגם מחמם?",
+   "a": "אש",
+   "h": "ebe4f086",
+   "q": "Which of these gives light and also heat?",
+   "o": [
+    "Fire",
+    "Water",
+    "Snow",
+    "Ice"
+   ],
+   "x": "Fire gives light and heat"
+  },
+  {
+   "he": "איזה מכשיר חשמלי מאיר את החדר?",
+   "a": "מנורה",
+   "h": "da9d200c",
+   "q": "Which electric thing lights up the room?",
+   "o": [
+    "A lamp",
+    "A pillow",
+    "A blanket",
+    "A book"
+   ],
+   "x": "A lamp gives light"
+  },
+  {
+   "he": "איזה חפץ בבית מאיר בלי חשמל?",
+   "a": "נר",
+   "h": "4c734e53",
+   "q": "What at home gives light without electricity?",
+   "o": [
+    "A candle",
+    "A lamp",
+    "A TV",
+    "A computer"
+   ],
+   "x": "A candle burns with fire, without electricity"
+  },
+  {
+   "he": "מה מהם לא נותן אור?",
+   "a": "כרית",
+   "h": "59aa5c98",
+   "q": "Which of these does not give light?",
+   "o": [
+    "A pillow",
+    "A candle",
+    "A lamp",
+    "A flashlight"
+   ],
+   "x": "A pillow does not give light"
+  },
+  {
+   "he": "מה קורה לקרח בשמש?",
+   "a": "נמס",
+   "h": "42b6ff60",
+   "q": "What happens to ice in the sun?",
+   "o": [
+    "It melts",
+    "It grows",
+    "It turns to stone",
+    "It stays the same"
+   ],
+   "x": "The sun's heat melts the ice",
+   "sc": {
+    "1": "Ice"
+   }
+  },
+  {
+   "he": "מה קורה למים במקפיא?",
+   "a": "קופאים",
+   "h": "83e90847",
+   "q": "What happens to water in the freezer?",
+   "o": [
+    "It turns to ice",
+    "It boils",
+    "It disappears",
+    "It gets hot"
+   ],
+   "x": "The freezer is very cold, so the water freezes"
+  },
+  {
+   "he": "מה קורה למים בסיר על האש?",
+   "a": "רותחים",
+   "h": "28ca01d1",
+   "q": "What happens to water in a pot on the fire?",
+   "o": [
+    "It boils",
+    "It freezes",
+    "It turns to ice",
+    "It gets cold"
+   ],
+   "x": "The fire heats the water until it boils"
+  },
+  {
+   "he": "איזה צבע מתחמם הכי הרבה בשמש?",
+   "a": "שחור",
+   "h": "6734703d",
+   "q": "Which color gets the hottest in the sun?",
+   "o": [
+    "Black",
+    "White",
+    "Yellow",
+    "Light blue"
+   ],
+   "x": "Dark clothes get hotter in the sun than light ones"
+  },
+  {
+   "he": "מה נוצר כשהגוף מסתיר את אור השמש?",
+   "a": "צל",
+   "h": "879e080d",
+   "q": "What forms when your body blocks the sunlight?",
+   "o": [
+    "A shadow",
+    "A rainbow",
+    "Rain",
+    "The moon"
+   ],
+   "x": "The body blocks the light – a shadow forms"
+  },
+  {
+   "he": "מה נותן חשמל לשלט של הטלוויזיה?",
+   "a": "סוללה",
+   "h": "d173894a",
+   "q": "What gives electricity to the TV remote?",
+   "o": [
+    "A battery",
+    "Water",
+    "Sand",
+    "Paper"
+   ],
+   "x": "A remote has batteries inside"
+  },
+  {
+   "he": "לאן מחברים את הכבל של הקומקום?",
+   "a": "לשקע חשמל",
+   "h": "981fcb59",
+   "q": "Where do we plug in the kettle's cord?",
+   "o": [
+    "Into an outlet",
+    "Into a faucet",
+    "Into a window",
+    "Into a sink"
+   ],
+   "x": "We plug electric things into an outlet"
+  },
+  {
+   "he": "מה מהם עובד בחשמל?",
+   "a": "טלוויזיה",
+   "h": "4d396931",
+   "q": "Which of these works with electricity?",
+   "o": [
+    "A TV",
+    "A ball",
+    "A book",
+    "Scissors"
+   ],
+   "x": "The TV runs on electricity"
+  },
+  {
+   "he": "איזה חפץ לא צריך חשמל?",
+   "a": "עיפרון",
+   "h": "bc380b3a",
+   "q": "Which thing does not need electricity?",
+   "o": [
+    "A pencil",
+    "A TV",
+    "A computer",
+    "A fridge"
+   ],
+   "x": "We write with a pencil, without electricity"
+  },
+  {
+   "he": "מה אסור לעשות עם חשמל?",
+   "a": "לגעת בידיים רטובות",
+   "h": "1d3a7623",
+   "q": "What must we never do with electricity?",
+   "o": [
+    "Touch with wet hands",
+    "Turn off the light",
+    "Ask an adult",
+    "Turn on a lamp"
+   ],
+   "x": "Water and electricity together – dangerous!"
+  },
+  {
+   "he": "מה עושים כשרואים כבל חשמל קרוע?",
+   "a": "קוראים למבוגר",
+   "h": "f413ab96",
+   "q": "What do we do about a broken electric cord?",
+   "o": [
+    "Call an adult",
+    "Touch it",
+    "Pull it",
+    "Pour water on it"
+   ],
+   "x": "Don't touch it! Call an adult right away"
+  },
+  {
+   "he": "ליד אש ותנור חם אפשר…",
+   "a": "להיכוות",
+   "h": "3029b903",
+   "q": "Near fire and a hot oven, you can…",
+   "o": [
+    "Get burned",
+    "Freeze",
+    "Get wet",
+    "Fall asleep"
+   ],
+   "x": "Fire and ovens are very hot – be careful!"
+  },
+  {
+   "he": "מה עושים כשיוצאים מהחדר?",
+   "a": "מכבים את האור",
+   "h": "fb907aad",
+   "q": "What do we do when we leave the room?",
+   "o": [
+    "Turn off the light",
+    "Open the fridge",
+    "Turn on the TV",
+    "Turn on the oven"
+   ],
+   "x": "This way we save electricity"
+  },
+  {
+   "he": "מה נותן לגוף שלנו אנרגיה?",
+   "a": "אוכל",
+   "h": "e92193e0",
+   "q": "What gives our body energy?",
+   "o": [
+    "Food",
+    "A battery",
+    "An outlet",
+    "Fuel"
+   ],
+   "x": "Food gives the body strength"
+  },
+  {
+   "he": "מה מחמם אוכל בעזרת חשמל?",
+   "a": "מיקרוגל",
+   "h": "782cb4d3",
+   "q": "What heats food with electricity?",
+   "o": [
+    "A microwave",
+    "A fridge",
+    "A fan",
+    "A lamp"
+   ],
+   "x": "A microwave heats food"
+  },
+  {
+   "he": "בעזרת מה רואים?",
+   "a": "עיניים",
+   "h": "2ba5b1c1",
+   "q": "What do we see with?",
+   "o": [
+    "Eyes",
+    "Ears",
+    "Nose",
+    "Tongue"
+   ],
+   "x": "We see with our eyes – the sense of sight"
+  },
+  {
+   "he": "בעזרת מה שומעים?",
+   "a": "אוזניים",
+   "h": "0675fefc",
+   "q": "What do we hear with?",
+   "o": [
+    "Ears",
+    "Eyes",
+    "Hands",
+    "Nose"
+   ],
+   "x": "We hear with our ears – the sense of hearing"
+  },
+  {
+   "he": "בעזרת מה מריחים?",
+   "a": "אף",
+   "h": "d70aabd4",
+   "q": "What do we smell with?",
+   "o": [
+    "Nose",
+    "Mouth",
+    "Eyes",
+    "Ears"
+   ],
+   "x": "We smell with our nose – the sense of smell"
+  },
+  {
+   "he": "בעזרת מה טועמים?",
+   "a": "לשון",
+   "h": "046233e7",
+   "q": "What do we taste with?",
+   "o": [
+    "Tongue",
+    "Nose",
+    "Ears",
+    "Legs"
+   ],
+   "x": "We taste with our tongue – the sense of taste"
+  },
+  {
+   "he": "בעזרת מה מרגישים שמשהו חם?",
+   "a": "עור",
+   "h": "31086f5a",
+   "q": "What do we use to feel that something is hot?",
+   "o": [
+    "Skin",
+    "Eyes",
+    "Ears",
+    "Nose"
+   ],
+   "x": "The sense of touch is in the skin"
+  },
+  {
+   "he": "איזה איבר בתמונה?",
+   "a": "אף",
+   "h": "35d695a6",
+   "q": "Which body part is in the picture?",
+   "o": [
+    "Nose",
+    "Ear",
+    "Eye",
+    "Tongue"
+   ],
+   "x": "This is a nose – we smell with it"
+  },
+  {
+   "he": "כמה חושים יש לנו?",
+   "a": "5",
+   "h": "6075cbda",
+   "q": "How many senses do we have?",
+   "o": [
+    "5",
+    "2",
+    "3",
+    "10"
+   ],
+   "x": "Sight, hearing, smell, taste and touch"
+  },
+  {
+   "he": "איזה חוש עובד בעיניים?",
+   "a": "ראייה",
+   "h": "535c9e42",
+   "q": "Which sense uses the eyes?",
+   "o": [
+    "Sight",
+    "Hearing",
+    "Smell",
+    "Taste"
+   ],
+   "x": "We see with our eyes – the sense of sight"
+  },
+  {
+   "he": "איזה חוש עובד בלשון?",
+   "a": "טעם",
+   "h": "4c869bdd",
+   "q": "Which sense uses the tongue?",
+   "o": [
+    "Taste",
+    "Sight",
+    "Hearing",
+    "Smell"
+   ],
+   "x": "We taste with our tongue – the sense of taste"
+  },
+  {
+   "he": "מה מהם אינו חוש?",
+   "a": "ריצה",
+   "h": "9558dd0c",
+   "q": "Which of these is not a sense?",
+   "o": [
+    "Running",
+    "Sight",
+    "Hearing",
+    "Taste"
+   ],
+   "x": "Running is moving, not a sense"
+  },
+  {
+   "he": "מה עושים כדי לדעת שהעוגה מתוקה?",
+   "a": "טועמים אותה",
+   "h": "730462c8",
+   "q": "How do we know the cake is sweet?",
+   "o": [
+    "We taste it",
+    "We hear it",
+    "We count it",
+    "We look at it"
+   ],
+   "x": "We feel sweetness on the tongue – the sense of taste"
+  },
+  {
+   "he": "איך יודעים שהשעון המעורר מצלצל?",
+   "a": "שומעים",
+   "h": "9806aeed",
+   "q": "How do we know the alarm clock is ringing?",
+   "o": [
+    "We hear it",
+    "We taste it",
+    "We smell it",
+    "We touch it"
+   ],
+   "x": "We hear ringing with our ears"
+  },
+  {
+   "he": "מה עושים כדי לדעת שהדובי רך?",
+   "a": "נוגעים בו",
+   "h": "4c688ead",
+   "q": "How do we know the teddy bear is soft?",
+   "o": [
+    "We touch it",
+    "We hear it",
+    "We smell it",
+    "We taste it"
+   ],
+   "x": "We feel softness by touch – the sense of touch"
+  },
+  {
+   "he": "איזה חוש עוזר לראות קשת?",
+   "a": "ראייה",
+   "h": "3797cc64",
+   "q": "Which sense helps us see a rainbow?",
+   "o": [
+    "Sight",
+    "Hearing",
+    "Taste",
+    "Smell"
+   ],
+   "x": "We see the colors with our eyes"
+  },
+  {
+   "he": "באיזה חוש מרגישים שהלימון חמוץ?",
+   "a": "טעם",
+   "h": "147e231b",
+   "q": "Which sense tells us a lemon is sour?",
+   "o": [
+    "Taste",
+    "Hearing",
+    "Sight",
+    "Touch"
+   ],
+   "x": "We feel sourness on the tongue"
+  },
+  {
+   "he": "באיזה חוש מרגישים שהקקטוס דוקר?",
+   "a": "מישוש",
+   "h": "df808edd",
+   "q": "Which sense tells us a cactus is prickly?",
+   "o": [
+    "Touch",
+    "Hearing",
+    "Taste",
+    "Smell"
+   ],
+   "x": "We feel prickly things with our skin"
+  },
+  {
+   "he": "איך יודעים שלפרח ריח טוב?",
+   "a": "מריחים אותו",
+   "h": "90647b66",
+   "q": "How do we know a flower has a nice scent?",
+   "o": [
+    "We smell it",
+    "We hear it",
+    "We taste it",
+    "We count it"
+   ],
+   "x": "We smell with our nose – the sense of smell"
+  },
+  {
+   "he": "מה עוזר למי שלא רואה טוב?",
+   "a": "משקפיים",
+   "h": "8b81a066",
+   "q": "What helps someone who can't see well?",
+   "o": [
+    "Glasses",
+    "Headphones",
+    "Gloves",
+    "A hat"
+   ],
+   "x": "Glasses help us see well"
+  },
+  {
+   "he": "מה מגן על העיניים מהשמש?",
+   "a": "משקפי שמש",
+   "h": "6b343136",
+   "q": "What protects our eyes from the sun?",
+   "o": [
+    "Sunglasses",
+    "Headphones",
+    "Gloves",
+    "A scarf"
+   ],
+   "x": "Sunglasses protect our eyes"
+  },
+  {
+   "he": "מה מזיק לעיניים?",
+   "a": "להסתכל ישר לשמש",
+   "h": "7a6d7b5d",
+   "q": "What is bad for our eyes?",
+   "o": [
+    "Staring at the sun",
+    "Sleeping at night",
+    "Eating carrots",
+    "Washing your face"
+   ],
+   "x": "Never look straight at the sun"
+  },
+  {
+   "he": "מה מהם הכי בריא?",
+   "a": "תפוח",
+   "h": "16209ad3",
+   "q": "Which of these is the healthiest?",
+   "o": [
+    "Apple",
+    "Candy",
+    "Chips",
+    "Cake"
+   ],
+   "x": "Fruits and vegetables are healthy food"
+  },
+  {
+   "he": "מה הכי טוב לשתות כשצמאים?",
+   "a": "מים",
+   "h": "2282bcb8",
+   "q": "What is best to drink when we are thirsty?",
+   "o": [
+    "Water",
+    "A sweet drink",
+    "Coffee",
+    "Soda"
+   ],
+   "x": "Water is the healthiest drink"
+  },
+  {
+   "he": "איזה ירק בתמונה?",
+   "a": "גזר",
+   "h": "fe61d532",
+   "q": "Which vegetable is in the picture?",
+   "o": [
+    "Carrot",
+    "Cucumber",
+    "Lettuce",
+    "Tomato"
+   ],
+   "x": "A carrot is an orange vegetable"
+  },
+  {
+   "he": "כמה פעמים כדאי לאכול פירות וירקות?",
+   "a": "בכל יום",
+   "h": "1379da39",
+   "q": "How often should we eat fruits and vegetables?",
+   "o": [
+    "Every day",
+    "Only on holidays",
+    "Once a year",
+    "Never"
+   ],
+   "x": "Fruits and vegetables keep us healthy"
+  },
+  {
+   "he": "מה כדאי לאכול רק מעט?",
+   "a": "ממתקים",
+   "h": "866be59d",
+   "q": "What should we eat only a little of?",
+   "o": [
+    "Sweets",
+    "Vegetables",
+    "Fruits",
+    "Whole-grain bread"
+   ],
+   "x": "Too much sugar harms our teeth and body"
+  },
+  {
+   "he": "מה עוזר לעצמות להיות חזקות?",
+   "a": "חלב",
+   "h": "c41fe4bd",
+   "q": "What helps our bones grow strong?",
+   "o": [
+    "Milk",
+    "Sweet drinks",
+    "Candy",
+    "Chips"
+   ],
+   "x": "Milk has calcium for our bones"
+  },
+  {
+   "he": "למה חשוב לאכול ארוחת בוקר?",
+   "a": "לקבל כוח ללמוד",
+   "h": "571f127a",
+   "q": "Why is it important to eat breakfast?",
+   "o": [
+    "To have energy",
+    "To feel tired",
+    "To be hungry",
+    "To sleep in class"
+   ],
+   "x": "Breakfast gives us energy for the day"
+  },
+  {
+   "he": "מה עושים לפרי לפני שאוכלים?",
+   "a": "שוטפים אותו",
+   "h": "d2e7a86d",
+   "q": "What do we do to fruit before eating it?",
+   "o": [
+    "Wash it",
+    "Throw it away",
+    "Freeze it",
+    "Paint it"
+   ],
+   "x": "We wash fruit with water before eating it"
+  },
+  {
+   "he": "מה מהם אינו ירק?",
+   "a": "תפוז",
+   "h": "ea8991f7",
+   "q": "Which of these is not a vegetable?",
+   "o": [
+    "Orange",
+    "Carrot",
+    "Broccoli",
+    "Lettuce"
+   ],
+   "x": "An orange is a fruit"
+  },
+  {
+   "he": "למה שותים הרבה ביום חם?",
+   "a": "הגוף מאבד מים",
+   "h": "b868dda2",
+   "q": "Why do we drink a lot on a hot day?",
+   "o": [
+    "The body loses water",
+    "To grow fast",
+    "To fall asleep",
+    "Because it is sweet"
+   ],
+   "x": "In the heat we sweat, so we need to drink"
+  },
+  {
+   "he": "מה עושים לפני האוכל?",
+   "a": "רוחצים ידיים",
+   "h": "73362afb",
+   "q": "What do we do before eating?",
+   "o": [
+    "Wash our hands",
+    "Sleep",
+    "Run",
+    "Exercise"
+   ],
+   "x": "We wash our hands with water and soap"
+  },
+  {
+   "he": "מה עושים אחרי השירותים?",
+   "a": "רוחצים ידיים",
+   "h": "cb6bf12f",
+   "q": "What do we do after using the toilet?",
+   "o": [
+    "Wash our hands",
+    "Eat",
+    "Sleep",
+    "Run"
+   ],
+   "x": "Always wash your hands after using the toilet"
+  },
+  {
+   "he": "במה רוחצים ידיים?",
+   "a": "מים וסבון",
+   "h": "0cb9e990",
+   "q": "What do we wash our hands with?",
+   "o": [
+    "Water and soap",
+    "Sand",
+    "Oil",
+    "Juice"
+   ],
+   "x": "Soap cleans away the dirt"
+  },
+  {
+   "he": "מתי מצחצחים שיניים?",
+   "a": "בבוקר ובערב",
+   "h": "770c211f",
+   "q": "When do we brush our teeth?",
+   "o": [
+    "Morning and evening",
+    "Once a week",
+    "Only on holidays",
+    "Only in summer"
+   ],
+   "x": "We brush twice a day – morning and evening"
+  },
+  {
+   "he": "מה הגוף צריך בלילה?",
+   "a": "שינה",
+   "h": "9907dbbd",
+   "q": "What does the body need at night?",
+   "o": [
+    "Sleep",
+    "Sweets",
+    "A computer",
+    "TV"
+   ],
+   "x": "While we sleep, the body rests and grows"
+  },
+  {
+   "he": "מה מזיק לגוף?",
+   "a": "לשבת כל היום",
+   "h": "8cee7bab",
+   "q": "What is bad for the body?",
+   "o": [
+    "Sitting all day",
+    "Playing outside",
+    "Sleeping at night",
+    "Eating vegetables"
+   ],
+   "x": "The body needs to move – sitting all day weakens it"
+  },
+  {
+   "he": "מה עושים כשמשתעלים?",
+   "a": "מכסים את הפה",
+   "h": "c5a01cf1",
+   "q": "What do we do when we cough?",
+   "o": [
+    "Cover our mouth",
+    "Shout loudly",
+    "Touch our friends",
+    "Sing a song"
+   ],
+   "x": "We cover our mouth so others don't get sick"
+  },
+  {
+   "he": "מה מורחים לפני שיוצאים לשמש?",
+   "a": "קרם הגנה",
+   "h": "9ce5ad0d",
+   "q": "What do we put on our skin before going outside?",
+   "o": [
+    "Sunscreen",
+    "Honey",
+    "Soap",
+    "Toothpaste"
+   ],
+   "x": "Sunscreen protects our skin"
+  },
+  {
+   "he": "מה חובשים כשרוכבים על אופניים?",
+   "a": "קסדה",
+   "h": "0478e339",
+   "q": "What do we wear when riding a bike?",
+   "o": [
+    "A helmet",
+    "A straw hat",
+    "A crown",
+    "A scarf"
+   ],
+   "x": "A helmet protects our head"
+  },
+  {
+   "he": "איזו פעילות מחזקת את הגוף?",
+   "a": "שחייה",
+   "h": "58d76b13",
+   "q": "Which activity makes the body stronger?",
+   "o": [
+    "Swimming",
+    "Watching TV",
+    "Playing computer games",
+    "Sleeping in the day"
+   ],
+   "x": "Swimming is exercise for the body"
+  },
+  {
+   "he": "כמה עונות יש בשנה?",
+   "a": "4",
+   "h": "841ae40e",
+   "q": "How many seasons are in a year?",
+   "o": [
+    "4",
+    "2",
+    "3",
+    "12"
+   ],
+   "x": "Fall, winter, spring and summer"
+  },
+  {
+   "he": "באיזו עונה יורד הכי הרבה גשם?",
+   "a": "חורף",
+   "h": "e0b143df",
+   "q": "Which season has the most rain?",
+   "o": [
+    "Winter",
+    "Summer",
+    "Spring",
+    "Fall"
+   ],
+   "x": "Winter is cold and rainy"
+  },
+  {
+   "he": "באיזו עונה הכי חם?",
+   "a": "קיץ",
+   "h": "d2a9b0e6",
+   "q": "Which season is the hottest?",
+   "o": [
+    "Summer",
+    "Winter",
+    "Spring",
+    "Fall"
+   ],
+   "x": "Summer is very hot"
+  },
+  {
+   "he": "באיזו עונה פורחים הכי הרבה פרחים?",
+   "a": "אביב",
+   "h": "2f950c8b",
+   "q": "In which season do the most flowers bloom?",
+   "o": [
+    "Spring",
+    "Winter",
+    "Summer",
+    "Fall"
+   ],
+   "x": "In spring everything blooms"
+  },
+  {
+   "he": "באיזו עונה נושרים העלים מהעצים?",
+   "a": "סתיו",
+   "h": "54db7e65",
+   "q": "In which season do trees lose their leaves?",
+   "o": [
+    "Fall",
+    "Spring",
+    "Summer",
+    "Winter"
+   ],
+   "x": "In fall many leaves drop from the trees"
+  },
+  {
+   "he": "איזו עונה באה אחרי החורף?",
+   "a": "אביב",
+   "h": "0e1daa8a",
+   "q": "Which season comes after winter?",
+   "o": [
+    "Spring",
+    "Summer",
+    "Fall",
+    "Winter again"
+   ],
+   "x": "Fall → winter → spring → summer"
+  },
+  {
+   "he": "איזו עונה באה אחרי הקיץ?",
+   "a": "סתיו",
+   "h": "8a2d77b2",
+   "q": "Which season comes after summer?",
+   "o": [
+    "Fall",
+    "Spring",
+    "Winter",
+    "Summer again"
+   ],
+   "x": "After the hot summer comes fall"
+  },
+  {
+   "he": "איזו עונה באה לפני החורף?",
+   "a": "סתיו",
+   "h": "2b90bc8a",
+   "q": "Which season comes before winter?",
+   "o": [
+    "Fall",
+    "Spring",
+    "Summer",
+    "Winter again"
+   ],
+   "x": "Fall → winter"
+  },
+  {
+   "he": "מה הסדר הנכון של העונות?",
+   "a": "סתיו, חורף, אביב",
+   "h": "9f1f4692",
+   "q": "What is the right order of the seasons?",
+   "o": [
+    "Fall, winter, spring",
+    "Winter, fall, spring",
+    "Summer, spring, winter",
+    "Spring, winter, summer"
+   ],
+   "x": "Fall → winter → spring → summer"
+  },
+  {
+   "he": "מה מהם אינו עונה?",
+   "a": "שבוע",
+   "h": "6bb922ca",
+   "q": "Which of these is not a season?",
+   "o": [
+    "Week",
+    "Summer",
+    "Winter",
+    "Spring"
+   ],
+   "x": "A week is seven days, not a season"
+  },
+  {
+   "he": "באיזו עונה לובשים מעיל?",
+   "a": "חורף",
+   "h": "64cd1ea7",
+   "q": "In which season do we wear a coat?",
+   "o": [
+    "Winter",
+    "Summer",
+    "Spring",
+    "Fall"
+   ],
+   "x": "Winter is cold – we wear a coat"
+  },
+  {
+   "he": "באיזו עונה החופש הגדול?",
+   "a": "קיץ",
+   "h": "96c64f96",
+   "q": "In which season is the long school vacation?",
+   "o": [
+    "Summer",
+    "Winter",
+    "Spring",
+    "Fall"
+   ],
+   "x": "The long vacation is in summer, in July and August"
+  },
+  {
+   "he": "באיזו עונה יורד הגשם הראשון?",
+   "a": "סתיו",
+   "h": "ee81724f",
+   "q": "In which season is the first rain?",
+   "o": [
+    "Fall",
+    "Summer",
+    "Spring",
+    "Winter"
+   ],
+   "x": "The first rain comes in fall"
+  },
+  {
+   "he": "באיזו עונה הימים הכי ארוכים?",
+   "a": "קיץ",
+   "h": "1ff35cd4",
+   "q": "In which season are the days the longest?",
+   "o": [
+    "Summer",
+    "Winter",
+    "Fall",
+    "Spring"
+   ],
+   "x": "In summer the sun sets late"
+  },
+  {
+   "he": "באיזו עונה הלילות הכי ארוכים?",
+   "a": "חורף",
+   "h": "ba7cbd47",
+   "q": "In which season are the nights the longest?",
+   "o": [
+    "Winter",
+    "Summer",
+    "Spring",
+    "Fall"
+   ],
+   "x": "In winter it gets dark early"
+  },
+  {
+   "he": "באיזו עונה יש שלג על החרמון?",
+   "a": "חורף",
+   "h": "5c3fe795",
+   "q": "In which season is there snow on Mount Hermon?",
+   "o": [
+    "Winter",
+    "Summer",
+    "Spring",
+    "Fall"
+   ],
+   "x": "Winter is cold, and sometimes it snows"
+  },
+  {
+   "he": "איזה בגד מתאים לחורף?",
+   "a": "צעיף",
+   "h": "218b1379",
+   "q": "Which piece of clothing is right for winter?",
+   "o": [
+    "A scarf",
+    "A swimsuit",
+    "Sandals",
+    "A straw hat"
+   ],
+   "x": "A scarf keeps our neck warm"
+  },
+  {
+   "he": "איזה פרי אוכלים בעיקר בקיץ?",
+   "a": "אבטיח",
+   "h": "358401e7",
+   "q": "Which fruit do we eat mostly in summer?",
+   "o": [
+    "Watermelon",
+    "Orange",
+    "Clementine",
+    "Pomegranate"
+   ],
+   "x": "Watermelons ripen in summer"
+  },
+  {
+   "he": "איזה פרי מבשיל בחורף?",
+   "a": "תפוז",
+   "h": "831bff29",
+   "q": "Which fruit ripens in winter?",
+   "o": [
+    "Orange",
+    "Watermelon",
+    "Grapes",
+    "Fig"
+   ],
+   "x": "Oranges ripen in winter"
+  },
+  {
+   "he": "מה מאיר את השמיים ביום?",
+   "a": "השמש",
+   "h": "1758df80",
+   "q": "What lights up the sky during the day?",
+   "o": [
+    "The sun",
+    "The moon",
+    "The stars",
+    "A flashlight"
+   ],
+   "x": "During the day the sun shines"
+  },
+  {
+   "he": "מה רואים בשמיים בלילה?",
+   "a": "ירח וכוכבים",
+   "h": "58c1c9a3",
+   "q": "What do we see in the sky at night?",
+   "o": [
+    "The moon and stars",
+    "A strong sun",
+    "A rainbow",
+    "A rising sun"
+   ],
+   "x": "At night we see the moon and stars"
+  },
+  {
+   "he": "מה מתחלף בכל יממה?",
+   "a": "יום ולילה",
+   "h": "187d36f6",
+   "q": "What takes turns every 24 hours?",
+   "o": [
+    "Day and night",
+    "Summer and winter",
+    "My birthday",
+    "The holidays"
+   ],
+   "x": "Every 24 hours there is a day and a night"
+  },
+  {
+   "he": "איך קוראים ליום ולילה ביחד?",
+   "a": "יממה",
+   "h": "758ba233",
+   "q": "Morning, noon, evening and night together make…",
+   "o": [
+    "One day",
+    "One week",
+    "One month",
+    "One year"
+   ],
+   "x": "Day and night together make one whole day"
+  },
+  {
+   "he": "כמה שעות יש ביממה?",
+   "a": "24",
+   "h": "297328c9",
+   "q": "How many hours are in a day and a night?",
+   "o": [
+    "24",
+    "12",
+    "10",
+    "7"
+   ],
+   "x": "A day and a night have 24 hours"
+  },
+  {
+   "he": "איפה השמש זורחת?",
+   "a": "במזרח",
+   "h": "c22adc32",
+   "q": "Where does the sun rise?",
+   "o": [
+    "In the east",
+    "In the west",
+    "In the north",
+    "In the south"
+   ],
+   "x": "The sun rises in the east and sets in the west"
+  },
+  {
+   "he": "מתי השמש שוקעת?",
+   "a": "בערב",
+   "h": "7e36ca93",
+   "q": "When does the sun set?",
+   "o": [
+    "In the evening",
+    "In the morning",
+    "At noon",
+    "At midnight"
+   ],
+   "x": "In the evening the sun sets and it gets dark"
+  },
+  {
+   "he": "מה הסדר הנכון ביום?",
+   "a": "בוקר, צהריים, ערב",
+   "h": "eb0f424d",
+   "q": "What is the right order of the day?",
+   "o": [
+    "Morning, noon, evening",
+    "Evening, noon, morning",
+    "Noon, morning, evening",
+    "Morning, evening, noon"
+   ],
+   "x": "Morning → noon → evening → night"
+  },
+  {
+   "he": "מה עושים בדרך כלל בלילה?",
+   "a": "ישנים",
+   "h": "299c46f7",
+   "q": "What do we usually do at night?",
+   "o": [
+    "Sleep",
+    "Go to school",
+    "Play in the park",
+    "Go to the beach"
+   ],
+   "x": "At night it is dark – time to sleep"
+  },
+  {
+   "he": "איזה בעל חיים ער בלילה?",
+   "a": "ינשוף",
+   "h": "d2759e69",
+   "q": "Which animal is awake at night?",
+   "o": [
+    "An owl",
+    "A rooster",
+    "A butterfly",
+    "A bee"
+   ],
+   "x": "The owl hunts at night and sleeps by day"
+  },
+  {
+   "he": "כמה ימים יש בשבוע?",
+   "a": "7",
+   "h": "7770a8dc",
+   "q": "How many days are in a week?",
+   "o": [
+    "7",
+    "5",
+    "10",
+    "30"
+   ],
+   "x": "Sunday to Saturday – 7 days"
+  },
+  {
+   "he": "איזה יום בא אחרי שישי?",
+   "a": "שבת",
+   "h": "a662f4d3",
+   "q": "Which day comes after Friday?",
+   "o": [
+    "Saturday",
+    "Sunday",
+    "Thursday",
+    "Monday"
+   ],
+   "x": "Friday → Saturday → Sunday"
+  },
+  {
+   "he": "איזה יום בא אחרי שלישי?",
+   "a": "רביעי",
+   "h": "39de7aee",
+   "q": "Which day comes after Tuesday?",
+   "o": [
+    "Wednesday",
+    "Monday",
+    "Thursday",
+    "Sunday"
+   ],
+   "x": "Tuesday → Wednesday"
+  },
+  {
+   "he": "כמה חודשים יש בשנה?",
+   "a": "12",
+   "h": "1ec1c3b6",
+   "q": "How many months are in a year?",
+   "o": [
+    "12",
+    "4",
+    "7",
+    "10"
+   ],
+   "x": "A year has 12 months"
+  },
+  {
+   "he": "מה חוזר בכל שנה?",
+   "a": "יום ההולדת",
+   "h": "ef321241",
+   "q": "What comes back every year?",
+   "o": [
+    "My birthday",
+    "When I was born",
+    "My first tooth",
+    "My first step"
+   ],
+   "x": "Your birthday comes back every year"
+  },
+  {
+   "he": "איך הירח נראה בתמונה?",
+   "a": "ירח מלא",
+   "h": "71d26a6c",
+   "q": "What does the moon look like in the picture?",
+   "o": [
+    "A full moon",
+    "A half moon",
+    "A thin moon",
+    "No moon"
+   ],
+   "x": "A whole circle – a full moon"
+  },
+  {
+   "he": "כל כמה זמן יש ירח מלא?",
+   "a": "פעם בחודש",
+   "h": "7d8680e6",
+   "q": "How often is there a full moon?",
+   "o": [
+    "Once a month",
+    "Every night",
+    "Once a year",
+    "Never"
+   ],
+   "x": "The moon's shape repeats every month"
+  },
+  {
+   "he": "מה בא אחרי הלילה?",
+   "a": "בוקר",
+   "h": "328d774c",
+   "q": "What comes after night?",
+   "o": [
+    "Morning",
+    "Evening",
+    "Noon",
+    "Sunset"
+   ],
+   "x": "Night → morning – a new day"
+  },
+  {
+   "he": "כמה פעמים ביממה השמש זורחת?",
+   "a": "פעם אחת",
+   "h": "4b4d33cf",
+   "q": "How many times a day does the sun rise?",
+   "o": [
+    "Once",
+    "Twice",
+    "Three times",
+    "Never"
+   ],
+   "x": "The sun rises once, in the morning"
+  },
+  {
+   "he": "איזה חלק של הצמח מתחת לאדמה?",
+   "a": "שורש",
+   "h": "48613f5c",
+   "q": "Which part of a plant is under the ground?",
+   "o": [
+    "Root",
+    "Flower",
+    "Leaf",
+    "Fruit"
+   ],
+   "x": "The roots are in the soil"
+  },
+  {
+   "he": "מה עושים השורשים?",
+   "a": "סופגים מים",
+   "h": "865bfce8",
+   "q": "What do roots do?",
+   "o": [
+    "Take in water",
+    "Make flowers",
+    "Fly in the wind",
+    "Light up at night"
+   ],
+   "x": "Roots take in water from the soil"
+  },
+  {
+   "he": "איזה חלק מחזיק את הפרח זקוף?",
+   "a": "גבעול",
+   "h": "53746889",
+   "q": "Which part holds a flower upright?",
+   "o": [
+    "Stem",
+    "Root",
+    "Fruit",
+    "Seed"
+   ],
+   "x": "The stem holds the flower and carries water"
+  },
+  {
+   "he": "איך נקרא הגבעול העבה של העץ?",
+   "a": "גזע",
+   "h": "5c4ee3ad",
+   "q": "What is the thick stem of a tree called?",
+   "o": [
+    "Trunk",
+    "Root",
+    "Leaf",
+    "Flower"
+   ],
+   "x": "A tree has a strong trunk"
+  },
+  {
+   "he": "באיזה צבע רוב העלים?",
+   "a": "ירוק",
+   "h": "98274d42",
+   "q": "What color are most leaves?",
+   "o": [
+    "Green",
+    "Blue",
+    "Black",
+    "Purple"
+   ],
+   "x": "Most leaves are green"
+  },
+  {
+   "he": "מאיזה חלק של הצמח מתפתח הפרי?",
+   "a": "מהפרח",
+   "h": "c27b0257",
+   "q": "Which part of a plant does fruit grow from?",
+   "o": [
+    "The flower",
+    "The root",
+    "The trunk",
+    "The leaf"
+   ],
+   "x": "The flower turns into a fruit"
+  },
+  {
+   "he": "מה יש בתוך האבטיח?",
+   "a": "זרעים",
+   "h": "5c5f0157",
+   "q": "What is inside a watermelon?",
+   "o": [
+    "Seeds",
+    "Roots",
+    "Rocks",
+    "Leaves"
+   ],
+   "x": "There are seeds inside the fruit",
+   "sc": {
+    "0": "🍉"
+   }
+  },
+  {
+   "he": "איזה חלק של הגזר אוכלים?",
+   "a": "שורש",
+   "h": "75220740",
+   "q": "Which part of a carrot do we eat?",
+   "o": [
+    "Root",
+    "Flower",
+    "Fruit",
+    "Seed"
+   ],
+   "x": "A carrot is a root"
+  },
+  {
+   "he": "איזה חלק של החסה אוכלים?",
+   "a": "עלים",
+   "h": "c68ca9c3",
+   "q": "Which part of lettuce do we eat?",
+   "o": [
+    "Leaves",
+    "Root",
+    "Seed",
+    "Flower"
+   ],
+   "x": "We eat the leaves of lettuce"
+  },
+  {
+   "he": "מה מהם אינו חלק של צמח?",
+   "a": "כנף",
+   "h": "752b933a",
+   "q": "Which of these is not part of a plant?",
+   "o": [
+    "Wing",
+    "Root",
+    "Stem",
+    "Leaf"
+   ],
+   "x": "Birds have wings, but plants don't"
+  },
+  {
+   "he": "ממה גדל צמח חדש?",
+   "a": "זרע",
+   "h": "fa36a184",
+   "q": "What does a new plant grow from?",
+   "o": [
+    "Seed",
+    "Stone",
+    "Paper",
+    "Plastic"
+   ],
+   "x": "A new plant grows from a seed"
+  },
+  {
+   "he": "מה צמח צריך כדי לגדול?",
+   "a": "מים ואור",
+   "h": "5537a365",
+   "q": "What does a plant need to grow?",
+   "o": [
+    "Water and light",
+    "Candy",
+    "Darkness",
+    "Plastic"
+   ],
+   "x": "Plants need water, light and air"
+  },
+  {
+   "he": "מה הסדר הנכון בגדילת צמח?",
+   "a": "זרע, נבט, צמח",
+   "h": "ede8df07",
+   "q": "What is the right order as a plant grows?",
+   "o": [
+    "Seed, sprout, plant",
+    "Sprout, seed, plant",
+    "Plant, sprout, seed",
+    "Seed, plant, sprout"
+   ],
+   "x": "Seed → sprout → plant"
+  },
+  {
+   "he": "מה יקרה לצמח בלי מים?",
+   "a": "יתייבש",
+   "h": "06ece498",
+   "q": "What happens to a plant without water?",
+   "o": [
+    "It dries up",
+    "It grows fast",
+    "It blooms",
+    "It makes fruit"
+   ],
+   "x": "Without water, a plant wilts and dries up"
+  },
+  {
+   "he": "מה יקרה לצמח בחושך?",
+   "a": "ייחלש ויצהיב",
+   "h": "861372b4",
+   "q": "What happens to a plant kept in the dark?",
+   "o": [
+    "Grows weak and yellow",
+    "Grows and blooms",
+    "Grows strong and green",
+    "Blooms and makes fruit"
+   ],
+   "x": "Without light, a plant gets weak and turns yellow"
+  },
+  {
+   "he": "מי עוזר לפרח להפוך לפרי?",
+   "a": "דבורה",
+   "h": "3df21a6f",
+   "q": "Who helps a flower turn into a fruit?",
+   "o": [
+    "Bee",
+    "Snake",
+    "Fish",
+    "Cat"
+   ],
+   "x": "Bees carry pollen from flower to flower"
+  },
+  {
+   "he": "איזה צמח גדל במדבר?",
+   "a": "קקטוס",
+   "h": "680b11b4",
+   "q": "Which plant grows in the desert?",
+   "o": [
+    "Cactus",
+    "Rice",
+    "Seaweed",
+    "Water lily"
+   ],
+   "x": "A cactus stores water in its body"
+  },
+  {
+   "he": "על איזה צמח גדלים ענבים?",
+   "a": "גפן",
+   "h": "bb4b4f48",
+   "q": "What plant do grapes grow on?",
+   "o": [
+    "Vine",
+    "Apple tree",
+    "Palm tree",
+    "Cactus"
+   ],
+   "x": "Grapes grow on a vine"
+  },
+  {
+   "he": "על איזה עץ גדלים תמרים?",
+   "a": "דקל",
+   "h": "164030c4",
+   "q": "Which tree do dates grow on?",
+   "o": [
+    "Palm tree",
+    "Pine tree",
+    "Olive tree",
+    "Vine"
+   ],
+   "x": "Dates grow on palm trees",
+   "sc": {
+    "0": "Date"
+   }
+  },
+  {
+   "he": "מה נכון על צמח?",
+   "a": "הוא יצור חי",
+   "h": "457dfbf6",
+   "q": "What is true about a plant?",
+   "o": [
+    "It is alive",
+    "It does not grow",
+    "It does not drink",
+    "It is an object"
+   ],
+   "x": "A plant grows, drinks and needs light"
+  },
+  {
+   "he": "מה מכסה את גוף הציפור?",
+   "a": "נוצות",
+   "h": "9840ff56",
+   "q": "What covers a bird's body?",
+   "o": [
+    "Feathers",
+    "Scales",
+    "Fur",
+    "Shell"
+   ],
+   "x": "Birds have feathers"
+  },
+  {
+   "he": "מה מכסה את גוף הדג?",
+   "a": "קשקשים",
+   "h": "7004c0da",
+   "q": "What covers a fish's body?",
+   "o": [
+    "Scales",
+    "Feathers",
+    "Fur",
+    "Wool"
+   ],
+   "x": "Fish have scales"
+  },
+  {
+   "he": "מה מכסה את גוף הכבשה?",
+   "a": "צמר",
+   "h": "59c4d1b8",
+   "q": "What covers a sheep's body?",
+   "o": [
+    "Wool",
+    "Feathers",
+    "Scales",
+    "Shell"
+   ],
+   "x": "A sheep has wool"
+  },
+  {
+   "he": "לאיזה בעל חיים יש שריון?",
+   "a": "צב",
+   "h": "f8778d7b",
+   "q": "Which animal has a shell?",
+   "o": [
+    "Turtle",
+    "Cat",
+    "Hen",
+    "Fish"
+   ],
+   "x": "The shell protects the turtle"
+  },
+  {
+   "he": "כמה רגליים יש לתרנגולת?",
+   "a": "2",
+   "h": "a421d4ec",
+   "q": "How many legs does a hen have?",
+   "o": [
+    "2",
+    "4",
+    "6",
+    "8"
+   ],
+   "x": "Birds have 2 legs"
+  },
+  {
+   "he": "כמה רגליים יש לחתול?",
+   "a": "4",
+   "h": "76fbc082",
+   "q": "How many legs does a cat have?",
+   "o": [
+    "4",
+    "2",
+    "6",
+    "8"
+   ],
+   "x": "A cat has 4 legs"
+  },
+  {
+   "he": "כמה רגליים יש לחרק?",
+   "a": "6",
+   "h": "902970c0",
+   "q": "How many legs does an insect have?",
+   "o": [
+    "6",
+    "4",
+    "8",
+    "2"
+   ],
+   "x": "Every insect has 6 legs"
+  },
+  {
+   "he": "כמה רגליים יש לעכביש?",
+   "a": "8",
+   "h": "00f870eb",
+   "q": "How many legs does a spider have?",
+   "o": [
+    "8",
+    "6",
+    "4",
+    "2"
+   ],
+   "x": "A spider has 8 legs"
+  },
+  {
+   "he": "לאיזה בעל חיים אין רגליים?",
+   "a": "נחש",
+   "h": "c09809e4",
+   "q": "Which animal has no legs?",
+   "o": [
+    "Snake",
+    "Dog",
+    "Bird",
+    "Ant"
+   ],
+   "x": "A snake crawls on its belly"
+  },
+  {
+   "he": "מה עוזר לדג לשחות?",
+   "a": "סנפירים",
+   "h": "ff53b18a",
+   "q": "What helps a fish swim?",
+   "o": [
+    "Fins",
+    "Feathers",
+    "Wings",
+    "Fur"
+   ],
+   "x": "A fish swims with its fins and tail"
+  },
+  {
+   "he": "מי מהם אינו ציפור?",
+   "a": "עטלף",
+   "h": "a4abd044",
+   "q": "Which one is not a bird?",
+   "o": [
+    "Bat",
+    "Pigeon",
+    "Hen",
+    "Duck"
+   ],
+   "x": "A bat has fur, not feathers"
+  },
+  {
+   "he": "מי מהם אינו חרק?",
+   "a": "עכביש",
+   "h": "83a8a44c",
+   "q": "Which one is not an insect?",
+   "o": [
+    "Spider",
+    "Ant",
+    "Bee",
+    "Butterfly"
+   ],
+   "x": "A spider has 8 legs; an insect has 6"
+  },
+  {
+   "he": "איפה חי הדג?",
+   "a": "במים",
+   "h": "7d3fbbb5",
+   "q": "Where does a fish live?",
+   "o": [
+    "In water",
+    "In a tree",
+    "In the desert",
+    "On the roof"
+   ],
+   "x": "Fish live in water"
+  },
+  {
+   "he": "איפה גרות הדבורים?",
+   "a": "בכוורת",
+   "h": "ac81fc38",
+   "q": "Where do bees live?",
+   "o": [
+    "In a hive",
+    "In a nest",
+    "In water",
+    "In a stable"
+   ],
+   "x": "Bees live in a hive"
+  },
+  {
+   "he": "איפה הציפור מטילה ביצים?",
+   "a": "בקן",
+   "h": "3f8a5ddb",
+   "q": "Where does a bird lay its eggs?",
+   "o": [
+    "In a nest",
+    "In a hive",
+    "In a stable",
+    "In the sea"
+   ],
+   "x": "A bird builds a nest for its eggs"
+  },
+  {
+   "he": "מה אוכלת הפרה?",
+   "a": "עשב",
+   "h": "07fdd457",
+   "q": "What does a cow eat?",
+   "o": [
+    "Grass",
+    "Meat",
+    "Fish",
+    "Insects"
+   ],
+   "x": "A cow eats plants"
+  },
+  {
+   "he": "מה אוכל האריה?",
+   "a": "בשר",
+   "h": "ccb553f6",
+   "q": "What does a lion eat?",
+   "o": [
+    "Meat",
+    "Grass",
+    "Fruit",
+    "Honey"
+   ],
+   "x": "A lion hunts other animals"
+  },
+  {
+   "he": "מי בוקע מביצת תרנגולת?",
+   "a": "אפרוח",
+   "h": "ebe769eb",
+   "q": "What hatches from a hen's egg?",
+   "o": [
+    "Chick",
+    "Puppy",
+    "Calf",
+    "Baby goat"
+   ],
+   "x": "A chick comes out of the egg"
+  },
+  {
+   "he": "מי יולדת גורים ולא מטילה ביצים?",
+   "a": "חתולה",
+   "h": "cfb76740",
+   "q": "Which animal has babies and does not lay eggs?",
+   "o": [
+    "Cat",
+    "Hen",
+    "Duck",
+    "Pigeon"
+   ],
+   "x": "A mother cat gives birth to kittens and nurses them"
+  },
+  {
+   "he": "איך נקרא התינוק של הפרה?",
+   "a": "עגל",
+   "h": "33f9f7b1",
+   "q": "What is a baby cow called?",
+   "o": [
+    "Calf",
+    "Baby goat",
+    "Lamb",
+    "Chick"
+   ],
+   "x": "A baby cow is a calf"
+  },
+  {
+   "he": "מה מקבלים מהתרנגולת?",
+   "a": "ביצים",
+   "h": "05a2d643",
+   "q": "What do we get from hens?",
+   "o": [
+    "Eggs",
+    "Wool",
+    "Honey",
+    "Fur"
+   ],
+   "x": "Hens lay eggs"
+  },
+  {
+   "he": "מה מקבלים מהדבורים?",
+   "a": "דבש",
+   "h": "73dc0030",
+   "q": "What do we get from bees?",
+   "o": [
+    "Honey",
+    "Milk",
+    "Eggs",
+    "Wool"
+   ],
+   "x": "Bees make honey"
+  },
+  {
+   "he": "מה הייתה הצפרדע כשהייתה קטנה?",
+   "a": "ראשן",
+   "h": "21040084",
+   "q": "What was a frog when it was little?",
+   "o": [
+    "Tadpole",
+    "Chick",
+    "Puppy",
+    "Caterpillar"
+   ],
+   "x": "A tadpole grows in water and becomes a frog"
+  },
+  {
+   "he": "מה היה הפרפר כשהיה קטן?",
+   "a": "זחל",
+   "h": "6c6f9eb9",
+   "q": "What was a butterfly when it was little?",
+   "o": [
+    "Caterpillar",
+    "Tadpole",
+    "Chick",
+    "Puppy"
+   ],
+   "x": "Caterpillar → pupa → butterfly"
+  },
+  {
+   "he": "מה מהם יצור חי?",
+   "a": "ארנב",
+   "h": "c2b3b887",
+   "q": "Which of these is a living thing?",
+   "o": [
+    "Rabbit",
+    "Ball",
+    "Doll",
+    "Chair"
+   ],
+   "x": "A rabbit breathes, eats and grows"
+  },
+  {
+   "he": "מה מהם דומם?",
+   "a": "כדור",
+   "h": "baee0e86",
+   "q": "Which of these is non-living?",
+   "o": [
+    "Ball",
+    "Bird",
+    "Flower",
+    "Fish"
+   ],
+   "x": "A ball does not breathe, eat or grow"
+  },
+  {
+   "he": "מה צריכים כל היצורים החיים?",
+   "a": "מים",
+   "h": "0456f87d",
+   "q": "What do all living things need?",
+   "o": [
+    "Water",
+    "TV",
+    "Toys",
+    "Clothes"
+   ],
+   "x": "Every living thing needs water to live"
+  },
+  {
+   "he": "האם הפרח הוא יצור חי?",
+   "a": "כן, הוא גדל",
+   "h": "3ba2f9a5",
+   "q": "Is a flower a living thing?",
+   "o": [
+    "Yes, it grows",
+    "No, it doesn't move",
+    "No, it is non-living",
+    "Only in summer"
+   ],
+   "x": "Plants grow, drink water and make new plants"
+  },
+  {
+   "he": "המכונית נוסעת. האם היא חיה?",
+   "a": "לא, היא דומם",
+   "h": "a7982d57",
+   "q": "A car moves. Is it alive?",
+   "o": [
+    "No, it's non-living",
+    "Yes, it moves",
+    "Yes, it's noisy",
+    "Only when it moves"
+   ],
+   "x": "A car does not eat, breathe or grow"
+  },
+  {
+   "he": "מה מהם גדל עם הזמן?",
+   "a": "גור כלבים",
+   "h": "d90cc2d7",
+   "q": "Which of these grows over time?",
+   "o": [
+    "Puppy",
+    "Ball",
+    "Teddy bear",
+    "Book"
+   ],
+   "x": "A puppy is alive – it will grow into a dog"
+  },
+  {
+   "he": "מי מהם נושם?",
+   "a": "דג",
+   "h": "52c91968",
+   "q": "Which one breathes?",
+   "o": [
+    "Fish",
+    "Clock",
+    "Scissors",
+    "Stone"
+   ],
+   "x": "A fish breathes too – in water, with gills"
+  },
+  {
+   "he": "האם השמש היא יצור חי?",
+   "a": "לא, היא דומם",
+   "h": "38145c1c",
+   "q": "Is the sun a living thing?",
+   "o": [
+    "No, it's non-living",
+    "Yes, it moves",
+    "Yes, it's hot",
+    "Only by day"
+   ],
+   "x": "The sun does not eat, grow or have young"
+  },
+  {
+   "he": "לחתולה נולדו גורים. מה זה מראה?",
+   "a": "שהיא יצור חי",
+   "h": "09f4e79e",
+   "q": "A cat had kittens. What does this show?",
+   "o": [
+    "She is alive",
+    "She is non-living",
+    "She is a plant",
+    "She is a toy"
+   ],
+   "x": "Living things have young"
+  },
+  {
+   "he": "מה ההבדל בין דג לסירה?",
+   "a": "הדג חי",
+   "h": "b1e867e2",
+   "q": "What is the difference between a fish and a boat?",
+   "o": [
+    "The fish is alive",
+    "The boat eats",
+    "The boat grows",
+    "The fish is non-living"
+   ],
+   "x": "A fish eats, breathes and grows – a boat doesn't"
+  },
+  {
+   "he": "מה לא שייך לקבוצה?",
+   "a": "כדור",
+   "h": "d0247674",
+   "q": "Which one does not belong?",
+   "o": [
+    "Ball",
+    "Dog",
+    "Cat",
+    "Rabbit"
+   ],
+   "x": "A ball is non-living; the others are living things"
+  },
+  {
+   "he": "מה משותף לעץ, לפרפר ולילד?",
+   "a": "כולם חיים",
+   "h": "cb008d83",
+   "q": "What do a tree, butterfly and child share?",
+   "o": [
+    "They are all alive",
+    "They all fly",
+    "They are all green",
+    "They are all non-living"
+   ],
+   "x": "They all breathe, feed and grow"
+  },
+  {
+   "he": "מה משותף ללבנה, לכדור ולספר?",
+   "a": "כולם דוממים",
+   "h": "4dc94b68",
+   "q": "What do a brick, ball and book share?",
+   "o": [
+    "They are all non-living",
+    "They are all alive",
+    "They all grow",
+    "They all eat"
+   ],
+   "x": "They don't breathe, eat or grow"
+  },
+  {
+   "he": "איזה יצור חי לא הולך ממקום למקום?",
+   "a": "עץ",
+   "h": "58d5e660",
+   "q": "Which living thing does not move from place to place?",
+   "o": [
+    "Tree",
+    "Dog",
+    "Ant",
+    "Child"
+   ],
+   "x": "A tree is alive, but it stays in one place"
+  },
+  {
+   "he": "דובי מדבר כשלוחצים. האם הוא חי?",
+   "a": "לא, הוא דומם",
+   "h": "a68ee651",
+   "q": "A teddy bear talks when pressed. Is it alive?",
+   "o": [
+    "No, it's non-living",
+    "Yes, it talks",
+    "Yes, it's soft",
+    "Only when pressed"
+   ],
+   "x": "It has a battery – it does not eat or grow"
+  },
+  {
+   "he": "מה צריך ארנב, וכדור לא צריך?",
+   "a": "אוכל",
+   "h": "aba9ae5c",
+   "q": "What does a rabbit need that a ball doesn't?",
+   "o": [
+    "Food",
+    "Color",
+    "Size",
+    "Shape"
+   ],
+   "x": "A living thing must eat – a ball doesn't"
+  },
+  {
+   "he": "איך יודעים שהציפור חיה?",
+   "a": "היא אוכלת וגדלה",
+   "h": "65c37c33",
+   "q": "How do we know a bird is alive?",
+   "o": [
+    "It eats and grows",
+    "It is colorful",
+    "It has a name",
+    "It is small"
+   ],
+   "x": "A living thing eats, breathes and grows"
+  },
+  {
+   "he": "מה בים הוא דומם?",
+   "a": "סלע",
+   "h": "e2b128d3",
+   "q": "Which thing in the sea is non-living?",
+   "o": [
+    "Rock",
+    "Fish",
+    "Octopus",
+    "Crab"
+   ],
+   "x": "A rock does not breathe, eat or grow"
+  },
+  {
+   "he": "מה מהם חי?",
+   "a": "נמלה",
+   "h": "0d8fd7f6",
+   "q": "Which of these is alive?",
+   "o": [
+    "Ant",
+    "Pencil",
+    "Key",
+    "Shoe"
+   ],
+   "x": "An ant is small, but it eats and grows"
+  },
+  {
+   "he": "מה מהם גדל מזרע?",
+   "a": "פרח",
+   "h": "c5d354a4",
+   "q": "Which of these grows from a seed?",
+   "o": [
+    "Flower",
+    "Ball",
+    "Car",
+    "Cup"
+   ],
+   "x": "Plants grow from seeds – they are living things"
+  },
+  {
+   "he": "מה מהם רך?",
+   "a": "גרב",
+   "h": "173cbe6a",
+   "q": "Which of these is soft?",
+   "o": [
+    "Sock",
+    "Brick",
+    "Nail",
+    "Plate"
+   ],
+   "x": "When you press a sock, it squashes"
+  },
+  {
+   "he": "מה מהם קשה?",
+   "a": "סלע",
+   "h": "e1697c98",
+   "q": "Which of these is hard?",
+   "o": [
+    "Rock",
+    "Sponge",
+    "Teddy bear",
+    "Wool"
+   ],
+   "x": "It is very hard to change a rock's shape"
+  },
+  {
+   "he": "מה יש בתוך כרית פוך?",
+   "a": "נוצות",
+   "h": "5eb09145",
+   "q": "What is inside a down pillow?",
+   "o": [
+    "Feathers",
+    "Stones",
+    "Nails",
+    "Cardboard"
+   ],
+   "x": "A down pillow is filled with soft feathers"
+  },
+  {
+   "he": "למה קסדה עשויה מחומר קשה?",
+   "a": "כדי להגן",
+   "h": "dc48be9a",
+   "q": "Why is a helmet made of hard material?",
+   "o": [
+    "To protect",
+    "To see through it",
+    "To be soft",
+    "To get wet"
+   ],
+   "x": "Hard material protects the head if you get hit"
+  },
+  {
+   "he": "מה קורה לבצק כשלוחצים עליו?",
+   "a": "משנה צורה",
+   "h": "c42b648e",
+   "q": "What happens to dough when you press it?",
+   "o": [
+    "It changes shape",
+    "It breaks",
+    "It becomes transparent",
+    "It becomes hard"
+   ],
+   "x": "Dough is soft – you can knead it"
+  },
+  {
+   "he": "במה רך ונעים להתכסות בלילה?",
+   "a": "שמיכה",
+   "h": "c9ebdb99",
+   "q": "What is soft and nice to cover up with at night?",
+   "o": [
+    "Blanket",
+    "Hammer",
+    "Key",
+    "Plate"
+   ],
+   "x": "A blanket is soft and nice to touch"
+  },
+  {
+   "he": "מה מהם קשה מאוד?",
+   "a": "מפתח",
+   "h": "0a128400",
+   "q": "Which of these is very hard?",
+   "o": [
+    "Key",
+    "Sock",
+    "Sponge",
+    "Pillow"
+   ],
+   "x": "A key is made of hard metal"
+  },
+  {
+   "he": "ספוג, כרית וצמר – מה משותף?",
+   "a": "כולם רכים",
+   "h": "e19a1806",
+   "q": "Sponge, pillow and wool – what do they share?",
+   "o": [
+    "They are all soft",
+    "They are all hard",
+    "They are all transparent",
+    "They are all metal"
+   ],
+   "x": "All three are easy to squash in your hand"
+  },
+  {
+   "he": "על מה עדיף ליפול?",
+   "a": "מזרן רך",
+   "h": "32c4edca",
+   "q": "What is better to fall on?",
+   "o": [
+    "A soft mattress",
+    "A stone floor",
+    "A wooden table",
+    "A sidewalk"
+   ],
+   "x": "A soft mattress cushions the fall"
+  },
+  {
+   "he": "ממה עשוי כדור רך לתינוק?",
+   "a": "בד וספוג",
+   "h": "4c83f257",
+   "q": "What is a soft ball for a baby made of?",
+   "o": [
+    "Cloth and sponge",
+    "Stone",
+    "Iron",
+    "Glass"
+   ],
+   "x": "Cloth and sponge are soft and don't hurt"
+  },
+  {
+   "he": "איך נקרא חומר שלא רואים דרכו?",
+   "a": "אטום",
+   "h": "97cace90",
+   "q": "What is a material you can't see through called?",
+   "o": [
+    "Opaque",
+    "Transparent",
+    "Soft",
+    "Flexible"
+   ],
+   "x": "Light does not pass through an opaque material"
+  },
+  {
+   "he": "דרך מה רואים מהבית החוצה?",
+   "a": "חלון זכוכית",
+   "h": "f918f648",
+   "q": "What lets us see outside from the house?",
+   "o": [
+    "A glass window",
+    "A wooden door",
+    "A stone wall",
+    "A thick curtain"
+   ],
+   "x": "Glass is transparent – we see outside through it"
+  },
+  {
+   "he": "דרך איזו שקית רואים מה יש בפנים?",
+   "a": "שקית ניילון שקופה",
+   "h": "0f9dc625",
+   "q": "Which bag lets you see what is inside?",
+   "o": [
+    "A transparent plastic bag",
+    "A paper bag",
+    "A cardboard box",
+    "A cloth bag"
+   ],
+   "x": "Light passes through transparent plastic"
+  },
+  {
+   "he": "למה קופסת עוגיות שקופה נוחה?",
+   "a": "רואים מה בתוכה",
+   "h": "3edbe568",
+   "q": "Why is a transparent cookie box useful?",
+   "o": [
+    "You see what's inside",
+    "It is soft",
+    "It is warm",
+    "It is broken"
+   ],
+   "x": "You see the cookies through the transparent plastic"
+  },
+  {
+   "he": "מה מהם אטום?",
+   "a": "ספר",
+   "h": "35d2dd01",
+   "q": "Which of these is opaque?",
+   "o": [
+    "Book",
+    "Glasses",
+    "Clear water",
+    "Glass window"
+   ],
+   "x": "You can't see through the pages of a book"
+  },
+  {
+   "he": "שמים פנס מאחורי קרטון. מה רואים?",
+   "a": "האור לא עובר",
+   "h": "75ed0c53",
+   "q": "We put a flashlight behind cardboard. What do we see?",
+   "o": [
+    "No light gets through",
+    "The light gets through",
+    "The cardboard lights up",
+    "The cardboard disappears"
+   ],
+   "x": "Cardboard is opaque – it stops the light"
+  },
+  {
+   "he": "למה וילון עבה עוזר לישון בבוקר?",
+   "a": "האור לא עובר",
+   "h": "d033d128",
+   "q": "Why does a thick curtain help you sleep in the morning?",
+   "o": [
+    "No light gets through",
+    "It is transparent",
+    "It is soft",
+    "It is colorful"
+   ],
+   "x": "An opaque curtain keeps the light out"
+  },
+  {
+   "he": "ממה עושים את העדשות במשקפיים?",
+   "a": "מחומר שקוף",
+   "h": "9dd6d7f6",
+   "q": "What are the lenses of eyeglasses made of?",
+   "o": [
+    "Transparent material",
+    "Cardboard",
+    "Wood",
+    "Cloth"
+   ],
+   "x": "We see through transparent lenses"
+  },
+  {
+   "he": "באיזה בקבוק רואים כמה מים נשארו?",
+   "a": "בקבוק שקוף",
+   "h": "51f55804",
+   "q": "In which bottle can you see how much water is left?",
+   "o": [
+    "A transparent bottle",
+    "A metal bottle",
+    "A wooden bottle",
+    "A paper bag"
+   ],
+   "x": "You see the water through a transparent bottle"
+  },
+  {
+   "he": "כוס, ניילון, מים, קרש: מה לא שקוף?",
+   "a": "קרש עץ",
+   "h": "03dca866",
+   "q": "Which of these is not transparent?",
+   "o": [
+    "Wooden board",
+    "Glass cup",
+    "Plastic bag",
+    "Clear water"
+   ],
+   "x": "Wood is opaque – the others are transparent"
+  },
+  {
+   "he": "בשביל מה המציאו מטרייה?",
+   "a": "לא להירטב",
+   "h": "ed38b0bb",
+   "q": "Why was the umbrella invented?",
+   "o": [
+    "To stay dry",
+    "To see well",
+    "To hear well",
+    "To heat food"
+   ],
+   "x": "An umbrella meets the need to stay dry"
+  },
+  {
+   "he": "מה עוזר לראות בחושך?",
+   "a": "פנס",
+   "h": "8fd30fa1",
+   "q": "What helps us see in the dark?",
+   "o": [
+    "Flashlight",
+    "Spoon",
+    "Scissors",
+    "Pillow"
+   ],
+   "x": "A flashlight gives light"
+  },
+  {
+   "he": "מה עוזר לחתוך נייר?",
+   "a": "מספריים",
+   "h": "858aa946",
+   "q": "What helps us cut paper?",
+   "o": [
+    "Scissors",
+    "Fork",
+    "Cup",
+    "Towel"
+   ],
+   "x": "Scissors cut paper"
+  },
+  {
+   "he": "מה שומר את האוכל קר?",
+   "a": "מקרר",
+   "h": "f14c8860",
+   "q": "What keeps food cold?",
+   "o": [
+    "Refrigerator",
+    "Oven",
+    "Fan",
+    "Lamp"
+   ],
+   "x": "A refrigerator keeps food cold and fresh"
+  },
+  {
+   "he": "במה מודדים אורך?",
+   "a": "סרגל",
+   "h": "d77d0178",
+   "q": "What do we measure length with?",
+   "o": [
+    "Ruler",
+    "Thermometer",
+    "Clock",
+    "Scale"
+   ],
+   "x": "A ruler measures length"
+  },
+  {
+   "he": "במה בודקים מה השעה?",
+   "a": "שעון",
+   "h": "3b11dea0",
+   "q": "What do we use to check the time?",
+   "o": [
+    "Clock",
+    "Ruler",
+    "Thermometer",
+    "Scissors"
+   ],
+   "x": "A clock shows the time",
+   "sc": {
+    "0": "?:??"
+   }
+  },
+  {
+   "he": "איך מדברים עם סבתא שגרה רחוק?",
+   "a": "בטלפון",
+   "h": "2244e563",
+   "q": "How do we talk to Grandma who lives far away?",
+   "o": [
+    "On the phone",
+    "With scissors",
+    "With an umbrella",
+    "With a pillow"
+   ],
+   "x": "A phone helps us talk from far away"
+  },
+  {
+   "he": "מה מכניס מסמר לקיר?",
+   "a": "פטיש",
+   "h": "9f5d6209",
+   "q": "What drives a nail into the wall?",
+   "o": [
+    "Hammer",
+    "Spoon",
+    "Comb",
+    "Scissors"
+   ],
+   "x": "We hit the nail with a hammer"
+  },
+  {
+   "he": "מה עוזר לראות דברים קטנים מאוד?",
+   "a": "זכוכית מגדלת",
+   "h": "bbd641a7",
+   "q": "What helps us see very tiny things?",
+   "o": [
+    "Magnifying glass",
+    "Umbrella",
+    "Comb",
+    "Teaspoon"
+   ],
+   "x": "A magnifying glass makes things look bigger"
+  },
+  {
+   "he": "מה עוזר לראות כוכבים רחוקים?",
+   "a": "טלסקופ",
+   "h": "001f5d5e",
+   "q": "What helps us see faraway stars?",
+   "o": [
+    "Telescope",
+    "Microwave",
+    "Comb",
+    "Umbrella"
+   ],
+   "x": "A telescope makes faraway things look closer"
+  },
+  {
+   "he": "למה אנשים ממציאים דברים?",
+   "a": "כדי לפתור בעיה",
+   "h": "7e695129",
+   "q": "Why do people invent things?",
+   "o": [
+    "To solve a problem",
+    "To make a mess",
+    "To break things",
+    "To sleep"
+   ],
+   "x": "An invention meets a need that people have"
+  },
+  {
+   "he": "מה נוסע על הכביש?",
+   "a": "מכונית",
+   "h": "3c86e28f",
+   "q": "What drives on the road?",
+   "o": [
+    "Car",
+    "Chair",
+    "Bed",
+    "Table"
+   ],
+   "x": "Vehicles take us to faraway places"
+  },
+  {
+   "he": "מה מהם אינו כלי תחבורה?",
+   "a": "מיטה",
+   "h": "6974a56d",
+   "q": "Which of these is not a vehicle?",
+   "o": [
+    "Bed",
+    "Bus",
+    "Train",
+    "Plane"
+   ],
+   "x": "We sleep in a bed – we don't ride in it"
+  },
+  {
+   "he": "איזה כלי תחבורה טס בשמיים?",
+   "a": "מטוס",
+   "h": "e85a97cb",
+   "q": "Which vehicle flies in the sky?",
+   "o": [
+    "Plane",
+    "Bus",
+    "Train",
+    "Boat"
+   ],
+   "x": "A plane flies through the air"
+  },
+  {
+   "he": "באיזה כלי שטים בים?",
+   "a": "סירה",
+   "h": "42bf4864",
+   "q": "What do we use to sail on the sea?",
+   "o": [
+    "Boat",
+    "Plane",
+    "Train",
+    "Bicycle"
+   ],
+   "x": "A boat sails on the water"
+  },
+  {
+   "he": "על איזה צורך עונה המעיל?",
+   "a": "לשמור על חום",
+   "h": "dad3d000",
+   "q": "Which need does a coat meet?",
+   "o": [
+    "To stay warm",
+    "To see well",
+    "To hear well",
+    "To cut paper"
+   ],
+   "x": "A coat keeps the body warm"
+  },
+  {
+   "he": "כשחם מאוד, מה עוזר להתקרר?",
+   "a": "מאוורר",
+   "h": "8746a43f",
+   "q": "When it's very hot, what helps us cool down?",
+   "o": [
+    "Fan",
+    "Oven",
+    "Blanket",
+    "Coat"
+   ],
+   "x": "A fan moves the air and cools us"
+  },
+  {
+   "he": "במה מבשלים מרק?",
+   "a": "בסיר",
+   "h": "0d9392d0",
+   "q": "What do we cook soup in?",
+   "o": [
+    "A pot",
+    "A plate",
+    "A paper cup",
+    "A fork"
+   ],
+   "x": "We cook soup in a pot on the stove"
+  },
+  {
+   "he": "מה המציאו כדי לכתוב?",
+   "a": "עיפרון",
+   "h": "5c70e6c8",
+   "q": "What was invented for writing?",
+   "o": [
+    "Pencil",
+    "Fork",
+    "Comb",
+    "Pillow"
+   ],
+   "x": "We write with a pencil"
+  },
+  {
+   "he": "איזה חומר הכי מתאים למטרייה?",
+   "a": "בד אטום למים",
+   "h": "d6aea1de",
+   "q": "Which material is best for an umbrella?",
+   "o": [
+    "Waterproof fabric",
+    "Paper",
+    "Cardboard",
+    "Cotton wool"
+   ],
+   "x": "Water does not pass through waterproof fabric"
+  },
+  {
+   "he": "ביום חם מאוד, איפה כדאי לשבת?",
+   "a": "בצל",
+   "h": "29e27bc3",
+   "q": "On a very hot day, where is it best to sit?",
+   "o": [
+    "In the shade",
+    "In the sun",
+    "In a closed car",
+    "Next to an oven"
+   ],
+   "x": "The shade is cooler and protected from the sun"
+  },
+  {
+   "he": "איך מזג האוויר בתמונה?",
+   "a": "שמשי",
+   "h": "5e329829",
+   "q": "What is the weather in the picture?",
+   "o": [
+    "Sunny",
+    "Rainy",
+    "Snowy",
+    "Stormy"
+   ],
+   "x": "The sun is out – the weather is sunny"
+  },
+  {
+   "he": "מה צריך הפנס כדי לפעול?",
+   "a": "סוללות",
+   "h": "f96f853c",
+   "q": "What does a flashlight need to work?",
+   "o": [
+    "Batteries",
+    "Water",
+    "Soil",
+    "Sand"
+   ],
+   "x": "Batteries give the flashlight electricity"
+  },
+  {
+   "he": "איזה איבר בתמונה?",
+   "a": "אוזן",
+   "h": "97e13731",
+   "q": "Which body part is in the picture?",
+   "o": [
+    "Ear",
+    "Nose",
+    "Eye",
+    "Tongue"
+   ],
+   "x": "It's an ear – we hear with it"
+  },
+  {
+   "he": "מה הגוף צריך כדי לגדול?",
+   "a": "אוכל בריא ושינה",
+   "h": "e7351545",
+   "q": "What does the body need to grow?",
+   "o": [
+    "Healthy food and sleep",
+    "Candy and TV",
+    "Only computer games",
+    "No sleep at all"
+   ],
+   "x": "Healthy food and sleep help us grow"
+  },
+  {
+   "he": "מה לובשים כשיורד גשם בחורף?",
+   "a": "מעיל",
+   "h": "d78cbdc5",
+   "q": "What do we wear when it rains in winter?",
+   "o": [
+    "Coat",
+    "Swimsuit",
+    "T-shirt",
+    "Flip-flops"
+   ],
+   "x": "Winter is cold – we wear a coat"
+  },
+  {
+   "he": "מתי רואים כוכבים בשמיים?",
+   "a": "בלילה",
+   "h": "d0f3ca54",
+   "q": "When do we see stars in the sky?",
+   "o": [
+    "At night",
+    "At noon",
+    "In the morning",
+    "In the afternoon"
+   ],
+   "x": "At night it is dark, and we see stars"
+  },
+  {
+   "he": "מה יוצא מזרע ששתלנו?",
+   "a": "נבט",
+   "h": "6c33bc02",
+   "q": "What comes out of a seed we planted?",
+   "o": [
+    "Sprout",
+    "Fruit",
+    "Flower",
+    "Trunk"
+   ],
+   "x": "A little sprout comes out of the seed"
+  },
+  {
+   "he": "לאיזה בעל חיים יש נוצות?",
+   "a": "ברווז",
+   "h": "1e5993d6",
+   "q": "Which animal has feathers?",
+   "o": [
+    "Duck",
+    "Dog",
+    "Fish",
+    "Cow"
+   ],
+   "x": "A duck, like every bird, has feathers"
+  },
+  {
+   "he": "איך נקרא התינוק של הכלב?",
+   "a": "גור",
+   "h": "198f5972",
+   "q": "What is a baby dog called?",
+   "o": [
+    "Puppy",
+    "Calf",
+    "Chick",
+    "Tadpole"
+   ],
+   "x": "A baby dog is a puppy"
+  },
+  {
+   "he": "מה שמים על האוזניים לשמוע מוזיקה?",
+   "a": "אוזניות",
+   "h": "c0397154",
+   "q": "What do we put on our ears to hear music?",
+   "o": [
+    "Headphones",
+    "Glasses",
+    "Gloves",
+    "Shoes"
+   ],
+   "x": "Headphones are for listening"
+  },
+  {
+   "he": "במה מנקים את הרצפה?",
+   "a": "מטאטא",
+   "h": "e675f053",
+   "q": "What do we clean the floor with?",
+   "o": [
+    "Broom",
+    "Fork",
+    "Umbrella",
+    "Scissors"
+   ],
+   "x": "A broom cleans the floor"
+  }
+ ]
+}

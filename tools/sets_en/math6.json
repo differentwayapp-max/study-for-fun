@@ -334,7 +334,7 @@
    "he": "איזה תרגיל תוצאתו גדולה מ-⁦5⁩?",
    "a": "⁦5 × 5/4⁩",
    "h": "4e21ee7e",
-   "q": "Which exercise has a result greater than 5?",
+   "q": "Which of these exercises has a result greater than 5?",
    "o": [
     "⁦5 × 5/4⁩",
     "⁦5 × 3/4⁩",
@@ -919,7 +919,7 @@
    "he": "⁦3.4 : 10⁩ שווה ל…",
    "a": "⁦34 : 100⁩",
    "h": "fb209c49",
-   "q": "3.4 ÷ 10 is equal to…",
+   "q": "Which of these is equal to 3.4 ÷ 10?",
    "o": [
     "⁦34 ÷ 100⁩",
     "⁦34 ÷ 10⁩",
@@ -1306,7 +1306,7 @@
    "he": "איזה שבר שווה ל-⁦0.6⁩?",
    "a": "⁦3/5⁩",
    "h": "d0c2d00a",
-   "q": "Which fraction is equal to 0.6?",
+   "q": "Which of these fractions is equal to 0.6?",
    "o": [
     "⁦3/5⁩",
     "⁦6/100⁩",
@@ -1894,7 +1894,7 @@
    "he": "חולצה ב-⁦80⁩ ₪, בהנחה של ⁦25%⁩. כמה משלמים?",
    "a": "⁦60 ₪⁩",
    "h": "14395fae",
-   "q": "A shirt costs 80 ₪ with a 25% discount. How much do you pay?",
+   "q": "A shirt costs 80 ₪. There is a 25% discount. How much do you pay?",
    "o": [
     "⁦60 ₪⁩",
     "⁦20 ₪⁩",
@@ -1959,7 +1959,7 @@
    "he": "נעליים ב-⁦160⁩ ₪, בהנחה של ⁦15%⁩. כמה משלמים?",
    "a": "⁦136 ₪⁩",
    "h": "896fcb23",
-   "q": "Shoes cost 160 ₪ with a 15% discount. How much do you pay?",
+   "q": "Shoes cost 160 ₪. There is a 15% discount. How much do you pay?",
    "o": [
     "⁦136 ₪⁩",
     "⁦24 ₪⁩",
@@ -2098,9 +2098,9 @@
    "h": "a98ab1f8",
    "q": "In the ratio 1 : 4, the first part is…",
    "o": [
-    "Quarter of the second",
+    "1/4 of the second",
     "4 times the second",
-    "Quarter of the total",
+    "1/4 of the total",
     "Half of the second"
    ],
    "x": "The second is 4 times the first",
@@ -2147,7 +2147,7 @@
    "he": "באיזה זוג מספרים היחס הוא ⁦2 : 5⁩?",
    "a": "4 ו-10",
    "h": "392ca027",
-   "q": "Which pair of numbers has the ratio 2 : 5?",
+   "q": "Which of these pairs of numbers has the ratio 2 : 5?",
    "o": [
     "4 and 10",
     "5 and 2",
@@ -2176,7 +2176,7 @@
    "he": "איזה יחס שקול ל-⁦3 : 4⁩?",
    "a": "⁦9 : 12⁩",
    "h": "25c7047a",
-   "q": "Which ratio is equivalent to 3 : 4?",
+   "q": "Which of these ratios is equivalent to 3 : 4?",
    "o": [
     "⁦9 : 12⁩",
     "⁦6 : 7⁩",
@@ -2256,7 +2256,7 @@
    "he": "איזה יחס שקול ל-⁦1 : 2⁩?",
    "a": "⁦7 : 14⁩",
    "h": "09eb2aa5",
-   "q": "Which ratio is equivalent to 1 : 2?",
+   "q": "Which of these ratios is equivalent to 1 : 2?",
    "o": [
     "⁦7 : 14⁩",
     "⁦3 : 5⁩",
@@ -2298,7 +2298,7 @@
    "he": "⁦4 : 10⁩ שקול ל…",
    "a": "⁦10 : 25⁩",
    "h": "3cd0e350",
-   "q": "4 : 10 is equivalent to…",
+   "q": "Which of these is equivalent to 4 : 10?",
    "o": [
     "⁦10 : 25⁩",
     "⁦6 : 12⁩",
@@ -2314,7 +2314,7 @@
    "he": "⁦3⁩ דליים צהוב לכל ⁦2⁩ כחולים. יש ⁦6⁩ כחולים. כמה צהובים?",
    "a": "⁦9⁩",
    "h": "d9605e07",
-   "q": "3 yellow buckets for every 2 blue ones. There are 6 blue ones. How many yellow?",
+   "q": "3 buckets of yellow paint for every 2 of blue. There are 6 blue. How many yellow?",
    "o": [
     "⁦9⁩",
     "⁦4⁩",
@@ -2410,7 +2410,7 @@
    "he": "לכמה חלקים שווים מחלקים כשהיחס הוא ⁦5 : 8⁩?",
    "a": "⁦13⁩",
    "h": "1d1bee58",
-   "q": "Into how many equal parts do you divide for the ratio 5 : 8?",
+   "q": "For the ratio 5 : 8, into how many equal parts is the whole divided?",
    "o": [
     "⁦13⁩",
     "⁦40⁩",
@@ -2471,7 +2471,7 @@
    "he": "בכד ⁦2⁩ ליטר משקה, יחס מים למיץ ⁦3 : 1⁩. כמה מיץ?",
    "a": "1/2 ליטר",
    "h": "8655ce9f",
-   "q": "A jug holds 2 L of drink, water to juice 3 : 1. How much juice?",
+   "q": "A jug holds 2 L of drink, with water to juice 3 : 1. How much juice?",
    "o": [
     "1/2 L",
     "1 1/2 L",
@@ -2725,7 +2725,7 @@
    "he": "באיזה קנה מידה הבית ייראה הכי גדול?",
    "a": "⁦1 : 100⁩",
    "h": "4e2dca76",
-   "q": "At which scale will the house look the largest?",
+   "q": "At which of these scales will the house look the largest?",
    "o": [
     "⁦1 : 100⁩",
     "⁦1 : 1,000⁩",
@@ -2854,7 +2854,7 @@
    "he": "נמלה צוירה בהגדלה ⁦5 : 1⁩. בציור ⁦4⁩ ס״מ. מה אורכה?",
    "a": "0.8 ס״מ",
    "h": "d2b2bae1",
-   "q": "An ant drawn enlarged 5 : 1 is 4 cm long. How long is the real ant?",
+   "q": "Drawn enlarged 5 : 1, an ant is 4 cm. How long is the real ant?",
    "o": [
     "0.8 cm",
     "20 cm",
@@ -3357,7 +3357,7 @@
     "The diameter",
     "The radius",
     "Half the radius",
-    "Quarter of the diameter"
+    "1/4 of the diameter"
    ],
    "x": "The diameter passes through the center"
   },
@@ -3786,7 +3786,7 @@
    "he": "מה מודדים ב-ס״מ ולא ב-סמ״ר?",
    "a": "היקף מעגל",
    "h": "773a4160",
-   "q": "What is measured in cm and not in cm²?",
+   "q": "Which of these is measured in cm, not in cm²?",
    "o": [
     "Circumference of a circle",
     "Area of a circle",
@@ -4343,10 +4343,10 @@
    "h": "c1ee4c3b",
    "q": "Which is greater?",
    "o": [
-    "⁦1,200 cm³⁩",
-    "⁦1 L⁩",
+    "1,200 cm³",
+    "1 L",
     "They are equal",
-    "You can't tell"
+    "Can't tell"
    ],
    "x": "1 L = ⁦1,000⁩ cm³",
    "sc": {
@@ -4414,7 +4414,7 @@
    "he": "שטח פאה של קובייה ⁦16⁩ סמ״ר. מה שטח הפנים?",
    "a": "96 סמ״ר",
    "h": "39fa8eda",
-   "q": "One face of a cube has an area of ⁦16⁩ cm². What is its surface area?",
+   "q": "One face of a cube has an area of 16 cm². What is the cube's surface area?",
    "o": [
     "⁦96 cm²⁩",
     "⁦64 cm²⁩",
@@ -4557,7 +4557,7 @@
     "⁦8⁩",
     "⁦6⁩"
    ],
-   "x": "Each face is multiplied by ⁦2 × 2 = 4⁩"
+   "x": "Each face's area is multiplied by 2 × 2 = 4"
   },
   {
    "he": "תיבה ⁦6⁩ על ⁦4⁩ על ⁦3⁩ ס״מ. מה שטח הפנים?",
@@ -4893,7 +4893,7 @@
    "he": "מה מהבאים נכון לגבי פריסה של 7 ריבועים?",
    "a": "יש פאה מיותרת",
    "h": "28c190c5",
-   "q": "Which is true about a net of 7 squares?",
+   "q": "Which of these is true about a net of 7 squares?",
    "o": [
     "There's an extra face",
     "It's a cube net",
@@ -4952,7 +4952,7 @@
     "⁦1⁩",
     "⁦3⁩"
    ],
-   "x": "The squares above and below the row face each other"
+   "x": "The squares above and below the row are opposite each other"
   },
   {
    "he": "פריסה של ריבוע ו-⁦4⁩ משולשים. של איזה גוף?",
@@ -5397,7 +5397,7 @@
    "he": "מעיל ב-⁦300⁩ ₪, בהנחה של ⁦40%⁩. כמה משלמים?",
    "a": "⁦180 ₪⁩",
    "h": "e903a8be",
-   "q": "A coat costs ⁦300⁩ ₪, with a ⁦40%⁩ discount. How much do you pay?",
+   "q": "A coat costs 300 ₪. There is a 40% discount. How much do you pay?",
    "o": [
     "⁦180 ₪⁩",
     "⁦120 ₪⁩",
@@ -5410,7 +5410,7 @@
    "he": "⁦18⁩ מתוך ⁦24⁩ ילדים הגיעו. כמה אחוז הגיעו?",
    "a": "⁦75%⁩",
    "h": "7210fca4",
-   "q": "⁦18⁩ of ⁦24⁩ children came. What percent came?",
+   "q": "18 out of 24 children came. What percent came?",
    "o": [
     "⁦75%⁩",
     "⁦18%⁩",

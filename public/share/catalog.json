@@ -390,84 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "math7-nov26",
-   "ver": "a592b6ae69",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מערכת צירים · מספרים מכוונים · זוויות",
-   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות · לפי עמודי הספר",
-   "desc_en": "Coordinates, absolute value, signed numbers, angles",
-   "tags": [
-    "מערכת צירים",
-    "ציר המספרים",
-    "ערך מוחלט",
-    "שטח והיקף",
-    "סדר פעולות",
-    "זוויות",
-    "חוצה זווית"
-   ],
-   "questions": 124,
-   "chapters": 10,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
-     "e": "(3, 5)"
-    },
-    {
-     "q": "איזה מהם הכי גדול?",
-     "e": "-2    -7-10    -15"
-    },
-    {
-     "q": "⁦|-5| = ?⁩",
-     "e": "|-5| = ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci1",
-   "ver": "4cbd223d56",
-   "subject": "מדעים",
-   "grade": 0,
-   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
-   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
-   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
-   "tags": [
-    "מזג אוויר",
-    "אנרגיה",
-    "החושים",
-    "בריאות",
-    "עונות השנה",
-    "יום ולילה",
-    "צמחים",
-    "בעלי חיים",
-    "חי ודומם",
-    "תכונות חפצים",
-    "טכנולוגיה"
-   ],
-   "questions": 234,
-   "chapters": 23,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך מזג האוויר בתמונה?",
-     "e": "🌧️"
-    },
-    {
-     "q": "במה מודדים כמה חם בחוץ?",
-     "e": "☀️❄️"
-    },
-    {
-     "q": "מה נותן לכדור הארץ אור וחום?",
-     "e": "🌍"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci2",
    "ver": "810f624da2",
    "subject": "מדעים",
@@ -1361,130 +1283,6 @@
    ]
   },
   {
-   "id": "math6",
-   "ver": "701df01be8",
-   "subject": "מתמטיקה",
-   "grade": 5,
-   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
-   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
-   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
-   "tags": [
-    "כפל וחילוק שברים",
-    "עשרוניים",
-    "אחוזים",
-    "הנחות",
-    "יחס",
-    "קנה מידה",
-    "מהירות, דרך וזמן",
-    "מעגל ועיגול",
-    "זוויות במשולש ובמרובע",
-    "נפח",
-    "שטח פנים",
-    "פריסות",
-    "ממוצע וגרפים"
-   ],
-   "questions": 383,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "⁦2/3 × 3/4 =⁩",
-     "e": "2/3 × 3/4",
-     "q_en": "2/3 × 3/4 ="
-    },
-    {
-     "q": "⁦1 1/2 × 2/3 =⁩",
-     "e": "1 1/2 × 2/3",
-     "q_en": "1 1/2 × 2/3 ="
-    },
-    {
-     "q": "מה המספר ההופכי של ⁦3/4⁩?",
-     "e": "3/4",
-     "q_en": "What is the reciprocal of 3/4?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 6",
-   "title_en": "Multiplying and dividing fractions · Decimals · Percent · Ratio and scale · Speed · Circles · Angles · Volume and surface area · Solids",
-   "tags_en": [
-    "Multiplying and dividing fractions",
-    "Decimals",
-    "Percent",
-    "Discounts",
-    "Ratio",
-    "Scale",
-    "Speed, distance and time",
-    "Circles and circle area",
-    "Angles in triangles and quadrilaterals",
-    "Volume",
-    "Surface area",
-    "Nets",
-    "Mean and graphs"
-   ]
-  },
-  {
-   "id": "math7",
-   "ver": "b0a4cf2cfc",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
-   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
-   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
-   "tags": [
-    "מספרים מכוונים",
-    "ביטויים אלגבריים",
-    "כינוס איברים",
-    "חוק הפילוג",
-    "משוואות",
-    "בעיות מילוליות",
-    "מערכת צירים",
-    "פונקציות וגרפים",
-    "חזקות ושורשים",
-    "יחס",
-    "שטחים",
-    "זוויות"
-   ],
-   "questions": 338,
-   "chapters": 32,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
-     "e": "-6 ? -11",
-     "q_en": "Which is greater?"
-    },
-    {
-     "q": "⁦-4·(-6) = ?⁩",
-     "e": "-4·(-6)= ?",
-     "q_en": "-4·(-6) = ?"
-    },
-    {
-     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
-     "e": "2x + 1x = 3",
-     "q_en": "Substitute x=3 in the expression 2x+1. What do you get?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 7 – Full year",
-   "title_en": "Positive and negative numbers · Expressions · Equations · Coordinates and functions · Powers · Angles",
-   "tags_en": [
-    "Positive and negative numbers",
-    "Algebraic expressions",
-    "Combining like terms",
-    "The distributive law",
-    "Equations",
-    "Word problems",
-    "The coordinate plane",
-    "Functions and graphs",
-    "Powers and roots",
-    "Ratio",
-    "Area",
-    "Angles"
-   ]
-  },
-  {
    "id": "sci4",
    "ver": "3aef43a3d9",
    "subject": "מדעים",
@@ -1606,6 +1404,240 @@
     "Triangles and angles",
     "Area",
     "Mean and graphs"
+   ]
+  },
+  {
+   "id": "math7",
+   "ver": "0806e77b1e",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
+   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
+   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
+   "tags": [
+    "מספרים מכוונים",
+    "ביטויים אלגבריים",
+    "כינוס איברים",
+    "חוק הפילוג",
+    "משוואות",
+    "בעיות מילוליות",
+    "מערכת צירים",
+    "פונקציות וגרפים",
+    "חזקות ושורשים",
+    "יחס",
+    "שטחים",
+    "זוויות"
+   ],
+   "questions": 338,
+   "chapters": 32,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
+     "e": "-6 ? -11",
+     "q_en": "Which is greater?"
+    },
+    {
+     "q": "⁦-4·(-6) = ?⁩",
+     "e": "-4·(-6)= ?",
+     "q_en": "-4·(-6) = ?"
+    },
+    {
+     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
+     "e": "2x + 1x = 3",
+     "q_en": "Substitute x=3 in the expression 2x+1. What do you get?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 7 – Full year",
+   "title_en": "Positive and negative numbers · Expressions · Equations · Coordinates and functions · Powers · Angles",
+   "tags_en": [
+    "Positive and negative numbers",
+    "Algebraic expressions",
+    "Combining like terms",
+    "The distributive law",
+    "Equations",
+    "Word problems",
+    "The coordinate plane",
+    "Functions and graphs",
+    "Powers and roots",
+    "Ratio",
+    "Area",
+    "Angles"
+   ]
+  },
+  {
+   "id": "math7-nov26",
+   "ver": "69649f6532",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מערכת צירים · מספרים מכוונים · זוויות",
+   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות · לפי עמודי הספר",
+   "desc_en": "Coordinates, absolute value, signed numbers, angles",
+   "tags": [
+    "מערכת צירים",
+    "ציר המספרים",
+    "ערך מוחלט",
+    "שטח והיקף",
+    "סדר פעולות",
+    "זוויות",
+    "חוצה זווית"
+   ],
+   "questions": 124,
+   "chapters": 10,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
+     "e": "(3, 5)",
+     "q_en": "Which quadrant is the point (3,5) in?"
+    },
+    {
+     "q": "איזה מהם הכי גדול?",
+     "e": "-2    -7-10    -15",
+     "q_en": "Which number is the greatest?"
+    },
+    {
+     "q": "⁦|-5| = ?⁩",
+     "e": "|-5| = ?",
+     "q_en": "|-5| = ?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 7 – Algebra and Geometry",
+   "title_en": "The coordinate plane · Positive and negative numbers · Angles",
+   "tags_en": [
+    "The coordinate plane",
+    "The number line",
+    "Absolute value",
+    "Area and perimeter",
+    "Order of operations",
+    "Angles",
+    "Angle bisector"
+   ]
+  },
+  {
+   "id": "math6",
+   "ver": "a9757d7e82",
+   "subject": "מתמטיקה",
+   "grade": 5,
+   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
+   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
+   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
+   "tags": [
+    "כפל וחילוק שברים",
+    "עשרוניים",
+    "אחוזים",
+    "הנחות",
+    "יחס",
+    "קנה מידה",
+    "מהירות, דרך וזמן",
+    "מעגל ועיגול",
+    "זוויות במשולש ובמרובע",
+    "נפח",
+    "שטח פנים",
+    "פריסות",
+    "ממוצע וגרפים"
+   ],
+   "questions": 383,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "⁦2/3 × 3/4 =⁩",
+     "e": "2/3 × 3/4",
+     "q_en": "2/3 × 3/4 ="
+    },
+    {
+     "q": "⁦1 1/2 × 2/3 =⁩",
+     "e": "1 1/2 × 2/3",
+     "q_en": "1 1/2 × 2/3 ="
+    },
+    {
+     "q": "מה המספר ההופכי של ⁦3/4⁩?",
+     "e": "3/4",
+     "q_en": "What is the reciprocal of 3/4?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 6",
+   "title_en": "Multiplying and dividing fractions · Decimals · Percent · Ratio and scale · Speed · Circles · Angles · Volume and surface area · Solids",
+   "tags_en": [
+    "Multiplying and dividing fractions",
+    "Decimals",
+    "Percent",
+    "Discounts",
+    "Ratio",
+    "Scale",
+    "Speed, distance and time",
+    "Circles and circle area",
+    "Angles in triangles and quadrilaterals",
+    "Volume",
+    "Surface area",
+    "Nets",
+    "Mean and graphs"
+   ]
+  },
+  {
+   "id": "sci1",
+   "ver": "116640b4fc",
+   "subject": "מדעים",
+   "grade": 0,
+   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
+   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
+   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
+   "tags": [
+    "מזג אוויר",
+    "אנרגיה",
+    "החושים",
+    "בריאות",
+    "עונות השנה",
+    "יום ולילה",
+    "צמחים",
+    "בעלי חיים",
+    "חי ודומם",
+    "תכונות חפצים",
+    "טכנולוגיה"
+   ],
+   "questions": 234,
+   "chapters": 23,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך מזג האוויר בתמונה?",
+     "e": "🌧️",
+     "q_en": "What is the weather like in the picture?"
+    },
+    {
+     "q": "במה מודדים כמה חם בחוץ?",
+     "e": "☀️❄️",
+     "q_en": "What do we use to measure how hot it is?"
+    },
+    {
+     "q": "מה נותן לכדור הארץ אור וחום?",
+     "e": "🌍",
+     "q_en": "What gives the Earth light and heat?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 1",
+   "title_en": "Weather · Senses · Plants and animals · Living and non-living",
+   "tags_en": [
+    "Weather",
+    "Energy",
+    "The senses",
+    "Health",
+    "Seasons",
+    "Day and night",
+    "Plants",
+    "Animals",
+    "Living and non-living",
+    "Properties of objects",
+    "Technology"
    ]
   }
  ]

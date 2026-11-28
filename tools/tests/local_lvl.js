@@ -7,6 +7,9 @@
 const { chromium } = require('playwright'); const fs = require('fs');
 const APP = process.env.APP || 'http://localhost:8765/';
 const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim() : '';
+// how many test-level questions math7 has now (the set grows – never a fixed number here)
+const N2 = (() => { const raw = fs.readFileSync(__dirname + '/../../public/share/math7.txt', 'utf8').trim();
+  return JSON.parse(Buffer.from(raw.slice(5), 'base64').toString('utf8')).questions.filter(q => q.lvl === 2).length; })();
 (async () => {
   const b = await chromium.launch(); const errs = [], pageErrs = []; const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   p.on('pageerror', e => pageErrs.push(e.message));
@@ -81,13 +84,13 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
   }, MAIN);
   console.log(JSON.stringify(r, null, 1));
   const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) errs.push(m); };
-  ok(r.load.qs2 === 58 && r.load.allLvl2 && !r.load.lvlInQs, `loadShare: the 58 test-level questions apart (${r.load.qs} + ${r.load.qs2})`);
+  ok(r.load.qs2 === N2 && r.load.allLvl2 && !r.load.lvlInQs, `loadShare: the ${N2} test-level questions apart (${r.load.qs} + ${r.load.qs2})`);
   ok(r.same, 'the regular list = the set without them (same questions, same order, same chapters)');
-  ok(r.set.qs2 === 58 && !r.set.lvlInQs && r.set.q === r.load.qs, 'the family\'s copy: questions without them, qs2 with them');
-  ok(r.split.qs2 === 58 && r.split.q === r.load.qs && r.chGuard, 'a copy with them mixed in is split; getChapters never shows them');
+  ok(r.set.qs2 === N2 && !r.set.lvlInQs && r.set.q === r.load.qs, 'the family\'s copy: questions without them, qs2 with them');
+  ok(r.split.qs2 === N2 && r.split.q === r.load.qs && r.chGuard, 'a copy with them mixed in is split; getChapters never shows them');
   ok(r.games > 100 && !r.nbad, `every station × every game, "חזרה על הכול", review questions, focused practice: no test-level question (${r.games} games)${r.nbad ? ' – ' + r.bad.join(' | ') : ''}`);
   ok(r.focus > 0, 'focused practice was built (' + r.focus + ' questions)');
-  ok(r.asg.qs2 === 58 && !r.asg.lvlInQs, 'a teacher\'s assignment copy keeps them apart');
+  ok(r.asg.qs2 === N2 && !r.asg.lvlInQs, 'a teacher\'s assignment copy keeps them apart');
   ok(r.map.N[0] === r.map.N[1] && r.map.done[0] === r.map.done[1] && r.map.chq, `the map ("עברתי", the plan, the stations) as without them (${r.map.N[0]} stations)`);
   ok(r.ready2.need2 === 3 && r.ready2.before === 70 && r.map.ready[0] <= r.map.ready[1], `readiness: a station with test-level questions needs 3 of them – all level A right gives ${r.ready2.before}% (70 at most)`);
   ok(r.badge >= 1 && r.legend, `the map: "⭐ שלב מבחן" on the passed stations that have it (${r.badge}) + the small legend`);
@@ -95,7 +98,7 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
   ok(r.hist2.lvl === 2 && r.hist2.q2 > 0 && !r.hist2.qr && r.hist2.doneSame && r.hist2.passed, 'kept with lvl 2 and its results (q2); "עברתי" unchanged; passed at 70%');
   ok(r.ready2.after === 100 && r.badgeFull, `after it: the station's readiness ${r.ready2.after}%, a full star on the map`);
   ok(!r.review.rvBad && !r.mixMatch, `"חזרה על הכול": level B only of passed stations (${r.review.rv2} seen in 40 rounds); match never mixes the levels`);
-  ok(r.share.in === 58 && r.share.back === 58 && r.share.backQs === r.load.qs, 'sharing / a link keeps the test level (58) apart');
+  ok(r.share.in === N2 && r.share.back === N2 && r.share.backQs === r.load.qs, 'sharing / a link keeps the test level (' + N2 + ') apart');
   ok(!pageErrs.length, 'no page errors ' + JSON.stringify(pageErrs.slice(0, 3)))
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })();

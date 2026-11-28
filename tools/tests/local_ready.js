@@ -14,7 +14,7 @@ const OUT = process.env.OUT || '';
     await p.addInitScript(l => localStorage.setItem('sff_lang', l), lang);
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(1800); await p.evaluate(() => document.getElementById('fbLogin')?.remove());
     const r = await p.evaluate(async () => {
-      const s = await loadShare('math8'); s.id = 'rd1'; s.questions = s.qs; s.kidId = 'k1';
+      const s = await loadShare('math8'); s.id = 'rd1'; s.questions = s.qs; s.qs2 = []; s.kidId = 'k1';   // level A only: the meter's own sums (test level: local_lvl.js)
       const day = 864e5, iso = t => new Date(t).toISOString().slice(0, 10);
       s.examDate = iso(Date.now() + 10 * day); s.created = Date.now() - 4 * day; s.dailyGoal = 3;
       kids.push({ id: 'k1', name: 'נועה', grade: 7, color: '#FF5C8A' }); sets.push(s); activeKid = 'k1';

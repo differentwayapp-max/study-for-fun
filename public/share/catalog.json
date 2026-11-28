@@ -1,52 +1,6 @@
 {
  "sets": [
   {
-   "id": "en6",
-   "ver": "461366cc01",
-   "subject": "אנגלית",
-   "grade": 5,
-   "title": "Grammar · Past Simple · Time · Band I words · Reading",
-   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
-   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
-   "tags": [
-    "Present Simple / Progressive",
-    "can · there is",
-    "have got",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Questions",
-    "Past Simple",
-    "this / these",
-    "Commands",
-    "Describing people",
-    "Clothes",
-    "Telling the time",
-    "Band I words",
-    "Writing",
-    "Reading"
-   ],
-   "questions": 460,
-   "chapters": 44,
-   "reading": 4,
-   "words": 107,
-   "samples": [
-    {
-     "q": "Look! The baby ___.",
-     "e": "👶😴"
-    },
-    {
-     "q": "___ your sister playing the piano now?",
-     "e": "👧🎹"
-    },
-    {
-     "q": "Fish ___ swim, but they can't walk.",
-     "e": "🐟"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en7",
    "ver": "139eb49420",
    "subject": "אנגלית",
@@ -1897,6 +1851,75 @@
     "Weather",
     "Nature",
     "Unseen"
+   ]
+  },
+  {
+   "id": "en6",
+   "ver": "9eaa09138f",
+   "subject": "אנגלית",
+   "grade": 5,
+   "title": "Grammar · Past Simple · Time · Band I words · Reading",
+   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
+   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
+   "tags": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
+   ],
+   "questions": 460,
+   "chapters": 44,
+   "reading": 4,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Look! The baby ___.",
+     "e": "👶😴",
+     "q_en": "Look! The baby ___."
+    },
+    {
+     "q": "___ your sister playing the piano now?",
+     "e": "👧🎹",
+     "q_en": "___ your sister playing the piano now?"
+    },
+    {
+     "q": "Fish ___ swim, but they can't walk.",
+     "e": "🐟",
+     "q_en": "Fish ___ swim, but they can't walk."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 6",
+   "title_en": "Grammar · Past Simple · Time · Band I words · Reading",
+   "tags_en": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
    ]
   }
  ]

@@ -47,6 +47,10 @@ const walk = async (p, id, all) => p.evaluate(async ([id, all]) => {
     if (key.qk !== key.tkey) fails.push('history qk is not the Hebrew question key');
     if (HE.test(key.en)) fails.push('qv() did not give the English question');
     if (!key.shown) fails.push('a question edited after translation still shows the old English');
+    // the map's station icons: the same as in Hebrew, except where the Hebrew icon is a Hebrew card (a number card never becomes an icon)
+    for (const id of IDS) { const icons = await p.evaluate(async id => { const s = await loadShare(id);
+      return s.qs.filter(q => qv(q).emoji !== q.emoji && !/[֐-׿]/.test(q.emoji || '')).length; }, id);
+      if (icons) fails.push(`${id}: ${icons} questions get another icon in English (a number card would show on the map)`); }
     // a Hebrew set: chapter titles stay whole Hebrew (no "Open, אמצע וסוף")
     const heb = await p.evaluate(async id => { const s = await loadShare(id); s.id = 't_h'; s.questions = s.qs; s.kidId = 'k1'; sets.length = 0; sets.push(s);
       curSet = s; renderReview(s); show('vReview'); await new Promise(r => setTimeout(r, 300));

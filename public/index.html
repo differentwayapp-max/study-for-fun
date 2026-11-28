@@ -2375,7 +2375,8 @@ const QV=new WeakMap();
 function qv(q){ if(!q||!q.en||q.en.k!==q.question||!EN()) return q; const c=QV.get(q); if(c) return c;
   const e=q.en, sc=Array.isArray(q.scene)?q.scene.map((it,i)=>e.sc&&e.sc[i]!=null?{...it,e:String(e.sc[i])}:it):q.scene;
   const v={...q, question:String(e.q||q.question), options:Array.isArray(e.o)&&e.o.length===q.options.length?e.o.map(String):q.options,
-    explanation:e.x!=null?String(e.x):q.explanation, ...(sc?{scene:sc,emoji:sc[0]?sc[0].e:q.emoji}:{})};
+    explanation:e.x!=null?String(e.x):q.explanation, ...(sc?{scene:sc,
+    emoji:q.emoji&&/[\u0590-\u05FF]/.test(q.emoji)&&Array.isArray(q.scene)&&q.scene[0]&&q.emoji===q.scene[0].e&&sc[0]?sc[0].e:q.emoji}:{})};   // only a Hebrew card that was the emoji gets its English (a number / symbol stays the station's icon)
   QV.set(q,v); return v; }
 // a label (topic, chapter title, set name) in the shown language: from the set's own labels, else from every set on the phone
 const setLbl=s=>EN()&&s&&s.en&&s.en.labels||null;
@@ -3624,7 +3625,7 @@ function chType(set,c){
   if(!/אנגלית|עברית|english/i.test(set.subject||'')) return 'prac';
   const g=c.qs.filter(q=>wordCat(set,q)==='grammar').length; return g>=c.qs.length/2?'gram':'word';
 }
-const PG_RE=/\s*·\s*(עמ'[^·]*)$/; function chPages(c){ const m=String(c.title||'').match(PG_RE); return m?m[1].trim():''; }   // book pages in the title: "Topic · עמ' 5–20"
+const PG_RE=/\s*·\s*((?:עמ'|pp\.)[^·]*)$/; function chPages(c){ const m=String(c.title||'').match(PG_RE); return m?m[1].trim():''; }   // book pages in the title: "Topic · עמ' 5–20"
 function chName(c){ let t=String(c.title||'').replace(/^📖\s*/,'').replace(PG_RE,''); if(t.includes(':')) t=t.split(':').slice(1).join(':').trim(); return t.length>22?t.slice(0,21)+'…':t; }
 function roadPlan(set){
   const C=getChapters(set), N=C.length, dn=chaptersDone(set), DAY=864e5, t0=new Date().setHours(0,0,0,0);

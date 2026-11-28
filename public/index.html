@@ -633,6 +633,19 @@ body:not(.cls) #tReport{display:none}body.cls #vStats>:not(#tReport){display:non
 .fcard.f2 .fsub{color:#6B4700}.fcard.f2 .btn{width:100%;justify-content:center;min-height:44px}.fcard.f2 .linkbtn{display:block;margin:2px auto 0}.fmore{color:#6B4700;font-weight:700}
 .hero.focusc{box-shadow:0 0 0 4px #B9A7FF,0 6px 0 var(--ink)}.ffixed{display:inline-block;margin-top:6px;background:#DDF8EC;color:#0B6B4A;border-radius:99px;padding:3px 10px;font-size:.8em;font-weight:700}
 .fnew{position:fixed;inset:0;z-index:80;background:rgba(27,42,74,.45);display:flex;align-items:flex-end;justify-content:center}
+#histDlg.hidden{display:none}
+.hsheet{width:100%;max-width:520px;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px calc(18px + var(--sab,0px));display:flex;flex-direction:column;gap:12px;animation:fnup .25s ease-out;max-height:calc(100dvh - 60px);overflow-y:auto;box-sizing:border-box}
+.hgrip{align-self:center;width:44px;height:5px;border-radius:9px;background:#D5DEF2}.hhead{display:flex;justify-content:space-between;align-items:center;gap:8px}.hhead>b{font-family:var(--display);font-size:1.05em;min-width:0}
+.hx{width:44px;height:44px;border-radius:50%;border:0;background:#F4F7FC;font:inherit;cursor:pointer;flex:none}
+.hchart{display:flex;flex-direction:column;gap:6px}.hchart .hint{font-weight:700}
+.hbars{height:110px;display:flex;align-items:flex-end;gap:5px;border-bottom:1.5px solid #EAF0FF;padding-bottom:2px}
+.hbar{flex:1;height:3px;background:#EAF0FF;border-radius:5px 5px 0 0}.hbar.now{box-shadow:0 0 0 2px #2F6BFF}
+.hax{display:flex;justify-content:space-between;font-size:.72em;color:var(--ink2)}.hsum{font-size:.82em;color:var(--ink2)}
+.hlist{display:flex;flex-direction:column}.hrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #EEF2F7}.hrow:last-child{border-bottom:0}
+.hrow>div{flex:1;min-width:0;display:flex;flex-direction:column}.hrow small{font-size:.78em;color:var(--ink2)}
+.hico{width:34px;height:34px;border-radius:10px;background:#EAF0FF;display:flex;align-items:center;justify-content:center;flex:none;font-size:15px}
+.hmore{align-self:center;font-weight:700}
+@media (max-height:620px){ .hbars{height:64px} .hsheet{gap:8px} .hrow{padding:6px 0} }
 .fnewsheet{width:100%;max-width:520px;background:#fff;border-radius:28px 28px 0 0;padding:22px 20px calc(24px + var(--sab));display:flex;flex-direction:column;align-items:center;gap:12px;animation:fnup .25s ease-out}
 @keyframes fnup{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .fnewtag{background:#FF5C8A;color:#fff;border-radius:99px;padding:4px 12px;font-size:.85em;font-weight:800}.fnewico{width:64px;height:64px;border-radius:20px;background:#B9A7FF;display:flex;align-items:center;justify-content:center}
@@ -4848,13 +4861,28 @@ function wDetail(sel,en){ return `<div class="wdetail"><div class="wtop"><span c
   ${Object.keys(sel.picks).length?`<div class="hint" style="margin-top:8px">${esc(sffT?sffT('ענה/תה במקום:'):'ענה/תה במקום:')} ${Object.entries(sel.picks).sort((a,b)=>b[1]-a[1]).map(([w,c])=>`<b dir="auto" translate="no">${esc(w)}</b> ×${c}`).join(' · ')}</div>`:''}
   <div class="hint" style="margin-top:6px" dir="auto" translate="no">❓ ${esc(sel.q.question)}</div></div>`; }
 // the set's games, in a window (until the history screen – level 3 – is built)
-function openSetHistory(id){ const s=getSet(id); if(!s) return; const H=history.filter(h=>h.setId===id).slice(0,60);
-  let d=$('histDlg'); if(!d){ d=document.createElement('div'); d.id='histDlg'; d.className='dlgwrap'; d.onclick=e=>{ if(e.target===d) d.classList.add('hidden'); }; document.body.appendChild(d); }
-  d.innerHTML=`<div class="card"><div class="dlghead"><b>${esc(sffT?sffT('היסטוריה'):'היסטוריה')} · <span dir="auto">${esc(String(s.subject))}</span></b><button class="btn ghost small" onclick="$('histDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
-    ${H.length?`<table><thead><tr><th>${esc(sffT?sffT('מתי'):'מתי')}</th><th>${esc(sffT?sffT('משחק'):'משחק')}</th><th>${esc(sffT?sffT('תוצאה'):'תוצאה')}</th></tr></thead><tbody>${H.map(h=>{ const p=Math.round(h.right/Math.max(1,h.n)*100);
-      return `<tr><td>${new Date(h.at).toLocaleString(EN()?'en-GB':'he-IL',{dateStyle:'short',timeStyle:'short'})}</td><td>${MODE_ICO[h.mode]||'🎮'}${h.retry?` <span class="hint">${esc(sffT?sffT('(חזרה על טעויות)'):'(חזרה על טעויות)')}</span>`:''}</td><td><span class="pill ${p>=80?'ok':p>=60?'warn':'bad'}">${h.right}/${h.n}</span></td></tr>`; }).join('')}</tbody></table>`
-      :`<p class="hint center">${esc(sffT?sffT('עוד אין משחקים'):'עוד אין משחקים')}</p>`}</div>`;
+// a set's history (level 3 of "מעקב", canvas TrackHistory): a sheet from the bottom – 14 days as bars (each day's success,
+// a gap = no practice, today outlined; oldest on the reading side's start), one line of totals, the last 4 games and "עוד N משחקים"
+const MODE_NAME={choice:'שאלות',memory:'זיכרון',match:'התאמה',riddle:'חידה',spell:'איות'};
+function histWhen(t){ const d=Math.round((dayStart(Date.now())-dayStart(t))/864e5), hm=new Date(t).toLocaleTimeString(EN()?'en-GB':'he-IL',{hour:'2-digit',minute:'2-digit'});
+  return d===0?`היום, ${hm}`:d===1?`אתמול, ${hm}`:`<bdi dir="ltr">${new Date(t).toLocaleDateString(EN()?'en-GB':'he-IL',{day:'numeric',month:'numeric'})}, ${hm}</bdi>`; }   // a date and a time read left to right in Hebrew too
+function openSetHistory(id, all){ const s=getSet(id); if(!s) return; const H=history.filter(h=>h.setId===id).slice(0,60), k=kidOfSet(s);
+  const T0=dayStart(Date.now()), days=[...Array(14).keys()].map(i=>T0-(13-i)*864e5), per=days.map(d=>{ const g=H.filter(h=>dayStart(h.at)===d&&h.n>0); return g.length?Math.round(g.reduce((a,h)=>a+h.right/h.n,0)/g.length*100):null; });
+  const H14=H.filter(h=>h.at>=days[0]), on=per.filter(x=>x!=null).length, avg=H14.length?Math.round(H14.reduce((a,h)=>a+h.right/Math.max(1,h.n),0)/H14.length*100):0;
+  const bars=per.map((v,i)=>`<span class="hbar${i===13?' now':''}"${v==null?'':` style="height:${Math.max(6,v)}%;background:${v>=80?'#24C78E':'#F2A63B'}"`} title="${v==null?'':v+'%'}"></span>`).join('');
+  const row=h=>{ const p=Math.round(h.right/Math.max(1,h.n)*100), ch=h.ch!=null&&h.ch>=0?h.ch+1:null;
+    return `<div class="hrow"><span class="hico" aria-hidden="true">${h.retry?'↻':MODE_ICO[h.mode]||'🎮'}</span><div><b>${h.retry?'<span>חזרה על טעויות</span>':`<span>${MODE_NAME[h.mode]||'משחק'}</span>${ch?` · <span>פרק ${ch}</span>`:''}`}</b><small>${histWhen(h.at)}</small></div>
+      <span class="pill ${p>=80?'ok':p>=60?'warn':'bad'}">${h.right}/${h.n}</span></div>`; };
+  const shown=all?H:H.slice(0,4);
+  let d=$('histDlg'); if(!d){ d=document.createElement('div'); d.id='histDlg'; d.className='fnew'; d.onclick=e=>{ if(e.target===d) d.classList.add('hidden'); }; document.body.appendChild(d); }
+  d.innerHTML=`<div class="hsheet" role="dialog" aria-modal="true"><span class="hgrip" aria-hidden="true"></span>
+    <div class="hhead"><b><span>היסטוריה</span> · ${k?`<bdi>${esc(kidName(k))}</bdi> · `:''}<span dir="auto">${esc(String(s.subject).replace(/^🎯\s*/,''))}</span></b><button class="hx" onclick="$('histDlg').classList.add('hidden')" aria-label="סגירה">✕</button></div>
+    ${H.length?`<div class="hchart"><span class="hint">14 ימים אחרונים · הצלחה בכל יום</span><div class="hbars" role="img" aria-label="${esc(sffTx2(`${on} ימים עם תרגול`))}">${bars}</div><div class="hax"><span>לפני שבועיים</span><span>היום</span></div></div>
+      <div class="hsum">${H14.length} משחקים ב-14 ימים · ${on} ימים עם תרגול · ${avg}% הצלחה</div>
+      <div class="hlist">${shown.map(row).join('')}</div>${!all&&H.length>4?`<button class="linkbtn hmore" onclick="openSetHistory('${esc(id)}',1)">עוד ${H.length-4} משחקים</button>`:''}`
+      :`<p class="hint center">עוד אין משחקים</p>`}</div>`;
   d.classList.remove('hidden'); }
+const sffTx2=t=>window.sffT?sffT(t):t;
 function renderStats(){
   if(isClassMode()){ renderTeacherStats(); return; }   // a group: the report by topic
   $('tReport').innerHTML='';

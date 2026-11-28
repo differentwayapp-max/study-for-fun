@@ -25,7 +25,7 @@
     'השם שלי': 'My name', 'חזרה': 'Back', 'צליל': 'Sound', 'ביטול': 'Cancel', 'למי': 'Who', 'נושאים': 'Topics',
     'חומר': 'Material', 'סיכום': 'Summary', 'למי ובאיזה מקצוע': 'Who and which subject', 'ילד/ה חדש/ה': 'New kid',
     'מקצוע': 'Subject', 'אנגלית': 'English', 'מתמטיקה': 'Math', 'עברית / לשון': 'Hebrew', 'מדעים': 'Science',
-    'היסטוריה': 'History', 'תנ"ך': 'Bible', 'אחר': 'Other', 'תאריך המבחן': 'Test date', 'קוד שיתוף': 'Share code',
+    'היסטוריה': 'History', '14 ימים אחרונים · הצלחה בכל יום': 'Last 14 days · success each day', 'לפני שבועיים': 'Two weeks ago', 'התאמה': 'Matching', 'תנ"ך': 'Bible', 'אחר': 'Other', 'תאריך המבחן': 'Test date', 'קוד שיתוף': 'Share code',
     'מילוי דוגמה': 'Fill in an example', 'המשך': 'Continue', 'הוספה': 'Add', 'ייבוא': 'Import',
     'נושאים למבחן': 'Test topics', 'נושא בכל שורה': 'One topic per line', 'דפי דוגמה': 'Sample pages', 'דף דוגמה': 'Sample page',
     'לא חובה': 'Optional', 'צילום': 'Camera', 'תמונות': 'Photos', 'קישור': 'Link', 'טקסט': 'Text',
@@ -288,6 +288,11 @@
   const tr = s => (s && HE.test(s)) ? translate(s) : s;
   // patterns for text with numbers or names in it
   const P = [
+    // the set's history sheet (level 3 of the tracking screen)
+    [/^(\d+) משחקים ב-14 ימים · (\d+) ימים עם תרגול · (\d+)% הצלחה$/, (m, g, d, p) => `${g} games in 14 days · ${d} days of practice · ${p}% success`],
+    [/^(\d+) ימים עם תרגול$/, (m, d) => `${d} days of practice`],
+    [/^עוד (\d+) משחקים$/, (m, n) => `${n} more games`],
+    [/^(היום|אתמול), (\d+:\d+)$/, (m, w, t) => `${w === 'היום' ? 'Today' : 'Yesterday'}, ${t}`],
     // the readiness meter (map header + the parent's row)
     [/^עוד (\d+) ימים · (\d+)\/(\d+) פרקים$/, (m, d, a, b) => `${d} days · ${a}/${b} chapters`],
     [/^(המבחן עבר|המבחן היום|המבחן מחר) · (\d+)\/(\d+) פרקים$/, (m, w, a, b) => `${{'המבחן עבר': 'Test passed', 'המבחן היום': 'Test today', 'המבחן מחר': 'Test tomorrow'}[w]} · ${a}/${b} chapters`],

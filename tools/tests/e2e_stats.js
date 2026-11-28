@@ -89,7 +89,12 @@ const GOOGLE = { sub: 'statsP', email: 'statsp@t.local', email_verified: true, n
   ok(await p.evaluate(() => /חשבון|מתמטיקה|math/i.test(document.querySelector('.stabs button.on').textContent) && document.getElementById('sFocus').classList.contains('hidden')), 'the math tab: nothing to strengthen – no pinned button');
   await p.click('.stabs button:nth-child(1)'); await p.waitForTimeout(300);
   await p.click('.srow:last-child'); await p.waitForTimeout(300);
-  ok(await p.evaluate(() => !document.getElementById('histDlg').classList.contains('hidden') && document.querySelectorAll('#histDlg tbody tr').length >= 3), 'the history row opens the set\'s games in a window');
+  const HS = await p.evaluate(() => { const d = document.getElementById('histDlg'), sh = d && d.querySelector('.hsheet'), r = sh && sh.getBoundingClientRect();
+    return { open: !!d && !d.classList.contains('hidden'), bars: d ? d.querySelectorAll('.hbars .hbar').length : 0, on: d ? d.querySelectorAll('.hbars .hbar[style]').length : 0, now: d ? d.querySelectorAll('.hbar.now').length : 0,
+      rows: d ? d.querySelectorAll('.hrow').length : 0, more: !!(d && d.querySelector('.hmore')), sum: d ? (d.querySelector('.hsum') || {}).textContent || '' : '', inScreen: !!r && r.bottom <= innerHeight + 1 && r.top >= 0, table: d ? d.querySelectorAll('table').length : 0 }; });
+  ok(HS.open && HS.bars === 14 && HS.on >= 1 && HS.now === 1 && HS.rows >= 3 && HS.rows <= 4 && /\d+ משחקים ב-14 ימים · \d+ ימים עם תרגול · \d+% הצלחה/.test(HS.sum) && HS.inScreen && !HS.table,
+    'the history row opens a sheet: 14 days as bars (today outlined), one line of totals, the last games (≤ 4), no table ' + JSON.stringify(HS));
+  if (HS.more) { await p.click('#histDlg .hmore'); await p.waitForTimeout(250); ok(await p.evaluate(() => document.querySelectorAll('#histDlg .hrow').length > 4 && !document.querySelector('#histDlg .hmore')), '"עוד N משחקים" shows them all'); }
   await p.evaluate(() => document.getElementById('histDlg').classList.add('hidden'));
   await p.click('#topBack'); await p.waitForTimeout(400);
   ok(await p.evaluate(() => document.querySelectorAll('#sBody .skcard').length === 3 && document.getElementById('topBack').classList.contains('hidden')), 'back: every kid again');

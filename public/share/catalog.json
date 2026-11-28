@@ -390,47 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "sci2",
-   "ver": "810f624da2",
-   "subject": "מדעים",
-   "grade": 1,
-   "title": "חומרים · יצורים חיים · שיניים · צמחים · טבע · טכנולוגיה",
-   "desc": "תכונות ומיון של חומרים, מוצק נוזל וגז, יצורים חיים וצורכיהם, השיניים ובריאותן, בעלי חיים ובתי גידול, מגוון צמחים, שמירה על הטבע וטכנולוגיה",
-   "desc_en": "Properties and sorting of materials, solid, liquid and gas, living things and their needs, teeth and dental health, animal groups and habitats, plant diversity, protecting nature and technology",
-   "tags": [
-    "תכונות חומרים",
-    "מיון חומרים",
-    "מוצק נוזל וגז",
-    "חי ודומם",
-    "צורכי היצורים",
-    "שיניים",
-    "בריאות השיניים",
-    "בתי גידול",
-    "מגוון צמחים",
-    "שמירה על הטבע",
-    "טכנולוגיה"
-   ],
-   "questions": 240,
-   "chapters": 23,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איזה צעצוע עשוי מחומר רך?",
-     "e": "🧸🔨"
-    },
-    {
-     "q": "איך נקרא חומר שמתכופף ולא נשבר?",
-     "e": "🤸"
-    },
-    {
-     "q": "ממה עשוי המפתח?",
-     "e": "🔑"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci3",
    "ver": "2ec420b7dc",
    "subject": "מדעים",
@@ -1660,6 +1619,65 @@
     "Order of operations",
     "Angles",
     "Angle bisector"
+   ]
+  },
+  {
+   "id": "sci2",
+   "ver": "57dd156773",
+   "subject": "מדעים",
+   "grade": 1,
+   "title": "חומרים · יצורים חיים · שיניים · צמחים · טבע · טכנולוגיה",
+   "desc": "תכונות ומיון של חומרים, מוצק נוזל וגז, יצורים חיים וצורכיהם, השיניים ובריאותן, בעלי חיים ובתי גידול, מגוון צמחים, שמירה על הטבע וטכנולוגיה",
+   "desc_en": "Properties and sorting of materials, solid, liquid and gas, living things and their needs, teeth and dental health, animal groups and habitats, plant diversity, protecting nature and technology",
+   "tags": [
+    "תכונות חומרים",
+    "מיון חומרים",
+    "מוצק נוזל וגז",
+    "חי ודומם",
+    "צורכי היצורים",
+    "שיניים",
+    "בריאות השיניים",
+    "בתי גידול",
+    "מגוון צמחים",
+    "שמירה על הטבע",
+    "טכנולוגיה"
+   ],
+   "questions": 240,
+   "chapters": 23,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איזה צעצוע עשוי מחומר רך?",
+     "e": "🧸🔨",
+     "q_en": "Which toy is made of a soft material?"
+    },
+    {
+     "q": "איך נקרא חומר שמתכופף ולא נשבר?",
+     "e": "🤸",
+     "q_en": "What do we call a material that bends without breaking?"
+    },
+    {
+     "q": "ממה עשוי המפתח?",
+     "e": "🔑",
+     "q_en": "What is a key made of?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 2",
+   "title_en": "Materials · Living things · Teeth · Plants · Nature · Technology",
+   "tags_en": [
+    "Properties of materials",
+    "Sorting materials",
+    "Solid, liquid and gas",
+    "Living and non-living",
+    "Needs of living things",
+    "Teeth",
+    "Dental health",
+    "Habitats",
+    "Plant diversity",
+    "Protecting nature",
+    "Technology"
    ]
   }
  ]

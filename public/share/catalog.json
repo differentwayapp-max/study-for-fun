@@ -390,49 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "sci6",
-   "ver": "a12a13df19",
-   "subject": "מדעים",
-   "grade": 5,
-   "title": "אנרגיה · אור וקול · חשמל ומגנטים · העין, העדשות והאוזן · מערכת אקולוגית · מערכת טכנולוגית",
-   "desc": "סוגי אנרגיה, המרות ושרשראות אנרגיה, ייצור חשמל וחיסכון, אור וצללים, החזרה, שקיפות וצבעים, קול – גובה ועוצמה, מעגל חשמלי טורי ומקבילי, מוליכים ובטיחות בחשמל, מגנטים ואלקטרומגנט, העין, שבירת אור, עדשות וליקויי ראייה, האוזן, יצרנים, צרכנים ומפרקים, פוטוסינתזה, בתי גידול בישראל והשפעת האדם, ומערכת טכנולוגית",
-   "desc_en": "Types of energy, energy conversions and chains, producing electricity and saving energy, light and shadows, reflection, transparency and colours, sound – pitch and loudness, series and parallel circuits, conductors and electrical safety, magnets and the electromagnet, the eye, refraction, lenses and vision defects, the ear, producers, consumers and decomposers, photosynthesis, habitats in Israel and human influence, and a technological system",
-   "tags": [
-    "אנרגיה",
-    "ייצור חשמל",
-    "אור וצל",
-    "קול",
-    "מעגל חשמלי",
-    "בטיחות בחשמל",
-    "מגנטים",
-    "העין והאוזן",
-    "עדשות וראייה",
-    "מערכת אקולוגית",
-    "פוטוסינתזה",
-    "בתי גידול",
-    "מערכת טכנולוגית"
-   ],
-   "questions": 339,
-   "chapters": 33,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהי אנרגיה?",
-     "e": "⚡🔥"
-    },
-    {
-     "q": "איזו מהן היא אנרגיה אגורה?",
-     "e": "⛰️💡"
-    },
-    {
-     "q": "נורה דולקת: לאילו שתי אנרגיות הופך החשמל?",
-     "e": "⚡⬅️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci7",
    "ver": "8177c97f9c",
    "subject": "מדעים",
@@ -1714,6 +1671,69 @@
     "Plant diversity",
     "Protecting nature",
     "Technology"
+   ]
+  },
+  {
+   "id": "sci6",
+   "ver": "ee47537a0b",
+   "subject": "מדעים",
+   "grade": 5,
+   "title": "אנרגיה · אור וקול · חשמל ומגנטים · העין, העדשות והאוזן · מערכת אקולוגית · מערכת טכנולוגית",
+   "desc": "סוגי אנרגיה, המרות ושרשראות אנרגיה, ייצור חשמל וחיסכון, אור וצללים, החזרה, שקיפות וצבעים, קול – גובה ועוצמה, מעגל חשמלי טורי ומקבילי, מוליכים ובטיחות בחשמל, מגנטים ואלקטרומגנט, העין, שבירת אור, עדשות וליקויי ראייה, האוזן, יצרנים, צרכנים ומפרקים, פוטוסינתזה, בתי גידול בישראל והשפעת האדם, ומערכת טכנולוגית",
+   "desc_en": "Types of energy, energy conversions and chains, producing electricity and saving energy, light and shadows, reflection, transparency and colours, sound – pitch and loudness, series and parallel circuits, conductors and electrical safety, magnets and the electromagnet, the eye, refraction, lenses and vision defects, the ear, producers, consumers and decomposers, photosynthesis, habitats in Israel and human influence, and a technological system",
+   "tags": [
+    "אנרגיה",
+    "ייצור חשמל",
+    "אור וצל",
+    "קול",
+    "מעגל חשמלי",
+    "בטיחות בחשמל",
+    "מגנטים",
+    "העין והאוזן",
+    "עדשות וראייה",
+    "מערכת אקולוגית",
+    "פוטוסינתזה",
+    "בתי גידול",
+    "מערכת טכנולוגית"
+   ],
+   "questions": 339,
+   "chapters": 33,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהי אנרגיה?",
+     "e": "⚡🔥",
+     "q_en": "What is energy?"
+    },
+    {
+     "q": "איזו מהן היא אנרגיה אגורה?",
+     "e": "⛰️💡",
+     "q_en": "Which one is stored energy?"
+    },
+    {
+     "q": "נורה דולקת: לאילו שתי אנרגיות הופך החשמל?",
+     "e": "⚡⬅️",
+     "q_en": "A bulb is lit: which two energies does the electricity become?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 6",
+   "title_en": "Energy · Light and sound · Electricity and magnets · The eye, lenses and the ear · Ecosystems · Technological systems",
+   "tags_en": [
+    "Energy",
+    "Generating electricity",
+    "Light and shadow",
+    "Sound",
+    "Electric circuits",
+    "Electrical safety",
+    "Magnets",
+    "The eye and the ear",
+    "Lenses and vision",
+    "Ecosystems",
+    "Photosynthesis",
+    "Habitats",
+    "Technological systems"
    ]
   }
  ]

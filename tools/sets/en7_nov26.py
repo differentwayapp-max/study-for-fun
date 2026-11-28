@@ -13,6 +13,15 @@ MAX_Q_WORDS = 10
 
 # (title, topics, [ (topic, question, [options], answer_index, explanation, scene) ])
 # scene: list of (emoji, x, y, size)  — or a single emoji string → centered.
+def Q(t, q, opts, ans, expl, sc, lvl=1):
+    r = (t, q, opts, ans, expl, sc)
+    return r + (2,) if lvl == 2 else r          # lvl=2: a test-level question (a 7th field 2 – "⭐ שלב מבחן")
+def Q2(*a): return Q(*a, lvl=2)
+def ROW(*es):
+    """The things the question talks about, side by side."""
+    n = len(es); s = min(40, 125 / n); step = min(92 / n, s / 1.6 * 1.35)
+    return [(e, round(50 + (j - (n - 1) / 2) * step, 1), 52, round(s)) for j, e in enumerate(es)]
+
 C = []
 
 C.append(("Present Simple: he / she / it", [PS], [

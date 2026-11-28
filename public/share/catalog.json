@@ -686,100 +686,6 @@
    "status": "ready"
   },
   {
-   "id": "sci7",
-   "ver": "8177c97f9c",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
-   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
-   "tags": [
-    "מודל חלקיקי",
-    "שינוי כימי",
-    "תמיסות",
-    "אנרגיה",
-    "מקורות אנרגיה",
-    "מעבר חום",
-    "התא",
-    "מיקרוסקופ",
-    "מחזור הדם",
-    "הובלה בצמח",
-    "חום וטמפרטורה",
-    "מערכת הנשימה",
-    "פוטוסינתזה",
-    "נשימה תאית",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 381,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
-     "e": "⚫⚫"
-    },
-    {
-     "q": "למה לנוזל אין צורה קבועה?",
-     "e": "💧"
-    },
-    {
-     "q": "מחממים מים. מה קורה לחלקיקים?",
-     "e": "🔥💧"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci7-materials",
-   "ver": "d47d9e0ece",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
-   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
-   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון",
-    "צפיפות",
-    "ציפה ושקיעה",
-    "מכשירי מדידה",
-    "המרות",
-    "מצבי צבירה",
-    "משתנים",
-    "תכנון ניסוי",
-    "גרפים וטבלאות"
-   ],
-   "questions": 305,
-   "chapters": 30,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬"
-    },
-    {
-     "q": "מה מהבאים מגדיר נפח?",
-     "e": "📦"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en4-nov26",
    "ver": "6d2785e347",
    "subject": "אנגלית",
@@ -1075,94 +981,6 @@
    "status": "ready"
   },
   {
-   "id": "math8",
-   "ver": "e8d937553f",
-   "subject": "מתמטיקה",
-   "grade": 7,
-   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
-   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
-   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
-   "tags": [
-    "פונקציה קווית",
-    "שיפוע",
-    "כפל מקוצר",
-    "חוקי חזקות",
-    "אי-שוויונות",
-    "מערכת משוואות",
-    "פתרון גרפי",
-    "יחס ופרופורציה",
-    "אחוזים וריבית",
-    "הסתברות",
-    "חפיפת משולשים",
-    "שווה שוקיים",
-    "מרובעים מיוחדים",
-    "דמיון משולשים",
-    "פיתגורס"
-   ],
-   "questions": 405,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה השיפוע של ⁦y=3x+2⁩?",
-     "e": "y = 3x + 2"
-    },
-    {
-     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
-     "e": "(0,1)(2,5)"
-    },
-    {
-     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
-     "e": "y = 2x + 5"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en8",
-   "ver": "b6fd56755e",
-   "subject": "אנגלית",
-   "grade": 7,
-   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
-   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
-   "tags": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
-    "Unseen"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 4,
-   "words": 59,
-   "samples": [
-    {
-     "q": "She ___ her homework, so she can watch TV.",
-     "e": "👧📓"
-    },
-    {
-     "q": "I haven't finished my project ___.",
-     "e": "📋⏳"
-    },
-    {
-     "q": "We ___ about the trip the day before yesterday.",
-     "e": "🗣️🧳"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci8",
    "ver": "2196e0b978",
    "subject": "מדעים",
@@ -1450,6 +1268,188 @@
     {
      "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
      "e": "🗣️📄"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7",
+   "ver": "9bba75abae",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
+   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
+   "tags": [
+    "מודל חלקיקי",
+    "שינוי כימי",
+    "תמיסות",
+    "אנרגיה",
+    "מקורות אנרגיה",
+    "מעבר חום",
+    "התא",
+    "מיקרוסקופ",
+    "מחזור הדם",
+    "הובלה בצמח",
+    "חום וטמפרטורה",
+    "מערכת הנשימה",
+    "פוטוסינתזה",
+    "נשימה תאית",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 381,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
+     "e": "⚫⚫"
+    },
+    {
+     "q": "למה לנוזל אין צורה קבועה?",
+     "e": "💧"
+    },
+    {
+     "q": "מחממים מים. מה קורה לחלקיקים?",
+     "e": "🔥💧"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "742e26c87e",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
+   "desc": "חומרים: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "צפיפות",
+    "ציפה ושקיעה",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 305,
+   "chapters": 30,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬"
+    },
+    {
+     "q": "מה מהבאים מגדיר נפח?",
+     "e": "📦"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math8",
+   "ver": "dd665330fe",
+   "subject": "מתמטיקה",
+   "grade": 7,
+   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
+   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
+   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
+   "tags": [
+    "פונקציה קווית",
+    "שיפוע",
+    "כפל מקוצר",
+    "חוקי חזקות",
+    "אי-שוויונות",
+    "מערכת משוואות",
+    "פתרון גרפי",
+    "יחס ופרופורציה",
+    "אחוזים וריבית",
+    "הסתברות",
+    "חפיפת משולשים",
+    "שווה שוקיים",
+    "מרובעים מיוחדים",
+    "דמיון משולשים",
+    "פיתגורס"
+   ],
+   "questions": 498,
+   "chapters": 39,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה השיפוע של ⁦y=3x+2⁩?",
+     "e": "y = 3x + 2"
+    },
+    {
+     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+     "e": "(0,1)(2,5)"
+    },
+    {
+     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+     "e": "y = 2x + 5"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en8",
+   "ver": "e5dfdaeaf2",
+   "subject": "אנגלית",
+   "grade": 7,
+   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
+   "tags": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ],
+   "questions": 472,
+   "chapters": 37,
+   "reading": 4,
+   "words": 59,
+   "samples": [
+    {
+     "q": "She ___ her homework, so she can watch TV.",
+     "e": "👧📓"
+    },
+    {
+     "q": "I haven't finished my project ___.",
+     "e": "📋⏳"
+    },
+    {
+     "q": "We ___ about the trip the day before yesterday.",
+     "e": "🗣️🧳"
     }
    ],
    "status": "ready"

@@ -1548,6 +1548,21 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
   const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
+const APPLE_SIGNIN=false; // true once Authentication → Sign-in method → Apple is on (Services ID + key from the Apple Developer account)
+/* the iPhone app (apple/, Capacitor): Google and Apple sign in through the phone's own sheets (a popup or Google's page inside
+   the app's web view is refused), then the credential signs in here – the web Firebase SDK stays the only sign-in. */
+const NATIVE_APP = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+const NATIVE_AUTH = NATIVE_APP && window.Capacitor.Plugins && window.Capacitor.Plugins.FirebaseAuthentication;
+if (NATIVE_APP) document.documentElement.classList.add('nativeapp');
+/* a provider's credential: in the iPhone app from the native sheet, else null (the caller uses a popup) */
+async function nativeCred(A, which) {
+  if (!NATIVE_AUTH) return null;
+  if (which === 'apple') { const r = await NATIVE_AUTH.signInWithApple({ skipNativeAuth: true });
+    return new A.OAuthProvider('apple.com').credential({ idToken: r.credential.idToken, rawNonce: r.credential.nonce }); }
+  const r = await NATIVE_AUTH.signInWithGoogle({ skipNativeAuth: true });
+  return A.GoogleAuthProvider.credential(r.credential.idToken, r.credential.accessToken);
+}
+function appleProvider(A) { const p = new A.OAuthProvider('apple.com'); p.addScope('email'); p.addScope('name'); return p; }
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
 const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together; a new one is approved again
 const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
@@ -1846,9 +1861,12 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
         try { await go(); }
         catch (e) {
           if (e.code !== 'recent_login') throw e;
-          const p = auth.currentUser.providerData.some(x => x.providerId === 'google.com') ? new A.GoogleAuthProvider() : null;
-          if (!p) throw Object.assign(new Error(W.sffT ? W.sffT('צריך להתחבר שוב ואז למחוק') : 'צריך להתחבר שוב ואז למחוק'), { code: 'recent_login' });
-          await A.reauthenticateWithPopup(auth.currentUser, p); await auth.currentUser.getIdToken(true);
+          const ids = auth.currentUser.providerData.map(x => x.providerId), which = ids.includes('google.com') ? 'google' : ids.includes('apple.com') ? 'apple' : null;
+          if (!which) throw Object.assign(new Error(W.sffT ? W.sffT('צריך להתחבר שוב ואז למחוק') : 'צריך להתחבר שוב ואז למחוק'), { code: 'recent_login' });
+          const cred = await nativeCred(A, which);
+          if (cred) await A.reauthenticateWithCredential(auth.currentUser, cred);
+          else await A.reauthenticateWithPopup(auth.currentUser, which === 'apple' ? appleProvider(A) : new A.GoogleAuthProvider());
+          await auth.currentUser.getIdToken(true);
           await go();
         }
         try { await A.signOut(auth); } catch (e) {}
@@ -2037,6 +2055,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
           <button class="fbcard teach" id="fbTeach" type="button"><span class="e">🧑‍🏫</span><b>אני מורה</b><span class="hint">כניסה עם Google</span></button>
         </div>
         <div class="hint fbtermsl">בכניסה הראשונה תתבקשו לאשר את <a href="/terms.html" target="_blank" rel="noopener noreferrer" onclick="this.href='/terms.html?lang='+(W.SFF_LANG?W.SFF_LANG():'he')">תנאי השימוש</a> ואת <a href="/privacy.html" target="_blank" rel="noopener noreferrer">מדיניות הפרטיות</a> – פעם אחת.</div>
+        <button class="fbapple hidden" id="fbApple" type="button"><svg viewBox="0 0 17 20" width="17" height="20" aria-hidden="true"><path fill="currentColor" d="M14.1 10.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9s-2-.9-3.3-.9C3.8 5 2.2 6 1.3 7.6c-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3 0 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.3 3.1-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.8-1.1-2.8-4.5zM11.6 3.3c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.1.1 2.3-.6 3-1.5z"/></svg><span>כניסה עם Apple</span></button>
         <button class="fbemailbtn hidden" id="fbEmailBtn" type="button">📧 אין לי Google – כניסה עם מייל</button>
         <div class="fbemail hidden" id="fbEmail"><input id="fbEmailIn" type="email" inputmode="email" autocomplete="email" placeholder="המייל שלך" dir="ltr">
           <button class="btn" id="fbEmailGo" type="button">שליחת קישור כניסה</button><div class="hint">נשלח קישור למייל. לוחצים עליו – ונכנסים. בלי סיסמה.</div></div>
@@ -2061,6 +2080,8 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
       // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
       // the email sign-in shows only once "Email link (passwordless sign-in)" is on in the Firebase console (tests turn it on)
       if (EMAIL_LINK || W.SFF_REST_EMU) el.querySelector('#fbEmailBtn').classList.remove('hidden');
+      if (APPLE_SIGNIN) el.querySelector('#fbApple').classList.remove('hidden');
+      el.querySelector('#fbApple').onclick = () => { pick('parent'); signIn('apple'); };
       el.querySelector('#fbEmailBtn').onclick = () => { el.querySelector('#fbEmail').classList.toggle('hidden'); el.querySelector('#fbEmailIn').focus(); };
       el.querySelector('#fbEmailGo').onclick = async () => {
         const mail = el.querySelector('#fbEmailIn').value.trim(), err = el.querySelector('#fbErr');
@@ -2075,14 +2096,17 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
       };
       el.querySelector('#fbGo').onclick = () => { pick('parent'); signIn(); };
       el.querySelector('#fbTeach').onclick = () => { location.href = '/teach'; };   /* teachers sign in in their own app */
-      const signIn = async () => {
+      const signIn = async (which = 'google') => {
         try {
-          const { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = await import(base + 'firebase-auth.js');
+          const A = await import(base + 'firebase-auth.js'), { getAuth, GoogleAuthProvider, signInWithPopup, signInWithCredential } = A;
+          const cred = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE) ? null : await nativeCred(A, which);   // the iPhone app: the phone's own sheet
           const r = (W.SFF_REST_EMU && W.SFF_TEST_GOOGLE)            // tests only: a fake Google account on the local emulator
             ? await signInWithCredential(getAuth(), GoogleAuthProvider.credential(JSON.stringify(W.SFF_TEST_GOOGLE)))
-            : await signInWithPopup(getAuth(), new GoogleAuthProvider());
+            : cred ? await signInWithCredential(getAuth(), cred)
+            : await signInWithPopup(getAuth(), which === 'apple' ? appleProvider(A) : new GoogleAuthProvider());
           el.remove(); resolve(r.user);
-        } catch (e) { el.querySelector('#fbErr').textContent = '⚠️ ' + (e.code || e.message); }
+        } catch (e) { if (/cancel/i.test(String(e && (e.code || e.message)))) return;   // closed the sheet – nothing to say
+          el.querySelector('#fbErr').textContent = '⚠️ ' + (e.code || e.message); }
       };
     });
   }
@@ -2183,6 +2207,8 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
   #fbLogin .fbterms{display:flex;align-items:flex-start;gap:10px;max-width:min(92vw,420px);text-align:start;font-size:.95em;cursor:pointer;padding:10px 12px;border-radius:12px;line-height:1.5}
   #fbLogin .fbterms input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:#2F6BFF}
   #fbLogin .fbterms.need{background:#FFF6E3;outline:2px solid #F2A63B}
+  #fbLogin .fbapple{display:flex;align-items:center;justify-content:center;gap:8px;width:min(92vw,320px);min-height:46px;border:0;border-radius:12px;background:#000;color:#fff;font:inherit;font-weight:600;font-size:1.02em;cursor:pointer}
+  #fbLogin .fbapple.hidden{display:none}
   #fbLogin .fbemailbtn{border:0;background:none;font:inherit;color:#2F6BFF;text-decoration:underline;cursor:pointer;padding:4px}
   #fbLogin .fbemail{display:flex;flex-direction:column;gap:8px;width:min(92vw,420px)}#fbLogin .fbemail input{width:100%;box-sizing:border-box}
   #fbLogin .fbkidmsg{max-width:min(92vw,420px);text-align:start;background:#FFF6E3;border-color:var(--sun)}
@@ -6403,6 +6429,28 @@ setTimeout(()=>$('splash')?.remove(), matchMedia('(prefers-reduced-motion: reduc
     });
     window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').then(r=>{ setInterval(()=>r.update().catch(()=>{}),30*60*1000); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) r.update().catch(()=>{}); }); }).catch(()=>{}));
   }
+</script>
+<script>
+/* the iPhone app only (apple/): a kid's phone is offered ONE daily reminder to practise (a notification from the phone
+   itself, nothing sent from a server). Asked once (sff_remind_asked); "no" is kept. Never on a parent's or a teacher's phone. */
+(function(){
+  const C = window.Capacitor, LN = C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.LocalNotifications;
+  if (!LN) return;
+  const T = s => window.sffT ? window.sffT(s) : s, KEY = 'sff_remind_asked';
+  const plan = () => LN.schedule({ notifications: [{ id: 1, title: 'Study for fun', body: T('הגיע הזמן לתרגל! 🌟 תחנה חדשה מחכה לך במפה'),
+    schedule: { on: { hour: 17, minute: 0 }, allowWhileIdle: true } }] });
+  window.addEventListener('load', () => setTimeout(async () => {
+    try {
+      if (!window.SFF_KID_DEVICE) return;
+      if (localStorage.getItem(KEY) === 'yes') { const p = await LN.checkPermissions(); if (p.display === 'granted') await plan(); return; }
+      if (localStorage.getItem(KEY) || typeof askSure !== 'function') return;
+      const ok = await askSure({ ico: '⏰', title: T('לקבל תזכורת לתרגל כל יום?'), text: T('תזכורת קטנה כל יום ב-17:00, כדי לא לפספס תחנה.'),
+        yes: T('כן, תזכירו לי'), no: T('לא עכשיו') });
+      localStorage.setItem(KEY, ok ? 'yes' : 'no');
+      if (ok && (await LN.requestPermissions()).display === 'granted') await plan();
+    } catch (e) {}
+  }, 9000));
+})();
 </script>
 </body>
 </html>

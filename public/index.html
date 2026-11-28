@@ -1549,6 +1549,9 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const W = window, LS = W.localStorage;
   const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
 const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Email/Password → Email link is enabled
+// the family app's ways into the teachers' app (sign-in ad, ☰ link, "to the teachers' app" for an adult with no family, a private
+// tutor's invitation): off while the store version is for families only (the owner's decision, 28.11); a test turns them on
+window.SFF_TEACH_ON=window.SFF_TEACH_LINKS===true; const TEACH_LINKS=window.SFF_TEACH_ON;
 const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together; a new one is approved again
 const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
   W.__sffStage = 'module';
@@ -1754,7 +1757,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
       else famInfo.splice(0, famInfo.length, ...famInfo.filter(x => x.kind !== 'class' && x.role !== 'tutor'));
       /* an adult with no family here (a teacher): to the teachers' app, or open a family of their own */
       if (!TEACH && !famInfo.length) {
-        const c = await familyChoice();
+        const c = TEACH_LINKS ? await familyChoice() : 'family';
         if (c === 'teach') { location.replace('/teach'); await new Promise(() => {}); }
         const own = F.doc(fdb, `families/${uid}`), os = await F.getDoc(own);
         const tok = os.exists() && os.data().inviteToken || rnd(18);
@@ -2049,7 +2052,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
         el.querySelector('.fbwho').insertAdjacentHTML('beforeend', '<div class="hint fbtsub">כיתה, קבוצה או תלמידים פרטיים – וגם מורה פרטי/ת שמשפחה הזמינה</div>'); }
       /* the family app: a kid or a parent only – teachers are invited to their own app, below (the owner's decision, 27.11) */
       else { el.querySelector('#fbTeach').classList.add('hidden'); el.querySelector('.fbwho').classList.add('two');
-        el.querySelector('#fbErr').insertAdjacentHTML('afterend', `<div class="fbad"><span class="e" aria-hidden="true">🧑‍🏫</span><b>מורה? יש לנו אפליקציה בשבילך</b>
+        if (TEACH_LINKS) el.querySelector('#fbErr').insertAdjacentHTML('afterend', `<div class="fbad"><span class="e" aria-hidden="true">🧑‍🏫</span><b>מורה? יש לנו אפליקציה בשבילך</b>
           <span class="t">תרגול חוויתי במקום שיעורי בית – לכיתה או לתלמידים פרטיים. רואים מי תרגל, מי נתקע ומה כדאי לעשות היום.</span>
           <a id="fbTeachAd" href="/teach">לאפליקציה למורים ›</a></div><a class="fbother fbadl" id="fbTeachLink" href="/teach">🧑‍🏫 מורה? לאפליקציה למורים ›</a>`); }
       document.body.appendChild(el);
@@ -4918,7 +4921,7 @@ function placeItem(f,cur){ const on=f.id===cur, cls=f.kind==='class', priv=f.tea
 // both apps link to the other one in the account part (a teacher in the family app, everyone in the teachers' app)
 function menuArrange(TA, T){
   const acc=$('dGrpAcc')?.querySelector('.dcard'); if(!acc) return;
-  let o=$('dOtherApp'); if(!o&&(TA||T)){ acc.insertAdjacentHTML('afterbegin', TA?`<a class="ditem" id="dOtherApp" href="/"><span class="di">👨‍👩‍👧</span><span class="dl">לאפליקציה למשפחות</span><span class="dchev" aria-hidden="true">‹</span></a>`
+  let o=$('dOtherApp'); if(!o&&(TA||(T&&window.SFF_TEACH_ON))){ acc.insertAdjacentHTML('afterbegin', TA?`<a class="ditem" id="dOtherApp" href="/"><span class="di">👨‍👩‍👧</span><span class="dl">לאפליקציה למשפחות</span><span class="dchev" aria-hidden="true">‹</span></a>`
     :`<a class="ditem" id="dOtherApp" href="/teach"><span class="di">🧑‍🏫</span><span class="dl">לאפליקציה למורים</span><span class="dchev" aria-hidden="true">‹</span></a>`); }
   if(!TA||$('sideMenu').dataset.ta) return; $('sideMenu').dataset.ta='1';
   const panel=$('sideMenu').querySelector('.dpanel'), who=panel.querySelector('.dwho'); who.after($('dFams'));
@@ -5146,7 +5149,7 @@ function openInvite(){
   INV={role:'helper',kids:[]}; $('invName').value=''; $('invForm').classList.remove('hidden'); $('invDone').classList.add('hidden'); invRender(); $('invDlg').classList.remove('hidden');
 }
 function invRender(){
-  $('invRoles').innerHTML=['helper','tutor','admin'].map(r=>`<button class="${INV.role===r?'on':''}" onclick="INV.role='${r}';invRender()"><b>${ROLES[r][0]} ${ROLES[r][1]}</b><small>${ROLES[r][2]}</small></button>`).join('');
+  $('invRoles').innerHTML=(window.SFF_TEACH_ON?['helper','tutor','admin']:['helper','admin']).map(r=>`<button class="${INV.role===r?'on':''}" onclick="INV.role='${r}';invRender()"><b>${ROLES[r][0]} ${ROLES[r][1]}</b><small>${ROLES[r][2]}</small></button>`).join('');
   $('invKidsWrap').classList.toggle('hidden',INV.role!=='tutor');
   $('invKids').innerHTML=kids.map(k=>`<button class="${INV.kids.includes(k.id)?'on':''}" onclick="INV.kids=INV.kids.includes('${k.id}')?INV.kids.filter(x=>x!=='${k.id}'):INV.kids.concat('${k.id}');invRender()">${esc(k.name)}</button>`).join('');
 }
@@ -5234,7 +5237,7 @@ const INTRO={
       <div style="background:#2F6BFF">${IC.sv('#fff',26,IC.pad)}<b>משחק כיפי</b><span style="color:#E4ECFF">תחנה = משחק אחר</span></div>
       <div style="background:#F2A63B;color:#1B2A4A">${IC.sv('#1B2A4A',26,IC.doc)}<b>החומר שלכם</b><span>מצלמים דף – יש תרגול</span></div>
       <div style="background:#24C78E;color:#0E2E22">${IC.sv('#0E2E22',26,IC.bars)}<b>מעקב להורה</b><span>מה יודע, מה לחזק</span></div>
-      <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>אחים, סבתא, מורה</span></div>
+      <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>${window.SFF_TEACH_ON?'אחים, סבתא, מורה':'אחים, סבא וסבתא'}</span></div>
       <div class="iwide" style="background:#B9A7FF;color:#1B1440">${IC.sv('#1B1440',26,IC.target,2.2)}<div><b>תרגול ממוקד</b><span>נבנה לבד מהטעויות – רק מה שעוד לא יושב</span></div></div>
     </div>
     <div style="flex:1 0 18px" aria-hidden="true"></div>${iMap()}`}),
@@ -5294,7 +5297,7 @@ Object.assign(INTRO,{
     <h1 style="margin-top:12px;font-size:32px">מתחילים<br><span style="color:#F2A63B">ב-3 צעדים</span></h1>
     <p style="margin-top:10px;max-width:300px;color:#D5DEF2">פחות מ-2 דקות, והילד כבר משחק</p>
     <div style="margin-top:18px;width:100%;display:flex;flex-direction:column;gap:10px">${st(1,'מוסיפים ילד','שם וכיתה – זהו',1)}${st(2,'בוחרים תרגול','מוכן מהקטלוג, או מצלמים את החומר')}${st(3,'שולחים לילד קישור','בוואטסאפ – והוא נכנס בלי סיסמה')}</div>
-    <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;color:#B9C6E4">${li('בלי פרסומות')}${li('בלי רכישות לילד')}${li('אפשר לצרף את בן/בת הזוג, סבתא או מורה')}</div>`}; }
+    <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;color:#B9C6E4">${li('בלי פרסומות')}${li('בלי רכישות לילד')}${li(window.SFF_TEACH_ON?'אפשר לצרף את בן/בת הזוג, סבתא או מורה':'אפשר לצרף את בן/בת הזוג, סבא או סבתא')}</div>`}; }
 });
 /* the store's 5th screen (the canvas's StoreFamily – store only, not in any intro): siblings compete, adults follow, safe for kids */
 INTRO.family=K=>{ const kid=(nm,bg,c,place,pts,h,top)=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">${iAva(nm,bg,c,top?44:38,top?18:16,top?'box-shadow:0 0 0 3px #F2A63B':'')}<b style="font-size:12px"><bdi>${esc(iT(nm))}</bdi></b>
@@ -5302,11 +5305,11 @@ INTRO.family=K=>{ const kid=(nm,bg,c,place,pts,h,top)=>`<div style="flex:1;displ
     adult=(t,l,bg,c)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:64px">${iAva(l,bg,c,40,16)}<span>${t}</span></div>`,
     li=t=>`<span style="display:flex;align-items:center;gap:5px">${IC.sv('#1B1440',14,IC.ok,2.6)}${t}</span>`;
   return {bg:'#B9A7FF', html:`<h1 style="margin-top:4px;font-size:32px;color:#1B1440">כל המשפחה<br>מתרגלת יחד</h1>
-    <p style="color:#1B1440;max-width:300px">אחים מתחרים בכיף על כוכבים – וסבתא, בן/בת הזוג או המורה הפרטי רואים את ההתקדמות</p>
+    <p style="color:#1B1440;max-width:300px">${window.SFF_TEACH_ON?'אחים מתחרים בכיף על כוכבים – וסבתא, בן/בת הזוג או המורה הפרטי רואים את ההתקדמות':'אחים מתחרים בכיף על כוכבים – וסבתא, סבא ובן/בת הזוג רואים את ההתקדמות'}</p>
     <div class="icard" style="margin-top:22px;padding:14px 14px 0;gap:8px;border-radius:22px;color:#1B1440"><b style="font-size:13px;color:#4A4870">לוח האלופים · אנגלית</b>
       <div style="display:flex;align-items:flex-end;justify-content:center;gap:8px">${kid('יואב','#EAF0FF','#2F6BFF',2,11,58)}${kid('נועה','#FFE4EC','#B3264F',1,14,82,1)}${kid('תמר','#DDF6EC','#0B6B4A',3,9,42)}</div></div>
     <div class="icard" style="margin-top:12px;padding:12px 14px;gap:10px;border-radius:22px;color:#1B1440"><b style="font-size:13px;color:#4A4870">עוקבים ומעודדים</b>
-      <div style="display:flex;justify-content:space-between;text-align:center;font-size:11px;font-weight:700">${adult('אמא','שירה','#EAF0FF','#2F6BFF')}${adult('אבא','אבא','#DDF6EC','#0B6B4A')}${adult('סבתא רותי','רותי','#FFE4EC','#B3264F')}${adult('דנה, מורה','דנה','#FFF3CC','#946200')}</div>
+      <div style="display:flex;justify-content:space-between;text-align:center;font-size:11px;font-weight:700">${adult('אמא','שירה','#EAF0FF','#2F6BFF')}${adult('אבא','אבא','#DDF6EC','#0B6B4A')}${adult('סבתא רותי','רותי','#FFE4EC','#B3264F')}${window.SFF_TEACH_ON?adult('דנה, מורה','דנה','#FFF3CC','#946200'):adult('סבא משה','משה','#FFF3CC','#946200')}</div>
       <div style="background:#1B1440;color:#fff;border-radius:12px;padding:10px;text-align:center;font-size:13px;font-weight:700">מזמינים בקישור – בוואטסאפ</div></div>
     <div style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:12px;font-weight:700;color:#1B1440">${li('בלי פרסומות')}${li('בלי רכישות')}${li('בלי אימייל לילד')}</div>`}; };
 const INTRO_SETS={parent:['main','material','track','start'], kid:['play','compete']};

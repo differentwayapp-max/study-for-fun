@@ -1,7 +1,7 @@
 {
  "set": {
   "name": "Science – Grade 7 – Materials, volume and mass",
-  "title": "Material and object · Volume · Mass · Weight · Density · States of matter · Inquiry",
+  "title": "Materials and objects · Volume · Mass · Weight · Density · States of matter · Inquiry",
   "tags": [
    "Materials and objects",
    "Volume",
@@ -321,14 +321,14 @@
    "he": "מה מהבאים אינו חומר?",
    "a": "מחשבה",
    "h": "fb76dcb2",
-   "q": "Which of these is not a material?",
+   "q": "Which of these is not matter?",
    "o": [
     "Thought",
     "Air",
     "Water",
     "Sand"
    ],
-   "x": "A material has mass and volume; a thought does not"
+   "x": "Matter has mass and volume; a thought does not"
   },
   {
    "he": "מפתח, בורג ומהדק – מה הם?",
@@ -676,12 +676,12 @@
    "he": "לתיבה ⁦2×2×2⁩ ולתיבה ⁦4×2×1⁩ יש נפח…",
    "a": "שווה",
    "h": "da72143e",
-   "q": "A 2×2×2 box and a 4×2×1 box have volumes that are…",
+   "q": "Which box has the greater volume?",
    "o": [
-    "Equal",
-    "Greater in the first",
-    "Greater in the second",
-    "Impossible to tell"
+    "They are equal",
+    "The first box",
+    "The second box",
+    "We can't tell"
    ],
    "x": "Both are 8 – different shapes, equal volume",
    "sc": {
@@ -1110,9 +1110,9 @@
    "q": "An apple is an object whose shape is…",
    "o": [
     "Not geometric",
-    "Box-shaped",
-    "Cube-shaped",
-    "Cylinder-shaped"
+    "Like a box",
+    "Like a cube",
+    "Like a cylinder"
    ],
    "x": "We can't measure its length, width and height"
   },
@@ -1324,7 +1324,7 @@
     "Measure only half",
     "Measure its color"
    ],
-   "x": "Only fully under water is all its volume measured"
+   "x": "Only when it is fully under water is all its volume measured"
   },
   {
    "he": "3 גולות זהות העלו את המים ב-6 מ״ל. נפח גולה?",
@@ -1727,7 +1727,7 @@
    "he": "פותחים בושם בפינת החדר. אחרי זמן מריחים בכל החדר. למה?",
    "a": "הגז מתפשט",
    "h": "4336ff7f",
-   "q": "Perfume is opened in a room's corner. Later it is smelled everywhere. Why?",
+   "q": "A perfume bottle is opened in a corner. Soon the whole room smells of it. Why?",
    "o": [
     "The gas spreads out",
     "The gas is compressed",
@@ -1831,7 +1831,7 @@
    "he": "כדור מנופח היטב וכדור זהה רך. למי מסה גדולה?",
    "a": "למנופח",
    "h": "07bd604d",
-   "q": "A well-pumped ball and an identical soft ball. Which has more mass?",
+   "q": "A fully pumped-up ball and an identical soft ball. Which has more mass?",
    "o": [
     "The pumped-up ball",
     "The soft ball",
@@ -2232,7 +2232,7 @@
    "he": "חללית רחוקה מכל כוכב. מה כמעט אפס אצל האסטרונאוט?",
    "a": "המשקל",
    "h": "e21cbf57",
-   "q": "A spaceship is far from any star. What is almost zero for the astronaut?",
+   "q": "A spaceship is far from any planet or star. What is almost zero for the astronaut?",
    "o": [
     "The weight",
     "The mass",
@@ -2651,7 +2651,7 @@
    "he": "איזה גוף ישקע במים? (הצפיפות בגרם לסמ״ק)",
    "a": "אבן 2.5",
    "h": "467888b4",
-   "q": "Which object will sink in water? (density in g/cm³)",
+   "q": "Which of these objects will sink in water? (density in g/cm³)",
    "o": [
     "Stone 2.5",
     "Cork 0.2",
@@ -2669,7 +2669,7 @@
     "Ruler",
     "Graduated cylinder",
     "Thermometer",
-    "Spring scale"
+    "Force meter"
    ],
    "x": "A ruler measures length in cm and mm"
   },
@@ -2694,7 +2694,7 @@
    "o": [
     "Stopwatch",
     "Thermometer",
-    "Spring scale",
+    "Force meter",
     "Ruler"
    ],
    "x": "A stopwatch measures time in seconds and minutes"
@@ -2716,7 +2716,7 @@
    "he": "מה מודדים במד כוח?",
    "a": "משקל",
    "h": "53295cd9",
-   "q": "What does a spring scale measure?",
+   "q": "What does a force meter measure?",
    "o": [
     "Weight",
     "Mass",
@@ -2733,7 +2733,7 @@
    "o": [
     "Ruler",
     "Thermometer",
-    "Spring scale",
+    "Force meter",
     "Stopwatch"
    ],
    "x": "Measure the edges and multiply them"
@@ -2973,8 +2973,8 @@
    ],
    "x": "A minute has 60 seconds, 2 × 60 = 120",
    "sc": {
-    "1": "2 minutes",
-    "2": "= ? seconds"
+    "1": "2 min",
+    "2": "= ? s"
    }
   },
   {
@@ -3115,7 +3115,7 @@
     "Liquid",
     "Can't tell"
    ],
-   "x": "In a gas, particles are far apart and move fast everywhere"
+   "x": "In a gas, particles are far apart and move fast in all directions"
   },
   {
    "he": "למה מוצק שומר על צורתו?",
@@ -3773,7 +3773,7 @@
    "h": "646b5b27",
    "q": "Why repeat an experiment several times?",
    "o": [
-    "More reliable results",
+    "For more reliable results",
     "To change the question",
     "To swap a variable",
     "To shorten the experiment"
@@ -3932,7 +3932,11 @@
    ],
    "x": "The column for 10 minutes shows 50",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -3948,7 +3952,11 @@
    ],
    "x": "20, 35, 50, 65 – it keeps rising",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -3964,7 +3972,11 @@
    ],
    "x": "⁦35-20=15⁩, ⁦50-35=15⁩, ⁦65-50=15⁩",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -3980,7 +3992,11 @@
    ],
    "x": "It keeps rising by 15: 65 + 15 = 80",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -3996,7 +4012,11 @@
    ],
    "x": "We set the times in advance; the temperature was measured",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -4012,7 +4032,11 @@
    ],
    "x": "80, 60, 45, 35 – it keeps dropping",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -4028,7 +4052,11 @@
    ],
    "x": "It dropped by 20, then by 15, then by 10",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -4078,7 +4106,11 @@
    ],
    "x": "Always 0°C – the temperature does not change while ice melts",
    "sc": {
-    "0": "min"
+    "0": "min",
+    "1": "6",
+    "2": "4",
+    "3": "2",
+    "4": "0"
    }
   },
   {
@@ -4233,10 +4265,10 @@
    "h": "f1bbadd6",
    "q": "Water is heated until it boils. What describes the graph?",
    "o": [
-    "Rises, then flat",
-    "Drops, then rises",
-    "Flat all along",
-    "Drops all along"
+    "Rises, then levels off",
+    "Falls, then rises",
+    "Flat throughout",
+    "Falling throughout"
    ],
    "x": "The water heated up, then stayed at 100°C while boiling",
    "sc": {
@@ -4256,8 +4288,16 @@
    ],
    "x": "More kg – more newtons: the line rises",
    "sc": {
-    "0": "kg",
-    "5": "N"
+    "4": "kg",
+    "3": "1",
+    "2": "2",
+    "1": "3",
+    "0": "4",
+    "9": "N",
+    "8": "10",
+    "7": "20",
+    "6": "30",
+    "5": "40"
    }
   },
   {
@@ -4590,7 +4630,14 @@
    ],
    "x": "In the column for 10:00 it says 24",
    "sc": {
-    "0": "Hour"
+    "3": "Hour",
+    "2": "8",
+    "1": "10",
+    "0": "12",
+    "7": "°C",
+    "6": "18",
+    "5": "24",
+    "4": "30"
    }
   }
  ]

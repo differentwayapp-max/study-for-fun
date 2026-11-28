@@ -910,79 +910,6 @@
    ]
   },
   {
-   "id": "sci7-materials",
-   "ver": "421545f051",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
-   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
-   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון",
-    "צפיפות",
-    "ציפה ושקיעה",
-    "מכשירי מדידה",
-    "המרות",
-    "מצבי צבירה",
-    "משתנים",
-    "תכנון ניסוי",
-    "גרפים וטבלאות"
-   ],
-   "questions": 305,
-   "chapters": 30,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺",
-     "q_en": "A chair is made of wood. Which is the object here?"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬",
-     "q_en": "Composition, source and properties – these describe…"
-    },
-    {
-     "q": "מה מהבאים מגדיר נפח?",
-     "e": "📦",
-     "q_en": "Which of these defines volume?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 7 – Materials, volume and mass",
-   "title_en": "Material and object · Volume · Mass · Weight · Density · States of matter · Inquiry",
-   "tags_en": [
-    "Materials and objects",
-    "Volume",
-    "Calculating volume",
-    "Graduated cylinder",
-    "mL and liters",
-    "Mass",
-    "Balances",
-    "Gas",
-    "Weight",
-    "Newtons",
-    "Density",
-    "Floating and sinking",
-    "Measuring instruments",
-    "Conversions",
-    "States of matter",
-    "Variables",
-    "Planning an experiment",
-    "Graphs and tables"
-   ]
-  },
-  {
    "id": "sci7",
    "ver": "6062301215",
    "subject": "מדעים",
@@ -2100,6 +2027,79 @@
     "Band I words",
     "Writing",
     "Reading"
+   ]
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "81cf1c0ffc",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
+   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "צפיפות",
+    "ציפה ושקיעה",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 305,
+   "chapters": 30,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺",
+     "q_en": "A chair is made of wood. Which is the object here?"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬",
+     "q_en": "Composition, source and properties – these describe…"
+    },
+    {
+     "q": "מה מהבאים מגדיר נפח?",
+     "e": "📦",
+     "q_en": "Which of these defines volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 7 – Materials, volume and mass",
+   "title_en": "Materials and objects · Volume · Mass · Weight · Density · States of matter · Inquiry",
+   "tags_en": [
+    "Materials and objects",
+    "Volume",
+    "Calculating volume",
+    "Graduated cylinder",
+    "mL and liters",
+    "Mass",
+    "Balances",
+    "Gas",
+    "Weight",
+    "Newtons",
+    "Density",
+    "Floating and sinking",
+    "Measuring instruments",
+    "Conversions",
+    "States of matter",
+    "Variables",
+    "Planning an experiment",
+    "Graphs and tables"
    ]
   }
  ]

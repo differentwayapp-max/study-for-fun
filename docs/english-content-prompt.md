@@ -121,6 +121,9 @@ distractor also correct, the question never gives the answer, the picture never 
   "Which *magnetic* material is attracted to a *magnet*?"). Reword.
 - **Two options become the same or synonyms in English** ("גדל" / "התרחב" → both "expanded"; "עיגול" / "מעגל" → both
   "circle"). Make them differ or change the distractor (in the same form as the answer).
+- **Don't repeat what the picture and the options already show** (the owner, 28.11): a comparison of exercises is asked
+  short – "Which exercise gives the greater result?" (the exercises are on the cards and in the options), not
+  "Which is greater: 9 times 2 or 5 times 3?". Options in symbols, as on the cards ("9 × 2").
 - **Order and direction:** a picture row keeps its physical places (`left:%`, never mirrored). A Hebrew question about
   "ראשון / אחרון / לפני / אחרי / הבא" in a row read right-to-left becomes a different answer when an English child reads
   left-to-right. For every such question (rows built with `ROW`, sequences, patterns, "מימין / משמאל"): either say the

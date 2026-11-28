@@ -30,6 +30,9 @@ apply the fix below, check, and deploy **only after the owner approves**.
 - Tests: `tools/tests/local_english.js` (new), `tools/tests/local_scenes.js` (`SFF_LANG=en`).
 - Docs: `CLAUDE.md` (a line on the English version), `docs/english-content-prompt.md`, `docs/catalog-review/english-pilot.md`.
 
+The owner approved the translation's style (28.11); one wording fix is already in the branch (math3: a comparison of
+exercises asks "Which exercise gives the greater result?" – `tools/sets_en/math3.json` + the rebuilt `public/share/math3*.txt`).
+
 ## 2. Fix still needed (found by the owner on the map, not in the branch)
 On the road map, stations of a translated set show a number card ("4,725", "2 thousands") as their icon. The cause: `qv()`
 replaces `emoji` with the first picture card. In Hebrew `q.emoji` is '' for a card longer than 4 characters (`clean()`), so the

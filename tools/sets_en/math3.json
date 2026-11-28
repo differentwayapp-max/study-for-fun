@@ -2218,7 +2218,7 @@
    "he": "מה גדול יותר?",
    "a": "⁦21 × 4⁩",
    "h": "a80aebf6",
-   "q": "Which is greater?",
+   "q": "Which exercise gives the greater result?",
    "o": [
     "⁦21 × 4⁩",
     "⁦41 × 2⁩",
@@ -2831,10 +2831,10 @@
    "he": "מה גדול יותר: ⁦9⁩ כפול ⁦2⁩ או ⁦5⁩ כפול ⁦3⁩?",
    "a": "⁦9⁩ כפול ⁦2⁩",
    "h": "b61857b9",
-   "q": "Which is greater: ⁦9⁩ times ⁦2⁩ or ⁦5⁩ times ⁦3⁩?",
+   "q": "Which exercise gives the greater result?",
    "o": [
-    "9 times 2",
-    "5 times 3",
+    "9 × 2",
+    "5 × 3",
     "They are equal",
     "Can't tell"
    ],

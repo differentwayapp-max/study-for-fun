@@ -2373,12 +2373,20 @@ async function logFail(where, e, subject, who){
   try{ const l=JSON.parse(localStorage.getItem('sff_errlog')||'[]'); l.unshift(rec); localStorage.setItem('sff_errlog',JSON.stringify(l.slice(0,30))); }catch(err){}
   return saved;
 }
+// the question bank (stage 1 – filled and measured, not used yet): its size, and what it could have saved this month's builds
+function bankStats(k){ if(!k||k.live==null) return '';
+  const pc=k.qs?Math.round(100*k.could/k.qs):0, usd=v=>'$'+(+v||0).toFixed(2);
+  return `<h3 style="grid-column:1/-1;margin:10px 0 0">🗃️ מאגר השאלות</h3>
+    <div class="stat"><b>${k.live}</b><span>שאלות במאגר</span></div><div class="stat"><b>${k.added}</b><span>נוספו החודש</span></div>
+    <div class="stat"><b>${pc}%</b><span>מהשאלות של ${k.builds} בניות היו מגיעות מהמאגר</span></div>
+    <div class="stat"><b>${usd(k.usd)}</b><span>היה נחסך החודש (מתוך ${usd(k.cost)})</span></div>
+    <div class="stat"><b>${k.skipped}</b><span>לא נכנסו (קשורות למשפחה)</span></div><div class="stat"><b>${k.out}</b><span>יצאו (ההורה שינה או מחק)</span></div>`; }
 async function openUsers(){
   show('vUsers'); $('uStats').innerHTML=''; document.querySelector('#vUsers h2').textContent='👥 משתמשים רשומים'; document.querySelector('#vUsers .hint').textContent='רק פרטי החשבון: שם, אימייל ותאריכים. בלי ילדים, תרגולים או התקדמות.'; $('uList').innerHTML='<p class="center">⏳</p>';
   let d; try{ d=await window.__sffAdminUsers(); }catch(e){ $('uList').innerHTML=`<p class="notice err">⚠️ ${esc(e.message||e)}</p>`; return; }
   const P=d.parents||[], now=Date.now(), wk=now-7*864e5, dt=t=>t?new Date(t).toLocaleDateString('he-IL',{day:'numeric',month:'numeric',year:'2-digit'}):'–';
   $('uStats').innerHTML=`<div class="stat"><b>${P.length}</b><span>הורים רשומים</span></div><div class="stat"><b>${P.filter(p=>p.created>=wk).length}</b><span>חדשים השבוע</span></div>
-    <div class="stat"><b>${P.filter(p=>p.last>=wk).length}</b><span>פעילים השבוע</span></div><div class="stat"><b>${d.kidDevices||0}</b><span>טלפונים של ילדים</span></div>`;
+    <div class="stat"><b>${P.filter(p=>p.last>=wk).length}</b><span>פעילים השבוע</span></div><div class="stat"><b>${d.kidDevices||0}</b><span>טלפונים של ילדים</span></div>`+bankStats(d.bank);
   $('uList').innerHTML=`<table class="utab"><thead><tr><th>שם</th><th>הצטרפות</th><th>כניסה אחרונה</th><th>תרגולים החודש</th></tr></thead><tbody>${P.map(p=>`<tr><td><b dir="auto">${esc(p.name||'–')}</b><div class="hint" dir="ltr">${esc(p.email)}</div></td><td>${dt(p.created)}</td><td>${dt(p.last)}</td><td>${p.builds||0}</td></tr>`).join('')}</tbody></table>`;
 }
 /* ---------- catalog suggestions: a parent offers a practice set → an admin checks and approves ---------- */

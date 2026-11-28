@@ -573,7 +573,12 @@ exports.adminUsers = onCall({ region: 'europe-west1', invoker: 'public', maxInst
   // how many new practice sets each account built this month (a number only)
   await Promise.all(parents.map(async p => { try { p.builds = (await db.doc(`families/${p.uid}/usage/${month}`).get()).data()?.builds || 0; } catch (_) { p.builds = 0; } }));
   parents.sort((a, b) => b.last - a.last);
-  return { parents: parents.map(({ uid, ...p }) => p), kidDevices, month };
+  // the question bank: how many questions it holds now, and this month's numbers (bankAfterBuild)
+  let bank = {};
+  try { const m = (await db.doc(`meta/qbank_${month}`).get()).data() || {};
+    bank = { live: (await db.collection('qbank').where('live', '==', true).count().get()).data().count,
+      ...Object.fromEntries(['builds', 'qs', 'could', 'usd', 'cost', 'added', 'skipped', 'out'].map(k => [k, +m[k] || 0])) }; } catch (_) {}
+  return { parents: parents.map(({ uid, ...p }) => p), kidDevices, month, bank };
 });
 
 // For the payment webhook (not exposed yet): add paid practice sets to a family.
@@ -623,6 +628,7 @@ function fakeAnswer(step, d) {
   if (step === 'match') { const words = t => String(t).toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(w => w.length > 2);
     return { map: (d.want || []).map(t => ({ topic: t, refs: (d.pool || []).filter(p => [p.title, ...(p.topics || [])].some(x => words(x).some(w => words(t).includes(w)))).map(p => p.ref) })) }; }
   if (step === 'select') return { picks: (d.groups || []).map(g => ({ topic: g.topic, i: (g.questions || []).map((x, k) => x.i ?? k) })) };
+  if (step === 'bank') return { drop: (d.questions || []).filter(x => /!private/.test(x.question)).map(x => ({ i: x.i, why: 'person' })) };
   return {};
 }
 
@@ -728,6 +734,7 @@ exports.ask = onCall(
     // the app's reachability check after a network failure (logFail): answers at once, not an error, nothing logged
     if (request.data && request.data.ping === true) return { json: { pong: true } };
     const { step: name, data = {}, images = [], famId, buildId } = request.data || {};
+    if (typeof name === 'string' && Object.prototype.hasOwnProperty.call(STEPS, name) && STEPS[name].server) throw new HttpsError('invalid-argument', 'Unknown step.');   // the server's own steps
     const json = await runStep({ admin: isAdminUser(auth), uid: auth.uid, famId, buildId, name, data, images, fake: request.data.fake === true });
     return { json };
   }
@@ -983,6 +990,125 @@ async function rememberPool(famId, kidId, qs) {
     tx.update(ref, { list }); }).catch(e => console.warn('rememberPool', e.message));
 }
 
+/* ---------- the question bank (stage 1: filled and measured – no build takes questions from it yet) ----------
+   After every server build that ended well:
+   1. bankMeasure – how much the bank could have given this build: the build's topics matched (Haiku) against the bank's topic
+      index of the same grade and subject; per chapter at most BANK_SHARE of its questions; the money is the build's own cost of
+      writing and checking (gen, pics, solve, review, fix) per question × those questions. On builds/{id}.bank and in
+      meta/qbank_<month>. Measured before this build's own questions go in.
+   2. bankAdd – the build's own questions that passed the checks go in, unless they are tied to the family: a ready catalog
+      question (srcq), a reported one, one with a name of the family's kids, or one the bank step (Haiku) leaves out (a real
+      person or place, the family's own material). A bank question keeps no family, kid, build or set id.
+   bankWatch: a question the parent later changes or deletes in the set it came from (or that a report replaced) leaves the bank.
+   Only the server reads or writes qbank / qbankIdx (firestore.rules: nobody else). The AI steps here are the app's cost, not
+   the family's (they never count on the family's budget or build calls). */
+const BANK_SHARE = I => (I.text || I.files || (Array.isArray(I.mat) && I.mat.length)) ? 0.5 : 0.7;
+const BANK_COST_STEPS = ['gen', 'pics', 'solve', 'review', 'fix'];
+const bankSubject = s => String(s || '').replace(/^🎯\s*/, '').trim().slice(0, 60);
+const bankTopicKey = t => core.tkey(String(t || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim());
+const bankId = (gi, subject, question) => sha(`${gi}|${bankSubject(subject)}|${String(question).replace(/\s+/g, ' ').trim()}`).slice(0, 32);
+const bankIdx = (gi, subject) => db.doc(`qbankIdx/${gi}_${core.tkey(bankSubject(subject))}`);
+const bankMonth = () => db.doc(`meta/qbank_${monthKey()}`);
+const bankAsk = (name, data, fake) => runStep({ admin: true, uid: null, famId: null, buildId: null, name, data, fake });
+
+async function bankMeasure(I, set, b, fake) {
+  const ctx = core.aiCtx(set.grade, set.subject, I.topics);
+  const idx = (await bankIdx(set.grade, set.subject).get()).data() || {};
+  const T = Object.entries(idx.topics || {}).filter(([, v]) => v && v.n > 0).sort((x, y) => y[1].n - x[1].n).slice(0, 150);
+  const own = set.questions.filter(q => !core.isPool(q)), share = BANK_SHARE(I);
+  let could = 0;
+  if (T.length && own.length) {
+    const want = [...new Set(I.chapters.flatMap(c => c.topics))].slice(0, 40);
+    const m = await bankAsk('match', { ctx, want, pool: T.map(([k, v]) => ({ ref: k, title: String(v.t || '').slice(0, 120), topics: [String(v.t || '').slice(0, 120)] })) }, fake);
+    const refs = t => (((m && m.map) || []).find(x => x.topic === t) || {}).refs || [];
+    I.chapters.forEach((ch, ci) => {
+      const keys = new Set(ch.topics.flatMap(refs).filter(k => idx.topics[k]));
+      const have = [...keys].reduce((a, k) => a + (+idx.topics[k].n || 0), 0);
+      const inCh = set.questions.filter(q => (q.ch ?? 0) === ci), ready = inCh.filter(core.isPool).length;
+      could += Math.max(0, Math.min(have, Math.floor(inCh.length * share) - ready, inCh.length - ready));
+    });
+  }
+  const usd = BANK_COST_STEPS.reduce((a, s) => a + (+(b.steps && b.steps[s] && b.steps[s].usd) || 0), 0);
+  const saved = own.length ? Math.round(usd * could / own.length * 1e4) / 1e4 : 0;
+  return { could, of: own.length, usd: saved, cost: Math.round(usd * 1e4) / 1e4 };
+}
+
+async function bankAdd(famId, I, set, fake) {
+  const words = t => ' ' + String(t || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ') + ' ';
+  let names = [];
+  try { names = ((await db.doc(`families/${famId}/fam/kids`).get()).data()?.list || []).map(k => String((k && k.name) || '').trim().toLowerCase()).filter(n => n.length > 1); } catch (_) {}
+  if (set.name) names.push(String(set.name).trim().toLowerCase());
+  // a kid's name in the question – or in its topic (the topic goes into the bank and its index too)
+  const named = q => { const w = words([q.topic, q.question, ...(q.options || []), q.explanation].join(' ')); return names.some(n => w.includes(' ' + n.replace(/[^\p{L}\p{N}]+/gu, ' ').trim() + ' ')); };
+  const cand = set.questions.filter(q => !core.isPool(q) && !q.reported && Array.isArray(q.options) && q.options.length === 4 && !named(q));
+  const skipped0 = set.questions.filter(q => !core.isPool(q)).length - cand.length;
+  const ctx = core.aiCtx(set.grade, set.subject, I.topics), drop = new Set();
+  for (let k = 0; k < cand.length; k += 40) {
+    const part = cand.slice(k, k + 40), r = await bankAsk('bank', { ctx, questions: part.map((q, j) => core.qSend(q, k + j)) }, fake);
+    ((r && r.drop) || []).forEach(x => { const i = +x.i; if (Number.isInteger(i) && i >= k && i < k + part.length) drop.add(i); });
+  }
+  const keep = cand.filter((_, i) => !drop.has(i)), subject = bankSubject(set.subject), idxRef = bankIdx(set.grade, set.subject);
+  let added = 0;
+  for (let k = 0; k < keep.length; k += 100) {
+    const part = keep.slice(k, k + 100), refs = part.map(q => db.doc(`qbank/${bankId(set.grade, subject, q.question)}`));
+    await db.runTransaction(async tx => {
+      const snaps = await tx.getAll(...refs), idxAdd = {}; let n = 0;
+      snaps.forEach((s, j) => {
+        const q = part[j], tk = bankTopicKey(q.topic);
+        if (s.exists) { if (s.data().live) tx.update(refs[j], { seen: FieldValue.increment(1), last: Date.now() }); return; }   // known (or once taken out: stays out)
+        tx.set(refs[j], { gi: set.grade, subject, topic: String(q.topic || '').slice(0, 120), tk, live: true, at: Date.now(), seen: 1, fixed: !!q.fixed,
+          q: JSON.parse(JSON.stringify({ topic: q.topic, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation || '', emoji: q.emoji || '', scene: q.scene || null, ...(q.core ? { core: true } : {}) })) });
+        const e = idxAdd[tk] || (idxAdd[tk] = { t: String(q.topic || '').slice(0, 120), n: 0 }); e.n++; n++;
+      });
+      if (n) tx.set(idxRef, { gi: set.grade, subject, topics: Object.fromEntries(Object.entries(idxAdd).map(([tk, e]) => [tk, { t: e.t, n: FieldValue.increment(e.n) }])) }, { merge: true });
+      added += n;
+    });
+  }
+  return { added, skipped: skipped0 + drop.size };
+}
+
+// after a build that ended well – never fails the build (its set is already with the family)
+// a question the parent changed (text, options, answer or explanation) or deleted in a set – or that a confirmed report
+// replaced – leaves the bank if it is there (and the count of its topic). A whole set deleted is not a sign. (No mark on the
+// set: a phone writes its own copy of a set back, so a mark could be lost – the bank is looked up by the question itself.)
+exports.bankWatch = require('firebase-functions/v2/firestore').onDocumentUpdated({ document: 'families/{famId}/sets/{setId}', region: 'europe-west1', maxInstances: 5, retry: false },
+  async ev => {
+    const a = ev.data.before.data()?.set, b = ev.data.after.data()?.set;
+    if (!a || !b || !Array.isArray(a.questions) || !Array.isArray(b.questions)) return;
+    const sig = q => JSON.stringify([q.options, q.answer, q.explanation || '']);
+    const now = new Map(b.questions.filter(q => q && q.question).map(q => [q.question, sig(q)]));
+    const gone = [...new Set(a.questions.filter(q => q && q.question && !core.isPool(q) && now.get(q.question) !== sig(q)).map(q => q.question))].slice(0, 200);
+    if (!gone.length) return;
+    const refs = gone.map(t => db.doc(`qbank/${bankId(a.grade, a.subject, t)}`)), idxRef = bankIdx(a.grade, a.subject);
+    let out = 0;
+    for (let k = 0; k < refs.length; k += 100) {
+      const part = refs.slice(k, k + 100);
+      await db.runTransaction(async tx => {
+        const snaps = await tx.getAll(...part), dec = {}; let n = 0;
+        snaps.forEach((s, j) => { if (!s.exists || !s.data().live) return; const tk = s.data().tk;
+          tx.update(part[j], { live: false, out: 'edited', outAt: Date.now() }); if (tk) dec[tk] = (dec[tk] || 0) + 1; n++; });
+        if (Object.keys(dec).length) tx.set(idxRef, { topics: Object.fromEntries(Object.entries(dec).map(([tk, d]) => [tk, { n: FieldValue.increment(-d) }])) }, { merge: true });
+        out += n;
+      });
+    }
+    if (out) await bankMonth().set({ out: FieldValue.increment(out) }, { merge: true });
+  });
+
+async function bankAfterBuild(famId, buildId, I, set, fake) {
+  try {
+    const ref = buildRef(famId, buildId), b = (await ref.get()).data() || {};
+    let m = { could: 0, of: 0, usd: 0, cost: 0 }, measured = true;
+    try { m = await bankMeasure(I, set, b, fake); } catch (e) { measured = false; console.warn(`bank measure ${buildId}: ${e.message}`); }   // the questions still go in
+    const a = await bankAdd(famId, I, set, fake);
+    await ref.update({ bank: { ...m, added: a.added, skipped: a.skipped } }).catch(() => {});
+    const inc = FieldValue.increment;
+    await bankMonth().set({ builds: inc(measured ? 1 : 0), qs: inc(m.of), could: inc(m.could), usd: inc(m.usd), cost: inc(m.cost), added: inc(a.added), skipped: inc(a.skipped) }, { merge: true });
+  } catch (e) {
+    console.warn(`bank ${buildId}: ${e.message}`);
+    await serverLog({ fn: 'bank', kind: 'error', code: reasonOf(e).slice(0, 60), msg: String(e.message || e).slice(0, 300) }).catch(() => {});
+  }
+}
+
 // One run of a build: the log is replayed, new steps are asked until the set is done or this task's time is up.
 exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPIC_API_KEY], timeoutSeconds: 1800, memory: '512MiB', maxInstances: 20,
   retryConfig: { maxAttempts: RUN_ATTEMPTS, minBackoffSeconds: 30, maxBackoffSeconds: 300 }, rateLimits: { maxConcurrentDispatches: 20 } },
@@ -1033,6 +1159,7 @@ exports.runBuild = onTaskDispatched({ region: 'europe-west1', secrets: [ANTHROPI
       await rememberPool(famId, I.kidId, set.questions);
       await closeBuild(famId, buildId, 'done', { setId });
       await cleanBuild(ref);
+      await bankAfterBuild(famId, buildId, I, set, !!b.fake);
     } catch (e) {
       await progress.flush();
       if (e.code === 'yield') { await ref.update({ run: run + 1 }); await runQueue(famId, buildId, run + 1); return; }

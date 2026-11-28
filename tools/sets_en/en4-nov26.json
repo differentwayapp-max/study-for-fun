@@ -1,0 +1,2122 @@
+{
+ "set": {
+  "name": "English – ABC, Colors, Animals",
+  "title": "ABC · Colors · Animals",
+  "tags": [
+   "ABC",
+   "Colors",
+   "Animals",
+   "Prepositions",
+   "Verbs",
+   "Missing letter"
+  ]
+ },
+ "labels": {
+  "Alphabet": "Alphabet",
+  "Colors": "Colors",
+  "Animals": "Animals",
+  "Prepositions": "Prepositions",
+  "Verbs": "Verbs",
+  "Missing letter": "Missing letter",
+  "ABC: big & small A–M": "ABC: capital & small A–M",
+  "ABC: big & small N–Z": "ABC: capital & small N–Z",
+  "ABC: order & first letter": "ABC: order & first letter",
+  "First letter A–D": "First letter A–D",
+  "First letter E–L": "First letter E–L",
+  "First letter M–O": "First letter M–O",
+  "First letter P–U": "First letter P–U",
+  "Review": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "האות הקטנה?",
+   "a": "a",
+   "h": "473c8112",
+   "q": "The small letter?",
+   "o": [
+    "a",
+    "o",
+    "e",
+    "u"
+   ],
+   "x": "Capital A = small a",
+   "sc": {
+    "0": "A"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "B",
+   "h": "008ef273",
+   "q": "The capital letter?",
+   "o": [
+    "B",
+    "D",
+    "P",
+    "Q"
+   ],
+   "x": "Small b = capital B",
+   "sc": {
+    "0": "b"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "c",
+   "h": "2c19735c",
+   "q": "The small letter?",
+   "o": [
+    "c",
+    "e",
+    "o",
+    "a"
+   ],
+   "x": "Capital C = small c",
+   "sc": {
+    "0": "C"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "D",
+   "h": "5065e1ee",
+   "q": "The capital letter?",
+   "o": [
+    "D",
+    "B",
+    "P",
+    "Q"
+   ],
+   "x": "Small d = capital D",
+   "sc": {
+    "0": "d"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "e",
+   "h": "54dc2cdc",
+   "q": "The small letter?",
+   "o": [
+    "e",
+    "a",
+    "o",
+    "c"
+   ],
+   "x": "Capital E = small e",
+   "sc": {
+    "0": "E"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "F",
+   "h": "2bf4c5b2",
+   "q": "The capital letter?",
+   "o": [
+    "F",
+    "T",
+    "L",
+    "J"
+   ],
+   "x": "Small f = capital F",
+   "sc": {
+    "0": "f"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "g",
+   "h": "d468dcdc",
+   "q": "The small letter?",
+   "o": [
+    "g",
+    "q",
+    "j",
+    "y"
+   ],
+   "x": "Capital G = small g",
+   "sc": {
+    "0": "G"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "H",
+   "h": "a1c5f2ed",
+   "q": "The capital letter?",
+   "o": [
+    "H",
+    "N",
+    "K",
+    "B"
+   ],
+   "x": "Small h = capital H",
+   "sc": {
+    "0": "h"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "i",
+   "h": "46ae1f10",
+   "q": "The small letter?",
+   "o": [
+    "i",
+    "j",
+    "r",
+    "t"
+   ],
+   "x": "Capital I = small i",
+   "sc": {
+    "0": "I",
+    "1": "Ice"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "J",
+   "h": "267459ea",
+   "q": "The capital letter?",
+   "o": [
+    "J",
+    "I",
+    "G",
+    "Y"
+   ],
+   "x": "Small j = capital J",
+   "sc": {
+    "0": "j"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "k",
+   "h": "b25fd8c2",
+   "q": "The small letter?",
+   "o": [
+    "k",
+    "h",
+    "x",
+    "y"
+   ],
+   "x": "Capital K = small k",
+   "sc": {
+    "0": "K"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "L",
+   "h": "3198ee27",
+   "q": "The capital letter?",
+   "o": [
+    "L",
+    "E",
+    "J",
+    "T"
+   ],
+   "x": "Small l = capital L",
+   "sc": {
+    "0": "l",
+    "1": "lion"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "m",
+   "h": "243c2a90",
+   "q": "The small letter?",
+   "o": [
+    "m",
+    "n",
+    "w",
+    "u"
+   ],
+   "x": "Capital M = small m",
+   "sc": {
+    "0": "M"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "N",
+   "h": "e68cac54",
+   "q": "The capital letter?",
+   "o": [
+    "N",
+    "M",
+    "H",
+    "U"
+   ],
+   "x": "Small n = capital N",
+   "sc": {
+    "0": "n"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "o",
+   "h": "d815f606",
+   "q": "The small letter?",
+   "o": [
+    "o",
+    "a",
+    "e",
+    "c"
+   ],
+   "x": "Capital O = small o",
+   "sc": {
+    "0": "O"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "P",
+   "h": "39cfb219",
+   "q": "The capital letter?",
+   "o": [
+    "P",
+    "Q",
+    "B",
+    "D"
+   ],
+   "x": "Small p = capital P",
+   "sc": {
+    "0": "p"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "q",
+   "h": "33fd122e",
+   "q": "The small letter?",
+   "o": [
+    "q",
+    "p",
+    "g",
+    "d"
+   ],
+   "x": "Capital Q = small q",
+   "sc": {
+    "0": "Q"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "R",
+   "h": "e869e616",
+   "q": "The capital letter?",
+   "o": [
+    "R",
+    "N",
+    "V",
+    "T"
+   ],
+   "x": "Small r = capital R",
+   "sc": {
+    "0": "r"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "s",
+   "h": "711862a1",
+   "q": "The small letter?",
+   "o": [
+    "s",
+    "z",
+    "c",
+    "x"
+   ],
+   "x": "Capital S = small s",
+   "sc": {
+    "0": "S"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "T",
+   "h": "2d13387f",
+   "q": "The capital letter?",
+   "o": [
+    "T",
+    "F",
+    "L",
+    "J"
+   ],
+   "x": "Small t = capital T",
+   "sc": {
+    "0": "t"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "u",
+   "h": "b29aecc6",
+   "q": "The small letter?",
+   "o": [
+    "u",
+    "v",
+    "n",
+    "w"
+   ],
+   "x": "Capital U = small u",
+   "sc": {
+    "0": "U"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "V",
+   "h": "dfbd2d71",
+   "q": "The capital letter?",
+   "o": [
+    "V",
+    "U",
+    "W",
+    "Y"
+   ],
+   "x": "Small v = capital V",
+   "sc": {
+    "0": "v"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "w",
+   "h": "9cf727b2",
+   "q": "The small letter?",
+   "o": [
+    "w",
+    "m",
+    "v",
+    "u"
+   ],
+   "x": "Capital W = small w",
+   "sc": {
+    "0": "W"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "X",
+   "h": "841e3cf4",
+   "q": "The capital letter?",
+   "o": [
+    "X",
+    "K",
+    "Y",
+    "Z"
+   ],
+   "x": "Small x = capital X",
+   "sc": {
+    "0": "x"
+   }
+  },
+  {
+   "he": "האות הקטנה?",
+   "a": "y",
+   "h": "bcc351b2",
+   "q": "The small letter?",
+   "o": [
+    "y",
+    "v",
+    "g",
+    "j"
+   ],
+   "x": "Capital Y = small y",
+   "sc": {
+    "0": "Y"
+   }
+  },
+  {
+   "he": "האות הגדולה?",
+   "a": "Z",
+   "h": "c00b1864",
+   "q": "The capital letter?",
+   "o": [
+    "Z",
+    "S",
+    "X",
+    "N"
+   ],
+   "x": "Small z = capital Z",
+   "sc": {
+    "0": "z"
+   }
+  },
+  {
+   "he": "What comes next?",
+   "a": "D",
+   "h": "a8f4b2aa",
+   "q": "What comes next?",
+   "o": [
+    "D",
+    "E",
+    "F",
+    "B"
+   ],
+   "x": "A B C D",
+   "sc": {
+    "0": "A",
+    "1": "B",
+    "2": "C"
+   }
+  },
+  {
+   "he": "What comes next?",
+   "a": "V",
+   "h": "4a0342f4",
+   "q": "What comes next?",
+   "o": [
+    "V",
+    "W",
+    "Y",
+    "R"
+   ],
+   "x": "S T U V",
+   "sc": {
+    "0": "S",
+    "1": "T",
+    "2": "U"
+   }
+  },
+  {
+   "he": "What comes next?",
+   "a": "Q",
+   "h": "d41eaea2",
+   "q": "What comes next?",
+   "o": [
+    "Q",
+    "R",
+    "S",
+    "T"
+   ],
+   "x": "N O P Q",
+   "sc": {
+    "0": "N",
+    "1": "O",
+    "2": "P"
+   }
+  },
+  {
+   "he": "What comes next?",
+   "a": "Z",
+   "h": "ece0cfe0",
+   "q": "What comes next?",
+   "o": [
+    "Z",
+    "A",
+    "V",
+    "U"
+   ],
+   "x": "W X Y Z – the end of the ABC",
+   "sc": {
+    "0": "W",
+    "1": "X",
+    "2": "Y"
+   }
+  },
+  {
+   "he": "Starts with which small letter?",
+   "a": "d",
+   "h": "95fb0a5e",
+   "q": "Starts with which small letter?",
+   "o": [
+    "d",
+    "b",
+    "g",
+    "t"
+   ],
+   "x": "dog starts with d"
+  },
+  {
+   "he": "Starts with?",
+   "a": "f",
+   "h": "88be53a6",
+   "q": "What letter does it start with?",
+   "o": [
+    "f",
+    "p",
+    "t",
+    "v"
+   ],
+   "x": "fish starts with f"
+  },
+  {
+   "he": "Starts with?",
+   "a": "o",
+   "h": "e3aefa02",
+   "q": "What letter does it start with?",
+   "o": [
+    "o",
+    "a",
+    "u",
+    "c"
+   ],
+   "x": "octopus starts with o"
+  },
+  {
+   "he": "Starts with?",
+   "a": "l",
+   "h": "7a937f6c",
+   "q": "What letter does it start with?",
+   "o": [
+    "l",
+    "i",
+    "j",
+    "y"
+   ],
+   "x": "lion starts with l"
+  },
+  {
+   "he": "Starts with B:",
+   "a": "bird",
+   "h": "43e01864",
+   "q": "Starts with B:",
+   "o": [
+    "bird",
+    "cat",
+    "fish",
+    "dog"
+   ],
+   "x": "bird starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "Starts with M:",
+   "a": "monkey",
+   "h": "d0a586d5",
+   "q": "Starts with M:",
+   "o": [
+    "monkey",
+    "cat",
+    "dog",
+    "lion"
+   ],
+   "x": "monkey starts with M",
+   "sc": {
+    "0": "M"
+   }
+  },
+  {
+   "he": "Starts with E:",
+   "a": "elephant",
+   "h": "04f17c20",
+   "q": "Starts with E:",
+   "o": [
+    "elephant",
+    "tiger",
+    "bird",
+    "fish"
+   ],
+   "x": "elephant starts with E",
+   "sc": {
+    "0": "E"
+   }
+  },
+  {
+   "he": "B is for… (בין)",
+   "a": "between",
+   "h": "f9cf1679",
+   "q": "B is for… (בין)",
+   "o": [
+    "between",
+    "alligator",
+    "lion",
+    "under"
+   ],
+   "x": "between = בין, starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "B is for… (שחור)",
+   "a": "black",
+   "h": "e1911698",
+   "q": "B is for… (שחור)",
+   "o": [
+    "black",
+    "green",
+    "swim",
+    "run"
+   ],
+   "x": "black = שחור, starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "B is for… (חום)",
+   "a": "brown",
+   "h": "5fb5384f",
+   "q": "B is for… (חום)",
+   "o": [
+    "brown",
+    "purple",
+    "octopus",
+    "dog"
+   ],
+   "x": "brown = חום, starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "B is for… (כחול)",
+   "a": "blue",
+   "h": "b5858b4a",
+   "q": "B is for… (כחול)",
+   "o": [
+    "blue",
+    "drink",
+    "alligator",
+    "lion"
+   ],
+   "x": "blue = כחול, starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "D is for… (כלב)",
+   "a": "dog",
+   "h": "d6281027",
+   "q": "D is for… (כלב)",
+   "o": [
+    "dog",
+    "eat",
+    "green",
+    "swim"
+   ],
+   "x": "dog = כלב, starts with D",
+   "sc": {
+    "0": "D"
+   }
+  },
+  {
+   "he": "C is for… (חתול)",
+   "a": "cat",
+   "h": "4d2f66d4",
+   "q": "C is for… (חתול)",
+   "o": [
+    "cat",
+    "dog",
+    "orange",
+    "drink"
+   ],
+   "x": "cat = חתול, starts with C",
+   "sc": {
+    "0": "C"
+   }
+  },
+  {
+   "he": "A is for… (תנין)",
+   "a": "alligator",
+   "h": "a038cdd4",
+   "q": "A is for… (תנין)",
+   "o": [
+    "alligator",
+    "lion",
+    "under",
+    "eat"
+   ],
+   "x": "alligator = תנין, starts with A",
+   "sc": {
+    "0": "A"
+   }
+  },
+  {
+   "he": "B is for… (ציפור)",
+   "a": "bird",
+   "h": "1c69aea7",
+   "q": "B is for… (ציפור)",
+   "o": [
+    "bird",
+    "tiger",
+    "eat",
+    "green"
+   ],
+   "x": "bird = ציפור, starts with B",
+   "sc": {
+    "0": "B"
+   }
+  },
+  {
+   "he": "D is for… (לשתות)",
+   "a": "drink",
+   "h": "ebbcd92d",
+   "q": "D is for… (לשתות)",
+   "o": [
+    "drink",
+    "sleep",
+    "elephant",
+    "purple"
+   ],
+   "x": "drink = לשתות, starts with D",
+   "sc": {
+    "0": "D"
+   }
+  },
+  {
+   "he": "C is for… (לגזור)",
+   "a": "cut",
+   "h": "8508dc26",
+   "q": "C is for… (לגזור)",
+   "o": [
+    "cut",
+    "fly",
+    "jump",
+    "tiger"
+   ],
+   "x": "cut = לגזור, starts with C",
+   "sc": {
+    "0": "C"
+   }
+  },
+  {
+   "he": "I is for… (בתוך)",
+   "a": "in",
+   "h": "4c9ed2ea",
+   "q": "I is for… (בתוך)",
+   "o": [
+    "in",
+    "alligator",
+    "jump",
+    "tiger"
+   ],
+   "x": "in = בתוך, starts with I",
+   "sc": {
+    "0": "I"
+   }
+  },
+  {
+   "he": "I is for… (לפני)",
+   "a": "in front of",
+   "h": "d1facb74",
+   "q": "I is for… (לפני)",
+   "o": [
+    "in front of",
+    "fish",
+    "red",
+    "octopus"
+   ],
+   "x": "in front of = לפני, starts with I",
+   "sc": {
+    "0": "I"
+   }
+  },
+  {
+   "he": "G is for… (ירוק)",
+   "a": "green",
+   "h": "dea30641",
+   "q": "G is for… (ירוק)",
+   "o": [
+    "green",
+    "purple",
+    "octopus",
+    "cat"
+   ],
+   "x": "green = ירוק, starts with G",
+   "sc": {
+    "0": "G"
+   }
+  },
+  {
+   "he": "G is for… (אפור)",
+   "a": "gray",
+   "h": "f78d291c",
+   "q": "G is for… (אפור)",
+   "o": [
+    "gray",
+    "bird",
+    "alligator",
+    "lion"
+   ],
+   "x": "gray = אפור, starts with G",
+   "sc": {
+    "0": "G"
+   }
+  },
+  {
+   "he": "L is for… (אריה)",
+   "a": "lion",
+   "h": "fda8edf5",
+   "q": "L is for… (אריה)",
+   "o": [
+    "lion",
+    "run",
+    "elephant",
+    "red"
+   ],
+   "x": "lion = אריה, starts with L",
+   "sc": {
+    "0": "L"
+   }
+  },
+  {
+   "he": "L is for… (פרת משה רבנו)",
+   "a": "ladybird",
+   "h": "18766e89",
+   "q": "L is for… (פרת משה רבנו)",
+   "o": [
+    "ladybird",
+    "cat",
+    "orange",
+    "drink"
+   ],
+   "x": "ladybird = פרת משה רבנו, starts with L",
+   "sc": {
+    "0": "L"
+   }
+  },
+  {
+   "he": "E is for… (פיל)",
+   "a": "elephant",
+   "h": "3710d1cc",
+   "q": "E is for… (פיל)",
+   "o": [
+    "elephant",
+    "monkey",
+    "bird",
+    "alligator"
+   ],
+   "x": "elephant = פיל, starts with E",
+   "sc": {
+    "0": "E"
+   }
+  },
+  {
+   "he": "G is for… (ג'ירפה)",
+   "a": "giraffe",
+   "h": "774b2422",
+   "q": "G is for… (ג'ירפה)",
+   "o": [
+    "giraffe",
+    "tiger",
+    "eat",
+    "fish"
+   ],
+   "x": "giraffe = ג'ירפה, starts with G",
+   "sc": {
+    "0": "G"
+   }
+  },
+  {
+   "he": "F is for… (דג)",
+   "a": "fish",
+   "h": "ebf78f41",
+   "q": "F is for… (דג)",
+   "o": [
+    "fish",
+    "octopus",
+    "dog",
+    "purple"
+   ],
+   "x": "fish = דג, starts with F",
+   "sc": {
+    "0": "F"
+   }
+  },
+  {
+   "he": "J is for… (לקפוץ)",
+   "a": "jump",
+   "h": "435c75d1",
+   "q": "J is for… (לקפוץ)",
+   "o": [
+    "jump",
+    "fly",
+    "green",
+    "tiger"
+   ],
+   "x": "jump = לקפוץ, starts with J",
+   "sc": {
+    "0": "J"
+   }
+  },
+  {
+   "he": "E is for… (לאכול)",
+   "a": "eat",
+   "h": "ed85341d",
+   "q": "E is for… (לאכול)",
+   "o": [
+    "eat",
+    "jump",
+    "tiger",
+    "run"
+   ],
+   "x": "eat = לאכול, starts with E",
+   "sc": {
+    "0": "E"
+   }
+  },
+  {
+   "he": "F is for… (לעוף)",
+   "a": "fly",
+   "h": "cf1ba66e",
+   "q": "F is for… (לעוף)",
+   "o": [
+    "fly",
+    "red",
+    "octopus",
+    "dog"
+   ],
+   "x": "fly = לעוף, starts with F",
+   "sc": {
+    "0": "F"
+   }
+  },
+  {
+   "he": "O is for… (על גבי)",
+   "a": "on top of",
+   "h": "f95cf35f",
+   "q": "O is for… (על גבי)",
+   "o": [
+    "on top of",
+    "alligator",
+    "jump",
+    "under"
+   ],
+   "x": "on top of = על גבי, starts with O",
+   "sc": {
+    "0": "O"
+   }
+  },
+  {
+   "he": "N is for… (ליד)",
+   "a": "next to",
+   "h": "481384e8",
+   "q": "N is for… (ליד)",
+   "o": [
+    "next to",
+    "fish",
+    "red",
+    "octopus"
+   ],
+   "x": "next to = ליד, starts with N",
+   "sc": {
+    "0": "N"
+   }
+  },
+  {
+   "he": "O is for… (מעל)",
+   "a": "over",
+   "h": "670955e9",
+   "q": "O is for… (מעל)",
+   "o": [
+    "over",
+    "purple",
+    "giraffe",
+    "cat"
+   ],
+   "x": "over = מעל, starts with O",
+   "sc": {
+    "0": "O"
+   }
+  },
+  {
+   "he": "O is for… (כתום)",
+   "a": "orange",
+   "h": "00b3553c",
+   "q": "O is for… (כתום)",
+   "o": [
+    "orange",
+    "bird",
+    "alligator",
+    "jump"
+   ],
+   "x": "orange = כתום, starts with O",
+   "sc": {
+    "0": "O"
+   }
+  },
+  {
+   "he": "M is for… (קוף)",
+   "a": "monkey",
+   "h": "0b3b5d3e",
+   "q": "M is for… (קוף)",
+   "o": [
+    "monkey",
+    "run",
+    "elephant",
+    "red"
+   ],
+   "x": "monkey = קוף, starts with M",
+   "sc": {
+    "0": "M"
+   }
+  },
+  {
+   "he": "O is for… (תמנון)",
+   "a": "octopus",
+   "h": "ae1bb468",
+   "q": "O is for… (תמנון)",
+   "o": [
+    "octopus",
+    "dog",
+    "purple",
+    "giraffe"
+   ],
+   "x": "octopus = תמנון, starts with O",
+   "sc": {
+    "0": "O"
+   }
+  },
+  {
+   "he": "U is for… (מתחת)",
+   "a": "under",
+   "h": "ac369dc3",
+   "q": "U is for… (מתחת)",
+   "o": [
+    "under",
+    "alligator",
+    "jump",
+    "tiger"
+   ],
+   "x": "under = מתחת, starts with U",
+   "sc": {
+    "0": "U"
+   }
+  },
+  {
+   "he": "R is for… (אדום)",
+   "a": "red",
+   "h": "52d7b66b",
+   "q": "R is for… (אדום)",
+   "o": [
+    "red",
+    "fish",
+    "swim",
+    "sleep"
+   ],
+   "x": "red = אדום, starts with R",
+   "sc": {
+    "0": "R"
+   }
+  },
+  {
+   "he": "P is for… (סגול)",
+   "a": "purple",
+   "h": "bc5a0beb",
+   "q": "P is for… (סגול)",
+   "o": [
+    "purple",
+    "orange",
+    "giraffe",
+    "black"
+   ],
+   "x": "purple = סגול, starts with P",
+   "sc": {
+    "0": "P"
+   }
+  },
+  {
+   "he": "T is for… (נמר)",
+   "a": "tiger",
+   "h": "64b6a6a8",
+   "q": "T is for… (נמר)",
+   "o": [
+    "tiger",
+    "bird",
+    "fly",
+    "green"
+   ],
+   "x": "tiger = נמר, starts with T",
+   "sc": {
+    "0": "T"
+   }
+  },
+  {
+   "he": "R is for… (לרוץ)",
+   "a": "run",
+   "h": "3f042556",
+   "q": "R is for… (לרוץ)",
+   "o": [
+    "run",
+    "eat",
+    "fish",
+    "swim"
+   ],
+   "x": "run = לרוץ, starts with R",
+   "sc": {
+    "0": "R"
+   }
+  },
+  {
+   "he": "S is for… (לשחות)",
+   "a": "swim",
+   "h": "cd7cdc2d",
+   "q": "S is for… (לשחות)",
+   "o": [
+    "swim",
+    "dog",
+    "orange",
+    "giraffe"
+   ],
+   "x": "swim = לשחות, starts with S",
+   "sc": {
+    "0": "S"
+   }
+  },
+  {
+   "he": "S is for… (לישון)",
+   "a": "sleep",
+   "h": "c294c562",
+   "q": "S is for… (לישון)",
+   "o": [
+    "sleep",
+    "lion",
+    "bird",
+    "alligator"
+   ],
+   "x": "sleep = לישון, starts with S",
+   "sc": {
+    "0": "S"
+   }
+  },
+  {
+   "he": "The strawberry is ___.",
+   "a": "red",
+   "h": "da505ce2",
+   "q": "The strawberry is ___.",
+   "o": [
+    "red",
+    "blue",
+    "green",
+    "black"
+   ],
+   "x": "אדום = red"
+  },
+  {
+   "he": "The broccoli is ___.",
+   "a": "green",
+   "h": "f02987d0",
+   "q": "The broccoli is ___.",
+   "o": [
+    "green",
+    "red",
+    "brown",
+    "orange"
+   ],
+   "x": "ירוק = green"
+  },
+  {
+   "he": "What color is it?",
+   "a": "gray",
+   "h": "34ec1828",
+   "q": "What color is it?",
+   "o": [
+    "gray",
+    "purple",
+    "orange",
+    "green"
+   ],
+   "x": "אפור = gray"
+  },
+  {
+   "he": "What color is it?",
+   "a": "brown",
+   "h": "5cae24f9",
+   "q": "What color is it?",
+   "o": [
+    "brown",
+    "green",
+    "red",
+    "purple"
+   ],
+   "x": "חום = brown"
+  },
+  {
+   "he": "The sea is ___.",
+   "a": "blue",
+   "h": "67c9540f",
+   "q": "The sea is ___.",
+   "o": [
+    "blue",
+    "black",
+    "orange",
+    "gray"
+   ],
+   "x": "כחול = blue"
+  },
+  {
+   "he": "The carrot is ___.",
+   "a": "orange",
+   "h": "02375ffb",
+   "q": "The carrot is ___.",
+   "o": [
+    "orange",
+    "purple",
+    "green",
+    "brown"
+   ],
+   "x": "כתום = orange"
+  },
+  {
+   "he": "The eggplant is ___.",
+   "a": "purple",
+   "h": "fb747b5e",
+   "q": "The eggplant is ___.",
+   "o": [
+    "purple",
+    "red",
+    "gray",
+    "green"
+   ],
+   "x": "סגול = purple"
+  },
+  {
+   "he": "What color is it?",
+   "a": "black",
+   "h": "e5f7b143",
+   "q": "What color is it?",
+   "o": [
+    "black",
+    "brown",
+    "blue",
+    "green"
+   ],
+   "x": "שחור = black"
+  },
+  {
+   "he": "אדום = ?",
+   "a": "red",
+   "h": "67f90102",
+   "q": "אדום = ?",
+   "o": [
+    "red",
+    "orange",
+    "purple",
+    "brown"
+   ],
+   "x": "אדום = red"
+  },
+  {
+   "he": "כחול = ?",
+   "a": "blue",
+   "h": "c1602aab",
+   "q": "כחול = ?",
+   "o": [
+    "blue",
+    "black",
+    "gray",
+    "green"
+   ],
+   "x": "כחול = blue"
+  },
+  {
+   "he": "Chocolate is ___.",
+   "a": "brown",
+   "h": "d87d660d",
+   "q": "Chocolate is ___.",
+   "o": [
+    "brown",
+    "black",
+    "gray",
+    "orange"
+   ],
+   "x": "חום = brown"
+  },
+  {
+   "he": "It likes bones.",
+   "a": "dog",
+   "h": "aeded185",
+   "q": "It likes bones.",
+   "o": [
+    "dog",
+    "bird",
+    "fish",
+    "octopus"
+   ],
+   "x": "כלב = dog"
+  },
+  {
+   "he": "It hunts mice.",
+   "a": "cat",
+   "h": "a5481a39",
+   "q": "It hunts mice.",
+   "o": [
+    "cat",
+    "fish",
+    "giraffe",
+    "elephant"
+   ],
+   "x": "חתול = cat"
+  },
+  {
+   "he": "It has a big mane. (רעמה)",
+   "a": "lion",
+   "h": "0f22c64b",
+   "q": "It has a big mane. (רעמה)",
+   "o": [
+    "lion",
+    "tiger",
+    "monkey",
+    "dog"
+   ],
+   "x": "אריה = lion",
+   "sc": {
+    "0": "Roar!"
+   }
+  },
+  {
+   "he": "What is this?",
+   "a": "alligator",
+   "h": "dfbc8a7b",
+   "q": "What is this?",
+   "o": [
+    "alligator",
+    "fish",
+    "elephant",
+    "octopus"
+   ],
+   "x": "תנין = alligator"
+  },
+  {
+   "he": "What is this?",
+   "a": "tiger",
+   "h": "dbc35b86",
+   "q": "What is this?",
+   "o": [
+    "tiger",
+    "lion",
+    "cat",
+    "giraffe"
+   ],
+   "x": "נמר (טיגריס) = tiger"
+  },
+  {
+   "he": "It has feathers.",
+   "a": "bird",
+   "h": "95bec66d",
+   "q": "It has feathers.",
+   "o": [
+    "bird",
+    "fish",
+    "ladybird",
+    "monkey"
+   ],
+   "x": "ציפור = bird"
+  },
+  {
+   "he": "What is this?",
+   "a": "ladybird",
+   "h": "5cc3cb72",
+   "q": "What is this?",
+   "o": [
+    "ladybird",
+    "bird",
+    "octopus",
+    "cat"
+   ],
+   "x": "פרת משה רבנו = ladybird"
+  },
+  {
+   "he": "It eats bananas.",
+   "a": "monkey",
+   "h": "5222eb9c",
+   "q": "It eats bananas.",
+   "o": [
+    "monkey",
+    "giraffe",
+    "lion",
+    "dog"
+   ],
+   "x": "קוף = monkey"
+  },
+  {
+   "he": "What is this?",
+   "a": "octopus",
+   "h": "c67d70dd",
+   "q": "What is this?",
+   "o": [
+    "octopus",
+    "fish",
+    "alligator",
+    "bird"
+   ],
+   "x": "תמנון = octopus"
+  },
+  {
+   "he": "It has a long trunk.",
+   "a": "elephant",
+   "h": "96d63b8a",
+   "q": "It has a long trunk.",
+   "o": [
+    "elephant",
+    "giraffe",
+    "tiger",
+    "monkey"
+   ],
+   "x": "פיל = elephant"
+  },
+  {
+   "he": "It has a very long neck.",
+   "a": "giraffe",
+   "h": "2b694e71",
+   "q": "It has a very long neck.",
+   "o": [
+    "giraffe",
+    "elephant",
+    "lion",
+    "alligator"
+   ],
+   "x": "ג'ירפה = giraffe"
+  },
+  {
+   "he": "It has fins.",
+   "a": "fish",
+   "h": "b330402b",
+   "q": "It has fins.",
+   "o": [
+    "fish",
+    "octopus",
+    "bird",
+    "cat"
+   ],
+   "x": "דג = fish"
+  },
+  {
+   "he": "The boy is ___ the bath.",
+   "a": "in",
+   "h": "616b65f6",
+   "q": "The boy is ___ the bath.",
+   "o": [
+    "in",
+    "on",
+    "under",
+    "next to"
+   ],
+   "x": "הילד בתוך האמבטיה = in"
+  },
+  {
+   "he": "The cat is ___ the bed.",
+   "a": "under",
+   "h": "09caa2df",
+   "q": "The cat is ___ the bed.",
+   "o": [
+    "under",
+    "on",
+    "in",
+    "next to"
+   ],
+   "x": "החתול מתחת למיטה = under"
+  },
+  {
+   "he": "The cat is ___ the dog.",
+   "a": "next to",
+   "h": "f945ca4f",
+   "q": "The cat is ___ the dog.",
+   "o": [
+    "next to",
+    "on",
+    "under",
+    "in"
+   ],
+   "x": "החתול ליד הכלב = next to"
+  },
+  {
+   "he": "It is ___ the tree. (לפני)",
+   "a": "in front of",
+   "h": "01d1f1f5",
+   "q": "It is ___ the tree. (לפני)",
+   "o": [
+    "in front of",
+    "on",
+    "in",
+    "on top of"
+   ],
+   "x": "הכלב לפני העץ = in front of"
+  },
+  {
+   "he": "The fish is ___ the boat.",
+   "a": "under",
+   "h": "0450efba",
+   "q": "The fish is ___ the boat.",
+   "o": [
+    "under",
+    "on top of",
+    "in",
+    "in front of"
+   ],
+   "x": "הדג מתחת לסירה = under"
+  },
+  {
+   "he": "My birthday is ___ Sunday.",
+   "a": "on",
+   "h": "effc9e41",
+   "q": "My birthday is ___ Sunday.",
+   "o": [
+    "on",
+    "in",
+    "under",
+    "next to"
+   ],
+   "x": "Days of the week: on Sunday"
+  },
+  {
+   "he": "The milk is ___ the glass.",
+   "a": "in",
+   "h": "0b5b8702",
+   "q": "The milk is ___ the glass.",
+   "o": [
+    "in",
+    "on",
+    "under",
+    "next to"
+   ],
+   "x": "החלב בתוך הכוס = in"
+  },
+  {
+   "he": "מעל = ?",
+   "a": "over",
+   "h": "c7a7acc3",
+   "q": "מעל = ?",
+   "o": [
+    "over",
+    "under",
+    "next to",
+    "between"
+   ],
+   "x": "מעל = over (not touching)"
+  },
+  {
+   "he": "Which of these means על גבי?",
+   "a": "on top of",
+   "h": "fe759dce",
+   "q": "Which of these means על גבי?",
+   "o": [
+    "on top of",
+    "over",
+    "under",
+    "between"
+   ],
+   "x": "על גבי = on top of (touching it)"
+  },
+  {
+   "he": "The plane is ___ the house.",
+   "a": "over",
+   "h": "d2b272ee",
+   "q": "The plane is ___ the house.",
+   "o": [
+    "over",
+    "in",
+    "under",
+    "between"
+   ],
+   "x": "המטוס מעל הבית = over"
+  },
+  {
+   "he": "It is ___ the dogs. (בין)",
+   "a": "between",
+   "h": "6f5d2cb1",
+   "q": "It is ___ the dogs. (בין)",
+   "o": [
+    "between",
+    "next to",
+    "under",
+    "on top of"
+   ],
+   "x": "בין שני הכלבים = between"
+  },
+  {
+   "he": "בין = ?",
+   "a": "between",
+   "h": "b7b9bd84",
+   "q": "בין = ?",
+   "o": [
+    "between",
+    "next to",
+    "over",
+    "in front of"
+   ],
+   "x": "בין = between"
+  },
+  {
+   "he": "It is ___ the house. (ליד)",
+   "a": "next to",
+   "h": "a0b7ad25",
+   "q": "It is ___ the house. (ליד)",
+   "o": [
+    "next to",
+    "in",
+    "over",
+    "under"
+   ],
+   "x": "הכלב ליד הבית = next to"
+  },
+  {
+   "he": "מתחת = ?",
+   "a": "under",
+   "h": "30242339",
+   "q": "מתחת = ?",
+   "o": [
+    "under",
+    "on",
+    "in",
+    "next to"
+   ],
+   "x": "מתחת = under"
+  },
+  {
+   "he": "ליד = ?",
+   "a": "next to",
+   "h": "64b66d62",
+   "q": "ליד = ?",
+   "o": [
+    "next to",
+    "under",
+    "in",
+    "on"
+   ],
+   "x": "ליד = next to"
+  },
+  {
+   "he": "לפני = ?",
+   "a": "in front of",
+   "h": "a67f8cb8",
+   "q": "לפני = ?",
+   "o": [
+    "in front of",
+    "next to",
+    "on top of",
+    "under"
+   ],
+   "x": "לפני = in front of"
+  },
+  {
+   "he": "Which verb?",
+   "a": "run",
+   "h": "65a099f8",
+   "q": "Which verb fits the picture?",
+   "o": [
+    "run",
+    "swim",
+    "sleep",
+    "eat"
+   ],
+   "x": "לרוץ = run"
+  },
+  {
+   "he": "Which verb?",
+   "a": "swim",
+   "h": "2401ea21",
+   "q": "Which verb fits the picture?",
+   "o": [
+    "swim",
+    "fly",
+    "run",
+    "jump"
+   ],
+   "x": "לשחות = swim"
+  },
+  {
+   "he": "Which verb?",
+   "a": "fly",
+   "h": "7221b426",
+   "q": "Which verb fits the picture?",
+   "o": [
+    "fly",
+    "swim",
+    "jump",
+    "drink"
+   ],
+   "x": "לעוף = fly"
+  },
+  {
+   "he": "Which verb?",
+   "a": "sleep",
+   "h": "a5ad7ad5",
+   "q": "Which verb fits the picture?",
+   "o": [
+    "sleep",
+    "eat",
+    "cut",
+    "run"
+   ],
+   "x": "לישון = sleep"
+  },
+  {
+   "he": "I ___ pizza for lunch. (אוכל)",
+   "a": "eat",
+   "h": "fed50cb6",
+   "q": "I ___ pizza for lunch. (אוכל)",
+   "o": [
+    "eat",
+    "drink",
+    "sleep",
+    "sing"
+   ],
+   "x": "לאכול = eat"
+  },
+  {
+   "he": "I ___ milk.",
+   "a": "drink",
+   "h": "bc3c031a",
+   "q": "I ___ milk.",
+   "o": [
+    "drink",
+    "eat",
+    "swim",
+    "fly"
+   ],
+   "x": "לשתות = drink"
+  },
+  {
+   "he": "I ___ the paper.",
+   "a": "cut",
+   "h": "f474821a",
+   "q": "I ___ the paper.",
+   "o": [
+    "cut",
+    "jump",
+    "drink",
+    "sleep"
+   ],
+   "x": "לגזור = cut"
+  },
+  {
+   "he": "קופצים גבוה = ?",
+   "a": "jump",
+   "h": "bb27eb09",
+   "q": "קופצים גבוה = ?",
+   "o": [
+    "jump",
+    "run",
+    "fly",
+    "swim"
+   ],
+   "x": "לקפוץ = jump"
+  },
+  {
+   "he": "לשתות = ?",
+   "a": "drink",
+   "h": "99c7e2cd",
+   "q": "לשתות = ?",
+   "o": [
+    "drink",
+    "eat",
+    "cut",
+    "sleep"
+   ],
+   "x": "לשתות = drink"
+  },
+  {
+   "he": "לקפוץ = ?",
+   "a": "jump",
+   "h": "539ee102",
+   "q": "לקפוץ = ?",
+   "o": [
+    "jump",
+    "eat",
+    "run",
+    "fly"
+   ],
+   "x": "לקפוץ = jump"
+  },
+  {
+   "he": "לישון = ?",
+   "a": "sleep",
+   "h": "b1b72c9b",
+   "q": "לישון = ?",
+   "o": [
+    "sleep",
+    "eat",
+    "jump",
+    "cut"
+   ],
+   "x": "לישון = sleep"
+  },
+  {
+   "he": "gir_ffe (ג'ירפה)",
+   "a": "a",
+   "h": "e39dd6a0",
+   "q": "gir_ffe (ג'ירפה)",
+   "o": [
+    "a",
+    "i",
+    "e",
+    "y"
+   ],
+   "x": "g-i-r-a-f-f-e = giraffe"
+  },
+  {
+   "he": "br_wn (חום)",
+   "a": "o",
+   "h": "b980c295",
+   "q": "br_wn (חום)",
+   "o": [
+    "o",
+    "e",
+    "y",
+    "w"
+   ],
+   "x": "b-r-o-w-n = brown"
+  },
+  {
+   "he": "f_sh (דג)",
+   "a": "i",
+   "h": "156f05e1",
+   "q": "f_sh (דג)",
+   "o": [
+    "i",
+    "a",
+    "e",
+    "u"
+   ],
+   "x": "f-i-s-h = fish"
+  },
+  {
+   "he": "b_rd (ציפור)",
+   "a": "i",
+   "h": "a852382d",
+   "q": "b_rd (ציפור)",
+   "o": [
+    "i",
+    "o",
+    "u",
+    "e"
+   ],
+   "x": "b-i-r-d = bird"
+  },
+  {
+   "he": "l_on (אריה)",
+   "a": "i",
+   "h": "c064a4ad",
+   "q": "l_on (אריה)",
+   "o": [
+    "i",
+    "e",
+    "a",
+    "u"
+   ],
+   "x": "l-i-o-n = lion"
+  },
+  {
+   "he": "ti_er (נמר)",
+   "a": "g",
+   "h": "7dcf659b",
+   "q": "ti_er (נמר)",
+   "o": [
+    "g",
+    "j",
+    "q",
+    "p"
+   ],
+   "x": "t-i-g-e-r = tiger"
+  },
+  {
+   "he": "monk_y (קוף)",
+   "a": "e",
+   "h": "7b2491d9",
+   "q": "monk_y (קוף)",
+   "o": [
+    "e",
+    "a",
+    "i",
+    "o"
+   ],
+   "x": "monkey = קוף"
+  },
+  {
+   "he": "elep_ant (פיל)",
+   "a": "h",
+   "h": "0b8e5b92",
+   "q": "elep_ant (פיל)",
+   "o": [
+    "h",
+    "k",
+    "n",
+    "f"
+   ],
+   "x": "elephant = פיל"
+  },
+  {
+   "he": "j_mp (לקפוץ)",
+   "a": "u",
+   "h": "6190c11c",
+   "q": "j_mp (לקפוץ)",
+   "o": [
+    "u",
+    "a",
+    "o",
+    "i"
+   ],
+   "x": "j-u-m-p = jump"
+  },
+  {
+   "he": "s_im (לשחות)",
+   "a": "w",
+   "h": "7e12c27c",
+   "q": "s_im (לשחות)",
+   "o": [
+    "w",
+    "v",
+    "m",
+    "u"
+   ],
+   "x": "s-w-i-m = swim"
+  },
+  {
+   "he": "_reen (ירוק)",
+   "a": "g",
+   "h": "6c5976dc",
+   "q": "_reen (ירוק)",
+   "o": [
+    "g",
+    "q",
+    "c",
+    "b"
+   ],
+   "x": "g-r-e-e-n = green"
+  },
+  {
+   "he": "כלב = ?",
+   "a": "dog",
+   "h": "af60d222",
+   "q": "כלב = ?",
+   "o": [
+    "dog",
+    "cat",
+    "bird",
+    "fish"
+   ],
+   "x": "כלב = dog"
+  },
+  {
+   "he": "פיל = ?",
+   "a": "elephant",
+   "h": "bfe80706",
+   "q": "פיל = ?",
+   "o": [
+    "elephant",
+    "giraffe",
+    "lion",
+    "tiger"
+   ],
+   "x": "פיל = elephant"
+  },
+  {
+   "he": "ג'ירפה = ?",
+   "a": "giraffe",
+   "h": "bc8f5710",
+   "q": "ג'ירפה = ?",
+   "o": [
+    "giraffe",
+    "elephant",
+    "monkey",
+    "alligator"
+   ],
+   "x": "ג'ירפה = giraffe"
+  },
+  {
+   "he": "פרת משה רבנו = ?",
+   "a": "ladybird",
+   "h": "0a7c268d",
+   "q": "פרת משה רבנו = ?",
+   "o": [
+    "ladybird",
+    "bird",
+    "octopus",
+    "fish"
+   ],
+   "x": "פרת משה רבנו = ladybird"
+  },
+  {
+   "he": "תנין = ?",
+   "a": "alligator",
+   "h": "1ff81ee5",
+   "q": "תנין = ?",
+   "o": [
+    "alligator",
+    "octopus",
+    "tiger",
+    "lion"
+   ],
+   "x": "תנין = alligator"
+  },
+  {
+   "he": "ירוק = ?",
+   "a": "green",
+   "h": "da39cd2d",
+   "q": "ירוק = ?",
+   "o": [
+    "green",
+    "gray",
+    "blue",
+    "brown"
+   ],
+   "x": "ירוק = green"
+  },
+  {
+   "he": "סגול = ?",
+   "a": "purple",
+   "h": "7db0fecf",
+   "q": "סגול = ?",
+   "o": [
+    "purple",
+    "orange",
+    "red",
+    "black"
+   ],
+   "x": "סגול = purple"
+  },
+  {
+   "he": "אפור = ?",
+   "a": "gray",
+   "h": "81920e31",
+   "q": "אפור = ?",
+   "o": [
+    "gray",
+    "green",
+    "black",
+    "brown"
+   ],
+   "x": "אפור = gray"
+  },
+  {
+   "he": "לרוץ = ?",
+   "a": "run",
+   "h": "3d0f9f2f",
+   "q": "לרוץ = ?",
+   "o": [
+    "run",
+    "swim",
+    "jump",
+    "fly"
+   ],
+   "x": "לרוץ = run"
+  },
+  {
+   "he": "לגזור = ?",
+   "a": "cut",
+   "h": "c552fa15",
+   "q": "לגזור = ?",
+   "o": [
+    "cut",
+    "eat",
+    "drink",
+    "run"
+   ],
+   "x": "לגזור = cut"
+  },
+  {
+   "he": "לאכול = ?",
+   "a": "eat",
+   "h": "9dc68acf",
+   "q": "לאכול = ?",
+   "o": [
+    "eat",
+    "drink",
+    "sleep",
+    "fly"
+   ],
+   "x": "לאכול = eat"
+  }
+ ]
+}

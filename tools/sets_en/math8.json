@@ -1,0 +1,5715 @@
+{
+ "set": {
+  "name": "Math – Grade 8",
+  "title": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
+  "tags": [
+   "Linear functions",
+   "Slope",
+   "Special products",
+   "Laws of exponents",
+   "Inequalities",
+   "Systems of equations",
+   "Graphical solution",
+   "Ratio and proportion",
+   "Percent and interest",
+   "Probability",
+   "Congruent triangles",
+   "Isosceles triangles",
+   "Special quadrilaterals",
+   "Similar triangles",
+   "The Pythagorean theorem"
+  ]
+ },
+ "labels": {
+  "שיפוע – ישר עולה ויורד": "Slope – increasing and decreasing lines",
+  "חיתוך עם הצירים והצבה בפונקציה": "Intercepts and substitution in a function",
+  "מגרף וטבלה לכלל · ישרים מקבילים": "From a graph and a table to a rule · Parallel lines",
+  "כפל ביטויים ונוסחאות הכפל המקוצר": "Multiplying expressions and special products",
+  "חוקי חזקות": "Laws of exponents",
+  "אי-שוויונות": "Inequalities",
+  "פתרון מערכת משוואות": "Solving a system of equations",
+  "פתרון גרפי של מערכת משוואות": "Graphical solution of a system of equations",
+  "בעיות מילוליות – מערכת משוואות": "Word problems – systems of equations",
+  "יחס ופרופורציה": "Ratio and proportion",
+  "אחוזים": "Percent",
+  "שינוי באחוזים וריבית": "Percent change and interest",
+  "הסתברות": "Probability",
+  "חפיפת משולשים": "Congruent triangles",
+  "משולש שווה שוקיים": "The isosceles triangle",
+  "מרובעים מיוחדים": "Special quadrilaterals",
+  "משולשים דומים": "Similar triangles",
+  "משפט פיתגורס – חישוב צלע": "The Pythagorean theorem – calculating a side",
+  "פיתגורס – זיהוי ובעיות": "Pythagoras – right triangles and word problems",
+  "שיפוע – מה זה?": "Slope – what is it?",
+  "שיפוע משתי נקודות": "Slope from two points",
+  "נקודות החיתוך עם הצירים": "The intercepts with the axes",
+  "הצבה בפונקציה קווית": "Substitution in a linear function",
+  "מטבלה ומגרף לכלל": "From a table and a graph to a rule",
+  "ישרים מקבילים": "Parallel lines",
+  "כפל ביטויים – סוגריים בסוגריים": "Multiplying expressions – parentheses by parentheses",
+  "נוסחאות הכפל המקוצר": "Special products",
+  "חוקי חזקות – כפל וחילוק": "Laws of exponents – multiplication and division",
+  "חזקה של חזקה וחזקת 0": "Power of a power and the zero exponent",
+  "פתרון אי-שוויון": "Solving an inequality",
+  "ציר המספרים והיפוך הסימן": "The number line and flipping the sign",
+  "שיטת ההצבה": "The substitution method",
+  "שיטת השוואת המקדמים": "The elimination method",
+  "פתרון גרפי – נקודת החיתוך": "Graphical solution – the intersection point",
+  "פתרון גרפי – כמה פתרונות?": "Graphical solution – how many solutions?",
+  "בעיות מילוליות – חלק א'": "Word problems – part 1",
+  "בעיות מילוליות – חלק ב'": "Word problems – part 2",
+  "יחס": "Ratio",
+  "פרופורציה ישרה": "Direct proportion",
+  "חישובי אחוזים": "Percent calculations",
+  "אחוזים בחיים": "Percent in everyday life",
+  "עלייה וירידה באחוזים": "Percent increase and decrease",
+  "ריבית": "Interest",
+  "הסתברות – מאורעות פשוטים": "Probability – simple events",
+  "המאורע המשלים": "The complementary event",
+  "משפטי החפיפה": "The congruence theorems",
+  "חפיפה – שימושים": "Congruence – applications",
+  "שווה שוקיים – צלעות וזוויות": "Isosceles – sides and angles",
+  "שווה שוקיים – חוצה זווית, תיכון וגובה": "Isosceles – angle bisector, median and height",
+  "מקבילית ומלבן": "Parallelogram and rectangle",
+  "מעוין וריבוע": "Rhombus and square",
+  "משולשים דומים – יחס הדמיון": "Similar triangles – the scale factor",
+  "דמיון בחיים": "Similarity in everyday life",
+  "משפט פיתגורס – מוצאים צלע": "The Pythagorean theorem – finding a side",
+  "פיתגורס – חישוב בצעדים": "Pythagoras – step-by-step calculations",
+  "האם המשולש ישר זווית?": "Is the triangle a right triangle?",
+  "פיתגורס בבעיות": "Pythagoras in word problems",
+  "חזרה": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "מה השיפוע של ⁦y=3x+2⁩?",
+   "a": "⁦3⁩",
+   "h": "c92af31d",
+   "q": "What is the slope of y=3x+2?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦5⁩",
+    "⁦-3⁩"
+   ],
+   "x": "The slope is the coefficient of x"
+  },
+  {
+   "he": "מה השיפוע של ⁦y=-4x+1⁩?",
+   "a": "⁦-4⁩",
+   "h": "69fd96bf",
+   "q": "What is the slope of y=-4x+1?",
+   "o": [
+    "⁦-4⁩",
+    "⁦4⁩",
+    "⁦1⁩",
+    "⁦-3⁩"
+   ],
+   "x": "The coefficient of x is -4"
+  },
+  {
+   "he": "מה השיפוע של ⁦y=x-7⁩?",
+   "a": "⁦1⁩",
+   "h": "72e46f6e",
+   "q": "What is the slope of y=x-7?",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦-7⁩",
+    "⁦7⁩"
+   ],
+   "x": "x is 1·x, so the slope is 1"
+  },
+  {
+   "he": "מה השיפוע של ⁦y=5-2x⁩?",
+   "a": "⁦-2⁩",
+   "h": "eec1f1a5",
+   "q": "What is the slope of y=5-2x?",
+   "o": [
+    "⁦-2⁩",
+    "⁦5⁩",
+    "⁦2⁩",
+    "⁦-5⁩"
+   ],
+   "x": "The coefficient of x is -2, even when it comes last"
+  },
+  {
+   "he": "מה השיפוע של ⁦y=6⁩?",
+   "a": "⁦0⁩",
+   "h": "ed64c44f",
+   "q": "What is the slope of y=6?",
+   "o": [
+    "0",
+    "6",
+    "1",
+    "No slope"
+   ],
+   "x": "A line parallel to the x-axis – slope 0"
+  },
+  {
+   "he": "שיפוע חיובי – הישר…",
+   "a": "עולה",
+   "h": "a82b891d",
+   "q": "A positive slope – the line is…",
+   "o": [
+    "Increasing",
+    "Decreasing",
+    "Parallel to the x-axis",
+    "Parallel to the y-axis"
+   ],
+   "x": "From left to right, y increases"
+  },
+  {
+   "he": "הישר ⁦y=-x+4⁩ הוא ישר…",
+   "a": "יורד",
+   "h": "3a451db6",
+   "q": "The line y=-x+4 is…",
+   "o": [
+    "Decreasing",
+    "Increasing",
+    "Parallel to the x-axis",
+    "Parallel to the y-axis"
+   ],
+   "x": "Slope -1 is negative → the line decreases"
+  },
+  {
+   "he": "איזה ישר עולה וחותך את ציר y ב-⁦-5⁩?",
+   "a": "⁦y=2x-5⁩",
+   "h": "da58ed9d",
+   "q": "Which line is increasing and crosses the y-axis at -5?",
+   "o": [
+    "⁦y=2x-5⁩",
+    "⁦y=-2x-5⁩",
+    "⁦y=-5⁩",
+    "⁦y=-x-5⁩"
+   ],
+   "x": "All have b=-5, but only y=2x-5 has a positive slope"
+  },
+  {
+   "he": "איזה ישר יורד?",
+   "a": "⁦y=-2x+3⁩",
+   "h": "f8f00d7d",
+   "q": "Which line is decreasing?",
+   "o": [
+    "⁦y=-2x+3⁩",
+    "⁦y=2x-3⁩",
+    "⁦y=x⁩",
+    "⁦y=-3⁩"
+   ],
+   "x": "Slope -2 is negative → decreasing"
+  },
+  {
+   "he": "איזה ישר הכי תלול?",
+   "a": "⁦y=5x⁩",
+   "h": "6d188978",
+   "q": "Which line is the steepest?",
+   "o": [
+    "⁦y=5x⁩",
+    "⁦y=2x⁩",
+    "⁦y=x⁩",
+    "⁦y=0.5x⁩"
+   ],
+   "x": "A greater slope → a steeper line"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+   "a": "⁦2⁩",
+   "h": "d1c64978",
+   "q": "What is the slope of the line through (0,1) and (2,5)?",
+   "o": [
+    "⁦2⁩",
+    "⁦4⁩",
+    "⁦0.5⁩",
+    "⁦3⁩"
+   ],
+   "x": "(5-1)÷(2-0) = 4÷2 = 2"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(1,3)⁩ ו-⁦(3,9)⁩?",
+   "a": "⁦3⁩",
+   "h": "3ac4b270",
+   "q": "What is the slope of the line through (1,3) and (3,9)?",
+   "o": [
+    "⁦3⁩",
+    "⁦6⁩",
+    "⁦2⁩",
+    "⁦1/3⁩"
+   ],
+   "x": "(9-3)÷(3-1) = 6÷2 = 3"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(0,4)⁩ ו-⁦(2,0)⁩?",
+   "a": "⁦-2⁩",
+   "h": "25ba24ec",
+   "q": "What is the slope of the line through (0,4) and (2,0)?",
+   "o": [
+    "⁦-2⁩",
+    "⁦2⁩",
+    "⁦-4⁩",
+    "⁦4⁩"
+   ],
+   "x": "(0-4)÷(2-0) = -4÷2 = -2"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(1,5)⁩ ו-⁦(4,5)⁩?",
+   "a": "⁦0⁩",
+   "h": "37126faa",
+   "q": "What is the slope of the line through (1,5) and (4,5)?",
+   "o": [
+    "⁦0⁩",
+    "⁦5⁩",
+    "⁦1⁩",
+    "⁦3⁩"
+   ],
+   "x": "y does not change → slope 0"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(-1,2)⁩ ו-⁦(1,6)⁩?",
+   "a": "⁦2⁩",
+   "h": "ebcd87d3",
+   "q": "What is the slope of the line through (-1,2) and (1,6)?",
+   "o": [
+    "⁦2⁩",
+    "⁦4⁩",
+    "⁦-2⁩",
+    "⁦3⁩"
+   ],
+   "x": "(6-2)÷(1-(-1)) = 4÷2 = 2"
+  },
+  {
+   "he": "x גדל ב-1, ו-y גדל ב-3. מה השיפוע?",
+   "a": "⁦3⁩",
+   "h": "f81d1cdc",
+   "q": "x increases by 1 and y increases by 3. What is the slope?",
+   "o": [
+    "⁦3⁩",
+    "⁦1⁩",
+    "⁦1/3⁩",
+    "⁦4⁩"
+   ],
+   "x": "Change in y divided by change in x: 3÷1"
+  },
+  {
+   "he": "x גדל ב-2, ו-y קטן ב-6. מה השיפוע?",
+   "a": "⁦-3⁩",
+   "h": "38c93902",
+   "q": "x increases by 2 and y decreases by 6. What is the slope?",
+   "o": [
+    "⁦-3⁩",
+    "⁦3⁩",
+    "⁦-6⁩",
+    "⁦-1/3⁩"
+   ],
+   "x": "-6÷2 = -3"
+  },
+  {
+   "he": "מה השיפוע לפי הטבלה?",
+   "a": "⁦3⁩",
+   "h": "d1ff300b",
+   "q": "What is the slope according to the table?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦1⁩",
+    "⁦11⁩"
+   ],
+   "x": "Each time x increases by 1, y increases by 3",
+   "sc": {
+    "0": "3",
+    "1": "2",
+    "2": "1",
+    "3": "0",
+    "4": "x",
+    "5": "11",
+    "6": "8",
+    "7": "5",
+    "8": "2",
+    "9": "y"
+   }
+  },
+  {
+   "he": "השיפוע 2, ו-x גדל ב-3. בכמה גדל y?",
+   "a": "⁦6⁩",
+   "h": "eafaecd3",
+   "q": "The slope is 2 and x increases by 3. By how much does y increase?",
+   "o": [
+    "⁦6⁩",
+    "⁦5⁩",
+    "⁦1.5⁩",
+    "⁦2⁩"
+   ],
+   "x": "2·3 = 6"
+  },
+  {
+   "he": "ישר עובר דרך ⁦(2,3)⁩ ו-⁦(4,3)⁩. הישר…",
+   "a": "מקביל לציר x",
+   "h": "b0579ebb",
+   "q": "A line passes through (2,3) and (4,3). The line is…",
+   "o": [
+    "Parallel to the x-axis",
+    "Increasing",
+    "Decreasing",
+    "Parallel to the y-axis"
+   ],
+   "x": "The same y → slope 0"
+  },
+  {
+   "he": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+   "a": "⁦(0,5)⁩",
+   "h": "db200af4",
+   "q": "y=2x+5 crosses the y-axis at the point…",
+   "o": [
+    "⁦(0,5)⁩",
+    "⁦(5,0)⁩",
+    "⁦(0,2)⁩",
+    "⁦(2,0)⁩"
+   ],
+   "x": "Substitute x=0 → y=5"
+  },
+  {
+   "he": "⁦y=-3x-4⁩ חותך את ציר y בנקודה…",
+   "a": "⁦(0,-4)⁩",
+   "h": "6a277f4a",
+   "q": "y=-3x-4 crosses the y-axis at the point…",
+   "o": [
+    "⁦(0,-4)⁩",
+    "⁦(0,-3)⁩",
+    "⁦(-4,0)⁩",
+    "⁦(0,4)⁩"
+   ],
+   "x": "Substitute x=0 → y=-4"
+  },
+  {
+   "he": "איפה ⁦y=7x⁩ חותך את ציר y?",
+   "a": "⁦(0,0)⁩",
+   "h": "c302d82b",
+   "q": "Where does y=7x cross the y-axis?",
+   "o": [
+    "⁦(0,0)⁩",
+    "⁦(0,7)⁩",
+    "⁦(7,0)⁩",
+    "⁦(1,7)⁩"
+   ],
+   "x": "No constant term → the line passes through the origin"
+  },
+  {
+   "he": "שיפוע 4, חיתוך עם ציר y ב-⁦(0,-1)⁩. הכלל?",
+   "a": "⁦y=4x-1⁩",
+   "h": "2657dcc4",
+   "q": "Slope 4, y-intercept at (0,-1). What is the rule?",
+   "o": [
+    "⁦y=4x-1⁩",
+    "⁦y=-x+4⁩",
+    "⁦y=4x+1⁩",
+    "⁦y=-4x-1⁩"
+   ],
+   "x": "y=mx+b: m=4, b=-1"
+  },
+  {
+   "he": "ישר בשיפוע ⁦-2⁩ עובר בראשית. מה הכלל?",
+   "a": "⁦y=-2x⁩",
+   "h": "a3525f6f",
+   "q": "A line with slope -2 passes through the origin. What is the rule?",
+   "o": [
+    "⁦y=-2x⁩",
+    "⁦y=x-2⁩",
+    "⁦y=-2⁩",
+    "⁦y=2x⁩"
+   ],
+   "x": "Passes through the origin → b=0"
+  },
+  {
+   "he": "ישר מקביל לציר x עובר ב-⁦(3,-5)⁩. הכלל?",
+   "a": "⁦y=-5⁩",
+   "h": "00e0157e",
+   "q": "A line parallel to the x-axis passes through (3,-5). What is the rule?",
+   "o": [
+    "⁦y=-5⁩",
+    "⁦x=3⁩",
+    "⁦y=3⁩",
+    "⁦y=-5x⁩"
+   ],
+   "x": "Parallel to the x-axis → y is constant, y=-5"
+  },
+  {
+   "he": "איפה ⁦y=2x-6⁩ חותך את ציר x?",
+   "a": "⁦(3,0)⁩",
+   "h": "198528f9",
+   "q": "Where does y=2x-6 cross the x-axis?",
+   "o": [
+    "⁦(3,0)⁩",
+    "⁦(0,-6)⁩",
+    "⁦(-3,0)⁩",
+    "⁦(6,0)⁩"
+   ],
+   "x": "0=2x-6 → x=3"
+  },
+  {
+   "he": "איפה ⁦y=-x+4⁩ חותך את ציר x?",
+   "a": "⁦(4,0)⁩",
+   "h": "dbb7188c",
+   "q": "Where does y=-x+4 cross the x-axis?",
+   "o": [
+    "⁦(4,0)⁩",
+    "⁦(0,4)⁩",
+    "⁦(-4,0)⁩",
+    "⁦(1,0)⁩"
+   ],
+   "x": "0=-x+4 → x=4"
+  },
+  {
+   "he": "בכלל ⁦y=mx+b⁩, מה מייצג m?",
+   "a": "השיפוע",
+   "h": "035c9466",
+   "q": "In the rule y=mx+b, what does m represent?",
+   "o": [
+    "The slope",
+    "The y-intercept",
+    "The x-coordinate",
+    "The y-coordinate"
+   ],
+   "x": "m – the slope, b – the y-intercept"
+  },
+  {
+   "he": "⁦y=4x+b⁩ עובר ב-⁦(0,3)⁩. מה b?",
+   "a": "⁦3⁩",
+   "h": "837f5cee",
+   "q": "y=4x+b passes through (0,3). What is b?",
+   "o": [
+    "⁦3⁩",
+    "⁦4⁩",
+    "⁦0⁩",
+    "⁦7⁩"
+   ],
+   "x": "At a point on the y-axis x=0 → y=b"
+  },
+  {
+   "he": "⁦y=3x-2⁩. מה y כש-⁦x=4⁩?",
+   "a": "⁦10⁩",
+   "h": "39d7528a",
+   "q": "y=3x-2. What is y when x=4?",
+   "o": [
+    "⁦10⁩",
+    "⁦14⁩",
+    "⁦12⁩",
+    "⁦5⁩"
+   ],
+   "x": "3·4-2 = 10"
+  },
+  {
+   "he": "⁦y=-2x+5⁩. מה y כש-⁦x=3⁩?",
+   "a": "⁦-1⁩",
+   "h": "8feef7dc",
+   "q": "y=-2x+5. What is y when x=3?",
+   "o": [
+    "⁦-1⁩",
+    "⁦11⁩",
+    "⁦1⁩",
+    "⁦-11⁩"
+   ],
+   "x": "-2·3+5 = -6+5 = -1"
+  },
+  {
+   "he": "⁦y=5x+1⁩. מה y כש-⁦x=-2⁩?",
+   "a": "⁦-9⁩",
+   "h": "a7ad6e0f",
+   "q": "y=5x+1. What is y when x=-2?",
+   "o": [
+    "⁦-9⁩",
+    "⁦11⁩",
+    "⁦-11⁩",
+    "⁦9⁩"
+   ],
+   "x": "5·(-2)+1 = -10+1 = -9"
+  },
+  {
+   "he": "⁦y=3x-4⁩. מתי ⁦y=11⁩?",
+   "a": "⁦5⁩",
+   "h": "8e5fec43",
+   "q": "y=3x-4. For which x is y=11?",
+   "o": [
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦29⁩",
+    "⁦15⁩"
+   ],
+   "x": "3x-4=11 → 3x=15 → x=5"
+  },
+  {
+   "he": "איזו נקודה נמצאת על הישר ⁦y=3x+1⁩?",
+   "a": "⁦(2,7)⁩",
+   "h": "b2c6a1bf",
+   "q": "Which point is on the line y=3x+1?",
+   "o": [
+    "⁦(2,7)⁩",
+    "⁦(7,2)⁩",
+    "⁦(1,3)⁩",
+    "⁦(0,3)⁩"
+   ],
+   "x": "3·2+1 = 7 ✓"
+  },
+  {
+   "he": "איזו נקודה נמצאת על הישר ⁦y=-x+5⁩?",
+   "a": "⁦(2,3)⁩",
+   "h": "a63f51f7",
+   "q": "Which point is on the line y=-x+5?",
+   "o": [
+    "⁦(2,3)⁩",
+    "⁦(3,8)⁩",
+    "⁦(5,5)⁩",
+    "⁦(-1,4)⁩"
+   ],
+   "x": "-2+5 = 3 ✓"
+  },
+  {
+   "he": "הנקודה ⁦(k,9)⁩ על הישר ⁦y=2x+1⁩. מה k?",
+   "a": "⁦4⁩",
+   "h": "019e218e",
+   "q": "The point (k,9) is on the line y=2x+1. What is k?",
+   "o": [
+    "⁦4⁩",
+    "⁦19⁩",
+    "⁦5⁩",
+    "⁦8⁩"
+   ],
+   "x": "2k+1=9 → k=4"
+  },
+  {
+   "he": "הנקודה ⁦(3,k)⁩ על הישר ⁦y=4x-5⁩. מה k?",
+   "a": "⁦7⁩",
+   "h": "3379673c",
+   "q": "The point (3,k) is on the line y=4x-5. What is k?",
+   "o": [
+    "⁦7⁩",
+    "⁦17⁩",
+    "⁦12⁩",
+    "⁦-7⁩"
+   ],
+   "x": "4·3-5 = 7"
+  },
+  {
+   "he": "מונית: 12 ₪ פתיחה ועוד 3 ₪ לק״מ. מה הכלל?",
+   "a": "⁦y=3x+12⁩",
+   "h": "f637ef55",
+   "q": "A taxi: 12 ₪ to start plus 3 ₪ per km. What is the rule?",
+   "o": [
+    "⁦y=3x+12⁩",
+    "⁦y=12x+3⁩",
+    "⁦y=15x⁩",
+    "⁦y=3x-12⁩"
+   ],
+   "x": "3 ₪ for each km (x), plus a fixed 12",
+   "sc": {
+    "1": "Start: 12 ₪",
+    "2": "3 ₪ per km"
+   }
+  },
+  {
+   "he": "מחיר נסיעה: ⁦y=3x+12⁩. כמה עולים 10 ק״מ?",
+   "a": "⁦42 ₪⁩",
+   "h": "7f6dd2d1",
+   "q": "Taxi fare: y=3x+12. How much does a 10 km ride cost?",
+   "o": [
+    "⁦42 ₪⁩",
+    "⁦30 ₪⁩",
+    "⁦22 ₪⁩",
+    "⁦150 ₪⁩"
+   ],
+   "x": "3·10+12 = 42"
+  },
+  {
+   "he": "איזה כלל מתאים לטבלה?",
+   "a": "⁦y=2x+1⁩",
+   "h": "febe3562",
+   "q": "Which rule fits the table?",
+   "o": [
+    "⁦y=2x+1⁩",
+    "⁦y=x+2⁩",
+    "⁦y=3x⁩",
+    "⁦y=2x-1⁩"
+   ],
+   "x": "Slope 2, and at x=0: y=1",
+   "sc": {
+    "0": "2",
+    "1": "1",
+    "2": "0",
+    "3": "x",
+    "4": "5",
+    "5": "3",
+    "6": "1",
+    "7": "y"
+   }
+  },
+  {
+   "he": "איזה כלל מתאים לטבלה הזו?",
+   "a": "⁦y=-x+4⁩",
+   "h": "5b135333",
+   "q": "Which rule fits this table?",
+   "o": [
+    "⁦y=-x+4⁩",
+    "⁦y=x+4⁩",
+    "⁦y=4x⁩",
+    "⁦y=-4x+1⁩"
+   ],
+   "x": "y goes down by 1 each step and starts at 4",
+   "sc": {
+    "0": "2",
+    "1": "1",
+    "2": "0",
+    "3": "x",
+    "4": "2",
+    "5": "3",
+    "6": "4",
+    "7": "y"
+   }
+  },
+  {
+   "he": "מה הכלל לפי הטבלה?",
+   "a": "⁦y=3x+2⁩",
+   "h": "e8f0a45a",
+   "q": "What is the rule according to the table?",
+   "o": [
+    "⁦y=3x+2⁩",
+    "⁦y=3x+5⁩",
+    "⁦y=5x⁩",
+    "⁦y=2x+3⁩"
+   ],
+   "x": "Slope 3; 3·1+2 = 5 ✓",
+   "sc": {
+    "0": "3",
+    "1": "2",
+    "2": "1",
+    "3": "x",
+    "4": "11",
+    "5": "8",
+    "6": "5",
+    "7": "y"
+   }
+  },
+  {
+   "he": "מה הכלל המתאים לטבלה?",
+   "a": "⁦y=3x⁩",
+   "h": "9ff6f325",
+   "q": "What rule fits the table?",
+   "o": [
+    "⁦y=3x⁩",
+    "⁦y=6x⁩",
+    "⁦y=x+6⁩",
+    "⁦y=2x⁩"
+   ],
+   "x": "y increases by 6 when x increases by 2 → slope 3",
+   "sc": {
+    "0": "4",
+    "1": "2",
+    "2": "0",
+    "3": "x",
+    "4": "12",
+    "5": "6",
+    "6": "0",
+    "7": "y"
+   }
+  },
+  {
+   "he": "איזה כלל מתאים לטבלה הבאה?",
+   "a": "⁦y=3⁩",
+   "h": "2fc4e622",
+   "q": "Which rule fits the following table?",
+   "o": [
+    "⁦y=3⁩",
+    "⁦y=3x⁩",
+    "⁦x=3⁩",
+    "⁦y=x+3⁩"
+   ],
+   "x": "y is always 3 → y=3",
+   "sc": {
+    "0": "2",
+    "1": "1",
+    "2": "0",
+    "3": "x",
+    "4": "3",
+    "5": "3",
+    "6": "3",
+    "7": "y"
+   }
+  },
+  {
+   "he": "הגרף עולה וחותך את ציר y ב-⁦-1⁩. מה הכלל?",
+   "a": "⁦y=2x-1⁩",
+   "h": "e19dd642",
+   "q": "The graph is increasing and crosses the y-axis at -1. What is the rule?",
+   "o": [
+    "⁦y=2x-1⁩",
+    "⁦y=-2x+1⁩",
+    "⁦y=-x⁩",
+    "⁦y=5⁩"
+   ],
+   "x": "An increasing graph → a positive slope"
+  },
+  {
+   "he": "הגרף יורד וחותך את ציר y ב-6. מה הכלל?",
+   "a": "⁦y=-3x+6⁩",
+   "h": "aa5b27f9",
+   "q": "The graph is decreasing and crosses the y-axis at 6. What is the rule?",
+   "o": [
+    "⁦y=-3x+6⁩",
+    "⁦y=3x+6⁩",
+    "⁦y=6⁩",
+    "⁦y=x-6⁩"
+   ],
+   "x": "A decreasing graph → a negative slope"
+  },
+  {
+   "he": "כל הנקודות בגובה 2. איזה כלל מתאים?",
+   "a": "⁦y=2⁩",
+   "h": "2facd970",
+   "q": "All the points are at height 2. Which rule fits?",
+   "o": [
+    "⁦y=2⁩",
+    "⁦y=2x⁩",
+    "⁦y=x+2⁩",
+    "⁦y=-2x⁩"
+   ],
+   "x": "y does not change → slope 0"
+  },
+  {
+   "he": "ישר עובר ב-⁦(0,2)⁩ וב-⁦(1,5)⁩. מה הכלל?",
+   "a": "⁦y=3x+2⁩",
+   "h": "ccc99e46",
+   "q": "A line passes through (0,2) and (1,5). What is the rule?",
+   "o": [
+    "⁦y=3x+2⁩",
+    "⁦y=2x+3⁩",
+    "⁦y=5x+2⁩",
+    "⁦y=3x+5⁩"
+   ],
+   "x": "Slope 5-2=3, y-intercept 2"
+  },
+  {
+   "he": "ישר עובר ב-⁦(0,-3)⁩ וב-⁦(2,1)⁩. מה הכלל?",
+   "a": "⁦y=2x-3⁩",
+   "h": "d9a2ae3c",
+   "q": "A line passes through (0,-3) and (2,1). What is the rule?",
+   "o": [
+    "⁦y=2x-3⁩",
+    "⁦y=-3x+2⁩",
+    "⁦y=2x+3⁩",
+    "⁦y=4x-3⁩"
+   ],
+   "x": "Slope 4÷2=2, y-intercept -3"
+  },
+  {
+   "he": "איזה ישר מקביל ל-⁦y=2x+1⁩?",
+   "a": "⁦y=2x-5⁩",
+   "h": "14beeb3c",
+   "q": "Which line is parallel to y=2x+1?",
+   "o": [
+    "⁦y=2x-5⁩",
+    "⁦y=-2x+1⁩",
+    "⁦y=x+2⁩",
+    "⁦y=0.5x+1⁩"
+   ],
+   "x": "Equal slopes → parallel lines"
+  },
+  {
+   "he": "איזה ישר מקביל ל-⁦y=-3x⁩?",
+   "a": "⁦y=-3x+4⁩",
+   "h": "8826aa07",
+   "q": "Which line is parallel to y=-3x?",
+   "o": [
+    "⁦y=-3x+4⁩",
+    "⁦y=3x⁩",
+    "⁦y=-x+3⁩",
+    "⁦y=x-3⁩"
+   ],
+   "x": "Both have slope -3"
+  },
+  {
+   "he": "מה שווה בשני ישרים מקבילים?",
+   "a": "השיפוע",
+   "h": "3373527f",
+   "q": "What is the same in two parallel lines?",
+   "o": [
+    "The slope",
+    "The y-intercept",
+    "The whole rule",
+    "Nothing"
+   ],
+   "x": "Parallel → the same slope, a different b"
+  },
+  {
+   "he": "ישר מקביל ל-⁦y=4x-1⁩ עובר ב-⁦(0,3)⁩. הכלל?",
+   "a": "⁦y=4x+3⁩",
+   "h": "1ab98d94",
+   "q": "A line parallel to y=4x-1 passes through (0,3). What is the rule?",
+   "o": [
+    "⁦y=4x+3⁩",
+    "⁦y=3x+4⁩",
+    "⁦y=-4x+3⁩",
+    "⁦y=4x-1⁩"
+   ],
+   "x": "Slope 4 like the original line, b=3"
+  },
+  {
+   "he": "ישר מקביל ל-⁦y=-x+2⁩ עובר בראשית. הכלל?",
+   "a": "⁦y=-x⁩",
+   "h": "e7a02879",
+   "q": "A line parallel to y=-x+2 passes through the origin. What is the rule?",
+   "o": [
+    "⁦y=-x⁩",
+    "⁦y=x⁩",
+    "⁦y=2⁩",
+    "⁦y=-x+2⁩"
+   ],
+   "x": "Slope -1, and through the origin b=0"
+  },
+  {
+   "he": "הישרים ⁦y=5x+2⁩ ו-⁦y=5x-3⁩…",
+   "a": "מקבילים",
+   "h": "930f91bd",
+   "q": "The lines y=5x+2 and y=5x-3…",
+   "o": [
+    "Are parallel",
+    "Intersect",
+    "Coincide",
+    "Pass through the origin"
+   ],
+   "x": "Same slope, different b → parallel"
+  },
+  {
+   "he": "הישרים ⁦y=2x+1⁩ ו-⁦y=3x+1⁩…",
+   "a": "נחתכים ב-⁦(0,1)⁩",
+   "h": "e536051c",
+   "q": "The lines y=2x+1 and y=3x+1…",
+   "o": [
+    "Intersect at (0,1)",
+    "Are parallel",
+    "Coincide",
+    "Do not intersect"
+   ],
+   "x": "Different slopes; both have b=1"
+  },
+  {
+   "he": "ישר מקביל לציר x עובר ב-⁦(2,4)⁩. מה שיפועו?",
+   "a": "⁦0⁩",
+   "h": "22a6e524",
+   "q": "A line parallel to the x-axis passes through (2,4). What is its slope?",
+   "o": [
+    "⁦0⁩",
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦1⁩"
+   ],
+   "x": "Parallel to the x-axis → slope 0"
+  },
+  {
+   "he": "איזה ישר מקביל לציר x?",
+   "a": "⁦y=-1⁩",
+   "h": "f2a05c98",
+   "q": "Which line is parallel to the x-axis?",
+   "o": [
+    "⁦y=-1⁩",
+    "⁦y=-x⁩",
+    "⁦x=-1⁩",
+    "⁦y=x-1⁩"
+   ],
+   "x": "y=-1: y is constant. x=-1 is parallel to the y-axis"
+  },
+  {
+   "he": "⁦y=ax+2⁩ מקביל ל-⁦y=6x-1⁩. מה a?",
+   "a": "⁦6⁩",
+   "h": "78a62ff3",
+   "q": "y=ax+2 is parallel to y=6x-1. What is a?",
+   "o": [
+    "⁦6⁩",
+    "⁦2⁩",
+    "⁦-1⁩",
+    "⁦-6⁩"
+   ],
+   "x": "Parallel lines → equal slopes"
+  },
+  {
+   "he": "⁦(x+2)(x+3) = ?⁩",
+   "a": "⁦x²+5x+6⁩",
+   "h": "16212687",
+   "q": "⁦(x+2)(x+3) = ?⁩",
+   "o": [
+    "⁦x²+5x+6⁩",
+    "⁦x²+6⁩",
+    "⁦x²+5x+5⁩",
+    "⁦2x+5⁩"
+   ],
+   "x": "x²+3x+2x+6: each term times each term"
+  },
+  {
+   "he": "⁦(x+4)(x-1) = ?⁩",
+   "a": "⁦x²+3x-4⁩",
+   "h": "4b97085e",
+   "q": "⁦(x+4)(x-1) = ?⁩",
+   "o": [
+    "⁦x²+3x-4⁩",
+    "⁦x²-4⁩",
+    "⁦x²+5x-4⁩",
+    "⁦x²+3x+4⁩"
+   ],
+   "x": "x²-x+4x-4, then combine: 3x"
+  },
+  {
+   "he": "⁦(x-5)(x-2) = ?⁩",
+   "a": "⁦x²-7x+10⁩",
+   "h": "4cb96cc7",
+   "q": "⁦(x-5)(x-2) = ?⁩",
+   "o": [
+    "⁦x²-7x+10⁩",
+    "⁦x²+10⁩",
+    "⁦x²-7x-10⁩",
+    "⁦x²-3x+10⁩"
+   ],
+   "x": "Minus times minus: (-5)·(-2) = +10"
+  },
+  {
+   "he": "⁦(2x+1)(x+3) = ?⁩",
+   "a": "⁦2x²+7x+3⁩",
+   "h": "7fd548d7",
+   "q": "⁦(2x+1)(x+3) = ?⁩",
+   "o": [
+    "⁦2x²+7x+3⁩",
+    "⁦2x²+3⁩",
+    "⁦2x²+6x+3⁩",
+    "⁦3x²+7x+3⁩"
+   ],
+   "x": "2x²+6x+x+3, then combine: 7x"
+  },
+  {
+   "he": "⁦3x(2x-4) = ?⁩",
+   "a": "⁦6x²-12x⁩",
+   "h": "00986544",
+   "q": "⁦3x(2x-4) = ?⁩",
+   "o": [
+    "⁦6x²-12x⁩",
+    "⁦6x-12⁩",
+    "⁦5x²-12x⁩",
+    "⁦6x²-4⁩"
+   ],
+   "x": "Each term in the parentheses times 3x"
+  },
+  {
+   "he": "בכפל ⁦(a+b)(c+d)⁩, כמה מכפלות מחברים?",
+   "a": "⁦4⁩",
+   "h": "ead145f6",
+   "q": "In (a+b)(c+d), how many products do you add?",
+   "o": [
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦3⁩",
+    "⁦1⁩"
+   ],
+   "x": "Each of two terms times each of two: 2·2"
+  },
+  {
+   "he": "מלבן: אורך ⁦x+4⁩, רוחב ⁦x+1⁩. מה השטח?",
+   "a": "⁦x²+5x+4⁩",
+   "h": "e491e120",
+   "q": "A rectangle: length x+4, width x+1. What is its area?",
+   "o": [
+    "⁦x²+5x+4⁩",
+    "⁦2x+5⁩",
+    "⁦4x+10⁩",
+    "⁦x²+4⁩"
+   ],
+   "x": "Length times width: x²+x+4x+4",
+   "sc": {
+    "0": "L = x+4",
+    "1": "W = x+1"
+   }
+  },
+  {
+   "he": "⁦(x-4)(x+6) = ?⁩",
+   "a": "⁦x²+2x-24⁩",
+   "h": "37f76bd0",
+   "q": "⁦(x-4)(x+6) = ?⁩",
+   "o": [
+    "⁦x²+2x-24⁩",
+    "⁦x²-2x-24⁩",
+    "⁦x²+2x+24⁩",
+    "⁦x²-24⁩"
+   ],
+   "x": "6x-4x = 2x, and (-4)·6 = -24"
+  },
+  {
+   "he": "⁦(x+2)(x+k) = x²+7x+10⁩. מה k?",
+   "a": "⁦5⁩",
+   "h": "f859d7a8",
+   "q": "(x+2)(x+k) = x²+7x+10. What is k?",
+   "o": [
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦10⁩",
+    "⁦3⁩"
+   ],
+   "x": "2·k = 10 → k=5; check: 2+5 = 7"
+  },
+  {
+   "he": "⁦(2x-3)(2x+1) = ?⁩",
+   "a": "⁦4x²-4x-3⁩",
+   "h": "5191b3f4",
+   "q": "⁦(2x-3)(2x+1) = ?⁩",
+   "o": [
+    "⁦4x²-4x-3⁩",
+    "⁦4x²-3⁩",
+    "⁦4x²+4x-3⁩",
+    "⁦2x²-4x-3⁩"
+   ],
+   "x": "4x²+2x-6x-3, then combine: -4x"
+  },
+  {
+   "he": "⁦(a+b)² = ?⁩",
+   "a": "⁦a²+2ab+b²⁩",
+   "h": "4b86bf86",
+   "q": "⁦(a+b)² = ?⁩",
+   "o": [
+    "⁦a²+2ab+b²⁩",
+    "⁦a²+b²⁩",
+    "⁦a²+ab+b²⁩",
+    "⁦2a+2b⁩"
+   ],
+   "x": "⁦(a+b)(a+b) = a²+ab+ab+b²⁩"
+  },
+  {
+   "he": "⁦(a-b)² = ?⁩",
+   "a": "⁦a²-2ab+b²⁩",
+   "h": "02f5f7f8",
+   "q": "⁦(a-b)² = ?⁩",
+   "o": [
+    "⁦a²-2ab+b²⁩",
+    "⁦a²-b²⁩",
+    "⁦a²+2ab+b²⁩",
+    "⁦a²-2ab-b²⁩"
+   ],
+   "x": "-2ab in the middle, and b² is always positive"
+  },
+  {
+   "he": "⁦(a+b)(a-b) = ?⁩",
+   "a": "⁦a²-b²⁩",
+   "h": "227e8de8",
+   "q": "⁦(a+b)(a-b) = ?⁩",
+   "o": [
+    "⁦a²-b²⁩",
+    "⁦a²+b²⁩",
+    "⁦a²-2ab+b²⁩",
+    "⁦a²-2ab-b²⁩"
+   ],
+   "x": "-ab and +ab cancel each other out"
+  },
+  {
+   "he": "⁦(x+5)² = ?⁩",
+   "a": "⁦x²+10x+25⁩",
+   "h": "37791663",
+   "q": "⁦(x+5)² = ?⁩",
+   "o": [
+    "⁦x²+10x+25⁩",
+    "⁦x²+25⁩",
+    "⁦x²+5x+25⁩",
+    "⁦x²+10x+10⁩"
+   ],
+   "x": "⁦x² + 2·5·x + 5²⁩"
+  },
+  {
+   "he": "⁦(x-3)² = ?⁩",
+   "a": "⁦x²-6x+9⁩",
+   "h": "cfdce538",
+   "q": "⁦(x-3)² = ?⁩",
+   "o": [
+    "⁦x²-6x+9⁩",
+    "⁦x²-9⁩",
+    "⁦x²+9⁩",
+    "⁦x²-6x-9⁩"
+   ],
+   "x": "⁦x² - 2·3·x + 3²⁩"
+  },
+  {
+   "he": "⁦(x+4)(x-4) = ?⁩",
+   "a": "⁦x²-16⁩",
+   "h": "8cfd61a1",
+   "q": "⁦(x+4)(x-4) = ?⁩",
+   "o": [
+    "⁦x²-16⁩",
+    "⁦x²+16⁩",
+    "⁦x²-8x+16⁩",
+    "⁦x²-8⁩"
+   ],
+   "x": "Difference of squares: x² - 4²"
+  },
+  {
+   "he": "⁦(2x+1)² = ?⁩",
+   "a": "⁦4x²+4x+1⁩",
+   "h": "3fc907ce",
+   "q": "⁦(2x+1)² = ?⁩",
+   "o": [
+    "⁦4x²+4x+1⁩",
+    "⁦4x²+1⁩",
+    "⁦2x²+4x+1⁩",
+    "⁦4x²+2x+1⁩"
+   ],
+   "x": "⁦(2x)² + 2·2x·1 + 1²⁩"
+  },
+  {
+   "he": "חשבו בעזרת נוסחה: ⁦21² = ?⁩",
+   "a": "⁦441⁩",
+   "h": "9f206b0d",
+   "q": "Use a formula: 21² = ?",
+   "o": [
+    "⁦441⁩",
+    "⁦421⁩",
+    "⁦442⁩",
+    "⁦401⁩"
+   ],
+   "x": "⁦(20+1)² = 400+40+1⁩"
+  },
+  {
+   "he": "חשבו בעזרת נוסחה: ⁦99·101 = ?⁩",
+   "a": "⁦9,999⁩",
+   "h": "c4040972",
+   "q": "Use a formula: 99·101 = ?",
+   "o": [
+    "⁦9,999⁩",
+    "⁦10,000⁩",
+    "⁦9,899⁩",
+    "⁦10,099⁩"
+   ],
+   "x": "⁦(100-1)(100+1) = 10,000-1⁩"
+  },
+  {
+   "he": "⁦x²-6x+9⁩ הוא ריבוע של…",
+   "a": "⁦x-3⁩",
+   "h": "3e5dd986",
+   "q": "x²-6x+9 is the square of…",
+   "o": [
+    "⁦x-3⁩",
+    "⁦x+3⁩",
+    "⁦x-9⁩",
+    "⁦x-6⁩"
+   ],
+   "x": "⁦(x-3)² = x²-6x+9⁩"
+  },
+  {
+   "he": "איך מפרקים את ⁦x²-25⁩ לכפל?",
+   "a": "⁦(x-5)(x+5)⁩",
+   "h": "64079b50",
+   "q": "How do you factor x²-25?",
+   "o": [
+    "⁦(x-5)(x+5)⁩",
+    "⁦(x-5)²⁩",
+    "⁦(x+5)²⁩",
+    "⁦(x-25)(x+1)⁩"
+   ],
+   "x": "Difference of squares: x² - 5²"
+  },
+  {
+   "he": "⁦2³·2⁴ = ?⁩",
+   "a": "⁦2⁷⁩",
+   "h": "f05f17ff",
+   "q": "⁦2³·2⁴ = ?⁩",
+   "o": [
+    "⁦2⁷⁩",
+    "⁦2¹²⁩",
+    "⁦4⁷⁩",
+    "⁦2¹⁩"
+   ],
+   "x": "Same base, multiplying → add the exponents: 3+4"
+  },
+  {
+   "he": "⁦a⁵·a² = ?⁩",
+   "a": "⁦a⁷⁩",
+   "h": "d5c0bcfe",
+   "q": "⁦a⁵·a² = ?⁩",
+   "o": [
+    "⁦a⁷⁩",
+    "⁦a¹⁰⁩",
+    "⁦a³⁩",
+    "⁦2a⁷⁩"
+   ],
+   "x": "Add the exponents: 5+2 = 7"
+  },
+  {
+   "he": "⁦x·x³ = ?⁩",
+   "a": "⁦x⁴⁩",
+   "h": "b8d3bbeb",
+   "q": "⁦x·x³ = ?⁩",
+   "o": [
+    "⁦x⁴⁩",
+    "⁦x³⁩",
+    "⁦x²⁩",
+    "⁦2x³⁩"
+   ],
+   "x": "x is x¹: 1+3 = 4"
+  },
+  {
+   "he": "⁦3⁶:3² = ?⁩",
+   "a": "⁦3⁴⁩",
+   "h": "bc092db6",
+   "q": "3⁶÷3² = ?",
+   "o": [
+    "⁦3⁴⁩",
+    "⁦3³⁩",
+    "⁦1³⁩",
+    "⁦3⁸⁩"
+   ],
+   "x": "Same base, dividing → subtract the exponents: 6-2",
+   "sc": {
+    "0": "3⁶ ÷ 3²"
+   }
+  },
+  {
+   "he": "⁦a⁸:a⁴ = ?⁩",
+   "a": "⁦a⁴⁩",
+   "h": "2145b16f",
+   "q": "a⁸÷a⁴ = ?",
+   "o": [
+    "⁦a⁴⁩",
+    "⁦a²⁩",
+    "⁦a¹²⁩",
+    "⁦1⁩"
+   ],
+   "x": "Subtract: 8-4 = 4 – don't divide 8÷4",
+   "sc": {
+    "0": "a⁸ ÷ a⁴"
+   }
+  },
+  {
+   "he": "⁦10⁵:10³ = ?⁩",
+   "a": "⁦100⁩",
+   "h": "3a21ecb1",
+   "q": "10⁵÷10³ = ?",
+   "o": [
+    "⁦100⁩",
+    "⁦1,000⁩",
+    "⁦10⁩",
+    "⁦10⁸⁩"
+   ],
+   "x": "5-3 = 2 → 10² = 100",
+   "sc": {
+    "0": "10⁵ ÷ 10³"
+   }
+  },
+  {
+   "he": "⁦2⁵·2⁵ = ?⁩",
+   "a": "⁦2¹⁰⁩",
+   "h": "a4ac1434",
+   "q": "⁦2⁵·2⁵ = ?⁩",
+   "o": [
+    "⁦2¹⁰⁩",
+    "⁦2²⁵⁩",
+    "⁦4¹⁰⁩",
+    "⁦2⁰⁩"
+   ],
+   "x": "The base stays 2: 5+5 = 10"
+  },
+  {
+   "he": "⁦x³·x²·x = ?⁩",
+   "a": "⁦x⁶⁩",
+   "h": "450b8eb8",
+   "q": "⁦x³·x²·x = ?⁩",
+   "o": [
+    "⁦x⁶⁩",
+    "⁦x⁵⁩",
+    "⁦x⁷⁩",
+    "⁦3x⁶⁩"
+   ],
+   "x": "⁦3+2+1 = 6⁩"
+  },
+  {
+   "he": "⁦5⁴⁩ כפול איזו חזקה של 5 נותן ⁦5⁹⁩?",
+   "a": "⁦5⁵⁩",
+   "h": "b2fd558b",
+   "q": "5⁴ times which power of 5 gives 5⁹?",
+   "o": [
+    "⁦5⁵⁩",
+    "⁦5¹³⁩",
+    "⁦5²⁩",
+    "⁦1⁵⁩"
+   ],
+   "x": "⁦4+5 = 9⁩"
+  },
+  {
+   "he": "⁦(2·5)³ = ?⁩",
+   "a": "⁦1,000⁩",
+   "h": "b4d27711",
+   "q": "⁦(2·5)³ = ?⁩",
+   "o": [
+    "⁦1,000⁩",
+    "⁦250⁩",
+    "⁦30⁩",
+    "⁦100⁩"
+   ],
+   "x": "10³ = 1,000, and also 2³·5³ = 8·125"
+  },
+  {
+   "he": "⁦(2³)² = ?⁩",
+   "a": "⁦2⁶⁩",
+   "h": "7010754d",
+   "q": "⁦(2³)² = ?⁩",
+   "o": [
+    "⁦2⁶⁩",
+    "⁦2⁵⁩",
+    "⁦2⁹⁩",
+    "⁦6²⁩"
+   ],
+   "x": "Power of a power → multiply the exponents: 3·2"
+  },
+  {
+   "he": "⁦(a⁴)³ = ?⁩",
+   "a": "⁦a¹²⁩",
+   "h": "938447fe",
+   "q": "⁦(a⁴)³ = ?⁩",
+   "o": [
+    "⁦a¹²⁩",
+    "⁦a⁷⁩",
+    "⁦a⁶⁴⁩",
+    "⁦3a⁴⁩"
+   ],
+   "x": "⁦a⁴·a⁴·a⁴⁩: ⁦4+4+4 = 12⁩"
+  },
+  {
+   "he": "⁦(x²)⁵ = ?⁩",
+   "a": "⁦x¹⁰⁩",
+   "h": "e211cba2",
+   "q": "⁦(x²)⁵ = ?⁩",
+   "o": [
+    "⁦x¹⁰⁩",
+    "⁦x⁷⁩",
+    "⁦x³²⁩",
+    "⁦2x⁵⁩"
+   ],
+   "x": "Multiply the exponents: 2·5 = 10"
+  },
+  {
+   "he": "⁦5⁰ = ?⁩",
+   "a": "⁦1⁩",
+   "h": "f47675ca",
+   "q": "⁦5⁰ = ?⁩",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦5⁩",
+    "⁦50⁩"
+   ],
+   "x": "5³÷5³ = 5⁰, and also 125÷125 = 1"
+  },
+  {
+   "he": "⁦a⁰⁩ שווה ל… (⁦a≠0⁩)",
+   "a": "⁦1⁩",
+   "h": "562230fe",
+   "q": "a⁰ equals… (a≠0)",
+   "o": [
+    "1",
+    "0",
+    "a",
+    "Can't tell"
+   ],
+   "x": "Any number (except 0) to the power of 0 equals 1"
+  },
+  {
+   "he": "⁦(-7)⁰ = ?⁩",
+   "a": "⁦1⁩",
+   "h": "19402b81",
+   "q": "⁦(-7)⁰ = ?⁩",
+   "o": [
+    "⁦1⁩",
+    "⁦-1⁩",
+    "⁦0⁩",
+    "⁦-7⁩"
+   ],
+   "x": "A negative number to the power of 0 also equals 1"
+  },
+  {
+   "he": "⁦3⁰+3¹ = ?⁩",
+   "a": "⁦4⁩",
+   "h": "0f57e3b3",
+   "q": "⁦3⁰+3¹ = ?⁩",
+   "o": [
+    "⁦4⁩",
+    "⁦3⁩",
+    "⁦1⁩",
+    "⁦6⁩"
+   ],
+   "x": "3⁰ = 1, 3¹ = 3 → 1+3 = 4"
+  },
+  {
+   "he": "⁦x⁵:x⁵ = ?⁩",
+   "a": "⁦1⁩",
+   "h": "61fa568a",
+   "q": "x⁵÷x⁵ = ?",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦x⁩",
+    "⁦x¹⁰⁩"
+   ],
+   "x": "A number divided by itself: x⁰ = 1",
+   "sc": {
+    "0": "x⁵ ÷ x⁵"
+   }
+  },
+  {
+   "he": "⁦(2x)³ = ?⁩",
+   "a": "⁦8x³⁩",
+   "h": "313f1d66",
+   "q": "⁦(2x)³ = ?⁩",
+   "o": [
+    "⁦8x³⁩",
+    "⁦2x³⁩",
+    "⁦6x³⁩",
+    "⁦8x⁩"
+   ],
+   "x": "Each factor to the power: 2³·x³ = 8x³"
+  },
+  {
+   "he": "⁦(10²)³:10⁶ = ?⁩",
+   "a": "⁦1⁩",
+   "h": "ae9e02a8",
+   "q": "(10²)³÷10⁶ = ?",
+   "o": [
+    "⁦1⁩",
+    "⁦10⁩",
+    "⁦0⁩",
+    "⁦10⁶⁩"
+   ],
+   "x": "10⁶÷10⁶ = 10⁰ = 1",
+   "sc": {
+    "0": "(10²)³ ÷ 10⁶"
+   }
+  },
+  {
+   "he": "איזה ביטוי שווה ל-⁦2⁸⁩?",
+   "a": "⁦(2⁴)²⁩",
+   "h": "7eb8dbfa",
+   "q": "Which expression equals 2⁸?",
+   "o": [
+    "(2⁴)²",
+    "2⁴·2²",
+    "(2⁶)²",
+    "2¹⁶÷2²"
+   ],
+   "x": "4·2 = 8; the others: 2⁶, 2¹², 2¹⁴"
+  },
+  {
+   "he": "מה הפתרון של ⁦x+5>9⁩?",
+   "a": "⁦x>4⁩",
+   "h": "01ce04de",
+   "q": "What is the solution of x+5>9?",
+   "o": [
+    "⁦x>4⁩",
+    "⁦x>14⁩",
+    "⁦x<4⁩",
+    "⁦x=4⁩"
+   ],
+   "x": "Subtract 5 from both sides"
+  },
+  {
+   "he": "מה הפתרון של ⁦x-3≤7⁩?",
+   "a": "⁦x≤10⁩",
+   "h": "457f8503",
+   "q": "What is the solution of x-3≤7?",
+   "o": [
+    "⁦x≤10⁩",
+    "⁦x≤4⁩",
+    "⁦x≥10⁩",
+    "⁦x<10⁩"
+   ],
+   "x": "Add 3 to both sides"
+  },
+  {
+   "he": "מה הפתרון של ⁦3x<12⁩?",
+   "a": "⁦x<4⁩",
+   "h": "e491a75c",
+   "q": "What is the solution of 3x<12?",
+   "o": [
+    "⁦x<4⁩",
+    "⁦x<36⁩",
+    "⁦x>4⁩",
+    "⁦x<9⁩"
+   ],
+   "x": "Divide by 3 (positive) – the sign stays"
+  },
+  {
+   "he": "מה הפתרון של ⁦2x+1≥9⁩?",
+   "a": "⁦x≥4⁩",
+   "h": "cf790e5d",
+   "q": "What is the solution of 2x+1≥9?",
+   "o": [
+    "⁦x≥4⁩",
+    "⁦x≥5⁩",
+    "⁦x≤4⁩",
+    "⁦x≥8⁩"
+   ],
+   "x": "2x≥8 → x≥4"
+  },
+  {
+   "he": "מה הפתרון של ⁦-2x>8⁩?",
+   "a": "⁦x<-4⁩",
+   "h": "1a7bb805",
+   "q": "What is the solution of -2x>8?",
+   "o": [
+    "⁦x<-4⁩",
+    "⁦x>-4⁩",
+    "⁦x>4⁩",
+    "⁦x<4⁩"
+   ],
+   "x": "Dividing by a negative → flip the sign"
+  },
+  {
+   "he": "מה הפתרון של ⁦-x≤3⁩?",
+   "a": "⁦x≥-3⁩",
+   "h": "1a126e4a",
+   "q": "What is the solution of -x≤3?",
+   "o": [
+    "⁦x≥-3⁩",
+    "⁦x≤-3⁩",
+    "⁦x≥3⁩",
+    "⁦x≤3⁩"
+   ],
+   "x": "Multiply by -1 → flip the sign"
+  },
+  {
+   "he": "מה הפתרון של ⁦5-x>2⁩?",
+   "a": "⁦x<3⁩",
+   "h": "234065f6",
+   "q": "What is the solution of 5-x>2?",
+   "o": [
+    "⁦x<3⁩",
+    "⁦x>3⁩",
+    "⁦x>-3⁩",
+    "⁦x<-3⁩"
+   ],
+   "x": "-x>-3 → x<3"
+  },
+  {
+   "he": "מה הפתרון של ⁦4x-7<5⁩?",
+   "a": "⁦x<3⁩",
+   "h": "b815d20f",
+   "q": "What is the solution of 4x-7<5?",
+   "o": [
+    "⁦x<3⁩",
+    "⁦x<-0.5⁩",
+    "⁦x>3⁩",
+    "⁦x<12⁩"
+   ],
+   "x": "4x<12 → x<3"
+  },
+  {
+   "he": "מה הפתרון של ⁦x/2>3⁩?",
+   "a": "⁦x>6⁩",
+   "h": "1112d189",
+   "q": "What is the solution of x/2>3?",
+   "o": [
+    "⁦x>6⁩",
+    "⁦x>1.5⁩",
+    "⁦x<6⁩",
+    "⁦x>5⁩"
+   ],
+   "x": "Multiply by 2 (positive) – the sign stays"
+  },
+  {
+   "he": "מה הפתרון של ⁦-3x≥-12⁩?",
+   "a": "⁦x≤4⁩",
+   "h": "0f6eeee2",
+   "q": "What is the solution of -3x≥-12?",
+   "o": [
+    "⁦x≤4⁩",
+    "⁦x≥4⁩",
+    "⁦x≤-4⁩",
+    "⁦x≥-4⁩"
+   ],
+   "x": "Divide by -3 → flip the sign"
+  },
+  {
+   "he": "מתי הופכים את סימן אי-השוויון?",
+   "a": "בכפל במספר שלילי",
+   "h": "6154f404",
+   "q": "When do you flip the inequality sign?",
+   "o": [
+    "Multiplying by a negative",
+    "Adding a negative",
+    "Multiplying by a positive",
+    "Never"
+   ],
+   "x": "Multiplying or dividing by a negative → the sign flips",
+   "sc": {
+    "0": "> or <"
+   }
+  },
+  {
+   "he": "האם 5 הוא פתרון של ⁦x>5⁩?",
+   "a": "לא",
+   "h": "fced097d",
+   "q": "Is 5 a solution of x>5?",
+   "o": [
+    "No",
+    "Yes",
+    "Only if x=5",
+    "Can't tell"
+   ],
+   "x": "5 is not greater than 5"
+  },
+  {
+   "he": "איזה מספר הוא פתרון של ⁦x≤-2⁩?",
+   "a": "⁦-3⁩",
+   "h": "a14d0094",
+   "q": "Which number is a solution of x≤-2?",
+   "o": [
+    "⁦-3⁩",
+    "⁦0⁩",
+    "⁦-1⁩",
+    "⁦2⁩"
+   ],
+   "x": "-3 is less than -2"
+  },
+  {
+   "he": "איזה מספר שלילי הוא פתרון של ⁦x>-1⁩?",
+   "a": "⁦-0.5⁩",
+   "h": "d912499a",
+   "q": "Which negative number is a solution of x>-1?",
+   "o": [
+    "⁦-0.5⁩",
+    "⁦-1⁩",
+    "⁦-2⁩",
+    "⁦-3⁩"
+   ],
+   "x": "-0.5 is greater than -1; -1 itself is not included"
+  },
+  {
+   "he": "איזה אי-שוויון מתואר על הציר?",
+   "a": "⁦x≥2⁩",
+   "h": "1f4134ac",
+   "q": "Which inequality is shown on the number line?",
+   "o": [
+    "⁦x≥2⁩",
+    "⁦x>2⁩",
+    "⁦x≤2⁩",
+    "⁦x<2⁩"
+   ],
+   "x": "Filled circle – 2 is included; arrow right – greater"
+  },
+  {
+   "he": "איזה אי-שוויון מתואר על הציר?",
+   "a": "⁦x<-1⁩",
+   "h": "7973c618",
+   "q": "Which inequality is shown on the number line?",
+   "o": [
+    "⁦x<-1⁩",
+    "⁦x≤-1⁩",
+    "⁦x>-1⁩",
+    "⁦x≥-1⁩"
+   ],
+   "x": "Empty circle – -1 is not included; left – less"
+  },
+  {
+   "he": "איך מסמנים על הציר את הפתרון של ⁦2x>6⁩?",
+   "a": "עיגול ריק, ימינה",
+   "h": "fcc43284",
+   "q": "How do you show the solution of 2x>6 on the number line?",
+   "o": [
+    "Empty circle, right",
+    "Filled circle, right",
+    "Empty circle, left",
+    "Filled circle, left"
+   ],
+   "x": "x>3: 3 is not included; the solution is the numbers above 3"
+  },
+  {
+   "he": "איזה אי-שוויון פתרונו מתואר על הציר?",
+   "a": "⁦-x≥-4⁩",
+   "h": "a5642da2",
+   "q": "Which inequality has its solution shown on the number line?",
+   "o": [
+    "⁦-x≥-4⁩",
+    "⁦x≥4⁩",
+    "⁦-x≤-4⁩",
+    "⁦x>4⁩"
+   ],
+   "x": "-x≥-4 → x≤4: filled at 4, to the left"
+  },
+  {
+   "he": "יש לדנה 45 ₪. מחברת עולה 8 ₪. כמה מחברות לכל היותר?",
+   "a": "⁦5⁩",
+   "h": "6df95e97",
+   "q": "Dana has 45 ₪. A notebook costs 8 ₪. At most how many notebooks can she buy?",
+   "o": [
+    "⁦5⁩",
+    "⁦6⁩",
+    "⁦4⁩",
+    "⁦37⁩"
+   ],
+   "x": "8x≤45 → x≤5⅝, so 5",
+   "sc": {
+    "1": "Has 45 ₪",
+    "2": "8 ₪ a notebook"
+   }
+  },
+  {
+   "he": "מה המספר השלם הגדול ביותר שמקיים ⁦x<5⁩?",
+   "a": "⁦4⁩",
+   "h": "af59b8d7",
+   "q": "What is the greatest integer that satisfies x<5?",
+   "o": [
+    "⁦4⁩",
+    "⁦5⁩",
+    "⁦6⁩",
+    "⁦4.9⁩"
+   ],
+   "x": "5 is not included; 4.9 is not an integer"
+  },
+  {
+   "he": "⁦y=2x⁩, ⁦x+y=9⁩. מה x?",
+   "a": "⁦3⁩",
+   "h": "ffa770b1",
+   "q": "y=2x, x+y=9. What is x?",
+   "o": [
+    "⁦3⁩",
+    "⁦6⁩",
+    "⁦9⁩",
+    "⁦4.5⁩"
+   ],
+   "x": "Substitute: x+2x=9 → 3x=9"
+  },
+  {
+   "he": "⁦y=2x⁩, ⁦x+y=9⁩. מה y?",
+   "a": "⁦6⁩",
+   "h": "b794fa8f",
+   "q": "y=2x, x+y=9. What is y?",
+   "o": [
+    "⁦6⁩",
+    "⁦3⁩",
+    "⁦9⁩",
+    "⁦18⁩"
+   ],
+   "x": "x=3 → y=2·3=6"
+  },
+  {
+   "he": "⁦y=x+1⁩, ⁦2x+y=10⁩. מה x?",
+   "a": "⁦3⁩",
+   "h": "e4a40e1f",
+   "q": "y=x+1, 2x+y=10. What is x?",
+   "o": [
+    "⁦3⁩",
+    "⁦4⁩",
+    "⁦5⁩",
+    "⁦9⁩"
+   ],
+   "x": "2x+x+1=10 → 3x=9"
+  },
+  {
+   "he": "⁦x=3⁩, ⁦x+2y=11⁩. מה y?",
+   "a": "⁦4⁩",
+   "h": "4ddfa2ec",
+   "q": "x=3, x+2y=11. What is y?",
+   "o": [
+    "⁦4⁩",
+    "⁦8⁩",
+    "⁦3⁩",
+    "⁦7⁩"
+   ],
+   "x": "3+2y=11 → 2y=8"
+  },
+  {
+   "he": "⁦y=3x-1⁩, ⁦y=x+5⁩. מה x?",
+   "a": "⁦3⁩",
+   "h": "a86e6f5d",
+   "q": "y=3x-1, y=x+5. What is x?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦6⁩",
+    "⁦1⁩"
+   ],
+   "x": "3x-1=x+5 → 2x=6"
+  },
+  {
+   "he": "מה הפתרון של ⁦y=x⁩, ⁦x+y=8⁩?",
+   "a": "⁦(4,4)⁩",
+   "h": "b7bf4ee2",
+   "q": "What is the solution of y=x, x+y=8?",
+   "o": [
+    "⁦(4,4)⁩",
+    "⁦(8,0)⁩",
+    "⁦(2,6)⁩",
+    "⁦(0,8)⁩"
+   ],
+   "x": "x+x=8 → x=4, and also y=4"
+  },
+  {
+   "he": "איזה זוג פותר את ⁦x+y=7⁩, ⁦x-y=1⁩?",
+   "a": "⁦(4,3)⁩",
+   "h": "201f8a71",
+   "q": "Which pair solves x+y=7, x-y=1?",
+   "o": [
+    "⁦(4,3)⁩",
+    "⁦(3,4)⁩",
+    "⁦(5,2)⁩",
+    "⁦(7,0)⁩"
+   ],
+   "x": "4+3=7 and also 4-3=1"
+  },
+  {
+   "he": "איזה זוג פותר את ⁦2x+y=5⁩, ⁦y=1⁩?",
+   "a": "⁦(2,1)⁩",
+   "h": "ecc4e1f5",
+   "q": "Which pair solves 2x+y=5, y=1?",
+   "o": [
+    "⁦(2,1)⁩",
+    "⁦(1,2)⁩",
+    "⁦(3,1)⁩",
+    "⁦(2,5)⁩"
+   ],
+   "x": "2x+1=5 → x=2"
+  },
+  {
+   "he": "בשיטת ההצבה, מה עושים קודם?",
+   "a": "מבודדים משתנה אחד",
+   "h": "861a5518",
+   "q": "In the substitution method, what do you do first?",
+   "o": [
+    "Isolate one variable",
+    "Add the equations",
+    "Guess a solution",
+    "Draw a graph"
+   ],
+   "x": "Isolate a variable and substitute it into the other equation"
+  },
+  {
+   "he": "⁦x=2y⁩, ⁦x+y=12⁩. מה x?",
+   "a": "⁦8⁩",
+   "h": "50ed109e",
+   "q": "x=2y, x+y=12. What is x?",
+   "o": [
+    "⁦8⁩",
+    "⁦4⁩",
+    "⁦6⁩",
+    "⁦12⁩"
+   ],
+   "x": "2y+y=12 → y=4 → x=8"
+  },
+  {
+   "he": "⁦x+y=10⁩, ⁦x-y=4⁩. מה x?",
+   "a": "⁦7⁩",
+   "h": "76426f38",
+   "q": "x+y=10, x-y=4. What is x?",
+   "o": [
+    "⁦7⁩",
+    "⁦3⁩",
+    "⁦14⁩",
+    "⁦6⁩"
+   ],
+   "x": "Add the equations: 2x=14"
+  },
+  {
+   "he": "⁦x+y=10⁩, ⁦x-y=4⁩. מה y?",
+   "a": "⁦3⁩",
+   "h": "91d2369d",
+   "q": "x+y=10, x-y=4. What is y?",
+   "o": [
+    "⁦3⁩",
+    "⁦7⁩",
+    "⁦6⁩",
+    "⁦4⁩"
+   ],
+   "x": "x=7 → 7+y=10"
+  },
+  {
+   "he": "⁦2x+y=11⁩, ⁦x-y=1⁩. מה x?",
+   "a": "⁦4⁩",
+   "h": "3771f58f",
+   "q": "2x+y=11, x-y=1. What is x?",
+   "o": [
+    "⁦4⁩",
+    "⁦3⁩",
+    "⁦12⁩",
+    "⁦5⁩"
+   ],
+   "x": "Add the equations: 3x=12"
+  },
+  {
+   "he": "⁦3x+2y=12⁩, ⁦x-2y=4⁩. מה x?",
+   "a": "⁦4⁩",
+   "h": "828b0aae",
+   "q": "3x+2y=12, x-2y=4. What is x?",
+   "o": [
+    "⁦4⁩",
+    "⁦16⁩",
+    "⁦2⁩",
+    "⁦8⁩"
+   ],
+   "x": "Add them: 4x=16"
+  },
+  {
+   "he": "⁦x+2y=8⁩, ⁦x+y=5⁩. מה y?",
+   "a": "⁦3⁩",
+   "h": "4fbe84ee",
+   "q": "x+2y=8, x+y=5. What is y?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦5⁩",
+    "⁦13⁩"
+   ],
+   "x": "Subtract: y=8-5=3"
+  },
+  {
+   "he": "מחברים את ⁦x+y=6⁩ ו-⁦x-y=2⁩. מה מקבלים?",
+   "a": "⁦2x=8⁩",
+   "h": "cc139389",
+   "q": "Add x+y=6 and x-y=2. What do you get?",
+   "o": [
+    "⁦2x=8⁩",
+    "⁦2y=8⁩",
+    "⁦2x=4⁩",
+    "⁦x=8⁩"
+   ],
+   "x": "y and -y cancel out"
+  },
+  {
+   "he": "⁦2x+3y=13⁩, ⁦2x+y=7⁩. מה y?",
+   "a": "⁦3⁩",
+   "h": "4b14b22c",
+   "q": "2x+3y=13, 2x+y=7. What is y?",
+   "o": [
+    "⁦3⁩",
+    "⁦6⁩",
+    "⁦2⁩",
+    "⁦10⁩"
+   ],
+   "x": "Subtract: 2y=6"
+  },
+  {
+   "he": "⁦5x+y=17⁩, ⁦3x+y=11⁩. מה x?",
+   "a": "⁦3⁩",
+   "h": "703ed5d5",
+   "q": "5x+y=17, 3x+y=11. What is x?",
+   "o": [
+    "⁦3⁩",
+    "⁦6⁩",
+    "⁦2⁩",
+    "⁦14⁩"
+   ],
+   "x": "Subtract: 2x=6"
+  },
+  {
+   "he": "כמה פתרונות למערכת ⁦x+y=5⁩, ⁦x+y=8⁩?",
+   "a": "אין פתרון",
+   "h": "81832412",
+   "q": "How many solutions does the system x+y=5, x+y=8 have?",
+   "o": [
+    "No solution",
+    "One solution",
+    "Two solutions",
+    "Infinitely many"
+   ],
+   "x": "x+y can't be both 5 and 8"
+  },
+  {
+   "he": "כמה פתרונות למערכת ⁦x+y=4⁩, ⁦2x+2y=8⁩?",
+   "a": "אינסוף",
+   "h": "c8dc950b",
+   "q": "How many solutions does the system x+y=4, 2x+2y=8 have?",
+   "o": [
+    "Infinitely many",
+    "No solution",
+    "One solution",
+    "Two solutions"
+   ],
+   "x": "The second equation is the first times 2"
+  },
+  {
+   "he": "בגרף, מהו הפתרון של מערכת משוואות?",
+   "a": "נקודת החיתוך",
+   "h": "77e6d20e",
+   "q": "On a graph, what is the solution of a system of equations?",
+   "o": [
+    "The intersection point",
+    "The starting point",
+    "The slope",
+    "The origin"
+   ],
+   "x": "The point that lies on both lines"
+  },
+  {
+   "he": "⁦y=x+1⁩ ו-⁦y=-x+5⁩. באיזה x הישרים נפגשים?",
+   "a": "⁦2⁩",
+   "h": "9707290b",
+   "q": "y=x+1 and y=-x+5. At what x do the lines meet?",
+   "o": [
+    "⁦2⁩",
+    "⁦3⁩",
+    "⁦1⁩",
+    "⁦5⁩"
+   ],
+   "x": "At x=2, both have y=3"
+  },
+  {
+   "he": "⁦y=x+1⁩ ו-⁦y=-x+5⁩. מה פתרון המערכת?",
+   "a": "⁦(2,3)⁩",
+   "h": "e9285d1c",
+   "q": "y=x+1 and y=-x+5. What is the solution of the system?",
+   "o": [
+    "⁦(2,3)⁩",
+    "⁦(3,2)⁩",
+    "⁦(0,1)⁩",
+    "⁦(0,5)⁩"
+   ],
+   "x": "They meet at x=2; substitute: y=2+1=3"
+  },
+  {
+   "he": "⁦y=2x-1⁩ ו-⁦y=-x+5⁩. מה פתרון המערכת?",
+   "a": "⁦(2,3)⁩",
+   "h": "ca47775a",
+   "q": "y=2x-1 and y=-x+5. What is the solution of the system?",
+   "o": [
+    "⁦(2,3)⁩",
+    "⁦(3,2)⁩",
+    "⁦(0,5)⁩",
+    "⁦(2,5)⁩"
+   ],
+   "x": "At x=2: 2·2-1 = 3 and -2+5 = 3"
+  },
+  {
+   "he": "⁦y=3⁩ ו-⁦y=x+2⁩. איפה הישרים נחתכים?",
+   "a": "⁦(1,3)⁩",
+   "h": "1457a385",
+   "q": "y=3 and y=x+2. Where do the lines intersect?",
+   "o": [
+    "⁦(1,3)⁩",
+    "⁦(3,1)⁩",
+    "⁦(3,5)⁩",
+    "⁦(0,3)⁩"
+   ],
+   "x": "x+2 = 3 → x=1"
+  },
+  {
+   "he": "⁦y=x⁩ ו-⁦y=-x⁩. איפה הישרים נחתכים?",
+   "a": "⁦(0,0)⁩",
+   "h": "4c3f7c76",
+   "q": "y=x and y=-x. Where do the lines intersect?",
+   "o": [
+    "⁦(0,0)⁩",
+    "⁦(1,1)⁩",
+    "⁦(1,-1)⁩",
+    "No intersection"
+   ],
+   "x": "x = -x only when x=0"
+  },
+  {
+   "he": "⁦y=x+4⁩ ו-⁦y=3x⁩. מה x בנקודת החיתוך?",
+   "a": "⁦2⁩",
+   "h": "5793c4d3",
+   "q": "y=x+4 and y=3x. What is x at the intersection point?",
+   "o": [
+    "⁦2⁩",
+    "⁦4⁩",
+    "⁦6⁩",
+    "⁦3⁩"
+   ],
+   "x": "3x = x+4 → 2x = 4 → x=2"
+  },
+  {
+   "he": "האם ⁦(1,3)⁩ פתרון של ⁦y=2x+1⁩ ו-⁦y=x+2⁩?",
+   "a": "כן",
+   "h": "08684ad3",
+   "q": "Is (1,3) a solution of y=2x+1 and y=x+2?",
+   "o": [
+    "Yes",
+    "No",
+    "Only of the first",
+    "Only of the second"
+   ],
+   "x": "2·1+1 = 3, 1+2 = 3 – on both lines"
+  },
+  {
+   "he": "האם ⁦(2,5)⁩ פתרון של ⁦y=2x+1⁩ ו-⁦y=x+2⁩?",
+   "a": "רק של הראשונה",
+   "h": "3f788599",
+   "q": "Is (2,5) a solution of y=2x+1 and y=x+2?",
+   "o": [
+    "Only of the first",
+    "Yes, of both",
+    "Only of the second",
+    "Of neither"
+   ],
+   "x": "2·2+1 = 5, but 2+2 = 4, not 5"
+  },
+  {
+   "he": "⁦(1,4)⁩ פתרון של ⁦y=2x+2⁩ ושל ⁦y=ax+3⁩. מה a?",
+   "a": "⁦1⁩",
+   "h": "82b85aed",
+   "q": "(1,4) is a solution of y=2x+2 and of y=ax+3. What is a?",
+   "o": [
+    "⁦1⁩",
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦3⁩"
+   ],
+   "x": "Substitute: a·1+3 = 4 → a=1"
+  },
+  {
+   "he": "שני ישרים מקבילים ושונים. כמה פתרונות למערכת?",
+   "a": "אין פתרון",
+   "h": "1da8e4bc",
+   "q": "Two different parallel lines. How many solutions does the system have?",
+   "o": [
+    "No solution",
+    "One solution",
+    "Two solutions",
+    "Infinitely many solutions"
+   ],
+   "x": "Parallel lines never meet – no common point"
+  },
+  {
+   "he": "⁦y=2x+1⁩ ו-⁦y=2x-3⁩. כמה פתרונות למערכת?",
+   "a": "אין פתרון",
+   "h": "60f741cc",
+   "q": "y=2x+1 and y=2x-3. How many solutions does the system have?",
+   "o": [
+    "No solution",
+    "One solution",
+    "Two solutions",
+    "Infinitely many solutions"
+   ],
+   "x": "Same slope, different y-intercept → parallel"
+  },
+  {
+   "he": "⁦y=x+2⁩ ו-⁦y=3x+2⁩. כמה פתרונות למערכת?",
+   "a": "פתרון אחד",
+   "h": "f6e5ae78",
+   "q": "y=x+2 and y=3x+2. How many solutions does the system have?",
+   "o": [
+    "One solution",
+    "No solution",
+    "Two solutions",
+    "Infinitely many solutions"
+   ],
+   "x": "Different slopes → they cross at one point, (0,2)"
+  },
+  {
+   "he": "⁦y=2x+1⁩ ו-⁦2y=4x+2⁩. כמה פתרונות למערכת?",
+   "a": "אינסוף פתרונות",
+   "h": "0147c9c7",
+   "q": "y=2x+1 and 2y=4x+2. How many solutions does the system have?",
+   "o": [
+    "Infinitely many solutions",
+    "No solution",
+    "One solution",
+    "Two solutions"
+   ],
+   "x": "Divide by 2: it is exactly the same line"
+  },
+  {
+   "he": "לשני ישרים שיפועים שונים. כמה פתרונות למערכת?",
+   "a": "פתרון אחד",
+   "h": "973e22a7",
+   "q": "Two lines have different slopes. How many solutions does the system have?",
+   "o": [
+    "One solution",
+    "No solution",
+    "Two solutions",
+    "Infinitely many solutions"
+   ],
+   "x": "Lines that are not parallel meet at one point"
+  },
+  {
+   "he": "איך נראית בגרף מערכת בלי פתרון?",
+   "a": "שני ישרים מקבילים",
+   "h": "03ce01c2",
+   "q": "On a graph, what does a system with no solution look like?",
+   "o": [
+    "Two parallel lines",
+    "Intersecting lines",
+    "One line",
+    "Perpendicular lines"
+   ],
+   "x": "Parallel lines have no common point",
+   "sc": {
+    "0": "No solution"
+   }
+  },
+  {
+   "he": "למערכת של שני ישרים אין פתרון. מה נכון?",
+   "a": "שיפועים שווים",
+   "h": "dca9ad59",
+   "q": "A system of two lines has no solution. What is true?",
+   "o": [
+    "Equal slopes",
+    "Different slopes",
+    "The lines are perpendicular",
+    "The lines coincide"
+   ],
+   "x": "No intersection → parallel → same slope",
+   "sc": {
+    "0": "No solution"
+   }
+  },
+  {
+   "he": "⁦y=x⁩ ו-⁦y=-2x+6⁩. לפי הגרף, מה פתרון המערכת?",
+   "a": "⁦(2,2)⁩",
+   "h": "1cfa08ee",
+   "q": "y=x and y=-2x+6. From the graph, what is the solution of the system?",
+   "o": [
+    "⁦(2,2)⁩",
+    "⁦(3,0)⁩",
+    "⁦(0,6)⁩",
+    "⁦(6,0)⁩"
+   ],
+   "x": "At x=2: y=2 and -4+6 = 2"
+  },
+  {
+   "he": "⁦y=4⁩ ו-⁦x=1⁩. מה פתרון המערכת?",
+   "a": "⁦(1,4)⁩",
+   "h": "6bcd69a1",
+   "q": "y=4 and x=1. What is the solution of the system?",
+   "o": [
+    "⁦(1,4)⁩",
+    "⁦(4,1)⁩",
+    "⁦(0,4)⁩",
+    "⁦(1,0)⁩"
+   ],
+   "x": "x must be 1, and y must be 4"
+  },
+  {
+   "he": "מונית א: ⁦y=2x+10⁩, מונית ב: ⁦y=4x+4⁩. לפי הגרף, באיזה מרחק המחיר שווה?",
+   "a": "3 ק״מ",
+   "h": "07569649",
+   "q": "Taxi A: y=2x+10, Taxi B: y=4x+4. From the graph, at what distance are the prices equal?",
+   "o": [
+    "3 km",
+    "10 km",
+    "4 km",
+    "6 km"
+   ],
+   "x": "2x+10 = 4x+4 → x=3: the intersection point"
+  },
+  {
+   "he": "סכום שני מספרים 20, והפרשם 6. מה הגדול?",
+   "a": "⁦13⁩",
+   "h": "8f1df7ab",
+   "q": "The sum of two numbers is 20 and their difference is 6. What is the larger one?",
+   "o": [
+    "⁦13⁩",
+    "⁦7⁩",
+    "⁦14⁩",
+    "⁦10⁩"
+   ],
+   "x": "x+y=20, x-y=6 → 2x=26"
+  },
+  {
+   "he": "סכום שני מספרים 15. אחד גדול פי 2 מהשני. הקטן?",
+   "a": "⁦5⁩",
+   "h": "3f7c4810",
+   "q": "The sum of two numbers is 15. One is twice the other. What is the smaller one?",
+   "o": [
+    "⁦5⁩",
+    "⁦10⁩",
+    "⁦7.5⁩",
+    "⁦3⁩"
+   ],
+   "x": "x+2x=15 → x=5"
+  },
+  {
+   "he": "בכיתה 30 תלמידים. יש 6 בנות יותר מבנים. כמה בנים?",
+   "a": "⁦12⁩",
+   "h": "dde4068f",
+   "q": "A class has 30 students. There are 6 more girls than boys. How many boys?",
+   "o": [
+    "⁦12⁩",
+    "⁦18⁩",
+    "⁦24⁩",
+    "⁦15⁩"
+   ],
+   "x": "x+(x+6)=30 → x=12",
+   "sc": {
+    "2": "30 students"
+   }
+  },
+  {
+   "he": "2 עטים ומחברת: 14 ₪. עט ומחברת: 10 ₪. מחיר עט?",
+   "a": "⁦4 ₪⁩",
+   "h": "f57356ea",
+   "q": "2 pens and a notebook: 14 ₪. A pen and a notebook: 10 ₪. Price of a pen?",
+   "o": [
+    "⁦4 ₪⁩",
+    "⁦6 ₪⁩",
+    "⁦5 ₪⁩",
+    "⁦7 ₪⁩"
+   ],
+   "x": "The difference between the two purchases is one pen"
+  },
+  {
+   "he": "3 תפוחים ו-2 בננות: 13 ₪. תפוח ובננה: 5 ₪. מחיר תפוח?",
+   "a": "⁦3 ₪⁩",
+   "h": "a988eb43",
+   "q": "3 apples and 2 bananas: 13 ₪. An apple and a banana: 5 ₪. Price of an apple?",
+   "o": [
+    "⁦3 ₪⁩",
+    "⁦2 ₪⁩",
+    "⁦5 ₪⁩",
+    "⁦1 ₪⁩"
+   ],
+   "x": "2 apples, 2 bananas = 10 ₪ → extra apple = 3 ₪"
+  },
+  {
+   "he": "בחווה תרנגולות ופרות: 10 ראשים ו-30 רגליים. כמה פרות?",
+   "a": "⁦5⁩",
+   "h": "def7d39e",
+   "q": "A farm has chickens and cows: 10 heads and 30 legs. How many cows?",
+   "o": [
+    "⁦5⁩",
+    "⁦4⁩",
+    "⁦6⁩",
+    "⁦3⁩"
+   ],
+   "x": "x+y=10, 2x+4y=30 → y=5",
+   "sc": {
+    "2": "10 heads",
+    "3": "30 legs"
+   }
+  },
+  {
+   "he": "אבא מבוגר מבנו ב-30 שנה. יחד הם בני 50. גיל הבן?",
+   "a": "⁦10⁩",
+   "h": "829074fa",
+   "q": "A father is 30 years older than his son. Together they are 50. How old is the son?",
+   "o": [
+    "⁦10⁩",
+    "⁦20⁩",
+    "⁦40⁩",
+    "⁦15⁩"
+   ],
+   "x": "x+(x+30)=50 → x=10",
+   "sc": {
+    "2": "Together 50"
+   }
+  },
+  {
+   "he": "12 מטבעות של 5 ו-10 ₪ שווים 90 ₪. כמה של 10?",
+   "a": "⁦6⁩",
+   "h": "ca6dbf9e",
+   "q": "12 coins of 5 ₪ and 10 ₪ are worth 90 ₪. How many 10 ₪ coins?",
+   "o": [
+    "⁦6⁩",
+    "⁦3⁩",
+    "⁦9⁩",
+    "⁦8⁩"
+   ],
+   "x": "x+y=12, 5x+10y=90 → y=6",
+   "sc": {
+    "1": "12 coins"
+   }
+  },
+  {
+   "he": "ילד 20 ₪, מבוגר 40 ₪. 5 כרטיסים ב-140 ₪. כמה מבוגרים?",
+   "a": "⁦2⁩",
+   "h": "262125df",
+   "q": "Child 20 ₪, adult 40 ₪. 5 tickets cost 140 ₪. How many adults?",
+   "o": [
+    "⁦2⁩",
+    "⁦3⁩",
+    "⁦5⁩",
+    "⁦4⁩"
+   ],
+   "x": "3 children (60) and 2 adults (80)",
+   "sc": {
+    "1": "5 tickets"
+   }
+  },
+  {
+   "he": "סכום שני מספרים 12, והפרשם 4. איזו מערכת מתאימה?",
+   "a": "⁦x+y=12, x-y=4⁩",
+   "h": "b0b75019",
+   "q": "The sum of two numbers is 12 and their difference is 4. Which system fits?",
+   "o": [
+    "⁦x+y=12, x-y=4⁩",
+    "⁦x-y=12, x+y=4⁩",
+    "⁦x+y=4, xy=12⁩",
+    "⁦x+y=12, xy=4⁩"
+   ],
+   "x": "Sum – addition, difference – subtraction",
+   "sc": {
+    "0": "Sum 12",
+    "1": "Diff 4"
+   }
+  },
+  {
+   "he": "מספר אחד גדול מהשני ב-8. סכומם 30. מה הקטן?",
+   "a": "⁦11⁩",
+   "h": "d708cc2d",
+   "q": "One number is 8 more than the other. Their sum is 30. What is the smaller one?",
+   "o": [
+    "⁦11⁩",
+    "⁦19⁩",
+    "⁦22⁩",
+    "⁦15⁩"
+   ],
+   "x": "y+8+y=30 → y=11"
+  },
+  {
+   "he": "למיכל ולנועה יחד 50 מדבקות. למיכל 10 יותר. כמה לנועה?",
+   "a": "⁦20⁩",
+   "h": "7d1c3b7d",
+   "q": "Michal and Noa have 50 stickers together. Michal has 10 more. How many does Noa have?",
+   "o": [
+    "⁦20⁩",
+    "⁦30⁩",
+    "⁦25⁩",
+    "⁦40⁩"
+   ],
+   "x": "x+(x+10)=50 → x=20",
+   "sc": {
+    "2": "Together 50"
+   }
+  },
+  {
+   "he": "היקף מלבן 20 ס״מ. האורך גדול מהרוחב ב-4. מה האורך?",
+   "a": "7 ס״מ",
+   "h": "6db6d479",
+   "q": "A rectangle's perimeter is 20 cm. Its length is 4 more than its width. What is the length?",
+   "o": [
+    "7 cm",
+    "3 cm",
+    "12 cm",
+    "8 cm"
+   ],
+   "x": "Length + width = 10, difference 4 → 7",
+   "sc": {
+    "1": "Perimeter 20",
+    "2": "Difference 4"
+   }
+  },
+  {
+   "he": "2 גלידות ו-3 סוכריות: 24 ₪. גלידה וסוכרייה: 10 ₪. סוכרייה?",
+   "a": "⁦4 ₪⁩",
+   "h": "77e4e4a3",
+   "q": "2 ice creams and 3 candies: 24 ₪. An ice cream and a candy: 10 ₪. A candy?",
+   "o": [
+    "⁦4 ₪⁩",
+    "⁦6 ₪⁩",
+    "⁦8 ₪⁩",
+    "⁦5 ₪⁩"
+   ],
+   "x": "Twice 10 = 20; the extra candy = 4"
+  },
+  {
+   "he": "במגרש 9 כלי רכב: מכוניות ואופנועים. יש 30 גלגלים. כמה מכוניות?",
+   "a": "⁦6⁩",
+   "h": "bab4f2a9",
+   "q": "A parking lot has 9 vehicles: cars and motorcycles. There are 30 wheels. How many cars?",
+   "o": [
+    "⁦6⁩",
+    "⁦3⁩",
+    "⁦4⁩",
+    "⁦5⁩"
+   ],
+   "x": "x+y=9, 4x+2y=30 → x=6",
+   "sc": {
+    "2": "9 vehicles",
+    "3": "30 wheels"
+   }
+  },
+  {
+   "he": "חולצה ומכנסיים ב-210 ₪. המכנסיים יקרים פי 2.5. כמה החולצה?",
+   "a": "⁦60 ₪⁩",
+   "h": "840a3761",
+   "q": "A shirt and pants: 210 ₪. The pants cost 2.5 times as much. How much is the shirt?",
+   "o": [
+    "⁦60 ₪⁩",
+    "⁦150 ₪⁩",
+    "⁦84 ₪⁩",
+    "⁦70 ₪⁩"
+   ],
+   "x": "x+2.5x=210 → 3.5x=210 → x=60"
+  },
+  {
+   "he": "מחברת יקרה מֵעֵט ב-2 ₪. 3 מחברות ו-2 עטים: 21₪. מחיר עט?",
+   "a": "⁦3 ₪⁩",
+   "h": "23bd57a7",
+   "q": "A notebook costs 2 ₪ more than a pen. 3 notebooks and 2 pens: 21 ₪. A pen?",
+   "o": [
+    "⁦3 ₪⁩",
+    "⁦5 ₪⁩",
+    "⁦4 ₪⁩",
+    "⁦2 ₪⁩"
+   ],
+   "x": "3(x+2)+2x=21 → 5x=15"
+  },
+  {
+   "he": "יש פי 3 בנים מבנות. יחד 40 ילדים. כמה בנות?",
+   "a": "⁦10⁩",
+   "h": "1a9f2266",
+   "q": "There are 3 times as many boys as girls. 40 children in all. How many girls?",
+   "o": [
+    "⁦10⁩",
+    "⁦30⁩",
+    "⁦13⁩",
+    "⁦20⁩"
+   ],
+   "x": "x+3x=40 → x=10",
+   "sc": {
+    "2": "Together 40"
+   }
+  },
+  {
+   "he": "סכום שני מספרים 25, והפרשם 5. מה מכפלתם?",
+   "a": "⁦150⁩",
+   "h": "03317013",
+   "q": "The sum of two numbers is 25 and their difference is 5. What is their product?",
+   "o": [
+    "⁦150⁩",
+    "⁦125⁩",
+    "⁦50⁩",
+    "⁦100⁩"
+   ],
+   "x": "The numbers are 15 and 10 → 15·10=150"
+  },
+  {
+   "he": "בקבוק ומכסה: 11 ₪. הבקבוק יקר מהמכסה ב-10 ₪. המכסה?",
+   "a": "⁦0.5 ₪⁩",
+   "h": "1d06bbdf",
+   "q": "A bottle and a cap: 11 ₪. The bottle costs 10 ₪ more than the cap. The cap?",
+   "o": [
+    "⁦0.5 ₪⁩",
+    "⁦1 ₪⁩",
+    "⁦10 ₪⁩",
+    "⁦1.5 ₪⁩"
+   ],
+   "x": "x+(x+10)=11 → 2x=1",
+   "sc": {
+    "1": "Together 11 ₪",
+    "2": "Difference 10 ₪"
+   }
+  },
+  {
+   "he": "בכיתה 12 בנים ו-18 בנות. מה יחס הבנים לכל התלמידים?",
+   "a": "⁦2:5⁩",
+   "h": "9490aac5",
+   "q": "A class has 12 boys and 18 girls. What is the ratio of boys to all students?",
+   "o": [
+    "⁦2:5⁩",
+    "⁦2:3⁩",
+    "⁦3:5⁩",
+    "⁦5:2⁩"
+   ],
+   "x": "12:30 – divide by 6: 2:5",
+   "sc": {
+    "2": "12 boys",
+    "3": "18 girls"
+   }
+  },
+  {
+   "he": "מה הצורה המצומצמת של היחס ⁦6:9⁩?",
+   "a": "⁦2:3⁩",
+   "h": "595f217f",
+   "q": "What is the simplest form of the ratio 6:9?",
+   "o": [
+    "⁦2:3⁩",
+    "⁦3:2⁩",
+    "⁦1:3⁩",
+    "⁦3:4⁩"
+   ],
+   "x": "Divide both numbers by 3",
+   "sc": {
+    "0": "6 : 9"
+   }
+  },
+  {
+   "he": "מחלקים סוכריות ביחס ⁦2:3⁩. בחלק הגדול 6 יותר. כמה בסך הכול?",
+   "a": "⁦30⁩",
+   "h": "48b0ccb9",
+   "q": "Candies are divided in the ratio 2:3. The larger part has 6 more. How many in all?",
+   "o": [
+    "⁦30⁩",
+    "⁦18⁩",
+    "⁦12⁩",
+    "⁦15⁩"
+   ],
+   "x": "One part = the difference = 6 → 5·6 = 30",
+   "sc": {
+    "1": "Difference 6",
+    "2": "2 : 3"
+   }
+  },
+  {
+   "he": "⁦x:6 = 2:3⁩. מה x?",
+   "a": "⁦4⁩",
+   "h": "e036dce5",
+   "q": "x:6 = 2:3. What is x?",
+   "o": [
+    "⁦4⁩",
+    "⁦9⁩",
+    "⁦3⁩",
+    "⁦12⁩"
+   ],
+   "x": "6 is 2 times 3 → x=2·2",
+   "sc": {
+    "0": "x : 6 = 2 : 3"
+   }
+  },
+  {
+   "he": "⁦x/(x+4) = 3/5⁩. מה x?",
+   "a": "⁦6⁩",
+   "h": "31152e45",
+   "q": "x/(x+4) = 3/5. What is x?",
+   "o": [
+    "⁦6⁩",
+    "⁦3⁩",
+    "⁦12⁩",
+    "⁦2.4⁩"
+   ],
+   "x": "5x = 3x+12 → x=6"
+  },
+  {
+   "he": "⁦4:x = 6:9⁩. מה x?",
+   "a": "⁦6⁩",
+   "h": "9d2374f6",
+   "q": "4:x = 6:9. What is x?",
+   "o": [
+    "⁦6⁩",
+    "⁦3⁩",
+    "⁦8⁩",
+    "⁦13.5⁩"
+   ],
+   "x": "6x = 4·9 = 36 → x=6",
+   "sc": {
+    "0": "4 : x = 6 : 9"
+   }
+  },
+  {
+   "he": "מתכון: 2 ביצים ל-3 כוסות קמח. כמה ביצים ל-9 כוסות?",
+   "a": "⁦6⁩",
+   "h": "181cab02",
+   "q": "A recipe: 2 eggs for 3 cups of flour. How many eggs for 9 cups?",
+   "o": [
+    "⁦6⁩",
+    "⁦8⁩",
+    "⁦4.5⁩",
+    "⁦5⁩"
+   ],
+   "x": "3 times the flour → 3 times the eggs",
+   "sc": {
+    "2": "2 for 3"
+   }
+  },
+  {
+   "he": "במפה בקנה מידה ⁦1:20000⁩, 7.5 ס״מ במפה הם…",
+   "a": "1.5 ק״מ",
+   "h": "2fdfdf65",
+   "q": "On a map with scale 1:20,000, 7.5 cm on the map represents…",
+   "o": [
+    "1.5 km",
+    "150 m",
+    "15 km",
+    "750 m"
+   ],
+   "x": "7.5·20,000 = 150,000 cm = 1.5 km",
+   "sc": {
+    "1": "1 : 20,000"
+   }
+  },
+  {
+   "he": "יחס האורך לרוחב ⁦5:2⁩. הרוחב 8. מה האורך?",
+   "a": "⁦20⁩",
+   "h": "25c9e64b",
+   "q": "The ratio of length to width is 5:2. The width is 8. What is the length?",
+   "o": [
+    "⁦20⁩",
+    "⁦10⁩",
+    "⁦16⁩",
+    "⁦3.2⁩"
+   ],
+   "x": "8÷2=4 → 5·4=20",
+   "sc": {
+    "0": "5 : 2",
+    "1": "? : 8"
+   }
+  },
+  {
+   "he": "זוויות משולש ביחס ⁦3:4:5⁩. מה הזווית הגדולה?",
+   "a": "⁦75°⁩",
+   "h": "73ab2dea",
+   "q": "A triangle's angles are in the ratio 3:4:5. What is the largest angle?",
+   "o": [
+    "⁦75°⁩",
+    "⁦45°⁩",
+    "⁦60°⁩",
+    "⁦15°⁩"
+   ],
+   "x": "180÷12=15 → 5·15=75",
+   "sc": {
+    "0": "3 : 4 : 5"
+   }
+  },
+  {
+   "he": "3 מחברות עולות 15 ₪. כמה עולות 7 מחברות?",
+   "a": "⁦35 ₪⁩",
+   "h": "ed8c8890",
+   "q": "3 notebooks cost 15 ₪. How much do 7 notebooks cost?",
+   "o": [
+    "⁦35 ₪⁩",
+    "⁦21 ₪⁩",
+    "⁦45 ₪⁩",
+    "⁦105 ₪⁩"
+   ],
+   "x": "One notebook costs 5 ₪ → 7·5=35",
+   "sc": {
+    "1": "3 notebooks"
+   }
+  },
+  {
+   "he": "מכונית נוסעת 180 ק״מ ב-2 שעות. כמה ב-5 שעות?",
+   "a": "450 ק״מ",
+   "h": "5abae8ba",
+   "q": "A car travels 180 km in 2 hours. How far does it go in 5 hours?",
+   "o": [
+    "450 km",
+    "360 km",
+    "900 km",
+    "300 km"
+   ],
+   "x": "90 km per hour → 90·5=450",
+   "sc": {
+    "1": "2 hours",
+    "2": "180 km"
+   }
+  },
+  {
+   "he": "y בפרופורציה ישרה ל-x. ⁦x=4⁩, ⁦y=12⁩. מה y כש-⁦x=10⁩?",
+   "a": "⁦30⁩",
+   "h": "3c9a1a14",
+   "q": "y is directly proportional to x. x=4, y=12. What is y when x=10?",
+   "o": [
+    "⁦30⁩",
+    "⁦18⁩",
+    "⁦40⁩",
+    "⁦120⁩"
+   ],
+   "x": "y=3x → 3·10=30"
+  },
+  {
+   "he": "באיזה כלל y בפרופורציה ישרה ל-x?",
+   "a": "⁦y=4x⁩",
+   "h": "125be5e2",
+   "q": "Which rule makes y directly proportional to x?",
+   "o": [
+    "⁦y=4x⁩",
+    "⁦y=4x+1⁩",
+    "⁦y=x+4⁩",
+    "⁦y=4⁩"
+   ],
+   "x": "Direct proportion: y=kx, a line through the origin",
+   "sc": {
+    "0": "Proportional"
+   }
+  },
+  {
+   "he": "מה מקדם הפרופורציה לפי הטבלה?",
+   "a": "⁦2.5⁩",
+   "h": "49101289",
+   "q": "What is the constant of proportionality in the table?",
+   "o": [
+    "⁦2.5⁩",
+    "⁦5⁩",
+    "⁦2⁩",
+    "⁦3⁩"
+   ],
+   "x": "y÷x = 5÷2 = 2.5",
+   "sc": {
+    "0": "6",
+    "1": "4",
+    "2": "2",
+    "3": "x",
+    "4": "15",
+    "5": "10",
+    "6": "5",
+    "7": "y"
+   }
+  },
+  {
+   "he": "גרף של פרופורציה ישרה הוא ישר ש…",
+   "a": "עובר בראשית",
+   "h": "caf48c3d",
+   "q": "The graph of a direct proportion is a line…",
+   "o": [
+    "Through the origin",
+    "Parallel to the x-axis",
+    "Through (0,1)",
+    "Always decreasing"
+   ],
+   "x": "x=0 → y=0",
+   "sc": {
+    "0": "3",
+    "1": "2",
+    "2": "1",
+    "3": "x",
+    "4": "12",
+    "5": "8",
+    "6": "4",
+    "7": "y"
+   }
+  },
+  {
+   "he": "ברז ממלא 12 ליטר ב-3 דקות. כמה ב-8 דקות?",
+   "a": "32 ליטר",
+   "h": "d419cfed",
+   "q": "A faucet fills 12 L in 3 minutes. How much in 8 minutes?",
+   "o": [
+    "32 L",
+    "36 L",
+    "24 L",
+    "96 L"
+   ],
+   "x": "4 L per minute → 4·8=32",
+   "sc": {
+    "1": "3 min",
+    "2": "12 L"
+   }
+  },
+  {
+   "he": "5 ק״ג תפוחים ב-40 ₪. כמה ק״ג ב-56 ₪?",
+   "a": "7 ק״ג",
+   "h": "e7a353ef",
+   "q": "5 kg of apples cost 40 ₪. How many kg for 56 ₪?",
+   "o": [
+    "7 kg",
+    "8 kg",
+    "6 kg",
+    "11 kg"
+   ],
+   "x": "8 ₪ per kg → 56÷8=7",
+   "sc": {
+    "1": "5 kg"
+   }
+  },
+  {
+   "he": "דולר אחד שווה 3.5 ₪. כמה ₪ הם 20 דולר?",
+   "a": "⁦70 ₪⁩",
+   "h": "dff8b563",
+   "q": "One dollar equals 3.5 ₪. How many ₪ is 20 dollars?",
+   "o": [
+    "⁦70 ₪⁩",
+    "⁦35 ₪⁩",
+    "⁦23.5 ₪⁩",
+    "⁦5.7 ₪⁩"
+   ],
+   "x": "20·3.5 = 70"
+  },
+  {
+   "he": "מדפסת מדפיסה 6 דפים ב-4 דקות. כמה ב-10 דקות?",
+   "a": "⁦15⁩",
+   "h": "5b0a916d",
+   "q": "A printer prints 6 pages in 4 minutes. How many in 10 minutes?",
+   "o": [
+    "⁦15⁩",
+    "⁦24⁩",
+    "⁦12⁩",
+    "⁦40⁩"
+   ],
+   "x": "1.5 pages per minute → 1.5·10=15",
+   "sc": {
+    "1": "4 min",
+    "2": "6 pages"
+   }
+  },
+  {
+   "he": "כמה זה 12.5% מ-320?",
+   "a": "⁦40⁩",
+   "h": "5ebaba23",
+   "q": "What is 12.5% of 320?",
+   "o": [
+    "⁦40⁩",
+    "⁦32⁩",
+    "⁦80⁩",
+    "⁦25⁩"
+   ],
+   "x": "12.5% is one eighth: 320÷8=40"
+  },
+  {
+   "he": "כמה זה 0.5% מ-600?",
+   "a": "⁦3⁩",
+   "h": "84f34d98",
+   "q": "What is 0.5% of 600?",
+   "o": [
+    "⁦3⁩",
+    "⁦30⁩",
+    "⁦0.3⁩",
+    "⁦300⁩"
+   ],
+   "x": "1% = 6 → half of that: 3"
+  },
+  {
+   "he": "כמה זה 120% מ-50?",
+   "a": "⁦60⁩",
+   "h": "8015e9be",
+   "q": "What is 120% of 50?",
+   "o": [
+    "⁦60⁩",
+    "⁦120⁩",
+    "⁦70⁩",
+    "⁦40⁩"
+   ],
+   "x": "1.2·50 = 60"
+  },
+  {
+   "he": "18 הם כמה אחוזים מ-12?",
+   "a": "⁦150%⁩",
+   "h": "5abaf49c",
+   "q": "18 is what percent of 12?",
+   "o": [
+    "⁦150%⁩",
+    "⁦50%⁩",
+    "⁦18%⁩",
+    "⁦66.7%⁩"
+   ],
+   "x": "18÷12 = 1.5 = 150%"
+  },
+  {
+   "he": "9 מתוך 20 תלמידים הם כמה אחוזים?",
+   "a": "⁦45%⁩",
+   "h": "80023f6d",
+   "q": "9 out of 20 students is what percent?",
+   "o": [
+    "⁦45%⁩",
+    "⁦9%⁩",
+    "⁦20%⁩",
+    "⁦55%⁩"
+   ],
+   "x": "9/20 = 45/100",
+   "sc": {
+    "1": "9 out of 20"
+   }
+  },
+  {
+   "he": "20% ממספר הם 14. מה המספר?",
+   "a": "⁦70⁩",
+   "h": "5f989e99",
+   "q": "20% of a number is 14. What is the number?",
+   "o": [
+    "⁦70⁩",
+    "⁦2.8⁩",
+    "⁦28⁩",
+    "⁦34⁩"
+   ],
+   "x": "14÷0.2 = 70"
+  },
+  {
+   "he": "40% מהכיתה בנים, והם 12. כמה תלמידים בכיתה?",
+   "a": "⁦30⁩",
+   "h": "80c71f93",
+   "q": "40% of the class are boys, and there are 12. How many students in the class?",
+   "o": [
+    "⁦30⁩",
+    "⁦48⁩",
+    "⁦20⁩",
+    "⁦18⁩"
+   ],
+   "x": "12÷0.4 = 30"
+  },
+  {
+   "he": "⁦0.35⁩ שווה לכמה אחוזים?",
+   "a": "⁦35%⁩",
+   "h": "e8413792",
+   "q": "0.35 equals what percent?",
+   "o": [
+    "⁦35%⁩",
+    "⁦3.5%⁩",
+    "⁦0.35%⁩",
+    "⁦350%⁩"
+   ],
+   "x": "Multiply by 100"
+  },
+  {
+   "he": "⁦3/8⁩ שווה לכמה אחוזים?",
+   "a": "⁦37.5%⁩",
+   "h": "808e35bd",
+   "q": "3/8 equals what percent?",
+   "o": [
+    "⁦37.5%⁩",
+    "⁦3.8%⁩",
+    "⁦62.5%⁩",
+    "⁦24%⁩"
+   ],
+   "x": "3/8 = 375/1000 = 37.5%"
+  },
+  {
+   "he": "מה גדול יותר: ⁦30%⁩ מ-60 או ⁦60%⁩ מ-30?",
+   "a": "שווים",
+   "h": "a9ddaa82",
+   "q": "Which is greater?",
+   "o": [
+    "They are equal",
+    "30% of 60",
+    "60% of 30",
+    "Can't tell"
+   ],
+   "x": "Both are 18"
+  },
+  {
+   "he": "חולצה ב-120 ₪ בהנחה של 25%. כמה שקלים ההנחה?",
+   "a": "⁦30 ₪⁩",
+   "h": "b26ff1b7",
+   "q": "A 120 ₪ shirt is 25% off. How much is the discount?",
+   "o": [
+    "⁦30 ₪⁩",
+    "⁦25 ₪⁩",
+    "⁦90 ₪⁩",
+    "⁦95 ₪⁩"
+   ],
+   "x": "A quarter of 120 is 30"
+  },
+  {
+   "he": "קיבלתי 18 נקודות מתוך 24. מה הציון באחוזים?",
+   "a": "⁦75⁩",
+   "h": "e3ec04cf",
+   "q": "I got 18 points out of 24. What is my score in percent?",
+   "o": [
+    "⁦75⁩",
+    "⁦18⁩",
+    "⁦80⁩",
+    "⁦72⁩"
+   ],
+   "x": "18/24 = 3/4 = 75%"
+  },
+  {
+   "he": "על מוצר ב-50 ₪ מוסיפים 18% מס. כמה המס?",
+   "a": "⁦9 ₪⁩",
+   "h": "35c9915e",
+   "q": "An 18% tax is added to a 50 ₪ item. How much is the tax?",
+   "o": [
+    "⁦9 ₪⁩",
+    "⁦18 ₪⁩",
+    "⁦59 ₪⁩",
+    "⁦68 ₪⁩"
+   ],
+   "x": "0.18·50 = 9"
+  },
+  {
+   "he": "בכיתה 25 תלמידים, ו-60% מהם בנות. כמה בנים?",
+   "a": "⁦10⁩",
+   "h": "d003b498",
+   "q": "A class has 25 students, and 60% of them are girls. How many boys?",
+   "o": [
+    "⁦10⁩",
+    "⁦15⁩",
+    "⁦60⁩",
+    "⁦40⁩"
+   ],
+   "x": "40% are boys: 0.4·25=10",
+   "sc": {
+    "2": "25 students",
+    "3": "60% girls"
+   }
+  },
+  {
+   "he": "הסוללה טעונה 40%. כמה אחוזים חסרים עד מלאה?",
+   "a": "⁦60%⁩",
+   "h": "80ea17d7",
+   "q": "The battery is 40% charged. What percent is missing until it is full?",
+   "o": [
+    "⁦60%⁩",
+    "⁦40%⁩",
+    "⁦100%⁩",
+    "⁦140%⁩"
+   ],
+   "x": "100%-40%=60%"
+  },
+  {
+   "he": "מתוך 500 ₪ דני הוציא 35%. כמה נשאר לו?",
+   "a": "⁦325 ₪⁩",
+   "h": "9309a1bd",
+   "q": "Dani spent 35% of 500 ₪. How much does he have left?",
+   "o": [
+    "⁦325 ₪⁩",
+    "⁦175 ₪⁩",
+    "⁦465 ₪⁩",
+    "⁦135 ₪⁩"
+   ],
+   "x": "65% is left: 0.65·500=325"
+  },
+  {
+   "he": "כמה זה 0.1% מ-40000?",
+   "a": "⁦40⁩",
+   "h": "fa63c52c",
+   "q": "What is 0.1% of 40,000?",
+   "o": [
+    "⁦40⁩",
+    "⁦400⁩",
+    "⁦4⁩",
+    "⁦4000⁩"
+   ],
+   "x": "1% = 400 → a tenth of that: 40",
+   "sc": {
+    "0": "0.1% · 40,000"
+   }
+  },
+  {
+   "he": "כמה זה 50% מתוך 50% מ-80?",
+   "a": "⁦20⁩",
+   "h": "6546d91c",
+   "q": "What is 50% of 50% of 80?",
+   "o": [
+    "⁦20⁩",
+    "⁦40⁩",
+    "⁦25⁩",
+    "⁦60⁩"
+   ],
+   "x": "Half of 80 = 40, half of 40 = 20"
+  },
+  {
+   "he": "איך מחשבים 200% ממספר?",
+   "a": "כופלים ב-2",
+   "h": "1339f272",
+   "q": "How do you find 200% of a number?",
+   "o": [
+    "Multiply by 2",
+    "Multiply by 200",
+    "Add 200",
+    "Divide by 2"
+   ],
+   "x": "200% = 200/100 = 2"
+  },
+  {
+   "he": "25% מ-40 ילדים אוהבים כדורגל. כמה ילדים?",
+   "a": "⁦10⁩",
+   "h": "8786e008",
+   "q": "25% of 40 children like soccer. How many children is that?",
+   "o": [
+    "⁦10⁩",
+    "⁦25⁩",
+    "⁦15⁩",
+    "⁦4⁩"
+   ],
+   "x": "A quarter of 40 is 10",
+   "sc": {
+    "1": "40 children"
+   }
+  },
+  {
+   "he": "מחיר של 80 ₪ עלה ב-10%. מה המחיר החדש?",
+   "a": "⁦88 ₪⁩",
+   "h": "f14e82cc",
+   "q": "A price of 80 ₪ went up by 10%. What is the new price?",
+   "o": [
+    "⁦88 ₪⁩",
+    "⁦90 ₪⁩",
+    "⁦8 ₪⁩",
+    "⁦72 ₪⁩"
+   ],
+   "x": "80 + 8 = 88"
+  },
+  {
+   "he": "מחיר של 200 ₪ ירד ב-15%. מה המחיר החדש?",
+   "a": "⁦170 ₪⁩",
+   "h": "6bdbf190",
+   "q": "A price of 200 ₪ went down by 15%. What is the new price?",
+   "o": [
+    "⁦170 ₪⁩",
+    "⁦185 ₪⁩",
+    "⁦30 ₪⁩",
+    "⁦230 ₪⁩"
+   ],
+   "x": "200 - 30 = 170"
+  },
+  {
+   "he": "המחיר עלה מ-50 ₪ ל-60 ₪. בכמה אחוזים?",
+   "a": "⁦20%⁩",
+   "h": "b14fabc4",
+   "q": "The price rose from 50 ₪ to 60 ₪. By what percent?",
+   "o": [
+    "⁦20%⁩",
+    "⁦10%⁩",
+    "⁦60%⁩",
+    "⁦16.7%⁩"
+   ],
+   "x": "10÷50 = 20% – divide by the original price"
+  },
+  {
+   "he": "המחיר ירד מ-80 ₪ ל-60 ₪. בכמה אחוזים?",
+   "a": "⁦25%⁩",
+   "h": "f54b9616",
+   "q": "The price fell from 80 ₪ to 60 ₪. By what percent?",
+   "o": [
+    "⁦25%⁩",
+    "⁦20%⁩",
+    "⁦33%⁩",
+    "⁦75%⁩"
+   ],
+   "x": "20÷80 = 25%"
+  },
+  {
+   "he": "כדי להעלות מחיר ב-20%, כופלים ב…",
+   "a": "⁦1.2⁩",
+   "h": "35aa3c95",
+   "q": "To raise a price by 20%, you multiply by…",
+   "o": [
+    "⁦1.2⁩",
+    "⁦0.2⁩",
+    "⁦20⁩",
+    "⁦0.8⁩"
+   ],
+   "x": "100%+20% = 120% = 1.2"
+  },
+  {
+   "he": "כדי להוריד מחיר ב-30%, כופלים ב…",
+   "a": "⁦0.7⁩",
+   "h": "2e1a2b7c",
+   "q": "To lower a price by 30%, you multiply by…",
+   "o": [
+    "⁦0.7⁩",
+    "⁦0.3⁩",
+    "⁦1.3⁩",
+    "⁦70⁩"
+   ],
+   "x": "100%-30% = 70% = 0.7"
+  },
+  {
+   "he": "אחרי הנחה של 20% המחיר 80 ₪. מה המחיר המקורי?",
+   "a": "⁦100 ₪⁩",
+   "h": "59baaff2",
+   "q": "After a 20% discount, the price is 80 ₪. What was the original price?",
+   "o": [
+    "⁦100 ₪⁩",
+    "⁦96 ₪⁩",
+    "⁦64 ₪⁩",
+    "⁦120 ₪⁩"
+   ],
+   "x": "80 = 0.8·x → x=100",
+   "sc": {
+    "1": "20% off",
+    "2": "After: 80 ₪"
+   }
+  },
+  {
+   "he": "מספר התלמידים גדל מ-400 ל-500. בכמה אחוזים?",
+   "a": "⁦25%⁩",
+   "h": "99255d8e",
+   "q": "The number of students grew from 400 to 500. By what percent?",
+   "o": [
+    "⁦25%⁩",
+    "⁦20%⁩",
+    "⁦100%⁩",
+    "⁦50%⁩"
+   ],
+   "x": "100÷400 = 25%"
+  },
+  {
+   "he": "מחיר עלה ב-10%, ואחר כך ירד ב-10%. מה קרה?",
+   "a": "ירד מעט",
+   "h": "5dbc438a",
+   "q": "A price rose by 10%, then fell by 10%. What happened?",
+   "o": [
+    "Slightly lower",
+    "Back to the original",
+    "Slightly higher",
+    "20% lower"
+   ],
+   "x": "100 → 110 → 99"
+  },
+  {
+   "he": "האוכלוסייה גדלה ב-5%. הייתה 2000. כמה עכשיו?",
+   "a": "⁦2100⁩",
+   "h": "fd92678b",
+   "q": "A population grew by 5%. It was 2000. What is it now?",
+   "o": [
+    "⁦2100⁩",
+    "⁦2005⁩",
+    "⁦2500⁩",
+    "⁦2050⁩"
+   ],
+   "x": "5% of 2000 is 100"
+  },
+  {
+   "he": "הפקיד 1000 ₪, ריבית 5% לשנה. כמה ריבית אחרי שנה?",
+   "a": "⁦50 ₪⁩",
+   "h": "3e34986d",
+   "q": "1000 ₪ is deposited at 5% interest a year. How much interest after a year?",
+   "o": [
+    "⁦50 ₪⁩",
+    "⁦5 ₪⁩",
+    "⁦1050 ₪⁩",
+    "⁦500 ₪⁩"
+   ],
+   "x": "0.05·1000 = 50",
+   "sc": {
+    "2": "5% a year"
+   }
+  },
+  {
+   "he": "הפקיד 2000 ₪, ריבית 3% לשנה. כמה יהיו בחשבון אחרי שנה?",
+   "a": "⁦2060 ₪⁩",
+   "h": "d9abe33e",
+   "q": "2000 ₪ is deposited at 3% interest a year. How much is in the account after a year?",
+   "o": [
+    "⁦2060 ₪⁩",
+    "⁦2003 ₪⁩",
+    "⁦2600 ₪⁩",
+    "⁦60 ₪⁩"
+   ],
+   "x": "Interest 60 ₪ → 2000+60",
+   "sc": {
+    "2": "3% a year"
+   }
+  },
+  {
+   "he": "ריבית פשוטה: 500 ₪, 4% לשנה, 3 שנים. כמה ריבית?",
+   "a": "⁦60 ₪⁩",
+   "h": "7f7a0456",
+   "q": "Simple interest: 500 ₪, 4% a year, 3 years. How much interest?",
+   "o": [
+    "⁦60 ₪⁩",
+    "⁦20 ₪⁩",
+    "⁦12 ₪⁩",
+    "⁦560 ₪⁩"
+   ],
+   "x": "20 ₪ a year → 20·3=60",
+   "sc": {
+    "2": "4% · 3 years"
+   }
+  },
+  {
+   "he": "ריבית דריבית: 1000 ₪, 10% לשנה, שנתיים. כמה בסוף?",
+   "a": "⁦1210 ₪⁩",
+   "h": "d5c5b62f",
+   "q": "Compound interest: 1000 ₪, 10% a year, 2 years. How much at the end?",
+   "o": [
+    "⁦1210 ₪⁩",
+    "⁦1200 ₪⁩",
+    "⁦1020 ₪⁩",
+    "⁦1100 ₪⁩"
+   ],
+   "x": "1000 → 1100 → 1210",
+   "sc": {
+    "2": "10% · 2 years"
+   }
+  },
+  {
+   "he": "הלוואה של 3000 ₪ בריבית 2% לשנה. כמה ריבית בשנה?",
+   "a": "⁦60 ₪⁩",
+   "h": "76e64003",
+   "q": "A 3000 ₪ loan at 2% interest a year. How much interest per year?",
+   "o": [
+    "⁦60 ₪⁩",
+    "⁦6 ₪⁩",
+    "⁦600 ₪⁩",
+    "⁦3060 ₪⁩"
+   ],
+   "x": "0.02·3000 = 60",
+   "sc": {
+    "2": "2% a year"
+   }
+  },
+  {
+   "he": "על 800 ₪ קיבל 40 ₪ ריבית בשנה. מה אחוז הריבית?",
+   "a": "⁦5%⁩",
+   "h": "f2391726",
+   "q": "800 ₪ earned 40 ₪ interest in a year. What is the interest rate?",
+   "o": [
+    "⁦5%⁩",
+    "⁦4%⁩",
+    "⁦40%⁩",
+    "⁦20%⁩"
+   ],
+   "x": "40÷800 = 0.05 = 5%",
+   "sc": {
+    "2": "40 ₪ interest"
+   }
+  },
+  {
+   "he": "ריבית 6% לשנה. אחרי שנה היו 1060 ₪. כמה הפקיד?",
+   "a": "⁦1000 ₪⁩",
+   "h": "7a41338c",
+   "q": "Interest is 6% a year. After a year there was 1060 ₪. How much was deposited?",
+   "o": [
+    "⁦1000 ₪⁩",
+    "⁦996 ₪⁩",
+    "⁦1124 ₪⁩",
+    "⁦1054 ₪⁩"
+   ],
+   "x": "1.06·x = 1060 → x=1000",
+   "sc": {
+    "1": "6% a year"
+   }
+  },
+  {
+   "he": "ריבית פשוטה 5% על 100 ₪ במשך 4 שנים. כמה ריבית?",
+   "a": "⁦20 ₪⁩",
+   "h": "437c52ac",
+   "q": "Simple interest of 5% on 100 ₪ for 4 years. How much interest?",
+   "o": [
+    "⁦20 ₪⁩",
+    "⁦5 ₪⁩",
+    "⁦25 ₪⁩",
+    "⁦120 ₪⁩"
+   ],
+   "x": "5 ₪ a year → 5·4=20",
+   "sc": {
+    "2": "5% · 4 years"
+   }
+  },
+  {
+   "he": "ריבית 3% או 4% על 1000 ₪. מה ההפרש בשנה?",
+   "a": "⁦10 ₪⁩",
+   "h": "4fce9f8f",
+   "q": "Interest of 3% or 4% on 1000 ₪. What is the difference per year?",
+   "o": [
+    "⁦10 ₪⁩",
+    "⁦1 ₪⁩",
+    "⁦100 ₪⁩",
+    "⁦40 ₪⁩"
+   ],
+   "x": "30 ₪ vs. 40 ₪"
+  },
+  {
+   "he": "החיסכון גדל בשנה מ-500 ₪ ל-550 ₪. מה אחוז הריבית?",
+   "a": "⁦10%⁩",
+   "h": "2bc32d0c",
+   "q": "Savings grew in a year from 500 ₪ to 550 ₪. What is the interest rate?",
+   "o": [
+    "⁦10%⁩",
+    "⁦50%⁩",
+    "⁦5%⁩",
+    "⁦55%⁩"
+   ],
+   "x": "50÷500 = 10%"
+  },
+  {
+   "he": "מטילים קובייה. מה ההסתברות לקבל 4?",
+   "a": "⁦1/6⁩",
+   "h": "039ee83d",
+   "q": "A die is rolled. What is the probability of getting a 4?",
+   "o": [
+    "⁦1/6⁩",
+    "⁦1/4⁩",
+    "⁦4/6⁩",
+    "⁦1/2⁩"
+   ],
+   "x": "One outcome out of 6"
+  },
+  {
+   "he": "מטילים קובייה. מה ההסתברות למספר זוגי?",
+   "a": "⁦1/2⁩",
+   "h": "39eb8778",
+   "q": "A die is rolled. What is the probability of an even number?",
+   "o": [
+    "⁦1/2⁩",
+    "⁦1/3⁩",
+    "⁦1/6⁩",
+    "⁦2/3⁩"
+   ],
+   "x": "2, 4, 6 → 3 out of 6",
+   "sc": {
+    "1": "Even"
+   }
+  },
+  {
+   "he": "מטילים קובייה. מה ההסתברות למספר גדול מ-4?",
+   "a": "⁦1/3⁩",
+   "h": "f17375b1",
+   "q": "A die is rolled. What is the probability of a number greater than 4?",
+   "o": [
+    "⁦1/3⁩",
+    "⁦1/2⁩",
+    "⁦2/3⁩",
+    "⁦1/6⁩"
+   ],
+   "x": "5 and 6 → 2 out of 6"
+  },
+  {
+   "he": "בשקית 3 כדורים אדומים ו-5 כחולים. מה ההסתברות לאדום?",
+   "a": "⁦3/8⁩",
+   "h": "dd2fdec9",
+   "q": "A bag has 3 red balls and 5 blue balls. What is the probability of red?",
+   "o": [
+    "⁦3/8⁩",
+    "⁦3/5⁩",
+    "⁦5/8⁩",
+    "⁦1/3⁩"
+   ],
+   "x": "3 red out of 8 balls"
+  },
+  {
+   "he": "מטילים מטבע. מה ההסתברות לקבל 'עץ'?",
+   "a": "⁦1/2⁩",
+   "h": "1aa4ab58",
+   "q": "A coin is tossed. What is the probability of getting heads?",
+   "o": [
+    "⁦1/2⁩",
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦1/4⁩"
+   ],
+   "x": "2 outcomes: heads or tails",
+   "sc": {
+    "0": "Coin toss"
+   }
+  },
+  {
+   "he": "מה ההסתברות של מאורע ודאי?",
+   "a": "⁦1⁩",
+   "h": "bd63ecf2",
+   "q": "What is the probability of a certain event?",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦1/2⁩",
+    "⁦100⁩"
+   ],
+   "x": "An event that is sure to happen → 1",
+   "sc": {
+    "1": "The sun rises"
+   }
+  },
+  {
+   "he": "מטילים קובייה רגילה. מה ההסתברות לקבל 7?",
+   "a": "⁦0⁩",
+   "h": "24dfa60f",
+   "q": "A regular die is rolled. What is the probability of getting a 7?",
+   "o": [
+    "⁦0⁩",
+    "⁦1⁩",
+    "⁦1/7⁩",
+    "⁦1/6⁩"
+   ],
+   "x": "A die has no 7 – an impossible event",
+   "sc": {
+    "1": "Roll a 7?"
+   }
+  },
+  {
+   "he": "איזה מספר אינו יכול להיות הסתברות?",
+   "a": "⁦1.2⁩",
+   "h": "64430e22",
+   "q": "Which number can NOT be a probability?",
+   "o": [
+    "⁦1.2⁩",
+    "⁦0⁩",
+    "⁦0.5⁩",
+    "⁦1⁩"
+   ],
+   "x": "A probability is between 0 and 1",
+   "sc": {
+    "1": "Probability"
+   }
+  },
+  {
+   "he": "בכיתה 12 בנים ו-18 בנות. מגרילים תלמיד. מה ההסתברות לבת?",
+   "a": "⁦3/5⁩",
+   "h": "17083511",
+   "q": "A class has 12 boys and 18 girls. One student is picked at random. Probability of a girl?",
+   "o": [
+    "⁦3/5⁩",
+    "⁦2/5⁩",
+    "⁦2/3⁩",
+    "⁦1/2⁩"
+   ],
+   "x": "18/30 = 3/5",
+   "sc": {
+    "2": "12 boys",
+    "3": "18 girls"
+   }
+  },
+  {
+   "he": "בשקית 2 כדורים אדומים ו-6 כחולים. מה ההסתברות לכחול?",
+   "a": "⁦3/4⁩",
+   "h": "84bc19b2",
+   "q": "A bag has 2 red balls and 6 blue balls. What is the probability of blue?",
+   "o": [
+    "⁦3/4⁩",
+    "⁦1/4⁩",
+    "⁦1/3⁩",
+    "⁦2/3⁩"
+   ],
+   "x": "6/8 = 3/4"
+  },
+  {
+   "he": "ההסתברות לגשם 0.3. מה ההסתברות שלא ירד גשם?",
+   "a": "⁦0.7⁩",
+   "h": "a62bb97b",
+   "q": "The probability of rain is 0.3. What is the probability of no rain?",
+   "o": [
+    "⁦0.7⁩",
+    "⁦0.3⁩",
+    "⁦1.3⁩",
+    "⁦0⁩"
+   ],
+   "x": "1-0.3 = 0.7"
+  },
+  {
+   "he": "⁦P(A)=1/4⁩. מה ההסתברות של המאורע המשלים?",
+   "a": "⁦3/4⁩",
+   "h": "9eb125b3",
+   "q": "P(A)=1/4. What is the probability of the complementary event?",
+   "o": [
+    "⁦3/4⁩",
+    "⁦1/4⁩",
+    "⁦4⁩",
+    "⁦1/2⁩"
+   ],
+   "x": "1-1/4 = 3/4"
+  },
+  {
+   "he": "מטילים קובייה. מה ההסתברות לא לקבל 6?",
+   "a": "⁦5/6⁩",
+   "h": "86782ad8",
+   "q": "A die is rolled. What is the probability of not getting a 6?",
+   "o": [
+    "⁦5/6⁩",
+    "⁦1/6⁩",
+    "⁦6/5⁩",
+    "⁦1⁩"
+   ],
+   "x": "1-1/6 = 5/6",
+   "sc": {
+    "1": "Not 6"
+   }
+  },
+  {
+   "he": "סכום ההסתברויות של מאורע והמשלים שלו הוא…",
+   "a": "⁦1⁩",
+   "h": "95e9ccb9",
+   "q": "The probabilities of an event and its complement add up to…",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦1/2⁩",
+    "⁦2⁩"
+   ],
+   "x": "One of them is sure to happen",
+   "sc": {
+    "0": "P(A) + P(not A)"
+   }
+  },
+  {
+   "he": "4 אדומים, 3 כחולים ו-1 שחור. מה ההסתברות לא לכחול?",
+   "a": "⁦5/8⁩",
+   "h": "33eaf888",
+   "q": "4 red, 3 blue and 1 black ball. What is the probability of not picking blue?",
+   "o": [
+    "⁦5/8⁩",
+    "⁦3/8⁩",
+    "⁦3/5⁩",
+    "⁦1/8⁩"
+   ],
+   "x": "1-3/8 = 5/8"
+  },
+  {
+   "he": "הסיכוי לנצח במשחק 40%. מה הסיכוי לא לנצח?",
+   "a": "⁦60%⁩",
+   "h": "5e66157e",
+   "q": "The chance of winning a game is 40%. What is the chance of not winning?",
+   "o": [
+    "⁦60%⁩",
+    "⁦40%⁩",
+    "⁦100%⁩",
+    "⁦0%⁩"
+   ],
+   "x": "100%-40% = 60%"
+  },
+  {
+   "he": "בכיתה בנים ובנות. ההסתברות לבחור בן 0.45. ולבת?",
+   "a": "⁦0.55⁩",
+   "h": "f43baa6d",
+   "q": "A class has boys and girls. The probability of picking a boy is 0.45. And a girl?",
+   "o": [
+    "⁦0.55⁩",
+    "⁦0.45⁩",
+    "⁦0.65⁩",
+    "⁦1.45⁩"
+   ],
+   "x": "1-0.45 = 0.55"
+  },
+  {
+   "he": "גלגל מזל מחולק ל-8 חלקים שווים, 2 אדומים. מה ההסתברות לאדום?",
+   "a": "⁦1/4⁩",
+   "h": "9140ee9e",
+   "q": "A spinner has 8 equal parts, 2 of them red. What is the probability of red?",
+   "o": [
+    "⁦1/4⁩",
+    "⁦1/2⁩",
+    "⁦2/6⁩",
+    "⁦1/8⁩"
+   ],
+   "x": "2/8 = 1/4"
+  },
+  {
+   "he": "מטילים קובייה. מהו המשלים של 'יצא 1 או 2'?",
+   "a": "יצא גדול מ-2",
+   "h": "140aa1bd",
+   "q": "A die is rolled. What is the complement of 'rolling 1 or 2'?",
+   "o": [
+    "Rolling more than 2",
+    "Rolling less than 2",
+    "Rolling a 3",
+    "Rolling an even number"
+   ],
+   "x": "All the rest: 3, 4, 5, 6",
+   "sc": {
+    "1": "1 or 2"
+   }
+  },
+  {
+   "he": "מגרילים מספר מ-1 עד 10. מה ההסתברות למספר זוגי?",
+   "a": "⁦1/2⁩",
+   "h": "87d9fa3f",
+   "q": "A number from 1 to 10 is drawn at random. What is the probability it is even?",
+   "o": [
+    "⁦1/2⁩",
+    "⁦1/10⁩",
+    "⁦5/9⁩",
+    "⁦2/5⁩"
+   ],
+   "x": "5 even numbers out of 10"
+  },
+  {
+   "he": "⁦AB=DE⁩, ⁦BC=EF⁩, ⁦∠B=∠E⁩. לפי איזה משפט חופפים?",
+   "a": "צ.ז.צ",
+   "h": "886a44f8",
+   "q": "AB=DE, BC=EF, ∠B=∠E. Which congruence theorem applies?",
+   "o": [
+    "SAS",
+    "ASA",
+    "SSS",
+    "Not congruent"
+   ],
+   "x": "The angle is between the two sides → SAS"
+  },
+  {
+   "he": "⁦∠A=∠D⁩, ⁦AB=DE⁩, ⁦∠B=∠E⁩. לפי איזה משפט חופפים?",
+   "a": "ז.צ.ז",
+   "h": "b4f4b940",
+   "q": "∠A=∠D, AB=DE, ∠B=∠E. Which congruence theorem applies?",
+   "o": [
+    "ASA",
+    "SAS",
+    "SSS",
+    "Not congruent"
+   ],
+   "x": "The side is between the two angles → ASA"
+  },
+  {
+   "he": "שלוש צלעות שוות בהתאמה. לפי איזה משפט חופפים?",
+   "a": "צ.צ.צ",
+   "h": "43baf980",
+   "q": "All three corresponding sides are equal. Which congruence theorem applies?",
+   "o": [
+    "SSS",
+    "SAS",
+    "ASA",
+    "Not congruent"
+   ],
+   "x": "Side, side, side → SSS"
+  },
+  {
+   "he": "שלוש זוויות שוות בהתאמה. האם המשולשים חופפים?",
+   "a": "לא בהכרח",
+   "h": "0f6956bf",
+   "q": "All three corresponding angles are equal. Are the triangles congruent?",
+   "o": [
+    "Not necessarily",
+    "Yes, AAA",
+    "Yes, SSS",
+    "Yes, ASA"
+   ],
+   "x": "Same shape, maybe a different size – similar triangles"
+  },
+  {
+   "he": "במשפט צ.ז.צ, איפה נמצאת הזווית?",
+   "a": "בין שתי הצלעות",
+   "h": "fe9bd91f",
+   "q": "In the SAS theorem, where is the angle?",
+   "o": [
+    "Between the two sides",
+    "Opposite the longest side",
+    "Anywhere",
+    "Next to one side"
+   ],
+   "x": "The angle is included between the two sides",
+   "sc": {
+    "0": "S . A . S"
+   }
+  },
+  {
+   "he": "במשפט ז.צ.ז, איפה נמצאת הצלע?",
+   "a": "בין שתי הזוויות",
+   "h": "48b2dc3a",
+   "q": "In the ASA theorem, where is the side?",
+   "o": [
+    "Between the two angles",
+    "Opposite a right angle",
+    "Anywhere",
+    "Opposite the first angle"
+   ],
+   "x": "The side lies between the two angles",
+   "sc": {
+    "0": "A . S . A"
+   }
+  },
+  {
+   "he": "⁦AB=DE⁩, ⁦AC=DF⁩, ⁦∠B=∠E⁩. האם המשולשים בהכרח חופפים?",
+   "a": "לא בהכרח",
+   "h": "2f724ec3",
+   "q": "AB=DE, AC=DF, ∠B=∠E. Are the triangles necessarily congruent?",
+   "o": [
+    "Not necessarily",
+    "Yes, SAS",
+    "Yes, SSS",
+    "Yes, ASA"
+   ],
+   "x": "∠B is not included, and AC is not known to be longer"
+  },
+  {
+   "he": "במשולשים חופפים, הצלעות המתאימות…",
+   "a": "שוות",
+   "h": "767a3d1e",
+   "q": "In congruent triangles, corresponding sides are…",
+   "o": [
+    "Equal",
+    "Proportional",
+    "Parallel",
+    "Perpendicular"
+   ],
+   "x": "Congruent → all sides and angles are equal"
+  },
+  {
+   "he": "⁦△ABC≅△DEF⁩. איזו צלע שווה ל-BC?",
+   "a": "⁦EF⁩",
+   "h": "78ae631e",
+   "q": "△ABC≅△DEF. Which side is equal to BC?",
+   "o": [
+    "⁦EF⁩",
+    "⁦DE⁩",
+    "⁦DF⁩",
+    "⁦AC⁩"
+   ],
+   "x": "B matches E, and C matches F"
+  },
+  {
+   "he": "⁦△ABC≅△DEF⁩. איזו זווית שווה ל-⁦∠A⁩?",
+   "a": "⁦∠D⁩",
+   "h": "8816ded6",
+   "q": "△ABC≅△DEF. Which angle is equal to ∠A?",
+   "o": [
+    "⁦∠D⁩",
+    "⁦∠E⁩",
+    "⁦∠F⁩",
+    "⁦∠B⁩"
+   ],
+   "x": "The first letter matches the first letter"
+  },
+  {
+   "he": "⁦△ABC≅△KLM⁩, ⁦AC=7⁩. מה אורך KM?",
+   "a": "⁦7⁩",
+   "h": "b1c70a00",
+   "q": "△ABC≅△KLM, AC=7. What is the length of KM?",
+   "o": [
+    "⁦7⁩",
+    "⁦14⁩",
+    "⁦3.5⁩",
+    "Can't tell"
+   ],
+   "x": "AC matches KM, so they are equal"
+  },
+  {
+   "he": "⁦△ABC≅△KLM⁩, ⁦∠B=50°⁩. מה גודל ⁦∠L⁩?",
+   "a": "⁦50°⁩",
+   "h": "a205dffb",
+   "q": "△ABC≅△KLM, ∠B=50°. What is the size of ∠L?",
+   "o": [
+    "⁦50°⁩",
+    "⁦130°⁩",
+    "⁦40°⁩",
+    "⁦90°⁩"
+   ],
+   "x": "B matches L"
+  },
+  {
+   "he": "משולש בצלעות 3, 4, 5 ומשולש בצלעות 5, 3, 4. חופפים?",
+   "a": "כן, צ.צ.צ",
+   "h": "abb0f1b2",
+   "q": "A triangle with sides 3, 4, 5 and a triangle with sides 5, 3, 4. Congruent?",
+   "o": [
+    "Yes, SSS",
+    "Yes, ASA",
+    "No",
+    "Not necessarily"
+   ],
+   "x": "The same three sides → SSS"
+  },
+  {
+   "he": "ידוע ⁦AB=DE⁩ ו-⁦∠B=∠E⁩. מה עוד חסר ל-צ.ז.צ?",
+   "a": "⁦BC=EF⁩",
+   "h": "1b8457ae",
+   "q": "Given AB=DE and ∠B=∠E. What else is needed for SAS?",
+   "o": [
+    "⁦BC=EF⁩",
+    "⁦AC=DF⁩",
+    "⁦∠A=∠D⁩",
+    "⁦∠C=∠F⁩"
+   ],
+   "x": "You need the other side next to ∠B"
+  },
+  {
+   "he": "⁦∠A=∠D⁩ ו-⁦∠B=∠E⁩. מה מהבאים משלים ל-ז.צ.ז?",
+   "a": "⁦AB=DE⁩",
+   "h": "33c0667d",
+   "q": "∠A=∠D and ∠B=∠E. Which of these completes ASA?",
+   "o": [
+    "⁦AB=DE⁩",
+    "⁦AB=EF⁩",
+    "⁦BC=DF⁩",
+    "⁦∠C=∠F⁩"
+   ],
+   "x": "The side between ∠A and ∠B is AB"
+  },
+  {
+   "he": "ידוע ⁦AB=DE⁩ ו-⁦BC=EF⁩. מה עוד חסר ל-צ.צ.צ?",
+   "a": "⁦AC=DF⁩",
+   "h": "aa0a08bb",
+   "q": "Given AB=DE and BC=EF. What else is needed for SSS?",
+   "o": [
+    "⁦AC=DF⁩",
+    "⁦∠B=∠E⁩",
+    "⁦AB=EF⁩",
+    "⁦∠A=∠D⁩"
+   ],
+   "x": "You need the third side"
+  },
+  {
+   "he": "האלכסון AC מחלק את המלבן ABCD. המשולשים ⁦△ABC⁩ ו-⁦△CDA⁩…",
+   "a": "חופפים",
+   "h": "e64314dc",
+   "q": "Diagonal AC divides rectangle ABCD. Triangles △ABC and △CDA are…",
+   "o": [
+    "Congruent",
+    "Only similar",
+    "Different",
+    "Equilateral"
+   ],
+   "x": "Opposite sides are equal, AC is shared → SSS"
+  },
+  {
+   "he": "M אמצע AB, ו-⁦CM⊥AB⁩. ⁦△AMC⁩ ו-⁦△BMC⁩ חופפים לפי…",
+   "a": "צ.ז.צ",
+   "h": "4d21339d",
+   "q": "M is the midpoint of AB, and CM⊥AB. △AMC and △BMC are congruent by…",
+   "o": [
+    "SAS",
+    "ASA",
+    "SSS",
+    "Not congruent"
+   ],
+   "x": "AM=BM, a right angle, CM is shared"
+  },
+  {
+   "he": "⁦AB=AC⁩, ו-AD חוצה את ⁦∠A⁩. לפי מה ⁦△ABD≅△ACD⁩?",
+   "a": "צ.ז.צ",
+   "h": "9e304407",
+   "q": "AB=AC, and AD bisects ∠A. By which theorem is △ABD≅△ACD?",
+   "o": [
+    "SAS",
+    "ASA",
+    "SSS",
+    "Not congruent"
+   ],
+   "x": "AB=AC, equal angles at A, AD is shared"
+  },
+  {
+   "he": "צלע משותפת לשני משולשים היא…",
+   "a": "שווה בשניהם",
+   "h": "c10eb1b8",
+   "q": "A side shared by two triangles is…",
+   "o": [
+    "Equal in both",
+    "Different in each",
+    "Always the hypotenuse",
+    "Always the shortest"
+   ],
+   "x": "The same side – the same length in both triangles"
+  },
+  {
+   "he": "במשולש ⁦∠B=∠C⁩. מה נכון לגבי הצלעות?",
+   "a": "⁦AB=AC⁩",
+   "h": "f4619d3b",
+   "q": "In a triangle, ∠B=∠C. What is true about the sides?",
+   "o": [
+    "⁦AB=AC⁩",
+    "⁦AB=BC⁩",
+    "⁦AC=BC⁩",
+    "No connection"
+   ],
+   "x": "Equal angles are opposite equal sides"
+  },
+  {
+   "he": "⁦AB=AC⁩. איזו זווית שווה ל-⁦∠B⁩?",
+   "a": "⁦∠C⁩",
+   "h": "ce0ca0e1",
+   "q": "AB=AC. Which angle is equal to ∠B?",
+   "o": [
+    "⁦∠C⁩",
+    "⁦∠A⁩",
+    "Both ∠A and ∠C",
+    "No angle"
+   ],
+   "x": "∠B is opposite AC, ∠C is opposite AB – equal legs"
+  },
+  {
+   "he": "⁦AB=AC⁩, ⁦∠B=70°⁩. מה ⁦∠A⁩?",
+   "a": "⁦40°⁩",
+   "h": "56a228e8",
+   "q": "AB=AC, ∠B=70°. What is ∠A?",
+   "o": [
+    "⁦40°⁩",
+    "⁦70°⁩",
+    "⁦110°⁩",
+    "⁦20°⁩"
+   ],
+   "x": "∠C = 70°, so 180-70-70 = 40"
+  },
+  {
+   "he": "שווה שוקיים, זווית הראש ⁦80°⁩. מה זווית הבסיס?",
+   "a": "⁦50°⁩",
+   "h": "93552a3a",
+   "q": "Isosceles triangle, vertex angle 80°. What is each base angle?",
+   "o": [
+    "⁦50°⁩",
+    "⁦80°⁩",
+    "⁦100°⁩",
+    "⁦40°⁩"
+   ],
+   "x": "The two base angles are equal: (180-80)÷2 = 50"
+  },
+  {
+   "he": "שווה שוקיים, זווית הבסיס ⁦25°⁩. מה זווית הראש?",
+   "a": "⁦130°⁩",
+   "h": "30693523",
+   "q": "Isosceles triangle, base angle 25°. What is the vertex angle?",
+   "o": [
+    "⁦130°⁩",
+    "⁦25°⁩",
+    "⁦155°⁩",
+    "⁦50°⁩"
+   ],
+   "x": "180-25-25 = 130"
+  },
+  {
+   "he": "שווה שוקיים: שוק 7, בסיס 4. מה ההיקף?",
+   "a": "⁦18⁩",
+   "h": "2b878f1f",
+   "q": "Isosceles triangle: leg 7, base 4. What is the perimeter?",
+   "o": [
+    "⁦18⁩",
+    "⁦15⁩",
+    "⁦11⁩",
+    "⁦28⁩"
+   ],
+   "x": "Two legs and a base: 7+7+4 = 18",
+   "sc": {
+    "0": "Leg 7",
+    "1": "Base 4"
+   }
+  },
+  {
+   "he": "שווה שוקיים: היקף 30, בסיס 12. מה אורך השוק?",
+   "a": "⁦9⁩",
+   "h": "18cbf1d5",
+   "q": "Isosceles triangle: perimeter 30, base 12. What is the length of a leg?",
+   "o": [
+    "⁦9⁩",
+    "⁦18⁩",
+    "⁦12⁩",
+    "⁦6⁩"
+   ],
+   "x": "30-12 = 18 for both legs → 18÷2 = 9",
+   "sc": {
+    "0": "P = 30",
+    "1": "Base 12"
+   }
+  },
+  {
+   "he": "במשולש שתי זוויות של ⁦50°⁩. איזה משולש זה?",
+   "a": "שווה שוקיים",
+   "h": "60134018",
+   "q": "A triangle has two 50° angles. What kind of triangle is it?",
+   "o": [
+    "Isosceles",
+    "Equilateral",
+    "Right",
+    "Obtuse"
+   ],
+   "x": "Equal angles → equal sides opposite them; the third is 80°"
+  },
+  {
+   "he": "האם בשווה שוקיים זוויות הבסיס יכולות להיות ⁦95°⁩?",
+   "a": "לא",
+   "h": "3604a72f",
+   "q": "Can the base angles of an isosceles triangle be 95°?",
+   "o": [
+    "No",
+    "Yes",
+    "Only if equilateral",
+    "Only if right"
+   ],
+   "x": "95+95 > 180 – no room for the vertex angle"
+  },
+  {
+   "he": "משולש שווה שוקיים וישר זווית. מה זוויות הבסיס?",
+   "a": "⁦45°⁩",
+   "h": "eafce5eb",
+   "q": "A right isosceles triangle. What are its base angles?",
+   "o": [
+    "⁦45°⁩",
+    "⁦90°⁩",
+    "⁦60°⁩",
+    "⁦30°⁩"
+   ],
+   "x": "The vertex angle is 90°, leaving 90÷2 = 45"
+  },
+  {
+   "he": "משולש שווה צלעות הוא גם…",
+   "a": "שווה שוקיים",
+   "h": "3673589a",
+   "q": "An equilateral triangle is also…",
+   "o": [
+    "Isosceles",
+    "Right",
+    "Obtuse",
+    "Scalene"
+   ],
+   "x": "It has two equal sides, even three"
+  },
+  {
+   "he": "⁦AB=AC⁩, ו-AD חוצה את ⁦∠A⁩. מה עוד AD?",
+   "a": "תיכון וגובה",
+   "h": "a7928e62",
+   "q": "AB=AC, and AD bisects ∠A. What else is AD?",
+   "o": [
+    "Median and height",
+    "Only a median",
+    "Only a height",
+    "A side"
+   ],
+   "x": "In an isosceles triangle: vertex angle bisector = median = height"
+  },
+  {
+   "he": "⁦AB=AC⁩, AD תיכון לבסיס, ⁦BC=10⁩. מה BD?",
+   "a": "⁦5⁩",
+   "h": "c0cd3939",
+   "q": "AB=AC, AD is the median to the base, BC=10. What is BD?",
+   "o": [
+    "⁦5⁩",
+    "⁦10⁩",
+    "⁦20⁩",
+    "⁦2.5⁩"
+   ],
+   "x": "A median goes to the midpoint of the base: 10÷2 = 5"
+  },
+  {
+   "he": "⁦AB=AC⁩, AD תיכון לבסיס. מה ⁦∠ADB⁩?",
+   "a": "⁦90°⁩",
+   "h": "e2a5454e",
+   "q": "AB=AC, AD is the median to the base. What is ∠ADB?",
+   "o": [
+    "⁦90°⁩",
+    "⁦45°⁩",
+    "⁦180°⁩",
+    "⁦60°⁩"
+   ],
+   "x": "In an isosceles triangle, the median to the base is also a height"
+  },
+  {
+   "he": "⁦AB=AC⁩, AD גובה לבסיס, ⁦∠BAC=40°⁩. מה ⁦∠BAD⁩?",
+   "a": "⁦20°⁩",
+   "h": "9ae52f7b",
+   "q": "AB=AC, AD is the height to the base, ∠BAC=40°. What is ∠BAD?",
+   "o": [
+    "⁦20°⁩",
+    "⁦40°⁩",
+    "⁦70°⁩",
+    "⁦80°⁩"
+   ],
+   "x": "The height bisects the vertex angle: 40÷2 = 20"
+  },
+  {
+   "he": "⁦AB=AC⁩, AD תיכון לבסיס, ⁦∠BAD=25°⁩. מה ⁦∠BAC⁩?",
+   "a": "⁦50°⁩",
+   "h": "f729b523",
+   "q": "AB=AC, AD is the median to the base, ∠BAD=25°. What is ∠BAC?",
+   "o": [
+    "⁦50°⁩",
+    "⁦25°⁩",
+    "⁦65°⁩",
+    "⁦130°⁩"
+   ],
+   "x": "The median bisects the vertex angle: 25·2 = 50"
+  },
+  {
+   "he": "⁦AB=AC⁩, AD גובה לבסיס, ⁦BD=4⁩. מה BC?",
+   "a": "⁦8⁩",
+   "h": "5fe14bf7",
+   "q": "AB=AC, AD is the height to the base, BD=4. What is BC?",
+   "o": [
+    "⁦8⁩",
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦16⁩"
+   ],
+   "x": "The height is also a median: BD = DC = 4"
+  },
+  {
+   "he": "⁦AB=AC⁩, D אמצע BC. ⁦△ABD⁩ ו-⁦△ACD⁩ חופפים לפי…",
+   "a": "צ.צ.צ",
+   "h": "96962bd6",
+   "q": "AB=AC, D is the midpoint of BC. △ABD and △ACD are congruent by…",
+   "o": [
+    "SSS",
+    "ASA",
+    "AAA",
+    "Not congruent"
+   ],
+   "x": "AB=AC, BD=CD, and AD is shared"
+  },
+  {
+   "he": "הגובה לבסיס מחלק משולש שווה שוקיים ל…",
+   "a": "שני משולשים חופפים",
+   "h": "9e8eff8e",
+   "q": "The height to the base divides an isosceles triangle into…",
+   "o": [
+    "Two congruent triangles",
+    "Two rectangles",
+    "Non-congruent triangles",
+    "Three triangles"
+   ],
+   "x": "It bisects the base and the vertex angle"
+  },
+  {
+   "he": "מקבילית היא מרובע שבו…",
+   "a": "הצלעות הנגדיות מקבילות",
+   "h": "96721489",
+   "q": "A parallelogram is a quadrilateral in which…",
+   "o": [
+    "Opposite sides are parallel",
+    "All angles are right",
+    "All sides are equal",
+    "Diagonals are perpendicular"
+   ],
+   "x": "Two pairs of parallel opposite sides"
+  },
+  {
+   "he": "במקבילית ABCD, ⁦AB=7⁩. מה אורך DC?",
+   "a": "⁦7⁩",
+   "h": "92d6a262",
+   "q": "In parallelogram ABCD, AB=7. What is the length of DC?",
+   "o": [
+    "⁦7⁩",
+    "⁦14⁩",
+    "⁦3.5⁩",
+    "Can't tell"
+   ],
+   "x": "In a parallelogram, opposite sides are equal"
+  },
+  {
+   "he": "במקבילית ABCD, ⁦∠A=70°⁩. מה ⁦∠C⁩?",
+   "a": "⁦70°⁩",
+   "h": "f3e55489",
+   "q": "In parallelogram ABCD, ∠A=70°. What is ∠C?",
+   "o": [
+    "⁦70°⁩",
+    "⁦110°⁩",
+    "⁦20°⁩",
+    "⁦290°⁩"
+   ],
+   "x": "In a parallelogram, opposite angles are equal"
+  },
+  {
+   "he": "במקבילית ABCD, ⁦∠A=70°⁩. מה ⁦∠B⁩?",
+   "a": "⁦110°⁩",
+   "h": "ec32c44c",
+   "q": "In parallelogram ABCD, ∠A=70°. What is ∠B?",
+   "o": [
+    "⁦110°⁩",
+    "⁦70°⁩",
+    "⁦20°⁩",
+    "⁦90°⁩"
+   ],
+   "x": "Angles next to the same side add up to 180°"
+  },
+  {
+   "he": "מה נכון לגבי האלכסונים בכל מקבילית?",
+   "a": "נחצים בנקודת המפגש",
+   "h": "bda96347",
+   "q": "What is true about the diagonals of every parallelogram?",
+   "o": [
+    "They bisect each other",
+    "They are always equal",
+    "They are always perpendicular",
+    "They never meet"
+   ],
+   "x": "The meeting point is the midpoint of each diagonal"
+  },
+  {
+   "he": "במקבילית האלכסונים נפגשים ב-M, ⁦AC=12⁩. מה AM?",
+   "a": "⁦6⁩",
+   "h": "118eb020",
+   "q": "In a parallelogram, the diagonals meet at M, AC=12. What is AM?",
+   "o": [
+    "⁦6⁩",
+    "⁦12⁩",
+    "⁦24⁩",
+    "⁦3⁩"
+   ],
+   "x": "The diagonals bisect each other: 12÷2 = 6"
+  },
+  {
+   "he": "מקבילית עם זווית ישרה אחת היא…",
+   "a": "מלבן",
+   "h": "2e3750f3",
+   "q": "A parallelogram with one right angle is a…",
+   "o": [
+    "Rectangle",
+    "Rhombus",
+    "Trapezoid",
+    "Kite"
+   ],
+   "x": "One right angle → all four are right"
+  },
+  {
+   "he": "מה נכון באלכסוני המלבן, ולא בכל מקבילית?",
+   "a": "שווים באורכם",
+   "h": "888b4210",
+   "q": "What is true of a rectangle's diagonals, but not of every parallelogram's?",
+   "o": [
+    "Equal in length",
+    "Bisect each other",
+    "Perpendicular to each other",
+    "Parallel to each other"
+   ],
+   "x": "In every parallelogram they bisect each other; in a rectangle they are also equal"
+  },
+  {
+   "he": "במלבן ABCD האלכסון ⁦AC=10⁩. מה אורך BD?",
+   "a": "⁦10⁩",
+   "h": "9417708c",
+   "q": "In rectangle ABCD, diagonal AC=10. What is the length of BD?",
+   "o": [
+    "⁦10⁩",
+    "⁦5⁩",
+    "⁦20⁩",
+    "Can't tell"
+   ],
+   "x": "In a rectangle, both diagonals are equal"
+  },
+  {
+   "he": "במלבן האלכסונים נפגשים ב-M, ⁦AC=14⁩. מה BM?",
+   "a": "⁦7⁩",
+   "h": "c3444d7c",
+   "q": "In a rectangle, the diagonals meet at M, AC=14. What is BM?",
+   "o": [
+    "⁦7⁩",
+    "⁦14⁩",
+    "⁦28⁩",
+    "⁦3.5⁩"
+   ],
+   "x": "BD = AC = 14, and M is the midpoint: 14÷2 = 7"
+  },
+  {
+   "he": "מעוין הוא מרובע שבו…",
+   "a": "כל הצלעות שוות",
+   "h": "ece48494",
+   "q": "A rhombus is a quadrilateral in which…",
+   "o": [
+    "All sides are equal",
+    "All angles are right",
+    "The diagonals are equal",
+    "One pair is parallel"
+   ],
+   "x": "Four equal sides – a rhombus"
+  },
+  {
+   "he": "במעוין ⁦AB=2x+1⁩ ו-⁦BC=x+6⁩. מה x?",
+   "a": "⁦5⁩",
+   "h": "20072e05",
+   "q": "In a rhombus, AB=2x+1 and BC=x+6. What is x?",
+   "o": [
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦11⁩",
+    "⁦2.5⁩"
+   ],
+   "x": "The sides of a rhombus are equal: 2x+1 = x+6"
+  },
+  {
+   "he": "האלכסונים במעוין…",
+   "a": "מאונכים זה לזה",
+   "h": "09c29545",
+   "q": "The diagonals of a rhombus are…",
+   "o": [
+    "Perpendicular to each other",
+    "Always equal",
+    "Not intersecting",
+    "Parallel"
+   ],
+   "x": "In a rhombus, the diagonals are perpendicular and bisect each other"
+  },
+  {
+   "he": "במעוין ABCD, ⁦∠A=120°⁩. מה ⁦∠BAC⁩?",
+   "a": "⁦60°⁩",
+   "h": "a4b05619",
+   "q": "In rhombus ABCD, ∠A=120°. What is ∠BAC?",
+   "o": [
+    "⁦60°⁩",
+    "⁦120°⁩",
+    "⁦30°⁩",
+    "⁦90°⁩"
+   ],
+   "x": "A diagonal of a rhombus bisects the angle: 120÷2"
+  },
+  {
+   "he": "מה מהבאים נכון? ריבוע הוא…",
+   "a": "מלבן וגם מעוין",
+   "h": "60a2ca65",
+   "q": "Which of these is true? A square is…",
+   "o": [
+    "Both rectangle and rhombus",
+    "Only a rectangle",
+    "Only a rhombus",
+    "Not a parallelogram"
+   ],
+   "x": "Right angles like a rectangle, equal sides like a rhombus"
+  },
+  {
+   "he": "מה נכון באלכסוני ריבוע, ולא בכל מעוין?",
+   "a": "אלכסונים שווים",
+   "h": "4cfa328c",
+   "q": "What is true of a square's diagonals, but not of every rhombus's?",
+   "o": [
+    "Equal diagonals",
+    "Perpendicular diagonals",
+    "Bisecting diagonals",
+    "Parallel diagonals"
+   ],
+   "x": "A square is also a rectangle, so its diagonals are equal"
+  },
+  {
+   "he": "מה מהבאים הוא מעוין עם זווית ישרה?",
+   "a": "ריבוע",
+   "h": "63762ebe",
+   "q": "Which of these is a rhombus with a right angle?",
+   "o": [
+    "Square",
+    "Trapezoid",
+    "Non-square rectangle",
+    "Triangle"
+   ],
+   "x": "Equal sides and a right angle → a square"
+  },
+  {
+   "he": "באיזה מרובע האלכסונים שווים, אבל לא מאונכים?",
+   "a": "מלבן",
+   "h": "b0de518b",
+   "q": "In which quadrilateral are the diagonals equal but not perpendicular?",
+   "o": [
+    "Rectangle",
+    "Square",
+    "Rhombus",
+    "Kite"
+   ],
+   "x": "In a square, a rhombus and a kite the diagonals are perpendicular"
+  },
+  {
+   "he": "מה נכון תמיד במשולשים דומים?",
+   "a": "הזוויות שוות",
+   "h": "dde87722",
+   "q": "Which of these is always true of similar triangles?",
+   "o": [
+    "The angles are equal",
+    "The sides are equal",
+    "The areas are equal",
+    "The perimeters are equal"
+   ],
+   "x": "Similar: equal angles, proportional sides"
+  },
+  {
+   "he": "יחס הדמיון 2. צלע במשולש הקטן 5. הצלע המתאימה בגדול?",
+   "a": "⁦10⁩",
+   "h": "ff159593",
+   "q": "Scale factor 2. A side of the small triangle is 5. Its matching side in the large one?",
+   "o": [
+    "⁦10⁩",
+    "⁦7⁩",
+    "⁦2.5⁩",
+    "⁦25⁩"
+   ],
+   "x": "5·2 = 10"
+  },
+  {
+   "he": "⁦△ABC∼△DEF⁩, ⁦AB=4⁩, ⁦DE=12⁩. פי כמה DEF גדול?",
+   "a": "פי 3",
+   "h": "8e046480",
+   "q": "△ABC∼△DEF, AB=4, DE=12. How many times larger is DEF?",
+   "o": [
+    "3 times",
+    "8 times",
+    "16 times",
+    "4 times"
+   ],
+   "x": "12÷4 = 3"
+  },
+  {
+   "he": "⁦△ABC∼△DEF⁩, ⁦AB=4⁩, ⁦DE=12⁩, ⁦BC=5⁩. מה EF?",
+   "a": "⁦15⁩",
+   "h": "4c5ebac4",
+   "q": "△ABC∼△DEF, AB=4, DE=12, BC=5. What is EF?",
+   "o": [
+    "⁦15⁩",
+    "⁦13⁩",
+    "⁦20⁩",
+    "⁦60⁩"
+   ],
+   "x": "3 times as large: 5·3 = 15"
+  },
+  {
+   "he": "⁦△ABC∼△DEF⁩. איזו צלע מתאימה ל-AC?",
+   "a": "⁦DF⁩",
+   "h": "3d79abae",
+   "q": "△ABC∼△DEF. Which side matches AC?",
+   "o": [
+    "⁦DF⁩",
+    "⁦DE⁩",
+    "⁦EF⁩",
+    "⁦AB⁩"
+   ],
+   "x": "A matches D, and C matches F"
+  },
+  {
+   "he": "משולש 3, 4, 5 ומשולש 6, 8, 10. האם הם דומים?",
+   "a": "כן, ביחס 2",
+   "h": "f122a563",
+   "q": "A triangle 3, 4, 5 and a triangle 6, 8, 10. Are they similar?",
+   "o": [
+    "Yes, scale factor 2",
+    "No",
+    "Yes, scale factor 3",
+    "They are congruent"
+   ],
+   "x": "Each side was multiplied by 2"
+  },
+  {
+   "he": "משולש 2, 3, 4 ומשולש 4, 6, 9. האם הם דומים?",
+   "a": "לא",
+   "h": "51def7a2",
+   "q": "A triangle 2, 3, 4 and a triangle 4, 6, 9. Are they similar?",
+   "o": [
+    "No",
+    "Yes, scale factor 2",
+    "Yes, scale factor 3",
+    "They are congruent"
+   ],
+   "x": "4·2 = 8, not 9"
+  },
+  {
+   "he": "בשני משולשים שתי זוויות שוות בהתאמה. המשולשים…",
+   "a": "דומים",
+   "h": "4b8ce230",
+   "q": "Two angles of one triangle equal two angles of another. The triangles are…",
+   "o": [
+    "Similar",
+    "Congruent",
+    "Isosceles",
+    "Right"
+   ],
+   "x": "AA: the third angle is equal too"
+  },
+  {
+   "he": "יחס הדמיון 3. היקף המשולש הקטן 10. היקף הגדול?",
+   "a": "⁦30⁩",
+   "h": "b590fbab",
+   "q": "Scale factor 3. The small triangle's perimeter is 10. The large one's perimeter?",
+   "o": [
+    "⁦30⁩",
+    "⁦13⁩",
+    "⁦90⁩",
+    "⁦10/3⁩"
+   ],
+   "x": "Each side × 3 → the perimeter × 3"
+  },
+  {
+   "he": "⁦△ABC∼△DEF⁩, ⁦∠A=40°⁩, ⁦∠E=75°⁩. מה ⁦∠F⁩?",
+   "a": "⁦65°⁩",
+   "h": "b57e359c",
+   "q": "△ABC∼△DEF, ∠A=40°, ∠E=75°. What is ∠F?",
+   "o": [
+    "⁦65°⁩",
+    "⁦40°⁩",
+    "⁦75°⁩",
+    "⁦115°⁩"
+   ],
+   "x": "∠D=∠A=40°, so 180-40-75 = 65"
+  },
+  {
+   "he": "עמוד 2 מ', צלו 3 מ'. צל העץ 12 מ'. גובה העץ?",
+   "a": "8 מ'",
+   "h": "a71021ac",
+   "q": "Pole 2 m, shadow 3 m. A tree's shadow is 12 m. How tall is the tree?",
+   "o": [
+    "8 m",
+    "18 m",
+    "11 m",
+    "6 m"
+   ],
+   "x": "Shadow × 4 → height × 4: 2·4",
+   "sc": {
+    "1": "Pole 2, shadow 3",
+    "2": "Tree's shadow 12"
+   }
+  },
+  {
+   "he": "ילד 1.5 מ', צלו 2 מ'. צל בניין 20 מ'. גובה הבניין?",
+   "a": "15 מ'",
+   "h": "8d4aba1c",
+   "q": "Child 1.5 m, shadow 2 m. A building's shadow is 20 m. How tall is the building?",
+   "o": [
+    "15 m",
+    "26.7 m",
+    "10 m",
+    "19.5 m"
+   ],
+   "x": "10 times: 1.5·10 = 15",
+   "sc": {
+    "1": "Kid 1.5 shadow 2",
+    "2": "Shadow 20"
+   }
+  },
+  {
+   "he": "תמונה 4 על 6 ס״מ הוגדלה פי 3. מה המידות החדשות?",
+   "a": "12 על 18",
+   "h": "01d96714",
+   "q": "A 4 by 6 cm picture is enlarged by a factor of 3. What are the new dimensions?",
+   "o": [
+    "12 by 18",
+    "7 by 9",
+    "12 by 6",
+    "4 by 18"
+   ],
+   "x": "Each dimension times 3"
+  },
+  {
+   "he": "במשולש ABC, ⁦DE∥BC⁩. המשולשים ADE ו-ABC…",
+   "a": "דומים",
+   "h": "51ef26ff",
+   "q": "In triangle ABC, DE∥BC. Triangles ADE and ABC are…",
+   "o": [
+    "Similar",
+    "Congruent",
+    "Equal in area",
+    "Right"
+   ],
+   "x": "A line parallel to a side makes equal angles"
+  },
+  {
+   "he": "⁦DE∥BC⁩, ⁦AD=2⁩, ⁦AB=6⁩, ⁦DE=3⁩. מה BC?",
+   "a": "⁦9⁩",
+   "h": "b6a5fa80",
+   "q": "DE∥BC, AD=2, AB=6, DE=3. What is BC?",
+   "o": [
+    "⁦9⁩",
+    "⁦6⁩",
+    "⁦4⁩",
+    "⁦1⁩"
+   ],
+   "x": "AB is 3 times AD → BC = 3·3"
+  },
+  {
+   "he": "⁦△ABC∼△DEF⁩ ביחס ⁦1:4⁩, ⁦EF=20⁩. מה BC?",
+   "a": "⁦5⁩",
+   "h": "da0a46c1",
+   "q": "△ABC∼△DEF in a ratio of 1:4, EF=20. What is BC?",
+   "o": [
+    "⁦5⁩",
+    "⁦80⁩",
+    "⁦16⁩",
+    "⁦24⁩"
+   ],
+   "x": "BC is a quarter of EF: 20÷4 = 5",
+   "sc": {
+    "0": "1 : 4"
+   }
+  },
+  {
+   "he": "דגם מטוס ביחס ⁦1:50⁩. אורך הדגם 40 ס״מ. אורך המטוס?",
+   "a": "20 מ'",
+   "h": "1529f495",
+   "q": "A model plane is 40 cm long at a scale of 1:50. How long is the real plane?",
+   "o": [
+    "20 m",
+    "2 m",
+    "50 m",
+    "90 cm"
+   ],
+   "x": "40·50 = 2000 cm = 20 m",
+   "sc": {
+    "1": "1 : 50",
+    "2": "40 cm"
+   }
+  },
+  {
+   "he": "שני משולשים שווי צלעות הם תמיד…",
+   "a": "דומים",
+   "h": "1131252e",
+   "q": "Two equilateral triangles are always…",
+   "o": [
+    "Similar",
+    "Congruent",
+    "Not similar",
+    "Right"
+   ],
+   "x": "All the angles are 60° in both"
+  },
+  {
+   "he": "צלעות משולש 5, 6, 7. בדומה לו הקצרה 10. הארוכה?",
+   "a": "⁦14⁩",
+   "h": "770b6849",
+   "q": "A triangle's sides are 5, 6, 7. In a similar one, the shortest is 10. The longest?",
+   "o": [
+    "⁦14⁩",
+    "⁦12⁩",
+    "⁦10⁩",
+    "⁦35⁩"
+   ],
+   "x": "2 times: 7·2 = 14"
+  },
+  {
+   "he": "יחס הדמיון בין שני משולשים הוא 1. מעבר לדמיון, הם…",
+   "a": "חופפים",
+   "h": "27941a47",
+   "q": "The scale factor between two triangles is 1. Beyond being similar, they are…",
+   "o": [
+    "Congruent",
+    "Isosceles",
+    "Right",
+    "Equilateral"
+   ],
+   "x": "Factor 1 → all the sides are equal"
+  },
+  {
+   "he": "במשולש ישר זווית הניצבים 3 ו-4. מה אורך היתר?",
+   "a": "⁦5⁩",
+   "h": "0790848f",
+   "q": "A right triangle has legs 3 and 4. What is the length of the hypotenuse?",
+   "o": [
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦12⁩",
+    "⁦25⁩"
+   ],
+   "x": "9+16 = 25 → √25 = 5"
+  },
+  {
+   "he": "הניצבים 6 ו-8. מה אורך היתר?",
+   "a": "⁦10⁩",
+   "h": "3e68abe0",
+   "q": "The legs are 6 and 8. What is the length of the hypotenuse?",
+   "o": [
+    "⁦10⁩",
+    "⁦14⁩",
+    "⁦48⁩",
+    "⁦100⁩"
+   ],
+   "x": "36+64 = 100 → 10"
+  },
+  {
+   "he": "הניצבים 5 ו-12. מה אורך היתר?",
+   "a": "⁦13⁩",
+   "h": "4ce0e7e1",
+   "q": "The legs are 5 and 12. What is the length of the hypotenuse?",
+   "o": [
+    "⁦13⁩",
+    "⁦17⁩",
+    "⁦60⁩",
+    "⁦169⁩"
+   ],
+   "x": "25+144 = 169 → 13"
+  },
+  {
+   "he": "היתר 10, וניצב אחד 6. מה הניצב השני?",
+   "a": "⁦8⁩",
+   "h": "9db7d16b",
+   "q": "The hypotenuse is 10, and one leg is 6. What is the other leg?",
+   "o": [
+    "⁦8⁩",
+    "⁦4⁩",
+    "⁦16⁩",
+    "⁦64⁩"
+   ],
+   "x": "100-36 = 64 → 8"
+  },
+  {
+   "he": "היתר 13, וניצב אחד 5. מה הניצב השני?",
+   "a": "⁦12⁩",
+   "h": "9d240f1a",
+   "q": "The hypotenuse is 13, and one leg is 5. What is the other leg?",
+   "o": [
+    "⁦12⁩",
+    "⁦8⁩",
+    "⁦18⁩",
+    "⁦144⁩"
+   ],
+   "x": "169-25 = 144 → 12"
+  },
+  {
+   "he": "היתר 25, וניצב אחד 7. מה הניצב השני?",
+   "a": "⁦24⁩",
+   "h": "387ece71",
+   "q": "The hypotenuse is 25, and one leg is 7. What is the other leg?",
+   "o": [
+    "⁦24⁩",
+    "⁦18⁩",
+    "⁦32⁩",
+    "⁦576⁩"
+   ],
+   "x": "625-49 = 576 → 24"
+  },
+  {
+   "he": "מה אומר משפט פיתגורס? (c – היתר)",
+   "a": "⁦a²+b²=c²⁩",
+   "h": "94c4bc3c",
+   "q": "What does the Pythagorean theorem say? (c is the hypotenuse)",
+   "o": [
+    "⁦a²+b²=c²⁩",
+    "⁦a+b=c⁩",
+    "⁦a²-b²=c²⁩",
+    "⁦2a+2b=c⁩"
+   ],
+   "x": "The sum of the squares of the legs = the square of the hypotenuse"
+  },
+  {
+   "he": "איפה נמצא היתר במשולש ישר זווית?",
+   "a": "מול הזווית הישרה",
+   "h": "efd20127",
+   "q": "Where is the hypotenuse in a right triangle?",
+   "o": [
+    "Opposite the right angle",
+    "Beside the right angle",
+    "Opposite the smallest angle",
+    "Always at the bottom"
+   ],
+   "x": "The hypotenuse – the longest side, opposite 90°"
+  },
+  {
+   "he": "הניצבים 8 ו-15. מה אורך היתר?",
+   "a": "⁦17⁩",
+   "h": "717ac805",
+   "q": "The legs are 8 and 15. What is the length of the hypotenuse?",
+   "o": [
+    "⁦17⁩",
+    "⁦23⁩",
+    "⁦13⁩",
+    "⁦289⁩"
+   ],
+   "x": "64+225 = 289 → 17"
+  },
+  {
+   "he": "הניצבים 1 ו-1. מה אורך היתר?",
+   "a": "⁦√2⁩",
+   "h": "9baa9504",
+   "q": "The legs are 1 and 1. What is the length of the hypotenuse?",
+   "o": [
+    "⁦√2⁩",
+    "⁦2⁩",
+    "⁦1⁩",
+    "⁦1.5⁩"
+   ],
+   "x": "1+1 = 2 → √2"
+  },
+  {
+   "he": "הניצבים 9 ו-12. מה אורך היתר?",
+   "a": "⁦15⁩",
+   "h": "74f732c5",
+   "q": "The legs are 9 and 12. What is the length of the hypotenuse?",
+   "o": [
+    "⁦15⁩",
+    "⁦21⁩",
+    "⁦25⁩",
+    "⁦108⁩"
+   ],
+   "x": "81+144 = 225 → 15"
+  },
+  {
+   "he": "⁦c²=100⁩. מה אורך היתר c?",
+   "a": "⁦10⁩",
+   "h": "2c3f02b3",
+   "q": "c²=100. What is the length of the hypotenuse c?",
+   "o": [
+    "⁦10⁩",
+    "⁦50⁩",
+    "⁦100⁩",
+    "⁦20⁩"
+   ],
+   "x": "10·10 = 100"
+  },
+  {
+   "he": "הניצבים 2 ו-3. כמה ⁦c²⁩?",
+   "a": "⁦13⁩",
+   "h": "a21c2564",
+   "q": "The legs are 2 and 3. What is c²?",
+   "o": [
+    "⁦13⁩",
+    "⁦5⁩",
+    "⁦25⁩",
+    "⁦6⁩"
+   ],
+   "x": "4+9 = 13"
+  },
+  {
+   "he": "מלבן 20 על 21. מה אורך האלכסון?",
+   "a": "⁦29⁩",
+   "h": "b06e9bee",
+   "q": "A rectangle is 20 by 21. What is the length of the diagonal?",
+   "o": [
+    "⁦29⁩",
+    "⁦41⁩",
+    "⁦420⁩",
+    "⁦31⁩"
+   ],
+   "x": "The diagonal is a hypotenuse: 400+441 = 841 → 29"
+  },
+  {
+   "he": "מלבן 12 על 35. מה אורך האלכסון?",
+   "a": "⁦37⁩",
+   "h": "629d251d",
+   "q": "A rectangle is 12 by 35. What is the length of the diagonal?",
+   "o": [
+    "⁦37⁩",
+    "⁦47⁩",
+    "⁦420⁩",
+    "⁦23⁩"
+   ],
+   "x": "144+1225 = 1369 → 37"
+  },
+  {
+   "he": "היתר 17, וניצב אחד 8. מה הניצב השני?",
+   "a": "⁦15⁩",
+   "h": "f8229ea9",
+   "q": "The hypotenuse is 17, and one leg is 8. What is the other leg?",
+   "o": [
+    "⁦15⁩",
+    "⁦9⁩",
+    "⁦25⁩",
+    "⁦12⁩"
+   ],
+   "x": "289-64 = 225 → 15"
+  },
+  {
+   "he": "משולש שווה שוקיים: שוק 5, בסיס 6. מה הגובה לבסיס?",
+   "a": "⁦4⁩",
+   "h": "6b0fa187",
+   "q": "Isosceles triangle: leg 5, base 6. What is the height to the base?",
+   "o": [
+    "⁦4⁩",
+    "⁦5⁩",
+    "⁦3⁩",
+    "⁦8⁩"
+   ],
+   "x": "Half the base is 3: 25-9 = 16 → 4",
+   "sc": {
+    "0": "Leg 5",
+    "1": "Base 6"
+   }
+  },
+  {
+   "he": "הניצבים 0.6 ו-0.8. מה אורך היתר?",
+   "a": "⁦1⁩",
+   "h": "4b26aae3",
+   "q": "The legs are 0.6 and 0.8. What is the length of the hypotenuse?",
+   "o": [
+    "⁦1⁩",
+    "⁦1.4⁩",
+    "⁦0.1⁩",
+    "⁦0.48⁩"
+   ],
+   "x": "0.36+0.64 = 1 → 1"
+  },
+  {
+   "he": "הניצבים 30 ו-40. מה אורך היתר?",
+   "a": "⁦50⁩",
+   "h": "b68eb1fc",
+   "q": "The legs are 30 and 40. What is the length of the hypotenuse?",
+   "o": [
+    "⁦50⁩",
+    "⁦70⁩",
+    "⁦35⁩",
+    "⁦2500⁩"
+   ],
+   "x": "900+1600 = 2500 → 50"
+  },
+  {
+   "he": "הניצבים 4 ו-4. כמה ⁦c²⁩?",
+   "a": "⁦32⁩",
+   "h": "69d435a0",
+   "q": "The legs are 4 and 4. What is c²?",
+   "o": [
+    "⁦32⁩",
+    "⁦16⁩",
+    "⁦8⁩",
+    "⁦64⁩"
+   ],
+   "x": "16+16 = 32"
+  },
+  {
+   "he": "שווה שוקיים: שוק 13, בסיס 10. מה הגובה לבסיס?",
+   "a": "⁦12⁩",
+   "h": "af42efdb",
+   "q": "Isosceles triangle: leg 13, base 10. What is the height to the base?",
+   "o": [
+    "⁦12⁩",
+    "⁦8⁩",
+    "⁦3⁩",
+    "⁦13⁩"
+   ],
+   "x": "Half the base is 5: 169-25 = 144 → 12",
+   "sc": {
+    "0": "Leg 13",
+    "1": "Base 10"
+   }
+  },
+  {
+   "he": "שווה שוקיים: שוק 10, גובה לבסיס 8. מה הבסיס?",
+   "a": "⁦12⁩",
+   "h": "d7323a25",
+   "q": "Isosceles triangle: leg 10, height to the base 8. What is the base?",
+   "o": [
+    "⁦12⁩",
+    "⁦6⁩",
+    "⁦16⁩",
+    "⁦18⁩"
+   ],
+   "x": "Half the base: 100-64 = 36 → 6, times 2",
+   "sc": {
+    "0": "Leg 10",
+    "1": "Height 8"
+   }
+  },
+  {
+   "he": "במעוין האלכסונים 6 ו-8. מה אורך הצלע?",
+   "a": "⁦5⁩",
+   "h": "5cb9ec38",
+   "q": "In a rhombus, the diagonals are 6 and 8. What is the length of a side?",
+   "o": [
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦14⁩",
+    "⁦10⁩"
+   ],
+   "x": "Half-diagonals 3 and 4, then Pythagoras: 5"
+  },
+  {
+   "he": "במעוין האלכסונים 10 ו-24. מה ההיקף?",
+   "a": "⁦52⁩",
+   "h": "4ab8ac13",
+   "q": "In a rhombus, the diagonals are 10 and 24. What is the perimeter?",
+   "o": [
+    "⁦52⁩",
+    "⁦13⁩",
+    "⁦68⁩",
+    "⁦34⁩"
+   ],
+   "x": "Side: 25+144 = 169 → 13, times 4"
+  },
+  {
+   "he": "ריבוע שצלעו 5. מה אורך האלכסון?",
+   "a": "⁦√50⁩",
+   "h": "e30d32e6",
+   "q": "A square has a side of 5. What is the length of the diagonal?",
+   "o": [
+    "⁦√50⁩",
+    "⁦10⁩",
+    "⁦5⁩",
+    "⁦25⁩"
+   ],
+   "x": "5²+5² = 50 → √50"
+  },
+  {
+   "he": "איזו שלשה, עם יתר 13, יוצרת משולש ישר זווית?",
+   "a": "⁦5, 12, 13⁩",
+   "h": "9ff5543f",
+   "q": "Which triple, with hypotenuse 13, makes a right triangle?",
+   "o": [
+    "⁦5, 12, 13⁩",
+    "⁦6, 8, 13⁩",
+    "⁦4, 10, 13⁩",
+    "⁦7, 9, 13⁩"
+   ],
+   "x": "25+144 = 169 = 13²"
+  },
+  {
+   "he": "איזו שלשה, עם יתר 15, יוצרת משולש ישר זווית?",
+   "a": "⁦9, 12, 15⁩",
+   "h": "d939f3c6",
+   "q": "Which triple, with hypotenuse 15, makes a right triangle?",
+   "o": [
+    "⁦9, 12, 15⁩",
+    "⁦6, 10, 15⁩",
+    "⁦7, 11, 15⁩",
+    "⁦8, 10, 15⁩"
+   ],
+   "x": "81+144 = 225 = 15²"
+  },
+  {
+   "he": "צלעות 7, 8, 9. האם המשולש ישר זווית?",
+   "a": "לא",
+   "h": "f606f1c2",
+   "q": "Sides 7, 8, 9. Is it a right triangle?",
+   "o": [
+    "No",
+    "Yes",
+    "Can't tell",
+    "It isn't a triangle"
+   ],
+   "x": "49+64 = 113, and 81 ≠ 113"
+  },
+  {
+   "he": "צלעות 8, 15, 17. האם המשולש ישר זווית?",
+   "a": "כן",
+   "h": "31ae6645",
+   "q": "Sides 8, 15, 17. Is it a right triangle?",
+   "o": [
+    "Yes",
+    "No",
+    "Can't tell",
+    "It isn't a triangle"
+   ],
+   "x": "64+225 = 289 = 17²"
+  },
+  {
+   "he": "צלעות 6, 8, 10. איפה הזווית הישרה?",
+   "a": "מול הצלע 10",
+   "h": "20334c3d",
+   "q": "Sides 6, 8, 10. Where is the right angle?",
+   "o": [
+    "Opposite side 10",
+    "Opposite side 8",
+    "Opposite side 6",
+    "There is none"
+   ],
+   "x": "The right angle is opposite the longest side"
+  },
+  {
+   "he": "כופלים את השלשה 3, 4, 5 ב-3. מה מקבלים?",
+   "a": "⁦9, 12, 15⁩",
+   "h": "ae606f53",
+   "q": "Multiply the triple 3, 4, 5 by 3. What do you get?",
+   "o": [
+    "⁦9, 12, 15⁩",
+    "⁦6, 7, 8⁩",
+    "⁦3, 12, 15⁩",
+    "⁦9, 16, 25⁩"
+   ],
+   "x": "Each side times 3"
+  },
+  {
+   "he": "מה חסר בשלשה ⁦7, 24, ?⁩ למשולש ישר זווית?",
+   "a": "⁦25⁩",
+   "h": "d13466f2",
+   "q": "What is missing in the triple 7, 24, ? for a right triangle?",
+   "o": [
+    "⁦25⁩",
+    "⁦26⁩",
+    "⁦31⁩",
+    "⁦17⁩"
+   ],
+   "x": "49+576 = 625 = 25²"
+  },
+  {
+   "he": "איך בודקים אם משולש ישר זווית? (c – הארוכה)",
+   "a": "⁦a²+b²=c² ?⁩",
+   "h": "b91857f8",
+   "q": "How do you check if a triangle is a right triangle? (c is the longest)",
+   "o": [
+    "⁦a²+b²=c² ?⁩",
+    "⁦a+b=c ?⁩",
+    "⁦a·b=c ?⁩",
+    "⁦a+b>c ?⁩"
+   ],
+   "x": "The converse of the Pythagorean theorem"
+  },
+  {
+   "he": "צלעות 5, 5, 7. האם המשולש ישר זווית?",
+   "a": "לא",
+   "h": "b2a7867f",
+   "q": "Sides 5, 5, 7. Is it a right triangle?",
+   "o": [
+    "No",
+    "Yes",
+    "Can't tell",
+    "It isn't a triangle"
+   ],
+   "x": "25+25 = 50, and 49 ≠ 50"
+  },
+  {
+   "he": "צלעות 12, 16, 20. האם המשולש ישר זווית?",
+   "a": "כן",
+   "h": "1d61a6a7",
+   "q": "Sides 12, 16, 20. Is it a right triangle?",
+   "o": [
+    "Yes",
+    "No",
+    "Can't tell",
+    "It isn't a triangle"
+   ],
+   "x": "144+256 = 400 = 20²"
+  },
+  {
+   "he": "סולם 5 מ', ורגלו 3 מ' מהקיר. לאיזה גובה הוא מגיע?",
+   "a": "4 מ'",
+   "h": "a137f7ab",
+   "q": "A 5 m ladder, its foot 3 m from the wall. How high does it reach?",
+   "o": [
+    "4 m",
+    "2 m",
+    "8 m",
+    "5.8 m"
+   ],
+   "x": "25-9 = 16 → 4",
+   "sc": {
+    "1": "Ladder 5 m",
+    "2": "3 m from wall"
+   }
+  },
+  {
+   "he": "הלכו 9 ק״מ צפונה ו-40 ק״מ מזרחה. כמה רחוק מההתחלה?",
+   "a": "41 ק״מ",
+   "h": "a0083445",
+   "q": "They walked 9 km north and 40 km east. How far are they from the start?",
+   "o": [
+    "41 km",
+    "49 km",
+    "31 km",
+    "360 km"
+   ],
+   "x": "81+1600 = 1681 → 41",
+   "sc": {
+    "1": "North 9 km",
+    "2": "East 40 km"
+   }
+  },
+  {
+   "he": "מסך 36 על 48 ס״מ. מה אורך האלכסון?",
+   "a": "60 ס״מ",
+   "h": "28162a6f",
+   "q": "A screen is 36 by 48 cm. What is the length of the diagonal?",
+   "o": [
+    "60 cm",
+    "84 cm",
+    "12 cm",
+    "42 cm"
+   ],
+   "x": "1296+2304 = 3600 → 60"
+  },
+  {
+   "he": "מגרש 24 על 32 מ'. כמה מטרים הולכים באלכסון?",
+   "a": "40 מ'",
+   "h": "1503b541",
+   "q": "A field is 24 by 32 m. How many meters is it along the diagonal?",
+   "o": [
+    "40 m",
+    "56 m",
+    "768 m",
+    "8 m"
+   ],
+   "x": "576+1024 = 1600 → 40"
+  },
+  {
+   "he": "חבל 13 מ' מראש עמוד בגובה 12 מ'. כמה רחוק מהעמוד?",
+   "a": "5 מ'",
+   "h": "362a5166",
+   "q": "A 13 m rope from a 12 m pole's top to the ground. How far from the pole?",
+   "o": [
+    "5 m",
+    "1 m",
+    "25 m",
+    "17.7 m"
+   ],
+   "x": "169-144 = 25 → 5",
+   "sc": {
+    "1": "Rope 13 m",
+    "2": "Pole 12 m"
+   }
+  },
+  {
+   "he": "במלבן האלכסון 52, וצלע אחת 20. מה הצלע השנייה?",
+   "a": "⁦48⁩",
+   "h": "4340edf3",
+   "q": "In a rectangle, the diagonal is 52 and one side is 20. What is the other side?",
+   "o": [
+    "⁦48⁩",
+    "⁦32⁩",
+    "⁦72⁩",
+    "⁦36⁩"
+   ],
+   "x": "2704-400 = 2304 → 48",
+   "sc": {
+    "0": "d = 52",
+    "1": "Side 20"
+   }
+  },
+  {
+   "he": "ספינה שטה 15 ק״מ מערבה ו-20 ק״מ דרומה. כמה רחוקה?",
+   "a": "25 ק״מ",
+   "h": "d13d686e",
+   "q": "A ship sails 15 km west and 20 km south. How far is it from the start?",
+   "o": [
+    "25 km",
+    "35 km",
+    "5 km",
+    "300 km"
+   ],
+   "x": "225+400 = 625 → 25",
+   "sc": {
+    "1": "15 km west",
+    "2": "20 km south"
+   }
+  },
+  {
+   "he": "רמפה באורך 17 מ', ובסיסה 15 מ'. מה גובהה?",
+   "a": "8 מ'",
+   "h": "f23d6326",
+   "q": "A ramp is 17 m long, and its base is 15 m. What is its height?",
+   "o": [
+    "8 m",
+    "2 m",
+    "32 m",
+    "22.7 m"
+   ],
+   "x": "289-225 = 64 → 8",
+   "sc": {
+    "1": "Ramp 17 m",
+    "2": "Base 15 m"
+   }
+  },
+  {
+   "he": "בלון בחוט 26 מ', במרחק 10 מ' אופקית. מה גובהו?",
+   "a": "24 מ'",
+   "h": "018900aa",
+   "q": "A balloon on a 26 m string, 10 m away horizontally. How high is it?",
+   "o": [
+    "24 m",
+    "16 m",
+    "36 m",
+    "28 m"
+   ],
+   "x": "676-100 = 576 → 24",
+   "sc": {
+    "1": "String 26 m",
+    "2": "10 m horizontal"
+   }
+  },
+  {
+   "he": "מלבן 3 על 4: בכמה האלכסון קצר מסכום שתי הצלעות?",
+   "a": "⁦2⁩",
+   "h": "e016ee62",
+   "q": "A 3 by 4 rectangle: how much shorter is the diagonal than the sum of the two sides?",
+   "o": [
+    "⁦2⁩",
+    "⁦5⁩",
+    "⁦7⁩",
+    "⁦1⁩"
+   ],
+   "x": "Diagonal 5, sum of the sides 3+4=7, difference 7-5=2"
+  },
+  {
+   "he": "מה השיפוע של ⁦y=-5x+3⁩?",
+   "a": "⁦-5⁩",
+   "h": "430064c5",
+   "q": "What is the slope of y=-5x+3?",
+   "o": [
+    "⁦-5⁩",
+    "⁦3⁩",
+    "⁦5⁩",
+    "⁦-3⁩"
+   ],
+   "x": "The coefficient of x"
+  },
+  {
+   "he": "שיפוע הישר דרך ⁦(1,1)⁩ ו-⁦(3,7)⁩?",
+   "a": "⁦3⁩",
+   "h": "fefe7cb2",
+   "q": "What is the slope of the line through (1,1) and (3,7)?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦6⁩",
+    "⁦4⁩"
+   ],
+   "x": "(7-1)÷(3-1) = 6÷2 = 3"
+  },
+  {
+   "he": "⁦y=4x-3⁩. מה y כש-⁦x=2⁩?",
+   "a": "⁦5⁩",
+   "h": "0ac65187",
+   "q": "y=4x-3. What is y when x=2?",
+   "o": [
+    "⁦5⁩",
+    "⁦11⁩",
+    "⁦-5⁩",
+    "⁦8⁩"
+   ],
+   "x": "4·2-3 = 5"
+  },
+  {
+   "he": "איפה ⁦y=3x+9⁩ חותך את ציר x?",
+   "a": "⁦(-3,0)⁩",
+   "h": "e91188ff",
+   "q": "Where does y=3x+9 cross the x-axis?",
+   "o": [
+    "⁦(-3,0)⁩",
+    "⁦(3,0)⁩",
+    "⁦(0,9)⁩",
+    "⁦(9,0)⁩"
+   ],
+   "x": "0=3x+9 → x=-3"
+  },
+  {
+   "he": "מה הכלל לפי הטבלה הזו?",
+   "a": "⁦y=2x-2⁩",
+   "h": "f4b28069",
+   "q": "What is the rule for this table?",
+   "o": [
+    "⁦y=2x-2⁩",
+    "⁦y=-2x+2⁩",
+    "⁦y=x-2⁩",
+    "⁦y=2x+2⁩"
+   ],
+   "x": "Slope 2, and at x=0: y=-2",
+   "sc": {
+    "0": "2",
+    "1": "1",
+    "2": "0",
+    "3": "x",
+    "4": "2",
+    "5": "0",
+    "6": "-2",
+    "7": "y"
+   }
+  },
+  {
+   "he": "איזה ישר מקביל ל-⁦y=0.5x+4⁩?",
+   "a": "⁦y=0.5x-1⁩",
+   "h": "f0d86040",
+   "q": "Which line is parallel to y=0.5x+4?",
+   "o": [
+    "⁦y=0.5x-1⁩",
+    "⁦y=4x+0.5⁩",
+    "⁦y=-0.5x+4⁩",
+    "⁦y=2x+4⁩"
+   ],
+   "x": "The same slope, 0.5"
+  },
+  {
+   "he": "מה הפתרון של ⁦6-2x>0⁩?",
+   "a": "⁦x<3⁩",
+   "h": "ab979311",
+   "q": "What is the solution of 6-2x>0?",
+   "o": [
+    "⁦x<3⁩",
+    "⁦x>3⁩",
+    "⁦x>-3⁩",
+    "⁦x<-3⁩"
+   ],
+   "x": "-2x>-6 → divide by a negative, flip the sign → x<3"
+  },
+  {
+   "he": "מה הפתרון של ⁦3x+4≤x+10⁩?",
+   "a": "⁦x≤3⁩",
+   "h": "3eaea293",
+   "q": "What is the solution of 3x+4≤x+10?",
+   "o": [
+    "⁦x≤3⁩",
+    "⁦x≥3⁩",
+    "⁦x≤7⁩",
+    "⁦x≤3.5⁩"
+   ],
+   "x": "2x≤6 → x≤3"
+  },
+  {
+   "he": "מה הפתרון של ⁦x+y=9⁩, ⁦x-y=3⁩?",
+   "a": "⁦(6,3)⁩",
+   "h": "c1a29860",
+   "q": "What is the solution of x+y=9, x-y=3?",
+   "o": [
+    "⁦(6,3)⁩",
+    "⁦(3,6)⁩",
+    "⁦(4,5)⁩",
+    "⁦(9,0)⁩"
+   ],
+   "x": "Add them: 2x=12 → x=6"
+  },
+  {
+   "he": "סכום שני מספרים 40, והפרשם 10. מה המספר הגדול?",
+   "a": "⁦25⁩",
+   "h": "dbb53d6a",
+   "q": "Two numbers have a sum of 40 and a difference of 10. What is the larger number?",
+   "o": [
+    "⁦25⁩",
+    "⁦15⁩",
+    "⁦30⁩",
+    "⁦20⁩"
+   ],
+   "x": "2x = 50 → x=25"
+  },
+  {
+   "he": "⁦5:x = 15:12⁩. מה x?",
+   "a": "⁦4⁩",
+   "h": "328f033e",
+   "q": "5:x = 15:12. What is x?",
+   "o": [
+    "⁦4⁩",
+    "⁦36⁩",
+    "⁦3⁩",
+    "⁦8⁩"
+   ],
+   "x": "15x = 60 → x=4",
+   "sc": {
+    "0": "5 : x = 15 : 12"
+   }
+  },
+  {
+   "he": "6 כרטיסים עולים 90 ₪. כמה עולים 4 כרטיסים?",
+   "a": "⁦60 ₪⁩",
+   "h": "52c6c292",
+   "q": "6 tickets cost 90 ₪. How much do 4 tickets cost?",
+   "o": [
+    "⁦60 ₪⁩",
+    "⁦24 ₪⁩",
+    "⁦36 ₪⁩",
+    "⁦15 ₪⁩"
+   ],
+   "x": "One ticket is 15 ₪ → 4·15=60",
+   "sc": {
+    "1": "6 tickets"
+   }
+  },
+  {
+   "he": "כמה זה 30% מ-150?",
+   "a": "⁦45⁩",
+   "h": "9eb17f27",
+   "q": "What is 30% of 150?",
+   "o": [
+    "⁦45⁩",
+    "⁦50⁩",
+    "⁦30⁩",
+    "⁦120⁩"
+   ],
+   "x": "0.3·150 = 45"
+  },
+  {
+   "he": "מחיר של 60 ₪ עלה ב-25%. מה המחיר החדש?",
+   "a": "⁦75 ₪⁩",
+   "h": "f5573c22",
+   "q": "A price of 60 ₪ went up by 25%. What is the new price?",
+   "o": [
+    "⁦75 ₪⁩",
+    "⁦85 ₪⁩",
+    "⁦15 ₪⁩",
+    "⁦45 ₪⁩"
+   ],
+   "x": "60·1.25 = 75"
+  },
+  {
+   "he": "ריבית 4% לשנה על 2500 ₪. כמה ריבית בשנה?",
+   "a": "⁦100 ₪⁩",
+   "h": "1e475979",
+   "q": "4% yearly interest on 2500 ₪. How much interest is that in a year?",
+   "o": [
+    "⁦100 ₪⁩",
+    "⁦25 ₪⁩",
+    "⁦1000 ₪⁩",
+    "⁦2600 ₪⁩"
+   ],
+   "x": "0.04·2500 = 100",
+   "sc": {
+    "2": "4% a year"
+   }
+  },
+  {
+   "he": "בשקית 3 כדורים אדומים ו-9 שחורים. מה ההסתברות לשחור?",
+   "a": "⁦3/4⁩",
+   "h": "45f50b9d",
+   "q": "A bag has 3 red balls and 9 black balls. What is the probability of black?",
+   "o": [
+    "⁦3/4⁩",
+    "⁦1/4⁩",
+    "⁦1/3⁩",
+    "⁦1/2⁩"
+   ],
+   "x": "9/12 = 3/4"
+  },
+  {
+   "he": "ההסתברות לזכות בהגרלה 0.02. מה ההסתברות לא לזכות?",
+   "a": "⁦0.98⁩",
+   "h": "46333929",
+   "q": "The probability of winning a raffle is 0.02. What is the probability of not winning?",
+   "o": [
+    "⁦0.98⁩",
+    "⁦0.02⁩",
+    "⁦0.8⁩",
+    "⁦1.02⁩"
+   ],
+   "x": "1-0.02 = 0.98"
+  },
+  {
+   "he": "⁦BC=EF⁩, ⁦∠B=∠E⁩, ⁦∠C=∠F⁩. לפי איזה משפט חופפים?",
+   "a": "ז.צ.ז",
+   "h": "cccc88f0",
+   "q": "BC=EF, ∠B=∠E, ∠C=∠F. By which theorem are they congruent?",
+   "o": [
+    "ASA",
+    "SAS",
+    "SSS",
+    "Not congruent"
+   ],
+   "x": "BC is between ∠B and ∠C → ASA"
+  },
+  {
+   "he": "⁦△DEF⁩ גדול פי 2 מ-⁦△ABC⁩, ו-⁦DE=14⁩. מה AB?",
+   "a": "⁦7⁩",
+   "h": "48227227",
+   "q": "△DEF is 2 times as large as △ABC, and DE=14. What is AB?",
+   "o": [
+    "⁦7⁩",
+    "⁦28⁩",
+    "⁦16⁩",
+    "⁦12⁩"
+   ],
+   "x": "14÷2 = 7"
+  },
+  {
+   "he": "הניצבים 12 ו-16. מה אורך היתר?",
+   "a": "⁦20⁩",
+   "h": "17ee66cd",
+   "q": "The legs are 12 and 16. What is the length of the hypotenuse?",
+   "o": [
+    "⁦20⁩",
+    "⁦28⁩",
+    "⁦24⁩",
+    "⁦400⁩"
+   ],
+   "x": "144+256 = 400 → 20"
+  },
+  {
+   "he": "איזו שלשה אינה של משולש ישר זווית?",
+   "a": "⁦4, 6, 8⁩",
+   "h": "c9f594ec",
+   "q": "Which triple does NOT form a right triangle?",
+   "o": [
+    "⁦4, 6, 8⁩",
+    "⁦3, 4, 5⁩",
+    "⁦6, 8, 10⁩",
+    "⁦5, 12, 13⁩"
+   ],
+   "x": "16+36 = 52, but 8² = 64"
+  }
+ ]
+}

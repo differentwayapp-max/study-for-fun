@@ -1,0 +1,4684 @@
+{
+ "set": {
+  "name": "Science – Grade 7 – Materials, volume and mass",
+  "title": "Materials and objects · Volume · Mass · Weight · Density · States of matter · Inquiry",
+  "tags": [
+   "Materials and objects",
+   "Volume",
+   "Calculating volume",
+   "Graduated cylinder",
+   "mL and liters",
+   "Mass",
+   "Balances",
+   "Gas",
+   "Weight",
+   "Newtons",
+   "Density",
+   "Floating and sinking",
+   "Measuring instruments",
+   "Conversions",
+   "States of matter",
+   "Variables",
+   "Planning an experiment",
+   "Graphs and tables"
+  ]
+ },
+ "labels": {
+  "חומר וגוף": "Materials and objects",
+  "נפח – הגדרה": "Volume – definition",
+  "חישוב נפח תיבה וקובייה": "Volume of a box and a cube",
+  "מדידת נפח נוזל": "Measuring liquid volume",
+  "נפח גוף בצורה לא גאומטרית": "Volume of non-geometric objects",
+  "מסה": "Mass",
+  "גז": "Gas",
+  "משקל": "Weight",
+  "צפיפות, ציפה ושקיעה": "Density, floating and sinking",
+  "מכשירי מדידה, יחידות והמרות": "Measuring instruments, units and conversions",
+  "מצבי צבירה ותכונותיהם": "States of matter and their properties",
+  "שאלת חקר ומשתנים": "Research questions and variables",
+  "תכנון ניסוי": "Planning an experiment",
+  "קריאת גרפים וטבלאות": "Reading graphs and tables",
+  "חומר וגוף – מה ההבדל?": "Material and object – what's the difference?",
+  "תכונות החומר ושימושיו": "Properties and uses of materials",
+  "נפח – המקום שגוף תופס": "Volume – the space an object occupies",
+  "נפח וצורה": "Volume and shape",
+  "חישוב נפח: הכלל": "Calculating volume: the rule",
+  "חישוב נפח: תרגול": "Calculating volume: practice",
+  "מדידת נפח נוזל: כלים ושנתות": "Measuring liquid volume: tools and scale marks",
+  "סמ״ק, מ״ל וליטר": "cm³, mL and liters",
+  "נפח בעזרת מים במשורה": "Volume with water in a graduated cylinder",
+  "חישוב לפי עליית המפלס": "Calculating from the rise in water level",
+  "מסה ומאזניים": "Mass and balances",
+  "יחידות מסה": "Units of mass",
+  "גז ממלא את הכלי": "A gas fills its container",
+  "גז נדחס": "A gas can be compressed",
+  "משקל ומד כוח": "Weight and the force meter",
+  "מסה מול משקל": "Mass vs. weight",
+  "מסה או משקל?": "Mass or weight?",
+  "צפיפות – כמה מסה בכל סמ״ק": "Density – how much mass in each cm³",
+  "ציפה ושקיעה": "Floating and sinking",
+  "איזה מכשיר? איזו יחידה?": "Which instrument? Which unit?",
+  "המרות בין יחידות": "Converting between units",
+  "מוצק, נוזל וגז – תכונות": "Solid, liquid and gas – properties",
+  "מעברים בין מצבי צבירה": "Changes between states of matter",
+  "משתנה בלתי תלוי ומשתנה תלוי": "Independent and dependent variables",
+  "משתנים קבועים ושאלת חקר טובה": "Controlled variables and a good research question",
+  "שלבי הניסוי": "Steps of an experiment",
+  "חזרות, ביקורת ותוצאה צפויה": "Repeated trials, control and expected results",
+  "קריאת טבלה": "Reading a table",
+  "קריאת גרף": "Reading a graph",
+  "חזרה למבחן": "Test review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "כיסא עשוי מעץ. מה כאן הגוף?",
+   "a": "הכיסא",
+   "h": "f73664e1",
+   "q": "A chair is made of wood. Which is the object here?",
+   "o": [
+    "The chair",
+    "The wood",
+    "The color",
+    "The volume"
+   ],
+   "x": "The chair is the object; the wood is its material"
+  },
+  {
+   "he": "כיסא עשוי מעץ. מה כאן החומר?",
+   "a": "העץ",
+   "h": "d3f7bf20",
+   "q": "A chair is made of wood. Which is the material here?",
+   "o": [
+    "The wood",
+    "The chair",
+    "The shape",
+    "The mass"
+   ],
+   "x": "The material is what the object is made of"
+  },
+  {
+   "he": "מה מהבאים הוא חומר?",
+   "a": "אלומיניום",
+   "h": "b3b886fc",
+   "q": "Which of these is a material?",
+   "o": [
+    "Aluminum",
+    "Chair",
+    "Ball",
+    "Key"
+   ],
+   "x": "Aluminum is a material; the rest are objects",
+   "sc": {
+    "0": "Chair • Ball",
+    "1": "Aluminum • Key"
+   }
+  },
+  {
+   "he": "מה מהבאים הוא גוף?",
+   "a": "מזלג",
+   "h": "cef7ed9e",
+   "q": "Which of these is an object?",
+   "o": [
+    "Fork",
+    "Iron",
+    "Plastic",
+    "Glass"
+   ],
+   "x": "A fork is an object; the rest are materials",
+   "sc": {
+    "0": "Iron • Plastic",
+    "1": "Glass • Fork"
+   }
+  },
+  {
+   "he": "איזה מהם יוצא דופן?",
+   "a": "הכיסא",
+   "h": "a9d241e0",
+   "q": "Which one is the odd one out?",
+   "o": [
+    "The chair",
+    "The wood",
+    "The iron",
+    "The plastic"
+   ],
+   "x": "A chair is an object; the rest are materials",
+   "sc": {
+    "0": "Wood • Chair",
+    "1": "Iron • Plastic"
+   }
+  },
+  {
+   "he": "מאיפה לוקחים את החומרים?",
+   "a": "מכדור הארץ",
+   "h": "21e8e0ea",
+   "q": "Where do we get materials from?",
+   "o": [
+    "From planet Earth",
+    "Only from factories",
+    "Only from stores",
+    "Only from the lab"
+   ],
+   "x": "From Earth's ground, water and air"
+  },
+  {
+   "he": "אילו שלוש תכונות מתארות גוף?",
+   "a": "צורה, נפח, מסה",
+   "h": "1778a052",
+   "q": "Which three properties describe an object?",
+   "o": [
+    "Shape, volume, mass",
+    "Composition, source, color",
+    "Color, smell, taste",
+    "Source, composition, use"
+   ],
+   "x": "An object is described by its shape, volume and mass"
+  },
+  {
+   "he": "פחית ומחבת עשויות אלומיניום. מה משותף להן?",
+   "a": "החומר",
+   "h": "9e378d06",
+   "q": "A can and a frying pan are made of aluminum. What do they share?",
+   "o": [
+    "The material",
+    "The shape",
+    "The volume",
+    "The use"
+   ],
+   "x": "Different objects can be made of the same material"
+  },
+  {
+   "he": "כוסות זהות בצורה ובגודל: מזכוכית ומפלסטיק. מה שונה?",
+   "a": "החומר",
+   "h": "1f0a9b5f",
+   "q": "Two cups, same shape and size: one glass, one plastic. What differs?",
+   "o": [
+    "The material",
+    "The shape",
+    "The volume",
+    "The use"
+   ],
+   "x": "Same shape and size, but a different material"
+  },
+  {
+   "he": "הרכב, מקור ותכונות – כך מתארים…",
+   "a": "חומר",
+   "h": "02efe33c",
+   "q": "Composition, source and properties – these describe…",
+   "o": [
+    "A material",
+    "An object",
+    "A shape",
+    "A weight"
+   ],
+   "x": "A material: composition, source, physical and chemical properties"
+  },
+  {
+   "he": "\"מאיפה מגיע האלומיניום?\" – שואלים על…",
+   "a": "מקור החומר",
+   "h": "96aec49e",
+   "q": "\"Where does aluminum come from?\" – this asks about…",
+   "o": [
+    "The material's source",
+    "The material's composition",
+    "The object's shape",
+    "The object's mass"
+   ],
+   "x": "Where a material comes from = its source"
+  },
+  {
+   "he": "\"ממה מורכב החומר?\" – שואלים על…",
+   "a": "ההרכב",
+   "h": "1e553e25",
+   "q": "\"What is the material made of?\" – this asks about its…",
+   "o": [
+    "Composition",
+    "Source",
+    "Shape",
+    "Volume"
+   ],
+   "x": "What a material is built of = its composition"
+  },
+  {
+   "he": "צבע, קשיות ומוליכות חום הן תכונות…",
+   "a": "פיזיקליות",
+   "h": "55bca914",
+   "q": "Color, hardness and heat conductivity are … properties.",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Shape",
+    "Volume"
+   ],
+   "x": "Properties we test without turning it into another material"
+  },
+  {
+   "he": "האם החומר נשרף או מחליד? זו תכונה…",
+   "a": "כימית",
+   "h": "c37bcb9f",
+   "q": "Whether a material burns or rusts is a … property.",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Shape",
+    "Volume"
+   ],
+   "x": "Burning and rusting make a new material"
+  },
+  {
+   "he": "למה סירים עשויים ממתכת?",
+   "a": "מוליכה חום היטב",
+   "h": "498028ac",
+   "q": "Why are cooking pots made of metal?",
+   "o": [
+    "It conducts heat well",
+    "It breaks easily",
+    "It is transparent",
+    "It melts easily"
+   ],
+   "x": "Metal passes the heat on to the food"
+  },
+  {
+   "he": "למה חלונות עשויים מזכוכית?",
+   "a": "היא שקופה",
+   "h": "1dcb8edd",
+   "q": "Why are windows made of glass?",
+   "o": [
+    "It is transparent",
+    "It is heavy",
+    "It conducts electricity",
+    "It is soft"
+   ],
+   "x": "We can see outside through transparent glass"
+  },
+  {
+   "he": "אלומיניום קל ולא מחליד. למה הוא מתאים?",
+   "a": "מסגרת אופניים",
+   "h": "99c54b0d",
+   "q": "Aluminum is light and does not rust. What is it good for?",
+   "o": [
+    "A bicycle frame",
+    "A see-through window",
+    "Warm clothing",
+    "Writing paper"
+   ],
+   "x": "We choose a material for a use by its properties"
+  },
+  {
+   "he": "פלדה חזקה מאוד. לכן בונים ממנה מבנים ענקיים כמו…",
+   "a": "גשרים",
+   "h": "65f50897",
+   "q": "Steel is very strong, so huge structures are built from it, like…",
+   "o": [
+    "Bridges",
+    "Balloons",
+    "Windows",
+    "Pillows"
+   ],
+   "x": "A strong material suits a structure that carries weight"
+  },
+  {
+   "he": "מה מהבאים אינו חומר?",
+   "a": "מחשבה",
+   "h": "fb76dcb2",
+   "q": "Which of these is not matter?",
+   "o": [
+    "Thought",
+    "Air",
+    "Water",
+    "Sand"
+   ],
+   "x": "Matter has mass and volume; a thought does not"
+  },
+  {
+   "he": "מפתח, בורג ומהדק – מה הם?",
+   "a": "גופים",
+   "h": "227e72c4",
+   "q": "A key, a screw and a paper clip – what are they?",
+   "o": [
+    "Objects",
+    "Materials",
+    "Properties",
+    "Units"
+   ],
+   "x": "Each has a shape, volume and mass – they are objects"
+  },
+  {
+   "he": "באיזה זוג שני הדברים הם חומרים?",
+   "a": "זהב וזכוכית",
+   "h": "bf116042",
+   "q": "In which pair are both things materials?",
+   "o": [
+    "Gold and glass",
+    "Ring and cup",
+    "Gold and ring",
+    "Cup and glass"
+   ],
+   "x": "A ring and a cup are objects; gold and glass are materials",
+   "sc": {
+    "0": "Ring • Gold",
+    "1": "Glass • Cup"
+   }
+  },
+  {
+   "he": "מה מהבאים מגדיר נפח?",
+   "a": "המקום שגוף תופס",
+   "h": "f61d14b1",
+   "q": "Which of these defines volume?",
+   "o": [
+    "Space an object occupies",
+    "Amount of matter",
+    "Pull of gravity",
+    "Color of an object"
+   ],
+   "x": "Volume = the space an object occupies"
+  },
+  {
+   "he": "ניפחו בלון. מה השתנה?",
+   "a": "הנפח",
+   "h": "216b21c8",
+   "q": "A balloon was blown up. What changed?",
+   "o": [
+    "The volume",
+    "The color",
+    "The material",
+    "Nothing"
+   ],
+   "x": "The balloon swelled and takes up more space"
+  },
+  {
+   "he": "ניפחו בלון. מה לא השתנה?",
+   "a": "החומר שלו",
+   "h": "311dcf8d",
+   "q": "A balloon was blown up. What did not change?",
+   "o": [
+    "Its material",
+    "Its volume",
+    "The space it fills",
+    "Its size"
+   ],
+   "x": "The rubber stays the same rubber, in the same color"
+  },
+  {
+   "he": "בלון שהתנפח תופס…",
+   "a": "יותר מקום",
+   "h": "1310d0a6",
+   "q": "A balloon that was blown up takes up…",
+   "o": [
+    "More space",
+    "Less space",
+    "The same space",
+    "No space"
+   ],
+   "x": "Its volume grew"
+  },
+  {
+   "he": "למי יש נפח?",
+   "a": "לכל חומר וגוף",
+   "h": "f304c279",
+   "q": "What has volume?",
+   "o": [
+    "Every material and object",
+    "Only solids",
+    "Only liquids",
+    "Only large objects"
+   ],
+   "x": "Every material takes up space"
+  },
+  {
+   "he": "האם לאוויר יש נפח?",
+   "a": "כן",
+   "h": "afe57781",
+   "q": "Does air have volume?",
+   "o": [
+    "Yes",
+    "No",
+    "Only in winter",
+    "Only when visible"
+   ],
+   "x": "Air takes up space, for example inside a balloon"
+  },
+  {
+   "he": "לאיזה מהם הנפח הגדול ביותר?",
+   "a": "כדורסל",
+   "h": "68079aee",
+   "q": "Which one has the greatest volume?",
+   "o": [
+    "A basketball",
+    "A ping-pong ball",
+    "A marble",
+    "A coin"
+   ],
+   "x": "The basketball takes up the most space"
+  },
+  {
+   "he": "איזו תכונה נמדדת בסמ״ק?",
+   "a": "הנפח",
+   "h": "3ef841cc",
+   "q": "Which property is measured in cm³?",
+   "o": [
+    "The volume",
+    "The mass",
+    "The weight",
+    "The length"
+   ],
+   "x": "cm³ = cubic centimeter, a unit of volume",
+   "sc": {
+    "0": "cm³ = ?"
+   }
+  },
+  {
+   "he": "שני מבנים מ-9 קוביות לגו זהות. מה בטוח שווה?",
+   "a": "הנפח",
+   "h": "5c9e6a96",
+   "q": "Two builds of 9 identical Lego bricks each. What is surely equal?",
+   "o": [
+    "The volume",
+    "The shape",
+    "The height",
+    "The length"
+   ],
+   "x": "The same number of identical bricks → the same volume",
+   "sc": {
+    "2": "9",
+    "3": "9"
+   }
+  },
+  {
+   "he": "קוביות זהות: מבנה של 9 ומבנה של 12. למי נפח גדול?",
+   "a": "למבנה של 12",
+   "h": "3c9c8725",
+   "q": "Identical bricks: a build of 9 and a build of 12. Which has more volume?",
+   "o": [
+    "The 12-brick build",
+    "The 9-brick build",
+    "They are equal",
+    "We can't tell"
+   ],
+   "x": "More bricks → more space",
+   "sc": {
+    "2": "9",
+    "3": "12"
+   }
+  },
+  {
+   "he": "מעכו גוש פלסטלינה לצורה אחרת. מה נשאר?",
+   "a": "הנפח",
+   "h": "121f315f",
+   "q": "A lump of modeling clay is squashed into a new shape. What stays?",
+   "o": [
+    "The volume",
+    "The shape",
+    "The length",
+    "The height"
+   ],
+   "x": "The shape changed, the amount of space did not"
+  },
+  {
+   "he": "שפכו מים מכוס לקערה. מה נשאר זהה?",
+   "a": "הנפח",
+   "h": "82581845",
+   "q": "Water is poured from a cup into a bowl. What stays unchanged?",
+   "o": [
+    "The volume",
+    "The shape",
+    "The height",
+    "The width"
+   ],
+   "x": "A liquid takes the container's shape; its volume stays"
+  },
+  {
+   "he": "שני גופים באותה צורה וגודל. מה בטוח שווה?",
+   "a": "הנפח",
+   "h": "9ac98d89",
+   "q": "Two objects have the same shape and size. What is surely equal?",
+   "o": [
+    "The volume",
+    "The mass",
+    "The material",
+    "The color"
+   ],
+   "x": "Same shape and same size → the same space"
+  },
+  {
+   "he": "קובייה וגליל: לא ברור למי נפח גדול. מה עושים?",
+   "a": "מודדים ומחשבים",
+   "h": "49c2d49e",
+   "q": "A cube and a cylinder: it is unclear which has more volume. What do we do?",
+   "o": [
+    "Measure and calculate",
+    "Guess",
+    "Weigh them",
+    "Check the color"
+   ],
+   "x": "When we can't see it – we measure and calculate"
+  },
+  {
+   "he": "איזה כלי לא עוזר לקבוע נפח?",
+   "a": "מד לחץ דם",
+   "h": "362a53f4",
+   "q": "Which tool does not help find volume?",
+   "o": [
+    "Blood pressure monitor",
+    "Ruler",
+    "Measuring cup",
+    "Tape measure"
+   ],
+   "x": "A blood pressure monitor measures pressure, not length"
+  },
+  {
+   "he": "איך מחשבים נפח של תיבה?",
+   "a": "אורך×רוחב×גובה",
+   "h": "7cef8d63",
+   "q": "How do we calculate the volume of a box?",
+   "o": [
+    "Length×width×height",
+    "Length+width+height",
+    "Length×width",
+    "Length×2+width×2"
+   ],
+   "x": "Multiply the three measurements"
+  },
+  {
+   "he": "רוחב 2 מ', אורך 1 מ', גובה 3 מ'. נפח?",
+   "a": "6 מ״ק",
+   "h": "13f77889",
+   "q": "Width 2 m, length 1 m, height 3 m. Volume?",
+   "o": [
+    "6 m³",
+    "6 m²",
+    "5 m³",
+    "9 m³"
+   ],
+   "x": "2×1×3 = 6 cubic meters",
+   "sc": {
+    "1": "2×1×3"
+   }
+  },
+  {
+   "he": "קובייה שצלעה 1 ס״מ. מה נפחה?",
+   "a": "1 סמ״ק",
+   "h": "9aafff26",
+   "q": "A cube has 1 cm edges. What is its volume?",
+   "o": [
+    "1 cm³",
+    "3 cm³",
+    "1 cm",
+    "4 cm³"
+   ],
+   "x": "1×1×1 = 1 cubic centimeter",
+   "sc": {
+    "1": "1 cm"
+   }
+  },
+  {
+   "he": "מידות התיבה בס״מ. מה קיצור יחידת הנפח?",
+   "a": "סמ״ק",
+   "h": "fcfc9448",
+   "q": "A box is measured in cm. What is the volume unit's symbol?",
+   "o": [
+    "cm³",
+    "cm",
+    "cm²",
+    "kg"
+   ],
+   "x": "cm × cm × cm = cm³",
+   "sc": {
+    "0": "cm×cm×cm"
+   }
+  },
+  {
+   "he": "מידות התיבה במטרים. באיזו יחידה הנפח?",
+   "a": "מ״ק",
+   "h": "de03613a",
+   "q": "A box is measured in meters. What unit is its volume in?",
+   "o": [
+    "m³",
+    "m²",
+    "m",
+    "kg"
+   ],
+   "x": "meter × meter × meter = cubic meter",
+   "sc": {
+    "0": "m×m×m"
+   }
+  },
+  {
+   "he": "מה פירוש סמ״ק?",
+   "a": "סנטימטר מעוקב",
+   "h": "43dff7a7",
+   "q": "What does cm³ mean?",
+   "o": [
+    "Cubic centimeter",
+    "Square centimeter",
+    "One centimeter",
+    "Cube symbol"
+   ],
+   "x": "A cube with 1 cm edges"
+  },
+  {
+   "he": "מגדילים פי 2 רק את גובה התיבה. הנפח…",
+   "a": "גדל פי 2",
+   "h": "16dd6b9f",
+   "q": "Only the box's height is doubled. Its volume…",
+   "o": [
+    "Doubles",
+    "Does not change",
+    "Quadruples",
+    "Halves"
+   ],
+   "x": "One factor of the product doubled",
+   "sc": {
+    "1": "height × 2"
+   }
+  },
+  {
+   "he": "לתיבה ⁦2×2×2⁩ ולתיבה ⁦4×2×1⁩ יש נפח…",
+   "a": "שווה",
+   "h": "da72143e",
+   "q": "Which box has the greater volume?",
+   "o": [
+    "They are equal",
+    "The first box",
+    "The second box",
+    "We can't tell"
+   ],
+   "x": "Both are 8 – different shapes, equal volume",
+   "sc": {
+    "0": "2×2×2",
+    "1": "4×2×1"
+   }
+  },
+  {
+   "he": "קובייה שצלעה 2 ס״מ. מה נפחה?",
+   "a": "8 סמ״ק",
+   "h": "042f4b79",
+   "q": "A cube has 2 cm edges. What is its volume?",
+   "o": [
+    "8 cm³",
+    "6 cm³",
+    "4 cm³",
+    "2 cm³"
+   ],
+   "x": "⁦2×2×2=8⁩",
+   "sc": {
+    "1": "2 cm"
+   }
+  },
+  {
+   "he": "קובייה שצלעה 3 ס״מ. מה נפחה?",
+   "a": "27 סמ״ק",
+   "h": "cc3e3dd5",
+   "q": "A cube has 3 cm edges. What is its volume?",
+   "o": [
+    "27 cm³",
+    "9 cm³",
+    "12 cm³",
+    "18 cm³"
+   ],
+   "x": "⁦3×3×3=27⁩",
+   "sc": {
+    "1": "3 cm"
+   }
+  },
+  {
+   "he": "תיבה במידות ⁦5×4×2⁩ ס״מ. מה נפחה?",
+   "a": "40 סמ״ק",
+   "h": "b921da44",
+   "q": "A box measures 5×4×2 cm. What is its volume?",
+   "o": [
+    "40 cm³",
+    "11 cm³",
+    "20 cm³",
+    "22 cm³"
+   ],
+   "x": "⁦5×4×2=40⁩",
+   "sc": {
+    "1": "5×4×2"
+   }
+  },
+  {
+   "he": "קופסה: אורך 10, רוחב 5, גובה 3 ס״מ. נפח?",
+   "a": "150 סמ״ק",
+   "h": "c2b5b52e",
+   "q": "A box: length 10, width 5, height 3 cm. Volume?",
+   "o": [
+    "150 cm³",
+    "18 cm³",
+    "50 cm³",
+    "300 cm³"
+   ],
+   "x": "⁦10×5×3=150⁩",
+   "sc": {
+    "1": "10×5×3"
+   }
+  },
+  {
+   "he": "חדר במידות ⁦4×3×2.5⁩ מטר. מה נפחו?",
+   "a": "30 מ״ק",
+   "h": "f3513e59",
+   "q": "A room measures 4×3×2.5 m. What is its volume?",
+   "o": [
+    "30 m³",
+    "9.5 m³",
+    "24 m³",
+    "12 m³"
+   ],
+   "x": "⁦4×3=12⁩, ⁦12×2.5=30⁩",
+   "sc": {
+    "1": "4×3×2.5"
+   }
+  },
+  {
+   "he": "ארגז במידות ⁦50×20×10⁩ ס״מ. מה נפחו?",
+   "a": "10,000 סמ״ק",
+   "h": "d83ca8f5",
+   "q": "A crate measures 50×20×10 cm. What is its volume?",
+   "o": [
+    "10,000 cm³",
+    "80 cm³",
+    "1000 cm³",
+    "100,000 cm³"
+   ],
+   "x": "⁦50×20=1000⁩, ⁦1000×10=10,000⁩",
+   "sc": {
+    "1": "50×20×10"
+   }
+  },
+  {
+   "he": "כמה קוביות של 1 סמ״ק ממלאות תיבה ⁦3×2×2⁩ ס״מ?",
+   "a": "⁦12⁩",
+   "h": "6f98f950",
+   "q": "How many 1 cm³ cubes fill a 3×2×2 cm box?",
+   "o": [
+    "⁦12⁩",
+    "⁦7⁩",
+    "⁦6⁩",
+    "⁦10⁩"
+   ],
+   "x": "The box's volume is 3×2×2 = 12 cm³",
+   "sc": {
+    "1": "3×2×2"
+   }
+  },
+  {
+   "he": "נפח תיבה 24 סמ״ק, אורך 4, רוחב 3 ס״מ. גובה?",
+   "a": "2 ס״מ",
+   "h": "0e6c34a8",
+   "q": "A box's volume is 24 cm³; length 4, width 3 cm. Height?",
+   "o": [
+    "2 cm",
+    "6 cm",
+    "8 cm",
+    "17 cm"
+   ],
+   "x": "⁦4×3=12⁩, ⁦24÷12=2⁩",
+   "sc": {
+    "1": "4×3×? = 24"
+   }
+  },
+  {
+   "he": "איזה כלי מודד נפח של נוזל?",
+   "a": "משורה",
+   "h": "570f92ce",
+   "q": "Which tool measures the volume of a liquid?",
+   "o": [
+    "Graduated cylinder",
+    "Ruler",
+    "Balance",
+    "Force meter"
+   ],
+   "x": "A graduated cylinder has volume scale marks"
+  },
+  {
+   "he": "מהו כלי המדידה הנפוץ ביותר לנפח נוזל?",
+   "a": "משורה",
+   "h": "4b6aacc1",
+   "q": "What is the most common tool for measuring liquid volume?",
+   "o": [
+    "Graduated cylinder",
+    "Conical flask",
+    "Syringe",
+    "Pipette"
+   ],
+   "x": "The graduated cylinder is the most common tool"
+  },
+  {
+   "he": "איזה מאלה אינו כלי למדידת נפח נוזל?",
+   "a": "מאזניים",
+   "h": "f3aabd12",
+   "q": "Which of these is not a tool for measuring liquid volume?",
+   "o": [
+    "Balance",
+    "Pipette",
+    "Syringe",
+    "Erlenmeyer flask"
+   ],
+   "x": "A balance measures mass, not volume"
+  },
+  {
+   "he": "איך נקראים הקווים המסומנים על כלי המדידה?",
+   "a": "שנתות",
+   "h": "8901c16d",
+   "q": "What are the lines on a measuring tool called?",
+   "o": [
+    "Scale marks",
+    "Sides",
+    "Digits",
+    "Stripes"
+   ],
+   "x": "Each line on the tool is a scale mark"
+  },
+  {
+   "he": "במשורה, המרחק בין שנתות סמוכות…",
+   "a": "שווה",
+   "h": "fb50a6f5",
+   "q": "In a graduated cylinder, the distance between neighboring marks is…",
+   "o": [
+    "Equal",
+    "Not equal",
+    "Larger toward the top",
+    "Smaller toward the top"
+   ],
+   "x": "The cylinder has straight sides, so the gaps are equal"
+  },
+  {
+   "he": "בבקבוק קוני, המרחק בין שנתות סמוכות…",
+   "a": "לא שווה",
+   "h": "66f5d6a1",
+   "q": "In a conical flask, the distance between neighboring marks is…",
+   "o": [
+    "Not equal",
+    "Equal",
+    "Always zero",
+    "There are no marks"
+   ],
+   "x": "The flask narrows at the top, so the gaps differ"
+  },
+  {
+   "he": "בבקבוק קוני, הנפח בין שנתות סמוכות…",
+   "a": "שווה",
+   "h": "dbb08f41",
+   "q": "In a conical flask, the volume between neighboring marks is…",
+   "o": [
+    "Equal",
+    "Not equal",
+    "Larger toward the top",
+    "Smaller toward the top"
+   ],
+   "x": "The gaps differ, but each mark adds the same volume"
+  },
+  {
+   "he": "למה בבקבוק קוני השנתות לא במרחק שווה?",
+   "a": "בגלל צורת הכלי",
+   "h": "50916b0b",
+   "q": "Why are a conical flask's marks not evenly spaced?",
+   "o": [
+    "Because of its shape",
+    "Because of liquid color",
+    "Because it is glass",
+    "Because it is small"
+   ],
+   "x": "The flask is wide at the bottom and narrow at the top"
+  },
+  {
+   "he": "מה מציין גובה הנוזל בכלי המדידה?",
+   "a": "את נפח הנוזל",
+   "h": "32fb50ca",
+   "q": "What does the liquid's height in a measuring tool show?",
+   "o": [
+    "The liquid's volume",
+    "The liquid's mass",
+    "The liquid's color",
+    "The liquid's weight"
+   ],
+   "x": "Read the mark the liquid reaches"
+  },
+  {
+   "he": "1 סמ״ק שווה ל…",
+   "a": "1 מ״ל",
+   "h": "c059ab49",
+   "q": "1 cm³ equals…",
+   "o": [
+    "1 mL",
+    "1 L",
+    "10 mL",
+    "1000 mL"
+   ],
+   "x": "cm³ and mL – exactly the same volume",
+   "sc": {
+    "1": "1 cm³",
+    "2": "= ?"
+   }
+  },
+  {
+   "he": "כמה סמ״ק יש בליטר אחד?",
+   "a": "⁦1000⁩",
+   "h": "40896a65",
+   "q": "How many cm³ are in one liter?",
+   "o": [
+    "⁦1000⁩",
+    "⁦100⁩",
+    "⁦10⁩",
+    "⁦10,000⁩"
+   ],
+   "x": "1 L = 1000 mL = 1000 cm³",
+   "sc": {
+    "1": "1 L",
+    "2": "= ? cm³"
+   }
+  },
+  {
+   "he": "2 ליטר = ? מ״ל",
+   "a": "2000 מ״ל",
+   "h": "bad1f0a9",
+   "q": "2 L = ? mL",
+   "o": [
+    "2000 mL",
+    "200 mL",
+    "20 mL",
+    "20,000 mL"
+   ],
+   "x": "L → mL: multiply by 1000",
+   "sc": {
+    "1": "2 L",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "500 מ״ל = ? ליטר",
+   "a": "0.5 ליטר",
+   "h": "305590e2",
+   "q": "500 mL = ? L",
+   "o": [
+    "0.5 L",
+    "5 L",
+    "50 L",
+    "0.05 L"
+   ],
+   "x": "mL → L: divide by 1000",
+   "sc": {
+    "1": "500 mL",
+    "2": "= ? L"
+   }
+  },
+  {
+   "he": "3500 מ״ל = ? ליטר",
+   "a": "3.5 ליטר",
+   "h": "c09284bc",
+   "q": "3500 mL = ? L",
+   "o": [
+    "3.5 L",
+    "35 L",
+    "350 L",
+    "0.35 L"
+   ],
+   "x": "⁦3500÷1000=3.5⁩",
+   "sc": {
+    "1": "3500 mL",
+    "2": "= ? L"
+   }
+  },
+  {
+   "he": "בקבוק של 1.5 ליטר. כמה מ״ל בו?",
+   "a": "1500 מ״ל",
+   "h": "01a31285",
+   "q": "A bottle holds 1.5 L. How many mL is that?",
+   "o": [
+    "1500 mL",
+    "150 mL",
+    "15 mL",
+    "15,000 mL"
+   ],
+   "x": "⁦1.5×1000=1500⁩",
+   "sc": {
+    "1": "1.5 L"
+   }
+  },
+  {
+   "he": "250 סמ״ק = ? מ״ל",
+   "a": "250 מ״ל",
+   "h": "b6867cb5",
+   "q": "250 cm³ = ? mL",
+   "o": [
+    "250 mL",
+    "25 mL",
+    "2500 mL",
+    "0.25 mL"
+   ],
+   "x": "1 cm³ = 1 mL, so the number stays the same",
+   "sc": {
+    "1": "250 cm³",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "כדי להפוך ליטר למ״ל…",
+   "a": "כופלים ב-1000",
+   "h": "c9b0aac7",
+   "q": "To change liters into mL, you…",
+   "o": [
+    "Multiply by 1000",
+    "Divide by 1000",
+    "Multiply by 100",
+    "Add 1000"
+   ],
+   "x": "A liter is large, so it holds many mL",
+   "sc": {
+    "1": "3 L",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "כדי להפוך מ״ל לליטר…",
+   "a": "מחלקים ב-1000",
+   "h": "6a9c88b6",
+   "q": "To change mL into liters, you…",
+   "o": [
+    "Divide by 1000",
+    "Multiply by 1000",
+    "Divide by 100",
+    "Subtract 1000"
+   ],
+   "x": "A mL is small, so the number of liters is smaller",
+   "sc": {
+    "1": "3000 mL",
+    "2": "= ? L"
+   }
+  },
+  {
+   "he": "שנתות כל 2 מ״ל. המים 3 שנתות מעל 20. נפח?",
+   "a": "26 מ״ל",
+   "h": "c4498742",
+   "q": "Marks every 2 mL. The water is 3 marks above 20. Volume?",
+   "o": [
+    "26 mL",
+    "23 mL",
+    "25 mL",
+    "30 mL"
+   ],
+   "x": "⁦3×2=6⁩, ⁦20+6=26⁩",
+   "sc": {
+    "1": "20 mL",
+    "2": "+ 3 marks"
+   }
+  },
+  {
+   "he": "תפוח הוא גוף בעל צורה…",
+   "a": "לא גאומטרית",
+   "h": "a5d8dba2",
+   "q": "An apple is an object whose shape is…",
+   "o": [
+    "Not geometric",
+    "Like a box",
+    "Like a cube",
+    "Like a cylinder"
+   ],
+   "x": "We can't measure its length, width and height"
+  },
+  {
+   "he": "איך מודדים נפח של אבן?",
+   "a": "במשורה עם מים",
+   "h": "a3aab8da",
+   "q": "How do we measure the volume of a stone?",
+   "o": [
+    "Graduated cylinder and water",
+    "Only a ruler",
+    "A balance",
+    "A force meter"
+   ],
+   "x": "Put it in water and see how much the level rose"
+  },
+  {
+   "he": "נפח הגוף שווה ל…",
+   "a": "עליית מפלס המים",
+   "h": "650f0f6d",
+   "q": "An object's volume equals…",
+   "o": [
+    "The water level's rise",
+    "The starting water level",
+    "The final water level",
+    "The mass of water"
+   ],
+   "x": "The level after minus the level before"
+  },
+  {
+   "he": "גוף נכנס למים. למה המפלס עולה?",
+   "a": "הגוף תופס מקום",
+   "h": "248abb8c",
+   "q": "An object goes into water. Why does the level rise?",
+   "o": [
+    "It takes up space",
+    "It heats the water",
+    "The water is compressed",
+    "The water expands"
+   ],
+   "x": "The object pushes the water aside and takes its place"
+  },
+  {
+   "he": "למה הגוף צריך לשקוע במים כולו?",
+   "a": "שכל נפחו יימדד",
+   "h": "3d9e23e9",
+   "q": "Why must the object be fully under the water?",
+   "o": [
+    "So it's all measured",
+    "So it stays wet",
+    "To make it heavier",
+    "To warm the water"
+   ],
+   "x": "A part sticking out does not raise the water"
+  },
+  {
+   "he": "באיזו יחידה נמדד נפח אבן במשורה?",
+   "a": "סמ״ק",
+   "h": "add8a228",
+   "q": "In which unit is a stone's volume measured in a graduated cylinder?",
+   "o": [
+    "cm³",
+    "kg",
+    "cm",
+    "N"
+   ],
+   "x": "In cm³, exactly the same as mL"
+  },
+  {
+   "he": "אבן א' העלתה את המים יותר מאבן ב'. למי נפח גדול?",
+   "a": "לאבן א'",
+   "h": "175f322f",
+   "q": "The water rose more in cylinder A than in B. Which stone has more volume?",
+   "o": [
+    "The stone in A",
+    "The stone in B",
+    "They are equal",
+    "We can't tell"
+   ],
+   "x": "A bigger rise → a bigger volume",
+   "sc": {
+    "2": "B",
+    "3": "A"
+   }
+  },
+  {
+   "he": "מכניסים אבן למשורה מלאה עד הסוף. מה יקרה?",
+   "a": "מים יגלשו",
+   "h": "14a33e58",
+   "q": "A stone goes into a graduated cylinder full to the top. What happens?",
+   "o": [
+    "Water spills over",
+    "The water drops",
+    "Nothing",
+    "The stone floats"
+   ],
+   "x": "The stone takes up space – there is no room for the water"
+  },
+  {
+   "he": "מים ב-50 מ״ל. הוכנסה אבן, המים עלו ל-65. נפח האבן?",
+   "a": "15 סמ״ק",
+   "h": "39cb016c",
+   "q": "Water at 50 mL. A stone goes in and the water rises to 65. Stone's volume?",
+   "o": [
+    "15 cm³",
+    "65 cm³",
+    "50 cm³",
+    "115 cm³"
+   ],
+   "x": "⁦65-50=15⁩",
+   "sc": {
+    "2": "50 mL",
+    "3": "65 mL"
+   }
+  },
+  {
+   "he": "מים ב-30 מ״ל, ועם הגוף 42 מ״ל. נפח הגוף?",
+   "a": "12 סמ״ק",
+   "h": "1088e5c3",
+   "q": "Water at 30 mL; with the object, 42 mL. The object's volume?",
+   "o": [
+    "12 cm³",
+    "42 cm³",
+    "72 cm³",
+    "30 cm³"
+   ],
+   "x": "⁦42-30=12⁩",
+   "sc": {
+    "2": "30 mL",
+    "3": "42 mL"
+   }
+  },
+  {
+   "he": "מים ב-60 מ״ל, ועם בורג 73 מ״ל. נפח הבורג?",
+   "a": "13 סמ״ק",
+   "h": "bea22fa2",
+   "q": "Water at 60 mL; with a screw, 73 mL. The screw's volume?",
+   "o": [
+    "13 cm³",
+    "73 cm³",
+    "133 cm³",
+    "60 cm³"
+   ],
+   "x": "⁦73-60=13⁩",
+   "sc": {
+    "2": "60 mL",
+    "3": "73 mL"
+   }
+  },
+  {
+   "he": "מים ב-100 מ״ל. מכניסים מפתח של 8 סמ״ק. המפלס?",
+   "a": "108 מ״ל",
+   "h": "6ef683df",
+   "q": "Water at 100 mL. An 8 cm³ key goes in. The new level?",
+   "o": [
+    "108 mL",
+    "92 mL",
+    "100 mL",
+    "800 mL"
+   ],
+   "x": "⁦100+8=108⁩",
+   "sc": {
+    "2": "100 mL",
+    "3": "? mL"
+   }
+  },
+  {
+   "he": "אחרי הכנסת אבן של 20 סמ״ק המים ב-70 מ״ל. כמה היו?",
+   "a": "50 מ״ל",
+   "h": "a7209189",
+   "q": "After adding a 20 cm³ stone, the water is at 70 mL. What was it before?",
+   "o": [
+    "50 mL",
+    "90 mL",
+    "70 mL",
+    "20 mL"
+   ],
+   "x": "⁦70-20=50⁩",
+   "sc": {
+    "2": "? mL",
+    "3": "70 mL"
+   }
+  },
+  {
+   "he": "מים ב-40 מ״ל, ועם גולה 41 מ״ל. נפח הגולה?",
+   "a": "1 סמ״ק",
+   "h": "a19ae441",
+   "q": "Water at 40 mL; with a marble, 41 mL. The marble's volume?",
+   "o": [
+    "1 cm³",
+    "41 cm³",
+    "81 cm³",
+    "40 cm³"
+   ],
+   "x": "⁦41-40=1⁩",
+   "sc": {
+    "2": "40 mL",
+    "3": "41 mL"
+   }
+  },
+  {
+   "he": "תפוח צף על המים. איך נמדוד את נפחו?",
+   "a": "משקיעים אותו כולו",
+   "h": "dfbbfc90",
+   "q": "An apple floats on water. How do we measure its volume?",
+   "o": [
+    "Push it fully under",
+    "Weigh it",
+    "Measure only half",
+    "Measure its color"
+   ],
+   "x": "Only when it is fully under water is all its volume measured"
+  },
+  {
+   "he": "3 גולות זהות העלו את המים ב-6 מ״ל. נפח גולה?",
+   "a": "2 סמ״ק",
+   "h": "27b82a33",
+   "q": "3 identical marbles raised the water by 6 mL. One marble's volume?",
+   "o": [
+    "2 cm³",
+    "6 cm³",
+    "3 cm³",
+    "18 cm³"
+   ],
+   "x": "⁦6÷3=2⁩",
+   "sc": {
+    "4": "6 mL"
+   }
+  },
+  {
+   "he": "עליית המפלס במשורה הייתה 12 מ״ל. מה נפח הגוף?",
+   "a": "12 סמ״ק",
+   "h": "91c3f613",
+   "q": "The water level in the cylinder rose by 12 mL. What is the object's volume?",
+   "o": [
+    "12 cm³",
+    "12 kg",
+    "24 cm³",
+    "6 cm³"
+   ],
+   "x": "The object's volume = the rise in level; 1 mL = 1 cm³",
+   "sc": {
+    "1": "+12 mL"
+   }
+  },
+  {
+   "he": "המים עלו מ-0.1 ליטר ל-130 מ״ל. נפח הגוף?",
+   "a": "30 סמ״ק",
+   "h": "04ab38fa",
+   "q": "The water rose from 0.1 L to 130 mL. The object's volume?",
+   "o": [
+    "30 cm³",
+    "130 cm³",
+    "129.9 cm³",
+    "31 cm³"
+   ],
+   "x": "0.1 L = 100 mL; 130-100 = 30",
+   "sc": {
+    "2": "0.1 L",
+    "3": "130 mL"
+   }
+  },
+  {
+   "he": "מה עושים ראשון כשמודדים נפח של אבן?",
+   "a": "קוראים מפלס התחלתי",
+   "h": "596f1308",
+   "q": "When measuring a stone's volume, what do you do first?",
+   "o": [
+    "Read the starting level",
+    "Put the stone in",
+    "Work out the difference",
+    "Read the final level"
+   ],
+   "x": "Without the starting level we can't find the difference"
+  },
+  {
+   "he": "למה את נפח תפוח האדמה לא מחשבים בכפל?",
+   "a": "צורתו לא גאומטרית",
+   "h": "c9721f40",
+   "q": "Why isn't a potato's volume found by multiplying?",
+   "o": [
+    "Its shape isn't geometric",
+    "It is too heavy",
+    "It is too hard",
+    "It has no volume"
+   ],
+   "x": "It has no clear length, width and height"
+  },
+  {
+   "he": "מהי מסה?",
+   "a": "כמות החומר",
+   "h": "6adcfaca",
+   "q": "What is mass?",
+   "o": [
+    "Amount of matter",
+    "Space an object occupies",
+    "Pull of gravity",
+    "Shape of an object"
+   ],
+   "x": "Mass = the amount of matter in an object"
+  },
+  {
+   "he": "בלון וכדורסל באותו נפח. במה הם שונים?",
+   "a": "במסה",
+   "h": "03b9c110",
+   "q": "A balloon and a basketball have the same volume. How do they differ?",
+   "o": [
+    "In mass",
+    "In volume",
+    "In size",
+    "In space occupied"
+   ],
+   "x": "Same volume, but the basketball has more matter"
+  },
+  {
+   "he": "למי מסה גדולה יותר?",
+   "a": "לכדורסל",
+   "h": "aa9e06a1",
+   "q": "Which has more mass?",
+   "o": [
+    "The basketball",
+    "The balloon",
+    "They are equal",
+    "Neither has mass"
+   ],
+   "x": "A basketball on your foot hurts more – more matter"
+  },
+  {
+   "he": "באיזה כלי מודדים מסה?",
+   "a": "מאזני כפות",
+   "h": "0f863af1",
+   "q": "Which tool measures mass?",
+   "o": [
+    "Pan balance",
+    "Graduated cylinder",
+    "Ruler",
+    "Force meter"
+   ],
+   "x": "A pan balance compares masses",
+   "sc": {
+    "1": "? g"
+   }
+  },
+  {
+   "he": "כפות המאזניים מאוזנות. מה זה אומר?",
+   "a": "המסות שוות",
+   "h": "2abb4bb4",
+   "q": "The balance pans are level. What does that mean?",
+   "o": [
+    "The masses are equal",
+    "The volumes are equal",
+    "The shapes are equal",
+    "The pans are empty"
+   ],
+   "x": "Level → the same mass on both pans"
+  },
+  {
+   "he": "מה שמים בכף השנייה כדי למדוד מסה?",
+   "a": "גושים במסה ידועה",
+   "h": "1657454f",
+   "q": "What goes on the other pan to measure mass?",
+   "o": [
+    "Blocks of known mass",
+    "Water",
+    "A graduated cylinder",
+    "A ruler"
+   ],
+   "x": "Standard masses (blocks of known mass) balance the pans"
+  },
+  {
+   "he": "מה הן אבני מסה?",
+   "a": "גושים במסה ידועה",
+   "h": "e5ef46a1",
+   "q": "What are standard masses?",
+   "o": [
+    "Blocks of known mass",
+    "Stones from the yard",
+    "A volume measuring tool",
+    "Small magnets"
+   ],
+   "x": "Metal blocks whose mass is known in advance"
+  },
+  {
+   "he": "מאזניים מאוזנים: תפוח מול 100 גרם ו-50 גרם. מסת התפוח?",
+   "a": "150 גרם",
+   "h": "089bf0cb",
+   "q": "Balanced: an apple against 100 g and 50 g. The apple's mass?",
+   "o": [
+    "150 g",
+    "100 g",
+    "50 g",
+    "200 g"
+   ],
+   "x": "⁦100+50=150⁩",
+   "sc": {
+    "2": "100 + 50"
+   }
+  },
+  {
+   "he": "לאילו מצבי צבירה יש מסה?",
+   "a": "לכולם",
+   "h": "41cb3cb7",
+   "q": "Which states of matter have mass?",
+   "o": [
+    "All of them",
+    "Only solids",
+    "Only liquids",
+    "Solids and liquids"
+   ],
+   "x": "Solids, liquids and gases all have mass"
+  },
+  {
+   "he": "קובעים מסה בהשוואה ל…",
+   "a": "גושים במסה ידועה",
+   "h": "5a21fe7e",
+   "q": "We find mass by comparing it with…",
+   "o": [
+    "Blocks of known mass",
+    "Blocks of known volume",
+    "Water in a cylinder",
+    "The pull of gravity"
+   ],
+   "x": "We compare it with standard masses"
+  },
+  {
+   "he": "1 גרם = ? מיליגרם",
+   "a": "1000 מ״ג",
+   "h": "19246fa7",
+   "q": "1 g = ? mg",
+   "o": [
+    "1000 mg",
+    "100 mg",
+    "10 mg",
+    "10,000 mg"
+   ],
+   "x": "A milligram is a thousandth of a gram",
+   "sc": {
+    "1": "1 g",
+    "2": "= ? mg"
+   }
+  },
+  {
+   "he": "1 ק״ג = ? גרם",
+   "a": "1000 גרם",
+   "h": "a22ad323",
+   "q": "1 kg = ? g",
+   "o": [
+    "1000 g",
+    "100 g",
+    "10 g",
+    "10,000 g"
+   ],
+   "x": "Kilo means a thousand",
+   "sc": {
+    "1": "1 kg",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "1 טון = ? ק״ג",
+   "a": "1000 ק״ג",
+   "h": "54892e99",
+   "q": "1 ton = ? kg",
+   "o": [
+    "1000 kg",
+    "100 kg",
+    "10 kg",
+    "10,000 kg"
+   ],
+   "x": "A ton is a thousand kilograms",
+   "sc": {
+    "1": "1 t",
+    "2": "= ? kg"
+   }
+  },
+  {
+   "he": "1 ק״ג = כמה מיליגרם?",
+   "a": "⁦1,000,000⁩",
+   "h": "f96c871a",
+   "q": "1 kg = how many mg?",
+   "o": [
+    "⁦1,000,000⁩",
+    "⁦1000⁩",
+    "⁦10,000⁩",
+    "⁦100⁩"
+   ],
+   "x": "1000 g, and each gram has 1000 mg",
+   "sc": {
+    "1": "1 kg",
+    "2": "= ? mg"
+   }
+  },
+  {
+   "he": "3 ק״ג = ? גרם",
+   "a": "3000 גרם",
+   "h": "d855397b",
+   "q": "3 kg = ? g",
+   "o": [
+    "3000 g",
+    "300 g",
+    "30 g",
+    "30,000 g"
+   ],
+   "x": "⁦3×1000=3000⁩",
+   "sc": {
+    "1": "3 kg",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "2500 גרם = ? ק״ג",
+   "a": "2.5 ק״ג",
+   "h": "cf533c3a",
+   "q": "2500 g = ? kg",
+   "o": [
+    "2.5 kg",
+    "25 kg",
+    "250 kg",
+    "0.25 kg"
+   ],
+   "x": "⁦2500÷1000=2.5⁩",
+   "sc": {
+    "1": "2500 g",
+    "2": "= ? kg"
+   }
+  },
+  {
+   "he": "איזו יחידה מתאימה למסה של משאית?",
+   "a": "טון",
+   "h": "7fdd700e",
+   "q": "Which unit suits the mass of a truck?",
+   "o": [
+    "Tons",
+    "Milligrams",
+    "Grams",
+    "Liters"
+   ],
+   "x": "A truck is very heavy – tons"
+  },
+  {
+   "he": "איזו יחידה מתאימה למסה של נמלה?",
+   "a": "מיליגרם",
+   "h": "5b75d8ed",
+   "q": "Which unit suits the mass of an ant?",
+   "o": [
+    "Milligrams",
+    "Tons",
+    "Kilograms",
+    "Cubic meters"
+   ],
+   "x": "An ant is very light – milligrams"
+  },
+  {
+   "he": "איזו מסה הגדולה ביותר מבין אלה?",
+   "a": "2 ק״ג",
+   "h": "5fb0543a",
+   "q": "Which of these masses is the greatest?",
+   "o": [
+    "2 kg",
+    "1500 g",
+    "1 kg",
+    "900 g"
+   ],
+   "x": "2 kg = 2000 g",
+   "sc": {
+    "0": "1 kg",
+    "1": "2 kg",
+    "2": "900 g",
+    "3": "1500 g"
+   }
+  },
+  {
+   "he": "שוקלים בקבוק סגור, ואז שואבים ממנו את האוויר. המסה…",
+   "a": "קטנה",
+   "h": "7b63a463",
+   "q": "A closed bottle is weighed, then the air is pumped out. Its mass…",
+   "o": [
+    "Decreases",
+    "Increases",
+    "Does not change",
+    "Becomes zero"
+   ],
+   "x": "Gas has mass too – we took matter out"
+  },
+  {
+   "he": "מכניסים מעט גז לבקבוק ריק וסגור. איזה חלק ממנו ימלא?",
+   "a": "את כל הבקבוק",
+   "h": "131d860a",
+   "q": "A little gas goes into an empty closed bottle. How much will it fill?",
+   "o": [
+    "The whole bottle",
+    "Only the bottom",
+    "Half the bottle",
+    "None of it"
+   ],
+   "x": "A gas spreads out and always fills its whole container"
+  },
+  {
+   "he": "נפח הגז בבקבוק סגור שווה ל…",
+   "a": "נפח הבקבוק",
+   "h": "d904eb5c",
+   "q": "The volume of the gas in a closed bottle equals…",
+   "o": [
+    "The bottle's volume",
+    "Half the bottle",
+    "The cap's volume",
+    "Zero"
+   ],
+   "x": "The gas fills the container's whole volume"
+  },
+  {
+   "he": "פותחים בושם בפינת החדר. אחרי זמן מריחים בכל החדר. למה?",
+   "a": "הגז מתפשט",
+   "h": "4336ff7f",
+   "q": "A perfume bottle is opened in a corner. Soon the whole room smells of it. Why?",
+   "o": [
+    "The gas spreads out",
+    "The gas is compressed",
+    "Gas has no mass",
+    "The smell cools down"
+   ],
+   "x": "The gas spreads out and fills the whole room"
+  },
+  {
+   "he": "מה מהבאים אינו נכון לגבי גז?",
+   "a": "אין לו מסה",
+   "h": "829ad114",
+   "q": "Which of these is not true about a gas?",
+   "o": [
+    "It has no mass",
+    "It fills any container",
+    "It can be compressed",
+    "Its shape changes"
+   ],
+   "x": "A gas has mass; it fills any container and can be compressed"
+  },
+  {
+   "he": "במה גז שונה ממוצק מבחינת הצורה?",
+   "a": "צורתו לא קבועה",
+   "h": "271f9d89",
+   "q": "How is a gas different from a solid in its shape?",
+   "o": [
+    "No fixed shape",
+    "A fixed shape",
+    "Always round",
+    "Always square"
+   ],
+   "x": "A gas spreads out and takes its container's shape"
+  },
+  {
+   "he": "בלון מלא אוויר – מסתו גדולה מבלון ריק. מה זה מוכיח?",
+   "a": "לגז יש מסה",
+   "h": "9af94640",
+   "q": "An air-filled balloon has more mass than an empty one. What does this prove?",
+   "o": [
+    "Gas has mass",
+    "Gas has no mass",
+    "The rubber grew",
+    "The balloon warmed up"
+   ],
+   "x": "The extra mass is the air inside"
+  },
+  {
+   "he": "איזה מצב צבירה נדחס בקלות?",
+   "a": "גז",
+   "h": "865b079a",
+   "q": "Which state of matter is easy to compress?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "None of them"
+   ],
+   "x": "A gas has much empty space between its particles"
+  },
+  {
+   "he": "מזרק סגור מלא אוויר. לוחצים על הבוכנה. מה קורה?",
+   "a": "האוויר נדחס",
+   "h": "4062f55c",
+   "q": "A closed syringe is full of air. You push the plunger. What happens?",
+   "o": [
+    "The air is compressed",
+    "The air disappears",
+    "The mass increases",
+    "The syringe explodes"
+   ],
+   "x": "A gas can be squeezed into a smaller volume"
+  },
+  {
+   "he": "מנפחים כדור עם משאבה. מה קורה למסת האוויר בו?",
+   "a": "גדלה",
+   "h": "88451ace",
+   "q": "A ball is pumped up. What happens to the mass of air inside?",
+   "o": [
+    "It increases",
+    "It decreases",
+    "It does not change",
+    "It disappears"
+   ],
+   "x": "More air goes in – that means more matter"
+  },
+  {
+   "he": "שני בקבוקים זהים מלאים גז. המסות בהכרח שוות?",
+   "a": "לא בהכרח",
+   "h": "d2a6b0d0",
+   "q": "Two identical bottles are full of gas. Are their masses surely equal?",
+   "o": [
+    "Not necessarily",
+    "Yes, always",
+    "Only when cold",
+    "Only in winter"
+   ],
+   "x": "The same container can hold different masses of gas"
+  },
+  {
+   "he": "כדור מנופח היטב וכדור זהה רך. למי מסה גדולה?",
+   "a": "למנופח",
+   "h": "07bd604d",
+   "q": "A fully pumped-up ball and an identical soft ball. Which has more mass?",
+   "o": [
+    "The pumped-up ball",
+    "The soft ball",
+    "They are equal",
+    "Neither has mass"
+   ],
+   "x": "More air is squeezed into the pumped-up ball"
+  },
+  {
+   "he": "במכל צלילה קטן יש הרבה אוויר. איך זה אפשרי?",
+   "a": "האוויר נדחס",
+   "h": "ea12b188",
+   "q": "A small diving tank holds a lot of air. How is that possible?",
+   "o": [
+    "The air is compressed",
+    "Air has no mass",
+    "The tank stretches",
+    "The air is liquid"
+   ],
+   "x": "A lot of gas is squeezed into a small container"
+  },
+  {
+   "he": "באותו כלי בדיוק יכולות להיות…",
+   "a": "מסות גז שונות",
+   "h": "5d9d554a",
+   "q": "The very same container can hold…",
+   "o": [
+    "Different masses of gas",
+    "Only one mass",
+    "Only a small volume",
+    "No gas at all"
+   ],
+   "x": "Squeeze in more gas → more mass, the same volume"
+  },
+  {
+   "he": "מהו משקל?",
+   "a": "כוח המשיכה לארץ",
+   "h": "b8223b90",
+   "q": "What is weight?",
+   "o": [
+    "Earth's gravitational pull",
+    "Amount of matter",
+    "Space an object occupies",
+    "Shape of an object"
+   ],
+   "x": "The force with which Earth pulls the object"
+  },
+  {
+   "he": "באיזה מכשיר מודדים משקל?",
+   "a": "מד כוח",
+   "h": "a640da87",
+   "q": "Which instrument measures weight?",
+   "o": [
+    "Force meter",
+    "Pan balance",
+    "Graduated cylinder",
+    "Ruler"
+   ],
+   "x": "A force meter with a spring measures weight"
+  },
+  {
+   "he": "מה יש בתוך מד כוח?",
+   "a": "קפיץ",
+   "h": "63646767",
+   "q": "What is inside a force meter?",
+   "o": [
+    "A spring",
+    "Water",
+    "A magnet",
+    "Standard masses"
+   ],
+   "x": "The spring stretches according to the weight"
+  },
+  {
+   "he": "תולים גוף על מד כוח. למה הקפיץ נמתח?",
+   "a": "כוח המשיכה לארץ",
+   "h": "766a453f",
+   "q": "An object hangs on a force meter. Why does the spring stretch?",
+   "o": [
+    "Earth's gravitational pull",
+    "The spring heats up",
+    "The object is small",
+    "The air pushes"
+   ],
+   "x": "Earth pulls the object down"
+  },
+  {
+   "he": "מהי יחידת המדידה של משקל?",
+   "a": "ניוטון",
+   "h": "f9df46fd",
+   "q": "What is the unit of measurement for weight?",
+   "o": [
+    "Newton",
+    "Kilogram",
+    "cm³",
+    "Liter"
+   ],
+   "x": "Weight is a force, measured in newtons",
+   "sc": {
+    "1": "10 ?"
+   }
+  },
+  {
+   "he": "על שם מי נקראת יחידת המשקל?",
+   "a": "ניוטון",
+   "h": "1d5639ac",
+   "q": "Who is the unit of weight named after?",
+   "o": [
+    "Newton",
+    "Einstein",
+    "Galileo",
+    "Shechtman"
+   ],
+   "x": "Isaac Newton – a famous English physicist"
+  },
+  {
+   "he": "באיזו מאה חי אייזק ניוטון?",
+   "a": "במאה ה-17",
+   "h": "bbc12cb1",
+   "q": "In which century did Isaac Newton live?",
+   "o": [
+    "17th century",
+    "20th century",
+    "12th century",
+    "21st century"
+   ],
+   "x": "Newton lived in the 1600s"
+  },
+  {
+   "he": "1 ניוטון הוא בערך משקל של…",
+   "a": "100 סמ״ק מים",
+   "h": "ce5dec77",
+   "q": "1 newton is roughly the weight of…",
+   "o": [
+    "100 cm³ of water",
+    "1 L of water",
+    "1 cm³ of water",
+    "10 L of water"
+   ],
+   "x": "100 cm³ of water weighs about 1 newton",
+   "sc": {
+    "1": "1 N",
+    "2": "= ?"
+   }
+  },
+  {
+   "he": "בערך כמה שוקל ליטר מים?",
+   "a": "10 ניוטון",
+   "h": "bf7f90ec",
+   "q": "Roughly how much does a liter of water weigh?",
+   "o": [
+    "10 N",
+    "1 N",
+    "100 N",
+    "1000 N"
+   ],
+   "x": "1000 cm³ = 10 × 100 cm³ → 10 N",
+   "sc": {
+    "1": "1 L",
+    "2": "= ? N"
+   }
+  },
+  {
+   "he": "מד כוח מראה 3 ניוטון. כמה מים בערך תלויים?",
+   "a": "300 סמ״ק",
+   "h": "14b98ea0",
+   "q": "A force meter shows 3 N. Roughly how much water hangs on it?",
+   "o": [
+    "300 cm³",
+    "30 cm³",
+    "3 cm³",
+    "3000 cm³"
+   ],
+   "x": "Each newton ≈ 100 cm³ of water",
+   "sc": {
+    "1": "3 N"
+   }
+  },
+  {
+   "he": "אסטרונאוט נחת על הירח. מה קרה לו?",
+   "a": "המשקל קטן יותר",
+   "h": "72e56356",
+   "q": "An astronaut landed on the Moon. What happened to the astronaut?",
+   "o": [
+    "The weight is smaller",
+    "The mass is smaller",
+    "The volume is smaller",
+    "The height is smaller"
+   ],
+   "x": "The Moon pulls more weakly than Earth"
+  },
+  {
+   "he": "אסטרונאוט על הירח. מה לא השתנה?",
+   "a": "המסה שלו",
+   "h": "8c7b18cf",
+   "q": "An astronaut is on the Moon. What did not change?",
+   "o": [
+    "Their mass",
+    "Their weight",
+    "Gravity on them",
+    "Ease of jumping"
+   ],
+   "x": "The amount of matter in the body stays the same"
+  },
+  {
+   "he": "גוף שוקל 60 ניוטון בארץ. כמה ישקול על הירח?",
+   "a": "פחות מ-60 ניוטון",
+   "h": "1b7dacc3",
+   "q": "An object weighs 60 N on Earth. What will it weigh on the Moon?",
+   "o": [
+    "Less than 60 N",
+    "More than 60 N",
+    "Exactly 60 N",
+    "0 N"
+   ],
+   "x": "The Moon's pull is weaker, but not zero",
+   "sc": {
+    "2": "60 N",
+    "3": "?"
+   }
+  },
+  {
+   "he": "למה על הירח קל לקפוץ גבוה?",
+   "a": "המשקל קטן יותר",
+   "h": "0604e0ed",
+   "q": "Why is it easy to jump high on the Moon?",
+   "o": [
+    "The weight is smaller",
+    "The mass is smaller",
+    "The volume is smaller",
+    "There is no ground"
+   ],
+   "x": "The Moon pulls weakly → smaller weight"
+  },
+  {
+   "he": "כוח המשיכה של הירח לעומת כדור הארץ?",
+   "a": "קטן יותר",
+   "h": "4be53b1f",
+   "q": "How does the Moon's gravity compare with Earth's?",
+   "o": [
+    "Weaker",
+    "Stronger",
+    "Equal",
+    "There is none"
+   ],
+   "x": "That is why everything weighs less on the Moon"
+  },
+  {
+   "he": "מעבירים גוף מקו המשווה לקוטב. מה גדל?",
+   "a": "המשקל",
+   "h": "4a407c9c",
+   "q": "An object is moved from the equator to a pole. What increases?",
+   "o": [
+    "The weight",
+    "The mass",
+    "The volume",
+    "The material"
+   ],
+   "x": "Objects weigh more at the poles"
+  },
+  {
+   "he": "מסת ילד 40 ק״ג. על הירח מסתו…",
+   "a": "לא משתנה",
+   "h": "c5ef2a8c",
+   "q": "A child's mass is 40 kg. On the Moon, the child's mass…",
+   "o": [
+    "Does not change",
+    "Gets smaller",
+    "Gets larger",
+    "Becomes zero"
+   ],
+   "x": "Mass does not depend on the place"
+  },
+  {
+   "he": "מה מודדים במאזני כפות ומה במד כוח?",
+   "a": "מסה / משקל",
+   "h": "b308362e",
+   "q": "What does a pan balance measure, and what does a force meter?",
+   "o": [
+    "Mass / weight",
+    "Weight / mass",
+    "Volume / mass",
+    "Mass / volume"
+   ],
+   "x": "Balance → mass; force meter → weight"
+  },
+  {
+   "he": "מה נכון לגבי מסה ומשקל?",
+   "a": "משקל תלוי במקום",
+   "h": "7da1115b",
+   "q": "Which is true about mass and weight?",
+   "o": [
+    "Weight depends on location",
+    "Mass depends on location",
+    "They are the same",
+    "Weight is in kg"
+   ],
+   "x": "Weight changes from place to place; mass does not"
+  },
+  {
+   "he": "לשני גופים אותה מסה, והם באותו מקום. משקלם…",
+   "a": "שווה",
+   "h": "43230491",
+   "q": "Two objects have the same mass and are in the same place. Their weights are…",
+   "o": [
+    "Equal",
+    "Different",
+    "Color-dependent",
+    "Shape-dependent"
+   ],
+   "x": "Same mass in the same place → same weight"
+  },
+  {
+   "he": "\"כמות החומר שבגוף\" – זו ההגדרה של…",
+   "a": "מסה",
+   "h": "75c60a1b",
+   "q": "\"The amount of matter in an object\" – this is the definition of…",
+   "o": [
+    "Mass",
+    "Weight",
+    "Volume",
+    "Shape"
+   ],
+   "x": "Weight is the pull of gravity; mass is the amount of matter"
+  },
+  {
+   "he": "באיזו יחידה מודדים מסה, ובאיזו משקל?",
+   "a": "ק״ג / ניוטון",
+   "h": "f0c09c03",
+   "q": "Which unit is for mass, and which for weight?",
+   "o": [
+    "kg / N",
+    "N / kg",
+    "L / kg",
+    "cm³ / N"
+   ],
+   "x": "Mass in g and kg; weight, a force, in newtons"
+  },
+  {
+   "he": "על שקית אורז כתוב \"1 ק״ג\". מה זה מציין?",
+   "a": "מסה",
+   "h": "ededee06",
+   "q": "A bag of rice says \"1 kg\". What does this show?",
+   "o": [
+    "Mass",
+    "Weight",
+    "Volume",
+    "Price"
+   ],
+   "x": "The kg is a unit of mass",
+   "sc": {
+    "1": "1 kg"
+   }
+  },
+  {
+   "he": "\"אני שוקל 40 ק״ג\" – בלשון מדעית מתכוונים ל…",
+   "a": "מסה",
+   "h": "d908d166",
+   "q": "\"I weigh 40 kg\" – in science, this really means my…",
+   "o": [
+    "Mass",
+    "Weight",
+    "Volume",
+    "Height"
+   ],
+   "x": "The kg is a unit of mass; weight is measured in newtons",
+   "sc": {
+    "1": "40 kg"
+   }
+  },
+  {
+   "he": "שוקלים תיק במאזני כפות בארץ ובירח. התוצאה…",
+   "a": "זהה",
+   "h": "5250011c",
+   "q": "A bag is weighed on a pan balance on Earth and on the Moon. The result is…",
+   "o": [
+    "The same",
+    "Larger on the Moon",
+    "Smaller on the Moon",
+    "Zero on the Moon"
+   ],
+   "x": "A pan balance compares masses, and mass does not change"
+  },
+  {
+   "he": "תולים תיק על מד כוח בארץ ובירח. התוצאה…",
+   "a": "קטנה בירח",
+   "h": "51b25993",
+   "q": "A bag hangs on a force meter on Earth and on the Moon. The reading is…",
+   "o": [
+    "Smaller on the Moon",
+    "The same",
+    "Larger on the Moon",
+    "Zero on the Moon"
+   ],
+   "x": "A force meter measures weight, and the Moon pulls weakly"
+  },
+  {
+   "he": "חללית רחוקה מכל כוכב. מה כמעט אפס אצל האסטרונאוט?",
+   "a": "המשקל",
+   "h": "e21cbf57",
+   "q": "A spaceship is far from any planet or star. What is almost zero for the astronaut?",
+   "o": [
+    "The weight",
+    "The mass",
+    "The volume",
+    "The amount of matter"
+   ],
+   "x": "Nothing pulls on the astronaut – but the matter remains"
+  },
+  {
+   "he": "מה תלוי בכוח המשיכה של המקום?",
+   "a": "המשקל",
+   "h": "e3659935",
+   "q": "What depends on the pull of gravity where you are?",
+   "o": [
+    "The weight",
+    "The mass",
+    "The volume",
+    "The material"
+   ],
+   "x": "Weight = the local pull of gravity on the object"
+  },
+  {
+   "he": "מסת גוף א' היא פי 2 ממסת גוף ב'. באותו מקום, משקלו…",
+   "a": "כפול",
+   "h": "f41bb79e",
+   "q": "Object A's mass is twice object B's. In the same place, A's weight is…",
+   "o": [
+    "Double",
+    "Equal",
+    "Half",
+    "4 times as much"
+   ],
+   "x": "In the same place, weight grows together with mass",
+   "sc": {
+    "2": "2 kg",
+    "3": "1 kg"
+   }
+  },
+  {
+   "he": "מסת ילד 30 ק״ג. בערך מה משקלו בארץ?",
+   "a": "300 ניוטון",
+   "h": "ea930e3b",
+   "q": "A child's mass is 30 kg. About how much does he weigh on Earth?",
+   "o": [
+    "300 N",
+    "30 N",
+    "3 N",
+    "3,000 N"
+   ],
+   "x": "100 g ≈ 1 N, so 30 kg ≈ 300 N",
+   "sc": {
+    "1": "30 kg"
+   }
+  },
+  {
+   "he": "מהי צפיפות של חומר?",
+   "a": "מסה חלקי נפח",
+   "h": "2f3d9e02",
+   "q": "What is the density of a material?",
+   "o": [
+    "Mass divided by volume",
+    "The object's volume",
+    "The object's weight",
+    "The object's shape"
+   ],
+   "x": "Mass per unit volume: how many grams in each cm³"
+  },
+  {
+   "he": "איך מחשבים צפיפות?",
+   "a": "מסה חלקי נפח",
+   "h": "b222f4f8",
+   "q": "How do you calculate density?",
+   "o": [
+    "Mass divided by volume",
+    "Mass times volume",
+    "Volume divided by mass",
+    "Mass plus volume"
+   ],
+   "x": "Divide the mass by the volume – you get g per cm³"
+  },
+  {
+   "he": "גוש: מסה 20 גרם, נפח 10 סמ״ק. מה צפיפותו?",
+   "a": "2 גרם לסמ״ק",
+   "h": "e218cd45",
+   "q": "A block has a mass of 20 g and a volume of 10 cm³. What is its density?",
+   "o": [
+    "2 g/cm³",
+    "200 g/cm³",
+    "30 g/cm³",
+    "0.5 g/cm³"
+   ],
+   "x": "20 ÷ 10 = 2",
+   "sc": {
+    "1": "20 g",
+    "2": "10 cm³"
+   }
+  },
+  {
+   "he": "בורג ברזל: מסה 79 גרם, נפח 10 סמ״ק. מה צפיפותו?",
+   "a": "7.9 גרם לסמ״ק",
+   "h": "48fabfac",
+   "q": "An iron screw: mass 79 g, volume 10 cm³. What is its density?",
+   "o": [
+    "7.9 g/cm³",
+    "790 g/cm³",
+    "89 g/cm³",
+    "69 g/cm³"
+   ],
+   "x": "79 ÷ 10 = 7.9 – that is the density of iron",
+   "sc": {
+    "1": "79 g",
+    "2": "10 cm³"
+   }
+  },
+  {
+   "he": "מסת אבן 60 גרם. המים במשורה עלו מ-50 ל-70 מ״ל. צפיפותה?",
+   "a": "3 גרם לסמ״ק",
+   "h": "6798090c",
+   "q": "A stone's mass is 60 g. In the cylinder, water rose from 50 to 70 mL. Density?",
+   "o": [
+    "3 g/cm³",
+    "1.2 g/cm³",
+    "0.33 g/cm³",
+    "20 g/cm³"
+   ],
+   "x": "Volume 70 − 50 = 20 cm³, and 60 ÷ 20 = 3",
+   "sc": {
+    "2": "50 mL",
+    "3": "70 mL"
+   }
+  },
+  {
+   "he": "צפיפות אלומיניום 2.7 גרם לסמ״ק. מה המסה של 10 סמ״ק?",
+   "a": "27 גרם",
+   "h": "a6ccf1d6",
+   "q": "Aluminum's density is 2.7 g/cm³. What is the mass of 10 cm³?",
+   "o": [
+    "27 g",
+    "2.7 g",
+    "270 g",
+    "12.7 g"
+   ],
+   "x": "Mass = density × volume: 2.7 × 10 = 27",
+   "sc": {
+    "1": "10 cm³"
+   }
+  },
+  {
+   "he": "שתי לבנים מאותו חומר, קטנה וגדולה. מה שווה בהן?",
+   "a": "הצפיפות",
+   "h": "76a7d3e5",
+   "q": "Two bricks of the same material, one small and one big. What is the same?",
+   "o": [
+    "The density",
+    "The mass",
+    "The volume",
+    "The weight"
+   ],
+   "x": "Density depends on the material, not on the object's size"
+  },
+  {
+   "he": "חתכו גוש ברזל לשני חצאים. מה קרה לצפיפות?",
+   "a": "לא השתנתה",
+   "h": "badf4331",
+   "q": "An iron block was cut in half. What happened to its density?",
+   "o": [
+    "It did not change",
+    "It halved",
+    "It doubled",
+    "It became zero"
+   ],
+   "x": "Mass and volume both got smaller – their ratio stayed the same"
+  },
+  {
+   "he": "לפי הטבלה – איזה חומר הכי צפוף?",
+   "a": "ברזל",
+   "h": "66a8587d",
+   "q": "According to the table, which material is the densest?",
+   "o": [
+    "Iron",
+    "Wood",
+    "Water",
+    "All the same"
+   ],
+   "x": "Each cm³ of iron has 7.9 g – the most",
+   "sc": {
+    "0": "Material",
+    "1": "Wood",
+    "2": "Water",
+    "3": "Iron",
+    "4": "Density"
+   }
+  },
+  {
+   "he": "מה המסה של סמ״ק אחד של מים?",
+   "a": "1 גרם",
+   "h": "af8125b7",
+   "q": "What is the mass of one cm³ of water?",
+   "o": [
+    "1 g",
+    "10 g",
+    "1 kg",
+    "100 g"
+   ],
+   "x": "The density of water is 1 g/cm³",
+   "sc": {
+    "1": "1 cm³"
+   }
+  },
+  {
+   "he": "בבקבוק 500 סמ״ק מים. מה מסת המים?",
+   "a": "500 גרם",
+   "h": "68920aea",
+   "q": "A bottle holds 500 cm³ of water. What is the water's mass?",
+   "o": [
+    "500 g",
+    "50 g",
+    "5 kg",
+    "5 g"
+   ],
+   "x": "Each cm³ of water has a mass of 1 g",
+   "sc": {
+    "1": "500 cm³"
+   }
+  },
+  {
+   "he": "קילו נוצות וקילו ברזל – למי נפח גדול יותר?",
+   "a": "לנוצות",
+   "h": "500608e0",
+   "q": "A kilo of feathers and a kilo of iron – which has more volume?",
+   "o": [
+    "The feathers",
+    "The iron",
+    "The same volume",
+    "Neither has volume"
+   ],
+   "x": "Feathers have low density, so the same mass takes more space",
+   "sc": {
+    "1": "1 kg feathers",
+    "2": "1 kg iron"
+   }
+  },
+  {
+   "he": "גוף צף במים כשהצפיפות שלו…",
+   "a": "קטנה משל המים",
+   "h": "fc304e13",
+   "q": "An object floats in water when its density is…",
+   "o": [
+    "Less than water's",
+    "Greater than water's",
+    "Greater than 5",
+    "Equal to zero"
+   ],
+   "x": "A material less dense than the liquid floats on it"
+  },
+  {
+   "he": "צפיפות עץ ⁦0.6⁩ וצפיפות מים ⁦1⁩. מה יקרה לעץ במים?",
+   "a": "יצוף",
+   "h": "e7a56a9b",
+   "q": "Wood's density is 0.6 and water's is 1. What happens to wood in water?",
+   "o": [
+    "It floats",
+    "It sinks",
+    "It stays mid-water",
+    "It dissolves"
+   ],
+   "x": "0.6 is less than 1 – wood is less dense than water",
+   "sc": {
+    "0": "Material",
+    "1": "Wood",
+    "2": "Water",
+    "3": "Iron",
+    "4": "Density"
+   }
+  },
+  {
+   "he": "צפיפות ברזל ⁦7.9⁩. מה יקרה למסמר ברזל במים?",
+   "a": "ישקע",
+   "h": "b7d806a8",
+   "q": "Iron's density is 7.9. What happens to an iron nail in water?",
+   "o": [
+    "It sinks",
+    "It floats",
+    "It stays mid-water",
+    "It dissolves"
+   ],
+   "x": "Iron is almost 8 times as dense as water",
+   "sc": {
+    "0": "Material",
+    "1": "Wood",
+    "2": "Water",
+    "3": "Iron",
+    "4": "Density"
+   }
+  },
+  {
+   "he": "שמן צף על מים. מה זה אומר?",
+   "a": "השמן פחות צפוף",
+   "h": "a932e172",
+   "q": "Oil floats on water. What does that tell us?",
+   "o": [
+    "Oil is less dense",
+    "Oil is denser",
+    "Oil has more mass",
+    "Oil is warmer"
+   ],
+   "x": "A less dense liquid floats on a denser one",
+   "sc": {
+    "1": "Oil",
+    "2": "Water"
+   }
+  },
+  {
+   "he": "קרח צף על מים. למה?",
+   "a": "הקרח פחות צפוף",
+   "h": "91ac72b6",
+   "q": "Ice floats on water. Why?",
+   "o": [
+    "Ice is less dense",
+    "Ice is denser",
+    "Ice is warm",
+    "Ice contains salt"
+   ],
+   "x": "When water freezes, its volume grows and its density drops"
+  },
+  {
+   "he": "אונייה מפלדה צפה, אבל מסמר פלדה שוקע. למה?",
+   "a": "האוויר שבתוכה",
+   "h": "6037d2e6",
+   "q": "A steel ship floats, but a steel nail sinks. Why?",
+   "o": [
+    "The air inside it",
+    "A different steel",
+    "The ship is small",
+    "The nail is warm"
+   ],
+   "x": "The ship with the air inside is less dense than water"
+  },
+  {
+   "he": "בים המלח צפים בקלות. למה?",
+   "a": "מים מלוחים צפופים",
+   "h": "a2c7bfdf",
+   "q": "People float easily in the Dead Sea. Why?",
+   "o": [
+    "Salt water is denser",
+    "The water is warm",
+    "The sea is shallow",
+    "There are no waves"
+   ],
+   "x": "Salt dissolved in the water increases its density"
+  },
+  {
+   "he": "ביצה שוקעת במים מתוקים וצפה במים מלוחים. למה?",
+   "a": "מים מלוחים צפופים",
+   "h": "1a51b048",
+   "q": "An egg sinks in fresh water but floats in salt water. Why?",
+   "o": [
+    "Salt water is denser",
+    "The egg shrank",
+    "Salt water is warm",
+    "The egg got cooked"
+   ],
+   "x": "The egg's density is between fresh and salt water's"
+  },
+  {
+   "he": "מוזגים לכוס דבש, מים ושמן. מה יהיה למטה?",
+   "a": "הדבש",
+   "h": "4155b302",
+   "q": "Honey, water and oil are poured into a glass. What will be at the bottom?",
+   "o": [
+    "The honey",
+    "The water",
+    "The oil",
+    "It all mixes"
+   ],
+   "x": "The densest liquid sinks to the bottom",
+   "sc": {
+    "0": "Liquid",
+    "1": "Honey",
+    "2": "Water",
+    "3": "Oil",
+    "4": "Density"
+   }
+  },
+  {
+   "he": "גוף שצפיפותו בדיוק כמו של המים. מה יקרה לו במים?",
+   "a": "ירחף בתוך המים",
+   "h": "bd01a5d6",
+   "q": "An object's density is exactly the same as water's. What happens to it in water?",
+   "o": [
+    "It stays suspended",
+    "It floats up",
+    "It sinks down",
+    "It dissolves"
+   ],
+   "x": "Equal densities – it neither rises nor sinks",
+   "sc": {
+    "0": "Object",
+    "2": "Water"
+   }
+  },
+  {
+   "he": "בלון הליום עולה באוויר. למה?",
+   "a": "הליום פחות צפוף",
+   "h": "d37f8fc7",
+   "q": "A helium balloon rises in the air. Why?",
+   "o": [
+    "Helium is less dense",
+    "Helium is very hot",
+    "It holds water",
+    "The balloon is heavy"
+   ],
+   "x": "Helium is less dense than air – so the balloon floats in it"
+  },
+  {
+   "he": "איזה גוף ישקע במים? (הצפיפות בגרם לסמ״ק)",
+   "a": "אבן 2.5",
+   "h": "467888b4",
+   "q": "Which of these objects will sink in water? (density in g/cm³)",
+   "o": [
+    "Stone 2.5",
+    "Cork 0.2",
+    "Ice 0.9",
+    "Wood 0.6"
+   ],
+   "x": "Only the stone is denser than water, which is 1"
+  },
+  {
+   "he": "באיזה מכשיר מודדים את אורך הספר?",
+   "a": "סרגל",
+   "h": "2b76be03",
+   "q": "Which instrument do you use to measure a book's length?",
+   "o": [
+    "Ruler",
+    "Graduated cylinder",
+    "Thermometer",
+    "Force meter"
+   ],
+   "x": "A ruler measures length in cm and mm"
+  },
+  {
+   "he": "באיזה מכשיר מודדים את הטמפרטורה של התה?",
+   "a": "מדחום",
+   "h": "84c94866",
+   "q": "Which instrument measures the temperature of tea?",
+   "o": [
+    "Thermometer",
+    "Ruler",
+    "Balance",
+    "Stopwatch"
+   ],
+   "x": "A thermometer measures temperature in degrees Celsius"
+  },
+  {
+   "he": "באיזה מכשיר מודדים כמה זמן נמשכה ריצה?",
+   "a": "שעון עצר",
+   "h": "68cba63a",
+   "q": "Which instrument measures how long a run took?",
+   "o": [
+    "Stopwatch",
+    "Thermometer",
+    "Force meter",
+    "Ruler"
+   ],
+   "x": "A stopwatch measures time in seconds and minutes"
+  },
+  {
+   "he": "מה מודדים במשורה?",
+   "a": "נפח נוזל",
+   "h": "20abc31b",
+   "q": "What does a graduated cylinder measure?",
+   "o": [
+    "Liquid volume",
+    "Mass",
+    "Length",
+    "Temperature"
+   ],
+   "x": "A graduated cylinder has mL markings"
+  },
+  {
+   "he": "מה מודדים במד כוח?",
+   "a": "משקל",
+   "h": "53295cd9",
+   "q": "What does a force meter measure?",
+   "o": [
+    "Weight",
+    "Mass",
+    "Volume",
+    "Length"
+   ],
+   "x": "Weight is a force, measured in newtons"
+  },
+  {
+   "he": "רוצים לחשב נפח של קובייה. באיזה מכשיר נמדוד?",
+   "a": "סרגל",
+   "h": "2d1509a8",
+   "q": "You want to calculate a cube's volume. Which instrument will you use?",
+   "o": [
+    "Ruler",
+    "Thermometer",
+    "Force meter",
+    "Stopwatch"
+   ],
+   "x": "Measure the edges and multiply them"
+  },
+  {
+   "he": "מדחום מראה 25°C. מה נמדד?",
+   "a": "טמפרטורה",
+   "h": "ce8bdb9f",
+   "q": "A thermometer shows 25°C. What is being measured?",
+   "o": [
+    "Temperature",
+    "Time",
+    "Weight",
+    "Volume"
+   ],
+   "x": "°C = degrees Celsius, a unit of temperature"
+  },
+  {
+   "he": "איזו יחידה מתאימה לנפח של בריכה?",
+   "a": "מ״ק",
+   "h": "2c4c034a",
+   "q": "Which unit suits the volume of a swimming pool?",
+   "o": [
+    "m³",
+    "mL",
+    "cm³",
+    "mm"
+   ],
+   "x": "A pool is huge – cubic meters"
+  },
+  {
+   "he": "איזו יחידה מתאימה לאורך של נמלה?",
+   "a": "מ״מ",
+   "h": "8f79436e",
+   "q": "Which unit suits the length of an ant?",
+   "o": [
+    "mm",
+    "m",
+    "km",
+    "kg"
+   ],
+   "x": "An ant is tiny – a few millimeters"
+  },
+  {
+   "he": "מה מהבאים זוג נכון של מכשיר ומה שהוא מודד?",
+   "a": "מדחום – טמפרטורה",
+   "h": "a7021104",
+   "q": "Which pair of instrument and what it measures is correct?",
+   "o": [
+    "Thermometer – temperature",
+    "Graduated cylinder – mass",
+    "Ruler – volume",
+    "Balance – length"
+   ],
+   "x": "A thermometer measures temperature"
+  },
+  {
+   "he": "1 מטר = ? ס״מ",
+   "a": "100 ס״מ",
+   "h": "5147ed88",
+   "q": "1 m = ? cm",
+   "o": [
+    "100 cm",
+    "10 cm",
+    "1,000 cm",
+    "60 cm"
+   ],
+   "x": "There are 100 centimeters in a meter",
+   "sc": {
+    "1": "1 m",
+    "2": "= ? cm"
+   }
+  },
+  {
+   "he": "1 ס״מ = ? מ״מ",
+   "a": "10 מ״מ",
+   "h": "9c6b65e2",
+   "q": "1 cm = ? mm",
+   "o": [
+    "10 mm",
+    "100 mm",
+    "1,000 mm",
+    "1 mm"
+   ],
+   "x": "There are 10 millimeters in a centimeter",
+   "sc": {
+    "1": "1 cm",
+    "2": "= ? mm"
+   }
+  },
+  {
+   "he": "3.5 מטר = ? ס״מ",
+   "a": "350 ס״מ",
+   "h": "f0d3d03b",
+   "q": "3.5 m = ? cm",
+   "o": [
+    "350 cm",
+    "35 cm",
+    "3,500 cm",
+    "305 cm"
+   ],
+   "x": "⁦3.5×100=350⁩",
+   "sc": {
+    "1": "3.5 m",
+    "2": "= ? cm"
+   }
+  },
+  {
+   "he": "250 ס״מ = ? מטר",
+   "a": "2.5 מטר",
+   "h": "6f54c229",
+   "q": "250 cm = ? m",
+   "o": [
+    "2.5 m",
+    "25 m",
+    "0.25 m",
+    "250 m"
+   ],
+   "x": "250 ÷ 100 = 2.5",
+   "sc": {
+    "1": "250 cm",
+    "2": "= ? m"
+   }
+  },
+  {
+   "he": "45 מ״מ = ? ס״מ",
+   "a": "4.5 ס״מ",
+   "h": "dc13b746",
+   "q": "45 mm = ? cm",
+   "o": [
+    "4.5 cm",
+    "45 cm",
+    "450 cm",
+    "0.45 cm"
+   ],
+   "x": "45 ÷ 10 = 4.5",
+   "sc": {
+    "1": "45 mm",
+    "2": "= ? cm"
+   }
+  },
+  {
+   "he": "1 מ״ק = ? ליטר",
+   "a": "1000 ליטר",
+   "h": "0932dbc3",
+   "q": "1 m³ = ? L",
+   "o": [
+    "1,000 L",
+    "100 L",
+    "10 L",
+    "1 L"
+   ],
+   "x": "100 × 100 × 100 cm³ = 1,000,000 cm³ = 1,000 L",
+   "sc": {
+    "1": "1 m³",
+    "2": "= ? L"
+   }
+  },
+  {
+   "he": "0.25 ק״ג = ? גרם",
+   "a": "250 גרם",
+   "h": "c875a947",
+   "q": "0.25 kg = ? g",
+   "o": [
+    "250 g",
+    "25 g",
+    "2,500 g",
+    "0.25 g"
+   ],
+   "x": "⁦0.25×1000=250⁩",
+   "sc": {
+    "1": "0.25 kg",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "3500 ק״ג = ? טון",
+   "a": "3.5 טון",
+   "h": "518060a4",
+   "q": "3,500 kg = ? t",
+   "o": [
+    "3.5 t",
+    "35 t",
+    "350 t",
+    "0.35 t"
+   ],
+   "x": "3,500 ÷ 1,000 = 3.5",
+   "sc": {
+    "1": "3,500 kg",
+    "2": "= ? t"
+   }
+  },
+  {
+   "he": "2.5 גרם = ? מ״ג",
+   "a": "2500 מ״ג",
+   "h": "2f929316",
+   "q": "2.5 g = ? mg",
+   "o": [
+    "2,500 mg",
+    "250 mg",
+    "25 mg",
+    "25,000 mg"
+   ],
+   "x": "1 g = 1,000 mg, 2.5 × 1,000 = 2,500",
+   "sc": {
+    "1": "2.5 g",
+    "2": "= ? mg"
+   }
+  },
+  {
+   "he": "בכד 1.2 ליטר. מוסיפים 300 מ״ל. כמה יש עכשיו?",
+   "a": "1.5 ליטר",
+   "h": "6e7e04c9",
+   "q": "A jug holds 1.2 L. You add 300 mL. How much is there now?",
+   "o": [
+    "1.5 L",
+    "301.2 L",
+    "4.2 L",
+    "1.23 L"
+   ],
+   "x": "1.2 L = 1,200 mL, 1,200 + 300 = 1,500",
+   "sc": {
+    "1": "1.2 L",
+    "2": "+ 300 mL"
+   }
+  },
+  {
+   "he": "2 דקות = ? שניות",
+   "a": "120 שניות",
+   "h": "44043936",
+   "q": "2 minutes = ? seconds",
+   "o": [
+    "120 seconds",
+    "200 seconds",
+    "60 seconds",
+    "100 seconds"
+   ],
+   "x": "A minute has 60 seconds, 2 × 60 = 120",
+   "sc": {
+    "1": "2 min",
+    "2": "= ? s"
+   }
+  },
+  {
+   "he": "מה הארוך ביותר מבין אלה?",
+   "a": "1.2 מטר",
+   "h": "6fd274f6",
+   "q": "Which of these is the longest?",
+   "o": [
+    "1.2 m",
+    "95 cm",
+    "1,100 mm",
+    "0.9 m"
+   ],
+   "x": "1.2 m = 120 cm – the most",
+   "sc": {
+    "0": "95 cm",
+    "1": "0.9 m",
+    "2": "1.2 m",
+    "3": "1,100 mm"
+   }
+  },
+  {
+   "he": "כמה כוסות של 250 מ״ל ממלאות בקבוק של 2 ליטר?",
+   "a": "⁦8⁩",
+   "h": "702f1163",
+   "q": "How many 250 mL cups fill a 2 L bottle?",
+   "o": [
+    "⁦8⁩",
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦10⁩"
+   ],
+   "x": "2 L = 2,000 mL, 2,000 ÷ 250 = 8",
+   "sc": {
+    "1": "2 L",
+    "2": "250 mL per cup"
+   }
+  },
+  {
+   "he": "למי יש צורה קבועה?",
+   "a": "מוצק",
+   "h": "6404872f",
+   "q": "Which state of matter has a fixed shape?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "Liquid and gas"
+   ],
+   "x": "A solid keeps its shape in any container"
+  },
+  {
+   "he": "מה נכון לגבי הצורה והנפח של נוזל?",
+   "a": "רק הנפח קבוע",
+   "h": "de417d65",
+   "q": "What is true about a liquid's shape and volume?",
+   "o": [
+    "Only volume is fixed",
+    "Both are fixed",
+    "Only shape is fixed",
+    "Both change"
+   ],
+   "x": "A liquid takes the container's shape but keeps its volume"
+  },
+  {
+   "he": "אילו שני מצבי צבירה יכולים לזרום?",
+   "a": "נוזל וגז",
+   "h": "db988559",
+   "q": "Which two states of matter can flow?",
+   "o": [
+    "Liquid and gas",
+    "Solid and gas",
+    "None of them",
+    "Solid and liquid"
+   ],
+   "x": "A liquid pours and a gas spreads – both flow"
+  },
+  {
+   "he": "מה מהבאים נוזל בטמפרטורת החדר?",
+   "a": "שמן",
+   "h": "83a4d647",
+   "q": "Which of these is a liquid at room temperature?",
+   "o": [
+    "Oil",
+    "Salt",
+    "Iron",
+    "Oxygen"
+   ],
+   "x": "Salt and iron are solids; oxygen is a gas"
+  },
+  {
+   "he": "מה מהבאים גז בטמפרטורת החדר?",
+   "a": "חמצן",
+   "h": "93ea75d5",
+   "q": "Which of these is a gas at room temperature?",
+   "o": [
+    "Oxygen",
+    "Oil",
+    "Sugar",
+    "Wood"
+   ],
+   "x": "Oxygen is a gas found in the air"
+  },
+  {
+   "he": "בציור: חלקיקים צפופים בשורות מסודרות. איזה מצב צבירה?",
+   "a": "מוצק",
+   "h": "72817785",
+   "q": "In the picture: particles packed in neat rows. Which state of matter?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "Can't tell"
+   ],
+   "x": "In a solid, the particles are close together and ordered"
+  },
+  {
+   "he": "בציור: חלקיקים קרובים אבל לא מסודרים. איזה מצב צבירה?",
+   "a": "נוזל",
+   "h": "a70c8818",
+   "q": "In the picture: particles close together but not in order. Which state of matter?",
+   "o": [
+    "Liquid",
+    "Solid",
+    "Gas",
+    "Can't tell"
+   ],
+   "x": "In a liquid, particles are close and move past each other"
+  },
+  {
+   "he": "בציור: מעט חלקיקים, רחוקים זה מזה. איזה מצב צבירה?",
+   "a": "גז",
+   "h": "48633a5d",
+   "q": "In the picture: a few particles, far apart. Which state of matter?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "Can't tell"
+   ],
+   "x": "In a gas, particles are far apart and move fast in all directions"
+  },
+  {
+   "he": "למה מוצק שומר על צורתו?",
+   "a": "חלקיקיו קבועים במקומם",
+   "h": "7ad7910c",
+   "q": "Why does a solid keep its shape?",
+   "o": [
+    "Its particles are fixed",
+    "It has no particles",
+    "Its particles spread out",
+    "It is always cold"
+   ],
+   "x": "The particles are close together and only vibrate in place"
+  },
+  {
+   "he": "למה כמעט אי אפשר לדחוס נוזל?",
+   "a": "חלקיקיו צפופים",
+   "h": "22406739",
+   "q": "Why is a liquid almost impossible to compress?",
+   "o": [
+    "Its particles are close",
+    "It has no mass",
+    "It flows",
+    "It is transparent"
+   ],
+   "x": "There is almost no space between the particles"
+  },
+  {
+   "he": "מים, קרח ואדים – מה משותף להם?",
+   "a": "אותו חומר",
+   "h": "4123ad67",
+   "q": "Water, ice and steam – what do they have in common?",
+   "o": [
+    "The same substance",
+    "The same state",
+    "The same shape",
+    "The same volume"
+   ],
+   "x": "All three are water, in different states of matter"
+  },
+  {
+   "he": "בנר דולק, השעווה שליד הפתיל נעשית נוזלית. איך נקרא התהליך?",
+   "a": "התכה",
+   "h": "31787f76",
+   "q": "In a burning candle, the wax near the wick turns liquid. What is this process?",
+   "o": [
+    "Melting",
+    "Freezing",
+    "Evaporation",
+    "Condensation"
+   ],
+   "x": "Melting: from solid to liquid"
+  },
+  {
+   "he": "מים הופכים לקרח במקפיא. איך נקרא התהליך?",
+   "a": "קיפאון",
+   "h": "36f7d6af",
+   "q": "Water turns into ice below 0°C. What is this process?",
+   "o": [
+    "Freezing",
+    "Melting",
+    "Evaporation",
+    "Condensation"
+   ],
+   "x": "Freezing: from liquid to solid"
+  },
+  {
+   "he": "שלולית התייבשה בשמש. איזה תהליך קרה?",
+   "a": "אידוי",
+   "h": "62d55bbe",
+   "q": "A puddle dried up in the sun. What process happened?",
+   "o": [
+    "Evaporation",
+    "Condensation",
+    "Freezing",
+    "Melting"
+   ],
+   "x": "Evaporation: the water turned into a gas – water vapor"
+  },
+  {
+   "he": "טיפות מופיעות מבחוץ על כוס קרה. איזה תהליך?",
+   "a": "עיבוי",
+   "h": "86ce23d7",
+   "q": "Drops appear on the outside of a cold glass. Which process is it?",
+   "o": [
+    "Condensation",
+    "Evaporation",
+    "Melting",
+    "Freezing"
+   ],
+   "x": "Water vapor from the air cooled and turned into drops"
+  },
+  {
+   "he": "עיבוי הוא מעבר מ…",
+   "a": "גז לנוזל",
+   "h": "23dc3c9d",
+   "q": "Condensation is a change from…",
+   "o": [
+    "Gas to liquid",
+    "Liquid to gas",
+    "Solid to liquid",
+    "Liquid to solid"
+   ],
+   "x": "Condensation is the opposite of evaporation"
+  },
+  {
+   "he": "התכה היא מעבר מ…",
+   "a": "מוצק לנוזל",
+   "h": "7ab87a83",
+   "q": "Melting is a change from…",
+   "o": [
+    "Solid to liquid",
+    "Liquid to solid",
+    "Liquid to gas",
+    "Gas to liquid"
+   ],
+   "x": "For example, ice melting into water"
+  },
+  {
+   "he": "שוקולד נמס ביד. באיזה מצב הוא עכשיו?",
+   "a": "נוזל",
+   "h": "83f52cc4",
+   "q": "Chocolate melted in a hand. What state is it in now?",
+   "o": [
+    "Liquid",
+    "Solid",
+    "Gas",
+    "Powder"
+   ],
+   "x": "The heat of the hand melted it"
+  },
+  {
+   "he": "מה צריך לעשות כדי להמיס קרח?",
+   "a": "לחמם אותו",
+   "h": "dc017ae8",
+   "q": "What must you do to melt ice?",
+   "o": [
+    "Heat it",
+    "Cool it",
+    "Compress it",
+    "Weigh it"
+   ],
+   "x": "Melting and evaporation happen when something is heated"
+  },
+  {
+   "he": "קרח נמס למים. מה לא השתנה?",
+   "a": "המסה",
+   "h": "ca9562e8",
+   "q": "Ice melted into water. What did not change?",
+   "o": [
+    "The mass",
+    "The state of matter",
+    "The shape",
+    "The hardness"
+   ],
+   "x": "A change of state does not change the amount of matter"
+  },
+  {
+   "he": "האם במעבר בין מצבי צבירה נוצר חומר חדש?",
+   "a": "לא, אותו חומר",
+   "h": "8fe6d3b9",
+   "q": "Does a change of state make a new substance?",
+   "o": [
+    "No, the same substance",
+    "Yes, always",
+    "Only in melting",
+    "Only in evaporation"
+   ],
+   "x": "It is a physical change: water stays water"
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה הבלתי תלוי?",
+   "a": "כמות המים",
+   "h": "65a1316a",
+   "q": "In the research question on the card, what is the independent variable?",
+   "o": [
+    "Amount of water",
+    "Plant height",
+    "Type of plant",
+    "Type of soil"
+   ],
+   "x": "It is what the researcher changes on purpose",
+   "sc": {
+    "1": "How does water",
+    "2": "amount affect",
+    "3": "plant height?"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה התלוי?",
+   "a": "גובה הצמח",
+   "h": "a98b5027",
+   "q": "In the research question on the card, what is the dependent variable?",
+   "o": [
+    "Plant height",
+    "Amount of water",
+    "Type of plant",
+    "Type of soil"
+   ],
+   "x": "It is what you measure – the result",
+   "sc": {
+    "1": "How does water",
+    "2": "amount affect",
+    "3": "plant height?"
+   }
+  },
+  {
+   "he": "המשתנה שהחוקר משנה בכוונה נקרא משתנה…",
+   "a": "בלתי תלוי",
+   "h": "fd8841e7",
+   "q": "The variable a researcher changes on purpose is the ___ variable.",
+   "o": [
+    "Independent",
+    "Dependent",
+    "Controlled",
+    "Predicted"
+   ],
+   "x": "It does not depend on the experiment – the researcher chooses it"
+  },
+  {
+   "he": "איך נקרא המשתנה שמודדים בניסוי?",
+   "a": "המשתנה התלוי",
+   "h": "1d2f4934",
+   "q": "What is the variable you measure in an experiment called?",
+   "o": [
+    "The dependent variable",
+    "The independent variable",
+    "The controlled variables",
+    "The hypothesis"
+   ],
+   "x": "The result \"depends\" on what we changed"
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה התלוי?",
+   "a": "גובה הקפיצה",
+   "h": "c3677c28",
+   "q": "In the research question on the card, what is the dependent variable?",
+   "o": [
+    "Bounce height",
+    "Drop height",
+    "Type of ball",
+    "Type of floor"
+   ],
+   "x": "You measure how high the ball bounces",
+   "sc": {
+    "1": "Effect of drop",
+    "2": "height on",
+    "3": "bounce height"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה הבלתי תלוי?",
+   "a": "טמפרטורת המים",
+   "h": "71f79d74",
+   "q": "In the research question on the card, what is the independent variable?",
+   "o": [
+    "Water temperature",
+    "Dissolving time",
+    "Amount of sugar",
+    "Amount of water"
+   ],
+   "x": "The researcher picks water at different temperatures",
+   "sc": {
+    "1": "Effect of water",
+    "2": "temperature on",
+    "3": "dissolving time"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה התלוי?",
+   "a": "זמן ההתכה",
+   "h": "d8858e7d",
+   "q": "In the research question on the card, what is the dependent variable?",
+   "o": [
+    "Melting time",
+    "Ice size",
+    "Type of container",
+    "Room temperature"
+   ],
+   "x": "You measure how long the ice takes to melt",
+   "sc": {
+    "1": "Effect of ice",
+    "2": "size on",
+    "3": "melting time"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה הבלתי תלוי?",
+   "a": "מספר המשקולות",
+   "h": "af3a49de",
+   "q": "In the research question on the card, what is the independent variable?",
+   "o": [
+    "Number of weights",
+    "Spring length",
+    "Type of spring",
+    "Experiment location"
+   ],
+   "x": "The researcher adds weights and measures the spring's length",
+   "sc": {
+    "1": "Effect of number",
+    "2": "of weights on",
+    "3": "spring length"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה התלוי?",
+   "a": "מהירות הייבוש",
+   "h": "5362550f",
+   "q": "In the research question on the card, what is the dependent variable?",
+   "o": [
+    "Drying speed",
+    "Type of fabric",
+    "Fabric size",
+    "Amount of water"
+   ],
+   "x": "You measure how fast the fabric dries",
+   "sc": {
+    "1": "Effect of fabric",
+    "2": "type on drying",
+    "3": "speed"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה הבלתי תלוי?",
+   "a": "כמות המלח",
+   "h": "9a259654",
+   "q": "In the research question on the card, what is the independent variable?",
+   "o": [
+    "Amount of salt",
+    "Boiling time",
+    "Amount of water",
+    "Type of pot"
+   ],
+   "x": "The researcher changes how much salt is added",
+   "sc": {
+    "1": "Effect of salt",
+    "2": "amount on",
+    "3": "boiling time"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה צריך להישאר קבוע?",
+   "a": "סוג הצמח",
+   "h": "95937cf2",
+   "q": "In the research question on the card, what must stay the same?",
+   "o": [
+    "Type of plant",
+    "Amount of water",
+    "Plant height",
+    "The result"
+   ],
+   "x": "All the plants are the same type – only the water changes",
+   "sc": {
+    "1": "How does water",
+    "2": "amount affect",
+    "3": "plant height?"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – איזה משתנה נשמור קבוע?",
+   "a": "כמות הסוכר",
+   "h": "943173b3",
+   "q": "In the research question on the card, which variable do we keep the same?",
+   "o": [
+    "Amount of sugar",
+    "Water temperature",
+    "Dissolving time",
+    "None needed"
+   ],
+   "x": "Every cup gets the same amount of sugar",
+   "sc": {
+    "1": "Effect of water",
+    "2": "temperature on",
+    "3": "dissolving time"
+   }
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה צריך להישאר קבוע?",
+   "a": "סוג הכדור",
+   "h": "bd692a9c",
+   "q": "In the research question on the card, what must stay the same?",
+   "o": [
+    "Type of ball",
+    "Drop height",
+    "Bounce height",
+    "Nothing"
+   ],
+   "x": "The same ball for every drop",
+   "sc": {
+    "1": "Effect of drop",
+    "2": "height on",
+    "3": "bounce height"
+   }
+  },
+  {
+   "he": "למה שומרים על משתנים קבועים?",
+   "a": "להשוואה הוגנת",
+   "h": "475b7d00",
+   "q": "Why do we keep some variables the same?",
+   "o": [
+    "For a fair comparison",
+    "To save time",
+    "To change the result",
+    "Because it is easier"
+   ],
+   "x": "Then only the independent variable affects the result"
+  },
+  {
+   "he": "בניסוי טוב, כמה משתנים בלתי תלויים משנים בכל פעם?",
+   "a": "רק אחד",
+   "h": "0eedcb88",
+   "q": "In a good experiment, how many independent variables are changed at a time?",
+   "o": [
+    "Only one",
+    "Two",
+    "Three",
+    "Any number"
+   ],
+   "x": "That way you know exactly what affected the result"
+  },
+  {
+   "he": "שינו גם את כמות המים וגם את האור. מה הבעיה?",
+   "a": "הסיבה לא ברורה",
+   "h": "83141d0b",
+   "q": "Both the amount of water and the light were changed. What is the problem?",
+   "o": [
+    "The cause is unclear",
+    "It is too short",
+    "No dependent variable",
+    "Nothing to measure"
+   ],
+   "x": "We won't know if the water or the light had the effect"
+  },
+  {
+   "he": "בשאלה \"מה ההשפעה של א' על ב'?\" – מהו א'?",
+   "a": "המשתנה הבלתי תלוי",
+   "h": "386c507b",
+   "q": "In \"What effect does A have on B?\", what is A?",
+   "o": [
+    "The independent variable",
+    "The dependent variable",
+    "A controlled variable",
+    "The result"
+   ],
+   "x": "A is what has the effect – what you change",
+   "sc": {
+    "0": "What effect does",
+    "1": "A have on B?"
+   }
+  },
+  {
+   "he": "בשאלה \"מה ההשפעה של א' על ב'?\" – מהו ב'?",
+   "a": "המשתנה התלוי",
+   "h": "3d36a919",
+   "q": "In \"What effect does A have on B?\", what is B?",
+   "o": [
+    "The dependent variable",
+    "The independent variable",
+    "A controlled variable",
+    "The hypothesis"
+   ],
+   "x": "B is what is affected – what you measure",
+   "sc": {
+    "0": "What effect does",
+    "1": "A have on B?"
+   }
+  },
+  {
+   "he": "האם זו שאלת חקר טובה?",
+   "a": "לא, אין משתנים",
+   "h": "8f804506",
+   "q": "Is this a good research question?",
+   "o": [
+    "No, no variables",
+    "Yes, excellent",
+    "Yes, has a hypothesis",
+    "No, too long"
+   ],
+   "x": "Nothing is changed and nothing is measured",
+   "sc": {
+    "1": "Is it pretty?"
+   }
+  },
+  {
+   "he": "מה צריך להופיע בשאלת חקר טובה?",
+   "a": "שני משתנים",
+   "h": "b9e953df",
+   "q": "What should a good research question include?",
+   "o": [
+    "Two variables",
+    "Only the result",
+    "Only the hypothesis",
+    "The researcher's name"
+   ],
+   "x": "What you change, and what it affects"
+  },
+  {
+   "he": "מה חסר בראש רשימת השלבים?",
+   "a": "שאלת חקר",
+   "h": "dba19dae",
+   "q": "What is missing at the top of the list of steps?",
+   "o": [
+    "Research question",
+    "Conclusion",
+    "Results",
+    "Procedure"
+   ],
+   "x": "You always start with the question you want to explore",
+   "sc": {
+    "1": "Hypothesis",
+    "2": "Procedure",
+    "3": "Results"
+   }
+  },
+  {
+   "he": "מה חסר ברשימת השלבים?",
+   "a": "מהלך הניסוי",
+   "h": "3705f591",
+   "q": "What is missing from the list of steps?",
+   "o": [
+    "Procedure",
+    "Research question",
+    "Hypothesis",
+    "Conclusion"
+   ],
+   "x": "After the hypothesis, you plan and carry out the experiment",
+   "sc": {
+    "0": "Question",
+    "1": "Hypothesis",
+    "3": "Results"
+   }
+  },
+  {
+   "he": "מה בא בסוף, אחרי התוצאות?",
+   "a": "מסקנה",
+   "h": "96717488",
+   "q": "What comes last, after the results?",
+   "o": [
+    "Conclusion",
+    "Hypothesis",
+    "Research question",
+    "Procedure"
+   ],
+   "x": "From the results, you draw a conclusion",
+   "sc": {
+    "0": "Results"
+   }
+  },
+  {
+   "he": "את המשפט בכרטיס כתבו לפני הניסוי. איך נקרא השלב?",
+   "a": "השערה",
+   "h": "486b66ad",
+   "q": "The sentence on the card was written before the experiment. What is this step called?",
+   "o": [
+    "Hypothesis",
+    "Conclusion",
+    "Result",
+    "Research question"
+   ],
+   "x": "A hypothesis: what we think will happen",
+   "sc": {
+    "1": "More water makes",
+    "2": "plants taller"
+   }
+  },
+  {
+   "he": "מה כתוב בכרטיס?",
+   "a": "שאלת חקר",
+   "h": "c3b95f72",
+   "q": "What does the card show?",
+   "o": [
+    "Research question",
+    "Hypothesis",
+    "Conclusion",
+    "Result"
+   ],
+   "x": "A question like \"How does … affect …?\"",
+   "sc": {
+    "1": "How does light",
+    "2": "affect plants?"
+   }
+  },
+  {
+   "he": "מה כתוב בכרטיס?",
+   "a": "תוצאה",
+   "h": "a24ac094",
+   "q": "What does the card show?",
+   "o": [
+    "Result",
+    "Hypothesis",
+    "Research question",
+    "Controlled variable"
+   ],
+   "x": "It is what was actually measured in the experiment",
+   "sc": {
+    "1": "Height after",
+    "2": "a week: 12 cm"
+   }
+  },
+  {
+   "he": "מהי השערה?",
+   "a": "תשובה משוערת לשאלה",
+   "h": "201d9411",
+   "q": "What is a hypothesis?",
+   "o": [
+    "A predicted answer",
+    "The measured result",
+    "A list of tools",
+    "The experiment's summary"
+   ],
+   "x": "A reasoned guess that is tested in an experiment"
+  },
+  {
+   "he": "מה נכון לגבי השערה טובה?",
+   "a": "אפשר לבדוק אותה",
+   "h": "3f877419",
+   "q": "What is true about a good hypothesis?",
+   "o": [
+    "It can be tested",
+    "It is always right",
+    "It has no variables",
+    "It is written last"
+   ],
+   "x": "A hypothesis is tested in an experiment"
+  },
+  {
+   "he": "התוצאות לא התאימו להשערה. מה עושים?",
+   "a": "דוחים את ההשערה",
+   "h": "06297179",
+   "q": "The results did not match the hypothesis. What do you do?",
+   "o": [
+    "Reject the hypothesis",
+    "Change the results",
+    "Delete the measurements",
+    "Hide the experiment"
+   ],
+   "x": "A hypothesis can turn out wrong – that is fine"
+  },
+  {
+   "he": "מה כותבים בשלב \"מהלך הניסוי\"?",
+   "a": "פעולות, כלים וחומרים",
+   "h": "b3bfd629",
+   "q": "What do you write in the \"Procedure\" step?",
+   "o": [
+    "Steps, tools and materials",
+    "The hypothesis",
+    "The conclusion",
+    "The research question"
+   ],
+   "x": "What you do, step by step"
+  },
+  {
+   "he": "למה חוזרים על הניסוי כמה פעמים?",
+   "a": "תוצאה אמינה יותר",
+   "h": "646b5b27",
+   "q": "Why repeat an experiment several times?",
+   "o": [
+    "For more reliable results",
+    "To change the question",
+    "To swap a variable",
+    "To shorten the experiment"
+   ],
+   "x": "A single measurement can come out wrong by mistake"
+  },
+  {
+   "he": "חזרו על המדידה 3 פעמים. מה הממוצע?",
+   "a": "11 שניות",
+   "h": "cf35b697",
+   "q": "The measurement was repeated 3 times. What is the mean?",
+   "o": [
+    "11 seconds",
+    "33 seconds",
+    "12 seconds",
+    "10 seconds"
+   ],
+   "x": "10 + 12 + 11 = 33, 33 ÷ 3 = 11",
+   "sc": {
+    "0": "Trial",
+    "4": "Seconds"
+   }
+  },
+  {
+   "he": "בודקים דשן. עציץ אחד לא מקבל דשן. הוא…",
+   "a": "קבוצת ביקורת",
+   "h": "2198246d",
+   "q": "Testing a fertilizer. One pot gets no fertilizer. It is…",
+   "o": [
+    "A control group",
+    "A dependent variable",
+    "A hypothesis",
+    "A conclusion"
+   ],
+   "x": "We compare the fertilized pot to it",
+   "sc": {
+    "2": "Fertilizer",
+    "3": "None"
+   }
+  },
+  {
+   "he": "למה צריך קבוצת ביקורת?",
+   "a": "כדי להשוות אליה",
+   "h": "c6651333",
+   "q": "Why do we need a control group?",
+   "o": [
+    "To compare with it",
+    "To save fertilizer",
+    "To save time",
+    "To change a variable"
+   ],
+   "x": "It shows what happens without the change",
+   "sc": {
+    "2": "Fertilizer",
+    "3": "None"
+   }
+  },
+  {
+   "he": "לפי ההשערה בכרטיס, באיזו כוס הסוכר יימס ראשון?",
+   "a": "במים של 60°C",
+   "h": "09aca1be",
+   "q": "According to the hypothesis on the card, in which cup will sugar dissolve first?",
+   "o": [
+    "In 60°C water",
+    "In 20°C water",
+    "In 40°C water",
+    "All at once"
+   ],
+   "x": "The hottest water – according to the hypothesis",
+   "sc": {
+    "0": "In hotter water,",
+    "1": "sugar dissolves",
+    "2": "faster"
+   }
+  },
+  {
+   "he": "לפי ההשערה בכרטיס, מאיזה גובה הכדור יקפוץ הכי גבוה?",
+   "a": "מ-2 מטר",
+   "h": "bf52ea74",
+   "q": "According to the hypothesis on the card, from what height will the ball bounce highest?",
+   "o": [
+    "From 2 meters",
+    "From 1 meter",
+    "From half a meter",
+    "The same from all"
+   ],
+   "x": "The greatest drop height – the highest bounce",
+   "sc": {
+    "0": "The higher the",
+    "1": "drop, the higher",
+    "2": "the ball bounces"
+   }
+  },
+  {
+   "he": "בודקים השפעת אור על צמחים. מה נכון בתכנון?",
+   "a": "רק האור שונה",
+   "h": "0ffdf663",
+   "q": "Testing the effect of light on plants. What is true of the plan?",
+   "o": [
+    "Only the light differs",
+    "Everything differs",
+    "Everything is the same",
+    "Only the pot differs"
+   ],
+   "x": "Change only the independent variable"
+  },
+  {
+   "he": "כל הכוסות קיבלו כפית סוכר אחת. למה?",
+   "a": "זה משתנה קבוע",
+   "h": "ed4b091c",
+   "q": "Every cup got one teaspoon of sugar. Why?",
+   "o": [
+    "It's a controlled variable",
+    "It's the dependent variable",
+    "It's the hypothesis",
+    "It's the conclusion"
+   ],
+   "x": "The amount of sugar does not change – a fair comparison"
+  },
+  {
+   "he": "מתי כותבים את התוצאה הצפויה?",
+   "a": "לפני הניסוי",
+   "h": "8168a3de",
+   "q": "When do you write the expected result?",
+   "o": [
+    "Before the experiment",
+    "After the experiment",
+    "Instead of the experiment",
+    "Never"
+   ],
+   "x": "It comes from the hypothesis, before measuring"
+  },
+  {
+   "he": "על סמך מה כותבים מסקנה?",
+   "a": "התוצאות",
+   "h": "dcb800bb",
+   "q": "What is a conclusion based on?",
+   "o": [
+    "The results",
+    "Only the hypothesis",
+    "Friends' opinions",
+    "The experiment's title"
+   ],
+   "x": "A conclusion explains what the results show"
+  },
+  {
+   "he": "מחממים מים. כמה מעלות היו המים אחרי 10 דקות?",
+   "a": "⁦50°C⁩",
+   "h": "d485017a",
+   "q": "Water is heated. What was its temperature after 10 minutes?",
+   "o": [
+    "⁦50°C⁩",
+    "⁦35°C⁩",
+    "⁦65°C⁩",
+    "⁦10°C⁩"
+   ],
+   "x": "The column for 10 minutes shows 50",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "15",
+    "6": "65",
+    "2": "10",
+    "7": "50",
+    "3": "5",
+    "8": "35",
+    "4": "0",
+    "9": "20"
+   }
+  },
+  {
+   "he": "מחממים מים. מה קרה לטמפרטורה עם הזמן?",
+   "a": "עלתה",
+   "h": "f2a3222b",
+   "q": "Water is heated. What happened to its temperature over time?",
+   "o": [
+    "It rose",
+    "It dropped",
+    "It stayed the same",
+    "It rose and dropped"
+   ],
+   "x": "20, 35, 50, 65 – it keeps rising",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "15",
+    "6": "65",
+    "2": "10",
+    "7": "50",
+    "3": "5",
+    "8": "35",
+    "4": "0",
+    "9": "20"
+   }
+  },
+  {
+   "he": "בכמה מעלות עלתה הטמפרטורה בכל 5 דקות?",
+   "a": "15 מעלות",
+   "h": "9e24ff8a",
+   "q": "By how many degrees did the temperature rise every 5 minutes?",
+   "o": [
+    "15 degrees",
+    "5 degrees",
+    "20 degrees",
+    "10 degrees"
+   ],
+   "x": "⁦35-20=15⁩, ⁦50-35=15⁩, ⁦65-50=15⁩",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "15",
+    "6": "65",
+    "2": "10",
+    "7": "50",
+    "3": "5",
+    "8": "35",
+    "4": "0",
+    "9": "20"
+   }
+  },
+  {
+   "he": "לפי הטבלה, מה צפוי אחרי 20 דקות?",
+   "a": "⁦80°C⁩",
+   "h": "f3fba302",
+   "q": "According to the table, what is expected after 20 minutes?",
+   "o": [
+    "⁦80°C⁩",
+    "⁦70°C⁩",
+    "⁦65°C⁩",
+    "⁦100°C⁩"
+   ],
+   "x": "It keeps rising by 15: 65 + 15 = 80",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "15",
+    "6": "65",
+    "2": "10",
+    "7": "50",
+    "3": "5",
+    "8": "35",
+    "4": "0",
+    "9": "20"
+   }
+  },
+  {
+   "he": "מה המשתנה הבלתי תלוי בטבלה?",
+   "a": "הזמן",
+   "h": "4ab44406",
+   "q": "What is the independent variable in the table?",
+   "o": [
+    "Time",
+    "Temperature",
+    "Amount of water",
+    "Type of container"
+   ],
+   "x": "We set the times in advance; the temperature was measured",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "15",
+    "6": "65",
+    "2": "10",
+    "7": "50",
+    "3": "5",
+    "8": "35",
+    "4": "0",
+    "9": "20"
+   }
+  },
+  {
+   "he": "תה מתקרר. מה קרה לטמפרטורה שלו?",
+   "a": "ירדה",
+   "h": "7e400840",
+   "q": "Tea is cooling. What happened to its temperature?",
+   "o": [
+    "It dropped",
+    "It rose",
+    "It stayed the same",
+    "It dropped and rose"
+   ],
+   "x": "80, 60, 45, 35 – it keeps dropping",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "30",
+    "6": "35",
+    "2": "20",
+    "7": "45",
+    "3": "10",
+    "8": "60",
+    "4": "0",
+    "9": "80"
+   }
+  },
+  {
+   "he": "באילו 10 דקות התה התקרר הכי הרבה?",
+   "a": "בין 0 ל-10",
+   "h": "b8f90519",
+   "q": "In which 10 minutes did the tea cool the most?",
+   "o": [
+    "From 0 to 10",
+    "From 10 to 20",
+    "From 20 to 30",
+    "Same in all"
+   ],
+   "x": "It dropped by 20, then by 15, then by 10",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "30",
+    "6": "35",
+    "2": "20",
+    "7": "45",
+    "3": "10",
+    "8": "60",
+    "4": "0",
+    "9": "80"
+   }
+  },
+  {
+   "he": "תולים משקולות על קפיץ. מה אורכו עם 2 משקולות?",
+   "a": "14 ס״מ",
+   "h": "e6434c6a",
+   "q": "Weights hang on a spring. How long is it with 2 weights?",
+   "o": [
+    "14 cm",
+    "12 cm",
+    "16 cm",
+    "2 cm"
+   ],
+   "x": "The column for 2 weights shows 14",
+   "sc": {
+    "0": "Weights",
+    "5": "cm"
+   }
+  },
+  {
+   "he": "עם כמה משקולות אורך הקפיץ 16 ס״מ?",
+   "a": "⁦3⁩",
+   "h": "b1fdfdd1",
+   "q": "With how many weights is the spring 16 cm long?",
+   "o": [
+    "⁦3⁩",
+    "⁦2⁩",
+    "⁦4⁩",
+    "⁦16⁩"
+   ],
+   "x": "16 cm is in the column for 3 weights",
+   "sc": {
+    "0": "Weights",
+    "5": "cm"
+   }
+  },
+  {
+   "he": "קרח נמס בכוס. מה קרה לטמפרטורה בזמן ההתכה?",
+   "a": "נשארה קבועה",
+   "h": "26eed36b",
+   "q": "Ice is melting in a glass. What happened to the temperature while it melted?",
+   "o": [
+    "It stayed the same",
+    "It rose",
+    "It dropped",
+    "It rose and dropped"
+   ],
+   "x": "Always 0°C – the temperature does not change while ice melts",
+   "sc": {
+    "0": "min",
+    "5": "°C",
+    "1": "6",
+    "6": "0",
+    "2": "4",
+    "7": "0",
+    "3": "2",
+    "8": "0",
+    "4": "0",
+    "9": "0"
+   }
+  },
+  {
+   "he": "השקו צמחים ומדדו את גובהם. מה המשתנה התלוי?",
+   "a": "גובה הצמח",
+   "h": "861bc38a",
+   "q": "Plants were watered and their height measured. What is the dependent variable?",
+   "o": [
+    "Plant height",
+    "Amount of water",
+    "Type of plant",
+    "Time"
+   ],
+   "x": "The height was measured; the amount of water was chosen",
+   "sc": {
+    "0": "Water (mL)",
+    "4": "Height (cm)"
+   }
+  },
+  {
+   "he": "מחממים מים. מה קורה לטמפרטורה לפי הגרף?",
+   "a": "הטמפרטורה עולה",
+   "h": "29182dd7",
+   "q": "Water is heated. According to the graph, what happens to the temperature?",
+   "o": [
+    "It rises",
+    "It drops",
+    "It stays the same",
+    "It rises, then drops"
+   ],
+   "x": "As time passes, the points get higher",
+   "sc": {
+    "9": "min"
+   }
+  },
+  {
+   "he": "מרק מתקרר. איזו מגמה מראה הגרף?",
+   "a": "ירידה",
+   "h": "f73205c8",
+   "q": "Soup is cooling. What trend does the graph show?",
+   "o": [
+    "Decrease",
+    "Increase",
+    "No change",
+    "Increase, then decrease"
+   ],
+   "x": "The points get lower over time",
+   "sc": {
+    "9": "min"
+   }
+  },
+  {
+   "he": "מים רותחים בסיר. מה קורה לטמפרטורה לפי הגרף?",
+   "a": "נשארת קבועה",
+   "h": "a208733d",
+   "q": "Water is boiling in a pot. By the graph, what happens to the temperature?",
+   "o": [
+    "It stays the same",
+    "It rises",
+    "It drops",
+    "It rises and drops"
+   ],
+   "x": "All the points are at the same height: 100°C",
+   "sc": {
+    "9": "min"
+   }
+  },
+  {
+   "he": "על איזה ציר שמים בדרך כלל את המשתנה הבלתי תלוי?",
+   "a": "הציר האופקי",
+   "h": "108d46a0",
+   "q": "On which axis do we usually put the independent variable?",
+   "o": [
+    "The horizontal axis",
+    "The vertical axis",
+    "Both axes",
+    "Neither axis"
+   ],
+   "x": "For example, time – on the horizontal axis, at the bottom",
+   "sc": {
+    "9": "min"
+   }
+  },
+  {
+   "he": "מה מוצג על הציר האנכי בגרף?",
+   "a": "טמפרטורה",
+   "h": "3495b3ab",
+   "q": "What is shown on the graph's vertical axis?",
+   "o": [
+    "Temperature",
+    "Time",
+    "Mass",
+    "Volume"
+   ],
+   "x": "°C – degrees Celsius",
+   "sc": {
+    "9": "min"
+   }
+  },
+  {
+   "he": "הגרף מראה טמפרטורה במשך היום. מתי היה הכי חם?",
+   "a": "בשעה 12",
+   "h": "67d4af3f",
+   "q": "The graph shows the temperature during the day. When was it hottest?",
+   "o": [
+    "At 12:00",
+    "At 9:00",
+    "At 15:00",
+    "At 18:00"
+   ],
+   "x": "The highest point – above 12",
+   "sc": {
+    "11": "h"
+   }
+  },
+  {
+   "he": "לפי הגרף, מה קרה לטמפרטורה משעה 12 עד 18?",
+   "a": "ירידה",
+   "h": "cbec49c6",
+   "q": "By the graph, what happened to the temperature from 12:00 to 18:00?",
+   "o": [
+    "Decrease",
+    "Increase",
+    "No change",
+    "Increase, then decrease"
+   ],
+   "x": "After 12:00, the points go down",
+   "sc": {
+    "11": "h"
+   }
+  },
+  {
+   "he": "מה קורה לאורך הקפיץ כשמוסיפים משקולות?",
+   "a": "גדל",
+   "h": "2ec5122a",
+   "q": "What happens to the spring's length when weights are added?",
+   "o": [
+    "It grows",
+    "It shrinks",
+    "It does not change",
+    "It grows, then shrinks"
+   ],
+   "x": "More weights – a higher point",
+   "sc": {
+    "8": "cm",
+    "9": "Wts"
+   }
+  },
+  {
+   "he": "מחממים מים עד רתיחה. מה מתאר את הגרף?",
+   "a": "עלייה ואז קבוע",
+   "h": "f1bbadd6",
+   "q": "Water is heated until it boils. What describes the graph?",
+   "o": [
+    "Rises, then levels off",
+    "Falls, then rises",
+    "Flat throughout",
+    "Falling throughout"
+   ],
+   "x": "The water heated up, then stayed at 100°C while boiling",
+   "sc": {
+    "11": "min"
+   }
+  },
+  {
+   "he": "איזה גרף יתאים לנתונים בטבלה?",
+   "a": "קו עולה",
+   "h": "d1ad1e6b",
+   "q": "Which graph fits the data in the table?",
+   "o": [
+    "A rising line",
+    "A falling line",
+    "A horizontal line",
+    "Rising, then falling"
+   ],
+   "x": "More kg – more newtons: the line rises",
+   "sc": {
+    "4": "kg",
+    "3": "1",
+    "2": "2",
+    "1": "3",
+    "0": "4",
+    "9": "N",
+    "8": "10",
+    "7": "20",
+    "6": "30",
+    "5": "40"
+   }
+  },
+  {
+   "he": "שולחן עשוי עץ. העץ הוא…",
+   "a": "החומר",
+   "h": "0cf9dbf6",
+   "q": "A table is made of wood. The wood is…",
+   "o": [
+    "The material",
+    "The object",
+    "The volume",
+    "The mass"
+   ],
+   "x": "The table is the object; the wood is the material"
+  },
+  {
+   "he": "תיבה במידות ⁦6×2×5⁩ ס״מ. מה נפחה?",
+   "a": "60 סמ״ק",
+   "h": "49b9b11c",
+   "q": "A box measures 6 × 2 × 5 cm. What is its volume?",
+   "o": [
+    "60 cm³",
+    "13 cm³",
+    "26 cm³",
+    "30 cm³"
+   ],
+   "x": "⁦6×2×5=60⁩"
+  },
+  {
+   "he": "קובייה שצלעה 4 ס״מ. מה נפחה?",
+   "a": "64 סמ״ק",
+   "h": "d94162ff",
+   "q": "A cube has 4 cm edges. What is its volume?",
+   "o": [
+    "64 cm³",
+    "16 cm³",
+    "12 cm³",
+    "48 cm³"
+   ],
+   "x": "⁦4×4×4=64⁩",
+   "sc": {
+    "1": "4 cm"
+   }
+  },
+  {
+   "he": "4 ליטר = ? מ״ל",
+   "a": "4000 מ״ל",
+   "h": "8d7e8d1e",
+   "q": "4 L = ? mL",
+   "o": [
+    "4,000 mL",
+    "400 mL",
+    "40 mL",
+    "40,000 mL"
+   ],
+   "x": "4 × 1,000 = 4,000",
+   "sc": {
+    "1": "4 L",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "750 מ״ל = ? ליטר",
+   "a": "0.75 ליטר",
+   "h": "8ccb3f34",
+   "q": "750 mL = ? L",
+   "o": [
+    "0.75 L",
+    "7.5 L",
+    "75 L",
+    "0.075 L"
+   ],
+   "x": "750 ÷ 1,000 = 0.75",
+   "sc": {
+    "1": "750 mL",
+    "2": "= ? L"
+   }
+  },
+  {
+   "he": "מים ב-25 מ״ל, ועם אבן 34 מ״ל. נפח האבן?",
+   "a": "9 סמ״ק",
+   "h": "7e056e27",
+   "q": "Water at 25 mL, and 34 mL with a stone. The stone's volume?",
+   "o": [
+    "9 cm³",
+    "34 cm³",
+    "59 cm³",
+    "25 cm³"
+   ],
+   "x": "⁦34-25=9⁩",
+   "sc": {
+    "2": "25 mL",
+    "3": "34 mL"
+   }
+  },
+  {
+   "he": "5 ק״ג = ? גרם",
+   "a": "5000 גרם",
+   "h": "12dfffa9",
+   "q": "5 kg = ? g",
+   "o": [
+    "5,000 g",
+    "500 g",
+    "50 g",
+    "50,000 g"
+   ],
+   "x": "5 × 1,000 = 5,000",
+   "sc": {
+    "1": "5 kg",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "2 טון = ? ק״ג",
+   "a": "2000 ק״ג",
+   "h": "ad12838e",
+   "q": "2 t = ? kg",
+   "o": [
+    "2,000 kg",
+    "200 kg",
+    "20 kg",
+    "20,000 kg"
+   ],
+   "x": "2 × 1,000 = 2,000",
+   "sc": {
+    "1": "2 t",
+    "2": "= ? kg"
+   }
+  },
+  {
+   "he": "4000 מיליגרם = ? גרם",
+   "a": "4 גרם",
+   "h": "843032dc",
+   "q": "4,000 milligrams = ? g",
+   "o": [
+    "4 g",
+    "40 g",
+    "400 g",
+    "0.4 g"
+   ],
+   "x": "4,000 ÷ 1,000 = 4",
+   "sc": {
+    "1": "4,000 mg",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "איזו יחידה אינה יחידת מסה?",
+   "a": "ניוטון",
+   "h": "0e96c0c8",
+   "q": "Which unit is NOT a unit of mass?",
+   "o": [
+    "Newton",
+    "Gram",
+    "Ton",
+    "Milligram"
+   ],
+   "x": "A newton is a unit of force (weight)"
+  },
+  {
+   "he": "איזו יחידה אינה יחידת נפח?",
+   "a": "ק״ג",
+   "h": "eebdad4c",
+   "q": "Which unit is NOT a unit of volume?",
+   "o": [
+    "kg",
+    "L",
+    "mL",
+    "cm³"
+   ],
+   "x": "kg is a unit of mass"
+  },
+  {
+   "he": "איזה משפט נכון לגבי גז?",
+   "a": "יש לו מסה",
+   "h": "138176f3",
+   "q": "Which statement about gas is true?",
+   "o": [
+    "It has mass",
+    "It has no mass",
+    "It can't be compressed",
+    "Its shape is fixed"
+   ],
+   "x": "Gas is matter: it has mass and can be compressed"
+  },
+  {
+   "he": "בערך כמה שוקלים 500 סמ״ק מים?",
+   "a": "5 ניוטון",
+   "h": "ac53dda4",
+   "q": "About how much do 500 cm³ of water weigh?",
+   "o": [
+    "5 N",
+    "50 N",
+    "500 N",
+    "0.5 N"
+   ],
+   "x": "500 g of water ≈ 5 N (100 g ≈ 1 N)",
+   "sc": {
+    "1": "500 cm³"
+   }
+  },
+  {
+   "he": "רובוט נוסע לירח. מה יישאר כמו בארץ: המסה או המשקל?",
+   "a": "המסה שלו",
+   "h": "790ad610",
+   "q": "A robot travels to the Moon. What stays the same as on Earth: mass or weight?",
+   "o": [
+    "Its mass",
+    "Its weight",
+    "Both",
+    "Neither"
+   ],
+   "x": "Mass – the amount of matter – does not change"
+  },
+  {
+   "he": "נוזל עבר מבקבוק צר לקערה רחבה. מה השתנה?",
+   "a": "הצורה",
+   "h": "8c618f20",
+   "q": "A liquid was poured from a narrow bottle into a wide bowl. What changed?",
+   "o": [
+    "The shape",
+    "The volume",
+    "The mass",
+    "The substance"
+   ],
+   "x": "A liquid takes the container's shape; its volume stays the same"
+  },
+  {
+   "he": "3 מטר = ? ס״מ",
+   "a": "300 ס״מ",
+   "h": "0aabca01",
+   "q": "3 m = ? cm",
+   "o": [
+    "300 cm",
+    "30 cm",
+    "3,000 cm",
+    "0.3 cm"
+   ],
+   "x": "⁦3×100=300⁩",
+   "sc": {
+    "1": "3 m",
+    "2": "= ? cm"
+   }
+  },
+  {
+   "he": "מה מודדים במדחום?",
+   "a": "טמפרטורה",
+   "h": "75ddba26",
+   "q": "What does a thermometer measure?",
+   "o": [
+    "Temperature",
+    "Time",
+    "Weight",
+    "Volume"
+   ],
+   "x": "A thermometer measures in degrees Celsius – °C"
+  },
+  {
+   "he": "אדים על המראה אחרי מקלחת חמה. איזה תהליך?",
+   "a": "עיבוי",
+   "h": "ed58e9c6",
+   "q": "The mirror fogs up after a hot shower. Which process is it?",
+   "o": [
+    "Condensation",
+    "Evaporation",
+    "Melting",
+    "Freezing"
+   ],
+   "x": "Water vapor met the cold mirror and turned into drops"
+  },
+  {
+   "he": "למי אין צורה קבועה ואין נפח קבוע?",
+   "a": "לגז",
+   "h": "42e1f401",
+   "q": "What has neither a fixed shape nor a fixed volume?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "All of them"
+   ],
+   "x": "A gas spreads out and fills the whole container"
+  },
+  {
+   "he": "בשאלת החקר בכרטיס – מה המשתנה הבלתי תלוי?",
+   "a": "סוג האדמה",
+   "h": "a701ffb6",
+   "q": "In the research question on the card, what is the independent variable?",
+   "o": [
+    "Type of soil",
+    "Plant height",
+    "Amount of water",
+    "Type of plant"
+   ],
+   "x": "The researcher plants in different soils",
+   "sc": {
+    "1": "Effect of soil",
+    "2": "type on",
+    "3": "plant height"
+   }
+  },
+  {
+   "he": "מה כתב התלמיד בכרטיס?",
+   "a": "השערה",
+   "h": "5bf0f5a9",
+   "q": "What did the student write on the card?",
+   "o": [
+    "Hypothesis",
+    "Conclusion",
+    "Result",
+    "Research question"
+   ],
+   "x": "A reasoned guess before the experiment",
+   "sc": {
+    "1": "I think ice",
+    "2": "will melt faster",
+    "3": "in the sun"
+   }
+  },
+  {
+   "he": "מה הייתה הטמפרטורה בשעה 10?",
+   "a": "⁦24°C⁩",
+   "h": "3ae6857e",
+   "q": "What was the temperature at 10:00?",
+   "o": [
+    "⁦24°C⁩",
+    "⁦18°C⁩",
+    "⁦30°C⁩",
+    "⁦10°C⁩"
+   ],
+   "x": "In the column for 10:00 it says 24",
+   "sc": {
+    "3": "Hour",
+    "2": "8",
+    "1": "10",
+    "0": "12",
+    "7": "°C",
+    "6": "18",
+    "5": "24",
+    "4": "30"
+   }
+  }
+ ]
+}

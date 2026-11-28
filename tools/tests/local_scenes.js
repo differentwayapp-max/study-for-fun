@@ -1,11 +1,13 @@
 // Renders every picture scene of catalog sets in the real app CSS and checks each emoji is fully
 // inside the frame, is drawn on one line, and does not cover another emoji. IDS=math1,heb1 OUT=dir (optional)
+// SFF_LANG=en: the English pictures (the cards of tools/sets_en/<id>.json)
 const { chromium } = require('playwright');
 const IDS = (process.env.IDS || '').split(',').filter(Boolean);
 const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never land in the repo
 (async () => {
   const b = await chromium.launch();
   const p = await (await b.newContext({ viewport: { width: 360, height: 720 }, deviceScaleFactor: 1 })).newPage();
+  if (process.env.SFF_LANG === 'en') await p.addInitScript(() => { try { localStorage.setItem('sff_lang', 'en'); } catch (e) {} });
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(1500);
   const ids = IDS.length ? IDS : await p.evaluate(async () => (await (await fetch('/share/catalog.json')).json()).sets.filter(x => x.status === 'ready').map(x => x.id));
   let bad = 0;
@@ -14,7 +16,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
       const set = await loadShare(id); const out = [];
       const box = document.createElement('div'); box.style.cssText = 'position:fixed;inset:0;z-index:9999;background:#fff;padding:12px;width:336px;overflow:auto';
       document.body.appendChild(box);
-      for (const [i, q] of set.questions.entries()) {
+      for (const [i, q0] of set.questions.entries()) { const q = qv(q0);
         if (!q.scene || !q.scene.length) continue;
         box.innerHTML = sceneHtml(q.scene); await new Promise(r => requestAnimationFrame(r));
         const sc = box.firstElementChild.getBoundingClientRect(), sp = [...box.querySelectorAll('span')];

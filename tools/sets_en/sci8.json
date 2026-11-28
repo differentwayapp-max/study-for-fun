@@ -1,0 +1,5388 @@
+{
+ "set": {
+  "name": "Science – Grade 8",
+  "title": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
+  "tags": [
+   "Elements and compounds",
+   "The atom",
+   "Chemical formulas",
+   "The periodic table",
+   "Chemical reactions",
+   "Electric circuits",
+   "Electrical safety",
+   "Forces",
+   "Newton's laws",
+   "Speed",
+   "Reproduction",
+   "Food webs",
+   "Interactions",
+   "Adaptations",
+   "Climate change",
+   "Engineering design",
+   "Technological systems"
+  ]
+ },
+ "labels": {
+  "יסודות, תרכובות ומולקולות": "Elements, compounds and molecules",
+  "מבנה האטום": "The structure of the atom",
+  "סמלים ונוסחאות כימיות": "Chemical symbols and formulas",
+  "הטבלה המחזורית: מתכות ואל-מתכות": "The periodic table: metals and nonmetals",
+  "תגובה כימית ושימור מסה": "Chemical reactions and conservation of mass",
+  "זרם, מתח והתנגדות": "Current, voltage and resistance",
+  "מעגל טורי ומעגל מקבילי": "Series and parallel circuits",
+  "הספק חשמלי וחיסכון": "Electric power and saving electricity",
+  "בטיחות בחשמל": "Electrical safety",
+  "סוגי כוחות": "Types of forces",
+  "כוח שקול וחוקי ניוטון": "Net force and Newton's laws",
+  "מהירות וגרפים של תנועה": "Speed and motion graphs",
+  "רבייה מינית ואל-מינית · רבייה בצמחים": "Sexual and asexual reproduction · Reproduction in plants",
+  "רבייה והתפתחות בבעלי חיים ובאדם": "Reproduction and development in animals and humans",
+  "מארג מזון וזרימת אנרגיה": "Food webs and energy flow",
+  "גורמים בסביבה ויחסי גומלין": "Environmental factors and interactions",
+  "אפקט החממה ושינוי האקלים": "The greenhouse effect and climate change",
+  "תיכון הנדסי ומערכות טכנולוגיות": "Engineering design and technological systems",
+  "אטום, מולקולה, יסוד ותרכובת": "Atom, molecule, element and compound",
+  "יסוד או תרכובת?": "Element or compound?",
+  "חלקי האטום": "Parts of the atom",
+  "מספר אטומי וספירת חלקיקים": "Atomic number and counting particles",
+  "סמלים כימיים": "Chemical symbols",
+  "נוסחאות כימיות": "Chemical formulas",
+  "איך בנויה הטבלה המחזורית": "How the periodic table is organized",
+  "מתכות ואל-מתכות": "Metals and nonmetals",
+  "מגיבים ותוצרים": "Reactants and products",
+  "חוק שימור המסה": "The law of conservation of mass",
+  "זרם, מתח ומכשירי מדידה": "Current, voltage and measuring instruments",
+  "התנגדות, מוליכים ומבודדים": "Resistance, conductors and insulators",
+  "מעגל טורי": "Series circuits",
+  "מעגל מקבילי": "Parallel circuits",
+  "הספק ואנרגיה חשמלית": "Power and electrical energy",
+  "חיסכון בחשמל": "Saving electricity",
+  "נתיך, מפסק ועומס יתר": "Fuses, circuit breakers and overload",
+  "הארקה, מפסק פחת והתנהגות בטוחה": "Grounding, safety switches (RCD) and safe behavior",
+  "כוח הכובד, חיכוך, אלסטי ומגנטי": "Gravity, friction, elastic and magnetic forces",
+  "כוחות סביבנו": "Forces around us",
+  "כוח שקול": "Net force",
+  "שלושת חוקי ניוטון": "Newton's three laws",
+  "חישוב מהירות": "Calculating speed",
+  "גרפים וטבלאות של תנועה": "Motion graphs and tables",
+  "רבייה מינית ואל-מינית": "Sexual and asexual reproduction",
+  "הפרח, האבקה וזרעים": "The flower, pollination and seeds",
+  "ביצים, התפתחות וגלגול": "Eggs, development and metamorphosis",
+  "גדילה והתבגרות באדם": "Human growth and puberty",
+  "שרשראות ומארגי מזון": "Food chains and food webs",
+  "זרימת אנרגיה ומחזור חומרים": "Energy flow and the cycling of matter",
+  "גורמים חיים ודוממים, התאמות לסביבה": "Biotic and abiotic factors, adaptations",
+  "יחסי גומלין והשפעת האדם": "Interactions and human impact",
+  "אפקט החממה ומחזור הפחמן": "The greenhouse effect and the carbon cycle",
+  "📖 קטע מידע: כדור הארץ מתחמם": "📖 Reading passage: The Earth is warming",
+  "תיכון הנדסי: דרישות, אילוצים ובדיקה": "Engineering design: requirements, constraints and testing",
+  "מערכות, בקרה ובחירת חומרים": "Systems, control and choosing materials",
+  "חזרה": "Review"
+ },
+ "texts": {
+  "33": "The Earth is wrapped in a layer of air called the atmosphere. The Sun's rays pass through it and warm the land and the sea. The warm ground gives off heat back upward, but some of it is trapped by greenhouse gases – mainly carbon dioxide and methane. This is the greenhouse effect, and thanks to it the average temperature on the Earth's surface is pleasant: about 15 degrees.\n\nSince the Industrial Revolution, about two hundred years ago, people have been burning huge amounts of coal, oil and natural gas. Burning releases carbon dioxide. At the same time, forests are being cut down, so fewer trees absorb the gas from the air. The amount of greenhouse gases has gone up, and the average temperature has risen by more than one degree.\n\nThis change has consequences: glaciers are melting, the sea level is rising, and heat waves, droughts and floods are becoming more frequent. Many species of plants and animals find it hard to adapt to the changes.\n\nWhat can we do? Make electricity from solar and wind energy, travel by public transportation or by bicycle, save electricity, plant trees and recycle. Every small step helps."
+ },
+ "questions": [
+  {
+   "he": "יסוד הוא חומר הבנוי מ…",
+   "a": "אטומים מסוג אחד",
+   "h": "e372a322",
+   "q": "An element is a substance made of…",
+   "o": [
+    "One kind of atom",
+    "Different kinds of atoms",
+    "A mixture of substances",
+    "Particles of light"
+   ],
+   "x": "In an element, all the atoms are the same kind"
+  },
+  {
+   "he": "תרכובת היא חומר הבנוי מ…",
+   "a": "אטומים מסוגים שונים",
+   "h": "197d1acd",
+   "q": "A compound is a substance made of…",
+   "o": [
+    "Different kinds of atoms",
+    "One kind of atom",
+    "Electrons only",
+    "Metals only"
+   ],
+   "x": "A compound has at least two kinds of bonded atoms"
+  },
+  {
+   "he": "מהי מולקולה?",
+   "a": "כמה אטומים מחוברים",
+   "h": "cd94d607",
+   "q": "What is a molecule?",
+   "o": [
+    "Several bonded atoms",
+    "A single atom",
+    "Part of the nucleus",
+    "A mixture of elements"
+   ],
+   "x": "A molecule is a particle of atoms bonded together"
+  },
+  {
+   "he": "מה מהבאים הוא יסוד?",
+   "a": "חמצן",
+   "h": "f3254ad3",
+   "q": "Which of these is an element?",
+   "o": [
+    "Oxygen",
+    "Water",
+    "Table salt",
+    "Sugar"
+   ],
+   "x": "Oxygen is made only of oxygen atoms"
+  },
+  {
+   "he": "מה מהבאים הוא תרכובת?",
+   "a": "מים",
+   "h": "01d8a249",
+   "q": "Which of these is a compound?",
+   "o": [
+    "Water",
+    "Iron",
+    "Gold",
+    "Oxygen"
+   ],
+   "x": "Water is made of hydrogen and oxygen"
+  },
+  {
+   "he": "שני אטומים זהים מחוברים. זו מולקולה של…",
+   "a": "יסוד",
+   "h": "195c2e88",
+   "q": "Two identical atoms are bonded. This is a molecule of…",
+   "o": [
+    "An element",
+    "A compound",
+    "A mixture",
+    "A metal"
+   ],
+   "x": "Only one kind of atom – an element"
+  },
+  {
+   "he": "כמה אטומים יש במולקולת מים אחת?",
+   "a": "⁦3⁩",
+   "h": "3a0a3e38",
+   "q": "How many atoms are in one water molecule?",
+   "o": [
+    "3",
+    "2",
+    "4",
+    "1"
+   ],
+   "x": "Two hydrogen atoms and one oxygen atom"
+  },
+  {
+   "he": "בערך כמה יסודות ידועים היום?",
+   "a": "כ-118",
+   "h": "948d97d8",
+   "q": "About how many elements are known today?",
+   "o": [
+    "About 118",
+    "About 10",
+    "About 1,000",
+    "Millions"
+   ],
+   "x": "The periodic table has about 118 elements"
+  },
+  {
+   "he": "מים מתפרקים בזרם חשמלי למימן ולחמצן. מה זה מוכיח?",
+   "a": "מים הם תרכובת",
+   "h": "dcc3fb78",
+   "q": "Electricity splits water into hydrogen and oxygen. What does this prove?",
+   "o": [
+    "Water is a compound",
+    "Water is an element",
+    "Water is a metal",
+    "Water is an atom"
+   ],
+   "x": "Only a compound can be split into elements"
+  },
+  {
+   "he": "אפשר לפרק יסוד לחומרים פשוטים יותר?",
+   "a": "לא",
+   "h": "d0163022",
+   "q": "Can an element be split into simpler substances?",
+   "o": [
+    "No",
+    "Yes, by heating",
+    "Yes, by electricity",
+    "Yes, in water"
+   ],
+   "x": "An element is the simplest kind of substance"
+  },
+  {
+   "he": "באיזה זוג שני החומרים הם יסודות?",
+   "a": "ברזל וחמצן",
+   "h": "919eac00",
+   "q": "In which of these pairs are both substances elements?",
+   "o": [
+    "Iron and oxygen",
+    "Water and salt",
+    "Iron and water",
+    "Sugar and oxygen"
+   ],
+   "x": "Iron and oxygen – each has one kind of atom"
+  },
+  {
+   "he": "מי יוצא דופן?",
+   "a": "מים",
+   "h": "8fb9669a",
+   "q": "Which one is the odd one out?",
+   "o": [
+    "Water",
+    "Gold",
+    "Iron",
+    "Copper"
+   ],
+   "x": "Water is a compound; the others are elements"
+  },
+  {
+   "he": "סוכר בנוי מפחמן, מימן וחמצן. סוכר הוא…",
+   "a": "תרכובת",
+   "h": "583dfedd",
+   "q": "Sugar is made of carbon, hydrogen and oxygen. Sugar is…",
+   "o": [
+    "A compound",
+    "An element",
+    "A metal",
+    "An atom"
+   ],
+   "x": "Three kinds of bonded atoms – a compound"
+  },
+  {
+   "he": "נתרן וכלור מסוכנים, אבל מלח בישול לא. למה?",
+   "a": "לתרכובת תכונות חדשות",
+   "h": "fc63d0a9",
+   "q": "Sodium and chlorine are dangerous, but table salt is not. Why?",
+   "o": [
+    "Compounds have new properties",
+    "Salt is a mixture",
+    "Salt is an element",
+    "The sodium disappeared"
+   ],
+   "x": "A compound differs from the elements that make it"
+  },
+  {
+   "he": "בכמה סוגי אטומים בנויה המולקולה בכרטיס?",
+   "a": "⁦2⁩",
+   "h": "f5e89265",
+   "q": "How many kinds of atoms make up the molecule on the card?",
+   "o": [
+    "2",
+    "3",
+    "1",
+    "4"
+   ],
+   "x": "Carbon and oxygen – two kinds"
+  },
+  {
+   "he": "מה ההבדל בין אטום למולקולה?",
+   "a": "מולקולה בנויה מאטומים",
+   "h": "411d9cc8",
+   "q": "What is the difference between an atom and a molecule?",
+   "o": [
+    "Molecules consist of atoms",
+    "Atoms consist of molecules",
+    "They are the same",
+    "An atom is bigger"
+   ],
+   "x": "Several atoms join together to form a molecule"
+  },
+  {
+   "he": "איזה חומר בכרטיס הוא יסוד?",
+   "a": "⁦N₂⁩",
+   "h": "9128a855",
+   "q": "Which substance on the card is an element?",
+   "o": [
+    "N₂",
+    "H₂O",
+    "CO₂",
+    "NaCl"
+   ],
+   "x": "N₂ is made only of nitrogen atoms"
+  },
+  {
+   "he": "גוש זהב טהור בנוי מ…",
+   "a": "אטומי זהב בלבד",
+   "h": "a52adccc",
+   "q": "A lump of pure gold is made of…",
+   "o": [
+    "Only gold atoms",
+    "Water molecules",
+    "Different atoms",
+    "Gold and oxygen"
+   ],
+   "x": "Gold is an element – one kind of atom"
+  },
+  {
+   "he": "כמה תרכובות שונות קיימות?",
+   "a": "מיליוני תרכובות",
+   "h": "53147bc8",
+   "q": "How many different compounds exist?",
+   "o": [
+    "Millions of compounds",
+    "Exactly 118",
+    "About 10",
+    "No compounds"
+   ],
+   "x": "About 118 elements make up millions of substances"
+  },
+  {
+   "he": "בתמונה: אטומים כחולים ואדומים מחוברים בזוגות. מהו החומר?",
+   "a": "תרכובת",
+   "h": "58439bcd",
+   "q": "In the picture: blue and red atoms bonded in pairs. What is the substance?",
+   "o": [
+    "A compound",
+    "An element",
+    "A single atom",
+    "A pure metal"
+   ],
+   "x": "Two kinds of bonded atoms – a compound"
+  },
+  {
+   "he": "איפה נמצאים הפרוטונים?",
+   "a": "בגרעין",
+   "h": "acf1967c",
+   "q": "Where are the protons?",
+   "o": [
+    "In the nucleus",
+    "Around the nucleus",
+    "Outside the atom",
+    "Between the molecules"
+   ],
+   "x": "Protons and neutrons are in the nucleus"
+  },
+  {
+   "he": "איפה נעים האלקטרונים?",
+   "a": "סביב הגרעין",
+   "h": "d0888b8a",
+   "q": "Where do the electrons move?",
+   "o": [
+    "Around the nucleus",
+    "Inside the nucleus",
+    "Inside the protons",
+    "They don't move"
+   ],
+   "x": "Electrons move fast around the nucleus"
+  },
+  {
+   "he": "מה המטען של פרוטון?",
+   "a": "חיובי",
+   "h": "5f45b91c",
+   "q": "What is the charge of a proton?",
+   "o": [
+    "Positive",
+    "Negative",
+    "No charge",
+    "It changes"
+   ],
+   "x": "A proton has a positive charge (+)"
+  },
+  {
+   "he": "מה המטען של אלקטרון?",
+   "a": "שלילי",
+   "h": "e40d51d1",
+   "q": "What is the charge of an electron?",
+   "o": [
+    "Negative",
+    "Positive",
+    "No charge",
+    "It changes"
+   ],
+   "x": "An electron has a negative charge (−)"
+  },
+  {
+   "he": "לאיזה חלקיק אין מטען חשמלי?",
+   "a": "נייטרון",
+   "h": "6606db0e",
+   "q": "Which particle has no electric charge?",
+   "o": [
+    "Neutron",
+    "Proton",
+    "Electron",
+    "Nucleus"
+   ],
+   "x": "A neutron is neutral – it has no charge"
+  },
+  {
+   "he": "אילו שני חלקיקים נמצאים בגרעין האטום?",
+   "a": "פרוטונים ונייטרונים",
+   "h": "8644bb99",
+   "q": "Which two particles are in the nucleus of an atom?",
+   "o": [
+    "Protons and neutrons",
+    "Protons and electrons",
+    "Neutrons and electrons",
+    "Atoms and molecules"
+   ],
+   "x": "The electrons are outside the nucleus"
+  },
+  {
+   "he": "איפה מרוכזת כמעט כל המסה של האטום?",
+   "a": "בגרעין",
+   "h": "dc627336",
+   "q": "Where is almost all of an atom's mass?",
+   "o": [
+    "In the nucleus",
+    "In the electrons",
+    "In empty space",
+    "Outside the atom"
+   ],
+   "x": "Electrons are very light; the nucleus is heavy"
+  },
+  {
+   "he": "מה מהבאים הכי קטן?",
+   "a": "אלקטרון",
+   "h": "1a9d43d1",
+   "q": "Which of these is the smallest?",
+   "o": [
+    "Electron",
+    "Atom",
+    "Molecule",
+    "Grain of salt"
+   ],
+   "x": "An electron is a tiny part of an atom"
+  },
+  {
+   "he": "מטען חיובי ומטען שלילי…",
+   "a": "נמשכים זה לזה",
+   "h": "cb0799ac",
+   "q": "A positive charge and a negative charge…",
+   "o": [
+    "Attract each other",
+    "Repel each other",
+    "Don't affect each other",
+    "Become a neutron"
+   ],
+   "x": "Opposite charges attract"
+  },
+  {
+   "he": "מה מחזיק את האלקטרונים ליד הגרעין?",
+   "a": "משיכה חשמלית",
+   "h": "f194d81f",
+   "q": "What holds the electrons near the nucleus?",
+   "o": [
+    "Electric attraction",
+    "Gravity",
+    "Friction",
+    "Glue"
+   ],
+   "x": "The nucleus is positive, electrons negative – they attract"
+  },
+  {
+   "he": "המספר האטומי שווה ל… שבגרעין",
+   "a": "מספר הפרוטונים",
+   "h": "51bbb358",
+   "q": "The atomic number equals the ___ in the nucleus.",
+   "o": [
+    "Number of protons",
+    "Number of neutrons",
+    "Number of molecules",
+    "Number of atoms"
+   ],
+   "x": "Atomic number = the number of protons in the nucleus"
+  },
+  {
+   "he": "לפי הכרטיס, כמה פרוטונים יש באטום חמצן?",
+   "a": "⁦8⁩",
+   "h": "93af56a7",
+   "q": "According to the card, how many protons does an oxygen atom have?",
+   "o": [
+    "8",
+    "16",
+    "4",
+    "2"
+   ],
+   "x": "Atomic number 8 = 8 protons",
+   "sc": {
+    "0": "Oxygen",
+    "1": "Atomic number 8"
+   }
+  },
+  {
+   "he": "לפחמן 6 פרוטונים. כמה אלקטרונים באטום פחמן ניטרלי?",
+   "a": "שישה",
+   "h": "ecabaadd",
+   "q": "Carbon has 6 protons. How many electrons does a neutral carbon atom have?",
+   "o": [
+    "Six",
+    "Three",
+    "Twelve",
+    "Zero"
+   ],
+   "x": "In a neutral atom, electrons = protons"
+  },
+  {
+   "he": "באטום ניטרלי מספר הפרוטונים שווה למספר ה…",
+   "a": "אלקטרונים",
+   "h": "b90e0529",
+   "q": "In a neutral atom, the number of protons equals the number of…",
+   "o": [
+    "Electrons",
+    "Neutrons",
+    "Molecules",
+    "Nuclei"
+   ],
+   "x": "The positive and negative charges balance"
+  },
+  {
+   "he": "מה המספר האטומי של האטום בטבלה?",
+   "a": "⁦11⁩",
+   "h": "a2cc672a",
+   "q": "What is the atomic number of the atom in the table?",
+   "o": [
+    "11",
+    "12",
+    "23",
+    "34"
+   ],
+   "x": "Atomic number = number of protons: 11",
+   "sc": {
+    "0": "Protons",
+    "2": "Neutrons",
+    "4": "Electrons"
+   }
+  },
+  {
+   "he": "כמה חלקיקים יש בגרעין של האטום בטבלה?",
+   "a": "⁦4⁩",
+   "h": "9a48cd89",
+   "q": "How many particles are in the nucleus of the atom in the table?",
+   "o": [
+    "4",
+    "2",
+    "6",
+    "8"
+   ],
+   "x": "In the nucleus: 2 protons + 2 neutrons",
+   "sc": {
+    "0": "Protons",
+    "2": "Neutrons",
+    "4": "Electrons"
+   }
+  },
+  {
+   "he": "מה קובע לאיזה יסוד שייך האטום?",
+   "a": "מספר הפרוטונים",
+   "h": "94e989f8",
+   "q": "What determines which element an atom belongs to?",
+   "o": [
+    "Number of protons",
+    "Number of neutrons",
+    "The atom's size",
+    "The atom's color"
+   ],
+   "x": "Each element has its own number of protons"
+  },
+  {
+   "he": "לאטום ⁦8⁩ פרוטונים ו-⁦8⁩ נייטרונים. מה מספר המסה שלו?",
+   "a": "⁦16⁩",
+   "h": "07bc4f94",
+   "q": "An atom has 8 protons and 8 neutrons. What is its mass number?",
+   "o": [
+    "16",
+    "8",
+    "64",
+    "0"
+   ],
+   "x": "Mass number = protons + neutrons",
+   "sc": {
+    "0": "8 protons",
+    "1": "8 neutrons"
+   }
+  },
+  {
+   "he": "לאטום 3 פרוטונים ו-3 אלקטרונים. מה מטענו הכולל?",
+   "a": "אין מטען",
+   "h": "d398fde5",
+   "q": "An atom has 3 protons and 3 electrons. What is its total charge?",
+   "o": [
+    "No charge",
+    "Positive",
+    "Negative",
+    "Depends on neutrons"
+   ],
+   "x": "3+ and 3− cancel each other out",
+   "sc": {
+    "0": "3 protons",
+    "1": "3 electrons"
+   }
+  },
+  {
+   "he": "האם אפשר לראות אטום בעין?",
+   "a": "לא, קטן מדי",
+   "h": "70667c6f",
+   "q": "Can you see an atom with your eyes?",
+   "o": [
+    "No, too small",
+    "Yes, easily",
+    "Only in sunlight",
+    "Only at night"
+   ],
+   "x": "An atom is tiny – only special microscopes show it"
+  },
+  {
+   "he": "מה הסמל הכימי של חמצן?",
+   "a": "⁦O⁩",
+   "h": "489bb9f5",
+   "q": "What is the chemical symbol for oxygen?",
+   "o": [
+    "O",
+    "H",
+    "C",
+    "N"
+   ],
+   "x": "Oxygen = O",
+   "sc": {
+    "0": "Oxygen"
+   }
+  },
+  {
+   "he": "מה הסמל הכימי של מימן?",
+   "a": "⁦H⁩",
+   "h": "5329ba6a",
+   "q": "What is the chemical symbol for hydrogen?",
+   "o": [
+    "H",
+    "O",
+    "Hg",
+    "N"
+   ],
+   "x": "Hydrogen = H",
+   "sc": {
+    "0": "Gas"
+   }
+  },
+  {
+   "he": "הסמל ⁦C⁩ שייך ל…",
+   "a": "פחמן",
+   "h": "fbd63739",
+   "q": "The symbol C stands for…",
+   "o": [
+    "Carbon",
+    "Calcium",
+    "Chlorine",
+    "Copper"
+   ],
+   "x": "C = carbon; Ca is calcium, Cl chlorine, Cu copper"
+  },
+  {
+   "he": "הסמל ⁦Na⁩ שייך ל…",
+   "a": "נתרן",
+   "h": "ba4bcb36",
+   "q": "The symbol Na stands for…",
+   "o": [
+    "Sodium",
+    "Nitrogen",
+    "Neon",
+    "Nickel"
+   ],
+   "x": "Na = sodium; N is nitrogen, Ne is neon"
+  },
+  {
+   "he": "הסמל ⁦Fe⁩ שייך ל…",
+   "a": "ברזל",
+   "h": "7a4d9d43",
+   "q": "The symbol Fe stands for…",
+   "o": [
+    "Iron",
+    "Fluorine",
+    "Gold",
+    "Silver"
+   ],
+   "x": "Fe = iron, from the Latin word ferrum"
+  },
+  {
+   "he": "הסמל ⁦Cl⁩ שייך ל…",
+   "a": "כלור",
+   "h": "02c7e89f",
+   "q": "The symbol Cl stands for…",
+   "o": [
+    "Chlorine",
+    "Carbon",
+    "Calcium",
+    "Copper"
+   ],
+   "x": "Cl = chlorine"
+  },
+  {
+   "he": "הסמל ⁦N⁩ שייך ל…",
+   "a": "חנקן",
+   "h": "aa4e270f",
+   "q": "The symbol N stands for…",
+   "o": [
+    "Nitrogen",
+    "Sodium",
+    "Neon",
+    "Nickel"
+   ],
+   "x": "N = nitrogen, Na = sodium"
+  },
+  {
+   "he": "איזה סמל כתוב נכון?",
+   "a": "⁦Na⁩",
+   "h": "565e7b87",
+   "q": "Which is the correct way to write the symbol for sodium?",
+   "o": [
+    "Na",
+    "NA",
+    "na",
+    "nA"
+   ],
+   "x": "The first letter is a capital, the second is lowercase",
+   "sc": {
+    "0": "Sodium"
+   }
+  },
+  {
+   "he": "סמל הזהב הוא ⁦Au⁩. מאיפה הוא בא?",
+   "a": "מהשם הלטיני",
+   "h": "04e1e06d",
+   "q": "The symbol for gold is Au. Where does it come from?",
+   "o": [
+    "From the Latin name",
+    "From the Hebrew name",
+    "From the discoverer's name",
+    "From the English name"
+   ],
+   "x": "aurum – gold in Latin"
+  },
+  {
+   "he": "מה מייצג סמל כימי?",
+   "a": "יסוד",
+   "h": "ce51a946",
+   "q": "What does a chemical symbol stand for?",
+   "o": [
+    "An element",
+    "A compound",
+    "A mixture",
+    "A reaction"
+   ],
+   "x": "Each element has a symbol of one or two letters"
+  },
+  {
+   "he": "מה הנוסחה של מים?",
+   "a": "⁦H₂O⁩",
+   "h": "eb01192a",
+   "q": "What is the formula for water?",
+   "o": [
+    "H₂O",
+    "HO₂",
+    "CO₂",
+    "H₂"
+   ],
+   "x": "Two hydrogen atoms and one oxygen atom"
+  },
+  {
+   "he": "מה הנוסחה של פחמן דו-חמצני?",
+   "a": "⁦CO₂⁩",
+   "h": "b1d32dc0",
+   "q": "What is the formula for carbon dioxide?",
+   "o": [
+    "CO₂",
+    "CO",
+    "C₂O",
+    "O₂"
+   ],
+   "x": "One carbon atom and two oxygen atoms"
+  },
+  {
+   "he": "מה הנוסחה של מלח בישול?",
+   "a": "⁦NaCl⁩",
+   "h": "7d58513f",
+   "q": "What is the formula for table salt?",
+   "o": [
+    "NaCl",
+    "NaO",
+    "KCl",
+    "Cl₂"
+   ],
+   "x": "Sodium + chlorine = NaCl"
+  },
+  {
+   "he": "מה הנוסחה של גז החמצן שאנחנו נושמים?",
+   "a": "⁦O₂⁩",
+   "h": "a19164ed",
+   "q": "What is the formula for the oxygen gas we breathe?",
+   "o": [
+    "O₂",
+    "O",
+    "H₂",
+    "CO₂"
+   ],
+   "x": "A molecule of two oxygen atoms"
+  },
+  {
+   "he": "כמה אטומי מימן יש ב-⁦H₂O⁩?",
+   "a": "⁦2⁩",
+   "h": "c49b7606",
+   "q": "How many hydrogen atoms are in H₂O?",
+   "o": [
+    "2",
+    "1",
+    "3",
+    "4"
+   ],
+   "x": "The small ₂ after the H"
+  },
+  {
+   "he": "כמה אטומים יש בסך הכול ב-⁦CO₂⁩?",
+   "a": "⁦3⁩",
+   "h": "3e1655c4",
+   "q": "How many atoms are there in total in CO₂?",
+   "o": [
+    "3",
+    "2",
+    "1",
+    "4"
+   ],
+   "x": "One carbon + two oxygen = 3"
+  },
+  {
+   "he": "מה מציין המספר הקטן שלמטה, אחרי הסמל?",
+   "a": "מספר האטומים",
+   "h": "a8dc0d6d",
+   "q": "What does the small number written low after a symbol show?",
+   "o": [
+    "Number of atoms",
+    "Number of molecules",
+    "The charge",
+    "The mass"
+   ],
+   "x": "How many atoms of that element are in the molecule"
+  },
+  {
+   "he": "אילו יסודות יש בנוסחה ⁦NaCl⁩?",
+   "a": "נתרן וכלור",
+   "h": "fc491b7e",
+   "q": "Which elements are in the formula NaCl?",
+   "o": [
+    "Sodium and chlorine",
+    "Nitrogen and chlorine",
+    "Sodium and carbon",
+    "Neon and calcium"
+   ],
+   "x": "Na is sodium, Cl is chlorine"
+  },
+  {
+   "he": "בכרטיס נוסחת מתאן. כמה אטומי מימן בה?",
+   "a": "⁦4⁩",
+   "h": "19f30c90",
+   "q": "The card shows the formula for methane. How many hydrogen atoms does it have?",
+   "o": [
+    "4",
+    "1",
+    "5",
+    "3"
+   ],
+   "x": "H₄ – four hydrogen atoms"
+  },
+  {
+   "he": "מה פירוש ⁦2H₂O⁩?",
+   "a": "שתי מולקולות מים",
+   "h": "a03440e5",
+   "q": "What does 2H₂O mean?",
+   "o": [
+    "Two water molecules",
+    "One water molecule",
+    "Two water atoms",
+    "Four oxygen atoms"
+   ],
+   "x": "The big number in front = the number of molecules"
+  },
+  {
+   "he": "כמה סוגי אטומים יש בנוסחה בכרטיס?",
+   "a": "⁦2⁩",
+   "h": "6ed6df1e",
+   "q": "How many kinds of atoms are in the formula on the card?",
+   "o": [
+    "2",
+    "3",
+    "4",
+    "1"
+   ],
+   "x": "Nitrogen and hydrogen – two kinds"
+  },
+  {
+   "he": "לפי מה מסודרים היסודות בטבלה המחזורית?",
+   "a": "מספר אטומי",
+   "h": "ad655e14",
+   "q": "What are the elements in the periodic table arranged by?",
+   "o": [
+    "Atomic number",
+    "Element name",
+    "Element color",
+    "Year of discovery"
+   ],
+   "x": "The atomic number rises from left to right"
+  },
+  {
+   "he": "איך נקראת שורה אופקית בטבלה?",
+   "a": "מחזור",
+   "h": "61455522",
+   "q": "What is a horizontal row in the table called?",
+   "o": [
+    "Period",
+    "Family",
+    "Compound",
+    "Formula"
+   ],
+   "x": "A row is a period; a column is a family"
+  },
+  {
+   "he": "איך נקרא טור אנכי בטבלה?",
+   "a": "משפחה",
+   "h": "58ab7021",
+   "q": "What is a vertical column in the table called?",
+   "o": [
+    "Family",
+    "Period",
+    "Molecule",
+    "Reaction"
+   ],
+   "x": "Elements in the same column have similar properties"
+  },
+  {
+   "he": "מה משותף ליסודות באותה משפחה?",
+   "a": "תכונות דומות",
+   "h": "a94d4353",
+   "q": "What do elements in the same family have in common?",
+   "o": [
+    "Similar properties",
+    "The same atomic number",
+    "The same mass",
+    "The same name"
+   ],
+   "x": "Elements in the same column behave alike"
+  },
+  {
+   "he": "רוב היסודות בטבלה הם…",
+   "a": "מתכות",
+   "h": "e2021910",
+   "q": "Most of the elements in the table are…",
+   "o": [
+    "Metals",
+    "Nonmetals",
+    "Gases",
+    "Liquids"
+   ],
+   "x": "About three quarters of the elements are metals"
+  },
+  {
+   "he": "איפה נמצאות רוב המתכות בטבלה?",
+   "a": "משמאל ובמרכז",
+   "h": "95bba630",
+   "q": "Where are most of the metals in the table?",
+   "o": [
+    "Left and center",
+    "The right corner",
+    "Only the top row",
+    "Only the last column"
+   ],
+   "x": "The nonmetals are at the top right"
+  },
+  {
+   "he": "מהו היסוד הראשון בטבלה?",
+   "a": "מימן",
+   "h": "84830849",
+   "q": "What is the first element in the table?",
+   "o": [
+    "Hydrogen",
+    "Oxygen",
+    "Helium",
+    "Carbon"
+   ],
+   "x": "Hydrogen has atomic number 1",
+   "sc": {
+    "0": "Atomic number 1"
+   }
+  },
+  {
+   "he": "מה מראה המספר העליון בריבוע של יסוד?",
+   "a": "מספר אטומי",
+   "h": "df0ca57b",
+   "q": "What does the top number in an element's box show?",
+   "o": [
+    "Atomic number",
+    "Number of neutrons",
+    "Boiling point",
+    "Number of molecules"
+   ],
+   "x": "The top number is how many protons the atom has"
+  },
+  {
+   "he": "הליום, ניאון וארגון הם…",
+   "a": "גזים אצילים",
+   "h": "086111f2",
+   "q": "Helium, neon and argon are…",
+   "o": [
+    "Noble gases",
+    "Metals",
+    "Compounds",
+    "Electrical conductors"
+   ],
+   "x": "The last column – gases that hardly react"
+  },
+  {
+   "he": "למה יש בטבלה ריבועים לכל יסוד ולא למים?",
+   "a": "מים הם תרכובת",
+   "h": "67b34887",
+   "q": "Why does the table have a box for each element but none for water?",
+   "o": [
+    "Water is a compound",
+    "Water is a metal",
+    "Water is a liquid",
+    "Water isn't important"
+   ],
+   "x": "The table lists only elements, not compounds"
+  },
+  {
+   "he": "איזו תכונה חשמלית יש למתכות?",
+   "a": "מוליכות חשמל",
+   "h": "db1d00c2",
+   "q": "What electrical property do metals have?",
+   "o": [
+    "They conduct electricity",
+    "They block electricity",
+    "They are negatively charged",
+    "They have high resistance"
+   ],
+   "x": "Metals conduct electricity and heat"
+  },
+  {
+   "he": "למה חוטי חשמל עשויים מנחושת, ולא מכסף שמוליך טוב יותר?",
+   "a": "כסף יקר מאוד",
+   "h": "7ab16f77",
+   "q": "Why are electric wires made of copper, not silver, which conducts better?",
+   "o": [
+    "Silver is very expensive",
+    "Silver is very brittle",
+    "Silver isn't flexible",
+    "Silver blocks electricity"
+   ],
+   "x": "Silver conducts a little better, but costs far more"
+  },
+  {
+   "he": "איזה יסוד הוא אל-מתכת?",
+   "a": "גופרית",
+   "h": "757b6221",
+   "q": "Which element is a nonmetal?",
+   "o": [
+    "Sulfur",
+    "Iron",
+    "Copper",
+    "Aluminum"
+   ],
+   "x": "Sulfur is yellow, brittle and does not conduct"
+  },
+  {
+   "he": "מה התכונה החשמלית של רוב האל-מתכות?",
+   "a": "לא מוליכות חשמל",
+   "h": "506ba4ba",
+   "q": "What is the electrical property of most nonmetals?",
+   "o": [
+    "They don't conduct electricity",
+    "They conduct electricity well",
+    "They produce electricity",
+    "They store electricity"
+   ],
+   "x": "Most nonmetals are insulators"
+  },
+  {
+   "he": "רדיד אלומיניום דק ולא נשבר. איזו תכונה זו?",
+   "a": "רקיעות",
+   "h": "86b1bb61",
+   "q": "Thin aluminum foil doesn't break. Which property is this?",
+   "o": [
+    "Malleability",
+    "Brittleness",
+    "Transparency",
+    "Insulation"
+   ],
+   "x": "Metals can be hammered into thin foil"
+  },
+  {
+   "he": "כספית היא מתכת נוזלית. למה הפסיקו להשתמש בה במדחומים?",
+   "a": "היא רעילה",
+   "h": "2066768c",
+   "q": "Mercury is a liquid metal. Why did people stop using it in thermometers?",
+   "o": [
+    "It is poisonous",
+    "It doesn't expand",
+    "It freezes indoors",
+    "It is transparent"
+   ],
+   "x": "A broken thermometer releases dangerous mercury vapor"
+  },
+  {
+   "he": "פחמן (הגרפיט בעיפרון) הוא…",
+   "a": "אל-מתכת",
+   "h": "e59fb005",
+   "q": "Carbon (the graphite in a pencil) is…",
+   "o": [
+    "A nonmetal",
+    "A metal",
+    "A gas",
+    "A compound"
+   ],
+   "x": "Carbon is on the nonmetal side of the table"
+  },
+  {
+   "he": "חמצן, חנקן וכלור – באיזה מצב צבירה הם בטמפרטורת החדר?",
+   "a": "גז",
+   "h": "7ac5a65d",
+   "q": "Oxygen, nitrogen and chlorine – what state are they in at room temperature?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "Plasma"
+   ],
+   "x": "Many nonmetals are gases"
+  },
+  {
+   "he": "איזה יסוד בטבלה הוא מתכת?",
+   "a": "יסוד א",
+   "h": "66de059f",
+   "q": "Which element in the table is a metal?",
+   "o": [
+    "Element A",
+    "Element B",
+    "Both",
+    "Neither"
+   ],
+   "x": "Shiny and conducts – a metal",
+   "sc": {
+    "0": "Element",
+    "1": "B",
+    "2": "A",
+    "3": "Conducts?",
+    "4": "No",
+    "5": "Yes",
+    "6": "Shiny?",
+    "7": "No",
+    "8": "Yes"
+   }
+  },
+  {
+   "he": "יסוד שביר, עמום ולא מוליך. לאיזו קבוצה הוא שייך?",
+   "a": "אל-מתכת",
+   "h": "4729d0a0",
+   "q": "An element is brittle, dull and doesn't conduct. Which group does it belong to?",
+   "o": [
+    "A nonmetal",
+    "A metal",
+    "A noble gas",
+    "An alloy"
+   ],
+   "x": "These are the properties of a nonmetal",
+   "sc": {
+    "0": "Brittle",
+    "1": "Dull",
+    "2": "Doesn't conduct"
+   }
+  },
+  {
+   "he": "מה נוצר בתגובה כימית?",
+   "a": "חומרים חדשים",
+   "h": "49e29d7d",
+   "q": "What forms in a chemical reaction?",
+   "o": [
+    "New substances",
+    "The same substances",
+    "New elements",
+    "Only energy"
+   ],
+   "x": "The products are different from the reactants"
+  },
+  {
+   "he": "כמה מולקולות של מגיבים יש בתגובה שבכרטיס?",
+   "a": "⁦3⁩",
+   "h": "10d46090",
+   "q": "How many reactant molecules are in the reaction on the card?",
+   "o": [
+    "3",
+    "2",
+    "4",
+    "5"
+   ],
+   "x": "2H₂ + O₂: two hydrogen molecules and one oxygen molecule"
+  },
+  {
+   "he": "איזה מספר חסר כדי שהתגובה בכרטיס תהיה מאוזנת?",
+   "a": "⁦2⁩",
+   "h": "fe9fd248",
+   "q": "What missing number balances the reaction on the card?",
+   "o": [
+    "2",
+    "1",
+    "3",
+    "4"
+   ],
+   "x": "Four hydrogen atoms on each side: 2H₂O"
+  },
+  {
+   "he": "בתגובה שבכרטיס, מהם המגיבים?",
+   "a": "ברזל וגופרית",
+   "h": "9b430d4a",
+   "q": "In the reaction on the card, what are the reactants?",
+   "o": [
+    "Iron and sulfur",
+    "Only iron sulfide",
+    "Iron and oxygen",
+    "Sulfur and oxygen"
+   ],
+   "x": "Reactants come before the arrow; iron sulfide is the product"
+  },
+  {
+   "he": "שני נוזלים שקופים מתערבבים, ונוצר משקע עכור. איזה שינוי זה?",
+   "a": "שינוי כימי",
+   "h": "ee39c417",
+   "q": "Two clear liquids mix, and a cloudy solid forms. What change is this?",
+   "o": [
+    "Chemical change",
+    "Evaporation",
+    "Dissolving",
+    "Freezing"
+   ],
+   "x": "A new solid forms that wasn't there before"
+  },
+  {
+   "he": "ברזל מחליד בגשם. איזה שינוי זה?",
+   "a": "שינוי כימי",
+   "h": "9d7b1f1c",
+   "q": "Iron rusts in the rain. What change is this?",
+   "o": [
+    "Chemical change",
+    "Physical change",
+    "Change of state",
+    "No change"
+   ],
+   "x": "Rust is a new substance"
+  },
+  {
+   "he": "מה התוצר בתגובה שבכרטיס?",
+   "a": "פחמן דו-חמצני",
+   "h": "ca2ba5fc",
+   "q": "What is the product of the reaction on the card?",
+   "o": [
+    "Carbon dioxide",
+    "Water",
+    "Hydrogen",
+    "Salt"
+   ],
+   "x": "Carbon + oxygen → CO₂"
+  },
+  {
+   "he": "מה התוצר בתגובה שבכרטיס?",
+   "a": "מים",
+   "h": "201bc28a",
+   "q": "What is the product of the reaction on the card?",
+   "o": [
+    "Water",
+    "Salt",
+    "Nitrogen",
+    "Carbon"
+   ],
+   "x": "Hydrogen + oxygen → water"
+  },
+  {
+   "he": "מה קורה לאטומים בתגובה כימית?",
+   "a": "מסתדרים מחדש",
+   "h": "26d2b46a",
+   "q": "What happens to the atoms in a chemical reaction?",
+   "o": [
+    "They rearrange",
+    "They disappear",
+    "New ones form",
+    "They become other elements"
+   ],
+   "x": "The same atoms, joined in new ways"
+  },
+  {
+   "he": "איזה גז חייב להיות כדי שתהיה בעירה?",
+   "a": "חמצן",
+   "h": "362b1a4a",
+   "q": "Which gas must be present for burning to happen?",
+   "o": [
+    "Oxygen",
+    "Nitrogen",
+    "Helium",
+    "Carbon dioxide"
+   ],
+   "x": "Without oxygen, the fire goes out"
+  },
+  {
+   "he": "⁦36⁩ גרם מים התפרקו ונוצרו ⁦4⁩ גרם מימן. כמה גרם חמצן נוצר?",
+   "a": "32 גרם",
+   "h": "48713ad5",
+   "q": "36 g of water broke down, forming 4 g of hydrogen. How much oxygen formed?",
+   "o": [
+    "32 g",
+    "36 g",
+    "40 g",
+    "4 g"
+   ],
+   "x": "36 − 4 = 32 – mass is conserved"
+  },
+  {
+   "he": "לפי הטבלה, מה מסת התוצרים בכלי סגור?",
+   "a": "20 גרם",
+   "h": "14746c4e",
+   "q": "According to the table, what is the mass of the products in a closed container?",
+   "o": [
+    "20 g",
+    "10 g",
+    "40 g",
+    "0 g"
+   ],
+   "x": "In a closed container, mass is conserved",
+   "sc": {
+    "0": "Reactants",
+    "1": "20 g",
+    "2": "Products"
+   }
+  },
+  {
+   "he": "ברזל וגופרית הגיבו עד הסוף. כמה גרם תוצר נוצר?",
+   "a": "88 גרם",
+   "h": "e6f5c270",
+   "q": "Iron and sulfur reacted completely. How many grams of product formed?",
+   "o": [
+    "88 g",
+    "24 g",
+    "56 g",
+    "32 g"
+   ],
+   "x": "56 + 32 = 88",
+   "sc": {
+    "0": "Iron 56 g",
+    "1": "Sulfur 32 g"
+   }
+  },
+  {
+   "he": "איך אפשר להראות בניסוי שגם בשריפת נייר המסה נשמרת?",
+   "a": "שורפים בכלי סגור",
+   "h": "78222e15",
+   "q": "How can an experiment show that mass is conserved when paper burns?",
+   "o": [
+    "Seal it, then burn",
+    "Weigh only the ash",
+    "Burn more paper",
+    "Burn it faster"
+   ],
+   "x": "In a closed container no gas escapes, so everything is weighed"
+  },
+  {
+   "he": "ברזל הגיב עם חמצן. לפי הטבלה, כמה גרם חמצן הגיב?",
+   "a": "24 גרם",
+   "h": "6ee2874a",
+   "q": "Iron reacted with oxygen. According to the table, how many grams of oxygen reacted?",
+   "o": [
+    "24 g",
+    "80 g",
+    "56 g",
+    "136 g"
+   ],
+   "x": "80 − 56 = 24 – the oxygen added mass",
+   "sc": {
+    "0": "56 g",
+    "1": "Iron",
+    "2": "80 g",
+    "3": "Product"
+   }
+  },
+  {
+   "he": "מה המסקנה מהטבלה?",
+   "a": "המסה לא משתנה",
+   "h": "7cb3776c",
+   "q": "What can you conclude from the table?",
+   "o": [
+    "Mass doesn't change",
+    "Mass increases",
+    "Mass decreases",
+    "There was no reaction"
+   ],
+   "x": "Before and after – the same mass",
+   "sc": {
+    "0": "50 g",
+    "1": "Before",
+    "2": "50 g",
+    "3": "After"
+   }
+  },
+  {
+   "he": "למה מסת התוצרים שווה למסת המגיבים?",
+   "a": "מספר האטומים נשמר",
+   "h": "4fd099b9",
+   "q": "Why is the mass of the products equal to the mass of the reactants?",
+   "o": [
+    "The atoms are conserved",
+    "New atoms form",
+    "Some atoms disappear",
+    "Molecules stay identical"
+   ],
+   "x": "The same atoms – just arranged differently"
+  },
+  {
+   "he": "כמה אטומי חמצן יש בצד התוצרים?",
+   "a": "⁦2⁩",
+   "h": "22f1d61a",
+   "q": "How many oxygen atoms are on the products side?",
+   "o": [
+    "2",
+    "1",
+    "4",
+    "3"
+   ],
+   "x": "2H₂O – one oxygen atom in each molecule"
+  },
+  {
+   "he": "כמה אטומי מימן יש בצד המגיבים?",
+   "a": "⁦4⁩",
+   "h": "239037b4",
+   "q": "How many hydrogen atoms are on the reactants side?",
+   "o": [
+    "4",
+    "2",
+    "1",
+    "6"
+   ],
+   "x": "2H₂ = 2 molecules × 2 atoms"
+  },
+  {
+   "he": "חומץ וסודה בכלי פתוח. לפי הטבלה, כמה גרם גז יצא?",
+   "a": "5 גרם",
+   "h": "d2913406",
+   "q": "Vinegar and baking soda in an open container. According to the table, how many grams of gas escaped?",
+   "o": [
+    "5 g",
+    "245 g",
+    "250 g",
+    "0 g"
+   ],
+   "x": "250 − 245 = 5 – the gas escaped into the air",
+   "sc": {
+    "0": "250 g",
+    "1": "Before",
+    "2": "245 g",
+    "3": "After"
+   }
+  },
+  {
+   "he": "מי ניסח את חוק שימור המסה?",
+   "a": "לבואזיה",
+   "h": "e1075727",
+   "q": "Who formulated the law of conservation of mass?",
+   "o": [
+    "Lavoisier",
+    "Newton",
+    "Darwin",
+    "Einstein"
+   ],
+   "x": "The French scientist Lavoisier, about 250 years ago"
+  },
+  {
+   "he": "זרם חשמלי בחוט מתכת הוא תנועה של…",
+   "a": "אלקטרונים",
+   "h": "f7887e4e",
+   "q": "An electric current in a metal wire is a flow of…",
+   "o": [
+    "Electrons",
+    "Protons",
+    "Neutrons",
+    "Water molecules"
+   ],
+   "x": "Electrons move along the wire"
+  },
+  {
+   "he": "באיזו יחידה מודדים זרם חשמלי?",
+   "a": "אמפר",
+   "h": "f3184f4e",
+   "q": "What unit is electric current measured in?",
+   "o": [
+    "Ampere",
+    "Volt",
+    "Ohm",
+    "Watt"
+   ],
+   "x": "Current – ampere (A)"
+  },
+  {
+   "he": "באיזו יחידה מודדים מתח?",
+   "a": "וולט",
+   "h": "128cccce",
+   "q": "What unit is potential difference measured in?",
+   "o": [
+    "Volt",
+    "Ampere",
+    "Ohm",
+    "Newton"
+   ],
+   "x": "Voltage (potential difference) – volt (V)"
+  },
+  {
+   "he": "באיזו יחידה מודדים התנגדות?",
+   "a": "אוהם",
+   "h": "b6b941b0",
+   "q": "What unit is resistance measured in?",
+   "o": [
+    "Ohm",
+    "Volt",
+    "Ampere",
+    "Watt"
+   ],
+   "x": "Resistance – ohm (Ω)"
+  },
+  {
+   "he": "על הסוללה כתוב ⁦1.5V⁩. איזה גודל זה מציין?",
+   "a": "מתח",
+   "h": "260da5cc",
+   "q": "A battery is labeled 1.5V. What quantity does this show?",
+   "o": [
+    "Voltage",
+    "Current",
+    "Resistance",
+    "Mass"
+   ],
+   "x": "V = volt, the unit of voltage"
+  },
+  {
+   "he": "מה הסוללה נותנת למעגל?",
+   "a": "מתח",
+   "h": "cc87b742",
+   "q": "What does a battery give a circuit?",
+   "o": [
+    "Voltage",
+    "Resistance",
+    "Friction",
+    "Mass"
+   ],
+   "x": "The battery \"pushes\" the electrons around the circuit"
+  },
+  {
+   "he": "באיזה מכשיר מודדים זרם?",
+   "a": "אמפרמטר",
+   "h": "da2fb191",
+   "q": "Which instrument measures current?",
+   "o": [
+    "Ammeter",
+    "Voltmeter",
+    "Thermometer",
+    "Spring scale"
+   ],
+   "x": "Ampere → ammeter"
+  },
+  {
+   "he": "באיזה מכשיר מודדים מתח?",
+   "a": "וולטמטר",
+   "h": "f56eb8e7",
+   "q": "Which instrument measures potential difference?",
+   "o": [
+    "Voltmeter",
+    "Ammeter",
+    "Balance",
+    "Ruler"
+   ],
+   "x": "Volt → voltmeter"
+  },
+  {
+   "he": "המעגל פתוח. מה קורה לנורה?",
+   "a": "לא דולקת",
+   "h": "aa5023f0",
+   "q": "The circuit is open. What happens to the bulb?",
+   "o": [
+    "It doesn't light",
+    "It shines brightly",
+    "It shines dimly",
+    "It explodes"
+   ],
+   "x": "No current flows in an open circuit"
+  },
+  {
+   "he": "מה תפקיד המפסק במעגל?",
+   "a": "לפתוח ולסגור",
+   "h": "39462da6",
+   "q": "What does a switch do in a circuit?",
+   "o": [
+    "Opens and closes it",
+    "Raises the voltage",
+    "Stores electricity",
+    "Measures current"
+   ],
+   "x": "A switch closes or opens the circuit"
+  },
+  {
+   "he": "איך נקרא חומר שזרם עובר בו בקלות?",
+   "a": "מוליך",
+   "h": "652d0571",
+   "q": "What is a material that current passes through easily called?",
+   "o": [
+    "Conductor",
+    "Insulator",
+    "Magnet",
+    "Switch"
+   ],
+   "x": "Metals are good conductors"
+  },
+  {
+   "he": "מה מהבאים מבודד חשמלי?",
+   "a": "פלסטיק",
+   "h": "1f56c668",
+   "q": "Which of these is an electrical insulator?",
+   "o": [
+    "Plastic",
+    "Copper",
+    "Iron",
+    "Aluminum"
+   ],
+   "x": "Plastic does not let current through"
+  },
+  {
+   "he": "למה חוטי חשמל עטופים בפלסטיק?",
+   "a": "למנוע התחשמלות",
+   "h": "48978c60",
+   "q": "Why are electric wires coated in plastic?",
+   "o": [
+    "To prevent electric shock",
+    "To increase current",
+    "To lower voltage",
+    "Just for looks"
+   ],
+   "x": "Plastic insulates and protects us"
+  },
+  {
+   "he": "מגדילים התנגדות, והמתח קבוע. מה קורה לזרם?",
+   "a": "הזרם קטן",
+   "h": "dd2bc177",
+   "q": "Resistance goes up and voltage stays the same. What happens to the current?",
+   "o": [
+    "The current decreases",
+    "The current increases",
+    "The current doesn't change",
+    "The current reverses"
+   ],
+   "x": "More resistance – less current"
+  },
+  {
+   "he": "מגדילים מתח, וההתנגדות קבועה. מה קורה לזרם?",
+   "a": "הזרם גדל",
+   "h": "db3f9a56",
+   "q": "Voltage goes up and resistance stays the same. What happens to the current?",
+   "o": [
+    "The current increases",
+    "The current decreases",
+    "The current doesn't change",
+    "The current becomes zero"
+   ],
+   "x": "More voltage – more current"
+  },
+  {
+   "he": "חוט ארוך יותר מאותו חומר. מה קורה להתנגדות?",
+   "a": "ההתנגדות גדלה",
+   "h": "2ea597a0",
+   "q": "A longer wire of the same material. What happens to the resistance?",
+   "o": [
+    "The resistance increases",
+    "The resistance decreases",
+    "The resistance doesn't change",
+    "The resistance disappears"
+   ],
+   "x": "A longer path – more resistance"
+  },
+  {
+   "he": "חוט עבה יותר מאותו חומר. מה קורה להתנגדות?",
+   "a": "ההתנגדות קטנה",
+   "h": "97c77081",
+   "q": "A thicker wire of the same material. What happens to the resistance?",
+   "o": [
+    "The resistance decreases",
+    "The resistance increases",
+    "The resistance doesn't change",
+    "The resistance doubles"
+   ],
+   "x": "A thicker wire – more room for the current"
+  },
+  {
+   "he": "מתח 6 וולט, התנגדות 2 אוהם. מה הזרם?",
+   "a": "3 אמפר",
+   "h": "6c8fae47",
+   "q": "The voltage is 6 V and the resistance is 2 Ω. What is the current?",
+   "o": [
+    "3 A",
+    "12 A",
+    "4 A",
+    "8 A"
+   ],
+   "x": "Current = voltage ÷ resistance: 6 ÷ 2 = 3"
+  },
+  {
+   "he": "לפי הטבלה, מה הזרם כשהמתח 8 וולט?",
+   "a": "4 אמפר",
+   "h": "75dd03fe",
+   "q": "According to the table, what is the current at 8 V?",
+   "o": [
+    "4 A",
+    "8 A",
+    "6 A",
+    "16 A"
+   ],
+   "x": "The current is half the voltage: 8 ÷ 2 = 4",
+   "sc": {
+    "0": "Volts",
+    "1": "6",
+    "3": "2",
+    "4": "Amps",
+    "5": "3",
+    "7": "1"
+   }
+  },
+  {
+   "he": "למה מי ברז מוליכים חשמל, ומים מזוקקים כמעט לא?",
+   "a": "יש בהם מלחים",
+   "h": "89bc0cd1",
+   "q": "Why does tap water conduct electricity, while distilled water hardly does?",
+   "o": [
+    "It contains salts",
+    "It contains air",
+    "It is colder",
+    "It is clearer"
+   ],
+   "x": "The dissolved salts carry the current"
+  },
+  {
+   "he": "כמה מסלולים יש לזרם במעגל טורי?",
+   "a": "מסלול אחד",
+   "h": "0d41fe07",
+   "q": "How many paths does the current have in a series circuit?",
+   "o": [
+    "One path",
+    "Two paths",
+    "Several paths",
+    "No path"
+   ],
+   "x": "Everything is connected in one chain"
+  },
+  {
+   "he": "שתי נורות זהות בטור, סוללה ⁦6⁩ וולט. מה המתח על כל אחת?",
+   "a": "3 וולט",
+   "h": "680f68ba",
+   "q": "Two identical bulbs in series with a 6 V battery. What is the voltage across each?",
+   "o": [
+    "3 V",
+    "6 V",
+    "12 V",
+    "1.5 V"
+   ],
+   "x": "In series the voltage is shared: 6 ÷ 2 = 3"
+  },
+  {
+   "he": "נורה א: ⁦2⁩ וולט, נורה ב: ⁦4⁩ וולט, בטור. מה מתח הסוללה?",
+   "a": "6 וולט",
+   "h": "f0b01d46",
+   "q": "Bulb A: 2 V, bulb B: 4 V, in series. What is the battery's voltage?",
+   "o": [
+    "6 V",
+    "2 V",
+    "4 V",
+    "8 V"
+   ],
+   "x": "In series the bulbs' voltages add up: 2 + 4 = 6",
+   "sc": {
+    "0": "Bulb",
+    "1": "B",
+    "2": "A",
+    "3": "Volts",
+    "4": "4",
+    "5": "2"
+   }
+  },
+  {
+   "he": "במעגל טורי, הזרם בכל הנורות…",
+   "a": "שווה",
+   "h": "f5d4c356",
+   "q": "In a series circuit, the current in every bulb is…",
+   "o": [
+    "The same",
+    "Different",
+    "Zero",
+    "Larger in each bulb"
+   ],
+   "x": "The current has only one path"
+  },
+  {
+   "he": "בחנוכייה חשמלית נורה אחת נשרפה, והשאר דולקות. איך הן מחוברות?",
+   "a": "במקביל",
+   "h": "f2e61c45",
+   "q": "One bulb of an electric Hanukkah menorah burned out; the others stay lit. How are they connected?",
+   "o": [
+    "In parallel",
+    "In series",
+    "Without a battery",
+    "Without wires"
+   ],
+   "x": "In parallel, each bulb has its own branch"
+  },
+  {
+   "he": "שתי סוללות של 1.5 וולט בטור. מה המתח?",
+   "a": "3 וולט",
+   "h": "73411236",
+   "q": "Two 1.5 V batteries in series. What is the voltage?",
+   "o": [
+    "3 V",
+    "1.5 V",
+    "0.75 V",
+    "0 V"
+   ],
+   "x": "In series the voltages add up: 1.5 + 1.5"
+  },
+  {
+   "he": "מפסק אחד במעגל טורי מכבה…",
+   "a": "את כל הנורות",
+   "h": "1f2b8498",
+   "q": "One switch in a series circuit turns off…",
+   "o": [
+    "All the bulbs",
+    "Only one bulb",
+    "No bulb",
+    "Only the battery"
+   ],
+   "x": "It opens the only path"
+  },
+  {
+   "he": "מה קורה לזרם כשמוסיפים נורות בטור?",
+   "a": "הזרם קטן",
+   "h": "903e6c58",
+   "q": "What happens to the current as more bulbs are added in series?",
+   "o": [
+    "The current decreases",
+    "The current increases",
+    "The current doesn't change",
+    "The current becomes zero"
+   ],
+   "x": "0.6, 0.3, 0.2 – the current goes down",
+   "sc": {
+    "0": "Bulbs",
+    "1": "3",
+    "3": "1",
+    "4": "Amps",
+    "5": "0.2",
+    "7": "0.6"
+   }
+  },
+  {
+   "he": "מה קורה להתנגדות הכוללת כשמוסיפים נורות בטור?",
+   "a": "ההתנגדות גדלה",
+   "h": "7f7c2684",
+   "q": "What happens to the total resistance when you add bulbs in series?",
+   "o": [
+    "Resistance increases",
+    "Resistance decreases",
+    "Resistance stays the same",
+    "Resistance drops to zero"
+   ],
+   "x": "Each bulb adds resistance"
+  },
+  {
+   "he": "מוציאים נורה אחת ממעגל טורי. כמה נורות ימשיכו לדלוק?",
+   "a": "אף אחת",
+   "h": "489a6cc0",
+   "q": "One bulb is removed from a series circuit. How many bulbs stay lit?",
+   "o": [
+    "None",
+    "All the others",
+    "Only one",
+    "All of them"
+   ],
+   "x": "The only path is broken"
+  },
+  {
+   "he": "כמה מסלולים יש לזרם במעגל מקבילי?",
+   "a": "יותר ממסלול אחד",
+   "h": "c8913a6c",
+   "q": "How many paths does the current have in a parallel circuit?",
+   "o": [
+    "More than one path",
+    "One path",
+    "No path",
+    "Only one wire"
+   ],
+   "x": "Each bulb has its own branch"
+  },
+  {
+   "he": "שלוש נורות במקביל. אחת נשרפה. כמה נורות ממשיכות לדלוק?",
+   "a": "שתיים",
+   "h": "e60748f4",
+   "q": "Three bulbs in parallel. One burns out. How many stay lit?",
+   "o": [
+    "Two",
+    "None",
+    "One",
+    "Three"
+   ],
+   "x": "Each bulb has its own branch – only one went out"
+  },
+  {
+   "he": "במקביל בבית: מקרר ⁦1⁩ אמפר, קומקום ⁦9⁩ אמפר. מה הזרם הראשי?",
+   "a": "10 אמפר",
+   "h": "77fd4028",
+   "q": "At home, in parallel: fridge 1 A, kettle 9 A. What is the total current?",
+   "o": [
+    "10 A",
+    "9 A",
+    "8 A",
+    "5 A"
+   ],
+   "x": "In parallel, the branch currents add up: 1 + 9 = 10",
+   "sc": {
+    "0": "Kettle",
+    "1": "Fridge",
+    "2": "Device",
+    "3": "9",
+    "4": "1",
+    "5": "Amps"
+   }
+  },
+  {
+   "he": "למה בבית מחברים מכשירים במקביל?",
+   "a": "כל מכשיר עצמאי",
+   "h": "01c513b9",
+   "q": "Why are appliances at home connected in parallel?",
+   "o": [
+    "Each works independently",
+    "To save wire",
+    "To dim the bulbs",
+    "All go off together"
+   ],
+   "x": "Each appliance is switched on and off separately"
+  },
+  {
+   "he": "איך מחברים וולטמטר כדי למדוד את המתח על נורה?",
+   "a": "במקביל",
+   "h": "e5aa25b3",
+   "q": "How do you connect a voltmeter to measure the voltage across a bulb?",
+   "o": [
+    "In parallel",
+    "In series",
+    "Instead of the bulb",
+    "Through the switch"
+   ],
+   "x": "The voltmeter compares the two ends of the bulb"
+  },
+  {
+   "he": "מה המתח על כל נורה במעגל מקבילי?",
+   "a": "כמתח הסוללה",
+   "h": "45667a83",
+   "q": "What is the voltage across each bulb in a parallel circuit?",
+   "o": [
+    "The battery's voltage",
+    "Half the voltage",
+    "Zero",
+    "Double the voltage"
+   ],
+   "x": "Each branch is connected straight to the battery"
+  },
+  {
+   "he": "מוסיפים נורות במקביל. מה קורה לזרם שיוצא מהסוללה?",
+   "a": "הזרם גדל",
+   "h": "d616ee41",
+   "q": "Bulbs are added in parallel. What happens to the current from the battery?",
+   "o": [
+    "Current increases",
+    "Current decreases",
+    "Current stays the same",
+    "Current drops to zero"
+   ],
+   "x": "Each new branch adds more current"
+  },
+  {
+   "he": "מפסק על ענף אחד במעגל מקבילי מכבה…",
+   "a": "רק הענף שלו",
+   "h": "acc73fc0",
+   "q": "A switch on one branch of a parallel circuit turns off…",
+   "o": [
+    "Only its own branch",
+    "All the bulbs",
+    "No bulb",
+    "The battery"
+   ],
+   "x": "The other branches stay closed"
+  },
+  {
+   "he": "שתי נורות זהות ואותה סוללה. איפה האור חזק יותר?",
+   "a": "במקביל",
+   "h": "0fa4ce02",
+   "q": "Two identical bulbs and the same battery. Where is the light brighter?",
+   "o": [
+    "In parallel",
+    "In series",
+    "The same in both",
+    "Depends on the color"
+   ],
+   "x": "In parallel, each bulb gets the full voltage"
+  },
+  {
+   "he": "מחברים הרבה מכשירים למפצל אחד. איזה זרם עובר בחוט המפצל?",
+   "a": "זרם גדול מדי",
+   "h": "a033b721",
+   "q": "Many appliances are plugged into one power strip. What current flows in its cord?",
+   "o": [
+    "Too much current",
+    "Too little current",
+    "No current at all",
+    "Normal current"
+   ],
+   "x": "The wires heat up and a fire may break out"
+  },
+  {
+   "he": "מה מתאר הספק חשמלי?",
+   "a": "אנרגיה בכל שנייה",
+   "h": "426658d1",
+   "q": "What does electrical power describe?",
+   "o": [
+    "Energy per second",
+    "The amount of wire",
+    "The device's mass",
+    "The wire's length"
+   ],
+   "x": "How much energy a device uses each second"
+  },
+  {
+   "he": "מה יחידת ההספק?",
+   "a": "וואט",
+   "h": "9e55325b",
+   "q": "What is the unit of power?",
+   "o": [
+    "Watt",
+    "Ampere",
+    "Volt",
+    "Ohm"
+   ],
+   "x": "Power – watt (W)"
+  },
+  {
+   "he": "הספק שווה מתח כפול…",
+   "a": "זרם",
+   "h": "722bf27e",
+   "q": "Power equals voltage times…",
+   "o": [
+    "Current",
+    "Resistance",
+    "Time",
+    "Mass"
+   ],
+   "x": "⁦P = V × I⁩"
+  },
+  {
+   "he": "מתח 230 וולט, זרם 2 אמפר. מה ההספק?",
+   "a": "460 וואט",
+   "h": "c99e5d66",
+   "q": "Voltage 230 V, current 2 A. What is the power?",
+   "o": [
+    "460 W",
+    "115 W",
+    "232 W",
+    "228 W"
+   ],
+   "x": "⁦230 × 2 = 460⁩"
+  },
+  {
+   "he": "כמה קילוואט הם 1000 וואט?",
+   "a": "1 קילוואט",
+   "h": "c40c3faf",
+   "q": "How many kilowatts is 1000 watts?",
+   "o": [
+    "1 kW",
+    "10 kW",
+    "100 kW",
+    "0.1 kW"
+   ],
+   "x": "Kilo = thousand"
+  },
+  {
+   "he": "לפי הטבלה, איזה מכשיר צורך הכי הרבה חשמל בשעה?",
+   "a": "מזגן",
+   "h": "fc4907fc",
+   "q": "According to the table, which appliance uses the most electricity per hour?",
+   "o": [
+    "Air conditioner",
+    "Fridge",
+    "Light bulb",
+    "All the same"
+   ],
+   "x": "2000 watts – the highest power",
+   "sc": {
+    "0": "Bulb",
+    "1": "Fridge",
+    "2": "A/C",
+    "3": "Device",
+    "4": "10",
+    "5": "150",
+    "6": "2000",
+    "7": "Watts"
+   }
+  },
+  {
+   "he": "מנורה של 100 וואט דלקה 10 שעות. כמה קוט״ש?",
+   "a": "1 קוט״ש",
+   "h": "3ed99331",
+   "q": "A 100 W lamp is on for 10 hours. How many kWh is that?",
+   "o": [
+    "1 kWh",
+    "10 kWh",
+    "1000 kWh",
+    "0.1 kWh"
+   ],
+   "x": "100 × 10 = 1000 watt-hours = 1 kWh"
+  },
+  {
+   "he": "קוט״ש (קילוואט-שעה) היא יחידה של…",
+   "a": "אנרגיה",
+   "h": "ed9ccfcf",
+   "q": "A kWh (kilowatt-hour) is a unit of…",
+   "o": [
+    "Energy",
+    "Power",
+    "Voltage",
+    "Current"
+   ],
+   "x": "Power × time = energy"
+  },
+  {
+   "he": "מה קובע כמה אנרגיה מכשיר צורך?",
+   "a": "הספק וזמן",
+   "h": "95492b2e",
+   "q": "What determines how much energy an appliance uses?",
+   "o": [
+    "Power and time",
+    "Color and size",
+    "Voltage alone",
+    "The appliance's price"
+   ],
+   "x": "Energy = power × time"
+  },
+  {
+   "he": "על מה משלמים בחשבון החשמל?",
+   "a": "אנרגיה",
+   "h": "33b443cd",
+   "q": "What do you pay for on the electricity bill?",
+   "o": [
+    "Energy",
+    "Number of appliances",
+    "Voltage",
+    "Number of wires"
+   ],
+   "x": "The bill is by kWh"
+  },
+  {
+   "he": "איזו נורה חסכונית יותר?",
+   "a": "נורת לד",
+   "h": "d13a6b73",
+   "q": "Which bulb is more energy-efficient?",
+   "o": [
+    "LED bulb",
+    "Incandescent bulb",
+    "Halogen bulb",
+    "They're all equal"
+   ],
+   "x": "An LED gives the same light with fewer watts"
+  },
+  {
+   "he": "נורת ליבון הופכת את רוב האנרגיה ל…",
+   "a": "חום",
+   "h": "5b106fb4",
+   "q": "An incandescent bulb turns most of its energy into…",
+   "o": [
+    "Heat",
+    "Light",
+    "Sound",
+    "Motion"
+   ],
+   "x": "That's why it gets very hot and wastes energy"
+  },
+  {
+   "he": "איזה הרגל חוסך חשמל בבית?",
+   "a": "לכבות אור ביציאה",
+   "h": "e67cdd15",
+   "q": "Which habit saves electricity at home?",
+   "o": [
+    "Switching lights off",
+    "Leaving the TV on",
+    "Opening the fridge often",
+    "Leaving the heater on"
+   ],
+   "x": "A light that's off uses no electricity"
+  },
+  {
+   "he": "לאיזו טמפרטורה מומלץ לכוון מזגן בקיץ?",
+   "a": "24 מעלות",
+   "h": "abcd2d98",
+   "q": "What temperature is recommended for the air conditioner in summer?",
+   "o": [
+    "24°C",
+    "16°C",
+    "18°C",
+    "30°C"
+   ],
+   "x": "Each degree lower uses more electricity"
+  },
+  {
+   "he": "מה הדרך החסכונית לחמם מים לרחצה בקיץ?",
+   "a": "דוד שמש",
+   "h": "0891e985",
+   "q": "What is the cheapest way to heat bath water in summer?",
+   "o": [
+    "Solar water heater",
+    "Electric water heater",
+    "Kettle",
+    "Oven"
+   ],
+   "x": "The sun heats it for free"
+  },
+  {
+   "he": "למה כדאי לחסוך בחשמל?",
+   "a": "פחות זיהום אוויר",
+   "h": "a582ba46",
+   "q": "Why is it worth saving electricity?",
+   "o": [
+    "To reduce air pollution",
+    "To raise the voltage",
+    "To heat the bulbs",
+    "There's no reason"
+   ],
+   "x": "Power plants burn fuels and pollute"
+  },
+  {
+   "he": "מה שורפים ברוב תחנות הכוח בישראל?",
+   "a": "גז טבעי",
+   "h": "601c10d4",
+   "q": "What do most power plants in Israel burn?",
+   "o": [
+    "Natural gas",
+    "Wood",
+    "Water",
+    "Olive oil"
+   ],
+   "x": "Most of Israel's electricity comes from natural gas"
+  },
+  {
+   "he": "מקרר עם תווית אנרגיה ⁦A⁩ הוא…",
+   "a": "חסכוני מאוד",
+   "h": "b7dc440d",
+   "q": "A fridge with an A energy label is…",
+   "o": [
+    "Very efficient",
+    "Very wasteful",
+    "Very big",
+    "Very noisy"
+   ],
+   "x": "A – the most efficient rating"
+  },
+  {
+   "he": "טלוויזיה במצב המתנה, עם נורה אדומה דולקת…",
+   "a": "צורכת מעט חשמל",
+   "h": "bdc88a13",
+   "q": "A TV on standby, with its red light on…",
+   "o": [
+    "Uses a little electricity",
+    "Uses nothing",
+    "Makes electricity",
+    "Uses the most"
+   ],
+   "x": "Standby uses electricity too – better to unplug"
+  },
+  {
+   "he": "מה הופך אור שמש ישר לחשמל?",
+   "a": "לוח סולרי",
+   "h": "f337bb25",
+   "q": "What turns sunlight directly into electricity?",
+   "o": [
+    "Solar panel",
+    "Solar water heater",
+    "Battery",
+    "Air conditioner"
+   ],
+   "x": "Solar cells convert light into electricity"
+  },
+  {
+   "he": "מה תפקיד הנתיך במעגל החשמלי?",
+   "a": "מנתק בזרם גבוה",
+   "h": "406c583a",
+   "q": "What does a fuse do in an electric circuit?",
+   "o": [
+    "Cuts off high current",
+    "Increases the current",
+    "Measures the voltage",
+    "Stores electricity"
+   ],
+   "x": "When the current is too high, the fuse's thin wire melts"
+  },
+  {
+   "he": "מה יש בתוך נתיך, שנמס כשהזרם גבוה מדי?",
+   "a": "חוט מתכת דק",
+   "h": "932d1502",
+   "q": "What is inside a fuse that melts when the current is too high?",
+   "o": [
+    "A thin metal wire",
+    "A plastic block",
+    "A drop of water",
+    "A piece of rubber"
+   ],
+   "x": "A thin wire heats fast and melts – the circuit opens"
+  },
+  {
+   "he": "באיזה חיבור מחברים את הנתיך למכשיר שהוא מגן עליו?",
+   "a": "בטור",
+   "h": "4cc784c7",
+   "q": "How is a fuse connected to the appliance it protects?",
+   "o": [
+    "In series",
+    "In parallel",
+    "Without wires",
+    "It isn't connected"
+   ],
+   "x": "In series – when the fuse blows, the whole circuit opens"
+  },
+  {
+   "he": "מזגן, תנור וקומקום מחוברים לאותו מפצל. איך נקרא המצב?",
+   "a": "עומס יתר",
+   "h": "91a54ffe",
+   "q": "An air conditioner, an oven and a kettle share one power strip. What is this called?",
+   "o": [
+    "Overload",
+    "Low voltage",
+    "A burnt-out bulb",
+    "Normal operation"
+   ],
+   "x": "Together they draw too much current from one outlet"
+  },
+  {
+   "he": "למה זרם גדול מדי בחוטי הבית מסוכן?",
+   "a": "החוטים מתחממים",
+   "h": "f2236611",
+   "q": "Why is too much current in home wiring dangerous?",
+   "o": [
+    "The wires heat up",
+    "The wires cool down",
+    "The voltage disappears",
+    "The bulbs get dimmer"
+   ],
+   "x": "A wire that's too hot can melt insulation and cause a fire"
+  },
+  {
+   "he": "מהו קצר חשמלי?",
+   "a": "חוט שעוקף מכשיר",
+   "h": "bc63f3cf",
+   "q": "What is a short circuit?",
+   "o": [
+    "Wire bypassing a device",
+    "Overly long wire",
+    "Dead battery",
+    "Open switch"
+   ],
+   "x": "The current bypasses the device and grows very large"
+  },
+  {
+   "he": "הדליקו עוד מכשירים, המפסק בלוח קפץ והחשמל כבה. למה?",
+   "a": "עומס יתר",
+   "h": "cfd37b0c",
+   "q": "More appliances were turned on, the breaker tripped and the power went out. Why?",
+   "o": [
+    "Overload",
+    "The city's voltage dropped",
+    "The bulb cooled down",
+    "The battery ran out"
+   ],
+   "x": "The breaker cut the circuit before the wires overheated"
+  },
+  {
+   "he": "מה היתרון של מפסק אוטומטי על נתיך?",
+   "a": "מרימים אותו בחזרה",
+   "h": "115d0687",
+   "q": "What is the advantage of a circuit breaker over a fuse?",
+   "o": [
+    "You just reset it",
+    "It increases current",
+    "It saves voltage",
+    "No advantage"
+   ],
+   "x": "A blown fuse is replaced; a breaker is simply reset"
+  },
+  {
+   "he": "המפסק קופץ שוב ושוב. מה נכון לעשות?",
+   "a": "לקרוא לחשמלאי",
+   "h": "36d4ecf6",
+   "q": "The breaker trips again and again. Which of these should you do?",
+   "o": [
+    "Call an electrician",
+    "Bypass it with wire",
+    "Hold it up",
+    "Add a power strip"
+   ],
+   "x": "A breaker that keeps tripping signals a fault to fix"
+  },
+  {
+   "he": "איפה נמצאים המפסקים של כל המעגלים בבית?",
+   "a": "בלוח החשמל",
+   "h": "9e6c6080",
+   "q": "Where are the breakers for all the circuits in a home?",
+   "o": [
+    "In the electrical panel",
+    "Inside the bulbs",
+    "Inside the fridge",
+    "In the remote control"
+   ],
+   "x": "The panel has a breaker for each circuit in the home"
+  },
+  {
+   "he": "מה תפקיד מפסק הפחת?",
+   "a": "מנתק כשזרם דולף",
+   "h": "6aed5098",
+   "q": "What does a safety switch (RCD) do?",
+   "o": [
+    "Cuts off leaking current",
+    "Raises the voltage",
+    "Measures power use",
+    "Heats the water"
+   ],
+   "x": "If current leaks, e.g. through a person, it cuts the power at once"
+  },
+  {
+   "he": "מה תפקיד חוט ההארקה?",
+   "a": "מוביל זרם לאדמה",
+   "h": "a8cf1a7b",
+   "q": "What does the ground wire do?",
+   "o": [
+    "Leads current to earth",
+    "Increases the current",
+    "Turns the device on",
+    "Cools the wires"
+   ],
+   "x": "If the metal casing becomes live, current flows to earth, not through us"
+  },
+  {
+   "he": "לאיזה מכשיר חשוב במיוחד חיבור הארקה?",
+   "a": "מכונת כביסה",
+   "h": "a6a063cf",
+   "q": "Which appliance especially needs a ground connection?",
+   "o": [
+    "Washing machine",
+    "Battery flashlight",
+    "Wristwatch",
+    "Remote control"
+   ],
+   "x": "A metal body, water and outlet voltage – risk of electric shock"
+  },
+  {
+   "he": "למה מסוכן להשתמש במייבש שיער ליד אמבטיה מלאה?",
+   "a": "סכנת התחשמלות",
+   "h": "289ecb07",
+   "q": "Why is it dangerous to use a hair dryer near a full bathtub?",
+   "o": [
+    "Risk of electric shock",
+    "The water will cool",
+    "The dryer will rust",
+    "Hair will get tangled"
+   ],
+   "x": "If the dryer falls in, current passes through the water to the body"
+  },
+  {
+   "he": "בכבל של מטען רואים את חוטי הנחושת. מה עושים עם הכבל?",
+   "a": "מחליפים אותו",
+   "h": "1e2299c4",
+   "q": "The copper wires show through a charger's cable. What do you do with it?",
+   "o": [
+    "Replace it",
+    "Wrap it in paper",
+    "Keep using it",
+    "Touch it to check"
+   ],
+   "x": "A bare wire can give a shock – don't use it"
+  },
+  {
+   "he": "אדם מתחשמל ואי אפשר לנתק את החשמל. במה מרחיקים אותו?",
+   "a": "מקל עץ יבש",
+   "h": "04203377",
+   "q": "Someone is getting a shock and the power can't be cut. What do you push them with?",
+   "o": [
+    "A dry wooden stick",
+    "An iron rod",
+    "A wet towel",
+    "A metal ladle"
+   ],
+   "x": "Dry wood insulates – the current won't pass to you"
+  },
+  {
+   "he": "צעצוע נתקע על קו חשמל ברחוב. מה נכון לעשות?",
+   "a": "לא להתקרב ולדווח",
+   "h": "ece807ea",
+   "q": "A toy is stuck on a power line. Which of these should you do?",
+   "o": [
+    "Stay away and report",
+    "Climb up for it",
+    "Use a long stick",
+    "Throw stones at it"
+   ],
+   "x": "Street lines carry very high voltage – it's dangerous to get close"
+  },
+  {
+   "he": "למה שמים מגן על שקעים בבית שיש בו תינוק?",
+   "a": "שלא יכניס חפצים",
+   "h": "da3c2721",
+   "q": "Why put covers on outlets in a home with a baby?",
+   "o": [
+    "To keep objects out",
+    "To save electricity",
+    "To lower the voltage",
+    "To warm the outlet"
+   ],
+   "x": "A baby might push a metal object into the outlet"
+  },
+  {
+   "he": "איך מוציאים תקע מהשקע בבטחה?",
+   "a": "אוחזים בתקע",
+   "h": "1af3de7f",
+   "q": "What is the safe way to unplug a device from the outlet?",
+   "o": [
+    "Grip the plug",
+    "Pull the cord",
+    "With a wet hand",
+    "Using a fork"
+   ],
+   "x": "Pulling the cord can tear the wires inside it"
+  },
+  {
+   "he": "מה מהבאים מסוכן במיוחד להכניס לשקע?",
+   "a": "מזלג מתכת",
+   "h": "04aa460c",
+   "q": "Which of these is especially dangerous to put in an outlet?",
+   "o": [
+    "A metal fork",
+    "A wooden spoon",
+    "A plastic ruler",
+    "A rubber eraser"
+   ],
+   "x": "Metal conducts – current would pass through it to the body"
+  },
+  {
+   "he": "מהו כוח?",
+   "a": "דחיפה או משיכה",
+   "h": "83cce491",
+   "q": "What is a force?",
+   "o": [
+    "A push or pull",
+    "A type of energy",
+    "Speed",
+    "An object's mass"
+   ],
+   "x": "A force pushes or pulls an object"
+  },
+  {
+   "he": "באיזו יחידה מודדים כוח?",
+   "a": "ניוטון",
+   "h": "65349e83",
+   "q": "What unit is force measured in?",
+   "o": [
+    "Newton",
+    "Kilogram",
+    "Watt",
+    "Meter"
+   ],
+   "x": "Force – newton (N)"
+  },
+  {
+   "he": "איזה כוח מושך את התפוח אל הקרקע?",
+   "a": "כוח הכובד",
+   "h": "5aee0bfe",
+   "q": "Which force pulls the apple to the ground?",
+   "o": [
+    "Gravity",
+    "Friction",
+    "Magnetic force",
+    "Elastic force"
+   ],
+   "x": "Earth pulls every object toward it"
+  },
+  {
+   "he": "איזה כוח מאט כדור שמתגלגל על דשא?",
+   "a": "חיכוך עם הקרקע",
+   "h": "f1808b50",
+   "q": "Which force slows down a ball rolling on grass?",
+   "o": [
+    "Friction with the ground",
+    "Gravity",
+    "Magnetic force",
+    "Elastic force"
+   ],
+   "x": "Friction acts against the direction of motion"
+  },
+  {
+   "he": "מיתר הקשת נמתח ודוחף את החץ. איזה כוח זה?",
+   "a": "כוח אלסטי",
+   "h": "26445234",
+   "q": "A bowstring is stretched and pushes the arrow. Which force is this?",
+   "o": [
+    "Elastic force",
+    "Magnetic force",
+    "Friction",
+    "Gravity"
+   ],
+   "x": "A stretched object exerts an elastic force"
+  },
+  {
+   "he": "מגנט מושך מסמר. איזה כוח זה?",
+   "a": "כוח מגנטי",
+   "h": "4b9072e0",
+   "q": "A magnet pulls a nail. Which force is this?",
+   "o": [
+    "Magnetic force",
+    "Elastic force",
+    "Friction",
+    "Gravity"
+   ],
+   "x": "A magnet attracts iron"
+  },
+  {
+   "he": "איזה חפץ המגנט ימשוך?",
+   "a": "מסמר ברזל",
+   "h": "450c833e",
+   "q": "Which object will the magnet attract?",
+   "o": [
+    "An iron nail",
+    "A glass cup",
+    "A wooden pencil",
+    "A rubber eraser"
+   ],
+   "x": "A magnet attracts iron, nickel and cobalt"
+  },
+  {
+   "he": "שני מגנטים נמשכים. בקצה האחד קוטב צפוני. מה בקצה השני?",
+   "a": "קוטב דרומי",
+   "h": "726498c5",
+   "q": "Two magnets attract. One of the facing ends is a north pole. What is the other?",
+   "o": [
+    "South pole",
+    "North pole",
+    "Positive pole",
+    "Negative pole"
+   ],
+   "x": "Opposite poles attract each other"
+  },
+  {
+   "he": "איזה כוח פועל על כל גוף שיש לו מסה, גם בלי מגע?",
+   "a": "כוח הכובד",
+   "h": "77983d24",
+   "q": "Which force acts on every object with mass, even without contact?",
+   "o": [
+    "Gravity",
+    "Friction",
+    "A push by hand",
+    "Elastic force"
+   ],
+   "x": "Earth pulls even from a distance"
+  },
+  {
+   "he": "אסטרונאוט שוקל ⁦720⁩ ניוטון בכדור הארץ. כמה ישקול על הירח?",
+   "a": "120 ניוטון",
+   "h": "01de875b",
+   "q": "An astronaut weighs 720 N on Earth. How much will he weigh on the Moon?",
+   "o": [
+    "120 N",
+    "720 N",
+    "360 N",
+    "72 N"
+   ],
+   "x": "On the Moon, weight is one-sixth: 720 ÷ 6"
+  },
+  {
+   "he": "איך מקטינים חיכוך במכונה?",
+   "a": "שמן סיכה",
+   "h": "7220c7e5",
+   "q": "What do you use to reduce friction in a machine?",
+   "o": [
+    "Lubricating oil",
+    "Sand",
+    "Glue",
+    "Rough rubber"
+   ],
+   "x": "Oil helps the parts slide"
+  },
+  {
+   "he": "למה יש חריצים בצמיגים?",
+   "a": "להגדיל חיכוך",
+   "h": "e4e51672",
+   "q": "Why do tires have grooves?",
+   "o": [
+    "To increase friction",
+    "To reduce friction",
+    "To increase speed",
+    "To save rubber"
+   ],
+   "x": "Good grip on the road, even in the rain"
+  },
+  {
+   "he": "למה קל להחליק על קרח?",
+   "a": "החיכוך קטן",
+   "h": "63762d3b",
+   "q": "Why is it easy to slip on ice?",
+   "o": [
+    "Friction is low",
+    "Friction is high",
+    "Gravity is strong",
+    "Ice is magnetic"
+   ],
+   "x": "A smooth surface – low friction"
+  },
+  {
+   "he": "איזה כוח עוזר לנו ללכת בלי להחליק?",
+   "a": "חיכוך עם הקרקע",
+   "h": "92ae0f06",
+   "q": "Which force helps us walk without slipping?",
+   "o": [
+    "Friction with the ground",
+    "Magnetic force",
+    "Elastic force",
+    "Air resistance"
+   ],
+   "x": "The shoe grips the floor"
+  },
+  {
+   "he": "גוף במסה 2 ק״ג. מה משקלו בכדור הארץ?",
+   "a": "20 ניוטון",
+   "h": "328b8128",
+   "q": "An object has a mass of 2 kg. What is its weight on Earth?",
+   "o": [
+    "20 N",
+    "2 N",
+    "200 N",
+    "10 N"
+   ],
+   "x": "Each kg weighs about 10 N",
+   "sc": {
+    "1": "2 kg"
+   }
+  },
+  {
+   "he": "המשקל של גוף הוא…",
+   "a": "כוח הכובד עליו",
+   "h": "111a9655",
+   "q": "The weight of an object is…",
+   "o": [
+    "Gravity's pull on it",
+    "Its amount of matter",
+    "Its volume",
+    "Its friction"
+   ],
+   "x": "Weight is a force, measured in newtons"
+  },
+  {
+   "he": "קפיץ נמתח ⁦2⁩ ס״מ לכל ניוטון. איזה כוח מותח אותו ⁦6⁩ ס״מ?",
+   "a": "3 ניוטון",
+   "h": "9e4b3439",
+   "q": "A spring stretches 2 cm per newton. What force stretches it 6 cm?",
+   "o": [
+    "3 N",
+    "12 N",
+    "6 N",
+    "8 N"
+   ],
+   "x": "The stretch is proportional to the force: 6 ÷ 2 = 3"
+  },
+  {
+   "he": "דף נייר נופל לאט. מה מאט אותו?",
+   "a": "התנגדות האוויר",
+   "h": "d2e36f8e",
+   "q": "A sheet of paper falls slowly. What slows it down?",
+   "o": [
+    "Air resistance",
+    "Magnetic force",
+    "Elastic force",
+    "Gravity"
+   ],
+   "x": "The air pushes against the paper's motion"
+  },
+  {
+   "he": "חללית רחוקה מאוד מכל כוכב. כוח הכובד עליה…",
+   "a": "קטן מאוד",
+   "h": "67e1e348",
+   "q": "A spaceship is very far from any star. The gravity on it is…",
+   "o": [
+    "Very small",
+    "Very large",
+    "Same as on Earth",
+    "Pushing it away"
+   ],
+   "x": "Gravity gets weaker with distance"
+  },
+  {
+   "he": "מה מגדיל חיכוך?",
+   "a": "משטח מחוספס",
+   "h": "1810f486",
+   "q": "What increases friction?",
+   "o": [
+    "A rough surface",
+    "A smooth surface",
+    "Oil",
+    "Wheels"
+   ],
+   "x": "Rougher – more friction"
+  },
+  {
+   "he": "שני ילדים דוחפים ארגז לאותו כיוון. מה הכוח השקול?",
+   "a": "50 ניוטון",
+   "h": "52a778b6",
+   "q": "Two kids push a crate in the same direction. What is the net force?",
+   "o": [
+    "50 N",
+    "10 N",
+    "30 N",
+    "0 N"
+   ],
+   "x": "Same direction – add: 30 + 20"
+  },
+  {
+   "he": "משיכת חבל: מה הכוח השקול?",
+   "a": "20 ניוטון ימינה",
+   "h": "1e66396f",
+   "q": "Tug-of-war: what is the net force?",
+   "o": [
+    "20 N right",
+    "180 N right",
+    "20 N left",
+    "0 N"
+   ],
+   "x": "Opposite directions – subtract: 100 − 80"
+  },
+  {
+   "he": "שתי הקבוצות מושכות את החבל בכוח שווה. מה הכוח השקול?",
+   "a": "אפס",
+   "h": "e68a9caf",
+   "q": "Both teams pull the rope with equal force. What is the net force?",
+   "o": [
+    "Zero",
+    "200 N",
+    "400 N",
+    "100 N"
+   ],
+   "x": "Zero net force – no change in motion"
+  },
+  {
+   "he": "הכוח השקול על גוף במנוחה הוא אפס. מה יקרה?",
+   "a": "יישאר במנוחה",
+   "h": "de8a82ae",
+   "q": "The net force on an object at rest is zero. What will happen?",
+   "o": [
+    "It stays at rest",
+    "It starts moving",
+    "It falls",
+    "It speeds up"
+   ],
+   "x": "No net force – no change"
+  },
+  {
+   "he": "כוחות שווים בגודל והפוכים בכיוון נקראים…",
+   "a": "כוחות מאוזנים",
+   "h": "80a8f2de",
+   "q": "Forces equal in size and opposite in direction are called…",
+   "o": [
+    "Balanced forces",
+    "Unbalanced forces",
+    "Magnetic forces",
+    "Elastic forces"
+   ],
+   "x": "They cancel each other out"
+  },
+  {
+   "he": "מתי משתנה מהירות הגוף?",
+   "a": "כשיש כוח שקול",
+   "h": "c52b93dc",
+   "q": "When does an object's speed change?",
+   "o": [
+    "With a net force",
+    "With no forces",
+    "With balanced forces",
+    "Never"
+   ],
+   "x": "Only a net force changes speed"
+  },
+  {
+   "he": "מכונית נוסעת ישר במהירות קבועה. מה הכוח השקול?",
+   "a": "אפס",
+   "h": "e279070d",
+   "q": "A car drives straight at a constant speed. What is the net force?",
+   "o": [
+    "Zero",
+    "In the driving direction",
+    "Against the motion",
+    "Downward"
+   ],
+   "x": "Constant speed – the forces are balanced"
+  },
+  {
+   "he": "דוחפים ארגז ב-50 ניוטון, החיכוך 20 ניוטון. מה השקול?",
+   "a": "30 ניוטון",
+   "h": "21fc0587",
+   "q": "A crate is pushed with 50 N, and friction is 20 N. What is the net force?",
+   "o": [
+    "30 N",
+    "70 N",
+    "20 N",
+    "50 N"
+   ],
+   "x": "50 − 20 = 30, in the direction of the push"
+  },
+  {
+   "he": "ספר מונח על שולחן. אילו כוחות פועלים עליו?",
+   "a": "כובד ותמיכה",
+   "h": "50e714d6",
+   "q": "A book lies on a table. Which forces act on it?",
+   "o": [
+    "Gravity and support force",
+    "Only gravity",
+    "No forces",
+    "Only friction"
+   ],
+   "x": "The table pushes up, gravity pulls down"
+  },
+  {
+   "he": "מה הכוח השקול על תפוח שתלוי על עץ?",
+   "a": "אפס",
+   "h": "44443b8d",
+   "q": "What is the net force on an apple hanging on a tree?",
+   "o": [
+    "Zero",
+    "Downward",
+    "Upward",
+    "Sideways"
+   ],
+   "x": "The apple is at rest – the forces are balanced"
+  },
+  {
+   "he": "האוטובוס בולם, והנוסעים נזרקים קדימה. איזה חוק מסביר זאת?",
+   "a": "חוק ההתמדה",
+   "h": "b0b474ca",
+   "q": "The bus brakes and the passengers are thrown forward. Which law explains this?",
+   "o": [
+    "The law of inertia",
+    "The third law",
+    "The second law",
+    "Conservation of mass"
+   ],
+   "x": "The body keeps on moving"
+  },
+  {
+   "he": "החוק הראשון של ניוטון נקרא גם…",
+   "a": "חוק ההתמדה",
+   "h": "eb82c8c2",
+   "q": "Newton's first law is also called…",
+   "o": [
+    "The law of inertia",
+    "The law of gravitation",
+    "Conservation of mass",
+    "Ohm's law"
+   ],
+   "x": "An object keeps its state of motion"
+  },
+  {
+   "he": "בבלימה חזקה, מפני מה מגינה חגורת הבטיחות?",
+   "a": "תנועה קדימה בהתמדה",
+   "h": "000b0512",
+   "q": "In hard braking, what does the seat belt protect you from?",
+   "o": [
+    "Moving forward by inertia",
+    "The engine's heat",
+    "The magnet's force",
+    "Wind from the window"
+   ],
+   "x": "The body keeps going forward – the belt stops it"
+  },
+  {
+   "he": "אותו כוח על כדור קל ועל כדור כבד. מי יאיץ יותר?",
+   "a": "הכדור הקל",
+   "h": "54146614",
+   "q": "The same force acts on a light ball and a heavy ball. Which accelerates more?",
+   "o": [
+    "The light ball",
+    "The heavy ball",
+    "Both equally",
+    "Neither"
+   ],
+   "x": "Smaller mass – greater acceleration"
+  },
+  {
+   "he": "בועטים חזק יותר באותו כדור. מה יקרה?",
+   "a": "יאיץ יותר",
+   "h": "16fc6bf3",
+   "q": "You kick the same ball harder. What will happen?",
+   "o": [
+    "It accelerates more",
+    "It accelerates less",
+    "Nothing changes",
+    "It stops"
+   ],
+   "x": "A greater force – a greater acceleration"
+  },
+  {
+   "he": "החוק השני של ניוטון קושר בין…",
+   "a": "כוח, מסה ותאוצה",
+   "h": "97a146d6",
+   "q": "Newton's second law links…",
+   "o": [
+    "Force, mass and acceleration",
+    "Voltage, current and resistance",
+    "Time, color and heat",
+    "Volume, mass and density"
+   ],
+   "x": "⁦F = m × a⁩"
+  },
+  {
+   "he": "דוחפים קיר. מה עושה הקיר?",
+   "a": "דוחף אותך חזרה",
+   "h": "db83c7cf",
+   "q": "You push a wall. What does the wall do?",
+   "o": [
+    "Pushes you back",
+    "Exerts no force",
+    "Pulls you",
+    "Moves a little"
+   ],
+   "x": "The third law: action and reaction"
+  },
+  {
+   "he": "רקטה פולטת גזים למטה ועולה למעלה. איזה חוק?",
+   "a": "החוק השלישי",
+   "h": "4834e08c",
+   "q": "A rocket pushes out gases downward and rises. Which law is this?",
+   "o": [
+    "The third law",
+    "The first law",
+    "The second law",
+    "Conservation of mass"
+   ],
+   "x": "The gases push the rocket the opposite way"
+  },
+  {
+   "he": "שחיין דוחף בידיו אחורה. מה דוחף אותו קדימה?",
+   "a": "המים",
+   "h": "64612fb8",
+   "q": "A swimmer pushes backward with their hands. What pushes them forward?",
+   "o": [
+    "The water",
+    "Gravity",
+    "The air",
+    "The pool floor"
+   ],
+   "x": "Action and reaction – the water pushes them back"
+  },
+  {
+   "he": "כדור שמתגלגל על הרצפה בסוף נעצר. למה?",
+   "a": "חיכוך עוצר אותו",
+   "h": "aff5c09d",
+   "q": "A ball rolling on the floor finally stops. Why?",
+   "o": [
+    "Friction stops it",
+    "Its force ran out",
+    "Inertia stops it",
+    "Gravity pushes it back"
+   ],
+   "x": "Without friction, it would keep going"
+  },
+  {
+   "he": "בחלל, בלי חיכוך, אבן נזרקה. מה יקרה לה?",
+   "a": "תמשיך לנוע",
+   "h": "9a322300",
+   "q": "In space, with no friction, a stone is thrown. What will happen to it?",
+   "o": [
+    "It keeps moving",
+    "It stops at once",
+    "It comes back",
+    "It slowly slows down"
+   ],
+   "x": "Inertia: no force – no change"
+  },
+  {
+   "he": "מהירות שווה דרך חלקי…",
+   "a": "זמן",
+   "h": "abbfe07f",
+   "q": "Speed equals distance divided by…",
+   "o": [
+    "Time",
+    "Mass",
+    "Force",
+    "Distance"
+   ],
+   "x": "Speed = distance ÷ time",
+   "sc": {
+    "0": "v = d ÷ ?"
+   }
+  },
+  {
+   "he": "רץ עבר 100 מטר ב-20 שניות. מה מהירותו?",
+   "a": "5 מטר לשנייה",
+   "h": "ea5d53d4",
+   "q": "A runner covered 100 m in 20 seconds. What is the runner's speed?",
+   "o": [
+    "5 m/s",
+    "2000 m/s",
+    "80 m/s",
+    "0.2 m/s"
+   ],
+   "x": "⁦100 ÷ 20 = 5⁩"
+  },
+  {
+   "he": "מכונית נסעה 120 ק״מ בשעתיים. מה מהירותה?",
+   "a": "60 קמ״ש",
+   "h": "64f96d29",
+   "q": "A car drove 120 km in two hours. What was its speed?",
+   "o": [
+    "60 km/h",
+    "240 km/h",
+    "120 km/h",
+    "30 km/h"
+   ],
+   "x": "⁦120 ÷ 2 = 60⁩"
+  },
+  {
+   "he": "רוכב נוסע 15 קמ״ש במשך שעתיים. כמה ק״מ עבר?",
+   "a": "30 ק״מ",
+   "h": "09c85f34",
+   "q": "A cyclist rides at 15 km/h for two hours. How many km does he cover?",
+   "o": [
+    "30 km",
+    "7.5 km",
+    "17 km",
+    "15 km"
+   ],
+   "x": "Distance = speed × time: 15 × 2"
+  },
+  {
+   "he": "רצה במהירות 5 מטר לשנייה. כמה זמן ל-400 מטר?",
+   "a": "80 שניות",
+   "h": "4bcf850d",
+   "q": "A runner runs at 5 m/s. How long does 400 m take her?",
+   "o": [
+    "80 seconds",
+    "2000 seconds",
+    "405 seconds",
+    "8 seconds"
+   ],
+   "x": "Time = distance ÷ speed: 400 ÷ 5"
+  },
+  {
+   "he": "באיזו יחידה מודדים מהירות של מכונית?",
+   "a": "קמ״ש",
+   "h": "f8a93650",
+   "q": "What unit is a car's speed measured in?",
+   "o": [
+    "km/h",
+    "km",
+    "Hour",
+    "Newton"
+   ],
+   "x": "Kilometers per hour – distance divided by time"
+  },
+  {
+   "he": "מי הרץ המהיר ביותר בטבלה?",
+   "a": "רץ א",
+   "h": "0f4980c9",
+   "q": "Who is the fastest runner in the table?",
+   "o": [
+    "Runner A",
+    "Runner B",
+    "Runner C",
+    "All the same"
+   ],
+   "x": "The same distance in the shortest time",
+   "sc": {
+    "0": "Runner",
+    "1": "C",
+    "2": "B",
+    "3": "A",
+    "4": "m",
+    "8": "s",
+    "9": "20",
+    "11": "12"
+   }
+  },
+  {
+   "he": "טיול של 200 ק״מ ארך 4 שעות. מה המהירות הממוצעת?",
+   "a": "50 קמ״ש",
+   "h": "2cc35bc8",
+   "q": "A 200 km trip took 4 hours. What was the average speed?",
+   "o": [
+    "50 km/h",
+    "800 km/h",
+    "204 km/h",
+    "40 km/h"
+   ],
+   "x": "⁦200 ÷ 4 = 50⁩"
+  },
+  {
+   "he": "חילזון זוחל סנטימטר אחד בשנייה. כמה ס״מ יעבור בדקה?",
+   "a": "60 ס״מ",
+   "h": "77046769",
+   "q": "A snail crawls one centimeter per second. How many cm will it crawl in a minute?",
+   "o": [
+    "60 cm",
+    "1 cm",
+    "10 cm",
+    "100 cm"
+   ],
+   "x": "A minute has 60 seconds"
+  },
+  {
+   "he": "שתי מכוניות נסעו שעה: א 80 ק״מ, ב 60 ק״מ. מי מהירה?",
+   "a": "מכונית א",
+   "h": "7847ce04",
+   "q": "In one hour, one car went 80 km and another went 60 km. Which was faster?",
+   "o": [
+    "The 80 km car",
+    "The 60 km car",
+    "Both the same",
+    "We can't tell"
+   ],
+   "x": "In the same time, A covered a longer distance"
+  },
+  {
+   "he": "איזו תנועה מראה הגרף?",
+   "a": "מהירות קבועה",
+   "h": "e098e3ca",
+   "q": "What kind of motion does the graph show?",
+   "o": [
+    "Constant speed",
+    "At rest",
+    "Slowing down",
+    "Speeding up"
+   ],
+   "x": "Each second, the same distance is added",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "לפי הגרף, מה עושה הגוף?",
+   "a": "עומד במקום",
+   "h": "c6d10f33",
+   "q": "According to the graph, what is the object doing?",
+   "o": [
+    "Standing still",
+    "Moving fast",
+    "Speeding up",
+    "Going back"
+   ],
+   "x": "Its position doesn't change over time",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "מה המהירות לפי הטבלה?",
+   "a": "5 מטר לשנייה",
+   "h": "ee62bc5b",
+   "q": "What is the speed according to the table?",
+   "o": [
+    "5 m/s",
+    "10 m/s",
+    "2 m/s",
+    "30 m/s"
+   ],
+   "x": "Every 2 seconds, another 10 meters",
+   "sc": {
+    "0": "6",
+    "1": "4",
+    "2": "2",
+    "3": "0",
+    "4": "s",
+    "5": "30",
+    "6": "20",
+    "7": "10",
+    "8": "0",
+    "9": "m"
+   }
+  },
+  {
+   "he": "לפי הכרטיס, איזה גוף מהיר יותר?",
+   "a": "גוף א",
+   "h": "ace0f0b7",
+   "q": "According to the card, which object is faster?",
+   "o": [
+    "Object A",
+    "Object B",
+    "Both the same",
+    "Neither"
+   ],
+   "x": "A steep line – more distance in the same time",
+   "sc": {
+    "0": "Object A: steep",
+    "1": "Object B: gentle"
+   }
+  },
+  {
+   "he": "לפי הגרף, מה קורה למהירות הגוף?",
+   "a": "גדלה",
+   "h": "194a7605",
+   "q": "According to the graph, what happens to the object's speed?",
+   "o": [
+    "It increases",
+    "It stays constant",
+    "It decreases",
+    "It is zero"
+   ],
+   "x": "Each second it covers more meters",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "לפי הגרף, איך משתנה מהירות הגוף?",
+   "a": "קטנה",
+   "h": "371343bf",
+   "q": "According to the graph, how does the object's speed change?",
+   "o": [
+    "It decreases",
+    "It increases",
+    "It stays constant",
+    "It doesn't move"
+   ],
+   "x": "Each second it covers fewer meters",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "המרחק מהבית קטן עם הזמן. מה עושה הילד?",
+   "a": "חוזר הביתה",
+   "h": "8fa8184d",
+   "q": "The distance from home gets smaller over time. What is the child doing?",
+   "o": [
+    "Going back home",
+    "Moving away from home",
+    "Standing still",
+    "Speeding away from home"
+   ],
+   "x": "The distance from home goes down",
+   "sc": {
+    "8": "Dist",
+    "9": "min"
+   }
+  },
+  {
+   "he": "לפי הטבלה, כמה ק״מ ייסע הרכב אחרי 4 שעות?",
+   "a": "240 ק״מ",
+   "h": "378876a3",
+   "q": "According to the table, how far will the car travel in 4 hours?",
+   "o": [
+    "240 km",
+    "180 km",
+    "200 km",
+    "300 km"
+   ],
+   "x": "60 km each hour: 60 × 4",
+   "sc": {
+    "0": "3",
+    "1": "2",
+    "2": "1",
+    "3": "h",
+    "4": "180",
+    "5": "120",
+    "6": "60",
+    "7": "km"
+   }
+  },
+  {
+   "he": "מה עושה הגוף בין שנייה 1 לשנייה 2?",
+   "a": "עומד במקום",
+   "h": "55f594f9",
+   "q": "What is the object doing between second 1 and second 2?",
+   "o": [
+    "Standing still",
+    "Speeding up",
+    "Going back",
+    "Moving fast"
+   ],
+   "x": "Its position didn't change – the object stood still",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "מה מראה השיפוע בגרף דרך-זמן?",
+   "a": "את המהירות",
+   "h": "5a403450",
+   "q": "What does the slope of a distance-time graph show?",
+   "o": [
+    "The speed",
+    "The mass",
+    "The force",
+    "The temperature"
+   ],
+   "x": "A steeper slope – a greater speed",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "כמה הורים משתתפים ברבייה מינית?",
+   "a": "שני הורים",
+   "h": "74a64fa4",
+   "q": "How many parents take part in sexual reproduction?",
+   "o": [
+    "Two parents",
+    "One parent",
+    "No parents",
+    "Three parents"
+   ],
+   "x": "A sperm cell from the male and an egg from the female"
+  },
+  {
+   "he": "כמה הורים יש ברבייה אל-מינית?",
+   "a": "הורה אחד",
+   "h": "466ff0bf",
+   "q": "How many parents are there in asexual reproduction?",
+   "o": [
+    "One parent",
+    "Two parents",
+    "Three parents",
+    "No parents"
+   ],
+   "x": "The offspring come from a single parent"
+  },
+  {
+   "he": "צאצאים מרבייה אל-מינית הם…",
+   "a": "זהים להורה",
+   "h": "235ee1a8",
+   "q": "Offspring from asexual reproduction are…",
+   "o": [
+    "Identical to the parent",
+    "Very unlike the parent",
+    "Different from each other",
+    "Similar to two parents"
+   ],
+   "x": "They are copies of the parent"
+  },
+  {
+   "he": "מה היתרון של רבייה מינית?",
+   "a": "מגוון בין הצאצאים",
+   "h": "9fb036f3",
+   "q": "What is the advantage of sexual reproduction?",
+   "o": [
+    "Variety among offspring",
+    "It's faster",
+    "Needs only one parent",
+    "Identical offspring"
+   ],
+   "x": "Variety helps living things adapt to changes"
+  },
+  {
+   "he": "מה היתרון של רבייה אל-מינית?",
+   "a": "מהירה ופשוטה",
+   "h": "e694a6cf",
+   "q": "What is the advantage of asexual reproduction?",
+   "o": [
+    "Fast and simple",
+    "Great variety",
+    "Needs a mate",
+    "Different offspring"
+   ],
+   "x": "There's no need to find a mate"
+  },
+  {
+   "he": "איך נקרא האיחוד של תא זרע וביצית?",
+   "a": "הפריה",
+   "h": "83f05a42",
+   "q": "What is the joining of a sperm cell and an egg called?",
+   "o": [
+    "Fertilization",
+    "Pollination",
+    "Germination",
+    "Division"
+   ],
+   "x": "Fertilization – the start of a new organism"
+  },
+  {
+   "he": "פקעת של תפוח אדמה מצמיחה צמח חדש. איזו רבייה זו?",
+   "a": "אל-מינית",
+   "h": "02a53246",
+   "q": "A potato tuber grows a new plant. Which type of reproduction is this?",
+   "o": [
+    "Asexual",
+    "Sexual",
+    "By seeds",
+    "By pollination"
+   ],
+   "x": "A part of the plant – no fertilization"
+  },
+  {
+   "he": "שותלים ייחור (ענף) של גפן. איזו רבייה זו?",
+   "a": "אל-מינית",
+   "h": "aa5bccdd",
+   "q": "A grapevine cutting (a branch) is planted. Which type of reproduction is this?",
+   "o": [
+    "Asexual",
+    "Sexual",
+    "By seeds",
+    "By eggs"
+   ],
+   "x": "The new plant is identical to the vine it came from"
+  },
+  {
+   "he": "איך נקרא התהליך שבו חיידק אחד הופך לשניים?",
+   "a": "התחלקות",
+   "h": "68dd5052",
+   "q": "What do we call the process in which one bacterium becomes two?",
+   "o": [
+    "Division",
+    "Fertilization",
+    "Pollination",
+    "Egg laying"
+   ],
+   "x": "One cell splits into two"
+  },
+  {
+   "he": "תות שדה מצמיח צמחים חדשים משלוחות. מה נכון עליהם?",
+   "a": "זהים להורה",
+   "h": "ffa2d654",
+   "q": "A strawberry plant grows new plants from runners. What is true about them?",
+   "o": [
+    "Identical to the parent",
+    "Different from the parent",
+    "Grown from seeds",
+    "Made by fertilization"
+   ],
+   "x": "Runners – asexual reproduction"
+  },
+  {
+   "he": "מהו איבר הרבייה של צמח פורח?",
+   "a": "הפרח",
+   "h": "a0d02910",
+   "q": "What is the reproductive organ of a flowering plant?",
+   "o": [
+    "The flower",
+    "The root",
+    "The leaf",
+    "The stem"
+   ],
+   "x": "Reproductive cells form in the flower"
+  },
+  {
+   "he": "איך נקרא מעבר אבקה מאבקן לצלקת?",
+   "a": "האבקה",
+   "h": "c5cc5873",
+   "q": "What is the transfer of pollen from a stamen to a stigma called?",
+   "o": [
+    "Pollination",
+    "Fertilization",
+    "Germination",
+    "Division"
+   ],
+   "x": "Pollination comes before fertilization"
+  },
+  {
+   "he": "מי מעביר אבקה בין פרחים?",
+   "a": "חרקים ורוח",
+   "h": "906cbb52",
+   "q": "What carries pollen between flowers?",
+   "o": [
+    "Insects and wind",
+    "Roots and leaves",
+    "Stones and sand",
+    "Light and heat"
+   ],
+   "x": "Bees, butterflies – and the wind too"
+  },
+  {
+   "he": "איפה נוצרים גרגרי האבקה?",
+   "a": "באבקנים",
+   "h": "1622abfc",
+   "q": "Where are pollen grains made?",
+   "o": [
+    "In the stamens",
+    "In the petals",
+    "In the root",
+    "In the stigma"
+   ],
+   "x": "The stamen – the flower's male part"
+  },
+  {
+   "he": "מהו החלק הנקבי בפרח?",
+   "a": "העלי",
+   "h": "cde65e02",
+   "q": "What is the female part of a flower?",
+   "o": [
+    "The pistil",
+    "The stamen",
+    "A petal",
+    "The stem"
+   ],
+   "x": "Pistil: stigma, style and ovary"
+  },
+  {
+   "he": "למה הופכת השחלה של הפרח אחרי ההפריה?",
+   "a": "לפרי",
+   "h": "8af9e10a",
+   "q": "What does a flower's ovary become after fertilization?",
+   "o": [
+    "A fruit",
+    "A leaf",
+    "A root",
+    "A stem"
+   ],
+   "x": "The fruit surrounds the seeds"
+  },
+  {
+   "he": "מה צריך זרע כדי לנבוט?",
+   "a": "מים, חום ואוויר",
+   "h": "5d389645",
+   "q": "What does a seed need to germinate?",
+   "o": [
+    "Water, warmth and air",
+    "Only light",
+    "Only soil",
+    "Salt and sun"
+   ],
+   "x": "Most seeds germinate even in the dark"
+  },
+  {
+   "he": "למה לפרחים צבעים וצוף מתוק?",
+   "a": "למשוך מאביקים",
+   "h": "8b76eff3",
+   "q": "Why do flowers have colors and sweet nectar?",
+   "o": [
+    "To attract pollinators",
+    "To keep insects away",
+    "To take in water",
+    "To make roots"
+   ],
+   "x": "The insect comes for nectar and picks up pollen."
+  },
+  {
+   "he": "ציפור אוכלת פרי עסיסי. במה היא עוזרת לצמח?",
+   "a": "בפיזור זרעים",
+   "h": "9ffa0131",
+   "q": "A bird eats a juicy fruit. How does it help the plant?",
+   "o": [
+    "By spreading seeds",
+    "By pollinating it",
+    "By photosynthesis",
+    "By watering it"
+   ],
+   "x": "The seeds come out somewhere else."
+  },
+  {
+   "he": "לזרעים שנישאים ברוח יש בדרך כלל…",
+   "a": "כנפיים או ציצית",
+   "h": "8866ec1b",
+   "q": "Seeds carried by the wind usually have…",
+   "o": [
+    "Wings or tufts",
+    "A thick, heavy shell",
+    "Juicy fruit",
+    "Sticky spines"
+   ],
+   "x": "Light parts that the wind can carry."
+  },
+  {
+   "he": "מה השלב שבין הזחל לפרפר?",
+   "a": "גולם",
+   "h": "62da1cf8",
+   "q": "What stage comes between the caterpillar and the butterfly?",
+   "o": [
+    "Pupa",
+    "Egg",
+    "Tadpole",
+    "Embryo"
+   ],
+   "x": "Egg → caterpillar → pupa → butterfly"
+  },
+  {
+   "he": "ראשן הוא שלב בהתפתחות של…",
+   "a": "צפרדע",
+   "h": "b10bcfaa",
+   "q": "A tadpole is a stage in the development of a…",
+   "o": [
+    "Frog",
+    "Butterfly",
+    "Chicken",
+    "Fish"
+   ],
+   "x": "A tadpole lives in water and breathes with gills."
+  },
+  {
+   "he": "איזה חרק עובר גלגול חסר?",
+   "a": "חגב",
+   "h": "536ae9c5",
+   "q": "Which insect goes through incomplete metamorphosis?",
+   "o": [
+    "Grasshopper",
+    "Butterfly",
+    "Bee",
+    "Beetle"
+   ],
+   "x": "Incomplete metamorphosis – no pupa stage."
+  },
+  {
+   "he": "הפריה פנימית מתרחשת…",
+   "a": "בתוך גוף הנקבה",
+   "h": "0eedbda7",
+   "q": "Internal fertilization takes place…",
+   "o": [
+    "Inside the female's body",
+    "In water",
+    "Outside the body",
+    "Inside the flower"
+   ],
+   "x": "This happens in mammals, birds and reptiles."
+  },
+  {
+   "he": "לרוב הדגים יש הפריה…",
+   "a": "חיצונית",
+   "h": "2c25af21",
+   "q": "In most fish, fertilization is…",
+   "o": [
+    "External",
+    "Internal",
+    "Asexual",
+    "Without eggs"
+   ],
+   "x": "The eggs are fertilized in the water."
+  },
+  {
+   "he": "למה דגים מטילים אלפי ביצים?",
+   "a": "רובן נאכלות",
+   "h": "b315eac9",
+   "q": "Why do fish lay thousands of eggs?",
+   "o": [
+    "Most get eaten",
+    "They are big",
+    "They are hard",
+    "They are mammals"
+   ],
+   "x": "This way at least some will survive."
+  },
+  {
+   "he": "באיזה איבר מתפתח העובר של יונקים?",
+   "a": "ברחם",
+   "h": "1fe75bca",
+   "q": "In which organ does a mammal's embryo develop?",
+   "o": [
+    "In the uterus",
+    "In the ovary",
+    "In the stomach",
+    "In the heart"
+   ],
+   "x": "The embryo grows in the uterus, inside the mother's body."
+  },
+  {
+   "he": "מה תפקיד החלמון בביצת תרנגולת?",
+   "a": "מזון לעובר",
+   "h": "dc3696a0",
+   "q": "What is the job of the yolk in a chicken egg?",
+   "o": [
+    "Food for the embryo",
+    "Protection from outside",
+    "Air for the embryo",
+    "Waste"
+   ],
+   "x": "The yolk feeds the embryo."
+  },
+  {
+   "he": "מה תפקיד קליפת הביצה?",
+   "a": "הגנה על העובר",
+   "h": "8d485197",
+   "q": "What is the job of the eggshell?",
+   "o": [
+    "Protecting the embryo",
+    "Feeding the embryo",
+    "Warming the nest",
+    "Attracting mates"
+   ],
+   "x": "The hard shell protects it."
+  },
+  {
+   "he": "ההורים מאכילים את הגורים ומגינים עליהם. איך נקראת התנהגות זו?",
+   "a": "טיפול הורי",
+   "h": "7d26f33e",
+   "q": "The parents feed their young and protect them. What is this behavior called?",
+   "o": [
+    "Parental care",
+    "Internal fertilization",
+    "Complete metamorphosis",
+    "Asexual reproduction"
+   ],
+   "x": "This way more offspring survive, even when there are few."
+  },
+  {
+   "he": "מה תפקיד השליה בהיריון?",
+   "a": "העברת מזון וחמצן",
+   "h": "6924833f",
+   "q": "What is the job of the placenta in pregnancy?",
+   "o": [
+    "Passing food and oxygen",
+    "Making egg cells",
+    "Digesting food",
+    "Filtering air"
+   ],
+   "x": "Food and oxygen pass through it from the mother's blood to the embryo."
+  },
+  {
+   "he": "כמה זמן נמשך היריון אצל אדם?",
+   "a": "כ-9 חודשים",
+   "h": "5daeffd9",
+   "q": "How long does a human pregnancy last?",
+   "o": [
+    "About 9 months",
+    "About 3 months",
+    "About 6 months",
+    "About 12 months"
+   ],
+   "x": "About 40 weeks."
+  },
+  {
+   "he": "דרך מה העובר מקבל מזון וחמצן?",
+   "a": "חבל הטבור",
+   "h": "40f7093a",
+   "q": "Through what does the embryo get food and oxygen?",
+   "o": [
+    "The umbilical cord",
+    "The mouth",
+    "The lungs",
+    "The skin"
+   ],
+   "x": "The umbilical cord connects it to the placenta."
+  },
+  {
+   "he": "איך נקראים תאי הרבייה של האישה?",
+   "a": "ביציות",
+   "h": "a6470e2a",
+   "q": "What are a woman's reproductive cells called?",
+   "o": [
+    "Egg cells",
+    "Sperm cells",
+    "Pollen grains",
+    "Seeds"
+   ],
+   "x": "Egg cells form in the ovaries."
+  },
+  {
+   "he": "איך נקראים תאי הרבייה של הגבר?",
+   "a": "תאי זרע",
+   "h": "975b2e36",
+   "q": "What are a man's reproductive cells called?",
+   "o": [
+    "Sperm cells",
+    "Egg cells",
+    "Pollen grains",
+    "Spores"
+   ],
+   "x": "Sperm cells form in the testes."
+  },
+  {
+   "he": "מה גורם לשינויים בגוף בגיל ההתבגרות?",
+   "a": "הורמונים",
+   "h": "933fdfd4",
+   "q": "What causes the changes in the body during puberty?",
+   "o": [
+    "Hormones",
+    "Vitamins",
+    "Bacteria",
+    "Spicy food"
+   ],
+   "x": "Hormones – substances that carry \"instructions\" in the body."
+  },
+  {
+   "he": "מה קורה לקול של בנים בגיל ההתבגרות?",
+   "a": "הקול מעמיק",
+   "h": "cb75ff3e",
+   "q": "What happens to a boy's voice during puberty?",
+   "o": [
+    "It gets deeper",
+    "It gets higher",
+    "It disappears",
+    "It stays the same"
+   ],
+   "x": "The vocal cords grow and the voice gets lower."
+  },
+  {
+   "he": "איזה שינוי קורה רק לבנות בגיל ההתבגרות?",
+   "a": "תחילת הווסת",
+   "h": "cb47f24b",
+   "q": "Which change happens only to girls during puberty?",
+   "o": [
+    "Menstruation begins",
+    "A beard grows",
+    "The voice deepens",
+    "Teeth fall out"
+   ],
+   "x": "Menstruation – a sign that the body is maturing."
+  },
+  {
+   "he": "על מה חשוב להקפיד בגיל ההתבגרות?",
+   "a": "היגיינה אישית",
+   "h": "bf306e0e",
+   "q": "What is important to take care of during puberty?",
+   "o": [
+    "Personal hygiene",
+    "Sleeping less",
+    "Skipping meals",
+    "Drinking less"
+   ],
+   "x": "More sweat – showers and deodorant."
+  },
+  {
+   "he": "איזה שלב בחיים בא אחרי הילדות?",
+   "a": "התבגרות",
+   "h": "3aa79f75",
+   "q": "Which stage of life comes after childhood?",
+   "o": [
+    "Adolescence",
+    "Infancy",
+    "Old age",
+    "Embryo"
+   ],
+   "x": "Infancy → childhood → adolescence → adulthood"
+  },
+  {
+   "he": "מה זו \"קפיצת גדילה\"?",
+   "a": "גדילה מהירה בגובה",
+   "h": "cf13f494",
+   "q": "What is a \"growth spurt\"?",
+   "o": [
+    "Fast growth in height",
+    "Losing weight",
+    "Growth stopping",
+    "A high jump"
+   ],
+   "x": "During puberty, we grow fast."
+  },
+  {
+   "he": "מתי בדרך כלל מתחילות בנות להתבגר?",
+   "a": "מוקדם מהבנים",
+   "h": "8f39d709",
+   "q": "When do girls usually start puberty?",
+   "o": [
+    "Earlier than boys",
+    "Later than boys",
+    "Exactly like boys",
+    "At age 20"
+   ],
+   "x": "Girls usually start a year or two earlier."
+  },
+  {
+   "he": "מי היצרן בשרשרת המזון שבתמונה?",
+   "a": "הדשא",
+   "h": "a7124b14",
+   "q": "Who is the producer in the food chain in the picture?",
+   "o": [
+    "The grass",
+    "The rabbit",
+    "The fox",
+    "The Sun"
+   ],
+   "x": "A producer makes food by photosynthesis."
+  },
+  {
+   "he": "מה מקור האנרגיה של כמעט כל מערכת אקולוגית?",
+   "a": "השמש",
+   "h": "ce8f2457",
+   "q": "What is the energy source of almost every ecosystem?",
+   "o": [
+    "The Sun",
+    "The soil",
+    "The water",
+    "The wind"
+   ],
+   "x": "Plants take in sunlight."
+  },
+  {
+   "he": "לאיזו קבוצה שייך המזון של צרכן ראשוני?",
+   "a": "יצרנים",
+   "h": "76af9369",
+   "q": "Which group does a primary consumer's food belong to?",
+   "o": [
+    "Producers",
+    "Secondary consumers",
+    "Decomposers",
+    "Predators"
+   ],
+   "x": "A primary consumer eats plants, that is, producers."
+  },
+  {
+   "he": "בשרשרת שבתמונה, מי הצרכן השניוני?",
+   "a": "הנחש",
+   "h": "c9a2e233",
+   "q": "In the chain in the picture, who is the secondary consumer?",
+   "o": [
+    "The snake",
+    "The mouse",
+    "The wheat",
+    "The eagle"
+   ],
+   "x": "The snake eats the primary consumer."
+  },
+  {
+   "he": "מה תפקיד המפרקים במערכת האקולוגית?",
+   "a": "מחזירים מינרלים לקרקע",
+   "h": "f376df5e",
+   "q": "What is the role of decomposers in an ecosystem?",
+   "o": [
+    "Return minerals to soil",
+    "Produce light",
+    "Pollinate flowers",
+    "Hunt predators"
+   ],
+   "x": "They break down the remains of dead organisms."
+  },
+  {
+   "he": "מה מהבאים הוא מפרק?",
+   "a": "פטרייה",
+   "h": "14331fdf",
+   "q": "Which of these is a decomposer?",
+   "o": [
+    "A mushroom",
+    "A rabbit",
+    "An oak",
+    "An eagle"
+   ],
+   "x": "Fungi and bacteria break down remains."
+  },
+  {
+   "he": "במארג, שועל אוכל ארנבות ועכברים. הארנבות נעלמו. מה יאכל השועל?",
+   "a": "יותר עכברים",
+   "h": "992de0ca",
+   "q": "In a food web, a fox eats rabbits and mice. The rabbits disappeared. What will the fox eat?",
+   "o": [
+    "More mice",
+    "Only grass",
+    "Only mushrooms",
+    "Nothing"
+   ],
+   "x": "In a food web, a predator has several food sources."
+  },
+  {
+   "he": "בשרשרת שבתמונה כל השועלים נעלמו. מה יקרה לארנבות?",
+   "a": "יתרבו",
+   "h": "69658bf1",
+   "q": "In the chain in the picture, all the foxes disappeared. What will happen to the rabbits?",
+   "o": [
+    "They will multiply",
+    "They will disappear",
+    "They won't change",
+    "They will eat meat"
+   ],
+   "x": "No one is left to hunt them."
+  },
+  {
+   "he": "הארנבות התרבו מאוד. מה יקרה לעשב?",
+   "a": "הכמות תקטן",
+   "h": "3c25194d",
+   "q": "The rabbits multiplied a lot. What will happen to the grass?",
+   "o": [
+    "There will be less",
+    "There will be more",
+    "It won't change",
+    "It will become trees"
+   ],
+   "x": "More rabbits eat more grass."
+  },
+  {
+   "he": "איך נקרא בעל חיים שאוכל גם צמחים וגם בעלי חיים?",
+   "a": "אוכל-כול",
+   "h": "db923825",
+   "q": "What do we call an animal that eats both plants and animals?",
+   "o": [
+    "Omnivore",
+    "Herbivore",
+    "Producer",
+    "Decomposer"
+   ],
+   "x": "For example, a bear: fruit, honey and fish."
+  },
+  {
+   "he": "איזה חלק מהאנרגיה עובר לרמה הבאה בשרשרת?",
+   "a": "כ-10%",
+   "h": "d432fa80",
+   "q": "What part of the energy passes to the next level in the chain?",
+   "o": [
+    "About 10%",
+    "About 100%",
+    "About 50%",
+    "About 90%"
+   ],
+   "x": "Most of the energy is used up or lost as heat."
+  },
+  {
+   "he": "לאן הולכת רוב האנרגיה בכל רמה?",
+   "a": "לחום ולתנועה",
+   "h": "6d1bcf59",
+   "q": "Where does most of the energy at each level go?",
+   "o": [
+    "To heat and movement",
+    "To the producers",
+    "Back to the Sun",
+    "Into the soil"
+   ],
+   "x": "The organism uses it to live and be active."
+  },
+  {
+   "he": "למה יש בטבע מעט אריות ומעט נשרים?",
+   "a": "מעט אנרגיה מגיעה",
+   "h": "685c5c44",
+   "q": "Why are there few lions and few eagles in nature?",
+   "o": [
+    "Little energy reaches them",
+    "They don't eat",
+    "They are plants",
+    "They have plenty"
+   ],
+   "x": "Little energy is left at the top of the chain."
+  },
+  {
+   "he": "מה נמצא בבסיס פירמידת האנרגיה?",
+   "a": "יצרנים",
+   "h": "41267f3f",
+   "q": "What is at the base of the energy pyramid?",
+   "o": [
+    "Producers",
+    "Predators",
+    "Decomposers",
+    "Secondary consumers"
+   ],
+   "x": "Producers have the most energy."
+  },
+  {
+   "he": "לפי הטבלה, כמה יחידות אנרגיה יגיעו לשועל?",
+   "a": "⁦100⁩",
+   "h": "214cb3f2",
+   "q": "According to the table, how many energy units will reach the fox?",
+   "o": [
+    "⁦100⁩",
+    "⁦1000⁩",
+    "⁦500⁩",
+    "⁦10⁩"
+   ],
+   "x": "Only about 10% passes on: 1000 ÷ 10 = 100",
+   "sc": {
+    "0": "Animal",
+    "1": "Fox",
+    "2": "Rabbit",
+    "3": "Energy",
+    "4": "?",
+    "5": "1000"
+   }
+  },
+  {
+   "he": "באיזה תהליך צמחים קולטים את אנרגיית השמש?",
+   "a": "פוטוסינתזה",
+   "h": "326b694c",
+   "q": "In which process do plants capture the Sun's energy?",
+   "o": [
+    "Photosynthesis",
+    "Respiration",
+    "Digestion",
+    "Decomposition"
+   ],
+   "x": "The sunlight is stored in sugar."
+  },
+  {
+   "he": "איך זורמת האנרגיה במערכת אקולוגית?",
+   "a": "בכיוון אחד",
+   "h": "826d0985",
+   "q": "How does energy flow in an ecosystem?",
+   "o": [
+    "In one direction",
+    "In a closed cycle",
+    "From predator to plant",
+    "It doesn't flow"
+   ],
+   "x": "From the Sun to producers to consumers – and it doesn't return."
+  },
+  {
+   "he": "מה קורה לחומרים, כמו פחמן, במערכת אקולוגית?",
+   "a": "עוברים במחזור",
+   "h": "e3c272c0",
+   "q": "What happens to substances, like carbon, in an ecosystem?",
+   "o": [
+    "They move in cycles",
+    "They disappear",
+    "They flow one way",
+    "They form from nothing"
+   ],
+   "x": "Decomposers return them to the soil and the air."
+  },
+  {
+   "he": "איך נקראים יצורים שמייצרים את המזון שלהם בעצמם?",
+   "a": "יצרנים",
+   "h": "f6e122cd",
+   "q": "What are organisms that make their own food called?",
+   "o": [
+    "Producers",
+    "Consumers",
+    "Decomposers",
+    "Predators"
+   ],
+   "x": "Plants and algae are producers."
+  },
+  {
+   "he": "פחות אור מגיע לעומק. איפה בים חיות רוב האצות?",
+   "a": "קרוב לפני המים",
+   "h": "29a81fa6",
+   "q": "Less light reaches the depths. Where in the sea do most algae live?",
+   "o": [
+    "Near the surface",
+    "On the deep seabed",
+    "In the beach sand",
+    "In underwater caves"
+   ],
+   "x": "Algae need light for photosynthesis."
+  },
+  {
+   "he": "מה מהבאים הוא גורם דומם (אביוטי) בסביבה?",
+   "a": "טמפרטורה",
+   "h": "4dc71833",
+   "q": "Which of these is an abiotic (nonliving) factor in the environment?",
+   "o": [
+    "Temperature",
+    "A fungus",
+    "A bacterium",
+    "Grass"
+   ],
+   "x": "An abiotic factor is not alive: light, water, temperature, soil."
+  },
+  {
+   "he": "מה מהבאים הוא גורם חי (ביוטי) בסביבה?",
+   "a": "טורף",
+   "h": "ae598fc4",
+   "q": "Which of these is a biotic (living) factor in the environment?",
+   "o": [
+    "A predator",
+    "Light",
+    "Soil",
+    "Wind"
+   ],
+   "x": "A biotic factor – any living thing that affects the environment."
+  },
+  {
+   "he": "איך נקרא המקום שבו יצור חי מוצא את כל צרכיו?",
+   "a": "בית גידול",
+   "h": "a8fa1369",
+   "q": "What do we call the place where an organism finds everything it needs?",
+   "o": [
+    "Habitat",
+    "Food chain",
+    "Population",
+    "Abiotic factor"
+   ],
+   "x": "There it has food, water, shelter and suitable conditions."
+  },
+  {
+   "he": "כל האיילים מאותו מין שחיים יחד באותו אזור הם…",
+   "a": "אוכלוסייה",
+   "h": "391d9b4d",
+   "q": "What do we call all the deer of one species living in one area?",
+   "o": [
+    "Population",
+    "Food web",
+    "Ecosystem",
+    "Habitat"
+   ],
+   "x": "A population – individuals of one species in the same place."
+  },
+  {
+   "he": "מה כוללת מערכת אקולוגית?",
+   "a": "יצורים וגורמים דוממים",
+   "h": "c4ce6219",
+   "q": "What does an ecosystem include?",
+   "o": [
+    "Living and nonliving things",
+    "Only animals",
+    "Only plants",
+    "Only water and soil"
+   ],
+   "x": "The living things and their nonliving surroundings affect each other."
+  },
+  {
+   "he": "לפי הגרף – באיזו טמפרטורה נבטו הכי הרבה זרעים?",
+   "a": "⁦20°C⁩",
+   "h": "35197086",
+   "q": "According to the graph, at what temperature did the most seeds sprout?",
+   "o": [
+    "⁦20°C⁩",
+    "⁦10°C⁩",
+    "⁦30°C⁩",
+    "⁦40°C⁩"
+   ],
+   "x": "The highest point is above 20.",
+   "sc": {
+    "8": "Seed"
+   }
+  },
+  {
+   "he": "לקקטוס אין עלים, והגבעול שלו ירוק ועבה. מה תפקידו?",
+   "a": "פוטוסינתזה ואגירת מים",
+   "h": "81de9a48",
+   "q": "A cactus has no leaves, and its stem is green and thick. What is the stem's job?",
+   "o": [
+    "Photosynthesis and storing water",
+    "Attracting bees",
+    "Absorbing nitrogen",
+    "Protection from cold"
+   ],
+   "x": "With no leaves, the stem does photosynthesis and stores water."
+  },
+  {
+   "he": "לגמל רגליים רחבות ודבשת עם שומן. לאיזו סביבה הוא מותאם?",
+   "a": "מדבר",
+   "h": "5f7c4ca8",
+   "q": "A camel has wide feet and a hump of fat. What environment is it adapted to?",
+   "o": [
+    "Desert",
+    "Polar region",
+    "Sea",
+    "Swamp"
+   ],
+   "x": "Wide feet don't sink into sand; the fat stores energy."
+  },
+  {
+   "he": "לדוב הקוטב שכבת שומן עבה ופרווה צפופה. ממה הן מגינות?",
+   "a": "מהקור",
+   "h": "fe213082",
+   "q": "A polar bear has a thick layer of fat and dense fur. What do they protect it from?",
+   "o": [
+    "The cold",
+    "The heat",
+    "The rain",
+    "The light"
+   ],
+   "x": "Fat and fur insulate and keep body heat in."
+  },
+  {
+   "he": "מה עושים בעלי חיים רבים במדבר בשעות החום?",
+   "a": "מסתתרים במחילות",
+   "h": "28b80640",
+   "q": "What do many desert animals do in the hot hours?",
+   "o": [
+    "Hide in burrows",
+    "Run in the sun",
+    "Swim in the sea",
+    "Migrate to the pole"
+   ],
+   "x": "They are active at night, when it is cool, and rest in shade."
+  },
+  {
+   "he": "מה מתאים את הדג לחיים במים?",
+   "a": "זימים וסנפירים",
+   "h": "dd2b3f45",
+   "q": "What adapts a fish to life in water?",
+   "o": [
+    "Gills and fins",
+    "Lungs and fur",
+    "Wings and feathers",
+    "Long legs"
+   ],
+   "x": "Gills take oxygen from water; fins help it swim."
+  },
+  {
+   "he": "ינשוף צד עכברים ואוכל אותם. איזה יחס גומלין זה?",
+   "a": "טריפה",
+   "h": "89f48caa",
+   "q": "An owl hunts mice and eats them. What kind of interaction is this?",
+   "o": [
+    "Predation",
+    "Mutualism",
+    "Parasitism",
+    "Competition"
+   ],
+   "x": "The predator hunts the prey and feeds on it."
+  },
+  {
+   "he": "דבורה שותה צוף ומאביקה את הפרח. איזה יחס גומלין זה?",
+   "a": "הדדיות",
+   "h": "8af66da6",
+   "q": "A bee drinks nectar and pollinates the flower. What kind of interaction is this?",
+   "o": [
+    "Mutualism",
+    "Predation",
+    "Parasitism",
+    "Competition"
+   ],
+   "x": "Both sides gain: the bee gets food, the flower gets pollinated."
+  },
+  {
+   "he": "פרעוש חי על כלב ומוצץ את דמו. איזה יחס גומלין זה?",
+   "a": "טפילות",
+   "h": "dbcfdd3a",
+   "q": "A flea lives on a dog and sucks its blood. What kind of interaction is this?",
+   "o": [
+    "Parasitism",
+    "Mutualism",
+    "Predation",
+    "Competition"
+   ],
+   "x": "The parasite gains; the host is harmed but stays alive."
+  },
+  {
+   "he": "שני עצים צמודים, ושניהם צריכים אור ומים. איזה יחס גומלין זה?",
+   "a": "תחרות",
+   "h": "3dc19a2b",
+   "q": "Two trees grow close together, and both need light and water. What kind of interaction is this?",
+   "o": [
+    "Competition",
+    "Mutualism",
+    "Predation",
+    "Parasitism"
+   ],
+   "x": "Both try to get the same limited resources."
+  },
+  {
+   "he": "אריות ונמרים צדים אותן זברות. מה היחס בין האריות לנמרים?",
+   "a": "תחרות",
+   "h": "1eefd646",
+   "q": "Lions and leopards hunt the same zebras. What is the relationship between the lions and leopards?",
+   "o": [
+    "Competition",
+    "Mutualism",
+    "Parasitism",
+    "Predation"
+   ],
+   "x": "The two predators compete for the same food."
+  },
+  {
+   "he": "מה נכון לגבי טפיל?",
+   "a": "פוגע בפונדקאי",
+   "h": "3c5f6af6",
+   "q": "What is true about a parasite?",
+   "o": [
+    "It harms the host",
+    "It helps the host",
+    "It makes food",
+    "It lives alone"
+   ],
+   "x": "It lives on or inside the host and feeds on it."
+  },
+  {
+   "he": "מספר הזאבים באזור גדל מאוד. מה יקרה למספר האיילים?",
+   "a": "יקטן",
+   "h": "dfbe61f1",
+   "q": "The number of wolves in an area grew a lot. What will happen to the number of deer?",
+   "o": [
+    "It will decrease",
+    "It will increase",
+    "It won't change",
+    "It will double"
+   ],
+   "x": "More predators eat more deer."
+  },
+  {
+   "he": "מפעל הזרים שפכים לנחל. מה יקרה לדגים בנחל?",
+   "a": "ייפגעו וימותו",
+   "h": "765412cd",
+   "q": "A factory dumped waste into a stream. What will happen to the fish in it?",
+   "o": [
+    "They'll suffer and die",
+    "They'll grow fast",
+    "Nothing will change",
+    "They'll move onto land"
+   ],
+   "x": "Water pollution harms the organisms that live in it."
+  },
+  {
+   "he": "למה כביש שחוצה יער פוגע בבעלי החיים?",
+   "a": "בית הגידול מתפצל",
+   "h": "cc337ffd",
+   "q": "Why does a road crossing a forest harm the animals?",
+   "o": [
+    "Their habitat is split",
+    "There is more food",
+    "More rain falls",
+    "They get warmer"
+   ],
+   "x": "It is hard for them to cross, find food and find mates."
+  },
+  {
+   "he": "מה עוזר לשמור על מגוון המינים?",
+   "a": "שמורות טבע",
+   "h": "e4726c4c",
+   "q": "What helps preserve the variety of species?",
+   "o": [
+    "Nature reserves",
+    "Cutting down forests",
+    "Draining swamps",
+    "Unlimited hunting"
+   ],
+   "x": "In a reserve, habitats are protected and many species live there."
+  },
+  {
+   "he": "המיינה הובאה לישראל מאסיה. מה עזר לה להתפשט?",
+   "a": "מעט טורפים",
+   "h": "f281d1cf",
+   "q": "The common myna was brought to Israel from Asia. What helped it spread?",
+   "o": [
+    "Few predators",
+    "It is weak",
+    "It has no food",
+    "It is cold"
+   ],
+   "x": "Most of the natural enemies that limited it in Asia are missing here."
+  },
+  {
+   "he": "מהו אפקט החממה?",
+   "a": "גזים כולאים חום",
+   "h": "b8312f74",
+   "q": "What is the greenhouse effect?",
+   "o": [
+    "Gases trap heat",
+    "The ozone hole",
+    "Acid rain",
+    "Cooling of the Earth"
+   ],
+   "x": "Gases in the air keep heat from escaping."
+  },
+  {
+   "he": "בלי אפקט החממה, כדור הארץ היה…",
+   "a": "קר מאוד",
+   "h": "e014715e",
+   "q": "Without the greenhouse effect, Earth would be…",
+   "o": [
+    "Very cold",
+    "Very hot",
+    "Exactly the same",
+    "Without night"
+   ],
+   "x": "The natural greenhouse effect keeps Earth warm."
+  },
+  {
+   "he": "מה מהבאים הוא גז חממה עיקרי?",
+   "a": "פחמן דו-חמצני",
+   "h": "295a730a",
+   "q": "Which of these is a main greenhouse gas?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Nitrogen",
+    "Helium"
+   ],
+   "x": "CO₂ traps heat in the atmosphere."
+  },
+  {
+   "he": "איזה מהם גז חממה שנפלט מפרות ומאשפה?",
+   "a": "מתאן",
+   "h": "41b7c965",
+   "q": "Which of these is a greenhouse gas given off by cows and garbage?",
+   "o": [
+    "Methane",
+    "Oxygen",
+    "Helium",
+    "Nitrogen"
+   ],
+   "x": "Methane – CH₄, a powerful greenhouse gas."
+  },
+  {
+   "he": "מה מוסיף הכי הרבה פחמן דו-חמצני לאוויר בגלל האדם?",
+   "a": "שריפת דלקים",
+   "h": "56ba5e4e",
+   "q": "Because of humans, what adds the most carbon dioxide to the air?",
+   "o": [
+    "Burning fuels",
+    "Photosynthesis",
+    "Rain",
+    "Sea waves"
+   ],
+   "x": "Coal, oil and gas in power plants and cars."
+  },
+  {
+   "he": "מה קולט פחמן דו-חמצני מהאוויר?",
+   "a": "צמחים",
+   "h": "6192f3fd",
+   "q": "What takes in carbon dioxide from the air?",
+   "o": [
+    "Plants",
+    "Cars",
+    "Factories",
+    "Fires"
+   ],
+   "x": "In photosynthesis, the plant takes in CO₂."
+  },
+  {
+   "he": "מה פולטים בעלי חיים בנשימה?",
+   "a": "פחמן דו-חמצני",
+   "h": "32a7b0a3",
+   "q": "What do animals give off when they breathe?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Methane",
+    "Hydrogen"
+   ],
+   "x": "They breathe in oxygen and breathe out CO₂."
+  },
+  {
+   "he": "מה קורה לכמות הפחמן הדו-חמצני באוויר לפי הגרף?",
+   "a": "עולה",
+   "h": "4f6cad6d",
+   "q": "According to the graph, what is happening to the amount of carbon dioxide in the air?",
+   "o": [
+    "It is rising",
+    "It is falling",
+    "It stays the same",
+    "It rises and falls"
+   ],
+   "x": "The points are higher every year.",
+   "sc": {
+    "9": "Year"
+   }
+  },
+  {
+   "he": "מה מהבאים אינו דלק מאובנים?",
+   "a": "עצי הסקה",
+   "h": "3414d1fd",
+   "q": "Which of these is not a fossil fuel?",
+   "o": [
+    "Firewood",
+    "Coal",
+    "Oil",
+    "Natural gas"
+   ],
+   "x": "Fossil fuels formed over millions of years."
+  },
+  {
+   "he": "מאיפה הגיע הפחמן שבנפט?",
+   "a": "יצורים חיים קדומים",
+   "h": "7b08c3d9",
+   "q": "Where did the carbon in oil come from?",
+   "o": [
+    "Ancient living things",
+    "Straight from the Sun",
+    "From seawater",
+    "From a volcano"
+   ],
+   "x": "Remains of plants and organisms from millions of years ago."
+  },
+  {
+   "he": "לפי הקטע, מה כולא חלק מהחום ליד כדור הארץ?",
+   "a": "גזי החממה",
+   "h": "b76d7c4d",
+   "q": "According to the passage, what traps some of the heat near Earth?",
+   "o": [
+    "Greenhouse gases",
+    "The Sun's rays",
+    "Glaciers",
+    "The sea"
+   ],
+   "x": "Some of it is trapped by greenhouse gases."
+  },
+  {
+   "he": "מה הטמפרטורה הממוצעת בזכות אפקט החממה?",
+   "a": "כ-15 מעלות",
+   "h": "a8752794",
+   "q": "What is the average temperature thanks to the greenhouse effect?",
+   "o": [
+    "About 15 degrees",
+    "About 0 degrees",
+    "About 40 degrees",
+    "About 100 degrees"
+   ],
+   "x": "The average temperature is pleasant: about 15 degrees."
+  },
+  {
+   "he": "מתי התחילו בני האדם לשרוף הרבה דלקים?",
+   "a": "מהמהפכה התעשייתית",
+   "h": "bbb58f30",
+   "q": "When did people start burning large amounts of fuel?",
+   "o": [
+    "Since the Industrial Revolution",
+    "A million years ago",
+    "Last year",
+    "In Bible times"
+   ],
+   "x": "Since the Industrial Revolution, about two hundred years ago."
+  },
+  {
+   "he": "למה כריתת יערות מגדילה את כמות גזי החממה?",
+   "a": "פחות עצים קולטים",
+   "h": "17188c45",
+   "q": "Why does cutting down forests increase greenhouse gases?",
+   "o": [
+    "Fewer trees absorb gas",
+    "Trees give off methane",
+    "There is more shade",
+    "There is more rain"
+   ],
+   "x": "Fewer trees take in the gas from the air."
+  },
+  {
+   "he": "בכמה עלתה הטמפרטורה הממוצעת לפי הקטע?",
+   "a": "ביותר ממעלה",
+   "h": "753ca443",
+   "q": "According to the passage, by how much has the average temperature risen?",
+   "o": [
+    "By over one degree",
+    "By 10 degrees",
+    "By 50 degrees",
+    "It hasn't risen"
+   ],
+   "x": "It has risen by more than one degree."
+  },
+  {
+   "he": "איזו תוצאה של ההתחממות מוזכרת בקטע?",
+   "a": "קרחונים נמסים",
+   "h": "ebc4c516",
+   "q": "Which of these results of the warming does the passage mention?",
+   "o": [
+    "Glaciers are melting",
+    "More snow in summer",
+    "Fewer heat waves",
+    "The sea is freezing"
+   ],
+   "x": "Glaciers are melting, and the sea level is rising."
+  },
+  {
+   "he": "מה קורה לגובה פני הים לפי הקטע?",
+   "a": "עולה",
+   "h": "d36141c2",
+   "q": "According to the passage, what is happening to the sea level?",
+   "o": [
+    "It is rising",
+    "It is falling",
+    "It isn't changing",
+    "The sea dries up"
+   ],
+   "x": "Water from the melting glaciers flows into the sea."
+  },
+  {
+   "he": "למה מינים רבים בסכנה, לפי הקטע?",
+   "a": "מתקשים להסתגל",
+   "h": "f0ead01c",
+   "q": "According to the passage, why are many species in danger?",
+   "o": [
+    "They struggle to adapt",
+    "Food is plentiful",
+    "The sea's too cold",
+    "They have no light"
+   ],
+   "x": "They have trouble adapting to the changes."
+  },
+  {
+   "he": "איזו דרך פעולה מוזכרת בקטע?",
+   "a": "נסיעה באופניים",
+   "h": "1cd5fd18",
+   "q": "Which of these actions does the passage mention?",
+   "o": [
+    "Riding a bicycle",
+    "Using more air conditioners",
+    "Burning forests",
+    "Taking many flights"
+   ],
+   "x": "Travel by public transportation or by bicycle."
+  },
+  {
+   "he": "למה חשמל מהשמש ומהרוח עוזר נגד ההתחממות?",
+   "a": "בלי שריפת דלקים",
+   "h": "26de0406",
+   "q": "Why does electricity from the sun and wind help against warming?",
+   "o": [
+    "No fuel is burned",
+    "It is stronger",
+    "It works at night",
+    "It cools the air"
+   ],
+   "x": "No carbon dioxide is released."
+  },
+  {
+   "he": "מה הרעיון המרכזי של הקטע?",
+   "a": "התחממות: סיבות ופתרונות",
+   "h": "825fc29c",
+   "q": "What is the main idea of the passage?",
+   "o": [
+    "Warming: causes and solutions",
+    "How rain forms",
+    "The life of glaciers",
+    "Building factories"
+   ],
+   "x": "The passage explains why it happens and what we can do."
+  },
+  {
+   "he": "מותר להוציא על הפרויקט רק 50 ₪. איך נקראת מגבלה כזו?",
+   "a": "אילוץ",
+   "h": "a61ae66c",
+   "q": "You may spend only 50 ₪ on the project. What is such a limit called?",
+   "o": [
+    "Constraint",
+    "Product",
+    "Hypothesis",
+    "Output"
+   ],
+   "x": "A constraint – a limit of money, time or materials."
+  },
+  {
+   "he": "מתכננים בקבוק לטיולים. מה מהבאים הוא דרישה מהמוצר?",
+   "a": "לא דולף",
+   "h": "ee96723d",
+   "q": "We are designing a bottle for hikes. Which of these is a requirement for the product?",
+   "o": [
+    "It doesn't leak",
+    "It breaks easily",
+    "It is very heavy",
+    "It leaks a little"
+   ],
+   "x": "A requirement – what the product must do to meet the need."
+  },
+  {
+   "he": "הגשר צריך להיות חזק מאוד אבל גם זול. מה עושים?",
+   "a": "מאזנים בין הדרישות",
+   "h": "ac7f10a4",
+   "q": "The bridge must be very strong but also cheap. What do we do?",
+   "o": [
+    "Balance the requirements",
+    "Give up the bridge",
+    "Build without planning",
+    "Ignore the price"
+   ],
+   "x": "Conflicting requirements – we look for the most balanced solution."
+  },
+  {
+   "he": "בנו דגם גשר מקשים. איך בודקים כמה הוא חזק?",
+   "a": "מעמיסים משקולות",
+   "h": "afad432d",
+   "q": "A model bridge was built from straws. How do we test how strong it is?",
+   "o": [
+    "Load it with weights",
+    "Paint it",
+    "Photograph it",
+    "Count the straws"
+   ],
+   "x": "In a test, we measure performance and compare it to the requirements."
+  },
+  {
+   "he": "לפי הטבלה – איזה דגם גשר נשא הכי הרבה משקל?",
+   "a": "דגם ב",
+   "h": "d549994f",
+   "q": "According to the table, which bridge model held the most weight?",
+   "o": [
+    "Model B",
+    "Model A",
+    "Model C",
+    "They are all equal"
+   ],
+   "x": "7 kg – more than 5 and 3.",
+   "sc": {
+    "0": "Model",
+    "1": "C",
+    "2": "B",
+    "3": "A",
+    "4": "kg",
+    "5": "5",
+    "6": "7",
+    "7": "3"
+   }
+  },
+  {
+   "he": "הדרישה: לשאת לפחות 5 ק״ג. לפי הטבלה – אילו דגמים עומדים בה?",
+   "a": "ב ו-ג",
+   "h": "f6e639f3",
+   "q": "The requirement: hold at least 5 kg. According to the table, which models meet it?",
+   "o": [
+    "B and C",
+    "Only A",
+    "Only C",
+    "A and B"
+   ],
+   "x": "7 and 5 are at least 5; 3 is less.",
+   "sc": {
+    "0": "Model",
+    "1": "C",
+    "2": "B",
+    "3": "A",
+    "4": "kg",
+    "5": "5",
+    "6": "7",
+    "7": "3"
+   }
+  },
+  {
+   "he": "למה משרטטים את הפתרון לפני שבונים?",
+   "a": "לתכנן מידות וחומרים",
+   "h": "1f2da167",
+   "q": "Why do we draw the solution before building it?",
+   "o": [
+    "To plan dimensions, materials",
+    "So it looks nice",
+    "Instead of building",
+    "To waste paper"
+   ],
+   "x": "A drawing reveals mistakes early, before material is wasted."
+  },
+  {
+   "he": "משתמשים אמרו שהכיסא החדש לא נוח. מה עושים עם המשוב?",
+   "a": "משפרים את הדגם",
+   "h": "bcc72de3",
+   "q": "Users said the new chair is uncomfortable. What do we do with the feedback?",
+   "o": [
+    "Improve the model",
+    "Ignore it",
+    "Sell it as is",
+    "Replace the users"
+   ],
+   "x": "Based on the feedback, we improve the model and test it again."
+  },
+  {
+   "he": "מוצר חדש נבדק בחום, בקור ובגשם. למה?",
+   "a": "שיעבוד בכל תנאי",
+   "h": "fa0dd319",
+   "q": "A new product is tested in heat, cold and rain. Why?",
+   "o": [
+    "So it always works",
+    "To break it",
+    "To make it prettier",
+    "For no reason"
+   ],
+   "x": "People will use it in different conditions."
+  },
+  {
+   "he": "מה הופך מוצר לידידותי יותר לסביבה?",
+   "a": "אפשר למחזר אותו",
+   "h": "63efe21e",
+   "q": "What makes a product more environmentally friendly?",
+   "o": [
+    "It can be recycled",
+    "It is disposable",
+    "It's heavily packaged",
+    "It uses much electricity"
+   ],
+   "x": "Recycling saves raw materials and reduces waste."
+  },
+  {
+   "he": "במערכת השקיה אוטומטית, חיישן מפעיל ברז. מה החיישן מודד?",
+   "a": "לחות הקרקע",
+   "h": "7cb40dbe",
+   "q": "In an automatic irrigation system, a sensor turns on a tap. What does the sensor measure?",
+   "o": [
+    "Soil moisture",
+    "Leaf color",
+    "Plant height",
+    "Noise in the wind"
+   ],
+   "x": "The sensor checks how wet the soil is – that is the input."
+  },
+  {
+   "he": "מערכת השקיה אוטומטית – מה הפלט שלה?",
+   "a": "מים לצמח",
+   "h": "e210725d",
+   "q": "An automatic irrigation system – what is its output?",
+   "o": [
+    "Water for the plant",
+    "Soil moisture",
+    "The sensor reading",
+    "Sunlight"
+   ],
+   "x": "The tap opens, and water flows to the plant."
+  },
+  {
+   "he": "המזגן נעצר כשהחדר מגיע ל-24 מעלות. איזה רכיב מאפשר זאת?",
+   "a": "חיישן טמפרטורה",
+   "h": "56cf6ae8",
+   "q": "The air conditioner stops when the room reaches 24 degrees. Which component makes this possible?",
+   "o": [
+    "Temperature sensor",
+    "LED light",
+    "Plug",
+    "Fan"
+   ],
+   "x": "The sensor measures, and the system compares it to the desired temperature."
+  },
+  {
+   "he": "מערכת שבודקת את התוצאה ומתקנת את עצמה היא מערכת…",
+   "a": "עם משוב",
+   "h": "79f8ef70",
+   "q": "A system that checks its result and corrects itself is a system…",
+   "o": [
+    "With feedback",
+    "Without input",
+    "Without a process",
+    "Without energy"
+   ],
+   "x": "Feedback – the output comes back and affects how the system works."
+  },
+  {
+   "he": "רמזור חכם מאריך את הירוק כשיש תור. מה הקלט שלו?",
+   "a": "מספר המכוניות",
+   "h": "e0afb79e",
+   "q": "A smart traffic light keeps the green longer when cars are waiting. What is its input?",
+   "o": [
+    "The number of cars",
+    "The lights' color",
+    "The sidewalk's length",
+    "The pole's height"
+   ],
+   "x": "A sensor counts the cars, and the light decides accordingly."
+  },
+  {
+   "he": "הרובוט עוצר לפני קיר. איזה רכיב קלט מאפשר זאת?",
+   "a": "חיישן מרחק",
+   "h": "883aa9f8",
+   "q": "The robot stops before a wall. Which input component makes this possible?",
+   "o": [
+    "Distance sensor",
+    "Motor",
+    "Speaker",
+    "Light bulb"
+   ],
+   "x": "The sensor takes in information; motor, speaker and bulb are outputs."
+  },
+  {
+   "he": "איזה חלק ברובוט מספק לו אנרגיה?",
+   "a": "הסוללה",
+   "h": "b703d182",
+   "q": "Which part of the robot supplies it with energy?",
+   "o": [
+    "The battery",
+    "The sensor",
+    "The wheels",
+    "The camera"
+   ],
+   "x": "Every system needs an energy source."
+  },
+  {
+   "he": "צריך מסגרת קלה לאופניים. שני החומרים בכרטיס חזקים מספיק. מה עדיף?",
+   "a": "אלומיניום",
+   "h": "bf8400e9",
+   "q": "A bike needs a light frame. Both materials on the card are strong enough. Which is better?",
+   "o": [
+    "Aluminum",
+    "Steel",
+    "No difference",
+    "Impossible to know"
+   ],
+   "x": "Lower density – the same volume weighs less.",
+   "sc": {
+    "1": "Steel – 7.9",
+    "2": "Aluminum – 2.7"
+   }
+  },
+  {
+   "he": "צינורות מים בבתים חדשים עשויים מפלסטיק ולא מברזל. למה?",
+   "a": "לא מחלידים",
+   "h": "8968fc2d",
+   "q": "Water pipes in new houses are made of plastic, not iron. Why?",
+   "o": [
+    "They don't rust",
+    "They conduct electricity",
+    "They are heavier",
+    "They are shiny"
+   ],
+   "x": "Iron rusts in contact with water and oxygen."
+  },
+  {
+   "he": "למה בתוך קסדת אופניים יש שכבת קצף?",
+   "a": "בולעת מכות",
+   "h": "b2022d8a",
+   "q": "Why is there a layer of foam inside a bike helmet?",
+   "o": [
+    "It absorbs impacts",
+    "It conducts heat",
+    "It is transparent",
+    "It is very heavy"
+   ],
+   "x": "The foam is crushed and absorbs the blow, and weighs almost nothing."
+  },
+  {
+   "he": "מה החיסרון של זכוכית בחלונות?",
+   "a": "נשברת בקלות",
+   "h": "635905b2",
+   "q": "What is the disadvantage of glass in windows?",
+   "o": [
+    "It breaks easily",
+    "It is transparent",
+    "It keeps out rain",
+    "It doesn't rust"
+   ],
+   "x": "Glass is brittle – that is why there is also tempered glass."
+  },
+  {
+   "he": "מלח בישול בנוי מנתרן ומכלור. מלח הוא…",
+   "a": "תרכובת",
+   "h": "db40e0d5",
+   "q": "Table salt is made of sodium and chlorine. Salt is…",
+   "o": [
+    "A compound",
+    "An element",
+    "A mixture",
+    "A metal"
+   ],
+   "x": "Two kinds of atoms bonded together."
+  },
+  {
+   "he": "איזה חלקיק נמצא מחוץ לגרעין?",
+   "a": "אלקטרון",
+   "h": "fdbd178e",
+   "q": "Which particle is found outside the nucleus?",
+   "o": [
+    "Electron",
+    "Proton",
+    "Neutron",
+    "None of them"
+   ],
+   "x": "Electrons move around the nucleus."
+  },
+  {
+   "he": "מה הנוסחה של המולקולה בכרטיס?",
+   "a": "⁦CO₂⁩",
+   "h": "61398957",
+   "q": "What is the formula of the molecule on the card?",
+   "o": [
+    "⁦CO₂⁩",
+    "⁦C₂O⁩",
+    "⁦CO⁩",
+    "⁦O₂C₂⁩"
+   ],
+   "x": "One carbon atom and two oxygen atoms."
+  },
+  {
+   "he": "אלומיניום מוליך חשמל ומבריק. הוא…",
+   "a": "מתכת",
+   "h": "93e7d1a2",
+   "q": "Aluminum conducts electricity and is shiny. It is a…",
+   "o": [
+    "Metal",
+    "Nonmetal",
+    "Noble gas",
+    "Compound"
+   ],
+   "x": "Conductivity and shine – properties of metals."
+  },
+  {
+   "he": "שרפו 12 גרם פחמן עם 32 גרם חמצן. כמה גרם תוצר?",
+   "a": "44 גרם",
+   "h": "e8f5e7ef",
+   "q": "12 g of carbon were burned with 32 g of oxygen. How many grams of product?",
+   "o": [
+    "44 g",
+    "20 g",
+    "12 g",
+    "32 g"
+   ],
+   "x": "Conservation of mass: 12 + 32 = 44"
+  },
+  {
+   "he": "מתח ⁦12⁩ וולט, זרם ⁦4⁩ אמפר. מה ההתנגדות?",
+   "a": "3 אוהם",
+   "h": "2dc8a2ba",
+   "q": "Voltage 12 volts, current 4 amperes. What is the resistance?",
+   "o": [
+    "3 ohms",
+    "48 ohms",
+    "16 ohms",
+    "8 ohms"
+   ],
+   "x": "Resistance = voltage ÷ current: 12 ÷ 4 = 3"
+  },
+  {
+   "he": "בבית נשרפה נורה במטבח. האור בסלון…",
+   "a": "ממשיך לדלוק",
+   "h": "b01bea60",
+   "q": "A light bulb in the kitchen burned out. The light in the living room…",
+   "o": [
+    "Stays on",
+    "Goes out",
+    "Gets dimmer",
+    "Flickers"
+   ],
+   "x": "Homes are wired in parallel."
+  },
+  {
+   "he": "מזגן של 2000 וואט פעל 3 שעות. כמה קוט״ש?",
+   "a": "6 קוט״ש",
+   "h": "1685008c",
+   "q": "A 2,000-watt air conditioner ran for 3 hours. How many kWh?",
+   "o": [
+    "6 kWh",
+    "600 kWh",
+    "2 kWh",
+    "5 kWh"
+   ],
+   "x": "2 × 3 = 6 – kilowatts times hours"
+  },
+  {
+   "he": "איזה כוח מחזיק את הירח במסלול סביב כדור הארץ?",
+   "a": "כוח הכובד",
+   "h": "a09524be",
+   "q": "What force keeps the Moon in orbit around Earth?",
+   "o": [
+    "Gravity",
+    "Friction",
+    "Elastic force",
+    "Magnetic force"
+   ],
+   "x": "Earth pulls on the Moon."
+  },
+  {
+   "he": "כוח 40 ניוטון ימינה ו-40 ניוטון שמאלה. מה השקול?",
+   "a": "אפס",
+   "h": "18de2d27",
+   "q": "40 N to the right and 40 N to the left. Which of these is the net force?",
+   "o": [
+    "Zero",
+    "80 N",
+    "40 N",
+    "20 N"
+   ],
+   "x": "Equal and opposite forces cancel each other out."
+  },
+  {
+   "he": "מפה מונחת על שולחן. מושכים אותה מהר – הצלחות נשארות. למה?",
+   "a": "חוק ההתמדה",
+   "h": "c2bcbb8a",
+   "q": "A tablecloth lies on a table. Pull it fast – the plates stay. Why?",
+   "o": [
+    "The law of inertia",
+    "A lot of friction",
+    "Magnetic force",
+    "Elastic force"
+   ],
+   "x": "The plates stay at rest."
+  },
+  {
+   "he": "רכבת נסעה 300 ק״מ ב-3 שעות. מה מהירותה?",
+   "a": "100 קמ״ש",
+   "h": "7f9ee22d",
+   "q": "A train traveled 300 km in 3 hours. What is its speed?",
+   "o": [
+    "100 km/h",
+    "900 km/h",
+    "303 km/h",
+    "150 km/h"
+   ],
+   "x": "300 ÷ 3 = 100"
+  },
+  {
+   "he": "לפי הגרף, מה עשה הגוף?",
+   "a": "נע במהירות קבועה",
+   "h": "53a4e363",
+   "q": "According to the graph, what did the object do?",
+   "o": [
+    "Moved at constant speed",
+    "Stood still",
+    "Slowed down",
+    "Moved backward"
+   ],
+   "x": "A straight rising line – constant speed.",
+   "sc": {
+    "8": "m",
+    "9": "s"
+   }
+  },
+  {
+   "he": "דבורה עוברת מפרח לפרח. מה היא עושה לצמח?",
+   "a": "האבקה",
+   "h": "52cd2155",
+   "q": "A bee goes from flower to flower. What does it do for the plant?",
+   "o": [
+    "Pollination",
+    "Fertilization",
+    "Germination",
+    "Decomposition"
+   ],
+   "x": "It carries pollen to the stigma."
+  },
+  {
+   "he": "שתילת ייחור של ורד נותנת צמח…",
+   "a": "זהה להורה",
+   "h": "ede92c1b",
+   "q": "Planting a rose cutting produces a plant…",
+   "o": [
+    "Identical to the parent",
+    "Different from the parent",
+    "With two parents",
+    "Without flowers"
+   ],
+   "x": "Asexual reproduction – a copy of the parent."
+  },
+  {
+   "he": "אצל איזה בעל חיים יש שלב גולם?",
+   "a": "פרפר",
+   "h": "59106b13",
+   "q": "Which animal has a pupa stage?",
+   "o": [
+    "Butterfly",
+    "Frog",
+    "Chicken",
+    "Cow"
+   ],
+   "x": "Pupa – in the complete metamorphosis of insects."
+  },
+  {
+   "he": "מה מסמן את תחילת גיל ההתבגרות?",
+   "a": "שינויים הורמונליים",
+   "h": "e807a65c",
+   "q": "What marks the start of puberty?",
+   "o": [
+    "Hormonal changes",
+    "Losing teeth",
+    "The end of growth",
+    "Eye color changing"
+   ],
+   "x": "Hormones start the changes."
+  },
+  {
+   "he": "בשרשרת שבתמונה, מי הצרכן הראשוני?",
+   "a": "החגב",
+   "h": "0b5c22b5",
+   "q": "In the chain in the picture, who is the primary consumer?",
+   "o": [
+    "The grasshopper",
+    "The grass",
+    "The frog",
+    "The snake"
+   ],
+   "x": "The grasshopper eats the plant."
+  },
+  {
+   "he": "מה יקרה לשרשרת אם ייעלמו כל הצמחים?",
+   "a": "כל השרשרת תיפגע",
+   "h": "06a6259c",
+   "q": "What will happen to the chain if all the plants disappear?",
+   "o": [
+    "The whole chain suffers",
+    "Only plants go missing",
+    "The predators benefit",
+    "Nothing happens"
+   ],
+   "x": "Without producers, there is no energy for anyone."
+  },
+  {
+   "he": "מה מהבאים מקטין פליטת גזי חממה?",
+   "a": "תחבורה ציבורית",
+   "h": "a5c2c98a",
+   "q": "Which of these reduces greenhouse gas emissions?",
+   "o": [
+    "Public transportation",
+    "Driving alone",
+    "Cutting down forests",
+    "Burning coal"
+   ],
+   "x": "Fewer cars – less fuel burned."
+  },
+  {
+   "he": "למה שתילת עצים עוזרת נגד ההתחממות?",
+   "a": "עצים קולטים CO₂",
+   "h": "290d5115",
+   "q": "Why does planting trees help against warming?",
+   "o": [
+    "Trees absorb CO₂",
+    "They cool the Sun",
+    "Trees give off methane",
+    "Trees stop rain"
+   ],
+   "x": "In photosynthesis, trees take in carbon dioxide."
+  }
+ ]
+}

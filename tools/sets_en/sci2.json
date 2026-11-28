@@ -1,0 +1,3208 @@
+{
+ "set": {
+  "name": "Science – Grade 2",
+  "title": "Materials · Living things · Teeth · Plants · Nature · Technology",
+  "tags": [
+   "Properties of materials",
+   "Sorting materials",
+   "Solid, liquid and gas",
+   "Living and non-living",
+   "Needs of living things",
+   "Teeth",
+   "Dental health",
+   "Habitats",
+   "Plant diversity",
+   "Protecting nature",
+   "Technology"
+  ]
+ },
+ "labels": {
+  "תכונות של חומרים": "Properties of materials",
+  "מיון חומרים": "Sorting materials",
+  "מצבי צבירה: נמס וקופא": "States of matter: melting and freezing",
+  "יצורים חיים ודוממים": "Living and non-living things",
+  "הצרכים של היצורים החיים": "The needs of living things",
+  "סוגי השיניים ותפקידן": "Types of teeth and their jobs",
+  "שמירה על בריאות השיניים": "Keeping our teeth healthy",
+  "מגוון בעלי חיים ובתי גידול": "Animal diversity and habitats",
+  "מגוון צמחים": "Plant diversity",
+  "שמירה על הטבע ומחזור": "Protecting nature and recycling",
+  "טכנולוגיה: מוצרים, כלים וחומרים": "Technology: products, tools and materials",
+  "קשה, רך ושקוף": "Hard, soft and transparent",
+  "גמיש ואטום למים": "Flexible and waterproof",
+  "ממה זה עשוי?": "What is it made of?",
+  "ממיינים חומרים": "Sorting materials into groups",
+  "מוצק, נוזל וגז": "Solid, liquid and gas",
+  "נמס וקופא": "Melting and freezing",
+  "סימנים של חיים": "Signs of life",
+  "חי או דומם?": "Living or non-living?",
+  "מה צריך יצור חי?": "What does a living thing need?",
+  "מזון, מים, אוויר ומחסה": "Food, water, air and shelter",
+  "חותכות, ניבים וטוחנות": "Incisors, canines and molars",
+  "שיני חלב ושיניים קבועות": "Baby teeth and permanent teeth",
+  "מצחצחים שיניים": "Brushing our teeth",
+  "שיניים בריאות": "Healthy teeth",
+  "קבוצות של בעלי חיים": "Groups of animals",
+  "בתי גידול": "Habitats",
+  "עץ, שיח ועשב": "Trees, bushes and herbs",
+  "צמחים שונים, מקומות שונים": "Different plants, different places",
+  "שומרים על הטבע": "Taking care of nature",
+  "מחזור ושמירה על הסביבה": "Recycling and caring for the environment",
+  "מוצר עונה על צורך": "A product meets a need",
+  "בוחרים חומר מתאים": "Choosing the right material",
+  "חזרה": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "איזה צעצוע עשוי מחומר רך?",
+   "a": "דובי",
+   "h": "607e166b",
+   "q": "Which toy is made of a soft material?",
+   "o": [
+    "Teddy bear",
+    "Hammer",
+    "Screw",
+    "Key"
+   ],
+   "x": "A teddy bear is made of soft cloth and stuffing"
+  },
+  {
+   "he": "מה מהם הכי קשה?",
+   "a": "לבנה",
+   "h": "3861269e",
+   "q": "Which of these is the hardest?",
+   "o": [
+    "Brick",
+    "Sponge",
+    "Wool",
+    "Pillow"
+   ],
+   "x": "It is very hard to change a brick's shape"
+  },
+  {
+   "he": "איך נקרא חומר שרואים דרכו?",
+   "a": "שקוף",
+   "h": "aa581c25",
+   "q": "What do we call a material we can see through?",
+   "o": [
+    "Transparent",
+    "Opaque",
+    "Flexible",
+    "Soft"
+   ],
+   "x": "Light passes through a transparent material"
+  },
+  {
+   "he": "מה מהם שקוף?",
+   "a": "כוס זכוכית",
+   "h": "ac149451",
+   "q": "Which of these is transparent?",
+   "o": [
+    "Glass cup",
+    "China mug",
+    "Cardboard box",
+    "Wooden ball"
+   ],
+   "x": "You can see the drink through a glass cup",
+   "sc": {
+    "0": "Glass cup",
+    "1": "China mug",
+    "2": "Cardboard box",
+    "3": "Wooden ball"
+   }
+  },
+  {
+   "he": "דרך מה אי אפשר לראות?",
+   "a": "קרטון",
+   "h": "ff9a648c",
+   "q": "Which of these can't we see through?",
+   "o": [
+    "Cardboard",
+    "Glass",
+    "Clear water",
+    "Eyeglasses"
+   ],
+   "x": "Cardboard is opaque – light can't pass through it",
+   "sc": {
+    "0": "Cardboard",
+    "1": "Glass",
+    "2": "Clear water",
+    "3": "Eyeglasses"
+   }
+  },
+  {
+   "he": "למה עושים חלונות מזכוכית?",
+   "a": "כי היא שקופה",
+   "h": "9916688a",
+   "q": "Which of these explains why windows are made of glass?",
+   "o": [
+    "It's transparent",
+    "It's soft",
+    "It's flexible",
+    "It soaks up water"
+   ],
+   "x": "Light comes in through transparent glass"
+  },
+  {
+   "he": "מה קורה לפלסטלינה כשלוחצים עליה?",
+   "a": "משנה את צורתה",
+   "h": "f2175831",
+   "q": "What happens to modeling clay when you press it?",
+   "o": [
+    "It changes shape",
+    "It breaks into pieces",
+    "It becomes transparent",
+    "It turns liquid"
+   ],
+   "x": "Modeling clay is soft and changes shape when pressed"
+  },
+  {
+   "he": "מה מהם גם רך וגם מחמם?",
+   "a": "שמיכת צמר",
+   "h": "a01857cb",
+   "q": "Which of these is both soft and warm?",
+   "o": [
+    "Wool blanket",
+    "Metal pot",
+    "Stone",
+    "Glass plate"
+   ],
+   "x": "Wool is soft and keeps the body warm"
+  },
+  {
+   "he": "על מה הכי נוח לשכב?",
+   "a": "מזרן רך",
+   "h": "bec78303",
+   "q": "Which of these is the most comfortable to lie on?",
+   "o": [
+    "Soft mattress",
+    "Stone floor",
+    "Wooden board",
+    "Metal table"
+   ],
+   "x": "A soft mattress feels nice for the body"
+  },
+  {
+   "he": "מה מהם רך וסופג מים?",
+   "a": "ספוג",
+   "h": "bb3a8861",
+   "q": "Which of these is soft and soaks up water?",
+   "o": [
+    "Sponge",
+    "Nail",
+    "Plate",
+    "Key"
+   ],
+   "x": "A sponge squashes easily when you press it"
+  },
+  {
+   "he": "איך נקרא חומר שמתכופף ולא נשבר?",
+   "a": "גמיש",
+   "h": "6bf0f241",
+   "q": "What do we call a material that bends without breaking?",
+   "o": [
+    "Flexible",
+    "Transparent",
+    "Breakable",
+    "Stiff"
+   ],
+   "x": "A flexible material bends and goes back to its shape"
+  },
+  {
+   "he": "מה מהם גמיש?",
+   "a": "גומייה",
+   "h": "e1cdec44",
+   "q": "Which of these is flexible?",
+   "o": [
+    "Rubber band",
+    "Nail",
+    "Glass cup",
+    "Brick"
+   ],
+   "x": "You can stretch and bend a rubber band"
+  },
+  {
+   "he": "מה מהם שביר?",
+   "a": "כוס זכוכית",
+   "h": "f0b4b71f",
+   "q": "Which of these is breakable?",
+   "o": [
+    "Glass cup",
+    "Rubber ball",
+    "Cotton shirt",
+    "Pillow"
+   ],
+   "x": "Glass breaks when it falls"
+  },
+  {
+   "he": "מה פירוש \"אטום למים\"?",
+   "a": "מים לא עוברים",
+   "h": "e73ef438",
+   "q": "What does \"waterproof\" mean?",
+   "o": [
+    "Water can't get through",
+    "Water gets through easily",
+    "It dissolves in water",
+    "Clear like water"
+   ],
+   "x": "Water can't pass through a waterproof material"
+  },
+  {
+   "he": "מה מהם אטום למים?",
+   "a": "מעיל ניילון",
+   "h": "9ab44c01",
+   "q": "Which of these is waterproof?",
+   "o": [
+    "Nylon coat",
+    "Cotton shirt",
+    "Paper",
+    "Sponge"
+   ],
+   "x": "Nylon doesn't let water through"
+  },
+  {
+   "he": "מה סופג מים?",
+   "a": "ספוג",
+   "h": "49597a06",
+   "q": "What soaks up water?",
+   "o": [
+    "Sponge",
+    "Plastic",
+    "Metal",
+    "Glass"
+   ],
+   "x": "A sponge has tiny holes that soak up water"
+  },
+  {
+   "he": "מה מהבאים מסביר למה מגפי גשם עשויים מגומי?",
+   "a": "גומי אטום למים",
+   "h": "aca09fe6",
+   "q": "Which of these explains why rain boots are made of rubber?",
+   "o": [
+    "Rubber is waterproof",
+    "Rubber is transparent",
+    "Rubber is breakable",
+    "Rubber soaks up water"
+   ],
+   "x": "This way our feet stay dry"
+  },
+  {
+   "he": "מה עושה נייר מגבת למים?",
+   "a": "סופג אותם",
+   "h": "fd9ab5ff",
+   "q": "What does a paper towel do to water?",
+   "o": [
+    "It soaks it up",
+    "It freezes it",
+    "It heats it",
+    "It colors it"
+   ],
+   "x": "Paper soaks up water"
+  },
+  {
+   "he": "למה צינור השקיה עשוי מחומר גמיש?",
+   "a": "כדי לכופף אותו",
+   "h": "a5e960cb",
+   "q": "Why is a garden hose made of a flexible material?",
+   "o": [
+    "So it can bend",
+    "So it's see-through",
+    "So it will break",
+    "So it's heavy"
+   ],
+   "x": "A flexible hose bends in every direction"
+  },
+  {
+   "he": "איזו תכונה חשובה למטרייה?",
+   "a": "אטומה למים",
+   "h": "ff07552f",
+   "q": "Which property is important for an umbrella?",
+   "o": [
+    "Waterproof",
+    "Transparent",
+    "Breakable",
+    "Soaks up water"
+   ],
+   "x": "An umbrella keeps us dry"
+  },
+  {
+   "he": "מה יקרה לשקית נייר בגשם?",
+   "a": "תירטב ותיקרע",
+   "h": "24a34b5f",
+   "q": "What will happen to a paper bag in the rain?",
+   "o": [
+    "It will tear",
+    "It will stay dry",
+    "It will turn transparent",
+    "It will turn hard"
+   ],
+   "x": "Paper soaks up water and tears"
+  },
+  {
+   "he": "ממה עשוי המפתח?",
+   "a": "מתכת",
+   "h": "6b2fb27e",
+   "q": "What is a key made of?",
+   "o": [
+    "Metal",
+    "Wood",
+    "Paper",
+    "Cloth"
+   ],
+   "x": "A key is made of hard metal"
+  },
+  {
+   "he": "ממה עשויים דפי הספר?",
+   "a": "נייר",
+   "h": "91d59cad",
+   "q": "What are the pages of a book made of?",
+   "o": [
+    "Paper",
+    "Glass",
+    "Rubber",
+    "Metal"
+   ],
+   "x": "The pages of a book are made of paper"
+  },
+  {
+   "he": "ממה תופרים חולצה?",
+   "a": "בד",
+   "h": "3225ad2f",
+   "q": "What is a shirt sewn from?",
+   "o": [
+    "Cloth",
+    "Wood",
+    "Glass",
+    "Stone"
+   ],
+   "x": "Clothes are sewn from cloth"
+  },
+  {
+   "he": "ממה עשוי הצמיג של האופניים?",
+   "a": "גומי",
+   "h": "9e3d33bf",
+   "q": "What is a bicycle tire made of?",
+   "o": [
+    "Rubber",
+    "Glass",
+    "Paper",
+    "Wood"
+   ],
+   "x": "The tire is made of flexible rubber"
+  },
+  {
+   "he": "ממה מייצרים נייר?",
+   "a": "מעץ",
+   "h": "0751113c",
+   "q": "What is paper made from?",
+   "o": [
+    "Wood",
+    "Glass",
+    "Metal",
+    "Rubber"
+   ],
+   "x": "Paper is made from trees"
+  },
+  {
+   "he": "ממה עשויה הפחית?",
+   "a": "מתכת",
+   "h": "afe8f012",
+   "q": "What is a can made of?",
+   "o": [
+    "Metal",
+    "Paper",
+    "Cloth",
+    "Wood"
+   ],
+   "x": "A can is made of thin metal"
+  },
+  {
+   "he": "איזה חפץ עשוי בעיקר מעץ?",
+   "a": "עיפרון",
+   "h": "cc406f62",
+   "q": "Which object is made mostly of wood?",
+   "o": [
+    "Pencil",
+    "Nail",
+    "Sock",
+    "Key"
+   ],
+   "x": "A pencil is made of wood, with a writing core inside"
+  },
+  {
+   "he": "מה מהם עשוי מבד?",
+   "a": "כרית",
+   "h": "ade7f264",
+   "q": "Which of these is made of cloth?",
+   "o": [
+    "Pillow",
+    "Nail",
+    "Key",
+    "Coin"
+   ],
+   "x": "A pillow is made of cloth and soft stuffing"
+  },
+  {
+   "he": "מה עשוי בדרך כלל מזכוכית?",
+   "a": "חלון",
+   "h": "c06de3ca",
+   "q": "What is usually made of glass?",
+   "o": [
+    "Window",
+    "Boot",
+    "Book",
+    "Pillow"
+   ],
+   "x": "Windows are made of transparent glass"
+  },
+  {
+   "he": "ממה סורגים צעיף חם?",
+   "a": "צמר",
+   "h": "fe7cf55a",
+   "q": "What is a warm scarf knitted from?",
+   "o": [
+    "Wool",
+    "Glass",
+    "Metal",
+    "Stone"
+   ],
+   "x": "Wool is soft and warm"
+  },
+  {
+   "he": "מה לא שייך לקבוצת המתכות?",
+   "a": "כוס זכוכית",
+   "h": "d91f831e",
+   "q": "Which one does not belong with the metals?",
+   "o": [
+    "Glass cup",
+    "Nail",
+    "Key",
+    "Can"
+   ],
+   "x": "All the others are made of metal"
+  },
+  {
+   "he": "מסמר, מפתח, מטבע – מה משותף להם?",
+   "a": "עשויים ממתכת",
+   "h": "4a852d9f",
+   "q": "Nail, key, coin – what do they share?",
+   "o": [
+    "Made of metal",
+    "Made of wood",
+    "All are soft",
+    "All are transparent"
+   ],
+   "x": "All three are made of metal"
+  },
+  {
+   "he": "מה לא שייך לקבוצת הרכים?",
+   "a": "אבן",
+   "h": "8e37d936",
+   "q": "Which one does not belong with the soft things?",
+   "o": [
+    "Stone",
+    "Pillow",
+    "Sponge",
+    "Wool"
+   ],
+   "x": "A stone is hard; the others are soft"
+  },
+  {
+   "he": "מה לא שייך לקבוצת השקופים?",
+   "a": "צלחת חרסינה",
+   "h": "0626ef57",
+   "q": "Which one does not belong with the transparent things?",
+   "o": [
+    "China plate",
+    "Glass cup",
+    "Clear water",
+    "Eyeglasses"
+   ],
+   "x": "A china plate is opaque – we can't see through it"
+  },
+  {
+   "he": "מעיל ניילון, מגף גומי, מטרייה – מה משותף?",
+   "a": "אטומים למים",
+   "h": "2e8d6599",
+   "q": "Nylon coat, rubber boot, umbrella – what do they share?",
+   "o": [
+    "Waterproof",
+    "Transparent",
+    "Breakable",
+    "Soak up water"
+   ],
+   "x": "All three keep water from getting through"
+  },
+  {
+   "he": "ספוג, נייר מגבת ובד – מה משותף?",
+   "a": "סופגים מים",
+   "h": "11e0bc11",
+   "q": "Sponge, paper towel and cloth – what do they share?",
+   "o": [
+    "Soak up water",
+    "Transparent",
+    "Very hard",
+    "Made of metal"
+   ],
+   "x": "All three soak up water"
+  },
+  {
+   "he": "איזה זוג עשוי מאותו חומר?",
+   "a": "מסמר ומפתח",
+   "h": "c839573c",
+   "q": "Which pair is made of the same material?",
+   "o": [
+    "Nail and key",
+    "Book and nail",
+    "Pillow and stone",
+    "Cup and sock"
+   ],
+   "x": "A nail and a key – both are metal"
+  },
+  {
+   "he": "לשולחן רגלי מתכת ומשטח עץ. כמה חומרים?",
+   "a": "2",
+   "h": "1f22e446",
+   "q": "A table has metal legs and a wooden top. How many materials?",
+   "o": [
+    "2",
+    "1",
+    "3",
+    "4"
+   ],
+   "x": "Metal and wood – two materials",
+   "sc": {
+    "0": "Table"
+   }
+  },
+  {
+   "he": "איזה צעצוע עשוי בדרך כלל מפלסטיק?",
+   "a": "דלי לחול",
+   "h": "8c68f02e",
+   "q": "Which toy is usually made of plastic?",
+   "o": [
+    "Sand bucket",
+    "Teddy bear",
+    "Book",
+    "Wool ball"
+   ],
+   "x": "A sand bucket is made of plastic"
+  },
+  {
+   "he": "איזה חומר מגיע מבעלי חיים?",
+   "a": "צמר",
+   "h": "5112543f",
+   "q": "Which material comes from animals?",
+   "o": [
+    "Wool",
+    "Plastic",
+    "Metal",
+    "Glass"
+   ],
+   "x": "Wool is sheared from sheep"
+  },
+  {
+   "he": "מה מהם נוזל?",
+   "a": "מים",
+   "h": "9ed2019f",
+   "q": "Which of these is a liquid?",
+   "o": [
+    "Water",
+    "Stone",
+    "Spoon",
+    "Key"
+   ],
+   "x": "Water flows, and we can pour it"
+  },
+  {
+   "he": "מה מהם מוצק?",
+   "a": "אבן",
+   "h": "3f64e1ae",
+   "q": "Which of these is a solid?",
+   "o": [
+    "Stone",
+    "Water",
+    "Milk",
+    "Air"
+   ],
+   "x": "A solid has a fixed shape"
+  },
+  {
+   "he": "מה קורה למים שמוזגים לכוס?",
+   "a": "מקבלים צורת כוס",
+   "h": "4319126c",
+   "q": "What happens to water poured into a glass?",
+   "o": [
+    "Takes the glass's shape",
+    "Turns solid",
+    "Disappears",
+    "Turns into air"
+   ],
+   "x": "A liquid has no fixed shape"
+  },
+  {
+   "he": "מה יש בתוך הבלון?",
+   "a": "אוויר",
+   "h": "e296e870",
+   "q": "What is inside the balloon?",
+   "o": [
+    "Air",
+    "Water",
+    "Sand",
+    "Nothing"
+   ],
+   "x": "A balloon has air inside, and air is a gas"
+  },
+  {
+   "he": "למי מהם יש צורה קבועה?",
+   "a": "למוצק",
+   "h": "727851c9",
+   "q": "Which of these has a fixed shape?",
+   "o": [
+    "A solid",
+    "A liquid",
+    "A gas",
+    "Steam"
+   ],
+   "x": "A solid keeps its shape"
+  },
+  {
+   "he": "מה עולה מכוס תה רותח?",
+   "a": "אדים",
+   "h": "51b3ae81",
+   "q": "What rises from a cup of boiling tea?",
+   "o": [
+    "Steam",
+    "Ice",
+    "Sand",
+    "Snow"
+   ],
+   "x": "Very hot water turns into steam – a gas"
+  },
+  {
+   "he": "מה מהם גז?",
+   "a": "אוויר",
+   "h": "2cbadd65",
+   "q": "Which of these is a gas?",
+   "o": [
+    "Air",
+    "Milk",
+    "Wood",
+    "Oil"
+   ],
+   "x": "The air around us is a gas"
+  },
+  {
+   "he": "קרח, מים ואדים – מה משותף?",
+   "a": "כולם מים",
+   "h": "c33165d6",
+   "q": "Ice, water and steam – what do they share?",
+   "o": [
+    "All water",
+    "All solids",
+    "All gases",
+    "All hot"
+   ],
+   "x": "It is water in three different states"
+  },
+  {
+   "he": "באיזה מצב נמצא החלב?",
+   "a": "נוזל",
+   "h": "6415fecf",
+   "q": "What state is milk in?",
+   "o": [
+    "Liquid",
+    "Solid",
+    "Gas",
+    "Steam"
+   ],
+   "x": "Milk flows and pours – it is a liquid"
+  },
+  {
+   "he": "מה נכון על מים, מיץ וחלב?",
+   "a": "כולם נוזלים",
+   "h": "956eae15",
+   "q": "What is true about water, juice and milk?",
+   "o": [
+    "All liquids",
+    "All solids",
+    "All gases",
+    "All transparent"
+   ],
+   "x": "They all flow and take the container's shape"
+  },
+  {
+   "he": "למה הקרח נמס בשמש?",
+   "a": "בגלל החום",
+   "h": "c37658f7",
+   "q": "Why does ice melt in the sun?",
+   "o": [
+    "Because of the heat",
+    "Because of the cold",
+    "Because of the wind",
+    "Because of the shade"
+   ],
+   "x": "The sun's heat turns ice into water"
+  },
+  {
+   "he": "שמו בקבוק מים במקפיא. מה יהיה בו בבוקר?",
+   "a": "קרח",
+   "h": "05ee1167",
+   "q": "A water bottle is in the freezer overnight. What's inside by morning?",
+   "o": [
+    "Ice",
+    "Steam",
+    "Hot water",
+    "Sand"
+   ],
+   "x": "In the cold, water freezes and turns into ice"
+  },
+  {
+   "he": "מה מהבאים הוא מעבר ממוצק לנוזל?",
+   "a": "התכה",
+   "h": "75823592",
+   "q": "Which of these is a change from solid to liquid?",
+   "o": [
+    "Melting",
+    "Freezing",
+    "Boiling",
+    "Drying"
+   ],
+   "x": "A solid that warms up turns into a liquid – melting",
+   "sc": {
+    "0": "Solid → liquid"
+   }
+  },
+  {
+   "he": "מה מהבאים הוא מעבר מנוזל למוצק?",
+   "a": "קפיאה",
+   "h": "4e1214a5",
+   "q": "Which of these is a change from liquid to solid?",
+   "o": [
+    "Freezing",
+    "Melting",
+    "Boiling",
+    "Washing"
+   ],
+   "x": "A liquid that freezes becomes a solid",
+   "sc": {
+    "0": "Liquid → solid"
+   }
+  },
+  {
+   "he": "מה קורה לקרטיב ביום חם?",
+   "a": "נמס",
+   "h": "973a41f5",
+   "q": "What happens to an ice pop on a hot day?",
+   "o": [
+    "It melts",
+    "It freezes",
+    "It hardens",
+    "It grows"
+   ],
+   "x": "The heat melts the ice pop"
+  },
+  {
+   "he": "מה קורה לשוקולד ביד חמה?",
+   "a": "נמס",
+   "h": "550b9ea2",
+   "q": "What happens to chocolate in a warm hand?",
+   "o": [
+    "It melts",
+    "It freezes",
+    "It hardens",
+    "It grows"
+   ],
+   "x": "The warm hand melts the chocolate"
+  },
+  {
+   "he": "איך מכינים ארטיק ממיץ?",
+   "a": "מקפיאים אותו",
+   "h": "e67993d9",
+   "q": "How do we make an ice pop from juice?",
+   "o": [
+    "We freeze it",
+    "We boil it",
+    "We shake it",
+    "We pour it out"
+   ],
+   "x": "In the cold, the juice freezes and turns solid"
+  },
+  {
+   "he": "מה קורה לנר שדולק הרבה זמן?",
+   "a": "נמס",
+   "h": "15d9cf8b",
+   "q": "What happens to a candle that burns for a long time?",
+   "o": [
+    "It melts",
+    "It freezes",
+    "It grows",
+    "It hardens"
+   ],
+   "x": "The flame's heat melts the wax"
+  },
+  {
+   "he": "איש שלג עמד בשמש. מה נשאר?",
+   "a": "שלולית מים",
+   "h": "d1fafb12",
+   "q": "A snowman stood in the sun. What was left?",
+   "o": [
+    "A puddle of water",
+    "A cloud",
+    "A stone",
+    "Sand"
+   ],
+   "x": "The snow melted and turned into water"
+  },
+  {
+   "he": "אפשר להקפיא שוב קרח שנמס?",
+   "a": "כן, בקור",
+   "h": "39b05b6f",
+   "q": "Can melted ice be frozen again?",
+   "o": [
+    "Yes, in the cold",
+    "No, never",
+    "Only in the sun",
+    "Only when boiling"
+   ],
+   "x": "The water will freeze again and become ice"
+  },
+  {
+   "he": "מה מהם רק יצור חי עושה?",
+   "a": "נושם",
+   "h": "4c451fa4",
+   "q": "Which of these can only a living thing do?",
+   "o": [
+    "Breathe",
+    "Fall",
+    "Roll",
+    "Get wet"
+   ],
+   "x": "Only living things breathe – non-living things also fall and get wet"
+  },
+  {
+   "he": "מה קורה לכל יצור חי עם הזמן?",
+   "a": "גדילה",
+   "h": "3c779e18",
+   "q": "Which change happens to every living thing over time?",
+   "o": [
+    "Growth",
+    "Talking",
+    "Flying",
+    "Swimming"
+   ],
+   "x": "Every living thing grows"
+  },
+  {
+   "he": "מה מהם אינו סימן של חיים?",
+   "a": "צבע ירוק",
+   "h": "90e1af33",
+   "q": "Which of these is not a sign of life?",
+   "o": [
+    "Green color",
+    "Breathing",
+    "Growth",
+    "Feeding"
+   ],
+   "x": "Non-living things can be green too"
+  },
+  {
+   "he": "האם העץ הוא יצור חי?",
+   "a": "כן, הוא גדל",
+   "h": "a0c9cf6e",
+   "q": "Is a tree a living thing?",
+   "o": [
+    "Yes, it grows",
+    "No, it's non-living",
+    "No, it can't walk",
+    "Only in winter"
+   ],
+   "x": "Plants grow, feed and reproduce"
+  },
+  {
+   "he": "מביצי הצפרדע בקעו ראשנים. איזה סימן חיים זה?",
+   "a": "רבייה",
+   "h": "8897c850",
+   "q": "Tadpoles hatched from frog eggs. Which sign of life is this?",
+   "o": [
+    "Reproduction",
+    "Breathing",
+    "Sleeping",
+    "Feeding"
+   ],
+   "x": "Living things reproduce – they have young"
+  },
+  {
+   "he": "השתיל הקטן נהיה עץ גבוה. איזה סימן חיים?",
+   "a": "גדילה",
+   "h": "5da996e4",
+   "q": "A small seedling became a tall tree. Which sign of life?",
+   "o": [
+    "Growth",
+    "Breathing",
+    "Reproduction",
+    "Movement"
+   ],
+   "x": "Living things grow"
+  },
+  {
+   "he": "התינוק שותה חלב. איזה סימן חיים זה?",
+   "a": "אכילה",
+   "h": "8f7e6c6c",
+   "q": "The baby drinks milk. Which sign of life is this?",
+   "o": [
+    "Feeding",
+    "Reproduction",
+    "Sleeping",
+    "Movement"
+   ],
+   "x": "Living things feed – they eat and drink"
+  },
+  {
+   "he": "החמנייה הצעירה פונה אל השמש. מה זה מראה?",
+   "a": "תגובה לאור",
+   "h": "69f13031",
+   "q": "The young sunflower turns to the sun. What does this show?",
+   "o": [
+    "Responding to light",
+    "Breathing",
+    "Sleeping",
+    "Reproduction"
+   ],
+   "x": "Living things respond to their surroundings; young sunflowers follow the sun"
+  },
+  {
+   "he": "מה מהם דומם?",
+   "a": "ספר",
+   "h": "d3e617ee",
+   "q": "Which of these is non-living?",
+   "o": [
+    "Book",
+    "Butterfly",
+    "Tree",
+    "Fish"
+   ],
+   "x": "A book doesn't breathe, eat or grow"
+  },
+  {
+   "he": "נשימה, אכילה וגדילה – סימנים של מה?",
+   "a": "יצור חי",
+   "h": "010e01be",
+   "q": "Breathing, feeding and growth – signs of what?",
+   "o": [
+    "A living thing",
+    "A non-living thing",
+    "A toy",
+    "A machine"
+   ],
+   "x": "These are signs of living things"
+  },
+  {
+   "he": "האבן היא…",
+   "a": "דומם",
+   "h": "bab74644",
+   "q": "A stone is…",
+   "o": [
+    "Non-living",
+    "A living thing",
+    "A plant",
+    "An animal"
+   ],
+   "x": "A stone doesn't breathe, eat or grow"
+  },
+  {
+   "he": "האם הפטרייה היא יצור חי?",
+   "a": "כן, היא גדלה",
+   "h": "c63649a1",
+   "q": "Is a mushroom a living thing?",
+   "o": [
+    "Yes, it grows",
+    "No, it's non-living",
+    "Only in the rain",
+    "Only at night"
+   ],
+   "x": "A mushroom grows, feeds and reproduces"
+  },
+  {
+   "he": "השעון מתקתק וזז. הוא…",
+   "a": "דומם",
+   "h": "d82e94eb",
+   "q": "The clock ticks and moves. It is…",
+   "o": [
+    "Non-living",
+    "A living thing",
+    "A plant",
+    "An animal"
+   ],
+   "x": "A clock doesn't breathe, eat or grow"
+  },
+  {
+   "he": "דובי ותינוק במיטה. מה נכון?",
+   "a": "רק התינוק נושם",
+   "h": "2e8c6173",
+   "q": "A teddy bear and a baby are in bed. What is true?",
+   "o": [
+    "Only the baby breathes",
+    "Both breathe",
+    "Only the teddy breathes",
+    "Both grow"
+   ],
+   "x": "The baby is living – it breathes and grows; the teddy is non-living"
+  },
+  {
+   "he": "מה מהם צמח?",
+   "a": "קקטוס",
+   "h": "86fdc6d8",
+   "q": "Which of these is a plant?",
+   "o": [
+    "Cactus",
+    "Turtle",
+    "Butterfly",
+    "Stone"
+   ],
+   "x": "A cactus is a plant that grows in the desert"
+  },
+  {
+   "he": "למה הצמחים הם יצורים חיים?",
+   "a": "גדלים ומתרבים",
+   "h": "29f59425",
+   "q": "Why are plants living things?",
+   "o": [
+    "They grow and reproduce",
+    "They walk around",
+    "They are green",
+    "They sleep at night"
+   ],
+   "x": "Plants grow, feed and reproduce"
+  },
+  {
+   "he": "רובוט זז ומדבר. איזה מהם חסר לו?",
+   "a": "גדילה",
+   "h": "97523169",
+   "q": "A robot moves and talks. Which of these is it missing?",
+   "o": [
+    "Growth",
+    "Movement",
+    "Talking",
+    "Color"
+   ],
+   "x": "A robot doesn't grow, eat or breathe – it is non-living"
+  },
+  {
+   "he": "מה ייצא מביצה של תרנגולת?",
+   "a": "אפרוח",
+   "h": "c492cf66",
+   "q": "What will hatch from a hen's egg?",
+   "o": [
+    "Chick",
+    "Puppy",
+    "Tadpole",
+    "Worm"
+   ],
+   "x": "A chick hatches from the egg – that's how hens reproduce"
+  },
+  {
+   "he": "מה מהם היה פעם חלק מיצור חי?",
+   "a": "עלה יבש",
+   "h": "d27403c4",
+   "q": "Which of these was once part of a living thing?",
+   "o": [
+    "Dry leaf",
+    "Stone",
+    "Nail",
+    "Glass"
+   ],
+   "x": "The leaf grew on a tree and then fell"
+  },
+  {
+   "he": "מה מהם אף פעם לא גדל?",
+   "a": "כדור",
+   "h": "66ce2a2d",
+   "q": "Which of these never grows?",
+   "o": [
+    "Ball",
+    "Baby",
+    "Kitten",
+    "Seedling"
+   ],
+   "x": "A ball is non-living – it doesn't grow"
+  },
+  {
+   "he": "מה כל היצורים החיים צריכים, חוץ מאוויר?",
+   "a": "מים",
+   "h": "313bbca4",
+   "q": "Besides air, what do all living things need?",
+   "o": [
+    "Water",
+    "TV",
+    "Toys",
+    "Clothes"
+   ],
+   "x": "Without water, we can't live"
+  },
+  {
+   "he": "אילו שלושה דברים הצמח צריך כדי לגדול?",
+   "a": "אור, מים ואוויר",
+   "h": "80ae44f9",
+   "q": "Which three things does a plant need to grow?",
+   "o": [
+    "Light, water and air",
+    "Only darkness",
+    "Only salt",
+    "Ice and snow"
+   ],
+   "x": "A plant needs light, water, air and soil"
+  },
+  {
+   "he": "איזה אור הצמח צריך כדי להכין מזון?",
+   "a": "אור השמש",
+   "h": "aafcb916",
+   "q": "Which light does a plant need to make food?",
+   "o": [
+    "Sunlight",
+    "Moonlight",
+    "Candlelight",
+    "Lightning"
+   ],
+   "x": "With sunlight, a plant makes food in its leaves"
+  },
+  {
+   "he": "שכחו להשקות את העציץ. מה יקרה?",
+   "a": "הצמח ינבול",
+   "h": "118d006f",
+   "q": "Someone forgot to water the potted plant. What will happen?",
+   "o": [
+    "It will wilt",
+    "It will grow fast",
+    "It will bloom",
+    "Nothing will happen"
+   ],
+   "x": "Without water, a plant wilts"
+  },
+  {
+   "he": "מה אנחנו נושמים?",
+   "a": "אוויר",
+   "h": "c90c8d8d",
+   "q": "What do we breathe?",
+   "o": [
+    "Air",
+    "Water",
+    "Sand",
+    "Light"
+   ],
+   "x": "Without air, we can't live"
+  },
+  {
+   "he": "למה הציפור בונה קן?",
+   "a": "מחסה לגוזלים",
+   "h": "c56f6d24",
+   "q": "Why does a bird build a nest?",
+   "o": [
+    "To shelter its chicks",
+    "To play",
+    "To eat it",
+    "To sing"
+   ],
+   "x": "The chicks are safe in the nest"
+  },
+  {
+   "he": "מה זה מחסה?",
+   "a": "מקום מוגן",
+   "h": "c6ea2dc6",
+   "q": "What is a shelter?",
+   "o": [
+    "A safe place",
+    "A kind of food",
+    "Drinking water",
+    "An outdoor game"
+   ],
+   "x": "In a shelter we hide from cold, rain and enemies"
+  },
+  {
+   "he": "מה המחסה של השועל?",
+   "a": "מאורה",
+   "h": "b02dae22",
+   "q": "What is a fox's shelter?",
+   "o": [
+    "A den",
+    "A treetop nest",
+    "A hive",
+    "A flowerpot"
+   ],
+   "x": "A fox lives in a den in the ground"
+  },
+  {
+   "he": "מה המחסה של הדבורים?",
+   "a": "כוורת",
+   "h": "018a7eab",
+   "q": "What is the shelter of bees?",
+   "o": [
+    "A hive",
+    "A den",
+    "A café",
+    "A puddle"
+   ],
+   "x": "Bees live in a hive"
+  },
+  {
+   "he": "מה אוכלת הפרה ברפת בחורף?",
+   "a": "חציר",
+   "h": "ca12928e",
+   "q": "What does a cow eat in the barn in winter?",
+   "o": [
+    "Hay",
+    "Meat",
+    "Fish",
+    "Candy"
+   ],
+   "x": "Hay is dry grass"
+  },
+  {
+   "he": "איפה הדג נושם?",
+   "a": "בתוך המים",
+   "h": "8643f82a",
+   "q": "Where does a fish breathe?",
+   "o": [
+    "In the water",
+    "Out of the water",
+    "In the sand",
+    "In a nest"
+   ],
+   "x": "A fish breathes in water with its gills"
+  },
+  {
+   "he": "לאריה ניבים חדים. מה הוא אוכל?",
+   "a": "בשר",
+   "h": "c3d52cce",
+   "q": "A lion has sharp canines. What does it eat?",
+   "o": [
+    "Meat",
+    "Grass",
+    "Fruit",
+    "Seeds"
+   ],
+   "x": "The lion hunts animals and eats meat"
+  },
+  {
+   "he": "מה אוכלת הארנבת?",
+   "a": "עשב וירקות",
+   "h": "73b7e35d",
+   "q": "What does a rabbit eat?",
+   "o": [
+    "Grass and vegetables",
+    "Meat",
+    "Fish",
+    "Insects"
+   ],
+   "x": "A rabbit eats plants"
+  },
+  {
+   "he": "בצנצנת עם חיפושית עושים חורים. למה?",
+   "a": "כדי שיהיה אוויר",
+   "h": "e42cc400",
+   "q": "We make holes in a beetle's jar. Why?",
+   "o": [
+    "So there is air",
+    "So it can escape",
+    "So it is dark",
+    "So it is wet"
+   ],
+   "x": "The beetle needs air to breathe"
+  },
+  {
+   "he": "צמח בארון חשוך מקבל מים. מה חסר לו?",
+   "a": "אור",
+   "h": "949b7274",
+   "q": "A plant in a dark closet gets water. What is it missing?",
+   "o": [
+    "Light",
+    "Darkness",
+    "Noise",
+    "Color"
+   ],
+   "x": "Without light, a plant can't make food"
+  },
+  {
+   "he": "מה חייבים לתת לכלב בכל יום?",
+   "a": "מים ואוכל",
+   "h": "8be6f71a",
+   "q": "What must we give a dog every day?",
+   "o": [
+    "Water and food",
+    "Candy",
+    "Clothes",
+    "A new toy"
+   ],
+   "x": "A dog needs water and food too"
+  },
+  {
+   "he": "איך הצמח מקבל מים מהאדמה?",
+   "a": "בשורשים",
+   "h": "f29cb8f0",
+   "q": "How does a plant get water from the soil?",
+   "o": [
+    "With its roots",
+    "With its flowers",
+    "With its leaves",
+    "With its fruits"
+   ],
+   "x": "The roots take in water from the soil"
+  },
+  {
+   "he": "מה מגן על הצב?",
+   "a": "השריון שלו",
+   "h": "8266877b",
+   "q": "What protects the turtle?",
+   "o": [
+    "Its shell",
+    "A treetop nest",
+    "A hive",
+    "Its tail"
+   ],
+   "x": "The turtle hides inside its shell"
+  },
+  {
+   "he": "מה המחסה של האדם?",
+   "a": "בית",
+   "h": "ea820501",
+   "q": "What is a person's shelter?",
+   "o": [
+    "A house",
+    "A nest",
+    "A hive",
+    "A den"
+   ],
+   "x": "A house protects us from cold and rain"
+  },
+  {
+   "he": "מה אוכל החתול?",
+   "a": "בשר",
+   "h": "73320153",
+   "q": "What does a cat eat?",
+   "o": [
+    "Meat",
+    "Grass",
+    "Seeds",
+    "Leaves"
+   ],
+   "x": "A cat eats meat"
+  },
+  {
+   "he": "ביום חם הכלב שוכב בצל. למה?",
+   "a": "כדי להתקרר",
+   "h": "b17e9408",
+   "q": "On a hot day, the dog lies in the shade. Why?",
+   "o": [
+    "To cool down",
+    "To eat",
+    "To grow",
+    "To get wet"
+   ],
+   "x": "It is cooler in the shade"
+  },
+  {
+   "he": "איך נקראות השיניים שבחזית הפה?",
+   "a": "חותכות",
+   "h": "b528f2d8",
+   "q": "What are the teeth at the front of the mouth called?",
+   "o": [
+    "Incisors",
+    "Molars",
+    "Canines",
+    "Wisdom teeth"
+   ],
+   "x": "The incisors are at the front"
+  },
+  {
+   "he": "מה התפקיד של השיניים החותכות?",
+   "a": "לנגוס",
+   "h": "7bd74738",
+   "q": "What do the incisors do?",
+   "o": [
+    "Bite",
+    "Grind",
+    "Tear",
+    "Swallow"
+   ],
+   "x": "We bite with the incisors, for example into a sandwich"
+  },
+  {
+   "he": "איך נקראות השיניים המחודדות ליד החותכות?",
+   "a": "ניבים",
+   "h": "56899052",
+   "q": "What are the pointed teeth next to the incisors called?",
+   "o": [
+    "Canines",
+    "Molars",
+    "Incisors",
+    "Wisdom teeth"
+   ],
+   "x": "Canines are pointed, like a leopard's"
+  },
+  {
+   "he": "מה התפקיד של הניבים?",
+   "a": "לקרוע מזון",
+   "h": "cc71ceb6",
+   "q": "What do the canines do?",
+   "o": [
+    "Tear food",
+    "Grind food",
+    "Drink",
+    "Breathe"
+   ],
+   "x": "Canines tear tough food, like meat"
+  },
+  {
+   "he": "איך נקראות השיניים הרחבות שבסוף הפה?",
+   "a": "טוחנות",
+   "h": "340245b5",
+   "q": "What are the wide teeth at the back of the mouth called?",
+   "o": [
+    "Molars",
+    "Incisors",
+    "Canines",
+    "Baby teeth"
+   ],
+   "x": "Molars are wide and sit at the back"
+  },
+  {
+   "he": "מה התפקיד של הטוחנות?",
+   "a": "לטחון וללעוס",
+   "h": "1d0e1310",
+   "q": "What do the molars do?",
+   "o": [
+    "Grind and chew",
+    "Bite",
+    "Tear",
+    "Smell"
+   ],
+   "x": "Molars grind food into small pieces"
+  },
+  {
+   "he": "באילו שיניים נוגסים בתפוח?",
+   "a": "חותכות",
+   "h": "2c559bb9",
+   "q": "Which teeth do we use to bite an apple?",
+   "o": [
+    "Incisors",
+    "Molars",
+    "Canines",
+    "Wisdom teeth"
+   ],
+   "x": "The incisors are sharp and bite"
+  },
+  {
+   "he": "באילו שיניים כותשים אגוז?",
+   "a": "טוחנות",
+   "h": "05509c2d",
+   "q": "Which teeth crush a nut?",
+   "o": [
+    "Molars",
+    "Incisors",
+    "Canines",
+    "None of them"
+   ],
+   "x": "The wide molars crush hard food"
+  },
+  {
+   "he": "למי מהם יש ניבים גדולים במיוחד?",
+   "a": "לאריה",
+   "h": "233a8771",
+   "q": "Which of these has especially big canines?",
+   "o": [
+    "Lion",
+    "Cow",
+    "Rabbit",
+    "Sheep"
+   ],
+   "x": "The lion eats meat and tears it with its canines"
+  },
+  {
+   "he": "לפרה יש טוחנות רחבות. למה?",
+   "a": "לטחון וללעוס",
+   "h": "bad8feb9",
+   "q": "A cow has wide molars. Why?",
+   "o": [
+    "Grind and chew",
+    "Tear meat",
+    "Bite fish",
+    "Crack bones"
+   ],
+   "x": "A cow chews grass for a long time"
+  },
+  {
+   "he": "איך נקראות השיניים הראשונות של ילד?",
+   "a": "שיני חלב",
+   "h": "c3d8e394",
+   "q": "What are a child's first teeth called?",
+   "o": [
+    "Baby teeth",
+    "Permanent teeth",
+    "Wisdom teeth",
+    "Molars"
+   ],
+   "x": "Baby teeth come in when we are babies"
+  },
+  {
+   "he": "מה קורה לשיני החלב?",
+   "a": "נופלות ומתחלפות",
+   "h": "4e87757d",
+   "q": "What happens to baby teeth?",
+   "o": [
+    "They fall out",
+    "They stay forever",
+    "They become canines",
+    "They grow bigger"
+   ],
+   "x": "Permanent teeth grow in their place"
+  },
+  {
+   "he": "מה צומח במקום שן חלב שנפלה?",
+   "a": "שן קבועה",
+   "h": "ffef065b",
+   "q": "What grows in place of a baby tooth that fell out?",
+   "o": [
+    "A permanent tooth",
+    "A new baby tooth",
+    "Nothing",
+    "A bone"
+   ],
+   "x": "The permanent tooth pushes the baby tooth out"
+  },
+  {
+   "he": "באיזה גיל מתחילות לנשור שיני החלב?",
+   "a": "בערך בגיל 6",
+   "h": "d5dd297c",
+   "q": "At what age do baby teeth start to fall out?",
+   "o": [
+    "About age 6",
+    "Age 1",
+    "Age 20",
+    "Age 50"
+   ],
+   "x": "Baby teeth fall out from about age 6"
+  },
+  {
+   "he": "כמה שיני חלב יש לילד?",
+   "a": "20",
+   "h": "45833045",
+   "q": "How many baby teeth does a child have?",
+   "o": [
+    "20",
+    "32",
+    "10",
+    "50"
+   ],
+   "x": "A child has 20 baby teeth"
+  },
+  {
+   "he": "כמה שיניים קבועות יש למבוגר?",
+   "a": "32",
+   "h": "dc2ff910",
+   "q": "How many permanent teeth does an adult have?",
+   "o": [
+    "32",
+    "20",
+    "10",
+    "100"
+   ],
+   "x": "An adult has 32 permanent teeth"
+  },
+  {
+   "he": "שן קבועה נפלה. מה יקרה?",
+   "a": "לא תצמח אחרת",
+   "h": "2d5c30bb",
+   "q": "A permanent tooth fell out. What will happen?",
+   "o": [
+    "No new tooth grows",
+    "A new tooth grows",
+    "A baby tooth grows",
+    "It comes back"
+   ],
+   "x": "A permanent tooth has no replacement – take care of it"
+  },
+  {
+   "he": "איזה חלק של השן מוסתר בחניכיים?",
+   "a": "השורש",
+   "h": "a74a4dde",
+   "q": "Which part of the tooth is hidden in the gums?",
+   "o": [
+    "The root",
+    "The crown",
+    "The enamel",
+    "The tip"
+   ],
+   "x": "The root holds the tooth in the jawbone"
+  },
+  {
+   "he": "איך נקראת השכבה הקשה שעוטפת את השן?",
+   "a": "אמייל",
+   "h": "bdb92945",
+   "q": "What is the hard layer covering a tooth called?",
+   "o": [
+    "Enamel",
+    "Root",
+    "Gums",
+    "Tongue"
+   ],
+   "x": "Enamel is the hardest material in the body"
+  },
+  {
+   "he": "איך נקרא הבשר הוורוד שמסביב לשיניים?",
+   "a": "חניכיים",
+   "h": "ad4d735a",
+   "q": "What is the pink flesh around the teeth called?",
+   "o": [
+    "Gums",
+    "Tongue",
+    "Lips",
+    "Cheeks"
+   ],
+   "x": "The gums wrap around the base of the teeth"
+  },
+  {
+   "he": "כמה פעמים ביום מצחצחים שיניים?",
+   "a": "פעמיים",
+   "h": "053c4448",
+   "q": "How many times a day do we brush our teeth?",
+   "o": [
+    "Twice",
+    "Once a week",
+    "Ten times",
+    "Never"
+   ],
+   "x": "We brush in the morning and in the evening"
+  },
+  {
+   "he": "מתי מצחצחים שיניים בערב?",
+   "a": "לפני השינה",
+   "h": "c3596a60",
+   "q": "When do we brush our teeth in the evening?",
+   "o": [
+    "Before bed",
+    "Before dinner",
+    "At midnight",
+    "We don't brush"
+   ],
+   "x": "After brushing, we don't eat until morning"
+  },
+  {
+   "he": "כמה זמן מצחצחים שיניים?",
+   "a": "בערך שתי דקות",
+   "h": "d8db4cb6",
+   "q": "How long do we brush our teeth?",
+   "o": [
+    "About two minutes",
+    "One second",
+    "An hour",
+    "A whole day"
+   ],
+   "x": "Good brushing takes about two minutes"
+  },
+  {
+   "he": "מה שמים על מברשת השיניים?",
+   "a": "משחת שיניים",
+   "h": "a0bf2b25",
+   "q": "What do we put on a toothbrush?",
+   "o": [
+    "Toothpaste",
+    "Dish soap",
+    "Jam",
+    "Shampoo"
+   ],
+   "x": "Toothpaste helps clean and strengthen the teeth"
+  },
+  {
+   "he": "מה מזיק לשיניים?",
+   "a": "הרבה ממתקים",
+   "h": "1c477662",
+   "q": "What is bad for our teeth?",
+   "o": [
+    "Lots of sweets",
+    "Water",
+    "Vegetables",
+    "Brushing"
+   ],
+   "x": "Sugar causes holes in the teeth"
+  },
+  {
+   "he": "איך נקרא חור בשן?",
+   "a": "עששת",
+   "h": "9ddf42b0",
+   "q": "What do we call a hole in a tooth?",
+   "o": [
+    "A cavity",
+    "Enamel",
+    "Gums",
+    "A root"
+   ],
+   "x": "Germs and sugar cause cavities"
+  },
+  {
+   "he": "מי בודק לנו את השיניים?",
+   "a": "רופא שיניים",
+   "h": "fbadb29f",
+   "q": "Who checks our teeth?",
+   "o": [
+    "Dentist",
+    "Teacher",
+    "Police officer",
+    "Cook"
+   ],
+   "x": "The dentist checks and treats our teeth"
+  },
+  {
+   "he": "כל כמה זמן הולכים לבדיקת שיניים?",
+   "a": "פעם בחצי שנה",
+   "h": "f5646a28",
+   "q": "How often do we go for a dental checkup?",
+   "o": [
+    "Every six months",
+    "Only when it hurts",
+    "Every day",
+    "Never"
+   ],
+   "x": "We get our teeth checked even when nothing hurts"
+  },
+  {
+   "he": "מה הכי טוב לשיניים לשתות?",
+   "a": "מים",
+   "h": "c5ea6093",
+   "q": "What is the best drink for our teeth?",
+   "o": [
+    "Water",
+    "Cola",
+    "Sweet chocolate milk",
+    "Sweetened juice"
+   ],
+   "x": "Water has no sugar"
+  },
+  {
+   "he": "איזה חטיף הכי טוב לשיניים?",
+   "a": "גזר",
+   "h": "87ada214",
+   "q": "Which snack is best for our teeth?",
+   "o": [
+    "Carrot",
+    "Candy",
+    "Lollipop",
+    "Toffee"
+   ],
+   "x": "A carrot has no sugar to harm the teeth"
+  },
+  {
+   "he": "מה עושים אחרי שאכלנו ממתק?",
+   "a": "שוטפים את הפה",
+   "h": "670b7a0c",
+   "q": "What do we do after eating candy?",
+   "o": [
+    "Rinse our mouth",
+    "Go to sleep",
+    "Eat more",
+    "Nothing"
+   ],
+   "x": "Rinsing washes the sugar off the teeth"
+  },
+  {
+   "he": "למה סוכר מזיק לשיניים?",
+   "a": "חיידקים ניזונים ממנו",
+   "h": "d0211578",
+   "q": "Why is sugar bad for our teeth?",
+   "o": [
+    "Germs feed on it",
+    "It is too cold",
+    "It is too hard",
+    "It whitens them"
+   ],
+   "x": "The germs make acid that harms the tooth"
+  },
+  {
+   "he": "מתי מחליפים מברשת שיניים?",
+   "a": "כל שלושה חודשים",
+   "h": "f5717514",
+   "q": "When do we change our toothbrush?",
+   "o": [
+    "Every three months",
+    "Every day",
+    "Every ten years",
+    "Never"
+   ],
+   "x": "An old toothbrush no longer cleans well"
+  },
+  {
+   "he": "איך מצחצחים נכון?",
+   "a": "בעדינות, כל השיניים",
+   "h": "200b5409",
+   "q": "How do we brush correctly?",
+   "o": [
+    "Gently, all teeth",
+    "Hard, front only",
+    "Only the molars",
+    "Only the tongue"
+   ],
+   "x": "We brush gently on all sides"
+  },
+  {
+   "he": "דני אוכל סוכריות ולא מצחצח. מה יקרה?",
+   "a": "עלולה להיות עששת",
+   "h": "4bfe1b16",
+   "q": "Dani eats candy and doesn't brush. What will happen?",
+   "o": [
+    "He may get cavities",
+    "His teeth get stronger",
+    "His teeth grow bigger",
+    "Nothing will happen"
+   ],
+   "x": "Sugar without brushing causes holes in the teeth"
+  },
+  {
+   "he": "איזה מזון עוזר לשיניים חזקות?",
+   "a": "חלב וגבינה",
+   "h": "97243c95",
+   "q": "Which food helps keep teeth strong?",
+   "o": [
+    "Milk and cheese",
+    "Candy",
+    "Cookies",
+    "Soda"
+   ],
+   "x": "Milk and cheese have calcium"
+  },
+  {
+   "he": "מה לא עושים עם השיניים?",
+   "a": "פותחים בקבוקים",
+   "h": "f99fb65b",
+   "q": "What should we not do with our teeth?",
+   "o": [
+    "Open bottles",
+    "Bite an apple",
+    "Smile",
+    "Chew food"
+   ],
+   "x": "The tooth might break"
+  },
+  {
+   "he": "למה חשוב לשמור על השיניים הקבועות?",
+   "a": "אין להן מחליפות",
+   "h": "8b6c45ef",
+   "q": "Why is it important to protect our permanent teeth?",
+   "o": [
+    "Nothing replaces them",
+    "They fall out naturally",
+    "They are small",
+    "They are baby teeth"
+   ],
+   "x": "A lost permanent tooth won't grow back"
+  },
+  {
+   "he": "השן כואבת. מה עושים?",
+   "a": "הולכים לרופא שיניים",
+   "h": "e1054694",
+   "q": "A tooth hurts. What do we do?",
+   "o": [
+    "Go to the dentist",
+    "Eat candy",
+    "Do nothing",
+    "Brush very hard"
+   ],
+   "x": "The dentist will treat the tooth"
+  },
+  {
+   "he": "במה מנקים בין השיניים?",
+   "a": "חוט דנטלי",
+   "h": "66486760",
+   "q": "What do we use to clean between our teeth?",
+   "o": [
+    "Dental floss",
+    "Comb",
+    "Scissors",
+    "Fork"
+   ],
+   "x": "Floss removes bits of food from between the teeth"
+  },
+  {
+   "he": "מה יש לכל העופות?",
+   "a": "נוצות",
+   "h": "042ddaa6",
+   "q": "What do all birds have?",
+   "o": [
+    "Feathers",
+    "Fins",
+    "Fur",
+    "Shells"
+   ],
+   "x": "All birds have feathers and a beak"
+  },
+  {
+   "he": "הגורים שותים חלב מאמם. לאיזו קבוצה שייכים?",
+   "a": "יונקים",
+   "h": "a1e580e3",
+   "q": "The young drink their mother's milk. What group is this?",
+   "o": [
+    "Mammals",
+    "Birds",
+    "Fish",
+    "Reptiles"
+   ],
+   "x": "Mammals feed their young with milk"
+  },
+  {
+   "he": "במה הדגים נושמים?",
+   "a": "בזימים",
+   "h": "cc01574a",
+   "q": "What do fish breathe with?",
+   "o": [
+    "Gills",
+    "Ears",
+    "Fins",
+    "Scales"
+   ],
+   "x": "Gills take oxygen from the water"
+  },
+  {
+   "he": "לנמלה 6 רגליים. לאיזו קבוצה היא שייכת?",
+   "a": "חרקים",
+   "h": "45d01b69",
+   "q": "An ant has 6 legs. What group is it in?",
+   "o": [
+    "Insects",
+    "Spiders",
+    "Mammals",
+    "Birds"
+   ],
+   "x": "Every insect has six legs"
+  },
+  {
+   "he": "מה מהם אינו חרק?",
+   "a": "עכביש",
+   "h": "8ee7695c",
+   "q": "Which of these is not an insect?",
+   "o": [
+    "Spider",
+    "Ant",
+    "Bee",
+    "Butterfly"
+   ],
+   "x": "A spider has eight legs"
+  },
+  {
+   "he": "מה מהם עוף?",
+   "a": "תרנגולת",
+   "h": "afea0fae",
+   "q": "Which of these is a bird?",
+   "o": [
+    "Hen",
+    "Bat",
+    "Butterfly",
+    "Dolphin"
+   ],
+   "x": "A hen has feathers – it is a bird"
+  },
+  {
+   "he": "מה מהם יונק?",
+   "a": "לוויתן",
+   "h": "a5e14977",
+   "q": "Which of these is a mammal?",
+   "o": [
+    "Whale",
+    "Shark",
+    "Octopus",
+    "Turtle"
+   ],
+   "x": "A whale feeds its baby milk"
+  },
+  {
+   "he": "מה מכסה את העור של הנחש?",
+   "a": "קשקשים",
+   "h": "e527e1b8",
+   "q": "What covers a snake's skin?",
+   "o": [
+    "Scales",
+    "Feathers",
+    "Fur",
+    "Hair"
+   ],
+   "x": "Like all reptiles, a snake has scales"
+  },
+  {
+   "he": "הצפרדע חיה במים וגם ביבשה. מה היא?",
+   "a": "דו-חי",
+   "h": "e8dc5c6f",
+   "q": "A frog lives in water and on land. What is it?",
+   "o": [
+    "Amphibian",
+    "Fish",
+    "Bird",
+    "Mammal"
+   ],
+   "x": "The frog is an amphibian"
+  },
+  {
+   "he": "מי מהם מטיל ביצים?",
+   "a": "תרנגולת",
+   "h": "23b5415c",
+   "q": "Which of these lays eggs?",
+   "o": [
+    "Hen",
+    "Cow",
+    "Dog",
+    "Cat"
+   ],
+   "x": "Birds lay eggs"
+  },
+  {
+   "he": "איפה חי הגמל?",
+   "a": "במדבר",
+   "h": "2554c232",
+   "q": "Where does the camel live?",
+   "o": [
+    "In the desert",
+    "In the sea",
+    "In the forest",
+    "At the poles"
+   ],
+   "x": "A camel copes with heat and little water"
+  },
+  {
+   "he": "איפה חי הדולפין?",
+   "a": "בים",
+   "h": "959517c3",
+   "q": "Where does the dolphin live?",
+   "o": [
+    "In the sea",
+    "In the desert",
+    "In the forest",
+    "In a tree"
+   ],
+   "x": "The dolphin swims in the sea"
+  },
+  {
+   "he": "איפה חי הפינגווין?",
+   "a": "במקום קר וקפוא",
+   "h": "3583e49d",
+   "q": "Where does the penguin live?",
+   "o": [
+    "Somewhere cold and icy",
+    "In a hot desert",
+    "In a green forest",
+    "In a wheat field"
+   ],
+   "x": "The penguin lives near the South Pole"
+  },
+  {
+   "he": "מה זה בית גידול?",
+   "a": "המקום שבו חי",
+   "h": "7c3093f9",
+   "q": "What is a habitat?",
+   "o": [
+    "Where living things live",
+    "A house for people",
+    "A kindergarten",
+    "A pet shop"
+   ],
+   "x": "A habitat is the place where a living thing lives"
+  },
+  {
+   "he": "איזה צמח מתאים למדבר?",
+   "a": "קקטוס",
+   "h": "54c3a520",
+   "q": "Which plant suits the desert?",
+   "o": [
+    "Cactus",
+    "Water lily",
+    "Pine tree",
+    "Lettuce"
+   ],
+   "x": "A cactus stores water inside it"
+  },
+  {
+   "he": "איפה חי הסנאי?",
+   "a": "על עצים ביער",
+   "h": "300ee7f0",
+   "q": "Where does the squirrel live?",
+   "o": [
+    "In forest trees",
+    "In the water",
+    "In the desert",
+    "At the poles"
+   ],
+   "x": "The squirrel climbs trees"
+  },
+  {
+   "he": "למה לדג יש סנפירים?",
+   "a": "כדי לשחות",
+   "h": "e1d7bced",
+   "q": "Why does a fish have fins?",
+   "o": [
+    "To swim",
+    "To fly",
+    "To walk",
+    "To dig"
+   ],
+   "x": "A fish swims in the water with its fins"
+  },
+  {
+   "he": "מי מהם חי ביער?",
+   "a": "דוב",
+   "h": "bc8cbe73",
+   "q": "Which of these lives in the forest?",
+   "o": [
+    "Bear",
+    "Shark",
+    "Camel",
+    "Penguin"
+   ],
+   "x": "The bear lives in the forest"
+  },
+  {
+   "he": "מי מהם חי בים?",
+   "a": "תמנון",
+   "h": "fdab0d29",
+   "q": "Which of these lives in the sea?",
+   "o": [
+    "Octopus",
+    "Lion",
+    "Camel",
+    "Squirrel"
+   ],
+   "x": "The octopus lives in the sea"
+  },
+  {
+   "he": "למה לדוב הקוטב פרווה לבנה ועבה?",
+   "a": "להסתתר ולהתחמם",
+   "h": "138a1df8",
+   "q": "Why does a polar bear have thick white fur?",
+   "o": [
+    "To hide, stay warm",
+    "To swim fast",
+    "To fly",
+    "To see at night"
+   ],
+   "x": "White like the snow, and thick against the cold"
+  },
+  {
+   "he": "איך נקרא צמח עם גזע אחד עבה וגבוה?",
+   "a": "עץ",
+   "h": "aea6243e",
+   "q": "What is a plant with one thick, tall trunk called?",
+   "o": [
+    "Tree",
+    "Bush",
+    "Herb",
+    "Mint"
+   ],
+   "x": "A tree has a thick, woody trunk with branches"
+  },
+  {
+   "he": "לאיזה צמח ענפים רבים מלמטה, בלי גזע?",
+   "a": "שיח",
+   "h": "e80d6d85",
+   "q": "Which plant has many low branches and no trunk?",
+   "o": [
+    "Bush",
+    "Tree",
+    "Herb",
+    "Palm tree"
+   ],
+   "x": "A bush has many branches growing near the ground"
+  },
+  {
+   "he": "מה מהם עשב?",
+   "a": "דשא",
+   "h": "9e8462e6",
+   "q": "Which of these is an herb?",
+   "o": [
+    "Grass",
+    "Oak",
+    "Pine",
+    "Olive"
+   ],
+   "x": "An herb has a soft green stem and no trunk"
+  },
+  {
+   "he": "איזה גבעול יש לעשב?",
+   "a": "רך וירוק",
+   "h": "4ae3661d",
+   "q": "What kind of stem does an herb have?",
+   "o": [
+    "Soft and green",
+    "Thick and hard",
+    "Made of wood",
+    "Made of stone"
+   ],
+   "x": "An herb's stem is soft – you can bend it"
+  },
+  {
+   "he": "מה מהם עץ?",
+   "a": "זית",
+   "h": "fc09cf33",
+   "q": "Which of these is a tree?",
+   "o": [
+    "Olive",
+    "Sunflower",
+    "Grass",
+    "Mint"
+   ],
+   "x": "An olive has a thick, hard trunk – it is a tree",
+   "sc": {
+    "0": "Olive",
+    "1": "Sunflower",
+    "2": "Grass",
+    "3": "Mint"
+   }
+  },
+  {
+   "he": "מפירות איזה עץ סוחטים שמן?",
+   "a": "זית",
+   "h": "3e2bf1a3",
+   "q": "Which tree's fruit is pressed for oil?",
+   "o": [
+    "Olive",
+    "Pine",
+    "Cypress",
+    "Eucalyptus"
+   ],
+   "x": "Olives are pressed to make olive oil"
+  },
+  {
+   "he": "איזה מהם ירוק כל השנה?",
+   "a": "אורן",
+   "h": "93f05b2f",
+   "q": "Which of these is green all year?",
+   "o": [
+    "Pine",
+    "Grapevine",
+    "Almond",
+    "Fig"
+   ],
+   "x": "The pine's thin leaves don't fall in winter"
+  },
+  {
+   "he": "מה קורה לעלי התאנה בחורף?",
+   "a": "נושרים",
+   "h": "f8a26851",
+   "q": "What happens to fig leaves in winter?",
+   "o": [
+    "They fall off",
+    "They grow huge",
+    "They turn blue",
+    "They become thorns"
+   ],
+   "x": "A fig tree drops its leaves in autumn"
+  },
+  {
+   "he": "איזה עץ פורח בלבן-ורוד בט״ו בשבט?",
+   "a": "שקדייה",
+   "h": "96023a71",
+   "q": "Which tree blooms pink and white on Tu BiShvat?",
+   "o": [
+    "Almond",
+    "Pine",
+    "Cypress",
+    "Palm"
+   ],
+   "x": "The almond blooms at the end of winter, before its leaves"
+  },
+  {
+   "he": "מה משותף לעץ, לשיח ולעשב?",
+   "a": "כולם צמחים",
+   "h": "d139c658",
+   "q": "What do a tree, a bush and an herb share?",
+   "o": [
+    "All are plants",
+    "All the same height",
+    "All have trunks",
+    "All bloom in winter"
+   ],
+   "x": "They are all living things that grow from the ground"
+  },
+  {
+   "he": "איזה צמח גדל בתוך מים?",
+   "a": "שושנת מים",
+   "h": "e06b5f02",
+   "q": "Which plant grows in a pond?",
+   "o": [
+    "Water lily",
+    "Cactus",
+    "Pine",
+    "Wheat"
+   ],
+   "x": "Water lily leaves float on the pond"
+  },
+  {
+   "he": "איפה הקקטוס אוגר מים?",
+   "a": "בגבעול העבה",
+   "h": "fdb3df84",
+   "q": "Where does a cactus store water?",
+   "o": [
+    "In its thick stem",
+    "In its thorns",
+    "In its flowers",
+    "In its fruit"
+   ],
+   "x": "The cactus's thick stem is full of water"
+  },
+  {
+   "he": "למה לצמחי מדבר עלים קטנים או קוצים?",
+   "a": "לאבד פחות מים",
+   "h": "a124351d",
+   "q": "Why do desert plants have tiny leaves or thorns?",
+   "o": [
+    "To lose less water",
+    "To get more light",
+    "To bloom fast",
+    "To float on water"
+   ],
+   "x": "Less water evaporates from small leaves"
+  },
+  {
+   "he": "במה צמחים שונים זה מזה?",
+   "a": "בצורת העלים",
+   "h": "591cb683",
+   "q": "How are plants different from each other?",
+   "o": [
+    "In leaf shape",
+    "In being alive",
+    "In growing",
+    "In breathing"
+   ],
+   "x": "All plants live, grow and breathe – but they look different"
+  },
+  {
+   "he": "איזה צמח מטפס על גדר?",
+   "a": "גפן",
+   "h": "73aaad18",
+   "q": "Which plant climbs a fence?",
+   "o": [
+    "Grapevine",
+    "Pine",
+    "Palm",
+    "Cactus"
+   ],
+   "x": "A grapevine has tendrils that wrap around and help it climb"
+  },
+  {
+   "he": "מאיזה צמח מכינים קמח ללחם?",
+   "a": "חיטה",
+   "h": "477282c5",
+   "q": "Which plant gives us flour for bread?",
+   "o": [
+    "Wheat",
+    "Rose",
+    "Cactus",
+    "Pine"
+   ],
+   "x": "Wheat grains are ground into flour"
+  },
+  {
+   "he": "איזה פרח בר אדום פורח בחורף?",
+   "a": "כלנית",
+   "h": "311ba946",
+   "q": "Which red wildflower blooms in winter?",
+   "o": [
+    "Anemone",
+    "Sunflower",
+    "Sea squill",
+    "Narcissus"
+   ],
+   "x": "In winter, anemones paint the fields red"
+  },
+  {
+   "he": "איזה צמח פורח בסוף הקיץ, לפני הגשם?",
+   "a": "חצב",
+   "h": "2684e4b3",
+   "q": "Which plant blooms at summer's end, before the rain?",
+   "o": [
+    "Sea squill",
+    "Anemone",
+    "Cyclamen",
+    "Almond"
+   ],
+   "x": "Sea squill flowers tell us that autumn is coming"
+  },
+  {
+   "he": "איזה חלק של החמנייה אוכלים כחטיף?",
+   "a": "הגרעינים",
+   "h": "cd9f0f20",
+   "q": "Which part of a sunflower do we eat as a snack?",
+   "o": [
+    "The seeds",
+    "The leaves",
+    "The roots",
+    "The stem"
+   ],
+   "x": "The seeds grow in the sunflower's big flower head"
+  },
+  {
+   "he": "תפוח, תות ותפוז – מה משותף?",
+   "a": "פירות של צמחים",
+   "h": "862fcfc7",
+   "q": "An apple, a strawberry, an orange – what do they share?",
+   "o": [
+    "Fruits of plants",
+    "All are green",
+    "They grow in water",
+    "All are sour"
+   ],
+   "x": "Each one is the fruit of a different plant"
+  },
+  {
+   "he": "ראית כלנית בשדה. מה עושים?",
+   "a": "מסתכלים ולא קוטפים",
+   "h": "17ff799d",
+   "q": "You see an anemone in a field. What do you do?",
+   "o": [
+    "Look but don't pick",
+    "Pick a bunch",
+    "Pull it out",
+    "Step on it"
+   ],
+   "x": "The anemone is a protected flower"
+  },
+  {
+   "he": "למה אסור לקטוף פרחים מוגנים?",
+   "a": "כדי שלא ייעלמו",
+   "h": "f49a70f5",
+   "q": "Why must we not pick protected flowers?",
+   "o": [
+    "So they won't vanish",
+    "Because they're poisonous",
+    "Because they're prickly",
+    "Because they're small"
+   ],
+   "x": "If everyone picks them, no flowers will be left"
+  },
+  {
+   "he": "מה עושים עם פסולת בטיול?",
+   "a": "לוקחים לפח",
+   "h": "6e00fb65",
+   "q": "What do we do with trash on a hike?",
+   "o": [
+    "Use a trash can",
+    "Leave it lying around",
+    "Throw it in streams",
+    "Bury it in sand"
+   ],
+   "x": "We keep nature clean"
+  },
+  {
+   "he": "מה זה למחזר?",
+   "a": "להשתמש שוב בחומר",
+   "h": "ae40df94",
+   "q": "What does it mean to recycle?",
+   "o": [
+    "Use the material again",
+    "Dump it at sea",
+    "Burn it",
+    "Buy more"
+   ],
+   "x": "Recycled material is made into a new product"
+  },
+  {
+   "he": "לאיזה פח זורקים עיתונים ישנים?",
+   "a": "לפח הכחול",
+   "h": "078d208f",
+   "q": "Which bin do old newspapers go in?",
+   "o": [
+    "The blue bin",
+    "The purple bin",
+    "The orange bin",
+    "The green bin"
+   ],
+   "x": "The blue bin is for paper and cardboard"
+  },
+  {
+   "he": "לאיזה מכל מכניסים בקבוקי זכוכית?",
+   "a": "למכל הסגול",
+   "h": "0e8b8ed0",
+   "q": "Which container do glass bottles go in?",
+   "o": [
+    "The purple container",
+    "The blue container",
+    "The orange container",
+    "The green bin"
+   ],
+   "x": "The purple container is for glass",
+   "sc": {
+    "0": "Glass bottles"
+   }
+  },
+  {
+   "he": "מה עושים בברז אחרי ששתינו?",
+   "a": "סוגרים אותו",
+   "h": "98e9c082",
+   "q": "What do we do with the tap after drinking?",
+   "o": [
+    "Turn it off",
+    "Leave it running",
+    "Turn it on full",
+    "Break it"
+   ],
+   "x": "This way we save water"
+  },
+  {
+   "he": "למה לא מאכילים חיות בר?",
+   "a": "זה מזיק להן",
+   "h": "e3722faa",
+   "q": "Why don't we feed wild animals?",
+   "o": [
+    "It harms them",
+    "They aren't hungry",
+    "They don't eat",
+    "It costs money"
+   ],
+   "x": "People's food can harm animals"
+  },
+  {
+   "he": "מה קורה לשקית ניילון שנזרקה לים?",
+   "a": "מזיקה לבעלי חיים",
+   "h": "e8a3695b",
+   "q": "What happens to a plastic bag thrown into the sea?",
+   "o": [
+    "It harms sea animals",
+    "It vanishes at once",
+    "It becomes a fish",
+    "It dissolves in water"
+   ],
+   "x": "Turtles and fish may swallow it"
+  },
+  {
+   "he": "איך חוסכים בנייר?",
+   "a": "כותבים בשני הצדדים",
+   "h": "28aae903",
+   "q": "How can we save paper?",
+   "o": [
+    "Write on both sides",
+    "Throw away blank pages",
+    "Tear pages",
+    "Print everything twice"
+   ],
+   "x": "Then fewer trees need to be cut down"
+  },
+  {
+   "he": "מה מסמל הסמל בתמונה?",
+   "a": "מחזור",
+   "h": "8627fbd6",
+   "q": "What does the sign in the picture mean?",
+   "o": [
+    "Recycling",
+    "Caution",
+    "Stop",
+    "Danger"
+   ],
+   "x": "This is the recycling symbol"
+  },
+  {
+   "he": "מה אפשר לעשות מבקבוק פלסטיק ישן?",
+   "a": "עציץ לצמח",
+   "h": "8d387b63",
+   "q": "What can we make from an old plastic bottle?",
+   "o": [
+    "A flower pot",
+    "Food",
+    "New water",
+    "Milk"
+   ],
+   "x": "We use the bottle again instead of throwing it away"
+  },
+  {
+   "he": "עם מה כדאי ללכת לקניות?",
+   "a": "סל בד",
+   "h": "d5e5e91f",
+   "q": "What is good to take shopping?",
+   "o": [
+    "A cloth bag",
+    "Lots of plastic bags",
+    "New bags",
+    "A foam box"
+   ],
+   "x": "We can use a cloth bag again and again"
+  },
+  {
+   "he": "מה עושים עם עיתונים שקראנו?",
+   "a": "ממחזרים",
+   "h": "20133f29",
+   "q": "What do we do with newspapers we've read?",
+   "o": [
+    "Recycle them",
+    "Burn them",
+    "Dump them at sea",
+    "Bury them"
+   ],
+   "x": "Recycled paper is made into new paper"
+  },
+  {
+   "he": "למה הולכים בטיול רק בשבילים?",
+   "a": "לא לפגוע בצמחים",
+   "h": "446554cc",
+   "q": "Why do we walk only on trails on a hike?",
+   "o": [
+    "To protect the plants",
+    "To walk faster",
+    "To pick flowers",
+    "To get dirty"
+   ],
+   "x": "So we don't step on plants and nests"
+  },
+  {
+   "he": "מה זו שמורת טבע?",
+   "a": "מקום מוגן לטבע",
+   "h": "6749975c",
+   "q": "What is a nature reserve?",
+   "o": [
+    "A protected place",
+    "A playground",
+    "A flower shop",
+    "A swimming beach"
+   ],
+   "x": "In a reserve, plants and animals are protected"
+  },
+  {
+   "he": "לאן זורקים סוללה ישנה?",
+   "a": "למכל מיוחד",
+   "h": "857ce830",
+   "q": "Where do we throw an old battery?",
+   "o": [
+    "Into a special bin",
+    "Into a regular bin",
+    "Into the sea",
+    "Onto the ground"
+   ],
+   "x": "Batteries have materials that harm the soil"
+  },
+  {
+   "he": "למה מכבים את האור כשיוצאים מהחדר?",
+   "a": "כדי לחסוך בחשמל",
+   "h": "6f7673e0",
+   "q": "Why do we turn off the light when leaving a room?",
+   "o": [
+    "To save electricity",
+    "To save water",
+    "To make it cold",
+    "To sleep"
+   ],
+   "x": "We save electricity and protect the environment"
+  },
+  {
+   "he": "במה כדאי לקחת מים לבית הספר?",
+   "a": "בקבוק רב-פעמי",
+   "h": "333a8a3c",
+   "q": "What should we bring water to school in?",
+   "o": [
+    "A reusable bottle",
+    "A disposable bottle",
+    "A disposable cup",
+    "A new can"
+   ],
+   "x": "We use a reusable bottle again and again"
+  },
+  {
+   "he": "מה שמים בפח הכתום?",
+   "a": "אריזות פלסטיק",
+   "h": "9d48af49",
+   "q": "What goes in the orange bin?",
+   "o": [
+    "Plastic packaging",
+    "Food scraps",
+    "Newspapers",
+    "Glass bottles"
+   ],
+   "x": "The orange bin is for packaging"
+  },
+  {
+   "he": "על איזה צורך עונה המטרייה?",
+   "a": "הגנה מגשם",
+   "h": "1474e800",
+   "q": "What need does an umbrella meet?",
+   "o": [
+    "Protection from rain",
+    "Hearing",
+    "Lighting",
+    "Cutting"
+   ],
+   "x": "An umbrella keeps us dry"
+  },
+  {
+   "he": "על איזה צורך עונה הפנס?",
+   "a": "אור בחושך",
+   "h": "9e7dac67",
+   "q": "What need does a flashlight meet?",
+   "o": [
+    "Light in the dark",
+    "Protection from rain",
+    "Keeping warm",
+    "Measuring length"
+   ],
+   "x": "A flashlight shines when it is dark"
+  },
+  {
+   "he": "על איזה צורך עונה המקרר?",
+   "a": "לשמור אוכל טרי",
+   "h": "f15e1c71",
+   "q": "What need does a refrigerator meet?",
+   "o": [
+    "Keeping food fresh",
+    "Heating the house",
+    "Washing clothes",
+    "Listening to music"
+   ],
+   "x": "In the cold, food doesn't spoil quickly"
+  },
+  {
+   "he": "במה מחברים כמה דפים יחד?",
+   "a": "שדכן",
+   "h": "6b88f4f1",
+   "q": "What do we use to fasten pages together?",
+   "o": [
+    "Stapler",
+    "Screwdriver",
+    "Fork",
+    "Comb"
+   ],
+   "x": "A stapler joins pages with a staple"
+  },
+  {
+   "he": "במה מבריגים בורג?",
+   "a": "מברג",
+   "h": "713cf483",
+   "q": "Which tool do we twist to tighten this?",
+   "o": [
+    "Screwdriver",
+    "Hammer",
+    "Scissors",
+    "Spoon"
+   ],
+   "x": "A screwdriver turns the screw"
+  },
+  {
+   "he": "במה משקים את העציץ?",
+   "a": "מזלף",
+   "h": "16aaa049",
+   "q": "What do we use to give a potted plant a drink?",
+   "o": [
+    "Watering can",
+    "Knitting needle",
+    "Scissors",
+    "Ruler"
+   ],
+   "x": "A watering can pours water onto the plant"
+  },
+  {
+   "he": "במה מודדים אורך של שולחן?",
+   "a": "סרט מדידה",
+   "h": "9d582eb7",
+   "q": "Which tool tells us how long a table is?",
+   "o": [
+    "Tape measure",
+    "Thermometer",
+    "Clock",
+    "Scale"
+   ],
+   "x": "A tape measure measures length"
+  },
+  {
+   "he": "במה שוקלים תפוחים?",
+   "a": "מאזניים",
+   "h": "28ebb778",
+   "q": "What do we weigh apples with?",
+   "o": [
+    "Scale",
+    "Ruler",
+    "Thermometer",
+    "Scissors"
+   ],
+   "x": "A scale shows how much something weighs"
+  },
+  {
+   "he": "מה עונה על הצורך לשמור על חום?",
+   "a": "מעיל",
+   "h": "6ee78362",
+   "q": "What meets the need to keep warm?",
+   "o": [
+    "Coat",
+    "Fan",
+    "Umbrella",
+    "Sunglasses"
+   ],
+   "x": "A coat keeps the body warm"
+  },
+  {
+   "he": "מה זה מוצר טכנולוגי?",
+   "a": "דבר שאדם יצר",
+   "h": "116f5b3d",
+   "q": "What is a technological product?",
+   "o": [
+    "Something people made",
+    "Something grown in nature",
+    "An animal",
+    "A kind of plant"
+   ],
+   "x": "People invent products to meet a need"
+  },
+  {
+   "he": "ממה עדיף לעשות סיר בישול?",
+   "a": "מתכת",
+   "h": "7bebb38a",
+   "q": "What is the best material for a cooking pot?",
+   "o": [
+    "Metal",
+    "Paper",
+    "Thin plastic",
+    "Wax"
+   ],
+   "x": "Metal doesn't burn or melt on the fire"
+  },
+  {
+   "he": "ממה עדיף לעשות חלון?",
+   "a": "זכוכית",
+   "h": "bc287714",
+   "q": "What is the best material for a window?",
+   "o": [
+    "Glass",
+    "Wood",
+    "Metal",
+    "Cardboard"
+   ],
+   "x": "Light comes in through clear glass"
+  },
+  {
+   "he": "ממה עדיף לעשות כדור קפיצה?",
+   "a": "גומי",
+   "h": "dfce2b6a",
+   "q": "What is the best material for a bouncy ball?",
+   "o": [
+    "Rubber",
+    "Glass",
+    "Wood",
+    "Stone"
+   ],
+   "x": "Rubber is flexible, so the ball bounces"
+  },
+  {
+   "he": "למה הידית של המחבת עשויה עץ?",
+   "a": "כדי לא להיכוות",
+   "h": "3ded1105",
+   "q": "Why is a frying pan's handle made of wood?",
+   "o": [
+    "So hands won't burn",
+    "So it will break",
+    "So it's see-through",
+    "So it will melt"
+   ],
+   "x": "Wood doesn't heat up as fast as metal"
+  },
+  {
+   "he": "מה מהבאים עדיף לכוס של תינוק?",
+   "a": "פלסטיק חזק",
+   "h": "dbcd9a8f",
+   "q": "Which of these is best for a baby's cup?",
+   "o": [
+    "Strong plastic",
+    "Thin glass",
+    "Paper",
+    "Cloth"
+   ],
+   "x": "Strong plastic doesn't break when the cup falls"
+  },
+  {
+   "he": "ממה עדיף לבנות בית חזק?",
+   "a": "בטון ולבנים",
+   "h": "c556e04f",
+   "q": "What is best for building a strong house?",
+   "o": [
+    "Concrete and bricks",
+    "Cardboard",
+    "Cloth",
+    "Paper"
+   ],
+   "x": "Concrete and bricks are hard and strong"
+  },
+  {
+   "he": "מטרייה מנייר – מה הבעיה?",
+   "a": "סופגת מים ונקרעת",
+   "h": "89119cf2",
+   "q": "An umbrella made of paper – what is the problem?",
+   "o": [
+    "It tears when wet",
+    "It is too heavy",
+    "It is see-through",
+    "It is too hard"
+   ],
+   "x": "An umbrella needs a material that keeps water out"
+  },
+  {
+   "he": "ממה עדיף לעשות מגבת?",
+   "a": "כותנה",
+   "h": "58517596",
+   "q": "What is the best material for a towel?",
+   "o": [
+    "Cotton",
+    "Nylon",
+    "Plastic",
+    "Metal"
+   ],
+   "x": "Cotton is soft and soaks up water"
+  },
+  {
+   "he": "למה הכבל של המנורה מצופה פלסטיק?",
+   "a": "כדי להגן מחשמל",
+   "h": "4bcb97cb",
+   "q": "Why is a lamp's cord covered in plastic?",
+   "o": [
+    "To protect from shocks",
+    "To make it heavy",
+    "To make it see-through",
+    "To make it melt"
+   ],
+   "x": "Plastic does not let electricity through"
+  },
+  {
+   "he": "מאיזה חומר מבין אלה עדיף לעשות כרית?",
+   "a": "בד רך",
+   "h": "77836b84",
+   "q": "Which of these materials is best for a pillow?",
+   "o": [
+    "Soft cloth",
+    "Wood",
+    "Metal",
+    "Stone"
+   ],
+   "x": "A pillow needs to be soft"
+  },
+  {
+   "he": "מה מהם גמיש?",
+   "a": "צינור גומי",
+   "h": "4b02c46c",
+   "q": "Which of these is flexible?",
+   "o": [
+    "Rubber hose",
+    "Glass cup",
+    "Brick",
+    "Nail"
+   ],
+   "x": "A rubber hose bends and doesn't break"
+  },
+  {
+   "he": "ממה עשוי המסמר?",
+   "a": "מתכת",
+   "h": "f9111d0a",
+   "q": "What is a nail made of?",
+   "o": [
+    "Metal",
+    "Wood",
+    "Cloth",
+    "Paper"
+   ],
+   "x": "A nail is made of hard metal"
+  },
+  {
+   "he": "באיזה מצב נמצא הקרח?",
+   "a": "מוצק",
+   "h": "86b55784",
+   "q": "What state is ice in?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "Steam"
+   ],
+   "x": "Ice has a fixed shape – it is a solid"
+  },
+  {
+   "he": "מה קורה לחמאה במחבת חמה?",
+   "a": "נמסה",
+   "h": "44cd3e9d",
+   "q": "What happens to butter in a hot pan?",
+   "o": [
+    "It melts",
+    "It freezes",
+    "It hardens",
+    "It grows"
+   ],
+   "x": "The heat melts the butter"
+  },
+  {
+   "he": "מה מהם זז אבל אינו יצור חי?",
+   "a": "ענן",
+   "h": "4376a5e4",
+   "q": "Which of these moves but is not alive?",
+   "o": [
+    "Cloud",
+    "Ant",
+    "Fish",
+    "Bird"
+   ],
+   "x": "A cloud moves with the wind, but doesn't breathe or eat"
+  },
+  {
+   "he": "האם הצמח נושם?",
+   "a": "כן",
+   "h": "e3e9025b",
+   "q": "Does a plant breathe?",
+   "o": [
+    "Yes",
+    "No, no nose",
+    "Only in winter",
+    "Only when it rains"
+   ],
+   "x": "All living things breathe – plants too"
+  },
+  {
+   "he": "מה צריך הדג כדי לחיות?",
+   "a": "מים",
+   "h": "498cda98",
+   "q": "What does a fish need to live?",
+   "o": [
+    "Water",
+    "Dry sand",
+    "Fur",
+    "A blanket"
+   ],
+   "x": "A fish lives and breathes in water"
+  },
+  {
+   "he": "מה אוכלת הכבשה?",
+   "a": "עשב",
+   "h": "9f79dc91",
+   "q": "What does a sheep eat?",
+   "o": [
+    "Grass",
+    "Meat",
+    "Fish",
+    "Insects"
+   ],
+   "x": "A sheep eats plants"
+  },
+  {
+   "he": "באילו שיניים קורעים בשר?",
+   "a": "ניבים",
+   "h": "9e0742f8",
+   "q": "Which teeth tear meat?",
+   "o": [
+    "Canines",
+    "Molars",
+    "Incisors",
+    "Baby teeth"
+   ],
+   "x": "The pointed canines tear food"
+  },
+  {
+   "he": "אילו שיניים נופלות לילדים בכיתה ב'?",
+   "a": "שיני חלב",
+   "h": "0227a85d",
+   "q": "Which teeth do 2nd graders lose?",
+   "o": [
+    "Baby teeth",
+    "Permanent teeth",
+    "Wisdom teeth",
+    "A lion's canines"
+   ],
+   "x": "Baby teeth are replaced by permanent teeth"
+  },
+  {
+   "he": "מה צריך כדי לצחצח שיניים?",
+   "a": "מברשת ומשחה",
+   "h": "1e2679ef",
+   "q": "What do we need to clean our teeth?",
+   "o": [
+    "Toothbrush and toothpaste",
+    "Comb and soap",
+    "Towel and spoon",
+    "Scissors"
+   ],
+   "x": "A toothbrush and toothpaste"
+  },
+  {
+   "he": "מה גורם לעששת?",
+   "a": "סוכר וחיידקים",
+   "h": "604d00a1",
+   "q": "What causes cavities?",
+   "o": [
+    "Sugar and germs",
+    "Drinking water",
+    "Brushing",
+    "Eating vegetables"
+   ],
+   "x": "Germs eat sugar and damage the tooth"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הינשוף?",
+   "a": "עופות",
+   "h": "1441488d",
+   "q": "Which group does the owl belong to?",
+   "o": [
+    "Birds",
+    "Mammals",
+    "Fish",
+    "Insects"
+   ],
+   "x": "An owl has feathers and a beak"
+  },
+  {
+   "he": "איפה חי הכריש?",
+   "a": "בים",
+   "h": "388bddeb",
+   "q": "Where does the shark live?",
+   "o": [
+    "In the sea",
+    "In the desert",
+    "In the forest",
+    "In a field"
+   ],
+   "x": "The shark is a fish that lives in the sea"
+  },
+  {
+   "he": "מה עושים עם בקבוק ריק?",
+   "a": "ממחזרים אותו",
+   "h": "49cb07e0",
+   "q": "What do we do with an empty bottle?",
+   "o": [
+    "Recycle it",
+    "Throw it in nature",
+    "Break it",
+    "Bury it in sand"
+   ],
+   "x": "We recycle to protect the environment"
+  },
+  {
+   "he": "מה אסור לעשות בשמורת טבע?",
+   "a": "לקטוף פרחים",
+   "h": "c0d324b1",
+   "q": "What must we not do in a nature reserve?",
+   "o": [
+    "Pick flowers",
+    "Watch birds",
+    "Walk on the trail",
+    "Take photos"
+   ],
+   "x": "In a reserve, we protect the plants"
+  },
+  {
+   "he": "במה תולים כביסה על החבל?",
+   "a": "אטבים",
+   "h": "3dddc61f",
+   "q": "What do we use to hang laundry on the line?",
+   "o": [
+    "Clothespins",
+    "Nails",
+    "Spoons",
+    "Scissors"
+   ],
+   "x": "Clothespins hold the clothes on the line"
+  },
+  {
+   "he": "איזה כלי עונה על הצורך לשתות?",
+   "a": "כוס",
+   "h": "5d28cfef",
+   "q": "Which item meets the need to drink?",
+   "o": [
+    "Cup",
+    "Fork",
+    "Comb",
+    "Ruler"
+   ],
+   "x": "We drink from a cup"
+  }
+ ]
+}

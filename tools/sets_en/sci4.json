@@ -1,0 +1,3795 @@
+{
+ "set": {
+  "name": "Science – Grade 4",
+  "title": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
+  "tags": [
+   "Volume and mass",
+   "States of matter",
+   "The water cycle",
+   "Air",
+   "Skeleton and muscles",
+   "The skin",
+   "Weather",
+   "Lithosphere and biosphere",
+   "Animals",
+   "Classification keys",
+   "Simple machines"
+  ]
+ },
+ "labels": {
+  "נפח וכמות חומר": "Volume and amount of material",
+  "מצבי צבירה": "States of matter",
+  "מים – תכונות ושימושים": "Water – properties and uses",
+  "מחזור המים בטבע": "The water cycle in nature",
+  "אוויר – תכונות ושימושים": "Air – properties and uses",
+  "שלד, מפרקים ושרירים": "Skeleton, joints and muscles",
+  "העור, בריאות ובטיחות": "The skin, health and safety",
+  "הידרוספרה ואטמוספרה": "Hydrosphere and atmosphere",
+  "ליתוספרה וביוספרה": "Lithosphere and biosphere",
+  "בעלי חוליות": "Vertebrates",
+  "חסרי חוליות, התאמות ומיון": "Invertebrates, adaptations and classification",
+  "מערכת טכנולוגית": "Technological systems",
+  "מכונות פשוטות ובחירת חומרים": "Simple machines and choosing materials",
+  "נפח – כמה מקום תופס הגוף": "Volume – how much space an object takes up",
+  "כמות חומר – מסה ומאזניים": "Amount of material – mass and scales",
+  "מוצק, נוזל וגז": "Solid, liquid and gas",
+  "מעברים בין מצבי צבירה": "Changes between states of matter",
+  "תכונות המים": "Properties of water",
+  "שימושים במים וחיסכון": "Using and saving water",
+  "שלבי מחזור המים": "Stages of the water cycle",
+  "מחזור המים סביבנו": "The water cycle around us",
+  "לאוויר יש נפח, מסה ולחץ": "Air has volume, mass and pressure",
+  "שימושים באוויר ושמירה עליו": "Using air and keeping it clean",
+  "השלד והמפרקים": "The skeleton and joints",
+  "שרירים ותנועה": "Muscles and movement",
+  "העור ותפקידיו": "The skin and its jobs",
+  "שומרים על הגוף": "Taking care of the body",
+  "המעטפות של כדור הארץ": "Earth's spheres",
+  "מזג אוויר וגשם בישראל": "Weather and rain in Israel",
+  "ליתוספרה – מעטפת הסלעים": "Lithosphere – the rock sphere",
+  "ביוספרה – מעטפת החיים": "Biosphere – the sphere of life",
+  "חמש קבוצות של בעלי חוליות": "Five groups of vertebrates",
+  "סימני ההיכר של כל קבוצה": "Identifying features of each group",
+  "חסרי חוליות": "Invertebrates",
+  "התאמות ומפתח מיון": "Adaptations and classification keys",
+  "צורך, מבנה ותפקוד": "Need, structure and function",
+  "קלט, תהליך ופלט": "Input, process and output",
+  "מנוף, גלגלת וגלגל": "Lever, pulley and wheel",
+  "בחירת חומר לפי תכונות": "Choosing a material by its properties",
+  "חזרה": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "מהו נפח?",
+   "a": "המקום שגוף תופס",
+   "h": "ff8b3c62",
+   "q": "What is the volume of an object?",
+   "o": [
+    "The space it fills",
+    "Its color",
+    "Its warmth",
+    "Its shape"
+   ],
+   "x": "Volume is the space an object takes up"
+  },
+  {
+   "he": "באיזה כלי מודדים נפח של נוזל?",
+   "a": "בכוס מדידה",
+   "h": "b20ced86",
+   "q": "Which tool measures the volume of a liquid?",
+   "o": [
+    "A measuring cup",
+    "A balance",
+    "A thermometer",
+    "A ruler"
+   ],
+   "x": "A measuring cup has mL markings"
+  },
+  {
+   "he": "באיזו יחידה מודדים כמה מיץ יש בבקבוק?",
+   "a": "ליטר",
+   "h": "102b3d46",
+   "q": "Which unit measures how much juice is in a bottle?",
+   "o": [
+    "Liters",
+    "Kilograms",
+    "Meters",
+    "Degrees"
+   ],
+   "x": "Liquid volume is measured in liters and mL"
+  },
+  {
+   "he": "כמה מ״ל יש בליטר אחד?",
+   "a": "⁦1,000⁩",
+   "h": "56f56982",
+   "q": "How many mL are in one liter?",
+   "o": [
+    "⁦1,000⁩",
+    "⁦100⁩",
+    "⁦10⁩",
+    "⁦500⁩"
+   ],
+   "x": "1 liter = 1,000 mL",
+   "sc": {
+    "1": "1 liter",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "מזגו מים מכוס צרה לקערה רחבה. מה קרה לנפח?",
+   "a": "נשאר אותו נפח",
+   "h": "b5265f9d",
+   "q": "Water goes from a narrow glass into a wide bowl. What happens to its volume?",
+   "o": [
+    "It stays the same",
+    "It gets bigger",
+    "It gets smaller",
+    "The water disappears"
+   ],
+   "x": "Only the shape changed, not the amount of water"
+  },
+  {
+   "he": "לפי הטבלה – באיזו כוס יש יותר מים?",
+   "a": "כוס א'",
+   "h": "31eaa842",
+   "q": "According to the table, which glass holds more water?",
+   "o": [
+    "Glass A",
+    "Glass B",
+    "The same amount",
+    "We can't tell"
+   ],
+   "x": "200 mL is more than 150 mL",
+   "sc": {
+    "0": "200 mL",
+    "1": "Glass A",
+    "2": "150 mL",
+    "3": "Glass B"
+   }
+  },
+  {
+   "he": "הכניסו אבן לכוס מים, ומפלס המים עלה. למה?",
+   "a": "האבן תופסת מקום",
+   "h": "263841ee",
+   "q": "A stone is put in a glass of water, and the water level rises. Why?",
+   "o": [
+    "It takes up space",
+    "It absorbed water",
+    "It heated the water",
+    "It melted"
+   ],
+   "x": "The stone has volume, so it pushes the water up"
+  },
+  {
+   "he": "המים במשורה עלו מ-⁦50⁩ ל-⁦70⁩ מ״ל. מה נפח האבן?",
+   "a": "⁦20⁩ מ״ל",
+   "h": "f52069ac",
+   "q": "A stone raised the water from 50 to 70 mL. What is the stone's volume?",
+   "o": [
+    "20 mL",
+    "70 mL",
+    "120 mL",
+    "50 mL"
+   ],
+   "x": "70 − 50 = 20 mL"
+  },
+  {
+   "he": "למי מהם הנפח הגדול ביותר?",
+   "a": "פיל",
+   "h": "a50738a5",
+   "q": "Which of these has the largest volume?",
+   "o": [
+    "Elephant",
+    "Dog",
+    "Mouse",
+    "Ant"
+   ],
+   "x": "The elephant takes up the most space"
+  },
+  {
+   "he": "בבקבוק ⁦2⁩ ליטר מים. כמה מ״ל זה?",
+   "a": "⁦2,000⁩",
+   "h": "ea34109e",
+   "q": "A bottle holds 2 liters of water. How many mL is that?",
+   "o": [
+    "⁦2,000⁩",
+    "⁦200⁩",
+    "⁦20⁩",
+    "⁦2⁩"
+   ],
+   "x": "2 × 1,000 = 2,000 mL",
+   "sc": {
+    "1": "2 liters",
+    "2": "= ? mL"
+   }
+  },
+  {
+   "he": "מה מודדים במאזניים?",
+   "a": "מסה",
+   "h": "dd397e0a",
+   "q": "What do we measure with a balance?",
+   "o": [
+    "Mass",
+    "Volume",
+    "Length",
+    "Temperature"
+   ],
+   "x": "A balance measures mass – the amount of matter"
+  },
+  {
+   "he": "באיזו יחידה מודדים מסה?",
+   "a": "קילוגרם",
+   "h": "026d8586",
+   "q": "Which unit is used to measure mass?",
+   "o": [
+    "Kilogram",
+    "Liter",
+    "Meter",
+    "Milliliter"
+   ],
+   "x": "Mass is measured in grams and kilograms"
+  },
+  {
+   "he": "כמה גרם יש בקילוגרם אחד?",
+   "a": "⁦1,000⁩",
+   "h": "f515f0b2",
+   "q": "How many grams are in one kilogram?",
+   "o": [
+    "⁦1,000⁩",
+    "⁦100⁩",
+    "⁦10⁩",
+    "⁦500⁩"
+   ],
+   "x": "1 kilogram = 1,000 grams",
+   "sc": {
+    "1": "1 kilogram",
+    "2": "= ? g"
+   }
+  },
+  {
+   "he": "במאזני כפות, הכף עם התפוח ירדה. מה נכון?",
+   "a": "לתפוח מסה גדולה",
+   "h": "7bc54df5",
+   "q": "On a pan balance, the pan with the apple went down. What is true?",
+   "o": [
+    "The apple is heavier",
+    "The strawberry is heavier",
+    "They are equal",
+    "The apple weighs nothing"
+   ],
+   "x": "The pan with the greater mass goes down"
+  },
+  {
+   "he": "כדור ברזל וכדור צמר באותו גודל. למי מסה גדולה?",
+   "a": "לכדור הברזל",
+   "h": "8eca5136",
+   "q": "An iron ball and a wool ball are the same size. Which has more mass?",
+   "o": [
+    "The iron one",
+    "The wool one",
+    "Equal masses",
+    "Neither one"
+   ],
+   "x": "Same volume, but iron has more matter in it"
+  },
+  {
+   "he": "לשני גופים אותו נפח. האם בהכרח יש להם אותה מסה?",
+   "a": "לא",
+   "h": "274a2e6e",
+   "q": "Two objects have the same volume. Must they have the same mass?",
+   "o": [
+    "No",
+    "Yes, always",
+    "Only liquids",
+    "Only solids"
+   ],
+   "x": "A brick and a sponge of the same size have different masses"
+  },
+  {
+   "he": "חתכו תפוח לארבעה חלקים. מה קרה למסה של כולם יחד?",
+   "a": "לא השתנתה",
+   "h": "18e88239",
+   "q": "An apple was cut into four pieces. What happened to their total mass?",
+   "o": [
+    "It didn't change",
+    "It increased",
+    "It decreased",
+    "It disappeared"
+   ],
+   "x": "No matter was added or taken away"
+  },
+  {
+   "he": "לפי הטבלה – איזה פרי הכי כבד?",
+   "a": "אגס",
+   "h": "b045720e",
+   "q": "According to the table, which fruit is the heaviest?",
+   "o": [
+    "Pear",
+    "Apple",
+    "Banana",
+    "All the same"
+   ],
+   "x": "180 g is the largest number",
+   "sc": {
+    "0": "150 g",
+    "1": "Apple",
+    "2": "120 g",
+    "3": "Banana",
+    "4": "180 g",
+    "5": "Pear"
+   }
+  },
+  {
+   "he": "בשקית ⁦2⁩ ק״ג סוכר ובשקית אחרת ⁦1⁩ ק״ג. כמה יחד?",
+   "a": "⁦3⁩ ק״ג",
+   "h": "d3b79290",
+   "q": "One bag holds 2 kg of sugar and another holds 1 kg. How much together?",
+   "o": [
+    "3 kg",
+    "2 kg",
+    "4 kg",
+    "1 kg"
+   ],
+   "x": "2 + 1 = 3 kg"
+  },
+  {
+   "he": "מה מודדים במשורה?",
+   "a": "נפח של נוזל",
+   "h": "8174baeb",
+   "q": "What does a graduated cylinder measure?",
+   "o": [
+    "Volume of a liquid",
+    "Mass of an object",
+    "Temperature",
+    "Length"
+   ],
+   "x": "A graduated cylinder is a tool for measuring volume"
+  },
+  {
+   "he": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
+   "a": "מוצק",
+   "h": "5672058e",
+   "q": "Which state of matter has a fixed shape and a fixed volume?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "None of them"
+   ],
+   "x": "A solid keeps its shape and its volume"
+  },
+  {
+   "he": "נוזל שמוזגים לכלי מקבל את…",
+   "a": "צורת הכלי",
+   "h": "84fced8e",
+   "q": "A liquid poured into a container takes on the container's…",
+   "o": [
+    "Shape",
+    "Color",
+    "Mass",
+    "Warmth"
+   ],
+   "x": "A liquid has no fixed shape"
+  },
+  {
+   "he": "גז בתוך כלי סגור ממלא…",
+   "a": "את כל הכלי",
+   "h": "b2c3a435",
+   "q": "A gas in a closed container fills…",
+   "o": [
+    "All of it",
+    "Only the bottom",
+    "Only half of it",
+    "Only the opening"
+   ],
+   "x": "A gas spreads out into all the space it has"
+  },
+  {
+   "he": "מה מהבאים הוא נוזל?",
+   "a": "חלב",
+   "h": "09cda74c",
+   "q": "Which of these is a liquid?",
+   "o": [
+    "Milk",
+    "Ice",
+    "Wood",
+    "Water vapor"
+   ],
+   "x": "Milk flows and takes the shape of its container"
+  },
+  {
+   "he": "מה מהבאים הוא מוצק?",
+   "a": "מפתח",
+   "h": "bfa455e9",
+   "q": "Which of these is a solid?",
+   "o": [
+    "Key",
+    "Juice",
+    "Air",
+    "Water vapor"
+   ],
+   "x": "A key has a fixed shape"
+  },
+  {
+   "he": "באיזה מצב צבירה נמצא האוויר?",
+   "a": "גז",
+   "h": "33d2f3d4",
+   "q": "What state of matter is air?",
+   "o": [
+    "Gas",
+    "Liquid",
+    "Solid",
+    "It has no state"
+   ],
+   "x": "Air is a mixture of gases"
+  },
+  {
+   "he": "איזה מהם יוצא דופן?",
+   "a": "קרח",
+   "h": "ce0d8bef",
+   "q": "Which one is the odd one out?",
+   "o": [
+    "Ice",
+    "Water",
+    "Milk",
+    "Juice"
+   ],
+   "x": "Ice is a solid; the rest are liquids"
+  },
+  {
+   "he": "חול נשפך ונערם כמו נוזל. מה מצב הצבירה שלו?",
+   "a": "מוצק",
+   "h": "c7aef5cd",
+   "q": "Sand pours and piles up like a liquid. What state of matter is it?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "It has no state"
+   ],
+   "x": "Each grain of sand keeps its own shape"
+  },
+  {
+   "he": "את מה הכי קל לדחוס למקום קטן?",
+   "a": "גז",
+   "h": "9a04aa9d",
+   "q": "Which is the easiest to squeeze into a small space?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "None of them"
+   ],
+   "x": "A gas can be compressed; liquids and solids hardly at all"
+  },
+  {
+   "he": "באיזה מצב צבירה נמצאים אדי מים?",
+   "a": "גז",
+   "h": "6ad06fe6",
+   "q": "What state of matter is water vapor?",
+   "o": [
+    "Gas",
+    "Liquid",
+    "Solid",
+    "All three"
+   ],
+   "x": "Water vapor is water as a gas"
+  },
+  {
+   "he": "קרח הופך למים. איך נקרא התהליך?",
+   "a": "התכה",
+   "h": "218bbb74",
+   "q": "Ice turns into water. What is this process called?",
+   "o": [
+    "Melting",
+    "Freezing",
+    "Evaporation",
+    "Condensation"
+   ],
+   "x": "Melting: from solid to liquid"
+  },
+  {
+   "he": "מים במקפיא הופכים לקרח. איך נקרא התהליך?",
+   "a": "קיפאון",
+   "h": "5f0588a2",
+   "q": "Water in the freezer turns into ice. What is this process called?",
+   "o": [
+    "Freezing",
+    "Melting",
+    "Evaporation",
+    "Condensation"
+   ],
+   "x": "Freezing: from liquid to solid"
+  },
+  {
+   "he": "מים רותחים הופכים לאדים. איך נקרא התהליך?",
+   "a": "התאדות",
+   "h": "a5e8ba72",
+   "q": "Boiling water turns into vapor. What is this process called?",
+   "o": [
+    "Evaporation",
+    "Condensation",
+    "Freezing",
+    "Melting"
+   ],
+   "x": "Evaporation: from liquid to gas"
+  },
+  {
+   "he": "אדים הופכים לטיפות על מכסה הסיר. איך נקרא?",
+   "a": "התעבות",
+   "h": "c436878a",
+   "q": "Vapor turns into drops on a pot lid. What is this called?",
+   "o": [
+    "Condensation",
+    "Evaporation",
+    "Melting",
+    "Freezing"
+   ],
+   "x": "Condensation: from gas to liquid"
+  },
+  {
+   "he": "באיזו טמפרטורה מים קופאים?",
+   "a": "⁦0⁩ מעלות",
+   "h": "03ddef49",
+   "q": "At what temperature does water freeze?",
+   "o": [
+    "0°C",
+    "100°C",
+    "10°C",
+    "50°C"
+   ],
+   "x": "Water freezes at 0 degrees Celsius"
+  },
+  {
+   "he": "באיזו טמפרטורה מים רותחים?",
+   "a": "⁦100⁩ מעלות",
+   "h": "5191bfc3",
+   "q": "At what temperature does water boil?",
+   "o": [
+    "100°C",
+    "0°C",
+    "50°C",
+    "200°C"
+   ],
+   "x": "Water boils at 100 degrees Celsius"
+  },
+  {
+   "he": "שוקולד ביד הפך לנוזל. מה גרם לכך?",
+   "a": "חום היד",
+   "h": "6593bec3",
+   "q": "Chocolate held in a hand became liquid. What caused this?",
+   "o": [
+    "The hand's warmth",
+    "The hand's coldness",
+    "Sunlight at night",
+    "The chocolate's color"
+   ],
+   "x": "Heating turns a solid into a liquid"
+  },
+  {
+   "he": "כביסה רטובה התייבשה בשמש. לאן הלכו המים?",
+   "a": "התאדו לאוויר",
+   "h": "5d02a07a",
+   "q": "Wet laundry dried in the sun. Where did the water go?",
+   "o": [
+    "Evaporated into the air",
+    "Soaked into the cloth",
+    "Froze in the cloth",
+    "Dripped into the ground"
+   ],
+   "x": "The heat made the water evaporate"
+  },
+  {
+   "he": "על כוס קרה מבחוץ מופיעות טיפות. מאיפה הן?",
+   "a": "אדי מים מהאוויר",
+   "h": "e697d274",
+   "q": "Drops appear on the outside of a cold glass. Where do they come from?",
+   "o": [
+    "Water vapor in air",
+    "Water inside the glass",
+    "Sweat from our hands",
+    "Raindrops"
+   ],
+   "x": "Water vapor in the air condensed on the cold glass"
+  },
+  {
+   "he": "מה צריך לעשות לנר כדי שיהפוך לנוזל?",
+   "a": "לחמם אותו",
+   "h": "03821bb6",
+   "q": "What must we do to a candle to make it liquid?",
+   "o": [
+    "Heat it",
+    "Cool it",
+    "Weigh it",
+    "Shake it"
+   ],
+   "x": "Heating causes melting"
+  },
+  {
+   "he": "איך נראים ומריחים מים נקיים?",
+   "a": "בלי צבע וריח",
+   "h": "ba07e8e7",
+   "q": "How does clean water look and smell?",
+   "o": [
+    "Colorless and odorless",
+    "Blue and fragrant",
+    "White and smelly",
+    "Yellow and smelly"
+   ],
+   "x": "Pure water has no color, smell or taste"
+  },
+  {
+   "he": "שמו סוכר במים, והוא נעלם מהעין. מה קרה?",
+   "a": "הוא התמוסס",
+   "h": "14d26363",
+   "q": "Sugar was put in water and disappeared from sight. What happened?",
+   "o": [
+    "It dissolved",
+    "It evaporated",
+    "It vanished completely",
+    "It froze"
+   ],
+   "x": "The sugar is still there – the water tastes sweet"
+  },
+  {
+   "he": "המים ממיסים חומרים רבים. איך נקרא חומר כזה?",
+   "a": "ממס",
+   "h": "f14b3cda",
+   "q": "Many substances, like salt, mix into water and vanish. Water is called a…",
+   "o": [
+    "Solvent",
+    "Metal",
+    "Gas",
+    "Solid"
+   ],
+   "x": "A substance that other substances dissolve in is a solvent"
+  },
+  {
+   "he": "מה מהבאים מתמוסס במים?",
+   "a": "מלח",
+   "h": "18160b7c",
+   "q": "Which of these dissolves in water?",
+   "o": [
+    "Salt",
+    "Sand",
+    "Oil",
+    "Stone"
+   ],
+   "x": "Salt dissolves and can no longer be seen"
+  },
+  {
+   "he": "מוזגים שמן ומים לאותה כוס. מה יקרה?",
+   "a": "השמן יצוף למעלה",
+   "h": "09f45ea6",
+   "q": "Oil and water are poured into the same glass. What will happen?",
+   "o": [
+    "The oil floats",
+    "The oil sinks",
+    "They mix completely",
+    "The water evaporates"
+   ],
+   "x": "Oil doesn't dissolve in water and floats on it"
+  },
+  {
+   "he": "למה בקבוק מלא מים נסדק במקפיא?",
+   "a": "המים מתרחבים בקיפאון",
+   "h": "fcfd3519",
+   "q": "Why does a bottle full of water crack in the freezer?",
+   "o": [
+    "Water expands when freezing",
+    "Water shrinks when freezing",
+    "The water evaporates",
+    "The bottle heats up"
+   ],
+   "x": "When water freezes, its volume gets bigger"
+  },
+  {
+   "he": "קוביית קרח בכוס מים – איפה היא תהיה?",
+   "a": "צפה למעלה",
+   "h": "5a943fa0",
+   "q": "An ice cube is in a glass of water. Where will it be?",
+   "o": [
+    "Floating on top",
+    "At the bottom",
+    "In the middle",
+    "Outside the glass"
+   ],
+   "x": "Ice is lighter than the same volume of water, so it floats"
+  },
+  {
+   "he": "לאן זורמים מים באופן טבעי?",
+   "a": "מלמעלה למטה",
+   "h": "62e4278b",
+   "q": "Which way does water flow naturally?",
+   "o": [
+    "From top to bottom",
+    "From bottom to top",
+    "Only sideways",
+    "Only in a circle"
+   ],
+   "x": "Water flows from a high place to a low one"
+  },
+  {
+   "he": "מה ההבדל בין מי ים למי ברז?",
+   "a": "מי ים מלוחים",
+   "h": "15177be7",
+   "q": "How is seawater different from tap water?",
+   "o": [
+    "Seawater is salty",
+    "Seawater is fresh",
+    "Tap water is salty",
+    "No difference"
+   ],
+   "x": "Seawater has a lot of dissolved salt"
+  },
+  {
+   "he": "באילו מצבי צבירה נמצאים מים בטבע?",
+   "a": "בשלושת המצבים",
+   "h": "edb969ef",
+   "q": "In which states of matter is water found in nature?",
+   "o": [
+    "All three",
+    "Only liquid",
+    "Only solid",
+    "Only gas"
+   ],
+   "x": "Snow and ice, flowing water, and vapor in the air"
+  },
+  {
+   "he": "ממה בנוי רוב גוף האדם?",
+   "a": "ממים",
+   "h": "c1aa370d",
+   "q": "What is most of the human body made of?",
+   "o": [
+    "Water",
+    "Fat",
+    "Bones",
+    "Air"
+   ],
+   "x": "More than half of the body is water"
+  },
+  {
+   "he": "חקלאים משתמשים במים בעיקר כדי…",
+   "a": "להשקות גידולים",
+   "h": "a4820c56",
+   "q": "Farmers mainly use water for…",
+   "o": [
+    "Watering crops",
+    "Washing cars",
+    "Washing clothes",
+    "Swimming"
+   ],
+   "x": "Plants in the fields need water"
+  },
+  {
+   "he": "איזו פעולה חוסכת במים?",
+   "a": "סגירת ברז בצחצוח",
+   "h": "02c3c02c",
+   "q": "Which action saves water?",
+   "o": [
+    "Turning off the tap",
+    "Taking very long showers",
+    "Hosing down the sidewalk",
+    "Leaving a tap dripping"
+   ],
+   "x": "Turn off the tap when you don't need it"
+  },
+  {
+   "he": "למה בישראל חשוב במיוחד לחסוך במים?",
+   "a": "יורד מעט גשם",
+   "h": "e90e5cdd",
+   "q": "Why is saving water especially important in Israel?",
+   "o": [
+    "Little rain falls",
+    "It snows a lot",
+    "Water is harmful",
+    "There is no sea"
+   ],
+   "x": "Most of Israel is dry, and it rains only in winter"
+  },
+  {
+   "he": "מהו האגם המתוק הגדול בישראל?",
+   "a": "הכנרת",
+   "h": "a1a491b2",
+   "q": "What is the largest freshwater lake in Israel?",
+   "o": [
+    "The Kinneret",
+    "The Dead Sea",
+    "The Mediterranean",
+    "The Red Sea"
+   ],
+   "x": "The Kinneret (Sea of Galilee) is a freshwater lake"
+  },
+  {
+   "he": "איך הופכים מי ים למי שתייה?",
+   "a": "התפלה",
+   "h": "f069451b",
+   "q": "How is seawater turned into drinking water?",
+   "o": [
+    "Desalination",
+    "Salting",
+    "Freezing",
+    "Coloring"
+   ],
+   "x": "Desalination removes the salt from the water"
+  },
+  {
+   "he": "מים זורמים מסובבים טורבינה. מה היא מייצרת?",
+   "a": "חשמל",
+   "h": "a031a2a6",
+   "q": "Flowing water turns a turbine. What does it produce?",
+   "o": [
+    "Electricity",
+    "Ice",
+    "Salt",
+    "Soil"
+   ],
+   "x": "A water power station makes electricity"
+  },
+  {
+   "he": "ביום חם לא שתינו מספיק. מה עלול לקרות?",
+   "a": "התייבשות",
+   "h": "cf5bacd8",
+   "q": "On a hot day we didn't drink enough. What might happen?",
+   "o": [
+    "Dehydration",
+    "A cold",
+    "A broken bone",
+    "A cough"
+   ],
+   "x": "The body loses water in sweat – we must drink"
+  },
+  {
+   "he": "לפי הטבלה – מה צורך הכי הרבה מים?",
+   "a": "מקלחת",
+   "h": "3be8ba5a",
+   "q": "According to the table, what uses the most water?",
+   "o": [
+    "Showering",
+    "Brushing teeth",
+    "Doing laundry",
+    "Drinking"
+   ],
+   "x": "60 L is the most in the table",
+   "sc": {
+    "0": "60 L",
+    "1": "Shower",
+    "2": "50 L",
+    "3": "Laundry",
+    "4": "6 L",
+    "5": "Brushing"
+   }
+  },
+  {
+   "he": "למה צריך מים כדי לנקות?",
+   "a": "הם ממיסים לכלוך",
+   "h": "eb3fe254",
+   "q": "Why do we need water for cleaning?",
+   "o": [
+    "It dissolves dirt",
+    "It is colorful",
+    "It is very heavy",
+    "It is always hot"
+   ],
+   "x": "Water dissolves dirt and washes it away"
+  },
+  {
+   "he": "השמש מחממת את מי הים. מה קורה למים?",
+   "a": "מתאדים",
+   "h": "2c085bef",
+   "q": "The sun heats seawater. What happens to the water?",
+   "o": [
+    "It evaporates",
+    "It freezes",
+    "It condenses",
+    "It soaks in"
+   ],
+   "x": "Heat turns water into vapor"
+  },
+  {
+   "he": "איך נוצרים עננים?",
+   "a": "התעבות",
+   "h": "62305671",
+   "q": "How do clouds form?",
+   "o": [
+    "Condensation",
+    "Melting snow",
+    "The sea freezing",
+    "Smoke from factories"
+   ],
+   "x": "Vapor cools high up and turns into droplets"
+  },
+  {
+   "he": "מי גשם נכנסים לתוך האדמה. איך נקרא התהליך?",
+   "a": "חלחול",
+   "h": "214dd424",
+   "q": "Rainwater goes into the ground. What is this process called?",
+   "o": [
+    "Infiltration",
+    "Evaporation",
+    "Condensation",
+    "Melting"
+   ],
+   "x": "The water seeps down through the soil"
+  },
+  {
+   "he": "איך נקראים המים שנאספים מתחת לפני האדמה?",
+   "a": "מי תהום",
+   "h": "0f2d9c5d",
+   "q": "What is the water stored beneath the soil called?",
+   "o": [
+    "Groundwater",
+    "Seawater",
+    "Water vapor",
+    "Puddle water"
+   ],
+   "x": "Groundwater is pumped up from wells"
+  },
+  {
+   "he": "מה מניע את מחזור המים?",
+   "a": "חום השמש",
+   "h": "8e395f6f",
+   "q": "What drives the water cycle?",
+   "o": [
+    "The sun's heat",
+    "The moon's light",
+    "Fish in the sea",
+    "Only plants"
+   ],
+   "x": "The sun heats water – and it evaporates"
+  },
+  {
+   "he": "מה בא במחזור המים אחרי ההתאדות?",
+   "a": "התעבות",
+   "h": "c61c25f9",
+   "q": "In the water cycle, what comes after evaporation?",
+   "o": [
+    "Condensation",
+    "Infiltration",
+    "Melting",
+    "Freezing"
+   ],
+   "x": "The vapor cools and condenses into clouds",
+   "sc": {
+    "1": "Evaporation → ?"
+   }
+  },
+  {
+   "he": "מה בא במחזור המים אחרי ההתעבות?",
+   "a": "משקעים",
+   "h": "03723e75",
+   "q": "In the water cycle, what comes after condensation?",
+   "o": [
+    "Precipitation",
+    "Evaporation",
+    "Infiltration",
+    "Melting"
+   ],
+   "x": "Rain, snow or hail falls from the clouds",
+   "sc": {
+    "1": "Condensation → ?"
+   }
+  },
+  {
+   "he": "לאן זורמים בסוף רוב הנחלים והנהרות?",
+   "a": "אל הים",
+   "h": "c13289c3",
+   "q": "Where do most streams and rivers end up?",
+   "o": [
+    "In the sea",
+    "On the mountain",
+    "In the clouds",
+    "In the desert"
+   ],
+   "x": "Rivers flow to the sea, and the water evaporates again"
+  },
+  {
+   "he": "למה קוראים לזה \"מחזור\" המים?",
+   "a": "המים חוזרים שוב",
+   "h": "243312e4",
+   "q": "Why is it called the water \"cycle\"?",
+   "o": [
+    "Water keeps coming back",
+    "Water runs out",
+    "It happens once",
+    "It happens in summer"
+   ],
+   "x": "Water goes through the stages again and again"
+  },
+  {
+   "he": "שלולית נעלמה אחרי יום שמשי. מה קרה?",
+   "a": "התאדות",
+   "h": "8503af7e",
+   "q": "A puddle disappeared after a sunny day. What happened?",
+   "o": [
+    "Evaporation",
+    "Freezing",
+    "Condensation",
+    "Melting"
+   ],
+   "x": "The heat made the water evaporate"
+  },
+  {
+   "he": "איך נוצר הטל על הדשא בבוקר?",
+   "a": "התעבות",
+   "h": "85598958",
+   "q": "How does dew form on the grass in the morning?",
+   "o": [
+    "Condensation",
+    "Rain at night",
+    "Water from roots",
+    "Melting ice"
+   ],
+   "x": "The night is cold – vapor turns into drops"
+  },
+  {
+   "he": "ערפל הוא בעצם…",
+   "a": "ענן קרוב לקרקע",
+   "h": "fae02c25",
+   "q": "Fog is really…",
+   "o": [
+    "A very low cloud",
+    "Smoke from a fire",
+    "Dust from the desert",
+    "Clean air"
+   ],
+   "x": "Fog is tiny water droplets in the air"
+  },
+  {
+   "he": "השלג בחרמון נמס באביב. לאן יגיעו המים?",
+   "a": "לנחלים ולאדמה",
+   "h": "5c28971b",
+   "q": "Snow on Mount Hermon melts in spring. Where will the water go?",
+   "o": [
+    "Into streams and soil",
+    "Straight to the clouds",
+    "Nowhere",
+    "Only into rocks"
+   ],
+   "x": "Snowmelt flows away and seeps into the ground"
+  },
+  {
+   "he": "מה מופיע על מכסה של סיר רותח?",
+   "a": "טיפות מים",
+   "h": "06df5c86",
+   "q": "What appears on the lid of a boiling pot?",
+   "o": [
+    "Water drops",
+    "Salt grains",
+    "Pieces of ice",
+    "Dust"
+   ],
+   "x": "The vapor condenses on the lid"
+  },
+  {
+   "he": "צמחים משחררים אדי מים מהעלים. לאן?",
+   "a": "לאוויר",
+   "h": "89553fea",
+   "q": "Plants release water vapor from their leaves. Where does it go?",
+   "o": [
+    "Into the air",
+    "Into the soil",
+    "Into the roots",
+    "Into the flowers"
+   ],
+   "x": "Plants also add vapor to the air"
+  },
+  {
+   "he": "מי הים המלוחים מתאדים. האם הגשם מלוח?",
+   "a": "לא, מתוק",
+   "h": "65561b35",
+   "q": "Salty seawater evaporates. Is the rain salty?",
+   "o": [
+    "No, it's fresh",
+    "Yes, it's salty",
+    "Salty only in summer",
+    "Salty only on mountains"
+   ],
+   "x": "The salt stays in the sea – only water evaporates"
+  },
+  {
+   "he": "באיזה שלב המים עוברים מגז לנוזל?",
+   "a": "התעבות",
+   "h": "67e60f74",
+   "q": "At which stage does water change from gas to liquid?",
+   "o": [
+    "Condensation",
+    "Evaporation",
+    "Infiltration",
+    "Flowing"
+   ],
+   "x": "Condensation: vapor turns into drops"
+  },
+  {
+   "he": "באיזה שלב המים עוברים מנוזל לגז?",
+   "a": "התאדות",
+   "h": "b98eb3a6",
+   "q": "At which stage does water change from liquid to gas?",
+   "o": [
+    "Evaporation",
+    "Condensation",
+    "Infiltration",
+    "Precipitation"
+   ],
+   "x": "Evaporation: water turns into vapor"
+  },
+  {
+   "he": "למה נהר זורם מההר אל הים?",
+   "a": "ההר גבוה יותר",
+   "h": "7f3d3639",
+   "q": "Why does a river flow from the mountain to the sea?",
+   "o": [
+    "The mountain is higher",
+    "The sea is warmer",
+    "The wind pushes it",
+    "The fish swim"
+   ],
+   "x": "Water flows from high places to low ones"
+  },
+  {
+   "he": "טיפות בענן מתחברות ונעשות כבדות. מה קורה?",
+   "a": "יורד גשם",
+   "h": "be750b32",
+   "q": "Drops in a cloud join and get heavy. What happens?",
+   "o": [
+    "It rains",
+    "The cloud rises",
+    "Wind forms",
+    "The cloud evaporates"
+   ],
+   "x": "Heavy drops fall as precipitation"
+  },
+  {
+   "he": "דחפו כוס הפוכה למים. הנייר בתוכה נשאר יבש. למה?",
+   "a": "אוויר תופס מקום",
+   "h": "bc83ce11",
+   "q": "An upside-down cup is pushed into water. The paper inside stays dry. Why?",
+   "o": [
+    "Air takes up space",
+    "Paper repels water",
+    "The water is cold",
+    "The cup is cracked"
+   ],
+   "x": "The air in the cup kept the water out"
+  },
+  {
+   "he": "ניפחנו בלון. מה נכנס לתוכו?",
+   "a": "אוויר",
+   "h": "0f380554",
+   "q": "We blew up a balloon. What went inside it?",
+   "o": [
+    "Air",
+    "Water",
+    "Nothing",
+    "Sand"
+   ],
+   "x": "Air takes up space and fills the balloon"
+  },
+  {
+   "he": "על מאזניים: בלון מלא ובלון ריק. איזה צד יירד?",
+   "a": "הצד של המלא",
+   "h": "e5e2bcb7",
+   "q": "On a balance: a full balloon and an empty one. Which side goes down?",
+   "o": [
+    "The full balloon's side",
+    "The empty balloon's side",
+    "They stay balanced",
+    "Both go up"
+   ],
+   "x": "Air has mass"
+  },
+  {
+   "he": "מה מוכיח הניסוי עם הבלונים על המאזניים?",
+   "a": "לאוויר יש מסה",
+   "h": "d11f6db0",
+   "q": "What does the balloon-and-balance experiment show?",
+   "o": [
+    "Air has mass",
+    "Air has color",
+    "Air is a liquid",
+    "Air is a solid"
+   ],
+   "x": "The full balloon is heavier – air has mass"
+  },
+  {
+   "he": "איזה דבר יומיומי מוכיח שלאוויר יש נפח?",
+   "a": "בלון מתנפח",
+   "h": "a5cab938",
+   "q": "What everyday thing shows that air has volume?",
+   "o": [
+    "A balloon filling up",
+    "Ice melting",
+    "A stone sinking",
+    "Water flowing"
+   ],
+   "x": "The air in a balloon takes up space"
+  },
+  {
+   "he": "האוויר דוחף על כל מה שסביבו. איך קוראים לזה?",
+   "a": "לחץ אוויר",
+   "h": "2dd0dc2e",
+   "q": "Air pushes on everything around it. What is this called?",
+   "o": [
+    "Air pressure",
+    "Air mass",
+    "Air color",
+    "Air temperature"
+   ],
+   "x": "Air presses in all directions"
+  },
+  {
+   "he": "שותים בקשית. מה דוחף את המיץ למעלה?",
+   "a": "לחץ אוויר",
+   "h": "49409e3b",
+   "q": "We drink through a straw. What pushes the juice up?",
+   "o": [
+    "Air pressure",
+    "The straw itself",
+    "Our teeth",
+    "The juice's color"
+   ],
+   "x": "Air presses on the juice in the cup"
+  },
+  {
+   "he": "מה יקרה לצמיג המכונית אם האוויר ייצא ממנו?",
+   "a": "יישטח תחת המכונית",
+   "h": "0f81cccc",
+   "q": "What will happen to a car tire if the air leaks out?",
+   "o": [
+    "It goes flat",
+    "It inflates",
+    "It lifts up",
+    "It gets heavier"
+   ],
+   "x": "Without compressed air, a tire can't hold the weight"
+  },
+  {
+   "he": "מה נמצא בתוך כוס \"ריקה\"?",
+   "a": "אוויר",
+   "h": "e6dc069a",
+   "q": "What is inside an \"empty\" cup?",
+   "o": [
+    "Air",
+    "Nothing",
+    "Water",
+    "Sand"
+   ],
+   "x": "An \"empty\" cup is full of air"
+  },
+  {
+   "he": "במה ממלאים צמיגים של אופניים?",
+   "a": "אוויר",
+   "h": "cae84107",
+   "q": "What do we fill bicycle tires with?",
+   "o": [
+    "Air",
+    "Water",
+    "Sand",
+    "Oil"
+   ],
+   "x": "A tire holds compressed air"
+  },
+  {
+   "he": "האוויר הוא תערובת של…",
+   "a": "גזים",
+   "h": "5d020354",
+   "q": "Air is a mixture of…",
+   "o": [
+    "Gases",
+    "Liquids",
+    "Metals",
+    "Stones"
+   ],
+   "x": "Nitrogen, oxygen and other gases"
+  },
+  {
+   "he": "איזה גז מהאוויר דרוש לנו לנשימה?",
+   "a": "חמצן",
+   "h": "42301f89",
+   "q": "Which gas in the air do we need to breathe?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Helium",
+    "Water vapor"
+   ],
+   "x": "The body takes oxygen from the air"
+  },
+  {
+   "he": "כיסו נר דולק בכוס, והוא כבה. למה?",
+   "a": "נגמר החמצן",
+   "h": "b335b567",
+   "q": "A burning candle was covered with a cup, and it went out. Why?",
+   "o": [
+    "The oxygen ran out",
+    "The cup was cold",
+    "The candle got wet",
+    "Darkness put it out"
+   ],
+   "x": "Fire needs oxygen to burn"
+  },
+  {
+   "he": "מה מניע סירת מפרש?",
+   "a": "הרוח",
+   "h": "42b81086",
+   "q": "What moves a sailboat?",
+   "o": [
+    "Wind",
+    "Electricity",
+    "Fuel",
+    "Sunlight"
+   ],
+   "x": "Wind – moving air – pushes the sail"
+  },
+  {
+   "he": "מה מייצרת טורבינת רוח?",
+   "a": "חשמל",
+   "h": "d288159d",
+   "q": "What does a wind turbine produce?",
+   "o": [
+    "Electricity",
+    "Water",
+    "Oxygen",
+    "Rain"
+   ],
+   "x": "The wind turns the turbine, which makes electricity"
+  },
+  {
+   "he": "איזה אוויר יוצא ממייבש שיער?",
+   "a": "אוויר חם",
+   "h": "439d0593",
+   "q": "What kind of air comes out of a hair dryer?",
+   "o": [
+    "Hot air",
+    "Freezing air",
+    "Wet air",
+    "Dirty air"
+   ],
+   "x": "A stream of hot air dries the hair"
+  },
+  {
+   "he": "איזה מעשה מזהם את האוויר?",
+   "a": "שריפת פסולת",
+   "h": "65f8771f",
+   "q": "Which action pollutes the air?",
+   "o": [
+    "Burning garbage",
+    "Planting trees",
+    "Riding a bike",
+    "Walking"
+   ],
+   "x": "Smoke from burning makes the air dirty"
+  },
+  {
+   "he": "מה עוזר לשמור על אוויר נקי?",
+   "a": "נטיעת עצים",
+   "h": "5d6b7d36",
+   "q": "What helps keep the air clean?",
+   "o": [
+    "Planting trees",
+    "Burning tires",
+    "Factory smoke",
+    "Lots of driving"
+   ],
+   "x": "Trees take in carbon dioxide and give off oxygen"
+  },
+  {
+   "he": "למה מנפחים כדורגל באוויר?",
+   "a": "כדי שיקפוץ",
+   "h": "b3bed2d7",
+   "q": "Why do we pump air into a soccer ball?",
+   "o": [
+    "So it bounces",
+    "So it is heavy",
+    "So it sinks",
+    "So it bursts"
+   ],
+   "x": "Compressed air makes the ball bounce"
+  },
+  {
+   "he": "מהם התפקידים של השלד?",
+   "a": "תמיכה, הגנה, תנועה",
+   "h": "aff3e11c",
+   "q": "What are the jobs of the skeleton?",
+   "o": [
+    "Support, protection, movement",
+    "Digesting food",
+    "Breathing and speaking",
+    "Hearing and seeing"
+   ],
+   "x": "The skeleton supports, protects and lets us move"
+  },
+  {
+   "he": "איזו עצם מגינה על המוח?",
+   "a": "הגולגולת",
+   "h": "ca1e45cf",
+   "q": "Which part of the skeleton protects the brain?",
+   "o": [
+    "The skull",
+    "The ribs",
+    "The thighbone",
+    "The upper arm bone"
+   ],
+   "x": "The skull is a hard box around the brain"
+  },
+  {
+   "he": "על מה מגינות הצלעות?",
+   "a": "הלב והריאות",
+   "h": "088c5a0b",
+   "q": "What do the ribs protect?",
+   "o": [
+    "The heart and lungs",
+    "The brain",
+    "The eyes",
+    "The feet"
+   ],
+   "x": "The rib cage protects the heart and lungs"
+  },
+  {
+   "he": "כמה עצמות יש בגוף של אדם מבוגר?",
+   "a": "⁦206⁩",
+   "h": "e0eb940e",
+   "q": "How many bones does an adult have?",
+   "o": [
+    "⁦206⁩",
+    "⁦50⁩",
+    "⁦1,000⁩",
+    "⁦12⁩"
+   ],
+   "x": "An adult has 206 bones"
+  },
+  {
+   "he": "מה נקרא המקום שבו שתי עצמות נפגשות ונעות?",
+   "a": "מפרק",
+   "h": "13e61272",
+   "q": "What is the place where two bones meet and move called?",
+   "o": [
+    "Joint",
+    "Muscle",
+    "Skin",
+    "Nail"
+   ],
+   "x": "A joint lets the bones move"
+  },
+  {
+   "he": "מפרק ציר זז רק קדימה ואחורה. איפה הוא נמצא?",
+   "a": "בברך",
+   "h": "596057de",
+   "q": "A hinge joint moves only back and forth. Where is it?",
+   "o": [
+    "In the knee",
+    "In the shoulder",
+    "In the hip",
+    "In the neck"
+   ],
+   "x": "The knee moves like a door hinge"
+  },
+  {
+   "he": "הכתף מאפשרת לסובב את היד בעיגול. איזה מפרק זה?",
+   "a": "מפרק כדורי",
+   "h": "dd8db4f9",
+   "q": "The shoulder lets the arm swing in a circle. What kind of joint is it?",
+   "o": [
+    "Ball-and-socket",
+    "Hinge",
+    "Fixed",
+    "There's no joint"
+   ],
+   "x": "A ball-and-socket joint moves in all directions"
+  },
+  {
+   "he": "עצמות הגולגולת סביב המוח – האם הן זזות?",
+   "a": "לא, הן מחוברות",
+   "h": "1a2240d5",
+   "q": "The skull bones around the brain – do they move?",
+   "o": [
+    "No, they're joined",
+    "Yes, like the knee",
+    "Yes, like the shoulder",
+    "Only during sleep"
+   ],
+   "x": "They are joined tightly to protect the brain"
+  },
+  {
+   "he": "מה עוזר לעצמות להיות חזקות?",
+   "a": "סידן ופעילות גופנית",
+   "h": "306ce258",
+   "q": "What helps bones become strong?",
+   "o": [
+    "Calcium and exercise",
+    "Sweets and sugary drinks",
+    "Sitting at screens",
+    "Little sleep"
+   ],
+   "x": "Calcium from milk and cheese, and exercise"
+  },
+  {
+   "he": "על מה מגן עמוד השדרה?",
+   "a": "חוט השדרה",
+   "h": "b1568f73",
+   "q": "What does the backbone protect?",
+   "o": [
+    "The spinal cord",
+    "The heart",
+    "The stomach",
+    "The eyes"
+   ],
+   "x": "The spinal cord runs inside the vertebrae"
+  },
+  {
+   "he": "מה מזיז את העצמות?",
+   "a": "השרירים",
+   "h": "c0d54331",
+   "q": "What moves the bones?",
+   "o": [
+    "The muscles",
+    "The skin",
+    "The hair",
+    "The nails"
+   ],
+   "x": "Muscles pull on the bones"
+  },
+  {
+   "he": "כשהשריר מושך את העצם, הוא…",
+   "a": "מתכווץ",
+   "h": "51328fb6",
+   "q": "When a muscle pulls a bone, it…",
+   "o": [
+    "Contracts",
+    "Relaxes",
+    "Breaks",
+    "Melts"
+   ],
+   "x": "A contracting muscle gets shorter and pulls"
+  },
+  {
+   "he": "שרירים עובדים בזוגות. כשאחד מתכווץ, השני…",
+   "a": "מתרפה",
+   "h": "aba2576f",
+   "q": "Muscles work in pairs. When one contracts, the other…",
+   "o": [
+    "Relaxes",
+    "Contracts too",
+    "Breaks",
+    "Disappears"
+   ],
+   "x": "One muscle pulls while the other relaxes"
+  },
+  {
+   "he": "איזה שריר מתכווץ כשמכופפים את היד במרפק?",
+   "a": "הדו-ראשי",
+   "h": "63215821",
+   "q": "Which muscle contracts when you bend your arm at the elbow?",
+   "o": [
+    "The biceps",
+    "The triceps",
+    "The heart muscle",
+    "The jaw muscle"
+   ],
+   "x": "The biceps on the front of the upper arm bends it"
+  },
+  {
+   "he": "מה מחבר שריר לעצם?",
+   "a": "גיד",
+   "h": "a77b129b",
+   "q": "What connects a muscle to a bone?",
+   "o": [
+    "Tendon",
+    "Joint",
+    "Skin",
+    "Nail"
+   ],
+   "x": "A tendon is a strong \"rope\" between muscle and bone"
+  },
+  {
+   "he": "איזה שריר עובד כל הזמן, גם בשינה?",
+   "a": "שריר הלב",
+   "h": "d2b24f29",
+   "q": "Which muscle works all the time, even during sleep?",
+   "o": [
+    "The heart muscle",
+    "The leg muscle",
+    "The arm muscle",
+    "The jaw muscle"
+   ],
+   "x": "The heart pumps blood nonstop"
+  },
+  {
+   "he": "מה מחזק את השרירים?",
+   "a": "פעילות גופנית",
+   "h": "6da28dda",
+   "q": "What makes muscles stronger?",
+   "o": [
+    "Physical activity",
+    "Sitting for hours",
+    "Too little sleep",
+    "Lots of sweets"
+   ],
+   "x": "Muscles get stronger when we use them"
+  },
+  {
+   "he": "מה מומלץ לעשות לפני ריצה?",
+   "a": "חימום ומתיחות",
+   "h": "1e3f424d",
+   "q": "What should you do before a run?",
+   "o": [
+    "Warm up and stretch",
+    "Eat a heavy meal",
+    "Sit for hours",
+    "Take a short nap"
+   ],
+   "x": "Warming up prepares the muscles and prevents injury"
+  },
+  {
+   "he": "מה היה קורה אילו לא היו לנו מפרקים?",
+   "a": "לא נוכל להתכופף",
+   "h": "41f78b07",
+   "q": "What would happen if we had no joints?",
+   "o": [
+    "We couldn't bend",
+    "We couldn't see",
+    "We couldn't hear",
+    "We couldn't taste"
+   ],
+   "x": "Without joints, the skeleton would be stiff"
+  },
+  {
+   "he": "אילו מערכות עובדות יחד כדי שנזוז?",
+   "a": "שלד ושרירים",
+   "h": "f985af7f",
+   "q": "Which systems work together so we can move?",
+   "o": [
+    "Skeleton and muscles",
+    "Skin and hair",
+    "Eyes and ears",
+    "Stomach and intestines"
+   ],
+   "x": "Muscles pull the bones of the skeleton"
+  },
+  {
+   "he": "מהו האיבר הגדול ביותר בגוף?",
+   "a": "העור",
+   "h": "3ccd9a70",
+   "q": "What is the largest organ in the body?",
+   "o": [
+    "The skin",
+    "The heart",
+    "The brain",
+    "The liver"
+   ],
+   "x": "The skin covers the whole body"
+  },
+  {
+   "he": "איזה תפקיד של העור שומר עלינו ממחלות?",
+   "a": "הגנה מפני חיידקים",
+   "h": "3c5654f5",
+   "q": "Which job of the skin keeps us from getting sick?",
+   "o": [
+    "Protection from germs",
+    "Digesting food",
+    "Pumping blood",
+    "Thinking and memory"
+   ],
+   "x": "The skin is a barrier against germs"
+  },
+  {
+   "he": "למה אנחנו מזיעים ביום חם?",
+   "a": "לקירור הגוף",
+   "h": "56bff05a",
+   "q": "Why do we sweat on a hot day?",
+   "o": [
+    "To cool the body",
+    "To warm the body",
+    "To clean our clothes",
+    "To build muscles"
+   ],
+   "x": "Sweat evaporates and cools the skin"
+  },
+  {
+   "he": "מה מרגישים בעזרת העור?",
+   "a": "מגע, חום, כאב",
+   "h": "8c657389",
+   "q": "What do we feel with our skin?",
+   "o": [
+    "Touch, heat, pain",
+    "Tastes",
+    "Sounds",
+    "Colors"
+   ],
+   "x": "Skin has sensors for touch, heat and pain"
+  },
+  {
+   "he": "מתי השערות סומרות ונוצר \"עור ברווז\"?",
+   "a": "כשקר",
+   "h": "63c78656",
+   "q": "When do our hairs stand up and we get \"goosebumps\"?",
+   "o": [
+    "When it's cold",
+    "When it's very hot",
+    "When we eat",
+    "When we drink"
+   ],
+   "x": "It is the skin's reaction to cold"
+  },
+  {
+   "he": "נחתכנו חתך קטן. מה עושים קודם?",
+   "a": "שוטפים במים נקיים",
+   "h": "caafa0d1",
+   "q": "We got a small cut. What do we do first?",
+   "o": [
+    "Rinse with clean water",
+    "Cover it with sand",
+    "Touch with dirty hands",
+    "Scratch the cut"
+   ],
+   "x": "Rinsing removes dirt and germs"
+  },
+  {
+   "he": "איך נקראת השכבה החיצונית של העור?",
+   "a": "אפידרמיס",
+   "h": "5ae44ebe",
+   "q": "What is the outer layer of the skin called?",
+   "o": [
+    "Epidermis",
+    "Dermis",
+    "Fat layer",
+    "Muscle"
+   ],
+   "x": "Epidermis – the top layer of skin"
+  },
+  {
+   "he": "מה נמצא בשכבה הפנימית של העור (דרמיס)?",
+   "a": "בלוטות זיעה",
+   "h": "39753cb2",
+   "q": "What is in the inner layer of the skin (dermis)?",
+   "o": [
+    "Sweat glands",
+    "Bones",
+    "Heart muscle",
+    "Lungs"
+   ],
+   "x": "The dermis has sweat glands, blood vessels and nerves"
+  },
+  {
+   "he": "מפני מה מגן הצבע (הפיגמנט) שבעור?",
+   "a": "קרני השמש",
+   "h": "358e062f",
+   "q": "What does the color (pigment) in our skin protect against?",
+   "o": [
+    "The sun's rays",
+    "Cold",
+    "Noise",
+    "Water"
+   ],
+   "x": "Pigment protects the skin from the sun's rays"
+  },
+  {
+   "he": "למה רוחצים ידיים לפני האוכל?",
+   "a": "לשטוף חיידקים מהידיים",
+   "h": "db5e5351",
+   "q": "Why do we wash our hands before eating?",
+   "o": [
+    "To remove germs",
+    "To warm them",
+    "To color them",
+    "To dry them"
+   ],
+   "x": "Soap and water remove germs"
+  },
+  {
+   "he": "איך מגינים על העור ביום שמשי?",
+   "a": "קרם הגנה וכובע",
+   "h": "67ab1264",
+   "q": "How do we protect our skin on a sunny day?",
+   "o": [
+    "Sunscreen and a hat",
+    "Tanning at noon",
+    "Going shirtless",
+    "Tanning oil"
+   ],
+   "x": "Sunscreen, a hat and a shirt prevent sunburn"
+  },
+  {
+   "he": "באילו שעות השמש מסוכנת לעור יותר מכל?",
+   "a": "בצהריים",
+   "h": "0d47295b",
+   "q": "At what time of day is the sun most harmful to skin?",
+   "o": [
+    "At noon",
+    "Early in the morning",
+    "In the evening",
+    "At night"
+   ],
+   "x": "At noon the sun's rays are strongest"
+  },
+  {
+   "he": "מה חובשים על הראש כשרוכבים על אופניים?",
+   "a": "קסדה",
+   "h": "0f2729ef",
+   "q": "What do we wear on our head when riding a bike?",
+   "o": [
+    "A helmet",
+    "A wool hat",
+    "Sunglasses",
+    "A scarf"
+   ],
+   "x": "A helmet protects the head in a fall"
+  },
+  {
+   "he": "רוכבים על סקייטבורד. מה מגן על הברכיים?",
+   "a": "מגני ברכיים",
+   "h": "bd2a9cbc",
+   "q": "You ride a skateboard. What protects your legs if you fall?",
+   "o": [
+    "Knee pads",
+    "Wool gloves",
+    "A scarf",
+    "Slippers"
+   ],
+   "x": "Pads prevent scrapes and injuries"
+  },
+  {
+   "he": "איך נכון לסחוב ילקוט כבד?",
+   "a": "על שתי הכתפיים",
+   "h": "462bdc9a",
+   "q": "What is the right way to carry a heavy schoolbag?",
+   "o": [
+    "On both shoulders",
+    "On one shoulder",
+    "In one hand",
+    "On your head"
+   ],
+   "x": "This spreads the weight and protects the back"
+  },
+  {
+   "he": "איך נכון לשבת מול המחשב?",
+   "a": "בגב זקוף",
+   "h": "a8c8285c",
+   "q": "What is the right way to sit at a computer?",
+   "o": [
+    "With a straight back",
+    "With a bent back",
+    "With a tilted head",
+    "Lying down"
+   ],
+   "x": "A straight back protects the spine"
+  },
+  {
+   "he": "כמה שעות שינה מומלצות לילד בגילך בלילה?",
+   "a": "כ-⁦10⁩ שעות",
+   "h": "70f31a0e",
+   "q": "How many hours of sleep do kids your age need a night?",
+   "o": [
+    "About 10 hours",
+    "About 4 hours",
+    "About 6 hours",
+    "About 16 hours"
+   ],
+   "x": "Children need about 9–11 hours of sleep"
+  },
+  {
+   "he": "נכווינו קלות מתה חם. מה עושים?",
+   "a": "מים קרירים זורמים",
+   "h": "b50004ca",
+   "q": "We got a slight burn from hot tea. What do we do?",
+   "o": [
+    "Rinse in cool water",
+    "Spread butter on it",
+    "Put salt on it",
+    "Cover with a blanket"
+   ],
+   "x": "Cool water cools the burn"
+  },
+  {
+   "he": "מה עוזר לגוף להישאר בריא?",
+   "a": "תזונה מגוונת",
+   "h": "8ad35430",
+   "q": "What helps the body stay healthy?",
+   "o": [
+    "A varied diet",
+    "Sweets every day",
+    "Sugary drinks",
+    "Sitting for hours"
+   ],
+   "x": "Vegetables, fruit, protein and grains"
+  },
+  {
+   "he": "חבר נפל ומאוד כואב לו ביד. מה עושים?",
+   "a": "קוראים למבוגר",
+   "h": "9df56047",
+   "q": "A friend fell and their arm hurts badly. What do we do?",
+   "o": [
+    "Call an adult",
+    "Keep playing",
+    "Shake the arm",
+    "Stay quiet"
+   ],
+   "x": "An adult will check and help – it may be broken"
+  },
+  {
+   "he": "מהי ההידרוספרה?",
+   "a": "מעטפת המים",
+   "h": "ddaffc42",
+   "q": "What is the hydrosphere?",
+   "o": [
+    "The layer of water",
+    "The layer of air",
+    "The layer of rock",
+    "The layer of plants"
+   ],
+   "x": "\"Hydro\" means water: seas, rivers, glaciers"
+  },
+  {
+   "he": "מהי האטמוספרה?",
+   "a": "מעטפת האוויר",
+   "h": "ba629829",
+   "q": "What is the atmosphere?",
+   "o": [
+    "The layer of air",
+    "The layer of water",
+    "The layer of rock",
+    "The layer of plants"
+   ],
+   "x": "The layer of air that surrounds Earth"
+  },
+  {
+   "he": "איפה נמצאים רוב המים בכדור הארץ?",
+   "a": "באוקיינוסים",
+   "h": "ff25605d",
+   "q": "Where is most of Earth's water?",
+   "o": [
+    "In the oceans",
+    "In rivers",
+    "In clouds",
+    "In wells"
+   ],
+   "x": "Most of Earth's water is salty, in the oceans"
+  },
+  {
+   "he": "איפה נמצאים רוב המים המתוקים בעולם?",
+   "a": "בקרחונים",
+   "h": "d078c24e",
+   "q": "Where is most of the world's fresh water?",
+   "o": [
+    "In glaciers",
+    "In rivers",
+    "In clouds",
+    "In ponds"
+   ],
+   "x": "Most fresh water is frozen in glaciers"
+  },
+  {
+   "he": "איפה יש מזג אוויר: עננים, גשם ורוח?",
+   "a": "באוויר שליד הקרקע",
+   "h": "453d758a",
+   "q": "Where do we find weather: clouds, rain and wind?",
+   "o": [
+    "Air near the ground",
+    "In space",
+    "Inside the ground",
+    "Above the Moon"
+   ],
+   "x": "Clouds, rain and wind are in the air near the ground"
+  },
+  {
+   "he": "מפני מה מגינה שכבת האוזון?",
+   "a": "קרינה מזיקה מהשמש",
+   "h": "707d1926",
+   "q": "What does the ozone layer protect us from?",
+   "o": [
+    "Harmful sun rays",
+    "Heavy rain",
+    "Winds",
+    "Snow"
+   ],
+   "x": "Ozone absorbs part of the Sun's radiation"
+  },
+  {
+   "he": "איפה נמצאת שכבת האוזון?",
+   "a": "גבוה מעל העננים",
+   "h": "07fae81b",
+   "q": "Where is the ozone layer?",
+   "o": [
+    "High above the clouds",
+    "Inside the clouds",
+    "Under the ground",
+    "Inside the sea"
+   ],
+   "x": "Ozone is high in the atmosphere, above the clouds"
+  },
+  {
+   "he": "ככל שעולים גבוה יותר, האוויר נעשה…",
+   "a": "דליל יותר",
+   "h": "4f747b60",
+   "q": "As you go higher, the air becomes…",
+   "o": [
+    "Thinner",
+    "Denser",
+    "Heavier",
+    "Warmer"
+   ],
+   "x": "Higher up there is less air – breathing is harder"
+  },
+  {
+   "he": "בלי האטמוספרה, מה היה חסר לנו?",
+   "a": "אוויר לנשימה",
+   "h": "ba8738d2",
+   "q": "Without the atmosphere, what would we be missing?",
+   "o": [
+    "Air to breathe",
+    "Soil for growing",
+    "Rocks for building",
+    "Sunlight"
+   ],
+   "x": "The atmosphere gives us air and keeps Earth warm"
+  },
+  {
+   "he": "באיזו עונה יורד רוב הגשם בישראל?",
+   "a": "בחורף",
+   "h": "af05d61f",
+   "q": "In which season does Israel get most of its rain?",
+   "o": [
+    "In winter",
+    "In summer",
+    "Only in fall",
+    "All year equally"
+   ],
+   "x": "In Israel, rain falls mostly in winter"
+  },
+  {
+   "he": "באיזה אזור בישראל יורד הכי הרבה גשם?",
+   "a": "בצפון",
+   "h": "7f49b406",
+   "q": "Which part of Israel gets the most rain?",
+   "o": [
+    "The north",
+    "The south",
+    "Eilat",
+    "The Arava"
+   ],
+   "x": "The north gets more rain than the south"
+  },
+  {
+   "he": "איזה אזור בישראל הוא מדבר?",
+   "a": "הנגב",
+   "h": "f46b4472",
+   "q": "Which region of Israel is a desert?",
+   "o": [
+    "The Negev",
+    "The Galilee",
+    "The Golan",
+    "The Carmel"
+   ],
+   "x": "Very little rain falls in the Negev"
+  },
+  {
+   "he": "לפי הגרף – איך השתנתה כמות הגשם מינואר למרץ?",
+   "a": "ירדה כל חודש",
+   "h": "1a67d652",
+   "q": "According to the graph, how did rainfall change from January to March?",
+   "o": [
+    "It dropped each month",
+    "It rose each month",
+    "It stayed the same",
+    "It rose, then dropped"
+   ],
+   "x": "Each point is lower than the one before it",
+   "sc": {
+    "3": "January",
+    "4": "February",
+    "5": "March",
+    "6": "Rain (mm)",
+    "7": "Month"
+   }
+  },
+  {
+   "he": "לפי הגרף – באיזה חודש ירד הכי מעט גשם?",
+   "a": "מרץ",
+   "h": "65917285",
+   "q": "According to the graph, which month had the least rain?",
+   "o": [
+    "March",
+    "January",
+    "February",
+    "All the same"
+   ],
+   "x": "The point for March is the lowest",
+   "sc": {
+    "3": "January",
+    "4": "February",
+    "5": "March",
+    "6": "Rain (mm)",
+    "7": "Month"
+   }
+  },
+  {
+   "he": "לפי הטבלה – באיזו עיר הכי חם?",
+   "a": "אילת",
+   "h": "c0cdd5bf",
+   "q": "According to the table, which city is the hottest?",
+   "o": [
+    "Eilat",
+    "Jerusalem",
+    "Safed",
+    "All the same"
+   ],
+   "x": "35° is the highest temperature in the table",
+   "sc": {
+    "0": "Eilat",
+    "1": "35°",
+    "2": "Jerusalem",
+    "3": "24°",
+    "4": "Safed",
+    "5": "22°"
+   }
+  },
+  {
+   "he": "במה מודדים טמפרטורה של האוויר?",
+   "a": "מדחום",
+   "h": "5ce09eac",
+   "q": "What do we use to measure air temperature?",
+   "o": [
+    "A thermometer",
+    "A rain gauge",
+    "A weather vane",
+    "A balance"
+   ],
+   "x": "A thermometer shows how hot or cold it is"
+  },
+  {
+   "he": "מה מראה שבשבת הרוח?",
+   "a": "את כיוון הרוח",
+   "h": "9809a5bc",
+   "q": "What does a weather vane show?",
+   "o": [
+    "Wind direction",
+    "Amount of rain",
+    "The temperature",
+    "The time"
+   ],
+   "x": "The vane points to where the wind comes from"
+  },
+  {
+   "he": "על מה מבשרים עננים אפורים וכבדים?",
+   "a": "גשם קרוב",
+   "h": "5b312c03",
+   "q": "What do heavy gray clouds tell us?",
+   "o": [
+    "Rain is coming",
+    "A sunny day",
+    "A heat wave",
+    "Sunset"
+   ],
+   "x": "Dark clouds are full of water drops"
+  },
+  {
+   "he": "מהו שרב (חמסין)?",
+   "a": "חום יבש ואבק",
+   "h": "8774aa5f",
+   "q": "What is a sharav (hamsin)?",
+   "o": [
+    "Dry heat and dust",
+    "Heavy rain",
+    "Heavy snow",
+    "Cold fog"
+   ],
+   "x": "A sharav is hot, dry and sometimes dusty"
+  },
+  {
+   "he": "\"היום חם ושמשי\" – מה זה מתאר?",
+   "a": "מזג אוויר",
+   "h": "242837fb",
+   "q": "\"Today is hot and sunny\" – what does this describe?",
+   "o": [
+    "The weather",
+    "The hydrosphere",
+    "The water cycle",
+    "The ozone layer"
+   ],
+   "x": "Weather is what is happening in the air now"
+  },
+  {
+   "he": "מה פירוש \"ליתו\" במילה ליתוספרה?",
+   "a": "אבן",
+   "h": "c7c60dd8",
+   "q": "What does \"litho\" mean in the word lithosphere?",
+   "o": [
+    "Stone",
+    "Water",
+    "Air",
+    "Life"
+   ],
+   "x": "\"Litho\" means stone: Earth's rocks and soil"
+  },
+  {
+   "he": "מה מהבאים שייך לליתוספרה?",
+   "a": "הרים וסלעים",
+   "h": "d569889d",
+   "q": "Which of these is part of the lithosphere?",
+   "o": [
+    "Mountains and rocks",
+    "Clouds",
+    "Sea waves",
+    "Birds"
+   ],
+   "x": "Mountains, rocks and soil are part of the lithosphere"
+  },
+  {
+   "he": "על איזו מעטפת אנחנו עומדים והולכים?",
+   "a": "ליתוספרה",
+   "h": "40482fd2",
+   "q": "Which of Earth's spheres do we stand and walk on?",
+   "o": [
+    "Lithosphere",
+    "Atmosphere",
+    "Hydrosphere",
+    "Biosphere"
+   ],
+   "x": "The ground under our feet is part of the lithosphere"
+  },
+  {
+   "he": "מה יוצא מהר געש מתפרץ?",
+   "a": "סלע מותך (לבה)",
+   "h": "7bbf8482",
+   "q": "What comes out of an erupting volcano?",
+   "o": [
+    "Molten rock (lava)",
+    "Fresh water",
+    "Snow",
+    "Cold air"
+   ],
+   "x": "Deep underground it is very hot, and rock melts"
+  },
+  {
+   "he": "ממה נוצרה הקרקע?",
+   "a": "מסלעים שהתפוררו",
+   "h": "d8e668e3",
+   "q": "What is soil made from?",
+   "o": [
+    "Crumbled rocks",
+    "Clouds",
+    "Salt water",
+    "Air"
+   ],
+   "x": "Rocks crumble slowly and mix with plant remains"
+  },
+  {
+   "he": "אילו שני משאבים מהליתוספרה משמשים לבנייה?",
+   "a": "אבן וחול",
+   "h": "5566888f",
+   "q": "Which two lithosphere resources are used for building?",
+   "o": [
+    "Stone and sand",
+    "Wind and clouds",
+    "Rain and dew",
+    "Air and vapor"
+   ],
+   "x": "We build with stone; sand makes concrete and glass"
+  },
+  {
+   "he": "מאיזו מעטפת כורים מתכות כמו ברזל ונחושת?",
+   "a": "ליתוספרה",
+   "h": "8903ef1e",
+   "q": "From which sphere do we mine metals like iron and copper?",
+   "o": [
+    "Lithosphere",
+    "Atmosphere",
+    "Biosphere",
+    "Hydrosphere"
+   ],
+   "x": "Metals are found in the rocks of the ground"
+  },
+  {
+   "he": "מה קורה לסלע שמים ורוח פוגעים בו שנים רבות?",
+   "a": "מתפורר לגרגרים",
+   "h": "3e49137f",
+   "q": "What happens to a rock that water and wind hit for many years?",
+   "o": [
+    "It crumbles into grains",
+    "It grows stronger",
+    "It turns into wood",
+    "It becomes transparent"
+   ],
+   "x": "This is weathering: the rock slowly breaks into pieces"
+  },
+  {
+   "he": "באיזו מעטפת מתרחשת רעידת אדמה?",
+   "a": "ליתוספרה",
+   "h": "9c92cd30",
+   "q": "In which sphere do earthquakes happen?",
+   "o": [
+    "Lithosphere",
+    "Atmosphere",
+    "Hydrosphere",
+    "Biosphere"
+   ],
+   "x": "Rocks deep underground move, and the ground shakes"
+  },
+  {
+   "he": "מה נכון על הליתוספרה?",
+   "a": "היא מוצקה",
+   "h": "e50e418d",
+   "q": "What is true about the lithosphere?",
+   "o": [
+    "It is solid",
+    "It is a gas",
+    "It is a liquid",
+    "It is transparent"
+   ],
+   "x": "Rocks and soil are solid – unlike air and water"
+  },
+  {
+   "he": "מהי הביוספרה?",
+   "a": "כל היצורים החיים",
+   "h": "4fd290f9",
+   "q": "What is the biosphere?",
+   "o": [
+    "All living things",
+    "The layer of rock",
+    "The layer of air",
+    "The layer of water"
+   ],
+   "x": "\"Bio\" means life: plants, animals and people"
+  },
+  {
+   "he": "איפה חיים יצורים בכדור הארץ?",
+   "a": "ביבשה, במים ובאוויר",
+   "h": "4b7e9b80",
+   "q": "Where on Earth are living things found?",
+   "o": [
+    "Land, water and air",
+    "Only on land",
+    "Only in the sea",
+    "Only in the air"
+   ],
+   "x": "The biosphere touches all three other spheres"
+  },
+  {
+   "he": "דג שוחה בים. לאילו שתי מעטפות הוא קשור?",
+   "a": "ביוספרה והידרוספרה",
+   "h": "b1a59c23",
+   "q": "A fish swims in the sea. Which two spheres is it part of?",
+   "o": [
+    "Biosphere and hydrosphere",
+    "Lithosphere and atmosphere",
+    "Only the atmosphere",
+    "Only the lithosphere"
+   ],
+   "x": "The fish is alive – biosphere; the sea – hydrosphere"
+  },
+  {
+   "he": "מה הצמח לוקח מהליתוספרה?",
+   "a": "מינרלים מהקרקע",
+   "h": "2bab95b2",
+   "q": "What does a plant take from the lithosphere?",
+   "o": [
+    "Minerals from the soil",
+    "Sunlight",
+    "Carbon dioxide",
+    "Clouds"
+   ],
+   "x": "Roots take in minerals and water from the soil"
+  },
+  {
+   "he": "מה הצמחים נותנים לאטמוספרה?",
+   "a": "חמצן",
+   "h": "971f585b",
+   "q": "What do plants give to the atmosphere?",
+   "o": [
+    "Oxygen",
+    "Smoke",
+    "Dust",
+    "Salt"
+   ],
+   "x": "When plants make food, they release oxygen into the air"
+  },
+  {
+   "he": "מה בעלי החיים לוקחים מהאטמוספרה?",
+   "a": "חמצן",
+   "h": "34fc30c1",
+   "q": "What do animals take from the atmosphere?",
+   "o": [
+    "Oxygen",
+    "Rocks",
+    "Salt",
+    "Dust"
+   ],
+   "x": "Animals breathe in oxygen from the air"
+  },
+  {
+   "he": "תולעים חופרות באדמה. איך הן משפיעות על הליתוספרה?",
+   "a": "מאווררות את הקרקע",
+   "h": "f44378e6",
+   "q": "Worms dig tunnels in the ground. How does this affect the lithosphere?",
+   "o": [
+    "They aerate the soil",
+    "They cool the sea",
+    "They make clouds",
+    "They dry up rivers"
+   ],
+   "x": "The tunnels let air and water into the soil"
+  },
+  {
+   "he": "שורשי עץ גדלים בתוך סדק בסלע. מה יקרה?",
+   "a": "הסלע יתפורר",
+   "h": "cc0c20c7",
+   "q": "Tree roots grow into a crack in a rock. What will happen?",
+   "o": [
+    "The rock will crumble",
+    "The rock will grow",
+    "The tree becomes rock",
+    "The rock will melt"
+   ],
+   "x": "Roots widen the crack – living things change rocks"
+  },
+  {
+   "he": "איך האדם משפיע על האטמוספרה?",
+   "a": "זיהום מעשן מפעלים",
+   "h": "1411713c",
+   "q": "How do people affect the atmosphere?",
+   "o": [
+    "Factory smoke pollutes it",
+    "They create oxygen",
+    "They create mountains",
+    "They move the Moon"
+   ],
+   "x": "Smoke from cars and factories pollutes the air"
+  },
+  {
+   "he": "בלי האטמוספרה וההידרוספרה, מה היה קורה לביוספרה?",
+   "a": "לא היו חיים",
+   "h": "11c177df",
+   "q": "Without the atmosphere and hydrosphere, what would happen to the biosphere?",
+   "o": [
+    "No life would exist",
+    "More life would exist",
+    "Nothing would change",
+    "Only fish would live"
+   ],
+   "x": "Living things need air and water"
+  },
+  {
+   "he": "מה משותף לכל בעלי החוליות?",
+   "a": "עמוד שדרה",
+   "h": "8db68dd6",
+   "q": "What do all vertebrates have in common?",
+   "o": [
+    "A backbone",
+    "Feathers",
+    "Scales",
+    "Gills"
+   ],
+   "x": "They all have an inner skeleton with a backbone"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הלווייתן?",
+   "a": "יונקים",
+   "h": "67d98f71",
+   "q": "Which group does the whale belong to?",
+   "o": [
+    "Mammals",
+    "Fish",
+    "Reptiles",
+    "Amphibians"
+   ],
+   "x": "A whale breathes with lungs and nurses its young"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הפינגווין?",
+   "a": "עופות",
+   "h": "34cb7070",
+   "q": "Which group does the penguin belong to?",
+   "o": [
+    "Birds",
+    "Mammals",
+    "Fish",
+    "Reptiles"
+   ],
+   "x": "It has feathers and a beak, but it cannot fly"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הצב?",
+   "a": "זוחלים",
+   "h": "66d678a2",
+   "q": "Which group does the turtle belong to?",
+   "o": [
+    "Reptiles",
+    "Amphibians",
+    "Fish",
+    "Mammals"
+   ],
+   "x": "A turtle has dry, scaly skin and lays eggs on land"
+  },
+  {
+   "he": "לאיזו קבוצה שייכת הצפרדע?",
+   "a": "דו-חיים",
+   "h": "54aefe9b",
+   "q": "Which group does the frog belong to?",
+   "o": [
+    "Amphibians",
+    "Reptiles",
+    "Fish",
+    "Mammals"
+   ],
+   "x": "It lives in water and on land; its young are tadpoles"
+  },
+  {
+   "he": "לאיזו קבוצה שייך העטלף?",
+   "a": "יונקים",
+   "h": "f58995ee",
+   "q": "Which group does the bat belong to?",
+   "o": [
+    "Mammals",
+    "Birds",
+    "Reptiles",
+    "Insects"
+   ],
+   "x": "A bat has fur and nurses its young – no feathers"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הכריש?",
+   "a": "דגים",
+   "h": "c6ab265e",
+   "q": "Which group does the shark belong to?",
+   "o": [
+    "Fish",
+    "Mammals",
+    "Reptiles",
+    "Amphibians"
+   ],
+   "x": "A shark breathes with gills and swims with fins"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הנחש?",
+   "a": "זוחלים",
+   "h": "5b6250a8",
+   "q": "Which group does the snake belong to?",
+   "o": [
+    "Reptiles",
+    "Amphibians",
+    "Mammals",
+    "Worms"
+   ],
+   "x": "A snake has dry, scaly skin"
+  },
+  {
+   "he": "איזה מהם יוצא דופן?",
+   "a": "כריש",
+   "h": "eaaeab38",
+   "q": "Which one does not belong?",
+   "o": [
+    "Shark",
+    "Dolphin",
+    "Cow",
+    "Dog"
+   ],
+   "x": "A shark is a fish; the others, even the dolphin, are mammals"
+  },
+  {
+   "he": "לאיזו קבוצה שייך התנין?",
+   "a": "זוחלים",
+   "h": "e950b973",
+   "q": "Which group does the crocodile belong to?",
+   "o": [
+    "Reptiles",
+    "Amphibians",
+    "Fish",
+    "Mammals"
+   ],
+   "x": "A crocodile has hard scales and lays eggs"
+  },
+  {
+   "he": "איך היונקים מאכילים את הגורים שלהם?",
+   "a": "מיניקים אותם",
+   "h": "18b9c37d",
+   "q": "How do mammals feed their young?",
+   "o": [
+    "They nurse them",
+    "They bring them seeds",
+    "The young find food",
+    "They give them leaves"
+   ],
+   "x": "Mammals feed their young with milk"
+  },
+  {
+   "he": "מה הזימים של הדג קולטים מהמים?",
+   "a": "חמצן",
+   "h": "e929adc1",
+   "q": "What do a fish's gills take from the water?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Sand",
+    "Light"
+   ],
+   "x": "Oxygen is dissolved in water; gills pass it to the blood"
+  },
+  {
+   "he": "מה מכסה את עור הזוחלים?",
+   "a": "קשקשים יבשים",
+   "h": "17e8f6f6",
+   "q": "What covers the skin of reptiles?",
+   "o": [
+    "Dry scales",
+    "Feathers",
+    "Fur",
+    "Moist skin"
+   ],
+   "x": "Scaly skin keeps them from drying out"
+  },
+  {
+   "he": "איזה עור יש לדו-חיים?",
+   "a": "לח וחלק",
+   "h": "82d825de",
+   "q": "What kind of skin do amphibians have?",
+   "o": [
+    "Moist and smooth",
+    "Covered in feathers",
+    "Covered in fur",
+    "Scaly and dry"
+   ],
+   "x": "A frog also breathes through its moist skin"
+  },
+  {
+   "he": "הראשן הוא הגור של…",
+   "a": "הצפרדע",
+   "h": "d48af902",
+   "q": "A tadpole is the young of…",
+   "o": [
+    "A frog",
+    "A fish",
+    "A snake",
+    "A turtle"
+   ],
+   "x": "A tadpole lives in water and becomes a frog"
+  },
+  {
+   "he": "במה נושם ראשן שחי במים?",
+   "a": "בזימים",
+   "h": "689ad310",
+   "q": "What does a tadpole living in water breathe with?",
+   "o": [
+    "Gills",
+    "Lungs",
+    "Its nose",
+    "Its tail"
+   ],
+   "x": "Lungs develop only as it grows"
+  },
+  {
+   "he": "מה מכסה את גופם של היונקים?",
+   "a": "פרווה או שיער",
+   "h": "4c9d2509",
+   "q": "What covers the bodies of mammals?",
+   "o": [
+    "Fur or hair",
+    "Feathers",
+    "Dry scales",
+    "Moist skin"
+   ],
+   "x": "Most mammals have fur or hair",
+   "sc": {
+    "0": "Mammals"
+   }
+  },
+  {
+   "he": "איזה חום גוף יש לעופות וליונקים?",
+   "a": "קבוע",
+   "h": "f11d3631",
+   "q": "What body temperature do birds and mammals have?",
+   "o": [
+    "Constant",
+    "Changes with surroundings",
+    "Always cold",
+    "Like the surrounding water"
+   ],
+   "x": "Their bodies keep the same temperature"
+  },
+  {
+   "he": "מה מאפיין את העופות?",
+   "a": "נוצות ומקור",
+   "h": "d4e6e82f",
+   "q": "What is typical of birds?",
+   "o": [
+    "Feathers and a beak",
+    "Fur and a tail",
+    "Gills and fins",
+    "Moist skin"
+   ],
+   "x": "All birds have feathers, a beak and wings",
+   "sc": {
+    "0": "Birds"
+   }
+  },
+  {
+   "he": "לפי הטבלה – לאיזו קבוצה שייך בעל החיים?",
+   "a": "יונקים",
+   "h": "190dcbce",
+   "q": "According to the table, which group does the animal belong to?",
+   "o": [
+    "Mammals",
+    "Birds",
+    "Reptiles",
+    "Fish"
+   ],
+   "x": "Fur and live young – a mammal",
+   "sc": {
+    "0": "Yes",
+    "1": "Fur",
+    "2": "No",
+    "3": "Feathers",
+    "4": "No",
+    "5": "Eggs"
+   }
+  },
+  {
+   "he": "מה אין לחסרי החוליות?",
+   "a": "עמוד שדרה",
+   "h": "58e294af",
+   "q": "What do invertebrates not have?",
+   "o": [
+    "A backbone",
+    "A mouth",
+    "A need for food",
+    "A need for air"
+   ],
+   "x": "The name says it: they have no vertebrae"
+  },
+  {
+   "he": "כמה רגליים יש לכל חרק?",
+   "a": "⁦6⁩",
+   "h": "04a2d83d",
+   "q": "How many legs does every insect have?",
+   "o": [
+    "⁦6⁩",
+    "⁦8⁩",
+    "⁦4⁩",
+    "⁦10⁩"
+   ],
+   "x": "Every insect has six legs"
+  },
+  {
+   "he": "לגוף החרק שלושה חלקים. כמה חלקים לגוף העכביש?",
+   "a": "⁦2⁩",
+   "h": "1cf2bbba",
+   "q": "An insect's body has three parts. How many does a spider's body have?",
+   "o": [
+    "⁦2⁩",
+    "⁦3⁩",
+    "⁦4⁩",
+    "⁦8⁩"
+   ],
+   "x": "A spider has a head-chest and an abdomen – two parts"
+  },
+  {
+   "he": "האם העכביש הוא חרק?",
+   "a": "לא",
+   "h": "0ecdfcfd",
+   "q": "Is a spider an insect?",
+   "o": [
+    "No",
+    "Yes",
+    "Only big spiders",
+    "Only at night"
+   ],
+   "x": "A spider has 8 legs, and an insect has 6"
+  },
+  {
+   "he": "לגוף החרק שלושה חלקים: ראש, חזה ו…",
+   "a": "בטן",
+   "h": "496640cd",
+   "q": "An insect's body has three parts: head, thorax and…",
+   "o": [
+    "Abdomen",
+    "Tail",
+    "Wing",
+    "Neck"
+   ],
+   "x": "Head, thorax and abdomen"
+  },
+  {
+   "he": "מה מגן על גוף החרק מבחוץ?",
+   "a": "שלד חיצוני",
+   "h": "dcd56fde",
+   "q": "What protects an insect's body from the outside?",
+   "o": [
+    "An exoskeleton",
+    "Bones",
+    "Fur",
+    "Feathers"
+   ],
+   "x": "Insects have a hard skeleton on the outside"
+  },
+  {
+   "he": "איזה מהם אינו חרק?",
+   "a": "חילזון",
+   "h": "51ce29e5",
+   "q": "Which one is not an insect?",
+   "o": [
+    "Snail",
+    "Bee",
+    "Butterfly",
+    "Ant"
+   ],
+   "x": "A snail is a mollusk, with no legs"
+  },
+  {
+   "he": "לאיזו קבוצה שייך החילזון?",
+   "a": "רכיכות",
+   "h": "8af81aed",
+   "q": "Which group does the snail belong to?",
+   "o": [
+    "Mollusks",
+    "Insects",
+    "Reptiles",
+    "Fish"
+   ],
+   "x": "A soft body, and usually a shell"
+  },
+  {
+   "he": "גם לתמנון אין עמוד שדרה. לאיזו קבוצה הוא שייך?",
+   "a": "רכיכות",
+   "h": "65a24ca1",
+   "q": "An octopus has no backbone either. Which group is it in?",
+   "o": [
+    "Mollusks",
+    "Fish",
+    "Mammals",
+    "Amphibians"
+   ],
+   "x": "An octopus is a mollusk without a shell"
+  },
+  {
+   "he": "לאיזו קבוצה שייכים רוב בעלי החיים בעולם?",
+   "a": "חסרי חוליות",
+   "h": "44959df8",
+   "q": "Which group do most animals in the world belong to?",
+   "o": [
+    "Invertebrates",
+    "Mammals",
+    "Birds",
+    "Fish"
+   ],
+   "x": "Most species are insects and other invertebrates"
+  },
+  {
+   "he": "מה יש בדבשת של הגמל?",
+   "a": "מאגר שומן",
+   "h": "1e4a4dd6",
+   "q": "What is in a camel's hump?",
+   "o": [
+    "Stored fat",
+    "Stored water",
+    "Bones",
+    "Air"
+   ],
+   "x": "The camel uses the fat when there is no food"
+  },
+  {
+   "he": "לברווז קרום בין האצבעות. למה הוא מתאים?",
+   "a": "לשחייה",
+   "h": "efc2082d",
+   "q": "A duck has skin between its toes. What is it good for?",
+   "o": [
+    "Swimming",
+    "Climbing",
+    "Digging",
+    "Running on sand"
+   ],
+   "x": "The webbed foot works like a paddle"
+  },
+  {
+   "he": "פרווה עבה ושכבת שומן מתאימות לחיים…",
+   "a": "באזור קר מאוד",
+   "h": "191358d9",
+   "q": "Thick fur and a layer of fat suit life…",
+   "o": [
+    "Somewhere very cold",
+    "In a hot desert",
+    "In a warm sea",
+    "In a rainforest"
+   ],
+   "x": "They keep the body warm"
+  },
+  {
+   "he": "צבע החגב דומה לצבע הסביבה. איך זה עוזר לו?",
+   "a": "הסוואה מאויבים",
+   "h": "bf1e1714",
+   "q": "A grasshopper's color matches its surroundings. How does this help it?",
+   "o": [
+    "Camouflage from enemies",
+    "Warming its body",
+    "Swimming fast",
+    "Jumping high"
+   ],
+   "x": "Predators find it hard to see"
+  },
+  {
+   "he": "לנשר מקור מעוקל וחד. למה הוא מתאים?",
+   "a": "לקריעת בשר",
+   "h": "593ce6b3",
+   "q": "An eagle has a sharp, hooked beak. What is it suited for?",
+   "o": [
+    "Tearing meat",
+    "Sucking nectar",
+    "Filtering water",
+    "Digging"
+   ],
+   "x": "The eagle eats meat"
+  },
+  {
+   "he": "לשועל המדבר אוזניים גדולות. איך זה עוזר לו?",
+   "a": "משחרר חום",
+   "h": "2d7f44c5",
+   "q": "The desert fox has big ears. How does this help it?",
+   "o": [
+    "It releases heat",
+    "It keeps heat in",
+    "It swims fast",
+    "It flies"
+   ],
+   "x": "Heat leaves the body through the big ears"
+  },
+  {
+   "he": "לפי מפתח המיון בכרטיס – מי זה?",
+   "a": "נמלה",
+   "h": "0b059b93",
+   "q": "According to the classification key on the card, which animal is it?",
+   "o": [
+    "Ant",
+    "Spider",
+    "Worm",
+    "Snail"
+   ],
+   "x": "An insect: no backbone, with 6 legs",
+   "sc": {
+    "0": "No backbone",
+    "1": "Has 6 legs"
+   }
+  },
+  {
+   "he": "לפי מפתח המיון בכרטיס – מי זה?",
+   "a": "יונה",
+   "h": "029f5a1a",
+   "q": "According to the classification key on the card, which animal is it?",
+   "o": [
+    "Pigeon",
+    "Bat",
+    "Lizard",
+    "Fish"
+   ],
+   "x": "A backbone and feathers – a bird",
+   "sc": {
+    "0": "Has a backbone",
+    "1": "Has feathers"
+   }
+  },
+  {
+   "he": "לפי מפתח המיון בכרטיס – מי זה?",
+   "a": "צפרדע",
+   "h": "5ff45e54",
+   "q": "According to the classification key on the card, which animal is it?",
+   "o": [
+    "Frog",
+    "Lizard",
+    "Fish",
+    "Snake"
+   ],
+   "x": "Moist, smooth skin – an amphibian",
+   "sc": {
+    "0": "Has a backbone",
+    "1": "Smooth wet skin"
+   }
+  },
+  {
+   "he": "בשביל מה משתמשים במפתח מיון?",
+   "a": "לזהות ולמיין",
+   "h": "9f371cfd",
+   "q": "What is a classification key used for?",
+   "o": [
+    "To identify and sort",
+    "To measure weight",
+    "To count eggs",
+    "To open cages"
+   ],
+   "x": "You answer questions and reach the right group"
+  },
+  {
+   "he": "מה עוזר לנשר לדאות בלי לנפנף בכנפיים?",
+   "a": "אוויר חם שעולה",
+   "h": "8b1fa2d0",
+   "q": "What helps an eagle soar without flapping its wings?",
+   "o": [
+    "Rising warm air",
+    "Water currents",
+    "Sunlight",
+    "The sand"
+   ],
+   "x": "Rising currents of warm air lift it up"
+  },
+  {
+   "he": "מה מניע אנשים לפתח מוצר טכנולוגי?",
+   "a": "צורך של אנשים",
+   "h": "c8bcadde",
+   "q": "What leads people to develop a technological product?",
+   "o": [
+    "A human need",
+    "The weather",
+    "A nice color",
+    "Chance"
+   ],
+   "x": "Every product meets a need"
+  },
+  {
+   "he": "על איזה צורך עונה המקרר?",
+   "a": "שמירת מזון טרי",
+   "h": "22f283ea",
+   "q": "What need does a refrigerator meet?",
+   "o": [
+    "Keeping food fresh",
+    "Heating the home",
+    "Light at night",
+    "Cleaning the floor"
+   ],
+   "x": "The cold keeps food from spoiling"
+  },
+  {
+   "he": "לשיני המזלג קצוות חדים. מה התפקוד שלהם?",
+   "a": "לנעוץ במזון",
+   "h": "65944d02",
+   "q": "The prongs of a fork have sharp ends. What is their function?",
+   "o": [
+    "Piercing food",
+    "Drinking",
+    "Cutting paper",
+    "Writing"
+   ],
+   "x": "The structure fits the function"
+  },
+  {
+   "he": "למה ידית הסיר עשויה מפלסטיק?",
+   "a": "מבודדת חום",
+   "h": "b060878c",
+   "q": "Why is a pot handle made of plastic?",
+   "o": [
+    "It insulates heat",
+    "It conducts heat",
+    "It is transparent",
+    "It is magnetic"
+   ],
+   "x": "So we don't get burned holding the pot"
+  },
+  {
+   "he": "למה לסוליית נעלי ספורט יש חריצים?",
+   "a": "כדי לא להחליק",
+   "h": "eba3cda3",
+   "q": "Why do the soles of sports shoes have grooves?",
+   "o": [
+    "To stop slipping",
+    "To be heavier",
+    "To keep heat",
+    "To whistle"
+   ],
+   "x": "The grooves grip the ground"
+  },
+  {
+   "he": "מה מהבאים הוא מוצר טכנולוגי?",
+   "a": "מספריים",
+   "h": "c87d369e",
+   "q": "Which of these is a technological product?",
+   "o": [
+    "Scissors",
+    "Tree",
+    "River",
+    "Stone"
+   ],
+   "x": "People designed and made the scissors"
+  },
+  {
+   "he": "מה הופך דבר ל\"מוצר טכנולוגי\"?",
+   "a": "אדם תכנן ויצר",
+   "h": "cade9c87",
+   "q": "What makes something a \"technological product\"?",
+   "o": [
+    "People made it",
+    "It grew in nature",
+    "It is green",
+    "It is old"
+   ],
+   "x": "A technological product is designed and made by people"
+  },
+  {
+   "he": "למה המטרייה עשויה מבד מיוחד?",
+   "a": "הוא אטום למים",
+   "h": "7b2384a9",
+   "q": "Why is an umbrella made of special fabric?",
+   "o": [
+    "It is waterproof",
+    "It is transparent",
+    "It conducts electricity",
+    "It is fragile"
+   ],
+   "x": "Water does not pass through the fabric"
+  },
+  {
+   "he": "על איזה צורך עונה מתקן המים בבית הספר?",
+   "a": "שתייה",
+   "h": "96a7a14a",
+   "q": "What need does the school water fountain meet?",
+   "o": [
+    "Drinking",
+    "Lighting",
+    "Heating",
+    "Transportation"
+   ],
+   "x": "The fountain gives us water to drink"
+  },
+  {
+   "he": "במה נסעו אנשים כשעוד לא היו מכוניות?",
+   "a": "עגלה וסוסים",
+   "h": "a62eac97",
+   "q": "What did people travel in before there were cars?",
+   "o": [
+    "A horse and cart",
+    "A plane",
+    "A helicopter",
+    "An electric scooter"
+   ],
+   "x": "Long ago, people used animals to travel"
+  },
+  {
+   "he": "איך נקרא מה שנכנס למערכת טכנולוגית?",
+   "a": "קלט",
+   "h": "03e5225b",
+   "q": "What do we call what enters a technological system?",
+   "o": [
+    "Input",
+    "Output",
+    "Control",
+    "Product"
+   ],
+   "x": "Input – what goes in"
+  },
+  {
+   "he": "איך נקרא מה שיוצא ממערכת טכנולוגית?",
+   "a": "פלט",
+   "h": "95ca2ca6",
+   "q": "What do we call what leaves a technological system?",
+   "o": [
+    "Output",
+    "Input",
+    "Raw material",
+    "Process"
+   ],
+   "x": "Output – what comes out"
+  },
+  {
+   "he": "בטוסטר נכנסים לחם וחשמל. מה הפלט?",
+   "a": "לחם קלוי",
+   "h": "b5012916",
+   "q": "Bread and electricity go into a toaster. What is the output?",
+   "o": [
+    "Browned, crispy bread",
+    "Electricity",
+    "A knife",
+    "A plate"
+   ],
+   "x": "The bread comes out toasted"
+  },
+  {
+   "he": "מה התהליך בטוסטר?",
+   "a": "חימום הלחם",
+   "h": "ba07cafd",
+   "q": "What is the process in a toaster?",
+   "o": [
+    "Heating the bread",
+    "Buying the bread",
+    "Eating the bread",
+    "Baking a cake"
+   ],
+   "x": "Inside the toaster, the bread heats up"
+  },
+  {
+   "he": "מה הקלט במכונת כביסה?",
+   "a": "בגדים מלוכלכים ומים",
+   "h": "8f5df2a1",
+   "q": "What is the input of a washing machine?",
+   "o": [
+    "Dirty clothes and water",
+    "Clean clothes",
+    "Folded clothes",
+    "A closet"
+   ],
+   "x": "Dirty clothes, water, detergent and electricity go in"
+  },
+  {
+   "he": "מה הפלט במכונת כביסה?",
+   "a": "בגדים נקיים",
+   "h": "e912e7f5",
+   "q": "What is the output of a washing machine?",
+   "o": [
+    "Clean clothes",
+    "Dirty clothes",
+    "Laundry detergent",
+    "Electricity"
+   ],
+   "x": "Clean clothes come out"
+  },
+  {
+   "he": "חיישן מדליק אור כשמחשיך. איזה חלק במערכת הוא?",
+   "a": "בקרה",
+   "h": "d181c9e3",
+   "q": "A sensor switches on a lamp when it gets dark. Which system part is this?",
+   "o": [
+    "Control",
+    "Output",
+    "Raw material",
+    "Product"
+   ],
+   "x": "Control checks and runs the system"
+  },
+  {
+   "he": "מה הפלט של פנס?",
+   "a": "אור",
+   "h": "98b5a3bf",
+   "q": "What is the output of the device in the picture?",
+   "o": [
+    "Light",
+    "A battery",
+    "Pressing a switch",
+    "Plastic"
+   ],
+   "x": "A flashlight turns electricity into light"
+  },
+  {
+   "he": "במכונת שתייה: מכניסים מטבע ולוחצים. מה זה?",
+   "a": "קלט",
+   "h": "a5da7a3d",
+   "q": "A drink machine: you drop a coin and press a button. Which part is this?",
+   "o": [
+    "Input",
+    "Output",
+    "Process",
+    "Product"
+   ],
+   "x": "What the user puts in is the input"
+  },
+  {
+   "he": "בבלנדר: פירות וחשמל נכנסים. מה התהליך?",
+   "a": "ריסוק וערבוב",
+   "h": "d694104b",
+   "q": "Fruit and electricity go into a blender. What is the process?",
+   "o": [
+    "Crushing and mixing",
+    "Freezing fruit",
+    "Picking fruit",
+    "Drinking the shake"
+   ],
+   "x": "The blades crush and mix"
+  },
+  {
+   "he": "מה עושות מכונות פשוטות?",
+   "a": "מקלות על העבודה",
+   "h": "2a64a9e4",
+   "q": "What do simple machines do?",
+   "o": [
+    "Make work easier",
+    "Produce electricity",
+    "Make work harder",
+    "Work by themselves"
+   ],
+   "x": "With them, you need less force"
+  },
+  {
+   "he": "נדנדה שבה ילד יושב בכל צד היא דוגמה ל…",
+   "a": "מנוף",
+   "h": "5687b36d",
+   "q": "A seesaw with a child on each side is an example of…",
+   "o": [
+    "A lever",
+    "A pulley",
+    "A screw",
+    "An inclined plane"
+   ],
+   "x": "A beam resting on a point in the middle"
+  },
+  {
+   "he": "איך נקראת הנקודה שעליה נשען המנוף?",
+   "a": "נקודת משען",
+   "h": "977ad70c",
+   "q": "What is the point a lever rests on called?",
+   "o": [
+    "The fulcrum",
+    "The load",
+    "The force",
+    "A pulley"
+   ],
+   "x": "The lever turns around the fulcrum"
+  },
+  {
+   "he": "בבאר, חבל הדלי עובר על גלגל. מה זה?",
+   "a": "גלגלת",
+   "h": "fb98d438",
+   "q": "At a well, the bucket's rope runs over a wheel. What is it?",
+   "o": [
+    "A pulley",
+    "A lever",
+    "A wedge",
+    "A screw"
+   ],
+   "x": "A pulley is a wheel with a rope"
+  },
+  {
+   "he": "איך גלגלת עוזרת להעלות דגל על תורן?",
+   "a": "הופכת את הכיוון",
+   "h": "675c9ee0",
+   "q": "How does a pulley help raise a flag up a pole?",
+   "o": [
+    "It changes the direction",
+    "It shrinks the flag",
+    "It makes wind",
+    "It adds weight"
+   ],
+   "x": "You pull down, and the flag goes up"
+  },
+  {
+   "he": "איזו מכונה פשוטה היא פותחן בקבוקים?",
+   "a": "מנוף",
+   "h": "a97e4970",
+   "q": "Which simple machine is a bottle opener?",
+   "o": [
+    "A lever",
+    "A pulley",
+    "A screw",
+    "An inclined plane"
+   ],
+   "x": "The opener rests on the cap and lifts it"
+  },
+  {
+   "he": "רמפה לכיסא גלגלים היא…",
+   "a": "מישור משופע",
+   "h": "9e127eca",
+   "q": "A wheelchair ramp is an example of…",
+   "o": [
+    "An inclined plane",
+    "A lever",
+    "A pulley",
+    "A screw"
+   ],
+   "x": "You go up a slope instead of stairs"
+  },
+  {
+   "he": "איזו מכונה פשוטה יש במספריים?",
+   "a": "מנוף",
+   "h": "37d44b6b",
+   "q": "Which simple machine is in a pair of scissors?",
+   "o": [
+    "A lever",
+    "A pulley",
+    "A screw",
+    "An inclined plane"
+   ],
+   "x": "Two levers with one fulcrum"
+  },
+  {
+   "he": "למה קל לגרור מזוודה עם גלגלים?",
+   "a": "גלגלים מקטינים חיכוך",
+   "h": "ae53f662",
+   "q": "Why is a suitcase with wheels easy to pull?",
+   "o": [
+    "Wheels reduce friction",
+    "Wheels add weight",
+    "The suitcase is empty",
+    "The floor is wet"
+   ],
+   "x": "A wheel rolls instead of rubbing on the floor"
+  },
+  {
+   "he": "במנוף, לוחצים רחוק יותר מנקודת המשען. מה קורה?",
+   "a": "צריך פחות כוח",
+   "h": "2a25bd87",
+   "q": "On a lever, you push farther from the fulcrum. What happens?",
+   "o": [
+    "You need less force",
+    "You need more force",
+    "Force stays the same",
+    "Nothing can be lifted"
+   ],
+   "x": "A longer arm – less force"
+  },
+  {
+   "he": "מאיזה חומר עושים חלון שרואים דרכו?",
+   "a": "זכוכית",
+   "h": "01607de1",
+   "q": "What material is a window you can see through made of?",
+   "o": [
+    "Glass",
+    "Wood",
+    "Iron",
+    "Cardboard"
+   ],
+   "x": "Glass is transparent"
+  },
+  {
+   "he": "ממה עשויים חוטי החשמל מבפנים?",
+   "a": "נחושת",
+   "h": "e32a6f38",
+   "q": "What are electric wires made of inside?",
+   "o": [
+    "Copper",
+    "Wood",
+    "Rubber",
+    "Glass"
+   ],
+   "x": "Copper is a metal that conducts electricity"
+  },
+  {
+   "he": "באיזה חומר כדאי לעטוף חוט חשמל?",
+   "a": "פלסטיק",
+   "h": "de75e1c9",
+   "q": "What material should we wrap an electric wire in?",
+   "o": [
+    "Plastic",
+    "Copper",
+    "Aluminum",
+    "Iron"
+   ],
+   "x": "Plastic insulates, and metals conduct electricity"
+  },
+  {
+   "he": "איזו תכונה חשובה במעיל גשם?",
+   "a": "אטימות למים",
+   "h": "20d27f47",
+   "q": "What property is important in a raincoat?",
+   "o": [
+    "Being waterproof",
+    "Being transparent",
+    "Conducting electricity",
+    "Being fragile"
+   ],
+   "x": "Water does not pass through the coat"
+  },
+  {
+   "he": "מאיזה חומר כדאי לבנות גשר גדול לרכבות?",
+   "a": "פלדה",
+   "h": "90555cd3",
+   "q": "What material is best for a big railway bridge?",
+   "o": [
+    "Steel",
+    "Cardboard",
+    "Thin glass",
+    "Rubber"
+   ],
+   "x": "Steel is very strong"
+  },
+  {
+   "he": "למה המחבת עשויה ממתכת?",
+   "a": "מוליכה חום",
+   "h": "5a2f0dbb",
+   "q": "Why is a frying pan made of metal?",
+   "o": [
+    "It conducts heat",
+    "It insulates heat",
+    "It is transparent",
+    "It tears easily"
+   ],
+   "x": "Metal carries the heat to the food"
+  },
+  {
+   "he": "למה בקבוקי שתייה רבים עשויים מפלסטיק?",
+   "a": "קל ולא נשבר",
+   "h": "ad4d6f00",
+   "q": "Why are many drink bottles made of plastic?",
+   "o": [
+    "Light and won't break",
+    "Heavy and breakable",
+    "Conducts electricity",
+    "Dissolves in water"
+   ],
+   "x": "Plastic is light and does not shatter"
+  },
+  {
+   "he": "מה מהבאים נמשך למגנט?",
+   "a": "מסמר ברזל",
+   "h": "0dcd6322",
+   "q": "Which of these is attracted to a magnet?",
+   "o": [
+    "An iron nail",
+    "A glass cup",
+    "A wooden pencil",
+    "A rubber ball"
+   ],
+   "x": "Iron is attracted to a magnet"
+  },
+  {
+   "he": "לפי הטבלה – מאיזה חומר כדאי לבנות רפסודה?",
+   "a": "עץ",
+   "h": "3b3f879b",
+   "q": "According to the table, what material is best for a raft?",
+   "o": [
+    "Wood",
+    "Iron",
+    "Stone",
+    "Glass"
+   ],
+   "x": "A raft needs to float",
+   "sc": {
+    "0": "Floats",
+    "1": "Wood",
+    "2": "Sinks",
+    "3": "Iron",
+    "4": "Sinks",
+    "5": "Stone"
+   }
+  },
+  {
+   "he": "למה ממחזרים בקבוקים ונייר?",
+   "a": "לשמור על הסביבה",
+   "h": "60ac1dca",
+   "q": "Why do we recycle bottles and paper?",
+   "o": [
+    "To protect the environment",
+    "To dirty the sea",
+    "To make more trash",
+    "To waste materials"
+   ],
+   "x": "It saves raw materials and reduces trash"
+  },
+  {
+   "he": "בבקבוק ליטר אחד. כמה כוסות של ⁦250⁩ מ״ל הוא ימלא?",
+   "a": "⁦4⁩",
+   "h": "b67e1822",
+   "q": "A bottle holds 1 liter. How many 250 mL cups will it fill?",
+   "o": [
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦10⁩",
+    "⁦250⁩"
+   ],
+   "x": "4 × 250 = 1,000 mL"
+  },
+  {
+   "he": "לפי הטבלה – באיזו כוס הכי מעט מים?",
+   "a": "כוס א'",
+   "h": "43cddaa1",
+   "q": "According to the table, which cup has the least water?",
+   "o": [
+    "Cup A",
+    "Cup B",
+    "Cup C",
+    "All equal"
+   ],
+   "x": "100 mL is the least",
+   "sc": {
+    "0": "100 mL",
+    "1": "Cup A",
+    "2": "250 mL",
+    "3": "Cup B",
+    "4": "180 mL",
+    "5": "Cup C"
+   }
+  },
+  {
+   "he": "שוקולד נמס הוכנס למקרר. מה יקרה?",
+   "a": "יתמצק שוב",
+   "h": "bb8300f9",
+   "q": "Melted chocolate was put in the fridge. What will happen?",
+   "o": [
+    "It turns solid again",
+    "It evaporates",
+    "It stays liquid",
+    "It disappears"
+   ],
+   "x": "In the cold, the liquid turns back into a solid"
+  },
+  {
+   "he": "באיזה מצב צבירה יש נפח קבוע אבל אין צורה קבועה?",
+   "a": "נוזל",
+   "h": "9e81af0a",
+   "q": "Which state of matter has a fixed volume but no fixed shape?",
+   "o": [
+    "Liquid",
+    "Solid",
+    "Gas",
+    "None of them"
+   ],
+   "x": "A liquid takes the shape of its container"
+  },
+  {
+   "he": "אילו מים מתאימים לשתייה?",
+   "a": "מים נקיים ומתוקים",
+   "h": "31f66a7d",
+   "q": "Which water is safe to drink?",
+   "o": [
+    "Clean fresh water",
+    "Seawater",
+    "Puddle water",
+    "Dead Sea water"
+   ],
+   "x": "Seawater is salty, and a puddle is dirty"
+  },
+  {
+   "he": "איזה תהליך אינו חלק ממחזור המים?",
+   "a": "המסת סוכר",
+   "h": "05571b34",
+   "q": "Which process is NOT part of the water cycle?",
+   "o": [
+    "Dissolving sugar",
+    "Evaporation",
+    "Condensation",
+    "Infiltration"
+   ],
+   "x": "Dissolving sugar in water is not a stage of the cycle"
+  },
+  {
+   "he": "מה מעיף עפיפון בשמיים?",
+   "a": "הרוח",
+   "h": "7d6b4532",
+   "q": "What makes a kite fly in the sky?",
+   "o": [
+    "The wind",
+    "Water",
+    "Electricity",
+    "A motor"
+   ],
+   "x": "Moving air pushes the kite"
+  },
+  {
+   "he": "איזה מפרק נמצא באמצע היד, בין הכתף לכף היד?",
+   "a": "המרפק",
+   "h": "b57c1312",
+   "q": "Which joint is in the middle of the arm, between shoulder and hand?",
+   "o": [
+    "The elbow",
+    "The knee",
+    "The ankle",
+    "The hip"
+   ],
+   "x": "The elbow joins the upper arm and the forearm"
+  },
+  {
+   "he": "כמה שרירים צריך כדי לכופף וליישר את היד?",
+   "a": "זוג שרירים",
+   "h": "fe63cee0",
+   "q": "How many muscles do you need to bend and straighten your arm?",
+   "o": [
+    "A pair of muscles",
+    "One muscle",
+    "No muscles",
+    "Only a bone"
+   ],
+   "x": "One muscle bends it, the other straightens it"
+  },
+  {
+   "he": "מה העור מוציא כדי לקרר את הגוף?",
+   "a": "זיעה",
+   "h": "98634edf",
+   "q": "What does the skin release to cool the body?",
+   "o": [
+    "Sweat",
+    "Blood",
+    "Fat",
+    "Air"
+   ],
+   "x": "Sweat evaporates and cools the body"
+  },
+  {
+   "he": "יוצאים לטיול ביום חם. מה לוקחים?",
+   "a": "כובע ומים",
+   "h": "83022ecd",
+   "q": "You go hiking on a hot day. What do you take?",
+   "o": [
+    "A hat and water",
+    "A wool coat",
+    "Gloves",
+    "A blanket"
+   ],
+   "x": "A hat shields from the sun; water prevents dehydration"
+  },
+  {
+   "he": "באיזה מקום בישראל יורד לפעמים שלג?",
+   "a": "בחרמון",
+   "h": "13c2d64f",
+   "q": "Where in Israel does it sometimes snow?",
+   "o": [
+    "On Mount Hermon",
+    "In Eilat",
+    "At the Dead Sea",
+    "In the Arava"
+   ],
+   "x": "Mount Hermon is Israel's highest mountain"
+  },
+  {
+   "he": "איזו מעטפת של כדור הארץ נותנת לנו אוויר?",
+   "a": "האטמוספרה",
+   "h": "e63c5f36",
+   "q": "Which of Earth's spheres gives us air?",
+   "o": [
+    "The atmosphere",
+    "The hydrosphere",
+    "The ocean",
+    "The glaciers"
+   ],
+   "x": "The atmosphere is the layer of air"
+  },
+  {
+   "he": "ליען יש נוצות, אבל הוא לא עף. מה הוא?",
+   "a": "עוף",
+   "h": "9534f804",
+   "q": "An ostrich has feathers but cannot fly. What is it?",
+   "o": [
+    "A bird",
+    "A mammal",
+    "A reptile",
+    "An amphibian"
+   ],
+   "x": "Every animal with feathers is a bird"
+  },
+  {
+   "he": "לאיזו קבוצה שייך הדולפין?",
+   "a": "יונקים",
+   "h": "fb137eac",
+   "q": "Which group does the dolphin belong to?",
+   "o": [
+    "Mammals",
+    "Fish",
+    "Reptiles",
+    "Amphibians"
+   ],
+   "x": "A dolphin breathes with lungs and nurses its young"
+  },
+  {
+   "he": "הזחל גדל ומשתנה. מה הוא יהיה?",
+   "a": "פרפר",
+   "h": "4fb98d2f",
+   "q": "A caterpillar grows and changes. What will it become?",
+   "o": [
+    "A butterfly",
+    "A spider",
+    "A snail",
+    "A worm"
+   ],
+   "x": "The caterpillar becomes a pupa, then a butterfly"
+  },
+  {
+   "he": "לקיפוד יש קוצים. במה הם עוזרים לו?",
+   "a": "הגנה מטורפים",
+   "h": "e6bf1a9a",
+   "q": "A hedgehog has spines. How do they help it?",
+   "o": [
+    "Protection from predators",
+    "Digging",
+    "Swimming",
+    "Cooling"
+   ],
+   "x": "The hedgehog curls into a ball, and its spines protect it"
+  },
+  {
+   "he": "מה התהליך בקומקום חשמלי?",
+   "a": "חימום המים",
+   "h": "e6146261",
+   "q": "What is the process in an electric kettle?",
+   "o": [
+    "Heating the water",
+    "Cooling the water",
+    "Pouring the water",
+    "Filtering the water"
+   ],
+   "x": "Electricity and water go in; hot water comes out"
+  },
+  {
+   "he": "איזו מכונה עוזרת להרים מלט לקומה גבוהה?",
+   "a": "גלגלת",
+   "h": "c970a1db",
+   "q": "Which machine helps lift cement to a high floor?",
+   "o": [
+    "A pulley",
+    "Scissors",
+    "A bottle opener",
+    "A screw"
+   ],
+   "x": "A rope and a wheel lift a heavy load"
+  }
+ ]
+}

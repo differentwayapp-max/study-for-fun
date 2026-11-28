@@ -1,0 +1,4033 @@
+{
+ "set": {
+  "name": "Science – Grade 3",
+  "title": "Materials · Electricity and energy · Plants · Protecting the environment",
+  "tags": [
+   "Properties of materials",
+   "Mixtures",
+   "Burning",
+   "Electric circuits",
+   "Conductors and insulators",
+   "Electrical safety",
+   "Energy sources",
+   "What plants need",
+   "Plant parts",
+   "Germination and pollination",
+   "Recycling and saving"
+  ]
+ },
+ "labels": {
+  "תכונות החומרים ושימושם": "Properties and uses of materials",
+  "תערובות והפרדה": "Mixtures and separating them",
+  "בעירה ובטיחות באש": "Burning and fire safety",
+  "המעגל החשמלי": "The electric circuit",
+  "מוליכים ומבודדים": "Conductors and insulators",
+  "בטיחות בחשמל": "Electrical safety",
+  "מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה": "Energy sources and turning electricity into light, heat and motion",
+  "מה צריך הצמח": "What plants need",
+  "חלקי הצמח ותפקידם": "Plant parts and their jobs",
+  "נביטה, גדילה והאבקה": "Germination, growth and pollination",
+  "צמחים בישראל": "Plants in Israel",
+  "זיהום הסביבה": "Pollution",
+  "מחזור וחיסכון במים ובחשמל": "Recycling and saving water and electricity",
+  "קשה, גמיש, שקוף ושביר": "Hard, flexible, transparent and breakable",
+  "בוחרים חומר מתאים": "Choosing the right material",
+  "מהי תערובת?": "What is a mixture?",
+  "מפרידים תערובות": "Separating mixtures",
+  "מה צריך כדי שתהיה אש?": "What does a fire need?",
+  "כיבוי אש ובטיחות": "Putting out fires and safety",
+  "בעירה – שינוי בחומר": "Burning – a change in the material",
+  "חלקי המעגל החשמלי": "Parts of an electric circuit",
+  "מעגל פתוח וסגור": "Open and closed circuits",
+  "מוליך או מבודד?": "Conductor or insulator?",
+  "בודקים במעגל": "Testing in a circuit",
+  "שומרים על עצמנו מחשמל": "Staying safe around electricity",
+  "חשמל בבית – מה נכון?": "Electricity at home – what's right?",
+  "מקורות אנרגיה": "Energy sources",
+  "חשמל הופך לאור, חום ותנועה": "Electricity turns into light, heat and motion",
+  "מה צריך צמח כדי לחיות?": "What does a plant need to live?",
+  "ניסויים בצרכי הצמח": "Experiments on plant needs",
+  "חלקי הצמח": "Parts of a plant",
+  "מה אוכלים מהצמח?": "Which plant parts do we eat?",
+  "נביטה וגדילה": "Germination and growth",
+  "פרחים, האבקה ופיזור זרעים": "Flowers, pollination and seed dispersal",
+  "צמחי בר בישראל": "Wild plants in Israel",
+  "צמחים, חגים ועונות": "Plants, holidays and seasons",
+  "זיהום אוויר, מים וקרקע": "Air, water and soil pollution",
+  "שומרים על הסביבה": "Protecting the environment",
+  "מחזור ושימוש חוזר": "Recycling and reusing",
+  "חוסכים במים ובחשמל": "Saving water and electricity",
+  "חזרה": "Review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "איך נקרא חומר שהאור עובר דרכו?",
+   "a": "שקוף",
+   "h": "45b7b207",
+   "q": "What do we call a material that light passes through?",
+   "o": [
+    "Transparent",
+    "Opaque",
+    "Flexible",
+    "Breakable"
+   ],
+   "x": "You can see through a transparent material"
+  },
+  {
+   "he": "מה מהבאים שביר?",
+   "a": "כוס זכוכית",
+   "h": "acd61eb1",
+   "q": "Which of these is breakable?",
+   "o": [
+    "Glass cup",
+    "Rubber ball",
+    "Wool sock",
+    "Sponge"
+   ],
+   "x": "Glass breaks when it falls"
+  },
+  {
+   "he": "איך נקרא חומר שמתכופף וחוזר לצורתו?",
+   "a": "גמיש",
+   "h": "c5fef5b0",
+   "q": "What do we call a material that bends and goes back to its shape?",
+   "o": [
+    "Flexible",
+    "Breakable",
+    "Transparent",
+    "Absorbent"
+   ],
+   "x": "A flexible material doesn't break when you bend it",
+   "sc": {
+    "0": "Bends",
+    "1": "and springs back"
+   }
+  },
+  {
+   "he": "מה סופג הכי הרבה מים?",
+   "a": "ספוג",
+   "h": "f308b507",
+   "q": "What soaks up the most water?",
+   "o": [
+    "Sponge",
+    "Nail",
+    "Plate",
+    "Bottle"
+   ],
+   "x": "A sponge has tiny holes that hold water"
+  },
+  {
+   "he": "קופסת נעליים לא נותנת לראות דרכה. ממה היא?",
+   "a": "קרטון",
+   "h": "7d8a21c9",
+   "q": "You can't see through a shoebox. What is it made of?",
+   "o": [
+    "Cardboard",
+    "Glass",
+    "Clear plastic wrap",
+    "Clear plastic"
+   ],
+   "x": "Cardboard is opaque – light doesn't pass through it"
+  },
+  {
+   "he": "איזה חומר הכי קשה?",
+   "a": "ברזל",
+   "h": "7b25dee0",
+   "q": "Which material is the hardest?",
+   "o": [
+    "Iron",
+    "Sponge",
+    "Wool",
+    "Paper"
+   ],
+   "x": "It is very hard to change the shape of iron"
+  },
+  {
+   "he": "מה קורה לדף נייר שנרטב?",
+   "a": "נקרע בקלות",
+   "h": "fbb2ad11",
+   "q": "What happens to a sheet of paper that gets wet?",
+   "o": [
+    "It tears easily",
+    "It gets stronger",
+    "It turns into iron",
+    "It shatters like glass"
+   ],
+   "x": "Wet paper gets weak and tears"
+  },
+  {
+   "he": "מה מהבאים הוא חומר שהאדם יצר?",
+   "a": "פלסטיק",
+   "h": "f4f8b916",
+   "q": "Which of these is a material made by people?",
+   "o": [
+    "Plastic",
+    "Wood",
+    "Wool",
+    "Stone"
+   ],
+   "x": "Plastic is made in factories; the others come from nature"
+  },
+  {
+   "he": "צמר וכותנה הם חומרים ש…",
+   "a": "באים מהטבע",
+   "h": "90903b40",
+   "q": "Wool and cotton are materials that…",
+   "o": [
+    "Come from nature",
+    "Are made in factories",
+    "Are made of metal",
+    "Are always transparent"
+   ],
+   "x": "Wool comes from sheep, cotton from a plant"
+  },
+  {
+   "he": "איזו תכונה משותפת למסמר, למפתח ולכפית?",
+   "a": "קשים",
+   "h": "bf806b1a",
+   "q": "Which property do a nail, a key and a spoon share?",
+   "o": [
+    "Hard",
+    "Soft",
+    "Transparent",
+    "Absorbent"
+   ],
+   "x": "All three are made of hard metal"
+  },
+  {
+   "he": "איך נבדוק איזה בד מתאים למטרייה?",
+   "a": "נשפוך עליו מים",
+   "h": "fef43b45",
+   "q": "How can we test which fabric is good for an umbrella?",
+   "o": [
+    "Pour water on it",
+    "Measure its length",
+    "Check its color",
+    "Smell it"
+   ],
+   "x": "Umbrella fabric must keep the water out"
+  },
+  {
+   "he": "למה ידית של סיר עשויה פלסטיק או עץ?",
+   "a": "לא מתחממת",
+   "h": "a75b02df",
+   "q": "Why is a pot handle made of plastic or wood?",
+   "o": [
+    "It doesn't get hot",
+    "It is transparent",
+    "It is breakable",
+    "It absorbs water"
+   ],
+   "x": "So we don't get burned when we hold it"
+  },
+  {
+   "he": "איזו תכונה של הזכוכית חשובה בחלון?",
+   "a": "שקוף",
+   "h": "6ebbb71b",
+   "q": "Which property of glass is important in a window?",
+   "o": [
+    "Transparent",
+    "Soft",
+    "Flexible",
+    "Absorbent"
+   ],
+   "x": "Light comes in through the glass, and we see outside"
+  },
+  {
+   "he": "דני הלך בגשם במגפי בד. מה יקרה לרגליים?",
+   "a": "יירטבו",
+   "h": "6f39828d",
+   "q": "Dani walked in the rain in cloth boots. What will happen to his feet?",
+   "o": [
+    "They'll get wet",
+    "They'll stay dry",
+    "They'll stay warmer",
+    "They'll turn transparent"
+   ],
+   "x": "Cloth soaks up water; rubber keeps water out"
+  },
+  {
+   "he": "מה הכי מתאים לבגד חם לחורף?",
+   "a": "צמר",
+   "h": "a947cf9d",
+   "q": "What is best for warm winter clothes?",
+   "o": [
+    "Wool",
+    "Nylon",
+    "Glass",
+    "Paper"
+   ],
+   "x": "Wool keeps the body warm"
+  },
+  {
+   "he": "מאיזה חומר כדאי לעשות מגבת?",
+   "a": "בד סופג",
+   "h": "2a53cbbb",
+   "q": "Which material is good for a towel?",
+   "o": [
+    "Absorbent fabric",
+    "Plastic",
+    "Metal",
+    "Glass"
+   ],
+   "x": "A towel needs to soak up water"
+  },
+  {
+   "he": "לפי הטבלה – מאיזה חומר כדאי כוס לתינוק?",
+   "a": "פלסטיק",
+   "h": "98914592",
+   "q": "According to the table, which material is good for a baby's cup?",
+   "o": [
+    "Plastic",
+    "Glass",
+    "Paper",
+    "China"
+   ],
+   "x": "Plastic doesn't break or get wet",
+   "sc": {
+    "0": "Glass",
+    "1": "Breaks",
+    "2": "Plastic",
+    "3": "Won't break",
+    "4": "Paper",
+    "5": "Rips if wet"
+   }
+  },
+  {
+   "he": "מה מהבאים לא מתאים לבניית קיר של בית?",
+   "a": "נייר",
+   "h": "90807b75",
+   "q": "Which of these is not good for building a house wall?",
+   "o": [
+    "Paper",
+    "Stone",
+    "Concrete",
+    "Bricks"
+   ],
+   "x": "Paper is weak and gets wet in the rain"
+  },
+  {
+   "he": "דני צריך קופסה קלה שלא נשברת לטיול. מאיזה חומר?",
+   "a": "פלסטיק",
+   "h": "06ce3568",
+   "q": "Dani needs a light box that won't break for a trip. Which material?",
+   "o": [
+    "Plastic",
+    "Glass",
+    "China",
+    "Heavy iron"
+   ],
+   "x": "Plastic is light and doesn't shatter"
+  },
+  {
+   "he": "רוצים לראות מה בתוך הקופסה. איזה חומר נבחר?",
+   "a": "שקוף",
+   "h": "00519152",
+   "q": "We want to see what's inside the box. Which material should we choose?",
+   "o": [
+    "Transparent",
+    "Opaque",
+    "Absorbent",
+    "Soft"
+   ],
+   "x": "Through a transparent material, we see what's inside"
+  },
+  {
+   "he": "מהי תערובת?",
+   "a": "כמה חומרים יחד",
+   "h": "8a734578",
+   "q": "What is a mixture?",
+   "o": [
+    "Several materials together",
+    "Only one material",
+    "Only water",
+    "Only air"
+   ],
+   "x": "In a mixture, two or more materials are mixed together"
+  },
+  {
+   "he": "מה מהבאים תערובת?",
+   "a": "סלט פירות",
+   "h": "575a99a4",
+   "q": "Which of these is a mixture?",
+   "o": [
+    "Fruit salad",
+    "Nail",
+    "Spoon",
+    "Ice cube"
+   ],
+   "x": "A fruit salad mixes several kinds of fruit"
+  },
+  {
+   "he": "אבקת שוקו בחלב – מה זה?",
+   "a": "תערובת",
+   "h": "ed589381",
+   "q": "Cocoa powder in milk – what is it?",
+   "o": [
+    "A mixture",
+    "One material",
+    "A metal",
+    "A gas"
+   ],
+   "x": "Two materials are mixed: powder and milk"
+  },
+  {
+   "he": "ערבבו חול במים וחיכו. מה יקרה?",
+   "a": "החול ישקע",
+   "h": "c3bc0321",
+   "q": "Sand is mixed into water, and we wait. What will happen?",
+   "o": [
+    "The sand sinks",
+    "The sand disappears",
+    "The sand floats",
+    "The water disappears"
+   ],
+   "x": "Sand is heavy and doesn't dissolve, so it sinks"
+  },
+  {
+   "he": "מה קורה לסוכר בכוס מים?",
+   "a": "מתמוסס במים",
+   "h": "61b80339",
+   "q": "What happens to sugar in a glass of water?",
+   "o": [
+    "It dissolves",
+    "It turns into ice",
+    "It floats up",
+    "It turns into sand"
+   ],
+   "x": "The sugar spreads through the water, and we can't see it"
+  },
+  {
+   "he": "מה מהבאים מתמוסס במים?",
+   "a": "המלח",
+   "h": "1dd48dcd",
+   "q": "Which of these dissolves in water?",
+   "o": [
+    "The salt",
+    "The sand",
+    "The nails",
+    "The stones"
+   ],
+   "x": "Salt spreads through the water; the others don't"
+  },
+  {
+   "he": "שמים שמן ומים בכוס. מה נראה?",
+   "a": "השמן צף למעלה",
+   "h": "4fb32cb0",
+   "q": "Oil and water are poured into a glass. What will we see?",
+   "o": [
+    "The oil floats",
+    "The oil sinks",
+    "They mix together",
+    "The oil disappears"
+   ],
+   "x": "Oil is lighter than water and doesn't mix with it",
+   "sc": {
+    "0": "Oil + water"
+   }
+  },
+  {
+   "he": "הסוכר מתמוסס במים. האם הוא עדיין שם?",
+   "a": "כן, המים מתוקים",
+   "h": "1b625a24",
+   "q": "Sugar dissolves in water. Is it still there?",
+   "o": [
+    "Yes, it tastes sweet",
+    "No, it disappeared",
+    "It turned into air",
+    "It sank completely"
+   ],
+   "x": "Taste it – the water is sweet"
+  },
+  {
+   "he": "בתערובת מלח וחול שופכים מים. מה מתמוסס?",
+   "a": "המלח",
+   "h": "0a14c107",
+   "q": "Water is poured on a mix of salt and sand. What dissolves?",
+   "o": [
+    "The salt",
+    "The sand",
+    "Both",
+    "Neither"
+   ],
+   "x": "Salt dissolves in water; sand doesn't"
+  },
+  {
+   "he": "מה לא מתמוסס במים?",
+   "a": "חול",
+   "h": "be3d90e1",
+   "q": "What does not dissolve in water?",
+   "o": [
+    "Sand",
+    "Sugar",
+    "Salt",
+    "Juice powder"
+   ],
+   "x": "The grains of sand stay and sink"
+  },
+  {
+   "he": "באיזה כלי מפרידים חול מאבנים קטנות?",
+   "a": "בנפה",
+   "h": "e48b9364",
+   "q": "Which tool separates sand from small stones?",
+   "o": [
+    "A sieve",
+    "A magnet",
+    "A filter",
+    "A spoon"
+   ],
+   "x": "The sand passes through the holes; the stones stay",
+   "sc": {
+    "0": "Sand + stones"
+   }
+  },
+  {
+   "he": "מה נשאר בתוך הנפה?",
+   "a": "החלקים הגדולים",
+   "h": "3d9137e3",
+   "q": "What stays inside the sieve?",
+   "o": [
+    "The big pieces",
+    "The small pieces",
+    "The water",
+    "The air"
+   ],
+   "x": "Small pieces pass through the holes of the sieve",
+   "sc": {
+    "0": "Sieve"
+   }
+  },
+  {
+   "he": "מה המגנט מוציא מהתערובת?",
+   "a": "סיכות הברזל",
+   "h": "e2c98cb6",
+   "q": "What does the magnet take out of the mixture?",
+   "o": [
+    "The iron pins",
+    "The sand",
+    "The paper",
+    "The wood"
+   ],
+   "x": "A magnet attracts iron"
+  },
+  {
+   "he": "איזו תערובת אפשר להפריד במגנט?",
+   "a": "מסמרים וחול",
+   "h": "8c4f7f6d",
+   "q": "Which mixture can be separated with a magnet?",
+   "o": [
+    "Nails and sand",
+    "Sugar and water",
+    "Sand and water",
+    "Oil and water"
+   ],
+   "x": "Only iron is attracted to a magnet"
+  },
+  {
+   "he": "מסננים מים עם חול. מה נשאר בפילטר?",
+   "a": "החול",
+   "h": "c8bd8c33",
+   "q": "Sandy water is poured through a filter. What stays in the filter?",
+   "o": [
+    "The sand",
+    "The water",
+    "Nothing",
+    "The air"
+   ],
+   "x": "The water passes through; the sand is stopped"
+  },
+  {
+   "he": "איך מקבלים בחזרה מלח ממי מלח?",
+   "a": "אידוי",
+   "h": "6caa100c",
+   "q": "How do we get salt back from salt water?",
+   "o": [
+    "Evaporation",
+    "Filtering",
+    "A magnet",
+    "Shaking hard"
+   ],
+   "x": "The water evaporates, and the salt stays"
+  },
+  {
+   "he": "בבריכות מלח מי הים מתאדים. מה מאדה אותם?",
+   "a": "חום השמש",
+   "h": "29a64d43",
+   "q": "In salt ponds, seawater evaporates. What makes it evaporate?",
+   "o": [
+    "The sun's heat",
+    "A big magnet",
+    "A big sieve",
+    "The cold at night"
+   ],
+   "x": "The sun heats the water; it evaporates, and the salt stays"
+  },
+  {
+   "he": "סוכר מתמוסס במים. אפשר להוציא אותו בפילטר?",
+   "a": "לא, הוא עובר",
+   "h": "6a4a5e88",
+   "q": "Sugar dissolves in water. Can a filter take it out?",
+   "o": [
+    "No, it goes through",
+    "Yes, easily",
+    "Only a sieve can",
+    "Only a magnet can"
+   ],
+   "x": "A dissolved material passes through the filter"
+  },
+  {
+   "he": "לפי הטבלה – מה במקום סימן השאלה?",
+   "a": "אידוי",
+   "h": "c6207af3",
+   "q": "According to the table, what goes in place of the question mark?",
+   "o": [
+    "Evaporation",
+    "Filtering",
+    "Magnet",
+    "Sieve"
+   ],
+   "x": "Salt dissolves – so we evaporate the water",
+   "sc": {
+    "0": "Sand, water",
+    "1": "Filter",
+    "2": "Salt, water",
+    "3": "?"
+   }
+  },
+  {
+   "he": "איך הכי פשוט להפריד אגוזים מצימוקים?",
+   "a": "ברירה ביד",
+   "h": "8d704871",
+   "q": "What is the easiest way to separate nuts from raisins?",
+   "o": [
+    "Picking by hand",
+    "Using a magnet",
+    "Evaporating",
+    "Filtering"
+   ],
+   "x": "The pieces are big – we pick them out by hand"
+  },
+  {
+   "he": "מה צריך כדי שתהיה אש?",
+   "a": "חומר, אוויר וחום",
+   "h": "712b7c60",
+   "q": "What does a fire need?",
+   "o": [
+    "Fuel, air and heat",
+    "Water, air and heat",
+    "Fuel, water and cold",
+    "Only air and cold"
+   ],
+   "x": "These three make up the fire triangle"
+  },
+  {
+   "he": "משולש האש: חום, חומר בוער ו…",
+   "a": "חמצן מהאוויר",
+   "h": "90224594",
+   "q": "The fire triangle: heat, fuel and…",
+   "o": [
+    "Oxygen from the air",
+    "Water",
+    "Sand",
+    "Ice"
+   ],
+   "x": "Without oxygen, there is no burning",
+   "sc": {
+    "0": "Heat",
+    "1": "Fuel",
+    "2": "?"
+   }
+  },
+  {
+   "he": "מה מהבאים בוער?",
+   "a": "עץ",
+   "h": "a6c38222",
+   "q": "Which of these burns?",
+   "o": [
+    "Wood",
+    "Water",
+    "Glass",
+    "Stone"
+   ],
+   "x": "Wood is a fuel – it catches fire"
+  },
+  {
+   "he": "מה מהבאים לא בוער?",
+   "a": "אבן",
+   "h": "23a39fce",
+   "q": "Which of these does not burn?",
+   "o": [
+    "Stone",
+    "Paper",
+    "Wood",
+    "Cloth"
+   ],
+   "x": "Stone doesn't catch fire"
+  },
+  {
+   "he": "שמים כוס הפוכה על נר דולק. מה יקרה?",
+   "a": "הנר יכבה",
+   "h": "ac20f57a",
+   "q": "An upside-down glass is put over a burning candle. What will happen?",
+   "o": [
+    "The candle goes out",
+    "The candle grows",
+    "Nothing changes",
+    "The glass burns"
+   ],
+   "x": "The oxygen in the glass runs out, and the fire goes out"
+  },
+  {
+   "he": "למה הנר כבה מתחת לכוס?",
+   "a": "חסר חמצן",
+   "h": "b80ab2b7",
+   "q": "Why does the candle go out under the glass?",
+   "o": [
+    "Not enough oxygen",
+    "The glass is cold",
+    "The candle got wet",
+    "There's too much light"
+   ],
+   "x": "Without oxygen, there is no burning"
+  },
+  {
+   "he": "מה נשאר מעץ אחרי שהוא נשרף?",
+   "a": "אפר",
+   "h": "4d9d6216",
+   "q": "What is left of wood after it burns?",
+   "o": [
+    "Ash",
+    "New wood",
+    "Water",
+    "Glass"
+   ],
+   "x": "Wood turns into ash, smoke and heat"
+  },
+  {
+   "he": "האש נותנת לנו חום וגם…",
+   "a": "אור",
+   "h": "77bc7bc5",
+   "q": "Fire gives us heat and also…",
+   "o": [
+    "Light",
+    "Cold",
+    "Water",
+    "Ice"
+   ],
+   "x": "A campfire warms us and lights up the dark"
+  },
+  {
+   "he": "נייר שנשרף – אפשר להחזיר אותו?",
+   "a": "לא, אי אפשר",
+   "h": "09e7e5a7",
+   "q": "Paper has burned. Can it turn back into paper?",
+   "o": [
+    "No, it can't",
+    "Yes, easily",
+    "Yes, with water",
+    "Yes, by cooling it"
+   ],
+   "x": "Burning is a change that can't be undone"
+  },
+  {
+   "he": "מכסים מדורה בחול. למה האש כבה?",
+   "a": "חסר חמצן",
+   "h": "7f48edc9",
+   "q": "A campfire is covered with sand. Why does the fire go out?",
+   "o": [
+    "Not enough oxygen",
+    "The sand is wet",
+    "The sand is hot",
+    "There is more light"
+   ],
+   "x": "The sand keeps the air from reaching the fire"
+  },
+  {
+   "he": "איך מים מכבים אש?",
+   "a": "מקררים אותה",
+   "h": "4df878d1",
+   "q": "How does water put out a fire?",
+   "o": [
+    "It cools it down",
+    "It adds air",
+    "It adds heat",
+    "It paints it"
+   ],
+   "x": "Water takes away the heat"
+  },
+  {
+   "he": "באיזה מכשיר מכבים שריפה קטנה בבית?",
+   "a": "מטף",
+   "h": "0903a050",
+   "q": "Which device puts out a small fire at home?",
+   "o": [
+    "A fire extinguisher",
+    "A fan",
+    "An iron",
+    "An oven"
+   ],
+   "x": "Every home should have a fire extinguisher"
+  },
+  {
+   "he": "שמן בוער במחבת. איך מכבים בלי מטף?",
+   "a": "מכסים במכסה",
+   "h": "d5235b09",
+   "q": "Oil is burning in a pan. How do we put it out without an extinguisher?",
+   "o": [
+    "Cover with a lid",
+    "Pour water on it",
+    "Blow hard",
+    "Add more oil"
+   ],
+   "x": "The lid stops the air from getting in"
+  },
+  {
+   "he": "למה לא שופכים מים על שמן בוער?",
+   "a": "האש מתפשטת",
+   "h": "a9cf31f7",
+   "q": "Why don't we pour water on burning oil?",
+   "o": [
+    "The fire spreads",
+    "The water runs out",
+    "The oil gets cold",
+    "It smells bad"
+   ],
+   "x": "Water splashes burning oil in every direction"
+  },
+  {
+   "he": "הבגד שלך נדלק. מה עושים?",
+   "a": "נשכבים ומתגלגלים",
+   "h": "9eda7a1d",
+   "q": "Your clothes catch fire. What do you do?",
+   "o": [
+    "Lie down and roll",
+    "Run fast",
+    "Wave your arms",
+    "Jump in place"
+   ],
+   "x": "Stop, drop and roll – this smothers the fire"
+  },
+  {
+   "he": "מי צריך להדליק נרות וגפרורים בבית?",
+   "a": "מבוגר",
+   "h": "0526132d",
+   "q": "Who should light candles and matches at home?",
+   "o": [
+    "An adult",
+    "A child alone",
+    "A baby",
+    "A little brother"
+   ],
+   "x": "Matches and lighters are for adults only"
+  },
+  {
+   "he": "יש עשן בחדר. איך יוצאים?",
+   "a": "זוחלים נמוך",
+   "h": "c04db60b",
+   "q": "There is smoke in the room. How do you get out?",
+   "o": [
+    "Crawl low",
+    "Stand up straight",
+    "Hide in the closet",
+    "Stay in bed"
+   ],
+   "x": "There is less smoke down low"
+  },
+  {
+   "he": "לאיזה מספר מתקשרים לכבאות והצלה?",
+   "a": "⁦102⁩",
+   "h": "9c4db665",
+   "q": "Which number do you call for Fire and Rescue?",
+   "o": [
+    "⁦102⁩",
+    "⁦101⁩",
+    "⁦100⁩",
+    "⁦106⁩"
+   ],
+   "x": "100 police, 101 ambulance, 102 fire department"
+  },
+  {
+   "he": "למה לא משאירים נר דולק בלי השגחה?",
+   "a": "עלולה לפרוץ שריפה",
+   "h": "d5947591",
+   "q": "Why don't we leave a burning candle unattended?",
+   "o": [
+    "A fire may start",
+    "The candle cools down",
+    "The candle disappears",
+    "The light is weak"
+   ],
+   "x": "A small flame can turn into a big fire"
+  },
+  {
+   "he": "איפה אסור להניח נייר ומגבות?",
+   "a": "ליד אש דולקת",
+   "h": "2ee1c19e",
+   "q": "Where must we never put paper and towels?",
+   "o": [
+    "Near an open flame",
+    "Inside a closet",
+    "In a drawer",
+    "On a shelf"
+   ],
+   "x": "Paper and cloth catch fire easily"
+  },
+  {
+   "he": "קרח נמס ונייר נשרף. מה ההבדל?",
+   "a": "הנייר לא יחזור",
+   "h": "aab0d308",
+   "q": "Ice melts and paper burns. What is the difference?",
+   "o": [
+    "Paper can't come back",
+    "Ice can't come back",
+    "No difference",
+    "Both can come back"
+   ],
+   "x": "Water can freeze again – ash won't turn back into paper"
+  },
+  {
+   "he": "האפר שנשאר אחרי שעץ נשרף הוא…",
+   "a": "חומר חדש",
+   "h": "6da6bc39",
+   "q": "The ash left after wood burns is…",
+   "o": [
+    "A new material",
+    "Smaller wood",
+    "Wet wood",
+    "A kind of water"
+   ],
+   "x": "When wood burns, it turns into new materials"
+  },
+  {
+   "he": "בעירה היא שינוי…",
+   "a": "של החומר עצמו",
+   "h": "b932a6e2",
+   "q": "Burning is a change…",
+   "o": [
+    "In the material itself",
+    "Only in shape",
+    "Only in place",
+    "That can be undone"
+   ],
+   "x": "Burning makes new materials"
+  },
+  {
+   "he": "נר דולק כמה שעות. מה קורה לנר?",
+   "a": "הוא מתקצר",
+   "h": "12365fda",
+   "q": "A candle burns for a few hours. What happens to it?",
+   "o": [
+    "It gets shorter",
+    "It gets longer",
+    "It gets heavier",
+    "Nothing"
+   ],
+   "x": "The wax burns and turns into gases in the air"
+  },
+  {
+   "he": "מה ההבדל בין שעווה שנמסה לשעווה שנשרפה?",
+   "a": "הנמסה תתקשה שוב",
+   "h": "1a0e179c",
+   "q": "How is melted wax different from burned wax?",
+   "o": [
+    "Melted wax hardens again",
+    "Burned wax hardens again",
+    "There's no difference",
+    "Both disappear"
+   ],
+   "x": "Melted wax cools and hardens; burned wax doesn't"
+  },
+  {
+   "he": "לאן נעלם רוב העץ שנשרף במדורה?",
+   "a": "הפך לעשן וגזים",
+   "h": "207afb70",
+   "q": "Where did most of the campfire wood go?",
+   "o": [
+    "Into smoke and gases",
+    "Into the ground",
+    "Into water",
+    "It didn't go anywhere"
+   ],
+   "x": "A little ash is left; most of the wood went into the air"
+  },
+  {
+   "he": "פרוסת לחם נשרפה בטוסטר. אפשר להחזיר אותה?",
+   "a": "לא, אי אפשר",
+   "h": "4595d02b",
+   "q": "A slice of bread burned in the toaster. Can it turn back into plain bread?",
+   "o": [
+    "No, it can't",
+    "Yes, by cooling",
+    "Yes, by freezing",
+    "Yes, with water"
+   ],
+   "x": "The strong heat made a new black material in the bread"
+  },
+  {
+   "he": "מה גורם לגפרור להידלק?",
+   "a": "חיכוך שמחמם",
+   "h": "0ee67aaa",
+   "q": "What makes a match light?",
+   "o": [
+    "Rubbing that heats it",
+    "Cold water",
+    "Darkness",
+    "A magnet"
+   ],
+   "x": "Rubbing heats the match head, and it catches fire"
+  },
+  {
+   "he": "גפרור שנשרף – אפשר להצית אותו שוב בקופסה?",
+   "a": "לא, אי אפשר",
+   "h": "b89895bf",
+   "q": "Can a burned match be lit again on its box?",
+   "o": [
+    "No, it can't",
+    "Yes, always",
+    "Yes, after drying",
+    "Yes, after cooling"
+   ],
+   "x": "The fuel on the match head has already burned"
+  },
+  {
+   "he": "מה מהבאים הוא בעירה?",
+   "a": "עץ במדורה",
+   "h": "13eba911",
+   "q": "Which of these is burning?",
+   "o": [
+    "Wood in a campfire",
+    "Melting ice",
+    "Boiling water",
+    "Sugar in water"
+   ],
+   "x": "Only the wood makes ash and smoke – new materials"
+  },
+  {
+   "he": "מה נותן את החשמל במעגל?",
+   "a": "הסוללה",
+   "h": "aa821830",
+   "q": "What supplies the electricity in a circuit?",
+   "o": [
+    "The battery",
+    "The bulb",
+    "The wire",
+    "The switch"
+   ],
+   "x": "The battery is the source of electricity"
+  },
+  {
+   "he": "מה מוביל את החשמל מהסוללה לנורה?",
+   "a": "חוטי מתכת",
+   "h": "c7da0a33",
+   "q": "What carries electricity from the battery to the bulb?",
+   "o": [
+    "Metal wires",
+    "Wool threads",
+    "Rubber bands",
+    "Paper strips"
+   ],
+   "x": "Electricity flows through the wires"
+  },
+  {
+   "he": "מה עושה הנורה כשחשמל עובר בה?",
+   "a": "מאירה",
+   "h": "35da0c7f",
+   "q": "What does a bulb do when electricity flows through it?",
+   "o": [
+    "It lights up",
+    "It cools down",
+    "It melts",
+    "It disappears"
+   ],
+   "x": "The bulb turns electricity into light"
+  },
+  {
+   "he": "בעזרת מה פותחים וסוגרים את המעגל?",
+   "a": "מתג",
+   "h": "883af6fe",
+   "q": "What do we use to open and close the circuit?",
+   "o": [
+    "A switch",
+    "A bulb",
+    "A battery",
+    "A wire"
+   ],
+   "x": "The switch turns things on and off"
+  },
+  {
+   "he": "מעגל סגור הוא מעגל ש…",
+   "a": "אין בו פתח",
+   "h": "ef197f0b",
+   "q": "A closed circuit is a circuit that…",
+   "o": [
+    "Has no gap",
+    "Has a gap",
+    "Has no battery",
+    "Has no bulb"
+   ],
+   "x": "Electricity flows only in a circuit with no gap"
+  },
+  {
+   "he": "חוט התנתק מהסוללה. מה יקרה לנורה?",
+   "a": "תכבה",
+   "h": "24634413",
+   "q": "A wire came off the battery. What will happen to the bulb?",
+   "o": [
+    "It will go out",
+    "It will shine brighter",
+    "It will burst",
+    "It will shine normally"
+   ],
+   "x": "The circuit opens, and electricity stops flowing"
+  },
+  {
+   "he": "לכמה קצוות בסוללה מחברים חוטים?",
+   "a": "⁦2⁩",
+   "h": "a993a7bb",
+   "q": "How many ends of a battery do we connect wires to?",
+   "o": [
+    "⁦2⁩",
+    "⁦1⁩",
+    "⁦3⁩",
+    "⁦4⁩"
+   ],
+   "x": "A plus end and a minus end"
+  },
+  {
+   "he": "איך נקראים הקצוות + ו־− של הסוללה?",
+   "a": "קטבים",
+   "h": "2f5b6c45",
+   "q": "What are the + and − ends of a battery called?",
+   "o": [
+    "Terminals",
+    "Wires",
+    "Switches",
+    "Bulbs"
+   ],
+   "x": "A battery has a positive and a negative terminal",
+   "sc": {
+    "1": "+",
+    "2": "−"
+   }
+  },
+  {
+   "he": "באיזה מכשיר יש סוללה, נורה ומתג?",
+   "a": "פנס",
+   "h": "d85ecbcd",
+   "q": "Which device has a battery, a bulb and a switch?",
+   "o": [
+    "A flashlight",
+    "A chair",
+    "A book",
+    "A cup"
+   ],
+   "x": "A flashlight has a complete electric circuit"
+  },
+  {
+   "he": "מתי הנורה במעגל דולקת?",
+   "a": "כשהמעגל סגור",
+   "h": "04268902",
+   "q": "When does the bulb in a circuit light up?",
+   "o": [
+    "In a closed circuit",
+    "In an open circuit",
+    "With a dead battery",
+    "With a broken wire"
+   ],
+   "x": "Electricity flows only in a closed circuit"
+  },
+  {
+   "he": "המתג פתוח. מה יקרה לנורה?",
+   "a": "לא תידלק",
+   "h": "04242c16",
+   "q": "The switch is open. What will happen to the bulb?",
+   "o": [
+    "It won't light up",
+    "It will light up",
+    "It will shine brightly",
+    "It will flicker"
+   ],
+   "x": "An open switch means an open circuit",
+   "sc": {
+    "1": "Open switch"
+   }
+  },
+  {
+   "he": "סוגרים את המתג. מה קורה?",
+   "a": "הנורה נדלקת",
+   "h": "f982f96e",
+   "q": "We close the switch. What happens?",
+   "o": [
+    "The bulb lights up",
+    "The bulb goes out",
+    "The battery charges",
+    "The wire melts"
+   ],
+   "x": "The circuit closes, and electricity flows",
+   "sc": {
+    "1": "Closed switch"
+   }
+  },
+  {
+   "he": "בשביל מה יש מתג במעגל?",
+   "a": "להדליק ולכבות",
+   "h": "ea66ef4c",
+   "q": "What is a switch in a circuit for?",
+   "o": [
+    "Turning on and off",
+    "Giving electricity",
+    "Making light",
+    "Making heat"
+   ],
+   "x": "Without a switch, we would have to disconnect a wire",
+   "sc": {
+    "1": "Switch"
+   }
+  },
+  {
+   "he": "הסוללה ריקה. מה יקרה לנורה?",
+   "a": "לא תידלק",
+   "h": "6d416652",
+   "q": "The battery is dead. What will happen to the bulb?",
+   "o": [
+    "It won't light up",
+    "It will shine brightly",
+    "It will heat up",
+    "It will change color"
+   ],
+   "x": "A dead battery has no electricity"
+  },
+  {
+   "he": "הפנס לא נדלק. מה כדאי לבדוק קודם?",
+   "a": "את הסוללות",
+   "h": "6abdd2d7",
+   "q": "The flashlight won't turn on. What should we check first?",
+   "o": [
+    "The batteries",
+    "The color",
+    "The smell",
+    "The weight"
+   ],
+   "x": "A dead battery is the most common reason"
+  },
+  {
+   "he": "במה מדליקים את האור בחדר?",
+   "a": "במתג שעל הקיר",
+   "h": "9b600983",
+   "q": "What do we use to turn on the light in a room?",
+   "o": [
+    "A wall switch",
+    "A plug",
+    "A cable",
+    "A bulb"
+   ],
+   "x": "The light switch closes the circuit"
+  },
+  {
+   "he": "לפי הטבלה – באיזה מעגל הנורה דולקת?",
+   "a": "מעגל ב'",
+   "h": "dc6f3d3c",
+   "q": "According to the table, in which circuit does the bulb light up?",
+   "o": [
+    "Circuit B",
+    "Circuit A",
+    "Circuit C",
+    "None of them"
+   ],
+   "x": "Only a closed circuit with a battery lights the bulb",
+   "sc": {
+    "0": "Circuit A",
+    "1": "Open",
+    "2": "Circuit B",
+    "3": "Closed",
+    "4": "Circuit C",
+    "5": "No battery"
+   }
+  },
+  {
+   "he": "מהי סוללה?",
+   "a": "מקור של חשמל",
+   "h": "9fc647c9",
+   "q": "What is a battery?",
+   "o": [
+    "A source of electricity",
+    "A kind of bulb",
+    "A long wire",
+    "A small switch"
+   ],
+   "x": "A battery gives electricity to a device"
+  },
+  {
+   "he": "מאיפה מקבל חשמל מכשיר שמחובר לשקע?",
+   "a": "מרשת החשמל",
+   "h": "5a24702c",
+   "q": "Where does a device plugged into an outlet get electricity?",
+   "o": [
+    "From the power grid",
+    "From a small battery",
+    "From the bulb",
+    "From water"
+   ],
+   "x": "The outlet is connected to the power grid"
+  },
+  {
+   "he": "איזה מכשיר עובד על סוללות?",
+   "a": "שלט טלוויזיה",
+   "h": "39639c03",
+   "q": "Which device runs on batteries?",
+   "o": [
+    "A TV remote",
+    "A washing machine",
+    "An oven",
+    "An air conditioner"
+   ],
+   "x": "A remote has small batteries inside"
+  },
+  {
+   "he": "חומר שחשמל עובר דרכו נקרא…",
+   "a": "מוליך",
+   "h": "6a4036b5",
+   "q": "A material that electricity passes through is called…",
+   "o": [
+    "A conductor",
+    "An insulator",
+    "Transparent",
+    "Flexible"
+   ],
+   "x": "A conductor lets electricity through"
+  },
+  {
+   "he": "חומר שחשמל לא עובר דרכו נקרא…",
+   "a": "מבודד",
+   "h": "b5fc825e",
+   "q": "A material that electricity can't pass through is called…",
+   "o": [
+    "An insulator",
+    "A conductor",
+    "A magnet",
+    "A battery"
+   ],
+   "x": "An insulator stops electricity"
+  },
+  {
+   "he": "מה מהבאים מוליך חשמל?",
+   "a": "מסמר ברזל",
+   "h": "36644fe9",
+   "q": "Which of these conducts electricity?",
+   "o": [
+    "Iron nail",
+    "Rubber ball",
+    "Glass cup",
+    "Plastic cap"
+   ],
+   "x": "Iron is a metal, and metals conduct electricity"
+  },
+  {
+   "he": "מה מהבאים מבודד?",
+   "a": "גומי",
+   "h": "8488e00b",
+   "q": "Which of these is an insulator?",
+   "o": [
+    "Rubber",
+    "Copper",
+    "Iron",
+    "Aluminum"
+   ],
+   "x": "Rubber doesn't let electricity through; the others are metals"
+  },
+  {
+   "he": "ממה עשוי החוט שבתוך כבל החשמל?",
+   "a": "מתכת",
+   "h": "f0ac6404",
+   "q": "What is the wire inside an electric cable made of?",
+   "o": [
+    "Metal",
+    "Plastic",
+    "Wood",
+    "Rubber"
+   ],
+   "x": "Metal conducts electricity"
+  },
+  {
+   "he": "העטיפה של כבל החשמל עשויה מחומר…",
+   "a": "מבודד",
+   "h": "50005083",
+   "q": "The cover of an electric cable is…",
+   "o": [
+    "An insulator",
+    "A conductor",
+    "Transparent",
+    "Easy to melt"
+   ],
+   "x": "The plastic insulates and protects us"
+  },
+  {
+   "he": "למה עוטפים חוטי חשמל בפלסטיק?",
+   "a": "נגד מכת חשמל",
+   "h": "051958c7",
+   "q": "Why are electric wires covered in plastic?",
+   "o": [
+    "To prevent electric shocks",
+    "To make them glow",
+    "To make them warm",
+    "To make them heavy"
+   ],
+   "x": "Plastic insulates – so we don't get a shock"
+  },
+  {
+   "he": "מסמר, מפתח וכפית עשויים מתכת. המתכת היא חומר…",
+   "a": "מוליך",
+   "h": "046e17a5",
+   "q": "A nail, a key and a spoon are made of metal. Metal is…",
+   "o": [
+    "A conductor",
+    "An insulator",
+    "Transparent",
+    "Absorbent"
+   ],
+   "x": "All metals conduct electricity"
+  },
+  {
+   "he": "מי יוצא דופן?",
+   "a": "גומי",
+   "h": "58bc09e9",
+   "q": "Which is the odd one out?",
+   "o": [
+    "Rubber",
+    "Iron",
+    "Copper",
+    "Aluminum"
+   ],
+   "x": "Rubber insulates; the others are metals that conduct",
+   "sc": {
+    "0": "Rubber",
+    "1": "Iron",
+    "2": "Copper",
+    "3": "Aluminum"
+   }
+  },
+  {
+   "he": "חשמלאי מתקן חוטי חשמל. אילו כפפות ילבש?",
+   "a": "כפפות גומי",
+   "h": "0a6c19fd",
+   "q": "An electrician fixes electric wires. Which gloves will he wear?",
+   "o": [
+    "Rubber gloves",
+    "Iron gloves",
+    "Copper gloves",
+    "Wet gloves"
+   ],
+   "x": "Rubber insulates and protects the hands"
+  },
+  {
+   "he": "בדקו חפצים במעגל. לפי הטבלה, מה מוליך?",
+   "a": "מפתח",
+   "h": "e52543de",
+   "q": "Objects were tested in a circuit. According to the table, which one conducts?",
+   "o": [
+    "Key",
+    "Eraser",
+    "Wood ruler",
+    "None of them"
+   ],
+   "x": "The bulb lit up only with the key",
+   "sc": {
+    "0": "Lights",
+    "1": "Key",
+    "2": "No light",
+    "3": "Eraser",
+    "4": "No light",
+    "5": "Wood ruler"
+   }
+  },
+  {
+   "he": "מכניסים מסמר לפתח במעגל. מה יקרה?",
+   "a": "הנורה תידלק",
+   "h": "845b4425",
+   "q": "A nail is put into the gap in a circuit. What will happen?",
+   "o": [
+    "The bulb lights up",
+    "The bulb stays off",
+    "The battery melts",
+    "The nail melts"
+   ],
+   "x": "The nail conducts and closes the circuit"
+  },
+  {
+   "he": "מכניסים גומייה לפתח במעגל. מה יקרה?",
+   "a": "הנורה לא תידלק",
+   "h": "d14403e8",
+   "q": "A rubber band is put into the gap in a circuit. What will happen?",
+   "o": [
+    "The bulb stays off",
+    "The bulb lights up",
+    "The bulb shines brightly",
+    "The rubber band burns"
+   ],
+   "x": "Rubber insulates and doesn't close the circuit"
+  },
+  {
+   "he": "כפית מתכת בפתח המעגל. מה יקרה?",
+   "a": "הנורה תידלק",
+   "h": "6549b336",
+   "q": "A metal spoon is in the gap in a circuit. What will happen?",
+   "o": [
+    "The bulb lights up",
+    "The bulb stays off",
+    "The spoon breaks",
+    "The bulb changes color"
+   ],
+   "x": "Metal conducts and closes the circuit"
+  },
+  {
+   "he": "למה ידית של מברג חשמלאי עשויה פלסטיק?",
+   "a": "פלסטיק מבודד",
+   "h": "efa04b03",
+   "q": "Why is an electrician's screwdriver handle made of plastic?",
+   "o": [
+    "Plastic insulates",
+    "Plastic conducts",
+    "To make it heavy",
+    "To make it transparent"
+   ],
+   "x": "The handle protects the hand from electricity"
+  },
+  {
+   "he": "מה מהבאים לא מוליך חשמל?",
+   "a": "עץ יבש",
+   "h": "2a102d6c",
+   "q": "Which of these does not conduct electricity?",
+   "o": [
+    "Dry wood",
+    "Iron",
+    "Copper",
+    "Aluminum"
+   ],
+   "x": "Dry wood is an insulator"
+  },
+  {
+   "he": "איך בודקים אם חומר מוליך חשמל?",
+   "a": "מחברים אותו למעגל",
+   "h": "b1f5fdeb",
+   "q": "How do we test if a material conducts electricity?",
+   "o": [
+    "By using a circuit",
+    "By tasting it",
+    "By smelling it",
+    "By weighing it"
+   ],
+   "x": "If the bulb lights up, the material conducts"
+  },
+  {
+   "he": "שמו חפץ במעגל והנורה נדלקה. החפץ…",
+   "a": "מוליך",
+   "h": "6b6204da",
+   "q": "An object was put in a circuit, and the bulb lit up. The object is…",
+   "o": [
+    "A conductor",
+    "An insulator",
+    "Transparent",
+    "Soft"
+   ],
+   "x": "Electricity passed through it"
+  },
+  {
+   "he": "איזה חפץ יוליך חשמל?",
+   "a": "מפתח",
+   "h": "1eb72bf9",
+   "q": "Which object will conduct electricity?",
+   "o": [
+    "Key",
+    "Notebook",
+    "Sock",
+    "Plastic cap"
+   ],
+   "x": "The key is made of metal"
+  },
+  {
+   "he": "באיזה חלק של הכבל עובר החשמל?",
+   "a": "בחוט המתכת",
+   "h": "232cb53b",
+   "q": "Which part of a cable does electricity flow through?",
+   "o": [
+    "The metal wire",
+    "The plastic cover",
+    "Only the plug",
+    "The air inside"
+   ],
+   "x": "Metal conducts; plastic insulates"
+  },
+  {
+   "he": "מותר להכניס חפץ לשקע החשמל?",
+   "a": "לא, אסור בהחלט",
+   "h": "9c9bf1f9",
+   "q": "Is it OK to put things into an electric outlet?",
+   "o": [
+    "No, never",
+    "Yes, always",
+    "Yes, only a key",
+    "Only in the morning"
+   ],
+   "x": "You can get a dangerous electric shock"
+  },
+  {
+   "he": "למה אסור לגעת בתקע בידיים רטובות?",
+   "a": "מים מוליכים חשמל",
+   "h": "c21d0228",
+   "q": "Why must we not touch a plug with wet hands?",
+   "o": [
+    "Water conducts electricity",
+    "Water is an insulator",
+    "The plug gets cold",
+    "Our hands get dirty"
+   ],
+   "x": "Electricity can pass through the water"
+  },
+  {
+   "he": "ראית כבל חשמל קרוע. מה עושים?",
+   "a": "קוראים למבוגר",
+   "h": "406937dc",
+   "q": "You see a torn electric cable. What do you do?",
+   "o": [
+    "Call an adult",
+    "Touch it",
+    "Fix it yourself",
+    "Play with it"
+   ],
+   "x": "Don't touch it – an adult will take care of it"
+  },
+  {
+   "he": "איפה לא משתמשים במכשיר חשמלי?",
+   "a": "ליד מים",
+   "h": "07e3a737",
+   "q": "Where should we not use an electric device?",
+   "o": [
+    "Near water",
+    "In the living room",
+    "In an office",
+    "Near a table"
+   ],
+   "x": "Water and electricity together are dangerous"
+  },
+  {
+   "he": "בלון נתקע על חוטי חשמל. מה עושים?",
+   "a": "קוראים למבוגר",
+   "h": "f9361db2",
+   "q": "A balloon is stuck on power lines. What do you do?",
+   "o": [
+    "Call an adult",
+    "Climb to get it",
+    "Pull it hard",
+    "Throw a stone"
+   ],
+   "x": "Stay away from power lines"
+  },
+  {
+   "he": "מה אומר שלט עם ברק על דלת?",
+   "a": "סכנת חשמל",
+   "h": "bc99d4ad",
+   "q": "What does a sign with lightning on a door mean?",
+   "o": [
+    "Electrical danger",
+    "There is water here",
+    "You may come in",
+    "A place to rest"
+   ],
+   "x": "A lightning bolt warns of electrical danger"
+  },
+  {
+   "he": "מחברים הרבה מכשירים לשקע אחד. זה מצב…",
+   "a": "מסוכן",
+   "h": "7a7f7cc1",
+   "q": "Plugging many devices into one outlet is…",
+   "o": [
+    "Dangerous",
+    "Recommended",
+    "Energy-saving",
+    "Always safe"
+   ],
+   "x": "The outlet heats up, and a fire may start"
+  },
+  {
+   "he": "איך מוציאים תקע מהשקע?",
+   "a": "מושכים בתקע",
+   "h": "450e2137",
+   "q": "How do we take a plug out of the outlet?",
+   "o": [
+    "Pull by the plug",
+    "Pull by the cable",
+    "Kick the cable",
+    "Pull with your teeth"
+   ],
+   "x": "Pulling the cable can tear it"
+  },
+  {
+   "he": "למה מכסים שקעים בבית שיש בו תינוק?",
+   "a": "שלא יכניס אצבע",
+   "h": "3cc7f978",
+   "q": "Why do we cover outlets in a home with a baby?",
+   "o": [
+    "To keep fingers out",
+    "To look nice",
+    "To save electricity",
+    "To keep warm"
+   ],
+   "x": "Babies are curious and don't understand the danger"
+  },
+  {
+   "he": "איזה חשמל חזק ומסוכן יותר?",
+   "a": "החשמל בשקע",
+   "h": "8de1ec41",
+   "q": "Which electricity is stronger and more dangerous?",
+   "o": [
+    "The wall outlet",
+    "A clock's battery",
+    "A remote's battery",
+    "A toy's battery"
+   ],
+   "x": "The electricity in an outlet is very strong"
+  },
+  {
+   "he": "מה מהבאים פועל בחשמל?",
+   "a": "מחשב",
+   "h": "0b155d5e",
+   "q": "Which of these runs on electricity?",
+   "o": [
+    "Computer",
+    "Scissors",
+    "Spoon",
+    "Umbrella"
+   ],
+   "x": "A computer needs electricity to work"
+  },
+  {
+   "he": "מכשיר חשמלי מעלה עשן. מה עושה ילד?",
+   "a": "קורא למבוגר",
+   "h": "db1bf285",
+   "q": "An electric device is giving off smoke. What should a child do?",
+   "o": [
+    "Call an adult",
+    "Pour water on it",
+    "Touch it",
+    "Keep playing"
+   ],
+   "x": "Never pour water on an electric device"
+  },
+  {
+   "he": "למה לא מטפסים על עמוד חשמל?",
+   "a": "סכנת התחשמלות",
+   "h": "e67f6444",
+   "q": "Why don't we climb electric poles?",
+   "o": [
+    "Risk of electric shock",
+    "The pole is low",
+    "The pole is dry",
+    "It's boring"
+   ],
+   "x": "The wires at the top carry strong electricity"
+  },
+  {
+   "he": "האם מים מהברז מוליכים חשמל?",
+   "a": "כן, מוליכים",
+   "h": "2cf9a8f3",
+   "q": "Does tap water conduct electricity?",
+   "o": [
+    "Yes, it does",
+    "No, never",
+    "Only hot water",
+    "Only cold water"
+   ],
+   "x": "That's why water and electricity are dangerous together"
+  },
+  {
+   "he": "מי צריך לתקן מכשיר חשמלי מקולקל?",
+   "a": "חשמלאי",
+   "h": "5b080054",
+   "q": "Who should fix a broken electric device?",
+   "o": [
+    "An electrician",
+    "A child in class",
+    "A gardener",
+    "A bus driver"
+   ],
+   "x": "Only someone trained in electricity should fix it"
+  },
+  {
+   "he": "יצאת מהמקלחת. מתי מותר להדליק את הפן?",
+   "a": "אחרי ניגוב הידיים",
+   "h": "ebbcebc9",
+   "q": "You got out of the shower. When may you turn on the hair dryer?",
+   "o": [
+    "After drying your hands",
+    "With wet hands",
+    "Inside the shower",
+    "On a wet floor"
+   ],
+   "x": "Dry hands – less danger"
+  },
+  {
+   "he": "מה עושים לפני שמנקים טוסטר?",
+   "a": "מנתקים מהשקע",
+   "h": "2d618ca9",
+   "q": "What do we do before cleaning a toaster?",
+   "o": [
+    "Unplug it",
+    "Wet it",
+    "Turn it on",
+    "Shake it"
+   ],
+   "x": "An unplugged device can't give a shock"
+  },
+  {
+   "he": "מה נחשף בכבל קרוע?",
+   "a": "חוט המתכת",
+   "h": "55be12c5",
+   "q": "What is exposed in a torn cable?",
+   "o": [
+    "The metal wire",
+    "The color",
+    "The plug",
+    "The plastic"
+   ],
+   "x": "Without the plastic insulation, you can get a shock"
+  },
+  {
+   "he": "מותר להכניס מזלג לטוסטר?",
+   "a": "אסור, מסוכן",
+   "h": "7c8014fd",
+   "q": "Is it OK to put a fork in a toaster?",
+   "o": [
+    "No, it's dangerous",
+    "Yes, while it's on",
+    "Yes, always",
+    "Only with water"
+   ],
+   "x": "A metal fork conducts electricity"
+  },
+  {
+   "he": "באיזה מקום מסוכן לשחק עם עפיפון?",
+   "a": "ליד חוטי חשמל",
+   "h": "0a7a5942",
+   "q": "Where is it dangerous to fly a kite?",
+   "o": [
+    "Near power lines",
+    "In an open field",
+    "On the beach",
+    "In a big park"
+   ],
+   "x": "The kite might get caught in the wires",
+   "sc": {
+    "1": "Kite"
+   }
+  },
+  {
+   "he": "מה המקור העיקרי של אנרגיה בכדור הארץ?",
+   "a": "השמש",
+   "h": "f2a3c931",
+   "q": "What is the main source of energy on Earth?",
+   "o": [
+    "The sun",
+    "The moon",
+    "The sea",
+    "The mountains"
+   ],
+   "x": "The sun gives light and heat to all living things"
+  },
+  {
+   "he": "מה מסובב את הכנפיים של טורבינת רוח?",
+   "a": "הרוח",
+   "h": "c7749896",
+   "q": "What turns the blades of a turbine that makes electricity?",
+   "o": [
+    "The wind",
+    "The sun",
+    "The rain",
+    "The moon"
+   ],
+   "x": "The wind turns the blades, and they make electricity"
+  },
+  {
+   "he": "איפה בדוד השמש המים מתחממים?",
+   "a": "בקולטים שעל הגג",
+   "h": "c62228bc",
+   "q": "In a solar water heater, where does the water heat up?",
+   "o": [
+    "In the roof panels",
+    "Inside the faucet",
+    "Inside the shower",
+    "In the basement"
+   ],
+   "x": "The panels on the roof soak up the sun's heat"
+  },
+  {
+   "he": "מאיפה מקבל הגוף שלנו אנרגיה?",
+   "a": "מהמזון",
+   "h": "12ddbc8f",
+   "q": "Where does our body get energy from?",
+   "o": [
+    "From food",
+    "From sleep",
+    "From clothes",
+    "From water"
+   ],
+   "x": "Food is the body's \"fuel\""
+  },
+  {
+   "he": "במה נוסעת מכונית רגילה?",
+   "a": "דלק",
+   "h": "909ae52d",
+   "q": "What does a regular car run on?",
+   "o": [
+    "Fuel",
+    "Water",
+    "Air",
+    "Sand"
+   ],
+   "x": "The engine burns fuel and gets energy from it"
+  },
+  {
+   "he": "מה נותן חשמל לטלפון הנייד?",
+   "a": "סוללה",
+   "h": "29019564",
+   "q": "What gives a cell phone its electricity?",
+   "o": [
+    "A battery",
+    "Oil",
+    "Water",
+    "Salt"
+   ],
+   "x": "The battery stores electricity; we charge it from an outlet"
+  },
+  {
+   "he": "איזה מקור אנרגיה מהבאים לא ייגמר?",
+   "a": "השמש",
+   "h": "1d7edefe",
+   "q": "Which of these energy sources will never run out?",
+   "o": [
+    "The sun",
+    "Oil",
+    "Coal",
+    "Gas"
+   ],
+   "x": "The sun and wind don't run out – oil and coal do"
+  },
+  {
+   "he": "מה הבעיה בשריפת פחם ונפט?",
+   "a": "מזהמת את האוויר",
+   "h": "bf6dc57d",
+   "q": "What is the problem with burning coal and oil?",
+   "o": [
+    "It pollutes the air",
+    "It cools the air",
+    "It makes water",
+    "It grows trees"
+   ],
+   "x": "Burning gives off smoke and harmful gases"
+  },
+  {
+   "he": "מה מסובב את הגלגל של טחנת קמח בנחל?",
+   "a": "זרם המים",
+   "h": "20534582",
+   "q": "What turns the wheel of a flour mill on a stream?",
+   "o": [
+    "The flowing water",
+    "The sand",
+    "The stones",
+    "The snow"
+   ],
+   "x": "Flowing water pushes and turns the wheel"
+  },
+  {
+   "he": "אילו שני דברים מייבשים כביסה על החבל?",
+   "a": "השמש והרוח",
+   "h": "3e76998d",
+   "q": "Which two things dry laundry on the clothesline?",
+   "o": [
+    "The sun and wind",
+    "A magnet",
+    "The shade",
+    "The cold"
+   ],
+   "x": "The sun and wind evaporate the water from the clothes"
+  },
+  {
+   "he": "מה מהבאים הופך חשמל בעיקר לאור?",
+   "a": "נורה",
+   "h": "0b8d2188",
+   "q": "Which of these turns electricity mainly into light?",
+   "o": [
+    "A bulb",
+    "A fan",
+    "An oven",
+    "A speaker"
+   ],
+   "x": "A bulb turns electricity into light"
+  },
+  {
+   "he": "לאיזו אנרגיה התנור הופך את החשמל?",
+   "a": "חום",
+   "h": "38728905",
+   "q": "What kind of energy does an oven turn electricity into?",
+   "o": [
+    "Heat",
+    "Cold",
+    "Sound",
+    "Water"
+   ],
+   "x": "In an oven, electricity turns into heat for baking"
+  },
+  {
+   "he": "באיזה מכשיר החשמל הופך לתנועה?",
+   "a": "מאוורר",
+   "h": "a6dbe0b1",
+   "q": "In which device does electricity turn into motion?",
+   "o": [
+    "A fan",
+    "A lamp",
+    "A toaster",
+    "An iron"
+   ],
+   "x": "The motor in a fan turns the blades"
+  },
+  {
+   "he": "לאיזו אנרגיה הרמקול הופך את החשמל?",
+   "a": "צליל",
+   "h": "4c8435a9",
+   "q": "What kind of energy does a speaker turn electricity into?",
+   "o": [
+    "Sound",
+    "Light",
+    "Cold",
+    "Water"
+   ],
+   "x": "In a speaker, electricity turns into sound"
+  },
+  {
+   "he": "בשביל מה משתמשים בקומקום חשמלי?",
+   "a": "לחימום מים",
+   "h": "0ab6b59f",
+   "q": "What is an electric kettle used for?",
+   "o": [
+    "Heating water",
+    "Cooling water",
+    "Lighting the room",
+    "Moving the table"
+   ],
+   "x": "In a kettle, electricity turns into heat"
+  },
+  {
+   "he": "המיקסר מערבב בצק לעוגה. לאיזו אנרגיה הפך החשמל?",
+   "a": "תנועה",
+   "h": "d2b82d02",
+   "q": "A mixer mixes cake batter. What energy does the electricity become?",
+   "o": [
+    "Motion",
+    "Light",
+    "Cold",
+    "Water"
+   ],
+   "x": "The mixer's motor turns the beaters."
+  },
+  {
+   "he": "נורה דולקת שעה. מה מרגישים כשמקרבים אליה יד?",
+   "a": "חום",
+   "h": "bd9f9ad8",
+   "q": "A bulb has been on for an hour. What does your hand feel near it?",
+   "o": [
+    "Heat",
+    "Cold",
+    "Wetness",
+    "Wind"
+   ],
+   "x": "Some of the electricity in the bulb also turns into heat."
+  },
+  {
+   "he": "איזה מכשיר הופך חשמל לאור וגם לצליל?",
+   "a": "טלוויזיה",
+   "h": "1ac56ad0",
+   "q": "Which device turns electricity into light and also sound?",
+   "o": [
+    "Television",
+    "Iron",
+    "Fan",
+    "Kettle"
+   ],
+   "x": "The screen lights up and the speakers make sound."
+  },
+  {
+   "he": "ברכבת חשמלית – לאיזו אנרגיה הופך החשמל?",
+   "a": "תנועה",
+   "h": "55d61789",
+   "q": "In an electric train, what energy does the electricity become?",
+   "o": [
+    "Motion",
+    "Cold",
+    "Water",
+    "Fuel"
+   ],
+   "x": "The motors move the train cars."
+  },
+  {
+   "he": "מגהץ, תנור וקומקום הופכים חשמל ל…",
+   "a": "חום",
+   "h": "590e2677",
+   "q": "An iron, an oven and a kettle turn electricity into…",
+   "o": [
+    "Heat",
+    "Cold",
+    "Sound",
+    "Water"
+   ],
+   "x": "In all three, electricity turns into heat."
+  },
+  {
+   "he": "צמח קיבל מים ואור. מה עוד הוא צריך כדי לחיות?",
+   "a": "אוויר",
+   "h": "f011103f",
+   "q": "A plant got water and light. What else does it need to live?",
+   "o": [
+    "Air",
+    "Darkness",
+    "Salt",
+    "Noise"
+   ],
+   "x": "A plant needs water, light and air."
+  },
+  {
+   "he": "צמח לא קיבל מים שבוע. העלים יתייבשו, והצמח…",
+   "a": "יבול",
+   "h": "37490c41",
+   "q": "A plant got no water for a week. Its leaves dry up, and it will…",
+   "o": [
+    "Wilt",
+    "Grow fast",
+    "Bloom",
+    "Turn blue"
+   ],
+   "x": "Without water, the plant wilts."
+  },
+  {
+   "he": "עציץ עמד בארון חשוך הרבה ימים. מה יקרה לצבע העלים?",
+   "a": "העלים יצהיבו",
+   "h": "0bd841bb",
+   "q": "A plant stood in a dark closet for days. What happens to its leaves?",
+   "o": [
+    "They turn yellow",
+    "They stay green",
+    "They turn blue",
+    "They turn red"
+   ],
+   "x": "Without light, the plant gets weak and turns yellow."
+  },
+  {
+   "he": "מאיפה הצמח בטבע מקבל אור?",
+   "a": "מהשמש",
+   "h": "749677e4",
+   "q": "In nature, where does a plant get light from?",
+   "o": [
+    "From the sun",
+    "From the soil",
+    "From the water",
+    "From the root"
+   ],
+   "x": "The sun shines on the plants."
+  },
+  {
+   "he": "צמח שעומד ליד חלון מתכופף אל…",
+   "a": "האור",
+   "h": "ccd5cf59",
+   "q": "A plant standing near a window bends toward…",
+   "o": [
+    "The light",
+    "The wall",
+    "The soil",
+    "The floor"
+   ],
+   "x": "Plants grow toward the light."
+  },
+  {
+   "he": "למה משקים צמחים בעציץ?",
+   "a": "הם צריכים מים",
+   "h": "73fb944f",
+   "q": "Why do we water plants in pots?",
+   "o": [
+    "To keep them alive",
+    "To clean them",
+    "To cool the pot",
+    "So they fall over"
+   ],
+   "x": "Without water, a plant can't live."
+  },
+  {
+   "he": "מה מקבל הצמח מהאדמה?",
+   "a": "מים וחומרים מזינים",
+   "h": "8e7c366b",
+   "q": "What does a plant get from the soil?",
+   "o": [
+    "Water and nutrients",
+    "Sunlight",
+    "Only air",
+    "Color for flowers"
+   ],
+   "x": "The roots take in water and minerals from the soil.",
+   "sc": {
+    "1": "Soil"
+   }
+  },
+  {
+   "he": "השקו יותר מדי, והמים עומדים בעציץ. מה יקרה?",
+   "a": "השורשים יירקבו",
+   "h": "26cac947",
+   "q": "Someone overwatered, and water is standing in the pot. What will happen?",
+   "o": [
+    "The roots rot",
+    "It grows faster",
+    "It blooms right away",
+    "Nothing happens"
+   ],
+   "x": "Roots need air too."
+  },
+  {
+   "he": "עציץ א' באור, עציץ ב' בחושך. מה בודקים?",
+   "a": "צורך באור",
+   "h": "9cae8ab6",
+   "q": "Pot A is in the light, pot B in the dark. What is tested?",
+   "o": [
+    "Need for light",
+    "Need for water",
+    "Need for air",
+    "The pot's color"
+   ],
+   "x": "Only the light is different between the pots.",
+   "sc": {
+    "0": "Light",
+    "1": "Pot A",
+    "2": "Dark",
+    "3": "Pot B"
+   }
+  },
+  {
+   "he": "מה הצמח מכין בעלים בעזרת אור השמש?",
+   "a": "מזון",
+   "h": "76cd2a19",
+   "q": "What does a plant make in its leaves with sunlight?",
+   "o": [
+    "Food",
+    "Soil",
+    "Stones",
+    "Rain"
+   ],
+   "x": "The plant makes its own food."
+  },
+  {
+   "he": "לפי הגרף – מה קורה לגובה הצמח?",
+   "a": "עולה כל שבוע",
+   "h": "ebaafcce",
+   "q": "According to the graph, what happens to the plant's height?",
+   "o": [
+    "Goes up every week",
+    "Goes down every week",
+    "Doesn't change",
+    "Goes up, then down"
+   ],
+   "x": "Each point is higher than the one before.",
+   "sc": {
+    "8": "cm",
+    "9": "Week"
+   }
+  },
+  {
+   "he": "לפי הטבלה – באילו תנאים הצמח גדל הכי הרבה?",
+   "a": "מים ואור",
+   "h": "ee43182a",
+   "q": "According to the table, in which conditions did the plant grow most?",
+   "o": [
+    "Water and light",
+    "Water only",
+    "Light only",
+    "No difference"
+   ],
+   "x": "12 cm – the tallest.",
+   "sc": {
+    "0": "12 cm",
+    "1": "Both",
+    "2": "4 cm",
+    "3": "No light",
+    "4": "1 cm",
+    "5": "No water"
+   }
+  },
+  {
+   "he": "לפי הטבלה – מה צמח צריך כדי לגדול טוב?",
+   "a": "מים ואור",
+   "h": "b09e99b2",
+   "q": "According to the table, what does a plant need to grow well?",
+   "o": [
+    "Water and light",
+    "Only water",
+    "Only light",
+    "Nothing"
+   ],
+   "x": "Without one of them, the plant grows very little.",
+   "sc": {
+    "0": "12 cm",
+    "1": "Both",
+    "2": "4 cm",
+    "3": "No light",
+    "4": "1 cm",
+    "5": "No water"
+   }
+  },
+  {
+   "he": "חורף בבית. איפה כדאי לשים את העציץ?",
+   "a": "ליד החלון",
+   "h": "17e55340",
+   "q": "It's winter at home. Where should you put the potted plant?",
+   "o": [
+    "Near the window",
+    "Inside the closet",
+    "Under the bed",
+    "In a dark basement"
+   ],
+   "x": "Near the window there is light."
+  },
+  {
+   "he": "צמחים כמו הקקטוס צריכים…",
+   "a": "מעט מים",
+   "h": "8432a5d6",
+   "q": "Plants like the cactus need…",
+   "o": [
+    "Little water",
+    "Lots of water",
+    "Snow",
+    "Darkness"
+   ],
+   "x": "A cactus stores water in its stem."
+  },
+  {
+   "he": "מה שונה בין העציצים בניסוי?",
+   "a": "כמות המים",
+   "h": "1e5d2766",
+   "q": "What is different between the pots in the experiment?",
+   "o": [
+    "The amount of water",
+    "The amount of light",
+    "The kind of plant",
+    "The pot's size"
+   ],
+   "x": "One pot is watered and the other is not.",
+   "sc": {
+    "0": "Water",
+    "1": "Pot A",
+    "2": "No water",
+    "3": "Pot B"
+   }
+  },
+  {
+   "he": "למה בניסוי לוקחים צמחים מאותו סוג?",
+   "a": "כדי להשוות נכון",
+   "h": "1c506a63",
+   "q": "Why use plants of the same kind in an experiment?",
+   "o": [
+    "To compare fairly",
+    "Because it's pretty",
+    "Because it's cheap",
+    "To cause confusion"
+   ],
+   "x": "We change only one thing at a time."
+  },
+  {
+   "he": "האם צמח צריך אוויר?",
+   "a": "כן, הוא נושם",
+   "h": "6404c945",
+   "q": "Does a plant need air?",
+   "o": [
+    "Yes, it breathes",
+    "No, only water",
+    "Only at night",
+    "Only in summer"
+   ],
+   "x": "Plants breathe too."
+  },
+  {
+   "he": "באיזה מקום מהבאים יגדל צמח הכי טוב?",
+   "a": "בגינה שטופת שמש",
+   "h": "9a8563ef",
+   "q": "In which of these places will a plant grow best?",
+   "o": [
+    "In a sunny garden",
+    "On a dry stone",
+    "In a dark closet",
+    "In dry sand"
+   ],
+   "x": "There it has everything it needs."
+  },
+  {
+   "he": "עלים צהובים ונבולים הם סימן ש…",
+   "a": "חסר משהו לצמח",
+   "h": "3faf50da",
+   "q": "A plant has yellow, wilted leaves. This is a sign that…",
+   "o": [
+    "It lacks something",
+    "It's very healthy",
+    "It's growing fast",
+    "It's a normal color"
+   ],
+   "x": "Maybe it lacks water or light."
+  },
+  {
+   "he": "איזה חלק של הצמח נמצא בתוך האדמה?",
+   "a": "השורשים",
+   "h": "593149da",
+   "q": "Which part of the plant is inside the soil?",
+   "o": [
+    "The roots",
+    "The leaves",
+    "The flowers",
+    "The fruits"
+   ],
+   "x": "The root grows down into the soil.",
+   "sc": {
+    "1": "Soil"
+   }
+  },
+  {
+   "he": "מה תפקיד השורש?",
+   "a": "סופג מים מהאדמה",
+   "h": "6704ee34",
+   "q": "What does the root do?",
+   "o": [
+    "Takes water from soil",
+    "Attracts bees",
+    "Makes fruit",
+    "Catches light"
+   ],
+   "x": "The root drinks water from the soil.",
+   "sc": {
+    "1": "Root"
+   }
+  },
+  {
+   "he": "מה מחזיק את העץ חזק באדמה?",
+   "a": "השורשים",
+   "h": "3a3bbeee",
+   "q": "What holds a tree firmly in the ground?",
+   "o": [
+    "The roots",
+    "The leaves",
+    "The flowers",
+    "The fruits"
+   ],
+   "x": "The roots anchor the plant."
+  },
+  {
+   "he": "מה תפקיד הגבעול?",
+   "a": "מוביל מים לעלים",
+   "h": "22524c32",
+   "q": "What does the stem do?",
+   "o": [
+    "Carries water to leaves",
+    "Only takes in light",
+    "Makes seeds",
+    "Attracts butterflies"
+   ],
+   "x": "The stem also holds the plant upright."
+  },
+  {
+   "he": "איפה הצמח מכין את המזון שלו?",
+   "a": "בעלים",
+   "h": "f77584ff",
+   "q": "Where does a plant make its food?",
+   "o": [
+    "In the leaves",
+    "In the roots",
+    "In the flowers",
+    "In the seeds"
+   ],
+   "x": "The leaves catch light and make food."
+  },
+  {
+   "he": "הגזע של העץ הוא בעצם…",
+   "a": "גבעול עבה",
+   "h": "f20f4720",
+   "q": "A tree's trunk is really a…",
+   "o": [
+    "Thick stem",
+    "Root",
+    "Big leaf",
+    "Flower"
+   ],
+   "x": "The trunk is the tree's stem."
+  },
+  {
+   "he": "מה התפקיד של הפרח?",
+   "a": "ממנו נוצר פרי",
+   "h": "899e122d",
+   "q": "What does the flower do?",
+   "o": [
+    "Fruit grows from it",
+    "Takes in water",
+    "Holds the plant up",
+    "Makes air"
+   ],
+   "x": "Fruit and seeds develop from the flower."
+  },
+  {
+   "he": "הגרעינים השחורים שבתוך האבטיח הם…",
+   "a": "זרעים",
+   "h": "6df6d98c",
+   "q": "The small black things inside a watermelon are…",
+   "o": [
+    "Seeds",
+    "Roots",
+    "Leaves",
+    "Stems"
+   ],
+   "x": "Seeds are found inside the fruit.",
+   "sc": {
+    "0": "Watermelon"
+   }
+  },
+  {
+   "he": "מה יכול לצמוח מזרע?",
+   "a": "צמח חדש",
+   "h": "e49bd7ae",
+   "q": "What can grow from a seed?",
+   "o": [
+    "A new plant",
+    "A stone",
+    "An insect",
+    "A plastic flower"
+   ],
+   "x": "A seed has a tiny plant inside."
+  },
+  {
+   "he": "מה אינו חלק של הצמח?",
+   "a": "סלע",
+   "h": "b36b64c3",
+   "q": "Which of these is not part of a plant?",
+   "o": [
+    "Rock",
+    "Root",
+    "Stem",
+    "Leaf"
+   ],
+   "x": "A rock is non-living."
+  },
+  {
+   "he": "איזה חלק של הגזר אנחנו אוכלים?",
+   "a": "השורש",
+   "h": "81db7283",
+   "q": "Which part of a carrot do we eat?",
+   "o": [
+    "The root",
+    "The leaf",
+    "The flower",
+    "The stem"
+   ],
+   "x": "A carrot is a thick root."
+  },
+  {
+   "he": "איזה חלק של החסה אוכלים?",
+   "a": "העלים",
+   "h": "0b5d0a12",
+   "q": "Which part of lettuce do we eat?",
+   "o": [
+    "The leaves",
+    "The root",
+    "The fruit",
+    "The seeds"
+   ],
+   "x": "Lettuce is made of leaves."
+  },
+  {
+   "he": "לפי הטבלה – מה במקום סימן השאלה?",
+   "a": "פרי",
+   "h": "0a699161",
+   "q": "According to the table, what goes in place of the question mark?",
+   "o": [
+    "Fruit",
+    "Seed",
+    "Stem",
+    "Root"
+   ],
+   "x": "The apple grows from the flower and has seeds.",
+   "sc": {
+    "0": "Root",
+    "1": "Carrot",
+    "2": "Leaf",
+    "3": "Lettuce",
+    "4": "?",
+    "5": "Apple"
+   }
+  },
+  {
+   "he": "גרגרי התירס הם…",
+   "a": "זרעים",
+   "h": "f55f3397",
+   "q": "Corn kernels are…",
+   "o": [
+    "Seeds",
+    "Leaves",
+    "Roots",
+    "Stems"
+   ],
+   "x": "A corn plant can grow from each kernel."
+  },
+  {
+   "he": "בברוקולי אוכלים בעיקר את…",
+   "a": "הפרחים",
+   "h": "57afc3a5",
+   "q": "In broccoli, we mostly eat the…",
+   "o": [
+    "Flowers",
+    "Roots",
+    "Seeds",
+    "Fruits"
+   ],
+   "x": "Broccoli is many tiny flowers."
+  },
+  {
+   "he": "העגבנייה, בעיני מדען, היא…",
+   "a": "פרי",
+   "h": "07cdd53c",
+   "q": "To a scientist, a tomato is a…",
+   "o": [
+    "Fruit",
+    "Root",
+    "Leaf",
+    "Stem"
+   ],
+   "x": "It has seeds, so it is a fruit."
+  },
+  {
+   "he": "איך יודעים שמשהו הוא פרי?",
+   "a": "יש בו זרעים",
+   "h": "2874978e",
+   "q": "How do you know something is a fruit?",
+   "o": [
+    "It has seeds",
+    "It is green",
+    "It is sweet",
+    "It grows in soil"
+   ],
+   "x": "A fruit grows from a flower and protects the seeds."
+  },
+  {
+   "he": "למה לעלים יש צורה רחבה ושטוחה?",
+   "a": "לקלוט הרבה אור",
+   "h": "ac18d8fa",
+   "q": "Why are leaves wide and flat?",
+   "o": [
+    "To catch more light",
+    "To drink water",
+    "To look pretty",
+    "To block rain"
+   ],
+   "x": "A wide leaf catches more light."
+  },
+  {
+   "he": "לקקטוס אין עלים רחבים. מה יש לו במקומם?",
+   "a": "קוצים",
+   "h": "577bfbbc",
+   "q": "A cactus has no wide leaves. What does it have instead?",
+   "o": [
+    "Spines",
+    "Big flowers",
+    "Roots in the air",
+    "Fruits"
+   ],
+   "x": "Spines save water and protect the cactus."
+  },
+  {
+   "he": "מה מוביל מים מהשורש אל העלים?",
+   "a": "הגבעול",
+   "h": "be53c2a7",
+   "q": "What carries water from the root to the leaves?",
+   "o": [
+    "The stem",
+    "The flower",
+    "The fruit",
+    "The seed"
+   ],
+   "x": "The stem works like a pipe."
+  },
+  {
+   "he": "מה זה נביטה?",
+   "a": "הזרע מתחיל לצמוח",
+   "h": "fa412377",
+   "q": "What is germination?",
+   "o": [
+    "A seed starts growing",
+    "A flower opens",
+    "A leaf falls",
+    "A fruit rots"
+   ],
+   "x": "A tiny plant comes out of the seed."
+  },
+  {
+   "he": "מה זרע צריך כדי לנבוט?",
+   "a": "מים, אוויר וחום",
+   "h": "8a6c5737",
+   "q": "What does a seed need to germinate?",
+   "o": [
+    "Water, air and warmth",
+    "Only light",
+    "Only soil",
+    "Cold and darkness"
+   ],
+   "x": "A dry, cold seed does not germinate."
+  },
+  {
+   "he": "שעועית נבטה בארון חשוך. מה זה מראה?",
+   "a": "אור לא הכרחי",
+   "h": "b7ee7013",
+   "q": "A bean sprouted in a dark closet. What does this show?",
+   "o": [
+    "Light is not needed",
+    "Light is needed",
+    "Water is not needed",
+    "Darkness is harmful"
+   ],
+   "x": "Seeds don't need light to germinate."
+  },
+  {
+   "he": "שמו שעועית בצמר גפן יבש. מה יקרה?",
+   "a": "לא תנבוט",
+   "h": "4b29b38e",
+   "q": "A bean was placed on dry cotton wool. What will happen?",
+   "o": [
+    "It won't sprout",
+    "It will sprout fast",
+    "It will bloom",
+    "It will become fruit"
+   ],
+   "x": "Without water, a seed doesn't germinate.",
+   "sc": {
+    "1": "Dry cotton wool"
+   }
+  },
+  {
+   "he": "מה יוצא ראשון מהזרע הנובט?",
+   "a": "שורש",
+   "h": "652e2de6",
+   "q": "What comes out of a sprouting seed first?",
+   "o": [
+    "A root",
+    "A flower",
+    "A fruit",
+    "A new seed"
+   ],
+   "x": "First the root, then the stem."
+  },
+  {
+   "he": "לאן גדל השורש?",
+   "a": "למטה",
+   "h": "7775d879",
+   "q": "Which way does a root grow?",
+   "o": [
+    "Down",
+    "Up",
+    "Sideways",
+    "Every way"
+   ],
+   "x": "The root grows toward the soil and water."
+  },
+  {
+   "he": "לאן גדל הגבעול?",
+   "a": "למעלה, לאור",
+   "h": "628df71a",
+   "q": "Which way does a stem grow?",
+   "o": [
+    "Up, toward light",
+    "Down, toward soil",
+    "Only sideways",
+    "It doesn't grow"
+   ],
+   "x": "The stem grows toward the light."
+  },
+  {
+   "he": "מה הסדר הנכון בחיי הצמח?",
+   "a": "זרע, נבט, צמח",
+   "h": "32bac0c2",
+   "q": "What is the right order in a plant's life?",
+   "o": [
+    "Seed, sprout, plant",
+    "Sprout, seed, plant",
+    "Plant, sprout, seed",
+    "Sprout, plant, seed"
+   ],
+   "x": "It all starts with a seed."
+  },
+  {
+   "he": "מה עוטף את הזרע ושומר עליו?",
+   "a": "קליפה",
+   "h": "a67c0024",
+   "q": "What covers the seed and protects it?",
+   "o": [
+    "A seed coat",
+    "A leaf",
+    "A root",
+    "A flower"
+   ],
+   "x": "The seed coat protects the seed."
+  },
+  {
+   "he": "מה יש בתוך הזרע חוץ מצמח זעיר?",
+   "a": "מזון לנבט",
+   "h": "4eb82802",
+   "q": "Besides a tiny plant, what is inside a seed?",
+   "o": [
+    "Food for the sprout",
+    "Sand and stones",
+    "A small flower",
+    "Only air"
+   ],
+   "x": "The sprout feeds on it until it has leaves."
+  },
+  {
+   "he": "איזה בעל חיים מעביר אבקה מפרח לפרח?",
+   "a": "דבורה",
+   "h": "489ce240",
+   "q": "Which animal carries pollen from flower to flower?",
+   "o": [
+    "A bee",
+    "A worm",
+    "A fish",
+    "A snail"
+   ],
+   "x": "The bee flies from flower to flower."
+  },
+  {
+   "he": "מה זה האבקה?",
+   "a": "העברת אבקה לפרח",
+   "h": "e760eafc",
+   "q": "What is pollination?",
+   "o": [
+    "Moving pollen to flowers",
+    "Watering the plant",
+    "Leaves falling",
+    "A root growing"
+   ],
+   "x": "After pollination, the flower can make fruit."
+  },
+  {
+   "he": "מה הדבורה לוקחת מהפרח?",
+   "a": "צוף מתוק",
+   "h": "7d5c1663",
+   "q": "What does a bee take from a flower?",
+   "o": [
+    "Sweet nectar",
+    "Green leaves",
+    "Roots",
+    "Soil"
+   ],
+   "x": "Bees make honey from nectar."
+  },
+  {
+   "he": "למה לפרחים יש צבעים חזקים וריח?",
+   "a": "למשוך חרקים",
+   "h": "7cfe8a47",
+   "q": "Why do flowers have bright colors and a smell?",
+   "o": [
+    "To attract insects",
+    "To scare off insects",
+    "To drink water",
+    "To warm the plant"
+   ],
+   "x": "Insects come and carry pollen."
+  },
+  {
+   "he": "אחרי ההאבקה, הפרח הופך ל…",
+   "a": "פרי עם זרעים",
+   "h": "155709f4",
+   "q": "After pollination, the flower turns into…",
+   "o": [
+    "A fruit with seeds",
+    "A root",
+    "A leaf",
+    "A stem"
+   ],
+   "x": "A cherry grows from a cherry flower."
+  },
+  {
+   "he": "מה עוד מעביר אבקה, חוץ מחרקים?",
+   "a": "הרוח",
+   "h": "77363f2c",
+   "q": "Besides insects, what else carries pollen?",
+   "o": [
+    "The wind",
+    "The soil",
+    "The dark",
+    "The stone"
+   ],
+   "x": "The wind blows light pollen around."
+  },
+  {
+   "he": "מה מפזר את הזרעים של שן הארי?",
+   "a": "הרוח",
+   "h": "60c8cab2",
+   "q": "What spreads dandelion seeds?",
+   "o": [
+    "The wind",
+    "The water",
+    "The ants",
+    "The bees"
+   ],
+   "x": "The seeds have light fluff, like a parachute.",
+   "sc": {
+    "1": "Dandelion"
+   }
+  },
+  {
+   "he": "איך ציפורים עוזרות לפזר זרעים?",
+   "a": "אוכלות את הפרי",
+   "h": "595bdd24",
+   "q": "How do birds help spread seeds?",
+   "o": [
+    "They eat the fruit",
+    "They drink water",
+    "They build nests",
+    "They sing songs"
+   ],
+   "x": "The seeds come out in another place."
+  },
+  {
+   "he": "קוקוס צף בים לאי אחר. מה פיזר אותו?",
+   "a": "המים",
+   "h": "0ef6e2d2",
+   "q": "A coconut floated across the sea to another island. What spread it?",
+   "o": [
+    "The water",
+    "The wind",
+    "A bird",
+    "An ant"
+   ],
+   "x": "The coconut is light and floats on water."
+  },
+  {
+   "he": "למה טוב שהזרעים מתפזרים רחוק?",
+   "a": "יש יותר מקום",
+   "h": "b86a2500",
+   "q": "Why is it good that seeds spread far away?",
+   "o": [
+    "So they have room",
+    "So they rot",
+    "So they don't sprout",
+    "So they stay crowded"
+   ],
+   "x": "Far from the tree there is room and light."
+  },
+  {
+   "he": "איזה פרח אדום מכסה את הנגב בחורף?",
+   "a": "כלנית",
+   "h": "5d2240ab",
+   "q": "Which red flower covers the Negev in winter?",
+   "o": [
+    "Anemone",
+    "Sunflower",
+    "Rose",
+    "Yellow chrysanthemum"
+   ],
+   "x": "The \"Red South\" festival celebrates the anemones.",
+   "sc": {
+    "0": "Red South"
+   }
+  },
+  {
+   "he": "למה אסור לקטוף פרחי בר מוגנים?",
+   "a": "שלא ייעלמו מהטבע",
+   "h": "9e515ba6",
+   "q": "Why must we not pick protected wildflowers?",
+   "o": [
+    "So they don't disappear",
+    "They are poisonous",
+    "They are thorny",
+    "They're the neighbor's"
+   ],
+   "x": "If we pick them, there will be no seeds."
+  },
+  {
+   "he": "צמח בר הוא צמח ש…",
+   "a": "גדל לבד בטבע",
+   "h": "ba317d9d",
+   "q": "A wild plant is a plant that…",
+   "o": [
+    "Grows on its own",
+    "People planted",
+    "Grows only in pots",
+    "Is made of plastic"
+   ],
+   "x": "Nobody planted it or waters it."
+  },
+  {
+   "he": "מתי פורחים רוב פרחי הבר בישראל?",
+   "a": "בחורף ובאביב",
+   "h": "a81d23e4",
+   "q": "When do most wildflowers bloom in Israel?",
+   "o": [
+    "In winter and spring",
+    "In hot summer",
+    "Only in fall",
+    "Never"
+   ],
+   "x": "After the rains there is water for blooming."
+  },
+  {
+   "he": "איך צמחי מדבר חוסכים מים?",
+   "a": "עלים קטנים מאוד",
+   "h": "2eddb746",
+   "q": "How do desert plants save water?",
+   "o": [
+    "Very small leaves",
+    "Big, wide leaves",
+    "Big flowers",
+    "A thin stem"
+   ],
+   "x": "Less water evaporates from a small leaf."
+  },
+  {
+   "he": "על מה שומרים הקוצים של הצבר?",
+   "a": "מפני בעלי חיים",
+   "h": "8b538c3e",
+   "q": "What do the prickly pear's spines protect it from?",
+   "o": [
+    "Animals",
+    "Rain",
+    "Light",
+    "Wind"
+   ],
+   "x": "Animals don't eat a prickly plant."
+  },
+  {
+   "he": "מה מהבאים הוא משבעת המינים?",
+   "a": "חיטה",
+   "h": "b91d3590",
+   "q": "Which of these is one of the Seven Species?",
+   "o": [
+    "Wheat",
+    "Apple",
+    "Banana",
+    "Strawberry"
+   ],
+   "x": "Wheat, barley, grapes, figs, pomegranates, olives and dates."
+  },
+  {
+   "he": "מה מהבאים גדל על עץ הדקל?",
+   "a": "תמרים",
+   "h": "53805381",
+   "q": "Which of these grows on a palm tree?",
+   "o": [
+    "Dates",
+    "Olives",
+    "Figs",
+    "Almonds"
+   ],
+   "x": "The date tree is a kind of palm."
+  },
+  {
+   "he": "איפה גדלים יערות אלון ואורן בישראל?",
+   "a": "בהרים בצפון",
+   "h": "a3b0f8f6",
+   "q": "Where do oak and pine forests grow in Israel?",
+   "o": [
+    "In the northern mountains",
+    "In the hot desert",
+    "In the sea",
+    "On sandy beaches"
+   ],
+   "x": "More rain falls there."
+  },
+  {
+   "he": "הזית הוא משבעת המינים. מה מפיקים מפריו?",
+   "a": "שמן",
+   "h": "8e7b27cb",
+   "q": "The olive is one of the Seven Species. What comes from its fruit?",
+   "o": [
+    "Oil",
+    "Flour",
+    "Sugar",
+    "Wool"
+   ],
+   "x": "Olives are pressed to make olive oil."
+  },
+  {
+   "he": "מה נוהגים לעשות בט״ו בשבט?",
+   "a": "נוטעים עצים",
+   "h": "b8a210cf",
+   "q": "What do people usually do on Tu BiShvat?",
+   "o": [
+    "Plant trees",
+    "Pick wildflowers",
+    "Light a bonfire",
+    "Build a sukkah"
+   ],
+   "x": "Tu BiShvat is the New Year of the Trees."
+  },
+  {
+   "he": "מה מהבאים אינו משבעת המינים?",
+   "a": "תפוח",
+   "h": "e8db623b",
+   "q": "Which of these is not one of the Seven Species?",
+   "o": [
+    "Apple",
+    "Grapes",
+    "Fig",
+    "Pomegranate"
+   ],
+   "x": "The apple is not one of the Seven Species.",
+   "sc": {
+    "0": "Apple",
+    "1": "Grapes",
+    "2": "Fig",
+    "3": "Pomegranate"
+   }
+  },
+  {
+   "he": "מה מופיע ראשון על השקדייה בסוף החורף?",
+   "a": "הפרחים",
+   "h": "56e0f5b2",
+   "q": "What appears first on the almond tree at the end of winter?",
+   "o": [
+    "The flowers",
+    "The leaves",
+    "The fruits",
+    "The thorns"
+   ],
+   "x": "The almond tree blooms before its leaves grow.",
+   "sc": {
+    "0": "Almond tree",
+    "1": "End of winter"
+   }
+  },
+  {
+   "he": "מה מארבעת המינים של סוכות?",
+   "a": "לולב",
+   "h": "2a80d120",
+   "q": "Which is one of the Four Species of Sukkot?",
+   "o": [
+    "Lulav (palm branch)",
+    "Apple",
+    "Rose",
+    "Lettuce"
+   ],
+   "x": "Lulav, etrog, myrtle and willow."
+  },
+  {
+   "he": "איזה פרי הדר גדל הרבה בישראל?",
+   "a": "תפוז",
+   "h": "6156210a",
+   "q": "Which citrus fruit grows a lot in Israel?",
+   "o": [
+    "Orange",
+    "Banana",
+    "Apple",
+    "Watermelon"
+   ],
+   "x": "Orange, lemon and grapefruit are citrus fruits."
+  },
+  {
+   "he": "מה מכינים מחיטה?",
+   "a": "קמח ולחם",
+   "h": "25d06c20",
+   "q": "What is made from wheat?",
+   "o": [
+    "Flour and bread",
+    "Oil",
+    "Sugar",
+    "Juice"
+   ],
+   "x": "Wheat grains are ground into flour."
+  },
+  {
+   "he": "מה מכינים מענבים?",
+   "a": "מיץ ויין",
+   "h": "be7b32ae",
+   "q": "What is made from grapes?",
+   "o": [
+    "Juice and wine",
+    "Bread",
+    "Oil",
+    "Flour"
+   ],
+   "x": "The grapes are squeezed."
+  },
+  {
+   "he": "מה יש בתוך הרימון?",
+   "a": "הרבה גרגרים",
+   "h": "49d7541d",
+   "q": "What is inside a pomegranate?",
+   "o": [
+    "Many juicy grains",
+    "One big pit",
+    "Only water",
+    "Leaves"
+   ],
+   "x": "Each grain of a pomegranate has a seed.",
+   "sc": {
+    "0": "Pomegranate"
+   }
+  },
+  {
+   "he": "לפי הגרף – באיזה חודש ירד הכי הרבה גשם?",
+   "a": "ינואר",
+   "h": "960b85ec",
+   "q": "According to the graph, which month had the most rain?",
+   "o": [
+    "January",
+    "April",
+    "July",
+    "All the same"
+   ],
+   "x": "In Israel, rain falls in winter.",
+   "sc": {
+    "3": "January",
+    "4": "April",
+    "5": "July",
+    "6": "Rain (mm)",
+    "7": "Month"
+   }
+  },
+  {
+   "he": "לפי הגרף – מתי יש לצמחי הבר הכי מעט מים?",
+   "a": "בקיץ",
+   "h": "f3aa0607",
+   "q": "According to the graph, when do wild plants have the least water?",
+   "o": [
+    "In summer",
+    "In winter",
+    "All year",
+    "In January"
+   ],
+   "x": "No rain falls at all in July.",
+   "sc": {
+    "3": "January",
+    "4": "April",
+    "5": "July",
+    "6": "Rain (mm)",
+    "7": "Month"
+   }
+  },
+  {
+   "he": "מה מזהם את האוויר?",
+   "a": "עשן של מכוניות",
+   "h": "f10d7518",
+   "q": "What pollutes the air?",
+   "o": [
+    "Smoke from cars",
+    "Green trees",
+    "Clean rain",
+    "A light wind"
+   ],
+   "x": "Factories also give off smoke."
+  },
+  {
+   "he": "במי פוגעת פסולת שזורקים לים?",
+   "a": "בדגים ובצבים",
+   "h": "8700b91f",
+   "q": "Who is harmed by trash thrown into the sea?",
+   "o": [
+    "Fish and turtles",
+    "Only the sand",
+    "The clouds",
+    "The moon"
+   ],
+   "x": "Sea animals choke on trash."
+  },
+  {
+   "he": "למה צבי ים בולעים שקיות ניילון?",
+   "a": "דומות למדוזות",
+   "h": "501673a3",
+   "q": "Why do sea turtles swallow plastic bags?",
+   "o": [
+    "They look like jellyfish",
+    "They taste good",
+    "They are nutritious",
+    "They want to play"
+   ],
+   "x": "A floating bag looks like a jellyfish."
+  },
+  {
+   "he": "מה זה זיהום?",
+   "a": "לכלוך שמזיק",
+   "h": "3b8da22f",
+   "q": "What is pollution?",
+   "o": [
+    "Dirt that causes harm",
+    "Cleaning the environment",
+    "Planting trees",
+    "Recycling bottles"
+   ],
+   "x": "Pollution harms people, animals and plants."
+  },
+  {
+   "he": "איך אפשר לזהם פחות את האוויר?",
+   "a": "נוסעים באופניים",
+   "h": "1edd6d9d",
+   "q": "How can we pollute the air less?",
+   "o": [
+    "Ride a bike",
+    "Drive more",
+    "Burn trash",
+    "Burn tires"
+   ],
+   "x": "Bikes don't give off smoke."
+  },
+  {
+   "he": "מה עושה אשפה שנזרקה בטבע?",
+   "a": "מזיקה לבעלי חיים",
+   "h": "6794eb63",
+   "q": "What does trash left in nature do?",
+   "o": [
+    "Harms animals",
+    "Helps plants",
+    "Disappears at once",
+    "Cleans the soil"
+   ],
+   "x": "Animals get hurt or eat it."
+  },
+  {
+   "he": "כמה זמן לוקח לשקית ניילון להתפרק?",
+   "a": "הרבה מאוד שנים",
+   "h": "6c53ff0b",
+   "q": "How long does a plastic bag take to break down?",
+   "o": [
+    "Many, many years",
+    "One day",
+    "A week",
+    "A month"
+   ],
+   "x": "Plastic stays in nature for hundreds of years."
+  },
+  {
+   "he": "מה מזהם את מי הנחל?",
+   "a": "שפכים ואשפה",
+   "h": "133c89fb",
+   "q": "What pollutes stream water?",
+   "o": [
+    "Sewage and trash",
+    "Small fish",
+    "Smooth stones",
+    "Water plants"
+   ],
+   "x": "Sewage is dirty water from homes and factories."
+  },
+  {
+   "he": "רעש חזק מאוד כל הזמן הוא…",
+   "a": "סוג של זיהום",
+   "h": "0dfb2daf",
+   "q": "Very loud noise all the time is…",
+   "o": [
+    "A kind of pollution",
+    "Good music",
+    "Something healthy",
+    "Clean air"
+   ],
+   "x": "Noise harms hearing and rest."
+  },
+  {
+   "he": "מה עושה עשן משריפת אשפה?",
+   "a": "מזהם את האוויר",
+   "h": "3a8d5484",
+   "q": "What does smoke from burning trash do?",
+   "o": [
+    "Pollutes the air",
+    "Cleans the air",
+    "Brings rain",
+    "Grows trees"
+   ],
+   "x": "We don't burn trash."
+  },
+  {
+   "he": "סיימנו פיקניק בפארק. מה עושים באשפה?",
+   "a": "אוספים לפח",
+   "h": "0d91db0d",
+   "q": "We finished a picnic in the park. What do we do with the trash?",
+   "o": [
+    "Throw it in bins",
+    "Leave it on grass",
+    "Bury it in sand",
+    "Burn it"
+   ],
+   "x": "Leave the place clean."
+  },
+  {
+   "he": "במה עדיף לסחוב קניות מהסופר?",
+   "a": "שקית בד",
+   "h": "8e31d577",
+   "q": "What is best for carrying groceries from the store?",
+   "o": [
+    "A cloth bag",
+    "Many plastic bags",
+    "A foam box",
+    "A single-use bag"
+   ],
+   "x": "A cloth bag can be used many times."
+  },
+  {
+   "he": "למה כדאי לנטוע עצים?",
+   "a": "הם מנקים אוויר",
+   "h": "84668b39",
+   "q": "Why is it good to plant trees?",
+   "o": [
+    "They clean the air",
+    "They make noise",
+    "They pollute",
+    "They dry things out"
+   ],
+   "x": "Trees take in carbon dioxide and give off oxygen."
+  },
+  {
+   "he": "מה מהבאים מזיק לטבע?",
+   "a": "זריקת אשפה בשביל",
+   "h": "93839f2a",
+   "q": "Which of these harms nature?",
+   "o": [
+    "Littering on the trail",
+    "Walking on the trail",
+    "Taking flower photos",
+    "Planting a tree"
+   ],
+   "x": "Trash in nature harms animals."
+  },
+  {
+   "he": "איזה בקבוק טוב יותר לסביבה?",
+   "a": "בקבוק רב־פעמי",
+   "h": "67cb8e1b",
+   "q": "Which bottle is better for the environment?",
+   "o": [
+    "A reusable bottle",
+    "A single-use bottle",
+    "A foam cup",
+    "A juice pouch"
+   ],
+   "x": "You fill it again and again."
+  },
+  {
+   "he": "איך אפשר להגיע לבית הספר בלי לזהם?",
+   "a": "ברגל",
+   "h": "95ee95b6",
+   "q": "How can you get to school without polluting?",
+   "o": [
+    "On foot",
+    "Alone by car",
+    "By taxi",
+    "By motorcycle"
+   ],
+   "x": "Walking gives off no smoke."
+  },
+  {
+   "he": "למה האוויר בעיר מזוהם יותר?",
+   "a": "יותר מכוניות ומפעלים",
+   "h": "3502336b",
+   "q": "Why is city air more polluted?",
+   "o": [
+    "More cars and factories",
+    "There are more trees",
+    "There are fewer people",
+    "More rain falls"
+   ],
+   "x": "Cars and factories give off smoke."
+  },
+  {
+   "he": "לפי הטבלה – באיזה יום אספו הכי הרבה אשפה?",
+   "a": "יום ב'",
+   "h": "b2bafb09",
+   "q": "According to the table, on which day was the most trash collected?",
+   "o": [
+    "Monday",
+    "Sunday",
+    "Tuesday",
+    "All the same"
+   ],
+   "x": "8 bags – the most.",
+   "sc": {
+    "0": "3 bags",
+    "1": "Sunday",
+    "2": "8 bags",
+    "3": "Monday",
+    "4": "5 bags",
+    "5": "Tuesday"
+   }
+  },
+  {
+   "he": "לפי הטבלה – כמה שקיות אספו בסך הכול?",
+   "a": "⁦16⁩",
+   "h": "5b8f5c1a",
+   "q": "According to the table, how many bags were collected in all?",
+   "o": [
+    "⁦16⁩",
+    "⁦15⁩",
+    "⁦8⁩",
+    "⁦13⁩"
+   ],
+   "x": "⁦3 + 8 + 5 = 16⁩",
+   "sc": {
+    "0": "3 bags",
+    "1": "Sunday",
+    "2": "8 bags",
+    "3": "Monday",
+    "4": "5 bags",
+    "5": "Tuesday"
+   }
+  },
+  {
+   "he": "ראית נחל גדול מלא אשפה. מה כדאי לעשות?",
+   "a": "לדווח ולעזור לנקות",
+   "h": "0d3b80cb",
+   "q": "You saw a big stream full of trash. What should you do?",
+   "o": [
+    "Report and help clean",
+    "Throw in more trash",
+    "Ignore it",
+    "Swim in the stream"
+   ],
+   "x": "Everyone can help the environment."
+  },
+  {
+   "he": "מה זה מחזור?",
+   "a": "פסולת לחומר חדש",
+   "h": "ecb9f12d",
+   "q": "What is recycling?",
+   "o": [
+    "Waste into new material",
+    "Burning trash",
+    "Burying trash",
+    "Buying new things"
+   ],
+   "x": "Old material is made into a new product."
+  },
+  {
+   "he": "לאיזה פח שמים קופסת קרטון מקופלת?",
+   "a": "הכחול",
+   "h": "634e6498",
+   "q": "Which bin does a folded cardboard box go in?",
+   "o": [
+    "The blue one",
+    "The purple one",
+    "The orange one",
+    "The green one"
+   ],
+   "x": "The blue bin is for paper and cardboard."
+  },
+  {
+   "he": "מה מכינים מזכוכית ממוחזרת?",
+   "a": "כלי זכוכית חדשים",
+   "h": "2ab8d7ad",
+   "q": "What is made from recycled glass?",
+   "o": [
+    "New glass items",
+    "Wool clothes",
+    "New paper",
+    "Cardboard boxes"
+   ],
+   "x": "Old glass is melted and made into new items."
+  },
+  {
+   "he": "מה עושים עם סוללות משומשות?",
+   "a": "למתקן איסוף סוללות",
+   "h": "392c6622",
+   "q": "Where should used batteries go?",
+   "o": [
+    "In a battery bin",
+    "In the regular trash",
+    "Into the sea",
+    "Into a fire"
+   ],
+   "x": "Batteries contain harmful materials."
+  },
+  {
+   "he": "מה מכינים מנייר ממוחזר?",
+   "a": "נייר חדש",
+   "h": "255588fe",
+   "q": "What is made from recycled paper?",
+   "o": [
+    "New paper",
+    "Glass",
+    "Metal",
+    "Oil"
+   ],
+   "x": "Old paper is ground up and dried."
+  },
+  {
+   "he": "למה ממחזרים נייר?",
+   "a": "לכרות פחות עצים",
+   "h": "544e3ffb",
+   "q": "Why do we recycle paper?",
+   "o": [
+    "To cut fewer trees",
+    "To cut more trees",
+    "To dirty the sea",
+    "To make more trash"
+   ],
+   "x": "Paper is made from trees."
+  },
+  {
+   "he": "מה זה שימוש חוזר?",
+   "a": "להשתמש בחפץ שוב",
+   "h": "2008a2c6",
+   "q": "What is reuse?",
+   "o": [
+    "Using an item again",
+    "Tossing after one use",
+    "Burning the item",
+    "Buying a new item"
+   ],
+   "x": "That way there is less trash."
+  },
+  {
+   "he": "מה אפשר להכין מקופסת שימורים ריקה?",
+   "a": "עציץ קטן",
+   "h": "34237061",
+   "q": "What can you make from an empty can?",
+   "o": [
+    "A small flowerpot",
+    "A sandwich",
+    "Water",
+    "Ice"
+   ],
+   "x": "Reusing the can."
+  },
+  {
+   "he": "ממה מכינים קומפוסט?",
+   "a": "קליפות ושאריות אוכל",
+   "h": "fcefb60a",
+   "q": "What is compost made from?",
+   "o": [
+    "Peels and food scraps",
+    "Plastic bottles",
+    "Batteries",
+    "Glass"
+   ],
+   "x": "The scraps rot and become rich soil."
+  },
+  {
+   "he": "מה מהבאים אפשר למחזר?",
+   "a": "בקבוק זכוכית",
+   "h": "47888ea1",
+   "q": "Which of these can be recycled?",
+   "o": [
+    "A glass bottle",
+    "A used diaper",
+    "A used tissue",
+    "Chewed gum"
+   ],
+   "x": "Glass can be recycled again and again."
+  },
+  {
+   "he": "איך חוסכים מים כשמצחצחים שיניים?",
+   "a": "סוגרים את הברז",
+   "h": "1bb65857",
+   "q": "How do we save water while brushing our teeth?",
+   "o": [
+    "Turn off the tap",
+    "Run water full blast",
+    "Leave it running",
+    "Brush twice"
+   ],
+   "x": "Turn it on only to rinse."
+  },
+  {
+   "he": "מה מהבאים חוסך יותר מים?",
+   "a": "מקלחת קצרה",
+   "h": "d1cda2a8",
+   "q": "Which of these saves more water?",
+   "o": [
+    "A short shower",
+    "A full bath",
+    "A long shower",
+    "Two baths"
+   ],
+   "x": "A short shower uses less water."
+  },
+  {
+   "he": "ברז מטפטף גם כשהוא סגור. מה עושים?",
+   "a": "מתקנים אותו",
+   "h": "162acf57",
+   "q": "A tap drips even when it's closed. What do we do?",
+   "o": [
+    "Fix it",
+    "Do nothing",
+    "Open it more",
+    "Decorate it"
+   ],
+   "x": "A small drip wastes a lot of water."
+  },
+  {
+   "he": "יוצאים מהחדר. מה עושים עם האור?",
+   "a": "מכבים אותו",
+   "h": "c9814a97",
+   "q": "You're leaving the room. What do you do with the light?",
+   "o": [
+    "Turn it off",
+    "Leave it on",
+    "Turn on more",
+    "Open a window"
+   ],
+   "x": "A light on in an empty room wastes electricity."
+  },
+  {
+   "he": "למה חשוב לחסוך בחשמל?",
+   "a": "פחות זיהום אוויר",
+   "h": "85d1c945",
+   "q": "Why is it important to save electricity?",
+   "o": [
+    "Less air pollution",
+    "To make it dark",
+    "More pollution",
+    "To heat things"
+   ],
+   "x": "Making electricity at a power plant pollutes."
+  },
+  {
+   "he": "מאיזה מקור נקי אפשר לקבל חשמל?",
+   "a": "אור השמש",
+   "h": "6a1fdea7",
+   "q": "From which clean source can we get electricity?",
+   "o": [
+    "Sunlight",
+    "Burning coal",
+    "Burning oil",
+    "Burning trash"
+   ],
+   "x": "Solar panels don't pollute."
+  },
+  {
+   "he": "מתי עדיף להשקות את הגינה?",
+   "a": "בבוקר או בערב",
+   "h": "36eed723",
+   "q": "When is it best to water the garden?",
+   "o": [
+    "Morning or evening",
+    "At hot midday",
+    "When it rains",
+    "Every hour"
+   ],
+   "x": "When it's cool, less water evaporates."
+  },
+  {
+   "he": "לפי הטבלה – מה צורך הכי הרבה מים?",
+   "a": "אמבטיה",
+   "h": "3285be93",
+   "q": "According to the table, what uses the most water?",
+   "o": [
+    "Bath",
+    "Short shower",
+    "Brushing teeth",
+    "All the same"
+   ],
+   "x": "150 L – the most.",
+   "sc": {
+    "0": "40 L",
+    "1": "Short shower",
+    "2": "150 L",
+    "3": "Bath",
+    "4": "1 L",
+    "5": "Brush teeth"
+   }
+  },
+  {
+   "he": "לפי הטבלה – כמה ליטרים חוסכת מקלחת קצרה במקום אמבטיה?",
+   "a": "⁦110⁩",
+   "h": "a4f3e653",
+   "q": "According to the table, how many liters does a short shower save over a bath?",
+   "o": [
+    "⁦110⁩",
+    "⁦190⁩",
+    "⁦40⁩",
+    "⁦150⁩"
+   ],
+   "x": "⁦150 − 40 = 110⁩",
+   "sc": {
+    "0": "40 L",
+    "1": "Short shower",
+    "2": "150 L",
+    "3": "Bath",
+    "4": "1 L",
+    "5": "Brush teeth"
+   }
+  },
+  {
+   "he": "מה מהבאים חוסך חשמל?",
+   "a": "סוגרים מקרר מהר",
+   "h": "3fad0e31",
+   "q": "Which of these saves electricity?",
+   "o": [
+    "Closing the fridge quickly",
+    "Leaving the fridge open",
+    "A screen always on",
+    "AC with window open"
+   ],
+   "x": "An open fridge has to work hard."
+  },
+  {
+   "he": "למה סיר בישול עשוי ממתכת?",
+   "a": "מוליכה חום",
+   "h": "820ebc20",
+   "q": "Why is a cooking pot made of metal?",
+   "o": [
+    "It conducts heat",
+    "It's transparent",
+    "It absorbs water",
+    "It's very soft"
+   ],
+   "x": "Metal carries the fire's heat to the food."
+  },
+  {
+   "he": "איזו תכונה חשובה לכוס שתייה?",
+   "a": "אטומה למים",
+   "h": "8c646ac0",
+   "q": "What property matters for a drinking cup?",
+   "o": [
+    "Waterproof",
+    "Absorbs water",
+    "Soft like a sponge",
+    "Dissolves in water"
+   ],
+   "x": "The cup must hold the drink."
+  },
+  {
+   "he": "ערבבו קמח וסיכות ברזל. איך מפרידים?",
+   "a": "במגנט",
+   "h": "869c6442",
+   "q": "Flour and iron pins were mixed. How do we separate them?",
+   "o": [
+    "With a magnet",
+    "By dissolving",
+    "By evaporating",
+    "By filtering in water"
+   ],
+   "x": "The magnet attracts only the iron."
+  },
+  {
+   "he": "אידו מים מלוחים. מה נשאר בכלי?",
+   "a": "מלח",
+   "h": "06495818",
+   "q": "Salty water was evaporated. What is left in the dish?",
+   "o": [
+    "Salt",
+    "Sand",
+    "Sugar",
+    "Nothing"
+   ],
+   "x": "The water evaporates; the salt stays in the dish."
+  },
+  {
+   "he": "מה מהבאים כדאי שיהיה במטבח?",
+   "a": "מטף כיבוי",
+   "h": "c281ba33",
+   "q": "Which of these is good to have in a kitchen?",
+   "o": [
+    "A fire extinguisher",
+    "Matches for kids",
+    "Paper by the stove",
+    "Curtains by the fire"
+   ],
+   "x": "An extinguisher helps put out a small fire."
+  },
+  {
+   "he": "איזה חלק במשולש האש מורידים כשמכסים בשמיכה?",
+   "a": "האוויר",
+   "h": "2312a252",
+   "q": "Covering a fire with a blanket removes which part of the fire triangle?",
+   "o": [
+    "Air",
+    "Heat",
+    "Fuel",
+    "Light"
+   ],
+   "x": "The blanket stops the air."
+  },
+  {
+   "he": "יש סוללה וחוטים. מה עוד צריך כדי לקבל אור?",
+   "a": "נורה",
+   "h": "d18cf7c7",
+   "q": "You have a battery and wires. What else do you need for light?",
+   "o": [
+    "A bulb",
+    "A magnet",
+    "An extinguisher",
+    "Some wool"
+   ],
+   "x": "The bulb turns electricity into light."
+  },
+  {
+   "he": "כמה סוללות צריך לפחות במעגל עם נורה?",
+   "a": "⁦1⁩",
+   "h": "eca8395a",
+   "q": "At least how many batteries does a circuit with a bulb need?",
+   "o": [
+    "⁦1⁩",
+    "⁦0⁩",
+    "⁦5⁩",
+    "⁦10⁩"
+   ],
+   "x": "One battery is enough to light a bulb."
+  },
+  {
+   "he": "לפי הטבלה – עם איזה חפץ הנורה לא נדלקה?",
+   "a": "כוס פלסטיק",
+   "h": "18f1770d",
+   "q": "According to the table, with which object did the bulb not light?",
+   "o": [
+    "Plastic cup",
+    "Coin",
+    "Pin",
+    "None of them"
+   ],
+   "x": "The cup was the only object that didn't light the bulb.",
+   "sc": {
+    "0": "Lit",
+    "1": "Coin",
+    "2": "Lit",
+    "3": "Pin",
+    "4": "Not lit",
+    "5": "Plastic cup"
+   }
+  },
+  {
+   "he": "לחוט החשמל יש שני חלקים. מה בחוץ?",
+   "a": "פלסטיק מבודד",
+   "h": "03d92115",
+   "q": "An electric cable has two parts. What is on the outside?",
+   "o": [
+    "Insulating plastic",
+    "Conducting metal",
+    "Water",
+    "Paper"
+   ],
+   "x": "The plastic keeps us safe."
+  },
+  {
+   "he": "שקע בקיר שבור ומתנדנד. מה עושים?",
+   "a": "מספרים למבוגר",
+   "h": "6b125949",
+   "q": "A wall outlet is broken and loose. What do you do?",
+   "o": [
+    "Tell an adult",
+    "Fix it with nails",
+    "Keep using it",
+    "Touch it"
+   ],
+   "x": "Only an electrician fixes an outlet."
+  },
+  {
+   "he": "אילו שני צרכים של הצמח באים מהשמיים?",
+   "a": "אור וגשם",
+   "h": "e033526c",
+   "q": "Which two plant needs come from the sky?",
+   "o": [
+    "Light and rain",
+    "Soil and roots",
+    "Stones and sand",
+    "Flowers and seeds"
+   ],
+   "x": "The sun gives light; rain gives water."
+  },
+  {
+   "he": "מאיזה חלק של הצמח מתפתח התפוח?",
+   "a": "מהפרח",
+   "h": "e793f0c0",
+   "q": "Which part of the plant does an apple grow from?",
+   "o": [
+    "The flower",
+    "The root",
+    "The leaf",
+    "The stem"
+   ],
+   "x": "After pollination, the flower becomes fruit."
+  },
+  {
+   "he": "איפה גדלים הגזר ותפוח האדמה?",
+   "a": "מתחת לאדמה",
+   "h": "c6725f10",
+   "q": "Where do carrots and potatoes grow?",
+   "o": [
+    "Under the ground",
+    "On the leaves",
+    "Inside the flower",
+    "On the branches"
+   ],
+   "x": "We dig to get them out."
+  },
+  {
+   "he": "מה קורה לזרע ששתלו באדמה רטובה וחמימה?",
+   "a": "נובט",
+   "h": "75589c39",
+   "q": "What happens to a seed planted in warm, wet soil?",
+   "o": [
+    "It germinates",
+    "It melts",
+    "It burns",
+    "It disappears"
+   ],
+   "x": "It has water, air and warmth."
+  },
+  {
+   "he": "מה הקשר בין דבורים לפירות?",
+   "a": "הדבורים מאביקות",
+   "h": "7c582413",
+   "q": "How are bees connected to fruit?",
+   "o": [
+    "Bees pollinate flowers",
+    "Bees eat fruit",
+    "Bees water plants",
+    "There's no connection"
+   ],
+   "x": "Without pollination there is no fruit."
+  },
+  {
+   "he": "איזה צמח מתאים לגינה במדבר?",
+   "a": "חוסך מים",
+   "h": "337a269f",
+   "q": "A desert garden needs a plant that…",
+   "o": [
+    "Saves water",
+    "Needs lots of water",
+    "Grows in snow",
+    "Grows in a swamp"
+   ],
+   "x": "Little rain falls in the desert."
+  },
+  {
+   "he": "מה מזהם את הים?",
+   "a": "שקיות ופסולת",
+   "h": "93c3b54e",
+   "q": "What pollutes the sea?",
+   "o": [
+    "Bags and trash",
+    "Fish",
+    "Seaweed",
+    "Waves"
+   ],
+   "x": "Trash from the beach washes into the sea."
+  },
+  {
+   "he": "מה חוסך גם מים וגם חשמל?",
+   "a": "מכונת כביסה מלאה",
+   "h": "d167b186",
+   "q": "What saves both water and electricity?",
+   "o": [
+    "A full washing machine",
+    "Washing one sock",
+    "An open tap",
+    "Always hot water"
+   ],
+   "x": "Fewer loads – less water and electricity."
+  },
+  {
+   "he": "צינור בגינה נשאר פתוח כל הלילה. מה הבעיה?",
+   "a": "בזבוז מים",
+   "h": "8ebb31c8",
+   "q": "A garden hose stayed on all night. What's the problem?",
+   "o": [
+    "Wasting water",
+    "Saving water",
+    "Air pollution",
+    "Electric shock"
+   ],
+   "x": "Turn off the tap as soon as you're done."
+  }
+ ]
+}

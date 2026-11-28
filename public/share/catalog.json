@@ -58,6 +58,69 @@
    ]
   },
   {
+   "id": "math2",
+   "ver": "b3c680e83b",
+   "subject": "מתמטיקה",
+   "grade": 1,
+   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
+   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
+   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
+   "tags": [
+    "מספרים עד 1,000",
+    "ישר המספרים",
+    "חיבור וחיסור עד 100",
+    "מאות שלמות",
+    "מספר חסר",
+    "לוח הכפל",
+    "חילוק",
+    "חצי ורבע",
+    "דיאגרמות",
+    "מצולעים",
+    "גופים",
+    "מדידות",
+    "שעון"
+   ],
+   "questions": 359,
+   "chapters": 35,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה בסך הכול?",
+     "e": "💯💯",
+     "q_en": "How many in all?"
+    },
+    {
+     "q": "כתבו בספרות: שלוש מאות ושבעים",
+     "e": "שלוש מאות ושבעים",
+     "q_en": "Write in digits: three hundred seventy"
+    },
+    {
+     "q": "מה חסר? ⁦100, 200, 300, _⁩",
+     "e": "100, 200, 300, ?",
+     "q_en": "What is missing? 100, 200, 300, _"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 2",
+   "title_en": "Numbers to 1,000 · Addition and subtraction · Times tables · Polygons and 3D shapes · Clock",
+   "tags_en": [
+    "Numbers to 1,000",
+    "The number line",
+    "Addition and subtraction to 100",
+    "Whole hundreds",
+    "Missing number",
+    "Times tables",
+    "Division",
+    "Halves and quarters",
+    "Charts",
+    "Polygons",
+    "3D shapes",
+    "Measurement",
+    "Clock"
+   ]
+  },
+  {
    "id": "math3",
    "ver": "db132b27ee",
    "subject": "מתמטיקה",
@@ -607,6 +670,65 @@
    ]
   },
   {
+   "id": "sci3",
+   "ver": "faffbee11a",
+   "subject": "מדעים",
+   "grade": 2,
+   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
+   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
+   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
+   "tags": [
+    "תכונות חומרים",
+    "תערובות",
+    "בעירה",
+    "מעגל חשמלי",
+    "מוליכים ומבודדים",
+    "בטיחות בחשמל",
+    "מקורות אנרגיה",
+    "צרכי הצמח",
+    "חלקי הצמח",
+    "נביטה והאבקה",
+    "מחזור וחיסכון"
+   ],
+   "questions": 290,
+   "chapters": 28,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך נקרא חומר שהאור עובר דרכו?",
+     "e": "🔦👓",
+     "q_en": "What do we call a material that light passes through?"
+    },
+    {
+     "q": "איך נבדוק איזה בד מתאים למטרייה?",
+     "e": "☂️",
+     "q_en": "How can we test which fabric is good for an umbrella?"
+    },
+    {
+     "q": "מהי תערובת?",
+     "e": "🥗",
+     "q_en": "What is a mixture?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 3",
+   "title_en": "Materials · Electricity and energy · Plants · Protecting the environment",
+   "tags_en": [
+    "Properties of materials",
+    "Mixtures",
+    "Burning",
+    "Electric circuits",
+    "Conductors and insulators",
+    "Electrical safety",
+    "Energy sources",
+    "What plants need",
+    "Plant parts",
+    "Germination and pollination",
+    "Recycling and saving"
+   ]
+  },
+  {
    "id": "sci4",
    "ver": "6972953722",
    "subject": "מדעים",
@@ -722,128 +844,6 @@
     "The Moon",
     "Day, night and seasons",
     "Product design"
-   ]
-  },
-  {
-   "id": "math2",
-   "ver": "b3c680e83b",
-   "subject": "מתמטיקה",
-   "grade": 1,
-   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
-   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
-   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
-   "tags": [
-    "מספרים עד 1,000",
-    "ישר המספרים",
-    "חיבור וחיסור עד 100",
-    "מאות שלמות",
-    "מספר חסר",
-    "לוח הכפל",
-    "חילוק",
-    "חצי ורבע",
-    "דיאגרמות",
-    "מצולעים",
-    "גופים",
-    "מדידות",
-    "שעון"
-   ],
-   "questions": 359,
-   "chapters": 35,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה בסך הכול?",
-     "e": "💯💯",
-     "q_en": "How many in all?"
-    },
-    {
-     "q": "כתבו בספרות: שלוש מאות ושבעים",
-     "e": "שלוש מאות ושבעים",
-     "q_en": "Write in digits: three hundred seventy"
-    },
-    {
-     "q": "מה חסר? ⁦100, 200, 300, _⁩",
-     "e": "100, 200, 300, ?",
-     "q_en": "What is missing? 100, 200, 300, _"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 2",
-   "title_en": "Numbers to 1,000 · Addition and subtraction · Times tables · Polygons and 3D shapes · Clock",
-   "tags_en": [
-    "Numbers to 1,000",
-    "The number line",
-    "Addition and subtraction to 100",
-    "Whole hundreds",
-    "Missing number",
-    "Times tables",
-    "Division",
-    "Halves and quarters",
-    "Charts",
-    "Polygons",
-    "3D shapes",
-    "Measurement",
-    "Clock"
-   ]
-  },
-  {
-   "id": "sci3",
-   "ver": "faffbee11a",
-   "subject": "מדעים",
-   "grade": 2,
-   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
-   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
-   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
-   "tags": [
-    "תכונות חומרים",
-    "תערובות",
-    "בעירה",
-    "מעגל חשמלי",
-    "מוליכים ומבודדים",
-    "בטיחות בחשמל",
-    "מקורות אנרגיה",
-    "צרכי הצמח",
-    "חלקי הצמח",
-    "נביטה והאבקה",
-    "מחזור וחיסכון"
-   ],
-   "questions": 290,
-   "chapters": 28,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך נקרא חומר שהאור עובר דרכו?",
-     "e": "🔦👓",
-     "q_en": "What do we call a material that light passes through?"
-    },
-    {
-     "q": "איך נבדוק איזה בד מתאים למטרייה?",
-     "e": "☂️",
-     "q_en": "How can we test which fabric is good for an umbrella?"
-    },
-    {
-     "q": "מהי תערובת?",
-     "e": "🥗",
-     "q_en": "What is a mixture?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 3",
-   "title_en": "Materials · Electricity and energy · Plants · Protecting the environment",
-   "tags_en": [
-    "Properties of materials",
-    "Mixtures",
-    "Burning",
-    "Electric circuits",
-    "Conductors and insulators",
-    "Electrical safety",
-    "Energy sources",
-    "What plants need",
-    "Plant parts",
-    "Germination and pollination",
-    "Recycling and saving"
    ]
   },
   {
@@ -976,6 +976,150 @@
     "Cellular respiration",
     "Engineering design",
     "Technological systems"
+   ]
+  },
+  {
+   "id": "sci8",
+   "ver": "6d9486aaee",
+   "subject": "מדעים",
+   "grade": 7,
+   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
+   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
+   "tags": [
+    "יסודות ותרכובות",
+    "האטום",
+    "נוסחאות כימיות",
+    "טבלה מחזורית",
+    "תגובה כימית",
+    "מעגלים חשמליים",
+    "בטיחות בחשמל",
+    "כוחות",
+    "חוקי ניוטון",
+    "מהירות",
+    "רבייה",
+    "מארג מזון",
+    "יחסי גומלין",
+    "התאמות לסביבה",
+    "שינוי האקלים",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 390,
+   "chapters": 37,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "יסוד הוא חומר הבנוי מ…",
+     "e": "🔵🔵",
+     "q_en": "An element is a substance made of…"
+    },
+    {
+     "q": "באיזה זוג שני החומרים הם יסודות?",
+     "e": "💧🔩",
+     "q_en": "In which of these pairs are both substances elements?"
+    },
+    {
+     "q": "איפה נמצאים הפרוטונים?",
+     "e": "⚛️",
+     "q_en": "Where are the protons?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 8",
+   "title_en": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
+   "tags_en": [
+    "Elements and compounds",
+    "The atom",
+    "Chemical formulas",
+    "The periodic table",
+    "Chemical reactions",
+    "Electric circuits",
+    "Electrical safety",
+    "Forces",
+    "Newton's laws",
+    "Speed",
+    "Reproduction",
+    "Food webs",
+    "Interactions",
+    "Adaptations",
+    "Climate change",
+    "Engineering design",
+    "Technological systems"
+   ]
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "8ed03ba357",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
+   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "צפיפות",
+    "ציפה ושקיעה",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 305,
+   "chapters": 30,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺",
+     "q_en": "A chair is made of wood. Which is the object here?"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬",
+     "q_en": "Composition, source and properties – these describe…"
+    },
+    {
+     "q": "מה מהבאים מגדיר נפח?",
+     "e": "📦",
+     "q_en": "Which of these defines volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 7 – Materials, volume and mass",
+   "title_en": "Materials and objects · Volume · Mass · Weight · Density · States of matter · Inquiry",
+   "tags_en": [
+    "Materials and objects",
+    "Volume",
+    "Calculating volume",
+    "Graduated cylinder",
+    "mL and liters",
+    "Mass",
+    "Balances",
+    "Gas",
+    "Weight",
+    "Newtons",
+    "Density",
+    "Floating and sinking",
+    "Measuring instruments",
+    "Conversions",
+    "States of matter",
+    "Variables",
+    "Planning an experiment",
+    "Graphs and tables"
    ]
   },
   {
@@ -1178,6 +1322,199 @@
    ]
   },
   {
+   "id": "en6",
+   "ver": "2f40075c13",
+   "subject": "אנגלית",
+   "grade": 5,
+   "title": "Grammar · Past Simple · Time · Band I words · Reading",
+   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
+   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
+   "tags": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
+   ],
+   "questions": 460,
+   "chapters": 44,
+   "reading": 4,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Look! The baby ___.",
+     "e": "👶😴",
+     "q_en": "Look! The baby ___."
+    },
+    {
+     "q": "___ your sister playing the piano now?",
+     "e": "👧🎹",
+     "q_en": "___ your sister playing the piano now?"
+    },
+    {
+     "q": "Fish ___ swim, but they can't walk.",
+     "e": "🐟",
+     "q_en": "Fish ___ swim, but they can't walk."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 6",
+   "title_en": "Grammar · Past Simple · Time · Band I words · Reading",
+   "tags_en": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
+   ]
+  },
+  {
+   "id": "en7",
+   "ver": "8f86777ac3",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
+   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
+   "tags": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ],
+   "questions": 372,
+   "chapters": 35,
+   "reading": 4,
+   "words": 58,
+   "samples": [
+    {
+     "q": "Yesterday I ___ my room.",
+     "e": "🧹🛏️",
+     "q_en": "Yesterday I ___ my room."
+    },
+    {
+     "q": "Which day is in the past?",
+     "e": "📅⬅️",
+     "q_en": "Which day is in the past?"
+    },
+    {
+     "q": "Past of bring?",
+     "e": "🎒bring → ?",
+     "q_en": "Past of bring?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 7",
+   "title_en": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "tags_en": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ]
+  },
+  {
+   "id": "en8",
+   "ver": "684f030e72",
+   "subject": "אנגלית",
+   "grade": 7,
+   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
+   "tags": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ],
+   "questions": 380,
+   "chapters": 37,
+   "reading": 4,
+   "words": 59,
+   "samples": [
+    {
+     "q": "She ___ her homework, so she can watch TV.",
+     "e": "👧📓",
+     "q_en": "She ___ her homework, so she can watch TV."
+    },
+    {
+     "q": "I haven't finished my project ___.",
+     "e": "📋⏳",
+     "q_en": "I haven't finished my project ___."
+    },
+    {
+     "q": "We ___ about the trip the day before yesterday.",
+     "e": "🗣️🧳",
+     "q_en": "We ___ about the trip the day before yesterday."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 8",
+   "title_en": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "tags_en": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ]
+  },
+  {
    "id": "en4-nov26",
    "ver": "bf225c005e",
    "subject": "אנגלית",
@@ -1272,130 +1609,6 @@
     "always / never",
     "Weather",
     "Nature",
-    "Unseen"
-   ]
-  },
-  {
-   "id": "en7",
-   "ver": "49c138c015",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
-   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
-   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
-   "tags": [
-    "Past Simple",
-    "Past Progressive",
-    "will / going to",
-    "Comparatives",
-    "as … as",
-    "Adverbs",
-    "too / enough",
-    "Modals",
-    "Quantifiers",
-    "Connectors",
-    "Band II words",
-    "Unseen"
-   ],
-   "questions": 372,
-   "chapters": 35,
-   "reading": 4,
-   "words": 58,
-   "samples": [
-    {
-     "q": "Yesterday I ___ my room.",
-     "e": "🧹🛏️",
-     "q_en": "Yesterday I ___ my room."
-    },
-    {
-     "q": "Which day is in the past?",
-     "e": "📅⬅️",
-     "q_en": "Which day is in the past?"
-    },
-    {
-     "q": "Past of bring?",
-     "e": "🎒bring → ?",
-     "q_en": "Past of bring?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 7",
-   "title_en": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
-   "tags_en": [
-    "Past Simple",
-    "Past Progressive",
-    "will / going to",
-    "Comparatives",
-    "as … as",
-    "Adverbs",
-    "too / enough",
-    "Modals",
-    "Quantifiers",
-    "Connectors",
-    "Band II words",
-    "Unseen"
-   ]
-  },
-  {
-   "id": "en8",
-   "ver": "1df5de390a",
-   "subject": "אנגלית",
-   "grade": 7,
-   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
-   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
-   "tags": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
-    "Unseen"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 4,
-   "words": 59,
-   "samples": [
-    {
-     "q": "She ___ her homework, so she can watch TV.",
-     "e": "👧📓",
-     "q_en": "She ___ her homework, so she can watch TV."
-    },
-    {
-     "q": "I haven't finished my project ___.",
-     "e": "📋⏳",
-     "q_en": "I haven't finished my project ___."
-    },
-    {
-     "q": "We ___ about the trip the day before yesterday.",
-     "e": "🗣️🧳",
-     "q_en": "We ___ about the trip the day before yesterday."
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 8",
-   "title_en": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "tags_en": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
     "Unseen"
    ]
   },
@@ -1887,219 +2100,6 @@
     "שם המספר",
     "פיסוק",
     "פ״א ול״א"
-   ]
-  },
-  {
-   "id": "sci8",
-   "ver": "6d9486aaee",
-   "subject": "מדעים",
-   "grade": 7,
-   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
-   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
-   "tags": [
-    "יסודות ותרכובות",
-    "האטום",
-    "נוסחאות כימיות",
-    "טבלה מחזורית",
-    "תגובה כימית",
-    "מעגלים חשמליים",
-    "בטיחות בחשמל",
-    "כוחות",
-    "חוקי ניוטון",
-    "מהירות",
-    "רבייה",
-    "מארג מזון",
-    "יחסי גומלין",
-    "התאמות לסביבה",
-    "שינוי האקלים",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 390,
-   "chapters": 37,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "יסוד הוא חומר הבנוי מ…",
-     "e": "🔵🔵",
-     "q_en": "An element is a substance made of…"
-    },
-    {
-     "q": "באיזה זוג שני החומרים הם יסודות?",
-     "e": "💧🔩",
-     "q_en": "In which of these pairs are both substances elements?"
-    },
-    {
-     "q": "איפה נמצאים הפרוטונים?",
-     "e": "⚛️",
-     "q_en": "Where are the protons?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 8",
-   "title_en": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
-   "tags_en": [
-    "Elements and compounds",
-    "The atom",
-    "Chemical formulas",
-    "The periodic table",
-    "Chemical reactions",
-    "Electric circuits",
-    "Electrical safety",
-    "Forces",
-    "Newton's laws",
-    "Speed",
-    "Reproduction",
-    "Food webs",
-    "Interactions",
-    "Adaptations",
-    "Climate change",
-    "Engineering design",
-    "Technological systems"
-   ]
-  },
-  {
-   "id": "en6",
-   "ver": "2f40075c13",
-   "subject": "אנגלית",
-   "grade": 5,
-   "title": "Grammar · Past Simple · Time · Band I words · Reading",
-   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
-   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
-   "tags": [
-    "Present Simple / Progressive",
-    "can · there is",
-    "have got",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Questions",
-    "Past Simple",
-    "this / these",
-    "Commands",
-    "Describing people",
-    "Clothes",
-    "Telling the time",
-    "Band I words",
-    "Writing",
-    "Reading"
-   ],
-   "questions": 460,
-   "chapters": 44,
-   "reading": 4,
-   "words": 107,
-   "samples": [
-    {
-     "q": "Look! The baby ___.",
-     "e": "👶😴",
-     "q_en": "Look! The baby ___."
-    },
-    {
-     "q": "___ your sister playing the piano now?",
-     "e": "👧🎹",
-     "q_en": "___ your sister playing the piano now?"
-    },
-    {
-     "q": "Fish ___ swim, but they can't walk.",
-     "e": "🐟",
-     "q_en": "Fish ___ swim, but they can't walk."
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 6",
-   "title_en": "Grammar · Past Simple · Time · Band I words · Reading",
-   "tags_en": [
-    "Present Simple / Progressive",
-    "can · there is",
-    "have got",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Questions",
-    "Past Simple",
-    "this / these",
-    "Commands",
-    "Describing people",
-    "Clothes",
-    "Telling the time",
-    "Band I words",
-    "Writing",
-    "Reading"
-   ]
-  },
-  {
-   "id": "sci7-materials",
-   "ver": "8ed03ba357",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
-   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
-   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון",
-    "צפיפות",
-    "ציפה ושקיעה",
-    "מכשירי מדידה",
-    "המרות",
-    "מצבי צבירה",
-    "משתנים",
-    "תכנון ניסוי",
-    "גרפים וטבלאות"
-   ],
-   "questions": 305,
-   "chapters": 30,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺",
-     "q_en": "A chair is made of wood. Which is the object here?"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬",
-     "q_en": "Composition, source and properties – these describe…"
-    },
-    {
-     "q": "מה מהבאים מגדיר נפח?",
-     "e": "📦",
-     "q_en": "Which of these defines volume?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 7 – Materials, volume and mass",
-   "title_en": "Materials and objects · Volume · Mass · Weight · Density · States of matter · Inquiry",
-   "tags_en": [
-    "Materials and objects",
-    "Volume",
-    "Calculating volume",
-    "Graduated cylinder",
-    "mL and liters",
-    "Mass",
-    "Balances",
-    "Gas",
-    "Weight",
-    "Newtons",
-    "Density",
-    "Floating and sinking",
-    "Measuring instruments",
-    "Conversions",
-    "States of matter",
-    "Variables",
-    "Planning an experiment",
-    "Graphs and tables"
    ]
   }
  ]

@@ -39,7 +39,8 @@ below, check, and deploy **only after the owner approves**.
 - More build checks added on the way: a question kept in multiple choice in Hebrew (`needOpts`) must be so in English too; no
   direction marks in English; "←"/"→" set by the text's direction (English-first → "→", Hebrew-first → "←"); one-letter
   answers keep their case.
-- Tests: `tools/tests/local_english.js` (new), `tools/tests/local_scenes.js` (`SFF_LANG=en`).
+- Tests: `tools/tests/local_english.js` (new), `tools/tests/local_scenes.js` (`SFF_LANG=en`); `tools/match_list.js` works with the
+  English layer (`SFF_LANG=en` lists the English cards).
 - Docs: `CLAUDE.md` (a line on the English version), `docs/english-content-prompt.md`, `docs/catalog-review/english-pilot.md`.
 
 The owner approved the translation's style (28.11); one wording fix is already in the branch (math3: a comparison of
@@ -103,21 +104,17 @@ is updated: `SFF_EN_DUMP=/tmp/x.json python3 -I tools/build_set.py tools/sets/<f
 `tools/sets_en/<id>.json` (copy the new `h`). A new catalog set needs its `tools/sets_en/<id>.json` the same way
 (`docs/english-content-prompt.md` §4–§8). Family-built (AI) sets have no English – they show as built.
 
-## 6. Problems in the Hebrew sets found on the way (for the owner – not part of this deploy)
-Each is the same in Hebrew mode; the English was already worded around it where possible. Numbers are places in the built set.
-- **sci4** "רוכבים על סקייטבורד. מה מגן על הברכיים?" gives away "מגני ברכיים" → "מה מגן על הרגליים כשנופלים?".
-- **math1** #183: the picture pairs 8 with the girl and 9 with the boy (8 boys, 9 girls); #139: the 10 (seats) under the child, the 6 (taken) under the bus.
-- **math4** a picture uses 🥛 for a liter (#334); an explanation "20, 18, 18, 18" does not follow the option order (#308).
-- **math7** "בפונקציה עולה … y…" → "עולה" and "בפונקציה קבועה … y…" → "קבוע": the answer word is in the question (#186, #187).
-- **math7-nov26** "איזו זווית קהה?" – in the matching game the chapter's 120° card is also obtuse → "איזו מהן קהה?".
-- **sci1** "איזה יצור חי לא הולך ממקום למקום?" – the chapter's card "פרח" also fits → "איזה מהם…".
-- **sci2** "דרך מה אי אפשר לראות?", "על מה הכי נוח לשכב?" – another card of the chapter also fits; "מסמר, מפתח, מטבע – מה משותף להם?" vs
-  "אטומים למים"; 🥛 shown as a glass cup (#31); "אדים" listed as a state of matter.
-- **sci3** the card "גומי" also answers "אילו כפפות ילבש?" (chapter "מוליך או מבודד?"); 🥛 used as a glass in #1, #42, #44, #92.
-- **sci5** "באיזה מזון יש הרבה חלבון?" and "איזה מזון עשיר בשומן?" – the chapter's card "גבינה" fits both → "איזה מהם…".
-- **sci7** "תאי עצב → רקמת עצבים" (the root gives the answer, #250); "תאים" / "תא" answers in one chapter (#254/#257);
-  "אנרגיה שעוברת" also answers the flame question (#181/#188).
-- **en4-nov26** the hint "נמר" for tiger means leopard → "טיגריס" (#68, #127); "ladybird" is British (ladybug); "תנין" + 🐊 is a
-  crocodile, the answer says alligator (#43, #86, #137).
-- **en4 / en5 / en6** a few English questions show their own answer or need "Which of these…" in Hebrew mode too (en4 #42,
-  #297; en5 #387 "cold and ___ … snow" → snowy; en6 #396).
+## 6. Problems in the Hebrew sets found on the way (not part of this deploy)
+- **Ready to fix:** the "נמר" gloss (en4-nov26) and five confirmed match-game clashes (math7-nov26, sci2 ×2, sci7 ×2) –
+  `docs/hebrew-fix-prompt.md`. It may run before this deploy (then rebuild the changed sets and run §3 again) or after it.
+- **For the owner's decision** (the same in Hebrew mode; the English was already worded around them where possible; numbers are
+  places in the built set):
+  - sci4 «רוכבים על סקייטבורד. מה מגן על הברכיים?» gives away «מגני ברכיים» → «מה מגן על הרגליים כשנופלים?».
+  - math1 #183: the picture pairs 8 with the girl and 9 with the boy (8 boys, 9 girls); #139: the 10 (seats) under the child, the 6 under the bus.
+  - math4 a picture uses 🥛 for a liter (#334); an explanation «20, 18, 18, 18» does not follow the option order (#308).
+  - math7 «בפונקציה עולה … y…» → «עולה», «בפונקציה קבועה … y…» → «קבוע»: the answer word is in the question (#186, #187).
+  - sci2 🥛 shown as a glass cup (#31); «אדים» listed as a state of matter. sci3 🥛 used as a glass (#1, #42, #44, #92).
+  - sci7 «תאי עצב → רקמת עצבים»: the root gives the answer (#250).
+  - en4-nov26 "ladybird" is British (ladybug); «תנין» + 🐊 is a crocodile, the answer says alligator – by the school's word list.
+  - en4 #42, #297; en5 #387 ("cold and ___ … snow" → snowy); en6 #396 – English questions that show their own answer or need
+    "Which of these…", in Hebrew mode too.

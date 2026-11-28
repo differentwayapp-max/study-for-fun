@@ -895,6 +895,19 @@ body:not(.thapp) #sBody.withfocus{padding-bottom:78px}
 .rmgo em{font-style:normal;background:#F2A63B;color:var(--ink);border-radius:12px;padding:8px 14px;font-weight:800;font-size:.88em;flex:none}
 .rmmore{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:.78em}.rmmore .chip{border:0;border-radius:99px;background:#FFF2C9;color:#6B4700;padding:4px 10px;font:inherit;font-weight:700;cursor:pointer}
 .rmmin{color:var(--ink2);margin-inline-start:auto}
+.rmrow{display:flex;align-items:center;gap:10px}.rmsum{flex:1;min-width:0;display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:start;cursor:pointer}
+.rmring{position:relative;width:54px;height:54px;flex:none}.rmring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.88em}
+.rmtx{display:flex;flex-direction:column;gap:2px;min-width:0}.rmw{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rmw>b{font-family:var(--display);font-size:1.02em}.rmsub2{font-size:.78em;color:var(--ink2)}.rmw i{font-style:normal;font-size:.8em;color:var(--ink2)}
+.rmtx small{font-size:.78em;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rmgo2{flex:none;display:flex;align-items:center;gap:6px;min-height:44px;background:var(--ink);color:#fff;border:0;border-radius:14px;padding:8px 14px;font:inherit;font-weight:800;font-size:.92em;cursor:pointer}
+html[dir=ltr] .rmgo2 svg{transform:scaleX(-1)}
+.rsheet{width:100%;max-width:520px;background:#fff;border-radius:28px 28px 0 0;padding:10px 18px calc(22px + var(--sab));display:flex;flex-direction:column;gap:12px;animation:fnup .25s ease-out;max-height:calc(100dvh - 40px);overflow-y:auto;box-sizing:border-box}
+.rsgrip{align-self:center;width:44px;height:5px;border-radius:9px;background:#D5DEF2}.rshead{display:flex;justify-content:space-between;align-items:center;gap:8px}.rshead>b{font-family:var(--display);font-size:1.1em}
+.rsx{width:40px;height:40px;border-radius:50%;border:0;background:#F4F7FC;font:inherit;cursor:pointer;flex:none}
+.rsrows{display:flex;flex-direction:column}.rsrow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #EEF2F7}.rsrow:last-child{border-bottom:0}
+.rsrow>div{flex:1;min-width:0;display:flex;flex-direction:column}.rsrow small{font-size:.8em;color:var(--ink2)}.rsico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.rsgo,.rsgo2{flex:none;min-height:40px;border-radius:12px;padding:6px 12px;font:inherit;font-weight:700;font-size:.85em;cursor:pointer}.rsgo{background:var(--ink);color:#fff;border:0}.rsgo2{background:#fff;color:var(--ink);border:2px solid #D5DEF2}
+.rshow{background:#F4F7FC;border-radius:14px;padding:10px 12px;font-size:.8em;line-height:1.5;color:var(--ink2)}.rshow b{color:var(--ink)}
 @media (max-height:740px){ #rdHdr{position:relative;top:auto} }   /* a short phone: the header scrolls away with the page, so the map gets the screen */
 @media (max-height:620px){ #rdHdr{gap:7px;padding:10px 12px} .rmpct{font-size:1.7em} .rmeter{align-items:center} .rmsub,.rmmore{display:none} .rmtop.hasm{display:none} .rmtag.sm{display:inline-block} .rmgo{min-height:46px;padding:6px 8px 6px 10px} .rmgo>svg{width:20px;height:20px} .rmgo em{padding:6px 10px} .rmlbl{height:13px} }.rdbar .rdexp{position:absolute;top:-2px;bottom:-2px;width:3px;margin-inline-start:-1px;background:var(--ink);border-radius:2px;text-decoration:none}
 .rdready{flex:1 1 100%;display:flex;gap:10px;align-items:center;border:2px solid var(--ink);border-radius:16px;background:#fff;padding:8px 10px}
@@ -3630,6 +3643,29 @@ function rdState(set, P){
   const st=lag?RDY.lo:RDY[lvl];
   return {R,E,P,target,lvl,lag,word:lag?'כדאי להאיץ':st.w,st};
 }
+// the readiness sheet (a tap on the map's readiness row): the %, the bar with today's mark and Ready, today, what to strengthen, the effort left
+function openReadySheet(){
+  const set=getSet(ROAD_SET); if(!set) return; const P=roadPlan(set), S=rdState(set,P); if(!S) return;
+  const {R,E,target,st}=S, doneN=Math.min(P.dn.size,P.N), sid=esc(set.id), pos=v=>Math.max(14,Math.min(86,v)), dl=P.dl;
+  const when=dl==null||dl<0?'':`מבחן ב-${fmtDate(set.examDate)} · ${dl===0?'היום':dl===1?'מחר':`עוד ${dl} ימים`}`;
+  const marks=(target!=null&&doneN<P.N?`<s class="rdexp" style="inset-inline-start:${target}%"></s>`:'')+`<s class="rdexp hi" style="inset-inline-start:${MAST_HI}%"></s>`;
+  const lbl=(target!=null&&doneN<P.N?`<span style="inset-inline-start:${pos(target)}%">כדאי היום: ${target}%</span>`:'')+(target==null||Math.abs(target-MAST_HI)>=24||doneN>=P.N?`<span class="hi" style="inset-inline-start:${pos(MAST_HI)}%">מוכנים</span>`:'');
+  const ico=(bg,c,path)=>`<span class="rsico" style="background:${bg}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg></span>`;
+  const rows=[];
+  if(E&&E.today.length) rows.push(`<div class="rsrow">${ico('#EAF0FF','#2F6BFF','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>')}<div><b>היום: ${chRange(E.today)}</b><small>כ-${E.todayQ} שאלות · כ-${Math.max(1,Math.ceil(E.todayQ*Q_MIN))} דקות</small></div><button class="rsgo" onclick="closeReadySheet();startStation('${sid}',${E.today[0]})">יוצאים</button></div>`);
+  R.weak.forEach(w=>rows.push(`<div class="rsrow">${ico('#FFF2C9','#946200','<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/>')}<div><b><span>לחזק:</span> <bdi>${esc(chName(P.C[w.i]))}</bdi></b><small>${w.pct}% בתשובות האחרונות</small></div><button class="rsgo2" onclick="closeReadySheet();startStation('${sid}',${w.i})">לתרגל</button></div>`));
+  if(E&&E.rest&&dl>=1) rows.push(`<div class="rsrow">${ico('#FFE4EC','#B3264F','<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>')}<div><b>עד המבחן: עוד ${E.rest} פרקים</b><small>כ-${E.qs} שאלות · כ-${E.min} דקות ביום</small></div></div>`);
+  closeReadySheet(); const el=document.createElement('div'); el.id='rdSheet'; el.className='fnew';
+  el.onclick=e=>{ if(e.target===el) closeReadySheet(); };
+  el.innerHTML=`<div class="rsheet" role="dialog" aria-modal="true" aria-label="${esc(sffTx('מוכנות למבחן'))}"><span class="rsgrip" aria-hidden="true"></span>
+    <div class="rshead"><b><span>מוכנות למבחן</span> · <span>${esc(String(set.subject).replace(/^🎯\s*/,''))}</span></b><button class="rsx" onclick="closeReadySheet()" aria-label="סגירה">✕</button></div>
+    <div class="rmeter"><b class="rmpct" style="color:${st.c}">${R.pct}%</b><div><b class="rmword" style="color:${st.t}">${S.word}</b>${when?`<div class="rmsub">${when}</div>`:''}</div></div>
+    <div class="rmbar" role="img" aria-label="${esc(sffTx(`מוכנות ${R.pct}%`))}"><i style="width:${R.pct}%;background:${st.bar}"></i>${marks}</div><div class="rmlbl">${lbl}</div>
+    <div class="rsrows">${rows.join('')}</div>
+    <div class="rshow"><b>איך מחשבים?</b> <span>לכל פרק – כמה תשובות נכונות ב-10 האחרונות שלו. פרק שעוד לא תורגל נחשב 0. המוכנות היא הממוצע של כל הפרקים.</span></div></div>`;
+  document.body.appendChild(el);
+}
+function closeReadySheet(){ $('rdSheet')?.remove(); }
 // on the example map: who this phone is, and what it found – so a screenshot tells what is missing
 function demoWhy(){
   const me=kidById(LOCK||activeKid), ver=document.querySelector('meta[name=sff-ver]')?.content||'';
@@ -3645,23 +3681,22 @@ function renderRoad(){
   // header
   const doneN=Math.min(P.dn.size,P.N), S=rdState(set,P), sid=esc(set.id);
   const dl=P.dl, when=dl==null?'':dl<0?'המבחן עבר · ':dl===0?'המבחן היום · ':dl===1?'המבחן מחר · ':`עוד ${dl} ימים · `;
-  let meter='', go1='', more='';
-  if(S){ const {R,E,target,st}=S, pos=v=>Math.max(14,Math.min(86,v));
-    const marks=(target!=null&&doneN<P.N?`<s class="rdexp" style="inset-inline-start:${target}%"></s>`:'')+`<s class="rdexp hi" style="inset-inline-start:${MAST_HI}%"></s>`;
-    const lbl=(target!=null&&doneN<P.N?`<span style="inset-inline-start:${pos(target)}%">כדאי היום: ${target}%</span>`:'')+(target==null||Math.abs(target-MAST_HI)>=24||doneN>=P.N?`<span class="hi" style="inset-inline-start:${pos(MAST_HI)}%">מוכנים</span>`:'');
-    meter=`<div class="rmeter"><b class="rmpct" style="color:${st.c}">${R.pct}%</b><div><b class="rmword" style="color:${st.t}">${S.word}</b><div class="rmsub">מוכנות למבחן</div></div><span class="rmtag sm">${when}${doneN}/${P.N} פרקים</span></div>
-      <div class="rmbar" role="img" aria-label="${esc(sffTx(`מוכנות ${R.pct}%`))}"><i style="width:${R.pct}%;background:${st.bar}"></i>${marks}</div><div class="rmlbl">${lbl}</div>`;
-    const weak=R.weak.slice(0,2).map(w=>`<button class="chip" onclick="startStation('${sid}',${w.i})">${esc(chName(P.C[w.i]))} · ${w.pct}%</button>`).join('');
-    const mins=E&&E.rest&&dl>=1?`<span class="rmmin">עד המבחן: ~${E.min} דק׳ ביום</span>`:'';
-    if(weak||mins) more=`<div class="rmmore">${weak?`<span class="hint">לחזק:</span>${weak}`:''}${mins}</div>`;
-  }
-  // the one button: today's chapters (or the next / weakest one)
-  const E=S&&S.E, wk=S&&S.R.weak[0];
-  const btn=(t,sub,ch)=>`<button class="rmgo" onclick="startStation('${sid}',${ch})"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F2A63B" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="#F2A63B"/></svg><span><b>${t}</b>${sub?`<small>${sub}</small>`:''}</span><em>יוצאים</em></button>`;
-  if(E&&E.today.length) go1=btn(`היום: ${chRange(E.today)}`,`כ-${E.todayQ} שאלות · כ-${Math.max(1,Math.ceil(E.todayQ*Q_MIN))} דקות`,E.today[0]);
-  else if(nx>=0&&nx<P.N) go1=btn(E&&dl>=1?'✓ היעד של היום הושלם':`הפרק הבא: ${chRange([nx])}`,E&&dl>=1?`אפשר להמשיך: ${chRange([nx])}`:'',nx);
-  else if(wk) go1=btn(`🌟 סיימת הכול!`,`לחזק: ${chRange([wk.i])}`,wk.i);
-  $('rdHdr').innerHTML=`<div class="rmtop${S?' hasm':''}"><b>הדרך למבחן</b><span class="rmtag">${when}${doneN}/${P.N} פרקים</span></div>${set.demo?'<div><span class="demotag">🎲 דוגמה</span>'+demoWhy()+'</div>':''}${meter}${go1}${more}`;
+  // the header: ONE row – a small readiness ring, the word, the days left and today's chapters, and one "go" button;
+  // everything else (the bar with today's mark, what to strengthen, the effort left, how it is counted) in a sheet on a tap
+  const E=S&&S.E, wk=S&&S.R.weak[0], days=dl==null?'':dl<0?'המבחן עבר':dl===0?'המבחן היום':dl===1?'המבחן מחר':`עוד ${dl} ימים`;
+  let goCh=-1, goT='ממשיכים';
+  if(E&&E.today.length){ goCh=E.today[0]; goT='יוצאים'; } else if(nx>=0&&nx<P.N) goCh=nx; else if(wk) goCh=wk.i;
+  const go1=goCh>=0?`<button class="rmgo2" onclick="startStation('${sid}',${goCh})">${goT}<svg width="12" height="12" viewBox="0 0 24 24" fill="#F2A63B" aria-hidden="true"><path d="M18 4L6 12l12 8z"/></svg></button>`:'';
+  let sum;
+  if(S){ const {R,target,st}=S, C2=138.2, arc=v=>(Math.max(0,Math.min(100,v))/100*C2).toFixed(1);
+    const today=E&&E.today.length?`היום ${chRange(E.today)}`:(E&&dl>=1&&nx>=0?'✓ היעד של היום הושלם':`${doneN}/${P.N} פרקים`);
+    const ring=`<span class="rmring"><svg width="54" height="54" viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="22" fill="none" stroke="#EAF0FF" stroke-width="6"/>
+      <circle cx="27" cy="27" r="22" fill="none" stroke="${st.bar}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${arc(R.pct)} ${C2}" transform="rotate(-90 27 27)"/>
+      ${target!=null&&doneN<P.N?`<circle cx="27" cy="27" r="22" fill="none" stroke="#1B2A4A" stroke-width="7" stroke-dasharray="1.6 ${C2}" stroke-dashoffset="-${arc(target)}" transform="rotate(-90 27 27)"/>`:''}</svg><b>${R.pct}%</b></span>`;
+    sum=`<button class="rmsum" onclick="openReadySheet()" aria-label="${esc(sffTx(`מוכנות ${R.pct}%`))}">${ring}<span class="rmtx"><span class="rmw"><b style="color:${st.t}">${S.word}</b> <span class="rmsub2">· מוכנות למבחן</span> <i aria-hidden="true">ⓘ</i></span>
+      <small>${days?`<span>${days}</span> · `:''}<span>${today}</span></small></span></button>`;
+  } else sum=`<div class="rmsum"><span class="rmtx"><b>${doneN}/${P.N} פרקים</b>${days?`<small><span>${days}</span></small>`:''}</span></div>`;
+  $('rdHdr').innerHTML=`${set.demo?'<div><span class="demotag">🎲 דוגמה</span>'+demoWhy()+'</div>':''}<div class="rmrow">${sum}${go1}</div>`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
   const goalDone=todays.every(i=>P.dn.has(i)), tried=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)&&best[i]!=null);

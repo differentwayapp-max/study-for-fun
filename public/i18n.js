@@ -115,7 +115,7 @@
     'בנייה מהחומר שלכם': 'Build from your own material', 'חסר תרגול': 'Missing a practice set', 'בנייה עם AI מהחומר שלכם – בקרוב': 'Building with AI from your material – coming soon',
     'תאריך המבחן': 'Test date', '(לא חובה)': '(optional)', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
     'לתרגל אותן עכשיו': 'Practise them now', 'אני יודע': 'I know', 'אין מה לתרגל שוב – כל הכבוד': 'Nothing to practise again – well done', 'עוד לא שיחקת – מתחילים': "You haven't played yet – let's start",
-    'מוכנות': 'Readiness', 'כדאי להאיץ': 'Speed up a bit', 'מוכנים ✓': 'Ready ✓', 'מוכנות למבחן': 'Test readiness', 'מוכנות למבחן:': 'Test readiness:', 'יוצאים': "Let's go", '✓ היעד של היום הושלם': "✓ Today's goal done", '🌟 סיימת הכול!': '🌟 All done!', 'התקדמות': 'Progress', 'מוכנים': 'Ready', 'עוד עבודה': 'More work', 'איפה כדאי להיות היום': 'Where to be by today', 'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
+    'מוכנות': 'Readiness', 'כדאי להאיץ': 'Speed up a bit', 'מוכנים ✓': 'Ready ✓', 'מוכנות למבחן': 'Test readiness', '· מוכנות למבחן': '· Test readiness', 'ממשיכים': 'Continue', 'לתרגל': 'Practise', 'לחזק:': 'Strengthen:', 'איך מחשבים?': 'How is it counted?', 'לכל פרק – כמה תשובות נכונות ב-10 האחרונות שלו. פרק שעוד לא תורגל נחשב 0. המוכנות היא הממוצע של כל הפרקים.': 'For each chapter – how many of its last 10 answers were right. A chapter not practised yet counts as 0. Readiness is the average of all the chapters.', 'המבחן מחר': 'Test tomorrow', 'המבחן עבר': 'Test passed', 'מוכנות למבחן:': 'Test readiness:', 'יוצאים': "Let's go", '✓ היעד של היום הושלם': "✓ Today's goal done", '🌟 סיימת הכול!': '🌟 All done!', 'התקדמות': 'Progress', 'מוכנים': 'Ready', 'עוד עבודה': 'More work', 'איפה כדאי להיות היום': 'Where to be by today', 'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
     'חזרה על הטעויות': 'Mistakes review', 'יום המבחן': 'Test day', 'מחר': 'Tomorrow',
     'יום ראשון': 'Sunday', 'יום שני': 'Monday', 'יום שלישי': 'Tuesday', 'יום רביעי': 'Wednesday', 'יום חמישי': 'Thursday', 'יום שישי': 'Friday', 'יום שבת': 'Saturday',
     'צריך את הלינק מההורה': 'You need the link from your parent', 'בקשו מההורה לשלוח שוב את הלינק, ופתחו אותו בטלפון הזה': 'Ask your parent to send the link again, and open it on this phone',
@@ -289,6 +289,10 @@
   // patterns for text with numbers or names in it
   const P = [
     // the readiness meter (map header + the parent's row)
+    [/^עוד (\d+) ימים$/, (m, d) => `${d} days left`],
+    [/^(\d+)% בתשובות האחרונות$/, (m, n) => `${n}% in the latest answers`],
+    [/^עד המבחן: עוד (\d+) פרקים$/, (m, n) => `Until the test: ${n} more chapters`],
+    [/^כ-(\d+) שאלות · כ-(\d+) דקות ביום$/, (m, q, d) => `~${q} questions · ~${d} min a day`],
     [/^עוד (\d+) ימים · (\d+)\/(\d+) פרקים$/, (m, d, a, b) => `${d} days · ${a}/${b} chapters`],
     [/^(המבחן עבר|המבחן היום|המבחן מחר) · (\d+)\/(\d+) פרקים$/, (m, w, a, b) => `${{'המבחן עבר': 'Test passed', 'המבחן היום': 'Test today', 'המבחן מחר': 'Test tomorrow'}[w]} · ${a}/${b} chapters`],
     [/^כדאי היום: (\d+)%$/, (m, n) => `Today's goal: ${n}%`],

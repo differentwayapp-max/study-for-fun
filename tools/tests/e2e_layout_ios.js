@@ -89,8 +89,8 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
     // the map's readiness header leaves at least two rows of the map on the screen (no scrolling)
     await p.evaluate(id => openRoad(id), ids.five[0]); await p.waitForTimeout(500);
     const M = await p.evaluate(() => { window.scrollTo(0, 0); const sv = document.querySelector('#rdMap svg'), r = sv.getBoundingClientRect(), k = r.width / 390, nav = document.getElementById('bNav').getBoundingClientRect();
-      const bottom = nav.height && nav.top < innerHeight ? nav.top : innerHeight; return { row2: Math.round(r.top + (228 + 12) * k), bottom: Math.round(bottom), meter: !!document.querySelector('#rdHdr .rmbar'), go: !!document.querySelector('#rdHdr .rmgo') }; });
-    if (!M.meter || !M.go || (h <= 548 && mode === 'safari' && M.row2 > M.bottom)) fails.map.push(`${tag}: the 2nd row ends at ${M.row2}, the screen at ${M.bottom}${M.meter ? '' : ' (no meter)'}${M.go ? '' : ' (no today button)'}`);
+      const bottom = nav.height && nav.top < innerHeight ? nav.top : innerHeight; return { row2: Math.round(r.top + (228 + 12) * k), bottom: Math.round(bottom), meter: !!document.querySelector('#rdHdr .rmring'), go: !!document.querySelector('#rdHdr .rmgo2'), hdrH: Math.round(document.getElementById('rdHdr').getBoundingClientRect().height) }; });
+    if (!M.meter || !M.go || M.hdrH > 96 || M.row2 > M.bottom) fails.map.push(`${tag}: header ${M.hdrH}px, the 2nd row ends at ${M.row2}, the screen at ${M.bottom}${M.meter ? '' : ' (no meter)'}${M.go ? '' : ' (no today button)'}`);
     if (w === 375 && h === 548 && mode === 'safari') await shot(p, `map_${w}x${h}_safari`);
     await p.evaluate(() => { document.body.classList.remove('kidside'); go('kids'); });
   }

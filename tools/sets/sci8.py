@@ -34,8 +34,10 @@ def W(s):
 def O(o):
     o = W(o)
     return o if HEB.search(o) or o.startswith("⁦") else "⁦" + o + "⁩"
-def Q(topic, q, opts, ans, expl, sc):
-    return (topic, W(q), [O(o) for o in opts], ans, W(expl), sc)
+def Q(topic, q, opts, ans, expl, sc, lvl=1):
+    t = (topic, W(q), [O(o) for o in opts], ans, W(expl), sc)
+    return t + (2,) if lvl == 2 else t
+def Q2(*a): return Q(*a, lvl=2)        # a test-level question (the level of a real grade-8 test – "⭐ שלב מבחן")
 
 def TWO(a, b, s=40):
     """Two emoji side by side."""

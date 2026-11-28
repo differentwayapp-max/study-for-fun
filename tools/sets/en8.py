@@ -153,7 +153,7 @@ C.append(("Future: will or going to?", [FU], [
  Q(FU, "Someone's at the door. – Don't get up, I ___ open it!", ["will", "did", "have", "was"], 0, "החלטה של הרגע ← will", ROW("🚪", "🔔")),
  Q(FU, "\"We're flying to Eilat on Friday.\" It is about:", ["a future plan", "the past", "a habit", "a rule"], 0, "on Friday ← תוכנית לעתיד", ROW("✈️", "🏖️")),
  Q(FU, "Which sentence is a prediction?", ["It will rain", "I'm meeting Dan", "Close the door", "I went home"], 0, "תחזית ← will", ROW("🔮", "☀️")),
- Q2(FU, "Which is correct? The glass is at the edge! It ___ fall.", ["is going to", "will to", "going to", "is go to"], 0, "רואים סימן ברור ← is going to", ROW("🥛", "🍽️")),
+ Q2(FU, "Which is correct? The glass is at the edge! It ___ fall.", ["is going to", "will to", "going to", "is go to"], 0, "רואים סימן ברור ← is going to", ROW("🥤", "⚠️")),
  Q2(FU, "\"I'm meeting Ron at 5.\" – What ___ at 5?", ["are you doing", "will you doing", "do you doing", "you are doing"], 0, "סידור לעתיד ← What are you doing?", ROW("📅", "🕔")),
 ]))
 
@@ -217,7 +217,7 @@ C.append(("Irregular and long adjectives", [CS], [
  Q(CS, "A cheetah is ___ than a horse.", ["faster", "fastest", "more fast", "the faster"], 0, "than ← fast + er", ROW("🐆", "🐎")),
  Q(CS, "Comparative of heavy?", ["heavier", "heavyer", "more heavy", "heaviest"], 0, "y אחרי עיצור ← ier", PW("🏋️", "heavy → ?")),
  Q(CS, "Which pair is irregular?", ["good – better", "tall – taller", "big – bigger", "nice – nicer"], 0, "good – better: לא מוסיפים er", ROW("📏", "❓")),
- Q2(CS, "Look at the card. A bike is ___ than a car.", ["less expensive", "more expensive", "less expensiver", "least expensive"], 0, "less + תואר + than = פחות … מ-", TXT("bike: 500 ₪", "car: 90,000 ₪")),
+ Q2(CS, "Look at the card. Which word is wrong?", ["more", "taller", "than", "is"], 0, "taller כבר משווה – בלי more", TXT("She is more", "taller than me.")),
 ]))
 
 C.append(("as … as · the most · comparing facts", [CS], [
@@ -234,6 +234,7 @@ C.append(("as … as · the most · comparing facts", [CS], [
  Q2(CS, "Jerusalem is one of the ___ in the world.", ["oldest cities", "oldest city", "older cities", "most old cities"], 0, "one of the + הכי + רבים", ROW("🕌", "🏛️")),
  Q2(CS, "Look at the card. Tom's bag is ___ as Dan's.", ["twice as heavy", "twice as heavier", "two as heavy", "twice heavy"], 0, "פי שניים = twice as … as", TXT("Tom: 10 kg", "Dan: 5 kg")),
  Q2(CS, "It was ___ a hot day that we stayed inside.", ["such", "so", "too", "very"], 0, "such + a + תואר + שם עצם", ROW("☀️", "🏠")),
+ Q2(CS, "Look at the card. A bike is ___ (expensive) than a car.", ["less expensive", "more expensive", "less expensiver", "least expensive"], 0, "less + תואר + than = פחות … מ-", TXT("bike: 500 ₪", "car: 90,000 ₪")),
 ]))
 
 # ───────────── Modals ─────────────
@@ -283,6 +284,7 @@ C.append(("too much · too many · enough · few", [QT], [
  Q(QT, "I need ___ minutes to get ready – maybe five.", ["a few", "a little", "much", "little"], 0, "minutes נספר + מעט ← a few", ROW("👕", "⏱️")),
  Q2(QT, "Few people came, so the party was ___.", ["boring", "great", "crowded", "full"], 0, "few = מעט מאוד (כמעט אף אחד)", ROW("🎉", "👤")),
  Q2(QT, "Which is correct? ___ of the 20 guests came. Not one!", ["None", "Neither", "Every", "Either"], 0, "אף אחד מתוך הרבה ← None", ROW("🎂", "🚪")),
+ Q2(QT, "___ of my two friends came. I was alone.", ["Neither", "Both", "Either", "All"], 0, "אף אחד משניים ← Neither", ROW("👫", "😞")),
 ]))
 
 C.append(("Countable or uncountable?", [QT], [
@@ -296,7 +298,6 @@ C.append(("Countable or uncountable?", [QT], [
  Q(QT, "I'd like ___ bread, please.", ["some", "many", "a few", "few"], 0, "בקשה + לא נספר ← some", ROW("🍞", "🙏")),
  Q(QT, "There are only ___ apples on the table.", ["a few", "a little", "much", "no"], 0, "שלושה תפוחים = a few", COUNT(("🍎", 3))),
  Q(QT, "___ of my parents are teachers.", ["Both", "Each", "Every", "Either"], 0, "שני ההורים ← Both … are", ROW("👨‍🏫", "👩‍🏫")),
- Q2(QT, "___ of my two friends came. I was alone.", ["Neither", "Both", "Either", "All"], 0, "אף אחד משניים ← Neither", ROW("👫", "😞")),
  Q2(QT, "Which is correct? ___ of the 30 students got a prize.", ["Each", "Every", "Much", "A little"], 0, "Each of + רבים (Every לא בא לפני of)", ROW("🏅", "👩‍🎓")),
 ]))
 
@@ -347,7 +348,7 @@ C.append(("Passive: is made · are spoken", [PS], [
  Q(PS, "Passive in the present: am / is / are + ___", ["V3", "V1", "-ing", "to + verb"], 0, "סביל בהווה: is/are + צורה שלישית", TXT("is + ?")),
  Q2(PS, "The museum ___ two million visitors a year.", ["gets", "is got", "is visited", "was visited"], 0, "המוזיאון מקבל מבקרים ← פעיל: gets", ROW("🏛️", "👥")),
  Q2(PS, "Active: They sell bread here. Passive: Bread ___ here.", ["is sold", "sells", "is sell", "are sold"], 0, "sell-sold-sold, bread יחיד ← is sold", ROW("🍞", "🏪")),
- Q2(PS, "Plastic bags ___ in this shop. Bring your own!", ["aren't given", "don't give", "isn't given", "not given"], 0, "שלילה בסביל ← aren't + V3", ROW("🛍️", "🚫")),
+ Q2(PS, "Which is correct? Plastic bags ___ here. Bring your own!", ["aren't given", "don't give", "isn't given", "not given"], 0, "שלילה בסביל ← aren't + V3", ROW("🛍️", "🚫")),
 ]))
 
 C.append(("Passive: was built · were written", [PS], [
@@ -411,7 +412,7 @@ C.append(("Word building: -tion · -ment · -ful · -less", [WF], [
  Q(WF, "A ___ hero is never afraid.", ["fearless", "fearful", "unfear", "fearment"], 0, "fear + less = בלי פחד", "🦸"),
  Q(WF, "\"careless\" means:", ["לא זהיר", "זהיר מאוד", "אכפתי", "דאגה"], 0, "less = בלי ← בלי זהירות", TXT("careless")),
  Q2(WF, "Thank you for your ___ (kind).", ["kindness", "kindly", "kindful", "unkind"], 0, "kind + ness = שם עצם: טוּב לב", ROW("🎁", "🤝")),
- Q2(WF, "The team played ___ (bad) and lost.", ["badly", "bad", "worse", "badness"], 0, "איך שיחקו? ← תואר פועל: bad + ly", ROW("⚽", "😞")),
+ Q2(WF, "The team played ___ (bad) and lost.", ["badly", "bad", "badful", "badness"], 0, "איך שיחקו? ← תואר פועל: bad + ly", ROW("⚽", "😞")),
  Q2(WF, "The test was a big ___ for me. I got 100!", ["success", "succeed", "successful", "successfully"], 0, "a big + שם עצם ← success", PW("📝", "100")),
  Q2(WF, "In \"a careful driver\", careful is a/an:", ["adjective", "noun", "verb", "adverb"], 0, "מתאר את שם העצם driver ← adjective", ROW("🚗", "👨")),
 ]))
@@ -479,7 +480,6 @@ C.append(("The environment", [VE], [
  Q(VE, "Smoke from factories can ___ our lungs.", ["harm", "help", "save", "heal"], 0, "לפגוע = harm", ROW("🏭", "💨")),
  Q(VE, "Many animals can't ___ without water.", ["survive", "survey", "serve", "supply"], 0, "לשרוד = survive", ROW("🐪", "💧")),
  Q2(VE, "If we waste water, we'll run ___ of it.", ["out", "off", "away", "up"], 0, "run out of = ייגמר לנו", ROW("🚰", "💧")),
- Q2(VE, "Turn ___ the lights when you leave the room.", ["off", "up", "away", "in"], 0, "turn off = לכבות", ROW("💡", "🚪")),
 ]))
 
 C.append(("Science & technology", [VE], [
@@ -495,6 +495,7 @@ C.append(("Science & technology", [VE], [
  Q(VE, "A small program on your phone is an ___.", ["app", "ape", "apple", "aim"], 0, "יישומון = app", ROW("📱", "👆")),
  Q2(VE, "Please pay ___ to the safety instructions.", ["attention", "interest", "care", "notice"], 0, "pay attention = לשים לב", ROW("🔬", "⚠️")),
  Q2(VE, "I forgot ___ my phone. Now it's dead.", ["to charge", "charge", "charged", "to charging"], 0, "forget + to + פועל = שכחתי לעשות", ROW("📱", "🔋")),
+ Q2(VE, "Turn ___ the lights when you leave the room.", ["off", "up", "away", "in"], 0, "turn off = לכבות", ROW("💡", "🚪")),
 ]))
 
 # ───────────── Words: health & travel ─────────────
@@ -524,7 +525,7 @@ C.append(("Travel", [VH], [
  Q(VH, "גבול (בין מדינות) = ?", ["border", "order", "board", "harbor"], 0, "גבול = border", ROW("🛂", "🚧")),
  Q(VH, "נוף = ?", ["view", "voice", "visit", "video"], 0, "נוף = view", ROW("🏞️", "👀")),
  Q(VH, "מקומי = ?", ["local", "lovely", "lonely", "loud"], 0, "מקומי = local", ROW("🏘️", "🧑")),
- Q2(VH, "Can you look ___ my cat while I'm away?", ["after", "for", "at", "up"], 0, "look after = לשמור על, לטפל", ROW("🐈", "🧳")),
+ Q2(VH, "Can you look ___ my cat while I'm away?", ["after", "out", "on", "up"], 0, "look after = לשמור על, לטפל", ROW("🐈", "🧳")),
  Q2(VH, "The plane took ___ at 6 a.m.", ["off", "up", "out", "on"], 0, "take off = להמריא", ROW("✈️", "🕕")),
  Q2(VH, "I'm looking forward to ___ Rome next month.", ["visiting", "visit", "visited", "to visit"], 0, "looking forward to + ing", ROW("🇮🇹", "📅")),
 ]))
@@ -541,7 +542,7 @@ C.append(("Media", [VM], [
  Q(VM, "Fake news is news that is ___.", ["not true", "very new", "very long", "funny"], 0, "fake = מזויף, לא אמיתי", ROW("📰", "📱")),
  Q(VM, "צופים (בטלוויזיה) = ?", ["viewers", "readers", "listeners", "writers"], 0, "צופים = viewers", ROW("📺", "👀")),
  Q(VM, "A website where you share your thoughts is a ___.", ["blog", "bag", "bug", "plug"], 0, "יומן ברשת = blog", ROW("💻", "✍️")),
- Q2(VM, "The editor has to ___ a decision today.", ["make", "do", "give", "get"], 0, "make a decision = לקבל החלטה", ROW("📰", "✍️")),
+ Q2(VM, "The editor has to ___ a decision today.", ["make", "do", "say", "get"], 0, "make a decision = לקבל החלטה", ROW("📰", "✍️")),
 ]))
 
 C.append(("More feelings", [VM], [

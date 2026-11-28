@@ -939,48 +939,6 @@
    "status": "ready"
   },
   {
-   "id": "heb8",
-   "ver": "aaeb7efd94",
-   "subject": "עברית / לשון",
-   "grade": 7,
-   "title": "הבנת הנקרא · סיכום ממזג · טיעון · תחביר ופסוקיות · פיסוק וציטוט · גזרות (גם פ״א ול״א) ובניינים · משקלים · שם המספר · משלב",
-   "desc": "חמישה קטעי קריאה (מאמר דעה, סיכום מחקר עם נתונים, טקסט מידעי ושני טקסטים להשוואה), סיכום ממזג, כתיבת טיעון ומילות קישור, חלקי המשפט ותיאורים, פסוקיות, גזרות, בניינים בכל הזמנים, משקלים, שם המספר, מילות יחס בנטייה, משלב, פיסוק (פסיק במשפט מאוחה ומורכב, ציטוט, סוגריים וקו מפריד) וגזרות פ״א ול״א",
-   "desc_en": "Five reading passages (op-eds, a research summary with data, an informational text and two texts to compare), merged summary, argument writing and connectors, sentence parts and adverbials, subordinate clauses, verb groups, binyanim in all tenses, noun patterns, number words, inflected prepositions, register, punctuation (commas in compound and complex sentences, quoting, brackets and the dash) and the פ״א / ל״א verb groups",
-   "tags": [
-    "טקסט טיעוני",
-    "טקסט מידעי",
-    "סיכום ממזג",
-    "טיעון",
-    "תיאורים",
-    "פסוקיות",
-    "גזרות",
-    "בניינים",
-    "משקלים",
-    "שם המספר",
-    "פיסוק",
-    "פ״א ול״א"
-   ],
-   "questions": 301,
-   "chapters": 29,
-   "reading": 5,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהי ההכללה של הפעולות בכרטיס?",
-     "e": "🧳קנה כרטיס, ארז"
-    },
-    {
-     "q": "מהי סוגיה?",
-     "e": "📝🔍"
-    },
-    {
-     "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
-     "e": "🌦️הואיל והגשם פסק,"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci8",
    "ver": "2196e0b978",
    "subject": "מדעים",
@@ -1368,51 +1326,8 @@
    "status": "ready"
   },
   {
-   "id": "en8",
-   "ver": "e5dfdaeaf2",
-   "subject": "אנגלית",
-   "grade": 7,
-   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
-   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
-   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
-   "tags": [
-    "Present Perfect",
-    "since / for",
-    "when / while",
-    "will / going to",
-    "If … will",
-    "Modals",
-    "who / which / that",
-    "Passive",
-    "used to",
-    "Connectors",
-    "Band II words",
-    "Word building",
-    "Unseen"
-   ],
-   "questions": 472,
-   "chapters": 37,
-   "reading": 4,
-   "words": 59,
-   "samples": [
-    {
-     "q": "She ___ her homework, so she can watch TV.",
-     "e": "👧📓"
-    },
-    {
-     "q": "I haven't finished my project ___.",
-     "e": "📋⏳"
-    },
-    {
-     "q": "We ___ about the trip the day before yesterday.",
-     "e": "🗣️🧳"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math8",
-   "ver": "bd0ba91004",
+   "ver": "f7d5246fe0",
    "subject": "מתמטיקה",
    "grade": 7,
    "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
@@ -1452,6 +1367,93 @@
     {
      "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
      "e": "y = 2x + 5"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en8",
+   "ver": "90421026b9",
+   "subject": "אנגלית",
+   "grade": 7,
+   "title": "Present Perfect · Conditionals · Passive · used to · Band II · Unseen",
+   "desc": "אנגלית לכיתה ח': Present Perfect, עבר מול Present Perfect, Past Progressive, עתיד, משפטי תנאי, השוואות, פעלים מודאליים, כמתים, who/which/that, סביל (is made / was built), used to, כתיבת פסקה ומילות קישור, אוצר מילים Band II, גזירת מילים (un-, dis-, ‎-ful, ‎-less, ‎-tion) וארבעה קטעי Unseen ארוכים",
+   "desc_en": "Grade 8 English: Present Perfect, Past Simple vs Present Perfect, Past Progressive, future forms, the first conditional, comparatives, modals, quantifiers, relative pronouns, the passive (is made / was built), used to, paragraphs and connectors, Band II words, word building (un-, dis-, -ful, -less, -tion) and four longer Unseen passages",
+   "tags": [
+    "Present Perfect",
+    "since / for",
+    "when / while",
+    "will / going to",
+    "If … will",
+    "Modals",
+    "who / which / that",
+    "Passive",
+    "used to",
+    "Connectors",
+    "Band II words",
+    "Word building",
+    "Unseen"
+   ],
+   "questions": 380,
+   "questions2": 93,
+   "chapters": 37,
+   "reading": 4,
+   "words": 59,
+   "samples": [
+    {
+     "q": "She ___ her homework, so she can watch TV.",
+     "e": "👧📓"
+    },
+    {
+     "q": "I haven't finished my project ___.",
+     "e": "📋⏳"
+    },
+    {
+     "q": "We ___ about the trip the day before yesterday.",
+     "e": "🗣️🧳"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb8",
+   "ver": "264c37dead",
+   "subject": "עברית / לשון",
+   "grade": 7,
+   "title": "הבנת הנקרא · סיכום ממזג · טיעון · תחביר ופסוקיות · פיסוק וציטוט · גזרות (גם פ״א ול״א) ובניינים · משקלים · שם המספר · משלב",
+   "desc": "חמישה קטעי קריאה (מאמר דעה, סיכום מחקר עם נתונים, טקסט מידעי ושני טקסטים להשוואה), סיכום ממזג, כתיבת טיעון ומילות קישור, חלקי המשפט ותיאורים, פסוקיות, גזרות, בניינים בכל הזמנים, משקלים, שם המספר, מילות יחס בנטייה, משלב, פיסוק (פסיק במשפט מאוחה ומורכב, ציטוט, סוגריים וקו מפריד) וגזרות פ״א ול״א",
+   "desc_en": "Five reading passages (op-eds, a research summary with data, an informational text and two texts to compare), merged summary, argument writing and connectors, sentence parts and adverbials, subordinate clauses, verb groups, binyanim in all tenses, noun patterns, number words, inflected prepositions, register, punctuation (commas in compound and complex sentences, quoting, brackets and the dash) and the פ״א / ל״א verb groups",
+   "tags": [
+    "טקסט טיעוני",
+    "טקסט מידעי",
+    "סיכום ממזג",
+    "טיעון",
+    "תיאורים",
+    "פסוקיות",
+    "גזרות",
+    "בניינים",
+    "משקלים",
+    "שם המספר",
+    "פיסוק",
+    "פ״א ול״א"
+   ],
+   "questions": 301,
+   "questions2": 91,
+   "chapters": 29,
+   "reading": 5,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהי ההכללה של הפעולות בכרטיס?",
+     "e": "🧳קנה כרטיס, ארז"
+    },
+    {
+     "q": "מהי סוגיה?",
+     "e": "📝🔍"
+    },
+    {
+     "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
+     "e": "🌦️הואיל והגשם פסק,"
     }
    ],
    "status": "ready"

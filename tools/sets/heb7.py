@@ -27,9 +27,11 @@ def W(s):
     """{…} → left-to-right inside Hebrew text (numbers)."""
     return re.sub(r"\{([^}]*)\}", lambda m: "⁦" + m.group(1) + "⁩", s)
 
-def Q(topic, q, opts, expl, sc):
-    """The right answer is always written first; the builder shuffles the options."""
-    return (topic, W(q), opts, 0, expl, sc)
+def Q(topic, q, opts, expl, sc, lvl=1):
+    """The right answer is always written first; the builder shuffles the options.
+    lvl=2 marks a test-level question (a 7th field 2 – "⭐ שלב מבחן")."""
+    t = (topic, W(q), opts, 0, expl, sc)
+    return t + (2,) if lvl == 2 else t
 
 def ROW(*es):
     """A few different emoji in a row (the things the question talks about)."""
@@ -239,8 +241,8 @@ C.append(("מושא, תיאור ולוואי", [PRT], [
 
 # ══════════════════════ Sentence types ══════════════════════
 OPTS3 = ["משפט פשוט", "משפט מחובר", "משפט מורכב", "צירוף, לא משפט"]
-def TYPE(q, ans, sent, e, expl):
-    return Q(SNT, q, [OPTS3[ans]] + [o for i, o in enumerate(OPTS3) if i != ans], expl, S(sent, e=e))
+def TYPE(q, ans, sent, e, expl, lvl=1):
+    return Q(SNT, q, [OPTS3[ans]] + [o for i, o in enumerate(OPTS3) if i != ans], expl, S(sent, e=e), lvl)
 
 C.append(("פשוט, מחובר או מורכב?", [SNT], [
  TYPE("איזה סוג משפט בכרטיס?", 1, "ירד גשם, ולכן נשארנו בבית.", "🌧️", "שני משפטים עצמאיים, מחוברים ב״ולכן״"),
@@ -296,8 +298,8 @@ C.append(("השלמת מילות קישור", [CON], [
 ]))
 
 # ══════════════════════ Roots and גזרות ══════════════════════
-def ROOTQ(q, word, root, wrong, e, expl):
-    return Q(ROOT, q.format(w=word), [root] + wrong, expl, WC(word, e))
+def ROOTQ(q, word, root, wrong, e, expl, lvl=1):
+    return Q(ROOT, q.format(w=word), [root] + wrong, expl, WC(word, e), lvl)
 
 C.append(("מה השורש?", [ROOT], [
  ROOTQ('מה השורש של המילה "{w}"?', "תיפול", "נ־פ־ל", ["ת־פ־ל", "י־פ־ל", "פ־ו־ל"], "🍂", "נפל, ייפול – הנ׳ נבלעת: גזרת פ״נ"),
@@ -313,8 +315,8 @@ C.append(("מה השורש?", [ROOT], [
 ]))
 
 GZ = ["שלמים", "פ״נ", "פ״י", "ל״ה", "ע״ו / ע״י"]
-def GZQ(q, ans, wrong, sc, expl):
-    return Q(ROOT, q, [ans] + wrong, expl, sc)
+def GZQ(q, ans, wrong, sc, expl, lvl=1):
+    return Q(ROOT, q, [ans] + wrong, expl, sc, lvl)
 
 C.append(("גזרות", [ROOT], [
  GZQ("לאיזו גזרה שייך השורש נ־פ־ל?", "פ״נ", ["ל״ה", "ע״ו / ע״י", "שלמים"], WC("נ־פ־ל", "🍂"), "האות הראשונה בשורש היא נ׳"),
@@ -331,8 +333,8 @@ C.append(("גזרות", [ROOT], [
 
 # ══════════════════════ בניינים ══════════════════════
 BN = ["פעל", "נפעל", "פיעל", "פועל", "הפעיל", "הופעל", "התפעל"]
-def BNQ(q, word, ans, wrong, e, expl):
-    return Q(BIN, q.format(w=word), [ans] + wrong, expl, WC(word, e))
+def BNQ(q, word, ans, wrong, e, expl, lvl=1):
+    return Q(BIN, q.format(w=word), [ans] + wrong, expl, WC(word, e), lvl)
 
 C.append(("באיזה בניין?", [BIN], [
  BNQ('באיזה בניין הפועל "{w}"?', "יִיגָּמֵר", "נפעל", ["פעל", "פיעל", "הופעל"], "⌛", "נגמר ← ייגמר: נפעל בעתיד"),
@@ -364,8 +366,8 @@ C.append(("משמעות הבניינים", [BIN], [
 MIKTAL, MAKTEL, KATAL, KTILA, KITUL = "מִקְטָל", "מַקְטֵל", "קַטָּל", "קְטִילָה", "קִטּוּל"
 HAKTALA, KATELET, MIKTALA, KATLAN = "הַקְטָלָה", "קַטֶּלֶת", "מִקְטָלָה", "קַטְלָן"
 
-def MQ(q, word, ans, wrong, e, expl):
-    return Q(MSH, q.format(w=word), [ans] + wrong, expl, WC(word, e))
+def MQ(q, word, ans, wrong, e, expl, lvl=1):
+    return Q(MSH, q.format(w=word), [ans] + wrong, expl, WC(word, e), lvl)
 
 C.append(("איזה משקל?", [MSH], [
  MQ('באיזה משקל המילה "{w}"?', "מִגְדָּל", MIKTAL, [MAKTEL, KATAL, KTILA], "🗼", "מִגְדָּל – מִקְטָל"),
@@ -395,8 +397,8 @@ C.append(("שם פעולה ובניית מילים", [MSH], [
 ]))
 
 # ══════════════════════ Number words ══════════════════════
-def NQ(q, data, ans, wrong, e, expl):
-    return Q(NUM, q, [ans] + wrong, expl, CARD(data, e=e))
+def NQ(q, data, ans, wrong, e, expl, lvl=1):
+    return Q(NUM, q, [ans] + wrong, expl, CARD(data, e=e), lvl)
 
 C.append(("זכר ונקבה במספרים", [NUM], [
  NQ("איך קוראים נכון את הכתוב בכרטיס?", "3 שקלים", "שלושה שקלים", ["שלוש שקלים", "שלושת שקלים", "שלושים שקלים"], "💰", "שקל – זכר: שלושה"),
@@ -425,8 +427,8 @@ C.append(("מספרים בהקשר ובסמיכות", [NUM], [
 ]))
 
 # ══════════════════════ Inflected prepositions ══════════════════════
-def PQ(p, g, ans, wrong, e, expl):
-    return Q(PREP, f'מה הצורה של "{p}" בגוף {g}?', [ans] + wrong, expl, CARD(f"{p} + {g}", e=e))
+def PQ(p, g, ans, wrong, e, expl, lvl=1):
+    return Q(PREP, f'מה הצורה של "{p}" בגוף {g}?', [ans] + wrong, expl, CARD(f"{p} + {g}", e=e), lvl)
 
 C.append(("נטיית מילות יחס", [PREP], [
  PQ("את", "אנחנו", "אותנו", ["איתנו", "אותינו", "אתכם"], "👥", "את + אנחנו = אותנו"),

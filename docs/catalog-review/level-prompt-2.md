@@ -19,7 +19,7 @@
 - **מסמך רמה ל-math7:** `docs/grade-levels/math7.md`, מדף עבודה אמיתי. אסור להעתיק ממנו תרגילים, כותבים חדשים.
 - **נקודת ההתחלה:** עובדים על הענף `claude/friendly-goldberg-0w7hhg`. **מתחילים רק אחרי ש:**
   - (1) סבב התיקונים של ז' (`fix-prompt-round9.md`) נדחף לענף.
-  - (2) `level-prompt-1.md` סיים את math7. הוא כותב את רמה ב' של מספרים מכוונים וחוק הפילוג ב-math7, ולכן **בפרומט הזה לא נוגעים בפרקים האלה של math7**.
+  - (2) רמה ב' של מספרים מכוונים וחוק הפילוג ב-math7 **כבר נכתבה** (58 שאלות, `reviews-round9/math7-level2.md`). **בפרומט הזה לא נוגעים בפרקים האלה של math7.**
   ```
   git fetch origin claude/friendly-goldberg-0w7hhg && git checkout claude/friendly-goldberg-0w7hhg && git pull
   ```

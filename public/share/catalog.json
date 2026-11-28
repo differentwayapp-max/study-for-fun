@@ -645,48 +645,6 @@
    "status": "ready"
   },
   {
-   "id": "math7",
-   "ver": "6ab43ba84a",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
-   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
-   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
-   "tags": [
-    "מספרים מכוונים",
-    "ביטויים אלגבריים",
-    "כינוס איברים",
-    "חוק הפילוג",
-    "משוואות",
-    "בעיות מילוליות",
-    "מערכת צירים",
-    "פונקציות וגרפים",
-    "חזקות ושורשים",
-    "יחס",
-    "שטחים",
-    "זוויות"
-   ],
-   "questions": 338,
-   "chapters": 32,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
-     "e": "-6 ? -11"
-    },
-    {
-     "q": "⁦-4·(-6) = ?⁩",
-     "e": "-4·(-6)= ?"
-    },
-    {
-     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
-     "e": "2x + 1x = 3"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math7-nov26",
    "ver": "a592b6ae69",
    "subject": "מתמטיקה",
@@ -1450,6 +1408,48 @@
     {
      "q": "איפה נמצאים הפרוטונים?",
      "e": "⚛️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math7",
+   "ver": "575d2d5e6f",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
+   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
+   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
+   "tags": [
+    "מספרים מכוונים",
+    "ביטויים אלגבריים",
+    "כינוס איברים",
+    "חוק הפילוג",
+    "משוואות",
+    "בעיות מילוליות",
+    "מערכת צירים",
+    "פונקציות וגרפים",
+    "חזקות ושורשים",
+    "יחס",
+    "שטחים",
+    "זוויות"
+   ],
+   "questions": 396,
+   "chapters": 32,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
+     "e": "-6 ? -11"
+    },
+    {
+     "q": "⁦-4·(-6) = ?⁩",
+     "e": "-4·(-6)= ?"
+    },
+    {
+     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
+     "e": "2x + 1x = 3"
     }
    ],
    "status": "ready"

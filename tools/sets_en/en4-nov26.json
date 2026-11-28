@@ -18,8 +18,8 @@
   "Prepositions": "Prepositions",
   "Verbs": "Verbs",
   "Missing letter": "Missing letter",
-  "ABC: big & small A–M": "ABC: big & small A–M",
-  "ABC: big & small N–Z": "ABC: big & small N–Z",
+  "ABC: big & small A–M": "ABC: capital & small A–M",
+  "ABC: big & small N–Z": "ABC: capital & small N–Z",
   "ABC: order & first letter": "ABC: order & first letter",
   "First letter A–D": "First letter A–D",
   "First letter E–L": "First letter E–L",
@@ -536,7 +536,7 @@
    "he": "Starts with?",
    "a": "f",
    "h": "88be53a6",
-   "q": "Starts with?",
+   "q": "What letter does it start with?",
    "o": [
     "f",
     "p",
@@ -549,7 +549,7 @@
    "he": "Starts with?",
    "a": "o",
    "h": "e3aefa02",
-   "q": "Starts with?",
+   "q": "What letter does it start with?",
    "o": [
     "o",
     "a",
@@ -562,7 +562,7 @@
    "he": "Starts with?",
    "a": "l",
    "h": "7a937f6c",
-   "q": "Starts with?",
+   "q": "What letter does it start with?",
    "o": [
     "l",
     "i",
@@ -1693,7 +1693,7 @@
    "he": "Which verb?",
    "a": "run",
    "h": "65a099f8",
-   "q": "Which verb?",
+   "q": "Which verb fits the picture?",
    "o": [
     "run",
     "swim",
@@ -1706,7 +1706,7 @@
    "he": "Which verb?",
    "a": "swim",
    "h": "2401ea21",
-   "q": "Which verb?",
+   "q": "Which verb fits the picture?",
    "o": [
     "swim",
     "fly",
@@ -1719,7 +1719,7 @@
    "he": "Which verb?",
    "a": "fly",
    "h": "7221b426",
-   "q": "Which verb?",
+   "q": "Which verb fits the picture?",
    "o": [
     "fly",
     "swim",
@@ -1732,7 +1732,7 @@
    "he": "Which verb?",
    "a": "sleep",
    "h": "a5ad7ad5",
-   "q": "Which verb?",
+   "q": "Which verb fits the picture?",
    "o": [
     "sleep",
     "eat",

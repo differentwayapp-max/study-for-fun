@@ -1612,55 +1612,6 @@
    ]
   },
   {
-   "id": "en4-nov26",
-   "ver": "05063c619a",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 144,
-   "chapters": 13,
-   "reading": 0,
-   "words": 36,
-   "samples": [
-    {
-     "q": "האות הקטנה?",
-     "e": "A",
-     "q_en": "The small letter?"
-    },
-    {
-     "q": "האות הגדולה?",
-     "e": "n",
-     "q_en": "The capital letter?"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB",
-     "q_en": "What comes next?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – ABC, Colors, Animals",
-   "title_en": "ABC · Colors · Animals",
-   "tags_en": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ]
-  },
-  {
    "id": "sci7",
    "ver": "b99c7d687a",
    "subject": "מדעים",
@@ -1790,6 +1741,55 @@
     "Vowel sounds",
     "Hello & my name",
     "Reading sentences"
+   ]
+  },
+  {
+   "id": "en4-nov26",
+   "ver": "bf225c005e",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 144,
+   "chapters": 13,
+   "reading": 0,
+   "words": 36,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A",
+     "q_en": "The small letter?"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n",
+     "q_en": "The capital letter?"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB",
+     "q_en": "What comes next?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – ABC, Colors, Animals",
+   "title_en": "ABC · Colors · Animals",
+   "tags_en": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
    ]
   }
  ]

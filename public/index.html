@@ -1568,7 +1568,7 @@ const EMAIL_LINK=false;   // true once Authentication → Sign-in method → Ema
 // tutor's invitation): off while the store version is for families only (the owner's decision, 28.11); a test turns them on
 window.SFF_TEACH_ON=window.SFF_TEACH_LINKS===true; const TEACH_LINKS=window.SFF_TEACH_ON;
 const TERMS_VERSION = '2026-11-21';   // the date in tools/docs/terms-*.md (terms.html) – change both together; a new one is approved again
-const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
+const PRIVACY_VERSION = '2026-11-28'; // the date at the top of privacy.html – recorded with every approval (a change alone asks nothing again)
   W.__sffStage = 'module';
   // kid's phone: if the Firebase library can't run here (Lockdown Mode) or doesn't start in time → backup connection
   const isKid = !!(W.SFF_KID_DEVICE && LS.getItem('sff_fam') && LS.getItem('sff_tok'));
@@ -5034,7 +5034,7 @@ async function cloudInit(){
   if(!DB) return;
   if(window.SFF_KID_DEVICE){ let inf=null, denied=false; try{ inf=await DB.doc('fam/info').get(); }catch(e){ denied=true; }
     const fam=lsGet('sff_fam');
-    if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ if(!window.SFF_TEACH_ON){ teachSoon(); return; } lsSet('sff_cls',fam); window.SFF_CLS_INFO=inf.data(); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
+    if(inf&&inf.exists&&inf.data()&&inf.data().kind==='class'){ if(!window.SFF_TEACH_ON){ teachSoon(true); return; } lsSet('sff_cls',fam); window.SFF_CLS_INFO=inf.data(); const me=LOCK||lsGet('sff_lock'); if(me){ classKidCloud(me); return; } }
     // this phone was a student's in a group and no longer may read it (consent withdrawn): nothing of the group stays here
     if(denied && fam && lsGet('sff_cls')===fam){ kidPhoneGone('kid: permission-denied'); return; } }
   if(isClassMode()) classCloud();
@@ -5703,9 +5703,10 @@ function joinShell(){ let el=$('joinPage'); if(!el){ el=document.createElement('
   return $('jBody'); }
 // the store version for families (TEACH_LINKS off): a teacher's links – joining a group (?join= / ?req=) or a student's phone in a
 // group – open only this note; nothing is asked or kept (no anonymous sign-in, no request, no consent)
-function teachSoon(){ const b=joinShell(); document.getElementById('sffLoad')?.remove();
+function teachSoon(groupKid){ const b=joinShell(); document.getElementById('sffLoad')?.remove();
   b.innerHTML=`<div class="card jstat" id="teachSoon"><div class="big">🏫</div><h2>ההצטרפות לקבוצות של מורים תיפתח בקרוב</h2>
-    <p class="sub">בינתיים אפשר לתרגל עם המשפחה: הורה פותח את האפליקציה, מוסיף ילד/ה ושולח קישור לטלפון של הילד/ה.</p></div>`; }
+    <p class="sub">בינתיים אפשר לתרגל עם המשפחה: הורה פותח את האפליקציה, מוסיף ילד/ה ושולח קישור לטלפון של הילד/ה.</p>
+    <a class="btn" id="teachSoonGo" href="/"${groupKid?` onclick="try{['sff_fam','sff_tok','sff_lock','sff_cls'].forEach(k=>localStorage.removeItem(k));}catch(e){}"`:''}>לאפליקציה ›</a></div>`; }   // a group student's phone: forget the group's link (a family's kid phone keeps its own)
 window.teachSoon=teachSoon;
 const joinErrTxt=c=>c==='link_closed'?'המורה סגר/ה את הקישור הזה. בקשו מהמורה קישור חדש.':c==='link_expired'?'תוקף הקישור הזה הסתיים. בקשו מהמורה קישור חדש.'
   :c==='link_bad'?'הקישור הזה לא תקין או שהוחלף. בקשו מהמורה את הקישור העדכני.':c==='no_signature'?'צריך לחתום בתוך המסגרת.'

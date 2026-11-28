@@ -4539,18 +4539,19 @@ async function saveAdminCfg(){
 // app admins only: a red dot on ☰ and on "יומן שרת" when the server log has something new since it was last opened
 // (the rules let only app admins read serverLog – nobody else can see the dot or the log)
 const SLOG_SEEN='sff_slog_seen';
-async function checkServerLog(){ try{ const r=await window.__sffRoot.newest('serverLog','at'); const at=Number(r&&r.at)||0;
+// the red dot: only something to look at (an error, a slow call, a fallback, AI spend) – never the nightly clean's own report (kind 'info')
+async function checkServerLog(){ try{ const at=(await window.__sffRoot.list('serverLog')).filter(r=>r.kind!=='info').reduce((m,r)=>Math.max(m,Number(r.at)||0),0);
   let seen=0; try{ seen=Number(localStorage.getItem(SLOG_SEEN))||0; }catch(e){}
   const on=at>seen; $('menuBtn').classList.toggle('dot',on); $('slDot')?.classList.toggle('hidden',!on); }catch(e){} }
 async function openServerLog(){
   let list=[]; try{ list=await window.__sffRoot.list('serverLog'); }catch(e){ toast('⚠️ אין הרשאה'); return; }
   list.sort((a,b)=>(Number(b.at)||0)-(Number(a.at)||0));
   try{ localStorage.setItem(SLOG_SEEN,String(Math.max(Date.now(),Number(list[0]&&list[0].at)||0))); }catch(e){} $('menuBtn').classList.remove('dot'); $('slDot')?.classList.add('hidden');
-  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰'};
+  const n=k=>list.filter(r=>r.kind===k).length, ico={error:'⚠️',slow:'🐢',fallback:'🔀',budget:'💰',info:'✅'}, fnName={dailyClean:'ניקוי לילי'};
   const box=$('moreDlg').querySelector('.moresheet'); box.dataset.keep=box.dataset.keep||box.innerHTML;
   box.innerHTML=`<div class="dlghead"><b>🖥️ יומן שרת · ${list.length}</b><button class="btn ghost small" onclick="closeMore()" aria-label="סגירה">✕</button></div>
     <p class="hint" style="margin:0 0 8px">⚠️ תקלות ${n('error')} · 🐢 קריאות איטיות ${n('slow')} · 🔀 מודל חלופי ${n('fallback')}${n('budget')?` · 💰 הוצאות AI ${n('budget')}`:''}</p>`+
-    (list.length?list.slice(0,100).map(r=>`<div class="errrow"><div><b>${esc(new Date(Number(r.at)||0).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}))}</b> · ${ico[r.kind]||'•'} ${esc(r.fn||'')}${r.ms?` · ${Math.round((Number(r.ms)||0)/1000)} שנ'`:''}</div>
+    (list.length?list.slice(0,100).map(r=>`<div class="errrow"><div><b>${esc(new Date(Number(r.at)||0).toLocaleString('he-IL',{dateStyle:'short',timeStyle:'short'}))}</b> · ${ico[r.kind]||'•'} <span>${esc(fnName[r.fn]||r.fn||'')}</span>${r.ms?` · ${Math.round((Number(r.ms)||0)/1000)} שנ'`:''}</div>
       <div class="hint" dir="ltr" translate="no">${esc(r.code||'')} ${esc(r.msg||'')}</div></div>`).join('')
       +`<button class="btn ghost small" style="margin-top:10px" id="slClear">🗑 לנקות את היומן</button>`:'<p class="hint center">אין רשומות 🎉</p>');
   const c=$('slClear'); if(c) c.addEventListener('click',async()=>{ for(const r of list){ try{ await window.__sffRoot.del('serverLog',r.id); }catch(e){} } openServerLog(); });

@@ -1,0 +1,5129 @@
+{
+ "set": {
+  "name": "English – Grade 5",
+  "title": "Grammar · Band I words · Reading",
+  "tags": [
+   "am / is / are",
+   "Present Simple",
+   "Present Progressive",
+   "can / there is",
+   "Plurals",
+   "Pronouns",
+   "Prepositions",
+   "Question words",
+   "Past: was / -ed",
+   "Past: went / ate",
+   "Telling the time",
+   "Band I words",
+   "Reading"
+  ]
+ },
+ "labels": {
+  "am · is · are · have · has": "am · is · are · have · has",
+  "Present Simple": "Present Simple",
+  "Present Progressive": "Present Progressive",
+  "can · there is / are": "can · there is / are",
+  "Plurals": "Plurals",
+  "Pronouns & possessives": "Pronouns & possessives",
+  "Prepositions: place & time": "Prepositions: place & time",
+  "Question words": "Question words",
+  "Past: was / were · -ed": "Past: was / were · -ed",
+  "Past: went · ate · saw · had": "Past: went · ate · saw · had",
+  "Words: daily routine & time": "Words: daily routine & time",
+  "Telling the time": "Telling the time",
+  "Words: home, food & clothes": "Words: home, food & clothes",
+  "Words: weather, hobbies & town": "Words: weather, hobbies & town",
+  "Reading": "Reading",
+  "am · is · are": "am · is · are",
+  "have · has": "have · has",
+  "Present Simple: he plays": "Present Simple: he plays",
+  "Present Simple: don't · doesn't · Do?": "Present Simple: don't · doesn't · Do?",
+  "Present Progressive: is playing": "Present Progressive: is playing",
+  "Now or every day?": "Now or every day?",
+  "can · can't": "can · can't",
+  "there is · there are": "there is · there are",
+  "Plurals: -s · -es · -ies": "Plurals: -s · -es · -ies",
+  "Irregular plurals: man – men": "Irregular plurals: man – men",
+  "Pronouns: I – me · he – him": "Pronouns: I – me · he – him",
+  "my · your · his · her": "my · your · his · her",
+  "Where? in · on · under · next to": "Where? in · on · under · next to",
+  "When? in · on · at": "When? in · on · at",
+  "Who · What · Where": "Who · What · Where",
+  "When · Why · How many": "When · Why · How many",
+  "was · were": "was · were",
+  "Past Simple: -ed": "Past Simple: -ed",
+  "Past: more irregular verbs": "Past: more irregular verbs",
+  "Daily routine": "Daily routine",
+  "Time words": "Time words",
+  "Telling the time: half past": "Telling the time: half past",
+  "Telling the time: quarter past": "Telling the time: quarter past",
+  "At home": "At home",
+  "Food & clothes": "Food & clothes",
+  "Weather & hobbies": "Weather & hobbies",
+  "Places in town": "Places in town",
+  "📖 Reading: A Busy Morning": "📖 Reading: A Busy Morning",
+  "📖 Reading: A Rainy Saturday": "📖 Reading: A Rainy Saturday",
+  "📖 Reading: Our Trip to the Zoo": "📖 Reading: Our Trip to the Zoo",
+  "חזרה כללית": "General review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "My brother is eight, and I ___ eleven.",
+   "a": "am",
+   "h": "331112b7",
+   "q": "My brother is eight, and I ___ eleven.",
+   "o": [
+    "am",
+    "is",
+    "are",
+    "be"
+   ],
+   "x": "I → am"
+  },
+  {
+   "he": "She ___ my best friend.",
+   "a": "is",
+   "h": "e271d341",
+   "q": "She ___ my best friend.",
+   "o": [
+    "is",
+    "am",
+    "are",
+    "be"
+   ],
+   "x": "she → is"
+  },
+  {
+   "he": "They ___ in the park.",
+   "a": "are",
+   "h": "eb684359",
+   "q": "They ___ in the park.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "they → are"
+  },
+  {
+   "he": "The dog ___ hungry.",
+   "a": "is",
+   "h": "6af75c6e",
+   "q": "The dog ___ hungry.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "be"
+   ],
+   "x": "the dog = it → is"
+  },
+  {
+   "he": "We ___ happy today.",
+   "a": "are",
+   "h": "48050127",
+   "q": "We ___ happy today.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "we → are"
+  },
+  {
+   "he": "You ___ a good student.",
+   "a": "are",
+   "h": "b438f82e",
+   "q": "You ___ a good student.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "you → are"
+  },
+  {
+   "he": "I ___ not tired.",
+   "a": "am",
+   "h": "4e6cf9fe",
+   "q": "I ___ not tired.",
+   "o": [
+    "am",
+    "is",
+    "are",
+    "be"
+   ],
+   "x": "I → am not"
+  },
+  {
+   "he": "Tom and Dan ___ brothers.",
+   "a": "are",
+   "h": "0650661b",
+   "q": "Tom and Dan ___ brothers.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "Two people = they → are"
+  },
+  {
+   "he": "___ you ready?",
+   "a": "Are",
+   "h": "170f3d56",
+   "q": "___ you ready?",
+   "o": [
+    "Are",
+    "Is",
+    "Am",
+    "Be"
+   ],
+   "x": "A question with you → Are"
+  },
+  {
+   "he": "Is she a teacher? Yes, she ___.",
+   "a": "is",
+   "h": "833803e1",
+   "q": "Is she a teacher? Yes, she ___.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "does"
+   ],
+   "x": "Is she...? → Yes, she is"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "It is cold.",
+   "h": "db1444c3",
+   "q": "Which is correct?",
+   "o": [
+    "It is cold.",
+    "It are cold.",
+    "It am cold.",
+    "It be cold."
+   ],
+   "x": "it → is"
+  },
+  {
+   "he": "My cats ___ black.",
+   "a": "are",
+   "h": "7d7108aa",
+   "q": "My cats ___ black.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "has"
+   ],
+   "x": "cats = plural → are"
+  },
+  {
+   "he": "I ___ a new bike.",
+   "a": "have",
+   "h": "68ee11be",
+   "q": "I ___ a new bike.",
+   "o": [
+    "have",
+    "has",
+    "am",
+    "is"
+   ],
+   "x": "I → have"
+  },
+  {
+   "he": "He ___ a new ball.",
+   "a": "has",
+   "h": "8db33efd",
+   "q": "He ___ a new ball.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "he → has"
+  },
+  {
+   "he": "She ___ long hair.",
+   "a": "has",
+   "h": "d1d51f12",
+   "q": "She ___ long hair.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "she → has"
+  },
+  {
+   "he": "We ___ two dogs.",
+   "a": "have",
+   "h": "1828b7ba",
+   "q": "We ___ two dogs.",
+   "o": [
+    "have",
+    "has",
+    "are",
+    "is"
+   ],
+   "x": "we → have"
+  },
+  {
+   "he": "My cat ___ green eyes.",
+   "a": "has",
+   "h": "9175d231",
+   "q": "My cat ___ green eyes.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "the cat = it → has"
+  },
+  {
+   "he": "They ___ a big house.",
+   "a": "have",
+   "h": "4d33c54d",
+   "q": "They ___ a big house.",
+   "o": [
+    "have",
+    "has",
+    "is",
+    "am"
+   ],
+   "x": "they → have"
+  },
+  {
+   "he": "Dana ___ a little brother.",
+   "a": "has",
+   "h": "3bc8eeb1",
+   "q": "Dana ___ a little brother.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "Dana = she → has"
+  },
+  {
+   "he": "Do you have a pen? Yes, I ___.",
+   "a": "do",
+   "h": "aa1022f3",
+   "q": "Do you have a pen? Yes, I ___.",
+   "o": [
+    "do",
+    "does",
+    "am",
+    "is"
+   ],
+   "x": "Do you...? → Yes, I do"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "It has wings.",
+   "h": "25efbb8c",
+   "q": "Which is correct?",
+   "o": [
+    "It has wings.",
+    "It have wings.",
+    "It haves wings.",
+    "It is wings."
+   ],
+   "x": "it → has"
+  },
+  {
+   "he": "אין לה = ?",
+   "a": "She doesn't have",
+   "h": "66029e3f",
+   "q": "אין לה = ?",
+   "o": [
+    "She doesn't have",
+    "She don't have",
+    "She doesn't has",
+    "Her doesn't have"
+   ],
+   "x": "אין לה = She doesn't have"
+  },
+  {
+   "he": "Mom and Dad ___ a car.",
+   "a": "have",
+   "h": "1c9cad6c",
+   "q": "Mom and Dad ___ a car.",
+   "o": [
+    "have",
+    "has",
+    "is",
+    "are"
+   ],
+   "x": "Two people = they → have"
+  },
+  {
+   "he": "A spider ___ eight legs.",
+   "a": "has",
+   "h": "5ea12f80",
+   "q": "A spider ___ eight legs.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "a spider = it → has"
+  },
+  {
+   "he": "He ___ football and scores goals.",
+   "a": "plays",
+   "h": "94393fb4",
+   "q": "He ___ football and scores goals.",
+   "o": [
+    "plays",
+    "play",
+    "playing",
+    "playes"
+   ],
+   "x": "he → plays"
+  },
+  {
+   "he": "I ___ milk in the morning.",
+   "a": "drink",
+   "h": "e5b3dfd0",
+   "q": "I ___ milk in the morning.",
+   "o": [
+    "drink",
+    "drinks",
+    "drinking",
+    "drinkes"
+   ],
+   "x": "I → no -s"
+  },
+  {
+   "he": "She ___ to school by bus.",
+   "a": "goes",
+   "h": "6cdab080",
+   "q": "She ___ to school by bus.",
+   "o": [
+    "goes",
+    "go",
+    "gos",
+    "going"
+   ],
+   "x": "she + go → goes"
+  },
+  {
+   "he": "My mom ___ TV at night.",
+   "a": "watches",
+   "h": "6a30e9c2",
+   "q": "My mom ___ TV at night.",
+   "o": [
+    "watches",
+    "watch",
+    "watchs",
+    "watching"
+   ],
+   "x": "After ch, add -es"
+  },
+  {
+   "he": "They ___ in Tel Aviv. It is their home.",
+   "a": "live",
+   "h": "4a51cbe8",
+   "q": "They ___ in Tel Aviv. It is their home.",
+   "o": [
+    "live",
+    "lives",
+    "living",
+    "lifes"
+   ],
+   "x": "they → no -s"
+  },
+  {
+   "he": "The baby ___ when she is hungry.",
+   "a": "cries",
+   "h": "2a404f85",
+   "q": "The baby ___ when she is hungry.",
+   "o": [
+    "cries",
+    "crys",
+    "cry",
+    "crying"
+   ],
+   "x": "y after a consonant → -ies"
+  },
+  {
+   "he": "Dan ___ his teeth every morning.",
+   "a": "brushes",
+   "h": "c1907a14",
+   "q": "Dan ___ his teeth every morning.",
+   "o": [
+    "brushes",
+    "brush",
+    "brushs",
+    "brushing"
+   ],
+   "x": "After sh, add -es"
+  },
+  {
+   "he": "We ___ dinner at seven.",
+   "a": "eat",
+   "h": "0e2673b8",
+   "q": "We ___ dinner at seven.",
+   "o": [
+    "eat",
+    "eats",
+    "eating",
+    "eates"
+   ],
+   "x": "we → no -s"
+  },
+  {
+   "he": "The shop ___ at nine.",
+   "a": "opens",
+   "h": "ac9eb9fd",
+   "q": "The shop ___ at nine.",
+   "o": [
+    "opens",
+    "open",
+    "opening",
+    "opend"
+   ],
+   "x": "the shop = it → opens"
+  },
+  {
+   "he": "My dog is tired. He ___ in his bed.",
+   "a": "sleeps",
+   "h": "5a989f36",
+   "q": "My dog is tired. He ___ in his bed.",
+   "o": [
+    "sleeps",
+    "sleep",
+    "sleeping",
+    "sleepes"
+   ],
+   "x": "the dog = he / it → sleeps"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "She reads books.",
+   "h": "a506886c",
+   "q": "Which is correct?",
+   "o": [
+    "She reads books.",
+    "She readed books.",
+    "She reading books.",
+    "She reades books."
+   ],
+   "x": "she → reads"
+  },
+  {
+   "he": "Lea ___ the piano.",
+   "a": "plays",
+   "h": "9454f6cc",
+   "q": "Lea ___ the piano.",
+   "o": [
+    "plays",
+    "play",
+    "plaies",
+    "playing"
+   ],
+   "x": "y after a vowel → just -s"
+  },
+  {
+   "he": "I ___ like fish.",
+   "a": "don't",
+   "h": "4475c73b",
+   "q": "I ___ like fish.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "not"
+   ],
+   "x": "I → don't"
+  },
+  {
+   "he": "He ___ eat meat. He eats only vegetables.",
+   "a": "doesn't",
+   "h": "08a2d69d",
+   "q": "He ___ eat meat. He eats only vegetables.",
+   "o": [
+    "doesn't",
+    "don't",
+    "isn't",
+    "not"
+   ],
+   "x": "he → doesn't"
+  },
+  {
+   "he": "She doesn't ___ coffee.",
+   "a": "drink",
+   "h": "29675ce9",
+   "q": "She doesn't ___ coffee.",
+   "o": [
+    "drink",
+    "drinks",
+    "drinking",
+    "drank"
+   ],
+   "x": "After doesn't → no -s"
+  },
+  {
+   "he": "They ___ walk to school. They go by bus.",
+   "a": "don't",
+   "h": "f13622a4",
+   "q": "They ___ walk to school. They go by bus.",
+   "o": [
+    "don't",
+    "doesn't",
+    "aren't",
+    "isn't"
+   ],
+   "x": "they → don't"
+  },
+  {
+   "he": "___ you like pizza?",
+   "a": "Do",
+   "h": "d60c5d5e",
+   "q": "___ you like pizza?",
+   "o": [
+    "Do",
+    "Does",
+    "Are",
+    "Is"
+   ],
+   "x": "you → Do"
+  },
+  {
+   "he": "___ she play tennis?",
+   "a": "Does",
+   "h": "5feaeeb4",
+   "q": "___ she play tennis?",
+   "o": [
+    "Does",
+    "Do",
+    "Is",
+    "Are"
+   ],
+   "x": "she → Does"
+  },
+  {
+   "he": "Does he ___ English?",
+   "a": "speak",
+   "h": "a6d88740",
+   "q": "Does he ___ English?",
+   "o": [
+    "speak",
+    "speaks",
+    "speaking",
+    "spoke"
+   ],
+   "x": "After Does → no -s"
+  },
+  {
+   "he": "Do they live here? Yes, they ___.",
+   "a": "do",
+   "h": "bdbd4e9f",
+   "q": "Do they live here? Yes, they ___.",
+   "o": [
+    "do",
+    "does",
+    "are",
+    "is"
+   ],
+   "x": "Do → Yes, they do"
+  },
+  {
+   "he": "Does your cat swim? No, it ___.",
+   "a": "doesn't",
+   "h": "f27ef32c",
+   "q": "Does your cat swim? No, it ___.",
+   "o": [
+    "doesn't",
+    "don't",
+    "isn't",
+    "not"
+   ],
+   "x": "Does → No, it doesn't"
+  },
+  {
+   "he": "My dad ___ work on Saturday. He rests at home.",
+   "a": "doesn't",
+   "h": "72c921dd",
+   "q": "My dad ___ work on Saturday. He rests at home.",
+   "o": [
+    "doesn't",
+    "don't",
+    "isn't",
+    "not"
+   ],
+   "x": "dad = he → doesn't"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "He doesn't run.",
+   "h": "ac52346a",
+   "q": "Which is correct?",
+   "o": [
+    "He doesn't run.",
+    "He don't run.",
+    "He doesn't runs.",
+    "He not run."
+   ],
+   "x": "he → doesn't + a verb with no -s"
+  },
+  {
+   "he": "We ___ have a car.",
+   "a": "don't",
+   "h": "2f9ef310",
+   "q": "We ___ have a car.",
+   "o": [
+    "don't",
+    "doesn't",
+    "aren't",
+    "not"
+   ],
+   "x": "we → don't"
+  },
+  {
+   "he": "Look! The boy ___ running.",
+   "a": "is",
+   "h": "f588a216",
+   "q": "Look! The boy ___ running.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "does"
+   ],
+   "x": "the boy = he → is + ing"
+  },
+  {
+   "he": "I am ___ a book. I am on page 5.",
+   "a": "reading",
+   "h": "32bab705",
+   "q": "I am ___ a book. I am on page 5.",
+   "o": [
+    "reading",
+    "read",
+    "reads",
+    "readed"
+   ],
+   "x": "am + ing → reading"
+  },
+  {
+   "he": "They ___ swimming in the pool.",
+   "a": "are",
+   "h": "6d24cea9",
+   "q": "They ___ swimming in the pool.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "do"
+   ],
+   "x": "they → are + ing"
+  },
+  {
+   "he": "She is ___ a cake.",
+   "a": "making",
+   "h": "c1617c06",
+   "q": "She is ___ a cake.",
+   "o": [
+    "making",
+    "makeing",
+    "make",
+    "makes"
+   ],
+   "x": "make → drop the e: making"
+  },
+  {
+   "he": "He is ___ in the sea, like a fish.",
+   "a": "swimming",
+   "h": "bc1700b3",
+   "q": "He is ___ in the sea, like a fish.",
+   "o": [
+    "swimming",
+    "swiming",
+    "swim",
+    "swims"
+   ],
+   "x": "swim → double the m: swimming"
+  },
+  {
+   "he": "We ___ eating lunch now.",
+   "a": "are",
+   "h": "1c9322bc",
+   "q": "We ___ eating lunch now.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "do"
+   ],
+   "x": "we → are"
+  },
+  {
+   "he": "Listen! The baby ___.",
+   "a": "is crying",
+   "h": "09301e2f",
+   "q": "Listen! The baby ___.",
+   "o": [
+    "is crying",
+    "cries",
+    "crying",
+    "are crying"
+   ],
+   "x": "Listen! = it's happening now → is crying"
+  },
+  {
+   "he": "Shh! Dad ___ sleeping.",
+   "a": "is",
+   "h": "259eb255",
+   "q": "Shh! Dad ___ sleeping.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "does"
+   ],
+   "x": "dad = he → is"
+  },
+  {
+   "he": "It ___ raining now.",
+   "a": "is",
+   "h": "c71d90ed",
+   "q": "It ___ raining now.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "does"
+   ],
+   "x": "it → is"
+  },
+  {
+   "he": "The cat is ___ on the sofa.",
+   "a": "sitting",
+   "h": "2a91667f",
+   "q": "The cat is ___ on the sofa.",
+   "o": [
+    "sitting",
+    "siting",
+    "sit",
+    "sits"
+   ],
+   "x": "sit → double the t: sitting"
+  },
+  {
+   "he": "Is he riding a bike? Yes, he ___.",
+   "a": "is",
+   "h": "fbb87b89",
+   "q": "Is he riding a bike? Yes, he ___.",
+   "o": [
+    "is",
+    "does",
+    "are",
+    "has"
+   ],
+   "x": "Is he...? → Yes, he is"
+  },
+  {
+   "he": "Are you writing? No, I ___.",
+   "a": "am not",
+   "h": "273afea7",
+   "q": "Are you writing? No, I ___.",
+   "o": [
+    "am not",
+    "are not",
+    "is not",
+    "don't"
+   ],
+   "x": "Are you...? → No, I am not"
+  },
+  {
+   "he": "I ___ football now.",
+   "a": "am playing",
+   "h": "7e677d31",
+   "q": "I ___ football now.",
+   "o": [
+    "am playing",
+    "play",
+    "plays",
+    "playing"
+   ],
+   "x": "now → am playing"
+  },
+  {
+   "he": "She ___ to school every day.",
+   "a": "walks",
+   "h": "3fa08dae",
+   "q": "She ___ to school every day.",
+   "o": [
+    "walks",
+    "is walking",
+    "walking",
+    "walk"
+   ],
+   "x": "every day → a habit: walks"
+  },
+  {
+   "he": "Look! It ___.",
+   "a": "is snowing",
+   "h": "49e54e38",
+   "q": "Look! It ___.",
+   "o": [
+    "is snowing",
+    "snows",
+    "snowing",
+    "snow"
+   ],
+   "x": "Look! = it's happening now → is snowing"
+  },
+  {
+   "he": "He usually ___ tea.",
+   "a": "drinks",
+   "h": "fdc073f1",
+   "q": "He usually ___ tea.",
+   "o": [
+    "drinks",
+    "is drinking",
+    "drinking",
+    "drink"
+   ],
+   "x": "usually → a habit: drinks"
+  },
+  {
+   "he": "We ___ TV right now.",
+   "a": "are watching",
+   "h": "e49c6b1a",
+   "q": "We ___ TV right now.",
+   "o": [
+    "are watching",
+    "watch",
+    "watches",
+    "is watching"
+   ],
+   "x": "right now → are watching"
+  },
+  {
+   "he": "Dad ___ the car every Friday.",
+   "a": "washes",
+   "h": "edefcf2b",
+   "q": "Dad ___ the car every Friday.",
+   "o": [
+    "washes",
+    "is washing",
+    "washing",
+    "wash"
+   ],
+   "x": "every Friday → a habit: washes"
+  },
+  {
+   "he": "Which time word goes with \"is playing\"?",
+   "a": "now",
+   "h": "bb4a649d",
+   "q": "Which time word goes with \"is playing\"?",
+   "o": [
+    "now",
+    "every day",
+    "usually",
+    "always"
+   ],
+   "x": "is playing → happening now: now"
+  },
+  {
+   "he": "Which time word goes with \"plays\"?",
+   "a": "every day",
+   "h": "d8e78487",
+   "q": "Which time word goes with \"plays\"?",
+   "o": [
+    "every day",
+    "now",
+    "right now",
+    "at the moment"
+   ],
+   "x": "plays → a habit: every day"
+  },
+  {
+   "he": "Listen! The birds ___.",
+   "a": "are singing",
+   "h": "c69b1176",
+   "q": "Listen! The birds ___.",
+   "o": [
+    "are singing",
+    "sing",
+    "sings",
+    "is singing"
+   ],
+   "x": "Listen! + birds → are singing"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "She is reading.",
+   "h": "b2e9f1e5",
+   "q": "Which is correct?",
+   "o": [
+    "She is reading.",
+    "She reading.",
+    "She is read.",
+    "She are reading."
+   ],
+   "x": "she → is + reading"
+  },
+  {
+   "he": "My brother ___ his homework now.",
+   "a": "is doing",
+   "h": "99b198f0",
+   "q": "My brother ___ his homework now.",
+   "o": [
+    "is doing",
+    "does",
+    "do",
+    "doing"
+   ],
+   "x": "now → is doing"
+  },
+  {
+   "he": "On Fridays we ___ pizza.",
+   "a": "eat",
+   "h": "1d70c4c8",
+   "q": "On Fridays we ___ pizza.",
+   "o": [
+    "eat",
+    "are eating",
+    "eats",
+    "eating"
+   ],
+   "x": "On Fridays = כל שישי → eat"
+  },
+  {
+   "he": "A fish ___ swim.",
+   "a": "can",
+   "h": "ddddb172",
+   "q": "A fish ___ swim.",
+   "o": [
+    "can",
+    "can't",
+    "is",
+    "has"
+   ],
+   "x": "A fish is able to swim → can"
+  },
+  {
+   "he": "A dog ___ fly.",
+   "a": "can't",
+   "h": "78118e3c",
+   "q": "A dog ___ fly.",
+   "o": [
+    "can't",
+    "can",
+    "is",
+    "does"
+   ],
+   "x": "A dog is not able to fly → can't"
+  },
+  {
+   "he": "Birds ___ fly.",
+   "a": "can",
+   "h": "222f7d29",
+   "q": "Birds ___ fly.",
+   "o": [
+    "can",
+    "can't",
+    "are",
+    "has"
+   ],
+   "x": "Birds are able to fly → can"
+  },
+  {
+   "he": "I can ___ a bike.",
+   "a": "ride",
+   "h": "6f819b06",
+   "q": "I can ___ a bike.",
+   "o": [
+    "ride",
+    "rides",
+    "riding",
+    "to ride"
+   ],
+   "x": "After can → the base form"
+  },
+  {
+   "he": "She can ___ a song very well.",
+   "a": "sing",
+   "h": "2c890214",
+   "q": "She can ___ a song very well.",
+   "o": [
+    "sing",
+    "sings",
+    "singing",
+    "to sing"
+   ],
+   "x": "After can → no -s"
+  },
+  {
+   "he": "___ you swim? Yes, I can.",
+   "a": "Can",
+   "h": "70c767bd",
+   "q": "___ you swim? Yes, I can.",
+   "o": [
+    "Can",
+    "Do",
+    "Are",
+    "Is"
+   ],
+   "x": "Yes, I can → Can you...?"
+  },
+  {
+   "he": "Can a cat read? No, it ___.",
+   "a": "can't",
+   "h": "a406e22f",
+   "q": "Can a cat read? No, it ___.",
+   "o": [
+    "can't",
+    "can",
+    "doesn't",
+    "isn't"
+   ],
+   "x": "Can...? → No, it can't"
+  },
+  {
+   "he": "A baby ___ drive a car.",
+   "a": "can't",
+   "h": "22e635e9",
+   "q": "A baby ___ drive a car.",
+   "o": [
+    "can't",
+    "can",
+    "does",
+    "is"
+   ],
+   "x": "A baby is not able to drive → can't"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "He can jump.",
+   "h": "38229e8e",
+   "q": "Which is correct?",
+   "o": [
+    "He can jump.",
+    "He cans jump.",
+    "He can jumps.",
+    "He can jumping."
+   ],
+   "x": "can + a verb with no -s"
+  },
+  {
+   "he": "לא יכול = ?",
+   "a": "can't",
+   "h": "3b7431a0",
+   "q": "לא יכול = ?",
+   "o": [
+    "can't",
+    "can",
+    "don't",
+    "isn't"
+   ],
+   "x": "לא יכול = can't"
+  },
+  {
+   "he": "A penguin can swim, but it ___ fly.",
+   "a": "can't",
+   "h": "2b59ca24",
+   "q": "A penguin can swim, but it ___ fly.",
+   "o": [
+    "can't",
+    "can",
+    "isn't",
+    "aren't"
+   ],
+   "x": "A penguin is not able to fly → can't"
+  },
+  {
+   "he": "Can you ___ English?",
+   "a": "speak",
+   "h": "c8186066",
+   "q": "Can you ___ English?",
+   "o": [
+    "speak",
+    "speaks",
+    "speaking",
+    "spoke"
+   ],
+   "x": "After can → the base form"
+  },
+  {
+   "he": "There ___ a cat on the bed.",
+   "a": "is",
+   "h": "fb28ddc0",
+   "q": "There ___ a cat on the bed.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "be"
+   ],
+   "x": "One thing → There is"
+  },
+  {
+   "he": "How many apples ___ there? Five.",
+   "a": "are",
+   "h": "605c0e5a",
+   "q": "How many apples ___ there? Five.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "do"
+   ],
+   "x": "apples = plural → are there"
+  },
+  {
+   "he": "There ___ two cars in the street.",
+   "a": "are",
+   "h": "4803ca67",
+   "q": "There ___ two cars in the street.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "Two things → There are"
+  },
+  {
+   "he": "There is ___ egg in the box.",
+   "a": "an",
+   "h": "78c24819",
+   "q": "There is ___ egg in the box.",
+   "o": [
+    "an",
+    "a",
+    "two",
+    "some"
+   ],
+   "x": "Before a vowel sound (egg) → an"
+  },
+  {
+   "he": "How many birds? There are ___.",
+   "a": "four",
+   "h": "68514996",
+   "q": "How many birds? There are ___.",
+   "o": [
+    "four",
+    "three",
+    "five",
+    "two"
+   ],
+   "x": "Counting: four = 4"
+  },
+  {
+   "he": "___ there a park near your house?",
+   "a": "Is",
+   "h": "e03a5345",
+   "q": "___ there a park near your house?",
+   "o": [
+    "Is",
+    "Are",
+    "Am",
+    "Do"
+   ],
+   "x": "a park = one thing → Is there"
+  },
+  {
+   "he": "Are there any cookies? Yes, there ___.",
+   "a": "are",
+   "h": "ccfdeef1",
+   "q": "Are there any cookies? Yes, there ___.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "do"
+   ],
+   "x": "Are there? → Yes, there are"
+  },
+  {
+   "he": "Is there any milk? No, there ___.",
+   "a": "isn't",
+   "h": "05b557ba",
+   "q": "Is there any milk? No, there ___.",
+   "o": [
+    "isn't",
+    "aren't",
+    "don't",
+    "not"
+   ],
+   "x": "Is there? → No, there isn't"
+  },
+  {
+   "he": "There ___ any kids in the park.",
+   "a": "aren't",
+   "h": "162f6106",
+   "q": "There ___ any kids in the park.",
+   "o": [
+    "aren't",
+    "isn't",
+    "no",
+    "don't"
+   ],
+   "x": "kids = plural → aren't"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "There are cats.",
+   "h": "a1247663",
+   "q": "Which is correct?",
+   "o": [
+    "There are cats.",
+    "There is cats.",
+    "There are cat.",
+    "There am cats."
+   ],
+   "x": "Plural → There are + cats"
+  },
+  {
+   "he": "There ___ a big tree in our garden.",
+   "a": "is",
+   "h": "2bc0a3d9",
+   "q": "There ___ a big tree in our garden.",
+   "o": [
+    "is",
+    "are",
+    "has",
+    "have"
+   ],
+   "x": "One tree → There is"
+  },
+  {
+   "he": "There ___ seven days in a week.",
+   "a": "are",
+   "h": "11315e9a",
+   "q": "There ___ seven days in a week.",
+   "o": [
+    "are",
+    "is",
+    "has",
+    "am"
+   ],
+   "x": "7 days = plural → are"
+  },
+  {
+   "he": "one book, two ___",
+   "a": "books",
+   "h": "55c5c5d2",
+   "q": "one book, two ___",
+   "o": [
+    "books",
+    "bookes",
+    "book",
+    "bookies"
+   ],
+   "x": "Most words → add -s"
+  },
+  {
+   "he": "one box, three ___",
+   "a": "boxes",
+   "h": "05213ee8",
+   "q": "one box, three ___",
+   "o": [
+    "boxes",
+    "boxs",
+    "box",
+    "boxies"
+   ],
+   "x": "After x → -es"
+  },
+  {
+   "he": "one baby, two ___",
+   "a": "babies",
+   "h": "9b8847fc",
+   "q": "one baby, two ___",
+   "o": [
+    "babies",
+    "babys",
+    "babyes",
+    "baby"
+   ],
+   "x": "y after a consonant → -ies"
+  },
+  {
+   "he": "one fox, two ___",
+   "a": "foxes",
+   "h": "b69c4828",
+   "q": "one fox, two ___",
+   "o": [
+    "foxes",
+    "foxs",
+    "fox",
+    "foxies"
+   ],
+   "x": "After x → -es"
+  },
+  {
+   "he": "one boy, four ___",
+   "a": "boys",
+   "h": "b459867a",
+   "q": "one boy, four ___",
+   "o": [
+    "boys",
+    "boies",
+    "boyes",
+    "boy"
+   ],
+   "x": "y after a vowel → just -s"
+  },
+  {
+   "he": "one watch, two ___",
+   "a": "watches",
+   "h": "74f761fc",
+   "q": "one watch, two ___",
+   "o": [
+    "watches",
+    "watchs",
+    "watch",
+    "watchies"
+   ],
+   "x": "After ch → -es"
+  },
+  {
+   "he": "one dish, three ___",
+   "a": "dishes",
+   "h": "ab4dbb07",
+   "q": "one dish, three ___",
+   "o": [
+    "dishes",
+    "dishs",
+    "dish",
+    "dishies"
+   ],
+   "x": "After sh → -es"
+  },
+  {
+   "he": "one city, two ___",
+   "a": "cities",
+   "h": "12764dd7",
+   "q": "one city, two ___",
+   "o": [
+    "cities",
+    "citys",
+    "cityes",
+    "city"
+   ],
+   "x": "y after a consonant → -ies"
+  },
+  {
+   "he": "one key, two ___",
+   "a": "keys",
+   "h": "24ea5e87",
+   "q": "one key, two ___",
+   "o": [
+    "keys",
+    "kies",
+    "keyes",
+    "key"
+   ],
+   "x": "y after a vowel → just -s"
+  },
+  {
+   "he": "one tomato, three ___",
+   "a": "tomatoes",
+   "h": "98944803",
+   "q": "one tomato, three ___",
+   "o": [
+    "tomatoes",
+    "tomatos",
+    "tomato",
+    "tomatoss"
+   ],
+   "x": "tomato → add -es"
+  },
+  {
+   "he": "Which of these words is plural?",
+   "a": "bags",
+   "h": "4e10ad58",
+   "q": "Which of these words is plural?",
+   "o": [
+    "bags",
+    "bag",
+    "a bag",
+    "one bag"
+   ],
+   "x": "Plural = more than one → -s"
+  },
+  {
+   "he": "one dress, two ___",
+   "a": "dresses",
+   "h": "72a04f91",
+   "q": "one dress, two ___",
+   "o": [
+    "dresses",
+    "dresss",
+    "dressies",
+    "dress"
+   ],
+   "x": "After ss → -es"
+  },
+  {
+   "he": "one man, two ___",
+   "a": "men",
+   "h": "696ed306",
+   "q": "one man, two ___",
+   "o": [
+    "men",
+    "mans",
+    "mens",
+    "manes"
+   ],
+   "x": "man – men (irregular)"
+  },
+  {
+   "he": "one woman, three ___",
+   "a": "women",
+   "h": "3af30fd4",
+   "q": "one woman, three ___",
+   "o": [
+    "women",
+    "womans",
+    "womens",
+    "woman"
+   ],
+   "x": "woman – women (irregular)"
+  },
+  {
+   "he": "one child, many ___",
+   "a": "children",
+   "h": "08f09da4",
+   "q": "one child, many ___",
+   "o": [
+    "children",
+    "childs",
+    "childrens",
+    "childes"
+   ],
+   "x": "child – children (irregular)"
+  },
+  {
+   "he": "one foot, two ___",
+   "a": "feet",
+   "h": "68d6afeb",
+   "q": "one foot, two ___",
+   "o": [
+    "feet",
+    "foots",
+    "feets",
+    "footes"
+   ],
+   "x": "foot – feet (irregular)"
+  },
+  {
+   "he": "one tooth, many ___",
+   "a": "teeth",
+   "h": "32333364",
+   "q": "one tooth, many ___",
+   "o": [
+    "teeth",
+    "tooths",
+    "teeths",
+    "toothes"
+   ],
+   "x": "tooth – teeth (irregular)"
+  },
+  {
+   "he": "one mouse, two ___",
+   "a": "mice",
+   "h": "62fdda46",
+   "q": "one mouse, two ___",
+   "o": [
+    "mice",
+    "mouses",
+    "mices",
+    "mouse"
+   ],
+   "x": "mouse – mice (irregular)"
+  },
+  {
+   "he": "one sheep, three ___",
+   "a": "sheep",
+   "h": "0cd25879",
+   "q": "one sheep, three ___",
+   "o": [
+    "sheep",
+    "sheeps",
+    "sheepes",
+    "sheepies"
+   ],
+   "x": "sheep – sheep (the same word)"
+  },
+  {
+   "he": "one fish, two ___",
+   "a": "fish",
+   "h": "108b1ef8",
+   "q": "one fish, two ___",
+   "o": [
+    "fish",
+    "fishs",
+    "fishies",
+    "fishen"
+   ],
+   "x": "fish – fish (the same word)"
+  },
+  {
+   "he": "Tom and Mia are ___. They are seven.",
+   "a": "children",
+   "h": "578b99b2",
+   "q": "Tom and Mia are ___. They are seven.",
+   "o": [
+    "children",
+    "child",
+    "childs",
+    "childrens"
+   ],
+   "x": "The plural of child → children"
+  },
+  {
+   "he": "Which plural is NOT correct?",
+   "a": "mans",
+   "h": "947543c0",
+   "q": "Which plural is NOT correct?",
+   "o": [
+    "mans",
+    "men",
+    "women",
+    "feet"
+   ],
+   "x": "Correct: men, not mans"
+  },
+  {
+   "he": "I brush my ___ every day.",
+   "a": "teeth",
+   "h": "e2c77713",
+   "q": "I brush my ___ every day.",
+   "o": [
+    "teeth",
+    "tooths",
+    "teeths",
+    "toothes"
+   ],
+   "x": "The plural of tooth → teeth"
+  },
+  {
+   "he": "The cat sees three ___ (mouse).",
+   "a": "mice",
+   "h": "3231e41d",
+   "q": "The cat sees three ___ (mouse).",
+   "o": [
+    "mice",
+    "mouses",
+    "mices",
+    "mouse"
+   ],
+   "x": "The plural of mouse → mice"
+  },
+  {
+   "he": "Dan is my friend. ___ is ten.",
+   "a": "He",
+   "h": "1eb6f9db",
+   "q": "Dan is my friend. ___ is ten.",
+   "o": [
+    "He",
+    "She",
+    "It",
+    "They"
+   ],
+   "x": "Dan = a boy → He"
+  },
+  {
+   "he": "Mia is nice. I like ___.",
+   "a": "her",
+   "h": "ab9383c2",
+   "q": "Mia is nice. I like ___.",
+   "o": [
+    "her",
+    "she",
+    "him",
+    "they"
+   ],
+   "x": "Mia = a girl, after the verb → her"
+  },
+  {
+   "he": "This is my friend Tom. Please call ___.",
+   "a": "him",
+   "h": "c2adcf39",
+   "q": "This is my friend Tom. Please call ___.",
+   "o": [
+    "him",
+    "he",
+    "his",
+    "her"
+   ],
+   "x": "Tom = a boy, after the verb → him"
+  },
+  {
+   "he": "Dana and I are friends. ___ play together.",
+   "a": "We",
+   "h": "4fa0bfa6",
+   "q": "Dana and I are friends. ___ play together.",
+   "o": [
+    "We",
+    "They",
+    "Us",
+    "She"
+   ],
+   "x": "Dana and I = אנחנו → We"
+  },
+  {
+   "he": "Where is the ball? I can't see ___.",
+   "a": "it",
+   "h": "58e4ccc3",
+   "q": "Where is the ball? I can't see ___.",
+   "o": [
+    "it",
+    "him",
+    "she",
+    "them"
+   ],
+   "x": "ball = one thing → it"
+  },
+  {
+   "he": "The kids are here. Look at ___!",
+   "a": "them",
+   "h": "8b80765c",
+   "q": "The kids are here. Look at ___!",
+   "o": [
+    "them",
+    "they",
+    "their",
+    "us"
+   ],
+   "x": "kids = הם, after at → them"
+  },
+  {
+   "he": "Can you help ___? I'm lost.",
+   "a": "me",
+   "h": "eaec2dd5",
+   "q": "Can you help ___? I'm lost.",
+   "o": [
+    "me",
+    "I",
+    "my",
+    "mine"
+   ],
+   "x": "אותי / לי = me"
+  },
+  {
+   "he": "Mom loves ___ – me and my sister.",
+   "a": "us",
+   "h": "065a4d9e",
+   "q": "Mom loves ___ – me and my sister.",
+   "o": [
+    "us",
+    "we",
+    "our",
+    "them"
+   ],
+   "x": "me and my sister = אותנו → us"
+  },
+  {
+   "he": "אותנו = ?",
+   "a": "us",
+   "h": "37ba1cd1",
+   "q": "אותנו = ?",
+   "o": [
+    "us",
+    "we",
+    "our",
+    "them"
+   ],
+   "x": "אותנו = us"
+  },
+  {
+   "he": "הם / הן = ?",
+   "a": "they",
+   "h": "4e1ae09b",
+   "q": "הם / הן = ?",
+   "o": [
+    "they",
+    "them",
+    "their",
+    "there"
+   ],
+   "x": "הם / הן = they"
+  },
+  {
+   "he": "The cat is hungry. Give ___ its food.",
+   "a": "it",
+   "h": "0cf7e4ba",
+   "q": "The cat is hungry. Give ___ its food.",
+   "o": [
+    "it",
+    "its",
+    "they",
+    "we"
+   ],
+   "x": "the cat = it"
+  },
+  {
+   "he": "I → ___ (אותי)",
+   "a": "me",
+   "h": "4e95ab9b",
+   "q": "I → ___ (אותי)",
+   "o": [
+    "me",
+    "my",
+    "mine",
+    "I'm"
+   ],
+   "x": "I → me = אותי"
+  },
+  {
+   "he": "I have a dog. ___ dog is brown.",
+   "a": "My",
+   "h": "6e057a26",
+   "q": "I have a dog. ___ dog is brown.",
+   "o": [
+    "My",
+    "Me",
+    "I",
+    "Mine"
+   ],
+   "x": "שלי + noun → My"
+  },
+  {
+   "he": "Tom has a bike. ___ bike is red.",
+   "a": "His",
+   "h": "ddd8632a",
+   "q": "Tom has a bike. ___ bike is red.",
+   "o": [
+    "His",
+    "Her",
+    "He",
+    "Him"
+   ],
+   "x": "Tom's = שלו → His"
+  },
+  {
+   "he": "Lea has a cat. ___ cat is white.",
+   "a": "Her",
+   "h": "da238925",
+   "q": "Lea has a cat. ___ cat is white.",
+   "o": [
+    "Her",
+    "His",
+    "She",
+    "Hers"
+   ],
+   "x": "Lea's = שלה → Her"
+  },
+  {
+   "he": "Is this ___ bag, Dan? Yes, it's mine.",
+   "a": "your",
+   "h": "8f69258a",
+   "q": "Is this ___ bag, Dan? Yes, it's mine.",
+   "o": [
+    "your",
+    "you",
+    "yours",
+    "you're"
+   ],
+   "x": "שלך + noun → your"
+  },
+  {
+   "he": "We love ___ school. (שלנו)",
+   "a": "our",
+   "h": "957652df",
+   "q": "We love ___ school. (שלנו)",
+   "o": [
+    "our",
+    "us",
+    "we",
+    "ours"
+   ],
+   "x": "שלנו + noun → our"
+  },
+  {
+   "he": "They live in a big house. ___ house is new.",
+   "a": "Their",
+   "h": "0a5b07ab",
+   "q": "They live in a big house. ___ house is new.",
+   "o": [
+    "Their",
+    "They",
+    "There",
+    "Them"
+   ],
+   "x": "שלהם → Their"
+  },
+  {
+   "he": "In autumn the tree loses ___ leaves.",
+   "a": "its",
+   "h": "35efda45",
+   "q": "In autumn the tree loses ___ leaves.",
+   "o": [
+    "its",
+    "it's",
+    "it",
+    "it is"
+   ],
+   "x": "its = שלו (for a thing)"
+  },
+  {
+   "he": "שלה = ?",
+   "a": "her",
+   "h": "83a9c2aa",
+   "q": "שלה = ?",
+   "o": [
+    "her",
+    "his",
+    "she",
+    "your"
+   ],
+   "x": "שלה = her"
+  },
+  {
+   "he": "שלו = ?",
+   "a": "his",
+   "h": "7ab81791",
+   "q": "שלו = ?",
+   "o": [
+    "his",
+    "her",
+    "he",
+    "him"
+   ],
+   "x": "שלו = his"
+  },
+  {
+   "he": "I am Dana. ___ name is Dana.",
+   "a": "My",
+   "h": "3bade1b0",
+   "q": "I am Dana. ___ name is Dana.",
+   "o": [
+    "My",
+    "Me",
+    "I",
+    "Your"
+   ],
+   "x": "השם שלי ← My name"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "her hat",
+   "h": "6e159f5e",
+   "q": "Which is correct?",
+   "o": [
+    "her hat",
+    "she hat",
+    "hers hat",
+    "her's hat"
+   ],
+   "x": "שלה + noun → her"
+  },
+  {
+   "he": "Tom and Dan have a ball. They play with ___ ball.",
+   "a": "their",
+   "h": "1eb46c73",
+   "q": "Tom and Dan have a ball. They play with ___ ball.",
+   "o": [
+    "their",
+    "them",
+    "they",
+    "there"
+   ],
+   "x": "Tom and Dan's → their"
+  },
+  {
+   "he": "The cat is ___ the box.",
+   "a": "on",
+   "h": "e5157eff",
+   "q": "The cat is ___ the box.",
+   "o": [
+    "on",
+    "in",
+    "under",
+    "at"
+   ],
+   "x": "החתול על הקופסה ← on"
+  },
+  {
+   "he": "The dog is ___ the bed.",
+   "a": "under",
+   "h": "ef3c772a",
+   "q": "The dog is ___ the bed.",
+   "o": [
+    "under",
+    "on",
+    "in",
+    "at"
+   ],
+   "x": "הכלב מתחת למיטה ← under"
+  },
+  {
+   "he": "The fish are ___ the tank.",
+   "a": "in",
+   "h": "ec67170d",
+   "q": "The fish are ___ the tank.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "under"
+   ],
+   "x": "הדגים בתוך האקווריום ← in"
+  },
+  {
+   "he": "The chair is ___ the table.",
+   "a": "next to",
+   "h": "c609ce61",
+   "q": "The chair is ___ the table.",
+   "o": [
+    "next to",
+    "on",
+    "under",
+    "in"
+   ],
+   "x": "הכיסא ליד השולחן ← next to"
+  },
+  {
+   "he": "The girl is ___ the umbrella.",
+   "a": "under",
+   "h": "53c0fcb5",
+   "q": "The girl is ___ the umbrella.",
+   "o": [
+    "under",
+    "on",
+    "in",
+    "at"
+   ],
+   "x": "הילדה מתחת למטרייה ← under"
+  },
+  {
+   "he": "The shop is ___ the bank.",
+   "a": "next to",
+   "h": "0dabbd63",
+   "q": "The shop is ___ the bank.",
+   "o": [
+    "next to",
+    "under",
+    "in",
+    "on"
+   ],
+   "x": "החנות ליד הבנק ← next to"
+  },
+  {
+   "he": "לידי = ?",
+   "a": "next to me",
+   "h": "36331895",
+   "q": "לידי = ?",
+   "o": [
+    "next to me",
+    "next to you",
+    "under me",
+    "on me"
+   ],
+   "x": "לידי = next to me"
+  },
+  {
+   "he": "על הספר = ?",
+   "a": "on the book",
+   "h": "0f666f79",
+   "q": "על הספר = ?",
+   "o": [
+    "on the book",
+    "under the book",
+    "in the book",
+    "at the book"
+   ],
+   "x": "על הספר = on the book"
+  },
+  {
+   "he": "מתחתיו = ?",
+   "a": "under it",
+   "h": "f7f4d698",
+   "q": "מתחתיו = ?",
+   "o": [
+    "under it",
+    "on it",
+    "in it",
+    "next to it"
+   ],
+   "x": "מתחתיו = under it"
+  },
+  {
+   "he": "I live ___ Haifa.",
+   "a": "in",
+   "h": "cb6e7200",
+   "q": "I live ___ Haifa.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "under"
+   ],
+   "x": "A city → in"
+  },
+  {
+   "he": "The picture is ___ the wall.",
+   "a": "on",
+   "h": "97644e44",
+   "q": "The picture is ___ the wall.",
+   "o": [
+    "on",
+    "in",
+    "under",
+    "at"
+   ],
+   "x": "על הקיר = on the wall"
+  },
+  {
+   "he": "My birthday is ___ May.",
+   "a": "in",
+   "h": "40593b96",
+   "q": "My birthday is ___ May.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "to"
+   ],
+   "x": "A month → in"
+  },
+  {
+   "he": "We have English ___ Monday.",
+   "a": "on",
+   "h": "a582404b",
+   "q": "We have English ___ Monday.",
+   "o": [
+    "on",
+    "in",
+    "at",
+    "to"
+   ],
+   "x": "A day → on"
+  },
+  {
+   "he": "School starts ___ eight o'clock.",
+   "a": "at",
+   "h": "76c23ffa",
+   "q": "School starts ___ eight o'clock.",
+   "o": [
+    "at",
+    "in",
+    "on",
+    "to"
+   ],
+   "x": "A clock time → at"
+  },
+  {
+   "he": "It is cold ___ winter.",
+   "a": "in",
+   "h": "0fef5899",
+   "q": "It is cold ___ winter.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "to"
+   ],
+   "x": "A season → in"
+  },
+  {
+   "he": "I go to bed ___ night.",
+   "a": "at",
+   "h": "8f20c464",
+   "q": "I go to bed ___ night.",
+   "o": [
+    "at",
+    "in",
+    "on",
+    "to"
+   ],
+   "x": "at night = בלילה"
+  },
+  {
+   "he": "We swim in the sea ___ summer.",
+   "a": "in",
+   "h": "ed7dae65",
+   "q": "We swim in the sea ___ summer.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "to"
+   ],
+   "x": "A season → in"
+  },
+  {
+   "he": "The party is ___ Friday.",
+   "a": "on",
+   "h": "921d36e6",
+   "q": "The party is ___ Friday.",
+   "o": [
+    "on",
+    "in",
+    "at",
+    "to"
+   ],
+   "x": "A day → on"
+  },
+  {
+   "he": "I drink milk ___ the morning.",
+   "a": "in",
+   "h": "1b0167c9",
+   "q": "I drink milk ___ the morning.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "to"
+   ],
+   "x": "in the morning = בבוקר"
+  },
+  {
+   "he": "The film starts ___ 6:30.",
+   "a": "at",
+   "h": "951cef93",
+   "q": "The film starts ___ 6:30.",
+   "o": [
+    "at",
+    "in",
+    "on",
+    "to"
+   ],
+   "x": "A clock time → at"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "on Sunday",
+   "h": "65322aa2",
+   "q": "Which is correct?",
+   "o": [
+    "on Sunday",
+    "in Sunday",
+    "at Sunday",
+    "to Sunday"
+   ],
+   "x": "A day of the week → on"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "at 5 o'clock",
+   "h": "e52e2af2",
+   "q": "Which is correct?",
+   "o": [
+    "at 5 o'clock",
+    "on 5 o'clock",
+    "in 5 o'clock",
+    "to 5 o'clock"
+   ],
+   "x": "A clock time → at"
+  },
+  {
+   "he": "The flowers open ___ spring.",
+   "a": "in",
+   "h": "bb04d557",
+   "q": "The flowers open ___ spring.",
+   "o": [
+    "in",
+    "on",
+    "at",
+    "to"
+   ],
+   "x": "A season → in"
+  },
+  {
+   "he": "___ is your teacher? Ms. Cohen.",
+   "a": "Who",
+   "h": "0eab4db9",
+   "q": "___ is your teacher? Ms. Cohen.",
+   "o": [
+    "Who",
+    "What",
+    "Where",
+    "When"
+   ],
+   "x": "Asking about a person → Who"
+  },
+  {
+   "he": "___ is your name? Dana.",
+   "a": "What",
+   "h": "d9cee39d",
+   "q": "___ is your name? Dana.",
+   "o": [
+    "What",
+    "Who",
+    "Where",
+    "How"
+   ],
+   "x": "מה השם? ← What"
+  },
+  {
+   "he": "___ do you live? In Haifa.",
+   "a": "Where",
+   "h": "e3dcab3c",
+   "q": "___ do you live? In Haifa.",
+   "o": [
+    "Where",
+    "What",
+    "Who",
+    "When"
+   ],
+   "x": "A place → Where"
+  },
+  {
+   "he": "___ is in the box? A ball.",
+   "a": "What",
+   "h": "3182c5ef",
+   "q": "___ is in the box? A ball.",
+   "o": [
+    "What",
+    "Who",
+    "Where",
+    "Why"
+   ],
+   "x": "A thing → What"
+  },
+  {
+   "he": "___ is the bus stop? Next to the bank.",
+   "a": "Where",
+   "h": "023b2306",
+   "q": "___ is the bus stop? Next to the bank.",
+   "o": [
+    "Where",
+    "What",
+    "Who",
+    "When"
+   ],
+   "x": "A place → Where"
+  },
+  {
+   "he": "___ is that boy? My brother.",
+   "a": "Who",
+   "h": "934ba113",
+   "q": "___ is that boy? My brother.",
+   "o": [
+    "Who",
+    "What",
+    "Where",
+    "How"
+   ],
+   "x": "A person → Who"
+  },
+  {
+   "he": "___ do you eat for breakfast? Eggs.",
+   "a": "What",
+   "h": "65365893",
+   "q": "___ do you eat for breakfast? Eggs.",
+   "o": [
+    "What",
+    "Where",
+    "Who",
+    "Why"
+   ],
+   "x": "מה אוכלים? ← What"
+  },
+  {
+   "he": "איפה = ?",
+   "a": "Where",
+   "h": "2352b422",
+   "q": "איפה = ?",
+   "o": [
+    "Where",
+    "When",
+    "What",
+    "Who"
+   ],
+   "x": "איפה = Where"
+  },
+  {
+   "he": "מי = ?",
+   "a": "Who",
+   "h": "2b3e3254",
+   "q": "מי = ?",
+   "o": [
+    "Who",
+    "What",
+    "Why",
+    "How"
+   ],
+   "x": "מי = Who"
+  },
+  {
+   "he": "Who is at the door?",
+   "a": "My mom",
+   "h": "0a79879a",
+   "q": "Who is at the door?",
+   "o": [
+    "My mom",
+    "At five",
+    "In the kitchen",
+    "A red ball"
+   ],
+   "x": "Who → answer with a person"
+  },
+  {
+   "he": "Where is Grandpa?",
+   "a": "In the garden",
+   "h": "62ffa3b9",
+   "q": "Where is Grandpa?",
+   "o": [
+    "In the garden",
+    "At ten",
+    "A big cake",
+    "My uncle"
+   ],
+   "x": "Where → answer with a place"
+  },
+  {
+   "he": "___ is your birthday? In June.",
+   "a": "When",
+   "h": "0aec9d40",
+   "q": "___ is your birthday? In June.",
+   "o": [
+    "When",
+    "Where",
+    "Who",
+    "Why"
+   ],
+   "x": "A time → When"
+  },
+  {
+   "he": "___ are you sad? Because I'm sick.",
+   "a": "Why",
+   "h": "dd786a10",
+   "q": "___ are you sad? Because I'm sick.",
+   "o": [
+    "Why",
+    "When",
+    "What",
+    "Where"
+   ],
+   "x": "Because → the question is Why"
+  },
+  {
+   "he": "___ cats do you have? Two.",
+   "a": "How many",
+   "h": "2c54b888",
+   "q": "___ cats do you have? Two.",
+   "o": [
+    "How many",
+    "How",
+    "What",
+    "When"
+   ],
+   "x": "A number → How many"
+  },
+  {
+   "he": "___ do you get up? At seven.",
+   "a": "When",
+   "h": "06d1472f",
+   "q": "___ do you get up? At seven.",
+   "o": [
+    "When",
+    "Where",
+    "Who",
+    "Why"
+   ],
+   "x": "A time → When"
+  },
+  {
+   "he": "How many legs do two dogs have?",
+   "a": "eight",
+   "h": "dc27bedc",
+   "q": "How many legs do two dogs have?",
+   "o": [
+    "eight",
+    "four",
+    "six",
+    "two"
+   ],
+   "x": "4 + 4 = 8 legs"
+  },
+  {
+   "he": "Why do you wear a coat?",
+   "a": "Because it's cold",
+   "h": "67d08f9f",
+   "q": "Why do you wear a coat?",
+   "o": [
+    "Because it's cold",
+    "In the winter",
+    "A warm coat",
+    "My mother"
+   ],
+   "x": "Why → answer with Because"
+  },
+  {
+   "he": "מתי = ?",
+   "a": "When",
+   "h": "b58682fc",
+   "q": "מתי = ?",
+   "o": [
+    "When",
+    "Where",
+    "Why",
+    "Who"
+   ],
+   "x": "מתי = When"
+  },
+  {
+   "he": "למה = ?",
+   "a": "Why",
+   "h": "96b0f84e",
+   "q": "למה = ?",
+   "o": [
+    "Why",
+    "What",
+    "Who",
+    "When"
+   ],
+   "x": "למה = Why"
+  },
+  {
+   "he": "When is the party?",
+   "a": "On Friday",
+   "h": "a3c02f3c",
+   "q": "When is the party?",
+   "o": [
+    "On Friday",
+    "At home",
+    "Three kids",
+    "With Dan"
+   ],
+   "x": "When → answer with a time"
+  },
+  {
+   "he": "How many books are there?",
+   "a": "five",
+   "h": "7ba953cc",
+   "q": "How many books are there?",
+   "o": [
+    "five",
+    "blue",
+    "on the desk",
+    "yes"
+   ],
+   "x": "How many → answer with a number"
+  },
+  {
+   "he": "___ old are you? I'm eleven.",
+   "a": "How",
+   "h": "861a2b0e",
+   "q": "___ old are you? I'm eleven.",
+   "o": [
+    "How",
+    "What",
+    "Who",
+    "How many"
+   ],
+   "x": "Asking about age → How old"
+  },
+  {
+   "he": "Yesterday I ___ at home.",
+   "a": "was",
+   "h": "70711747",
+   "q": "Yesterday I ___ at home.",
+   "o": [
+    "was",
+    "were",
+    "am",
+    "is"
+   ],
+   "x": "I in the past → was"
+  },
+  {
+   "he": "They ___ at the beach last week.",
+   "a": "were",
+   "h": "c75ff43e",
+   "q": "They ___ at the beach last week.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "x": "they in the past → were"
+  },
+  {
+   "he": "She ___ sick yesterday.",
+   "a": "was",
+   "h": "951dca67",
+   "q": "She ___ sick yesterday.",
+   "o": [
+    "was",
+    "were",
+    "is",
+    "are"
+   ],
+   "x": "she in the past → was"
+  },
+  {
+   "he": "We ___ happy at the party last night.",
+   "a": "were",
+   "h": "487b5c33",
+   "q": "We ___ happy at the party last night.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "x": "we in the past → were"
+  },
+  {
+   "he": "The weather ___ hot yesterday.",
+   "a": "was",
+   "h": "1a1f0693",
+   "q": "The weather ___ hot yesterday.",
+   "o": [
+    "was",
+    "were",
+    "is",
+    "are"
+   ],
+   "x": "it in the past → was"
+  },
+  {
+   "he": "You ___ late yesterday.",
+   "a": "were",
+   "h": "c18e9537",
+   "q": "You ___ late yesterday.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "x": "you in the past → were"
+  },
+  {
+   "he": "___ you at school yesterday?",
+   "a": "Were",
+   "h": "ddde1219",
+   "q": "___ you at school yesterday?",
+   "o": [
+    "Were",
+    "Was",
+    "Are",
+    "Did"
+   ],
+   "x": "you in the past → Were"
+  },
+  {
+   "he": "Was it cold? Yes, it ___.",
+   "a": "was",
+   "h": "a11e888f",
+   "q": "Was it cold? Yes, it ___.",
+   "o": [
+    "was",
+    "were",
+    "is",
+    "did"
+   ],
+   "x": "Was it...? ← Yes, it was"
+  },
+  {
+   "he": "The dogs ___ hungry last night.",
+   "a": "were",
+   "h": "b8fd8fff",
+   "q": "The dogs ___ hungry last night.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "x": "dogs = plural, in the past → were"
+  },
+  {
+   "he": "Past of is?",
+   "a": "was",
+   "h": "a8f3cc79",
+   "q": "Past of is?",
+   "o": [
+    "was",
+    "were",
+    "been",
+    "ised"
+   ],
+   "x": "is ← was"
+  },
+  {
+   "he": "Past of are?",
+   "a": "were",
+   "h": "f02c0d0f",
+   "q": "Past of are?",
+   "o": [
+    "were",
+    "was",
+    "ared",
+    "been"
+   ],
+   "x": "are ← were"
+  },
+  {
+   "he": "My grandpa ___ a teacher in 1970.",
+   "a": "was",
+   "h": "a89d44e7",
+   "q": "My grandpa ___ a teacher in 1970.",
+   "o": [
+    "was",
+    "were",
+    "is",
+    "are"
+   ],
+   "x": "1970 = past, he → was"
+  },
+  {
+   "he": "Yesterday I ___ football and scored a goal.",
+   "a": "played",
+   "h": "f151afc2",
+   "q": "Yesterday I ___ football and scored a goal.",
+   "o": [
+    "played",
+    "play",
+    "plays",
+    "playing"
+   ],
+   "x": "Yesterday → past: played"
+  },
+  {
+   "he": "She ___ TV last night.",
+   "a": "watched",
+   "h": "c00c717d",
+   "q": "She ___ TV last night.",
+   "o": [
+    "watched",
+    "watch",
+    "watches",
+    "watching"
+   ],
+   "x": "last night → past: watched"
+  },
+  {
+   "he": "We ___ our grandma last Sunday.",
+   "a": "visited",
+   "h": "d9bfd657",
+   "q": "We ___ our grandma last Sunday.",
+   "o": [
+    "visited",
+    "visit",
+    "visits",
+    "visiting"
+   ],
+   "x": "last Sunday → past: visited"
+  },
+  {
+   "he": "Past of dance?",
+   "a": "danced",
+   "h": "5959cd8e",
+   "q": "Past of dance?",
+   "o": [
+    "danced",
+    "danceed",
+    "dancd",
+    "dances"
+   ],
+   "x": "Ends in e → add only d"
+  },
+  {
+   "he": "Past of study?",
+   "a": "studied",
+   "h": "36c44faf",
+   "q": "Past of study?",
+   "o": [
+    "studied",
+    "studyed",
+    "studys",
+    "studed"
+   ],
+   "x": "y after a consonant → ied"
+  },
+  {
+   "he": "Past of stop?",
+   "a": "stopped",
+   "h": "b776e343",
+   "q": "Past of stop?",
+   "o": [
+    "stopped",
+    "stoped",
+    "stopt",
+    "stops"
+   ],
+   "x": "Double the p → stopped"
+  },
+  {
+   "he": "Past of play?",
+   "a": "played",
+   "h": "2215755f",
+   "q": "Past of play?",
+   "o": [
+    "played",
+    "plaied",
+    "plaid",
+    "plays"
+   ],
+   "x": "y after a vowel → ed"
+  },
+  {
+   "he": "Last week it ___ a lot.",
+   "a": "rained",
+   "h": "4b0f4669",
+   "q": "Last week it ___ a lot.",
+   "o": [
+    "rained",
+    "rains",
+    "rain",
+    "raining"
+   ],
+   "x": "Last week → past: rained"
+  },
+  {
+   "he": "He ___ the door with a key two minutes ago.",
+   "a": "opened",
+   "h": "6ecfe113",
+   "q": "He ___ the door with a key two minutes ago.",
+   "o": [
+    "opened",
+    "opens",
+    "open",
+    "opening"
+   ],
+   "x": "ago = לפני → past"
+  },
+  {
+   "he": "Which form of walk is past?",
+   "a": "walked",
+   "h": "00f62969",
+   "q": "Which form of walk is past?",
+   "o": [
+    "walked",
+    "walk",
+    "walks",
+    "walking"
+   ],
+   "x": "-ed at the end → past"
+  },
+  {
+   "he": "Which time word is for the past?",
+   "a": "yesterday",
+   "h": "72af9a58",
+   "q": "Which time word is for the past?",
+   "o": [
+    "yesterday",
+    "tomorrow",
+    "now",
+    "every day"
+   ],
+   "x": "yesterday = אתמול"
+  },
+  {
+   "he": "I ___ my room yesterday.",
+   "a": "cleaned",
+   "h": "7b8e2cf4",
+   "q": "I ___ my room yesterday.",
+   "o": [
+    "cleaned",
+    "clean",
+    "cleans",
+    "cleaning"
+   ],
+   "x": "yesterday → past: cleaned"
+  },
+  {
+   "he": "Yesterday I ___ to the park.",
+   "a": "went",
+   "h": "82203646",
+   "q": "Yesterday I ___ to the park.",
+   "o": [
+    "went",
+    "goed",
+    "go",
+    "goes"
+   ],
+   "x": "go in the past → went (not goed)"
+  },
+  {
+   "he": "Past of go?",
+   "a": "went",
+   "h": "9bb02d5d",
+   "q": "Past of go?",
+   "o": [
+    "went",
+    "goed",
+    "goes",
+    "wented"
+   ],
+   "x": "go → went: an irregular verb, no -ed"
+  },
+  {
+   "he": "Past of eat?",
+   "a": "ate",
+   "h": "3924b6f0",
+   "q": "Past of eat?",
+   "o": [
+    "ate",
+    "eated",
+    "eats",
+    "eat"
+   ],
+   "x": "eat → ate: an irregular verb"
+  },
+  {
+   "he": "Past of see?",
+   "a": "saw",
+   "h": "c81d6fd3",
+   "q": "Past of see?",
+   "o": [
+    "saw",
+    "seed",
+    "sees",
+    "seeing"
+   ],
+   "x": "see → saw: an irregular verb"
+  },
+  {
+   "he": "Past of have?",
+   "a": "had",
+   "h": "83020f18",
+   "q": "Past of have?",
+   "o": [
+    "had",
+    "haved",
+    "has",
+    "having"
+   ],
+   "x": "have / has ← had"
+  },
+  {
+   "he": "We ___ (eat) pizza for dinner yesterday.",
+   "a": "ate",
+   "h": "4045f4df",
+   "q": "We ___ (eat) pizza for dinner yesterday.",
+   "o": [
+    "ate",
+    "eated",
+    "eat",
+    "eats"
+   ],
+   "x": "yesterday → past: eat → ate"
+  },
+  {
+   "he": "Last night we ___ a funny film.",
+   "a": "saw",
+   "h": "941891ba",
+   "q": "Last night we ___ a funny film.",
+   "o": [
+    "saw",
+    "seed",
+    "see",
+    "sees"
+   ],
+   "x": "last night → past: see → saw"
+  },
+  {
+   "he": "She ___ a bad cold last week.",
+   "a": "had",
+   "h": "dd06bac3",
+   "q": "She ___ a bad cold last week.",
+   "o": [
+    "had",
+    "haved",
+    "has",
+    "have"
+   ],
+   "x": "last week → past: has → had"
+  },
+  {
+   "he": "אכלתי = ?",
+   "a": "I ate",
+   "h": "9d0930f3",
+   "q": "אכלתי = ?",
+   "o": [
+    "I ate",
+    "I eat",
+    "I eated",
+    "I eats"
+   ],
+   "x": "אכלתי = past → I ate"
+  },
+  {
+   "he": "ראיתי = ?",
+   "a": "I saw",
+   "h": "1940c3d8",
+   "q": "ראיתי = ?",
+   "o": [
+    "I saw",
+    "I see",
+    "I seed",
+    "I sees"
+   ],
+   "x": "ראיתי = past → I saw"
+  },
+  {
+   "he": "Which form of go is past?",
+   "a": "went",
+   "h": "f4d3297b",
+   "q": "Which form of go is past?",
+   "o": [
+    "went",
+    "go",
+    "goes",
+    "going"
+   ],
+   "x": "went = הלך (the past of go)"
+  },
+  {
+   "he": "Dad ___ home at six yesterday.",
+   "a": "came",
+   "h": "e6019429",
+   "q": "Dad ___ home at six yesterday.",
+   "o": [
+    "came",
+    "comed",
+    "comes",
+    "come"
+   ],
+   "x": "yesterday → past: come → came"
+  },
+  {
+   "he": "I ___ my homework last night.",
+   "a": "did",
+   "h": "f76798c3",
+   "q": "I ___ my homework last night.",
+   "o": [
+    "did",
+    "doed",
+    "do",
+    "does"
+   ],
+   "x": "last night → past: do → did"
+  },
+  {
+   "he": "Yesterday we ___ under a big tree.",
+   "a": "sat",
+   "h": "5a25671e",
+   "q": "Yesterday we ___ under a big tree.",
+   "o": [
+    "sat",
+    "sitted",
+    "sit",
+    "sits"
+   ],
+   "x": "yesterday → past: sit → sat"
+  },
+  {
+   "he": "Mom ___ (make) a cake last week.",
+   "a": "made",
+   "h": "e80a85b0",
+   "q": "Mom ___ (make) a cake last week.",
+   "o": [
+    "made",
+    "maked",
+    "makes",
+    "make"
+   ],
+   "x": "last week → past: make → made"
+  },
+  {
+   "he": "Yesterday Tom ___ (have) a big breakfast.",
+   "a": "had",
+   "h": "5e5e1827",
+   "q": "Yesterday Tom ___ (have) a big breakfast.",
+   "o": [
+    "had",
+    "has",
+    "haved",
+    "have"
+   ],
+   "x": "yesterday → past: had"
+  },
+  {
+   "he": "Which sentence is correct?",
+   "a": "I went home.",
+   "h": "3e436f93",
+   "q": "Which sentence is correct?",
+   "o": [
+    "I went home.",
+    "I goed home.",
+    "I wented home.",
+    "I gone home."
+   ],
+   "x": "go in the past → went, no -ed"
+  },
+  {
+   "he": "Did you see the lion? Yes, I ___ it.",
+   "a": "saw",
+   "h": "37d31b90",
+   "q": "Did you see the lion? Yes, I ___ it.",
+   "o": [
+    "saw",
+    "see",
+    "seed",
+    "sees"
+   ],
+   "x": "Past: see → saw"
+  },
+  {
+   "he": "Yesterday I didn't ___ to school.",
+   "a": "go",
+   "h": "6537aeb3",
+   "q": "Yesterday I didn't ___ to school.",
+   "o": [
+    "go",
+    "went",
+    "goes",
+    "goed"
+   ],
+   "x": "After didn't → the base form: go"
+  },
+  {
+   "he": "___ you see the film yesterday?",
+   "a": "Did",
+   "h": "bf4cb7e3",
+   "q": "___ you see the film yesterday?",
+   "o": [
+    "Did",
+    "Do",
+    "Does",
+    "Are"
+   ],
+   "x": "A question in the past → Did + see"
+  },
+  {
+   "he": "Which is NOT past: eat, went, saw, had?",
+   "a": "eat",
+   "h": "1975cef9",
+   "q": "Which is NOT past: eat, went, saw, had?",
+   "o": [
+    "eat",
+    "went",
+    "saw",
+    "had"
+   ],
+   "x": "eat = present. Its past: ate"
+  },
+  {
+   "he": "להתעורר = ?",
+   "a": "wake up",
+   "h": "7dfc868c",
+   "q": "להתעורר = ?",
+   "o": [
+    "wake up",
+    "get dressed",
+    "go to bed",
+    "brush"
+   ],
+   "x": "להתעורר = wake up"
+  },
+  {
+   "he": "להתלבש = ?",
+   "a": "get dressed",
+   "h": "219ae52c",
+   "q": "להתלבש = ?",
+   "o": [
+    "get dressed",
+    "get up",
+    "take a shower",
+    "go home"
+   ],
+   "x": "להתלבש = get dressed"
+  },
+  {
+   "he": "I ___ my teeth.",
+   "a": "brush",
+   "h": "38ea4cc6",
+   "q": "I ___ my teeth.",
+   "o": [
+    "brush",
+    "wash",
+    "eat",
+    "comb"
+   ],
+   "x": "לצחצח שיניים = brush my teeth"
+  },
+  {
+   "he": "I ___ a shower every evening.",
+   "a": "take",
+   "h": "c6daef9a",
+   "q": "I ___ a shower every evening.",
+   "o": [
+    "take",
+    "make",
+    "do",
+    "go"
+   ],
+   "x": "take a shower = להתקלח"
+  },
+  {
+   "he": "לאכול ארוחת בוקר = ?",
+   "a": "have breakfast",
+   "h": "39cdcd8f",
+   "q": "לאכול ארוחת בוקר = ?",
+   "o": [
+    "have breakfast",
+    "have dinner",
+    "have lunch",
+    "go to bed"
+   ],
+   "x": "ארוחת בוקר = breakfast"
+  },
+  {
+   "he": "I ___ my homework after school.",
+   "a": "do",
+   "h": "a6d01518",
+   "q": "I ___ my homework after school.",
+   "o": [
+    "do",
+    "make",
+    "go",
+    "take"
+   ],
+   "x": "do homework = להכין שיעורים"
+  },
+  {
+   "he": "At night I ___ to bed.",
+   "a": "go",
+   "h": "823ca537",
+   "q": "At night I ___ to bed.",
+   "o": [
+    "go",
+    "get",
+    "do",
+    "make"
+   ],
+   "x": "go to bed = ללכת לישון"
+  },
+  {
+   "he": "ארוחת ערב = ?",
+   "a": "dinner",
+   "h": "a43f4d76",
+   "q": "ארוחת ערב = ?",
+   "o": [
+    "dinner",
+    "lunch",
+    "breakfast",
+    "dessert"
+   ],
+   "x": "ארוחת ערב = dinner"
+  },
+  {
+   "he": "I ___ my hands before I eat.",
+   "a": "wash",
+   "h": "8fb955a3",
+   "q": "I ___ my hands before I eat.",
+   "o": [
+    "wash",
+    "brush",
+    "take",
+    "do"
+   ],
+   "x": "wash my hands = לשטוף ידיים"
+  },
+  {
+   "he": "Every morning I ___ the bus to school.",
+   "a": "take",
+   "h": "a0e6b610",
+   "q": "Every morning I ___ the bus to school.",
+   "o": [
+    "take",
+    "do",
+    "make",
+    "have"
+   ],
+   "x": "take the bus = לנסוע באוטובוס"
+  },
+  {
+   "he": "ארוחת צהריים = ?",
+   "a": "lunch",
+   "h": "8e164647",
+   "q": "ארוחת צהריים = ?",
+   "o": [
+    "lunch",
+    "dinner",
+    "breakfast",
+    "dessert"
+   ],
+   "x": "ארוחת צהריים = lunch"
+  },
+  {
+   "he": "לקום (מהמיטה) = ?",
+   "a": "get up",
+   "h": "c93a307e",
+   "q": "לקום (מהמיטה) = ?",
+   "o": [
+    "get up",
+    "go to bed",
+    "get dressed",
+    "sit down"
+   ],
+   "x": "לקום = get up"
+  },
+  {
+   "he": "שיעורי בית = ?",
+   "a": "homework",
+   "h": "b4f2780e",
+   "q": "שיעורי בית = ?",
+   "o": [
+    "homework",
+    "housework",
+    "hometown",
+    "hobby"
+   ],
+   "x": "שיעורי בית = homework"
+  },
+  {
+   "he": "אתמול = ?",
+   "a": "yesterday",
+   "h": "7acdc67e",
+   "q": "אתמול = ?",
+   "o": [
+    "yesterday",
+    "tomorrow",
+    "today",
+    "tonight"
+   ],
+   "x": "אתמול = yesterday"
+  },
+  {
+   "he": "מחר = ?",
+   "a": "tomorrow",
+   "h": "9c9931e4",
+   "q": "מחר = ?",
+   "o": [
+    "tomorrow",
+    "yesterday",
+    "today",
+    "always"
+   ],
+   "x": "מחר = tomorrow"
+  },
+  {
+   "he": "What day comes after Monday?",
+   "a": "Tuesday",
+   "h": "ed5a8fcd",
+   "q": "What day comes after Monday?",
+   "o": [
+    "Tuesday",
+    "Sunday",
+    "Wednesday",
+    "Thursday"
+   ],
+   "x": "Monday ← Tuesday"
+  },
+  {
+   "he": "There are seven days in a ___.",
+   "a": "week",
+   "h": "c325ae8f",
+   "q": "There are seven days in a ___.",
+   "o": [
+    "week",
+    "month",
+    "year",
+    "day"
+   ],
+   "x": "7 ימים = שבוע = week"
+  },
+  {
+   "he": "There are twelve months in a ___.",
+   "a": "year",
+   "h": "03155c55",
+   "q": "There are twelve months in a ___.",
+   "o": [
+    "year",
+    "week",
+    "day",
+    "month"
+   ],
+   "x": "12 חודשים = שנה = year"
+  },
+  {
+   "he": "בוקר = ?",
+   "a": "morning",
+   "h": "462ffe3e",
+   "q": "בוקר = ?",
+   "o": [
+    "morning",
+    "evening",
+    "night",
+    "afternoon"
+   ],
+   "x": "בוקר = morning"
+  },
+  {
+   "he": "ערב = ?",
+   "a": "evening",
+   "h": "4295e734",
+   "q": "ערב = ?",
+   "o": [
+    "evening",
+    "morning",
+    "afternoon",
+    "noon"
+   ],
+   "x": "ערב = evening"
+  },
+  {
+   "he": "The clock says 3:00. It is three ___.",
+   "a": "o'clock",
+   "h": "20657c40",
+   "q": "The clock says 3:00. It is three ___.",
+   "o": [
+    "o'clock",
+    "hours",
+    "times",
+    "clock"
+   ],
+   "x": "שלוש בדיוק = three o'clock"
+  },
+  {
+   "he": "שבוע הבא = ?",
+   "a": "next week",
+   "h": "b1cf0e0f",
+   "q": "שבוע הבא = ?",
+   "o": [
+    "next week",
+    "last week",
+    "this week",
+    "every week"
+   ],
+   "x": "הבא = next"
+  },
+  {
+   "he": "תמיד = ?",
+   "a": "always",
+   "h": "80a9276f",
+   "q": "תמיד = ?",
+   "o": [
+    "always",
+    "never",
+    "sometimes",
+    "usually"
+   ],
+   "x": "תמיד = always"
+  },
+  {
+   "he": "אף פעם = ?",
+   "a": "never",
+   "h": "3f74c677",
+   "q": "אף פעם = ?",
+   "o": [
+    "never",
+    "always",
+    "often",
+    "sometimes"
+   ],
+   "x": "אף פעם = never"
+  },
+  {
+   "he": "The month after March is ___.",
+   "a": "April",
+   "h": "95f4daad",
+   "q": "The month after March is ___.",
+   "o": [
+    "April",
+    "May",
+    "February",
+    "June"
+   ],
+   "x": "March ← April"
+  },
+  {
+   "he": "What time is it?",
+   "a": "half past seven",
+   "h": "5f1fc87a",
+   "q": "What time is it?",
+   "o": [
+    "half past seven",
+    "half past eight",
+    "seven o'clock",
+    "half past six"
+   ],
+   "x": "7 and 30 minutes = half past seven"
+  },
+  {
+   "he": "What time is it?",
+   "a": "half past four",
+   "h": "1ce170e6",
+   "q": "What time is it?",
+   "o": [
+    "half past four",
+    "half past five",
+    "four o'clock",
+    "quarter past four"
+   ],
+   "x": "4 and half an hour = half past four"
+  },
+  {
+   "he": "What time is it?",
+   "a": "eleven o'clock",
+   "h": "94f3fbad",
+   "q": "What time is it?",
+   "o": [
+    "eleven o'clock",
+    "half past eleven",
+    "seven o'clock",
+    "quarter past eleven"
+   ],
+   "x": "Exactly 11 = eleven o'clock"
+  },
+  {
+   "he": "How many minutes are in half an hour?",
+   "a": "thirty",
+   "h": "e3d50990",
+   "q": "How many minutes are in half an hour?",
+   "o": [
+    "thirty",
+    "fifteen",
+    "sixty",
+    "forty-five"
+   ],
+   "x": "An hour = 60 minutes. Half an hour = 30"
+  },
+  {
+   "he": "Which clock shows half past nine?",
+   "a": "9:30",
+   "h": "d1fa6e36",
+   "q": "Which clock shows half past nine?",
+   "o": [
+    "9:30",
+    "9:15",
+    "10:30",
+    "9:00"
+   ],
+   "x": "half past nine = 9 וחצי = 9:30"
+  },
+  {
+   "he": "⁦half past two⁩ = ?",
+   "a": "2:30",
+   "h": "340468ab",
+   "q": "⁦half past two⁩ = ?",
+   "o": [
+    "2:30",
+    "2:15",
+    "3:30",
+    "2:00"
+   ],
+   "x": "half past = וחצי: 2:30"
+  },
+  {
+   "he": "שמונה וחצי = ?",
+   "a": "half past eight",
+   "h": "932c731b",
+   "q": "שמונה וחצי = ?",
+   "o": [
+    "half past eight",
+    "half past seven",
+    "eight o'clock",
+    "quarter past eight"
+   ],
+   "x": "וחצי = half past: half past eight"
+  },
+  {
+   "he": "School starts at 8:30. It starts at ___.",
+   "a": "half past eight",
+   "h": "38be49be",
+   "q": "School starts at 8:30. It starts at ___.",
+   "o": [
+    "half past eight",
+    "half past nine",
+    "eight o'clock",
+    "quarter past eight"
+   ],
+   "x": "8:30 = half past eight"
+  },
+  {
+   "he": "Breakfast is half an hour after 7:00. When?",
+   "a": "half past seven",
+   "h": "cd4eda6c",
+   "q": "Breakfast is half an hour after 7:00. When?",
+   "o": [
+    "half past seven",
+    "half past six",
+    "eight o'clock",
+    "quarter past seven"
+   ],
+   "x": "7:00 plus 30 minutes = 7:30"
+  },
+  {
+   "he": "What time is it?",
+   "a": "half past twelve",
+   "h": "6eca5157",
+   "q": "What time is it?",
+   "o": [
+    "half past twelve",
+    "twelve o'clock",
+    "half past one",
+    "quarter past twelve"
+   ],
+   "x": "12 and 30 minutes = half past twelve"
+  },
+  {
+   "he": "What time is it?",
+   "a": "quarter past five",
+   "h": "f4178177",
+   "q": "What time is it?",
+   "o": [
+    "quarter past five",
+    "quarter past six",
+    "half past five",
+    "five o'clock"
+   ],
+   "x": "5 and 15 minutes = quarter past five"
+  },
+  {
+   "he": "How many minutes are in a quarter of an hour?",
+   "a": "fifteen",
+   "h": "4f529a72",
+   "q": "How many minutes are in a quarter of an hour?",
+   "o": [
+    "fifteen",
+    "thirty",
+    "twenty-five",
+    "sixty"
+   ],
+   "x": "A quarter of an hour = 60 ÷ 4 = 15 minutes"
+  },
+  {
+   "he": "Which clock shows quarter past ten?",
+   "a": "10:15",
+   "h": "aa2af3f1",
+   "q": "Which clock shows quarter past ten?",
+   "o": [
+    "10:15",
+    "10:30",
+    "11:15",
+    "10:45"
+   ],
+   "x": "quarter past = ורבע: 10:15"
+  },
+  {
+   "he": "שבע ורבע = ?",
+   "a": "quarter past seven",
+   "h": "81bbe8a1",
+   "q": "שבע ורבע = ?",
+   "o": [
+    "quarter past seven",
+    "quarter past six",
+    "half past seven",
+    "seven o'clock"
+   ],
+   "x": "ורבע = quarter past: quarter past seven"
+  },
+  {
+   "he": "The bus comes at 8:15. It comes at ___.",
+   "a": "quarter past eight",
+   "h": "5e5ab2ef",
+   "q": "The bus comes at 8:15. It comes at ___.",
+   "o": [
+    "quarter past eight",
+    "quarter past nine",
+    "half past eight",
+    "eight o'clock"
+   ],
+   "x": "8:15 = quarter past eight"
+  },
+  {
+   "he": "It is 3:00. Fifteen minutes later it is ___.",
+   "a": "quarter past three",
+   "h": "0aa6354e",
+   "q": "It is 3:00. Fifteen minutes later it is ___.",
+   "o": [
+    "quarter past three",
+    "half past three",
+    "quarter past four",
+    "three o'clock"
+   ],
+   "x": "3:00 plus 15 minutes = 3:15"
+  },
+  {
+   "he": "⁦quarter past two⁩ = ?",
+   "a": "2:15",
+   "h": "3c3f4d50",
+   "q": "⁦quarter past two⁩ = ?",
+   "o": [
+    "2:15",
+    "2:30",
+    "3:15",
+    "2:45"
+   ],
+   "x": "quarter past = ורבע: 2:15"
+  },
+  {
+   "he": "What time is it?",
+   "a": "quarter past twelve",
+   "h": "3705c0ea",
+   "q": "What time is it?",
+   "o": [
+    "quarter past twelve",
+    "half past twelve",
+    "twelve o'clock",
+    "quarter past two"
+   ],
+   "x": "12 and 15 minutes = quarter past twelve"
+  },
+  {
+   "he": "What time is it?",
+   "a": "half past nine",
+   "h": "230d6166",
+   "q": "What time is it?",
+   "o": [
+    "half past nine",
+    "quarter past nine",
+    "nine o'clock",
+    "half past ten"
+   ],
+   "x": "9 and 30 minutes = half past nine"
+  },
+  {
+   "he": "Which of these times comes first in the morning?",
+   "a": "quarter past seven",
+   "h": "d22b5fce",
+   "q": "Which of these times comes first in the morning?",
+   "o": [
+    "quarter past seven",
+    "half past seven",
+    "eight o'clock",
+    "half past eight"
+   ],
+   "x": "7:15 comes before 7:30, 8:00 and 8:30"
+  },
+  {
+   "he": "מטבח = ?",
+   "a": "kitchen",
+   "h": "fcc8ab9c",
+   "q": "מטבח = ?",
+   "o": [
+    "kitchen",
+    "bedroom",
+    "bathroom",
+    "garden"
+   ],
+   "x": "מטבח = kitchen"
+  },
+  {
+   "he": "חדר שינה = ?",
+   "a": "bedroom",
+   "h": "c146eba9",
+   "q": "חדר שינה = ?",
+   "o": [
+    "bedroom",
+    "kitchen",
+    "living room",
+    "bathroom"
+   ],
+   "x": "חדר שינה = bedroom"
+  },
+  {
+   "he": "חדר אמבטיה = ?",
+   "a": "bathroom",
+   "h": "fb75cbb9",
+   "q": "חדר אמבטיה = ?",
+   "o": [
+    "bathroom",
+    "bedroom",
+    "kitchen",
+    "garden"
+   ],
+   "x": "חדר אמבטיה = bathroom"
+  },
+  {
+   "he": "We sit on the sofa in the ___.",
+   "a": "living room",
+   "h": "c9a289da",
+   "q": "We sit on the sofa in the ___.",
+   "o": [
+    "living room",
+    "bathroom",
+    "garden",
+    "shower"
+   ],
+   "x": "סלון = living room"
+  },
+  {
+   "he": "ספה = ?",
+   "a": "sofa",
+   "h": "36571c09",
+   "q": "ספה = ?",
+   "o": [
+    "sofa",
+    "bed",
+    "table",
+    "door"
+   ],
+   "x": "ספה = sofa"
+  },
+  {
+   "he": "דלת פתוחה = ?",
+   "a": "an open door",
+   "h": "332a2919",
+   "q": "דלת פתוחה = ?",
+   "o": [
+    "an open door",
+    "a door open",
+    "an open floor",
+    "a open door"
+   ],
+   "x": "Adjective before the noun: an open door"
+  },
+  {
+   "he": "שולחן = ?",
+   "a": "table",
+   "h": "43f21214",
+   "q": "שולחן = ?",
+   "o": [
+    "table",
+    "chair",
+    "bed",
+    "sofa"
+   ],
+   "x": "שולחן = table"
+  },
+  {
+   "he": "כיסא = ?",
+   "a": "chair",
+   "h": "7dcc692e",
+   "q": "כיסא = ?",
+   "o": [
+    "chair",
+    "table",
+    "bed",
+    "sofa"
+   ],
+   "x": "כיסא = chair"
+  },
+  {
+   "he": "Flowers grow in the ___.",
+   "a": "garden",
+   "h": "30b7986d",
+   "q": "Flowers grow in the ___.",
+   "o": [
+    "garden",
+    "kitchen",
+    "bathroom",
+    "bedroom"
+   ],
+   "x": "גינה = garden"
+  },
+  {
+   "he": "At night I sleep in my ___ under a blanket. (מיטה)",
+   "a": "bed",
+   "h": "06f8a5cb",
+   "q": "At night I sleep in my ___ under a blanket. (מיטה)",
+   "o": [
+    "bed",
+    "bath",
+    "door",
+    "table"
+   ],
+   "x": "We sleep in a bed (מיטה = bed)"
+  },
+  {
+   "he": "Which is NOT a room?",
+   "a": "garden",
+   "h": "7cf97281",
+   "q": "Which is NOT a room?",
+   "o": [
+    "garden",
+    "kitchen",
+    "bedroom",
+    "bathroom"
+   ],
+   "x": "A garden is not a room"
+  },
+  {
+   "he": "לחם טרי = ?",
+   "a": "fresh bread",
+   "h": "872b5e88",
+   "q": "לחם טרי = ?",
+   "o": [
+    "fresh bread",
+    "bread fresh",
+    "fresh bed",
+    "fish bread"
+   ],
+   "x": "Adjective before the noun: fresh bread"
+  },
+  {
+   "he": "גבינה צהובה = ?",
+   "a": "yellow cheese",
+   "h": "1d0ebc24",
+   "q": "גבינה צהובה = ?",
+   "o": [
+    "yellow cheese",
+    "cheese yellow",
+    "yellow chicken",
+    "yellow cake"
+   ],
+   "x": "Adjective before the noun: yellow cheese"
+  },
+  {
+   "he": "Which is a fruit?",
+   "a": "banana",
+   "h": "fa22909f",
+   "q": "Which is a fruit?",
+   "o": [
+    "banana",
+    "carrot",
+    "bread",
+    "egg"
+   ],
+   "x": "A banana is a fruit"
+  },
+  {
+   "he": "Which is a drink?",
+   "a": "water",
+   "h": "11beb3c4",
+   "q": "Which is a drink?",
+   "o": [
+    "water",
+    "rice",
+    "cheese",
+    "salad"
+   ],
+   "x": "Water is something we drink"
+  },
+  {
+   "he": "ירקות = ?",
+   "a": "vegetables",
+   "h": "d47aab4b",
+   "q": "ירקות = ?",
+   "o": [
+    "vegetables",
+    "fruit",
+    "sweets",
+    "drinks"
+   ],
+   "x": "ירקות = vegetables"
+  },
+  {
+   "he": "I'm thirsty. I want some ___.",
+   "a": "water",
+   "h": "1f09b0d5",
+   "q": "I'm thirsty. I want some ___.",
+   "o": [
+    "water",
+    "bread",
+    "cheese",
+    "rice"
+   ],
+   "x": "Thirsty → we drink water"
+  },
+  {
+   "he": "I'm hungry. Can I have a cheese ___?",
+   "a": "sandwich",
+   "h": "01a28096",
+   "q": "I'm hungry. Can I have a cheese ___?",
+   "o": [
+    "sandwich",
+    "coat",
+    "pencil",
+    "chair"
+   ],
+   "x": "Hungry → we eat a sandwich"
+  },
+  {
+   "he": "In winter I wear a warm ___ over my sweater.",
+   "a": "coat",
+   "h": "d0d7fe20",
+   "q": "In winter I wear a warm ___ over my sweater.",
+   "o": [
+    "coat",
+    "T-shirt",
+    "swimsuit",
+    "sandal"
+   ],
+   "x": "מעיל חם = warm coat"
+  },
+  {
+   "he": "מכנסיים = ?",
+   "a": "pants",
+   "h": "84bdd26a",
+   "q": "מכנסיים = ?",
+   "o": [
+    "pants",
+    "shirt",
+    "shoes",
+    "socks"
+   ],
+   "x": "מכנסיים = pants"
+  },
+  {
+   "he": "I wear ___ on my feet, over my socks.",
+   "a": "shoes",
+   "h": "68580490",
+   "q": "I wear ___ on my feet, over my socks.",
+   "o": [
+    "shoes",
+    "gloves",
+    "hats",
+    "shirts"
+   ],
+   "x": "Over the socks = shoes"
+  },
+  {
+   "he": "הכובע שלי = ?",
+   "a": "my hat",
+   "h": "89b4a859",
+   "q": "הכובע שלי = ?",
+   "o": [
+    "my hat",
+    "hat my",
+    "my hot",
+    "me hat"
+   ],
+   "x": "'my' comes before the noun: my hat"
+  },
+  {
+   "he": "גרביים חמים = ?",
+   "a": "warm socks",
+   "h": "ab637e78",
+   "q": "גרביים חמים = ?",
+   "o": [
+    "warm socks",
+    "socks warm",
+    "warm shoes",
+    "warm sock"
+   ],
+   "x": "Adjective before the noun: warm socks"
+  },
+  {
+   "he": "It's hot. I wear ___ with short sleeves.",
+   "a": "a T-shirt",
+   "h": "594fd371",
+   "q": "It's hot. I wear ___ with short sleeves.",
+   "o": [
+    "a T-shirt",
+    "a scarf",
+    "gloves",
+    "boots"
+   ],
+   "x": "Short sleeves → a T-shirt"
+  },
+  {
+   "he": "Which is NOT clothing?",
+   "a": "banana",
+   "h": "d223937e",
+   "q": "Which is NOT clothing?",
+   "o": [
+    "banana",
+    "dress",
+    "coat",
+    "sock"
+   ],
+   "x": "You don't wear a banana!"
+  },
+  {
+   "he": "It's ___ today. I'm wet! Take an umbrella.",
+   "a": "rainy",
+   "h": "b528aeb5",
+   "q": "It's ___ today. I'm wet! Take an umbrella.",
+   "o": [
+    "rainy",
+    "sunny",
+    "hot",
+    "dry"
+   ],
+   "x": "גשום = rainy"
+  },
+  {
+   "he": "It's ___. Wear a hat and sunglasses.",
+   "a": "sunny",
+   "h": "98ecc31a",
+   "q": "It's ___. Wear a hat and sunglasses.",
+   "o": [
+    "sunny",
+    "rainy",
+    "snowy",
+    "cloudy"
+   ],
+   "x": "שמשי = sunny"
+  },
+  {
+   "he": "Snow is ___.",
+   "a": "cold",
+   "h": "f0cae192",
+   "q": "Snow is ___.",
+   "o": [
+    "cold",
+    "hot",
+    "green",
+    "sweet"
+   ],
+   "x": "Snow is cold"
+  },
+  {
+   "he": "It's ___. My hat flies away!",
+   "a": "windy",
+   "h": "281a9578",
+   "q": "It's ___. My hat flies away!",
+   "o": [
+    "windy",
+    "sunny",
+    "hot",
+    "cloudy"
+   ],
+   "x": "יש רוח = windy"
+  },
+  {
+   "he": "מעונן = ?",
+   "a": "cloudy",
+   "h": "441caca8",
+   "q": "מעונן = ?",
+   "o": [
+    "cloudy",
+    "rainy",
+    "sunny",
+    "windy"
+   ],
+   "x": "מעונן = cloudy"
+  },
+  {
+   "he": "I like to ___ pictures.",
+   "a": "draw",
+   "h": "768e71b9",
+   "q": "I like to ___ pictures.",
+   "o": [
+    "draw",
+    "swim",
+    "cook",
+    "ride"
+   ],
+   "x": "לצייר = draw"
+  },
+  {
+   "he": "Dan plays the ___.",
+   "a": "guitar",
+   "h": "7dcdb86e",
+   "q": "Dan plays the ___.",
+   "o": [
+    "guitar",
+    "football",
+    "swimming",
+    "bike"
+   ],
+   "x": "We play the guitar (play the + instrument)"
+  },
+  {
+   "he": "My hobby is ___. I love books.",
+   "a": "reading",
+   "h": "c4a2ac7e",
+   "q": "My hobby is ___. I love books.",
+   "o": [
+    "reading",
+    "swimming",
+    "dancing",
+    "cooking"
+   ],
+   "x": "Loves books → reading"
+  },
+  {
+   "he": "She likes ___. She goes to the pool.",
+   "a": "swimming",
+   "h": "d4bc3113",
+   "q": "She likes ___. She goes to the pool.",
+   "o": [
+    "swimming",
+    "singing",
+    "drawing",
+    "reading"
+   ],
+   "x": "Pool → swimming"
+  },
+  {
+   "he": "תחביב = ?",
+   "a": "hobby",
+   "h": "9dfc53d8",
+   "q": "תחביב = ?",
+   "o": [
+    "hobby",
+    "holiday",
+    "homework",
+    "house"
+   ],
+   "x": "תחביב = hobby"
+  },
+  {
+   "he": "לבשל = ?",
+   "a": "cook",
+   "h": "830ea85d",
+   "q": "לבשל = ?",
+   "o": [
+    "cook",
+    "clean",
+    "catch",
+    "cut"
+   ],
+   "x": "לבשל = cook"
+  },
+  {
+   "he": "לרקוד = ?",
+   "a": "dance",
+   "h": "677eefa7",
+   "q": "לרקוד = ?",
+   "o": [
+    "dance",
+    "draw",
+    "drive",
+    "dive"
+   ],
+   "x": "לרקוד = dance"
+  },
+  {
+   "he": "A big shop with all kinds of food is a ___.",
+   "a": "supermarket",
+   "h": "4fee4c06",
+   "q": "A big shop with all kinds of food is a ___.",
+   "o": [
+    "supermarket",
+    "library",
+    "school",
+    "hospital"
+   ],
+   "x": "סופרמרקט = supermarket"
+  },
+  {
+   "he": "Doctors work in a ___.",
+   "a": "hospital",
+   "h": "33d036d0",
+   "q": "Doctors work in a ___.",
+   "o": [
+    "hospital",
+    "bank",
+    "park",
+    "cinema"
+   ],
+   "x": "בית חולים = hospital"
+  },
+  {
+   "he": "You borrow books from the ___.",
+   "a": "library",
+   "h": "cae9c3c2",
+   "q": "You borrow books from the ___.",
+   "o": [
+    "library",
+    "bank",
+    "zoo",
+    "bakery"
+   ],
+   "x": "ספרייה = library"
+  },
+  {
+   "he": "You see a film at the ___.",
+   "a": "cinema",
+   "h": "1b420184",
+   "q": "You see a film at the ___.",
+   "o": [
+    "cinema",
+    "library",
+    "post office",
+    "bank"
+   ],
+   "x": "קולנוע = cinema"
+  },
+  {
+   "he": "You see lions at the ___.",
+   "a": "zoo",
+   "h": "1aa1991e",
+   "q": "You see lions at the ___.",
+   "o": [
+    "zoo",
+    "bank",
+    "bakery",
+    "pool"
+   ],
+   "x": "גן חיות = zoo"
+  },
+  {
+   "he": "You swim at the ___.",
+   "a": "pool",
+   "h": "1cc003c6",
+   "q": "You swim at the ___.",
+   "o": [
+    "pool",
+    "bank",
+    "library",
+    "bakery"
+   ],
+   "x": "בריכה = pool"
+  },
+  {
+   "he": "תחנת אוטובוס = ?",
+   "a": "bus stop",
+   "h": "30b4ff93",
+   "q": "תחנת אוטובוס = ?",
+   "o": [
+    "bus stop",
+    "bookshop",
+    "car park",
+    "playground"
+   ],
+   "x": "תחנת אוטובוס = bus stop"
+  },
+  {
+   "he": "You keep money in the ___.",
+   "a": "bank",
+   "h": "95e4c40b",
+   "q": "You keep money in the ___.",
+   "o": [
+    "bank",
+    "park",
+    "zoo",
+    "shop"
+   ],
+   "x": "בנק = bank"
+  },
+  {
+   "he": "רחוב = ?",
+   "a": "street",
+   "h": "340be8a9",
+   "q": "רחוב = ?",
+   "o": [
+    "street",
+    "store",
+    "school",
+    "square"
+   ],
+   "x": "רחוב = street"
+  },
+  {
+   "he": "Children play on the swings at the ___.",
+   "a": "park",
+   "h": "8541c4aa",
+   "q": "Children play on the swings at the ___.",
+   "o": [
+    "park",
+    "bank",
+    "post office",
+    "hospital"
+   ],
+   "x": "פארק = park"
+  },
+  {
+   "he": "חנות = ?",
+   "a": "shop",
+   "h": "bbf27039",
+   "q": "חנות = ?",
+   "o": [
+    "shop",
+    "ship",
+    "sheep",
+    "shoe"
+   ],
+   "x": "חנות = shop"
+  },
+  {
+   "he": "A shop that bakes bread is a ___.",
+   "a": "bakery",
+   "h": "f1dbe206",
+   "q": "A shop that bakes bread is a ___.",
+   "o": [
+    "bakery",
+    "bank",
+    "library",
+    "hospital"
+   ],
+   "x": "מאפייה = bakery"
+  },
+  {
+   "he": "How old is Noa?",
+   "a": "eleven",
+   "h": "c74e8dee",
+   "q": "How old is Noa?",
+   "o": [
+    "eleven",
+    "ten",
+    "twelve",
+    "six"
+   ],
+   "x": "Noa is eleven years old"
+  },
+  {
+   "he": "Who is Ben?",
+   "a": "her brother",
+   "h": "c4d67814",
+   "q": "Who is Ben?",
+   "o": [
+    "her brother",
+    "her father",
+    "her friend",
+    "her dog"
+   ],
+   "x": "her little brother, Ben"
+  },
+  {
+   "he": "When does Noa get up?",
+   "a": "at 6:30",
+   "h": "d0b2d45d",
+   "q": "When does Noa get up?",
+   "o": [
+    "at 6:30",
+    "at 7:15",
+    "at 8:00",
+    "at 6:00"
+   ],
+   "x": "half past six = 6:30"
+  },
+  {
+   "he": "What does Noa eat for breakfast?",
+   "a": "bread and cheese",
+   "h": "ca8e150a",
+   "q": "What does Noa eat for breakfast?",
+   "o": [
+    "bread and cheese",
+    "eggs",
+    "a sandwich",
+    "cornflakes"
+   ],
+   "x": "eats bread with cheese"
+  },
+  {
+   "he": "What does Ben drink?",
+   "a": "orange juice",
+   "h": "09fc4ebf",
+   "q": "What does Ben drink?",
+   "o": [
+    "orange juice",
+    "milk",
+    "water",
+    "tea"
+   ],
+   "x": "He drinks orange juice"
+  },
+  {
+   "he": "How does Noa go to school?",
+   "a": "she walks",
+   "h": "3cfcf049",
+   "q": "How does Noa go to school?",
+   "o": [
+    "she walks",
+    "by bus",
+    "by car",
+    "by bike"
+   ],
+   "x": "she walks there with Maya"
+  },
+  {
+   "he": "Who is Maya?",
+   "a": "her best friend",
+   "h": "084a2c63",
+   "q": "Who is Maya?",
+   "o": [
+    "her best friend",
+    "her sister",
+    "her teacher",
+    "her mother"
+   ],
+   "x": "her best friend, Maya"
+  },
+  {
+   "he": "When does school start?",
+   "a": "at eight",
+   "h": "5083ebaf",
+   "q": "When does school start?",
+   "o": [
+    "at eight",
+    "at seven",
+    "at nine",
+    "at six"
+   ],
+   "x": "School starts at eight o'clock"
+  },
+  {
+   "he": "Why does Noa like English?",
+   "a": "she loves stories",
+   "h": "616aa7c8",
+   "q": "Why does Noa like English?",
+   "o": [
+    "she loves stories",
+    "it's easy",
+    "she likes Maya",
+    "it's short"
+   ],
+   "x": "because she loves reading stories"
+  },
+  {
+   "he": "What does Noa play?",
+   "a": "the guitar",
+   "h": "2dd0a2c8",
+   "q": "What does Noa play?",
+   "o": [
+    "the guitar",
+    "football",
+    "the piano",
+    "tennis"
+   ],
+   "x": "plays the guitar"
+  },
+  {
+   "he": "Is Noa late for school?",
+   "a": "No, she isn't.",
+   "h": "f8f469da",
+   "q": "Is Noa late for school?",
+   "o": [
+    "No, she isn't.",
+    "Yes, she is.",
+    "Yes, every day.",
+    "She is sick."
+   ],
+   "x": "At 7:15 she is ready, home is close, school is at 8:00"
+  },
+  {
+   "he": "What is the text mostly about?",
+   "a": "Noa's morning",
+   "h": "1f990cae",
+   "q": "What is the text mostly about?",
+   "o": [
+    "Noa's morning",
+    "Noa's school",
+    "Ben's breakfast",
+    "Maya's family"
+   ],
+   "x": "The text tells what Noa does in the morning"
+  },
+  {
+   "he": "What day is it?",
+   "a": "Saturday",
+   "h": "66194187",
+   "q": "What day is it?",
+   "o": [
+    "Saturday",
+    "Friday",
+    "Sunday",
+    "Monday"
+   ],
+   "x": "It is Saturday morning"
+  },
+  {
+   "he": "What is the weather like?",
+   "a": "rainy",
+   "h": "b0938bc5",
+   "q": "What is the weather like?",
+   "o": [
+    "rainy",
+    "sunny",
+    "windy",
+    "snowy"
+   ],
+   "x": "it is raining = rainy"
+  },
+  {
+   "he": "What is Mom doing?",
+   "a": "reading a newspaper",
+   "h": "a8b60e79",
+   "q": "What is Mom doing?",
+   "o": [
+    "reading a newspaper",
+    "cooking",
+    "sleeping",
+    "watching TV"
+   ],
+   "x": "Mom is reading a newspaper"
+  },
+  {
+   "he": "Where is Dad?",
+   "a": "in the kitchen",
+   "h": "a8f05b64",
+   "q": "Where is Dad?",
+   "o": [
+    "in the kitchen",
+    "in the garden",
+    "in the park",
+    "in the bedroom"
+   ],
+   "x": "Dad is cooking in the kitchen"
+  },
+  {
+   "he": "Where is Tom sitting?",
+   "a": "on the sofa",
+   "h": "c80ad8c9",
+   "q": "Where is Tom sitting?",
+   "o": [
+    "on the sofa",
+    "on the bed",
+    "on the floor",
+    "in a box"
+   ],
+   "x": "sitting on the sofa"
+  },
+  {
+   "he": "Why is Tom bored?",
+   "a": "can't play outside",
+   "h": "fd241fde",
+   "q": "Why is Tom bored?",
+   "o": [
+    "can't play outside",
+    "he is sick",
+    "no television",
+    "Lily is sleeping"
+   ],
+   "x": "We can't play in the park"
+  },
+  {
+   "he": "Whose idea is the box house?",
+   "a": "Lily's",
+   "h": "6b8c6052",
+   "q": "Whose idea is the box house?",
+   "o": [
+    "Lily's",
+    "Tom's",
+    "Mom's",
+    "Dad's"
+   ],
+   "x": "Lily has an idea"
+  },
+  {
+   "he": "How many boxes are there?",
+   "a": "three",
+   "h": "0cbb487f",
+   "q": "How many boxes are there?",
+   "o": [
+    "three",
+    "two",
+    "four",
+    "one"
+   ],
+   "x": "three big boxes"
+  },
+  {
+   "he": "Where are the boxes?",
+   "a": "under Lily's bed",
+   "h": "d85fbe8e",
+   "q": "Where are the boxes?",
+   "o": [
+    "under Lily's bed",
+    "in the kitchen",
+    "in the garden",
+    "on the sofa"
+   ],
+   "x": "under her bed"
+  },
+  {
+   "he": "Who is sleeping in the box house?",
+   "a": "the cat",
+   "h": "25f36ae3",
+   "q": "Who is sleeping in the box house?",
+   "o": [
+    "the cat",
+    "Tom",
+    "Lily",
+    "the dog"
+   ],
+   "x": "the cat is sleeping in the box house"
+  },
+  {
+   "he": "\"bored\" means:",
+   "a": "משועמם",
+   "h": "bbe63fd7",
+   "q": "\"bored\" means:",
+   "o": [
+    "משועמם",
+    "עייף",
+    "שמח",
+    "רעב"
+   ],
+   "x": "bored = משועמם"
+  },
+  {
+   "he": "What will the family do now?",
+   "a": "eat pancakes",
+   "h": "52ef6ed2",
+   "q": "What will the family do now?",
+   "o": [
+    "eat pancakes",
+    "go to school",
+    "play outside",
+    "cook pancakes"
+   ],
+   "x": "Dad: The pancakes are ready! → now they eat"
+  },
+  {
+   "he": "Which is the best new title?",
+   "a": "The Box House",
+   "h": "49ae8697",
+   "q": "Which is the best new title?",
+   "o": [
+    "The Box House",
+    "A Sunny Day",
+    "In the Park",
+    "Dad's New Car"
+   ],
+   "x": "Most of the story is about the box house"
+  },
+  {
+   "he": "When did the class visit the zoo?",
+   "a": "last Friday",
+   "h": "27f85bdb",
+   "q": "When did the class visit the zoo?",
+   "o": [
+    "last Friday",
+    "last Sunday",
+    "yesterday",
+    "last summer"
+   ],
+   "x": "Last Friday was a great day"
+  },
+  {
+   "he": "Where is the zoo?",
+   "a": "in Jerusalem",
+   "h": "ec937db6",
+   "q": "Where is the zoo?",
+   "o": [
+    "in Jerusalem",
+    "in Haifa",
+    "in Eilat",
+    "in Tel Aviv"
+   ],
+   "x": "the zoo in Jerusalem"
+  },
+  {
+   "he": "What was the weather like?",
+   "a": "sunny and warm",
+   "h": "9759c394",
+   "q": "What was the weather like?",
+   "o": [
+    "sunny and warm",
+    "rainy",
+    "cold and windy",
+    "snowy"
+   ],
+   "x": "The weather was sunny and warm"
+  },
+  {
+   "he": "How many big lions were there?",
+   "a": "two",
+   "h": "1dae86b5",
+   "q": "How many big lions were there?",
+   "o": [
+    "two",
+    "three",
+    "five",
+    "one"
+   ],
+   "x": "two big lions and three cubs"
+  },
+  {
+   "he": "What did one monkey do?",
+   "a": "It jumped.",
+   "h": "de80b4ce",
+   "q": "What did one monkey do?",
+   "o": [
+    "It jumped.",
+    "It slept.",
+    "It ate.",
+    "It sang."
+   ],
+   "x": "One monkey jumped on a tree"
+  },
+  {
+   "he": "Who laughed a lot?",
+   "a": "Adam",
+   "h": "e2e5f9f6",
+   "q": "Who laughed a lot?",
+   "o": [
+    "Adam",
+    "the teacher",
+    "the monkey",
+    "the lions"
+   ],
+   "x": "My friend Adam laughed a lot"
+  },
+  {
+   "he": "Where did they eat lunch?",
+   "a": "under a tree",
+   "h": "b081eca0",
+   "q": "Where did they eat lunch?",
+   "o": [
+    "under a tree",
+    "on the bus",
+    "at school",
+    "near the lions"
+   ],
+   "x": "we sat under a big tree"
+  },
+  {
+   "he": "Which animals did the writer like best?",
+   "a": "the penguins",
+   "h": "bbab96f2",
+   "q": "Which animals did the writer like best?",
+   "o": [
+    "the penguins",
+    "the lions",
+    "the monkeys",
+    "the cubs"
+   ],
+   "x": "I liked the penguins best"
+  },
+  {
+   "he": "How did they go back to school?",
+   "a": "by bus",
+   "h": "b788cd50",
+   "q": "How did they go back to school?",
+   "o": [
+    "by bus",
+    "on foot",
+    "by train",
+    "by car"
+   ],
+   "x": "we traveled back by bus"
+  },
+  {
+   "he": "How did they feel at three o'clock?",
+   "a": "tired",
+   "h": "6c110a28",
+   "q": "How did they feel at three o'clock?",
+   "o": [
+    "tired",
+    "hungry",
+    "bored",
+    "sad"
+   ],
+   "x": "At three o'clock we were tired"
+  },
+  {
+   "he": "\"cubs\" means:",
+   "a": "גורים",
+   "h": "106c5298",
+   "q": "\"cubs\" means:",
+   "o": [
+    "גורים",
+    "קופים",
+    "עצים",
+    "אריות"
+   ],
+   "x": "cubs = גורים (young lions)"
+  },
+  {
+   "he": "How many lions were there in all?",
+   "a": "five",
+   "h": "63d2c790",
+   "q": "How many lions were there in all?",
+   "o": [
+    "five",
+    "two",
+    "three",
+    "six"
+   ],
+   "x": "Two big lions and three cubs: 2 + 3 = 5"
+  },
+  {
+   "he": "Why do you think the writer liked the penguins best?",
+   "a": "They were funny.",
+   "h": "25e12b6f",
+   "q": "Why do you think the writer liked the penguins best?",
+   "o": [
+    "They were funny.",
+    "They were big.",
+    "They were sleeping.",
+    "They ate sandwiches."
+   ],
+   "x": "They were very funny! – that's why the writer liked them"
+  },
+  {
+   "he": "Did the writer enjoy the trip?",
+   "a": "Yes, very much.",
+   "h": "f28e3802",
+   "q": "Did the writer enjoy the trip?",
+   "o": [
+    "Yes, very much.",
+    "No, it rained.",
+    "No, too boring.",
+    "Only the bus."
+   ],
+   "x": "It was the best trip of the year"
+  },
+  {
+   "he": "My friends ___ at the cinema now.",
+   "a": "are",
+   "h": "200d6185",
+   "q": "My friends ___ at the cinema now.",
+   "o": [
+    "are",
+    "is",
+    "am",
+    "be"
+   ],
+   "x": "friends = plural → are"
+  },
+  {
+   "he": "Ben ___ two sisters.",
+   "a": "has",
+   "h": "f75e3150",
+   "q": "Ben ___ two sisters.",
+   "o": [
+    "has",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "Ben = he → has"
+  },
+  {
+   "he": "My cat ___ milk every morning.",
+   "a": "drinks",
+   "h": "7749cbf0",
+   "q": "My cat ___ milk every morning.",
+   "o": [
+    "drinks",
+    "drink",
+    "drinking",
+    "drinkes"
+   ],
+   "x": "the cat = it → drinks"
+  },
+  {
+   "he": "___ your brother like football?",
+   "a": "Does",
+   "h": "c573c7ab",
+   "q": "___ your brother like football?",
+   "o": [
+    "Does",
+    "Do",
+    "Is",
+    "Are"
+   ],
+   "x": "your brother = he → Does"
+  },
+  {
+   "he": "Look! The children ___ in the snow.",
+   "a": "are playing",
+   "h": "faddcc1a",
+   "q": "Look! The children ___ in the snow.",
+   "o": [
+    "are playing",
+    "is playing",
+    "play",
+    "plays"
+   ],
+   "x": "Look! + children → are playing"
+  },
+  {
+   "he": "She is ___ a letter now.",
+   "a": "writing",
+   "h": "bd0ca48c",
+   "q": "She is ___ a letter now.",
+   "o": [
+    "writing",
+    "writeing",
+    "write",
+    "writes"
+   ],
+   "x": "write → drop the e: writing"
+  },
+  {
+   "he": "A cow ___ fly.",
+   "a": "can't",
+   "h": "78bf007b",
+   "q": "A cow ___ fly.",
+   "o": [
+    "can't",
+    "can",
+    "isn't",
+    "aren't"
+   ],
+   "x": "A cow can't fly → can't"
+  },
+  {
+   "he": "There ___ a cake in the kitchen.",
+   "a": "is",
+   "h": "eea81239",
+   "q": "There ___ a cake in the kitchen.",
+   "o": [
+    "is",
+    "are",
+    "am",
+    "have"
+   ],
+   "x": "One cake → There is"
+  },
+  {
+   "he": "one glass, two ___",
+   "a": "glasses",
+   "h": "1fe771dc",
+   "q": "one glass, two ___",
+   "o": [
+    "glasses",
+    "glasss",
+    "glassies",
+    "glass"
+   ],
+   "x": "After ss → es"
+  },
+  {
+   "he": "Two ___ are at the door.",
+   "a": "men",
+   "h": "2237acef",
+   "q": "Two ___ are at the door.",
+   "o": [
+    "men",
+    "mans",
+    "man",
+    "mens"
+   ],
+   "x": "The plural of man → men"
+  },
+  {
+   "he": "This is my grandma. I love ___.",
+   "a": "her",
+   "h": "3b6436f1",
+   "q": "This is my grandma. I love ___.",
+   "o": [
+    "her",
+    "she",
+    "his",
+    "they"
+   ],
+   "x": "grandma = she; after love → her"
+  },
+  {
+   "he": "Tom and Dan, is this ___ ball?",
+   "a": "your",
+   "h": "71dc037b",
+   "q": "Tom and Dan, is this ___ ball?",
+   "o": [
+    "your",
+    "you",
+    "yours",
+    "you're"
+   ],
+   "x": "Belongs to you (Tom and Dan) + a noun → your"
+  },
+  {
+   "he": "We have a test ___ Thursday.",
+   "a": "on",
+   "h": "36655a9f",
+   "q": "We have a test ___ Thursday.",
+   "o": [
+    "on",
+    "in",
+    "at",
+    "to"
+   ],
+   "x": "A day → on"
+  },
+  {
+   "he": "The mouse is ___ the cat.",
+   "a": "next to",
+   "h": "1b22d30c",
+   "q": "The mouse is ___ the cat.",
+   "o": [
+    "next to",
+    "in",
+    "on",
+    "at"
+   ],
+   "x": "The mouse is beside the cat → next to"
+  },
+  {
+   "he": "___ is your mom? She's at work.",
+   "a": "Where",
+   "h": "4fec1f94",
+   "q": "___ is your mom? She's at work.",
+   "o": [
+    "Where",
+    "Who",
+    "What",
+    "When"
+   ],
+   "x": "A place → Where"
+  },
+  {
+   "he": "___ apples are there? Six.",
+   "a": "How many",
+   "h": "113ba37f",
+   "q": "___ apples are there? Six.",
+   "o": [
+    "How many",
+    "How",
+    "What",
+    "Which"
+   ],
+   "x": "A number → How many"
+  },
+  {
+   "he": "Last night we ___ at home.",
+   "a": "were",
+   "h": "80f4fd20",
+   "q": "Last night we ___ at home.",
+   "o": [
+    "were",
+    "was",
+    "are",
+    "is"
+   ],
+   "x": "we in the past → were"
+  },
+  {
+   "he": "Past of jump?",
+   "a": "jumped",
+   "h": "759c2a8a",
+   "q": "Past of jump?",
+   "o": [
+    "jumped",
+    "jumpt",
+    "jumpped",
+    "jumps"
+   ],
+   "x": "jump → jumped"
+  },
+  {
+   "he": "I have breakfast in the ___.",
+   "a": "morning",
+   "h": "bac65326",
+   "q": "I have breakfast in the ___.",
+   "o": [
+    "morning",
+    "night",
+    "evening",
+    "afternoon"
+   ],
+   "x": "Breakfast → morning"
+  },
+  {
+   "he": "שמלה חדשה = ?",
+   "a": "a new dress",
+   "h": "9e2263cf",
+   "q": "שמלה חדשה = ?",
+   "o": [
+    "a new dress",
+    "a dress new",
+    "a new desk",
+    "new a dress"
+   ],
+   "x": "Adjective before the noun: a new dress"
+  },
+  {
+   "he": "It's cold and ___. Look at the snow!",
+   "a": "snowy",
+   "h": "15500e03",
+   "q": "It's cold and ___. Look at the snow!",
+   "o": [
+    "snowy",
+    "sunny",
+    "hot",
+    "dry"
+   ],
+   "x": "Snow → snowy"
+  },
+  {
+   "he": "You send letters at the ___.",
+   "a": "post office",
+   "h": "da8debea",
+   "q": "You send letters at the ___.",
+   "o": [
+    "post office",
+    "bakery",
+    "zoo",
+    "pool"
+   ],
+   "x": "דואר = post office"
+  }
+ ]
+}

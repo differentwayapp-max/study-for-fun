@@ -3228,7 +3228,7 @@
    "he": "כמה צירי סימטריה יש למלבן שאינו ריבוע?",
    "a": "⁦2⁩",
    "h": "005218f7",
-   "q": "How many lines of symmetry does a rectangle that is not a square have?",
+   "q": "How many lines of symmetry does a rectangle that is NOT a square have?",
    "o": [
     "⁦2⁩",
     "⁦4⁩",
@@ -3315,7 +3315,7 @@
    "he": "האם אלכסון של מלבן שאינו ריבוע הוא ציר סימטריה?",
    "a": "לא",
    "h": "522ee559",
-   "q": "Is the diagonal of a rectangle (not a square) a line of symmetry?",
+   "q": "Is the diagonal of a rectangle (NOT a square) a line of symmetry?",
    "o": [
     "No",
     "Yes",

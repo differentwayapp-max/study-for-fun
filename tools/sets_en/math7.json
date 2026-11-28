@@ -877,7 +877,7 @@
    "he": "איזה איבר אינו דומה לשאר?",
    "a": "⁦4y⁩",
    "h": "4c44685d",
-   "q": "Which term is not like the others?",
+   "q": "Which term is NOT like the others?",
    "o": [
     "⁦4y⁩",
     "⁦2x⁩",
@@ -2038,7 +2038,7 @@
    "he": "נקודה: 3 שמאלה מהראשית ו-2 למעלה. מה שיעוריה?",
    "a": "⁦(-3,2)⁩",
    "h": "7e83382f",
-   "q": "A point is 3 left of the origin and 2 up. What are its coordinates?",
+   "q": "A point is 3 left of the origin and 2 up. Which of these are its coordinates?",
    "o": [
     "⁦(-3,2)⁩",
     "⁦(3,-2)⁩",
@@ -4523,7 +4523,7 @@
    "he": "מ-⁦(4,-1)⁩ זזים 6 שמאלה ו-3 למעלה. לאן מגיעים?",
    "a": "⁦(-2,2)⁩",
    "h": "c509dd12",
-   "q": "From (4,-1), move 6 left and 3 up. Where do you end up?",
+   "q": "From (4,-1), move 6 left and 3 up. Which of these points do you reach?",
    "o": [
     "⁦(-2,2)⁩",
     "⁦(10,2)⁩",

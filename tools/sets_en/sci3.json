@@ -405,9 +405,9 @@
    "q": "Which of these dissolves in water?",
    "o": [
     "The salt",
-    "Sand",
-    "Nails",
-    "Stones"
+    "The sand",
+    "The nails",
+    "The stones"
    ],
    "x": "Salt spreads through the water; the others don't"
   },
@@ -433,7 +433,7 @@
    "h": "1b625a24",
    "q": "Sugar dissolves in water. Is it still there?",
    "o": [
-    "Yes, water tastes sweet",
+    "Yes, it tastes sweet",
     "No, it disappeared",
     "It turned into air",
     "It sank completely"
@@ -554,7 +554,7 @@
    "he": "בבריכות מלח מי הים מתאדים. מה מאדה אותם?",
    "a": "חום השמש",
    "h": "29a64d43",
-   "q": "In salt pools, seawater evaporates. What makes it evaporate?",
+   "q": "In salt ponds, seawater evaporates. What makes it evaporate?",
    "o": [
     "The sun's heat",
     "A big magnet",
@@ -602,9 +602,9 @@
    "q": "What is the easiest way to separate nuts from raisins?",
    "o": [
     "Picking by hand",
-    "With a magnet",
-    "By evaporation",
-    "By filtering"
+    "Using a magnet",
+    "Evaporating",
+    "Filtering"
    ],
    "x": "The pieces are big – we pick them out by hand"
   },
@@ -721,7 +721,7 @@
    "he": "נייר שנשרף – אפשר להחזיר אותו?",
    "a": "לא, אי אפשר",
    "h": "09e7e5a7",
-   "q": "Paper has burned. Can we get it back?",
+   "q": "Paper has burned. Can it turn back into paper?",
    "o": [
     "No, it can't",
     "Yes, easily",
@@ -955,7 +955,7 @@
    "he": "פרוסת לחם נשרפה בטוסטר. אפשר להחזיר אותה?",
    "a": "לא, אי אפשר",
    "h": "4595d02b",
-   "q": "A slice of bread burned in the toaster. Can we undo it?",
+   "q": "A slice of bread burned in the toaster. Can it turn back into plain bread?",
    "o": [
     "No, it can't",
     "Yes, by cooling",
@@ -1512,7 +1512,7 @@
    "h": "b1f5fdeb",
    "q": "How do we test if a material conducts electricity?",
    "o": [
-    "Using a circuit",
+    "By using a circuit",
     "By tasting it",
     "By smelling it",
     "By weighing it"
@@ -1564,7 +1564,7 @@
    "h": "9c9bf1f9",
    "q": "Is it OK to put things into an electric outlet?",
    "o": [
-    "No, never!",
+    "No, never",
     "Yes, always",
     "Yes, only a key",
     "Only in the morning"
@@ -1605,7 +1605,7 @@
    "o": [
     "Near water",
     "In the living room",
-    "In a study",
+    "In an office",
     "Near a table"
    ],
    "x": "Water and electricity together are dangerous"
@@ -1682,7 +1682,7 @@
    "q": "Which electricity is stronger and more dangerous?",
    "o": [
     "The wall outlet",
-    "A clock battery",
+    "A clock's battery",
     "A remote's battery",
     "A toy's battery"
    ],
@@ -1968,7 +1968,7 @@
    "he": "לאיזו אנרגיה התנור הופך את החשמל?",
    "a": "חום",
    "h": "38728905",
-   "q": "Which energy does an oven turn electricity into?",
+   "q": "What kind of energy does an oven turn electricity into?",
    "o": [
     "Heat",
     "Cold",
@@ -1994,7 +1994,7 @@
    "he": "לאיזו אנרגיה הרמקול הופך את החשמל?",
    "a": "צליל",
    "h": "4c8435a9",
-   "q": "Which energy does a speaker turn electricity into?",
+   "q": "What kind of energy does a speaker turn electricity into?",
    "o": [
     "Sound",
     "Light",
@@ -2098,7 +2098,7 @@
    "he": "צמח לא קיבל מים שבוע. העלים יתייבשו, והצמח…",
    "a": "יבול",
    "h": "37490c41",
-   "q": "No water for a week: the leaves dry up, and the plant will…",
+   "q": "A plant got no water for a week. Its leaves dry up, and it will…",
    "o": [
     "Wilt",
     "Grow fast",
@@ -2152,7 +2152,7 @@
    "h": "73fb944f",
    "q": "Why do we water plants in pots?",
    "o": [
-    "It keeps them alive",
+    "To keep them alive",
     "To clean them",
     "To cool the pot",
     "So they fall over"
@@ -2250,12 +2250,12 @@
    ],
    "x": "12 cm – the tallest.",
    "sc": {
-    "0": "Water & light",
-    "1": "12 cm",
-    "2": "Water only",
-    "3": "4 cm",
-    "4": "Light only",
-    "5": "1 cm"
+    "0": "12 cm",
+    "1": "Both",
+    "2": "4 cm",
+    "3": "No light",
+    "4": "1 cm",
+    "5": "No water"
    }
   },
   {
@@ -2271,12 +2271,12 @@
    ],
    "x": "Without one of them, the plant grows very little.",
    "sc": {
-    "0": "Water & light",
-    "1": "12 cm",
-    "2": "Water only",
-    "3": "4 cm",
-    "4": "Light only",
-    "5": "1 cm"
+    "0": "12 cm",
+    "1": "Both",
+    "2": "4 cm",
+    "3": "No light",
+    "4": "1 cm",
+    "5": "No water"
    }
   },
   {
@@ -2367,7 +2367,7 @@
    "he": "עלים צהובים ונבולים הם סימן ש…",
    "a": "חסר משהו לצמח",
    "h": "3faf50da",
-   "q": "Yellow, wilted leaves are a sign that…",
+   "q": "A plant has yellow, wilted leaves. This is a sign that…",
    "o": [
     "It lacks something",
     "It's very healthy",
@@ -2506,7 +2506,7 @@
    "he": "מה אינו חלק של הצמח?",
    "a": "סלע",
    "h": "b36b64c3",
-   "q": "What is not a part of a plant?",
+   "q": "Which of these is not part of a plant?",
    "o": [
     "Rock",
     "Root",
@@ -2554,11 +2554,12 @@
    ],
    "x": "The apple grows from the flower and has seeds.",
    "sc": {
-    "0": "Carrot",
-    "1": "Root",
-    "2": "Lettuce",
-    "3": "Leaf",
-    "4": "Apple"
+    "0": "Root",
+    "1": "Carrot",
+    "2": "Leaf",
+    "3": "Lettuce",
+    "4": "?",
+    "5": "Apple"
    }
   },
   {
@@ -2911,7 +2912,7 @@
    "h": "b86a2500",
    "q": "Why is it good that seeds spread far away?",
    "o": [
-    "There is more room",
+    "So they have room",
     "So they rot",
     "So they don't sprout",
     "So they stay crowded"
@@ -2953,7 +2954,7 @@
    "h": "ba317d9d",
    "q": "A wild plant is a plant that…",
    "o": [
-    "Grows alone in nature",
+    "Grows on its own",
     "People planted",
     "Grows only in pots",
     "Is made of plastic"
@@ -3292,7 +3293,7 @@
    "h": "6c53ff0b",
    "q": "How long does a plastic bag take to break down?",
    "o": [
-    "Very many years",
+    "Many, many years",
     "One day",
     "A week",
     "A month"
@@ -3527,12 +3528,12 @@
    "he": "מה עושים עם סוללות משומשות?",
    "a": "למתקן איסוף סוללות",
    "h": "392c6622",
-   "q": "What do we do with used batteries?",
+   "q": "Where should used batteries go?",
    "o": [
-    "To a battery bin",
-    "To the regular trash",
+    "In a battery bin",
+    "In the regular trash",
     "Into the sea",
-    "Burn them"
+    "Into a fire"
    ],
    "x": "Batteries contain harmful materials."
   },
@@ -3569,7 +3570,7 @@
    "q": "What is reuse?",
    "o": [
     "Using an item again",
-    "Throwing out after once",
+    "Tossing after one use",
     "Burning the item",
     "Buying a new item"
    ],
@@ -3621,7 +3622,7 @@
    "q": "How do we save water while brushing our teeth?",
    "o": [
     "Turn off the tap",
-    "Run it hard",
+    "Run water full blast",
     "Leave it running",
     "Brush twice"
    ],
@@ -3718,12 +3719,12 @@
    ],
    "x": "150 L – the most.",
    "sc": {
-    "0": "Short shower",
-    "1": "40 L",
-    "2": "Bath",
-    "3": "150 L",
-    "4": "Brushing teeth",
-    "5": "1 L"
+    "0": "40 L",
+    "1": "Short shower",
+    "2": "150 L",
+    "3": "Bath",
+    "4": "1 L",
+    "5": "Brush teeth"
    }
   },
   {
@@ -3739,12 +3740,12 @@
    ],
    "x": "⁦150 − 40 = 110⁩",
    "sc": {
-    "0": "Short shower",
-    "1": "40 L",
-    "2": "Bath",
-    "3": "150 L",
-    "4": "Brushing teeth",
-    "5": "1 L"
+    "0": "40 L",
+    "1": "Short shower",
+    "2": "150 L",
+    "3": "Bath",
+    "4": "1 L",
+    "5": "Brush teeth"
    }
   },
   {
@@ -3855,7 +3856,7 @@
    "he": "כמה סוללות צריך לפחות במעגל עם נורה?",
    "a": "⁦1⁩",
    "h": "eca8395a",
-   "q": "What is the least number of batteries in a circuit with a bulb?",
+   "q": "At least how many batteries does a circuit with a bulb need?",
    "o": [
     "⁦1⁩",
     "⁦0⁩",
@@ -3875,21 +3876,21 @@
     "Pin",
     "None of them"
    ],
-   "x": "The bulb didn't light only with the cup.",
+   "x": "The cup was the only object that didn't light the bulb.",
    "sc": {
-    "0": "Coin",
-    "1": "Lit",
-    "2": "Pin",
-    "3": "Lit",
-    "4": "Plastic cup",
-    "5": "Not lit"
+    "0": "Lit",
+    "1": "Coin",
+    "2": "Lit",
+    "3": "Pin",
+    "4": "Not lit",
+    "5": "Plastic cup"
    }
   },
   {
    "he": "לחוט החשמל יש שני חלקים. מה בחוץ?",
    "a": "פלסטיק מבודד",
    "h": "03d92115",
-   "q": "An electric wire has two parts. What is on the outside?",
+   "q": "An electric cable has two parts. What is on the outside?",
    "o": [
     "Insulating plastic",
     "Conducting metal",
@@ -3902,14 +3903,14 @@
    "he": "שקע בקיר שבור ומתנדנד. מה עושים?",
    "a": "מספרים למבוגר",
    "h": "6b125949",
-   "q": "A wall socket is broken and loose. What do you do?",
+   "q": "A wall outlet is broken and loose. What do you do?",
    "o": [
     "Tell an adult",
     "Fix it with nails",
     "Keep using it",
     "Touch it"
    ],
-   "x": "Only an electrician fixes a socket."
+   "x": "Only an electrician fixes an outlet."
   },
   {
    "he": "אילו שני צרכים של הצמח באים מהשמיים?",
@@ -3980,9 +3981,9 @@
    "he": "איזה צמח מתאים לגינה במדבר?",
    "a": "חוסך מים",
    "h": "337a269f",
-   "q": "Which kind of plant suits a desert garden?",
+   "q": "A desert garden needs a plant that…",
    "o": [
-    "One that saves water",
+    "Saves water",
     "Needs lots of water",
     "Grows in snow",
     "Grows in a swamp"

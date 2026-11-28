@@ -339,7 +339,7 @@
    "he": "איזה משפט נכון לפי המודל החלקיקי?",
    "a": "החלקיקים תמיד נעים",
    "h": "8a958768",
-   "q": "Which statement is true according to the particle model?",
+   "q": "Which of these is true according to the particle model?",
    "o": [
     "Particles always move",
     "Air is between particles",
@@ -378,7 +378,7 @@
    "he": "גוף התפשט בחום. מה גדל: החלקיקים או הרווחים?",
    "a": "הרווחים ביניהם",
    "h": "80d2236d",
-   "q": "An object expanded when heated. What grew?",
+   "q": "An object expanded when heated. What grew: the particles or the spaces?",
    "o": [
     "The spaces between them",
     "The particles themselves",
@@ -404,7 +404,7 @@
    "he": "למה משאירים רווחים קטנים בין פסי הרכבת?",
    "a": "להתפשטות בקיץ",
    "h": "39c0e1b4",
-   "q": "Why are small gaps left between railway rails?",
+   "q": "Why are small gaps left between railroad rails?",
    "o": [
     "For expansion in summer",
     "To save iron",
@@ -546,7 +546,7 @@
    "h": "aad374dc",
    "q": "Sugar is dissolved in tea. What happened to the sugar particles?",
    "o": [
-    "Stayed among the water",
+    "Spread through the water",
     "Vanished completely",
     "Sank to the bottom",
     "Turned into water"
@@ -661,7 +661,7 @@
    "he": "איזה שינוי הוא כימי?",
    "a": "שריפת נייר",
    "h": "10232dd5",
-   "q": "Which change is chemical?",
+   "q": "Which of these changes is chemical?",
    "o": [
     "Burning paper",
     "Tearing paper",
@@ -917,7 +917,7 @@
    "he": "איזה סימן אינו מעיד על תגובה כימית?",
    "a": "שינוי צורה",
    "h": "39c8da79",
-   "q": "Which sign does not point to a chemical reaction?",
+   "q": "Which of these signs does not point to a chemical reaction?",
    "o": [
     "A change of shape",
     "A change of color",
@@ -1168,7 +1168,7 @@
    "h": "10379fb9",
    "q": "What is a mixture?",
    "o": [
-    "Several substances combined",
+    "Several substances mixed together",
     "One pure substance",
     "A new substance",
     "A solid object"
@@ -1348,7 +1348,7 @@
    "he": "איך אפשר להמיס עוד סוכר בתמיסה רוויה?",
    "a": "לחמם אותה",
    "h": "d10ce553",
-   "q": "How can more sugar dissolve in a saturated solution?",
+   "q": "How can you dissolve more sugar in a saturated solution?",
    "o": [
     "Heat it",
     "Cool it",
@@ -1602,7 +1602,7 @@
     "0": "Stone",
     "1": "B",
     "2": "A",
-    "3": "Height",
+    "3": "Height (m)",
     "4": "2",
     "5": "10"
    }
@@ -1637,7 +1637,7 @@
    "he": "ככל שמותחים יותר את הקשת – האנרגיה האלסטית…",
    "a": "גדלה עם המתיחה",
    "h": "a62cc7ed",
-   "q": "The more you stretch a bow, its elastic energy…",
+   "q": "The more you stretch a bow, what happens to its elastic energy?",
    "o": [
     "Grows with the stretch",
     "Shrinks with the stretch",
@@ -1680,7 +1680,7 @@
    "he": "שתי כוסות מים זהות, אחת חמה ואחת קרה. באיזו יותר אנרגיית חום?",
    "a": "בחמה",
    "h": "bc9ab394",
-   "q": "Two identical cups of water, one hot and one cold. Which has more thermal energy?",
+   "q": "Two identical cups of water, one hot and one cold. Which has more heat energy?",
    "o": [
     "The hot one",
     "The cold one",
@@ -2064,7 +2064,7 @@
    "h": "503fd3d8",
    "q": "What is the drawback of solar energy?",
    "o": [
-    "None at night",
+    "Not available at night",
     "Pollutes a lot",
     "Runs out soon",
     "Gives off smoke"
@@ -2377,7 +2377,7 @@
    "he": "איזה חומר מוליך חום טוב?",
    "a": "נחושת",
    "h": "5737962f",
-   "q": "Which material conducts heat well?",
+   "q": "Which of these materials conducts heat well?",
    "o": [
     "Copper",
     "Wood",
@@ -3321,7 +3321,7 @@
    "he": "מה הסדר הנכון, מהקטן אל הגדול?",
    "a": "תא, רקמה, איבר",
    "h": "8cfa9476",
-   "q": "What is the right order, from smallest to largest?",
+   "q": "What is the right order of organ, cell and tissue, from smallest to largest?",
    "o": [
     "Cell, tissue, organ",
     "Organ, cell, tissue",
@@ -3808,7 +3808,7 @@
    "he": "במחזור הדם הקטן – הדם זורם בין הלב ל…",
    "a": "ריאות",
    "h": "c2f98c22",
-   "q": "In pulmonary circulation, blood flows between the heart and the…",
+   "q": "In the shorter circulation loop, blood flows between the heart and the…",
    "o": [
     "Lungs",
     "Brain",
@@ -4813,7 +4813,7 @@
    "he": "חקר מדעי שואל \"למה זה קורה?\". מה שואל התיכון ההנדסי?",
    "a": "איך לפתור בעיה?",
    "h": "e3ea5426",
-   "q": "Science asks \"Why does it happen?\". What does engineering design ask?",
+   "q": "Science asks, \"Why does it happen?\" What does engineering design ask?",
    "o": [
     "How to solve problems?",
     "What's the temperature?",
@@ -4994,12 +4994,12 @@
    "h": "66a7e3ed",
    "q": "Between the particles of a liquid there are…",
    "o": [
-    "Small gaps",
+    "Small spaces",
     "Air",
-    "Huge gaps",
+    "Huge spaces",
     "Water"
    ],
-   "x": "In a liquid the particles are close – the gaps are small"
+   "x": "In a liquid the particles are close – the spaces are small"
   },
   {
    "he": "בקיץ חוטי החשמל משתלשלים יותר. למה?",

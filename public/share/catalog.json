@@ -1,97 +1,6 @@
 {
  "sets": [
   {
-   "id": "en4",
-   "ver": "315fea6293",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "Sounds · Words · Sentences · Questions · Reading",
-   "desc": "אנגלית לכיתה ד' – כל השנה: חרוזים וצלילים, תנועות קצרות ו-magic e, sh ch th, ברכות ושיחה, מילים בסיסיות, משפטים קצרים (has, his/her, Do you like), מילות יחס, מילות שאלה וקטעי קריאה קצרים",
-   "desc_en": "Grade 4 English, the whole year: rhymes and sounds, short vowels and magic e, sh ch th, greetings and basic talk, core words, short sentences (has, his/her, Do you like), in/on/under/next to, question words and short reading passages",
-   "tags": [
-    "Rhymes",
-    "Short vowels",
-    "Magic e",
-    "sh ch th",
-    "Sight words",
-    "Greetings",
-    "Family",
-    "Colors & numbers",
-    "Body & clothes",
-    "Animals & food",
-    "Days",
-    "I am / I can",
-    "Do you like?",
-    "has / his / her",
-    "There is / are",
-    "in / on / under",
-    "Question words",
-    "Reading"
-   ],
-   "questions": 397,
-   "chapters": 38,
-   "reading": 3,
-   "words": 135,
-   "samples": [
-    {
-     "q": "Which word rhymes with sun?",
-     "e": "☀️sun"
-    },
-    {
-     "q": "fl_g (דגל)",
-     "e": "🚩"
-    },
-    {
-     "q": "b_x (קופסה)",
-     "e": "📦"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en5",
-   "ver": "3055aa0262",
-   "subject": "אנגלית",
-   "grade": 4,
-   "title": "Grammar · Band I words · Reading",
-   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
-   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
-   "tags": [
-    "am / is / are",
-    "Present Simple",
-    "Present Progressive",
-    "can / there is",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Question words",
-    "Past: was / -ed",
-    "Past: went / ate",
-    "Telling the time",
-    "Band I words",
-    "Reading"
-   ],
-   "questions": 389,
-   "chapters": 32,
-   "reading": 3,
-   "words": 72,
-   "samples": [
-    {
-     "q": "My brother is eight, and I ___ eleven.",
-     "e": "👦11"
-    },
-    {
-     "q": "I ___ a new bike.",
-     "e": "🚲"
-    },
-    {
-     "q": "He ___ football and scores goals.",
-     "e": "👦⚽"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en6",
    "ver": "461366cc01",
    "subject": "אנגלית",
@@ -175,42 +84,6 @@
     {
      "q": "Past of bring?",
      "e": "🎒bring → ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en7-nov26",
-   "ver": "7110e39661",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Present Simple · Weather & Nature",
-   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
-   "desc_en": "Grammar, 112 worksheet words and a reading passage",
-   "tags": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
-   ],
-   "questions": 178,
-   "chapters": 13,
-   "reading": 1,
-   "words": 112,
-   "samples": [
-    {
-     "q": "She ___ to school.",
-     "e": "👧🏫"
-    },
-    {
-     "q": "What is falling?",
-     "e": "🌧️"
-    },
-    {
-     "q": "She ___ like snow.",
-     "e": "👧❄️"
     }
    ],
    "status": "ready"
@@ -385,54 +258,6 @@
     {
      "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
      "e": "🗣️📄"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci7-materials",
-   "ver": "d47d9e0ece",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
-   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
-   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון",
-    "צפיפות",
-    "ציפה ושקיעה",
-    "מכשירי מדידה",
-    "המרות",
-    "מצבי צבירה",
-    "משתנים",
-    "תכנון ניסוי",
-    "גרפים וטבלאות"
-   ],
-   "questions": 305,
-   "chapters": 30,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬"
-    },
-    {
-     "q": "מה מהבאים מגדיר נפח?",
-     "e": "📦"
     }
    ],
    "status": "ready"
@@ -656,55 +481,8 @@
    "status": "ready"
   },
   {
-   "id": "sci8",
-   "ver": "2196e0b978",
-   "subject": "מדעים",
-   "grade": 7,
-   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
-   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
-   "tags": [
-    "יסודות ותרכובות",
-    "האטום",
-    "נוסחאות כימיות",
-    "טבלה מחזורית",
-    "תגובה כימית",
-    "מעגלים חשמליים",
-    "בטיחות בחשמל",
-    "כוחות",
-    "חוקי ניוטון",
-    "מהירות",
-    "רבייה",
-    "מארג מזון",
-    "יחסי גומלין",
-    "התאמות לסביבה",
-    "שינוי האקלים",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 390,
-   "chapters": 37,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "יסוד הוא חומר הבנוי מ…",
-     "e": "🔵🔵"
-    },
-    {
-     "q": "באיזה זוג שני החומרים הם יסודות?",
-     "e": "💧🔩"
-    },
-    {
-     "q": "איפה נמצאים הפרוטונים?",
-     "e": "⚛️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math1",
-   "ver": "992b01e543",
+   "ver": "2b59c04027",
    "subject": "מתמטיקה",
    "grade": 0,
    "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
@@ -757,69 +535,6 @@
     "Pictographs",
     "Shapes",
     "The clock"
-   ]
-  },
-  {
-   "id": "math2",
-   "ver": "a41c951c1e",
-   "subject": "מתמטיקה",
-   "grade": 1,
-   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
-   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
-   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
-   "tags": [
-    "מספרים עד 1,000",
-    "ישר המספרים",
-    "חיבור וחיסור עד 100",
-    "מאות שלמות",
-    "מספר חסר",
-    "לוח הכפל",
-    "חילוק",
-    "חצי ורבע",
-    "דיאגרמות",
-    "מצולעים",
-    "גופים",
-    "מדידות",
-    "שעון"
-   ],
-   "questions": 359,
-   "chapters": 35,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה בסך הכול?",
-     "e": "💯💯",
-     "q_en": "How many in all?"
-    },
-    {
-     "q": "כתבו בספרות: שלוש מאות ושבעים",
-     "e": "שלוש מאות ושבעים",
-     "q_en": "Write in digits: three hundred seventy"
-    },
-    {
-     "q": "מה חסר? ⁦100, 200, 300, _⁩",
-     "e": "100, 200, 300, ?",
-     "q_en": "What is missing? 100, 200, 300, _"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 2",
-   "title_en": "Numbers to 1,000 · Addition and subtraction · Times tables · Polygons and 3D shapes · Clock",
-   "tags_en": [
-    "Numbers to 1,000",
-    "The number line",
-    "Addition and subtraction to 100",
-    "Whole hundreds",
-    "Missing number",
-    "Times tables",
-    "Division",
-    "Halves and quarters",
-    "Charts",
-    "Polygons",
-    "3D shapes",
-    "Measurement",
-    "Clock"
    ]
   },
   {
@@ -885,7 +600,7 @@
   },
   {
    "id": "math4",
-   "ver": "82187f5b95",
+   "ver": "245c1480ce",
    "subject": "מתמטיקה",
    "grade": 3,
    "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
@@ -947,67 +662,8 @@
    ]
   },
   {
-   "id": "sci4",
-   "ver": "3aef43a3d9",
-   "subject": "מדעים",
-   "grade": 3,
-   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
-   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
-   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
-   "tags": [
-    "נפח ומסה",
-    "מצבי צבירה",
-    "מחזור המים",
-    "אוויר",
-    "שלד ושרירים",
-    "העור",
-    "מזג אוויר",
-    "ליתוספרה וביוספרה",
-    "בעלי חיים",
-    "מפתח מיון",
-    "מכונות פשוטות"
-   ],
-   "questions": 279,
-   "chapters": 27,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהו נפח?",
-     "e": "📦",
-     "q_en": "What is the volume of an object?"
-    },
-    {
-     "q": "מה מודדים במאזניים?",
-     "e": "⚖️",
-     "q_en": "What do we measure with a balance?"
-    },
-    {
-     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
-     "e": "🧱💧",
-     "q_en": "Which state of matter has a fixed shape and a fixed volume?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 4",
-   "title_en": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
-   "tags_en": [
-    "Volume and mass",
-    "States of matter",
-    "The water cycle",
-    "Air",
-    "Skeleton and muscles",
-    "The skin",
-    "Weather",
-    "Lithosphere and biosphere",
-    "Animals",
-    "Classification keys",
-    "Simple machines"
-   ]
-  },
-  {
    "id": "math5",
-   "ver": "01d0b5db95",
+   "ver": "4e77ffeb31",
    "subject": "מתמטיקה",
    "grade": 4,
    "title": "שברים · עשרוניים · אחוזים · ראשוניים והתחלקות · משולשים ומרובעים · שטחים · ממוצע",
@@ -1071,8 +727,71 @@
    ]
   },
   {
+   "id": "math6",
+   "ver": "804dd7ddfb",
+   "subject": "מתמטיקה",
+   "grade": 5,
+   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
+   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
+   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
+   "tags": [
+    "כפל וחילוק שברים",
+    "עשרוניים",
+    "אחוזים",
+    "הנחות",
+    "יחס",
+    "קנה מידה",
+    "מהירות, דרך וזמן",
+    "מעגל ועיגול",
+    "זוויות במשולש ובמרובע",
+    "נפח",
+    "שטח פנים",
+    "פריסות",
+    "ממוצע וגרפים"
+   ],
+   "questions": 383,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "⁦2/3 × 3/4 =⁩",
+     "e": "2/3 × 3/4",
+     "q_en": "2/3 × 3/4 ="
+    },
+    {
+     "q": "⁦1 1/2 × 2/3 =⁩",
+     "e": "1 1/2 × 2/3",
+     "q_en": "1 1/2 × 2/3 ="
+    },
+    {
+     "q": "מה המספר ההופכי של ⁦3/4⁩?",
+     "e": "3/4",
+     "q_en": "What is the reciprocal of 3/4?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 6",
+   "title_en": "Multiplying and dividing fractions · Decimals · Percent · Ratio and scale · Speed · Circles · Angles · Volume and surface area · Solids",
+   "tags_en": [
+    "Multiplying and dividing fractions",
+    "Decimals",
+    "Percent",
+    "Discounts",
+    "Ratio",
+    "Scale",
+    "Speed, distance and time",
+    "Circles and circle area",
+    "Angles in triangles and quadrilaterals",
+    "Volume",
+    "Surface area",
+    "Nets",
+    "Mean and graphs"
+   ]
+  },
+  {
    "id": "math7",
-   "ver": "0806e77b1e",
+   "ver": "07bd1d7fcc",
    "subject": "מתמטיקה",
    "grade": 6,
    "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
@@ -1132,66 +851,70 @@
    ]
   },
   {
-   "id": "math6",
-   "ver": "a9757d7e82",
+   "id": "math8",
+   "ver": "7938a35f6e",
    "subject": "מתמטיקה",
-   "grade": 5,
-   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
-   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
-   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
+   "grade": 7,
+   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
+   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
+   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
    "tags": [
-    "כפל וחילוק שברים",
-    "עשרוניים",
-    "אחוזים",
-    "הנחות",
-    "יחס",
-    "קנה מידה",
-    "מהירות, דרך וזמן",
-    "מעגל ועיגול",
-    "זוויות במשולש ובמרובע",
-    "נפח",
-    "שטח פנים",
-    "פריסות",
-    "ממוצע וגרפים"
+    "פונקציה קווית",
+    "שיפוע",
+    "כפל מקוצר",
+    "חוקי חזקות",
+    "אי-שוויונות",
+    "מערכת משוואות",
+    "פתרון גרפי",
+    "יחס ופרופורציה",
+    "אחוזים וריבית",
+    "הסתברות",
+    "חפיפת משולשים",
+    "שווה שוקיים",
+    "מרובעים מיוחדים",
+    "דמיון משולשים",
+    "פיתגורס"
    ],
-   "questions": 383,
-   "chapters": 37,
+   "questions": 405,
+   "chapters": 39,
    "reading": 0,
    "words": 0,
    "samples": [
     {
-     "q": "⁦2/3 × 3/4 =⁩",
-     "e": "2/3 × 3/4",
-     "q_en": "2/3 × 3/4 ="
+     "q": "מה השיפוע של ⁦y=3x+2⁩?",
+     "e": "y = 3x + 2",
+     "q_en": "What is the slope of y=3x+2?"
     },
     {
-     "q": "⁦1 1/2 × 2/3 =⁩",
-     "e": "1 1/2 × 2/3",
-     "q_en": "1 1/2 × 2/3 ="
+     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+     "e": "(0,1)(2,5)",
+     "q_en": "What is the slope of the line through (0,1) and (2,5)?"
     },
     {
-     "q": "מה המספר ההופכי של ⁦3/4⁩?",
-     "e": "3/4",
-     "q_en": "What is the reciprocal of 3/4?"
+     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+     "e": "y = 2x + 5",
+     "q_en": "y=2x+5 crosses the y-axis at the point…"
     }
    ],
    "status": "ready",
-   "name_en": "Math – Grade 6",
-   "title_en": "Multiplying and dividing fractions · Decimals · Percent · Ratio and scale · Speed · Circles · Angles · Volume and surface area · Solids",
+   "name_en": "Math – Grade 8",
+   "title_en": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
    "tags_en": [
-    "Multiplying and dividing fractions",
-    "Decimals",
-    "Percent",
-    "Discounts",
-    "Ratio",
-    "Scale",
-    "Speed, distance and time",
-    "Circles and circle area",
-    "Angles in triangles and quadrilaterals",
-    "Volume",
-    "Surface area",
-    "Nets",
-    "Mean and graphs"
+    "Linear functions",
+    "Slope",
+    "Special products",
+    "Laws of exponents",
+    "Inequalities",
+    "Systems of equations",
+    "Graphical solution",
+    "Ratio and proportion",
+    "Percent and interest",
+    "Probability",
+    "Congruent triangles",
+    "Isosceles triangles",
+    "Special quadrilaterals",
+    "Similar triangles",
+    "The Pythagorean theorem"
    ]
   },
   {
@@ -1305,191 +1028,6 @@
    ]
   },
   {
-   "id": "math8",
-   "ver": "6a34e2d51b",
-   "subject": "מתמטיקה",
-   "grade": 7,
-   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
-   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
-   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
-   "tags": [
-    "פונקציה קווית",
-    "שיפוע",
-    "כפל מקוצר",
-    "חוקי חזקות",
-    "אי-שוויונות",
-    "מערכת משוואות",
-    "פתרון גרפי",
-    "יחס ופרופורציה",
-    "אחוזים וריבית",
-    "הסתברות",
-    "חפיפת משולשים",
-    "שווה שוקיים",
-    "מרובעים מיוחדים",
-    "דמיון משולשים",
-    "פיתגורס"
-   ],
-   "questions": 405,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה השיפוע של ⁦y=3x+2⁩?",
-     "e": "y = 3x + 2",
-     "q_en": "What is the slope of y=3x+2?"
-    },
-    {
-     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
-     "e": "(0,1)(2,5)",
-     "q_en": "What is the slope of the line through (0,1) and (2,5)?"
-    },
-    {
-     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
-     "e": "y = 2x + 5",
-     "q_en": "y=2x+5 crosses the y-axis at the point…"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 8",
-   "title_en": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
-   "tags_en": [
-    "Linear functions",
-    "Slope",
-    "Special products",
-    "Laws of exponents",
-    "Inequalities",
-    "Systems of equations",
-    "Graphical solution",
-    "Ratio and proportion",
-    "Percent and interest",
-    "Probability",
-    "Congruent triangles",
-    "Isosceles triangles",
-    "Special quadrilaterals",
-    "Similar triangles",
-    "The Pythagorean theorem"
-   ]
-  },
-  {
-   "id": "sci3",
-   "ver": "2237b5f523",
-   "subject": "מדעים",
-   "grade": 2,
-   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
-   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
-   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
-   "tags": [
-    "תכונות חומרים",
-    "תערובות",
-    "בעירה",
-    "מעגל חשמלי",
-    "מוליכים ומבודדים",
-    "בטיחות בחשמל",
-    "מקורות אנרגיה",
-    "צרכי הצמח",
-    "חלקי הצמח",
-    "נביטה והאבקה",
-    "מחזור וחיסכון"
-   ],
-   "questions": 290,
-   "chapters": 28,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך נקרא חומר שהאור עובר דרכו?",
-     "e": "🔦👓",
-     "q_en": "What do we call a material that light passes through?"
-    },
-    {
-     "q": "איך נבדוק איזה בד מתאים למטרייה?",
-     "e": "☂️",
-     "q_en": "How can we test which fabric is good for an umbrella?"
-    },
-    {
-     "q": "מהי תערובת?",
-     "e": "🥗",
-     "q_en": "What is a mixture?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 3",
-   "title_en": "Materials · Electricity and energy · Plants · Protecting the environment",
-   "tags_en": [
-    "Properties of materials",
-    "Mixtures",
-    "Burning",
-    "Electric circuits",
-    "Conductors and insulators",
-    "Electrical safety",
-    "Energy sources",
-    "What plants need",
-    "Plant parts",
-    "Germination and pollination",
-    "Recycling and saving"
-   ]
-  },
-  {
-   "id": "sci5",
-   "ver": "cc37f78a64",
-   "subject": "מדעים",
-   "grade": 4,
-   "title": "מתכות · תזונה · עיכול, נשימה ומחזור הדם · קרקע · מערכת השמש · תכנון מוצר",
-   "desc": "תכונות המתכות, בחירת חומרים ומיחזור, רכיבי המזון ותזונה נבונה, מערכת העיכול ומערכת הנשימה, הלב ומחזור הדם, קרקע וסלעים וסוגי הקרקע בישראל, סחיפה ושימור קרקע, מערכת השמש, הירח ומופעיו, ליקוי חמה וליקוי ירח, יום ולילה, שנה ועונות, ותהליך תכנון ובניית מוצר",
-   "desc_en": "Metals and their properties, choosing materials and recycling, nutrients and a balanced diet, the digestive and respiratory systems, the heart and blood circulation, soil and rocks and the soil types of Israel, erosion and soil conservation, the solar system, the Moon and its phases, solar and lunar eclipses, day and night, the year and seasons, and the design process",
-   "tags": [
-    "מתכות",
-    "מיחזור",
-    "תזונה",
-    "מערכת העיכול",
-    "מערכת הנשימה",
-    "הלב ומחזור הדם",
-    "קרקע וסלעים",
-    "מערכת השמש",
-    "הירח",
-    "יום ולילה ועונות",
-    "תכנון מוצר"
-   ],
-   "questions": 300,
-   "chapters": 29,
-   "reading": 2,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה מהבאים עשוי ממתכת?",
-     "e": "🔩✏️",
-     "q_en": "Which of these is made of metal?"
-    },
-    {
-     "q": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
-     "e": "🔩🌧️",
-     "q_en": "What forms on iron left outside in the rain?"
-    },
-    {
-     "q": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
-     "e": "🍲🔥",
-     "q_en": "A pot is made of metal so heat reaches the food. Which property is this?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 5",
-   "title_en": "Metals · Nutrition · Digestion, breathing and circulation · Soil · The solar system · Product design",
-   "tags_en": [
-    "Metals",
-    "Recycling",
-    "Nutrition",
-    "The digestive system",
-    "The respiratory system",
-    "The heart and circulation",
-    "Soil and rocks",
-    "The solar system",
-    "The Moon",
-    "Day, night and seasons",
-    "Product design"
-   ]
-  },
-  {
    "id": "sci2",
    "ver": "58e8b7ae2c",
    "subject": "מדעים",
@@ -1549,8 +1087,482 @@
    ]
   },
   {
+   "id": "sci4",
+   "ver": "6972953722",
+   "subject": "מדעים",
+   "grade": 3,
+   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
+   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
+   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
+   "tags": [
+    "נפח ומסה",
+    "מצבי צבירה",
+    "מחזור המים",
+    "אוויר",
+    "שלד ושרירים",
+    "העור",
+    "מזג אוויר",
+    "ליתוספרה וביוספרה",
+    "בעלי חיים",
+    "מפתח מיון",
+    "מכונות פשוטות"
+   ],
+   "questions": 279,
+   "chapters": 27,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהו נפח?",
+     "e": "📦",
+     "q_en": "What is the volume of an object?"
+    },
+    {
+     "q": "מה מודדים במאזניים?",
+     "e": "⚖️",
+     "q_en": "What do we measure with a balance?"
+    },
+    {
+     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
+     "e": "🧱💧",
+     "q_en": "Which state of matter has a fixed shape and a fixed volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 4",
+   "title_en": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
+   "tags_en": [
+    "Volume and mass",
+    "States of matter",
+    "The water cycle",
+    "Air",
+    "Skeleton and muscles",
+    "The skin",
+    "Weather",
+    "Lithosphere and biosphere",
+    "Animals",
+    "Classification keys",
+    "Simple machines"
+   ]
+  },
+  {
+   "id": "sci5",
+   "ver": "927c3565ff",
+   "subject": "מדעים",
+   "grade": 4,
+   "title": "מתכות · תזונה · עיכול, נשימה ומחזור הדם · קרקע · מערכת השמש · תכנון מוצר",
+   "desc": "תכונות המתכות, בחירת חומרים ומיחזור, רכיבי המזון ותזונה נבונה, מערכת העיכול ומערכת הנשימה, הלב ומחזור הדם, קרקע וסלעים וסוגי הקרקע בישראל, סחיפה ושימור קרקע, מערכת השמש, הירח ומופעיו, ליקוי חמה וליקוי ירח, יום ולילה, שנה ועונות, ותהליך תכנון ובניית מוצר",
+   "desc_en": "Metals and their properties, choosing materials and recycling, nutrients and a balanced diet, the digestive and respiratory systems, the heart and blood circulation, soil and rocks and the soil types of Israel, erosion and soil conservation, the solar system, the Moon and its phases, solar and lunar eclipses, day and night, the year and seasons, and the design process",
+   "tags": [
+    "מתכות",
+    "מיחזור",
+    "תזונה",
+    "מערכת העיכול",
+    "מערכת הנשימה",
+    "הלב ומחזור הדם",
+    "קרקע וסלעים",
+    "מערכת השמש",
+    "הירח",
+    "יום ולילה ועונות",
+    "תכנון מוצר"
+   ],
+   "questions": 300,
+   "chapters": 29,
+   "reading": 2,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה מהבאים עשוי ממתכת?",
+     "e": "🔩✏️",
+     "q_en": "Which of these is made of metal?"
+    },
+    {
+     "q": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
+     "e": "🔩🌧️",
+     "q_en": "What forms on iron left outside in the rain?"
+    },
+    {
+     "q": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
+     "e": "🍲🔥",
+     "q_en": "A pot is made of metal so heat reaches the food. Which property is this?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 5",
+   "title_en": "Metals · Nutrition · Digestion, breathing and circulation · Soil · The solar system · Product design",
+   "tags_en": [
+    "Metals",
+    "Recycling",
+    "Nutrition",
+    "The digestive system",
+    "The respiratory system",
+    "The heart and circulation",
+    "Soil and rocks",
+    "The solar system",
+    "The Moon",
+    "Day, night and seasons",
+    "Product design"
+   ]
+  },
+  {
+   "id": "en4",
+   "ver": "87b2c04124",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "Sounds · Words · Sentences · Questions · Reading",
+   "desc": "אנגלית לכיתה ד' – כל השנה: חרוזים וצלילים, תנועות קצרות ו-magic e, sh ch th, ברכות ושיחה, מילים בסיסיות, משפטים קצרים (has, his/her, Do you like), מילות יחס, מילות שאלה וקטעי קריאה קצרים",
+   "desc_en": "Grade 4 English, the whole year: rhymes and sounds, short vowels and magic e, sh ch th, greetings and basic talk, core words, short sentences (has, his/her, Do you like), in/on/under/next to, question words and short reading passages",
+   "tags": [
+    "Rhymes",
+    "Short vowels",
+    "Magic e",
+    "sh ch th",
+    "Sight words",
+    "Greetings",
+    "Family",
+    "Colors & numbers",
+    "Body & clothes",
+    "Animals & food",
+    "Days",
+    "I am / I can",
+    "Do you like?",
+    "has / his / her",
+    "There is / are",
+    "in / on / under",
+    "Question words",
+    "Reading"
+   ],
+   "questions": 397,
+   "chapters": 38,
+   "reading": 3,
+   "words": 135,
+   "samples": [
+    {
+     "q": "Which word rhymes with sun?",
+     "e": "☀️sun",
+     "q_en": "Which word rhymes with sun?"
+    },
+    {
+     "q": "fl_g (דגל)",
+     "e": "🚩",
+     "q_en": "fl_g (דגל)"
+    },
+    {
+     "q": "b_x (קופסה)",
+     "e": "📦",
+     "q_en": "b_x (קופסה)"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 4",
+   "title_en": "Sounds · Words · Sentences · Questions · Reading",
+   "tags_en": [
+    "Rhymes",
+    "Short vowels",
+    "Magic e",
+    "sh ch th",
+    "Sight words",
+    "Greetings",
+    "Family",
+    "Colors & numbers",
+    "Body & clothes",
+    "Animals & food",
+    "Days",
+    "I am / I can",
+    "Do you like?",
+    "has / his / her",
+    "There is / are",
+    "in / on / under",
+    "Question words",
+    "Reading"
+   ]
+  },
+  {
+   "id": "en4-nov26",
+   "ver": "bf225c005e",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 144,
+   "chapters": 13,
+   "reading": 0,
+   "words": 36,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A",
+     "q_en": "The small letter?"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n",
+     "q_en": "The capital letter?"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB",
+     "q_en": "What comes next?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – ABC, Colors, Animals",
+   "title_en": "ABC · Colors · Animals",
+   "tags_en": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ]
+  },
+  {
+   "id": "en7-nov26",
+   "ver": "3813ae5e29",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Present Simple · Weather & Nature",
+   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
+   "desc_en": "Grammar, 112 worksheet words and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to school.",
+     "e": "👧🏫",
+     "q_en": "She ___ to school."
+    },
+    {
+     "q": "What is falling?",
+     "e": "🌧️",
+     "q_en": "What is falling?"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️",
+     "q_en": "She ___ like snow."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Present Simple + Words",
+   "title_en": "Present Simple · Weather & Nature",
+   "tags_en": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ]
+  },
+  {
+   "id": "math2",
+   "ver": "b3c680e83b",
+   "subject": "מתמטיקה",
+   "grade": 1,
+   "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
+   "desc": "מספרים עד 1,000 וישר המספרים, חיבור וחיסור עד 100 בראש ובמאונך, חיבור וחיסור מאות שלמות, מספר חסר, כפל וחילוק ולוח הכפל, חצי ורבע, טבלאות ודיאגרמות, מצולעים, גופים, שיקוף והזזה, אורך, שטח, משקל ושעון",
+   "desc_en": "Numbers to 1,000 and the number line, adding and subtracting to 100 (mental and vertical), adding and subtracting whole hundreds, missing numbers, multiplication, division and times tables, half and quarter, tables and bar charts, polygons, solids, reflection and translation, length, area, weight and the clock",
+   "tags": [
+    "מספרים עד 1,000",
+    "ישר המספרים",
+    "חיבור וחיסור עד 100",
+    "מאות שלמות",
+    "מספר חסר",
+    "לוח הכפל",
+    "חילוק",
+    "חצי ורבע",
+    "דיאגרמות",
+    "מצולעים",
+    "גופים",
+    "מדידות",
+    "שעון"
+   ],
+   "questions": 359,
+   "chapters": 35,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה בסך הכול?",
+     "e": "💯💯",
+     "q_en": "How many in all?"
+    },
+    {
+     "q": "כתבו בספרות: שלוש מאות ושבעים",
+     "e": "שלוש מאות ושבעים",
+     "q_en": "Write in digits: three hundred seventy"
+    },
+    {
+     "q": "מה חסר? ⁦100, 200, 300, _⁩",
+     "e": "100, 200, 300, ?",
+     "q_en": "What is missing? 100, 200, 300, _"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 2",
+   "title_en": "Numbers to 1,000 · Addition and subtraction · Times tables · Polygons and 3D shapes · Clock",
+   "tags_en": [
+    "Numbers to 1,000",
+    "The number line",
+    "Addition and subtraction to 100",
+    "Whole hundreds",
+    "Missing number",
+    "Times tables",
+    "Division",
+    "Halves and quarters",
+    "Charts",
+    "Polygons",
+    "3D shapes",
+    "Measurement",
+    "Clock"
+   ]
+  },
+  {
+   "id": "sci3",
+   "ver": "faffbee11a",
+   "subject": "מדעים",
+   "grade": 2,
+   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
+   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
+   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
+   "tags": [
+    "תכונות חומרים",
+    "תערובות",
+    "בעירה",
+    "מעגל חשמלי",
+    "מוליכים ומבודדים",
+    "בטיחות בחשמל",
+    "מקורות אנרגיה",
+    "צרכי הצמח",
+    "חלקי הצמח",
+    "נביטה והאבקה",
+    "מחזור וחיסכון"
+   ],
+   "questions": 290,
+   "chapters": 28,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך נקרא חומר שהאור עובר דרכו?",
+     "e": "🔦👓",
+     "q_en": "What do we call a material that light passes through?"
+    },
+    {
+     "q": "איך נבדוק איזה בד מתאים למטרייה?",
+     "e": "☂️",
+     "q_en": "How can we test which fabric is good for an umbrella?"
+    },
+    {
+     "q": "מהי תערובת?",
+     "e": "🥗",
+     "q_en": "What is a mixture?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 3",
+   "title_en": "Materials · Electricity and energy · Plants · Protecting the environment",
+   "tags_en": [
+    "Properties of materials",
+    "Mixtures",
+    "Burning",
+    "Electric circuits",
+    "Conductors and insulators",
+    "Electrical safety",
+    "Energy sources",
+    "What plants need",
+    "Plant parts",
+    "Germination and pollination",
+    "Recycling and saving"
+   ]
+  },
+  {
+   "id": "en3",
+   "ver": "378eee29ff",
+   "subject": "אנגלית",
+   "grade": 2,
+   "title": "ABC · First words · Short sentences",
+   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
+   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
+   "tags": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
+   ],
+   "questions": 330,
+   "chapters": 31,
+   "reading": 0,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Which word rhymes with cat?",
+     "e": "🐈cat",
+     "q_en": "Which word rhymes with cat?"
+    },
+    {
+     "q": "Which word starts like ball?",
+     "e": "⚽ball",
+     "q_en": "Which word starts like ball?"
+    },
+    {
+     "q": "איזו אות נקראת אֶם?",
+     "e": "אֶם",
+     "q_en": "Which letter is called אֶם?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 3",
+   "title_en": "ABC · First words · Short sentences",
+   "tags_en": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
+   ]
+  },
+  {
    "id": "sci6",
-   "ver": "ee47537a0b",
+   "ver": "2744027102",
    "subject": "מדעים",
    "grade": 5,
    "title": "אנרגיה · אור וקול · חשמל ומגנטים · העין, העדשות והאוזן · מערכת אקולוגית · מערכת טכנולוגית",
@@ -1612,8 +1624,144 @@
    ]
   },
   {
+   "id": "en5",
+   "ver": "d2ab20973b",
+   "subject": "אנגלית",
+   "grade": 4,
+   "title": "Grammar · Band I words · Reading",
+   "desc": "אנגלית לכיתה ה' – כל השנה: am/is/are ו-have/has, Present Simple ו-Present Progressive, can ו-there is, רבים, כינויי גוף ושייכות, מילות יחס, מילות שאלה, היכרות ראשונה עם עבר (‎-ed ופעלים לא רגילים: went, ate, saw, had), אמירת השעה (half past, quarter past), אוצר מילים Band I ושלושה קטעי קריאה",
+   "desc_en": "Grade 5 English, the whole year: am/is/are and have/has, Present Simple and Present Progressive, can and there is, plurals, pronouns and possessives, prepositions, question words, a first look at the past (-ed and irregular verbs: went, ate, saw, had), telling the time (half past, quarter past), Band I words and three reading passages",
+   "tags": [
+    "am / is / are",
+    "Present Simple",
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Past: went / ate",
+    "Telling the time",
+    "Band I words",
+    "Reading"
+   ],
+   "questions": 389,
+   "chapters": 32,
+   "reading": 3,
+   "words": 72,
+   "samples": [
+    {
+     "q": "My brother is eight, and I ___ eleven.",
+     "e": "👦11",
+     "q_en": "My brother is eight, and I ___ eleven."
+    },
+    {
+     "q": "I ___ a new bike.",
+     "e": "🚲",
+     "q_en": "I ___ a new bike."
+    },
+    {
+     "q": "He ___ football and scores goals.",
+     "e": "👦⚽",
+     "q_en": "He ___ football and scores goals."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 5",
+   "title_en": "Grammar · Band I words · Reading",
+   "tags_en": [
+    "am / is / are",
+    "Present Simple",
+    "Present Progressive",
+    "can / there is",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Question words",
+    "Past: was / -ed",
+    "Past: went / ate",
+    "Telling the time",
+    "Band I words",
+    "Reading"
+   ]
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "421545f051",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
+   "desc": "העולם המופלא של החומרים – פרק ראשון: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "צפיפות",
+    "ציפה ושקיעה",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 305,
+   "chapters": 30,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺",
+     "q_en": "A chair is made of wood. Which is the object here?"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬",
+     "q_en": "Composition, source and properties – these describe…"
+    },
+    {
+     "q": "מה מהבאים מגדיר נפח?",
+     "e": "📦",
+     "q_en": "Which of these defines volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 7 – Materials, volume and mass",
+   "title_en": "Material and object · Volume · Mass · Weight · Density · States of matter · Inquiry",
+   "tags_en": [
+    "Materials and objects",
+    "Volume",
+    "Calculating volume",
+    "Graduated cylinder",
+    "mL and liters",
+    "Mass",
+    "Balances",
+    "Gas",
+    "Weight",
+    "Newtons",
+    "Density",
+    "Floating and sinking",
+    "Measuring instruments",
+    "Conversions",
+    "States of matter",
+    "Variables",
+    "Planning an experiment",
+    "Graphs and tables"
+   ]
+  },
+  {
    "id": "sci7",
-   "ver": "b99c7d687a",
+   "ver": "6062301215",
    "subject": "מדעים",
    "grade": 6,
    "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
@@ -1681,115 +1829,74 @@
    ]
   },
   {
-   "id": "en3",
-   "ver": "e1f24750fa",
-   "subject": "אנגלית",
-   "grade": 2,
-   "title": "ABC · First words · Short sentences",
-   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
-   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
+   "id": "sci8",
+   "ver": "cf7a9f4b47",
+   "subject": "מדעים",
+   "grade": 7,
+   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
+   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
    "tags": [
-    "Rhymes",
-    "Letters & sounds",
-    "ABC order",
-    "Short words",
-    "Sight words",
-    "Family & body",
-    "Colors & numbers",
-    "Animals & food",
-    "School",
-    "I am / I have",
-    "Vowel sounds",
-    "Hello & my name",
-    "Reading sentences"
+    "יסודות ותרכובות",
+    "האטום",
+    "נוסחאות כימיות",
+    "טבלה מחזורית",
+    "תגובה כימית",
+    "מעגלים חשמליים",
+    "בטיחות בחשמל",
+    "כוחות",
+    "חוקי ניוטון",
+    "מהירות",
+    "רבייה",
+    "מארג מזון",
+    "יחסי גומלין",
+    "התאמות לסביבה",
+    "שינוי האקלים",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
    ],
-   "questions": 330,
-   "chapters": 31,
-   "reading": 0,
-   "words": 107,
+   "questions": 390,
+   "chapters": 37,
+   "reading": 1,
+   "words": 0,
    "samples": [
     {
-     "q": "Which word rhymes with cat?",
-     "e": "🐈cat",
-     "q_en": "Which word rhymes with cat?"
+     "q": "יסוד הוא חומר הבנוי מ…",
+     "e": "🔵🔵",
+     "q_en": "An element is a substance made of…"
     },
     {
-     "q": "Which word starts like ball?",
-     "e": "⚽ball",
-     "q_en": "Which word starts like ball?"
+     "q": "באיזה זוג שני החומרים הם יסודות?",
+     "e": "💧🔩",
+     "q_en": "In which pair are both substances elements?"
     },
     {
-     "q": "איזו אות נקראת אֶם?",
-     "e": "אֶם",
-     "q_en": "Which letter is called אֶם?"
+     "q": "איפה נמצאים הפרוטונים?",
+     "e": "⚛️",
+     "q_en": "Where are the protons?"
     }
    ],
    "status": "ready",
-   "name_en": "English – Grade 3",
-   "title_en": "ABC · First words · Short sentences",
+   "name_en": "Science – Grade 8",
+   "title_en": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
    "tags_en": [
-    "Rhymes",
-    "Letters & sounds",
-    "ABC order",
-    "Short words",
-    "Sight words",
-    "Family & body",
-    "Colors & numbers",
-    "Animals & food",
-    "School",
-    "I am / I have",
-    "Vowel sounds",
-    "Hello & my name",
-    "Reading sentences"
-   ]
-  },
-  {
-   "id": "en4-nov26",
-   "ver": "bf225c005e",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 144,
-   "chapters": 13,
-   "reading": 0,
-   "words": 36,
-   "samples": [
-    {
-     "q": "האות הקטנה?",
-     "e": "A",
-     "q_en": "The small letter?"
-    },
-    {
-     "q": "האות הגדולה?",
-     "e": "n",
-     "q_en": "The capital letter?"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB",
-     "q_en": "What comes next?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – ABC, Colors, Animals",
-   "title_en": "ABC · Colors · Animals",
-   "tags_en": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
+    "Elements and compounds",
+    "The atom",
+    "Chemical formulas",
+    "The periodic table",
+    "Chemical reactions",
+    "Electric circuits",
+    "Electrical safety",
+    "Forces",
+    "Newton's laws",
+    "Speed",
+    "Reproduction",
+    "Food webs",
+    "Interactions",
+    "Adaptations",
+    "Climate change",
+    "Engineering design",
+    "Technological systems"
    ]
   }
  ]

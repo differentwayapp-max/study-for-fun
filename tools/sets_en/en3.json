@@ -799,7 +799,7 @@
    "he": "איזה מהם הוא זוג של אותה אות?",
    "a": "B b",
    "h": "fd4fd051",
-   "q": "Which pair is the same letter?",
+   "q": "Which of these pairs is the same letter?",
    "o": [
     "B b",
     "B d",
@@ -812,7 +812,7 @@
    "he": "איזה מהם הוא זוג של אותה אות?",
    "a": "T t",
    "h": "44e2e124",
-   "q": "Which pair is the same letter?",
+   "q": "Which of these pairs is the same letter?",
    "o": [
     "T t",
     "T f",
@@ -825,7 +825,7 @@
    "he": "איזה מהם הוא זוג של אותה אות?",
    "a": "M m",
    "h": "09b11e96",
-   "q": "Which pair is the same letter?",
+   "q": "Which of these pairs is the same letter?",
    "o": [
     "M m",
     "M n",
@@ -921,7 +921,7 @@
     "always capital",
     "always small",
     "capital or small",
-    "capital at the start"
+    "capital only at start"
    ],
    "x": "I = אני, always a capital letter"
   },
@@ -2236,7 +2236,7 @@
     "six",
     "five"
    ],
-   "x": "A dog has 4 legs = four"
+   "x": "A dog has 4 (four) legs"
   },
   {
    "he": "What comes after four?",
@@ -2743,7 +2743,7 @@
     "pizza",
     "cheese"
    ],
-   "x": "קופים אוהבים בננות"
+   "x": "Monkeys like bananas (בננות)"
   },
   {
    "he": "Rabbits like ___.",
@@ -2756,7 +2756,7 @@
     "pizza",
     "milk"
    ],
-   "x": "ארנבים אוהבים גזר"
+   "x": "Rabbits like carrots (גזר)"
   },
   {
    "he": "A cow gives us ___.",
@@ -2769,7 +2769,7 @@
     "bread",
     "water"
    ],
-   "x": "פרה נותנת חלב = milk"
+   "x": "A cow gives us milk (חלב)"
   },
   {
    "he": "A hen gives us ___.",
@@ -2782,7 +2782,7 @@
     "cheese",
     "apples"
    ],
-   "x": "תרנגולת מטילה ביצים = eggs"
+   "x": "A hen lays eggs (ביצים)"
   },
   {
    "he": "⁦apple⁩ = ?",
@@ -2912,7 +2912,7 @@
     "ruler",
     "bag"
    ],
-   "x": "כותבים בעט = pen"
+   "x": "We write with a pen (עט)"
   },
   {
    "he": "This is a ___.",
@@ -2990,7 +2990,7 @@
     "a book",
     "a ruler"
    ],
-   "x": "גוזרים במספריים = scissors"
+   "x": "We cut paper with scissors (מספריים)"
   },
   {
    "he": "I read a ___.",
@@ -3003,7 +3003,7 @@
     "ruler",
     "crayon"
    ],
-   "x": "קוראים ספר = book"
+   "x": "We read a book (ספר)"
   },
   {
    "he": "I color with a ___.",
@@ -3016,7 +3016,7 @@
     "book",
     "bag"
    ],
-   "x": "צובעים בצבע = crayon"
+   "x": "We color with a crayon (צבע)"
   },
   {
    "he": "My books are in my ___.",
@@ -3029,7 +3029,7 @@
     "ruler",
     "crayon"
    ],
-   "x": "הספרים בילקוט = bag"
+   "x": "My books are in my bag (ילקוט)"
   },
   {
    "he": "Which is NOT a school thing?",
@@ -3068,7 +3068,7 @@
     "are",
     "be"
    ],
-   "x": "I ← am: I am a girl"
+   "x": "I → am: I am a girl"
   },
   {
    "he": "I ___ happy.",
@@ -3685,7 +3685,7 @@
    "he": "מה מהבאים אומרים למורה בבוקר?",
    "a": "Good morning",
    "h": "60a947a2",
-   "q": "What do you say to your teacher when school starts?",
+   "q": "Which of these do you say to your teacher when school starts?",
    "o": [
     "Good morning",
     "Good night",
@@ -4143,14 +4143,14 @@
    "he": "איזה צליל עושה האות ⁦P⁩?",
    "a": "פ",
    "h": "42c33ddd",
-   "q": "Which sound does the letter P make?",
+   "q": "What sound does the letter P make?",
    "o": [
     "פ",
     "ב",
     "ט",
     "ק"
    ],
-   "x": "P עושה פ, כמו ב-pen"
+   "x": "P says פ, as in pen"
   },
   {
    "he": "האות הקטנה של ⁦T⁩?",
@@ -4254,7 +4254,7 @@
     "eye",
     "hand"
    ],
-   "x": "מריחים באף = nose"
+   "x": "We smell with our nose (אף)"
   },
   {
    "he": "⁦sister⁩ = ?",

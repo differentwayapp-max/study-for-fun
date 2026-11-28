@@ -61,7 +61,7 @@
   "חזרה": "Review"
  },
  "texts": {
-  "3": "The can's journey\n\nDid you drink from a can? Don't throw it into the regular trash! The can is made of aluminum, and it can be recycled.\n\nAluminum is produced from a rock called bauxite. To get the metal out of the rock, people dig huge mines in nature and use a great deal of electricity.\n\nIn recycling, used cans are collected, cleaned, crushed and melted in a very hot furnace. The liquid metal is made into new sheets, and new cans are made from them. Making a can from recycled metal saves most of the electricity needed to make a can from the rock.\n\nAluminum can be recycled again and again, and it does not lose its properties. Iron, copper and gold are recycled too. This way, less waste reaches the garbage dumps, and less nature is destroyed by digging.\n\nSo the next time you finish a drink, look for the recycling bin!",
+  "3": "The can's journey\n\nDid you just have a drink from a can? Don't throw it into the regular trash! The can is made of aluminum, and it can be recycled.\n\nAluminum is produced from a rock called bauxite. To get the metal out of the rock, people dig huge mines in nature and use a great deal of electricity.\n\nIn recycling, used cans are collected, cleaned, crushed and melted in a very hot furnace. The liquid metal is made into new sheets, and new cans are made from them. Making a can from recycled metal saves most of the electricity needed to make a can from the rock.\n\nAluminum can be recycled again and again, and it does not lose its properties. Iron, copper and gold are recycled too. This way, less waste reaches the garbage dumps, and less nature is destroyed by digging.\n\nSo the next time you finish a drink, look for the recycling bin!",
   "22": "Does the Moon change shape?\n\nOne night we see a round, bright Moon in the sky, and a week later we see only half a circle. Does the Moon really change its shape? No! The Moon is a sphere, and it always stays a sphere.\n\nThe Moon does not make its own light. The Sun always lights up half of the Moon, and the Moon reflects that light back to us. The Moon travels around the Earth, so each night we see a different part of its lit side. The changes in shape that we see are called \"the phases of the Moon.\"\n\nWhen the Moon is between the Earth and the Sun, its lit side faces away from us, and we can hardly see it. This is the new moon. Little by little a crescent appears – a thin, lit strip – then a half moon, and after about two weeks, a full moon. Then the lit part gets smaller and smaller, until the next new moon.\n\nA full cycle of the phases of the Moon lasts about 29½ days. That is why in the Hebrew calendar every month begins at the new moon (Rosh Chodesh), and in the middle of the month, on the 15th, the Moon is full. For example, on Seder night of Passover, 15 Nisan, the Moon is full."
  },
  "questions": [
@@ -82,7 +82,7 @@
    "he": "איזה חומר אינו מתכת?",
    "a": "עץ",
    "h": "345d03ad",
-   "q": "Which material is not a metal?",
+   "q": "Which material is NOT a metal?",
    "o": [
     "Wood",
     "Iron",
@@ -594,10 +594,10 @@
    "h": "bea36935",
    "q": "According to the passage, where should an empty can go?",
    "o": [
-    "In the recycling bin",
-    "In the regular trash",
+    "Into the recycling bin",
+    "Into the regular trash",
     "Into the sea",
-    "On the street"
+    "Onto the street"
    ],
    "x": "That way it can become a new can"
   },
@@ -631,7 +631,7 @@
    "he": "באיזה מזון יש הרבה חלבון?",
    "a": "ביצה",
    "h": "f247418d",
-   "q": "Which food has a lot of protein?",
+   "q": "Which of these foods has a lot of protein?",
    "o": [
     "Egg",
     "Cucumber",
@@ -657,7 +657,7 @@
    "he": "איזה מזון עשיר בשומן?",
    "a": "אבוקדו",
    "h": "9f7a9835",
-   "q": "Which food is rich in fat?",
+   "q": "Which of these foods is rich in fat?",
    "o": [
     "Avocado",
     "Apple",
@@ -761,7 +761,7 @@
    "he": "איזה מזון עשיר בברזל, שחשוב לדם?",
    "a": "בשר אדום",
    "h": "c897561e",
-   "q": "Which food is rich in iron, which is important for the blood?",
+   "q": "Which food is rich in iron, a mineral the blood needs?",
    "o": [
     "Red meat",
     "Sugar",
@@ -787,7 +787,7 @@
    "he": "בטבלה: רכיבים ב-⁦100⁩ מ״ל חלב. מה יש הכי הרבה?",
    "a": "פחמימות",
    "h": "40a1ddc5",
-   "q": "The table shows nutrients in 100 mL of milk. Which is there most of?",
+   "q": "The table shows nutrients in 100 mL of milk. Which nutrient is there the most of?",
    "o": [
     "Carbohydrates",
     "Protein",
@@ -873,7 +873,7 @@
     "Rich in vitamins",
     "Rich in fat",
     "Rich in protein",
-    "They have no water"
+    "No water in them"
    ],
    "x": "Vegetables and fruit are a source of vitamins and minerals"
   },
@@ -907,7 +907,7 @@
    "he": "איזו מהן ארוחת הבוקר הכי מאוזנת?",
    "a": "לחם, ביצה וירקות",
    "h": "9430c77d",
-   "q": "Which breakfast is the most balanced?",
+   "q": "Which of these breakfasts is the most balanced?",
    "o": [
     "Bread, egg and vegetables",
     "Cake and chocolate milk",
@@ -998,7 +998,7 @@
    "he": "איזו מהן ארוחת העשר הכי בריאה?",
    "a": "כריך ופרי",
    "h": "fb0f600d",
-   "q": "Which school snack is the healthiest?",
+   "q": "Which of these school snacks is the healthiest?",
    "o": [
     "Sandwich and fruit",
     "Cake and sweet drink",
@@ -1020,10 +1020,10 @@
    ],
    "x": "Cereal A has much less sugar",
    "sc": {
-    "0": "Cereal A",
-    "1": "5 g",
-    "2": "Cereal B",
-    "3": "25 g"
+    "0": "5 g",
+    "1": "Cereal A",
+    "2": "25 g",
+    "3": "Cereal B"
    }
   },
   {
@@ -1150,7 +1150,7 @@
    "he": "איזה הרגל אינו בריא?",
    "a": "לדלג על ארוחות",
    "h": "b31000ae",
-   "q": "Which habit is not healthy?",
+   "q": "Which habit is NOT healthy?",
    "o": [
     "Skipping meals",
     "Drinking water",
@@ -1433,7 +1433,7 @@
    "he": "איזה איבר אינו חלק ממערכת העיכול?",
    "a": "הריאות",
    "h": "8ffca56e",
-   "q": "Which organ is not part of the digestive system?",
+   "q": "Which organ is NOT part of the digestive system?",
    "o": [
     "The lungs",
     "The stomach",
@@ -1974,7 +1974,7 @@
    "he": "נחתכנו באצבע. מה עוצר את הדימום?",
    "a": "נוצר קריש דם",
    "h": "2d4614e0",
-   "q": "We cut a finger. What stops the bleeding?",
+   "q": "You cut your finger. What stops the bleeding?",
    "o": [
     "A blood clot forms",
     "Blood turns to water",
@@ -2447,7 +2447,7 @@
    "he": "מאיזה סלע עשויה רוב \"אבן ירושלים\"?",
    "a": "גיר",
    "h": "37a9e712",
-   "q": "What rock is most \"Jerusalem stone\" made of?",
+   "q": "Most \"Jerusalem stone\" is made of which rock?",
    "o": [
     "Limestone",
     "Basalt",
@@ -2857,7 +2857,7 @@
    "he": "לפי הטבלה: ככל שכוכב הלכת רחוק יותר מהשמש, ההקפה…",
    "a": "ארוכה יותר",
    "h": "132fe655",
-   "q": "According to the table, the farther a planet is from the Sun, its orbit is…",
+   "q": "According to the table, when a planet is farther from the Sun, its orbit is…",
    "o": [
     "Longer",
     "Shorter",
@@ -3442,7 +3442,7 @@
    "h": "4af2ac34",
    "q": "Does the Sun really move around us during the day?",
    "o": [
-    "No, it only seems",
+    "No, it's an illusion",
     "Yes, around Earth",
     "Yes, north to south",
     "Only in summer"
@@ -3500,7 +3500,7 @@
    "he": "מה יש בצד של כדור הארץ שפונה אל השמש?",
    "a": "יום",
    "h": "16c0f1f4",
-   "q": "What is it on the side of Earth that faces the Sun?",
+   "q": "On the side of Earth that faces the Sun, it is…",
    "o": [
     "Daytime",
     "Nighttime",
@@ -3840,9 +3840,12 @@
    ],
    "x": "With wool the tea stayed hottest – 60°C",
    "sc": {
-    "0": "Wool",
-    "2": "Paper",
-    "4": "No cover"
+    "0": "60°C",
+    "1": "Wool",
+    "2": "45°C",
+    "3": "Paper",
+    "4": "35°C",
+    "5": "None"
    }
   },
   {
@@ -3858,9 +3861,12 @@
    ],
    "x": "That shows how much each cover helped",
    "sc": {
-    "0": "Wool",
-    "2": "Paper",
-    "4": "No cover"
+    "0": "60°C",
+    "1": "Wool",
+    "2": "45°C",
+    "3": "Paper",
+    "4": "35°C",
+    "5": "None"
    }
   },
   {
@@ -3884,8 +3890,8 @@
    "o": [
     "It meets the requirement",
     "It failed the test",
-    "Take it apart",
-    "Paint it"
+    "It needs dismantling",
+    "It needs painting"
    ],
    "x": "2 kg is more than was required"
   },
@@ -3936,7 +3942,7 @@
    "o": [
     "Conducting electricity",
     "Being transparent",
-    "Being soft like sponge",
+    "Being spongy",
     "Floating in water"
    ],
    "x": "Metals conduct heat and electricity"
@@ -3997,7 +4003,7 @@
    "he": "איזה רכיב תזונה אינו נותן אנרגיה?",
    "a": "מים",
    "h": "d714469d",
-   "q": "Which nutrient does not provide energy?",
+   "q": "Which of these nutrients does not provide energy?",
    "o": [
     "Water",
     "Carbohydrates",

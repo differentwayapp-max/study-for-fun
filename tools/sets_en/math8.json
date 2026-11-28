@@ -3583,7 +3583,7 @@
    "he": "איזה מספר אינו יכול להיות הסתברות?",
    "a": "⁦1.2⁩",
    "h": "64430e22",
-   "q": "Which number cannot be a probability?",
+   "q": "Which number can NOT be a probability?",
    "o": [
     "⁦1.2⁩",
     "⁦0⁩",
@@ -4523,7 +4523,7 @@
    "he": "מה נכון תמיד במשולשים דומים?",
    "a": "הזוויות שוות",
    "h": "dde87722",
-   "q": "What is always true of similar triangles?",
+   "q": "Which of these is always true of similar triangles?",
    "o": [
     "The angles are equal",
     "The sides are equal",
@@ -5702,7 +5702,7 @@
    "he": "איזו שלשה אינה של משולש ישר זווית?",
    "a": "⁦4, 6, 8⁩",
    "h": "c9f594ec",
-   "q": "Which triple does not form a right triangle?",
+   "q": "Which triple does NOT form a right triangle?",
    "o": [
     "⁦4, 6, 8⁩",
     "⁦3, 4, 5⁩",

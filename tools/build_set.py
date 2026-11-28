@@ -229,6 +229,13 @@ def en_entry(q):
             "hsc": {str(k): it["e"] for k, it in enumerate(q["scene"]) if is_text(it["e"])}}
 def en_key(he, a): return he.strip() + "\u0001" + a.strip()
 EN = json.loads(EN_PATH.read_text(encoding="utf-8")) if EN_PATH.exists() else None
+OPTS_EN = re.compile(r"\bcorrect\b|\b(is|are) (correct|true|right|wrong|false)\b|^which (one|of these)\b|\bof these\b|odd one|doesn't belong|does not belong", re.I)
+OPTS_NOT = re.compile(r"\bNOT\b")
+OPTS_HE = re.compile(r"(מה|מי|איזה|איזו|אילו)\s+(נכון|נכונה|נכונים|לא נכון|שגוי)|מהבאים|מבין האפשרויות|לא שיי?ך|יוצא דופן|יוצאת דופן|אינו |אינה |אינם |אינן |איננה|כתוב נכון|כתובה נכון|כתובות נכון|מבין אלה|מאלה|איזה משפט נכון|באיזו מילה יש|יש טעות|איזו מהן|איזה מהם|מי מהם|מה מהם|מי מהן|איזה מהן")
+def need_opts(t):   # = needOpts in public/build-core.js (keep in step)
+    t = re.sub(r"[\u0591-\u05C7\u2066-\u2069]", "", str(t))
+    return bool(OPTS_EN.search(t) or OPTS_NOT.search(t) or OPTS_HE.search(t))
+passage_q = lambda q: bool(chapters[q["ch"]].get("text"))   # passage questions are choice-only anyway
 EN_OUT = None
 if __import__("os").environ.get("SFF_EN_DUMP"):
     # a skeleton for the translator: every question with its Hebrew, and the English already written (kept); then stop
@@ -273,7 +280,10 @@ if EN is not None:
         if not e or not str(e.get("q", "")).strip(): en_err(f"{tag}: no English"); continue
         used.add(k)
         if e.get("h") != q_hash(q): en_err(f"{tag}: the Hebrew changed since it was translated – check the English, then dump again (h)"); continue
-        noiso = lambda t: re.sub(r"[\u2066-\u2069]", "", str(t)).strip()   # English reads left to right: no direction marks (else "⁦5⁩" ≠ "5" in the games)
+        def noiso(t):   # English reads left to right: no direction marks (else "⁦5⁩" ≠ "5" in the games)
+            t = re.sub(r"[\u2066-\u2069]", "", str(t)).strip()
+            first = re.search(r"[A-Za-z\u0590-\u05FF]", t)   # the app shows it dir="auto": a text that starts in English is drawn left to right,
+            return t.replace("←", "→") if first and not HE_RE.match(first.group(0)) else t   # so the Hebrew "←" (= then) must point right
         eo = [noiso(o) for o in (e.get("o") or [])]
         if len(eo) != 4 or len(set(eo)) != 4 or not all(eo): en_err(f"{tag}: need 4 different English options"); continue
         eq, ex = noiso(e["q"]), noiso(e.get("x", ""))
@@ -297,6 +307,9 @@ if EN is not None:
         same = lambda c, a: c == a if len(a) == 1 else c.lower() == a.lower()   # one letter keeps its case (B ≠ b)
         if len(cards) == 1 and same(cards[0].strip(), ea) and ea.lower() not in eq.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
             en_err(f"{tag}: the English card \"{cards[0]}\" is the answer")
+        # a question the app keeps in multiple choice in Hebrew must stay there in English (else, in match / memory, another
+        # answer card of the chapter may also fit it) – the same test as needOpts in public/build-core.js
+        if need_opts(q["question"]) and not need_opts(eq) and not passage_q(q): en_err(f"{tag}: multiple choice only in Hebrew, not in English – write \"Which of these…\" / \"Which one…\" (or NOT in capitals)")
         q["en"] = {"k": q["question"].strip(), "q": eq, "o": [eo[SRC_OPTS[i].index(o)] for o in q["options"]], "x": ex, **({"sc": sc} if sc else {})}
         n_en += 1
     extra = [e.get("he") for k, e in by.items() if k not in used] if not HEB_SUBJECT else []

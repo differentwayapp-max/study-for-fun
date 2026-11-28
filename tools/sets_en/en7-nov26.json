@@ -1,0 +1,2354 @@
+{
+ "set": {
+  "name": "English – Present Simple + Words",
+  "title": "Present Simple · Weather & Nature",
+  "tags": [
+   "Present Simple",
+   "has / does",
+   "always / never",
+   "Weather",
+   "Nature",
+   "Unseen"
+  ]
+ },
+ "labels": {
+  "Present Simple": "Present Simple",
+  "Weather words": "Weather words",
+  "Nature & places": "Nature & places",
+  "Action words": "Action words",
+  "Describing words": "Describing words",
+  "Everyday words": "Everyday words",
+  "Unseen": "Unseen",
+  "Present Simple: he / she / it": "Present Simple: he / she / it",
+  "Weather": "Weather",
+  "Present Simple: don't / doesn't": "Present Simple: don't / doesn't",
+  "Present Simple: questions": "Present Simple: questions",
+  "Phrases": "Phrases",
+  "More words": "More words",
+  "Present Simple: has, does, always…": "Present Simple: has, does, always…",
+  "📖 Unseen: Weather Watcher": "📖 Unseen: Weather Watcher",
+  "חזרה כללית": "Review"
+ },
+ "texts": {
+  "11": "Weather Watcher\n\nLia is thirteen years old. She lives with her family in a small city near the mountains in the north. Her father is a farmer, so the weather is very important to him. Every morning, Lia wakes up early and checks the temperature outside. Then she writes it in a special notebook.\n\nIn the summer, the heat is extreme. It is often 35 degrees! Lia and her friends spend time at the swimming pool or sit in the shade of a big tree. In the winter, it is freezing. Sometimes there is snow on the ground and ice on the roof. Lia puts on her warm coat and her scarf before she leaves the house.\n\nLia wants to be a weather scientist. She hopes to predict storms and help farmers. \"When a storm arrives, it can destroy a whole field,\" she says. \"If farmers know about it early, they can protect their plants.\"\n\nLia's dream is to visit the South Pole. \"It is probably the coldest place on earth,\" she says. \"I can't wait!\""
+ },
+ "questions": [
+  {
+   "he": "She ___ to school.",
+   "a": "goes",
+   "h": "87266ccb",
+   "q": "She ___ to school.",
+   "o": [
+    "go",
+    "goes",
+    "going",
+    "gone"
+   ],
+   "x": "she → add -es: goes"
+  },
+  {
+   "he": "He ___ with his toys.",
+   "a": "plays",
+   "h": "0f048cc5",
+   "q": "He ___ with his toys.",
+   "o": [
+    "play",
+    "plays",
+    "playing",
+    "to play"
+   ],
+   "x": "he → add -s: plays"
+  },
+  {
+   "he": "The sun ___ in the east.",
+   "a": "rises",
+   "h": "630049a0",
+   "q": "The sun ___ in the east.",
+   "o": [
+    "rise",
+    "rises",
+    "rising",
+    "to rise"
+   ],
+   "x": "השמש = it → rises"
+  },
+  {
+   "he": "My cat ___ fish for dinner.",
+   "a": "eats",
+   "h": "1889639e",
+   "q": "My cat ___ fish for dinner.",
+   "o": [
+    "eat",
+    "eats",
+    "eating",
+    "to eat"
+   ],
+   "x": "החתול = it → eats"
+  },
+  {
+   "he": "They ___ in the river.",
+   "a": "swim",
+   "h": "28d7ab71",
+   "q": "They ___ in the river.",
+   "o": [
+    "swim",
+    "swims",
+    "swimming",
+    "to swim"
+   ],
+   "x": "they = plural → no -s"
+  },
+  {
+   "he": "It ___ a lot in winter.",
+   "a": "rains",
+   "h": "3c833ede",
+   "q": "It ___ a lot in winter.",
+   "o": [
+    "rain",
+    "rains",
+    "raining",
+    "to rain"
+   ],
+   "x": "it → rains"
+  },
+  {
+   "he": "Dad ___ TV at night.",
+   "a": "watches",
+   "h": "f32d94bf",
+   "q": "Dad ___ TV at night.",
+   "o": [
+    "watch",
+    "watches",
+    "watchs",
+    "watching"
+   ],
+   "x": "After ch, add -es"
+  },
+  {
+   "he": "I ___ up at seven.",
+   "a": "wake",
+   "h": "28e19cc2",
+   "q": "I ___ up at seven.",
+   "o": [
+    "wake",
+    "wakes",
+    "waking",
+    "to wake"
+   ],
+   "x": "I → no -s"
+  },
+  {
+   "he": "The baby ___ because it's sad.",
+   "a": "cries",
+   "h": "e1a5bd29",
+   "q": "The baby ___ because it's sad.",
+   "o": [
+    "cry",
+    "crys",
+    "cries",
+    "crying"
+   ],
+   "x": "y after a consonant → -ies"
+  },
+  {
+   "he": "We ___ time in the park.",
+   "a": "spend",
+   "h": "5a044bd4",
+   "q": "We ___ time in the park.",
+   "o": [
+    "spend",
+    "spends",
+    "spending",
+    "to spend"
+   ],
+   "x": "we = plural → no -s"
+  },
+  {
+   "he": "Snow ___ in spring.",
+   "a": "melts",
+   "h": "e97382c0",
+   "q": "Snow ___ in spring.",
+   "o": [
+    "melt",
+    "melts",
+    "melting",
+    "to melt"
+   ],
+   "x": "השלג = it → melts"
+  },
+  {
+   "he": "The farmer ___ apples to shops.",
+   "a": "sells",
+   "h": "c31de6c1",
+   "q": "The farmer ___ apples to shops.",
+   "o": [
+    "sell",
+    "sells",
+    "selling",
+    "to sell"
+   ],
+   "x": "farmer = he → sells"
+  },
+  {
+   "he": "Mom ___ eggs in a pan.",
+   "a": "fries",
+   "h": "1e191d7c",
+   "q": "Mom ___ eggs in a pan.",
+   "o": [
+    "fry",
+    "frys",
+    "fries",
+    "frying"
+   ],
+   "x": "y after a consonant → -ies"
+  },
+  {
+   "he": "What is falling?",
+   "a": "rain",
+   "h": "75b86038",
+   "q": "What is falling?",
+   "o": [
+    "rain",
+    "snow",
+    "wind",
+    "ice"
+   ],
+   "x": "גשם = rain"
+  },
+  {
+   "he": "What is this?",
+   "a": "cloud",
+   "h": "6aba5999",
+   "q": "What is this?",
+   "o": [
+    "cloud",
+    "sea",
+    "roof",
+    "field"
+   ],
+   "x": "ענן = cloud"
+  },
+  {
+   "he": "What is this?",
+   "a": "snow",
+   "h": "e6ba3cb9",
+   "q": "What is this?",
+   "o": [
+    "snow",
+    "rain",
+    "heat",
+    "shade"
+   ],
+   "x": "שלג = snow"
+  },
+  {
+   "he": "רוח = ?",
+   "a": "wind",
+   "h": "6f91440b",
+   "q": "רוח = ?",
+   "o": [
+    "wind",
+    "wave",
+    "ice",
+    "cloud"
+   ],
+   "x": "רוח = wind"
+  },
+  {
+   "he": "Rain, thunder and wind: a ___.",
+   "a": "storm",
+   "h": "b63750b0",
+   "q": "Rain, thunder and wind: a ___.",
+   "o": [
+    "storm",
+    "river",
+    "heat",
+    "scarf"
+   ],
+   "x": "סערה = storm"
+  },
+  {
+   "he": "קרח = ?",
+   "a": "ice",
+   "h": "16d60a15",
+   "q": "קרח = ?",
+   "o": [
+    "ice",
+    "snow",
+    "bone",
+    "hole"
+   ],
+   "x": "קרח = ice"
+  },
+  {
+   "he": "חום = ?",
+   "a": "heat",
+   "h": "3aac8e4f",
+   "q": "חום = ?",
+   "o": [
+    "heat",
+    "ice",
+    "wind",
+    "shade"
+   ],
+   "x": "חום = heat"
+  },
+  {
+   "he": "Five degrees below zero. It's ___.",
+   "a": "freezing",
+   "h": "3068579c",
+   "q": "Five degrees below zero. It's ___.",
+   "o": [
+    "freezing",
+    "warm",
+    "pleasant",
+    "strange"
+   ],
+   "x": "מתחת לאפס = קפוא = freezing"
+  },
+  {
+   "he": "מזג אוויר = ?",
+   "a": "weather",
+   "h": "552f2da4",
+   "q": "מזג אוויר = ?",
+   "o": [
+    "weather",
+    "season",
+    "sea",
+    "sweat"
+   ],
+   "x": "מזג אוויר = weather"
+  },
+  {
+   "he": "עונה = ?",
+   "a": "season",
+   "h": "7fb636e8",
+   "q": "עונה = ?",
+   "o": [
+    "season",
+    "sailor",
+    "scarf",
+    "skin"
+   ],
+   "x": "עונה = season"
+  },
+  {
+   "he": "It is 30 ___.",
+   "a": "degrees",
+   "h": "4fadf48f",
+   "q": "It is 30 ___.",
+   "o": [
+    "degrees",
+    "zeros",
+    "rivers",
+    "waves"
+   ],
+   "x": "30° = 30 מעלות"
+  },
+  {
+   "he": "It rains. My coat is ___.",
+   "a": "wet",
+   "h": "31279211",
+   "q": "It rains. My coat is ___.",
+   "o": [
+    "wet",
+    "curly",
+    "low",
+    "famous"
+   ],
+   "x": "רטוב = wet"
+  },
+  {
+   "he": "Sunny and warm: a ___ day.",
+   "a": "pleasant",
+   "h": "d5307ed6",
+   "q": "Sunny and warm: a ___ day.",
+   "o": [
+    "pleasant",
+    "curly",
+    "heavy",
+    "worried"
+   ],
+   "x": "נעים = pleasant"
+  },
+  {
+   "he": "She ___ like snow.",
+   "a": "doesn't",
+   "h": "ba15f070",
+   "q": "She ___ like snow.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "she → doesn't"
+  },
+  {
+   "he": "They ___ live in the city.",
+   "a": "don't",
+   "h": "63962bf9",
+   "q": "They ___ live in the city.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "not"
+   ],
+   "x": "they → don't"
+  },
+  {
+   "he": "He doesn't ___ chicken.",
+   "a": "eat",
+   "h": "93847c91",
+   "q": "He doesn't ___ chicken.",
+   "o": [
+    "eat",
+    "eats",
+    "eating",
+    "ate"
+   ],
+   "x": "After doesn't → verb without -s"
+  },
+  {
+   "he": "I ___ go fishing.",
+   "a": "don't",
+   "h": "ba16e384",
+   "q": "I ___ go fishing.",
+   "o": [
+    "don't",
+    "doesn't",
+    "am not",
+    "not"
+   ],
+   "x": "I → don't"
+  },
+  {
+   "he": "It ___ snow in Eilat.",
+   "a": "doesn't",
+   "h": "469fa3da",
+   "q": "It ___ snow in Eilat.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "it → doesn't"
+  },
+  {
+   "he": "We ___ swim in winter.",
+   "a": "don't",
+   "h": "57b6c88f",
+   "q": "We ___ swim in winter.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "we → don't"
+  },
+  {
+   "he": "My dog doesn't ___ trees.",
+   "a": "climb",
+   "h": "d5b5ce0f",
+   "q": "My dog doesn't ___ trees.",
+   "o": [
+    "climb",
+    "climbs",
+    "climbing",
+    "climbed"
+   ],
+   "x": "After doesn't → verb without -s"
+  },
+  {
+   "he": "Dad ___ wear a scarf.",
+   "a": "doesn't",
+   "h": "5a5f0e28",
+   "q": "Dad ___ wear a scarf.",
+   "o": [
+    "doesn't",
+    "don't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "dad = he → doesn't"
+  },
+  {
+   "he": "You ___ need a coat.",
+   "a": "don't",
+   "h": "e2de6d00",
+   "q": "You ___ need a coat.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "not"
+   ],
+   "x": "you → don't"
+  },
+  {
+   "he": "Cats ___ fly.",
+   "a": "don't",
+   "h": "fc15369b",
+   "q": "Cats ___ fly.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "cats = plural → don't"
+  },
+  {
+   "he": "She doesn't ___ TV.",
+   "a": "watch",
+   "h": "2025a382",
+   "q": "She doesn't ___ TV.",
+   "o": [
+    "watch",
+    "watches",
+    "watching",
+    "watched"
+   ],
+   "x": "After doesn't → verb without -s"
+  },
+  {
+   "he": "Which sentence about him is correct?",
+   "a": "He doesn't play",
+   "h": "a12f9a8d",
+   "q": "Which sentence about him is correct?",
+   "o": [
+    "He don't play",
+    "He doesn't play",
+    "He not play",
+    "He doesn't plays"
+   ],
+   "x": "he → doesn't + verb without -s"
+  },
+  {
+   "he": "Which sentence about her is correct?",
+   "a": "She doesn't swim",
+   "h": "c811101b",
+   "q": "Which sentence about her is correct?",
+   "o": [
+    "She don't swim",
+    "She doesn't swims",
+    "She doesn't swim",
+    "She not swim"
+   ],
+   "x": "she → doesn't + verb without -s"
+  },
+  {
+   "he": "What is this?",
+   "a": "mountain",
+   "h": "48444243",
+   "q": "What is this?",
+   "o": [
+    "mountain",
+    "river",
+    "field",
+    "roof"
+   ],
+   "x": "הר = mountain"
+  },
+  {
+   "he": "ים = ?",
+   "a": "sea",
+   "h": "a0b8eced",
+   "q": "ים = ?",
+   "o": [
+    "sea",
+    "river",
+    "field",
+    "hole"
+   ],
+   "x": "ים = sea"
+  },
+  {
+   "he": "נהר = ?",
+   "a": "river",
+   "h": "e62d287c",
+   "q": "נהר = ?",
+   "o": [
+    "river",
+    "roof",
+    "sea",
+    "road"
+   ],
+   "x": "נהר = river"
+  },
+  {
+   "he": "שדה = ?",
+   "a": "field",
+   "h": "30e7b0ef",
+   "q": "שדה = ?",
+   "o": [
+    "field",
+    "park",
+    "city",
+    "hole"
+   ],
+   "x": "שדה = field"
+  },
+  {
+   "he": "What is this?",
+   "a": "city",
+   "h": "4d321cd4",
+   "q": "What is this?",
+   "o": [
+    "city",
+    "field",
+    "earth",
+    "pool"
+   ],
+   "x": "עיר = city"
+  },
+  {
+   "he": "כדור הארץ = ?",
+   "a": "planet Earth",
+   "h": "4fcda989",
+   "q": "כדור הארץ = ?",
+   "o": [
+    "planet Earth",
+    "ground",
+    "sea",
+    "city"
+   ],
+   "x": "כדור הארץ = planet Earth"
+  },
+  {
+   "he": "On a map, up = ?",
+   "a": "north",
+   "h": "cfefd6ec",
+   "q": "On a map, up = ?",
+   "o": [
+    "north",
+    "south",
+    "east",
+    "west"
+   ],
+   "x": "Up on a map = north (צפון)"
+  },
+  {
+   "he": "The sun rises in the ___.",
+   "a": "east",
+   "h": "9da93602",
+   "q": "The sun rises in the ___.",
+   "o": [
+    "east",
+    "west",
+    "north",
+    "south"
+   ],
+   "x": "The sun rises in the east (מזרח)"
+  },
+  {
+   "he": "The sun sets in the ___.",
+   "a": "west",
+   "h": "e3d20130",
+   "q": "The sun sets in the ___.",
+   "o": [
+    "west",
+    "east",
+    "north",
+    "south"
+   ],
+   "x": "The sun sets in the west (מערב)"
+  },
+  {
+   "he": "בריכת שחייה = ?",
+   "a": "swimming pool",
+   "h": "0af3a69b",
+   "q": "בריכת שחייה = ?",
+   "o": [
+    "swimming pool",
+    "river",
+    "sea",
+    "hole"
+   ],
+   "x": "בריכת שחייה = swimming pool"
+  },
+  {
+   "he": "What is this?",
+   "a": "park",
+   "h": "898a18f6",
+   "q": "What is this?",
+   "o": [
+    "park",
+    "field",
+    "roof",
+    "sidewalk"
+   ],
+   "x": "פארק = park"
+  },
+  {
+   "he": "גג = ?",
+   "a": "roof",
+   "h": "39b9442c",
+   "q": "גג = ?",
+   "o": [
+    "roof",
+    "ground",
+    "hole",
+    "floor"
+   ],
+   "x": "גג = roof"
+  },
+  {
+   "he": "חור = ?",
+   "a": "hole",
+   "h": "bd02af9a",
+   "q": "חור = ?",
+   "o": [
+    "hole",
+    "bone",
+    "roof",
+    "shade"
+   ],
+   "x": "חור = hole"
+  },
+  {
+   "he": "בירה (עיר) = ?",
+   "a": "capital",
+   "h": "75ab2595",
+   "q": "בירה (עיר) = ?",
+   "o": [
+    "capital",
+    "city",
+    "field",
+    "earth"
+   ],
+   "x": "בירה = capital: Jerusalem is the capital"
+  },
+  {
+   "he": "On a map, down = ?",
+   "a": "south",
+   "h": "eeb43d93",
+   "q": "On a map, down = ?",
+   "o": [
+    "south",
+    "north",
+    "east",
+    "west"
+   ],
+   "x": "Down on a map = south (דרום)"
+  },
+  {
+   "he": "קרקע = ?",
+   "a": "ground",
+   "h": "182c2091",
+   "q": "קרקע = ?",
+   "o": [
+    "ground",
+    "roof",
+    "hole",
+    "sea"
+   ],
+   "x": "קרקע = ground"
+  },
+  {
+   "he": "___ she like ice cream?",
+   "a": "Does",
+   "h": "f390d52e",
+   "q": "___ she like ice cream?",
+   "o": [
+    "Do",
+    "Does",
+    "Is",
+    "Are"
+   ],
+   "x": "she → Does"
+  },
+  {
+   "he": "___ they play football?",
+   "a": "Do",
+   "h": "ced7c441",
+   "q": "___ they play football?",
+   "o": [
+    "Do",
+    "Does",
+    "Is",
+    "Am"
+   ],
+   "x": "they → Do"
+  },
+  {
+   "he": "Does he ___ fishing?",
+   "a": "go",
+   "h": "5b5ec838",
+   "q": "Does he ___ fishing?",
+   "o": [
+    "go",
+    "goes",
+    "going",
+    "went"
+   ],
+   "x": "After Does → verb without -s"
+  },
+  {
+   "he": "___ you wake up early?",
+   "a": "Do",
+   "h": "75bce4f6",
+   "q": "___ you wake up early?",
+   "o": [
+    "Do",
+    "Does",
+    "Is",
+    "Are"
+   ],
+   "x": "you → Do"
+  },
+  {
+   "he": "Does it ___ in winter?",
+   "a": "rain",
+   "h": "77e1461a",
+   "q": "Does it ___ in winter?",
+   "o": [
+    "rain",
+    "rains",
+    "raining",
+    "rained"
+   ],
+   "x": "After Does → verb without -s"
+  },
+  {
+   "he": "Where ___ he live?",
+   "a": "does",
+   "h": "240b169d",
+   "q": "Where ___ he live?",
+   "o": [
+    "does",
+    "do",
+    "is",
+    "are"
+   ],
+   "x": "he → does"
+  },
+  {
+   "he": "What ___ you eat?",
+   "a": "do",
+   "h": "5391ef71",
+   "q": "What ___ you eat?",
+   "o": [
+    "do",
+    "does",
+    "are",
+    "is"
+   ],
+   "x": "you → do"
+  },
+  {
+   "he": "When ___ the sun rise?",
+   "a": "does",
+   "h": "b16948ca",
+   "q": "When ___ the sun rise?",
+   "o": [
+    "does",
+    "do",
+    "is",
+    "are"
+   ],
+   "x": "השמש = it → does"
+  },
+  {
+   "he": "___ your dad cook?",
+   "a": "Does",
+   "h": "86aecc4e",
+   "q": "___ your dad cook?",
+   "o": [
+    "Does",
+    "Do",
+    "Is",
+    "Are"
+   ],
+   "x": "dad = he → Does"
+  },
+  {
+   "he": "Do fish ___ in the sea?",
+   "a": "live",
+   "h": "597ac608",
+   "q": "Do fish ___ in the sea?",
+   "o": [
+    "live",
+    "lives",
+    "living",
+    "lived"
+   ],
+   "x": "After Do → verb without -s"
+  },
+  {
+   "he": "Which question about her is correct?",
+   "a": "Does she sing?",
+   "h": "2dd33fe3",
+   "q": "Which question about her is correct?",
+   "o": [
+    "Do she sing?",
+    "Does she sing?",
+    "Does she sings?",
+    "Is she sing?"
+   ],
+   "x": "she → Does + verb without -s"
+  },
+  {
+   "he": "Which question about them is correct?",
+   "a": "Do they run?",
+   "h": "2eb05849",
+   "q": "Which question about them is correct?",
+   "o": [
+    "Does they run?",
+    "Do they runs?",
+    "Do they run?",
+    "Are they run?"
+   ],
+   "x": "they → Do + verb without -s"
+  },
+  {
+   "he": "Does Dana ___ a coat?",
+   "a": "wear",
+   "h": "9842a82c",
+   "q": "Does Dana ___ a coat?",
+   "o": [
+    "wear",
+    "wears",
+    "wearing",
+    "wore"
+   ],
+   "x": "After Does → verb without -s"
+  },
+  {
+   "he": "להגיע = ?",
+   "a": "arrive",
+   "h": "b8892ced",
+   "q": "להגיע = ?",
+   "o": [
+    "arrive",
+    "leave",
+    "divide",
+    "destroy"
+   ],
+   "x": "להגיע = arrive"
+  },
+  {
+   "he": "לעזוב = ?",
+   "a": "leave",
+   "h": "d95dc5a9",
+   "q": "לעזוב = ?",
+   "o": [
+    "leave",
+    "stay",
+    "arrive",
+    "rise"
+   ],
+   "x": "לעזוב = leave"
+  },
+  {
+   "he": "Ice ___ in the sun.",
+   "a": "melts",
+   "h": "9c41b222",
+   "q": "Ice ___ in the sun.",
+   "o": [
+    "melts",
+    "rises",
+    "sets",
+    "fries"
+   ],
+   "x": "נמס = melts"
+  },
+  {
+   "he": "לטגן = ?",
+   "a": "fry",
+   "h": "f470b38e",
+   "q": "לטגן = ?",
+   "o": [
+    "fry",
+    "melt",
+    "solve",
+    "shine"
+   ],
+   "x": "לטגן = fry"
+  },
+  {
+   "he": "What is the hobby?",
+   "a": "go fishing",
+   "h": "582eac33",
+   "q": "What is the hobby?",
+   "o": [
+    "go fishing",
+    "hang out",
+    "lie down",
+    "put on"
+   ],
+   "x": "ללכת לדוג = go fishing"
+  },
+  {
+   "he": "לשכב = ?",
+   "a": "lie down",
+   "h": "0f3bd601",
+   "q": "לשכב = ?",
+   "o": [
+    "lie down",
+    "wake up",
+    "get on",
+    "put on"
+   ],
+   "x": "לשכב = lie down"
+  },
+  {
+   "he": "ללבוש = ?",
+   "a": "put on",
+   "h": "6b349962",
+   "q": "ללבוש = ?",
+   "o": [
+    "put on",
+    "take off",
+    "turn off",
+    "roll down"
+   ],
+   "x": "ללבוש = put on"
+  },
+  {
+   "he": "להוריד (בגד) = ?",
+   "a": "take off",
+   "h": "cd2d8e5b",
+   "q": "להוריד (בגד) = ?",
+   "o": [
+    "take off",
+    "put on",
+    "turn on",
+    "get on"
+   ],
+   "x": "להוריד = take off"
+  },
+  {
+   "he": "להדליק = ?",
+   "a": "turn on",
+   "h": "3e5228c4",
+   "q": "להדליק = ?",
+   "o": [
+    "turn on",
+    "turn off",
+    "take off",
+    "set"
+   ],
+   "x": "להדליק = turn on"
+  },
+  {
+   "he": "לפתור = ?",
+   "a": "solve",
+   "h": "a29b7fce",
+   "q": "לפתור = ?",
+   "o": [
+    "solve",
+    "divide",
+    "predict",
+    "destroy"
+   ],
+   "x": "לפתור = solve"
+  },
+  {
+   "he": "לחזות = ?",
+   "a": "predict",
+   "h": "1aef9779",
+   "q": "לחזות = ?",
+   "o": [
+    "predict",
+    "divide",
+    "spend",
+    "mean"
+   ],
+   "x": "לחזות = predict"
+  },
+  {
+   "he": "לחלק = ?",
+   "a": "divide",
+   "h": "d48385db",
+   "q": "לחלק = ?",
+   "o": [
+    "divide",
+    "destroy",
+    "fry",
+    "hope"
+   ],
+   "x": "לחלק = divide"
+  },
+  {
+   "he": "להרוס = ?",
+   "a": "destroy",
+   "h": "6e728979",
+   "q": "להרוס = ?",
+   "o": [
+    "destroy",
+    "solve",
+    "rise",
+    "stay"
+   ],
+   "x": "להרוס = destroy"
+  },
+  {
+   "he": "לבדוק = ?",
+   "a": "check",
+   "h": "64704d34",
+   "q": "לבדוק = ?",
+   "o": [
+    "check",
+    "set",
+    "stay",
+    "fall"
+   ],
+   "x": "לבדוק = check"
+  },
+  {
+   "he": "I ___ when my alarm rings.",
+   "a": "wake up",
+   "h": "53be07f0",
+   "q": "I ___ when my alarm rings.",
+   "o": [
+    "wake up",
+    "lie down",
+    "get on",
+    "hang out"
+   ],
+   "x": "wake up = להתעורר"
+  },
+  {
+   "he": "מסוכן = ?",
+   "a": "dangerous",
+   "h": "116ae133",
+   "q": "מסוכן = ?",
+   "o": [
+    "dangerous",
+    "famous",
+    "pleasant",
+    "special"
+   ],
+   "x": "מסוכן = dangerous"
+  },
+  {
+   "he": "מפורסם = ?",
+   "a": "famous",
+   "h": "85721d9b",
+   "q": "מפורסם = ?",
+   "o": [
+    "famous",
+    "heavy",
+    "strange",
+    "worried"
+   ],
+   "x": "מפורסם = famous"
+  },
+  {
+   "he": "כבד = ?",
+   "a": "heavy",
+   "h": "18807ae0",
+   "q": "כבד = ?",
+   "o": [
+    "heavy",
+    "low",
+    "close",
+    "free"
+   ],
+   "x": "כבד = heavy"
+  },
+  {
+   "he": "How does he feel?",
+   "a": "worried",
+   "h": "bd01fd55",
+   "q": "How does he feel?",
+   "o": [
+    "worried",
+    "pleasant",
+    "sticky",
+    "curly"
+   ],
+   "x": "מודאג = worried"
+  },
+  {
+   "he": "How does she feel?",
+   "a": "surprised",
+   "h": "00550578",
+   "q": "How does she feel?",
+   "o": [
+    "surprised",
+    "worried",
+    "freezing",
+    "heavy"
+   ],
+   "x": "מופתע = surprised"
+  },
+  {
+   "he": "מוזר = ?",
+   "a": "strange",
+   "h": "13dabd61",
+   "q": "מוזר = ?",
+   "o": [
+    "strange",
+    "special",
+    "sticky",
+    "extreme"
+   ],
+   "x": "מוזר = strange"
+  },
+  {
+   "he": "Her hair is ___.",
+   "a": "curly",
+   "h": "c4ad5a48",
+   "q": "Her hair is ___.",
+   "o": [
+    "curly",
+    "heavy",
+    "low",
+    "famous"
+   ],
+   "x": "מתולתל = curly"
+  },
+  {
+   "he": "דביק = ?",
+   "a": "sticky",
+   "h": "91262772",
+   "q": "דביק = ?",
+   "o": [
+    "sticky",
+    "curly",
+    "extreme",
+    "close"
+   ],
+   "x": "דביק = sticky"
+  },
+  {
+   "he": "מיוחד = ?",
+   "a": "special",
+   "h": "1b9de9cd",
+   "q": "מיוחד = ?",
+   "o": [
+    "special",
+    "strange",
+    "several",
+    "opposite"
+   ],
+   "x": "מיוחד = special"
+  },
+  {
+   "he": "חופשי = ?",
+   "a": "free",
+   "h": "5e1cbb03",
+   "q": "חופשי = ?",
+   "o": [
+    "free",
+    "low",
+    "wet",
+    "warm"
+   ],
+   "x": "חופשי = free"
+  },
+  {
+   "he": "נמוך = ?",
+   "a": "low",
+   "h": "139c25e1",
+   "q": "נמוך = ?",
+   "o": [
+    "low",
+    "close",
+    "heavy",
+    "free"
+   ],
+   "x": "נמוך = low"
+  },
+  {
+   "he": "ההפך = ?",
+   "a": "opposite",
+   "h": "a0ee0e32",
+   "q": "ההפך = ?",
+   "o": [
+    "opposite",
+    "outside",
+    "extreme",
+    "several"
+   ],
+   "x": "ההפך = opposite (hot ↔ cold)"
+  },
+  {
+   "he": "קיצוני = ?",
+   "a": "extreme",
+   "h": "c9a4bc98",
+   "q": "קיצוני = ?",
+   "o": [
+    "extreme",
+    "famous",
+    "pleasant",
+    "worried"
+   ],
+   "x": "קיצוני = extreme"
+  },
+  {
+   "he": "קרוב = ?",
+   "a": "close",
+   "h": "142c2d05",
+   "q": "קרוב = ?",
+   "o": [
+    "close",
+    "low",
+    "free",
+    "heavy"
+   ],
+   "x": "קרוב = close"
+  },
+  {
+   "he": "חמים (נעים) = ?",
+   "a": "warm",
+   "h": "086c3d76",
+   "q": "חמים (נעים) = ?",
+   "o": [
+    "warm",
+    "wet",
+    "low",
+    "sticky"
+   ],
+   "x": "חמים = warm"
+  },
+  {
+   "he": "What is this?",
+   "a": "finger",
+   "h": "1be5d0d2",
+   "q": "What is this?",
+   "o": [
+    "finger",
+    "chin",
+    "bone",
+    "skin"
+   ],
+   "x": "אצבע = finger"
+  },
+  {
+   "he": "What is this?",
+   "a": "bone",
+   "h": "8412b5db",
+   "q": "What is this?",
+   "o": [
+    "bone",
+    "skin",
+    "ice",
+    "fan"
+   ],
+   "x": "עצם = bone"
+  },
+  {
+   "he": "What is this?",
+   "a": "scarf",
+   "h": "a35a5f38",
+   "q": "What is this?",
+   "o": [
+    "scarf",
+    "coat",
+    "fan",
+    "roof"
+   ],
+   "x": "צעיף = scarf"
+  },
+  {
+   "he": "What is this?",
+   "a": "coat",
+   "h": "b3be40a6",
+   "q": "What is this?",
+   "o": [
+    "coat",
+    "scarf",
+    "cover",
+    "cloud"
+   ],
+   "x": "מעיל = coat"
+  },
+  {
+   "he": "Who is he?",
+   "a": "farmer",
+   "h": "3c8e2430",
+   "q": "Who is he?",
+   "o": [
+    "farmer",
+    "sailor",
+    "fan",
+    "city"
+   ],
+   "x": "חקלאי = farmer"
+  },
+  {
+   "he": "Who is he?",
+   "a": "sailor",
+   "h": "c72ce2c3",
+   "q": "Who is he?",
+   "o": [
+    "sailor",
+    "farmer",
+    "fan",
+    "problem"
+   ],
+   "x": "מלח = sailor"
+  },
+  {
+   "he": "What is this?",
+   "a": "ice cream cone",
+   "h": "e8ab7624",
+   "q": "What is this?",
+   "o": [
+    "ice cream cone",
+    "ice",
+    "snow",
+    "bone"
+   ],
+   "x": "גביע גלידה = ice cream cone"
+  },
+  {
+   "he": "מאוורר = ?",
+   "a": "fan",
+   "h": "c2158e23",
+   "q": "מאוורר = ?",
+   "o": [
+    "fan",
+    "coat",
+    "roof",
+    "hole"
+   ],
+   "x": "מאוורר = fan"
+  },
+  {
+   "he": "צל = ?",
+   "a": "shade",
+   "h": "2099d5bf",
+   "q": "צל = ?",
+   "o": [
+    "shade",
+    "shine",
+    "sweat",
+    "snow"
+   ],
+   "x": "צל = shade"
+  },
+  {
+   "he": "What is this?",
+   "a": "wave",
+   "h": "233f1a5e",
+   "q": "What is this?",
+   "o": [
+    "wave",
+    "wind",
+    "river",
+    "field"
+   ],
+   "x": "גל = wave"
+  },
+  {
+   "he": "זיעה = ?",
+   "a": "sweat",
+   "h": "230488c8",
+   "q": "זיעה = ?",
+   "o": [
+    "sweat",
+    "skin",
+    "sea",
+    "snow"
+   ],
+   "x": "זיעה = sweat"
+  },
+  {
+   "he": "חופשה = ?",
+   "a": "vacation",
+   "h": "9719e952",
+   "q": "חופשה = ?",
+   "o": [
+    "vacation",
+    "advice",
+    "season",
+    "solution"
+   ],
+   "x": "חופשה = vacation"
+  },
+  {
+   "he": "פתרון = ?",
+   "a": "solution",
+   "h": "e2e929c0",
+   "q": "פתרון = ?",
+   "o": [
+    "solution",
+    "problem",
+    "advice",
+    "hope"
+   ],
+   "x": "פתרון = solution"
+  },
+  {
+   "he": "סנטר = ?",
+   "a": "chin",
+   "h": "cfa6680d",
+   "q": "סנטר = ?",
+   "o": [
+    "chin",
+    "skin",
+    "bone",
+    "finger"
+   ],
+   "x": "סנטר = chin"
+  },
+  {
+   "he": "עור = ?",
+   "a": "skin",
+   "h": "6cda670d",
+   "q": "עור = ?",
+   "o": [
+    "skin",
+    "bone",
+    "chin",
+    "scarf"
+   ],
+   "x": "עור = skin"
+  },
+  {
+   "he": "גב = ?",
+   "a": "back",
+   "h": "2591b8b3",
+   "q": "גב = ?",
+   "o": [
+    "back",
+    "chin",
+    "bone",
+    "skin"
+   ],
+   "x": "גב = back",
+   "sc": {
+    "0": "גב"
+   }
+  },
+  {
+   "he": "I ___ ice cream.",
+   "a": "feel like",
+   "h": "593f4848",
+   "q": "I ___ ice cream.",
+   "o": [
+    "feel like",
+    "hang out",
+    "can't wait",
+    "make plans"
+   ],
+   "x": "מתחשק לי = I feel like"
+  },
+  {
+   "he": "לעלות על (אוטובוס) = ?",
+   "a": "get on",
+   "h": "c5b4554e",
+   "q": "לעלות על (אוטובוס) = ?",
+   "o": [
+    "get on",
+    "take off",
+    "turn on",
+    "roll down"
+   ],
+   "x": "לעלות על = get on"
+  },
+  {
+   "he": "לבלות (עם חברים) = ?",
+   "a": "hang out",
+   "h": "21d40f7d",
+   "q": "לבלות (עם חברים) = ?",
+   "o": [
+    "hang out",
+    "make plans",
+    "lie down",
+    "put on"
+   ],
+   "x": "לבלות = hang out"
+  },
+  {
+   "he": "We ___ time together.",
+   "a": "spend",
+   "h": "9802e628",
+   "q": "We ___ time together.",
+   "o": [
+    "spend",
+    "set",
+    "stay",
+    "fall"
+   ],
+   "x": "spend time = לבלות זמן"
+  },
+  {
+   "he": "לתכנן תוכניות = ?",
+   "a": "make plans",
+   "h": "8c15c76b",
+   "q": "לתכנן תוכניות = ?",
+   "o": [
+    "make plans",
+    "hang out",
+    "hold a record",
+    "go fishing"
+   ],
+   "x": "לתכנן = make plans"
+  },
+  {
+   "he": "להחזיק בשיא = ?",
+   "a": "hold a record",
+   "h": "77732ef6",
+   "q": "להחזיק בשיא = ?",
+   "o": [
+    "hold a record",
+    "make plans",
+    "roll down",
+    "feel like"
+   ],
+   "x": "להחזיק בשיא = hold a record"
+  },
+  {
+   "he": "להוריד (חלון) = ?",
+   "a": "roll down",
+   "h": "e4f866a0",
+   "q": "להוריד (חלון) = ?",
+   "o": [
+    "roll down",
+    "turn off",
+    "take off",
+    "get on"
+   ],
+   "x": "להוריד חלון = roll down"
+  },
+  {
+   "he": "לכבות = ?",
+   "a": "turn off",
+   "h": "1743ca1c",
+   "q": "לכבות = ?",
+   "o": [
+    "turn off",
+    "turn on",
+    "put on",
+    "set"
+   ],
+   "x": "לכבות = turn off"
+  },
+  {
+   "he": "סוג של = ?",
+   "a": "kind of",
+   "h": "e4c69fca",
+   "q": "סוג של = ?",
+   "o": [
+    "kind of",
+    "for example",
+    "the whole",
+    "in the right"
+   ],
+   "x": "סוג של = kind of"
+  },
+  {
+   "he": "כל ה... (כל הפיצה) = ?",
+   "a": "the whole",
+   "h": "ebc89f96",
+   "q": "כל ה... (כל הפיצה) = ?",
+   "o": [
+    "the whole",
+    "kind of",
+    "several",
+    "opposite"
+   ],
+   "x": "the whole pizza = כל הפיצה"
+  },
+  {
+   "he": "להיות צודק = to be ___",
+   "a": "in the right",
+   "h": "7dd2eea8",
+   "q": "להיות צודק = to be ___",
+   "o": [
+    "in the right",
+    "kind of",
+    "the whole",
+    "for example"
+   ],
+   "x": "צודק = in the right"
+  },
+  {
+   "he": "לדוגמה = ?",
+   "a": "for example",
+   "h": "5b649722",
+   "q": "לדוגמה = ?",
+   "o": [
+    "for example",
+    "kind of",
+    "the whole",
+    "really"
+   ],
+   "x": "לדוגמה = for example"
+  },
+  {
+   "he": "מדרכה = ?",
+   "a": "sidewalk",
+   "h": "d9653285",
+   "q": "מדרכה = ?",
+   "o": [
+    "sidewalk",
+    "roof",
+    "field",
+    "river"
+   ],
+   "x": "מדרכה = sidewalk"
+  },
+  {
+   "he": "מחוץ ל... = ?",
+   "a": "outside",
+   "h": "39f31394",
+   "q": "מחוץ ל... = ?",
+   "o": [
+    "outside",
+    "indoors",
+    "below",
+    "through"
+   ],
+   "x": "מחוץ ל = outside"
+  },
+  {
+   "he": "דרך (עוברים) = ?",
+   "a": "through",
+   "h": "ca3b4ab8",
+   "q": "דרך (עוברים) = ?",
+   "o": [
+    "through",
+    "below",
+    "outside",
+    "close"
+   ],
+   "x": "דרך = through"
+  },
+  {
+   "he": "באמת = ?",
+   "a": "really",
+   "h": "0d060f3a",
+   "q": "באמת = ?",
+   "o": [
+    "really",
+    "luckily",
+    "probably",
+    "certainly"
+   ],
+   "x": "באמת = really"
+  },
+  {
+   "he": "בוודאי = ?",
+   "a": "certainly",
+   "h": "061c6fa1",
+   "q": "בוודאי = ?",
+   "o": [
+    "certainly",
+    "really",
+    "luckily",
+    "probably"
+   ],
+   "x": "בוודאי = certainly"
+  },
+  {
+   "he": "אפס = ?",
+   "a": "zero",
+   "h": "739c5198",
+   "q": "אפס = ?",
+   "o": [
+    "zero",
+    "several",
+    "degree",
+    "low"
+   ],
+   "x": "0 = zero"
+  },
+  {
+   "he": "להישאר = ?",
+   "a": "stay",
+   "h": "b3f19ca7",
+   "q": "להישאר = ?",
+   "o": [
+    "stay",
+    "leave",
+    "arrive",
+    "fall"
+   ],
+   "x": "להישאר = stay"
+  },
+  {
+   "he": "ליפול = ?",
+   "a": "fall",
+   "h": "82029fe0",
+   "q": "ליפול = ?",
+   "o": [
+    "fall",
+    "rise",
+    "stay",
+    "shine"
+   ],
+   "x": "ליפול = fall"
+  },
+  {
+   "he": "לזהור (השמש) = ?",
+   "a": "shine",
+   "h": "2d2b2869",
+   "q": "לזהור (השמש) = ?",
+   "o": [
+    "shine",
+    "set",
+    "fall",
+    "melt"
+   ],
+   "x": "לזהור = shine"
+  },
+  {
+   "he": "לשקוע (השמש) = ?",
+   "a": "set",
+   "h": "0b7c326d",
+   "q": "לשקוע (השמש) = ?",
+   "o": [
+    "set",
+    "rise",
+    "shine",
+    "fall"
+   ],
+   "x": "השמש שוקעת = the sun sets"
+  },
+  {
+   "he": "What does this word ___?",
+   "a": "mean",
+   "h": "1a8d6b58",
+   "q": "What does this word ___?",
+   "o": [
+    "mean",
+    "set",
+    "stay",
+    "fall"
+   ],
+   "x": "mean = פירושו"
+  },
+  {
+   "he": "כיסוי / כריכה = ?",
+   "a": "cover",
+   "h": "ebb27c56",
+   "q": "כיסוי / כריכה = ?",
+   "o": [
+    "cover",
+    "coat",
+    "roof",
+    "fan"
+   ],
+   "x": "כריכה = cover"
+  },
+  {
+   "he": "בעיה = ?",
+   "a": "problem",
+   "h": "04dd17d3",
+   "q": "בעיה = ?",
+   "o": [
+    "problem",
+    "solution",
+    "advice",
+    "hope"
+   ],
+   "x": "בעיה = problem"
+  },
+  {
+   "he": "She ___ a dog.",
+   "a": "has",
+   "h": "dc35c5ba",
+   "q": "She ___ a dog.",
+   "o": [
+    "has",
+    "have",
+    "haves",
+    "having"
+   ],
+   "x": "she → has (not haves)"
+  },
+  {
+   "he": "My dad ___ the dishes.",
+   "a": "does",
+   "h": "18a36504",
+   "q": "My dad ___ the dishes.",
+   "o": [
+    "does",
+    "do",
+    "dos",
+    "doing"
+   ],
+   "x": "he → does (not dos)"
+  },
+  {
+   "he": "My grandparents ___ a big garden.",
+   "a": "have",
+   "h": "fc2e05a7",
+   "q": "My grandparents ___ a big garden.",
+   "o": [
+    "have",
+    "has",
+    "haves",
+    "having"
+   ],
+   "x": "grandparents = they → have"
+  },
+  {
+   "he": "Does he swim? No, he ___.",
+   "a": "doesn't",
+   "h": "95739849",
+   "q": "Does he swim? No, he ___.",
+   "o": [
+    "doesn't",
+    "don't",
+    "isn't",
+    "not"
+   ],
+   "x": "Does → No, he doesn't"
+  },
+  {
+   "he": "Do you ski? No, I ___.",
+   "a": "don't",
+   "h": "1d851632",
+   "q": "Do you ski? No, I ___.",
+   "o": [
+    "don't",
+    "doesn't",
+    "am not",
+    "not"
+   ],
+   "x": "Do you → No, I don't"
+  },
+  {
+   "he": "100%: I ___ walk to school.",
+   "a": "always",
+   "h": "29c88e94",
+   "q": "100%: I ___ walk to school.",
+   "o": [
+    "always",
+    "never",
+    "sometimes",
+    "often"
+   ],
+   "x": "100% = always = תמיד"
+  },
+  {
+   "he": "0%: She ___ eats fish.",
+   "a": "never",
+   "h": "99991a00",
+   "q": "0%: She ___ eats fish.",
+   "o": [
+    "never",
+    "always",
+    "usually",
+    "often"
+   ],
+   "x": "0% = never = אף פעם"
+  },
+  {
+   "he": "לפעמים = ?",
+   "a": "sometimes",
+   "h": "3acb2653",
+   "q": "לפעמים = ?",
+   "o": [
+    "sometimes",
+    "always",
+    "never",
+    "usually"
+   ],
+   "x": "לפעמים = sometimes"
+  },
+  {
+   "he": "בדרך כלל = ?",
+   "a": "usually",
+   "h": "1d91f41a",
+   "q": "בדרך כלל = ?",
+   "o": [
+    "usually",
+    "never",
+    "always",
+    "sometimes"
+   ],
+   "x": "בדרך כלל = usually"
+  },
+  {
+   "he": "Which is correct?",
+   "a": "He always walks",
+   "h": "4db943b4",
+   "q": "Which is correct?",
+   "o": [
+    "He always walks",
+    "He always walk",
+    "He walk always",
+    "Always he walk"
+   ],
+   "x": "always comes before the verb, and he takes -s"
+  },
+  {
+   "he": "The museum ___ at ten.",
+   "a": "opens",
+   "h": "05becb9c",
+   "q": "The museum ___ at ten.",
+   "o": [
+    "opens",
+    "open",
+    "opening",
+    "to open"
+   ],
+   "x": "the museum = it → opens"
+  },
+  {
+   "he": "My parents ___ in Haifa.",
+   "a": "work",
+   "h": "c09a3a52",
+   "q": "My parents ___ in Haifa.",
+   "o": [
+    "work",
+    "works",
+    "working",
+    "to work"
+   ],
+   "x": "parents = plural → no -s"
+  },
+  {
+   "he": "She ___ English very well.",
+   "a": "speaks",
+   "h": "70501423",
+   "q": "She ___ English very well.",
+   "o": [
+    "speaks",
+    "speak",
+    "speaking",
+    "to speak"
+   ],
+   "x": "she → speaks"
+  },
+  {
+   "he": "How old is Lia?",
+   "a": "13",
+   "h": "a366ab2b",
+   "q": "How old is Lia?",
+   "o": [
+    "13",
+    "12",
+    "14",
+    "30"
+   ],
+   "x": "In the first line: thirteen = 13"
+  },
+  {
+   "he": "Where does Lia live?",
+   "a": "near the mountains",
+   "h": "7a589f29",
+   "q": "Where does Lia live?",
+   "o": [
+    "near the mountains",
+    "near the sea",
+    "in the desert",
+    "on an island"
+   ],
+   "x": "near the mountains in the north"
+  },
+  {
+   "he": "What is her father's job?",
+   "a": "farmer",
+   "h": "5764e820",
+   "q": "What is her father's job?",
+   "o": [
+    "farmer",
+    "sailor",
+    "teacher",
+    "scientist"
+   ],
+   "x": "Her father is a farmer"
+  },
+  {
+   "he": "What does Lia check every morning?",
+   "a": "the temperature",
+   "h": "4d17a9c3",
+   "q": "What does Lia check every morning?",
+   "o": [
+    "the temperature",
+    "the news",
+    "her phone",
+    "the river"
+   ],
+   "x": "checks the temperature outside"
+  },
+  {
+   "he": "What is the summer like?",
+   "a": "very hot",
+   "h": "929549b2",
+   "q": "What is the summer like?",
+   "o": [
+    "very hot",
+    "freezing",
+    "rainy",
+    "windy"
+   ],
+   "x": "the heat is extreme = חום קיצוני"
+  },
+  {
+   "he": "Where do the friends swim?",
+   "a": "at the pool",
+   "h": "3fdba3b0",
+   "q": "Where do the friends swim?",
+   "o": [
+    "at the pool",
+    "in the sea",
+    "in the river",
+    "at school"
+   ],
+   "x": "at the swimming pool"
+  },
+  {
+   "he": "Where is the ice?",
+   "a": "on the roof",
+   "h": "738c9760",
+   "q": "Where is the ice?",
+   "o": [
+    "on the roof",
+    "in the pool",
+    "on the tree",
+    "in the river"
+   ],
+   "x": "ice on the roof"
+  },
+  {
+   "he": "What does Lia wear in winter?",
+   "a": "coat and scarf",
+   "h": "9c211110",
+   "q": "What does Lia wear in winter?",
+   "o": [
+    "coat and scarf",
+    "hat and gloves",
+    "a swimsuit",
+    "sunglasses"
+   ],
+   "x": "her warm coat and her scarf"
+  },
+  {
+   "he": "What does Lia want to be?",
+   "a": "weather scientist",
+   "h": "a74f4ec4",
+   "q": "What does Lia want to be?",
+   "o": [
+    "weather scientist",
+    "farmer",
+    "teacher",
+    "sailor"
+   ],
+   "x": "Lia wants to be a weather scientist"
+  },
+  {
+   "he": "What can a storm do?",
+   "a": "destroy a field",
+   "h": "bf592bb0",
+   "q": "What can a storm do?",
+   "o": [
+    "destroy a field",
+    "help farmers",
+    "melt the snow",
+    "cool the city"
+   ],
+   "x": "it can destroy a whole field"
+  },
+  {
+   "he": "\"predict\" means:",
+   "a": "לחזות",
+   "h": "9c122ec2",
+   "q": "\"predict\" means:",
+   "o": [
+    "לחזות",
+    "להרוס",
+    "להגן",
+    "לבדוק"
+   ],
+   "x": "predict storms = לחזות סערות"
+  },
+  {
+   "he": "What is the South Pole?",
+   "a": "the coldest place",
+   "h": "e8b7ce41",
+   "q": "What is the South Pole?",
+   "o": [
+    "the coldest place",
+    "the hottest place",
+    "a small city",
+    "a big field"
+   ],
+   "x": "probably the coldest place on earth"
+  },
+  {
+   "he": "\"I can't wait!\" – Lia is:",
+   "a": "excited",
+   "h": "aac65843",
+   "q": "\"I can't wait!\" – Lia is:",
+   "o": [
+    "excited",
+    "worried",
+    "sad",
+    "bored"
+   ],
+   "x": "I can't wait! = מתרגשת"
+  },
+  {
+   "he": "עצה = ?",
+   "a": "advice",
+   "h": "afd9b7f1",
+   "q": "עצה = ?",
+   "o": [
+    "advice",
+    "hope",
+    "problem",
+    "opposite"
+   ],
+   "x": "עצה = advice"
+  },
+  {
+   "he": "תקווה = ?",
+   "a": "hope",
+   "h": "5adbfc09",
+   "q": "תקווה = ?",
+   "o": [
+    "hope",
+    "hole",
+    "heat",
+    "ice"
+   ],
+   "x": "תקווה = hope"
+  },
+  {
+   "he": "בחוץ = ?",
+   "a": "outdoors",
+   "h": "cfdf0479",
+   "q": "בחוץ = ?",
+   "o": [
+    "outdoors",
+    "indoors",
+    "below",
+    "through"
+   ],
+   "x": "בחוץ = outdoors"
+  },
+  {
+   "he": "בפנים = ?",
+   "a": "indoors",
+   "h": "ac2b5a99",
+   "q": "בפנים = ?",
+   "o": [
+    "indoors",
+    "outdoors",
+    "outside",
+    "above"
+   ],
+   "x": "בפנים = indoors"
+  },
+  {
+   "he": "מתחת = ?",
+   "a": "below",
+   "h": "230905a7",
+   "q": "מתחת = ?",
+   "o": [
+    "below",
+    "through",
+    "close",
+    "several"
+   ],
+   "x": "מתחת = below"
+  },
+  {
+   "he": "כמה (כמות) = ?",
+   "a": "several",
+   "h": "d4ad515e",
+   "q": "כמה (כמות) = ?",
+   "o": [
+    "several",
+    "certainly",
+    "probably",
+    "luckily"
+   ],
+   "x": "כמה = several"
+  },
+  {
+   "he": "כנראה = ?",
+   "a": "probably",
+   "h": "26dc9393",
+   "q": "כנראה = ?",
+   "o": [
+    "probably",
+    "certainly",
+    "luckily",
+    "really"
+   ],
+   "x": "כנראה = probably"
+  },
+  {
+   "he": "למרבה המזל = ?",
+   "a": "luckily",
+   "h": "d72edb69",
+   "q": "למרבה המזל = ?",
+   "o": [
+    "luckily",
+    "really",
+    "probably",
+    "certainly"
+   ],
+   "x": "למרבה המזל = luckily"
+  },
+  {
+   "he": "He ___ in Haifa.",
+   "a": "lives",
+   "h": "551f6d67",
+   "q": "He ___ in Haifa.",
+   "o": [
+    "live",
+    "lives",
+    "living",
+    "to live"
+   ],
+   "x": "he → lives"
+  },
+  {
+   "he": "___ it snow here?",
+   "a": "Does",
+   "h": "b11eaa64",
+   "q": "___ it snow here?",
+   "o": [
+    "Does",
+    "Do",
+    "Is",
+    "Are"
+   ],
+   "x": "it → Does"
+  },
+  {
+   "he": "We ___ like storms.",
+   "a": "don't",
+   "h": "5dc4473d",
+   "q": "We ___ like storms.",
+   "o": [
+    "don't",
+    "doesn't",
+    "isn't",
+    "aren't"
+   ],
+   "x": "we → don't"
+  },
+  {
+   "he": "תלוי ב... = ?",
+   "a": "it depends on",
+   "h": "49e98ec4",
+   "q": "תלוי ב... = ?",
+   "o": [
+    "it depends on",
+    "feel like",
+    "make plans",
+    "can't wait"
+   ],
+   "x": "תלוי ב... = it depends on"
+  },
+  {
+   "he": "לא יכול לחכות = ?",
+   "a": "can't wait",
+   "h": "c32c52aa",
+   "q": "לא יכול לחכות = ?",
+   "o": [
+    "can't wait",
+    "feel like",
+    "hold a record",
+    "hang out"
+   ],
+   "x": "לא יכול לחכות = can't wait"
+  }
+ ]
+}

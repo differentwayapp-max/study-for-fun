@@ -3442,7 +3442,7 @@
    "he": "למה עיגול אינו מצולע?",
    "a": "אין לו צלעות",
    "h": "20dff16e",
-   "q": "Why is a circle not a polygon?",
+   "q": "Why is a circle NOT a polygon?",
    "o": [
     "It has no sides",
     "It is too small",
@@ -4063,7 +4063,7 @@
    "he": "מזיזים את החץ שמאלה, ואז משקפים למטה. מה יוצא?",
    "a": "⁦↘️⁩",
    "h": "c539c1a9",
-   "q": "Slide the arrow left, then reflect it in a bottom mirror. What do you get?",
+   "q": "Slide the arrow left, then flip it down. Which of these do you get?",
    "o": [
     "⁦↘️⁩",
     "⁦↗️⁩",

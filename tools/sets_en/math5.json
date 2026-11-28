@@ -3885,7 +3885,7 @@
    "he": "איזה מרובע אינו מקבילית?",
    "a": "טרפז",
    "h": "721c342a",
-   "q": "Which quadrilateral is not a parallelogram?",
+   "q": "Which quadrilateral is NOT a parallelogram?",
    "o": [
     "Trapezoid",
     "Rectangle",
@@ -4297,7 +4297,7 @@
    "he": "במקבילית שאינה מלבן, הגובה ___ מהצלע הסמוכה",
    "a": "קצר יותר",
    "h": "b600c2ee",
-   "q": "In a parallelogram that is not a rectangle, how does the height compare with the slanted side?",
+   "q": "In a parallelogram that is NOT a rectangle, how does the height compare with the slanted side?",
    "o": [
     "Shorter",
     "Longer",

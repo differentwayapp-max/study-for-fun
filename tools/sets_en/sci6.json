@@ -254,9 +254,12 @@
    ],
    "x": "540 kilocalories – the most energy",
    "sc": {
-    "0": "Apple",
-    "2": "Bread",
-    "4": "Chocolate"
+    "0": "52",
+    "1": "Apple",
+    "2": "250",
+    "3": "Bread",
+    "4": "540",
+    "5": "Chocolate"
    }
   },
   {
@@ -332,7 +335,7 @@
    "o": [
     "They give off heat",
     "They give off sound",
-    "They store height",
+    "They store gravitational energy",
     "They move fast"
    ],
    "x": "All three are sources of heat energy"
@@ -767,7 +770,7 @@
    "h": "e5f3f650",
    "q": "Which action saves electricity?",
    "o": [
-    "Lights off when leaving",
+    "Turning off the lights",
     "Leaving the AC on",
     "Leaving the computer on",
     "Opening the fridge often"
@@ -821,7 +824,7 @@
    "o": [
     "Walk",
     "Take a taxi alone",
-    "Each child by car",
+    "One car per child",
     "Warm up the car"
    ],
    "x": "Walking uses no fuel"
@@ -893,7 +896,7 @@
    "q": "Why can we see the moon at night?",
    "o": [
     "It reflects sunlight",
-    "It gives off light",
+    "It shines by itself",
     "It burns like fire",
     "It's made of glass"
    ],
@@ -1296,7 +1299,7 @@
    "he": "ספר אינו מקור אור. איך אנחנו רואים אותו?",
    "a": "מחזיר אור",
    "h": "0f257939",
-   "q": "A book is not a light source. What lets us see it?",
+   "q": "A book is NOT a light source. What lets us see it?",
    "o": [
     "Reflected light",
     "Its own light",
@@ -1497,7 +1500,7 @@
    "he": "טלפון של שתי כוסות וחוט: איך הקול עובר?",
    "a": "בחוט המתוח",
    "h": "b1ccca7d",
-   "q": "A string telephone of two cups: how does the sound travel?",
+   "q": "A string telephone made of two cups: how does the sound travel?",
    "o": [
     "Through the tight string",
     "Through light",
@@ -2124,7 +2127,7 @@
    "he": "רואים חוט חשמל קרוע ברחוב. כמה מותר להתקרב אליו?",
    "a": "לא מתקרבים בכלל",
    "h": "45bf8aa9",
-   "q": "You see a torn power line in the street. How close may you go?",
+   "q": "You see a fallen power line in the street. How close may you go?",
    "o": [
     "Not at all",
     "Within 1 meter",
@@ -2158,7 +2161,7 @@
     "No, it's dangerous",
     "Yes, carefully",
     "Yes, with gloves",
-    "Yes, if rushing"
+    "Yes, when hurrying"
    ],
    "x": "A torn cord is dangerous – repair or replace it"
   },
@@ -2304,7 +2307,7 @@
    "h": "b41b4084",
    "q": "Does a magnet attract a paper clip through a sheet of paper?",
    "o": [
-    "Yes, it goes through",
+    "Yes, the force passes",
     "No, never",
     "Only through metal",
     "Only in the dark"
@@ -2739,7 +2742,7 @@
    "he": "חתול רואה טוב בחושך. מה נפתח אצלו מאוד?",
    "a": "האישון",
    "h": "27926748",
-   "q": "A cat sees well in the dark. What opens very wide in it?",
+   "q": "A cat sees well in the dark. What part of the cat opens very wide?",
    "o": [
     "The pupil",
     "The ear",
@@ -3201,7 +3204,7 @@
    "he": "מה נכון לגבי שמיעה באוזניות?",
    "a": "עוצמה נמוכה והפסקות",
    "h": "c9a673b7",
-   "q": "Which is right when listening with earphones?",
+   "q": "Which of these is right when listening with earphones?",
    "o": [
     "Low volume and breaks",
     "Maximum volume",
@@ -3240,14 +3243,14 @@
    "he": "למה עובד עם מקדחת כביש שם אוזניות מגן?",
    "a": "לשמור על השמיעה",
    "h": "5808da58",
-   "q": "Why does a road-drill worker wear ear muffs?",
+   "q": "Why does a jackhammer worker wear earmuffs?",
    "o": [
     "To guard his hearing",
     "To hear music",
     "To warm his ears",
     "To see better"
    ],
-   "x": "The road drill is very loud"
+   "x": "The jackhammer is very loud"
   },
   {
    "he": "מקלון עמוק באוזן מסוכן כי הוא…",
@@ -3517,7 +3520,7 @@
    ],
    "x": "In year 3 the point is the highest",
    "sc": {
-    "8": "Rabbits",
+    "8": "🐇",
     "9": "Year"
    }
   },
@@ -3534,7 +3537,7 @@
    ],
    "x": "Predators reduce the number of prey",
    "sc": {
-    "8": "Rabbits",
+    "8": "🐇",
     "9": "Year"
    }
   },
@@ -3555,7 +3558,7 @@
    "he": "עכבר אוכל חיטה, ונחש אוכל עכבר. מי הצרכן השני?",
    "a": "הנחש",
    "h": "797b4029",
-   "q": "A mouse eats wheat, and a snake eats it. Who is the second consumer?",
+   "q": "A mouse eats wheat, and a snake eats the mouse. Who is the second consumer?",
    "o": [
     "The snake",
     "The mouse",
@@ -3746,7 +3749,7 @@
    "h": "f33d215b",
    "q": "Where in Israel is there a coral reef?",
    "o": [
-    "Gulf of Eilat",
+    "The Gulf of Eilat",
     "The Dead Sea",
     "The Sea of Galilee",
     "The Jordan River"
@@ -3913,7 +3916,7 @@
    "he": "מפעל שופך שפכים לנחל. מה יקרה לדגים?",
    "a": "ייפגעו",
    "h": "452241e0",
-   "q": "A factory dumps sewage into a stream. What will happen to the fish?",
+   "q": "A factory dumps wastewater into a stream. What will happen to the fish?",
    "o": [
     "They will be harmed",
     "There will be more",
@@ -4267,7 +4270,7 @@
    "he": "רמזור מתחלף רק לפי שעון. יש לו משוב?",
    "a": "לא, אין משוב",
    "h": "d43b0e92",
-   "q": "A traffic light changes only by a clock. Does it have feedback?",
+   "q": "A traffic light changes only on a timer. Does it have feedback?",
    "o": [
     "No, it doesn't",
     "Yes, always",
@@ -4345,7 +4348,7 @@
    "he": "תנור מכוון ל-180 מעלות. מה שומר על החום?",
    "a": "חיישן טמפרטורה",
    "h": "599e6769",
-   "q": "An oven is set to 180 degrees. What keeps it at that heat?",
+   "q": "An oven is set to 180°C. What keeps it at that heat?",
    "o": [
     "A temperature sensor",
     "The door",
@@ -4384,7 +4387,7 @@
    "he": "איזה מקור אנרגיה אינו מתחדש?",
    "a": "גז טבעי",
    "h": "205161ae",
-   "q": "Which energy source is not renewable?",
+   "q": "Which energy source is NOT renewable?",
    "o": [
     "Natural gas",
     "The sun",
@@ -4488,7 +4491,7 @@
    "he": "חומר שאינו מעביר חשמל נקרא…",
    "a": "מבודד",
    "h": "d4d87369",
-   "q": "A material that does not let electricity through is called…",
+   "q": "A material that does NOT let electricity through is called…",
    "o": [
     "An insulator",
     "A conductor",
@@ -4506,7 +4509,7 @@
     "To insulate your hand",
     "For decoration",
     "To make it heavy",
-    "To conduct to hands"
+    "To conduct current"
    ],
    "x": "Only the pins are metal"
   },

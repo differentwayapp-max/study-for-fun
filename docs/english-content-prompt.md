@@ -152,7 +152,7 @@ Dates: words ("March 1"), never 1/3 (ambiguous). Time on cards: "7:30". Number w
 #### 4.4 Geometry labels
 Hebrew letters as point / shape labels become Latin capitals in alphabet order: א→A, ב→B, ג→C, ד→D, ה→E, ו→F, ז→G,
 ח→H (משולש אבג → triangle ABC, צלע אב → side AB, זווית ∢ב → angle B, "מסמר ג'" → "nail C"). Same mapping in the
-question, the options, the explanation and every picture card of that question. A card "? ← ג + ד" → "C + D → ?".
+question, the options, the explanation and every picture card of that question. A card "? ← ג + ד" (read right to left: ? gives C + D) → "? → C + D" – keep the meaning of the arrow, not its look.
 
 #### 4.5 Glossary (one term each – extend it in this file as you go)
 **Math – numbers and operations:** מנייה counting · מספרים סודרים ordinal numbers · זוגי / אי-זוגי even / odd · ישר

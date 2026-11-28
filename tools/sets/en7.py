@@ -251,7 +251,7 @@ C.append(("Superlatives: the biggest", [CS], [
  Q(CS, "Superlative of funny?", ["funniest", "funnyest", "most funny", "funnier"], 0, "y אחרי עיצור ← iest", PW("😂", "funny → ?")),
  Q(CS, "Which is correct?", ["the most difficult", "the difficultest", "the more difficult", "most difficultest"], 0, "מילה ארוכה ← the most", ROW("🧩", "🤯")),
  Q(CS, "The Dead Sea is the ___ (low) place on Earth.", ["lowest", "lower", "most low", "low"], 0, "the lowest = הכי נמוך", ROW("🌊", "⬇️")),
- Q2(CS, "Jupiter is huge. In size, it is the ___ planet.", ["biggest", "bigger", "most big", "big"], 0, "of all ← הכי: the biggest", ROW("🔭", "🌌")),
+ Q2(CS, "Jupiter is huge. In size, it is the ___ planet.", ["biggest", "bigger", "most big", "big"], 0, "the + est = הכי גדול: the biggest", ROW("🔭", "🌌")),
  Q2(CS, "Who is the shortest of the three boys?", ["Dan", "Ron", "Tom", "they're equal"], 0, "1.50 הכי קטן ← Dan", TXT("Dan 1.50 m", "Ron 1.60 m", "Tom 1.70 m")),
  Q2(CS, "Which is correct? It was the ___ day of my life!", ["best", "goodest", "most good", "better"], 0, "good – better – best", ROW("🎉", "😊")),
 ]))
@@ -391,7 +391,7 @@ C.append(("much · many · a lot of", [QT], [
  Q(QT, "There are ___ of people here.", ["a lot", "much", "many", "a little"], 0, "a lot of people = הרבה אנשים", ROW("👫", "👫", "👫")),
  Q(QT, "How many ___ are in your class?", ["students", "water", "money", "homework"], 0, "many + נספר ברבים", ROW("🏫", "📋")),
  Q2(QT, "How ___ does this T-shirt cost?", ["much", "many", "long", "often"], 0, "מחיר ← How much", ROW("👕", "💵")),
- Q2(QT, "'I have three brothers.' – How ___ brothers do you have?", ["many", "much", "old", "long"], 0, "brothers נספרים ← How many", ROW("👦", "👦", "👦")),
+ Q2(QT, "'We have four lessons today.' – How ___ lessons do you have?", ["many", "much", "old", "long"], 0, "lessons נספרים ← How many", ROW("🏫", "📚")),
  Q2(QT, "There ___ many cars on the road yesterday.", ["were", "was", "are", "did"], 0, "cars ברבים, yesterday ← there were", ROW("🚗", "🚙", "🛣️")),
  Q2(QT, "There ___ a lot of snow last winter.", ["was", "were", "did", "is"], 0, "snow לא נספר, עבר ← there was", ROW("⛄", "❄️")),
 ]))
@@ -426,7 +426,7 @@ C.append(("and · but · because · so", [CN], [
  Q(CN, "because = ?", ["כי", "לכן", "אבל", "או"], 0, "because = כי (סיבה)", TXT("because")),
  Q(CN, "Which English word shows a result?", ["so", "because", "but", "and"], 0, "so = לכן ← תוצאה", TXT("result")),
  Q2(CN, "___ the bus was late, we missed the film.", ["Because", "Although", "However", "So"], 0, "סיבה בתחילת המשפט ← Because", ROW("🚌", "🎬")),
- Q2(CN, "Which of these fits? ___, we packed. Then we flew.", ["First", "Then", "Finally", "However"], 0, "סדר בפסקה: First, Then, Finally", ROW("🧳", "🚗", "✈️")),
+ Q2(CN, "Which of these fits? ___, we packed. Then we flew.", ["First", "Then", "Finally", "However"], 0, "סדר בפסקה: First, Then, Finally", ROW("🧳", "✈️")),
  Q2(CN, "Which of these fits? Wash it. ___, cut it. Finally, eat it.", ["Then", "Finally", "First", "Before"], 0, "באמצע הרשימה ← Then", ROW("🍎", "🔪")),
  Q2(CN, "Which of these fits? We ate, then sang. ___, we left.", ["Finally", "First", "Because", "Although"], 0, "הצעד האחרון ← Finally", ROW("🍽️", "🎤", "🚪")),
  Q2(CN, "Which of these fits? We ate dinner. ___, we watched a film.", ["After that", "Because", "Although", "First"], 0, "אחרי ארוחת הערב ← After that", ROW("🍽️", "🎬")),
@@ -624,7 +624,7 @@ C.append(("📖 Unseen: The Young Inventor", [UN], [
  Q(UN, "What can we learn from Tamar?", ["don't give up", "build big watches", "work alone", "avoid science"], 0, "נכשלה פעמיים והמשיכה עד שהצליחה", ROW("👧", "💭")),
  Q2(UN, "'It also shows where the person is.' 'It' is:", ["the watch", "the phone", "the message", "the family"], 0, "השעון שולח הודעה ומראה איפה האדם", OPTS("⌚", "📱", "✉️", "👪")),
  Q2(UN, "'She was alone at home' – 'She' is:", ["the grandmother", "Tamar", "a neighbor", "the engineer"], 0, "הסבתא נפלה כשהייתה לבד", ROW("🏠", "👵")),
- Q2(UN, "What happened LAST in the story?", ["won first prize", "asked an engineer", "read articles", "built a watch"], 0, "Last year… won first prize – אחרי הכול", ROW("📖", "🕐")),
+ Q2(UN, "Which of these happened LAST?", ["won first prize", "asked an engineer", "read articles", "built a watch"], 0, "Last year… won first prize – אחרי הכול", ROW("📖", "🕐")),
  Q2(UN, "Which watch worked?", ["the third one", "the first one", "the second one", "none of them"], 0, "Finally, the third watch worked", ROW("⌚", "⌚", "⌚")),
  Q2(UN, "How do we know building it wasn't easy?", ["two watches failed", "she read articles", "she was eleven", "Grandma wore it"], 0, "הראשון גדול מדי, השני לא שלח הודעות", ROW("🔧", "⌚")),
 ], P2))
@@ -658,7 +658,7 @@ C.append(("📖 Unseen: The Beach Clean-Up", [UN], [
  Q(UN, "Why did everyone cheer?", ["turtle got free", "lunch was ready", "the work ended", "Yael found shells"], 0, "הצב השתחרר וחזר לים", ROW("👫", "🙌")),
  Q2(UN, "'its leg was stuck' – 'its' means:", ["the turtle's", "the net's", "the sea's", "Yael's"], 0, "A small turtle… its leg = הרגל של הצב", ROW("🐢", "🏖️")),
  Q2(UN, "'We took them to a recycling center.' 'them' is:", ["the rubbish bags", "the turtles", "the groups", "the fishing nets"], 0, "them = twenty big bags of rubbish", ROW("🚚", "♻️")),
- Q2(UN, "What did the class do LAST that day?", ["recycled the bags", "saved a turtle", "collected bottles", "counted bags"], 0, "בצהריים לקחו את השקיות למיחזור", ROW("🏖️", "🕐")),
+ Q2(UN, "What did the class do LAST that day?", ["visited recycling center", "saved a turtle", "collected bottles", "counted bags"], 0, "בצהריים לקחו את השקיות למיחזור", ROW("🏖️", "🕐")),
  Q2(UN, "How do we know plastic bags are dangerous for turtles?", ["turtles eat them", "turtles are small", "turtles like sand", "turtles walk slowly"], 0, "Turtles often eat plastic bags", ROW("🐢", "🛍️")),
  Q2(UN, "How do we know the writer's family changed?", ["no plastic bags", "more bottle caps", "a new beach", "a bigger car"], 0, "my family doesn't buy plastic bags anymore", ROW("👪", "🛒")),
 ], P3))

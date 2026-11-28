@@ -985,100 +985,6 @@
    "status": "ready"
   },
   {
-   "id": "sci7",
-   "ver": "9bba75abae",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
-   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
-   "tags": [
-    "מודל חלקיקי",
-    "שינוי כימי",
-    "תמיסות",
-    "אנרגיה",
-    "מקורות אנרגיה",
-    "מעבר חום",
-    "התא",
-    "מיקרוסקופ",
-    "מחזור הדם",
-    "הובלה בצמח",
-    "חום וטמפרטורה",
-    "מערכת הנשימה",
-    "פוטוסינתזה",
-    "נשימה תאית",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 381,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
-     "e": "⚫⚫"
-    },
-    {
-     "q": "למה לנוזל אין צורה קבועה?",
-     "e": "💧"
-    },
-    {
-     "q": "מחממים מים. מה קורה לחלקיקים?",
-     "e": "🔥💧"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci7-materials",
-   "ver": "742e26c87e",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
-   "desc": "חומרים: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
-   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
-   "tags": [
-    "חומר וגוף",
-    "נפח",
-    "חישוב נפח",
-    "משורה",
-    "מ״ל וליטר",
-    "מסה",
-    "מאזניים",
-    "גז",
-    "משקל",
-    "ניוטון",
-    "צפיפות",
-    "ציפה ושקיעה",
-    "מכשירי מדידה",
-    "המרות",
-    "מצבי צבירה",
-    "משתנים",
-    "תכנון ניסוי",
-    "גרפים וטבלאות"
-   ],
-   "questions": 305,
-   "chapters": 30,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
-     "e": "🌳💺"
-    },
-    {
-     "q": "הרכב, מקור ותכונות – כך מתארים…",
-     "e": "🔬"
-    },
-    {
-     "q": "מה מהבאים מגדיר נפח?",
-     "e": "📦"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math8",
    "ver": "f7d5246fe0",
    "subject": "מתמטיקה",
@@ -1212,86 +1118,6 @@
    "status": "ready"
   },
   {
-   "id": "en7",
-   "ver": "f12bd98728",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
-   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
-   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
-   "tags": [
-    "Past Simple",
-    "Past Progressive",
-    "will / going to",
-    "Comparatives",
-    "as … as",
-    "Adverbs",
-    "too / enough",
-    "Modals",
-    "Quantifiers",
-    "Connectors",
-    "Band II words",
-    "Unseen"
-   ],
-   "questions": 372,
-   "questions2": 124,
-   "chapters": 35,
-   "reading": 4,
-   "words": 58,
-   "samples": [
-    {
-     "q": "Yesterday I ___ my room.",
-     "e": "🧹🛏️"
-    },
-    {
-     "q": "Which day is in the past?",
-     "e": "📅⬅️"
-    },
-    {
-     "q": "Past of bring?",
-     "e": "🎒bring → ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en7-nov26",
-   "ver": "411d1b7916",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Start of grade 7 review · Present Simple · Words",
-   "desc": "חזרה לתחילת כיתה ז': Present Simple (has, does, don't, שאלות, always / never), כ-110 מילים (מזג אוויר, טבע ומקומות, פעולות, תיאור) וקטע קריאה",
-   "desc_en": "Start of grade 7 review: Present Simple (has, does, don't, questions, always / never), about 110 words (weather, nature and places, actions, describing words) and a reading passage",
-   "tags": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
-   ],
-   "questions": 178,
-   "questions2": 23,
-   "chapters": 13,
-   "reading": 1,
-   "words": 112,
-   "samples": [
-    {
-     "q": "She ___ to the pool every Monday.",
-     "e": "👧🏊‍♀️"
-    },
-    {
-     "q": "What is falling?",
-     "e": "🌧️"
-    },
-    {
-     "q": "She ___ like snow.",
-     "e": "👧❄️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math7-nov26",
    "ver": "2d04ca3f4b",
    "subject": "מתמטיקה",
@@ -1325,49 +1151,6 @@
     {
      "q": "⁦|-5| = ?⁩",
      "e": "|-5| = ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "heb7",
-   "ver": "40c7a5248a",
-   "subject": "עברית / לשון",
-   "grade": 6,
-   "title": "הבנת הנקרא · סיכום · טיעון · תחביר · פיסוק · שורשים ובניינים · משקלים · סמיכות · שם המספר · משלב",
-   "desc": "ארבעה קטעי קריאה (טיעון ומידע), סיכום וסיכום ממזג, כתיבת טיעון, חלקי המשפט, סוגי משפטים, מילות קישור, שורשים וגזרות, בניינים, משקלים, שם המספר, מילות יחס בנטייה, משלב לשון, פיסוק (מירכאות, ציטוט וקו מפריד) וסמיכות ונטיית השם",
-   "desc_en": "Four reading passages (argument and information), summary and merged summary, argument writing, parts of the sentence, sentence types, connectors, roots and verb groups, binyanim, noun patterns, number words, inflected prepositions, register, punctuation (quotation marks, quoting and the dash) and construct state with possessive endings",
-   "tags": [
-    "טקסט טיעוני",
-    "טקסט מידעי",
-    "סיכום ממזג",
-    "חלקי המשפט",
-    "מחובר ומורכב",
-    "מילות קישור",
-    "גזרות",
-    "בניינים",
-    "משקלים",
-    "שם המספר",
-    "פיסוק",
-    "סמיכות"
-   ],
-   "questions": 321,
-   "questions2": 145,
-   "chapters": 31,
-   "reading": 4,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה משאירים מגוף הטקסט בסיכום?",
-     "e": "📄➡️"
-    },
-    {
-     "q": "במה שונה סיכום ממזג מסיכום רגיל?",
-     "e": "📝סיכום ממזג"
-    },
-    {
-     "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
-     "e": "🗣️📄"
     }
    ],
    "status": "ready"
@@ -1459,6 +1242,225 @@
     {
      "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
      "e": "2x + 1x = 3"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en7-nov26",
+   "ver": "b1c2f64fca",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Start of grade 7 review · Present Simple · Words",
+   "desc": "חזרה לתחילת כיתה ז': Present Simple (has, does, don't, שאלות, always / never), כ-110 מילים (מזג אוויר, טבע ומקומות, פעולות, תיאור) וקטע קריאה",
+   "desc_en": "Start of grade 7 review: Present Simple (has, does, don't, questions, always / never), about 110 words (weather, nature and places, actions, describing words) and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "questions2": 22,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to the pool every Monday.",
+     "e": "👧🏊‍♀️"
+    },
+    {
+     "q": "What is falling?",
+     "e": "🌧️"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7",
+   "ver": "9000507359",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
+   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
+   "tags": [
+    "מודל חלקיקי",
+    "שינוי כימי",
+    "תמיסות",
+    "אנרגיה",
+    "מקורות אנרגיה",
+    "מעבר חום",
+    "התא",
+    "מיקרוסקופ",
+    "מחזור הדם",
+    "הובלה בצמח",
+    "חום וטמפרטורה",
+    "מערכת הנשימה",
+    "פוטוסינתזה",
+    "נשימה תאית",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 381,
+   "questions2": 47,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
+     "e": "⚫⚫"
+    },
+    {
+     "q": "למה לנוזל אין צורה קבועה?",
+     "e": "💧"
+    },
+    {
+     "q": "מחממים מים. מה קורה לחלקיקים?",
+     "e": "🔥💧"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci7-materials",
+   "ver": "e2ee5351df",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "חומר וגוף · נפח · מסה · משקל · צפיפות · מצבי צבירה · חקר",
+   "desc": "חומרים: חומר וגוף, נפח, מסה ומשקל, צפיפות, ציפה ושקיעה, מדידות והמרות, מצבי צבירה, משתנים, תכנון ניסוי וגרפים",
+   "desc_en": "Materials and bodies, volume, mass and weight, density, floating and sinking, measuring and unit conversions, states of matter, variables, planning an experiment, graphs and tables",
+   "tags": [
+    "חומר וגוף",
+    "נפח",
+    "חישוב נפח",
+    "משורה",
+    "מ״ל וליטר",
+    "מסה",
+    "מאזניים",
+    "גז",
+    "משקל",
+    "ניוטון",
+    "צפיפות",
+    "ציפה ושקיעה",
+    "מכשירי מדידה",
+    "המרות",
+    "מצבי צבירה",
+    "משתנים",
+    "תכנון ניסוי",
+    "גרפים וטבלאות"
+   ],
+   "questions": 305,
+   "questions2": 21,
+   "chapters": 30,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כיסא עשוי מעץ. מה כאן הגוף?",
+     "e": "🌳💺"
+    },
+    {
+     "q": "הרכב, מקור ותכונות – כך מתארים…",
+     "e": "🔬"
+    },
+    {
+     "q": "מה מהבאים מגדיר נפח?",
+     "e": "📦"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en7",
+   "ver": "90e9e16ff8",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
+   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
+   "tags": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ],
+   "questions": 372,
+   "questions2": 123,
+   "chapters": 35,
+   "reading": 4,
+   "words": 58,
+   "samples": [
+    {
+     "q": "Yesterday I ___ my room.",
+     "e": "🧹🛏️"
+    },
+    {
+     "q": "Which day is in the past?",
+     "e": "📅⬅️"
+    },
+    {
+     "q": "Past of bring?",
+     "e": "🎒bring → ?"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb7",
+   "ver": "9c7d32a82a",
+   "subject": "עברית / לשון",
+   "grade": 6,
+   "title": "הבנת הנקרא · סיכום · טיעון · תחביר · פיסוק · שורשים ובניינים · משקלים · סמיכות · שם המספר · משלב",
+   "desc": "ארבעה קטעי קריאה (טיעון ומידע), סיכום וסיכום ממזג, כתיבת טיעון, חלקי המשפט, סוגי משפטים, מילות קישור, שורשים וגזרות, בניינים, משקלים, שם המספר, מילות יחס בנטייה, משלב לשון, פיסוק (מירכאות, ציטוט וקו מפריד) וסמיכות ונטיית השם",
+   "desc_en": "Four reading passages (argument and information), summary and merged summary, argument writing, parts of the sentence, sentence types, connectors, roots and verb groups, binyanim, noun patterns, number words, inflected prepositions, register, punctuation (quotation marks, quoting and the dash) and construct state with possessive endings",
+   "tags": [
+    "טקסט טיעוני",
+    "טקסט מידעי",
+    "סיכום ממזג",
+    "חלקי המשפט",
+    "מחובר ומורכב",
+    "מילות קישור",
+    "גזרות",
+    "בניינים",
+    "משקלים",
+    "שם המספר",
+    "פיסוק",
+    "סמיכות"
+   ],
+   "questions": 321,
+   "questions2": 145,
+   "chapters": 31,
+   "reading": 4,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה משאירים מגוף הטקסט בסיכום?",
+     "e": "📄➡️"
+    },
+    {
+     "q": "במה שונה סיכום ממזג מסיכום רגיל?",
+     "e": "📝סיכום ממזג"
+    },
+    {
+     "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
+     "e": "🗣️📄"
     }
    ],
    "status": "ready"

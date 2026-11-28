@@ -8,8 +8,8 @@ const { chromium } = require('playwright'); const fs = require('fs');
 const APP = process.env.APP || 'http://localhost:8765/';
 const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim() : '';
 (async () => {
-  const b = await chromium.launch(); const errs = []; const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage();
-  p.on('pageerror', e => errs.push(e.message));
+  const b = await chromium.launch(); const errs = [], pageErrs = []; const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage();
+  p.on('pageerror', e => pageErrs.push(e.message));
   await p.addInitScript(() => localStorage.setItem('sff_lang', 'he'));
   await p.goto(APP, { waitUntil: 'load' }); await p.waitForTimeout(1800);
   await p.evaluate(() => { document.getElementById('fbLogin')?.remove(); document.getElementById('sffLoad')?.remove(); });
@@ -56,6 +56,27 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
     history.filter(h => h.setId === S.id).forEach(h => history.push({ ...h, kidId: 'k2', setId: R.id }));
     const P1 = roadPlan(S), P2 = roadPlan(R), E1 = examReady(S), E2 = examReady(R);
     out.map = { N: [P1.N, P2.N], done: [[...chaptersDone(S)].join(), [...chaptersDone(R)].join()], ready: [E1 && E1.pct, E2 && E2.pct], chq: getChapters(S).map(c => c.qs.length).join() === getChapters(R).map(c => c.qs.length).join() };
+    // ---- stage 3: "⭐ שלב מבחן" ----
+    const C2 = getChapters(S), st = [...Array(C2.length).keys()].filter(i => lvl2Of(S, i).length), i2 = st[st.length - 1];
+    const q2s = C2[i2].qs; history.unshift({ at: Date.now(), kidId: 'k1', setId: S.id, ch: i2, right: q2s.length, n: q2s.length, mode: 'choice',   // the station passed, all level A right
+      qr: q2s.map(q => S.questions.indexOf(q) + '.1'), qk: q2s.map(q => tkey(q.question)), topics: {} });
+    out.st = st.join(); const per0 = examReady(S).per[i2];
+    out.ready2 = { before: per0.pct, need2: per0.need2 };                        // all level A right, no level B answered → at most 70%
+    openRoad(S.id); out.badge = document.querySelectorAll('#rdMap .st2').length; out.legend = !!document.querySelector('#rdMap .rdlv2');
+    startLvl2(S.id, i2); out.game2 = { lvl: G.lvl, ch: G.ch, all2: G.qs.every(q => q.lvl === 2), n: G.qs.length, mode: G.mode };
+    const doneBefore = [...chaptersDone(S)].join();
+    G.res = G.qs.map(q => ({ q, ok: true })); endGame();
+    const h0 = history[0]; out.hist2 = { lvl: h0.lvl, ch: h0.ch, q2: (h0.q2 || []).length, qr: (h0.qr || []).length, doneSame: [...chaptersDone(S)].join() === doneBefore, passed: lvl2Passed(S).has(i2) };
+    out.ready2.after = examReady(S).per[i2].pct;
+    openRoad(S.id); out.badgeFull = [...document.querySelectorAll('#rdMap .st2 circle')].some(c => c.getAttribute('fill') === '#FFD166');
+    // "חזרה על הכול": level B only of passed stations; match / memory never mix the levels
+    const passedOrig = new Set([...chaptersDone(S)].map(i => stOrig(C2, i))); let rv2 = 0, rvBad = 0;
+    for (let k = 0; k < 40; k++) chapterQs(S, -1).forEach(q => { if (q.lvl === 2) { rv2++; if (!passedOrig.has(q.ch)) rvBad++; } });
+    out.review = { rv2, rvBad };
+    startGame(S, [...C2[i2].qs, ...lvl2Of(S, i2)], 'match'); out.mixMatch = G.qs.some(q => q.lvl === 2) && G.qs.some(q => q.lvl !== 2); quitGame();
+    // sharing keeps the test level
+    const pay = setPayload(S), back = await loadShare('SFF1:' + btoa(unescape(encodeURIComponent(JSON.stringify(pay)))));
+    out.share = { in: pay.questions.filter(q => q.lvl === 2).length, back: back.qs2.length, backQs: back.qs.length };
     out.bad = bad.slice(0, 8); out.nbad = bad.length; return out;
   }, MAIN);
   console.log(JSON.stringify(r, null, 1));
@@ -67,7 +88,14 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
   ok(r.games > 100 && !r.nbad, `every station × every game, "חזרה על הכול", review questions, focused practice: no test-level question (${r.games} games)${r.nbad ? ' – ' + r.bad.join(' | ') : ''}`);
   ok(r.focus > 0, 'focused practice was built (' + r.focus + ' questions)');
   ok(r.asg.qs2 === 58 && !r.asg.lvlInQs, 'a teacher\'s assignment copy keeps them apart');
-  ok(r.map.N[0] === r.map.N[1] && r.map.done[0] === r.map.done[1] && r.map.ready[0] === r.map.ready[1] && r.map.chq, `the map and the readiness meter as without them (${r.map.N[0]} stations, readiness ${r.map.ready[0]}%)`);
-  ok(!errs.some(e => !/^(loadShare|the |a |every|focused)/.test(e)), 'no page errors')
+  ok(r.map.N[0] === r.map.N[1] && r.map.done[0] === r.map.done[1] && r.map.chq, `the map ("עברתי", the plan, the stations) as without them (${r.map.N[0]} stations)`);
+  ok(r.ready2.need2 === 3 && r.ready2.before === 70 && r.map.ready[0] <= r.map.ready[1], `readiness: a station with test-level questions needs 3 of them – all level A right gives ${r.ready2.before}% (70 at most)`);
+  ok(r.badge >= 1 && r.legend, `the map: "⭐ שלב מבחן" on the passed stations that have it (${r.badge}) + the small legend`);
+  ok(r.game2.lvl === 2 && r.game2.all2 && r.game2.n > 0, `the test stage plays only that station's level B questions (${r.game2.n})`);
+  ok(r.hist2.lvl === 2 && r.hist2.q2 > 0 && !r.hist2.qr && r.hist2.doneSame && r.hist2.passed, 'kept with lvl 2 and its results (q2); "עברתי" unchanged; passed at 70%');
+  ok(r.ready2.after === 100 && r.badgeFull, `after it: the station's readiness ${r.ready2.after}%, a full star on the map`);
+  ok(!r.review.rvBad && !r.mixMatch, `"חזרה על הכול": level B only of passed stations (${r.review.rv2} seen in 40 rounds); match never mixes the levels`);
+  ok(r.share.in === 58 && r.share.back === 58 && r.share.backQs === r.load.qs, 'sharing / a link keeps the test level (58) apart');
+  ok(!pageErrs.length, 'no page errors ' + JSON.stringify(pageErrs.slice(0, 3)))
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })();

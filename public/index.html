@@ -883,6 +883,7 @@ body:not(.thapp) #sBody.withfocus{padding-bottom:78px}
 .rdst{flex:none;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;font-family:var(--display);font-weight:600;font-size:.8em;background:#fff}
 .rdst.ok{background:#E9E4FF;color:var(--ink)}.rdst.warn{background:#FFE9C2}
 .rdbar{position:relative}
+#rdMap .st2{cursor:pointer} .rdlv2{text-align:center;margin:6px 0 0;font-size:.8em}
 #rdHdr{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:14px}
 .rmtag.sm{display:none;margin-inline-start:auto;align-self:center;white-space:nowrap;font-size:.72em;padding:3px 8px}.rmword{white-space:nowrap}.rmtop{display:flex;justify-content:space-between;align-items:center;gap:6px 8px;flex-wrap:wrap}#rdHdr>*{min-width:0;max-width:100%}.rmtop>b{font-family:var(--display);font-size:1.1em;white-space:nowrap}
 .rmtag{background:#FFF2C9;color:#6B4700;border-radius:99px;padding:4px 10px;font-size:.8em;font-weight:700}
@@ -2254,7 +2255,8 @@ function cleanHist(h){
     qr:Array.isArray(h.qr)?h.qr.filter(x=>typeof x==='string'&&/^\d+\.[01](\.\d)?$/.test(x)).slice(0,200):[], topics,
     // each question's text key (and the picked option's when wrong) – finds the question again after the set changed or was deleted
     ...(Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length&&h.qk.every(x=>typeof x==='string'&&/^[0-9a-z]{1,8}(:[0-9a-z]{1,8})?$/.test(x))?{qk:h.qk.slice(0,200)}:{}),
-    ...(typeof h.src==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(h.src)?{src:h.src}:{})};
+    ...(typeof h.src==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(h.src)?{src:h.src}:{}),
+    ...(h.lvl===2?{lvl:2}:{}), ...(Array.isArray(h.q2)&&h.q2.every(x=>typeof x==='string'&&/^[0-9a-z]{1,8}\.[01]$/.test(x))?{q2:h.q2.slice(0,200)}:{})};
 }
 function track(gi){ // grade index 0..11
   if(gi<=2) return {name:'גוששים', young:true};
@@ -2952,11 +2954,11 @@ async function fixPictures(){
 function delQ(i){ curSet.questions.splice(i,1); markEdited(curSet); renderReview(curSet); }
 
 /* ---------- sharing ---------- */
-function setPayload(s){ return {v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}}; }
+function setPayload(s){ return {v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:[...s.questions,...(Array.isArray(s.qs2)?s.qs2:[])].map(({topic,question,options,answer,explanation,emoji,scene,ch,lvl})=>({topic,question,options,answer,explanation,emoji,scene,ch,...(lvl===2?{lvl:2}:{})})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}}; }
 const codeOf=payload=>'SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
 function openShare(){
   const s=curSet;
-  const payload={v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
+  const payload={v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:[...s.questions,...(Array.isArray(s.qs2)?s.qs2:[])].map(({topic,question,options,answer,explanation,emoji,scene,ch,lvl})=>({topic,question,options,answer,explanation,emoji,scene,ch,...(lvl===2?{lvl:2}:{})})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
   $('shareCode').value='SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   const code=s.src?String(s.src).replace(/_/g,'-'):'';
   $('shareLinkRow').classList.toggle('hidden',!code); if(code) $('shareLink').value=`${location.origin}/?add=${encodeURIComponent(code)}`;
@@ -3262,8 +3264,8 @@ function getChapters(s){
   return out;
 }
 const PASS=.7, passedRound=h=>h.n>0 && h.right/h.n>=PASS;
-function chaptersDone(s){ return new Set(history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
-function chapterBest(s){ const b={}; history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&h.ch!=null&&h.ch>=0&&h.n>0).forEach(h=>{ const p=h.right/h.n; if(b[h.ch]==null||p>b[h.ch]) b[h.ch]=p; }); return b; }
+function chaptersDone(s){ return new Set(history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&!h.retry&&h.lvl!==2&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
+function chapterBest(s){ const b={}; history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&h.lvl!==2&&h.ch!=null&&h.ch>=0&&h.n>0).forEach(h=>{ const p=h.right/h.n; if(b[h.ch]==null||p>b[h.ch]) b[h.ch]=p; }); return b; }
 function roundsTotal(s){ return getChapters(s).length; }
 function roundsDone(s){ return chaptersDone(s).size; }
 // finished: the test date passed, every station is done, or the parent opened a focused (🎯) practice for it
@@ -3275,7 +3277,15 @@ function setDone(s){ if(!s||s.demo) return null;
 const DONE_LBL={exam:'🏁 המבחן עבר', done:'⭐ הושלם', focus:'🎯 עבר לתרגול ממוקד'};
 function setProgress(s){ return Math.min(1, roundsDone(s)/roundsTotal(s)); }
 function nextChapter(s){ const d=chaptersDone(s), n=roundsTotal(s); for(let i=0;i<n;i++) if(!d.has(i)) return i; return -1; } // -1 = review of everything
-function chapterQs(s,ch){ const C=getChapters(s); if(ch>=0&&C[ch]) return C[ch].qs; return shuffle(s.questions).slice(0,s.perRound||10); }
+function chapterQs(s,ch){ const C=getChapters(s); if(ch>=0&&C[ch]) return C[ch].qs; const dn=chaptersDone(s);
+  return shuffle([...s.questions, ...(s.qs2||[]).filter(q=>dn.has(q.ch))]).slice(0,s.perRound||10); }   // "חזרה על הכול": level B only of chapters passed
+// the test window's stage 3 – "⭐ שלב מבחן": a station's test-level questions (set.qs2, lvl 2) open once the station is passed;
+// a game of them is kept with lvl: 2 (never "עברתי", never the station's best), passed at the same PASS
+const stOrig=(C,i)=>{ const q=C[i]&&C[i].qs[0]; return q&&q.ch!=null?q.ch:i; };                 // a station's chapter number (q.ch)
+const lvl2Of=(s,i)=>{ const o=stOrig(getChapters(s),i); return (Array.isArray(s.qs2)?s.qs2:[]).filter(q=>q.ch===o); };   // a station's test-level questions
+function lvl2Passed(s){ return new Set(history.filter(h=>h.setId===s.id&&h.lvl===2&&h.mode!=='memory'&&h.ch!=null&&passedRound(h)).map(h=>h.ch)); }
+function startLvl2(setId, ch){ const set=getSet(setId), qs=set&&lvl2Of(set,ch); if(!qs||!qs.length) return;
+  startGame(set, qs, 'choice', ch); G.ch=ch; G.lvl=2; hud(); toast('⭐ שלב מבחן – שאלות ברמת מבחן'); }
 
 /* ---------- full-card carousel ---------- */
 const CAR_POS={};   // the card each carousel was on, kept while its screen is hidden
@@ -3650,13 +3660,17 @@ function roadPlan(set){
 function examReady(set, H=history){
   const C=getChapters(set); if(!C.length||set.demo) return null;
   const chOf={}; C.forEach((c,ci)=>c.qs.forEach(q=>{ chOf[tkey(q.question)]=ci; }));
-  const per=C.map(c=>({r:0,n:0,need:Math.min(MAST_N,c.qs.length)}));
+  // test-level questions (set.qs2): of a station's last MAST_N answers at least 3 are theirs – no 80% without the test level
+  const k2={}, n2=C.map(()=>0); C.forEach((c,ci)=>{ const o=stOrig(C,ci); (Array.isArray(set.qs2)?set.qs2:[]).forEach(q=>{ if(q.ch===o){ k2[tkey(q.question)]=ci; n2[ci]++; } }); });
+  const per=C.map((c,ci)=>{ const need2=Math.min(3,n2[ci]); return {r:0,n:0,need:Math.min(MAST_N-need2,c.qs.length),r2:0,n2:0,need2}; });
   H.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qk)&&Array.isArray(h.qr)).forEach(h=>h.qk.forEach((k,j)=>{   // newest game first
     const ci=chOf[String(k).split(':')[0]], x=per[ci]; if(!x||x.n>=x.need) return;
     x.n++; if(String(h.qr[j]||'').split('.')[1]==='1') x.r++; }));
-  per.forEach(x=>{ x.pct=Math.round(x.r/Math.max(1,x.need)*100); });
+  H.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.q2)).forEach(h=>h.q2.forEach(e=>{ const [k,ok]=String(e).split('.'), x=per[k2[k]];
+    if(!x||x.n2>=x.need2) return; x.n2++; if(ok==='1') x.r2++; }));
+  per.forEach(x=>{ x.pct=Math.round((x.r+x.r2)/Math.max(1,x.need+x.need2)*100); });
   const pct=Math.round(per.reduce((a,x)=>a+x.pct,0)/per.length);
-  const weak=per.map((x,i)=>({...x,i})).filter(x=>x.n>0&&x.pct<MAST_HI).sort((a,b)=>a.pct-b.pct).slice(0,3);
+  const weak=per.map((x,i)=>({...x,i})).filter(x=>(x.n+x.n2)>0&&x.pct<MAST_HI).sort((a,b)=>a.pct-b.pct).slice(0,3);
   return {pct, per, weak};
 }
 // the effort the test still needs: stations / questions / minutes a day, today's stations, and where the bar should be by today
@@ -3743,6 +3757,7 @@ function renderRoad(){
   $('rdHdr').innerHTML=`${set.demo?'<div><span class="demotag">🎲 דוגמה</span>'+demoWhy()+'</div>':''}<div class="rmrow">${sum}${go1}</div>`;
   // the full map: every station on one board, row after row like a board game
   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
+  const lv2=new Set([...Array(P.N).keys()].filter(i=>lvl2Of(set,i).length)), p2=lvl2Passed(set);   // stations with a "⭐ שלב מבחן", and those passed
   const goalDone=todays.every(i=>P.dn.has(i)), tried=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)&&best[i]!=null);
   const items=[...Array(P.N).keys()].map(i=>({i,c:P.C[i]})); items.push({rev:true}); if(P.flagDay!=null) items.push({flag:true});
   const COLS=3, W=390, RH=150, rtl=(window.SFF_LANG?SFF_LANG():'he')==='he', X=[74,195,316];
@@ -3768,12 +3783,13 @@ function renderRoad(){
       <text x="${x}" y="${y+11}" font-size="${now?32:28}" text-anchor="middle">${esc(emo)}</text>
       <circle cx="${x+r-5}" cy="${y-r+5}" r="13" fill="#fff" stroke="#1B2A4A" stroke-width="2"/><text x="${x+r-5}" y="${y-r+10}" font-size="13" text-anchor="middle">${T.i}</text>
       ${again?`<rect x="${x-r-6}" y="${y+r-18}" width="46" height="22" rx="11" fill="#6B5BD6" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+17}" y="${y+r-2}" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">↺${Math.round(best[it.i]*100)}%</text>`:''}
+      ${!isRev&&done&&lv2.has(it.i)?`<g class="st2" role="button" aria-label="${esc(sffTx('שלב מבחן'))}" onclick="event.stopPropagation();startLvl2('${set.id}',${it.i})"><circle cx="${x-r+2}" cy="${y+r-6}" r="16" fill="${p2.has(it.i)?'#FFD166':'#fff'}" stroke="#1B2A4A" stroke-width="2.5" ${p2.has(it.i)?'':'stroke-dasharray="5 3"'}/><text x="${x-r+2}" y="${y+r}" font-size="16" text-anchor="middle" ${p2.has(it.i)?'':'opacity=".6"'}>⭐</text></g>`:''}
       ${!isRev&&it.i===goalAfter?`<circle cx="${x-r+4}" cy="${y-r+6}" r="14" fill="${goalDone?'#FFD166':'#FFFBEF'}" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+4}" y="${y-r+12}" font-size="15" text-anchor="middle">🏆</text>`:''}</g>
       <text x="${x}" y="${y+r+18}" font-size="11" text-anchor="middle" fill="#3c4a6b"${!isRev&&chPages(it.c)?' direction="rtl" style="direction:rtl;unicode-bidi:embed"':''}>${isRev?esc(T.l):(it.i+1)+' · '+(chPages(it.c)?esc(chPages(it.c).replace(/(\d[\d–-]*)/,'\u2066$1\u2069')):esc(T.l))}</text>
       <text x="${x}" y="${y+r+33}" font-size="12" text-anchor="middle" font-weight="600" fill="#1B2A4A">${esc((s=>s.length>12?s.slice(0,11)+'…':s)(isRev?(window.sffT?sffT('חזרה על הכול'):'חזרה על הכול'):chName(it.c)))}</text>`;
     if(now) svg+=`<foreignObject x="${x-20}" y="${y-r-44}" width="40" height="40"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,38):'🧒'}</div></foreignObject>`;
   });
-  $('rdMap').innerHTML=svg+'</svg>';
+  $('rdMap').innerHTML=svg+'</svg>'+(lv2.size?`<p class="hint rdlv2">⭐ שלב מבחן – שאלות ברמת מבחן בתחנה שעברת</p>`:'');
 }
 
 /* ---------- the app picks the game for each station, and keeps them varied ---------- */
@@ -3969,7 +3985,7 @@ function startGame(set, onlyQs, mode, ch, topic){
   if(ch==null && !onlyQs) ch=nextChapter(set);
   const base = onlyQs || chapterQs(set,ch);
   let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q],chapters:set.chapters},mode).length);
-  if(mode==='memory'||mode==='match') pool=noClash(pool,mode);
+  if(mode==='memory'||mode==='match'){ if(pool.some(q=>q.lvl===2)&&pool.some(q=>q.lvl!==2)) pool=pool.filter(q=>q.lvl!==2); pool=noClash(pool,mode); }   // never level A and B in one match / memory game
   if(pool.length<MIN[mode]){ mode='choice'; pool=base; }
   const per=set.perRound||10;
   const whole = !onlyQs && ch!=null;                                        // a station on the map → the whole chapter
@@ -4284,6 +4300,7 @@ function endGame(){
   const stars = pct>=.9?3:pct>=.6?2:pct>0?1:0;
   $('eStars').innerHTML=[0,1,2].map(i=>starSvg(i<stars)).join('');
   $('eTitle').textContent = pct===1?'מושלם!':pct>=.9?'כמעט מושלם!':pct>=.6?'עבודה טובה!':'התחלה טובה – ממשיכים!';
+  if(G.lvl===2) $('eTitle').textContent = pct>=PASS?'⭐ עברת את שלב המבחן!':'⭐ שלב המבחן – עוד קצת, ואפשר לנסות שוב';
   const modeName=MODES.find(m=>m.id===G.mode).name;
   $('eSub').innerHTML=`<span>✓ ${right}/${n}</span><span>⭐ ${G.score}</span>${G.best>1?`<span>🔥 ${G.best}</span>`:''}`;
   const by={}; G.res.forEach(r=>{by[r.q.topic]=by[r.q.topic]||[0,0]; by[r.q.topic][1]++; if(r.ok) by[r.q.topic][0]++;});
@@ -4304,7 +4321,7 @@ function endGame(){
   if(stars>=2||done===goal){ burst(); setTimeout(burst,400); }
 }
 // the bonus game uses the cards of the station just played (if they suit memory cards)
-function bonusQs(){ if(!G||!G.set||!gameOn(G.set,'memory')) return null; const pool=modePool({questions:G.res.filter(r=>!(G.rev&&G.rev.has(r.q))).map(r=>r.q),chapters:G.set.chapters},'memory'); return pool.length>=MIN.memory?pool:null; }
+function bonusQs(){ if(!G||!G.set||!gameOn(G.set,'memory')) return null; const pool=modePool({questions:G.res.filter(r=>!(G.rev&&G.rev.has(r.q))).map(r=>r.q).filter(q=>G.lvl===2?q.lvl===2:q.lvl!==2),chapters:G.set.chapters},'memory'); return pool.length>=MIN.memory?pool:null; }
 function startBonus(){ const qs=bonusQs(); if(qs) startGame(G.set, qs, 'memory', G.ch); }
 function retryMistakes(){ startGame(G.set, G.res.filter(r=>!r.ok).map(r=>r.q), 'choice'); G.retry=true; }
 function refreshCurrentQ(){
@@ -4486,7 +4503,8 @@ function recordSession(by, right, n){
     retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(s.src?{src:String(s.src)}:{}), ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
     qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
     qk:G.res.filter(r=>s.questions.indexOf(r.q)>=0).map(r=>tkey(r.q.question)+(!r.ok&&Number.isInteger(r.pick)?':'+tkey(r.q.options[r.pick]):'')),
-    topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
+    topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}])),
+    ...(G.lvl===2?{lvl:2}:{}), ...(G.res.some(r=>r.q.lvl===2)?{q2:G.res.filter(r=>r.q.lvl===2).map(r=>tkey(r.q.question)+'.'+(r.ok?1:0)).slice(0,200)}:{})});
   history=history.slice(0,500);
   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);
 }

@@ -217,7 +217,7 @@
    "he": "באיזה זוג שני החומרים הם יסודות?",
    "a": "ברזל וחמצן",
    "h": "919eac00",
-   "q": "In which pair are both substances elements?",
+   "q": "In which of these pairs are both substances elements?",
    "o": [
     "Iron and oxygen",
     "Water and salt",
@@ -328,7 +328,7 @@
     "About 10",
     "No compounds"
    ],
-   "x": "About 118 elements build millions of substances"
+   "x": "About 118 elements make up millions of substances"
   },
   {
    "he": "בתמונה: אטומים כחולים ואדומים מחוברים בזוגות. מהו החומר?",
@@ -911,7 +911,7 @@
    "he": "לפי מה מסודרים היסודות בטבלה המחזורית?",
    "a": "מספר אטומי",
    "h": "ad655e14",
-   "q": "How are the elements arranged in the periodic table?",
+   "q": "What are the elements in the periodic table arranged by?",
    "o": [
     "Atomic number",
     "Element name",
@@ -1109,7 +1109,7 @@
    "he": "כספית היא מתכת נוזלית. למה הפסיקו להשתמש בה במדחומים?",
    "a": "היא רעילה",
    "h": "2066768c",
-   "q": "Mercury is a liquid metal. Why did thermometers stop using it?",
+   "q": "Mercury is a liquid metal. Why did people stop using it in thermometers?",
    "o": [
     "It is poisonous",
     "It doesn't expand",
@@ -2249,7 +2249,7 @@
    "h": "a582ba46",
    "q": "Why is it worth saving electricity?",
    "o": [
-    "Less air pollution",
+    "To reduce air pollution",
     "To raise the voltage",
     "To heat the bulbs",
     "There's no reason"
@@ -2345,7 +2345,7 @@
     "Without wires",
     "It isn't connected"
    ],
-   "x": "In series – when the fuse breaks, the whole circuit opens"
+   "x": "In series – when the fuse blows, the whole circuit opens"
   },
   {
    "he": "מזגן, תנור וקומקום מחוברים לאותו מפצל. איך נקרא המצב?",
@@ -2447,9 +2447,9 @@
     "Cuts off leaking current",
     "Raises the voltage",
     "Measures power use",
-    "Heats the water heater"
+    "Heats the water"
    ],
-   "x": "Leaking current, e.g. through a person, cuts the power at once"
+   "x": "If current leaks, e.g. through a person, it cuts the power at once"
   },
   {
    "he": "מה תפקיד חוט ההארקה?",
@@ -2462,7 +2462,7 @@
     "Turns the device on",
     "Cools the wires"
    ],
-   "x": "If the metal body gets live, current escapes into the earth, not us"
+   "x": "If the metal casing becomes live, current flows to earth, not through us"
   },
   {
    "he": "לאיזה מכשיר חשוב במיוחד חיבור הארקה?",
@@ -2702,7 +2702,7 @@
    "he": "איך מקטינים חיכוך במכונה?",
    "a": "שמן סיכה",
    "h": "7220c7e5",
-   "q": "How do you reduce friction in a machine?",
+   "q": "What do you use to reduce friction in a machine?",
    "o": [
     "Lubricating oil",
     "Sand",
@@ -3199,11 +3199,13 @@
    "x": "The same distance in the shortest time",
    "sc": {
     "0": "Runner",
-    "1": "A",
+    "1": "C",
     "2": "B",
-    "3": "C",
+    "3": "A",
     "4": "m",
-    "8": "s"
+    "8": "s",
+    "9": "20",
+    "11": "12"
    }
   },
   {
@@ -3236,10 +3238,10 @@
    "he": "שתי מכוניות נסעו שעה: א 80 ק״מ, ב 60 ק״מ. מי מהירה?",
    "a": "מכונית א",
    "h": "7847ce04",
-   "q": "Two cars drove for one hour: A 80 km, B 60 km. Which is faster?",
+   "q": "In one hour, one car went 80 km and another went 60 km. Which was faster?",
    "o": [
-    "Car A",
-    "Car B",
+    "The 80 km car",
+    "The 60 km car",
     "Both the same",
     "We can't tell"
    ],
@@ -3462,7 +3464,7 @@
    "q": "Offspring from asexual reproduction are…",
    "o": [
     "Identical to the parent",
-    "Very different from it",
+    "Very unlike the parent",
     "Different from each other",
     "Similar to two parents"
    ],
@@ -3901,7 +3903,7 @@
    "he": "מה קורה לקול של בנים בגיל ההתבגרות?",
    "a": "הקול מעמיק",
    "h": "cb75ff3e",
-   "q": "What happens to boys' voices during puberty?",
+   "q": "What happens to a boy's voice during puberty?",
    "o": [
     "It gets deeper",
     "It gets higher",
@@ -4734,7 +4736,7 @@
    "he": "איזו תוצאה של ההתחממות מוזכרת בקטע?",
    "a": "קרחונים נמסים",
    "h": "ebc4c516",
-   "q": "Which result of the warming is mentioned in the passage?",
+   "q": "Which of these results of the warming does the passage mention?",
    "o": [
     "Glaciers are melting",
     "More snow in summer",
@@ -4773,7 +4775,7 @@
    "he": "איזו דרך פעולה מוזכרת בקטע?",
    "a": "נסיעה באופניים",
    "h": "1cd5fd18",
-   "q": "Which course of action does the passage mention?",
+   "q": "Which of these actions does the passage mention?",
    "o": [
     "Riding a bicycle",
     "Using more air conditioners",
@@ -5109,12 +5111,12 @@
    "he": "מלח בישול בנוי מנתרן ומכלור. מלח הוא…",
    "a": "תרכובת",
    "h": "db40e0d5",
-   "q": "Table salt is made of sodium and chlorine. Salt is a…",
+   "q": "Table salt is made of sodium and chlorine. Salt is…",
    "o": [
-    "Compound",
-    "Element",
-    "Mixture",
-    "Metal"
+    "A compound",
+    "An element",
+    "A mixture",
+    "A metal"
    ],
    "x": "Two kinds of atoms bonded together."
   },

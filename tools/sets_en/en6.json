@@ -170,7 +170,7 @@
    "he": "Which time words go with \"is playing\"?",
    "a": "at the moment",
    "h": "6a28f590",
-   "q": "Which time words go with \"is playing\"?",
+   "q": "Which time phrase goes with \"is playing\"?",
    "o": [
     "at the moment",
     "every day",
@@ -3157,7 +3157,7 @@
     "eggs",
     "bread"
    ],
-   "x": "Cheese and butter are made from milk"
+   "x": "milk = חלב: cheese and butter come from milk"
   },
   {
    "he": "Chickens give us ___.",
@@ -3456,7 +3456,7 @@
     "cool",
     "freezing"
    ],
-   "x": "40 degrees = very hot = hot"
+   "x": "40 degrees = חם מאוד = hot"
   },
   {
    "he": "קפוא = ?",
@@ -3794,7 +3794,7 @@
     "ההוא (רחוק)",
     "ההם (רחוקים)"
    ],
-   "x": "these = אלה, כמה דברים קרובים"
+   "x": "these = אלה, several things that are near"
   },
   {
    "he": "Look at ___ bird up in the sky!",
@@ -3885,7 +3885,7 @@
     "here",
     "that's"
    ],
-   "x": "Plural: these is near, those is far"
+   "x": "Plural: these = near, those = far"
   },
   {
    "he": "Which is correct?",
@@ -4262,7 +4262,7 @@
     "tall",
     "young"
    ],
-   "x": "bald = קירח, בלי שיער"
+   "x": "bald = קירח, no hair"
   },
   {
    "he": "Opposite of tall?",
@@ -4665,7 +4665,7 @@
     "am",
     "be"
    ],
-   "x": "jeans is always plural → are"
+   "x": "jeans = always plural → are"
   },
   {
    "he": "A ___ keeps my trousers up.",
@@ -5146,7 +5146,7 @@
     "I like music",
     "I music like."
    ],
-   "x": "I is always a capital letter, and a period at the end"
+   "x": "I is always a capital, and a period goes at the end"
   },
   {
    "he": "Which word needs a capital letter? \"We visited london.\"",
@@ -5237,13 +5237,13 @@
     "C, A, B",
     "A, C, B"
    ],
-   "x": "Start with hello, end with Bye"
+   "x": "Start with Hi, end with Bye"
   },
   {
    "he": "Which is a full sentence about dogs?",
    "a": "Dogs can swim.",
    "h": "80ce1785",
-   "q": "Which is a full sentence about dogs?",
+   "q": "Which of these is a full sentence about dogs?",
    "o": [
     "Dogs can swim.",
     "Can swim dogs.",

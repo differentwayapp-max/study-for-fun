@@ -1052,77 +1052,6 @@
    ]
   },
   {
-   "id": "sci8",
-   "ver": "cf7a9f4b47",
-   "subject": "מדעים",
-   "grade": 7,
-   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
-   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
-   "tags": [
-    "יסודות ותרכובות",
-    "האטום",
-    "נוסחאות כימיות",
-    "טבלה מחזורית",
-    "תגובה כימית",
-    "מעגלים חשמליים",
-    "בטיחות בחשמל",
-    "כוחות",
-    "חוקי ניוטון",
-    "מהירות",
-    "רבייה",
-    "מארג מזון",
-    "יחסי גומלין",
-    "התאמות לסביבה",
-    "שינוי האקלים",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 390,
-   "chapters": 37,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "יסוד הוא חומר הבנוי מ…",
-     "e": "🔵🔵",
-     "q_en": "An element is a substance made of…"
-    },
-    {
-     "q": "באיזה זוג שני החומרים הם יסודות?",
-     "e": "💧🔩",
-     "q_en": "In which pair are both substances elements?"
-    },
-    {
-     "q": "איפה נמצאים הפרוטונים?",
-     "e": "⚛️",
-     "q_en": "Where are the protons?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 8",
-   "title_en": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
-   "tags_en": [
-    "Elements and compounds",
-    "The atom",
-    "Chemical formulas",
-    "The periodic table",
-    "Chemical reactions",
-    "Electric circuits",
-    "Electrical safety",
-    "Forces",
-    "Newton's laws",
-    "Speed",
-    "Reproduction",
-    "Food webs",
-    "Interactions",
-    "Adaptations",
-    "Climate change",
-    "Engineering design",
-    "Technological systems"
-   ]
-  },
-  {
    "id": "en3",
    "ver": "378eee29ff",
    "subject": "אנגלית",
@@ -1318,75 +1247,6 @@
     "Past: went / ate",
     "Telling the time",
     "Band I words",
-    "Reading"
-   ]
-  },
-  {
-   "id": "en6",
-   "ver": "e9504738ec",
-   "subject": "אנגלית",
-   "grade": 5,
-   "title": "Grammar · Past Simple · Time · Band I words · Reading",
-   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
-   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
-   "tags": [
-    "Present Simple / Progressive",
-    "can · there is",
-    "have got",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Questions",
-    "Past Simple",
-    "this / these",
-    "Commands",
-    "Describing people",
-    "Clothes",
-    "Telling the time",
-    "Band I words",
-    "Writing",
-    "Reading"
-   ],
-   "questions": 460,
-   "chapters": 44,
-   "reading": 4,
-   "words": 107,
-   "samples": [
-    {
-     "q": "Look! The baby ___.",
-     "e": "👶😴",
-     "q_en": "Look! The baby ___."
-    },
-    {
-     "q": "___ your sister playing the piano now?",
-     "e": "👧🎹",
-     "q_en": "___ your sister playing the piano now?"
-    },
-    {
-     "q": "Fish ___ swim, but they can't walk.",
-     "e": "🐟",
-     "q_en": "Fish ___ swim, but they can't walk."
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Grade 6",
-   "title_en": "Grammar · Past Simple · Time · Band I words · Reading",
-   "tags_en": [
-    "Present Simple / Progressive",
-    "can · there is",
-    "have got",
-    "Plurals",
-    "Pronouns",
-    "Prepositions",
-    "Questions",
-    "Past Simple",
-    "this / these",
-    "Commands",
-    "Describing people",
-    "Clothes",
-    "Telling the time",
-    "Band I words",
-    "Writing",
     "Reading"
    ]
   },
@@ -2100,6 +1960,146 @@
     "שם המספר",
     "פיסוק",
     "פ״א ול״א"
+   ]
+  },
+  {
+   "id": "sci8",
+   "ver": "6d9486aaee",
+   "subject": "מדעים",
+   "grade": 7,
+   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
+   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
+   "tags": [
+    "יסודות ותרכובות",
+    "האטום",
+    "נוסחאות כימיות",
+    "טבלה מחזורית",
+    "תגובה כימית",
+    "מעגלים חשמליים",
+    "בטיחות בחשמל",
+    "כוחות",
+    "חוקי ניוטון",
+    "מהירות",
+    "רבייה",
+    "מארג מזון",
+    "יחסי גומלין",
+    "התאמות לסביבה",
+    "שינוי האקלים",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 390,
+   "chapters": 37,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "יסוד הוא חומר הבנוי מ…",
+     "e": "🔵🔵",
+     "q_en": "An element is a substance made of…"
+    },
+    {
+     "q": "באיזה זוג שני החומרים הם יסודות?",
+     "e": "💧🔩",
+     "q_en": "In which of these pairs are both substances elements?"
+    },
+    {
+     "q": "איפה נמצאים הפרוטונים?",
+     "e": "⚛️",
+     "q_en": "Where are the protons?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 8",
+   "title_en": "Structure of matter · Electricity and safety · Forces and motion · Reproduction · Ecology and climate · Technology",
+   "tags_en": [
+    "Elements and compounds",
+    "The atom",
+    "Chemical formulas",
+    "The periodic table",
+    "Chemical reactions",
+    "Electric circuits",
+    "Electrical safety",
+    "Forces",
+    "Newton's laws",
+    "Speed",
+    "Reproduction",
+    "Food webs",
+    "Interactions",
+    "Adaptations",
+    "Climate change",
+    "Engineering design",
+    "Technological systems"
+   ]
+  },
+  {
+   "id": "en6",
+   "ver": "2f40075c13",
+   "subject": "אנגלית",
+   "grade": 5,
+   "title": "Grammar · Past Simple · Time · Band I words · Reading",
+   "desc": "אנגלית לכיתה ו' – חיזוק Band I: Present Simple מול Progressive, can, there is, have got, רבים, כינויי גוף ושייכות, מילות יחס, שאלות, Past Simple (was/were, ‎-ed, פעלים חריגים, didn't, Did?), this/that/these/those, ציווי, תיאור אנשים, בגדים, אמירת השעה, אוצר מילים, כתיבה וארבעה קטעי קריאה",
+   "desc_en": "Grade 6 English, consolidating Band I: Present Simple vs Progressive, can, there is, have got, plurals, pronouns, prepositions, questions, the Past Simple (was/were, -ed, irregular verbs, didn't, Did?), this/that/these/those, commands, describing people, clothes, telling the time, Band I words, writing and four reading passages",
+   "tags": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
+   ],
+   "questions": 460,
+   "chapters": 44,
+   "reading": 4,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Look! The baby ___.",
+     "e": "👶😴",
+     "q_en": "Look! The baby ___."
+    },
+    {
+     "q": "___ your sister playing the piano now?",
+     "e": "👧🎹",
+     "q_en": "___ your sister playing the piano now?"
+    },
+    {
+     "q": "Fish ___ swim, but they can't walk.",
+     "e": "🐟",
+     "q_en": "Fish ___ swim, but they can't walk."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 6",
+   "title_en": "Grammar · Past Simple · Time · Band I words · Reading",
+   "tags_en": [
+    "Present Simple / Progressive",
+    "can · there is",
+    "have got",
+    "Plurals",
+    "Pronouns",
+    "Prepositions",
+    "Questions",
+    "Past Simple",
+    "this / these",
+    "Commands",
+    "Describing people",
+    "Clothes",
+    "Telling the time",
+    "Band I words",
+    "Writing",
+    "Reading"
    ]
   }
  ]

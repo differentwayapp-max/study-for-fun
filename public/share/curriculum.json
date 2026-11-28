@@ -231,5 +231,231 @@
     "סביל (Passive), used to, גזירת מילים (-ful, -less, -ness, un-)"
    ]
   }
+ },
+ "grades_en": {
+  "0": {
+   "מתמטיקה": [
+    "Numbers to 100: counting, reading and writing, even and odd, the number line",
+    "Addition and subtraction to 20; whole tens",
+    "Introduction to multiplication and division (to 20); equal and inequality signs",
+    "Getting to know one half",
+    "Geometry: polygons and quadrilaterals, translation (slide) and reflection",
+    "Measurement: length in cm, telling time to the hour"
+   ],
+   "עברית / לשון": [
+    "Early reading: letters, vowel marks (nikud), phonological awareness, decoding",
+    "Accurate, fluent reading of words and sentences",
+    "Writing letters, words and sentences",
+    "Listening and speaking; vocabulary; stories and poems"
+   ],
+   "מדעים": [
+    "Energy; measuring temperature and weather",
+    "The senses and taking in information from the surroundings",
+    "A healthy lifestyle",
+    "The seasons and repeating cycles in nature",
+    "The structure of plants and animals",
+    "What technology is: meeting people's needs"
+   ],
+   "אנגלית": [
+    "No required curriculum – spoken exposure only: songs, games and basic words"
+   ]
+  },
+  "1": {
+   "מתמטיקה": [
+    "Numbers to 1,000: place value, skip counting",
+    "Addition and subtraction to 100; simple equations",
+    "The meaning of multiplication and division; the times tables",
+    "Halves and quarters",
+    "Data handling",
+    "Geometry: 3D shapes (solids); reflection and translation (slide)",
+    "Measurement: cm and meters, area, weight, half and quarter hours"
+   ],
+   "עברית / לשון": [
+    "Reading fluency",
+    "Reading comprehension: stories, informational texts, instructions",
+    "Writing a short text; correct spelling",
+    "Basic punctuation; singular and plural, masculine and feminine"
+   ],
+   "מדעים": [
+    "Materials: properties, sorting, states of matter",
+    "Characteristics of living things and what they need to survive",
+    "Teeth and dental health",
+    "Diversity in nature and protecting it",
+    "Technology: how a product meets a need"
+   ],
+   "אנגלית": [
+    "No required curriculum – spoken exposure only: songs, games and basic words"
+   ]
+  },
+  "2": {
+   "מתמטיקה": [
+    "Numbers to 10,000: the decimal system",
+    "Addition and subtraction to 10,000",
+    "Multiplication and division within 100; 2-digit by 1-digit multiplication",
+    "Order of operations and parentheses; rounding and estimating",
+    "Unit fractions: half, third, quarter",
+    "Geometry: angles, perpendicular and parallel lines, triangles and quadrilaterals",
+    "Measurement: length, volume, weight and time"
+   ],
+   "עברית / לשון": [
+    "Reading comprehension: finding information, interpreting and drawing inferences",
+    "Genres: stories, informational texts, argument, instructions, poetry",
+    "Writing: a story, a description, a letter, a report",
+    "Grammar: roots, parts of speech, tenses and persons, punctuation",
+    "Vocabulary and using a dictionary"
+   ],
+   "מדעים": [
+    "Materials: properties and uses, mixtures, burning (combustion)",
+    "Electrical energy and safety",
+    "Plants: needs, structure and life processes",
+    "How people affect the environment"
+   ],
+   "אנגלית": [
+    "Listening and speaking; phonological awareness",
+    "The alphabet, letter sounds, early reading and writing",
+    "Vocabulary: family, colors, numbers, animals, food, school",
+    "Short sentences and simple instructions"
+   ]
+  },
+  "3": {
+   "מתמטיקה": [
+    "Large numbers; the four operations (including long multiplication and long division)",
+    "Divisibility rules",
+    "Fractions: part of a whole and part of a quantity, comparing, adding and subtracting",
+    "Geometry: squares and rectangles, diagonals, triangles, rectangular prisms (boxes), symmetry",
+    "Measurement: area and perimeter of a rectangle, volume of a box, time"
+   ],
+   "עברית / לשון": [
+    "Reading comprehension: finding information, interpreting and drawing inferences",
+    "Genres: stories, informational texts, argument, instructions, poetry",
+    "Writing: a story, a description, a letter, a report",
+    "Grammar: roots, parts of speech, tenses and persons, punctuation",
+    "Vocabulary and using a dictionary"
+   ],
+   "מדעים": [
+    "Volume and amount of material; states of matter",
+    "Water and air: properties and uses",
+    "The human body: skeleton, muscles, movement, skin",
+    "The hydrosphere and the atmosphere",
+    "Diversity in nature: animals",
+    "Technological systems: structure and how they work"
+   ],
+   "אנגלית": [
+    "Listening and speaking; phonological awareness",
+    "The alphabet, letter sounds, early reading and writing",
+    "Vocabulary: family, colors, numbers, animals, food, school",
+    "Short sentences and simple instructions"
+   ]
+  },
+  "4": {
+   "מתמטיקה": [
+    "Fractions: simplifying and expanding, mixed numbers",
+    "Decimals: comparing, adding and subtracting, rounding",
+    "A first look at percent",
+    "Prime and composite numbers",
+    "Geometry: quadrilaterals, heights, area of polygons",
+    "Data handling and the mean (average)"
+   ],
+   "עברית / לשון": [
+    "Longer texts; combining information from several sources; tables and charts",
+    "Writing: argument, summary, report",
+    "Grammar: roots and patterns, binyanim (verb patterns), prepositions, logical connectives",
+    "Literature: stories, poems, legends and classic Jewish sources"
+   ],
+   "מדעים": [
+    "Metals and how materials are used",
+    "The human body: nutrition and healthy eating, breathing",
+    "Soils and rocks",
+    "The solar system; day and night, month, year",
+    "Designing and building a product"
+   ],
+   "אנגלית": [
+    "Reading short texts; writing sentences and a paragraph",
+    "Grammar: am/is/are, have, Present Simple, Present Progressive, can, there is/are",
+    "Plurals, pronouns, prepositions and question words, an introduction to the Past Simple",
+    "Vocabulary: Band I"
+   ]
+  },
+  "5": {
+   "מתמטיקה": [
+    "Multiplying and dividing fractions and mixed numbers",
+    "Multiplying and dividing decimals",
+    "Percent",
+    "Ratio, dividing in a ratio, scale",
+    "Geometry: circles, volume, 3D shapes and nets",
+    "Data handling; using a calculator"
+   ],
+   "עברית / לשון": [
+    "Longer texts; combining information from several sources; tables and charts",
+    "Writing: argument, summary, report",
+    "Grammar: roots and patterns, binyanim (verb patterns), prepositions, logical connectives",
+    "Literature: stories, poems, legends and classic Jewish sources"
+   ],
+   "מדעים": [
+    "Energy: types and conversions; light and sound; electricity",
+    "Sense organs: the eye and the ear",
+    "Ecosystems and human impact",
+    "Technological systems"
+   ],
+   "אנגלית": [
+    "Reading short texts; writing sentences and a paragraph",
+    "Grammar: am/is/are, have, Present Simple, Present Progressive, can, there is/are",
+    "Plurals, pronouns, prepositions and question words, an introduction to the Past Simple",
+    "Vocabulary: Band I"
+   ]
+  },
+  "6": {
+   "מתמטיקה": [
+    "Algebra: expressions, combining like terms, equations, word problems",
+    "Introduction to functions: representations, increasing and decreasing",
+    "Powers and roots, positive and negative numbers, the coordinate plane",
+    "Geometry: area, angles, the angle sum of a triangle and of a polygon"
+   ],
+   "עברית / לשון": [
+    "Reading comprehension: argumentative and informational texts",
+    "Writing: summaries, summaries of several sources, argument",
+    "Syntax: parts of the sentence; simple, compound and complex sentences",
+    "Word formation: roots, gzarot (verb groups), binyanim (verb patterns), mishkalim (noun patterns)",
+    "Number words, prepositions, language registers"
+   ],
+   "מדעים": [
+    "Materials: properties, changes, the particle model",
+    "Energy: types and conversions",
+    "Characteristics of living things, the cell, the circulatory (transport) system"
+   ],
+   "אנגלית": [
+    "Reading longer texts; writing paragraphs",
+    "Grammar: Past Simple, Past Progressive, will / going to",
+    "Comparatives, modals, quantifiers, linking words",
+    "Vocabulary: Band II"
+   ]
+  },
+  "7": {
+   "מתמטיקה": [
+    "Linear functions and slope, inequalities, systems of equations",
+    "Ratio, proportion, percent, probability",
+    "Congruent triangles, similar triangles, the Pythagorean theorem"
+   ],
+   "עברית / לשון": [
+    "Reading comprehension: argumentative and informational texts",
+    "Writing: summaries, summaries of several sources, argument",
+    "Syntax: parts of the sentence; simple, compound and complex sentences",
+    "Word formation: roots, gzarot (verb groups), binyanim (verb patterns), mishkalim (noun patterns)",
+    "Number words, prepositions, language registers"
+   ],
+   "מדעים": [
+    "Elements, compounds and the structure of matter",
+    "Electrical energy; forces and motion",
+    "Reproduction and development",
+    "Ecosystems and climate change"
+   ],
+   "אנגלית": [
+    "Reading longer texts (Unseen); writing paragraphs",
+    "Grammar: Present Perfect (ever/never, already/yet, since/for) vs. Past Simple",
+    "First conditional (If… will); relative pronouns who / which / that",
+    "Linking words (although, however, therefore); vocabulary: Band II",
+    "The passive, used to, word formation (-ful, -less, -ness, un-)"
+   ]
+  }
  }
 }

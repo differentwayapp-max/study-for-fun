@@ -242,10 +242,10 @@ except Exception: catalog = {"sets": []}
 code_name = src.stem.replace("_", "-")
 samples, seen_ch = [], set()
 for q in qs:                                   # one sample from different chapters, pictures first
-    if q["ch"] in seen_ch or len(samples) >= 3 or ("text" in chapters[q["ch"]]): continue
+    if q.get("lvl") == 2 or q["ch"] in seen_ch or len(samples) >= 3 or ("text" in chapters[q["ch"]]): continue   # never a test-level sample
     seen_ch.add(q["ch"]); samples.append({"q": q["question"], "e": "".join(it["e"] for it in q["scene"][:2])})
 entry = {"id": code_name, "ver": ver, "subject": SET["subject"], "grade": SET["grade"], "title": SET.get("title", SET["name"]),
-         "desc": SET.get("desc", ""), "desc_en": SET.get("desc_en", ""), "tags": SET.get("tags", SET["topics"]), "questions": len(qs), "chapters": len(chapters),
+         "desc": SET.get("desc", ""), "desc_en": SET.get("desc_en", ""), "tags": SET.get("tags", SET["topics"]), "questions": sum(1 for q in qs if q.get("lvl") != 2), **({"questions2": sum(1 for q in qs if q.get("lvl") == 2)} if any(q.get("lvl") == 2 for q in qs) else {}), "chapters": len(chapters),
          "reading": sum(1 for c in chapters if c.get("text")), "words": len(word_list), "samples": samples, "status": "ready"}
 catalog["sets"] = [e for e in catalog["sets"] if e.get("id") != code_name] + [entry]
 cat_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=1), encoding="utf-8")

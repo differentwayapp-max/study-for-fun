@@ -34,14 +34,14 @@
   "חשמל בבטחה": "Using electricity safely",
   "חמשת החושים": "The five senses",
   "מה מרגישים?": "What do we sense?",
-  "אוכלים בריא": "Eating healthy",
+  "אוכלים בריא": "Healthy eating",
   "גוף נקי ופעיל": "A clean and active body",
   "ארבע העונות": "The four seasons",
   "עונות בישראל": "Seasons in Israel",
   "יום ולילה": "Day and night",
   "דברים שחוזרים": "Things that repeat",
   "חלקי הצמח": "Parts of a plant",
-  "צמח גדל": "A plant grows",
+  "צמח גדל": "How a plant grows",
   "גוף בעלי החיים": "Animal bodies",
   "בית, אוכל וגורים": "Homes, food and babies",
   "חי או דומם?": "Living or non-living?",
@@ -253,7 +253,7 @@
    "he": "איזו חולצה לובשים ביום חם?",
    "a": "חולצה קצרה",
    "h": "b3a829aa",
-   "q": "What do we wear on a hot day?",
+   "q": "Which shirt do we wear on a hot day?",
    "o": [
     "A T-shirt",
     "A wool sweater",
@@ -292,7 +292,7 @@
    "he": "מה נועלים כשיש שלוליות?",
    "a": "מגפיים",
    "h": "be9157ec",
-   "q": "What do we wear when there are puddles?",
+   "q": "What do we wear on our feet when there are puddles?",
    "o": [
     "Boots",
     "Sandals",
@@ -305,7 +305,7 @@
    "he": "מה לובשים כשהולכים לשחות?",
    "a": "בגד ים",
    "h": "66b36648",
-   "q": "What do we wear to go swimming?",
+   "q": "What do we wear at the pool or the sea?",
    "o": [
     "A swimsuit",
     "A coat",
@@ -1062,7 +1062,7 @@
    "he": "מה מורחים לפני שיוצאים לשמש?",
    "a": "קרם הגנה",
    "h": "9ce5ad0d",
-   "q": "What do we put on our skin before going outside?",
+   "q": "What do we put on before going in the sun?",
    "o": [
     "Sunscreen",
     "Honey",
@@ -1387,7 +1387,7 @@
    "he": "איך קוראים ליום ולילה ביחד?",
    "a": "יממה",
    "h": "758ba233",
-   "q": "Morning, noon, evening and night together make…",
+   "q": "From one morning to the next morning is…",
    "o": [
     "One day",
     "One week",
@@ -1682,7 +1682,7 @@
    ],
    "x": "There are seeds inside the fruit",
    "sc": {
-    "0": "🍉"
+    "0": "Melon"
    }
   },
   {
@@ -1841,7 +1841,7 @@
    ],
    "x": "Dates grow on palm trees",
    "sc": {
-    "0": "Date"
+    "0": "Dates"
    }
   },
   {
@@ -1994,7 +1994,7 @@
    "q": "Which one is not a bird?",
    "o": [
     "Bat",
-    "Pigeon",
+    "Dove",
     "Hen",
     "Duck"
    ],
@@ -2095,12 +2095,12 @@
    "he": "מי יולדת גורים ולא מטילה ביצים?",
    "a": "חתולה",
    "h": "cfb76740",
-   "q": "Which animal has babies and does not lay eggs?",
+   "q": "Which animal gives birth and does not lay eggs?",
    "o": [
     "Cat",
     "Hen",
     "Duck",
-    "Pigeon"
+    "Dove"
    ],
    "x": "A mother cat gives birth to kittens and nurses them"
   },
@@ -2271,7 +2271,7 @@
     "Yes, it's hot",
     "Only by day"
    ],
-   "x": "The sun does not eat, grow or have young"
+   "x": "The sun does not eat, grow or have babies"
   },
   {
    "he": "לחתולה נולדו גורים. מה זה מראה?",
@@ -2284,7 +2284,7 @@
     "She is a plant",
     "She is a toy"
    ],
-   "x": "Living things have young"
+   "x": "Living things have babies"
   },
   {
    "he": "מה ההבדל בין דג לסירה?",
@@ -2316,7 +2316,7 @@
    "he": "מה משותף לעץ, לפרפר ולילד?",
    "a": "כולם חיים",
    "h": "cb008d83",
-   "q": "What do a tree, butterfly and child share?",
+   "q": "What do a tree, a butterfly and a child share?",
    "o": [
     "They are all alive",
     "They all fly",
@@ -2329,7 +2329,7 @@
    "he": "מה משותף ללבנה, לכדור ולספר?",
    "a": "כולם דוממים",
    "h": "4dc94b68",
-   "q": "What do a brick, ball and book share?",
+   "q": "What do a brick, a ball and a book share?",
    "o": [
     "They are all non-living",
     "They are all alive",
@@ -2342,7 +2342,7 @@
    "he": "איזה יצור חי לא הולך ממקום למקום?",
    "a": "עץ",
    "h": "58d5e660",
-   "q": "Which living thing does not move from place to place?",
+   "q": "Which of these living things stays in one place?",
    "o": [
     "Tree",
     "Dog",
@@ -2969,7 +2969,7 @@
    "he": "איך מזג האוויר בתמונה?",
    "a": "שמשי",
    "h": "5e329829",
-   "q": "What is the weather in the picture?",
+   "q": "What is the weather like in the picture?",
    "o": [
     "Sunny",
     "Rainy",

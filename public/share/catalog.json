@@ -1445,132 +1445,6 @@
    ]
   },
   {
-   "id": "sci1",
-   "ver": "116640b4fc",
-   "subject": "מדעים",
-   "grade": 0,
-   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
-   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
-   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
-   "tags": [
-    "מזג אוויר",
-    "אנרגיה",
-    "החושים",
-    "בריאות",
-    "עונות השנה",
-    "יום ולילה",
-    "צמחים",
-    "בעלי חיים",
-    "חי ודומם",
-    "תכונות חפצים",
-    "טכנולוגיה"
-   ],
-   "questions": 234,
-   "chapters": 23,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך מזג האוויר בתמונה?",
-     "e": "🌧️",
-     "q_en": "What is the weather like in the picture?"
-    },
-    {
-     "q": "במה מודדים כמה חם בחוץ?",
-     "e": "☀️❄️",
-     "q_en": "What do we use to measure how hot it is?"
-    },
-    {
-     "q": "מה נותן לכדור הארץ אור וחום?",
-     "e": "🌍",
-     "q_en": "What gives the Earth light and heat?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 1",
-   "title_en": "Weather · Senses · Plants and animals · Living and non-living",
-   "tags_en": [
-    "Weather",
-    "Energy",
-    "The senses",
-    "Health",
-    "Seasons",
-    "Day and night",
-    "Plants",
-    "Animals",
-    "Living and non-living",
-    "Properties of objects",
-    "Technology"
-   ]
-  },
-  {
-   "id": "math8",
-   "ver": "e0317b9986",
-   "subject": "מתמטיקה",
-   "grade": 7,
-   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
-   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
-   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
-   "tags": [
-    "פונקציה קווית",
-    "שיפוע",
-    "כפל מקוצר",
-    "חוקי חזקות",
-    "אי-שוויונות",
-    "מערכת משוואות",
-    "פתרון גרפי",
-    "יחס ופרופורציה",
-    "אחוזים וריבית",
-    "הסתברות",
-    "חפיפת משולשים",
-    "שווה שוקיים",
-    "מרובעים מיוחדים",
-    "דמיון משולשים",
-    "פיתגורס"
-   ],
-   "questions": 405,
-   "chapters": 39,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה השיפוע של ⁦y=3x+2⁩?",
-     "e": "y = 3x + 2",
-     "q_en": "What is the slope of y=3x+2?"
-    },
-    {
-     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
-     "e": "(0,1)(2,5)",
-     "q_en": "What is the slope of the line through (0,1) and (2,5)?"
-    },
-    {
-     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
-     "e": "y = 2x + 5",
-     "q_en": "y=2x+5 crosses the y-axis at the point…"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 8",
-   "title_en": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
-   "tags_en": [
-    "Linear functions",
-    "Slope",
-    "Special products",
-    "Laws of exponents",
-    "Inequalities",
-    "Systems of equations",
-    "Graphical solution",
-    "Ratio and proportion",
-    "Percent and interest",
-    "Probability",
-    "Congruent triangles",
-    "Isosceles triangles",
-    "Special quadrilaterals",
-    "Similar triangles",
-    "The Pythagorean theorem"
-   ]
-  },
-  {
    "id": "math7-nov26",
    "ver": "0a39afe78c",
    "subject": "מתמטיקה",
@@ -1678,6 +1552,132 @@
     "Plant diversity",
     "Protecting nature",
     "Technology"
+   ]
+  },
+  {
+   "id": "sci1",
+   "ver": "bad9efe4c1",
+   "subject": "מדעים",
+   "grade": 0,
+   "title": "מזג אוויר · חושים · צמחים ובעלי חיים · חי ודומם",
+   "desc": "מזג אוויר, אנרגיה, החושים, בריאות, עונות, יום ולילה, צמחים, בעלי חיים, חי ודומם, תכונות של חפצים (קשה ורך, שקוף ואטום) וטכנולוגיה",
+   "desc_en": "Weather, energy, the senses, health, seasons, day and night, plants, animals, living and non-living things, properties of objects (hard and soft, transparent and opaque) and technology",
+   "tags": [
+    "מזג אוויר",
+    "אנרגיה",
+    "החושים",
+    "בריאות",
+    "עונות השנה",
+    "יום ולילה",
+    "צמחים",
+    "בעלי חיים",
+    "חי ודומם",
+    "תכונות חפצים",
+    "טכנולוגיה"
+   ],
+   "questions": 234,
+   "chapters": 23,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך מזג האוויר בתמונה?",
+     "e": "🌧️",
+     "q_en": "What is the weather like in the picture?"
+    },
+    {
+     "q": "במה מודדים כמה חם בחוץ?",
+     "e": "☀️❄️",
+     "q_en": "What do we use to measure how hot it is?"
+    },
+    {
+     "q": "מה נותן לכדור הארץ אור וחום?",
+     "e": "🌍",
+     "q_en": "What gives the Earth light and heat?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 1",
+   "title_en": "Weather · Senses · Plants and animals · Living and non-living",
+   "tags_en": [
+    "Weather",
+    "Energy",
+    "The senses",
+    "Health",
+    "Seasons",
+    "Day and night",
+    "Plants",
+    "Animals",
+    "Living and non-living",
+    "Properties of objects",
+    "Technology"
+   ]
+  },
+  {
+   "id": "math8",
+   "ver": "6a34e2d51b",
+   "subject": "מתמטיקה",
+   "grade": 7,
+   "title": "פונקציה קווית · כפל מקוצר וחזקות · מערכות משוואות · אחוזים · הסתברות · גאומטריה",
+   "desc": "שיפוע ו-y=mx+b, ישרים מקבילים, כפל ביטויים ונוסחאות הכפל המקוצר, חוקי חזקות, אי-שוויונות, מערכת משוואות (גם פתרון גרפי) ובעיות, יחס ופרופורציה, אחוזים וריבית, הסתברות, חפיפת משולשים, משולש שווה שוקיים, מרובעים מיוחדים, דמיון משולשים, משפט פיתגורס",
+   "desc_en": "Linear functions (slope, y-intercept, y=mx+b, parallel lines), multiplying expressions and the short multiplication formulas, laws of exponents, linear inequalities, systems of equations (also solved graphically) and word problems, ratio and proportion, percent and interest, probability, congruent triangles, the isosceles triangle, special quadrilaterals, similar triangles, Pythagoras' theorem",
+   "tags": [
+    "פונקציה קווית",
+    "שיפוע",
+    "כפל מקוצר",
+    "חוקי חזקות",
+    "אי-שוויונות",
+    "מערכת משוואות",
+    "פתרון גרפי",
+    "יחס ופרופורציה",
+    "אחוזים וריבית",
+    "הסתברות",
+    "חפיפת משולשים",
+    "שווה שוקיים",
+    "מרובעים מיוחדים",
+    "דמיון משולשים",
+    "פיתגורס"
+   ],
+   "questions": 405,
+   "chapters": 39,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה השיפוע של ⁦y=3x+2⁩?",
+     "e": "y = 3x + 2",
+     "q_en": "What is the slope of y=3x+2?"
+    },
+    {
+     "q": "שיפוע הישר דרך ⁦(0,1)⁩ ו-⁦(2,5)⁩?",
+     "e": "(0,1)(2,5)",
+     "q_en": "What is the slope of the line through (0,1) and (2,5)?"
+    },
+    {
+     "q": "⁦y=2x+5⁩ חותך את ציר y בנקודה…",
+     "e": "y = 2x + 5",
+     "q_en": "y=2x+5 crosses the y-axis at the point…"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 8",
+   "title_en": "Linear functions · Special products and powers · Systems of equations · Percent · Probability · Geometry",
+   "tags_en": [
+    "Linear functions",
+    "Slope",
+    "Special products",
+    "Laws of exponents",
+    "Inequalities",
+    "Systems of equations",
+    "Graphical solution",
+    "Ratio and proportion",
+    "Percent and interest",
+    "Probability",
+    "Congruent triangles",
+    "Isosceles triangles",
+    "Special quadrilaterals",
+    "Similar triangles",
+    "The Pythagorean theorem"
    ]
   }
  ]

@@ -39,7 +39,7 @@
   "מרובעים מיוחדים": "Special quadrilaterals",
   "משולשים דומים": "Similar triangles",
   "משפט פיתגורס – חישוב צלע": "The Pythagorean theorem – calculating a side",
-  "פיתגורס – זיהוי ובעיות": "Pythagoras – identifying and word problems",
+  "פיתגורס – זיהוי ובעיות": "Pythagoras – right triangles and word problems",
   "שיפוע – מה זה?": "Slope – what is it?",
   "שיפוע משתי נקודות": "Slope from two points",
   "נקודות החיתוך עם הצירים": "The intercepts with the axes",
@@ -72,7 +72,7 @@
   "שווה שוקיים – חוצה זווית, תיכון וגובה": "Isosceles – angle bisector, median and height",
   "מקבילית ומלבן": "Parallelogram and rectangle",
   "מעוין וריבוע": "Rhombus and square",
-  "משולשים דומים – יחס הדמיון": "Similar triangles – the similarity ratio",
+  "משולשים דומים – יחס הדמיון": "Similar triangles – the scale factor",
   "דמיון בחיים": "Similarity in everyday life",
   "משפט פיתגורס – מוצאים צלע": "The Pythagorean theorem – finding a side",
   "פיתגורס – חישוב בצעדים": "Pythagoras – step-by-step calculations",
@@ -867,12 +867,12 @@
    "he": "הישרים ⁦y=5x+2⁩ ו-⁦y=5x-3⁩…",
    "a": "מקבילים",
    "h": "930f91bd",
-   "q": "The lines y=5x+2 and y=5x-3 are…",
+   "q": "The lines y=5x+2 and y=5x-3…",
    "o": [
-    "Parallel",
-    "Intersecting",
-    "Coinciding",
-    "Through the origin"
+    "Are parallel",
+    "Intersect",
+    "Coincide",
+    "Pass through the origin"
    ],
    "x": "Same slope, different b → parallel"
   },
@@ -1715,7 +1715,7 @@
     "Empty circle, left",
     "Filled circle, left"
    ],
-   "x": "x>3: 3 is not included, the numbers greater than it"
+   "x": "x>3: 3 is not included; the solution is the numbers above 3"
   },
   {
    "he": "איזה אי-שוויון פתרונו מתואר על הציר?",
@@ -1751,14 +1751,14 @@
    "he": "מה המספר השלם הגדול ביותר שמקיים ⁦x<5⁩?",
    "a": "⁦4⁩",
    "h": "af59b8d7",
-   "q": "What is the greatest whole number that satisfies x<5?",
+   "q": "What is the greatest integer that satisfies x<5?",
    "o": [
     "⁦4⁩",
     "⁦5⁩",
     "⁦6⁩",
     "⁦4.9⁩"
    ],
-   "x": "5 is not included; 4.9 is not a whole number"
+   "x": "5 is not included; 4.9 is not an integer"
   },
   {
    "he": "⁦y=2x⁩, ⁦x+y=9⁩. מה x?",
@@ -2303,7 +2303,7 @@
    "he": "סכום שני מספרים 15. אחד גדול פי 2 מהשני. הקטן?",
    "a": "⁦5⁩",
    "h": "3f7c4810",
-   "q": "The sum of two numbers is 15. One is twice the other. What is the smaller?",
+   "q": "The sum of two numbers is 15. One is twice the other. What is the smaller one?",
    "o": [
     "⁦5⁩",
     "⁦10⁩",
@@ -2352,7 +2352,7 @@
     "⁦5 ₪⁩",
     "⁦1 ₪⁩"
    ],
-   "x": "Twice an apple and a banana = 10 ₪ → apple = 3"
+   "x": "2 apples, 2 bananas = 10 ₪ → extra apple = 3 ₪"
   },
   {
    "he": "בחווה תרנגולות ופרות: 10 ראשים ו-30 רגליים. כמה פרות?",
@@ -2375,7 +2375,7 @@
    "he": "אבא מבוגר מבנו ב-30 שנה. יחד הם בני 50. גיל הבן?",
    "a": "⁦10⁩",
    "h": "829074fa",
-   "q": "A father is 30 years older than his son. Together they are 50. The son's age?",
+   "q": "A father is 30 years older than his son. Together they are 50. How old is the son?",
    "o": [
     "⁦10⁩",
     "⁦20⁩",
@@ -2440,7 +2440,7 @@
    "he": "מספר אחד גדול מהשני ב-8. סכומם 30. מה הקטן?",
    "a": "⁦11⁩",
    "h": "d708cc2d",
-   "q": "One number is 8 more than the other. Their sum is 30. What is the smaller?",
+   "q": "One number is 8 more than the other. Their sum is 30. What is the smaller one?",
    "o": [
     "⁦11⁩",
     "⁦19⁩",
@@ -2479,7 +2479,7 @@
    "x": "Length + width = 10, difference 4 → 7",
    "sc": {
     "1": "Perimeter 20",
-    "2": "Diff 4"
+    "2": "Difference 4"
    }
   },
   {
@@ -2516,7 +2516,7 @@
    "he": "חולצה ומכנסיים ב-210 ₪. המכנסיים יקרים פי 2.5. כמה החולצה?",
    "a": "⁦60 ₪⁩",
    "h": "840a3761",
-   "q": "A shirt and pants cost 210 ₪. The pants cost 2.5 times as much. The shirt?",
+   "q": "A shirt and pants: 210 ₪. The pants cost 2.5 times as much. How much is the shirt?",
    "o": [
     "⁦60 ₪⁩",
     "⁦150 ₪⁩",
@@ -2699,16 +2699,16 @@
    "he": "במפה בקנה מידה ⁦1:20000⁩, 7.5 ס״מ במפה הם…",
    "a": "1.5 ק״מ",
    "h": "2fdfdf65",
-   "q": "On a map with scale 1:20000, 7.5 cm on the map is…",
+   "q": "On a map with scale 1:20,000, 7.5 cm on the map represents…",
    "o": [
     "1.5 km",
     "150 m",
     "15 km",
     "750 m"
    ],
-   "x": "7.5·20000 = 150000 cm = 1.5 km",
+   "x": "7.5·20,000 = 150,000 cm = 1.5 km",
    "sc": {
-    "1": "1 : 20000"
+    "1": "1 : 20,000"
    }
   },
   {
@@ -2817,7 +2817,17 @@
     "⁦2⁩",
     "⁦3⁩"
    ],
-   "x": "y÷x = 5÷2 = 2.5"
+   "x": "y÷x = 5÷2 = 2.5",
+   "sc": {
+    "0": "6",
+    "1": "4",
+    "2": "2",
+    "3": "x",
+    "4": "15",
+    "5": "10",
+    "6": "5",
+    "7": "y"
+   }
   },
   {
    "he": "גרף של פרופורציה ישרה הוא ישר ש…",
@@ -2830,7 +2840,17 @@
     "Through (0,1)",
     "Always decreasing"
    ],
-   "x": "x=0 → y=0"
+   "x": "x=0 → y=0",
+   "sc": {
+    "0": "3",
+    "1": "2",
+    "2": "1",
+    "3": "x",
+    "4": "12",
+    "5": "8",
+    "6": "4",
+    "7": "y"
+   }
   },
   {
    "he": "ברז ממלא 12 ליטר ב-3 דקות. כמה ב-8 דקות?",
@@ -3114,14 +3134,17 @@
    "he": "כמה זה 0.1% מ-40000?",
    "a": "⁦40⁩",
    "h": "fa63c52c",
-   "q": "What is 0.1% of 40000?",
+   "q": "What is 0.1% of 40,000?",
    "o": [
     "⁦40⁩",
     "⁦400⁩",
     "⁦4⁩",
     "⁦4000⁩"
    ],
-   "x": "1% = 400 → a tenth of that: 40"
+   "x": "1% = 400 → a tenth of that: 40",
+   "sc": {
+    "0": "0.1% · 40,000"
+   }
   },
   {
    "he": "כמה זה 50% מתוך 50% מ-80?",
@@ -3664,7 +3687,7 @@
    "he": "4 אדומים, 3 כחולים ו-1 שחור. מה ההסתברות לא לכחול?",
    "a": "⁦5/8⁩",
    "h": "33eaf888",
-   "q": "4 red, 3 blue and 1 black. What is the probability of not blue?",
+   "q": "4 red, 3 blue and 1 black ball. What is the probability of not picking blue?",
    "o": [
     "⁦5/8⁩",
     "⁦3/8⁩",
@@ -4401,7 +4424,7 @@
     "All sides are equal",
     "All angles are right",
     "The diagonals are equal",
-    "One pair of parallels"
+    "One pair is parallel"
    ],
    "x": "Four equal sides – a rhombus"
   },
@@ -4664,7 +4687,7 @@
    "he": "תמונה 4 על 6 ס״מ הוגדלה פי 3. מה המידות החדשות?",
    "a": "12 על 18",
    "h": "01d96714",
-   "q": "A 4 by 6 cm picture is enlarged 3 times. What are the new dimensions?",
+   "q": "A 4 by 6 cm picture is enlarged by a factor of 3. What are the new dimensions?",
    "o": [
     "12 by 18",
     "7 by 9",
@@ -4710,7 +4733,7 @@
     "⁦16⁩",
     "⁦24⁩"
    ],
-   "x": "BC is 4 times shorter: 20÷4 = 5",
+   "x": "BC is a quarter of EF: 20÷4 = 5",
    "sc": {
     "0": "1 : 4"
    }
@@ -5302,7 +5325,7 @@
    "he": "חבל 13 מ' מראש עמוד בגובה 12 מ'. כמה רחוק מהעמוד?",
    "a": "5 מ'",
    "h": "362a5166",
-   "q": "A 13 m rope goes from the top of a 12 m pole. How far from the pole?",
+   "q": "A 13 m rope from a 12 m pole's top to the ground. How far from the pole?",
    "o": [
     "5 m",
     "1 m",
@@ -5459,7 +5482,17 @@
     "⁦y=x-2⁩",
     "⁦y=2x+2⁩"
    ],
-   "x": "Slope 2, and at x=0: y=-2"
+   "x": "Slope 2, and at x=0: y=-2",
+   "sc": {
+    "0": "2",
+    "1": "1",
+    "2": "0",
+    "3": "x",
+    "4": "2",
+    "5": "0",
+    "6": "-2",
+    "7": "y"
+   }
   },
   {
    "he": "איזה ישר מקביל ל-⁦y=0.5x+4⁩?",

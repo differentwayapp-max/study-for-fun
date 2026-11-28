@@ -1423,57 +1423,6 @@
    ]
   },
   {
-   "id": "math7-nov26",
-   "ver": "69649f6532",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מערכת צירים · מספרים מכוונים · זוויות",
-   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות · לפי עמודי הספר",
-   "desc_en": "Coordinates, absolute value, signed numbers, angles",
-   "tags": [
-    "מערכת צירים",
-    "ציר המספרים",
-    "ערך מוחלט",
-    "שטח והיקף",
-    "סדר פעולות",
-    "זוויות",
-    "חוצה זווית"
-   ],
-   "questions": 124,
-   "chapters": 10,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
-     "e": "(3, 5)",
-     "q_en": "Which quadrant is the point (3,5) in?"
-    },
-    {
-     "q": "איזה מהם הכי גדול?",
-     "e": "-2    -7-10    -15",
-     "q_en": "Which number is the greatest?"
-    },
-    {
-     "q": "⁦|-5| = ?⁩",
-     "e": "|-5| = ?",
-     "q_en": "|-5| = ?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 7 – Algebra and Geometry",
-   "title_en": "The coordinate plane · Positive and negative numbers · Angles",
-   "tags_en": [
-    "The coordinate plane",
-    "The number line",
-    "Absolute value",
-    "Area and perimeter",
-    "Order of operations",
-    "Angles",
-    "Angle bisector"
-   ]
-  },
-  {
    "id": "math6",
    "ver": "a9757d7e82",
    "subject": "מתמטיקה",
@@ -1660,6 +1609,57 @@
     "Special quadrilaterals",
     "Similar triangles",
     "The Pythagorean theorem"
+   ]
+  },
+  {
+   "id": "math7-nov26",
+   "ver": "0a39afe78c",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מערכת צירים · מספרים מכוונים · זוויות",
+   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות · לפי עמודי הספר",
+   "desc_en": "Coordinates, absolute value, signed numbers, angles",
+   "tags": [
+    "מערכת צירים",
+    "ציר המספרים",
+    "ערך מוחלט",
+    "שטח והיקף",
+    "סדר פעולות",
+    "זוויות",
+    "חוצה זווית"
+   ],
+   "questions": 124,
+   "chapters": 10,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
+     "e": "(3, 5)",
+     "q_en": "Which quadrant is the point (3,5) in?"
+    },
+    {
+     "q": "איזה מהם הכי גדול?",
+     "e": "-2    -7-10    -15",
+     "q_en": "Which of these is the greatest?"
+    },
+    {
+     "q": "⁦|-5| = ?⁩",
+     "e": "|-5| = ?",
+     "q_en": "|-5| = ?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 7 – Algebra and Geometry",
+   "title_en": "The coordinate plane · Positive and negative numbers · Angles",
+   "tags_en": [
+    "The coordinate plane",
+    "The number line",
+    "Absolute value",
+    "Area and perimeter",
+    "Order of operations",
+    "Angles",
+    "Angle bisector"
    ]
   }
  ]

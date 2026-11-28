@@ -16,7 +16,7 @@
   "מערכת צירים": "The coordinate plane",
   "ציר המספרים": "The number line",
   "ערך מוחלט ונגדיים": "Absolute value and opposites",
-  "היקף ושטח בצירים": "Perimeter and area on the plane",
+  "היקף ושטח בצירים": "Perimeter and area in the coordinate plane",
   "מספרים מכוונים": "Positive and negative numbers",
   "סוגי זוויות": "Types of angles",
   "חיבור וחיסור זוויות": "Adding and subtracting angles",
@@ -210,7 +210,7 @@
    "he": "איזה מהם הכי גדול?",
    "a": "⁦-2⁩",
    "h": "4e1f0dff",
-   "q": "Which number is the greatest?",
+   "q": "Which of these is the greatest?",
    "o": [
     "⁦-2⁩",
     "⁦-7⁩",
@@ -560,7 +560,7 @@
    "he": "אורך הקטע ⁦(1,2)–(6,2)⁩?",
    "a": "⁦5⁩",
    "h": "647a19a6",
-   "q": "What is the length of segment (1,2)–(6,2)?",
+   "q": "How long is the segment from (1,2) to (6,2)?",
    "o": [
     "⁦5⁩",
     "⁦4⁩",
@@ -573,7 +573,7 @@
    "he": "אורך הקטע ⁦(-3,4)–(5,4)⁩?",
    "a": "⁦8⁩",
    "h": "7dfeecc0",
-   "q": "What is the length of segment (-3,4)–(5,4)?",
+   "q": "How long is the segment from (-3,4) to (5,4)?",
    "o": [
     "⁦8⁩",
     "⁦2⁩",
@@ -586,7 +586,7 @@
    "he": "אורך הקטע ⁦(2,-1)–(2,6)⁩?",
    "a": "⁦7⁩",
    "h": "dbc5cfd6",
-   "q": "What is the length of segment (2,-1)–(2,6)?",
+   "q": "How long is the segment from (2,-1) to (2,6)?",
    "o": [
     "⁦7⁩",
     "⁦5⁩",
@@ -859,7 +859,7 @@
    "he": "צוללת ב-⁦-30⁩ מ', עלתה 12. איפה?",
    "a": "⁦-18⁩",
    "h": "afd41c6d",
-   "q": "Submarine at -30 m rose 12 m. Where now?",
+   "q": "Submarine at -30 m rises 12 m. Where now?",
    "o": [
     "⁦-18⁩",
     "⁦-42⁩",
@@ -879,7 +879,7 @@
     "⁦6⁩",
     "⁦-6⁩"
    ],
-   "x": "Minus times minus = plus"
+   "x": "Negative times negative = positive"
   },
   {
    "he": "⁦-3·5 = ?⁩",
@@ -892,7 +892,7 @@
     "⁦2⁩",
     "⁦-2⁩"
    ],
-   "x": "Minus times plus = minus"
+   "x": "Negative times positive = negative"
   },
   {
    "he": "⁦-12:3 = ?⁩",
@@ -905,7 +905,7 @@
     "⁦-9⁩",
     "⁦-36⁩"
    ],
-   "x": "Minus divided by plus = minus",
+   "x": "Negative divided by positive = negative",
    "sc": {
     "0": "-12 ÷ 3"
    }
@@ -921,7 +921,7 @@
     "⁦-72⁩",
     "⁦-84⁩"
    ],
-   "x": "Minus divided by minus = plus",
+   "x": "Negative divided by negative = positive",
    "sc": {
     "0": "-78 ÷ (-6)"
    }
@@ -1131,7 +1131,7 @@
    "he": "איזו זווית קהה?",
    "a": "⁦100°⁩",
    "h": "9be30067",
-   "q": "Which angle is obtuse?",
+   "q": "Which of these angles is obtuse?",
    "o": [
     "⁦100°⁩",
     "⁦80°⁩",
@@ -1199,20 +1199,20 @@
    "he": "מהן השוקיים של ⁦∠ABC⁩?",
    "a": "⁦BA⁩ ו-⁦BC⁩",
    "h": "9de6e3d1",
-   "q": "What are the arms of ∠ABC?",
+   "q": "What are the sides of ∠ABC?",
    "o": [
     "BA and BC",
     "AB and AC",
     "CA and CB",
     "AC and BC"
    ],
-   "x": "The arms start at the vertex B"
+   "x": "The sides start at the vertex B"
   },
   {
    "he": "כמה מעלות בין המחוגים בשעה ⁦4:00⁩?",
    "a": "⁦120°⁩",
    "h": "e50e4f26",
-   "q": "How many degrees between the clock hands at 4:00?",
+   "q": "Degrees between the clock hands at 4:00?",
    "o": [
     "⁦120°⁩",
     "⁦90°⁩",
@@ -1251,7 +1251,7 @@
    "he": "⁦BD⁩ בתוכה. ⁦∠ABD=30°, ∠DBC=45°⁩, ⁦∠ABC=?⁩",
    "a": "⁦75°⁩",
    "h": "6f9a0568",
-   "q": "BD is inside. ∠ABD=30°, ∠DBC=45°, ∠ABC=?",
+   "q": "BD is inside ∠ABC. ∠ABD=30°, ∠DBC=45°. ∠ABC=?",
    "o": [
     "⁦75°⁩",
     "⁦15°⁩",
@@ -1264,7 +1264,7 @@
    "he": "⁦BD⁩ בתוכה. ⁦∠ABC=100°, ∠ABD=35°⁩, ⁦∠DBC=?⁩",
    "a": "⁦65°⁩",
    "h": "eaaf349c",
-   "q": "BD is inside. ∠ABC=100°, ∠ABD=35°, ∠DBC=?",
+   "q": "BD is inside ∠ABC. ∠ABC=100°, ∠ABD=35°. ∠DBC=?",
    "o": [
     "⁦65°⁩",
     "⁦135°⁩",
@@ -1277,7 +1277,7 @@
    "he": "⁦BD⁩ בתוכה. ⁦∠ABC=145°, ∠DBC=80°⁩, ⁦∠ABD=?⁩",
    "a": "⁦65°⁩",
    "h": "a7b1b9b8",
-   "q": "BD is inside. ∠ABC=145°, ∠DBC=80°, ∠ABD=?",
+   "q": "BD is inside ∠ABC. ∠ABC=145°, ∠DBC=80°. ∠ABD=?",
    "o": [
     "⁦65°⁩",
     "⁦225°⁩",
@@ -1290,7 +1290,7 @@
    "he": "שטוחה מחולקת ל-⁦70°⁩ ול-?",
    "a": "⁦110°⁩",
    "h": "1d988c77",
-   "q": "A straight angle split into 70° and ?",
+   "q": "A straight angle is split into 70° and what?",
    "o": [
     "⁦110°⁩",
     "⁦20°⁩",
@@ -1306,7 +1306,7 @@
    "he": "ישרה מחולקת ל-⁦25°⁩ ול-?",
    "a": "⁦65°⁩",
    "h": "45e10e31",
-   "q": "A right angle split into 25° and ?",
+   "q": "A right angle is split into 25° and what?",
    "o": [
     "⁦65°⁩",
     "⁦75°⁩",
@@ -1393,7 +1393,7 @@
    "he": "ישרה מחולקת לשתיים שוות. כל אחת?",
    "a": "⁦45°⁩",
    "h": "0511f249",
-   "q": "A right angle split into two equal parts. Each?",
+   "q": "A right angle split in half. Each part?",
    "o": [
     "⁦45°⁩",
     "⁦90°⁩",
@@ -1416,7 +1416,7 @@
     "Two unequal parts",
     "A right angle"
    ],
-   "x": "Bisect = cut into two equal halves",
+   "x": "Bisect = cut into two equal parts",
    "sc": {
     "0": "Angle bisector"
    }
@@ -1690,7 +1690,7 @@
    "he": "שטוחה מחולקת ל-⁦35°⁩ ול-?",
    "a": "⁦145°⁩",
    "h": "0d3a1c96",
-   "q": "A straight angle split into 35° and ?",
+   "q": "A straight angle is split into 35° and what?",
    "o": [
     "⁦145°⁩",
     "⁦55°⁩",

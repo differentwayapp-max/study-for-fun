@@ -921,7 +921,7 @@
     "always capital",
     "always small",
     "capital or small",
-    "capital only at the start"
+    "capital at the start"
    ],
    "x": "I = אני, always a capital letter"
   },

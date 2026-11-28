@@ -525,49 +525,6 @@
    "status": "ready"
   },
   {
-   "id": "en3",
-   "ver": "60751b2305",
-   "subject": "אנגלית",
-   "grade": 2,
-   "title": "ABC · First words · Short sentences",
-   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
-   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
-   "tags": [
-    "Rhymes",
-    "Letters & sounds",
-    "ABC order",
-    "Short words",
-    "Sight words",
-    "Family & body",
-    "Colors & numbers",
-    "Animals & food",
-    "School",
-    "I am / I have",
-    "Vowel sounds",
-    "Hello & my name",
-    "Reading sentences"
-   ],
-   "questions": 330,
-   "chapters": 31,
-   "reading": 0,
-   "words": 107,
-   "samples": [
-    {
-     "q": "Which word rhymes with cat?",
-     "e": "🐈cat"
-    },
-    {
-     "q": "Which word starts like ball?",
-     "e": "⚽ball"
-    },
-    {
-     "q": "איזו אות נקראת אֶם?",
-     "e": "אֶם"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "heb4",
    "ver": "4744227e0a",
    "subject": "עברית / לשון",
@@ -1770,6 +1727,69 @@
     "Cellular respiration",
     "Engineering design",
     "Technological systems"
+   ]
+  },
+  {
+   "id": "en3",
+   "ver": "e1f24750fa",
+   "subject": "אנגלית",
+   "grade": 2,
+   "title": "ABC · First words · Short sentences",
+   "desc": "אנגלית לכיתה ג' – שנה ראשונה: חרוזים וצלילים, שמות האותיות וצליליהן, צלילי התנועות, אותיות גדולות וקטנות, סדר ה-ABC, קריאת מילים קצרות, מילים ראשונות, ברכות והיכרות וקריאת משפטים קצרים",
+   "desc_en": "Grade 3 English, the first year: rhymes and sounds, letter names and sounds, vowel sounds, capital and small letters, ABC order, reading short words, first words, greetings and introductions and reading short sentences",
+   "tags": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
+   ],
+   "questions": 330,
+   "chapters": 31,
+   "reading": 0,
+   "words": 107,
+   "samples": [
+    {
+     "q": "Which word rhymes with cat?",
+     "e": "🐈cat",
+     "q_en": "Which word rhymes with cat?"
+    },
+    {
+     "q": "Which word starts like ball?",
+     "e": "⚽ball",
+     "q_en": "Which word starts like ball?"
+    },
+    {
+     "q": "איזו אות נקראת אֶם?",
+     "e": "אֶם",
+     "q_en": "Which letter is called אֶם?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Grade 3",
+   "title_en": "ABC · First words · Short sentences",
+   "tags_en": [
+    "Rhymes",
+    "Letters & sounds",
+    "ABC order",
+    "Short words",
+    "Sight words",
+    "Family & body",
+    "Colors & numbers",
+    "Animals & food",
+    "School",
+    "I am / I have",
+    "Vowel sounds",
+    "Hello & my name",
+    "Reading sentences"
    ]
   }
  ]

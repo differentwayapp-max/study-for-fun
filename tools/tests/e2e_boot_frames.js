@@ -15,7 +15,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const slow = async p => { if (!process.env.SLOW) return; const c = await p.context().newCDPSession(p); await c.send('Emulation.setCPUThrottlingRate', { rate: 4 });
     await c.send('Network.enable'); await c.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 1.5e6 / 8 * 10, uploadThroughput: 750e3 / 8 * 10 }); };
   const ctx = async (who, name, onb) => { const c = await b.newContext({ viewport: { width: 360, height: 740 } }); c.on('page', p => slow(p).catch(() => {}));
-    await c.addInitScript(([g, o]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; if (o) window.SFF_TEST_ONB = true; localStorage.setItem('sff_lang', 'he'); },
+    await c.addInitScript(([g, o]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_TEACH_LINKS = true;   /* the teacher's way between the two apps (off in the store version) */ if (o) window.SFF_TEST_ONB = true; localStorage.setItem('sff_lang', 'he'); },
       [{ sub: who, email: who + '@t.local', email_verified: true, name }, !!onb]); return c; };
   // what the screen shows now – a short label of each visible part
   const frame = p => p.evaluate(() => { const vis = el => { if (!el || !el.isConnected) return false; for (let e = el; e; e = e.parentElement) { const c = getComputedStyle(e); if (c.display === 'none' || c.visibility === 'hidden' || +c.opacity === 0) return false; } return el.getBoundingClientRect().height > 0; };

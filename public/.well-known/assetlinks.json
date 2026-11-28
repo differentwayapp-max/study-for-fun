@@ -1,11 +1,16 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "app.dway.studyforfun",
-    "sha256_cert_fingerprints": [
-      "1A:2E:CA:2B:67:70:52:9D:3F:84:B4:89:FD:95:1A:63:44:7E:8C:B6:8D:39:7A:62:6E:3A:51:1C:D4:2F:26:96",
-      "DF:D0:93:43:04:05:BC:F8:D6:20:FA:D9:85:24:42:49:2F:29:0A:BC:72:10:69:85:66:B5:47:EC:FC:4A:6A:D7"
-    ]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.dway.studyforfun",
+      "sha256_cert_fingerprints": [
+        "78:5E:61:8A:40:CB:03:14:06:1C:29:52:B1:FA:82:08:2B:30:EC:52:9B:8E:85:36:EE:A2:5A:7F:99:6A:75:57",
+        "1A:2E:CA:2B:67:70:52:9D:3F:84:B4:89:FD:95:1A:63:44:7E:8C:B6:8D:39:7A:62:6E:3A:51:1C:D4:2F:26:96",
+        "DF:D0:93:43:04:05:BC:F8:D6:20:FA:D9:85:24:42:49:2F:29:0A:BC:72:10:69:85:66:B5:47:EC:FC:4A:6A:D7"
+      ]
+    }
   }
-}]
+]

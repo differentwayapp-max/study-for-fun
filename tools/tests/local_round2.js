@@ -34,7 +34,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
     out.popup = getComputedStyle($('gSheet')).position === 'fixed' && $('gSheet').getBoundingClientRect().bottom <= innerHeight;
     quitGame();
     // progress: a kid without practice sets is still there
-    go('stats'); out.nokid = $('sNoKids').textContent;
+    go('stats'); out.nokid = [...document.querySelectorAll('#sBody .skcard')].map(c => c.textContent).find(t => /דני/.test(t)) || '';
     // a word on "מה אני יודע" shows its question
     history.unshift({ at: Date.now(), kidId: 'k1', setId: a.id, ch: 0, right: 1, n: 1, mode: 'choice', qr: ['0.1'], qk: [tkey(a.questions[0].question)], topics: {} });
     activeKid = 'k1'; openMe(); const w = document.querySelector('#meBody .wchip'); w && w.click(); await new Promise(r => setTimeout(r, 50));

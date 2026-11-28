@@ -493,6 +493,7 @@ body.kidside .pside,body.locked .pside{display:none!important}
 .intro .imore button{pointer-events:auto;width:44px;height:44px;border-radius:50%;border:0;background:#1B2A4A;color:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
 .intro.dark .imore button{background:#fff;color:#1B2A4A}
 .icard0.ilow .iphone,.icard0.inop .iphone,.icard0.ilow .iopt,.icard0.icut .iopt{display:none!important}
+.icard0.ilastoff .ilast{display:none!important}   /* a part that goes only as the last resort – instead of scrolling (the opening screen's map on an SE) */
 .intro .ispace{width:1px;pointer-events:none}
 .intro .icard0{position:absolute;top:0;transform-origin:0 0;min-height:0}
 .intro .ibot{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 20px max(10px,var(--sab))}
@@ -5233,7 +5234,7 @@ const iPhone=(st,inner)=>`<div class="iphone" style="${st}">${inner}</div>`;
 // the opening screen's map card (the canvas's Main): 5 stations, right to left – part of the content, never a cut phone
 const iMap=()=>{ const sv=(c,inner)=>`<span class="imapc" style="${c}">${inner}</span>`, star=IC.star('#fff',18),
     st=(cl,t,c,x='')=>`<div class="imaps" style="${x}">${c}<span>${t}</span></div>`;
-  return `<div class="imap">
+  return `<div class="imap ilast">
     <div class="irow" style="font-size:13px;font-weight:700"><span>המפה של נועה · אנגלית</span><span style="background:#FFF2C9;color:#946200;border-radius:99px;padding:3px 9px;font-size:12px;white-space:nowrap">עוד 3 ימים למבחן</span></div>
     <div class="imaprow"><span class="imapl" aria-hidden="true"></span><span class="imapl on" aria-hidden="true"></span>
       ${st(0,'פרק 1',sv('background:#24C78E',star))}${st(0,'פרק 2',sv('background:#24C78E',star))}${st(0,'היום',sv('background:#2F6BFF;color:#fff;font-size:16px;box-shadow:0 0 0 4px #C9D9FF','3'),'font-weight:800;color:#2F6BFF')}${st(0,'פרק 4',sv('background:#EAF0FF;font-size:15px','4'),'color:#4A4870')}${st(0,'מבחן',sv('background:#FF5C8A',IC.sv('#fff',17,IC.flag,2.2)),'color:#B3264F')}</div>
@@ -5249,7 +5250,7 @@ const INTRO={
       <div style="background:#FF5C8A;color:#3A0716">${IC.sv('#3A0716',26,IC.ppl)}<b>כל המשפחה</b><span>${window.SFF_TEACH_ON?'אחים, סבתא, מורה':'אחים, סבא וסבתא'}</span></div>
       <div class="iwide" style="background:#B9A7FF;color:#1B1440">${IC.sv('#1B1440',26,IC.target,2.2)}<div><b>תרגול ממוקד</b><span>נבנה לבד מהטעויות – רק מה שעוד לא יושב</span></div></div>
     </div>
-    <div style="flex:1 0 18px" aria-hidden="true"></div>${iMap()}`}),
+    <div class="ilast" style="flex:1 0 18px" aria-hidden="true"></div>${iMap()}`}),
   play:K=>({bg:'#2F6BFF', dark:1, html:`
     <h1>כל תחנה –<br>משחק אחר</h1>
     <p style="color:#E4ECFF">שאלות עם תמונות, זיכרון, התאמה וסידור אותיות – עם הקראה באנגלית</p>
@@ -5515,11 +5516,11 @@ function introShow(dir){
 // the screen is drawn at 360 px wide; it is scaled to the phone: as wide as the screen, as tall as the space between the bars.
 // A short phone (Safari with its address bar: an iPhone 14 has 664 px, an SE 548): first the parts marked "iopt" go (small notes),
 // below 520 px also the phone pictures; then the screen shrinks down to 72% – the explanation never under 12 px on the screen;
-// only then does it scroll, with a fade and an arrow at the bottom until the end (the owner's report: screens cut on an iPhone).
+// still too tall: the parts marked "ilast" go (the opening screen's map); only then does it scroll, with a fade and an arrow at the bottom until the end (the owner's report: screens cut on an iPhone).
 function introFit(el){
   const st=el.querySelector('.istage'), c=el.querySelector('.icard0'); if(!st||!c) return;
   const W=st.clientWidth, H=st.clientHeight, kw=Math.min(W/360,1.3), KMIN=.72;
-  c.classList.remove('ilow','icut','inop'); c.style.height='auto'; c.style.transform='none'; st.scrollTop=0;
+  c.classList.remove('ilow','icut','inop','ilastoff'); c.style.height='auto'; c.style.transform='none'; st.scrollTop=0;
   const ps=[...c.children].filter(x=>x.tagName==='P'); ps.forEach(x=>{ if('st' in x.dataset) x.style.fontSize=x.dataset.st; else x.dataset.st=x.style.fontSize; if(!x.dataset.f0) x.dataset.f0=parseFloat(getComputedStyle(x).fontSize); });
   // the content's height: the text and cards (a phone picture is apart – it sits whole at the bottom, or isn't shown)
   const flowH=()=>{ const top=c.getBoundingClientRect().top; return Math.max(0,...[...c.children].filter(x=>!x.classList.contains('iphone')&&x.offsetParent!==null).map(x=>x.getBoundingClientRect().bottom-top))+16; };
@@ -5535,6 +5536,7 @@ function introFit(el){
     return {flow,k}; };
   let {flow,k}=fit();
   if(phH()&&(flow+phH())*k>H+1){ c.classList.add('inop'); ({flow,k}=fit()); }   // the phone never shows cut: no room – it isn't shown at all
+  if((flow-16)*k>H+1&&c.querySelector('.ilast')){ c.classList.add('ilastoff'); ({flow,k}=fit()); }   // still too tall at 72%: the last-resort parts go before it scrolls
   const more=(flow-16)*k>H+1;                                             // (the 16 px under the last card may be cut)
   c.style.transform=`scale(${k})`; c.style.height=(more?flow:H/k)+'px';  // fills the stage (a phone sits at its bottom)
   st.style.overflowY=more?'auto':'hidden';

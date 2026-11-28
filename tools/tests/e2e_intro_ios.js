@@ -3,7 +3,8 @@
 // the series: the parent (4), the kid (2), the tutor (t1–t5), the class teacher and the private teacher (s1–s6), Hebrew and English.
 // Each screen: nothing of the screen (a part hidden on purpose aside) below the bottom of the stage – a must
 // from 390×664 up; at 375×548 / 375×629 it may scroll, only with the hint (a fade + an arrow) on, and the hint goes at the end;
-// a phone picture is whole or not shown (never cut), the opening screen's map card is whole, no "for whom" tag;
+// a phone picture is whole or not shown (never cut), the opening screen's map card is whole – on an SE it goes (ilast) so the
+// screen needs no scrolling, from 390×664 up it stays; no "for whom" tag;
 // every button ≥ 44 px; the explanation ≥ 12 px on the screen (its size × the scale). English: no Hebrew left.
 // The family app's sign-in: no card cut in half at the bottom (a short screen: one link to the teachers' app instead of the card).
 // OUT=dir: a picture of each screen that fails, and the pictures for the report (SHOTS=1).
@@ -16,7 +17,7 @@ const SERIES = [['parent', '(openIntro(false),0)'], ['kid', '(openIntro(true),0)
 const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'compete'], tutor: ['t2'], class: ['s4'], private: ['s4'] };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
-  const errs = [], table = {}, bad = [], tags = [], cuts = [], phoneT = {};
+  const errs = [], table = {}, bad = [], tags = [], cuts = [], phoneT = {}, mainSE = [], mapGone = [];
   const check = p => p.evaluate(() => {
     const el = document.getElementById('intro'), st = el.querySelector('.istage'), c = el.querySelector('.icard0'), sb = st.getBoundingClientRect().bottom;
     const k = new DOMMatrix(getComputedStyle(c).transform).a;
@@ -34,8 +35,8 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
     // to the end: everything is reachable, the hint goes
     st.scrollTop = st.scrollHeight; const sb2 = st.getBoundingClientRect().bottom;
     const lowEnd = kids().filter(x => x.getBoundingClientRect().bottom > sb2 + 1).length;
-    const map = c.querySelector('.imap'), mapCut = map ? (map.getBoundingClientRect().bottom > sb2 + 1 || map.getBoundingClientRect().top < st.getBoundingClientRect().top - 1 && !scroll) : false;
-    return { key: el.dataset.key, k: +k.toFixed(2), low, hint, scroll, small, font, lowEnd, phone, phones, mapCut, tag, heb: (el.innerText.match(/[֐-׿][^\n]*/g) || []) };
+    const map = c.querySelector('.imap'), mapCut = map && map.offsetParent !== null ? (map.getBoundingClientRect().bottom > sb2 + 1 || map.getBoundingClientRect().top < st.getBoundingClientRect().top - 1 && !scroll) : false;
+    return { key: el.dataset.key, k: +k.toFixed(2), mapOn: !!map && map.offsetParent !== null, low, hint, scroll, small, font, lowEnd, phone, phones, mapCut, tag, heb: (el.innerText.match(/[֐-׿][^\n]*/g) || []) };
   });
   const endHint = p => p.evaluate(() => new Promise(r => setTimeout(() => { const el = document.getElementById('intro'); const st = el.querySelector('.istage'); const res = !!el.querySelector('.imore.on'); st.scrollTop = 0; st.dispatchEvent(new Event('scroll')); r(res); }, 150)));
   for (const lang of ['he', 'en']) {
@@ -55,6 +56,7 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
           const r = await check(p), must = w >= 390 || h >= 664, hEnd = r.scroll ? await endHint(p) : false;
           const fits = !r.low.length && !r.scroll, hinted = r.scroll && r.hint && !hEnd && !r.lowEnd;
           if (r.tag) tags.push(`${lang} ${ser}:${r.key} «${r.tag}»`);
+          if (ser === 'parent' && r.key === 'main') { if (w === 375 && h === 548 && r.scroll) mainSE.push(lang); if (w >= 390 && h >= 664 && !r.mapOn) mapGone.push(`${lang} ${w}×${h}`); }
           if (r.phone.length || r.mapCut) cuts.push(`${lang} ${w}×${h} ${ser}:${r.key} ` + JSON.stringify({ phone: r.phone, mapCut: r.mapCut }));
           if (r.phones) (phoneT[`${ser}:${r.key}`] = phoneT[`${ser}:${r.key}`] || {})[`${nm} ${lang}`] = r.phones;
           const pass = (fits || (!must && hinted)) && !r.small.length && !r.font.length && (lang === 'he' || !r.heb.length);
@@ -68,6 +70,8 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
     await p.evaluate('document.getElementById("intro")?.remove()'); await c.close();
   }
   console.log('the screens: Hebrew and English, 5 sizes, 5 series');
+  ok(!mainSE.length, 'the opening screen on an SE (375×548) fits with no scrolling – its map goes as the last resort (ilast) ' + mainSE.join(' '));
+  ok(!mapGone.length, 'the opening screen keeps its map from 390×664 up (a short phone may drop it rather than scroll) ' + mapGone.join(' '));
   ok(!cuts.length, 'a phone picture is whole (under the text, inside the stage) or not shown; the map card of the opening screen is whole – every series, 5 sizes, he/en' + (cuts.length ? '\n    ' + cuts.join('\n    ') : ''));
   console.log('  phone pictures: ' + JSON.stringify(phoneT));
   ok(!tags.length, 'no "for whom" tag on any screen (להורה / לילד / למורה הפרטי / למורה בבית הספר / לאחים, לחברים ולכיתה) ' + JSON.stringify([...new Set(tags)]));

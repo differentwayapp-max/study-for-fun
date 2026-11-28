@@ -29,9 +29,11 @@ def W(s):
     """{…} → left-to-right inside Hebrew text (numbers)."""
     return re.sub(r"\{([^}]*)\}", lambda m: "⁦" + m.group(1) + "⁩", s)
 
-def Q(topic, q, opts, expl, sc):
-    """The right answer is always written first; the builder shuffles the options."""
-    return (topic, W(q), opts, 0, expl, sc)
+def Q(topic, q, opts, expl, sc, lvl=1):
+    """The right answer is always written first; the builder shuffles the options.
+    lvl=2 marks a test-level question (a 7th field 2 – "⭐ שלב מבחן")."""
+    t = (topic, W(q), opts, 0, expl, sc)
+    return t + (2,) if lvl == 2 else t
 
 def ROW(*es):
     """A few different emoji in a row (the things the question talks about)."""
@@ -272,8 +274,8 @@ C.append(("תיאורים ולוואי", [PRT], [
 
 # ══════════════════════ Sentence types and subordinate clauses ══════════════════════
 OPTS3 = ["משפט פשוט", "משפט מחובר", "משפט מורכב", "צירוף, לא משפט"]
-def TYPE(q, ans, sent, e, expl):
-    return Q(SNT, q, [OPTS3[ans]] + [o for i, o in enumerate(OPTS3) if i != ans], expl, S(sent, e=e))
+def TYPE(q, ans, sent, e, expl, lvl=1):
+    return Q(SNT, q, [OPTS3[ans]] + [o for i, o in enumerate(OPTS3) if i != ans], expl, S(sent, e=e), lvl)
 
 C.append(("פשוט, מחובר או מורכב?", [SNT], [
  TYPE("איזה סוג משפט בכרטיס?", 2, "התלמידים שהגיעו באיחור לא נכנסו.", "⏰", "שהגיעו באיחור – פסוקית לוואי"),
@@ -289,8 +291,8 @@ C.append(("פשוט, מחובר או מורכב?", [SNT], [
 ]))
 
 CL = ["פסוקית נושא", "פסוקית מושא", "פסוקית לוואי", "פסוקית זמן", "פסוקית סיבה", "פסוקית תכלית", "פסוקית ויתור", "פסוקית תנאי"]
-def CLQ(q, ans, wrong, sent, e, expl):
-    return Q(SNT, q, [ans] + wrong, expl, S(sent, e=e))
+def CLQ(q, ans, wrong, sent, e, expl, lvl=1):
+    return Q(SNT, q, [ans] + wrong, expl, S(sent, e=e), lvl)
 
 C.append(("סוגי פסוקיות", [SNT], [
  CLQ("איזו פסוקית יש במשפט שבכרטיס?", "פסוקית נושא", ["פסוקית מושא", "פסוקית לוואי", "פסוקית זמן"], "מי שמגיע ראשון זוכה.", "🥇", "מי זוכה? מי שמגיע ראשון"),
@@ -306,8 +308,8 @@ C.append(("סוגי פסוקיות", [SNT], [
 ]))
 
 # ══════════════════════ גזרות ══════════════════════
-def ROOTQ(q, word, root, wrong, e, expl):
-    return Q(GZR, q.format(w=word), [root] + wrong, expl, WC(word, e))
+def ROOTQ(q, word, root, wrong, e, expl, lvl=1):
+    return Q(GZR, q.format(w=word), [root] + wrong, expl, WC(word, e), lvl)
 
 C.append(("מה השורש? אותיות שנעלמות", [GZR], [
  ROOTQ('מה השורש של המילה "{w}"?', "הִשַּׂגְנוּ", "נ־ש־ג", ["ש־ג־ג", "ה־ש־ג", "י־ש־ג"], "🏆", "השיג – הנ׳ נבלעה בדגש: פ״נ"),
@@ -323,8 +325,8 @@ C.append(("מה השורש? אותיות שנעלמות", [GZR], [
 ]))
 
 GZ = ["שלמים", "פ״נ", "פ״י", "ע״ו / ע״י", "ל״ה", "כפולים"]
-def GZQ(q, ans, wrong, sc, expl):
-    return Q(GZR, q, [ans] + wrong, expl, sc)
+def GZQ(q, ans, wrong, sc, expl, lvl=1):
+    return Q(GZR, q, [ans] + wrong, expl, sc, lvl)
 
 C.append(("גזרות בנטייה ובזמנים", [GZR], [
  GZQ("לאיזו גזרה שייך השורש ס־ב־ב?", "כפולים", ["ע״ו / ע״י", "ל״ה", "פ״נ"], WC("ס־ב־ב", "🔄"), "שתי האותיות האחרונות זהות"),
@@ -340,8 +342,8 @@ C.append(("גזרות בנטייה ובזמנים", [GZR], [
 ]))
 
 # ══════════════════════ בניינים ══════════════════════
-def BNQ(q, word, ans, wrong, e, expl):
-    return Q(BIN, q.format(w=word), [ans] + wrong, expl, WC(word, e))
+def BNQ(q, word, ans, wrong, e, expl, lvl=1):
+    return Q(BIN, q.format(w=word), [ans] + wrong, expl, WC(word, e), lvl)
 
 C.append(("באיזה בניין? בכל הזמנים", [BIN], [
  BNQ('באיזה בניין המילה "{w}"?', "יְסֻדַּר", "פועל", ["פיעל", "נפעל", "הופעל"], "🗂️", "עתיד של סוּדַּר – פועל"),
@@ -375,8 +377,8 @@ MAKTELA, MIKTALA, KATAL, KATELET = "מַקְטֵלָה", "מִקְטָלָה", "
 KITUL, MIKTELET, MAKTEL, KATLAN = "קִטּוּל", "מִקְטֶלֶת", "מַקְטֵל", "קַטְלָן"
 KTILA, HAKTALA, MIKTAL = "קְטִילָה", "הַקְטָלָה", "מִקְטָל"
 
-def MQ(q, word, ans, wrong, e, expl):
-    return Q(MSH, q.format(w=word), [ans] + wrong, expl, WC(word, e))
+def MQ(q, word, ans, wrong, e, expl, lvl=1):
+    return Q(MSH, q.format(w=word), [ans] + wrong, expl, WC(word, e), lvl)
 
 C.append(("איזה משקל?", [MSH], [
  MQ('באיזה משקל המילה "{w}"?', "שָׁבִיר", KATIL, [KATAL, KTILA, MAKTEL], "🍷", "שָׁבִיר – קָטִיל: אפשר לשבור"),
@@ -405,8 +407,8 @@ C.append(("משמעות המשקל ובניית מילים", [MSH], [
 ]))
 
 # ══════════════════════ שם המספר ══════════════════════
-def NQ(q, data, ans, wrong, e, expl):
-    return Q(NUM, q, [ans] + wrong, expl, CARD(data, e=e))
+def NQ(q, data, ans, wrong, e, expl, lvl=1):
+    return Q(NUM, q, [ans] + wrong, expl, CARD(data, e=e), lvl)
 
 C.append(("מספרים: 11–19, מאות ואלפים", [NUM], [
  NQ("איך קוראים נכון את הכתוב בכרטיס?", "13 בנות", "שלוש עשרה בנות", ["שלושה עשר בנות", "שלוש עשר בנות", "שלושה עשרה בנות"], "👧", "נקבה: שלוש עשרה"),
@@ -435,8 +437,8 @@ C.append(("סמיכות ומספר סודר", [NUM], [
 ]))
 
 # ══════════════════════ מילות יחס בנטייה ══════════════════════
-def PQ(p, g, ans, wrong, e, expl):
-    return Q(PREP, f'מה הצורה של "{p}" בגוף {g}?', [ans] + wrong, expl, CARD(f"{p} + {g}", e=e))
+def PQ(p, g, ans, wrong, e, expl, lvl=1):
+    return Q(PREP, f'מה הצורה של "{p}" בגוף {g}?', [ans] + wrong, expl, CARD(f"{p} + {g}", e=e), lvl)
 
 C.append(("נטיית מילות יחס", [PREP], [
  PQ("בלי", "אני", "בלעדיי", ["בליי", "בלעדיני", "בלעדיו"], "🚶", "בלי + אני = בלעדיי"),

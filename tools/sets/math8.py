@@ -27,7 +27,10 @@ MAX_Q_WORDS = 12         # short word problems
 
 def W(s): return re.sub(r"\{([^}]*)\}", lambda m: "⁦" + m.group(1) + "⁩", s)
 def O(o): o = W(o); return o if re.search(r"[֐-׿]", o) or o.startswith("⁦") else "⁦" + o + "⁩"
-def Q(topic, q, opts, ans, expl, sc): return (topic, W(q), [O(o) for o in opts], ans, W(expl), sc)
+def Q(topic, q, opts, ans, expl, sc, lvl=1):
+    t = (topic, W(q), [O(o) for o in opts], ans, W(expl), sc)
+    return t + (2,) if lvl == 2 else t
+def Q2(*a): return Q(*a, lvl=2)        # a test-level question (the level of a real grade-8 test)
 
 _TXT = TXT
 def TXT(*lines, s=None):                                                # number cards as big as the frame allows

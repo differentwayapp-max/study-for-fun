@@ -6,7 +6,7 @@ const OUT = process.env.OUT || require('os').tmpdir();   // screenshots never la
   const b = await chromium.launch(); const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));
   await p.addInitScript(() => localStorage.setItem('sff_lang', 'he'));
-  await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(1800); await p.evaluate(() => document.getElementById('fbLogin')?.remove());
+  await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(1800); await p.evaluate(() => { document.getElementById('fbLogin')?.remove(); document.getElementById('sffLoad')?.remove(); });   // no cloud in a local test: the loading screen would cover the page
   const r = await p.evaluate(async () => {
     const s = await loadShare('en4-nov26'); s.id = 't1'; s.questions = s.qs; kids.push({ id: 'k1', name: 'עדי', grade: 3, color: '#FF5C8A' }); s.kidId = 'k1'; sets.push(s);
     const vis = id => !document.getElementById(id).classList.contains('hidden');

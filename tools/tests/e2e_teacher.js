@@ -14,7 +14,7 @@ const doc = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bearer
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (who, lang = 'he') => { const c = await b.newContext({ viewport: { width: 390, height: 844 } });
-    await c.addInitScript(([g, l]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); },
+    await c.addInitScript(([g, l]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_TEACH_LINKS = true;   /* the ways between the two apps (off in the store version) */ localStorage.setItem('sff_lang', l); },
       [{ sub: who, email: who + '@t.local', email_verified: true, name: who === 'mom' ? 'אמא' : 'מורה' }, lang]); return c; };
   const page = async (c, url = APP + 'teach') => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   const ready = p => p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 25000 }).then(() => p.waitForTimeout(1500));

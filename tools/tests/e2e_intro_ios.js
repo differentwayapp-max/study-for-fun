@@ -77,7 +77,7 @@ const PICK = { parent: ['main', 'material', 'track', 'start'], kid: ['play', 'co
   console.log('the family app\'s sign-in');
   for (const [w, h, nm] of SIZES) for (const lang of ['he', 'en']) {
     const c = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
-    await c.addInitScript(l => localStorage.setItem('sff_lang', l), lang);
+    await c.addInitScript(l => { localStorage.setItem('sff_lang', l); window.SFF_TEACH_LINKS = true; }, lang);   // the teachers' card on the sign-in (off in the store version – local_family_only)
     const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(APP, { waitUntil: 'load' });
     await p.waitForSelector('#fbLogin', { timeout: 20000 }); await p.waitForTimeout(800);
     const r = await p.evaluate(() => { const H = innerHeight, cut = [...document.querySelectorAll('#fbLogin .fbcard, #fbLogin .fbad')].filter(x => x.offsetParent !== null).filter(x => { const q = x.getBoundingClientRect(); return q.top < H && q.bottom > H + 1; }).map(x => x.id || x.className);

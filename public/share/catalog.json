@@ -390,88 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "sci3",
-   "ver": "2ec420b7dc",
-   "subject": "מדעים",
-   "grade": 2,
-   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
-   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
-   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
-   "tags": [
-    "תכונות חומרים",
-    "תערובות",
-    "בעירה",
-    "מעגל חשמלי",
-    "מוליכים ומבודדים",
-    "בטיחות בחשמל",
-    "מקורות אנרגיה",
-    "צרכי הצמח",
-    "חלקי הצמח",
-    "נביטה והאבקה",
-    "מחזור וחיסכון"
-   ],
-   "questions": 290,
-   "chapters": 28,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איך נקרא חומר שהאור עובר דרכו?",
-     "e": "🔦👓"
-    },
-    {
-     "q": "איך נבדוק איזה בד מתאים למטרייה?",
-     "e": "☂️"
-    },
-    {
-     "q": "מהי תערובת?",
-     "e": "🥗"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "sci5",
-   "ver": "f652e178e2",
-   "subject": "מדעים",
-   "grade": 4,
-   "title": "מתכות · תזונה · עיכול, נשימה ומחזור הדם · קרקע · מערכת השמש · תכנון מוצר",
-   "desc": "תכונות המתכות, בחירת חומרים ומיחזור, רכיבי המזון ותזונה נבונה, מערכת העיכול ומערכת הנשימה, הלב ומחזור הדם, קרקע וסלעים וסוגי הקרקע בישראל, סחיפה ושימור קרקע, מערכת השמש, הירח ומופעיו, ליקוי חמה וליקוי ירח, יום ולילה, שנה ועונות, ותהליך תכנון ובניית מוצר",
-   "desc_en": "Metals and their properties, choosing materials and recycling, nutrients and a balanced diet, the digestive and respiratory systems, the heart and blood circulation, soil and rocks and the soil types of Israel, erosion and soil conservation, the solar system, the Moon and its phases, solar and lunar eclipses, day and night, the year and seasons, and the design process",
-   "tags": [
-    "מתכות",
-    "מיחזור",
-    "תזונה",
-    "מערכת העיכול",
-    "מערכת הנשימה",
-    "הלב ומחזור הדם",
-    "קרקע וסלעים",
-    "מערכת השמש",
-    "הירח",
-    "יום ולילה ועונות",
-    "תכנון מוצר"
-   ],
-   "questions": 300,
-   "chapters": 29,
-   "reading": 2,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה מהבאים עשוי ממתכת?",
-     "e": "🔩✏️"
-    },
-    {
-     "q": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
-     "e": "🔩🌧️"
-    },
-    {
-     "q": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
-     "e": "🍲🔥"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci6",
    "ver": "a12a13df19",
    "subject": "מדעים",
@@ -1496,65 +1414,6 @@
    ]
   },
   {
-   "id": "sci2",
-   "ver": "57dd156773",
-   "subject": "מדעים",
-   "grade": 1,
-   "title": "חומרים · יצורים חיים · שיניים · צמחים · טבע · טכנולוגיה",
-   "desc": "תכונות ומיון של חומרים, מוצק נוזל וגז, יצורים חיים וצורכיהם, השיניים ובריאותן, בעלי חיים ובתי גידול, מגוון צמחים, שמירה על הטבע וטכנולוגיה",
-   "desc_en": "Properties and sorting of materials, solid, liquid and gas, living things and their needs, teeth and dental health, animal groups and habitats, plant diversity, protecting nature and technology",
-   "tags": [
-    "תכונות חומרים",
-    "מיון חומרים",
-    "מוצק נוזל וגז",
-    "חי ודומם",
-    "צורכי היצורים",
-    "שיניים",
-    "בריאות השיניים",
-    "בתי גידול",
-    "מגוון צמחים",
-    "שמירה על הטבע",
-    "טכנולוגיה"
-   ],
-   "questions": 240,
-   "chapters": 23,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "איזה צעצוע עשוי מחומר רך?",
-     "e": "🧸🔨",
-     "q_en": "Which toy is made of a soft material?"
-    },
-    {
-     "q": "איך נקרא חומר שמתכופף ולא נשבר?",
-     "e": "🤸",
-     "q_en": "What do we call a material that bends without breaking?"
-    },
-    {
-     "q": "ממה עשוי המפתח?",
-     "e": "🔑",
-     "q_en": "What is a key made of?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 2",
-   "title_en": "Materials · Living things · Teeth · Plants · Nature · Technology",
-   "tags_en": [
-    "Properties of materials",
-    "Sorting materials",
-    "Solid, liquid and gas",
-    "Living and non-living",
-    "Needs of living things",
-    "Teeth",
-    "Dental health",
-    "Habitats",
-    "Plant diversity",
-    "Protecting nature",
-    "Technology"
-   ]
-  },
-  {
    "id": "sci1",
    "ver": "bad9efe4c1",
    "subject": "מדעים",
@@ -1678,6 +1537,183 @@
     "Special quadrilaterals",
     "Similar triangles",
     "The Pythagorean theorem"
+   ]
+  },
+  {
+   "id": "sci3",
+   "ver": "2237b5f523",
+   "subject": "מדעים",
+   "grade": 2,
+   "title": "חומרים · חשמל ואנרגיה · צמחים · שומרים על הסביבה",
+   "desc": "תכונות החומרים ובחירת חומר, תערובות והפרדה, בעירה כשינוי בחומר ובטיחות באש, מעגל חשמלי, מוליכים ומבודדים, בטיחות בחשמל, מקורות אנרגיה והפיכת חשמל לאור, חום ותנועה, צרכי הצמח וחלקיו, נביטה והאבקה, צמחים בישראל, זיהום, מחזור וחיסכון",
+   "desc_en": "Properties of materials and choosing a material, mixtures and separating them, burning as a change in materials and fire safety, electric circuits, conductors and insulators, electrical safety, energy sources and turning electricity into light, heat and motion, what plants need and their parts, germination and pollination, plants in Israel, pollution, recycling and saving water and energy",
+   "tags": [
+    "תכונות חומרים",
+    "תערובות",
+    "בעירה",
+    "מעגל חשמלי",
+    "מוליכים ומבודדים",
+    "בטיחות בחשמל",
+    "מקורות אנרגיה",
+    "צרכי הצמח",
+    "חלקי הצמח",
+    "נביטה והאבקה",
+    "מחזור וחיסכון"
+   ],
+   "questions": 290,
+   "chapters": 28,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איך נקרא חומר שהאור עובר דרכו?",
+     "e": "🔦👓",
+     "q_en": "What do we call a material that light passes through?"
+    },
+    {
+     "q": "איך נבדוק איזה בד מתאים למטרייה?",
+     "e": "☂️",
+     "q_en": "How can we test which fabric is good for an umbrella?"
+    },
+    {
+     "q": "מהי תערובת?",
+     "e": "🥗",
+     "q_en": "What is a mixture?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 3",
+   "title_en": "Materials · Electricity and energy · Plants · Protecting the environment",
+   "tags_en": [
+    "Properties of materials",
+    "Mixtures",
+    "Burning",
+    "Electric circuits",
+    "Conductors and insulators",
+    "Electrical safety",
+    "Energy sources",
+    "What plants need",
+    "Plant parts",
+    "Germination and pollination",
+    "Recycling and saving"
+   ]
+  },
+  {
+   "id": "sci5",
+   "ver": "cc37f78a64",
+   "subject": "מדעים",
+   "grade": 4,
+   "title": "מתכות · תזונה · עיכול, נשימה ומחזור הדם · קרקע · מערכת השמש · תכנון מוצר",
+   "desc": "תכונות המתכות, בחירת חומרים ומיחזור, רכיבי המזון ותזונה נבונה, מערכת העיכול ומערכת הנשימה, הלב ומחזור הדם, קרקע וסלעים וסוגי הקרקע בישראל, סחיפה ושימור קרקע, מערכת השמש, הירח ומופעיו, ליקוי חמה וליקוי ירח, יום ולילה, שנה ועונות, ותהליך תכנון ובניית מוצר",
+   "desc_en": "Metals and their properties, choosing materials and recycling, nutrients and a balanced diet, the digestive and respiratory systems, the heart and blood circulation, soil and rocks and the soil types of Israel, erosion and soil conservation, the solar system, the Moon and its phases, solar and lunar eclipses, day and night, the year and seasons, and the design process",
+   "tags": [
+    "מתכות",
+    "מיחזור",
+    "תזונה",
+    "מערכת העיכול",
+    "מערכת הנשימה",
+    "הלב ומחזור הדם",
+    "קרקע וסלעים",
+    "מערכת השמש",
+    "הירח",
+    "יום ולילה ועונות",
+    "תכנון מוצר"
+   ],
+   "questions": 300,
+   "chapters": 29,
+   "reading": 2,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה מהבאים עשוי ממתכת?",
+     "e": "🔩✏️",
+     "q_en": "Which of these is made of metal?"
+    },
+    {
+     "q": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
+     "e": "🔩🌧️",
+     "q_en": "What forms on iron left outside in the rain?"
+    },
+    {
+     "q": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
+     "e": "🍲🔥",
+     "q_en": "A pot is made of metal so heat reaches the food. Which property is this?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 5",
+   "title_en": "Metals · Nutrition · Digestion, breathing and circulation · Soil · The solar system · Product design",
+   "tags_en": [
+    "Metals",
+    "Recycling",
+    "Nutrition",
+    "The digestive system",
+    "The respiratory system",
+    "The heart and circulation",
+    "Soil and rocks",
+    "The solar system",
+    "The Moon",
+    "Day, night and seasons",
+    "Product design"
+   ]
+  },
+  {
+   "id": "sci2",
+   "ver": "58e8b7ae2c",
+   "subject": "מדעים",
+   "grade": 1,
+   "title": "חומרים · יצורים חיים · שיניים · צמחים · טבע · טכנולוגיה",
+   "desc": "תכונות ומיון של חומרים, מוצק נוזל וגז, יצורים חיים וצורכיהם, השיניים ובריאותן, בעלי חיים ובתי גידול, מגוון צמחים, שמירה על הטבע וטכנולוגיה",
+   "desc_en": "Properties and sorting of materials, solid, liquid and gas, living things and their needs, teeth and dental health, animal groups and habitats, plant diversity, protecting nature and technology",
+   "tags": [
+    "תכונות חומרים",
+    "מיון חומרים",
+    "מוצק נוזל וגז",
+    "חי ודומם",
+    "צורכי היצורים",
+    "שיניים",
+    "בריאות השיניים",
+    "בתי גידול",
+    "מגוון צמחים",
+    "שמירה על הטבע",
+    "טכנולוגיה"
+   ],
+   "questions": 240,
+   "chapters": 23,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "איזה צעצוע עשוי מחומר רך?",
+     "e": "🧸🔨",
+     "q_en": "Which toy is made of a soft material?"
+    },
+    {
+     "q": "איך נקרא חומר שמתכופף ולא נשבר?",
+     "e": "🤸",
+     "q_en": "What do we call a material that bends without breaking?"
+    },
+    {
+     "q": "ממה עשוי המפתח?",
+     "e": "🔑",
+     "q_en": "What is a key made of?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 2",
+   "title_en": "Materials · Living things · Teeth · Plants · Nature · Technology",
+   "tags_en": [
+    "Properties of materials",
+    "Sorting materials",
+    "Solid, liquid and gas",
+    "Living and non-living",
+    "Needs of living things",
+    "Teeth",
+    "Dental health",
+    "Habitats",
+    "Plant diversity",
+    "Protecting nature",
+    "Technology"
    ]
   }
  ]

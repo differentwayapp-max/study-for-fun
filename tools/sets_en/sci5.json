@@ -1,0 +1,4192 @@
+{
+ "set": {
+  "name": "Science – Grade 5",
+  "title": "Metals · Nutrition · Digestion, breathing and circulation · Soil · The solar system · Product design",
+  "tags": [
+   "Metals",
+   "Recycling",
+   "Nutrition",
+   "The digestive system",
+   "The respiratory system",
+   "The heart and circulation",
+   "Soil and rocks",
+   "The solar system",
+   "The Moon",
+   "Day, night and seasons",
+   "Product design"
+  ]
+ },
+ "labels": {
+  "תכונות המתכות": "Properties of metals",
+  "בחירת חומרים ומיחזור": "Choosing materials and recycling",
+  "רכיבי המזון": "Nutrients",
+  "תזונה נבונה": "Healthy eating",
+  "מערכת העיכול": "The digestive system",
+  "מערכת הנשימה": "The respiratory system",
+  "הלב ומחזור הדם": "The heart and circulation",
+  "הקרקע – הרכב וסוגים": "Soil – composition and types",
+  "סלעים, סחיפה ושימור קרקע": "Rocks, erosion and soil conservation",
+  "מערכת השמש": "The solar system",
+  "הירח ומופעיו": "The Moon and its phases",
+  "יום ולילה, שנה ועונות": "Day and night, the year and seasons",
+  "תכנון ובניית מוצר": "Designing and building a product",
+  "מה מיוחד במתכות?": "What's special about metals?",
+  "חלודה ושמירה על מתכות": "Rust and protecting metals",
+  "בוחרים חומר לפי תכונות": "Choosing a material by its properties",
+  "📖 קטע מידע: המסע של הפחית": "📖 Reading passage: The can's journey",
+  "רכיבי המזון ותפקידם": "Nutrients and their jobs",
+  "איפה נמצא כל רכיב?": "Where is each nutrient found?",
+  "תפריט מאוזן": "A balanced menu",
+  "תוויות מזון והרגלים": "Food labels and habits",
+  "מסלול המזון בגוף": "The path of food in the body",
+  "שיניים ובריאות העיכול": "Teeth and digestive health",
+  "הדרך של האוויר": "The path of air",
+  "נשימה, ספורט ועישון": "Breathing, sports and smoking",
+  "הלב וכלי הדם": "The heart and blood vessels",
+  "מה הדם מוביל?": "What does blood carry?",
+  "ממה בנויה הקרקע?": "What is soil made of?",
+  "סוגי קרקע": "Types of soil",
+  "סוגי הקרקע בישראל": "Soil types in Israel",
+  "סלעים ובליה": "Rocks and weathering",
+  "סחיפה ושימור קרקע": "Erosion and soil conservation",
+  "השמש וכוכבי הלכת": "The Sun and the planets",
+  "סדר כוכבי הלכת": "The order of the planets",
+  "הירח – השכן שלנו": "The Moon – our neighbor",
+  "📖 קטע מידע: הירח משנה צורה?": "📖 Reading passage: Does the Moon change shape?",
+  "ליקוי חמה וליקוי ירח": "Solar and lunar eclipses",
+  "יום ולילה": "Day and night",
+  "חודש, שנה ועונות": "Month, year and seasons",
+  "שלבי תהליך התכנון": "Stages of the design process",
+  "מתכננים מוצר – דוגמאות": "Designing a product – examples",
+  "חזרה": "Review"
+ },
+ "texts": {
+  "3": "The can's journey\n\nDid you drink from a can? Don't throw it into the regular trash! The can is made of aluminum, and it can be recycled.\n\nAluminum is produced from a rock called bauxite. To get the metal out of the rock, people dig huge mines in nature and use a great deal of electricity.\n\nIn recycling, used cans are collected, cleaned, crushed and melted in a very hot furnace. The liquid metal is made into new sheets, and new cans are made from them. Making a can from recycled metal saves most of the electricity needed to make a can from the rock.\n\nAluminum can be recycled again and again, and it does not lose its properties. Iron, copper and gold are recycled too. This way, less waste reaches the garbage dumps, and less nature is destroyed by digging.\n\nSo the next time you finish a drink, look for the recycling bin!",
+  "22": "Does the Moon change shape?\n\nOne night we see a round, bright Moon in the sky, and a week later we see only half a circle. Does the Moon really change its shape? No! The Moon is a sphere, and it always stays a sphere.\n\nThe Moon does not make its own light. The Sun always lights up half of the Moon, and the Moon reflects that light back to us. The Moon travels around the Earth, so each night we see a different part of its lit side. The changes in shape that we see are called \"the phases of the Moon.\"\n\nWhen the Moon is between the Earth and the Sun, its lit side faces away from us, and we can hardly see it. This is the new moon. Little by little a crescent appears – a thin, lit strip – then a half moon, and after about two weeks, a full moon. Then the lit part gets smaller and smaller, until the next new moon.\n\nA full cycle of the phases of the Moon lasts about 29½ days. That is why in the Hebrew calendar every month begins at the new moon (Rosh Chodesh), and in the middle of the month, on the 15th, the Moon is full. For example, on Seder night of Passover, 15 Nisan, the Moon is full."
+ },
+ "questions": [
+  {
+   "he": "מה מהבאים עשוי ממתכת?",
+   "a": "בורג",
+   "h": "64acf06b",
+   "q": "Which of these is made of metal?",
+   "o": [
+    "Screw",
+    "Pencil",
+    "Glass cup",
+    "Shirt"
+   ],
+   "x": "The screw is made of iron – a metal"
+  },
+  {
+   "he": "איזה חומר אינו מתכת?",
+   "a": "עץ",
+   "h": "345d03ad",
+   "q": "Which material is not a metal?",
+   "o": [
+    "Wood",
+    "Iron",
+    "Aluminum",
+    "Copper"
+   ],
+   "x": "Wood comes from plants; the others are metals"
+  },
+  {
+   "he": "מה קורה לכפית מתכת בכוס תה חם?",
+   "a": "היא מתחממת",
+   "h": "d8330910",
+   "q": "What happens to a metal spoon in a cup of hot tea?",
+   "o": [
+    "It gets hot",
+    "It gets cold",
+    "It melts",
+    "It rusts at once"
+   ],
+   "x": "Metals conduct heat well"
+  },
+  {
+   "he": "למה חוטי חשמל עשויים מנחושת?",
+   "a": "היא מוליכה חשמל",
+   "h": "13c9e244",
+   "q": "Why are electric wires made of copper?",
+   "o": [
+    "It conducts electricity",
+    "It is transparent",
+    "It insulates electricity",
+    "It is very soft"
+   ],
+   "x": "Copper lets electric current pass easily"
+  },
+  {
+   "he": "למה עוטפים חוטי חשמל בפלסטיק?",
+   "a": "פלסטיק מבודד חשמל",
+   "h": "2b8cf963",
+   "q": "Why are electric wires covered in plastic?",
+   "o": [
+    "Plastic insulates electricity",
+    "Plastic conducts electricity",
+    "To make them heavy",
+    "To make them rust"
+   ],
+   "x": "The plastic protects us from electric shock"
+  },
+  {
+   "he": "מתכת מלוטשת נוצצת. איך נקראת התכונה?",
+   "a": "ברק מתכתי",
+   "h": "62b07155",
+   "q": "Polished metal shines. What is this property called?",
+   "o": [
+    "Metallic luster",
+    "Heat conductivity",
+    "Brittleness",
+    "Transparency"
+   ],
+   "x": "Polished metal reflects light and gleams"
+  },
+  {
+   "he": "מכים בברזל חם ומשנים את צורתו. איזו תכונה זו?",
+   "a": "ניתן לריקוע",
+   "h": "28addb72",
+   "q": "Hot iron is hammered into a new shape. Which property is this?",
+   "o": [
+    "Malleable",
+    "Transparent",
+    "Brittle",
+    "Heat-insulating"
+   ],
+   "x": "Metals change shape when hammered, without breaking"
+  },
+  {
+   "he": "איזו מתכת נמשכת למגנט?",
+   "a": "ברזל",
+   "h": "181e5b0c",
+   "q": "Which metal is attracted to a magnet?",
+   "o": [
+    "Iron",
+    "Aluminum",
+    "Copper",
+    "Gold"
+   ],
+   "x": "Iron is attracted; aluminum, copper and gold are not"
+  },
+  {
+   "he": "האם כל המתכות נמשכות למגנט?",
+   "a": "לא, רק חלקן",
+   "h": "f3aa97dd",
+   "q": "Are all metals attracted to magnets?",
+   "o": [
+    "No, only some",
+    "Yes, all of them",
+    "No metal is",
+    "Only heavy ones"
+   ],
+   "x": "An aluminum can, for example, is not attracted to a magnet"
+  },
+  {
+   "he": "איזו מתכת היא נוזל בטמפרטורת החדר?",
+   "a": "כספית",
+   "h": "bc51ccd8",
+   "q": "Which metal is a liquid at room temperature?",
+   "o": [
+    "Mercury",
+    "Iron",
+    "Gold",
+    "Copper"
+   ],
+   "x": "Mercury is the only metal that is liquid at room temperature"
+  },
+  {
+   "he": "מה נוצר על ברזל שנשאר בחוץ בגשם?",
+   "a": "חלודה",
+   "h": "4525382b",
+   "q": "What forms on iron left outside in the rain?",
+   "o": [
+    "Rust",
+    "Gold",
+    "Ice",
+    "Dust"
+   ],
+   "x": "Iron in contact with water and air rusts"
+  },
+  {
+   "he": "מה צריך כדי שברזל יחליד?",
+   "a": "מים ואוויר",
+   "h": "3f6b2450",
+   "q": "What does iron need in order to rust?",
+   "o": [
+    "Water and air",
+    "Darkness",
+    "A magnet",
+    "Cold"
+   ],
+   "x": "Oxygen from the air and water cause rust"
+  },
+  {
+   "he": "למה צובעים שערים מברזל?",
+   "a": "כדי שלא יחלידו",
+   "h": "45d848e0",
+   "q": "Why are iron gates painted?",
+   "o": [
+    "So they won't rust",
+    "So they rust fast",
+    "So they get warm",
+    "So they are heavy"
+   ],
+   "x": "The paint keeps water and air away from the iron"
+  },
+  {
+   "he": "מטבעות זהב עתיקים עדיין מבריקים. למה?",
+   "a": "זהב אינו מחליד",
+   "h": "a24474f3",
+   "q": "Ancient gold coins still shine. Why?",
+   "o": [
+    "Gold doesn't rust",
+    "Gold is soft",
+    "Gold is heavy",
+    "Gold is yellow"
+   ],
+   "x": "Gold does not react with water and air"
+  },
+  {
+   "he": "למה חלודה מסוכנת לגשר ברזל?",
+   "a": "היא מחלישה אותו",
+   "h": "cf2a8ad1",
+   "q": "Why is rust dangerous for an iron bridge?",
+   "o": [
+    "It weakens it",
+    "It strengthens it",
+    "It decorates it",
+    "It cools it"
+   ],
+   "x": "Rust crumbles, and the iron becomes thin and weak"
+  },
+  {
+   "he": "אופניים עמדו כל החורף בחצר. מה קרה כנראה לשרשרת?",
+   "a": "החלידה",
+   "h": "9f6626e5",
+   "q": "A bike stood in the yard all winter. What probably happened to its chain?",
+   "o": [
+    "It rusted",
+    "It got shiny",
+    "It melted",
+    "It stretched"
+   ],
+   "x": "The chain is iron, and it was in the rain and air"
+  },
+  {
+   "he": "מה מורחים על שרשרת אופניים כדי שלא תחליד?",
+   "a": "שמן",
+   "h": "ea48cd8f",
+   "q": "What do we put on a bike chain so it won't rust?",
+   "o": [
+    "Oil",
+    "Water",
+    "Salt",
+    "Sand"
+   ],
+   "x": "The oil covers the metal and keeps water away"
+  },
+  {
+   "he": "באיזה מקום ברזל יחליד הכי מהר?",
+   "a": "ליד הים",
+   "h": "aa104411",
+   "q": "Where will iron rust the fastest?",
+   "o": [
+    "By the sea",
+    "In a dry desert",
+    "Inside oil",
+    "In a dry box"
+   ],
+   "x": "Damp, salty air speeds up rusting"
+  },
+  {
+   "he": "לפי הטבלה – איזה מסמר יחליד ראשון?",
+   "a": "מסמר ב'",
+   "h": "bc936606",
+   "q": "According to the table, which nail will rust first?",
+   "o": [
+    "Nail B",
+    "Nail A",
+    "Nail C",
+    "All at once"
+   ],
+   "x": "Only nail B has both water and air",
+   "sc": {
+    "0": "Dry air",
+    "1": "Nail A",
+    "2": "Damp air",
+    "3": "Nail B",
+    "4": "Oil",
+    "5": "Nail C"
+   }
+  },
+  {
+   "he": "מאיזה צבע היא החלודה על הברזל?",
+   "a": "חום-כתום",
+   "h": "a9a00007",
+   "q": "What color is the rust on iron?",
+   "o": [
+    "Orange-brown",
+    "Silver",
+    "Clear",
+    "Blue"
+   ],
+   "x": "Rust is a new substance, orange-brown in color"
+  },
+  {
+   "he": "סיר עשוי ממתכת כדי שהחום יעבור לאוכל. איזו תכונה זו?",
+   "a": "מוליכות חום",
+   "h": "fbd2a760",
+   "q": "A pot is made of metal so heat reaches the food. Which property is this?",
+   "o": [
+    "Heat conductivity",
+    "Heat insulation",
+    "Metallic luster",
+    "Brittleness"
+   ],
+   "x": "Metal passes heat from the fire to the food"
+  },
+  {
+   "he": "למה ידית של מחבת עשויה מפלסטיק קשה או מעץ?",
+   "a": "חומר מבודד חום",
+   "h": "b75d2ccc",
+   "q": "Why is a frying pan handle made of hard plastic or wood?",
+   "o": [
+    "A heat insulator",
+    "A shiny material",
+    "A heat conductor",
+    "A rusting material"
+   ],
+   "x": "The handle stays cool, so we don't get burned"
+  },
+  {
+   "he": "למה מסגרת אופניים עשויה ממתכת?",
+   "a": "חומר חזק ועמיד",
+   "h": "2d7469e2",
+   "q": "Why is a bike frame made of metal?",
+   "o": [
+    "A strong, durable material",
+    "A transparent material",
+    "A soft material",
+    "An electrical insulator"
+   ],
+   "x": "The frame must carry the rider"
+  },
+  {
+   "he": "למה כף עץ טובה לבחישת מרק רותח?",
+   "a": "חומר מבודד חום",
+   "h": "ecf55adf",
+   "q": "Why is a wooden spoon good for stirring boiling soup?",
+   "o": [
+    "A heat insulator",
+    "A heat conductor",
+    "A shiny material",
+    "A magnetic material"
+   ],
+   "x": "Wood insulates heat, so the hand doesn't get burned"
+  },
+  {
+   "he": "איזה סיב טבעי לבגדי חורף מגיע מכבשים?",
+   "a": "צמר",
+   "h": "b4ee11f4",
+   "q": "Which natural fiber for winter clothes comes from sheep?",
+   "o": [
+    "Wool",
+    "Cotton",
+    "Linen",
+    "Silk"
+   ],
+   "x": "Wool is sheared from sheep, and it insulates heat"
+  },
+  {
+   "he": "לפי הטבלה – איזו מתכת מתאימה לגוף של מטוס?",
+   "a": "אלומיניום",
+   "h": "35828459",
+   "q": "According to the table, which metal suits the body of an airplane?",
+   "o": [
+    "Aluminum",
+    "Iron",
+    "Lead",
+    "All of them"
+   ],
+   "x": "An airplane needs a light material",
+   "sc": {
+    "0": "Heavy",
+    "1": "Iron",
+    "2": "Light",
+    "3": "Aluminum",
+    "4": "Very heavy",
+    "5": "Lead"
+   }
+  },
+  {
+   "he": "כבל חשמל בנוי משני חומרים. מה בתוכו?",
+   "a": "נחושת",
+   "h": "d401e2f2",
+   "q": "An electric cable is made of two materials. What is inside it?",
+   "o": [
+    "Copper",
+    "Plastic",
+    "Wood",
+    "Glass"
+   ],
+   "x": "Conducting metal inside, insulating plastic outside"
+  },
+  {
+   "he": "איזו תכונה חשובה בחומר של מגפי גשם?",
+   "a": "אטום למים",
+   "h": "7109ba48",
+   "q": "Which property matters in the material of rain boots?",
+   "o": [
+    "Waterproof",
+    "Transparent",
+    "Conducts electricity",
+    "Very heavy"
+   ],
+   "x": "The boots must keep the water out"
+  },
+  {
+   "he": "מה בודקים לפני שבוחרים חומר למוצר?",
+   "a": "את תכונותיו",
+   "h": "3dafbb3d",
+   "q": "What do we check before choosing a material for a product?",
+   "o": [
+    "Its properties",
+    "Only its color",
+    "Only its name",
+    "Only its smell"
+   ],
+   "x": "We choose a material whose properties suit the use"
+  },
+  {
+   "he": "למה בונים בניינים מבטון ומפלדה?",
+   "a": "חומר חזק ועמיד",
+   "h": "94e2c554",
+   "q": "Why are buildings made of concrete and steel?",
+   "o": [
+    "A strong, durable material",
+    "A very light material",
+    "A transparent material",
+    "A soft material"
+   ],
+   "x": "A building must stand for many years"
+  },
+  {
+   "he": "מאיזו מתכת עשויה הפחית?",
+   "a": "אלומיניום",
+   "h": "86be355f",
+   "q": "What metal is the can made of?",
+   "o": [
+    "Aluminum",
+    "Iron",
+    "Copper",
+    "Gold"
+   ],
+   "x": "In the passage: the can is made of aluminum"
+  },
+  {
+   "he": "מאיזה סלע מפיקים אלומיניום?",
+   "a": "בוקסיט",
+   "h": "9ad7ea86",
+   "q": "From which rock is aluminum produced?",
+   "o": [
+    "Bauxite",
+    "Limestone",
+    "Basalt",
+    "Marble"
+   ],
+   "x": "Aluminum is produced from a rock called bauxite"
+  },
+  {
+   "he": "מה עושים לפחיות במיחזור, אחרי שמועכים אותן?",
+   "a": "ממיסים אותן",
+   "h": "a36476ce",
+   "q": "In recycling, what is done to the cans after crushing them?",
+   "o": [
+    "They are melted",
+    "They are thrown away",
+    "They are painted",
+    "They are buried"
+   ],
+   "x": "They are melted in a very hot furnace"
+  },
+  {
+   "he": "מה חוסכים כשמכינים פחית ממתכת ממוחזרת?",
+   "a": "חשמל",
+   "h": "234b0846",
+   "q": "What is saved by making a can from recycled metal?",
+   "o": [
+    "Electricity",
+    "Water",
+    "Salt",
+    "Paint"
+   ],
+   "x": "It saves most of the electricity needed"
+  },
+  {
+   "he": "כמה פעמים אפשר למחזר אלומיניום?",
+   "a": "שוב ושוב",
+   "h": "6a0aa2b7",
+   "q": "How many times can aluminum be recycled?",
+   "o": [
+    "Again and again",
+    "Only once",
+    "Twice",
+    "Not even once"
+   ],
+   "x": "It does not lose its properties"
+  },
+  {
+   "he": "איזו מתכת נוספת ממוחזרת, לפי הקטע?",
+   "a": "נחושת",
+   "h": "5be4b67c",
+   "q": "Which other metal is recycled, according to the passage?",
+   "o": [
+    "Copper",
+    "Mercury",
+    "Lead",
+    "Tin"
+   ],
+   "x": "In the passage: iron, copper and gold are recycled"
+  },
+  {
+   "he": "איזו תועלת לטבע מוזכרת בקטע?",
+   "a": "פחות חפירות",
+   "h": "2155a996",
+   "q": "Which benefit to nature does the passage mention?",
+   "o": [
+    "Less digging",
+    "More mines",
+    "More waste",
+    "Less rain"
+   ],
+   "x": "Less nature is destroyed by digging"
+  },
+  {
+   "he": "מה פירוש המילה \"מכרות\" בקטע?",
+   "a": "מקומות חפירה",
+   "h": "05782feb",
+   "q": "What does the word \"mines\" mean in the passage?",
+   "o": [
+    "Digging sites",
+    "Machines",
+    "Stores",
+    "Furnaces"
+   ],
+   "x": "In a mine, people dig to get rocks and metals out"
+  },
+  {
+   "he": "מה מטרת הקטע?",
+   "a": "לעודד מיחזור",
+   "h": "6b4359fa",
+   "q": "What is the purpose of the passage?",
+   "o": [
+    "To encourage recycling",
+    "To make us laugh",
+    "To tell a legend",
+    "To teach cooking"
+   ],
+   "x": "It explains and asks us to recycle cans"
+  },
+  {
+   "he": "לפי הקטע, לאן כדאי לזרוק פחית ריקה?",
+   "a": "למכל המיחזור",
+   "h": "bea36935",
+   "q": "According to the passage, where should an empty can go?",
+   "o": [
+    "In the recycling bin",
+    "In the regular trash",
+    "Into the sea",
+    "On the street"
+   ],
+   "x": "That way it can become a new can"
+  },
+  {
+   "he": "מהו הרכיב העיקרי בלחם, באורז ובפסטה?",
+   "a": "פחמימות",
+   "h": "b0f280ed",
+   "q": "What is the main nutrient in bread, rice and pasta?",
+   "o": [
+    "Carbohydrates",
+    "Proteins",
+    "Fats",
+    "Vitamins"
+   ],
+   "x": "Grains are rich in carbohydrates – a source of energy"
+  },
+  {
+   "he": "מה התפקיד העיקרי של החלבונים בגוף?",
+   "a": "בנייה וגדילה",
+   "h": "974efdda",
+   "q": "What is the main job of proteins in the body?",
+   "o": [
+    "Building and growth",
+    "Cooling the body",
+    "Coloring the hair",
+    "Drinking"
+   ],
+   "x": "Proteins build muscles and help us grow"
+  },
+  {
+   "he": "באיזה מזון יש הרבה חלבון?",
+   "a": "ביצה",
+   "h": "f247418d",
+   "q": "Which food has a lot of protein?",
+   "o": [
+    "Egg",
+    "Cucumber",
+    "Candy",
+    "Apple"
+   ],
+   "x": "Eggs, meat, fish and legumes are rich in protein"
+  },
+  {
+   "he": "מה תפקיד השומנים בגוף?",
+   "a": "מאגר אנרגיה",
+   "h": "e5c1d5fc",
+   "q": "What is the job of fats in the body?",
+   "o": [
+    "Storing energy",
+    "Building teeth",
+    "Cleaning the blood",
+    "Absorbing light"
+   ],
+   "x": "Fat stores energy and keeps the body warm"
+  },
+  {
+   "he": "איזה מזון עשיר בשומן?",
+   "a": "אבוקדו",
+   "h": "9f7a9835",
+   "q": "Which food is rich in fat?",
+   "o": [
+    "Avocado",
+    "Apple",
+    "Cucumber",
+    "Rice"
+   ],
+   "x": "Avocados, oil and nuts have a lot of fat"
+  },
+  {
+   "he": "איזה מינרל דרוש לעצמות ולשיניים חזקות?",
+   "a": "סידן",
+   "h": "d7a1868b",
+   "q": "Which mineral is needed for strong bones and teeth?",
+   "o": [
+    "Calcium",
+    "Iron",
+    "Potassium",
+    "Sodium"
+   ],
+   "x": "Calcium is found in milk and dairy products"
+  },
+  {
+   "he": "באיזה ויטמין עשירים תפוזים ולימונים?",
+   "a": "ויטמין ⁦C⁩",
+   "h": "1cdb42b5",
+   "q": "Oranges and lemons are rich in which vitamin?",
+   "o": [
+    "Vitamin C",
+    "Vitamin D",
+    "Vitamin K",
+    "Vitamin B12"
+   ],
+   "x": "Citrus fruits are rich in vitamin C"
+  },
+  {
+   "he": "איזה חלק מגוף האדם הוא מים, בערך?",
+   "a": "יותר ממחצית",
+   "h": "4526bd04",
+   "q": "About how much of the human body is water?",
+   "o": [
+    "More than half",
+    "Less than a tenth",
+    "A quarter",
+    "Almost none"
+   ],
+   "x": "About 60% of the human body is water"
+  },
+  {
+   "he": "מה במזון עוזר למעיים לפעול היטב?",
+   "a": "סיבים תזונתיים",
+   "h": "d4ab4326",
+   "q": "What in food helps the intestines work well?",
+   "o": [
+    "Dietary fiber",
+    "Sugar",
+    "Salt",
+    "Fat"
+   ],
+   "x": "Fiber is in vegetables, fruit and whole grains"
+  },
+  {
+   "he": "איזה מזון יוצא דופן?",
+   "a": "גבינה",
+   "h": "e0e95e44",
+   "q": "Which food is the odd one out?",
+   "o": [
+    "Cheese",
+    "Bread",
+    "Rice",
+    "Pasta"
+   ],
+   "x": "Cheese is rich in protein; the others in carbohydrates"
+  },
+  {
+   "he": "באיזה מזון יש הרבה פחמימות?",
+   "a": "תפוח אדמה",
+   "h": "7bcaa688",
+   "q": "Which food has a lot of carbohydrates?",
+   "o": [
+    "Potato",
+    "Egg",
+    "Fish",
+    "Cheese"
+   ],
+   "x": "Potatoes are rich in starch – a carbohydrate"
+  },
+  {
+   "he": "סוכר הוא סוג של…",
+   "a": "פחמימות",
+   "h": "1c7957dc",
+   "q": "Sugar belongs to which group of nutrients?",
+   "o": [
+    "Carbohydrates",
+    "Proteins",
+    "Fats",
+    "Minerals"
+   ],
+   "x": "Sugar and starch are carbohydrates"
+  },
+  {
+   "he": "איזה מזון עשיר בברזל, שחשוב לדם?",
+   "a": "בשר אדום",
+   "h": "c897561e",
+   "q": "Which food is rich in iron, which is important for the blood?",
+   "o": [
+    "Red meat",
+    "Sugar",
+    "Water",
+    "Oil"
+   ],
+   "x": "Meat, lentils and spinach are rich in iron"
+  },
+  {
+   "he": "איזה ויטמין העור מייצר בעזרת אור השמש?",
+   "a": "ויטמין ⁦D⁩",
+   "h": "ef3ff091",
+   "q": "Which vitamin does the skin make with the help of sunlight?",
+   "o": [
+    "Vitamin D",
+    "Vitamin C",
+    "Vitamin A",
+    "Vitamin K"
+   ],
+   "x": "In the sun, the skin makes vitamin D"
+  },
+  {
+   "he": "בטבלה: רכיבים ב-⁦100⁩ מ״ל חלב. מה יש הכי הרבה?",
+   "a": "פחמימות",
+   "h": "40a1ddc5",
+   "q": "The table shows nutrients in 100 mL of milk. Which is there most of?",
+   "o": [
+    "Carbohydrates",
+    "Protein",
+    "Fat",
+    "All the same"
+   ],
+   "x": "5 g is the largest number in the table",
+   "sc": {
+    "0": "3 g",
+    "1": "Protein",
+    "2": "5 g",
+    "3": "Carbs",
+    "4": "3 g",
+    "5": "Fat"
+   }
+  },
+  {
+   "he": "לפי הטבלה – כמה חלבון יש ב-⁦100⁩ מ״ל חלב?",
+   "a": "⁦3⁩ גרם",
+   "h": "df4a5875",
+   "q": "According to the table, how much protein is in 100 mL of milk?",
+   "o": [
+    "3 g",
+    "5 g",
+    "100 g",
+    "11 g"
+   ],
+   "x": "The protein row says 3 g",
+   "sc": {
+    "0": "3 g",
+    "1": "Protein",
+    "2": "5 g",
+    "3": "Carbs",
+    "4": "3 g",
+    "5": "Fat"
+   }
+  },
+  {
+   "he": "איזה מהם אינו רכיב תזונה?",
+   "a": "חמצן",
+   "h": "a9b2ceb8",
+   "q": "Which of these is not a nutrient?",
+   "o": [
+    "Oxygen",
+    "Protein",
+    "Vitamin",
+    "Mineral"
+   ],
+   "x": "Oxygen enters by breathing, not with food"
+  },
+  {
+   "he": "למה חשוב לשתות מים כל יום?",
+   "a": "הגוף מאבד מים",
+   "h": "c5c97d88",
+   "q": "Why is it important to drink water every day?",
+   "o": [
+    "The body loses water",
+    "Water is fattening",
+    "Water has protein",
+    "There's no need"
+   ],
+   "x": "We lose water in sweat, urine and breath"
+  },
+  {
+   "he": "קטניות מחליפות את הבשר בתפריט הצמחוני. בזכות איזה רכיב?",
+   "a": "חלבון",
+   "h": "db6a9bab",
+   "q": "Legumes replace meat in a vegetarian diet. Which nutrient makes this possible?",
+   "o": [
+    "Protein",
+    "Sugar",
+    "Vitamin C",
+    "Salt"
+   ],
+   "x": "Legumes are rich in protein, like meat"
+  },
+  {
+   "he": "מה משותף לגזר, לתפוז ולחסה?",
+   "a": "עשירים בוויטמינים",
+   "h": "3ffe8958",
+   "q": "What do carrots, oranges and lettuce have in common?",
+   "o": [
+    "Rich in vitamins",
+    "Rich in fat",
+    "Rich in protein",
+    "They have no water"
+   ],
+   "x": "Vegetables and fruit are a source of vitamins and minerals"
+  },
+  {
+   "he": "מהי תזונה מאוזנת?",
+   "a": "מזון מגוון במידה",
+   "h": "ff96e589",
+   "q": "What is a balanced diet?",
+   "o": [
+    "Varied food in moderation",
+    "Only vegetables",
+    "Only meat",
+    "Lots of sweets"
+   ],
+   "x": "Food from all the food groups, in the right amounts"
+  },
+  {
+   "he": "למה לא כדאי לאכול חטיפים מתוקים כל יום?",
+   "a": "עשירים בסוכר",
+   "h": "abd1957b",
+   "q": "Why shouldn't we eat sweet snacks every day?",
+   "o": [
+    "They're high in sugar",
+    "They have no taste",
+    "They're green",
+    "They're cold"
+   ],
+   "x": "Lots of sugar harms teeth and causes weight gain"
+  },
+  {
+   "he": "איזו מהן ארוחת הבוקר הכי מאוזנת?",
+   "a": "לחם, ביצה וירקות",
+   "h": "9430c77d",
+   "q": "Which breakfast is the most balanced?",
+   "o": [
+    "Bread, egg and vegetables",
+    "Cake and chocolate milk",
+    "Snack and sweet drink",
+    "Only candy"
+   ],
+   "x": "It has carbohydrates, protein and vitamins"
+  },
+  {
+   "he": "מה הכי כדאי לשתות כשצמאים?",
+   "a": "מים",
+   "h": "330e8efd",
+   "q": "What is best to drink when you are thirsty?",
+   "o": [
+    "Water",
+    "Soda",
+    "Sweetened juice",
+    "Energy drink"
+   ],
+   "x": "Water quenches thirst without extra sugar"
+  },
+  {
+   "he": "למה כדאי לאכול ארוחת בוקר?",
+   "a": "לקבל אנרגיה",
+   "h": "f4fb0868",
+   "q": "Why should we eat breakfast?",
+   "o": [
+    "To get energy",
+    "To doze in class",
+    "To skip drinking water",
+    "To fast until evening"
+   ],
+   "x": "After the night, the body needs energy for learning"
+  },
+  {
+   "he": "מה קורה כשאוכלים הרבה יותר אנרגיה ממה שמוציאים?",
+   "a": "עולים במשקל",
+   "h": "adc06730",
+   "q": "What happens when we eat much more energy than we use?",
+   "o": [
+    "We gain weight",
+    "We lose weight",
+    "We grow taller",
+    "Nothing changes"
+   ],
+   "x": "The extra energy is stored in the body as fat"
+  },
+  {
+   "he": "דני אוכל רק פסטה. מה חסר לו?",
+   "a": "חלבונים וויטמינים",
+   "h": "0019340e",
+   "q": "Dani eats only pasta. What is he missing?",
+   "o": [
+    "Proteins and vitamins",
+    "Carbohydrates",
+    "Energy",
+    "Nothing"
+   ],
+   "x": "Pasta is mostly carbohydrates"
+  },
+  {
+   "he": "אילו שני הרגלים יחד שומרים על משקל בריא?",
+   "a": "תזונה ופעילות גופנית",
+   "h": "949a1b09",
+   "q": "Which two habits together keep a healthy weight?",
+   "o": [
+    "Diet and physical activity",
+    "Screens and sweet drinks",
+    "Candy and TV",
+    "Snacks and little sleep"
+   ],
+   "x": "We eat right and move every day"
+  },
+  {
+   "he": "למה לא כדאי לאכול הרבה מלח?",
+   "a": "מעלה לחץ דם",
+   "h": "17fa6a8f",
+   "q": "Why shouldn't we eat a lot of salt?",
+   "o": [
+    "It raises blood pressure",
+    "It strengthens bones",
+    "It gives vitamins",
+    "It improves sleep"
+   ],
+   "x": "Too much salt harms the heart and blood vessels"
+  },
+  {
+   "he": "איזו מהן ארוחת העשר הכי בריאה?",
+   "a": "כריך ופרי",
+   "h": "fb0f600d",
+   "q": "Which school snack is the healthiest?",
+   "o": [
+    "Sandwich and fruit",
+    "Cake and sweet drink",
+    "Chocolate bar",
+    "Chips"
+   ],
+   "x": "A sandwich and fruit – varied nutrients, little sugar"
+  },
+  {
+   "he": "בטבלה: סוכר ב-⁦100⁩ גרם דגני בוקר. מה בריא יותר?",
+   "a": "דגנים א'",
+   "h": "b16b447e",
+   "q": "The table shows sugar in 100 g of cereal. Which is healthier?",
+   "o": [
+    "Cereal A",
+    "Cereal B",
+    "Both the same",
+    "We can't tell"
+   ],
+   "x": "Cereal A has much less sugar",
+   "sc": {
+    "0": "Cereal A",
+    "1": "5 g",
+    "2": "Cereal B",
+    "3": "25 g"
+   }
+  },
+  {
+   "he": "לפי הגרף – באיזה יום נועם שתה הכי הרבה מים?",
+   "a": "יום ג'",
+   "h": "75b25e70",
+   "q": "According to the graph, on which day did Noam drink the most water?",
+   "o": [
+    "Tuesday",
+    "Sunday",
+    "Monday",
+    "Wednesday"
+   ],
+   "x": "The highest point is on Tuesday",
+   "sc": {
+    "4": "Sun",
+    "5": "Mon",
+    "6": "Tue",
+    "7": "Wed",
+    "8": "Glasses",
+    "9": "Day"
+   }
+  },
+  {
+   "he": "לפי הגרף – באיזה יום נועם שתה הכי מעט מים?",
+   "a": "יום א'",
+   "h": "05987dd6",
+   "q": "According to the graph, on which day did Noam drink the least water?",
+   "o": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday"
+   ],
+   "x": "The lowest point is on Sunday",
+   "sc": {
+    "4": "Sun",
+    "5": "Mon",
+    "6": "Tue",
+    "7": "Wed",
+    "8": "Glasses",
+    "9": "Day"
+   }
+  },
+  {
+   "he": "מה כדאי לבדוק בתווית של מוצר מזון?",
+   "a": "כמות סוכר ומלח",
+   "h": "6c0b6381",
+   "q": "What should you check on a food label?",
+   "o": [
+    "Sugar and salt amounts",
+    "The package color",
+    "The store name",
+    "The letter size"
+   ],
+   "x": "The label tells us what is in the food"
+  },
+  {
+   "he": "מה מסמן סמל אדום על מוצר מזון בישראל?",
+   "a": "רכיב בכמות גבוהה",
+   "h": "1c422981",
+   "q": "What does a red symbol on a food product in Israel mean?",
+   "o": [
+    "High in an ingredient",
+    "A recommended product",
+    "A cheap product",
+    "A new product"
+   ],
+   "x": "A lot of sugar, sodium or saturated fat"
+  },
+  {
+   "he": "באיזו תדירות מומלץ לאכול ירקות ופירות?",
+   "a": "כל יום",
+   "h": "ce6fbe7a",
+   "q": "How often should we eat vegetables and fruit?",
+   "o": [
+    "Every day",
+    "Once a month",
+    "Once a year",
+    "Only on holidays"
+   ],
+   "x": "Vegetables and fruit provide vitamins and fiber"
+  },
+  {
+   "he": "איזה מזון כדאי לאכול רק לעיתים רחוקות?",
+   "a": "צ'יפס מטוגן",
+   "h": "4cd92a05",
+   "q": "Which food should we eat only rarely?",
+   "o": [
+    "French fries",
+    "Cucumber",
+    "Apple",
+    "Plain yogurt"
+   ],
+   "x": "Fried food has a lot of fat and salt"
+  },
+  {
+   "he": "מה יקרה לגוף שלא מקבל מספיק סידן?",
+   "a": "עצמות חלשות",
+   "h": "d4fc5a00",
+   "q": "What will happen to a body that doesn't get enough calcium?",
+   "o": [
+    "Weak bones",
+    "Strong muscles",
+    "More energy",
+    "Long hair"
+   ],
+   "x": "Calcium builds bones and teeth"
+  },
+  {
+   "he": "רוני רץ מחר בתחרות. מה כדאי לו לאכול היום?",
+   "a": "פחמימות",
+   "h": "7cfb399c",
+   "q": "Roni is running in a race tomorrow. What should he eat today?",
+   "o": [
+    "Carbohydrates",
+    "Only fat",
+    "Nothing",
+    "Lots of salt"
+   ],
+   "x": "Carbohydrates give energy for running"
+  },
+  {
+   "he": "איזה הרגל אינו בריא?",
+   "a": "לדלג על ארוחות",
+   "h": "b31000ae",
+   "q": "Which habit is not healthy?",
+   "o": [
+    "Skipping meals",
+    "Drinking water",
+    "Eating vegetables",
+    "Eating slowly"
+   ],
+   "x": "Without meals, the body is left without energy"
+  },
+  {
+   "he": "איפה מתחיל העיכול?",
+   "a": "בפה",
+   "h": "fe5d26af",
+   "q": "Where does digestion begin?",
+   "o": [
+    "In the mouth",
+    "In the stomach",
+    "In the large intestine",
+    "In the lungs"
+   ],
+   "x": "The teeth chew, and saliva starts breaking food down"
+  },
+  {
+   "he": "מה תפקיד השיניים בעיכול?",
+   "a": "לחתוך ולטחון",
+   "h": "085790c5",
+   "q": "What do the teeth do in digestion?",
+   "o": [
+    "Cut and grind",
+    "Absorb food",
+    "Remove waste",
+    "Let air in"
+   ],
+   "x": "The teeth break the food into small pieces"
+  },
+  {
+   "he": "מה עושה הרוק?",
+   "a": "מרכך ומתחיל לפרק",
+   "h": "846f78dd",
+   "q": "What does saliva do?",
+   "o": [
+    "Softens and starts digesting",
+    "Removes waste",
+    "Cleans the lungs",
+    "Warms the body"
+   ],
+   "x": "Saliva wets the food and starts digesting it"
+  },
+  {
+   "he": "איך נקרא הצינור שמוביל מזון מהפה אל הקיבה?",
+   "a": "ושט",
+   "h": "b12ff331",
+   "q": "What is the tube that carries food from the mouth to the stomach called?",
+   "o": [
+    "Esophagus",
+    "Windpipe",
+    "Small intestine",
+    "Vein"
+   ],
+   "x": "The esophagus carries food to the stomach"
+  },
+  {
+   "he": "מה קורה למזון בקיבה, מלבד הפירוק?",
+   "a": "מתערבב במיצי עיכול",
+   "h": "746f9520",
+   "q": "What happens to food in the stomach, besides breaking down?",
+   "o": [
+    "Mixes with digestive juices",
+    "Leaves the body",
+    "Turns into air",
+    "Gets chewed by teeth"
+   ],
+   "x": "The stomach churns the food with acidic juices",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "באיזה איבר רוב חומרי המזון נספגים לדם?",
+   "a": "במעי הדק",
+   "h": "8ed2eebf",
+   "q": "In which organ are most nutrients absorbed into the blood?",
+   "o": [
+    "In the small intestine",
+    "In the stomach",
+    "In the mouth",
+    "In the esophagus"
+   ],
+   "x": "The wall of the small intestine absorbs the nutrients",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "מה התפקיד העיקרי של המעי הגס?",
+   "a": "ספיגת מים",
+   "h": "4e6c94de",
+   "q": "What is the main job of the large intestine?",
+   "o": [
+    "Absorbing water",
+    "Chewing food",
+    "Breathing",
+    "Swallowing"
+   ],
+   "x": "In the large intestine, water is absorbed from the waste",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "מהו הסדר הנכון של מסלול המזון?",
+   "a": "פה-ושט-קיבה",
+   "h": "e47e7112",
+   "q": "What is the correct order of the food's path?",
+   "o": [
+    "Mouth-esophagus-stomach",
+    "Esophagus-mouth-stomach",
+    "Stomach-mouth-esophagus",
+    "Mouth-stomach-esophagus"
+   ],
+   "x": "From the mouth, through the esophagus, into the stomach"
+  },
+  {
+   "he": "מהו עיכול?",
+   "a": "פירוק המזון לחלקיקים",
+   "h": "797f7fe0",
+   "q": "What is digestion?",
+   "o": [
+    "Breaking food into particles",
+    "Swallowing air",
+    "Drinking water",
+    "Brushing teeth"
+   ],
+   "x": "This way the body can absorb food into the blood"
+  },
+  {
+   "he": "לאן עוברים חומרי המזון מהמעי הדק?",
+   "a": "לדם",
+   "h": "5aab8e92",
+   "q": "Where do nutrients go from the small intestine?",
+   "o": [
+    "Into the blood",
+    "Into the lungs",
+    "Into the esophagus",
+    "Into the mouth"
+   ],
+   "x": "The blood carries them to all the body's cells",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "אילו שיניים נמצאות בחזית הפה ונוגסות במזון?",
+   "a": "החותכות",
+   "h": "4f2c73e0",
+   "q": "Which teeth are at the front of the mouth and bite into food?",
+   "o": [
+    "Incisors",
+    "Molars",
+    "Canines",
+    "Wisdom teeth"
+   ],
+   "x": "The front incisors bite into the food"
+  },
+  {
+   "he": "אילו שיניים רחבות ונמצאות בעומק הפה?",
+   "a": "הטוחנות",
+   "h": "d18e8d2d",
+   "q": "Which teeth are wide and found at the back of the mouth?",
+   "o": [
+    "Molars",
+    "Incisors",
+    "Canines",
+    "Front teeth"
+   ],
+   "x": "The wide molars crush the food"
+  },
+  {
+   "he": "למה חשוב ללעוס היטב? כי זה…",
+   "a": "מקל על העיכול",
+   "h": "c0283976",
+   "q": "Why is it important to chew well? Because it…",
+   "o": [
+    "Makes digestion easier",
+    "Slows breathing",
+    "Strengthens the lungs",
+    "Adds vitamins"
+   ],
+   "x": "Small pieces are digested easily"
+  },
+  {
+   "he": "מה גורם לחורים בשיניים?",
+   "a": "חיידקים וסוכר",
+   "h": "8cc665e9",
+   "q": "What causes holes in teeth?",
+   "o": [
+    "Bacteria and sugar",
+    "Water",
+    "Vegetables",
+    "Brushing"
+   ],
+   "x": "Bacteria eat sugar and make acid"
+  },
+  {
+   "he": "כמה פעמים ביום מומלץ לצחצח שיניים?",
+   "a": "פעמיים",
+   "h": "a3cc459b",
+   "q": "How many times a day should we brush our teeth?",
+   "o": [
+    "Twice",
+    "Once a week",
+    "Once a month",
+    "Never"
+   ],
+   "x": "In the morning and in the evening before bed"
+  },
+  {
+   "he": "איזה חלק במערכת העיכול הוא הארוך ביותר?",
+   "a": "המעי הדק",
+   "h": "b3466edd",
+   "q": "Which part of the digestive system is the longest?",
+   "o": [
+    "The small intestine",
+    "The stomach",
+    "The esophagus",
+    "The mouth"
+   ],
+   "x": "The small intestine is several meters long, folded in the belly",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "מה תפקיד מיצי העיכול בקיבה?",
+   "a": "לפרק את המזון",
+   "h": "709a6c10",
+   "q": "What do the digestive juices in the stomach do?",
+   "o": [
+    "Break down the food",
+    "Cool the food",
+    "Dry the food",
+    "Color the food"
+   ],
+   "x": "The acidic juices break down the food",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "למה כדאי לשטוף ידיים לפני האוכל?",
+   "a": "למנוע מחלות",
+   "h": "a384a1a7",
+   "q": "Why should we wash our hands before eating?",
+   "o": [
+    "To prevent illness",
+    "To get vitamins",
+    "To warm our hands",
+    "To digest faster"
+   ],
+   "x": "This way germs don't get into the mouth with food"
+  },
+  {
+   "he": "איזה איבר אינו חלק ממערכת העיכול?",
+   "a": "הריאות",
+   "h": "8ffca56e",
+   "q": "Which organ is not part of the digestive system?",
+   "o": [
+    "The lungs",
+    "The stomach",
+    "The esophagus",
+    "The small intestine"
+   ],
+   "x": "The lungs belong to the respiratory system"
+  },
+  {
+   "he": "מה יוצא מהגוף בסוף מסלול העיכול?",
+   "a": "פסולת שלא נספגה",
+   "h": "620dae38",
+   "q": "What leaves the body at the end of the digestive path?",
+   "o": [
+    "Waste that wasn't absorbed",
+    "Proteins",
+    "Vitamins",
+    "Oxygen"
+   ],
+   "x": "What the body didn't absorb leaves as feces",
+   "sc": {
+    "1": "Mouth",
+    "2": "Esophagus",
+    "3": "Stomach",
+    "4": "Intestines"
+   }
+  },
+  {
+   "he": "דרך מה נכנס האוויר לגוף?",
+   "a": "האף והפה",
+   "h": "2709a09f",
+   "q": "Through what does air enter the body?",
+   "o": [
+    "The nose and mouth",
+    "The ears",
+    "The eyes",
+    "The fingernails"
+   ],
+   "x": "We breathe in air through the nose or mouth"
+  },
+  {
+   "he": "מה תפקיד השערות שבתוך האף?",
+   "a": "לסנן אבק",
+   "h": "8f38893a",
+   "q": "What is the job of the hairs inside the nose?",
+   "o": [
+    "To filter dust",
+    "To make oxygen",
+    "To digest food",
+    "To hear sounds"
+   ],
+   "x": "Hairs and mucus trap dust and germs"
+  },
+  {
+   "he": "איך נקרא הצינור שמוביל אוויר אל הריאות?",
+   "a": "קנה הנשימה",
+   "h": "b036ff4a",
+   "q": "What is the tube that carries air to the lungs called?",
+   "o": [
+    "The windpipe",
+    "The esophagus",
+    "The intestine",
+    "The vein"
+   ],
+   "x": "The windpipe branches into bronchi in the lungs"
+  },
+  {
+   "he": "איזה גז נכנס לגוף בשאיפה ונחוץ לחיים?",
+   "a": "חמצן",
+   "h": "17e7e88f",
+   "q": "Which gas enters the body as we breathe in and is needed for life?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Smoke",
+    "Helium"
+   ],
+   "x": "Oxygen passes from the lungs into the blood"
+  },
+  {
+   "he": "איזה גז פסולת הגוף מוציא בנשיפה?",
+   "a": "פחמן דו-חמצני",
+   "h": "fc965fe0",
+   "q": "Which waste gas does the body give off as we breathe out?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Hydrogen",
+    "Helium"
+   ],
+   "x": "Carbon dioxide is a waste product of the body"
+  },
+  {
+   "he": "איפה עובר החמצן מהאוויר אל הדם?",
+   "a": "בריאות",
+   "h": "dfa3bde6",
+   "q": "Where does oxygen pass from the air into the blood?",
+   "o": [
+    "In the lungs",
+    "In the stomach",
+    "In the nose",
+    "In the mouth"
+   ],
+   "x": "In tiny air sacs in the lungs – the alveoli"
+  },
+  {
+   "he": "מה קורה לבית החזה כשאנחנו שואפים אוויר?",
+   "a": "מתרחב",
+   "h": "b343cb4c",
+   "q": "What happens to the chest when we breathe in?",
+   "o": [
+    "It expands",
+    "It shrinks",
+    "It doesn't move",
+    "It cools down"
+   ],
+   "x": "The lungs fill with air, and the chest expands"
+  },
+  {
+   "he": "איזה שריר מתחת לריאות עוזר לנו לנשום?",
+   "a": "הסרעפת",
+   "h": "2f7f0fe9",
+   "q": "Which muscle under the lungs helps us breathe?",
+   "o": [
+    "The diaphragm",
+    "The heart",
+    "The arm muscle",
+    "The thigh muscle"
+   ],
+   "x": "The diaphragm moves down as we inhale and up as we exhale"
+  },
+  {
+   "he": "לאן מוביל הדם את החמצן?",
+   "a": "לכל תאי הגוף",
+   "h": "4d5da68f",
+   "q": "Where does the blood carry oxygen to?",
+   "o": [
+    "To all body cells",
+    "Only to the lungs",
+    "Only to the nose",
+    "Out of the body"
+   ],
+   "x": "Every cell in the body needs oxygen"
+  },
+  {
+   "he": "בחורף נושפים ורואים \"עשן\" לבן. ממה הוא?",
+   "a": "טיפות מים זעירות",
+   "h": "9aacbacf",
+   "q": "In winter we breathe out and see white \"smoke.\" What is it made of?",
+   "o": [
+    "Tiny water droplets",
+    "Oxygen",
+    "Smoke from a fire",
+    "Dust"
+   ],
+   "x": "Water vapor from our breath condenses into droplets in the cold"
+  },
+  {
+   "he": "לפי הגרף – מתי נושמים הכי מהר?",
+   "a": "בריצה",
+   "h": "adfdcf62",
+   "q": "According to the graph, when do we breathe the fastest?",
+   "o": [
+    "When running",
+    "At rest",
+    "When walking",
+    "Always the same"
+   ],
+   "x": "When running – the highest point",
+   "sc": {
+    "3": "Rest",
+    "4": "Walk",
+    "5": "Run",
+    "6": "Breaths/min",
+    "7": "Activity"
+   }
+  },
+  {
+   "he": "לפי הטבלה – כמה נשימות בדקה בזמן הליכה?",
+   "a": "⁦25⁩",
+   "h": "d94ebc8c",
+   "q": "According to the table, how many breaths per minute while walking?",
+   "o": [
+    "⁦25⁩",
+    "⁦16⁩",
+    "⁦40⁩",
+    "⁦65⁩"
+   ],
+   "x": "The walking row says 25",
+   "sc": {
+    "0": "16",
+    "1": "Rest",
+    "2": "25",
+    "3": "Walking",
+    "4": "40",
+    "5": "Running"
+   }
+  },
+  {
+   "he": "למה נושמים מהר יותר בזמן ריצה?",
+   "a": "השרירים צריכים חמצן",
+   "h": "08cb73d1",
+   "q": "Why do we breathe faster when running?",
+   "o": [
+    "The muscles need oxygen",
+    "The nose gets blocked",
+    "The heart rests",
+    "The lungs are small"
+   ],
+   "x": "Hard-working muscles use more oxygen"
+  },
+  {
+   "he": "מה קורה ללב בזמן ריצה?",
+   "a": "הלב פועם מהר",
+   "h": "03eb6d28",
+   "q": "What happens to the heart while running?",
+   "o": [
+    "It beats fast",
+    "It stops",
+    "It beats slowly",
+    "It cools down"
+   ],
+   "x": "The heart sends more blood with oxygen"
+  },
+  {
+   "he": "איך העישון פוגע בריאות?",
+   "a": "מכניס זפת ורעלים",
+   "h": "35dcc003",
+   "q": "How does smoking harm the lungs?",
+   "o": [
+    "Adds tar and toxins",
+    "Cleans them",
+    "Makes them bigger",
+    "Makes them stronger"
+   ],
+   "x": "Tar sticks to the lungs and makes breathing hard"
+  },
+  {
+   "he": "מהו עישון פסיבי?",
+   "a": "שאיפת עשן מאחרים",
+   "h": "358630c2",
+   "q": "What is passive smoking?",
+   "o": [
+    "Breathing in others' smoke",
+    "Smoking outdoors",
+    "Quitting smoking",
+    "Smoking a little"
+   ],
+   "x": "Even people who don't smoke are harmed by the smoke"
+  },
+  {
+   "he": "מה עוזר לחזק את מערכת הנשימה?",
+   "a": "פעילות גופנית",
+   "h": "329e70fd",
+   "q": "What helps strengthen the respiratory system?",
+   "o": [
+    "Physical activity",
+    "Smoking",
+    "Sitting for hours",
+    "Polluted air"
+   ],
+   "x": "Sports strengthen the breathing muscles"
+  },
+  {
+   "he": "למה עדיף לנשום דרך האף ולא דרך הפה?",
+   "a": "האוויר מסונן ומתחמם",
+   "h": "7828c265",
+   "q": "Why is it better to breathe through the nose than the mouth?",
+   "o": [
+    "Filters and warms air",
+    "Less air gets in",
+    "The nose makes oxygen",
+    "The mouth is closed"
+   ],
+   "x": "In the nose the air is cleaned, warmed and moistened"
+  },
+  {
+   "he": "איזה מהם מזיק למערכת הנשימה?",
+   "a": "אוויר מזוהם",
+   "h": "9af438ab",
+   "q": "Which of these harms the respiratory system?",
+   "o": [
+    "Polluted air",
+    "A forest hike",
+    "Swimming",
+    "Singing"
+   ],
+   "x": "Smoke and dust damage the lungs"
+  },
+  {
+   "he": "אחרי ריצה נחים. מה קורה לנשימה?",
+   "a": "נרגעת לאט",
+   "h": "2f274b0e",
+   "q": "After a run we rest. What happens to our breathing?",
+   "o": [
+    "It slowly calms down",
+    "It gets faster",
+    "It stops",
+    "It doesn't change"
+   ],
+   "x": "The body needs less oxygen, and breathing calms down"
+  },
+  {
+   "he": "מה תפקיד הלב?",
+   "a": "שואב דם לגוף",
+   "h": "cc5ce905",
+   "q": "What is the job of the heart?",
+   "o": [
+    "Pumps blood",
+    "Digests food",
+    "Filters air",
+    "Moves bones"
+   ],
+   "x": "The heart is a pump that moves blood through the body"
+  },
+  {
+   "he": "ממה עשוי הלב?",
+   "a": "שריר",
+   "h": "c52ad126",
+   "q": "What is the heart made of?",
+   "o": [
+    "Muscle",
+    "Bone",
+    "Fat",
+    "Cartilage"
+   ],
+   "x": "The heart is a muscle that contracts all the time, even in sleep"
+  },
+  {
+   "he": "בערך בגודל של מה הלב שלנו?",
+   "a": "אגרוף",
+   "h": "2f98dd9d",
+   "q": "About what size is our heart?",
+   "o": [
+    "A fist",
+    "A head",
+    "A foot",
+    "A thumb"
+   ],
+   "x": "The heart is about the size of its owner's fist"
+  },
+  {
+   "he": "איפה נמצא הלב?",
+   "a": "בבית החזה",
+   "h": "12aef136",
+   "q": "Where is the heart?",
+   "o": [
+    "In the chest",
+    "In the belly",
+    "In the head",
+    "In the leg"
+   ],
+   "x": "The heart is in the chest, between the lungs, protected by the ribs"
+  },
+  {
+   "he": "איך נקראים בשם אחד עורקים, ורידים ונימים?",
+   "a": "כלי דם",
+   "h": "83527cc1",
+   "q": "What is one name for arteries, veins and capillaries?",
+   "o": [
+    "Blood vessels",
+    "Nerves",
+    "Tendons",
+    "Intestines"
+   ],
+   "x": "They are all tubes that blood flows through"
+  },
+  {
+   "he": "אילו כלי דם מובילים דם מהלב אל הגוף?",
+   "a": "עורקים",
+   "h": "70c68d38",
+   "q": "Which blood vessels carry blood from the heart to the body?",
+   "o": [
+    "Arteries",
+    "Veins",
+    "Windpipes",
+    "Nerves"
+   ],
+   "x": "Arteries – from the heart; veins – back to the heart"
+  },
+  {
+   "he": "אילו כלי דם מחזירים דם אל הלב?",
+   "a": "ורידים",
+   "h": "aca94c3d",
+   "q": "Which blood vessels bring blood back to the heart?",
+   "o": [
+    "Veins",
+    "Arteries",
+    "Tendons",
+    "Intestines"
+   ],
+   "x": "The veins bring the blood from the body back to the heart"
+  },
+  {
+   "he": "איך נקראים כלי הדם הדקים ביותר?",
+   "a": "נימים",
+   "h": "3d613b2a",
+   "q": "What are the thinnest blood vessels called?",
+   "o": [
+    "Capillaries",
+    "Main arteries",
+    "Large veins",
+    "Tendons"
+   ],
+   "x": "Oxygen and food pass to the cells through capillary walls"
+  },
+  {
+   "he": "מה מרגישים כששמים אצבעות על פרק כף היד?",
+   "a": "דופק",
+   "h": "6a191214",
+   "q": "What do you feel when you put your fingers on your wrist?",
+   "o": [
+    "Pulse",
+    "Breathing",
+    "Hunger",
+    "Digestion"
+   ],
+   "x": "The pulse is a wave of blood with every heartbeat"
+  },
+  {
+   "he": "כמה פעמים בערך פועם לב של ילד בדקה, במנוחה?",
+   "a": "כ-⁦80⁩",
+   "h": "1e1aea0f",
+   "q": "About how many times a minute does a child's heart beat at rest?",
+   "o": [
+    "About 80",
+    "About 5",
+    "About 1,000",
+    "About 10,000"
+   ],
+   "x": "With each beat, the heart pushes blood into the arteries"
+  },
+  {
+   "he": "מה הדם מוביל מהריאות לכל הגוף?",
+   "a": "חמצן",
+   "h": "48d188aa",
+   "q": "What does the blood carry from the lungs to the whole body?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Undigested food",
+    "Dust"
+   ],
+   "x": "In the lungs the blood picks up oxygen and brings it to the cells"
+  },
+  {
+   "he": "מה הדם מוביל מהמעי הדק אל התאים?",
+   "a": "חומרי מזון",
+   "h": "c6603d34",
+   "q": "What does the blood carry from the small intestine to the cells?",
+   "o": [
+    "Nutrients",
+    "Air",
+    "Urine",
+    "Bone"
+   ],
+   "x": "Nutrients are absorbed into the blood in the small intestine"
+  },
+  {
+   "he": "איזה גז הדם מביא מהתאים אל הריאות?",
+   "a": "פחמן דו-חמצני",
+   "h": "5fc1abaf",
+   "q": "Which gas does the blood bring from the cells to the lungs?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Helium",
+    "Hydrogen"
+   ],
+   "x": "When we breathe out, carbon dioxide leaves the body"
+  },
+  {
+   "he": "איך נקרא המסלול שהדם עושה בגוף שוב ושוב?",
+   "a": "מחזור הדם",
+   "h": "07bfddbf",
+   "q": "What is the path that blood travels around the body again and again called?",
+   "o": [
+    "Blood circulation",
+    "The water cycle",
+    "The digestive system",
+    "The lunar cycle"
+   ],
+   "x": "Blood leaves the heart, travels through the body and returns"
+  },
+  {
+   "he": "איך הלב והריאות עובדים יחד?",
+   "a": "הדם קולט חמצן",
+   "h": "a4232859",
+   "q": "How do the heart and lungs work together?",
+   "o": [
+    "Blood picks up oxygen",
+    "The heart breathes air",
+    "The lungs pump blood",
+    "They are not connected"
+   ],
+   "x": "The heart sends blood to the lungs, where it picks up oxygen"
+  },
+  {
+   "he": "אילו מזונות שומרים על לב בריא?",
+   "a": "ירקות ופירות",
+   "h": "d50d0cb9",
+   "q": "Which foods keep the heart healthy?",
+   "o": [
+    "Vegetables and fruit",
+    "Lots of salt",
+    "Fried food",
+    "Lots of sugar"
+   ],
+   "x": "Lots of salt, fat and sugar harm the heart and blood vessels"
+  },
+  {
+   "he": "כמה זמן מומלץ לילדים לפעילות גופנית בכל יום?",
+   "a": "לפחות שעה",
+   "h": "966f70c6",
+   "q": "How much physical activity is recommended for children every day?",
+   "o": [
+    "At least an hour",
+    "Five minutes",
+    "An hour a week",
+    "None is needed"
+   ],
+   "x": "An hour of movement a day makes the heart stronger"
+  },
+  {
+   "he": "איך עישון פוגע בלב?",
+   "a": "מצר כלי דם",
+   "h": "f541e00d",
+   "q": "How does smoking harm the heart?",
+   "o": [
+    "Narrows blood vessels",
+    "Strengthens the heart",
+    "Cleans the blood",
+    "Adds oxygen"
+   ],
+   "x": "With narrow blood vessels, the heart must work harder"
+  },
+  {
+   "he": "נחתכנו באצבע. מה עוצר את הדימום?",
+   "a": "נוצר קריש דם",
+   "h": "2d4614e0",
+   "q": "We cut a finger. What stops the bleeding?",
+   "o": [
+    "A blood clot forms",
+    "Blood turns to water",
+    "The heart stops",
+    "Blood flows faster"
+   ],
+   "x": "Platelets form a clot that closes the cut"
+  },
+  {
+   "he": "לפי הטבלה – כמה פעימות בדקה אחרי ריצה?",
+   "a": "⁦140⁩",
+   "h": "cda8e980",
+   "q": "According to the table, how many beats per minute after running?",
+   "o": [
+    "⁦140⁩",
+    "⁦80⁩",
+    "⁦100⁩",
+    "⁦40⁩"
+   ],
+   "x": "The running row says 140 – the muscles need more oxygen",
+   "sc": {
+    "0": "80",
+    "1": "Rest",
+    "2": "100",
+    "3": "Walking",
+    "4": "140",
+    "5": "Running"
+   }
+  },
+  {
+   "he": "מה מהבאים אינו חלק טבעי מהקרקע?",
+   "a": "פלסטיק",
+   "h": "725cbd38",
+   "q": "Which of these is not a natural part of soil?",
+   "o": [
+    "Plastic",
+    "Rock particles",
+    "Humus",
+    "Water"
+   ],
+   "x": "Soil: rock particles, humus, water and air"
+  },
+  {
+   "he": "מהי רקבובית?",
+   "a": "חומר מצמחים מתים",
+   "h": "23e809a9",
+   "q": "What is humus?",
+   "o": [
+    "Material from dead plants",
+    "A kind of rock",
+    "Salt water",
+    "Beach sand"
+   ],
+   "x": "Remains of plants and animals that have rotted"
+  },
+  {
+   "he": "מי מפרק עלים מתים לרקבובית?",
+   "a": "חיידקים ופטריות",
+   "h": "d135f7e0",
+   "q": "Who breaks down dead leaves into humus?",
+   "o": [
+    "Bacteria and fungi",
+    "Birds",
+    "Fish",
+    "The wind"
+   ],
+   "x": "Tiny living things break down the remains"
+  },
+  {
+   "he": "איך נוצרים חלקיקי הקרקע?",
+   "a": "הסלע מתפורר לאט",
+   "h": "ec374f05",
+   "q": "How do soil particles form?",
+   "o": [
+    "Rock slowly crumbles",
+    "Rock grows",
+    "Rock melts",
+    "Rock evaporates"
+   ],
+   "x": "Water, wind and heat break up rocks – weathering"
+  },
+  {
+   "he": "כמה זמן לוקח ליצור שכבת קרקע עבה?",
+   "a": "מאות ואלפי שנים",
+   "h": "019e5b7d",
+   "q": "How long does it take for a thick layer of soil to form?",
+   "o": [
+    "Many hundreds of years",
+    "One day",
+    "A week",
+    "One year"
+   ],
+   "x": "Soil forms very slowly"
+  },
+  {
+   "he": "איזו שכבה של הקרקע הכי עשירה ברקבובית?",
+   "a": "העליונה",
+   "h": "2104c465",
+   "q": "Which soil layer is the richest in humus?",
+   "o": [
+    "The top layer",
+    "The bottom layer",
+    "The bedrock",
+    "All are equal"
+   ],
+   "x": "That is where leaves fall and living things live"
+  },
+  {
+   "he": "מה נמצא בתחתית, מתחת לשכבות הקרקע?",
+   "a": "סלע האם",
+   "h": "6c6afc02",
+   "q": "What is at the very bottom, under the soil layers?",
+   "o": [
+    "Bedrock",
+    "Humus",
+    "Grass roots",
+    "Leaves"
+   ],
+   "x": "The soil above it forms from this rock"
+  },
+  {
+   "he": "למה תולעים טובות לקרקע?",
+   "a": "מאווררות ומעשירות",
+   "h": "84f5b889",
+   "q": "Why are worms good for the soil?",
+   "o": [
+    "Aerate and enrich it",
+    "Eat the rock",
+    "Dry it out",
+    "Pollute it"
+   ],
+   "x": "They dig tunnels for air and break down leaves"
+  },
+  {
+   "he": "שופכים מים על גוש אדמה, ועולות בועות. מה זה מראה?",
+   "a": "יש אוויר בקרקע",
+   "h": "cb8c0af5",
+   "q": "Water is poured on a lump of soil, and bubbles rise. What does this show?",
+   "o": [
+    "Soil contains air",
+    "Soil contains sugar",
+    "The soil is boiling",
+    "Soil contains fish"
+   ],
+   "x": "The water pushed out the air between the grains"
+  },
+  {
+   "he": "מה מקבל הצמח מהקרקע?",
+   "a": "מים ומינרלים",
+   "h": "11e7203a",
+   "q": "What does a plant get from the soil?",
+   "o": [
+    "Water and minerals",
+    "Light",
+    "Carbon dioxide",
+    "The sun's heat"
+   ],
+   "x": "The roots absorb water and minerals from the soil"
+  },
+  {
+   "he": "באיזו קרקע הגרגרים הכי גדולים?",
+   "a": "חול",
+   "h": "37d8a91d",
+   "q": "Which soil has the largest grains?",
+   "o": [
+    "Sand",
+    "Clay",
+    "Humus",
+    "Fine powder"
+   ],
+   "x": "Sand grains are large, with spaces between them"
+  },
+  {
+   "he": "לפי הטבלה – באיזו קרקע המים חלחלו מהר יותר?",
+   "a": "חול",
+   "h": "ae8be260",
+   "q": "According to the table, in which soil did the water drain faster?",
+   "o": [
+    "Sand",
+    "Clay",
+    "Both the same",
+    "We can't tell"
+   ],
+   "x": "5 seconds is less than 60 seconds",
+   "sc": {
+    "0": "5 s",
+    "1": "Sand",
+    "2": "60 s",
+    "3": "Clay"
+   }
+  },
+  {
+   "he": "לפי הטבלה – איזו קרקע שומרת מים זמן רב?",
+   "a": "חרסית",
+   "h": "71c8da58",
+   "q": "According to the table, which soil holds water for a long time?",
+   "o": [
+    "Clay",
+    "Sand",
+    "Both",
+    "Neither"
+   ],
+   "x": "Water drains through it slowly",
+   "sc": {
+    "0": "5 s",
+    "1": "Sand",
+    "2": "60 s",
+    "3": "Clay"
+   }
+  },
+  {
+   "he": "מה קורה לחרסית רטובה כשלוחצים אותה ביד?",
+   "a": "נדבקת ומקבלת צורה",
+   "h": "57b47a98",
+   "q": "What happens to wet clay when you squeeze it?",
+   "o": [
+    "Sticks and takes shape",
+    "Crumbles into grains",
+    "Disappears",
+    "Boils"
+   ],
+   "x": "Wet clay is sticky and easy to shape"
+  },
+  {
+   "he": "מאיזו קרקע מכינים כלי חרס ולבנים?",
+   "a": "חרסית",
+   "h": "9c215fe5",
+   "q": "Which soil is used to make pottery and bricks?",
+   "o": [
+    "Clay",
+    "Sand",
+    "Humus",
+    "Compost"
+   ],
+   "x": "Clay is kneaded and then fired in a kiln"
+  },
+  {
+   "he": "שתלו שעועית בקרקעות שונות. היכן גדלה הכי גבוה?",
+   "a": "קרקע גינה",
+   "h": "6e53f50d",
+   "q": "Beans were planted in different soils. Where did they grow tallest?",
+   "o": [
+    "Garden soil",
+    "Sand",
+    "Clay",
+    "Same in all"
+   ],
+   "x": "9 cm – the greatest height",
+   "sc": {
+    "0": "3 cm",
+    "1": "Sand",
+    "2": "5 cm",
+    "3": "Clay",
+    "4": "9 cm",
+    "5": "Garden"
+   }
+  },
+  {
+   "he": "למה השעועית גדלה טוב בקרקע הגינה?",
+   "a": "יש בה רקבובית",
+   "h": "dcc46b7a",
+   "q": "Why did the beans grow well in the garden soil?",
+   "o": [
+    "It has humus",
+    "It is clean sand",
+    "It has no water",
+    "It is very hard"
+   ],
+   "x": "Humus provides minerals and keeps the soil moist",
+   "sc": {
+    "0": "3 cm",
+    "1": "Sand",
+    "2": "5 cm",
+    "3": "Clay",
+    "4": "9 cm",
+    "5": "Garden"
+   }
+  },
+  {
+   "he": "חקלאי מוסיף קומפוסט לשדה. למה?",
+   "a": "להעשיר את הקרקע",
+   "h": "ab3afd87",
+   "q": "A farmer adds compost to a field. Why?",
+   "o": [
+    "To enrich the soil",
+    "To dry it out",
+    "To kill worms",
+    "To color it"
+   ],
+   "x": "Compost is humus that feeds plants"
+  },
+  {
+   "he": "באיזה אזור בישראל יש הרבה קרקע חולית?",
+   "a": "חוף הים",
+   "h": "be72d6d1",
+   "q": "Which region of Israel has a lot of sandy soil?",
+   "o": [
+    "The seashore",
+    "Mount Hermon's summit",
+    "The Golan Heights",
+    "The Jerusalem hills"
+   ],
+   "x": "There are sand dunes along the Coastal Plain"
+  },
+  {
+   "he": "בעציץ עם חרסית בלבד המים עומדים. מה הבעיה לשורשים?",
+   "a": "חסר להם אוויר",
+   "h": "d64c3e57",
+   "q": "In a pot with only clay, the water doesn't drain. What's the problem for the roots?",
+   "o": [
+    "They lack air",
+    "Too much light",
+    "They are too cold",
+    "They lack color"
+   ],
+   "x": "Water fills the spaces and pushes out the air"
+  },
+  {
+   "he": "איזו קרקע אדומה נפוצה בהרי הגליל והכרמל?",
+   "a": "טרה רוסה",
+   "h": "6fb3b2ad",
+   "q": "Which red soil is common in the Galilee and Carmel mountains?",
+   "o": [
+    "Terra rossa",
+    "Loess",
+    "Rendzina",
+    "Sand"
+   ],
+   "x": "\"Terra rossa\" = red earth; it forms from hard limestone"
+  },
+  {
+   "he": "מאיזו שפה נגזר השם \"טרה רוסה\"?",
+   "a": "מאיטלקית",
+   "h": "e72c9119",
+   "q": "Which language does the name \"terra rossa\" come from?",
+   "o": [
+    "Italian",
+    "Arabic",
+    "Greek",
+    "English"
+   ],
+   "x": "In Italian: terra = earth, rossa = red"
+  },
+  {
+   "he": "איזו קרקע בהירה נוצרת מסלעי קירטון וגיר רך?",
+   "a": "רנדזינה",
+   "h": "44f87b7e",
+   "q": "Which light-colored soil forms from chalk and soft limestone?",
+   "o": [
+    "Rendzina",
+    "Terra rossa",
+    "Hamra",
+    "Basalt soil"
+   ],
+   "x": "Rendzina is light because the rock it formed from is white"
+  },
+  {
+   "he": "איזו קרקע בנגב נוצרה מאבק דק שהביאה הרוח?",
+   "a": "לס",
+   "h": "eabebe8e",
+   "q": "Which soil in the Negev formed from fine dust brought by the wind?",
+   "o": [
+    "Loess",
+    "Terra rossa",
+    "Rendzina",
+    "Hamra"
+   ],
+   "x": "The wind brought fine desert dust, and it settled"
+  },
+  {
+   "he": "מה קורה לקרקע לס בגשם חזק?",
+   "a": "נאטמת והמים זורמים",
+   "h": "c0e93621",
+   "q": "What happens to loess soil in heavy rain?",
+   "o": [
+    "Seals; water runs off",
+    "Soaks up everything",
+    "Turns red",
+    "Turns into rock"
+   ],
+   "x": "A crust forms on loess, so the Negev gets floods"
+  },
+  {
+   "he": "איזו קרקע חולית ואדמדמה נמצאת במישור החוף?",
+   "a": "חמרה",
+   "h": "27e42fc3",
+   "q": "Which sandy, reddish soil is found on the Coastal Plain?",
+   "o": [
+    "Hamra",
+    "Loess",
+    "Rendzina",
+    "Basalt soil"
+   ],
+   "x": "Hamra formed from coastal sand; it is reddish-brown"
+  },
+  {
+   "he": "איזו קרקע כהה נוצרה מסלע געשי ברמת הגולן?",
+   "a": "קרקע בזלתית",
+   "h": "9efbf28d",
+   "q": "Which dark soil formed from volcanic rock in the Golan Heights?",
+   "o": [
+    "Basalt soil",
+    "Loess",
+    "Hamra",
+    "Rendzina"
+   ],
+   "x": "The Golan had volcanoes – black basalt crumbled into soil"
+  },
+  {
+   "he": "למה הקרקעות בישראל שונות זו מזו?",
+   "a": "נוצרו מסלעים שונים",
+   "h": "1ea43211",
+   "q": "Why are the soils in Israel different from each other?",
+   "o": [
+    "Formed from different rocks",
+    "All formed from sand",
+    "Because of the Moon",
+    "Someone painted them"
+   ],
+   "x": "They formed from different rocks; the wind brought some"
+  },
+  {
+   "he": "למה הטרה רוסה אדומה?",
+   "a": "ברזל מחומצן",
+   "h": "e703a9b9",
+   "q": "Why is terra rossa red?",
+   "o": [
+    "Oxidized iron",
+    "Red roots",
+    "Artificial coloring",
+    "Red flowers"
+   ],
+   "x": "Iron in the soil oxidizes – like rust"
+  },
+  {
+   "he": "לפי הטבלה – באיזה אזור נמצאת קרקע הלס?",
+   "a": "בנגב",
+   "h": "215d0995",
+   "q": "According to the table, where is loess soil found?",
+   "o": [
+    "In the Negev",
+    "In the Galilee",
+    "On the Coastal Plain",
+    "In the Golan Heights"
+   ],
+   "x": "In the table: loess – the Negev",
+   "sc": {
+    "0": "Galilee",
+    "1": "Terra rossa",
+    "2": "Negev",
+    "3": "Loess",
+    "4": "Coast",
+    "5": "Hamra"
+   }
+  },
+  {
+   "he": "איזה סלע נוצר מלבה של הר געש שהתקררה?",
+   "a": "בזלת",
+   "h": "91af54c0",
+   "q": "Which rock forms from volcanic lava that cooled?",
+   "o": [
+    "Basalt",
+    "Limestone",
+    "Marble",
+    "Sandstone"
+   ],
+   "x": "Dark basalt is cooled lava, as in the Golan"
+  },
+  {
+   "he": "מאיזה סלע עשויה רוב \"אבן ירושלים\"?",
+   "a": "גיר",
+   "h": "37a9e712",
+   "q": "What rock is most \"Jerusalem stone\" made of?",
+   "o": [
+    "Limestone",
+    "Basalt",
+    "Granite",
+    "Coal"
+   ],
+   "x": "Jerusalem stone is a light-colored limestone"
+  },
+  {
+   "he": "גיר נוצר בים מהצטברות של…",
+   "a": "שלדים וקונכיות",
+   "h": "7e8efd61",
+   "q": "Limestone forms in the sea from a buildup of…",
+   "o": [
+    "Skeletons and shells",
+    "Hot lava",
+    "Ice",
+    "Desert sand"
+   ],
+   "x": "Limestone is a sedimentary rock that forms in the sea"
+  },
+  {
+   "he": "מה קורה כשמטפטפים חומץ על סלע גיר?",
+   "a": "מופיעות בועות",
+   "h": "bb781538",
+   "q": "What happens when you drip vinegar on limestone?",
+   "o": [
+    "Bubbles appear",
+    "It turns black",
+    "It catches fire",
+    "Nothing happens"
+   ],
+   "x": "Limestone reacts with acid and gives off a gas"
+  },
+  {
+   "he": "שיש נוצר מסלע גיר שעבר…",
+   "a": "חום ולחץ",
+   "h": "57895f22",
+   "q": "Marble forms from limestone that went through…",
+   "o": [
+    "Heat and pressure",
+    "Fast cooling",
+    "Dissolving in water",
+    "Painting"
+   ],
+   "x": "Deep underground, the limestone changed into marble"
+  },
+  {
+   "he": "סלע שנוצר משכבות חול ובוץ ששקעו נקרא…",
+   "a": "סלע משקע",
+   "h": "3bfcf211",
+   "q": "Rock formed from layers of sand and mud that settled is called…",
+   "o": [
+    "Sedimentary rock",
+    "Volcanic rock",
+    "Metamorphic rock",
+    "Lava"
+   ],
+   "x": "Layers settled and pressed together over a long time"
+  },
+  {
+   "he": "באיזה סלע מוצאים לפעמים מאובנים של צדפים?",
+   "a": "גיר",
+   "h": "07ed18a2",
+   "q": "In which rock do you sometimes find fossil shells?",
+   "o": [
+    "Limestone",
+    "Basalt",
+    "Granite",
+    "Glass"
+   ],
+   "x": "Limestone formed in the sea, with sea creatures"
+  },
+  {
+   "he": "מהי בליה?",
+   "a": "התפוררות סלעים",
+   "h": "4d179a7a",
+   "q": "What is weathering?",
+   "o": [
+    "Breaking down of rocks",
+    "Building up of rocks",
+    "Melting of metals",
+    "Growing of plants"
+   ],
+   "x": "Water, wind and heat break rocks apart"
+  },
+  {
+   "he": "איך שורשי עצים גורמים לבליה?",
+   "a": "סודקים את הסלע",
+   "h": "d68a5db4",
+   "q": "How do tree roots cause weathering?",
+   "o": [
+    "They crack the rock",
+    "They heat the rock",
+    "They cool the rock",
+    "They paint the rock"
+   ],
+   "x": "Roots grow into cracks and widen them"
+  },
+  {
+   "he": "מים קופאים בסדק בסלע. למה הסדק מתרחב?",
+   "a": "הקרח מתפשט",
+   "h": "44564a1a",
+   "q": "Water freezes in a crack in a rock. Why does the crack widen?",
+   "o": [
+    "The ice expands",
+    "The ice shrinks",
+    "The rock melts",
+    "The ice evaporates"
+   ],
+   "x": "Ice takes up more space than water"
+  },
+  {
+   "he": "מהי סחיפת קרקע?",
+   "a": "העברת קרקע ממקומה",
+   "h": "cb99e0e5",
+   "q": "What is soil erosion?",
+   "o": [
+    "Carrying soil away",
+    "Breaking rock apart",
+    "Watering a field",
+    "Digging a hole"
+   ],
+   "x": "Water and wind carry the soil somewhere else"
+  },
+  {
+   "he": "סופת חול נושאת גרגרים במדבר. מה סוחף אותם?",
+   "a": "הרוח",
+   "h": "210a5130",
+   "q": "A sandstorm sweeps grains across the desert. What moves them?",
+   "o": [
+    "The wind",
+    "Water",
+    "The Sun",
+    "Plants"
+   ],
+   "x": "The wind blows small grains a long way"
+  },
+  {
+   "he": "מה קורה לקרקע חשופה בגשם חזק?",
+   "a": "נסחפת במים",
+   "h": "d5c2affc",
+   "q": "What happens to bare soil in heavy rain?",
+   "o": [
+    "It washes away",
+    "It hardens like rock",
+    "It freezes",
+    "It covers plants"
+   ],
+   "x": "Without plants, the water carries the soil off"
+  },
+  {
+   "he": "איך צמחים מגינים על הקרקע מפני סחיפה?",
+   "a": "השורשים מחזיקים אותה",
+   "h": "102ec5d4",
+   "q": "How do plants protect the soil from erosion?",
+   "o": [
+    "Their roots hold it",
+    "Their leaves attract water",
+    "They dry it out",
+    "They dissolve rocks"
+   ],
+   "x": "The roots grip the soil grains"
+  },
+  {
+   "he": "למה בונים טרסות (מדרגות) על מדרונות?",
+   "a": "לעצור סחיפה",
+   "h": "63f0bf65",
+   "q": "Why are terraces (steps) built on slopes?",
+   "o": [
+    "To stop erosion",
+    "To decorate the hill",
+    "To dry the soil",
+    "To scare off birds"
+   ],
+   "x": "The steps slow the water and protect the soil"
+  },
+  {
+   "he": "איזו פעולה מגבירה סחיפת קרקע?",
+   "a": "כריתת עצים",
+   "h": "b04c3145",
+   "q": "Which action increases soil erosion?",
+   "o": [
+    "Cutting down trees",
+    "Planting trees",
+    "Building terraces",
+    "Covering with straw"
+   ],
+   "x": "Without trees, the soil is left bare"
+  },
+  {
+   "he": "שפכו מים על שני מגשי קרקע. כמה נסחף מהמגש עם הדשא?",
+   "a": "⁦10⁩ גרם",
+   "h": "b0599ef4",
+   "q": "Water was poured on two trays of soil. How much washed away from the grass tray?",
+   "o": [
+    "10 g",
+    "80 g",
+    "90 g",
+    "70 g"
+   ],
+   "x": "The \"Grass\" row shows 10 g",
+   "sc": {
+    "0": "80 g",
+    "1": "Bare",
+    "2": "10 g",
+    "3": "Grass"
+   }
+  },
+  {
+   "he": "מה המסקנה מהניסוי בטבלה?",
+   "a": "צמחים מקטינים סחיפה",
+   "h": "ddc5eac1",
+   "q": "What does the experiment in the table show?",
+   "o": [
+    "Plants reduce erosion",
+    "Plants increase erosion",
+    "There is no difference",
+    "Grass attracts soil"
+   ],
+   "x": "Much less soil washed away with grass",
+   "sc": {
+    "0": "80 g",
+    "1": "Bare",
+    "2": "10 g",
+    "3": "Grass"
+   }
+  },
+  {
+   "he": "חקלאי מכסה את הקרקע בקש ובעלים. למה?",
+   "a": "לעצור סחיפה",
+   "h": "1a06de27",
+   "q": "A farmer covers the soil with straw and leaves. Why?",
+   "o": [
+    "To stop erosion",
+    "To invite wind",
+    "To heat the rock",
+    "To drive away worms"
+   ],
+   "x": "The cover prevents erosion and keeps moisture in"
+  },
+  {
+   "he": "לאן מגיעה הקרקע שנסחפה בנחל?",
+   "a": "לעמקים ולים",
+   "h": "bff9fcad",
+   "q": "Where does soil carried away by a stream end up?",
+   "o": [
+    "Valleys and the sea",
+    "The mountaintop",
+    "Inside the rocks",
+    "Back where it was"
+   ],
+   "x": "The water carries it down to low places"
+  },
+  {
+   "he": "מהי השמש?",
+   "a": "כוכב",
+   "h": "f46888f5",
+   "q": "What is the Sun?",
+   "o": [
+    "A star",
+    "A planet",
+    "A moon",
+    "A comet"
+   ],
+   "x": "The Sun is a star – a ball of hot gas"
+  },
+  {
+   "he": "סביב מה סובבים כל כוכבי הלכת שלנו?",
+   "a": "השמש",
+   "h": "78704e7b",
+   "q": "What do all of our planets revolve around?",
+   "o": [
+    "The Sun",
+    "Earth",
+    "The Moon",
+    "Jupiter"
+   ],
+   "x": "The Sun is at the center, and the planets orbit it"
+  },
+  {
+   "he": "כמה כוכבי לכת יש במערכת השמש?",
+   "a": "⁦8⁩",
+   "h": "8a3dd05f",
+   "q": "How many planets are in the solar system?",
+   "o": [
+    "⁦8⁩",
+    "⁦9⁩",
+    "⁦7⁩",
+    "⁦12⁩"
+   ],
+   "x": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune"
+  },
+  {
+   "he": "איזה כוכב לכת הקרוב ביותר לשמש?",
+   "a": "חמה",
+   "h": "f5e4c2eb",
+   "q": "Which planet is closest to the Sun?",
+   "o": [
+    "Mercury",
+    "Venus",
+    "Mars",
+    "Neptune"
+   ],
+   "x": "Mercury is the first planet from the Sun"
+  },
+  {
+   "he": "במקום הכמה מהשמש נמצא כדור הארץ?",
+   "a": "שלישי",
+   "h": "80a1896f",
+   "q": "Counting from the Sun, in which place is Earth?",
+   "o": [
+    "Third",
+    "First",
+    "Second",
+    "Fourth"
+   ],
+   "x": "Mercury, Venus, and then Earth"
+  },
+  {
+   "he": "איזה כוכב לכת הוא הגדול ביותר?",
+   "a": "צדק",
+   "h": "bdbec76e",
+   "q": "Which planet is the largest?",
+   "o": [
+    "Jupiter",
+    "Saturn",
+    "Earth",
+    "Mars"
+   ],
+   "x": "Jupiter is the giant of the planets"
+  },
+  {
+   "he": "איזה כוכב לכת נקרא \"הכוכב האדום\"?",
+   "a": "מאדים",
+   "h": "88fc6d4b",
+   "q": "Which planet is called \"the Red Planet\"?",
+   "o": [
+    "Mars",
+    "Venus",
+    "Jupiter",
+    "Saturn"
+   ],
+   "x": "The soil on Mars has a lot of rust"
+  },
+  {
+   "he": "לאיזה כוכב לכת יש טבעות גדולות ובולטות?",
+   "a": "שבתאי",
+   "h": "1add90e6",
+   "q": "Which planet has large, easy-to-see rings?",
+   "o": [
+    "Saturn",
+    "Mars",
+    "Mercury",
+    "Venus"
+   ],
+   "x": "The rings are made of ice and rock"
+  },
+  {
+   "he": "למה כוכבי הלכת נראים מאירים בשמיים?",
+   "a": "מחזירים אור שמש",
+   "h": "43460e51",
+   "q": "Why do the planets look bright in the sky?",
+   "o": [
+    "They reflect sunlight",
+    "They make light",
+    "They burn with fire",
+    "They have electricity"
+   ],
+   "x": "Only the Sun gives off light; the planets reflect it"
+  },
+  {
+   "he": "מה ההבדל בין כוכב לבין כוכב לכת?",
+   "a": "כוכב מפיק אור",
+   "h": "cd235cd2",
+   "q": "What is the difference between a star and a planet?",
+   "o": [
+    "Stars give off light",
+    "Planets burn",
+    "There is no difference",
+    "Stars are always small"
+   ],
+   "x": "A star, like the Sun, makes its own light"
+  },
+  {
+   "he": "לפי הטבלה – למי מהשלושה הקפת השמש הכי ארוכה?",
+   "a": "מאדים",
+   "h": "e0375824",
+   "q": "According to the table, which of the three takes longest to orbit the Sun?",
+   "o": [
+    "Mars",
+    "Mercury",
+    "Earth",
+    "All the same"
+   ],
+   "x": "687 days – the longest time",
+   "sc": {
+    "0": "88 days",
+    "1": "Mercury",
+    "2": "365 days",
+    "3": "Earth",
+    "4": "687 days",
+    "5": "Mars"
+   }
+  },
+  {
+   "he": "לפי הטבלה: ככל שכוכב הלכת רחוק יותר מהשמש, ההקפה…",
+   "a": "ארוכה יותר",
+   "h": "132fe655",
+   "q": "According to the table, the farther a planet is from the Sun, its orbit is…",
+   "o": [
+    "Longer",
+    "Shorter",
+    "The same",
+    "Stopped"
+   ],
+   "x": "Mercury is close and fast; Mars is far and slow",
+   "sc": {
+    "0": "88 days",
+    "1": "Mercury",
+    "2": "365 days",
+    "3": "Earth",
+    "4": "687 days",
+    "5": "Mars"
+   }
+  },
+  {
+   "he": "מהו הסדר הנכון, מהשמש והלאה?",
+   "a": "חמה, נוגה, ארץ",
+   "h": "df0e4b5a",
+   "q": "What is the correct order, going out from the Sun?",
+   "o": [
+    "Mercury, Venus, Earth",
+    "Venus, Mercury, Earth",
+    "Earth, Venus, Mercury",
+    "Mercury, Earth, Venus"
+   ],
+   "x": "First Mercury, then Venus, and then Earth"
+  },
+  {
+   "he": "איזה כוכב לכת בא מיד אחרי כדור הארץ?",
+   "a": "מאדים",
+   "h": "5d3b09d3",
+   "q": "Going out from the Sun, which planet comes right after Earth?",
+   "o": [
+    "Mars",
+    "Venus",
+    "Jupiter",
+    "Mercury"
+   ],
+   "x": "Fourth from the Sun: Mars"
+  },
+  {
+   "he": "איזה כוכב לכת בא מיד אחרי מאדים?",
+   "a": "צדק",
+   "h": "35bb8236",
+   "q": "Going out from the Sun, which planet comes right after Mars?",
+   "o": [
+    "Jupiter",
+    "Saturn",
+    "Venus",
+    "Neptune"
+   ],
+   "x": "After Mars comes Jupiter, the giant"
+  },
+  {
+   "he": "איזה כוכב לכת הרחוק ביותר מהשמש?",
+   "a": "נפטון",
+   "h": "a8cfa177",
+   "q": "Which planet is farthest from the Sun?",
+   "o": [
+    "Neptune",
+    "Uranus",
+    "Saturn",
+    "Jupiter"
+   ],
+   "x": "Neptune – the eighth and last planet"
+  },
+  {
+   "he": "למה כוכבי הלכת הרחוקים קרים מאוד?",
+   "a": "מעט חום מגיע",
+   "h": "8e2cb72e",
+   "q": "Why are the distant planets very cold?",
+   "o": [
+    "Little heat reaches them",
+    "They're near the Moon",
+    "They have no sun",
+    "They have refrigerators"
+   ],
+   "x": "The farther from the Sun, the less heat arrives"
+  },
+  {
+   "he": "על איזה כוכב לכת ידוע לנו שיש חיים?",
+   "a": "כדור הארץ",
+   "h": "ba027257",
+   "q": "On which planet do we know there is life?",
+   "o": [
+    "Earth",
+    "Mars",
+    "Venus",
+    "Jupiter"
+   ],
+   "x": "Only Earth is known to have liquid water, air and life"
+  },
+  {
+   "he": "איזה כוכב לכת הכי חם, בגלל אטמוספרה עבה?",
+   "a": "נוגה",
+   "h": "a2e48269",
+   "q": "Which planet is the hottest, because of its thick atmosphere?",
+   "o": [
+    "Venus",
+    "Mercury",
+    "Mars",
+    "Jupiter"
+   ],
+   "x": "Venus's thick atmosphere traps heat"
+  },
+  {
+   "he": "מה מחזיק את כוכבי הלכת במסלולם סביב השמש?",
+   "a": "כוח המשיכה",
+   "h": "0ef31e5d",
+   "q": "What keeps the planets in their orbits around the Sun?",
+   "o": [
+    "Gravity",
+    "The wind",
+    "Ropes",
+    "A magnet"
+   ],
+   "x": "The Sun pulls the planets toward it"
+  },
+  {
+   "he": "מהו הירח?",
+   "a": "לוויין של הארץ",
+   "h": "9824ef94",
+   "q": "What is the Moon?",
+   "o": [
+    "Earth's satellite",
+    "A shining star",
+    "A planet",
+    "Part of the Sun"
+   ],
+   "x": "The Moon orbits Earth"
+  },
+  {
+   "he": "האם הירח מפיק אור בעצמו?",
+   "a": "לא, מחזיר אור",
+   "h": "a777698c",
+   "q": "Does the Moon give off its own light?",
+   "o": [
+    "No, it reflects light",
+    "Yes, like the Sun",
+    "Yes, only at night",
+    "Only at full moon"
+   ],
+   "x": "The Sun lights up the Moon"
+  },
+  {
+   "he": "כמה זמן לוקח לירח להקיף את כדור הארץ?",
+   "a": "כחודש",
+   "h": "de40f60c",
+   "q": "How long does it take the Moon to orbit Earth?",
+   "o": [
+    "About a month",
+    "A day",
+    "A year",
+    "A week"
+   ],
+   "x": "One full orbit takes a little less than a month"
+  },
+  {
+   "he": "מה אין על הירח?",
+   "a": "אוויר לנשימה",
+   "h": "66b72081",
+   "q": "What does the Moon NOT have?",
+   "o": [
+    "Air to breathe",
+    "Rocks",
+    "Craters",
+    "Dust"
+   ],
+   "x": "The Moon has no atmosphere – there is no air"
+  },
+  {
+   "he": "מה הם העיגולים הגדולים על פני הירח?",
+   "a": "מכתשים",
+   "h": "22b212f3",
+   "q": "What are the large circles on the Moon's surface?",
+   "o": [
+    "Craters",
+    "Lakes",
+    "Forests",
+    "Cities"
+   ],
+   "x": "Pits made by rocks from space hitting the Moon"
+  },
+  {
+   "he": "מי היה האדם הראשון שהלך על הירח?",
+   "a": "ניל ארמסטרונג",
+   "h": "71a11d1a",
+   "q": "Who was the first person to walk on the Moon?",
+   "o": [
+    "Neil Armstrong",
+    "Ilan Ramon",
+    "Galileo",
+    "Albert Einstein"
+   ],
+   "x": "In 1969, on the Apollo 11 mission"
+  },
+  {
+   "he": "מה רואים בשמיים בזמן מולד הירח?",
+   "a": "כמעט כלום",
+   "h": "a54d40db",
+   "q": "What do you see in the sky at the new moon?",
+   "o": [
+    "Almost nothing",
+    "Full moon",
+    "Half moon",
+    "Two moons"
+   ],
+   "x": "The lit side faces away from us"
+  },
+  {
+   "he": "איך נקרא שלב הירח שבתמונה?",
+   "a": "ירח מלא",
+   "h": "01f07bb1",
+   "q": "What is the Moon phase in the picture called?",
+   "o": [
+    "Full moon",
+    "New moon",
+    "Half moon",
+    "Crescent"
+   ],
+   "x": "The whole circle is lit"
+  },
+  {
+   "he": "אחרי המולד, החלק המואר של הירח הולך ו…",
+   "a": "גדל",
+   "h": "c401936a",
+   "q": "After the new moon, the lit part of the Moon…",
+   "o": [
+    "Grows",
+    "Shrinks",
+    "Disappears",
+    "Splits in two"
+   ],
+   "x": "The lit part grows until the full moon"
+  },
+  {
+   "he": "בערך כמה זמן עובר ממולד עד ירח מלא?",
+   "a": "כשבועיים",
+   "h": "a232393a",
+   "q": "About how long is it from the new moon to the full moon?",
+   "o": [
+    "About two weeks",
+    "One day",
+    "Two months",
+    "A year"
+   ],
+   "x": "Half a month – about 15 days"
+  },
+  {
+   "he": "האם הירח באמת משנה את צורתו?",
+   "a": "לא, תמיד כדור",
+   "h": "d262d7a0",
+   "q": "Does the Moon really change its shape?",
+   "o": [
+    "No, always a sphere",
+    "Yes, every night",
+    "Yes, once a year",
+    "Only in winter"
+   ],
+   "x": "In the passage: the Moon always stays a sphere"
+  },
+  {
+   "he": "מה מאיר את הירח, לפי הקטע?",
+   "a": "השמש",
+   "h": "d305b7e4",
+   "q": "According to the passage, what lights up the Moon?",
+   "o": [
+    "The Sun",
+    "Earth",
+    "The stars",
+    "The Moon itself"
+   ],
+   "x": "The Sun always lights up half of the Moon"
+  },
+  {
+   "he": "איך נקראים השינויים בצורת הירח שאנחנו רואים?",
+   "a": "מופעי הירח",
+   "h": "133f4755",
+   "q": "What are the changes we see in the Moon's shape called?",
+   "o": [
+    "Phases of the Moon",
+    "A solar eclipse",
+    "The seasons",
+    "Spins of the Moon"
+   ],
+   "x": "That is what the second paragraph says"
+  },
+  {
+   "he": "איפה נמצא הירח בזמן המולד?",
+   "a": "בין הארץ לשמש",
+   "h": "2b612a87",
+   "q": "Where is the Moon at the new moon?",
+   "o": [
+    "Between Earth and Sun",
+    "Behind the Sun",
+    "Behind Earth",
+    "Near Mars"
+   ],
+   "x": "Its lit side faces away from us"
+  },
+  {
+   "he": "מה רואים כשבועיים אחרי המולד?",
+   "a": "ירח מלא",
+   "h": "be34592f",
+   "q": "What do you see about two weeks after the new moon?",
+   "o": [
+    "Full moon",
+    "Thin crescent",
+    "New moon",
+    "Half moon"
+   ],
+   "x": "In the passage: after about two weeks – a full moon"
+  },
+  {
+   "he": "כמה זמן נמשך מחזור שלם של מופעי הירח?",
+   "a": "כ-⁦29⁩ וחצי ימים",
+   "h": "8cefe17f",
+   "q": "How long does a full cycle of the Moon's phases last?",
+   "o": [
+    "About 29½ days",
+    "7 days",
+    "365 days",
+    "100 days"
+   ],
+   "x": "Almost a whole month"
+  },
+  {
+   "he": "מתי מתחיל חודש בלוח העברי?",
+   "a": "במולד הירח",
+   "h": "6f513901",
+   "q": "When does a month begin in the Hebrew calendar?",
+   "o": [
+    "At the new moon",
+    "At the full moon",
+    "At the half moon",
+    "On Sunday"
+   ],
+   "x": "The new month (Rosh Chodesh) starts at the new moon"
+  },
+  {
+   "he": "איך ייראה הירח בליל הסדר?",
+   "a": "ירח מלא",
+   "h": "70c819c5",
+   "q": "What will the Moon look like on Seder night?",
+   "o": [
+    "Full moon",
+    "Thin crescent",
+    "Half moon",
+    "It won't be seen"
+   ],
+   "x": "15 Nisan – the middle of the month",
+   "sc": {
+    "0": "15 Nisan"
+   }
+  },
+  {
+   "he": "מה פירוש המילה \"סהר\" בקטע?",
+   "a": "רצועה דקה מוארת",
+   "h": "a92bd0a4",
+   "q": "What does the word \"crescent\" mean in the passage?",
+   "o": [
+    "A thin lit strip",
+    "A full moon",
+    "A star",
+    "A cloud"
+   ],
+   "x": "A crescent – only a thin part of the Moon is lit"
+  },
+  {
+   "he": "מה מטרת הקטע?",
+   "a": "להסביר תופעה",
+   "h": "a99974e8",
+   "q": "What is the purpose of the passage?",
+   "o": [
+    "To explain a phenomenon",
+    "To tell a legend",
+    "To sell something",
+    "To make us laugh"
+   ],
+   "x": "It explains why the Moon seems to change"
+  },
+  {
+   "he": "בליקוי חמה – מי מסתיר את השמש?",
+   "a": "הירח",
+   "h": "a3a7c5a3",
+   "q": "In a solar eclipse, what hides the Sun?",
+   "o": [
+    "The Moon",
+    "Earth",
+    "A big cloud",
+    "A planet"
+   ],
+   "x": "The Moon passes between Earth and the Sun and hides it"
+  },
+  {
+   "he": "בליקוי ירח – הצל של מי נופל על הירח?",
+   "a": "של כדור הארץ",
+   "h": "16b7227f",
+   "q": "In a lunar eclipse, whose shadow falls on the Moon?",
+   "o": [
+    "Earth's",
+    "The Sun's",
+    "A cloud's",
+    "Mars's"
+   ],
+   "x": "Earth is between the Sun and the Moon"
+  },
+  {
+   "he": "מה הסדר בליקוי חמה?",
+   "a": "שמש, ירח, ארץ",
+   "h": "332d6e94",
+   "q": "What is the order in a solar eclipse?",
+   "o": [
+    "Sun, Moon, Earth",
+    "Sun, Earth, Moon",
+    "Moon, Sun, Earth",
+    "Earth, Sun, Moon"
+   ],
+   "x": "The Moon is in the middle, between the Sun and Earth"
+  },
+  {
+   "he": "מה הסדר בליקוי ירח?",
+   "a": "שמש, ארץ, ירח",
+   "h": "dc7ce7e3",
+   "q": "What is the order in a lunar eclipse?",
+   "o": [
+    "Sun, Earth, Moon",
+    "Sun, Moon, Earth",
+    "Moon, Sun, Earth",
+    "Earth, Sun, Moon"
+   ],
+   "x": "Earth is in the middle and casts a shadow on the Moon"
+  },
+  {
+   "he": "באיזה מופע של הירח יכול לקרות ליקוי חמה?",
+   "a": "מולד",
+   "h": "11ccd28c",
+   "q": "In which phase of the Moon can a solar eclipse happen?",
+   "o": [
+    "New moon",
+    "Full moon",
+    "Half moon",
+    "Crescent"
+   ],
+   "x": "At the new moon, the Moon is between Earth and the Sun"
+  },
+  {
+   "he": "באיזה מופע של הירח יכול לקרות ליקוי ירח?",
+   "a": "ירח מלא",
+   "h": "efc34a9f",
+   "q": "In which phase of the Moon can a lunar eclipse happen?",
+   "o": [
+    "Full moon",
+    "New moon",
+    "Half moon",
+    "Crescent"
+   ],
+   "x": "At the full moon, Earth is between the Sun and the Moon"
+  },
+  {
+   "he": "למה אסור להסתכל על ליקוי חמה בלי משקפיים מיוחדים?",
+   "a": "האור פוגע בעיניים",
+   "h": "6dbfbb9f",
+   "q": "Why must you never watch a solar eclipse without special glasses?",
+   "o": [
+    "It harms your eyes",
+    "The Sun goes out",
+    "The Moon falls",
+    "The eclipse stops"
+   ],
+   "x": "The strong sunlight can damage the eyes forever"
+  },
+  {
+   "he": "איזה צבע מקבל הירח לפעמים בליקוי ירח מלא?",
+   "a": "אדום-כתום",
+   "h": "1052ef19",
+   "q": "What color does the Moon sometimes turn in a total lunar eclipse?",
+   "o": [
+    "Red-orange",
+    "Green",
+    "Light blue",
+    "Bright white"
+   ],
+   "x": "A little sunlight passes through the atmosphere and reddens it"
+  },
+  {
+   "he": "באיזה ליקוי מותר לצפות בעין בלי הגנה?",
+   "a": "ליקוי ירח",
+   "h": "1eab7e78",
+   "q": "Which eclipse is safe to watch without eye protection?",
+   "o": [
+    "A lunar eclipse",
+    "A solar eclipse",
+    "Both",
+    "Neither"
+   ],
+   "x": "The Moon doesn't dazzle – you can watch it safely"
+  },
+  {
+   "he": "הירח קטן מהשמש. איך הוא מסתיר אותה כולה?",
+   "a": "קרוב אלינו יותר",
+   "h": "b64786f0",
+   "q": "The Moon is smaller than the Sun. How can it hide all of it?",
+   "o": [
+    "It's closer to us",
+    "It's bigger than it",
+    "It's heavier than it",
+    "It's hotter than it"
+   ],
+   "x": "Like a thumb near your eye hiding a faraway building"
+  },
+  {
+   "he": "מה גורם ליום וללילה?",
+   "a": "הארץ מסתובבת",
+   "h": "3121d589",
+   "q": "What causes day and night?",
+   "o": [
+    "Earth rotates",
+    "The Sun circles us",
+    "The Moon blocks it",
+    "Clouds cover it"
+   ],
+   "x": "Earth spins on its axis"
+  },
+  {
+   "he": "כמה שעות נמשך סיבוב אחד של הארץ סביב צירה?",
+   "a": "⁦24⁩",
+   "h": "842b4401",
+   "q": "How many hours does one rotation of Earth on its axis take?",
+   "o": [
+    "⁦24⁩",
+    "⁦12⁩",
+    "⁦48⁩",
+    "⁦365⁩"
+   ],
+   "x": "One rotation = one full day = 24 hours"
+  },
+  {
+   "he": "איך נקראים יום ולילה ביחד?",
+   "a": "יממה",
+   "h": "0fccdd71",
+   "q": "Daytime and nighttime together make up…",
+   "o": [
+    "A 24-hour day",
+    "A week",
+    "A month",
+    "A season"
+   ],
+   "x": "Daytime plus nighttime = 24 hours"
+  },
+  {
+   "he": "כשבישראל צהריים, מה יש בצד השני של כדור הארץ?",
+   "a": "לילה",
+   "h": "3a131807",
+   "q": "When it is noon in Israel, what is it on the other side of Earth?",
+   "o": [
+    "Night",
+    "Noon too",
+    "Morning",
+    "Sunset"
+   ],
+   "x": "The side facing away from the Sun is dark"
+  },
+  {
+   "he": "באיזה כיוון השמש זורחת?",
+   "a": "מזרח",
+   "h": "ef0eeae4",
+   "q": "In which direction does the Sun rise?",
+   "o": [
+    "East",
+    "West",
+    "North",
+    "South"
+   ],
+   "x": "The Sun rises in the east and sets in the west"
+  },
+  {
+   "he": "האם השמש באמת נעה סביבנו במשך היום?",
+   "a": "לא, רק נדמה",
+   "h": "4af2ac34",
+   "q": "Does the Sun really move around us during the day?",
+   "o": [
+    "No, it only seems",
+    "Yes, around Earth",
+    "Yes, north to south",
+    "Only in summer"
+   ],
+   "x": "The Sun seems to move because we are spinning"
+  },
+  {
+   "he": "למה הצל שלנו קצר בצהריים?",
+   "a": "השמש גבוהה בשמיים",
+   "h": "e8e43742",
+   "q": "Why is our shadow short at noon?",
+   "o": [
+    "The Sun is high",
+    "The Sun is close",
+    "The Sun is small",
+    "There are clouds"
+   ],
+   "x": "At noon the Sun is highest in the sky, so shadows are short"
+  },
+  {
+   "he": "לפי הגרף – באיזו שעה הצל הכי קצר?",
+   "a": "⁦12⁩",
+   "h": "261b2fc3",
+   "q": "According to the graph, at what hour is the shadow shortest?",
+   "o": [
+    "⁦12⁩",
+    "⁦8⁩",
+    "⁦16⁩",
+    "⁦10⁩"
+   ],
+   "x": "The lowest point is at 12",
+   "sc": {
+    "10": "Shadow",
+    "11": "Hour"
+   }
+  },
+  {
+   "he": "לפי הגרף – מה קורה לצל אחרי הצהריים?",
+   "a": "מתארך",
+   "h": "670d5238",
+   "q": "According to the graph, what happens to the shadow after noon?",
+   "o": [
+    "It gets longer",
+    "It gets shorter",
+    "It disappears",
+    "It doesn't change"
+   ],
+   "x": "After 12 the points go up – the shadow gets longer",
+   "sc": {
+    "10": "Shadow",
+    "11": "Hour"
+   }
+  },
+  {
+   "he": "מה יש בצד של כדור הארץ שפונה אל השמש?",
+   "a": "יום",
+   "h": "16c0f1f4",
+   "q": "What is it on the side of Earth that faces the Sun?",
+   "o": [
+    "Daytime",
+    "Nighttime",
+    "Winter",
+    "An eclipse"
+   ],
+   "x": "The lit side has daytime; the dark side has nighttime"
+  },
+  {
+   "he": "איך נקרא הזמן של הקפה אחת סביב השמש?",
+   "a": "שנה",
+   "h": "ffe12d28",
+   "q": "What is the time of one orbit around the Sun called?",
+   "o": [
+    "A year",
+    "A 24-hour day",
+    "A month",
+    "A week"
+   ],
+   "x": "One orbit = a year, about 365 days"
+  },
+  {
+   "he": "כמה ימים יש בשנה רגילה?",
+   "a": "⁦365⁩",
+   "h": "0779d74f",
+   "q": "How many days are in a regular year?",
+   "o": [
+    "⁦365⁩",
+    "⁦30⁩",
+    "⁦100⁩",
+    "⁦24⁩"
+   ],
+   "x": "That is how long one orbit around the Sun takes",
+   "sc": {
+    "0": "1 year = ? days"
+   }
+  },
+  {
+   "he": "איזו תנועה קובעת את אורך החודש?",
+   "a": "הירח סביב הארץ",
+   "h": "5c50d171",
+   "q": "Which motion sets the length of a month?",
+   "o": [
+    "Moon around Earth",
+    "Earth on its axis",
+    "Earth around the Sun",
+    "Sun around the Moon"
+   ],
+   "x": "The cycle of the Moon's phases takes about a month"
+  },
+  {
+   "he": "איזו תנועה יוצרת שנה?",
+   "a": "הארץ סביב השמש",
+   "h": "eca7e52e",
+   "q": "Which motion makes a year?",
+   "o": [
+    "Earth around the Sun",
+    "Earth on its axis",
+    "Moon around Earth",
+    "Sun around the Moon"
+   ],
+   "x": "One full orbit around the Sun – a year"
+  },
+  {
+   "he": "באיזו עונה הימים הכי ארוכים בישראל?",
+   "a": "קיץ",
+   "h": "59a90cd6",
+   "q": "In which season are the days longest in Israel?",
+   "o": [
+    "Summer",
+    "Winter",
+    "Fall",
+    "Spring"
+   ],
+   "x": "In summer the Sun rises high and shines for more hours"
+  },
+  {
+   "he": "איך נראית השמש בצהרי הקיץ, לעומת צהרי החורף?",
+   "a": "גבוהה יותר בשמיים",
+   "h": "37efc78e",
+   "q": "How does the Sun look at noon in summer, compared to noon in winter?",
+   "o": [
+    "Higher in the sky",
+    "Lower in the sky",
+    "Twice as big",
+    "At the same height"
+   ],
+   "x": "In summer the Sun is high, and its rays are stronger"
+  },
+  {
+   "he": "מה גורם לעונות השנה?",
+   "a": "נטיית ציר הארץ",
+   "h": "04ecff03",
+   "q": "What causes the seasons?",
+   "o": [
+    "Earth's tilted axis",
+    "Distance from the Moon",
+    "The Sun spinning",
+    "The clouds"
+   ],
+   "x": "The axis is tilted, so the Sun's height changes"
+  },
+  {
+   "he": "לפי הטבלה – באיזה חודש יש הכי הרבה שעות אור?",
+   "a": "יוני",
+   "h": "3b48a452",
+   "q": "According to the table, which month has the most hours of daylight?",
+   "o": [
+    "June",
+    "December",
+    "March",
+    "All the same"
+   ],
+   "x": "14 hours – the most daylight",
+   "sc": {
+    "0": "10 h",
+    "1": "December",
+    "2": "12 h",
+    "3": "March",
+    "4": "14 h",
+    "5": "June"
+   }
+  },
+  {
+   "he": "לפי הטבלה – באיזו עונה היום והלילה שווים בערך?",
+   "a": "אביב",
+   "h": "f723066a",
+   "q": "According to the table, in which season are day and night about equal?",
+   "o": [
+    "Spring",
+    "Summer",
+    "Winter",
+    "Never"
+   ],
+   "x": "In March: 12 hours of light and 12 hours of dark",
+   "sc": {
+    "0": "10 h",
+    "1": "December",
+    "2": "12 h",
+    "3": "March",
+    "4": "14 h",
+    "5": "June"
+   }
+  },
+  {
+   "he": "כשבישראל חורף, איזו עונה יש באוסטרליה?",
+   "a": "קיץ",
+   "h": "7b72eb67",
+   "q": "When it is winter in Israel, what season is it in Australia?",
+   "o": [
+    "Summer",
+    "Winter too",
+    "Fall",
+    "Spring"
+   ],
+   "x": "In the southern half of Earth, the seasons are reversed"
+  },
+  {
+   "he": "מהו השלב הראשון בתכנון מוצר?",
+   "a": "זיהוי הצורך",
+   "h": "d831726f",
+   "q": "What is the first step in designing a product?",
+   "o": [
+    "Identifying the need",
+    "Building the product",
+    "Testing the product",
+    "Selling the product"
+   ],
+   "x": "First you understand what problem needs to be solved"
+  },
+  {
+   "he": "מהו סדר השלבים הנכון?",
+   "a": "צורך, רעיונות, בנייה",
+   "h": "47a2b4a1",
+   "q": "What is the correct order of the steps?",
+   "o": [
+    "Need, ideas, building",
+    "Building, need, ideas",
+    "Ideas, building, need",
+    "Building, ideas, need"
+   ],
+   "x": "Identify a need, come up with ideas, then build"
+  },
+  {
+   "he": "מה עושים מיד אחרי שבונים את המוצר?",
+   "a": "בודקים אותו",
+   "h": "c069c6b5",
+   "q": "What do you do right after building the product?",
+   "o": [
+    "Test it",
+    "Throw it away",
+    "Forget about it",
+    "Sell it"
+   ],
+   "x": "You check whether it meets the need"
+  },
+  {
+   "he": "הבדיקה הראתה שהמגדל נופל. מה עושים?",
+   "a": "משפרים את התכנון",
+   "h": "9ac9cb87",
+   "q": "The test showed that the tower falls over. What do you do?",
+   "o": [
+    "Improve the design",
+    "Give up",
+    "Hide it",
+    "Say it worked"
+   ],
+   "x": "You improve it and test it again"
+  },
+  {
+   "he": "מהו אב-טיפוס?",
+   "a": "דגם ראשון לבדיקה",
+   "h": "c0d1fecd",
+   "q": "What is a prototype?",
+   "o": [
+    "A first test model",
+    "A product for sale",
+    "A price list",
+    "The inventor's name"
+   ],
+   "x": "You build a first model in order to test it"
+  },
+  {
+   "he": "למה כדאי להציע כמה רעיונות ולא רק אחד?",
+   "a": "לבחור את הטוב",
+   "h": "4ffb810c",
+   "q": "Why is it worth suggesting several ideas, not just one?",
+   "o": [
+    "To choose the best",
+    "To waste time",
+    "To confuse everyone",
+    "Building is not allowed"
+   ],
+   "x": "You compare ideas and choose the one that fits"
+  },
+  {
+   "he": "מה עושים בשלב התכנון?",
+   "a": "משרטטים ובוחרים חומרים",
+   "h": "769550eb",
+   "q": "What do you do in the planning stage?",
+   "o": [
+    "Sketch and choose materials",
+    "Sell the product",
+    "Throw out ideas",
+    "Test a finished product"
+   ],
+   "x": "You prepare a sketch and a list of materials and tools"
+  },
+  {
+   "he": "מהי \"דרישה\" של מוצר?",
+   "a": "תנאי שחייב להתקיים",
+   "h": "a3f96fbc",
+   "q": "What is a product \"requirement\"?",
+   "o": [
+    "A condition to meet",
+    "The product's price",
+    "The packaging color",
+    "The inventor's name"
+   ],
+   "x": "For example: the bag must hold 5 kg"
+  },
+  {
+   "he": "איפה מחפשים מידע כשמתחילים לתכנן?",
+   "a": "בספרים ובאינטרנט",
+   "h": "57b4c854",
+   "q": "Where do you look for information when you start planning?",
+   "o": [
+    "In books and online",
+    "In the trash can",
+    "In a dream",
+    "There is no need"
+   ],
+   "x": "You learn from solutions that already exist"
+  },
+  {
+   "he": "מה משותף לכל המוצרים הטכנולוגיים?",
+   "a": "עונים על צורך",
+   "h": "311d9d57",
+   "q": "What do all technological products have in common?",
+   "o": [
+    "They meet a need",
+    "They're all electric",
+    "They're all metal",
+    "They're all expensive"
+   ],
+   "x": "Every product is built to solve a problem"
+  },
+  {
+   "he": "נועה רוצה כלי ששומר על התה חם. מה הצורך?",
+   "a": "לשמור על חום",
+   "h": "496ce59e",
+   "q": "Noa wants something that keeps her tea hot. What is the need?",
+   "o": [
+    "Keeping the heat in",
+    "Cooling a drink",
+    "Drying clothes",
+    "Lighting a room"
+   ],
+   "x": "The need: the tea should stay hot"
+  },
+  {
+   "he": "איזה חומר מתאים לבידוד הכלי של נועה?",
+   "a": "צמר",
+   "h": "fb2482e6",
+   "q": "Which material is good for insulating Noa's container?",
+   "o": [
+    "Wool",
+    "Thin aluminum",
+    "Copper",
+    "Iron"
+   ],
+   "x": "Wool insulates against heat loss; metals conduct heat"
+  },
+  {
+   "he": "בבדיקה התה התקרר אחרי ⁦5⁩ דקות. מה השלב הבא?",
+   "a": "לשפר את הבידוד",
+   "h": "4b298c3a",
+   "q": "In the test, the tea cooled down after 5 minutes. What is the next step?",
+   "o": [
+    "Improve the insulation",
+    "Declare success",
+    "Add ice",
+    "Stop completely"
+   ],
+   "x": "The result isn't good – improve it and test again"
+  },
+  {
+   "he": "טמפרטורת התה אחרי ⁦20⁩ דקות. איזה כיסוי הכי טוב?",
+   "a": "צמר",
+   "h": "9583f5d6",
+   "q": "Tea temperature after 20 minutes. Which cover works best?",
+   "o": [
+    "Wool",
+    "Paper",
+    "No cover",
+    "All the same"
+   ],
+   "x": "With wool the tea stayed hottest – 60°C",
+   "sc": {
+    "0": "Wool",
+    "2": "Paper",
+    "4": "No cover"
+   }
+  },
+  {
+   "he": "לפי הטבלה – למה בדקו גם כוס בלי כיסוי?",
+   "a": "כדי להשוות",
+   "h": "f835a568",
+   "q": "According to the table, why did they also test a cup with no cover?",
+   "o": [
+    "To compare",
+    "For decoration",
+    "To drink it",
+    "To heat it"
+   ],
+   "x": "That shows how much each cover helped",
+   "sc": {
+    "0": "Wool",
+    "2": "Paper",
+    "4": "No cover"
+   }
+  },
+  {
+   "he": "בנו גשר מקרטון. איך בודקים אותו?",
+   "a": "מעמיסים עליו משקולות",
+   "h": "a18cb6e0",
+   "q": "A bridge was built from cardboard. How do you test it?",
+   "o": [
+    "Load weights onto it",
+    "Paint it",
+    "Smell it",
+    "Fold it"
+   ],
+   "x": "You check whether the bridge meets the requirement"
+  },
+  {
+   "he": "הדרישה: הגשר יחזיק ⁦1⁩ ק״ג. הוא החזיק ⁦2⁩ ק״ג. מה נכון?",
+   "a": "עומד בדרישה",
+   "h": "d8a9dbf8",
+   "q": "The bridge had to hold 1 kg. It held 2 kg. What is true?",
+   "o": [
+    "It meets the requirement",
+    "It failed the test",
+    "Take it apart",
+    "Paint it"
+   ],
+   "x": "2 kg is more than was required"
+  },
+  {
+   "he": "מה הכי חשוב לבדוק במגן לטלפון?",
+   "a": "שהטלפון לא נשבר",
+   "h": "d6bc5c31",
+   "q": "What is most important to test in a phone case?",
+   "o": [
+    "The phone doesn't break",
+    "The case smells nice",
+    "The case is heavy",
+    "The case is warm"
+   ],
+   "x": "The case is meant to protect the phone when it falls"
+  },
+  {
+   "he": "מה מסמנים בסרטוט של מוצר?",
+   "a": "מידות וחומרים",
+   "h": "8ffb5f0d",
+   "q": "What is marked on a sketch of a product?",
+   "o": [
+    "Measurements and materials",
+    "Price and seller",
+    "The store's name",
+    "The weather"
+   ],
+   "x": "A sketch shows the shape, measurements and materials"
+  },
+  {
+   "he": "יואב בנה מתקן השקיה, אבל הצמח התייבש. מה המסקנה?",
+   "a": "המתקן נכשל בבדיקה",
+   "h": "53f25acb",
+   "q": "Yoav built a watering device, but the plant dried up. What's the conclusion?",
+   "o": [
+    "The device failed",
+    "The device works well",
+    "No test is needed",
+    "Plants don't drink"
+   ],
+   "x": "The device didn't meet the requirement – it needs improving"
+  },
+  {
+   "he": "איזו תכונה משותפת לרוב המתכות?",
+   "a": "מוליכות חשמל",
+   "h": "97180013",
+   "q": "What property do most metals share?",
+   "o": [
+    "Conducting electricity",
+    "Being transparent",
+    "Being soft like sponge",
+    "Floating in water"
+   ],
+   "x": "Metals conduct heat and electricity"
+  },
+  {
+   "he": "ברזל צבוע מחליד לאט יותר. למה?",
+   "a": "הצבע מרחיק מים",
+   "h": "3781a0f8",
+   "q": "Painted iron rusts more slowly. Why?",
+   "o": [
+    "Paint keeps water out",
+    "Paint heats it",
+    "Paint attracts magnets",
+    "Paint conducts electricity"
+   ],
+   "x": "The paint blocks water and air"
+  },
+  {
+   "he": "למה לא בונים סירה מנייר?",
+   "a": "נייר נרטב ונקרע",
+   "h": "d8b96bc7",
+   "q": "Why don't we build a boat out of paper?",
+   "o": [
+    "Paper gets soaked, tears",
+    "Paper is heavy",
+    "Paper is shiny",
+    "Paper conducts electricity"
+   ],
+   "x": "A boat's material must hold up in water"
+  },
+  {
+   "he": "מה חוסכים כשממחזרים מתכות?",
+   "a": "חומרי גלם ואנרגיה",
+   "h": "4944cac9",
+   "q": "What do we save when we recycle metals?",
+   "o": [
+    "Raw materials and energy",
+    "Hours of sleep",
+    "Mineral water",
+    "Daylight"
+   ],
+   "x": "Less mining and less electricity"
+  },
+  {
+   "he": "חלב, גבינה ויוגורט עשירים במיוחד ב…",
+   "a": "סידן",
+   "h": "efbc35b7",
+   "q": "Milk, cheese and yogurt are especially rich in…",
+   "o": [
+    "Calcium",
+    "Vitamin C",
+    "Fiber",
+    "Vegetable fat"
+   ],
+   "x": "Dairy products are a source of calcium and protein"
+  },
+  {
+   "he": "איזה רכיב תזונה אינו נותן אנרגיה?",
+   "a": "מים",
+   "h": "d714469d",
+   "q": "Which nutrient does not provide energy?",
+   "o": [
+    "Water",
+    "Carbohydrates",
+    "Fats",
+    "Proteins"
+   ],
+   "x": "Water is essential, but it gives no energy"
+  },
+  {
+   "he": "איזו ארוחה מאוזנת יותר?",
+   "a": "אורז, עוף וסלט",
+   "h": "56efdb30",
+   "q": "Which meal is more balanced?",
+   "o": [
+    "Rice, chicken and salad",
+    "Fries and sausage",
+    "Cake and ice cream",
+    "Only rice"
+   ],
+   "x": "Carbohydrate, protein and vegetables"
+  },
+  {
+   "he": "מה קורה למזון בוושט?",
+   "a": "נדחף לקיבה",
+   "h": "ea12c6c8",
+   "q": "What happens to food in the esophagus?",
+   "o": [
+    "Pushed to the stomach",
+    "Chewed",
+    "Absorbed into the blood",
+    "Dried out"
+   ],
+   "x": "The esophagus muscles push the food down"
+  },
+  {
+   "he": "איפה המזון מתערבב בחומצה ובמיצי עיכול?",
+   "a": "בקיבה",
+   "h": "d28f1641",
+   "q": "Where does food mix with acid and digestive juices?",
+   "o": [
+    "In the stomach",
+    "In the lungs",
+    "In the windpipe",
+    "In the nose"
+   ],
+   "x": "In the stomach, acid helps break down food"
+  },
+  {
+   "he": "מה תפקיד הריאות?",
+   "a": "להכניס חמצן לדם",
+   "h": "f77987f5",
+   "q": "What is the job of the lungs?",
+   "o": [
+    "Adding oxygen to blood",
+    "Digesting food",
+    "Grinding food",
+    "Filtering water"
+   ],
+   "x": "And removing carbon dioxide from the body"
+  },
+  {
+   "he": "איזה הרגל שומר על הריאות?",
+   "a": "לא לעשן",
+   "h": "a3b3065f",
+   "q": "Which habit protects the lungs?",
+   "o": [
+    "Not smoking",
+    "Smoking a little",
+    "Sitting near smokers",
+    "Breathing in dust"
+   ],
+   "x": "Smoking harms the lungs and the whole body"
+  },
+  {
+   "he": "באיזו קרקע מים עומדים זמן רב?",
+   "a": "חרסית",
+   "h": "b30e5a6a",
+   "q": "In which soil does water stay on top for a long time?",
+   "o": [
+    "Clay",
+    "Sand",
+    "Gravel",
+    "Stones"
+   ],
+   "x": "Clay grains are tiny and tightly packed"
+  },
+  {
+   "he": "מה מעשיר את הקרקע במינרלים?",
+   "a": "רקבובית",
+   "h": "ba2e3718",
+   "q": "What enriches the soil with minerals?",
+   "o": [
+    "Humus",
+    "Plastic",
+    "Glass",
+    "A plastic bag"
+   ],
+   "x": "Remains of plants and animals break down"
+  },
+  {
+   "he": "איזה סלע כהה נפוץ ברמת הגולן?",
+   "a": "בזלת",
+   "h": "f7ad7315",
+   "q": "Which dark rock is common in the Golan Heights?",
+   "o": [
+    "Basalt",
+    "Limestone",
+    "Marble",
+    "Chalk"
+   ],
+   "x": "The Golan formed from the lava of volcanoes"
+  },
+  {
+   "he": "איזה כוכב לכת הוא השני מהשמש?",
+   "a": "נוגה",
+   "h": "81d0468c",
+   "q": "Which planet is second from the Sun?",
+   "o": [
+    "Venus",
+    "Mercury",
+    "Mars",
+    "Jupiter"
+   ],
+   "x": "Mercury, and then Venus"
+  },
+  {
+   "he": "איך נקרא שלב הירח שבתמונה?",
+   "a": "חצי ירח",
+   "h": "4e21a18a",
+   "q": "What is the Moon phase in the picture called?",
+   "o": [
+    "Half moon",
+    "New moon",
+    "Full moon",
+    "Thin crescent"
+   ],
+   "x": "Half of the circle is lit"
+  },
+  {
+   "he": "כמה פעמים מסתובב כדור הארץ סביב צירו בשבוע?",
+   "a": "⁦7⁩",
+   "h": "2c9e816b",
+   "q": "How many times does Earth spin on its axis in a week?",
+   "o": [
+    "⁦7⁩",
+    "⁦1⁩",
+    "⁦24⁩",
+    "⁦52⁩"
+   ],
+   "x": "One spin every day – 7 in a week"
+  },
+  {
+   "he": "כמה פעמים מקיף כדור הארץ את השמש בשנה?",
+   "a": "פעם אחת",
+   "h": "4c4c2d54",
+   "q": "How many times does Earth orbit the Sun in a year?",
+   "o": [
+    "Once",
+    "⁦12⁩",
+    "⁦365⁩",
+    "Twice"
+   ],
+   "x": "One full orbit every year"
+  },
+  {
+   "he": "מהו השלב שבין הרעיונות לבנייה?",
+   "a": "תכנון",
+   "h": "09521cfc",
+   "q": "Which stage comes between the ideas and the building?",
+   "o": [
+    "Planning",
+    "Testing",
+    "Identifying the need",
+    "Improving"
+   ],
+   "x": "You choose an idea and plan it"
+  },
+  {
+   "he": "הבדיקה הראתה שהמוצר עונה על הצורך. מה זה אומר?",
+   "a": "המוצר הצליח",
+   "h": "499091cf",
+   "q": "The test showed that the product meets the need. What does that mean?",
+   "o": [
+    "The product succeeded",
+    "Throw it away",
+    "The need changed",
+    "The test was wrong"
+   ],
+   "x": "The product does what it is supposed to do"
+  }
+ ]
+}

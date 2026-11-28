@@ -135,7 +135,7 @@
    "he": "למה עושים חלונות מזכוכית?",
    "a": "כי היא שקופה",
    "h": "9916688a",
-   "q": "Why are windows made of glass?",
+   "q": "Which of these explains why windows are made of glass?",
    "o": [
     "It's transparent",
     "It's soft",
@@ -254,7 +254,7 @@
    "h": "9ab44c01",
    "q": "Which of these is waterproof?",
    "o": [
-    "Nylon raincoat",
+    "Nylon coat",
     "Cotton shirt",
     "Paper",
     "Sponge"
@@ -486,12 +486,12 @@
    "he": "מסמר, מפתח, מטבע – מה משותף להם?",
    "a": "עשויים ממתכת",
    "h": "4a852d9f",
-   "q": "Nail, key, coin – what material are they made of?",
+   "q": "Nail, key, coin – what do they share?",
    "o": [
-    "Metal",
-    "Wood",
-    "Rubber",
-    "Glass"
+    "Made of metal",
+    "Made of wood",
+    "All are soft",
+    "All are transparent"
    ],
    "x": "All three are made of metal"
   },
@@ -1483,7 +1483,7 @@
    "he": "באילו שיניים נוגסים בתפוח?",
    "a": "חותכות",
    "h": "2c559bb9",
-   "q": "Which teeth do we bite into an apple with?",
+   "q": "Which teeth do we use to bite an apple?",
    "o": [
     "Incisors",
     "Molars",
@@ -1889,7 +1889,7 @@
    "q": "Why is it important to protect our permanent teeth?",
    "o": [
     "Nothing replaces them",
-    "They fall out alone",
+    "They fall out naturally",
     "They are small",
     "They are baby teeth"
    ],
@@ -2432,7 +2432,7 @@
     "The roots",
     "The stem"
    ],
-   "x": "The seeds we snack on are the sunflower's own seeds"
+   "x": "The seeds grow in the sunflower's big flower head"
   },
   {
    "he": "תפוח, תות ותפוז – מה משותף?",
@@ -2560,7 +2560,7 @@
    "h": "e8a3695b",
    "q": "What happens to a plastic bag thrown into the sea?",
    "o": [
-    "It harms animals",
+    "It harms sea animals",
     "It vanishes at once",
     "It becomes a fish",
     "It dissolves in water"
@@ -2766,7 +2766,7 @@
    "he": "במה מבריגים בורג?",
    "a": "מברג",
    "h": "713cf483",
-   "q": "What do we use to turn a screw?",
+   "q": "Which tool do we twist to tighten this?",
    "o": [
     "Screwdriver",
     "Hammer",
@@ -2885,7 +2885,7 @@
    "h": "3ded1105",
    "q": "Why is a frying pan's handle made of wood?",
    "o": [
-    "So we won't burn",
+    "So hands won't burn",
     "So it will break",
     "So it's see-through",
     "So it will melt"
@@ -2924,7 +2924,7 @@
    "h": "89119cf2",
    "q": "An umbrella made of paper – what is the problem?",
    "o": [
-    "It soaks and tears",
+    "It tears when wet",
     "It is too heavy",
     "It is see-through",
     "It is too hard"

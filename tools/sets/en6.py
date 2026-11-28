@@ -561,7 +561,7 @@ C.append(("Connectors: and · but · because", [WR], [
  Q(WR, "I like cats, ___ I don't like dogs. (אבל)", ["but", "because", "or", "so"], 0, "but = אבל (ניגוד)", ROW("🐈", "👍", "🐕", "👎")),
  Q(WR, "I'm hungry ___ I didn't eat breakfast.", ["because", "but", "and", "or"], 0, "because = כי (סיבה)", "🍽️"),
  Q(WR, "She can sing, ___ she can't dance.", ["but", "because", "or", "so"], 0, "can מול can't ← but", ROW("🎤", "💃")),
- Q(WR, "We stayed at home ___ it was raining.", ["because", "but", "and", "or"], 0, "הגשם הוא הסיבה ← because", ROW("🏠", "🌧️")),
+ Q(WR, "Which of these fits? We stayed at home ___ it was raining.", ["because", "but", "so", "or"], 0, "הגשם הוא הסיבה ← because", ROW("🏠", "🌧️")),
  Q(WR, "Tom is tall, ___ he can't reach the top shelf.", ["but", "because", "or", "so"], 0, "גבוה אבל לא מגיע ← but", ROW("👨", "📚")),
  Q(WR, "I have a dog ___ a cat.", ["and", "but", "because", "so"], 0, "and = גם וגם", ROW("🐕", "🐈")),
  Q(WR, "Why are you happy? ___ it's my birthday!", ["Because", "But", "And", "Or"], 0, "Why? ← Because", "🎂"),

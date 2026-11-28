@@ -3,7 +3,7 @@
 # the future (will / going to), comparatives and superlatives, as … as, adverbs (quickly / well), too / enough, modals (can, could, must, should, have to),
 # quantifiers, connectors, Band II vocabulary (feelings & jobs, travel & technology, the environment)
 # and four reading passages (Unseen).
-# Present Simple, weather and nature words are in the separate set en7_nov26 and are not repeated here.
+# Present Simple, weather and nature words are in the separate set en7-nov26 ("Start of grade 7 review") and are not repeated here.
 # Organised by fine topics (≈20 questions each) so a parent can tick only what the test covers.
 # Run: python3 -I tools/build_set.py tools/sets/en7.py
 import re
@@ -58,7 +58,7 @@ C.append(("Past Simple: -ed", [PR], [
 C.append(("Past Simple: time words & spelling", [PR], [
  Q(PR, "Which day is in the past?", ["yesterday", "tomorrow", "now", "every day"], 0, "yesterday = אתמול ← עבר", ROW("📅", "⬅️")),
  Q(PR, "Which week is in the past?", ["last week", "next week", "every week", "tomorrow"], 0, "last week = בשבוע שעבר", ROW("📅", "⬅️")),
- Q(PR, "I ___ TV last night.", ["watched", "watch", "watches", "watching"], 0, "last night ← watched", ROW("📺", "🌙")),
+ Q(PR, "I ___ the whole film last night, but I didn't like it.", ["watched", "watch", "watches", "watching"], 0, "last night ← עבר: watched", ROW("🎬", "🌙")),
  Q(PR, "Which is NOT a past verb?", ["walks", "walked", "opened", "laughed"], 0, "walks = הווה; השאר עבר", ROW("🚶", "🚪", "😂")),
  Q(PR, "Past of plan?", ["planned", "plannd", "planded", "plans"], 0, "תנועה קצרה + n ← מכפילים: planned", PW("🗓️", "plan → ?")),
  Q(PR, "Past of worry?", ["worried", "worryed", "worries", "woried"], 0, "y אחרי עיצור ← ied", PW("😟", "worry → ?")),
@@ -83,9 +83,9 @@ C.append(("Irregular verbs: go – went", [PI], [
 ]))
 
 C.append(("Irregular verbs in sentences", [PI], [
- Q(PI, "Yesterday we ___ to the beach by bus.", ["went", "go", "goes", "gone"], 0, "yesterday ← went", ROW("🏖️", "🌊")),
+ Q(PI, "Last summer we ___ to Eilat by train.", ["went", "go", "goes", "gone"], 0, "last summer ← עבר: went", ROW("🚆", "🏖️")),
  Q(PI, "She ___ a letter last week.", ["wrote", "writes", "write", "written"], 0, "last week ← wrote", ROW("👧", "✉️")),
- Q(PI, "I ___ a strange dream last night.", ["had", "have", "has", "haved"], 0, "last night ← had", ROW("😴", "💭")),
+ Q(PI, "I ___ asleep in front of the TV last night.", ["fell", "felt", "fall", "falled"], 0, "fall – fell; fell asleep = נרדמתי", ROW("😴", "📺")),
  Q(PI, "They ___ all the pizza – the box is empty!", ["ate", "eat", "eats", "eated"], 0, "the box is empty ← עבר: ate", ROW("🍕", "🍽️")),
  Q(PI, "He paid 900 ₪ and ___ a new phone.", ["bought", "buys", "buy", "buyed"], 0, "paid ← עבר: bought", ROW("👦", "📱")),
  Q(PI, "Last Friday we ___ a lion at the zoo.", ["saw", "see", "sees", "seen"], 0, "last Friday ← saw", ROW("🦁", "🎟️")),
@@ -107,7 +107,7 @@ C.append(("Past Simple: didn't · wasn't · weren't", [PN], [
  Q(PN, "He ___ eat breakfast this morning.", ["didn't", "doesn't", "don't", "wasn't"], 0, "הבוקר כבר עבר ← didn't", ROW("🥣", "❌")),
  Q(PN, "We ___ at home yesterday.", ["weren't", "wasn't", "didn't", "aren't"], 0, "we ← weren't", ROW("🏠", "❌")),
  Q(PN, "It ___ cold yesterday. It was hot.", ["wasn't", "weren't", "didn't", "isn't"], 0, "it ← wasn't", ROW("☀️", "🌡️")),
- Q(PN, "I ___ very tired last night, so I slept early.", ["was", "were", "did", "am"], 0, "I ← was", ROW("😴", "🌙")),
+ Q(PN, "I ___ very tired last night, so I went to bed early.", ["was", "were", "did", "am"], 0, "I ← was", ROW("😴", "🌙")),
 ]))
 
 C.append(("Past Simple: questions", [PN], [
@@ -128,7 +128,7 @@ C.append(("Past Simple: questions", [PN], [
 C.append(("Past Progressive: was / were + -ing", [PP], [
  Q(PP, "At 8 pm yesterday, I ___ TV.", ["was watching", "were watching", "am watching", "watching"], 0, "I ← was + ing", ROW("📺", "🕗")),
  Q(PP, "They ___ football at 5 o'clock yesterday.", ["were playing", "was playing", "are playing", "play"], 0, "they ← were + ing", ROW("⚽", "🕔")),
- Q(PP, "She was ___ a letter.", ["writing", "write", "wrote", "writes"], 0, "was + פועל עם ing", ROW("👧", "✉️")),
+ Q(PP, "She was ___ a message to her friend.", ["sending", "send", "sent", "sends"], 0, "was + פועל עם ing", ROW("👧", "📱")),
  Q(PP, "What ___ you doing at noon yesterday?", ["were", "was", "did", "are"], 0, "you ← were", ROW("🕛", "❓")),
  Q(PP, "The dog ___ sleeping, so we were quiet.", ["was", "were", "did", "does"], 0, "dog = it ← was", ROW("🐕", "🛋️")),
  Q(PP, "We ___ not listening to the teacher.", ["were", "was", "did", "does"], 0, "we ← were", ROW("👫", "🙉")),
@@ -155,7 +155,7 @@ C.append(("When or while?", [PP], [
 C.append(("Future: will · won't", [FU], [
  Q(FU, "Take an umbrella. I think it ___ rain tomorrow.", ["will", "is", "was", "did"], 0, "I think + עתיד ← will", ROW("🌧️", "📅")),
  Q(FU, "She will ___ you later.", ["call", "calls", "called", "calling"], 0, "אחרי will ← צורת בסיס", ROW("👧", "📞")),
- Q(FU, "They said yes! They ___ come to the party.", ["will", "are", "did", "was"], 0, "הם הסכימו + עתיד ← will", ROW("🎉", "👍")),
+ Q(FU, "They said yes! They ___ come to the party.", ["will", "are", "were", "was"], 0, "הם הסכימו + עתיד ← will", ROW("🎉", "👍")),
  Q(FU, "I'm thirsty. – I ___ get you some water.", ["will", "am", "did", "was"], 0, "החלטה ברגע הדיבור ← will", ROW("🥵", "💧")),
  Q(FU, "will not = ?", ["won't", "wasn't", "weren't", "don't"], 0, "will not = won't", TXT("will not")),
  Q(FU, "Good news! Scientists think people ___ live on Mars in 2050.", ["will", "did", "were", "was"], 0, "תחזית לעתיד ← will", PW("🚀", "2050")),
@@ -212,7 +212,7 @@ C.append(("as … as: the same", [AA], [
  Q(AA, "A dog isn't as ___ as a horse.", ["big", "bigger", "biggest", "small"], 0, "כלב קטן מסוס ← not as big as", ROW("🐕", "🐎")),
  Q(AA, "Which is correct with tall?", ["as tall as", "as taller as", "as tall than", "so tall than"], 0, "as + תואר רגיל + as", ROW("👧", "👧")),
  Q(AA, "An elephant isn't as ___ as a cat.", ["light", "lighter", "lightest", "heavy"], 0, "פיל כבד מחתול ← not as light as", ROW("🐘", "🐈")),
- Q(AA, "This test was as ___ as last week's test.", ["easy", "easier", "easiest", "easily"], 0, "בין as ל-as ← תואר רגיל", ROW("📝", "📝")),
+ Q(AA, "This test was as ___ as last week's. Again, everyone got 100.", ["easy", "easier", "easiest", "easily"], 0, "בין as ל-as ← תואר רגיל", ROW("📝", "📝")),
  Q(AA, "\"as fast as\" means:", ["מהיר באותה מידה", "מהיר יותר", "הכי מהיר", "פחות מהיר"], 0, "as … as = באותה מידה", TXT("as fast as")),
  Q(AA, "\"not as cold as\" means:", ["פחות קר", "קר יותר", "הכי קר", "קר באותה מידה"], 0, "not as … as = פחות … מ-", TXT("not as cold as")),
  Q(AA, "A bike isn't as fast as a car. The car is ___.", ["faster", "slower", "as slow", "the slowest"], 0, "האופניים איטיים יותר ← המכונית faster", ROW("🚲", "🚗")),
@@ -291,7 +291,7 @@ C.append(("Modals: can · could · should", [MD], [
  Q(MD, "I ___ swim when I was five.", ["could", "can", "must", "should"], 0, "יכולת בעבר ← could", PW("🏊", "age 5")),
  Q(MD, "Penguins ___ fly.", ["can't", "can", "must", "should"], 0, "פינגווינים לא יכולים לעוף", ROW("🐧", "✈️")),
  Q(MD, "Wow! My little brother ___ ride a bike now!", ["can", "can't", "must", "should"], 0, "יכולת בהווה ← can", ROW("👦", "🚲")),
- Q(MD, "Which is more polite: ___ you help me?", ["Could", "Must", "Should", "Have"], 0, "בקשה מנומסת ← Could you…?", ROW("🙏", "📦")),
+ Q(MD, "Which of these is more polite: ___ you help me?", ["Could", "Must", "Should", "Have"], 0, "בקשה מנומסת ← Could you…?", ROW("🙏", "📦")),
  Q(MD, "Advice: you look tired. You ___ go to bed.", ["should", "shouldn't", "mustn't", "can't"], 0, "עצה ← should", ROW("😴", "🛏️")),
  Q(MD, "Advice: you ___ eat so much candy.", ["shouldn't", "should", "must", "have to"], 0, "עצה לא לעשות ← shouldn't", ROW("🍬", "🦷")),
  Q(MD, "Advice: it's cold. You ___ take a coat.", ["should", "shouldn't", "can't", "mustn't"], 0, "עצה ← should", ROW("❄️", "🧥")),
@@ -330,28 +330,28 @@ C.append(("much · many · a lot of", [QT], [
 C.append(("some · any · a few · a little", [QT], [
  Q(QT, "I bought ___ bread and ___ eggs.", ["some", "any", "many", "a few"], 0, "משפט חיובי, גם נספר וגם לא נספר ← some", ROW("🍞", "🍽️")),
  Q(QT, "Dad ate them all, so there aren't ___ apples left.", ["any", "much", "a little", "some"], 0, "שלילה, לא נשאר כלום ← any", ROW("👨", "🍎", "❌")),
- Q(QT, "I don't have ___ money – not even one shekel.", ["any", "some", "many", "a few"], 0, "שלילה ← any", ROW("👛", "❌")),
+ Q(QT, "I don't have ___ money. My wallet is empty!", ["any", "some", "many", "a few"], 0, "שלילה ← any", ROW("👛", "❌")),
  Q(QT, "I have only ___ friends in Haifa – just three.", ["a few", "a little", "much", "any"], 0, "מעט + נספר ← a few", PW("👫", "3")),
- Q(QT, "Add only ___ salt to the soup.", ["a little", "a few", "many", "any"], 0, "מעט + לא נספר ← a little", ROW("🧂", "🍲")),
+ Q(QT, "Which of these fits? Add only ___ salt to the soup.", ["a little", "a few", "many", "any"], 0, "מעט + לא נספר ← a little", ROW("🧂", "🍲")),
  Q(QT, "Can I have ___ tea and ___ cookies, please?", ["some", "any", "many", "a few"], 0, "בקשה (גם tea וגם cookies) ← some", ROW("☕", "🙏")),
  Q(QT, "Which word goes with a few?", ["books", "water", "music", "sugar"], 0, "a few + נספר (books)", OPTS("📕", "💧", "🎵")),
  Q(QT, "Which word goes with a little?", ["milk", "eggs", "apples", "cups"], 0, "a little + לא נספר (milk)", OPTS("🥛", "🥚", "🍎")),
- Q(QT, "There aren't ___ eggs in the fridge.", ["any", "some", "much", "a little"], 0, "שלילה + נספר ← any", ROW("🥚", "❌")),
+ Q(QT, "There aren't ___ eggs, so I can't bake a cake.", ["any", "some", "much", "a little"], 0, "שלילה + נספר ← any", ROW("🥚", "❌")),
  Q(QT, "Hurry! We don't have ___ time – only five minutes.", ["much", "many", "a few", "some"], 0, "time לא נספר ← much", ROW("⏰", "🏃")),
 ]))
 
 # ───────────── Connectors ─────────────
 C.append(("and · but · because · so", [CN], [
- Q(CN, "I like tea ___ coffee.", ["and", "but", "so", "because"], 0, "מוסיפים עוד דבר ← and", ROW("☕", "🍵")),
- Q(CN, "The sun was shining, ___ the water was cold. (אבל)", ["but", "and", "so", "because"], 0, "but = אבל (ניגוד)", ROW("☀️", "🌊", "🥶")),
+ Q(CN, "Which of these adds another idea?", ["and", "but", "so", "because"], 0, "and = וגם, מוסיף רעיון", ROW("☕", "➕", "🍵")),
+ Q(CN, "The sun was shining, ___ the water was cold.", ["but", "or", "so", "because"], 0, "but = אבל (ניגוד)", ROW("☀️", "🌊", "🥶")),
  Q(CN, "I'm hungry, ___ I'm making a sandwich.", ["so", "but", "because", "although"], 0, "תוצאה ← so", ROW("😋", "🥪")),
  Q(CN, "I'm making a sandwich ___ I'm hungry.", ["because", "so", "but", "although"], 0, "סיבה ← because", ROW("🥪", "😋")),
  Q(CN, "It was raining, ___ we stayed home.", ["so", "because", "but", "although"], 0, "תוצאה ← so", ROW("🌧️", "🏠")),
- Q(CN, "We stayed home ___ it was raining.", ["because", "so", "but", "however"], 0, "סיבה ← because", ROW("🏠", "🌧️")),
+ Q(CN, "The match was cancelled ___ the field was full of water.", ["because", "so", "but", "although"], 0, "הסיבה לביטול ← because", ROW("⚽", "💧")),
  Q(CN, "He is rich, ___ he isn't happy.", ["but", "so", "because", "or"], 0, "ניגוד ← but", ROW("💰", "😞")),
  Q(CN, "so = ?", ["לכן", "כי", "אבל", "למרות ש"], 0, "so = לכן (תוצאה)", TXT("so")),
  Q(CN, "because = ?", ["כי", "לכן", "אבל", "או"], 0, "because = כי (סיבה)", TXT("because")),
- Q(CN, "Which word shows a result?", ["so", "because", "but", "and"], 0, "so = לכן ← תוצאה", TXT("result")),
+ Q(CN, "Which English word shows a result?", ["so", "because", "but", "and"], 0, "so = לכן ← תוצאה", TXT("result")),
 ]))
 
 C.append(("although · however", [CN], [
@@ -407,7 +407,7 @@ C.append(("Travel", [VT], [
  Q(VT, "יעד (המקום שאליו נוסעים) = ?", ["destination", "direction", "decision", "delay"], 0, "יעד = destination", ROW("📍", "🗺️")),
  Q(VT, "The train is late. There is a ___.", ["delay", "journey", "ticket", "souvenir"], 0, "עיכוב = delay", ROW("🚆", "⏰")),
  Q(VT, "תייר = ?", ["tourist", "passenger", "pilot", "waiter"], 0, "תייר = tourist", ROW("📸", "🗺️")),
- Q(VT, "The plane will ___ in Rome at six.", ["land", "fly", "leave", "drive"], 0, "לנחות = land", ROW("🛬", "🕕")),
+ Q(VT, "The plane will ___ in Rome at six.", ["land", "fly", "leave", "drive"], 0, "לנחות = land", ROW("✈️", "🇮🇹", "🕕")),
 ]))
 
 C.append(("Technology", [VT], [
@@ -430,7 +430,7 @@ C.append(("Environment words", [VE], [
  Q(VE, "זיהום = ?", ["pollution", "solution", "population", "protection"], 0, "זיהום = pollution", ROW("🏭", "💨")),
  Q(VE, "למחזר = ?", ["recycle", "reduce", "refuse", "repeat"], 0, "למחזר = recycle", ROW("♻️")),
  Q(VE, "להגן על = ?", ["protect", "pollute", "produce", "prepare"], 0, "להגן = protect", ROW("🛡️", "🐢")),
- Q(VE, "אנרגיה סולארית = ___ energy", ["solar", "wind", "water", "nuclear"], 0, "סולארי = מהשמש = solar", ROW("☀️", "🔋")),
+ Q(VE, "Energy from the sun = ___ energy", ["solar", "wind", "water", "nuclear"], 0, "solar = של השמש", ROW("🔋", "🏠")),
  Q(VE, "Animals that may disappear are ___.", ["endangered", "dangerous", "extinct", "enormous"], 0, "בסכנת הכחדה = endangered", ROW("🐼", "🐅")),
  Q(VE, "בזבוז, פסולת = ?", ["waste", "wave", "water", "wall"], 0, "בזבוז = waste", ROW("🗑️", "🍌")),
  Q(VE, "כוכב לכת = ?", ["planet", "plant", "plane", "plan"], 0, "כוכב לכת = planet", ROW("🌍", "🌙")),
@@ -444,12 +444,12 @@ C.append(("Saving the planet", [VE], [
  Q(VE, "Use a bottle again = ___ it.", ["reuse", "reduce", "refuse", "remove"], 0, "להשתמש שוב = reuse", ROW("🥤", "🔁")),
  Q(VE, "We must ___ the forests.", ["protect", "pollute", "destroy", "waste"], 0, "צריך להגן על היערות", ROW("🌲", "🦌")),
  Q(VE, "יער = ?", ["forest", "field", "desert", "farm"], 0, "יער = forest", ROW("🌲", "🌲", "🌲")),
- Q(VE, "Plastic bags are bad for the ___ – the world around us.", ["environment", "energy", "entrance", "oxygen"], 0, "שקיות פלסטיק פוגעות בסביבה", ROW("🛍️", "🐢")),
+ Q(VE, "Plastic is bad for the ___ around us.", ["environment", "energy", "entrance", "oxygen"], 0, "שקיות פלסטיק פוגעות בסביבה", ROW("🛍️", "🐢")),
  Q(VE, "אשפה, זבל = ?", ["rubbish", "rabbit", "ribbon", "robber"], 0, "אשפה = rubbish", ROW("🗑️")),
- Q(VE, "Global warming makes the Earth ___.", ["warmer", "colder", "smaller", "cleaner"], 0, "התחממות ← חם יותר = warmer", ROW("🌍", "🌡️")),
+ Q(VE, "Because of global warming, ice in the Arctic ___.", ["melts", "freezes", "grows", "builds"], 0, "חם יותר ← הקרח נמס", ROW("🌍", "🌡️")),
  Q(VE, "Don't ___ water! Close the tap.", ["waste", "save", "recycle", "protect"], 0, "לבזבז = waste", ROW("🚰", "💧")),
  Q(VE, "אקלים = ?", ["climate", "climb", "clean", "client"], 0, "אקלים = climate", ROW("🌡️", "🌦️")),
- Q(VE, "Which one is bad for the planet?", ["pollution", "recycling", "solar energy", "trees"], 0, "זיהום פוגע בכדור הארץ", ROW("🌍", "❓")),
+ Q(VE, "Which one is bad for the planet?", ["pollution", "recycling", "solar energy", "trees"], 0, "זיהום פוגע בכדור הארץ", OPTS("🏭", "♻️", "☀️", "🌳")),
 ]))
 
 # ───────────── Unseen (Band II) ─────────────
@@ -559,13 +559,13 @@ C.append(("📖 Unseen: One Week Without Screens", [UN], [
  Q(UN, "How many hours a day does the writer usually use the phone?", ["about five", "about two", "about nine", "about one"], 0, "about five hours a day", ROW("📱", "⏰")),
  Q(UN, "How did the writer feel on the first day?", ["bored and nervous", "calm and happy", "proud and excited", "tired and sick"], 0, "I was bored and nervous", ROW("👦", "📅")),
  Q(UN, "Where was the phone during the week?", ["in Mom's drawer", "in the park", "at school", "in a bag"], 0, "My mother was keeping it in her drawer", ROW("📱", "❓")),
- Q(UN, "What did the writer play with the brother?", ["a board game", "football", "computer games", "the piano"], 0, "I took out an old board game", ROW("👦", "🌙")),
+ Q(UN, "What did the writer play in the evening?", ["a board game", "football", "computer games", "the piano"], 0, "I took out an old board game", ROW("👦", "🌙")),
  Q(UN, "What was the book about?", ["a traveling girl", "a football team", "a lost phone", "a school challenge"], 0, "a girl who travels around the world", ROW("📖", "❓")),
  Q(UN, "Who did the writer play football with?", ["friends", "the brother", "Mom", "a coach"], 0, "went to the park with my friends", ROW("⚽", "🌳")),
  Q(UN, "When are phones not allowed now?", ["at dinner", "at school", "in the morning", "in the park"], 0, "no phones at dinner", ROW("📵", "❓")),
  Q(UN, "Why is the writer going to keep the rule?", ["sleeps better", "gets money", "Mom says so", "it's easy"], 0, "because I sleep better and feel calmer", ROW("📵", "😊")),
  Q(UN, "\"challenge\" means:", ["אתגר", "משחק", "חופשה", "חוק"], 0, "challenge = אתגר", TXT("challenge")),
- Q(UN, "What is the main idea of the text?", ["a screen-free week", "a new phone", "a board game", "a trip abroad"], 0, "שבוע בלי מסכים ומה הכותב למד", ROW("📖", "💭")),
+ Q(UN, "What is the main idea of the text?", ["a week offline", "a new phone", "a board game", "a trip abroad"], 0, "שבוע בלי מסכים ומה הכותב למד", ROW("📖", "💭")),
  Q(UN, "What does the writer do differently with screens now?", ["uses screens less", "bought a phone", "stopped reading", "plays outside less"], 0, "חוק חדש: פחות מסכים ← ישן טוב יותר", ROW("👦", "📅")),
 ], P4))
 
@@ -581,7 +581,7 @@ C.append(("חזרה כללית", [PR, PI, PN, PP, FU, CS, MD, QT, CN, VF, VT, VE
  Q(CS, "Comparative of easy?", ["easier", "easyer", "more easy", "easiest"], 0, "y אחרי עיצור ← ier", PW("👌", "easy → ?")),
  Q(CS, "A bike is ___ (slow) than a car.", ["slower", "slowest", "more slow", "slow"], 0, "slow ← slower", ROW("🚲", "🚗")),
  Q(MD, "You ___ touch that wire! It's dangerous.", ["mustn't", "must", "have to", "should"], 0, "אסור ← mustn't", ROW("🔌", "⚠️")),
- Q(MD, "I ___ ride a bike when I was six.", ["could", "can", "must", "will"], 0, "יכולת בעבר ← could", PW("🚲", "age 6")),
+ Q(MD, "My grandpa ___ run fast when he was young.", ["could", "can", "must", "will"], 0, "יכולת בעבר ← could", ROW("👴", "🏃")),
  Q(QT, "How ___ sugar do you want?", ["much", "many", "a few", "few"], 0, "sugar לא נספר ← much", ROW("☕", "🍬")),
  Q(QT, "There are ___ cookies left – just two.", ["a few", "a little", "much", "any"], 0, "מעט + נספר ← a few", COUNT(("🍪", 2))),
  Q(CN, "I was tired, ___ I went to bed early.", ["so", "because", "although", "however"], 0, "תוצאה ← so", ROW("😴", "🛏️")),

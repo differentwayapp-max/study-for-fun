@@ -29,7 +29,10 @@ MAX_Q_WORDS = 12
 
 
 def W(s): return re.sub(r"\{([^}]*)\}", lambda m: "⁦" + m.group(1) + "⁩", s)
-def Q(t, q, opts, ans, expl, sc): return (t, W(q), opts, ans, W(expl), sc)
+def Q(t, q, opts, ans, expl, sc, lvl=1):
+    r = (t, W(q), opts, ans, W(expl), sc)
+    return r + (2,) if lvl == 2 else r
+def Q2(*a): return Q(*a, lvl=2)        # a test-level question (the level of a real grade-8 test)
 
 def ROW(*es):
     """The things the question talks about, side by side."""

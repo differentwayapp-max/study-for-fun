@@ -38,6 +38,11 @@ C.append(("Present Simple: he / she / it", [PS], [
  (PS, "Snow ___ in spring.", ["melt", "melts", "melting", "to melt"], 1, "השלג = it ← melts", [("☀️", 25, 25, 30), ("⛄", 60, 60, 46)]),
  (PS, "The farmer ___ apples to shops.", ["sell", "sells", "selling", "to sell"], 1, "farmer = he ← sells", [("👨‍🌾", 30, 55, 44), ("🍎", 62, 66, 22), ("🏪", 80, 35, 26)]),
  (PS, "Mom ___ eggs in a pan.", ["fry", "frys", "fries", "frying"], 2, "y אחרי עיצור ← ies", [("👩", 32, 55, 40), ("🍳", 70, 58, 38)]),
+ Q2(PS, "Look! The cat ___ on my bed.", ["is sleeping", "sleeps", "sleep", "sleeping"], 0, "Look! ← קורה עכשיו: is + ing", ROW("🐈", "🛏️")),
+ Q2(PS, "Every Friday, Mom ___ a cake for us.", ["bakes", "is baking", "bake", "baking"], 0, "every Friday = הרגל ← Present Simple", ROW("👩", "🎂", "📅")),
+ Q2(PS, "Shh! Grandpa ___ the news right now.", ["is watching", "watches", "watch", "watching"], 0, "right now ← is + ing", ROW("👴", "📺")),
+ Q2(PS, "Find the mistake: 'He go to school by bus.'", ["go → goes", "He → His", "by → in", "bus → buses"], 0, "he ← מוסיפים es: goes", ROW("👦", "🚌", "🏫")),
+ Q2(PS, "She ___ tea, but her brother ___ coffee.", ["drinks, drinks", "drink, drinks", "drinks, drink", "drinking, drinks"], 0, "she / brother ← שניהם עם s", ROW("👧", "🍵", "👦", "☕")),
 ]))
 
 C.append(("Weather", [WE], [
@@ -70,6 +75,9 @@ C.append(("Present Simple: don't / doesn't", [PS], [
  (PS, "She doesn't ___ TV.", ["watch", "watches", "watching", "watched"], 0, "אחרי doesn't ← בלי s", [("👧", 32, 55, 38), ("📺", 70, 52, 36), ("❌", 70, 52, 16)]),
  (PS, "Which sentence about him is correct?", ["He don't play", "He doesn't play", "He not play", "He doesn't plays"], 1, "he ← doesn't + פועל בלי s", [("👦", 50, 50, 46)]),
  (PS, "Which sentence about her is correct?", ["She don't swim", "She doesn't swims", "She doesn't swim", "She not swim"], 2, "she ← doesn't + פועל בלי s", [("👧", 40, 50, 40), ("🏊‍♀️", 72, 62, 24), ("❌", 72, 62, 30)]),
+ Q2(PS, "'Dana likes snow.' Negative: Dana ___ snow.", ["doesn't like", "don't like", "doesn't likes", "isn't like"], 0, "doesn't + פועל בלי s", ROW("👧", "⛄")),
+ Q2(PS, "'They live in Eilat.' Negative: They ___ in Eilat.", ["don't live", "doesn't live", "don't lives", "aren't live"], 0, "they ← don't + צורת בסיס", ROW("👫", "🏜️")),
+ Q2(PS, "I ___ TV now. I'm doing my homework.", ["am not watching", "don't watching", "not watching", "isn't watching"], 0, "now ← am not + ing", ROW("📺", "📓")),
 ]))
 
 C.append(("Nature & places", [NP], [
@@ -102,6 +110,11 @@ C.append(("Present Simple: questions", [PS], [
  (PS, "Which question about her is correct?", ["Do she sing?", "Does she sing?", "Does she sings?", "Is she sing?"], 1, "she ← Does + פועל בלי s", [("👧", 40, 55, 40), ("🎤", 70, 50, 26)]),
  (PS, "Which question about them is correct?", ["Does they run?", "Do they runs?", "Do they run?", "Are they run?"], 2, "they ← Do + פועל בלי s", [("🏃", 35, 55, 36), ("🏃‍♀️", 68, 55, 36)]),
  (PS, "Does Dana ___ a coat?", ["wear", "wears", "wearing", "wore"], 0, "אחרי Does ← בלי s", [("👧", 35, 55, 40), ("🧥", 70, 55, 32)]),
+ Q2(PS, "'She works in a bank.' – Where ___ she work?", ["does", "do", "is", "works"], 0, "she ← Where does she work?", ROW("👩", "🏦")),
+ Q2(PS, "'We eat at six.' – When ___ you eat?", ["do", "does", "are", "is"], 0, "you ← When do you…?", ROW("🍽️", "🕕")),
+ Q2(PS, "What ___ you doing now? – I'm reading.", ["are", "do", "does", "is"], 0, "doing now ← are you doing", ROW("📖", "👦")),
+ Q2(PS, "___ he usually walk to school?", ["Does", "Is", "Do", "Are"], 0, "usually = הרגל ← Does he walk", ROW("👦", "🚶", "🏫")),
+ Q2(PS, "Find the mistake: 'Does she likes pizza?'", ["likes → like", "Does → Do", "she → her", "pizza → pizzas"], 0, "אחרי Does ← פועל בלי s", ROW("👧", "🍕")),
 ]))
 
 C.append(("Action words", [AW], [
@@ -180,6 +193,11 @@ C.append(("📖 Unseen: Weather Watcher", [UN], [
  (UN, "\"predict\" means:", ["לחזות", "להרוס", "להגן", "לבדוק"], 0, "predict storms = לחזות סערות", OPTS("🔮", "💥", "🛡️", "🔍")),
  (UN, "What is the South Pole?", ["the coldest place", "the hottest place", "a small city", "a big field"], 0, "probably the coldest place on earth", OPTS("❄️", "🔥", "🏘️", "🌾")),
  (UN, "\"I can't wait!\" – Lia is:", ["excited", "worried", "sad", "bored"], 0, "I can't wait! = מתרגשת", OPTS("🤩", "😟", "😢", "😑")),
+ Q2(UN, "'Then she writes it in a special notebook.' 'it' is:", ["the temperature", "the notebook", "the morning", "the city"], 0, "checks the temperature… writes it", ROW("📓", "✏️")),
+ Q2(UN, "'it can destroy a whole field' – 'it' is:", ["a storm", "a farmer", "the snow", "the shade"], 0, "When a storm arrives, it can destroy", ROW("🌾", "💥")),
+ Q2(UN, "Why is the weather important to Lia's father?", ["he's a farmer", "he likes snow", "he's a scientist", "he's a sailor"], 0, "Her father is a farmer, so…", ROW("👨", "🌦️")),
+ Q2(UN, "What does Lia do right after checking the temperature?", ["writes it down", "wakes up early", "wears her coat", "goes to school"], 0, "Then she writes it in a notebook", ROW("👧", "🕐")),
+ Q2(UN, "When does Lia put on her coat?", ["before leaving home", "after school", "in the summer", "at the pool"], 0, "before she leaves the house", ROW("👧", "🚪")),
 ], PASSAGE))
 
 C.append(("חזרה כללית", [PS, WE, NP, AW, DW, EW, UN], [
@@ -268,5 +286,10 @@ C.insert(_u, ("Present Simple: has, does, always…", [PS], [
  (PS, "The museum ___ at ten.", ["opens", "open", "opening", "to open"], 0, "the museum = it ← opens", [("🏛️", 45, 55, 46), ("🕙", 78, 25, 20)]),
  (PS, "My parents ___ in Haifa.", ["work", "works", "working", "to work"], 0, "parents = רבים ← בלי s", [("👫", 40, 58, 38), ("🏙️", 75, 50, 32)]),
  (PS, "She ___ English very well.", ["speaks", "speak", "speaking", "to speak"], 0, "she ← speaks", [("👧", 40, 55, 40), ("💬", 72, 35, 26)]),
+ Q2(PS, "I usually ___ to school, but today it's raining.", ["walk", "am walking", "walks", "walking"], 0, "usually = הרגל ← Present Simple", ROW("🚶", "🏫", "🌧️")),
+ Q2(PS, "She usually walks, but today she ___ the bus.", ["is taking", "takes", "take", "taking"], 0, "today, לא כרגיל ← is + ing", ROW("👧", "🚌")),
+ Q2(PS, "Yesterday she walked, but she usually ___ the bus.", ["takes", "took", "is taking", "take"], 0, "usually = הרגל ← takes", ROW("👧", "🚌", "🚶")),
+ Q2(PS, "Listen! Someone ___ at the door.", ["is knocking", "knocks", "knock", "knocking"], 0, "Listen! ← קורה עכשיו: is + ing", ROW("🚪", "👂")),
+ Q2(PS, "My sister ___ her teeth twice a day.", ["brushes", "is brushing", "brush", "brushing"], 0, "twice a day = הרגל ← brushes", ROW("👧", "🦷")),
 ]))
 OLD_CODES = ["en7-nov26-9eaa62", "en7-nov26-333b7b", "en7-nov26-1adab8"]

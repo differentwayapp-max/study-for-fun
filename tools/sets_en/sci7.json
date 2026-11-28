@@ -1,0 +1,5256 @@
+{
+ "set": {
+  "name": "Science – Grade 7 – Energy, the Cell and the Particle Model",
+  "title": "Particle model · Chemical change · Energy · Heat · The cell · Transport and respiration · Technology",
+  "tags": [
+   "Particle model",
+   "Chemical change",
+   "Solutions",
+   "Energy",
+   "Energy sources",
+   "Heat transfer",
+   "The cell",
+   "The microscope",
+   "Circulation",
+   "Transport in plants",
+   "Heat and temperature",
+   "The respiratory system",
+   "Photosynthesis",
+   "Cellular respiration",
+   "Engineering design",
+   "Technological systems"
+  ]
+ },
+ "labels": {
+  "המודל החלקיקי": "The particle model",
+  "חלקיקים בתנועה: התפשטות ופעפוע": "Particles in motion: expansion and diffusion",
+  "שינוי פיזיקלי ושינוי כימי": "Physical and chemical change",
+  "תגובה כימית ושימור מסה": "Chemical reactions and conservation of mass",
+  "תערובות ותמיסות": "Mixtures and solutions",
+  "צורות אנרגיה": "Forms of energy",
+  "המרות אנרגיה": "Energy conversions",
+  "מקורות אנרגיה": "Energy sources",
+  "מעבר חום ובידוד": "Heat transfer and insulation",
+  "חום וטמפרטורה": "Heat and temperature",
+  "מאפייני היצור החי": "Characteristics of living things",
+  "התא והמיקרוסקופ": "The cell and the microscope",
+  "רמות ארגון": "Levels of organization",
+  "מערכת ההובלה באדם": "The human circulatory system",
+  "מערכת הנשימה": "The respiratory system",
+  "הובלה בצמח": "Transport in plants",
+  "פוטוסינתזה ונשימה תאית": "Photosynthesis and cellular respiration",
+  "תיכון הנדסי ומערכות טכנולוגיות": "Engineering design and technological systems",
+  "החומר בנוי מחלקיקים": "Matter is made of particles",
+  "מצבי צבירה לפי המודל": "States of matter in the model",
+  "טמפרטורה והתפשטות": "Temperature and expansion",
+  "פעפוע והמסה": "Diffusion and dissolving",
+  "פיזיקלי או כימי?": "Physical or chemical?",
+  "מה השתנה בחומר?": "What changed in the substance?",
+  "סימנים לתגובה: בעירה והחלדה": "Signs of a reaction: burning and rusting",
+  "שימור המסה": "Conservation of mass",
+  "תערובות והפרדה": "Mixtures and separation",
+  "תמיסות": "Solutions",
+  "למי יש יותר אנרגיה?": "Which has more energy?",
+  "שרשראות אנרגיה ושימור": "Energy chains and conservation",
+  "מתחדש או מתכלה?": "Renewable or nonrenewable?",
+  "אנרגיה בעולם שלנו": "Energy in our world",
+  "הולכה, הסעה וקרינה": "Conduction, convection and radiation",
+  "מוליכים ומבודדים": "Conductors and insulators",
+  "חום או טמפרטורה?": "Heat or temperature?",
+  "כמות חום ושיווי טמפרטורה": "Amount of heat and thermal equilibrium",
+  "מאפייני החיים": "Characteristics of life",
+  "חי, היה חי או דומם?": "Living, once living or non-living?",
+  "רכיבי התא": "Parts of the cell",
+  "מיקרוסקופ ותאים": "Microscopes and cells",
+  "מתא ועד מערכת": "From cell to system",
+  "רמות ארגון – תרגול": "Levels of organization – practice",
+  "הלב וכלי הדם": "The heart and blood vessels",
+  "הדם ומחזור הדם": "Blood and circulation",
+  "איברי מערכת הנשימה": "Organs of the respiratory system",
+  "חילוף גזים": "Gas exchange",
+  "שורשים, עצה ושיפה": "Roots, xylem and phloem",
+  "דיות ופיוניות": "Transpiration and stomata",
+  "פוטוסינתזה – איך הצמח מייצר מזון": "Photosynthesis – how a plant makes food",
+  "נשימה תאית והמיטוכונדריה": "Cellular respiration and mitochondria",
+  "תהליך התיכון ההנדסי": "The engineering design process",
+  "מערכת טכנולוגית ובחירת חומר": "Technological systems and choosing materials",
+  "חזרה למבחן": "Review for the test"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
+   "a": "מחלקיקים זעירים",
+   "h": "32bb9af1",
+   "q": "According to the particle model, what is all matter made of?",
+   "o": [
+    "Tiny particles",
+    "Air and space",
+    "Small drops",
+    "Ice crystals"
+   ],
+   "x": "All matter is made of very tiny particles"
+  },
+  {
+   "he": "מה יש ברווחים שבין החלקיקים של החומר?",
+   "a": "כלום – ריק",
+   "h": "dcff9b15",
+   "q": "What is in the spaces between a substance's particles?",
+   "o": [
+    "Nothing – empty space",
+    "Air",
+    "Water",
+    "Small particles"
+   ],
+   "x": "There is no matter between the particles – only space"
+  },
+  {
+   "he": "האם החלקיקים של חומר מוצק נעים?",
+   "a": "כן, רוטטים במקום",
+   "h": "579039d4",
+   "q": "Do the particles of a solid move?",
+   "o": [
+    "Yes, vibrate in place",
+    "No, they stand still",
+    "Only when touched",
+    "Only when heated"
+   ],
+   "x": "Particles always move; in a solid they vibrate in place"
+  },
+  {
+   "he": "מה מחזיק את החלקיקים של המוצק יחד?",
+   "a": "כוחות משיכה",
+   "h": "c64ece70",
+   "q": "What holds the particles of a solid together?",
+   "o": [
+    "Attractive forces",
+    "Natural glue",
+    "Air pressure",
+    "Body heat"
+   ],
+   "x": "Attractive forces act between the particles"
+  },
+  {
+   "he": "באיזה מצב צבירה הרווחים בין החלקיקים הכי גדולים?",
+   "a": "גז",
+   "h": "bf671465",
+   "q": "In which state of matter are the spaces between particles largest?",
+   "o": [
+    "Gas",
+    "Solid",
+    "Liquid",
+    "Same in all"
+   ],
+   "x": "In a gas, the particles are very far apart"
+  },
+  {
+   "he": "החלקיקים מסודרים בשורות וצמודים. איזה מצב צבירה?",
+   "a": "מוצק",
+   "h": "ddb59d95",
+   "q": "The particles are close together in neat rows. Which state of matter?",
+   "o": [
+    "Solid",
+    "Liquid",
+    "Gas",
+    "Solution"
+   ],
+   "x": "In a solid, the particles are ordered and packed tightly"
+  },
+  {
+   "he": "החלקיקים צפופים אך מחליקים זה על פני זה. איזה מצב?",
+   "a": "נוזל",
+   "h": "0862d0b0",
+   "q": "The particles are close but slide past each other. Which state?",
+   "o": [
+    "Liquid",
+    "Solid",
+    "Gas",
+    "None of these"
+   ],
+   "x": "In a liquid, particles are close but move around"
+  },
+  {
+   "he": "למה אפשר לדחוס גז בקלות?",
+   "a": "יש רווחים גדולים",
+   "h": "fe9043ac",
+   "q": "Why can a gas be compressed easily?",
+   "o": [
+    "There are large spaces",
+    "The particles are soft",
+    "The particles shrink",
+    "It has no mass"
+   ],
+   "x": "The particles move closer, into the large spaces"
+  },
+  {
+   "he": "האם אפשר לראות חלקיק אחד בעין?",
+   "a": "לא, הוא זעיר",
+   "h": "eb2faccf",
+   "q": "Can you see a single particle with your eyes?",
+   "o": [
+    "No, it's tiny",
+    "Yes, easily",
+    "Only in solids",
+    "Only in gases"
+   ],
+   "x": "Particles are far too small to see"
+  },
+  {
+   "he": "חלקיקי המים בקרח ובאדים – האם הם זהים?",
+   "a": "כן, אותם חלקיקים",
+   "h": "58f157e0",
+   "q": "Water particles in ice and in steam – are they the same?",
+   "o": [
+    "Yes, the same particles",
+    "No, ice is heavier",
+    "No, steam is bigger",
+    "No, they broke apart"
+   ],
+   "x": "Only their arrangement and motion change, not the particles"
+  },
+  {
+   "he": "למה לנוזל אין צורה קבועה?",
+   "a": "החלקיקים זזים ממקומם",
+   "h": "f71364cf",
+   "q": "Why doesn't a liquid have a fixed shape?",
+   "o": [
+    "Particles move around",
+    "Particles melt",
+    "It has no particles",
+    "Particles grow"
+   ],
+   "x": "The particles slide and take the container's shape"
+  },
+  {
+   "he": "למה למוצק יש צורה קבועה?",
+   "a": "החלקיקים קבועים במקומם",
+   "h": "cf56ad06",
+   "q": "Why does a solid have a fixed shape?",
+   "o": [
+    "Particles stay in place",
+    "Particles are heavy",
+    "It has no spaces",
+    "It is cold"
+   ],
+   "x": "The particles vibrate but don't leave their places"
+  },
+  {
+   "he": "למה גז ממלא את כל הכלי שהוא נמצא בו?",
+   "a": "חלקיקיו נעים חופשי",
+   "h": "8ce836f7",
+   "q": "Why does a gas fill the whole container it is in?",
+   "o": [
+    "Its particles move freely",
+    "Its particles grow",
+    "The container attracts it",
+    "It is very light"
+   ],
+   "x": "Gas particles move in all directions, up to the walls"
+  },
+  {
+   "he": "מה קורה לסידור החלקיקים כשקרח נמס?",
+   "a": "הסידור מתפרק",
+   "h": "a1758040",
+   "q": "What happens to the arrangement of the particles when ice melts?",
+   "o": [
+    "Breaks apart",
+    "Stays exactly the same",
+    "Becomes more ordered",
+    "Particles disappear"
+   ],
+   "x": "The particles themselves don't change – only their arrangement"
+  },
+  {
+   "he": "מים מתאדים. מה קורה למרחק בין החלקיקים?",
+   "a": "גדל מאוד",
+   "h": "1434ffd6",
+   "q": "Water evaporates. What happens to the distance between the particles?",
+   "o": [
+    "It grows a lot",
+    "It shrinks",
+    "It doesn't change",
+    "It disappears"
+   ],
+   "x": "In water vapor, the particles are far apart"
+  },
+  {
+   "he": "לפי הכרטיס, באיזה מצב צבירה מדובר?",
+   "a": "גז",
+   "h": "c5ae0c7a",
+   "q": "According to the card, which state of matter is it?",
+   "o": [
+    "Gas",
+    "Liquid",
+    "Solid",
+    "Solution"
+   ],
+   "x": "Particles far apart and moving freely – a gas",
+   "sc": {
+    "0": "Ordered: no",
+    "1": "Spaces: large",
+    "2": "Motion: free"
+   }
+  },
+  {
+   "he": "לפי הכרטיס, מהו מצב הצבירה?",
+   "a": "נוזל",
+   "h": "ce1ef4b6",
+   "q": "According to the card, what is the state of matter?",
+   "o": [
+    "Liquid",
+    "Gas",
+    "Solid",
+    "Mixture"
+   ],
+   "x": "Packed close but flowing – a liquid",
+   "sc": {
+    "0": "Packed: yes",
+    "1": "Ordered: no",
+    "2": "Flowing: yes"
+   }
+  },
+  {
+   "he": "באיזה מצב צבירה כוחות המשיכה בין החלקיקים הכי חזקים?",
+   "a": "מוצק",
+   "h": "80e6dd13",
+   "q": "In which state are the attractive forces between particles strongest?",
+   "o": [
+    "Solid",
+    "Gas",
+    "Liquid",
+    "Same in all"
+   ],
+   "x": "That is why particles in a solid stay in place"
+  },
+  {
+   "he": "מזרק סגור מלא מים. האם אפשר לדחוס אותם?",
+   "a": "כמעט לא",
+   "h": "3b645d69",
+   "q": "A sealed syringe is full of water. Can the water be compressed?",
+   "o": [
+    "Hardly at all",
+    "Yes, easily",
+    "Yes, to half",
+    "Only if warm"
+   ],
+   "x": "In a liquid the particles are close – almost no spaces"
+  },
+  {
+   "he": "איזה משפט נכון לפי המודל החלקיקי?",
+   "a": "החלקיקים תמיד נעים",
+   "h": "8a958768",
+   "q": "Which statement is true according to the particle model?",
+   "o": [
+    "Particles always move",
+    "Air is between particles",
+    "Heat makes particles expand",
+    "Solids have no motion"
+   ],
+   "x": "Particles are always moving, in every state of matter"
+  },
+  {
+   "he": "מחממים מים. מה קורה לחלקיקים?",
+   "a": "נעים מהר יותר",
+   "h": "6088ebd2",
+   "q": "Water is heated. What happens to its particles?",
+   "o": [
+    "They move faster",
+    "They get bigger",
+    "They move slower",
+    "They disappear"
+   ],
+   "x": "When heated, the particles move faster"
+  },
+  {
+   "he": "על מה מלמדת אותנו הטמפרטורה של חומר?",
+   "a": "מהירות החלקיקים",
+   "h": "0ed1fe8c",
+   "q": "What does the temperature of a substance tell us?",
+   "o": [
+    "The particles' speed",
+    "The number of particles",
+    "The particles' size",
+    "The substance's color"
+   ],
+   "x": "The hotter it is, the faster the particles move"
+  },
+  {
+   "he": "גוף התפשט בחום. מה גדל: החלקיקים או הרווחים?",
+   "a": "הרווחים ביניהם",
+   "h": "80d2236d",
+   "q": "An object expanded when heated. What grew?",
+   "o": [
+    "The spaces between them",
+    "The particles themselves",
+    "Both",
+    "Neither"
+   ],
+   "x": "The particles don't grow – they only move apart"
+  },
+  {
+   "he": "גוף מתקרר. מה קורה לנפחו בדרך כלל?",
+   "a": "קטן",
+   "h": "875a89b2",
+   "q": "An object cools down. What usually happens to its volume?",
+   "o": [
+    "It decreases",
+    "It increases",
+    "It doesn't change",
+    "It disappears"
+   ],
+   "x": "The particles slow down and move closer – contraction"
+  },
+  {
+   "he": "למה משאירים רווחים קטנים בין פסי הרכבת?",
+   "a": "להתפשטות בקיץ",
+   "h": "39c0e1b4",
+   "q": "Why are small gaps left between railway rails?",
+   "o": [
+    "For expansion in summer",
+    "To save iron",
+    "For the noise",
+    "For rainwater to drain"
+   ],
+   "x": "In the heat the rails get longer and need room"
+  },
+  {
+   "he": "בלון על פי בקבוק. מכניסים את הבקבוק למים חמים. מה קורה?",
+   "a": "הבלון מתנפח",
+   "h": "2fcd9d4c",
+   "q": "A balloon is over a bottle's mouth. The bottle goes into hot water. What happens?",
+   "o": [
+    "The balloon inflates",
+    "The balloon shrinks",
+    "The balloon melts",
+    "Nothing"
+   ],
+   "x": "The air in the bottle warms and expands into the balloon"
+  },
+  {
+   "he": "במדחום הנוזל עולה כשחם. למה?",
+   "a": "הנוזל מתפשט",
+   "h": "d360b9d9",
+   "q": "In a thermometer, the liquid rises when it is warm. Why?",
+   "o": [
+    "The liquid expands",
+    "The liquid evaporates",
+    "It is pulled upward",
+    "The liquid contracts"
+   ],
+   "x": "When warm, the liquid takes up a larger volume"
+  },
+  {
+   "he": "מה לא משתנה כשגוף מתפשט?",
+   "a": "המסה",
+   "h": "3bcd85b6",
+   "q": "What does not change when an object expands?",
+   "o": [
+    "The mass",
+    "The volume",
+    "The spaces",
+    "The particles' speed"
+   ],
+   "x": "Same particles – same mass, just a larger volume"
+  },
+  {
+   "he": "חיממו נוזל. מה קרה לנפחו לפי הטבלה?",
+   "a": "גדל",
+   "h": "5362e4bf",
+   "q": "A liquid was heated. According to the table, what happened to its volume?",
+   "o": [
+    "It increased",
+    "It decreased",
+    "It didn't change",
+    "Increased, then decreased"
+   ],
+   "x": "100 → 101 → 102 – expansion",
+   "sc": {
+    "0": "60",
+    "1": "40",
+    "2": "20",
+    "3": "°C",
+    "4": "102",
+    "5": "101",
+    "6": "100",
+    "7": "mL"
+   }
+  },
+  {
+   "he": "מכסה מתכת תקוע על צנצנת זכוכית. מה יעזור לפתוח?",
+   "a": "לחמם את המכסה",
+   "h": "b5a30121",
+   "q": "A metal lid is stuck on a glass jar. What will help open it?",
+   "o": [
+    "Heating the lid",
+    "Cooling the lid",
+    "Freezing the jar",
+    "Shaking it hard"
+   ],
+   "x": "Metal expands in heat more than glass does"
+  },
+  {
+   "he": "ריח בושם התפשט בכל החדר. איך נקרא התהליך?",
+   "a": "פעפוע",
+   "h": "f54f9234",
+   "q": "The smell of perfume spread through the whole room. What is this process called?",
+   "o": [
+    "Diffusion",
+    "Condensation",
+    "Melting",
+    "Conduction"
+   ],
+   "x": "The scent particles move and spread through the air"
+  },
+  {
+   "he": "טיפת צבע במים מתפזרת לבד, בלי ערבוב. למה?",
+   "a": "חלקיקים נעים תמיד",
+   "h": "8c2320c3",
+   "q": "A drop of dye in water spreads by itself, without stirring. Why?",
+   "o": [
+    "Particles always move",
+    "The water flows",
+    "The dye is heavy",
+    "The dye evaporates"
+   ],
+   "x": "The dye and water particles are always moving"
+  },
+  {
+   "he": "באילו מים טיפת צבע תתפזר מהר יותר?",
+   "a": "במים חמים",
+   "h": "60b3b21e",
+   "q": "In which water will a drop of dye spread faster?",
+   "o": [
+    "In hot water",
+    "In cold water",
+    "In salt water",
+    "It's the same"
+   ],
+   "x": "When it is hot, the particles move faster"
+  },
+  {
+   "he": "באיזה מצב צבירה הפעפוע הכי מהיר?",
+   "a": "בגז",
+   "h": "95a8e0ae",
+   "q": "In which state of matter is diffusion fastest?",
+   "o": [
+    "In a gas",
+    "In a liquid",
+    "In a solid",
+    "Same in all"
+   ],
+   "x": "In a gas the particles are fast and far apart"
+  },
+  {
+   "he": "ממיסים סוכר בתה. מה קרה לחלקיקי הסוכר?",
+   "a": "נשארו בין המים",
+   "h": "aad374dc",
+   "q": "Sugar is dissolved in tea. What happened to the sugar particles?",
+   "o": [
+    "Stayed among the water",
+    "Vanished completely",
+    "Sank to the bottom",
+    "Turned into water"
+   ],
+   "x": "The sugar didn't vanish – the sweet taste remains"
+  },
+  {
+   "he": "למה לא רואים את הסוכר אחרי שנמס?",
+   "a": "חלקיקיו זעירים ומפוזרים",
+   "h": "c84acaa2",
+   "q": "Why can't we see the sugar after it dissolves?",
+   "o": [
+    "Tiny, scattered particles",
+    "It burned",
+    "It evaporated",
+    "It turned into air"
+   ],
+   "x": "The sugar particles are scattered among the water particles"
+  },
+  {
+   "he": "למה סוכר נמס מהר יותר במים חמים?",
+   "a": "חלקיקי המים מהירים",
+   "h": "9d559e12",
+   "q": "Why does sugar dissolve faster in hot water?",
+   "o": [
+    "Water particles are faster",
+    "The sugar gets smaller",
+    "The water is heavier",
+    "There is less water"
+   ],
+   "x": "Fast water particles spread the sugar out sooner"
+  },
+  {
+   "he": "מערבבים ⁦50⁩ מ״ל מים ו-⁦50⁩ מ״ל כוהל. מה הנפח?",
+   "a": "קצת פחות מ-100",
+   "h": "0d38a654",
+   "q": "50 mL of water and 50 mL of alcohol are mixed. What is the volume?",
+   "o": [
+    "Slightly less than 100",
+    "Exactly 100 mL",
+    "More than 100",
+    "50 mL"
+   ],
+   "x": "Particles fit into the spaces between other particles"
+  },
+  {
+   "he": "בלון קשור מתרוקן לאט במשך כמה ימים. למה?",
+   "a": "חלקיקי גז יוצאים",
+   "h": "d84f38c9",
+   "q": "A tied balloon slowly goes flat over a few days. Why?",
+   "o": [
+    "Gas particles escape",
+    "The rubber melts",
+    "The air disappears",
+    "The balloon is heavy"
+   ],
+   "x": "Gas particles pass through the rubber"
+  },
+  {
+   "he": "באיזה חדר ריח עוגה יגיע אלינו מהר יותר?",
+   "a": "בחדר חם",
+   "h": "892afbcb",
+   "q": "In which room will the smell of a cake reach us faster?",
+   "o": [
+    "In a warm room",
+    "In a cold room",
+    "In a dark room",
+    "No difference"
+   ],
+   "x": "In warm air the particles move faster"
+  },
+  {
+   "he": "מה קורה בשינוי כימי?",
+   "a": "נוצר חומר חדש",
+   "h": "2669a595",
+   "q": "What happens in a chemical change?",
+   "o": [
+    "A new substance forms",
+    "Only the shape changes",
+    "Only the size changes",
+    "Nothing"
+   ],
+   "x": "In a chemical change, new substances form"
+  },
+  {
+   "he": "קרח נמס. איזה שינוי זה?",
+   "a": "פיזיקלי",
+   "h": "e4f0d3ac",
+   "q": "Ice melts. What kind of change is this?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Biological",
+    "No change"
+   ],
+   "x": "The water stayed water – only its state changed"
+  },
+  {
+   "he": "עוגה נאפית בתנור. איזה שינוי?",
+   "a": "כימי",
+   "h": "6e615574",
+   "q": "A cake bakes in the oven. What kind of change?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "New substances form – it can't be undone"
+  },
+  {
+   "he": "איזה שינוי הוא כימי?",
+   "a": "שריפת נייר",
+   "h": "10232dd5",
+   "q": "Which change is chemical?",
+   "o": [
+    "Burning paper",
+    "Tearing paper",
+    "Folding paper",
+    "Wetting paper"
+   ],
+   "x": "Burning makes ash and gases – new substances"
+  },
+  {
+   "he": "מנסרים קרש לשניים. איזה שינוי זה?",
+   "a": "פיזיקלי",
+   "h": "5b63961b",
+   "q": "A board is sawed in two. What kind of change is this?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Biological",
+    "No change"
+   ],
+   "x": "Even the sawdust is still wood"
+  },
+  {
+   "he": "איזה יוצא דופן?",
+   "a": "תפוח משחים",
+   "h": "66d626e8",
+   "q": "Which one is the odd one out?",
+   "o": [
+    "An apple turning brown",
+    "Water boiling",
+    "Chocolate melting",
+    "A glass breaking"
+   ],
+   "x": "A browning apple is chemical; the rest are physical"
+  },
+  {
+   "he": "המסת סוכר במים – איזה שינוי?",
+   "a": "פיזיקלי",
+   "h": "ebec8320",
+   "q": "Dissolving sugar in water – what kind of change?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "No change",
+    "Burning"
+   ],
+   "x": "Evaporate the water and you get the sugar back"
+  },
+  {
+   "he": "חלב החמיץ. איזה שינוי?",
+   "a": "כימי",
+   "h": "6d928fc1",
+   "q": "The milk went sour. What kind of change?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "New substances formed: a different taste and smell"
+  },
+  {
+   "he": "מה מהבאים קל להחזיר למצבו הקודם?",
+   "a": "התכת שעווה",
+   "h": "816a65d9",
+   "q": "Which of these is easy to return to how it was?",
+   "o": [
+    "Melting wax",
+    "Burning wax",
+    "Cooking an egg",
+    "Baking bread"
+   ],
+   "x": "Melted wax becomes solid again"
+  },
+  {
+   "he": "מים רותחים והופכים לאדים. האם נוצר חומר חדש?",
+   "a": "לא, עדיין מים",
+   "h": "52da84e1",
+   "q": "Water boils and turns into steam. Is a new substance formed?",
+   "o": [
+    "No, still water",
+    "Yes, steam",
+    "Yes, oxygen",
+    "Yes, air"
+   ],
+   "x": "Steam is water in the gas state"
+  },
+  {
+   "he": "בשינוי פיזיקלי – מה נשאר בלי שינוי?",
+   "a": "סוג החומר",
+   "h": "a891dcc0",
+   "q": "In a physical change, what stays the same?",
+   "o": [
+    "The kind of substance",
+    "The shape",
+    "The state of matter",
+    "The size"
+   ],
+   "x": "It is still the same substance"
+  },
+  {
+   "he": "גזרו נייר לחתיכות. האם החומר השתנה?",
+   "a": "לא, רק הצורה",
+   "h": "bf1cc0cf",
+   "q": "Paper was cut into pieces. Did the substance change?",
+   "o": [
+    "No, only its shape",
+    "Yes, it is new",
+    "Yes, it burned",
+    "Yes, it melted"
+   ],
+   "x": "Every piece is still paper"
+  },
+  {
+   "he": "עלים נרקבים על הקרקע. איזה שינוי?",
+   "a": "כימי",
+   "h": "851bfee9",
+   "q": "Leaves rot on the ground. What kind of change?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "Rotting makes new substances"
+  },
+  {
+   "he": "בנר דולק יש…",
+   "a": "שני סוגי השינויים",
+   "h": "25b3de7c",
+   "q": "A burning candle shows…",
+   "o": [
+    "Both kinds of change",
+    "Only a chemical change",
+    "Only a physical change",
+    "No change at all"
+   ],
+   "x": "The wax melts (physical) and burns (chemical)"
+  },
+  {
+   "he": "גפרור נדלק. איזה שינוי?",
+   "a": "כימי",
+   "h": "bbe2e323",
+   "q": "A match is lit. What kind of change?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "Burning – ash, gases, heat and light form"
+  },
+  {
+   "he": "לפי הכרטיס – איזה שינוי עבר החומר?",
+   "a": "כימי",
+   "h": "3076f4ed",
+   "q": "According to the card, what change did the substance go through?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "A new color and a gas – signs of a new substance",
+   "sc": {
+    "0": "New color",
+    "1": "Bubbles formed",
+    "2": "Can't be undone"
+   }
+  },
+  {
+   "he": "ניפוח בלון – איזה שינוי?",
+   "a": "פיזיקלי",
+   "h": "820dbf7b",
+   "q": "Blowing up a balloon – what kind of change?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Burning",
+    "Rusting"
+   ],
+   "x": "The rubber stretches but stays rubber"
+  },
+  {
+   "he": "בננה משחירה עם הזמן. איזה שינוי?",
+   "a": "כימי",
+   "h": "0daa0446",
+   "q": "A banana turns black over time. What kind of change?",
+   "o": [
+    "Chemical",
+    "Physical",
+    "Only in shape",
+    "No change"
+   ],
+   "x": "New substances form in the peel"
+  },
+  {
+   "he": "מה מבדיל שינוי כימי משינוי פיזיקלי?",
+   "a": "היווצרות חומר חדש",
+   "h": "9f6fdc93",
+   "q": "What sets a chemical change apart from a physical change?",
+   "o": [
+    "Forming a new substance",
+    "A change in size",
+    "A change in shape",
+    "A change in place"
+   ],
+   "x": "Only in a chemical change does a new substance form"
+  },
+  {
+   "he": "מקפיאים מים בתבנית. איזה שינוי?",
+   "a": "פיזיקלי",
+   "h": "5ec16ff6",
+   "q": "Water is frozen in an ice tray. What kind of change?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Burning",
+    "Rotting"
+   ],
+   "x": "The ice is still water"
+  },
+  {
+   "he": "מה מהבאים סימן לתגובה כימית?",
+   "a": "פליטת גז (בועות)",
+   "h": "c609ae13",
+   "q": "Which of these is a sign of a chemical reaction?",
+   "o": [
+    "Gas given off (bubbles)",
+    "A change of shape",
+    "Breaking into pieces",
+    "A change of place"
+   ],
+   "x": "Bubbles of a new gas – a sign of a chemical reaction"
+  },
+  {
+   "he": "מערבבים סודה לשתייה וחומץ, ונוצרות בועות. מה קרה?",
+   "a": "תגובה כימית",
+   "h": "594e1cd5",
+   "q": "Baking soda and vinegar are mixed, and bubbles form. What happened?",
+   "o": [
+    "A chemical reaction",
+    "Dissolving",
+    "Boiling",
+    "Evaporation"
+   ],
+   "x": "A new gas forms – carbon dioxide",
+   "sc": {
+    "1": "Soda + vinegar",
+    "2": "= bubbles"
+   }
+  },
+  {
+   "he": "איזה סימן אינו מעיד על תגובה כימית?",
+   "a": "שינוי צורה",
+   "h": "39c8da79",
+   "q": "Which sign does not point to a chemical reaction?",
+   "o": [
+    "A change of shape",
+    "A change of color",
+    "Gas forming",
+    "Heat and light released"
+   ],
+   "x": "Shape changes in physical changes too"
+  },
+  {
+   "he": "בעירת עצים במדורה – מה משתחרר?",
+   "a": "חום ואור",
+   "h": "07b28e81",
+   "q": "Wood burns in a campfire – what is released?",
+   "o": [
+    "Heat and light",
+    "Only water",
+    "Cold",
+    "Only color"
+   ],
+   "x": "Burning releases heat and light"
+  },
+  {
+   "he": "מה צריך כדי שתתרחש בעירה?",
+   "a": "דלק, חמצן וחום",
+   "h": "c84decd8",
+   "q": "What is needed for burning to happen?",
+   "o": [
+    "Fuel, oxygen and heat",
+    "Fuel and water",
+    "Only oxygen",
+    "Water and light"
+   ],
+   "x": "The fire triangle: fuel, oxygen and a high temperature"
+  },
+  {
+   "he": "נר בכוס הפוכה קטנה ונר בכוס גדולה. איזה נר יכבה קודם?",
+   "a": "שבכוס הקטנה",
+   "h": "3336b878",
+   "q": "One candle under a small upside-down cup, one under a large cup. Which goes out first?",
+   "o": [
+    "In the small cup",
+    "In the large cup",
+    "Both at once",
+    "Neither"
+   ],
+   "x": "A small cup holds less oxygen"
+  },
+  {
+   "he": "למה שמיכה מכבה אש קטנה?",
+   "a": "מונעת חמצן",
+   "h": "3df7be15",
+   "q": "Why does a blanket put out a small fire?",
+   "o": [
+    "It blocks oxygen",
+    "It cools with water",
+    "It adds fuel",
+    "It absorbs the light"
+   ],
+   "x": "Without oxygen there is no burning"
+  },
+  {
+   "he": "מסמר באוויר יבש לא החליד. מה חסר לו?",
+   "a": "מים",
+   "h": "9931fe31",
+   "q": "A nail in dry air did not rust. What was it missing?",
+   "o": [
+    "Water",
+    "Oxygen",
+    "Light",
+    "Heat"
+   ],
+   "x": "Air has oxygen, but without water there is no rust"
+  },
+  {
+   "he": "מה מהבאים מסביר איך צבע מגן על ברזל מחלודה?",
+   "a": "חוסם מים וחמצן",
+   "h": "2a697922",
+   "q": "Which of these explains how paint protects iron from rust?",
+   "o": [
+    "Blocks water and oxygen",
+    "Makes the iron stronger",
+    "Cools the iron",
+    "Adds oxygen to it"
+   ],
+   "x": "No contact with water and oxygen – no rust"
+  },
+  {
+   "he": "איפה מסמר ברזל יחליד הכי מהר?",
+   "a": "במים מלוחים",
+   "h": "bf3f48d9",
+   "q": "Where will an iron nail rust fastest?",
+   "o": [
+    "In salt water",
+    "In oil",
+    "In dry air",
+    "Sealed and dry"
+   ],
+   "x": "Water and salt speed up rusting"
+  },
+  {
+   "he": "תגובה בכלי סגור. מה קורה למסה הכוללת?",
+   "a": "המסה נשמרת",
+   "h": "79694878",
+   "q": "A reaction in a closed container. What happens to the total mass?",
+   "o": [
+    "Mass stays the same",
+    "Mass increases",
+    "Mass decreases",
+    "Mass disappears"
+   ],
+   "x": "The reactants' mass equals the products' mass"
+  },
+  {
+   "he": "המגיבים בכלי סגור שקלו כמו בכרטיס. כמה שוקלים התוצרים?",
+   "a": "50 גרם",
+   "h": "2ed6c08a",
+   "q": "The reactants in a closed container weighed as on the card. How much do the products weigh?",
+   "o": [
+    "50 g",
+    "Less than 50",
+    "More than 50",
+    "0 g"
+   ],
+   "x": "The law of conservation of mass",
+   "sc": {
+    "0": "Reactants: 50 g"
+   }
+  },
+  {
+   "he": "שורפים נייר בכלי פתוח. האפר קל יותר. למה?",
+   "a": "גזים יצאו לאוויר",
+   "h": "56ad45e1",
+   "q": "Paper burns in an open container. The ash is lighter. Why?",
+   "o": [
+    "Gases escaped into air",
+    "The mass vanished",
+    "The fire ate it",
+    "The ash is dry"
+   ],
+   "x": "The mass didn't vanish – it left as gases"
+  },
+  {
+   "he": "מסמר חלוד שוקל יותר ממסמר חדש. למה?",
+   "a": "חמצן התחבר אליו",
+   "h": "bca5dda9",
+   "q": "A rusty nail weighs more than a new one. Why?",
+   "o": [
+    "Oxygen combined with it",
+    "The iron expanded",
+    "It lost iron",
+    "It cooled down"
+   ],
+   "x": "Rust is made of iron and oxygen from the air"
+  },
+  {
+   "he": "איך נקראים החומרים שנוצרים בתגובה כימית?",
+   "a": "תוצרים",
+   "h": "7622226c",
+   "q": "What are the substances formed in a chemical reaction called?",
+   "o": [
+    "Products",
+    "Reactants",
+    "Mixtures",
+    "Solutes"
+   ],
+   "x": "Reactants come before, products come after",
+   "sc": {
+    "0": "A + B → ?"
+   }
+  },
+  {
+   "he": "איך נקראים החומרים שיש בתחילת התגובה?",
+   "a": "מגיבים",
+   "h": "095d1013",
+   "q": "What are the substances present at the start of a reaction called?",
+   "o": [
+    "Reactants",
+    "Products",
+    "Solutes",
+    "Solvents"
+   ],
+   "x": "The reactants turn into the products",
+   "sc": {
+    "0": "? → C + D"
+   }
+  },
+  {
+   "he": "מדדו מסה בכלי סגור לפני ואחרי תגובה. מה מראים הנתונים?",
+   "a": "המסה נשמרת",
+   "h": "754ca2f0",
+   "q": "Mass was measured in a closed container before and after a reaction. What do the data show?",
+   "o": [
+    "Mass stays the same",
+    "Mass was created",
+    "Mass disappeared",
+    "Mass doubled"
+   ],
+   "x": "80 g before, 80 g after",
+   "sc": {
+    "0": "80 g",
+    "1": "Before",
+    "2": "80 g",
+    "3": "After"
+   }
+  },
+  {
+   "he": "סודה וחומץ בבקבוק, ובלון סגור על פיו. האם המסה תשתנה?",
+   "a": "המסה נשמרת",
+   "h": "38be8251",
+   "q": "Baking soda and vinegar in a bottle, a balloon sealed over its mouth. Will the mass change?",
+   "o": [
+    "Mass stays the same",
+    "Yes, it will increase",
+    "Yes, it will decrease",
+    "Depends on the color"
+   ],
+   "x": "The gas stays in the balloon – nothing escapes"
+  },
+  {
+   "he": "סודה וחומץ בכוס פתוחה על מאזניים. מה יראו המאזניים?",
+   "a": "ירידה במסה",
+   "h": "6115c58a",
+   "q": "Baking soda and vinegar in an open cup on a scale. What will the scale show?",
+   "o": [
+    "A drop in mass",
+    "A rise in mass",
+    "The same mass",
+    "Zero"
+   ],
+   "x": "The gas (the bubbles) escapes into the air"
+  },
+  {
+   "he": "מה אומר חוק שימור המסה?",
+   "a": "המסה נשמרת",
+   "h": "7e48cc2a",
+   "q": "What does the law of conservation of mass say?",
+   "o": [
+    "Mass stays the same",
+    "Mass always increases",
+    "Mass always decreases",
+    "Gases have no mass"
+   ],
+   "x": "In a reaction, mass is neither created nor destroyed"
+  },
+  {
+   "he": "מה זו תערובת?",
+   "a": "כמה חומרים מעורבבים",
+   "h": "10379fb9",
+   "q": "What is a mixture?",
+   "o": [
+    "Several substances combined",
+    "One pure substance",
+    "A new substance",
+    "A solid object"
+   ],
+   "x": "In a mixture, each substance keeps its properties"
+  },
+  {
+   "he": "מה מהבאים הוא חומר טהור?",
+   "a": "מים מזוקקים",
+   "h": "48effa67",
+   "q": "Which of these is a pure substance?",
+   "o": [
+    "Distilled water",
+    "Seawater",
+    "Air",
+    "Orange juice"
+   ],
+   "x": "Distilled water contains only water"
+  },
+  {
+   "he": "איך מפרידים חול ממים?",
+   "a": "סינון",
+   "h": "10798532",
+   "q": "How do you separate sand from water?",
+   "o": [
+    "Filtering",
+    "Dissolving",
+    "A magnet",
+    "Stirring"
+   ],
+   "x": "The sand stays in the filter paper"
+  },
+  {
+   "he": "איך מפרידים נסורת ברזל מחול?",
+   "a": "במגנט",
+   "h": "a19164e4",
+   "q": "How do you separate iron filings from sand?",
+   "o": [
+    "With a magnet",
+    "By filtering",
+    "By evaporating",
+    "With water"
+   ],
+   "x": "The magnet attracts the iron but not the sand"
+  },
+  {
+   "he": "איך מקבלים מלח בחזרה ממי ים?",
+   "a": "אידוי המים",
+   "h": "ae74038d",
+   "q": "How do you get salt back from seawater?",
+   "o": [
+    "Evaporating the water",
+    "Filtering",
+    "A magnet",
+    "Cooling"
+   ],
+   "x": "The water evaporates and the salt is left behind"
+  },
+  {
+   "he": "האם אפשר לסנן מלח מתוך מי מלח?",
+   "a": "לא, הוא מומס",
+   "h": "1ffaaaf9",
+   "q": "Can salt be filtered out of salt water?",
+   "o": [
+    "No, it's dissolved",
+    "Yes, easily",
+    "Yes, with paper",
+    "Only when cold"
+   ],
+   "x": "The salt particles pass through the filter"
+  },
+  {
+   "he": "האוויר שאנחנו נושמים הוא…",
+   "a": "תערובת של גזים",
+   "h": "9116cf01",
+   "q": "The air we breathe is…",
+   "o": [
+    "A mixture of gases",
+    "A pure substance",
+    "A single gas",
+    "A solid"
+   ],
+   "x": "Nitrogen, oxygen and other gases"
+  },
+  {
+   "he": "בתערובת – האם החומרים שומרים על תכונותיהם?",
+   "a": "כן, שומרים",
+   "h": "7cb9a446",
+   "q": "In a mixture, do the substances keep their properties?",
+   "o": [
+    "Yes, they do",
+    "No, they change",
+    "Only the solids",
+    "Only the liquids"
+   ],
+   "x": "That is why they can be separated"
+  },
+  {
+   "he": "שמן ומים בכוס. מה קורה?",
+   "a": "השמן צף למעלה",
+   "h": "ee26ff29",
+   "q": "Oil and water in a cup. What happens?",
+   "o": [
+    "The oil floats up",
+    "They mix together",
+    "The oil sinks",
+    "The water floats"
+   ],
+   "x": "Oil doesn't mix with water and floats on it"
+  },
+  {
+   "he": "איזו תערובת אפשר להפריד במסננת?",
+   "a": "אורז ומים",
+   "h": "3020792d",
+   "q": "Which mixture can be separated with a sieve?",
+   "o": [
+    "Rice and water",
+    "Sugar and water",
+    "Salt and water",
+    "Juice and water"
+   ],
+   "x": "The rice doesn't dissolve – it stays in the sieve"
+  },
+  {
+   "he": "בתמיסת מלח במים – מהו המומס?",
+   "a": "המלח",
+   "h": "6cff8ebc",
+   "q": "In a solution of salt in water, what is the solute?",
+   "o": [
+    "The salt",
+    "The water",
+    "The cup",
+    "The air"
+   ],
+   "x": "The solute is the substance that dissolves"
+  },
+  {
+   "he": "בתמיסת סוכר במים – מהו הממס?",
+   "a": "המים",
+   "h": "2f39dea5",
+   "q": "In a solution of sugar in water, what is the solvent?",
+   "o": [
+    "The water",
+    "The sugar",
+    "The spoon",
+    "The cup"
+   ],
+   "x": "The solvent is what the solute dissolves in"
+  },
+  {
+   "he": "מה מאפיין תמיסה?",
+   "a": "שקופה ואחידה",
+   "h": "06d06f01",
+   "q": "What is typical of a solution?",
+   "o": [
+    "Clear and uniform",
+    "Always cloudy",
+    "It has lumps",
+    "Always colored"
+   ],
+   "x": "The solute is spread evenly through the whole solution"
+  },
+  {
+   "he": "מוסיפים סוכר עד שהוא כבר לא נמס. מה התמיסה?",
+   "a": "רוויה",
+   "h": "8561bec9",
+   "q": "Sugar is added until no more dissolves. What kind of solution is it?",
+   "o": [
+    "Saturated",
+    "Dilute",
+    "Pure",
+    "Solid"
+   ],
+   "x": "Saturated – no more can dissolve in it"
+  },
+  {
+   "he": "איך אפשר להמיס עוד סוכר בתמיסה רוויה?",
+   "a": "לחמם אותה",
+   "h": "d10ce553",
+   "q": "How can more sugar dissolve in a saturated solution?",
+   "o": [
+    "Heat it",
+    "Cool it",
+    "Shake it",
+    "Add sugar"
+   ],
+   "x": "More sugar dissolves in hot water"
+  },
+  {
+   "he": "בשתי הכוסות אותה כמות מים. איזו מתוקה יותר?",
+   "a": "כוס ב",
+   "h": "09358c4c",
+   "q": "Both cups have the same amount of water. Which one is sweeter?",
+   "o": [
+    "Cup B",
+    "Cup A",
+    "Both the same",
+    "Can't tell"
+   ],
+   "x": "More sugar in the same water – a higher concentration",
+   "sc": {
+    "0": "Cup",
+    "1": "B",
+    "2": "A",
+    "3": "Tsp sugar",
+    "4": "3",
+    "5": "1"
+   }
+  },
+  {
+   "he": "מוסיפים מים למיץ מרוכז. מה קורה לריכוז?",
+   "a": "יורד",
+   "h": "85bd37a5",
+   "q": "Water is added to concentrated juice. What happens to the concentration?",
+   "o": [
+    "It goes down",
+    "It goes up",
+    "It doesn't change",
+    "It disappears"
+   ],
+   "x": "The same solute in much more solvent"
+  },
+  {
+   "he": "מה לא יימס במים?",
+   "a": "חול",
+   "h": "d3bbf068",
+   "q": "What will not dissolve in water?",
+   "o": [
+    "Sand",
+    "Sugar",
+    "Salt",
+    "Juice powder"
+   ],
+   "x": "Sand sinks and does not dissolve"
+  },
+  {
+   "he": "בלי לחמם – מה עוזר לסוכר להימס מהר יותר?",
+   "a": "ערבוב",
+   "h": "48c67747",
+   "q": "Without heating – what helps sugar dissolve faster?",
+   "o": [
+    "Stirring",
+    "Cooling",
+    "A bigger cup",
+    "Strong light"
+   ],
+   "x": "Stirring spreads the sugar through the water"
+  },
+  {
+   "he": "ממיסים ⁦20⁩ גרם מלח ב-⁦200⁩ גרם מים. מה מסת התמיסה?",
+   "a": "220 גרם",
+   "h": "c5f6b1a0",
+   "q": "20 g of salt is dissolved in 200 g of water. What is the solution's mass?",
+   "o": [
+    "220 g",
+    "200 g",
+    "180 g",
+    "20 g"
+   ],
+   "x": "200 + 20 = 220 – no mass is lost"
+  },
+  {
+   "he": "כדור מתגלגל. איזו אנרגיה יש לו בגלל תנועתו?",
+   "a": "קינטית",
+   "h": "ef80ec76",
+   "q": "A ball is rolling. What energy does it have because of its motion?",
+   "o": [
+    "Kinetic",
+    "Elastic",
+    "Chemical",
+    "Electrical"
+   ],
+   "x": "Kinetic energy is the energy of motion"
+  },
+  {
+   "he": "ספר מונח על מדף גבוה. איזו אנרגיה אגורה בו?",
+   "a": "אנרגיית גובה",
+   "h": "88188426",
+   "q": "A book sits on a high shelf. What energy is stored in it?",
+   "o": [
+    "Gravitational energy",
+    "Kinetic energy",
+    "Sound energy",
+    "Light energy"
+   ],
+   "x": "If it falls, its height turns into motion"
+  },
+  {
+   "he": "קשת מתוחה לפני הירי. איזו אנרגיה אגורה בה?",
+   "a": "אלסטית",
+   "h": "92b56aea",
+   "q": "A bow is drawn, ready to shoot. What energy is stored in it?",
+   "o": [
+    "Elastic",
+    "Kinetic",
+    "Thermal",
+    "Sound"
+   ],
+   "x": "A stretched or squeezed object stores elastic energy"
+  },
+  {
+   "he": "לפי הכרטיס – באיזה מזון אגורה יותר אנרגיה כימית?",
+   "a": "באגוזים",
+   "h": "fb5384d6",
+   "q": "According to the card, which food stores more chemical energy?",
+   "o": [
+    "Nuts",
+    "Cucumber",
+    "Both the same",
+    "Neither"
+   ],
+   "x": "More calories – more chemical energy in the food",
+   "sc": {
+    "0": "Calories/100 g",
+    "1": "Nuts: 600",
+    "2": "Cucumber: 15"
+   }
+  },
+  {
+   "he": "מה קורה בתוך סוללה כשהיא מפעילה פנס?",
+   "a": "מתרחשת תגובה כימית",
+   "h": "818fbb4a",
+   "q": "What happens inside a battery when it powers a flashlight?",
+   "o": [
+    "A chemical reaction occurs",
+    "Electricity spills out",
+    "Light is stored",
+    "It melts"
+   ],
+   "x": "Substances in it react; chemical energy becomes electrical energy"
+  },
+  {
+   "he": "בבנזין אגורה אנרגיה…",
+   "a": "כימית",
+   "h": "02d0c13b",
+   "q": "Gasoline stores which kind of energy?",
+   "o": [
+    "Chemical",
+    "Kinetic",
+    "Gravitational",
+    "Elastic"
+   ],
+   "x": "Burning it in the engine releases the energy"
+  },
+  {
+   "he": "איזו אנרגיה נוצרת כשמכים בתוף?",
+   "a": "קול",
+   "h": "1ebd54bd",
+   "q": "What energy is produced when you hit a drum?",
+   "o": [
+    "Sound",
+    "Chemical",
+    "Gravitational",
+    "Elastic"
+   ],
+   "x": "The drum vibrates and makes sound"
+  },
+  {
+   "he": "אילו אנרגיות מגיעות אלינו מהשמש?",
+   "a": "אור וחום",
+   "h": "c1561761",
+   "q": "Which kinds of energy reach us from the Sun?",
+   "o": [
+    "Light and heat",
+    "Sound",
+    "Elastic",
+    "Chemical"
+   ],
+   "x": "The Sun's radiation lights and warms us"
+  },
+  {
+   "he": "קרון רכבת הרים עומד בנקודה הגבוהה. איזו אנרגיה יש לו?",
+   "a": "אנרגיית גובה",
+   "h": "e4dd3eb7",
+   "q": "A roller coaster car is stopped at the highest point. What energy does it have?",
+   "o": [
+    "Gravitational energy",
+    "Kinetic energy",
+    "Elastic energy",
+    "Sound energy"
+   ],
+   "x": "It isn't moving, but it is high up"
+  },
+  {
+   "he": "במה תלויה האנרגיה הקינטית של גוף?",
+   "a": "מסה ומהירות",
+   "h": "2eef2b1f",
+   "q": "What does an object's kinetic energy depend on?",
+   "o": [
+    "Mass and speed",
+    "Color and shape",
+    "Temperature and color",
+    "Height and color"
+   ],
+   "x": "Heavier and faster – more kinetic energy"
+  },
+  {
+   "he": "שתי מכוניות זהות. לאיזו יש יותר אנרגיה קינטית?",
+   "a": "מכונית ב",
+   "h": "b6880dcd",
+   "q": "Two identical cars. Which one has more kinetic energy?",
+   "o": [
+    "Car B",
+    "Car A",
+    "Both the same",
+    "Neither"
+   ],
+   "x": "The faster one has more kinetic energy",
+   "sc": {
+    "0": "B",
+    "1": "A",
+    "2": "Car",
+    "3": "90",
+    "4": "50",
+    "5": "km/h"
+   }
+  },
+  {
+   "he": "שתי אבנים זהות. לאיזו יש יותר אנרגיית גובה?",
+   "a": "אבן א",
+   "h": "fbc776b1",
+   "q": "Two identical stones. Which one has more gravitational energy?",
+   "o": [
+    "Stone A",
+    "Stone B",
+    "Both the same",
+    "Neither"
+   ],
+   "x": "The higher one has more gravitational energy",
+   "sc": {
+    "0": "Stone",
+    "1": "B",
+    "2": "A",
+    "3": "Height",
+    "4": "2",
+    "5": "10"
+   }
+  },
+  {
+   "he": "משאית ואופניים נוסעים באותה מהירות. למי יותר אנרגיה קינטית?",
+   "a": "למשאית",
+   "h": "3e323d72",
+   "q": "A truck and a bicycle move at the same speed. Which has more kinetic energy?",
+   "o": [
+    "The truck",
+    "The bicycle",
+    "Both the same",
+    "Neither"
+   ],
+   "x": "The truck is much heavier"
+  },
+  {
+   "he": "כדור מונח על הרצפה ולא זז. כמה אנרגיה קינטית יש לו?",
+   "a": "אפס",
+   "h": "25c2fe9a",
+   "q": "A ball lies on the floor, not moving. How much kinetic energy does it have?",
+   "o": [
+    "Zero",
+    "A lot",
+    "A little",
+    "Like a rolling ball"
+   ],
+   "x": "No motion – no kinetic energy"
+  },
+  {
+   "he": "ככל שמותחים יותר את הקשת – האנרגיה האלסטית…",
+   "a": "גדלה עם המתיחה",
+   "h": "a62cc7ed",
+   "q": "The more you stretch a bow, its elastic energy…",
+   "o": [
+    "Grows with the stretch",
+    "Shrinks with the stretch",
+    "Stays the same",
+    "Disappears"
+   ],
+   "x": "A bigger stretch – more elastic energy"
+  },
+  {
+   "he": "מה מראה הגרף על אנרגיית הגובה של כדור?",
+   "a": "גדלה עם הגובה",
+   "h": "4ecd6e9c",
+   "q": "What does the graph show about a ball's gravitational energy?",
+   "o": [
+    "Grows with height",
+    "Shrinks with height",
+    "Doesn't change",
+    "Depends on the color"
+   ],
+   "x": "Higher up – the point on the graph is higher",
+   "sc": {
+    "8": "E",
+    "9": "m"
+   }
+  },
+  {
+   "he": "איזו אנרגיה מעביר זרם בחוטים?",
+   "a": "חשמלית",
+   "h": "fa3d1751",
+   "q": "What energy does a current carry through wires?",
+   "o": [
+    "Electrical",
+    "Chemical",
+    "Elastic",
+    "Gravitational"
+   ],
+   "x": "Electric current carries electrical energy"
+  },
+  {
+   "he": "שתי כוסות מים זהות, אחת חמה ואחת קרה. באיזו יותר אנרגיית חום?",
+   "a": "בחמה",
+   "h": "bc9ab394",
+   "q": "Two identical cups of water, one hot and one cold. Which has more thermal energy?",
+   "o": [
+    "The hot one",
+    "The cold one",
+    "They are equal",
+    "Neither"
+   ],
+   "x": "The particles of hot water move faster"
+  },
+  {
+   "he": "איזו אנרגיה יש לרוח?",
+   "a": "קינטית",
+   "h": "519e60b5",
+   "q": "What energy does wind have?",
+   "o": [
+    "Kinetic",
+    "Chemical",
+    "Elastic",
+    "Sound"
+   ],
+   "x": "Wind is moving air"
+  },
+  {
+   "he": "מים בסכר גבוה. איזו אנרגיה אגורה בהם?",
+   "a": "אנרגיית גובה",
+   "h": "8a4d8655",
+   "q": "Water is held high behind a dam. What energy is stored in it?",
+   "o": [
+    "Gravitational energy",
+    "Elastic energy",
+    "Chemical energy",
+    "Sound energy"
+   ],
+   "x": "When the water falls, its height turns into motion"
+  },
+  {
+   "he": "נורת להט: ⁦60⁩ יחידות חשמל, ⁦6⁩ מהן לאור. כמה לחום?",
+   "a": "54 יחידות",
+   "h": "f1ce8c93",
+   "q": "Incandescent bulb: 60 units of electricity, 6 of them to light. How many to heat?",
+   "o": [
+    "54 units",
+    "6 units",
+    "60 units",
+    "66 units"
+   ],
+   "x": "60 − 6 = 54 – most of it becomes heat"
+  },
+  {
+   "he": "באוזניות – אנרגיה חשמלית הופכת ל…",
+   "a": "קול",
+   "h": "6d82eb43",
+   "q": "In earphones, electrical energy turns into…",
+   "o": [
+    "Sound",
+    "Light",
+    "Gravitational",
+    "Chemical"
+   ],
+   "x": "The earphones vibrate and make sound"
+  },
+  {
+   "he": "במכונית חשמלית – אנרגיה חשמלית הופכת בעיקר ל…",
+   "a": "קינטית",
+   "h": "dad55313",
+   "q": "In an electric car, electrical energy turns mainly into…",
+   "o": [
+    "Kinetic",
+    "Chemical",
+    "Gravitational",
+    "Light"
+   ],
+   "x": "The motor turns the wheels – motion"
+  },
+  {
+   "he": "מה שרשרת האנרגיה בפנס?",
+   "a": "כימית, חשמלית, אור",
+   "h": "74012e29",
+   "q": "What is the energy chain in a flashlight?",
+   "o": [
+    "Chemical, electrical, light",
+    "Light, electrical, chemical",
+    "Electrical, chemical, sound",
+    "Kinetic, light, heat"
+   ],
+   "x": "Battery → electricity → the bulb lights up"
+  },
+  {
+   "he": "אדם רץ. מאיזו אנרגיה בגופו נוצרת התנועה?",
+   "a": "כימית",
+   "h": "4e68b8b7",
+   "q": "A person runs. Which energy in the body becomes the motion?",
+   "o": [
+    "Chemical",
+    "Elastic",
+    "Gravitational",
+    "Sound"
+   ],
+   "x": "From the chemical energy in food"
+  },
+  {
+   "he": "בלוח סולארי – אנרגיית אור הופכת ל…",
+   "a": "חשמלית",
+   "h": "2a194198",
+   "q": "In a solar panel, light energy turns into…",
+   "o": [
+    "Electrical",
+    "Chemical",
+    "Sound",
+    "Gravitational"
+   ],
+   "x": "Solar cells make electricity from light"
+  },
+  {
+   "he": "בעלה של צמח – אנרגיית אור הופכת ל…",
+   "a": "כימית",
+   "h": "39a87dc9",
+   "q": "In a plant's leaf, light energy turns into…",
+   "o": [
+    "Chemical",
+    "Electrical",
+    "Sound",
+    "Kinetic"
+   ],
+   "x": "In photosynthesis the plant stores energy in sugar"
+  },
+  {
+   "he": "כדור נופל מגובה. איזו המרה מתרחשת?",
+   "a": "גובה לקינטית",
+   "h": "66f73893",
+   "q": "A ball falls from a height. What energy conversion happens?",
+   "o": [
+    "Gravitational to kinetic",
+    "Kinetic to gravitational",
+    "Chemical to heat",
+    "Sound to light"
+   ],
+   "x": "It drops lower and speeds up"
+  },
+  {
+   "he": "זורקים כדור למעלה, והוא מאט. איזו המרה?",
+   "a": "קינטית לגובה",
+   "h": "6ef7284c",
+   "q": "A ball is thrown up and slows down. What conversion happens?",
+   "o": [
+    "Kinetic to gravitational",
+    "Gravitational to kinetic",
+    "Heat to light",
+    "Light to sound"
+   ],
+   "x": "It rises and slows down"
+  },
+  {
+   "he": "שפשוף ידיים מחמם אותן. איזו המרה?",
+   "a": "קינטית לחום",
+   "h": "ca6a194f",
+   "q": "Rubbing your hands warms them. What conversion happens?",
+   "o": [
+    "Kinetic to heat",
+    "Heat to kinetic",
+    "Chemical to light",
+    "Electrical to sound"
+   ],
+   "x": "Friction turns motion into heat"
+  },
+  {
+   "he": "מה אומר חוק שימור האנרגיה?",
+   "a": "רק עוברת צורה",
+   "h": "b75f2b5f",
+   "q": "What does the law of conservation of energy say?",
+   "o": [
+    "It only changes form",
+    "It fades over time",
+    "It comes from nothing",
+    "It's only in electricity"
+   ],
+   "x": "Energy is never created or destroyed"
+  },
+  {
+   "he": "פרה אוכלת עשב. מה חסר בשרשרת האנרגיה?",
+   "a": "כימית",
+   "h": "25e95952",
+   "q": "A cow eats grass. What is missing in the energy chain?",
+   "o": [
+    "Chemical",
+    "Sound",
+    "Elastic",
+    "Electrical"
+   ],
+   "x": "Grass stores sunlight as chemical energy",
+   "sc": {
+    "1": "Sunlight",
+    "2": "Grass: ?",
+    "3": "Cow moving"
+   }
+  },
+  {
+   "he": "במנוע מכונית – לאיזו אנרגיה הופך חלק גדול מהדלק, מלבד תנועה?",
+   "a": "חום",
+   "h": "14f57239",
+   "q": "In a car engine, besides motion, much of the fuel's energy becomes…",
+   "o": [
+    "Heat",
+    "Light",
+    "Gravitational",
+    "Elastic"
+   ],
+   "x": "The engine gets hot – \"wasted\" energy"
+  },
+  {
+   "he": "למה נורת לד חסכונית יותר מנורת להט?",
+   "a": "פחות חום מבוזבז",
+   "h": "af036e06",
+   "q": "Why is an LED bulb more efficient than an incandescent bulb?",
+   "o": [
+    "Less wasted heat",
+    "More heat",
+    "It is smaller",
+    "It is white"
+   ],
+   "x": "More electricity becomes light, and less becomes heat"
+  },
+  {
+   "he": "בתחנת כוח פחמית – מה שרשרת האנרגיה?",
+   "a": "כימית, חום, חשמלית",
+   "h": "fe0deb3e",
+   "q": "In a coal power plant, what is the energy chain?",
+   "o": [
+    "Chemical, heat, electrical",
+    "Electrical, heat, chemical",
+    "Light, sound, electrical",
+    "Gravitational, chemical, light"
+   ],
+   "x": "Coal is burned, water boils, and a turbine spins"
+  },
+  {
+   "he": "בטורבינת רוח – תנועת הרוח הופכת ל…",
+   "a": "חשמלית",
+   "h": "b7a40e27",
+   "q": "In a wind turbine, the wind's motion becomes…",
+   "o": [
+    "Electrical",
+    "Chemical",
+    "Elastic",
+    "Gravitational"
+   ],
+   "x": "The wind turns the blades, and the generator makes electricity"
+  },
+  {
+   "he": "כדור קופץ נמוך יותר בכל קפיצה. לאיזו אנרגיה הפכה?",
+   "a": "חום",
+   "h": "c494cecc",
+   "q": "A ball bounces lower each time. What energy did it turn into?",
+   "o": [
+    "Heat",
+    "It disappeared",
+    "Gravitational",
+    "Light"
+   ],
+   "x": "Energy doesn't disappear – it became heat (and sound)"
+  },
+  {
+   "he": "קשת משגרת חץ. איזו המרה מתרחשת?",
+   "a": "אלסטית לקינטית",
+   "h": "1d6c7f3c",
+   "q": "A bow shoots an arrow. What conversion happens?",
+   "o": [
+    "Elastic to kinetic",
+    "Kinetic to elastic",
+    "Chemical to sound",
+    "Heat to light"
+   ],
+   "x": "The stretched string pushes the arrow"
+  },
+  {
+   "he": "מה מקור רוב האנרגיה על כדור הארץ?",
+   "a": "השמש",
+   "h": "4cf09648",
+   "q": "Where does most of the energy on Earth come from?",
+   "o": [
+    "The Sun",
+    "The Moon",
+    "The wind",
+    "The sea"
+   ],
+   "x": "Food, wind and fuel too – all thanks to the Sun"
+  },
+  {
+   "he": "מנוע קיבל ⁦100⁩ יחידות; ⁦30⁩ הפכו לתנועה, השאר לחום. כמה לחום?",
+   "a": "70 יחידות",
+   "h": "13253063",
+   "q": "An engine got 100 units; 30 became motion, the rest heat. How much heat?",
+   "o": [
+    "70 units",
+    "30 units",
+    "100 units",
+    "130 units"
+   ],
+   "x": "100 − 30 = 70 – energy is conserved"
+  },
+  {
+   "he": "איזה מקור אנרגיה הוא מתחדש?",
+   "a": "שמש",
+   "h": "c82958db",
+   "q": "Which energy source is renewable?",
+   "o": [
+    "Sunlight",
+    "Oil",
+    "Coal",
+    "Natural gas"
+   ],
+   "x": "The Sun won't run out in the foreseeable future"
+  },
+  {
+   "he": "איזה מקור אנרגיה הוא מתכלה?",
+   "a": "פחם",
+   "h": "35f80b3d",
+   "q": "Which energy source is nonrenewable?",
+   "o": [
+    "Coal",
+    "Wind",
+    "Sunlight",
+    "Flowing water"
+   ],
+   "x": "Coal took millions of years to form – its amount is limited"
+  },
+  {
+   "he": "למה נפט נקרא מקור מתכלה?",
+   "a": "הכמות שלו מוגבלת",
+   "h": "631686fa",
+   "q": "Why is oil called a nonrenewable source?",
+   "o": [
+    "Its amount is limited",
+    "It doesn't pollute",
+    "It renews quickly",
+    "It is free"
+   ],
+   "x": "We use it faster than it forms"
+  },
+  {
+   "he": "ממה נוצרו פחם ונפט?",
+   "a": "שרידי יצורים קדומים",
+   "h": "5513923a",
+   "q": "What were coal and oil formed from?",
+   "o": [
+    "Remains of ancient organisms",
+    "Volcanic rocks",
+    "Seawater",
+    "Moonlight"
+   ],
+   "x": "Plants and animals from millions of years ago"
+  },
+  {
+   "he": "מה החיסרון העיקרי של שריפת דלקים?",
+   "a": "זיהום אוויר",
+   "h": "80073157",
+   "q": "What is the main drawback of burning fuels?",
+   "o": [
+    "Air pollution",
+    "Lack of heat",
+    "They are renewable",
+    "They hold no energy"
+   ],
+   "x": "Burning releases smoke and harmful gases"
+  },
+  {
+   "he": "איזה גז נפלט בשריפת דלקים ומחמם את כדור הארץ?",
+   "a": "פחמן דו-חמצני",
+   "h": "ffa9e654",
+   "q": "Which gas, released by burning fuels, warms the Earth?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Nitrogen",
+    "Helium"
+   ],
+   "x": "A greenhouse gas – it adds to global warming"
+  },
+  {
+   "he": "מה החיסרון של אנרגיית השמש?",
+   "a": "אין בלילה",
+   "h": "503fd3d8",
+   "q": "What is the drawback of solar energy?",
+   "o": [
+    "None at night",
+    "Pollutes a lot",
+    "Runs out soon",
+    "Gives off smoke"
+   ],
+   "x": "At night and on cloudy days, less is produced"
+  },
+  {
+   "he": "בישראל יש הרבה ימי שמש. מה כדאי להתקין על הגגות?",
+   "a": "תאים סולאריים",
+   "h": "7273f26b",
+   "q": "Israel has many sunny days. What should be installed on roofs?",
+   "o": [
+    "Solar panels",
+    "Coal plants",
+    "Oil engines",
+    "Wood stoves"
+   ],
+   "x": "Lots of sun – lots of solar electricity"
+  },
+  {
+   "he": "איזה יוצא דופן?",
+   "a": "גז טבעי",
+   "h": "bd2f2bef",
+   "q": "Which one doesn't belong?",
+   "o": [
+    "Natural gas",
+    "Wind",
+    "Sunlight",
+    "Sea waves"
+   ],
+   "x": "Natural gas is nonrenewable; the others are renewable"
+  },
+  {
+   "he": "איך אפשר לחסוך באנרגיה בבית?",
+   "a": "לכבות אורות מיותרים",
+   "h": "d9e376bf",
+   "q": "How can we save energy at home?",
+   "o": [
+    "Turn off extra lights",
+    "Leave the AC on",
+    "Open windows with AC",
+    "Leave screens on"
+   ],
+   "x": "Less electricity – less fuel burned"
+  },
+  {
+   "he": "מה הופך את אנרגיית הרוח לחשמל?",
+   "a": "טורבינת רוח",
+   "h": "f5547a05",
+   "q": "What turns wind energy into electricity?",
+   "o": [
+    "A wind turbine",
+    "A solar cell",
+    "A battery",
+    "A gasoline engine"
+   ],
+   "x": "The wind turns the turbine's blades"
+  },
+  {
+   "he": "מים זורמים מסובבים טורבינה בסכר. איזה מקור זה?",
+   "a": "כוח המים",
+   "h": "ac931100",
+   "q": "Flowing water turns a turbine at a dam. What source is this?",
+   "o": [
+    "Hydropower",
+    "Solar energy",
+    "Oil",
+    "Coal"
+   ],
+   "x": "A renewable source: a hydroelectric power plant"
+  },
+  {
+   "he": "מה היתרון של מקורות מתחדשים?",
+   "a": "לא נגמרים",
+   "h": "2758fe53",
+   "q": "What is the advantage of renewable sources?",
+   "o": [
+    "They don't run out",
+    "They're always cheap",
+    "They work without sun",
+    "They need no plant"
+   ],
+   "x": "Nature renews them all the time"
+  },
+  {
+   "he": "אורניום בתחנת כוח גרעינית הוא מקור…",
+   "a": "מתכלה",
+   "h": "84e5d51d",
+   "q": "What kind of source is uranium in a nuclear power plant?",
+   "o": [
+    "Nonrenewable",
+    "Renewable",
+    "Biological",
+    "Solar"
+   ],
+   "x": "Uranium is mined from the ground, and its amount is limited"
+  },
+  {
+   "he": "הגרף מראה כמה מהחשמל מגיע מהשמש. מה המגמה?",
+   "a": "עלייה",
+   "h": "6295b531",
+   "q": "The graph shows how much electricity comes from the Sun. What is the trend?",
+   "o": [
+    "Increasing",
+    "Decreasing",
+    "Constant",
+    "Up and down"
+   ],
+   "x": "Each point is higher than the one before",
+   "sc": {
+    "9": "Year"
+   }
+  },
+  {
+   "he": "למה אי אפשר לסמוך רק על אנרגיית רוח?",
+   "a": "לא תמיד נושבת",
+   "h": "004fc82e",
+   "q": "Why can't we rely only on wind energy?",
+   "o": [
+    "It doesn't always blow",
+    "It pollutes",
+    "It runs out",
+    "It is too hot"
+   ],
+   "x": "With no wind, the turbine stops"
+  },
+  {
+   "he": "מה מאלה לא מזהם את האוויר בזמן ייצור האנרגיה?",
+   "a": "טורבינת רוח",
+   "h": "7267fb97",
+   "q": "Which of these doesn't pollute the air while producing energy?",
+   "o": [
+    "A wind turbine",
+    "A gasoline car",
+    "A coal plant",
+    "A campfire"
+   ],
+   "x": "Wind turns the blades – with no burning"
+  },
+  {
+   "he": "דוד שמש על הגג – איזו המרה מתרחשת בו?",
+   "a": "אור לחום",
+   "h": "49d5aed9",
+   "q": "A solar water heater on the roof – what conversion happens in it?",
+   "o": [
+    "Light to heat",
+    "Heat to light",
+    "Electrical to sound",
+    "Chemical to gravitational"
+   ],
+   "x": "Sunlight heats the water"
+  },
+  {
+   "he": "כמה זמן נמשכת היווצרות של פחם?",
+   "a": "מיליוני שנים",
+   "h": "6a3be6d2",
+   "q": "How long does it take coal to form?",
+   "o": [
+    "Millions of years",
+    "A few days",
+    "One year",
+    "A hundred years"
+   ],
+   "x": "That's why it is nonrenewable"
+  },
+  {
+   "he": "איזה מקור אנרגיה מניע את רוב המכוניות היום?",
+   "a": "דלק מנפט",
+   "h": "09669fcc",
+   "q": "Which energy source powers most cars today?",
+   "o": [
+    "Fuel from oil",
+    "Sunlight",
+    "Wind power",
+    "Nuclear energy"
+   ],
+   "x": "Gasoline and diesel are made from oil"
+  },
+  {
+   "he": "לאן עובר חום תמיד?",
+   "a": "מהחם אל הקר",
+   "h": "61de248a",
+   "q": "Which way does heat always flow?",
+   "o": [
+    "From hot to cold",
+    "From cold to hot",
+    "From bottom to top",
+    "Equally in all directions"
+   ],
+   "x": "Until both objects are at the same temperature"
+  },
+  {
+   "he": "כפית מתכת בתה חם התחממה כולה. איך עבר החום?",
+   "a": "הולכה",
+   "h": "9e4205d9",
+   "q": "A metal spoon in hot tea got hot all over. How did heat travel?",
+   "o": [
+    "Conduction",
+    "Convection",
+    "Radiation",
+    "Insulation"
+   ],
+   "x": "Heat passed through the metal, particle to particle"
+  },
+  {
+   "he": "בחדר, אוויר חם עולה ואוויר קר יורד. איך נקרא המעבר?",
+   "a": "הסעה",
+   "h": "57622d17",
+   "q": "In a room, warm air rises and cool air sinks. What is this called?",
+   "o": [
+    "Convection",
+    "Conduction",
+    "Radiation",
+    "Insulation"
+   ],
+   "x": "Convection – a flow of liquid or gas"
+  },
+  {
+   "he": "איך מגיע אלינו חום השמש דרך החלל?",
+   "a": "קרינה",
+   "h": "26550975",
+   "q": "How does the Sun's heat reach us through space?",
+   "o": [
+    "Radiation",
+    "Conduction",
+    "Convection",
+    "Wind"
+   ],
+   "x": "Radiation travels even through a vacuum"
+  },
+  {
+   "he": "למה אין הסעה במוצקים?",
+   "a": "החלקיקים לא זורמים",
+   "h": "6f6520a0",
+   "q": "Why is there no convection in solids?",
+   "o": [
+    "The particles don't flow",
+    "They have no particles",
+    "They are too cold",
+    "They have no heat"
+   ],
+   "x": "In convection, the material itself flows"
+  },
+  {
+   "he": "מים בסיר מתחממים מלמטה וזורמים במעגל. מה זה?",
+   "a": "הסעה",
+   "h": "a21f1b25",
+   "q": "Water in a pot heats from below and flows in a loop. What is this?",
+   "o": [
+    "Convection",
+    "Conduction",
+    "Radiation",
+    "Evaporation"
+   ],
+   "x": "Hot water rises, and cold water sinks"
+  },
+  {
+   "he": "ליד מדורה הפנים חמות, אבל הגב קר. למה?",
+   "a": "קרינה פוגעת מלפנים",
+   "h": "61dcc599",
+   "q": "Near a campfire your face is warm, but your back is cold. Why?",
+   "o": [
+    "Radiation hits the front",
+    "Convection from everywhere",
+    "Conduction through the legs",
+    "Fire uses up oxygen"
+   ],
+   "x": "Radiation travels in a straight line from the fire"
+  },
+  {
+   "he": "באיזו חולצה יהיה חם יותר בשמש?",
+   "a": "שחורה",
+   "h": "d0393886",
+   "q": "Which shirt will feel hotter in the sun?",
+   "o": [
+    "Black",
+    "White",
+    "Light yellow",
+    "Silver"
+   ],
+   "x": "Dark colors absorb more radiation"
+  },
+  {
+   "he": "למה מתקינים מזגן למעלה, קרוב לתקרה?",
+   "a": "אוויר קר יורד",
+   "h": "a12273f2",
+   "q": "Why is an air conditioner installed high, near the ceiling?",
+   "o": [
+    "Cool air sinks",
+    "Cool air rises",
+    "Out of the way",
+    "Heat escapes"
+   ],
+   "x": "The cool air sinks and fills the room"
+  },
+  {
+   "he": "בהולכה – איך עובר החום?",
+   "a": "מחלקיק לחלקיק",
+   "h": "2298addb",
+   "q": "In conduction, how does heat travel?",
+   "o": [
+    "Particle to particle",
+    "In a flowing liquid",
+    "In light rays",
+    "Through holes"
+   ],
+   "x": "Fast particles pass their motion to their neighbors"
+  },
+  {
+   "he": "איזה חומר מוליך חום טוב?",
+   "a": "נחושת",
+   "h": "5737962f",
+   "q": "Which material conducts heat well?",
+   "o": [
+    "Copper",
+    "Wood",
+    "Wool",
+    "Plastic"
+   ],
+   "x": "Metals are good conductors of heat"
+  },
+  {
+   "he": "למה ידיות של סירים עשויות לרוב פלסטיק?",
+   "a": "פלסטיק מבודד חום",
+   "h": "a247efc7",
+   "q": "Why are pot handles usually made of plastic?",
+   "o": [
+    "Plastic insulates heat",
+    "Plastic conducts heat",
+    "Plastic is pretty",
+    "Plastic is heavy"
+   ],
+   "x": "That way the handle doesn't get hot in your hand"
+  },
+  {
+   "he": "למה מעיל מחמם אותנו בחורף?",
+   "a": "המעיל מבודד",
+   "h": "89cfd9d8",
+   "q": "Why does a coat keep us warm in winter?",
+   "o": [
+    "The coat insulates",
+    "The coat makes heat",
+    "The coat conducts",
+    "The coat is heavy"
+   ],
+   "x": "The coat keeps the body's heat in"
+  },
+  {
+   "he": "למה עוטפים צינורות מים חמים בחומר מבודד?",
+   "a": "לא לאבד חום",
+   "h": "7637d60a",
+   "q": "Why are hot-water pipes wrapped in insulating material?",
+   "o": [
+    "To keep heat in",
+    "To cool them",
+    "To look nice",
+    "To conduct heat"
+   ],
+   "x": "The insulator slows the heat flowing out"
+  },
+  {
+   "he": "בטרמוס יש ריק בין הדפנות. מה הריק מונע?",
+   "a": "הולכה והסעה",
+   "h": "6fa5e2ff",
+   "q": "A thermos has a vacuum between its walls. What does the vacuum prevent?",
+   "o": [
+    "Conduction and convection",
+    "Only radiation",
+    "The mass",
+    "The volume"
+   ],
+   "x": "A vacuum has no particles to carry heat"
+  },
+  {
+   "he": "למה בגדי צמר מחממים?",
+   "a": "הצמר כולא אוויר",
+   "h": "d4f48ca9",
+   "q": "Why do wool clothes keep us warm?",
+   "o": [
+    "Wool traps air",
+    "Wool makes heat",
+    "Wool conducts heat",
+    "Wool absorbs cold"
+   ],
+   "x": "Trapped air is a good insulator"
+  },
+  {
+   "he": "בבוקר קר, מעקה מתכת מרגיש קר יותר מעץ. למה?",
+   "a": "מתכת מוליכה חום",
+   "h": "e17495cb",
+   "q": "On a cold morning, a metal railing feels colder than wood. Why?",
+   "o": [
+    "Metal conducts heat",
+    "The metal is colder",
+    "The wood is warmer",
+    "The wood conducts"
+   ],
+   "x": "At the same temperature, metal draws heat from the hand faster"
+  },
+  {
+   "he": "לווייתן בים קר – איך שכבת השומן עוזרת לו?",
+   "a": "השומן מבודד",
+   "h": "7e85ffa1",
+   "q": "A whale in a cold sea – how does its layer of fat help it?",
+   "o": [
+    "The fat insulates",
+    "The fat conducts heat",
+    "The fat attracts sun",
+    "The fat cools it"
+   ],
+   "x": "Fat is a good insulator"
+  },
+  {
+   "he": "תה של ⁦90°C⁩ בשלוש כוסות. אחרי שעה – איזו מבודדת הכי טוב?",
+   "a": "כוס א",
+   "h": "07fe8a50",
+   "q": "Tea at 90°C in three cups. After an hour, which cup insulates best?",
+   "o": [
+    "Cup A",
+    "Cup B",
+    "Cup C",
+    "All the same"
+   ],
+   "x": "In cup A the tea stayed the hottest",
+   "sc": {
+    "0": "C",
+    "1": "B",
+    "2": "A",
+    "3": "Cup",
+    "4": "40",
+    "5": "55",
+    "6": "70",
+    "7": "°C"
+   }
+  },
+  {
+   "he": "למה בונים חלונות כפולים עם אוויר ביניהם?",
+   "a": "שכבת האוויר מבודדת",
+   "h": "1c6ee3f5",
+   "q": "Why do double-pane windows have air between the panes?",
+   "o": [
+    "The air layer insulates",
+    "Air conducts heat",
+    "To see more",
+    "To save glass"
+   ],
+   "x": "The air layer slows the flow of heat"
+  },
+  {
+   "he": "בבוקר קריר ובצהריים חם. מה גדל בחלקיקי האוויר?",
+   "a": "המהירות שלהם",
+   "h": "279d8219",
+   "q": "Cool in the morning, hot at noon. What increases in the air particles?",
+   "o": [
+    "Their speed",
+    "Their size",
+    "Their mass",
+    "Their color"
+   ],
+   "x": "Hotter – the particles move faster"
+  },
+  {
+   "he": "מהו חום?",
+   "a": "אנרגיה שעוברת",
+   "h": "4c1e5e93",
+   "q": "What is heat?",
+   "o": [
+    "Energy that is transferred",
+    "A kind of material",
+    "A measuring device",
+    "The color of fire"
+   ],
+   "x": "Heat flows from a hot object to a colder one"
+  },
+  {
+   "he": "באיזו יחידה מודדים טמפרטורה?",
+   "a": "מעלות צלזיוס",
+   "h": "3b77b62c",
+   "q": "Which unit is used to measure temperature?",
+   "o": [
+    "Degrees Celsius",
+    "Joules",
+    "Newtons",
+    "Liters"
+   ],
+   "x": "A thermometer shows degrees Celsius – °C"
+  },
+  {
+   "he": "באיזו יחידה מודדים אנרגיה, וגם כמות חום?",
+   "a": "ג'אול",
+   "h": "9e91fcc6",
+   "q": "Which unit measures energy, and also an amount of heat?",
+   "o": [
+    "Joules",
+    "Degrees Celsius",
+    "Meters",
+    "Liters"
+   ],
+   "x": "Heat is energy, so it is measured in joules"
+  },
+  {
+   "he": "כוס מים ואמבטיה, שתיהן ב-⁦40°C⁩. באיזו יותר אנרגיית חום?",
+   "a": "באמבטיה",
+   "h": "7b3287c3",
+   "q": "A glass of water and a bathtub, both at 40°C. Which holds more heat energy?",
+   "o": [
+    "The bathtub",
+    "The glass",
+    "The same",
+    "Neither one"
+   ],
+   "x": "Same temperature, but the bathtub has many more particles"
+  },
+  {
+   "he": "כוס מים ואמבטיה, שתיהן ב-⁦40°C⁩. במה החלקיקים מהירים יותר?",
+   "a": "אותה מהירות",
+   "h": "dc874a33",
+   "q": "A glass of water and a bathtub, both at 40°C. Where do particles move faster?",
+   "o": [
+    "Same speed",
+    "In the bathtub",
+    "In the glass",
+    "No motion"
+   ],
+   "x": "Particle speed depends only on temperature"
+  },
+  {
+   "he": "גץ מזיקוק לוהט, אבל לא שורף את היד. למה?",
+   "a": "מעט אנרגיית חום",
+   "h": "ca5758f1",
+   "q": "A firework spark is red-hot but doesn't burn your hand. Why?",
+   "o": [
+    "Little heat energy",
+    "Low temperature",
+    "It is wet",
+    "It is cold"
+   ],
+   "x": "High temperature, but a tiny mass – little heat energy"
+  },
+  {
+   "he": "מערבבים כמויות שוות של מים ב-⁦20°C⁩ וב-⁦60°C⁩. מה הטמפרטורה?",
+   "a": "⁦40°C⁩",
+   "h": "1aa9a8fa",
+   "q": "Equal amounts of water at 20°C and 60°C are mixed. What is the temperature?",
+   "o": [
+    "⁦40°C⁩",
+    "⁦80°C⁩",
+    "⁦20°C⁩",
+    "⁦60°C⁩"
+   ],
+   "x": "Equal amounts – the temperature is halfway: (20 + 60) ÷ 2 = 40"
+  },
+  {
+   "he": "מחממים מים בסיר. מה המים מקבלים מהלהבה?",
+   "a": "חום",
+   "h": "5860b1e1",
+   "q": "Water in a pot sits on a flame. What does the water get from it?",
+   "o": [
+    "Heat",
+    "Temperature",
+    "Cold",
+    "Particles"
+   ],
+   "x": "The flame transfers energy, and the water's temperature rises"
+  },
+  {
+   "he": "מה נכון לגבי חום וטמפרטורה?",
+   "a": "אלה מושגים שונים",
+   "h": "8b95e057",
+   "q": "What is true about heat and temperature?",
+   "o": [
+    "Different concepts",
+    "The same concept",
+    "Both in joules",
+    "Both in degrees"
+   ],
+   "x": "Temperature – how hot; heat – energy that is transferred"
+  },
+  {
+   "he": "מחממים ליטר אחד ושני ליטרים מים באותה להבה. מי ירתח קודם?",
+   "a": "הליטר האחד",
+   "h": "af86534e",
+   "q": "1 L and 2 L of water are heated on the same flame. Which boils first?",
+   "o": [
+    "The 1 L",
+    "The 2 L",
+    "Both at once",
+    "Neither"
+   ],
+   "x": "A smaller amount needs less energy",
+   "sc": {
+    "1": "1 L",
+    "2": "2 L"
+   }
+  },
+  {
+   "he": "לחמם 2 ליטר מים במקום ליטר – כמה אנרגיה צריך?",
+   "a": "פי 2",
+   "h": "9384e6dc",
+   "q": "Heating 2 L of water instead of 1 L – how much energy is needed?",
+   "o": [
+    "Twice as much",
+    "The same amount",
+    "Half",
+    "4 times as much"
+   ],
+   "x": "Twice the water – twice the particles to heat",
+   "sc": {
+    "1": "1 L",
+    "2": "2 L"
+   }
+  },
+  {
+   "he": "כפית חמה בכוס מים קרים. מתי ייפסק מעבר החום?",
+   "a": "בטמפרטורה שווה",
+   "h": "835784d3",
+   "q": "A hot spoon in a glass of cold water. When does heat flow stop?",
+   "o": [
+    "At equal temperatures",
+    "When the water boils",
+    "When the spoon freezes",
+    "Never"
+   ],
+   "x": "When the temperatures are equal, no more heat flows"
+  },
+  {
+   "he": "מחזיקים קרח ביד, והיד מרגישה קור. מה קורה?",
+   "a": "חום עובר מהיד",
+   "h": "717a5dca",
+   "q": "You hold ice and your hand feels cold. What is happening?",
+   "o": [
+    "Heat leaves the hand",
+    "Cold enters the hand",
+    "The ice adds cold",
+    "Nothing is transferred"
+   ],
+   "x": "No \"cold\" flows – the hand loses heat to the ice"
+  },
+  {
+   "he": "מים ב-⁦80°C⁩ ומים ב-⁦10°C⁩ מתערבבים. מה תהיה הטמפרטורה?",
+   "a": "בין 10 ל-80",
+   "h": "2ba4322e",
+   "q": "Water at 80°C and water at 10°C are mixed. What will the temperature be?",
+   "o": [
+    "Between 10 and 80",
+    "Above 80",
+    "Below 10",
+    "Exactly 90"
+   ],
+   "x": "The hot water cools and the cold water warms"
+  },
+  {
+   "he": "כוס תה חם נשארת על השולחן. לאיזו טמפרטורה תגיע לבסוף?",
+   "a": "טמפרטורת החדר",
+   "h": "1c34b40e",
+   "q": "A cup of hot tea is left on the table. What temperature will it reach?",
+   "o": [
+    "Room temperature",
+    "⁦0°C⁩",
+    "⁦100°C⁩",
+    "Hotter than the room"
+   ],
+   "x": "The tea cools until it matches the room's temperature",
+   "sc": {
+    "11": "min"
+   }
+  },
+  {
+   "he": "1000 ג'אול הם…",
+   "a": "1 קילו-ג'אול",
+   "h": "0b42e03d",
+   "q": "1,000 joules equal…",
+   "o": [
+    "1 kilojoule",
+    "10 kilojoules",
+    "100 kilojoules",
+    "0.1 kilojoule"
+   ],
+   "x": "Kilo = a thousand, as in kilogram",
+   "sc": {
+    "1": "1,000 J"
+   }
+  },
+  {
+   "he": "על אריזת מזון כתוב \"קלוריות\". מה הן מודדות?",
+   "a": "אנרגיה",
+   "h": "bc85ed9f",
+   "q": "Food packages list \"calories\". What do they measure?",
+   "o": [
+    "Energy",
+    "Temperature",
+    "Mass",
+    "Volume"
+   ],
+   "x": "How much energy the body gets from the food"
+  },
+  {
+   "he": "באיזה מהם החלקיקים נעים הכי מהר?",
+   "a": "תה ב-90°C",
+   "h": "e504d4ce",
+   "q": "In which of these do particles move fastest?",
+   "o": [
+    "Tea at 90°C",
+    "Water at 20°C",
+    "Ice at 0°C",
+    "Juice at 5°C"
+   ],
+   "x": "Higher temperature – faster particles"
+  },
+  {
+   "he": "כדי להמיס גוש קרח גדול צריך יותר…",
+   "a": "אנרגיה",
+   "h": "5f5f589c",
+   "q": "Melting a big block of ice takes more…",
+   "o": [
+    "Energy",
+    "Low temperature",
+    "Darkness",
+    "Time in the cold"
+   ],
+   "x": "More material – more energy to melt it"
+  },
+  {
+   "he": "במה דומה המבנה של כל היצורים החיים?",
+   "a": "בנויים מתאים",
+   "h": "44f91d49",
+   "q": "How is the structure of all living things alike?",
+   "o": [
+    "Made of cells",
+    "They have legs",
+    "They have leaves",
+    "They have lungs"
+   ],
+   "x": "Every living thing is made of one or more cells"
+  },
+  {
+   "he": "מכונית נעה וצורכת דלק. למה היא לא יצור חי?",
+   "a": "היא לא מתרבה",
+   "h": "a524783e",
+   "q": "A car moves and uses fuel. Why isn't it a living thing?",
+   "o": [
+    "It doesn't reproduce",
+    "It doesn't move",
+    "It has no energy",
+    "It is heavy"
+   ],
+   "x": "It has no cells, and it doesn't grow or reproduce"
+  },
+  {
+   "he": "זרע נובט והופך לצמח. איזה מאפיין זה?",
+   "a": "גדילה והתפתחות",
+   "h": "7fa5faf0",
+   "q": "A seed sprouts and becomes a plant. Which characteristic is this?",
+   "o": [
+    "Growth and development",
+    "Movement",
+    "Excretion",
+    "Respiration"
+   ],
+   "x": "The seed grows and develops into a plant"
+  },
+  {
+   "he": "צמח פונה לכיוון האור. איזה מאפיין זה?",
+   "a": "תגובה לגירוי",
+   "h": "e4788eda",
+   "q": "A plant turns toward the light. Which characteristic is this?",
+   "o": [
+    "Response to stimuli",
+    "Reproduction",
+    "Excretion",
+    "Nutrition"
+   ],
+   "x": "Light is the stimulus – the plant responds"
+  },
+  {
+   "he": "חתולה ממליטה גורים. איזה מאפיין זה?",
+   "a": "רבייה",
+   "h": "f0dd6c12",
+   "q": "A cat gives birth to kittens. Which characteristic is this?",
+   "o": [
+    "Reproduction",
+    "Growth",
+    "Respiration",
+    "Excretion"
+   ],
+   "x": "Reproduction – producing offspring"
+  },
+  {
+   "he": "הוצאת פסולת מהגוף, כמו שתן וזיעה, נקראת…",
+   "a": "הפרשה",
+   "h": "5fb902c1",
+   "q": "Removing waste from the body, like urine and sweat, is called…",
+   "o": [
+    "Excretion",
+    "Respiration",
+    "Nutrition",
+    "Reproduction"
+   ],
+   "x": "The body gets rid of substances it doesn't need"
+  },
+  {
+   "he": "האם צמחים נושמים?",
+   "a": "כן, כל הזמן",
+   "h": "92660bb2",
+   "q": "Do plants breathe (respire)?",
+   "o": [
+    "Yes, all the time",
+    "No, never",
+    "Only at night",
+    "Only by day"
+   ],
+   "x": "Every living cell respires – day and night"
+  },
+  {
+   "he": "איך צמח ירוק משיג את מזונו?",
+   "a": "מייצר בעצמו",
+   "h": "b877d79c",
+   "q": "How does a green plant get its food?",
+   "o": [
+    "It makes it itself",
+    "It eats insects",
+    "Only from the soil",
+    "It needs no food"
+   ],
+   "x": "By photosynthesis, using sunlight"
+  },
+  {
+   "he": "איזה יוצא דופן?",
+   "a": "מכונית",
+   "h": "959fa2be",
+   "q": "Which one doesn't belong?",
+   "o": [
+    "Car",
+    "Mushroom",
+    "Bacterium",
+    "Tree"
+   ],
+   "x": "A car is not a living thing"
+  },
+  {
+   "he": "כלב רץ אחרי כדור שנזרק. אילו שני מאפיינים רואים?",
+   "a": "תנועה ותגובה לגירוי",
+   "h": "547be5b0",
+   "q": "A dog runs after a thrown ball. Which two characteristics do we see?",
+   "o": [
+    "Movement, response to stimuli",
+    "Reproduction, excretion",
+    "Growth, reproduction",
+    "Excretion, respiration"
+   ],
+   "x": "The ball is the stimulus, and the dog responds by moving"
+  },
+  {
+   "he": "עלה יבש שנשר מהעץ הוא…",
+   "a": "היה חי",
+   "h": "d482af4f",
+   "q": "A dry leaf that fell from a tree is…",
+   "o": [
+    "Once alive",
+    "Alive",
+    "Never alive",
+    "A whole plant"
+   ],
+   "x": "It was part of a living tree"
+  },
+  {
+   "he": "סלע על ההר הוא…",
+   "a": "דומם",
+   "h": "33532c1a",
+   "q": "A rock on the mountain is…",
+   "o": [
+    "Never alive",
+    "A living thing",
+    "Once alive",
+    "A seed"
+   ],
+   "x": "A rock was never alive – it is non-living"
+  },
+  {
+   "he": "זרע יבש בשקית – האם הוא חי?",
+   "a": "חי, במצב רדום",
+   "h": "955b52e6",
+   "q": "A dry seed in a bag – is it alive?",
+   "o": [
+    "Alive, but dormant",
+    "Not alive",
+    "Once alive",
+    "Never alive"
+   ],
+   "x": "Under the right conditions, the seed will germinate"
+  },
+  {
+   "he": "מוסיפים שמרים לבצק, והבצק תופח. למה?",
+   "a": "השמרים חיים",
+   "h": "0c8f441a",
+   "q": "Yeast is added to dough, and the dough rises. Why?",
+   "o": [
+    "The yeast is alive",
+    "The sugar dissolves",
+    "The water boils",
+    "The flour swells"
+   ],
+   "x": "The yeast feeds, respires and gives off gas"
+  },
+  {
+   "he": "מהי היחידה הקטנה ביותר של החיים?",
+   "a": "התא",
+   "h": "21b39a06",
+   "q": "What is the smallest unit of life?",
+   "o": [
+    "The cell",
+    "The organ",
+    "The tissue",
+    "The particle"
+   ],
+   "x": "Every living thing is made of cells"
+  },
+  {
+   "he": "אש גדלה, זזה וצורכת חמצן. למה היא לא חיה?",
+   "a": "אין לה תאים",
+   "h": "66fbc472",
+   "q": "Fire grows, moves and uses oxygen. Why isn't it alive?",
+   "o": [
+    "It has no cells",
+    "It is hot",
+    "It is red",
+    "It doesn't move"
+   ],
+   "x": "Fire is not made of cells"
+  },
+  {
+   "he": "מזון נותן אנרגיה. בשביל מה עוד בעלי חיים צריכים אותו?",
+   "a": "גדילה ובנייה",
+   "h": "ba671a74",
+   "q": "Food gives energy. What else do animals need it for?",
+   "o": [
+    "Growth and building",
+    "Color",
+    "Rest only",
+    "Cooling the body"
+   ],
+   "x": "Food also gives building materials for growth"
+  },
+  {
+   "he": "תהליך הנשימה בתאים נועד להפיק…",
+   "a": "אנרגיה",
+   "h": "b1911eec",
+   "q": "Cellular respiration is meant to release…",
+   "o": [
+    "Energy",
+    "Water",
+    "Light",
+    "Sound"
+   ],
+   "x": "In respiration, the cell breaks down sugar and releases energy"
+  },
+  {
+   "he": "עכביש מרגיש רטט ברשת ורץ אליו. איזה מאפיין?",
+   "a": "תגובה לגירוי",
+   "h": "212f4243",
+   "q": "A spider feels a vibration in its web and runs to it. Which characteristic?",
+   "o": [
+    "Response to stimuli",
+    "Reproduction",
+    "Growth",
+    "Excretion"
+   ],
+   "x": "The vibration is the stimulus"
+  },
+  {
+   "he": "לפי הכרטיס – מה זה יכול להיות?",
+   "a": "צמח",
+   "h": "0f05982b",
+   "q": "According to the card, what could this be?",
+   "o": [
+    "A plant",
+    "A stone",
+    "A dog",
+    "A car"
+   ],
+   "x": "A plant is alive, but doesn't move from place to place",
+   "sc": {
+    "0": "Grows: yes",
+    "1": "Reproduces: yes",
+    "2": "Moves about: no"
+   }
+  },
+  {
+   "he": "איזה רכיב קשיח קיים רק בתא צמח?",
+   "a": "דופן התא",
+   "h": "f196e597",
+   "q": "Which rigid part is found only in plant cells?",
+   "o": [
+    "The cell wall",
+    "The nucleus",
+    "The cell membrane",
+    "The cytoplasm"
+   ],
+   "x": "Only plant cells have this rigid layer"
+  },
+  {
+   "he": "איזה רכיב שולט בפעולות התא ומכיל חומר תורשתי?",
+   "a": "הגרעין",
+   "h": "0eb00c33",
+   "q": "Which part controls the cell's activities and holds genetic material?",
+   "o": [
+    "The nucleus",
+    "The cell wall",
+    "The vacuole",
+    "The cell membrane"
+   ],
+   "x": "The nucleus – the cell's \"manager\""
+  },
+  {
+   "he": "מה תפקיד קרום התא?",
+   "a": "בקרת כניסה ויציאה",
+   "h": "88f756fe",
+   "q": "What does the cell membrane do?",
+   "o": [
+    "Controls entry and exit",
+    "Makes food",
+    "Stores light",
+    "Determines heredity"
+   ],
+   "x": "The membrane controls what goes into and out of the cell"
+  },
+  {
+   "he": "באיזה רכיב בתא מתרחשת הפוטוסינתזה?",
+   "a": "כלורופלסט",
+   "h": "7fa954cd",
+   "q": "In which part of the cell does photosynthesis take place?",
+   "o": [
+    "Chloroplast",
+    "Nucleus",
+    "Vacuole",
+    "Cell membrane"
+   ],
+   "x": "Chloroplasts contain green chlorophyll, which absorbs light"
+  },
+  {
+   "he": "החומר הסמיך הממלא את התא נקרא…",
+   "a": "ציטופלסמה",
+   "h": "15314a2c",
+   "q": "The jelly-like substance that fills the cell is called…",
+   "o": [
+    "Cytoplasm",
+    "Vacuole",
+    "Nucleus",
+    "Cell wall"
+   ],
+   "x": "All the parts of the cell are in the cytoplasm"
+  },
+  {
+   "he": "מה נותן לתא הצמח צורה קשיחה?",
+   "a": "דופן התא",
+   "h": "c9e7dfc2",
+   "q": "What gives a plant cell its rigid shape?",
+   "o": [
+    "The cell wall",
+    "The cell membrane",
+    "The nucleus",
+    "The cytoplasm"
+   ],
+   "x": "The wall surrounds the membrane and supports the cell"
+  },
+  {
+   "he": "איזה רכיב גדול במיוחד בתא צמח ואוגר מים?",
+   "a": "חלולית",
+   "h": "7e37e047",
+   "q": "Which part is especially large in a plant cell and stores water?",
+   "o": [
+    "Vacuole",
+    "Nucleus",
+    "Chloroplast",
+    "Cell wall"
+   ],
+   "x": "The central vacuole is full of water"
+  },
+  {
+   "he": "למה בתאי שורש הגזר אין כלורופלסטים?",
+   "a": "אין שם אור",
+   "h": "0072c932",
+   "q": "Why do carrot root cells have no chloroplasts?",
+   "o": [
+    "No light there",
+    "They are small",
+    "No water there",
+    "They have a wall"
+   ],
+   "x": "The root is underground – no light for photosynthesis"
+  },
+  {
+   "he": "באיזה צבע הכלורופלסטים?",
+   "a": "ירוק",
+   "h": "d5c213b4",
+   "q": "What color are chloroplasts?",
+   "o": [
+    "Green",
+    "Red",
+    "Clear",
+    "Blue"
+   ],
+   "x": "Because of the chlorophyll inside them"
+  },
+  {
+   "he": "איזה רכיב עוטף כל תא, של צמח ושל בעל חיים?",
+   "a": "קרום התא",
+   "h": "e34f9d53",
+   "q": "Which part surrounds every cell, in plants and in animals?",
+   "o": [
+    "The cell membrane",
+    "The cell wall",
+    "The chloroplast",
+    "The large vacuole"
+   ],
+   "x": "A membrane surrounds every cell; plants also have a wall outside it"
+  },
+  {
+   "he": "למה צריך מיקרוסקופ כדי לראות תאים?",
+   "a": "התאים זעירים",
+   "h": "6fc5fc53",
+   "q": "Why do we need a microscope to see cells?",
+   "o": [
+    "Cells are tiny",
+    "Cells are clear",
+    "Cells move",
+    "Cells are warm"
+   ],
+   "x": "Most cells are too small to see with the naked eye"
+  },
+  {
+   "he": "עינית ⁦×10⁩ ועדשה ⁦×40⁩. מה ההגדלה?",
+   "a": "⁦400⁩",
+   "h": "511ae5f2",
+   "q": "An eyepiece ×10 and an objective lens ×40. What is the magnification?",
+   "o": [
+    "⁦400⁩",
+    "⁦50⁩",
+    "⁦40⁩",
+    "⁦4000⁩"
+   ],
+   "x": "⁦10×40=400⁩"
+  },
+  {
+   "he": "עינית ⁦×10⁩ ועדשה ⁦×4⁩. מה ההגדלה?",
+   "a": "⁦40⁩",
+   "h": "281d48d0",
+   "q": "An eyepiece ×10 and an objective lens ×4. What is the magnification?",
+   "o": [
+    "⁦40⁩",
+    "⁦14⁩",
+    "⁦400⁩",
+    "⁦4⁩"
+   ],
+   "x": "⁦10×4=40⁩"
+  },
+  {
+   "he": "מי ראה לראשונה תאים, בפיסת שעם?",
+   "a": "רוברט הוק",
+   "h": "5114ec15",
+   "q": "Who first saw cells, in a piece of cork?",
+   "o": [
+    "Robert Hooke",
+    "Isaac Newton",
+    "Albert Einstein",
+    "Louis Pasteur"
+   ],
+   "x": "Hooke saw tiny \"cells\" in cork"
+  },
+  {
+   "he": "מה פירוש הגדלה של ⁦×100⁩?",
+   "a": "פי 100 גדול",
+   "h": "27a9026e",
+   "q": "What does a magnification of ×100 mean?",
+   "o": [
+    "100 times bigger",
+    "100 cells",
+    "100 cm",
+    "100 seconds"
+   ],
+   "x": "The sample looks 100 times bigger"
+  },
+  {
+   "he": "לאיזה תא אין דופן?",
+   "a": "תא עור באדם",
+   "h": "d2ed88f4",
+   "q": "Which cell has no cell wall?",
+   "o": [
+    "A human skin cell",
+    "A leaf cell",
+    "A root cell",
+    "A plant stem cell"
+   ],
+   "x": "Animal cells have no cell wall"
+  },
+  {
+   "he": "בתא של עלה רואים נקודות ירוקות קטנות. מה הן?",
+   "a": "כלורופלסטים",
+   "h": "bab0a204",
+   "q": "In a leaf cell we see small green dots. What are they?",
+   "o": [
+    "Chloroplasts",
+    "Nuclei",
+    "Vacuoles",
+    "Water drops"
+   ],
+   "x": "Chloroplasts give the leaf its green color"
+  },
+  {
+   "he": "האם יצור חי יכול להיות בנוי מתא אחד?",
+   "a": "כן, כמו חיידק",
+   "h": "a2052cba",
+   "q": "Can a living thing be made of just one cell?",
+   "o": [
+    "Yes, like bacteria",
+    "No, never",
+    "Only plants",
+    "Only in the sea"
+   ],
+   "x": "Bacteria are single-celled organisms"
+  },
+  {
+   "he": "למה דגימה למיקרוסקופ צריכה להיות דקה?",
+   "a": "כדי שאור יעבור",
+   "h": "97621281",
+   "q": "Why must a microscope sample be thin?",
+   "o": [
+    "So light passes through",
+    "So it weighs less",
+    "So it dries out",
+    "So it is colorful"
+   ],
+   "x": "Light passes through the sample to the eye"
+  },
+  {
+   "he": "לפי הכרטיס – איזה תא זה?",
+   "a": "תא צמח",
+   "h": "47c934bb",
+   "q": "According to the card, what cell is this?",
+   "o": [
+    "A plant cell",
+    "An animal cell",
+    "A blood cell",
+    "A nerve cell"
+   ],
+   "x": "A wall and chloroplasts – only in a plant cell",
+   "sc": {
+    "0": "Cell wall: yes",
+    "1": "Chloroplast: yes",
+    "2": "Vacuole: large"
+   }
+  },
+  {
+   "he": "מה הסדר הנכון, מהקטן אל הגדול?",
+   "a": "תא, רקמה, איבר",
+   "h": "8cfa9476",
+   "q": "What is the right order, from smallest to largest?",
+   "o": [
+    "Cell, tissue, organ",
+    "Organ, cell, tissue",
+    "Tissue, cell, organ",
+    "Cell, organ, tissue"
+   ],
+   "x": "Cells make up tissues; tissues make up an organ",
+   "sc": {
+    "0": "small → large"
+   }
+  },
+  {
+   "he": "קבוצת תאים דומים שעושים אותה עבודה נקראת…",
+   "a": "רקמה",
+   "h": "b881b822",
+   "q": "A group of similar cells doing the same job is called…",
+   "o": [
+    "Tissue",
+    "Organ",
+    "System",
+    "Organism"
+   ],
+   "x": "For example, muscle tissue"
+  },
+  {
+   "he": "הלב הוא…",
+   "a": "איבר",
+   "h": "662b3630",
+   "q": "The heart is…",
+   "o": [
+    "An organ",
+    "A cell",
+    "A tissue",
+    "A system"
+   ],
+   "x": "The heart is made of several tissues"
+  },
+  {
+   "he": "הלב וכלי הדם יחד יוצרים…",
+   "a": "מערכת",
+   "h": "1ef8f2e2",
+   "q": "The heart and blood vessels together form…",
+   "o": [
+    "A system",
+    "An organ",
+    "A tissue",
+    "A cell"
+   ],
+   "x": "Several organs working together – a system"
+  },
+  {
+   "he": "מה בנוי מכמה רקמות שונות?",
+   "a": "איבר",
+   "h": "cc960ead",
+   "q": "What is made of several different tissues?",
+   "o": [
+    "An organ",
+    "A cell",
+    "A nucleus",
+    "A particle"
+   ],
+   "x": "For example, the brain – nerve tissue, blood and more"
+  },
+  {
+   "he": "העלה של הצמח הוא…",
+   "a": "איבר",
+   "h": "2df93cb5",
+   "q": "A plant's leaf is…",
+   "o": [
+    "An organ",
+    "A cell",
+    "A system",
+    "A tissue"
+   ],
+   "x": "A leaf is made of several tissues"
+  },
+  {
+   "he": "איזה יוצא דופן?",
+   "a": "רקמה",
+   "h": "1dc30bbc",
+   "q": "Which one doesn't belong?",
+   "o": [
+    "Tissue",
+    "Heart",
+    "Stomach",
+    "Lung"
+   ],
+   "x": "The heart, the stomach and the lungs are organs"
+  },
+  {
+   "he": "מערכת העיכול בנויה מ…",
+   "a": "כמה איברים",
+   "h": "88e4231b",
+   "q": "The digestive system is made of…",
+   "o": [
+    "Several organs",
+    "One cell",
+    "One tissue",
+    "One organ"
+   ],
+   "x": "Mouth, esophagus, stomach, intestines and more"
+  },
+  {
+   "he": "ברמות הארגון של גוף חי – מהי הגבוהה ביותר?",
+   "a": "יצור שלם",
+   "h": "3066e2ea",
+   "q": "In the levels of organization of a living body, which is the highest?",
+   "o": [
+    "Whole organism",
+    "System",
+    "Organ",
+    "Tissue"
+   ],
+   "x": "All the systems together – a whole living organism",
+   "sc": {
+    "0": "cell, tissue, …"
+   }
+  },
+  {
+   "he": "המוח הוא איבר במערכת…",
+   "a": "העצבים",
+   "h": "282e6a65",
+   "q": "The brain is an organ in which system?",
+   "o": [
+    "Nervous",
+    "Digestive",
+    "Circulatory",
+    "Respiratory"
+   ],
+   "x": "The brain, the spinal cord and the nerves"
+  },
+  {
+   "he": "תאי עצב שייכים לרקמת…",
+   "a": "עצבים",
+   "h": "ea2f5030",
+   "q": "Nerve cells belong to which kind of tissue?",
+   "o": [
+    "Nervous",
+    "Bone",
+    "Muscle",
+    "Fat"
+   ],
+   "x": "Nervous tissue carries signals through the body"
+  },
+  {
+   "he": "הקיבה היא איבר במערכת…",
+   "a": "העיכול",
+   "h": "a2599eea",
+   "q": "The stomach is an organ in which system?",
+   "o": [
+    "Digestive",
+    "Respiratory",
+    "Circulatory",
+    "Nervous"
+   ],
+   "x": "Food is digested in the stomach"
+  },
+  {
+   "he": "הריאות שייכות למערכת…",
+   "a": "הנשימה",
+   "h": "2b5326e8",
+   "q": "The lungs belong to which system?",
+   "o": [
+    "Respiratory",
+    "Digestive",
+    "Circulatory",
+    "Skeletal"
+   ],
+   "x": "In the lungs, oxygen is taken in from the air"
+  },
+  {
+   "he": "איזה איבר שייך למערכת ההובלה?",
+   "a": "הלב",
+   "h": "aecb7388",
+   "q": "Which organ belongs to the circulatory system?",
+   "o": [
+    "The heart",
+    "The stomach",
+    "A bone",
+    "The brain"
+   ],
+   "x": "The heart pumps blood around the body"
+  },
+  {
+   "he": "רקמה בנויה מ…",
+   "a": "תאים",
+   "h": "64b085c0",
+   "q": "A tissue is made of…",
+   "o": [
+    "Cells",
+    "Organs",
+    "Systems",
+    "Organisms"
+   ],
+   "x": "A tissue is a group of similar cells"
+  },
+  {
+   "he": "השורש של הצמח הוא…",
+   "a": "איבר",
+   "h": "8cc44ca8",
+   "q": "Which level of organization is a plant's root?",
+   "o": [
+    "Organ",
+    "Cell",
+    "Tissue",
+    "System"
+   ],
+   "x": "The root has its own job and is made of several tissues"
+  },
+  {
+   "he": "מה חסר בסדר רמות הארגון?",
+   "a": "איבר",
+   "h": "e4a1b66d",
+   "q": "What is missing in the order of the levels of organization?",
+   "o": [
+    "Organ",
+    "Nucleus",
+    "Organism",
+    "Particle"
+   ],
+   "x": "Cell, tissue, organ, system",
+   "sc": {
+    "0": "Cell",
+    "1": "Tissue",
+    "3": "System"
+   }
+  },
+  {
+   "he": "כדורית דם אדומה היא…",
+   "a": "תא",
+   "h": "4f3b40a5",
+   "q": "Which level of organization is a red blood corpuscle?",
+   "o": [
+    "Cell",
+    "Organ",
+    "System",
+    "Tissue"
+   ],
+   "x": "Each red corpuscle is a single cell"
+  },
+  {
+   "he": "מה משותף לכל רמות הארגון?",
+   "a": "בנויות מתאים",
+   "h": "bbb8067d",
+   "q": "What do all levels of organization have in common?",
+   "o": [
+    "Made of cells",
+    "They have bones",
+    "All are organs",
+    "Only in animals"
+   ],
+   "x": "The cell is the building block of life"
+  },
+  {
+   "he": "כמה תאים יש בגוף האדם, בערך?",
+   "a": "עשרות טריליונים",
+   "h": "83488c60",
+   "q": "About how many cells are in the human body?",
+   "o": [
+    "Tens of trillions",
+    "A hundred",
+    "A thousand",
+    "A million"
+   ],
+   "x": "About 37 trillion cells"
+  },
+  {
+   "he": "מה תפקיד הלב?",
+   "a": "להזרים דם בגוף",
+   "h": "051c5d80",
+   "q": "What is the heart's job?",
+   "o": [
+    "Pumping blood",
+    "Breathing air",
+    "Digesting food",
+    "Thinking"
+   ],
+   "x": "The heart is a pump that moves blood around the body"
+  },
+  {
+   "he": "כמה חללים יש בלב האדם?",
+   "a": "⁦4⁩",
+   "h": "ffb1a797",
+   "q": "How many chambers does the human heart have?",
+   "o": [
+    "⁦4⁩",
+    "⁦2⁩",
+    "⁦3⁩",
+    "⁦1⁩"
+   ],
+   "x": "Two atria and two ventricles"
+  },
+  {
+   "he": "באילו כלי דם מרגישים את הדופק בפרק היד?",
+   "a": "עורקים",
+   "h": "dcdb635f",
+   "q": "In which blood vessels do you feel the pulse at the wrist?",
+   "o": [
+    "Arteries",
+    "Veins",
+    "Capillaries",
+    "Nerves"
+   ],
+   "x": "Each heartbeat pushes blood through the arteries"
+  },
+  {
+   "he": "באילו כלי דם יש מסתמים שמונעים זרימה אחורה?",
+   "a": "ורידים",
+   "h": "96cef08d",
+   "q": "Which blood vessels have valves that stop blood flowing backward?",
+   "o": [
+    "Veins",
+    "Arteries",
+    "Capillaries",
+    "The windpipe"
+   ],
+   "x": "Valves in the veins help blood return to the heart"
+  },
+  {
+   "he": "באילו כלי דם עוברים חמצן ומזון אל התאים?",
+   "a": "נימים",
+   "h": "5e913998",
+   "q": "Through which blood vessels do oxygen and food reach the cells?",
+   "o": [
+    "Capillaries",
+    "Arteries",
+    "Veins",
+    "The heart"
+   ],
+   "x": "Capillary walls are very thin"
+  },
+  {
+   "he": "מה מרגישים כשמודדים דופק בפרק היד?",
+   "a": "פעימות הלב",
+   "h": "11cde18e",
+   "q": "What do you feel when you take your pulse at the wrist?",
+   "o": [
+    "Heartbeats",
+    "Your breathing",
+    "Your muscles",
+    "Your digestion"
+   ],
+   "x": "Each beat pushes blood through the arteries"
+  },
+  {
+   "he": "דופק בדקה לפי הטבלה. באיזו פעילות הלב פועם הכי מהר?",
+   "a": "ריצה",
+   "h": "79fc5d23",
+   "q": "The table shows pulse per minute. During which activity does the heart beat fastest?",
+   "o": [
+    "Running",
+    "Walking",
+    "Resting",
+    "Sleeping"
+   ],
+   "x": "150 beats per minute – the highest pulse",
+   "sc": {
+    "0": "70",
+    "1": "Resting",
+    "2": "100",
+    "3": "Walking",
+    "4": "150",
+    "5": "Running"
+   }
+  },
+  {
+   "he": "למה הדופק עולה בזמן ריצה?",
+   "a": "השרירים צריכים חמצן",
+   "h": "d5584e58",
+   "q": "Why does the pulse rise while running?",
+   "o": [
+    "Muscles need oxygen",
+    "The heart cools",
+    "Blood gets thicker",
+    "The lungs rest"
+   ],
+   "x": "The heart pumps more blood to the muscles"
+  },
+  {
+   "he": "לאן הולך הדם מהחדר הימני של הלב?",
+   "a": "לריאות",
+   "h": "27c7d8b4",
+   "q": "Where does blood go from the heart's right ventricle?",
+   "o": [
+    "To the lungs",
+    "To the brain",
+    "To the legs",
+    "To the stomach"
+   ],
+   "x": "There the blood picks up oxygen"
+  },
+  {
+   "he": "מה תפקיד המסתמים בלב?",
+   "a": "מונעים זרימה אחורה",
+   "h": "952982c8",
+   "q": "What is the job of the heart's valves?",
+   "o": [
+    "Stop backward flow",
+    "Make blood",
+    "Clean the blood",
+    "Cool the heart"
+   ],
+   "x": "Blood flows in one direction only"
+  },
+  {
+   "he": "איזה רכיב בדם מוביל חמצן?",
+   "a": "תאי דם אדומים",
+   "h": "8a891119",
+   "q": "Which part of the blood carries oxygen?",
+   "o": [
+    "Red blood cells",
+    "White blood cells",
+    "Platelets",
+    "Plasma"
+   ],
+   "x": "Red cells contain hemoglobin, which binds oxygen"
+  },
+  {
+   "he": "מה תפקיד תאי הדם הלבנים?",
+   "a": "הגנה מפני חיידקים",
+   "h": "903d0ca1",
+   "q": "What is the job of white blood cells?",
+   "o": [
+    "Fighting germs",
+    "Carrying oxygen",
+    "Clotting blood",
+    "Carrying water"
+   ],
+   "x": "They fight bacteria and viruses"
+  },
+  {
+   "he": "נחתכת ביד, והדם נקרש. מי אחראי לכך?",
+   "a": "טסיות הדם",
+   "h": "1126c88d",
+   "q": "You cut your hand and the blood clots. What is responsible?",
+   "o": [
+    "Platelets",
+    "Red blood cells",
+    "The heart",
+    "Plasma"
+   ],
+   "x": "Platelets seal the wound"
+  },
+  {
+   "he": "החלק הנוזלי של הדם נקרא…",
+   "a": "פלסמה",
+   "h": "cc77b8b5",
+   "q": "The liquid part of blood is called…",
+   "o": [
+    "Plasma",
+    "Platelets",
+    "Hemoglobin",
+    "Capillaries"
+   ],
+   "x": "Plasma is mostly water"
+  },
+  {
+   "he": "מה מוביל הדם מהמעיים לכל הגוף?",
+   "a": "חומרי מזון",
+   "h": "1e40c915",
+   "q": "What does blood carry from the intestines to the whole body?",
+   "o": [
+    "Nutrients",
+    "Air",
+    "Urine",
+    "Bones"
+   ],
+   "x": "Digested food passes into the blood"
+  },
+  {
+   "he": "מה מוביל הדם מהתאים אל הריאות?",
+   "a": "פחמן דו-חמצני",
+   "h": "d46d4710",
+   "q": "What does blood carry from the cells to the lungs?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Food",
+    "Urine"
+   ],
+   "x": "It leaves the body when we breathe out"
+  },
+  {
+   "he": "במחזור הדם הקטן – הדם זורם בין הלב ל…",
+   "a": "ריאות",
+   "h": "c2f98c22",
+   "q": "In pulmonary circulation, blood flows between the heart and the…",
+   "o": [
+    "Lungs",
+    "Brain",
+    "Legs",
+    "Liver"
+   ],
+   "x": "Pulmonary circulation: heart, lungs, heart"
+  },
+  {
+   "he": "דם שחוזר מהריאות אל הלב עשיר ב…",
+   "a": "חמצן",
+   "h": "85f11424",
+   "q": "Blood returning from the lungs to the heart is rich in…",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Waste",
+    "Urine"
+   ],
+   "x": "In the lungs the blood picked up oxygen"
+  },
+  {
+   "he": "מבין תאי הדם – אילו הכי רבים?",
+   "a": "תאי דם אדומים",
+   "h": "f3e638b6",
+   "q": "Which blood cells are the most numerous?",
+   "o": [
+    "Red blood cells",
+    "White blood cells",
+    "Both equally",
+    "Blood has no cells"
+   ],
+   "x": "There are hundreds of red cells for each white cell"
+  },
+  {
+   "he": "מה אינו חלק ממערכת ההובלה?",
+   "a": "הקיבה",
+   "h": "b50a0c12",
+   "q": "Which of these is not part of the circulatory system?",
+   "o": [
+    "The stomach",
+    "The heart",
+    "The arteries",
+    "The capillaries"
+   ],
+   "x": "The stomach belongs to the digestive system"
+  },
+  {
+   "he": "מה חסר בדרך של האוויר אל הריאות?",
+   "a": "סמפונות",
+   "h": "91ccb804",
+   "q": "What is missing on the air's path to the lungs?",
+   "o": [
+    "Bronchi",
+    "Esophagus",
+    "Stomach",
+    "Heart"
+   ],
+   "x": "The windpipe branches into bronchi, which lead to the alveoli",
+   "sc": {
+    "0": "Nose",
+    "1": "Windpipe",
+    "3": "Alveoli"
+   }
+  },
+  {
+   "he": "באיזה חלק של הריאות עובר חמצן אל הדם?",
+   "a": "בנאדיות",
+   "h": "97710f65",
+   "q": "In which part of the lungs does oxygen pass into the blood?",
+   "o": [
+    "In the alveoli",
+    "In the windpipe",
+    "In the nose",
+    "In the throat"
+   ],
+   "x": "Alveoli have thin walls with capillaries right against them"
+  },
+  {
+   "he": "מה תפקיד הסרעפת?",
+   "a": "שריר שעוזר לנשום",
+   "h": "24ebbc51",
+   "q": "What is the job of the diaphragm?",
+   "o": [
+    "Helping us breathe",
+    "Filtering dust",
+    "Digesting food",
+    "Pumping blood"
+   ],
+   "x": "The diaphragm moves down, the chest grows and air enters",
+   "sc": {
+    "0": "Diaphragm"
+   }
+  },
+  {
+   "he": "למה עדיף לנשום דרך האף?",
+   "a": "האף מסנן ומחמם",
+   "h": "bdc5217b",
+   "q": "Why is it better to breathe through the nose?",
+   "o": [
+    "It filters and warms",
+    "The nose is smaller",
+    "The mouth gets tired",
+    "There's no difference"
+   ],
+   "x": "Hairs and mucus in the nose trap dust and germs"
+  },
+  {
+   "he": "למה יש בריאות מיליוני נאדיות קטנות?",
+   "a": "שטח פנים גדול",
+   "h": "c70f4467",
+   "q": "Why do the lungs have millions of tiny alveoli?",
+   "o": [
+    "Large surface area",
+    "To be heavy",
+    "To store food",
+    "To make bone"
+   ],
+   "x": "More surface – more oxygen passes into the blood"
+  },
+  {
+   "he": "מה קורה לבית החזה בשאיפה?",
+   "a": "מתרחב",
+   "h": "c0cf134a",
+   "q": "What happens to the chest when you breathe in?",
+   "o": [
+    "It expands",
+    "It contracts",
+    "It doesn't change",
+    "It cools down"
+   ],
+   "x": "The chest grows and air flows into the lungs"
+  },
+  {
+   "he": "מה שומר על קנה הנשימה פתוח תמיד?",
+   "a": "טבעות סחוס",
+   "h": "5535d4b9",
+   "q": "What keeps the windpipe always open?",
+   "o": [
+    "Rings of cartilage",
+    "A layer of fat",
+    "The jawbone",
+    "The tongue"
+   ],
+   "x": "Stiff cartilage rings keep the tube from collapsing",
+   "sc": {
+    "0": "Windpipe"
+   }
+  },
+  {
+   "he": "מה מונע מאוכל להיכנס לקנה הנשימה?",
+   "a": "מכסה הגרון",
+   "h": "3dd0ae19",
+   "q": "What stops food from entering the windpipe?",
+   "o": [
+    "The epiglottis",
+    "The teeth",
+    "The diaphragm",
+    "The bronchi"
+   ],
+   "x": "When we swallow, the epiglottis closes the windpipe"
+  },
+  {
+   "he": "מי מוביל את החמצן מהריאות אל כל התאים?",
+   "a": "מערכת ההובלה",
+   "h": "92eaa35b",
+   "q": "Which system carries oxygen from the lungs to all the cells?",
+   "o": [
+    "Circulatory system",
+    "Digestive system",
+    "Nervous system",
+    "Skeletal system"
+   ],
+   "x": "Blood picks up oxygen in the lungs and brings it to cells"
+  },
+  {
+   "he": "עישון פוגע בנאדיות. מה התוצאה?",
+   "a": "פחות חמצן לדם",
+   "h": "76debe73",
+   "q": "Smoking damages the alveoli. What is the result?",
+   "o": [
+    "Less oxygen in blood",
+    "More oxygen in blood",
+    "Stronger lungs",
+    "Easier breathing"
+   ],
+   "x": "Damaged alveoli – less surface for gas exchange"
+  },
+  {
+   "he": "איזה גז עובר מהנאדיות אל הדם?",
+   "a": "חמצן",
+   "h": "a77b57d1",
+   "q": "Which gas passes from the alveoli into the blood?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Nitrogen",
+    "Water vapor"
+   ],
+   "x": "Alveoli have much oxygen; the blood arriving there has little"
+  },
+  {
+   "he": "איזה גז עובר מהדם אל הנאדיות?",
+   "a": "פחמן דו-חמצני",
+   "h": "b0ea6602",
+   "q": "Which gas passes from the blood into the alveoli?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Sugar",
+    "Nitrogen"
+   ],
+   "x": "The blood gives up this waste, and we breathe it out"
+  },
+  {
+   "he": "לפי הטבלה – באיזה אוויר יותר פחמן דו-חמצני?",
+   "a": "באוויר הנשוף",
+   "h": "a2bf7d42",
+   "q": "According to the table, which air has more carbon dioxide?",
+   "o": [
+    "Air we breathe out",
+    "Air we breathe in",
+    "Both the same",
+    "Neither has any"
+   ],
+   "x": "4% in air breathed out versus 0.04% in air breathed in",
+   "sc": {
+    "0": "Out",
+    "1": "In",
+    "2": "Gas",
+    "3": "16%",
+    "4": "21%",
+    "5": "Oxygen",
+    "6": "4%",
+    "7": "0.04%",
+    "8": "CO₂"
+   }
+  },
+  {
+   "he": "לפי הטבלה – כמה חמצן יש באוויר שאנחנו נושפים?",
+   "a": "כ-16%",
+   "h": "3dcbdcfc",
+   "q": "According to the table, how much oxygen is in the air we breathe out?",
+   "o": [
+    "About 16%",
+    "About 21%",
+    "⁦0%⁩",
+    "About 4%"
+   ],
+   "x": "The body uses only part of the oxygen breathed in",
+   "sc": {
+    "0": "Out",
+    "1": "In",
+    "2": "Gas",
+    "3": "16%",
+    "4": "21%",
+    "5": "Oxygen",
+    "6": "4%",
+    "7": "0.04%",
+    "8": "CO₂"
+   }
+  },
+  {
+   "he": "למה חמצן עובר מהנאדיות אל הדם?",
+   "a": "ריכוזו בנאדיות גבוה",
+   "h": "03a8082f",
+   "q": "Why does oxygen pass from the alveoli into the blood?",
+   "o": [
+    "Higher concentration in alveoli",
+    "The blood pulls it",
+    "It is heavy",
+    "The heart sucks it"
+   ],
+   "x": "A substance moves from where there is much to where there is little"
+  },
+  {
+   "he": "למה לנאדיות ולנימים דופן דקה מאוד?",
+   "a": "כדי שגזים יעברו",
+   "h": "166e7f90",
+   "q": "Why do alveoli and capillaries have very thin walls?",
+   "o": [
+    "So gases pass through",
+    "So they are light",
+    "To store air",
+    "To stop germs"
+   ],
+   "x": "A wall one cell thick – gases pass quickly"
+  },
+  {
+   "he": "מה קורה לקצב הנשימה בזמן מאמץ?",
+   "a": "עולה",
+   "h": "4f6b6900",
+   "q": "What happens to the breathing rate during exercise?",
+   "o": [
+    "It increases",
+    "It decreases",
+    "It stops",
+    "It stays the same"
+   ],
+   "x": "Muscles need more oxygen and make more CO₂"
+  },
+  {
+   "he": "איפה מתרחש חילוף הגזים אצל דג?",
+   "a": "בזימים",
+   "h": "99a48a92",
+   "q": "Where does gas exchange take place in a fish?",
+   "o": [
+    "In the gills",
+    "In the lungs",
+    "In the fins",
+    "In the scales"
+   ],
+   "x": "Gills take in oxygen dissolved in the water"
+  },
+  {
+   "he": "דרך מה נכנסים ויוצאים גזים בעלה?",
+   "a": "פיוניות",
+   "h": "da452075",
+   "q": "Through what do gases enter and leave a leaf?",
+   "o": [
+    "Stomata",
+    "Xylem",
+    "Phloem",
+    "Chloroplasts"
+   ],
+   "x": "Tiny openings in the leaf allow gas exchange"
+  },
+  {
+   "he": "מה הקשר בין הנשימה בריאות לנשימה התאית?",
+   "a": "הריאות מספקות חמצן",
+   "h": "85ce46ef",
+   "q": "How is breathing in the lungs linked to cellular respiration?",
+   "o": [
+    "Lungs supply oxygen",
+    "No link at all",
+    "The same process",
+    "Cells supply oxygen"
+   ],
+   "x": "The lungs take in oxygen; cells use it to release energy"
+  },
+  {
+   "he": "מה קולטים השורשים מהאדמה?",
+   "a": "מים ומינרלים",
+   "h": "5d17a132",
+   "q": "What do roots take up from the soil?",
+   "o": [
+    "Water and minerals",
+    "Sugar",
+    "Light",
+    "Ready-made food"
+   ],
+   "x": "Roots take up water and minerals"
+  },
+  {
+   "he": "מה מגדיל את שטח הקליטה של השורש?",
+   "a": "שערות השורש",
+   "h": "6673e374",
+   "q": "What increases the root's absorbing surface?",
+   "o": [
+    "Root hairs",
+    "The flowers",
+    "The bark",
+    "The seeds"
+   ],
+   "x": "Many hairs – a large surface for taking up water"
+  },
+  {
+   "he": "באילו צינורות עולים מים מהשורש אל העלים?",
+   "a": "עצה",
+   "h": "47cd64cc",
+   "q": "In which tubes does water rise from the root to the leaves?",
+   "o": [
+    "Xylem",
+    "Phloem",
+    "Arteries",
+    "Veins"
+   ],
+   "x": "The xylem carries water and minerals upward"
+  },
+  {
+   "he": "באילו צינורות זורם הסוכר מהעלים לכל הצמח?",
+   "a": "שיפה",
+   "h": "f29fa00c",
+   "q": "In which tubes does sugar flow from the leaves to the whole plant?",
+   "o": [
+    "Phloem",
+    "Xylem",
+    "Roots",
+    "Stomata"
+   ],
+   "x": "The phloem carries food from the leaves"
+  },
+  {
+   "he": "גבעול סלרי בכוס מים צבועים. אחרי יום העלים צבועים. למה?",
+   "a": "המים עולים בעצה",
+   "h": "2a473553",
+   "q": "A celery stalk stands in colored water. A day later its leaves are colored. Why?",
+   "o": [
+    "Water rose through xylem",
+    "Dye seeped from outside",
+    "The air colored them",
+    "The sun colored them"
+   ],
+   "x": "The colored water rose in the transport tubes"
+  },
+  {
+   "he": "לאן מגיעים המים שהשורש קלט?",
+   "a": "לכל חלקי הצמח",
+   "h": "949ed97d",
+   "q": "Where does the water taken up by the root go?",
+   "o": [
+    "To all plant parts",
+    "Only to the flowers",
+    "Only to the root",
+    "Back to the soil"
+   ],
+   "x": "The water reaches every cell in the plant"
+  },
+  {
+   "he": "חותכים טבעת קליפה סביב הגזע. איזו הובלה נקטעת מיד?",
+   "a": "הובלת הסוכר לשורשים",
+   "h": "f9109d35",
+   "q": "A ring of bark is cut around the trunk. Which transport stops at once?",
+   "o": [
+    "Sugar to the roots",
+    "Water to the leaves",
+    "Minerals to the leaves",
+    "Water to the roots"
+   ],
+   "x": "The phloem in the bark is cut; the xylem inside is intact"
+  },
+  {
+   "he": "מה מהבאים הוא תפקיד צינורות ההובלה בגבעול?",
+   "a": "הובלת מים ומזון",
+   "h": "2640678d",
+   "q": "Which of these is the job of the stem's transport tubes?",
+   "o": [
+    "Carrying water and food",
+    "Making light",
+    "Making seeds",
+    "Absorbing light"
+   ],
+   "x": "Xylem – water, phloem – food"
+  },
+  {
+   "he": "צמח לא הושקה שבוע. מה יקרה לו?",
+   "a": "ינבול",
+   "h": "22a24a8b",
+   "q": "A plant was not watered for a week. What will happen to it?",
+   "o": [
+    "It will wilt",
+    "It will bloom",
+    "It will grow fast",
+    "It will turn greener"
+   ],
+   "x": "Without water the cells lose their firmness"
+  },
+  {
+   "he": "מה מייצר הצמח בעלים בעזרת אור?",
+   "a": "סוכר",
+   "h": "3838852d",
+   "q": "What does a plant make in its leaves with the help of light?",
+   "o": [
+    "Sugar",
+    "Water",
+    "Minerals",
+    "Soil"
+   ],
+   "x": "Photosynthesis makes sugar and oxygen"
+  },
+  {
+   "he": "איך נקרא איבוד מים מהעלים בצורת אדים?",
+   "a": "דיות",
+   "h": "3dbb4a47",
+   "q": "What is the loss of water vapor from leaves called?",
+   "o": [
+    "Transpiration",
+    "Excretion",
+    "Condensation",
+    "Absorption"
+   ],
+   "x": "Transpiration – water evaporating from the leaves"
+  },
+  {
+   "he": "דרך מה יוצאים אדי המים מהעלה?",
+   "a": "פיוניות",
+   "h": "467b5615",
+   "q": "Through what does water vapor leave the leaf?",
+   "o": [
+    "Stomata",
+    "Roots",
+    "Flowers",
+    "Xylem"
+   ],
+   "x": "Stomata – tiny openings in the leaf"
+  },
+  {
+   "he": "באיזה מזג אוויר הדיות מהירה יותר?",
+   "a": "ביום חם ויבש",
+   "h": "45e4e252",
+   "q": "When is transpiration faster?",
+   "o": [
+    "On hot, dry days",
+    "On cold days",
+    "On humid nights",
+    "In rainy winters"
+   ],
+   "x": "In heat and dry air, water evaporates fast"
+  },
+  {
+   "he": "שמו שקית שקופה על ענף. אחרי שעות יש טיפות. מה מקורן?",
+   "a": "דיות",
+   "h": "b9c7abb0",
+   "q": "A clear bag is put over a branch. Hours later there are drops. What is their source?",
+   "o": [
+    "Transpiration",
+    "Rain",
+    "The outside air",
+    "The bag"
+   ],
+   "x": "Water vapor from the leaves condensed on the bag"
+  },
+  {
+   "he": "איך הדיות עוזרת לצמח?",
+   "a": "מושכת מים למעלה",
+   "h": "b28781ce",
+   "q": "How does transpiration help the plant?",
+   "o": [
+    "It pulls water up",
+    "It makes flowers",
+    "It grows roots",
+    "It absorbs sand"
+   ],
+   "x": "Evaporating water \"pulls\" water up from the root"
+  },
+  {
+   "he": "לקקטוס יש קוצים במקום עלים רחבים. למה?",
+   "a": "לחסוך במים",
+   "h": "20e1c553",
+   "q": "A cactus has spines instead of wide leaves. Why?",
+   "o": [
+    "To save water",
+    "To attract sunlight",
+    "To grow fast",
+    "To make seeds"
+   ],
+   "x": "Less leaf surface – less transpiration"
+  },
+  {
+   "he": "איבוד מים מעלים במשך היום. מתי איבדו הכי הרבה?",
+   "a": "בשעה 12",
+   "h": "06fa2b1f",
+   "q": "The table shows water lost by leaves during the day. When was the most lost?",
+   "o": [
+    "At 12:00",
+    "At 8:00",
+    "At 16:00",
+    "At night"
+   ],
+   "x": "At noon it is hottest – transpiration is fastest",
+   "sc": {
+    "0": "16",
+    "1": "12",
+    "2": "8",
+    "3": "Hour",
+    "4": "7",
+    "5": "12",
+    "6": "5",
+    "7": "mL"
+   }
+  },
+  {
+   "he": "איזה גז נכנס לעלה דרך הפיוניות לצורך הפוטוסינתזה?",
+   "a": "פחמן דו-חמצני",
+   "h": "b6877d13",
+   "q": "Which gas enters the leaf through the stomata for photosynthesis?",
+   "o": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Hydrogen",
+    "Helium"
+   ],
+   "x": "The plant makes sugar from carbon dioxide and water"
+  },
+  {
+   "he": "מה דומה בין צמח לבין מערכת ההובלה באדם?",
+   "a": "יש צינורות הובלה",
+   "h": "b84b890d",
+   "q": "What do a plant and the human circulatory system both have?",
+   "o": [
+    "Transport tubes",
+    "A heart",
+    "Blood",
+    "Roots"
+   ],
+   "x": "In both, substances flow through tubes"
+  },
+  {
+   "he": "ביום עם רוח חזקה – מה קורה לדיות?",
+   "a": "מתגברת",
+   "h": "bae91c3e",
+   "q": "On a very windy day, what happens to transpiration?",
+   "o": [
+    "It increases",
+    "It stops",
+    "It decreases",
+    "It stays the same"
+   ],
+   "x": "The wind carries the vapor away from the leaf"
+  },
+  {
+   "he": "מה מהבאים אינו נחוץ לפוטוסינתזה?",
+   "a": "חמצן",
+   "h": "09ec6b90",
+   "q": "Which of these is not needed for photosynthesis?",
+   "o": [
+    "Oxygen",
+    "Light",
+    "Water",
+    "Carbon dioxide"
+   ],
+   "x": "Oxygen is a product of photosynthesis, not a raw material"
+  },
+  {
+   "he": "אילו חומרים נוצרים בפוטוסינתזה?",
+   "a": "סוכר וחמצן",
+   "h": "45f892ba",
+   "q": "Which substances are produced in photosynthesis?",
+   "o": [
+    "Sugar and oxygen",
+    "Water and light",
+    "Oxygen and water",
+    "Sugar and carbon dioxide"
+   ],
+   "x": "The plant builds sugar and releases oxygen into the air"
+  },
+  {
+   "he": "מאיפה מגיע הפחמן הדו-חמצני לפוטוסינתזה?",
+   "a": "מהאוויר, דרך הפיוניות",
+   "h": "511c94e9",
+   "q": "Where does the carbon dioxide for photosynthesis come from?",
+   "o": [
+    "The air, via stomata",
+    "The soil",
+    "The sun",
+    "The flowers"
+   ],
+   "x": "The gas enters the leaf through tiny openings"
+  },
+  {
+   "he": "מאיפה מגיעים המים לפוטוסינתזה?",
+   "a": "מהשורשים, בעצה",
+   "h": "78991322",
+   "q": "Where does the water for photosynthesis come from?",
+   "o": [
+    "The roots, via xylem",
+    "The sun",
+    "The flowers",
+    "Only the phloem"
+   ],
+   "x": "The root takes up water and the xylem carries it up"
+  },
+  {
+   "he": "איזו אנרגיה נאגרת בסוכר שהצמח מייצר?",
+   "a": "אנרגיה כימית",
+   "h": "2f9aab09",
+   "q": "What energy is stored in the sugar a plant makes?",
+   "o": [
+    "Chemical energy",
+    "Sound energy",
+    "Electrical energy",
+    "Gravitational energy"
+   ],
+   "x": "Light energy becomes chemical energy in the sugar"
+  },
+  {
+   "he": "צמח היה בחושך יומיים. מה תמצא בדיקת עמילן בעליו?",
+   "a": "אין עמילן",
+   "h": "8e010b5d",
+   "q": "A plant spent two days in the dark. What will a starch test of its leaves show?",
+   "o": [
+    "No starch",
+    "Sugar instead of starch",
+    "Starch as usual",
+    "More starch"
+   ],
+   "x": "No light, no photosynthesis – and the leaves used up their starch"
+  },
+  {
+   "he": "מה תפקיד הכלורופיל?",
+   "a": "קולט אור",
+   "h": "7cfe469d",
+   "q": "What is the job of chlorophyll?",
+   "o": [
+    "Absorbing light",
+    "Absorbing water",
+    "Carrying sugar",
+    "Building roots"
+   ],
+   "x": "The green pigment absorbs light energy"
+  },
+  {
+   "he": "צמח מים בשמש משחרר בועות קטנות. ממה הן?",
+   "a": "חמצן",
+   "h": "1e220288",
+   "q": "A water plant in the sun releases small bubbles. What are they?",
+   "o": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Water vapor",
+    "Hydrogen"
+   ],
+   "x": "Photosynthesis releases oxygen, which rises as bubbles"
+  },
+  {
+   "he": "מה הצמח עושה עם הסוכר שייצר?",
+   "a": "אנרגיה וחומרי בניין",
+   "h": "2d025eb3",
+   "q": "What does the plant do with the sugar it made?",
+   "o": [
+    "Energy and building material",
+    "Throws it away",
+    "Returns it to soil",
+    "Turns it into light"
+   ],
+   "x": "Some is broken down in respiration; some builds cells and starch"
+  },
+  {
+   "he": "לפי הגרף – מה קורה לפליטת החמצן כשמגבירים את האור?",
+   "a": "עולה",
+   "h": "0b545053",
+   "q": "According to the graph, what happens to oxygen release as the light gets stronger?",
+   "o": [
+    "It increases",
+    "It decreases",
+    "It stays the same",
+    "It drops to zero"
+   ],
+   "x": "More light – faster photosynthesis",
+   "sc": {
+    "8": "O₂",
+    "9": "Lux"
+   }
+  },
+  {
+   "he": "באיזה רכיב של התא מתרחשת הנשימה התאית?",
+   "a": "מיטוכונדריה",
+   "h": "bc90eeab",
+   "q": "In which part of the cell does cellular respiration take place?",
+   "o": [
+    "Mitochondria",
+    "Chloroplasts",
+    "The nucleus",
+    "The cell wall"
+   ],
+   "x": "Mitochondria are the cell's \"powerhouses\""
+  },
+  {
+   "he": "מה התא צריך לנשימה תאית?",
+   "a": "סוכר וחמצן",
+   "h": "4cee5032",
+   "q": "What does a cell need for cellular respiration?",
+   "o": [
+    "Sugar and oxygen",
+    "Light and water",
+    "Minerals and light",
+    "Nitrogen and water"
+   ],
+   "x": "The cell breaks down sugar with oxygen and releases energy"
+  },
+  {
+   "he": "מה נוצר בנשימה התאית, מלבד אנרגיה?",
+   "a": "פחמן דו-חמצני ומים",
+   "h": "50564285",
+   "q": "Besides energy, what does cellular respiration produce?",
+   "o": [
+    "Carbon dioxide and water",
+    "Sugar and oxygen",
+    "Light and starch",
+    "Oxygen and minerals"
+   ],
+   "x": "We breathe out the carbon dioxide"
+  },
+  {
+   "he": "האם יש מיטוכונדריות גם בתאי צמח?",
+   "a": "כן, הצמח נושם",
+   "h": "6ec17b8c",
+   "q": "Do plant cells also have mitochondria?",
+   "o": [
+    "Yes, plants respire",
+    "No, only chloroplasts",
+    "Only in flowers",
+    "Only in winter"
+   ],
+   "x": "Every living cell respires, plant cells too"
+  },
+  {
+   "he": "למה יש בתאי שריר הרבה מיטוכונדריות?",
+   "a": "צריכים הרבה אנרגיה",
+   "h": "e0767757",
+   "q": "Why do muscle cells have many mitochondria?",
+   "o": [
+    "They need much energy",
+    "They are green",
+    "They are small",
+    "They have no nucleus"
+   ],
+   "x": "Muscles work hard – they need lots of cellular respiration"
+  },
+  {
+   "he": "בלילה, בלי אור, הצמח…",
+   "a": "רק נושם",
+   "h": "e1553ba0",
+   "q": "At night, without light, the plant…",
+   "o": [
+    "Only respires",
+    "Only photosynthesizes",
+    "Does not respire",
+    "Makes oxygen"
+   ],
+   "x": "No light, no photosynthesis – but respiration goes on"
+  },
+  {
+   "he": "החמצן שצמחים פולטים בפוטוסינתזה – מי משתמש בו?",
+   "a": "כל היצורים הנושמים",
+   "h": "24c3ca93",
+   "q": "Who uses the oxygen that plants release in photosynthesis?",
+   "o": [
+    "All organisms that breathe",
+    "Only the chloroplast",
+    "Only the clouds",
+    "No one"
+   ],
+   "x": "Most organisms use oxygen for cellular respiration"
+  },
+  {
+   "he": "איזה תהליך בגוף מייצר את הפחמן הדו-חמצני שנושפים?",
+   "a": "נשימה תאית",
+   "h": "561d8798",
+   "q": "Which process in the body makes the carbon dioxide we breathe out?",
+   "o": [
+    "Cellular respiration",
+    "Breathing in air",
+    "Digestion",
+    "Excretion"
+   ],
+   "x": "Cells break down sugar and release CO₂ into the blood"
+  },
+  {
+   "he": "מי סיד מתעכרים בגלל פחמן דו-חמצני. נושפים לתוכם בקש. מה יקרה?",
+   "a": "יתעכרו",
+   "h": "215d18ce",
+   "q": "Carbon dioxide makes limewater go milky. You blow into limewater through a straw. What happens?",
+   "o": [
+    "It turns cloudy",
+    "It stays clear",
+    "It boils",
+    "It freezes"
+   ],
+   "x": "Air we breathe out has a lot of carbon dioxide"
+  },
+  {
+   "he": "איזה תהליך משחרר בתאים את האנרגיה שבמזון?",
+   "a": "נשימה תאית",
+   "h": "faf57122",
+   "q": "Which process releases the energy in food inside cells?",
+   "o": [
+    "Cellular respiration",
+    "Photosynthesis",
+    "Digestion",
+    "Excretion"
+   ],
+   "x": "Digestion breaks food down; cellular respiration releases its energy"
+  },
+  {
+   "he": "מה השלב הראשון בתהליך התיכון ההנדסי?",
+   "a": "הגדרת הבעיה",
+   "h": "a2e677ba",
+   "q": "What is the first stage of the engineering design process?",
+   "o": [
+    "Defining the problem",
+    "Building a model",
+    "Testing the model",
+    "Improving the solution"
+   ],
+   "x": "First understand the need, then plan"
+  },
+  {
+   "he": "רוצים שהעציצים יושקו בזמן החופשה. מה עושים קודם?",
+   "a": "הגדרת הבעיה",
+   "h": "588c5771",
+   "q": "You want the plants watered during the vacation. What is the first step?",
+   "o": [
+    "Defining the problem",
+    "Buying materials",
+    "Building right away",
+    "Testing the model"
+   ],
+   "x": "Understand the need: how much water, how often"
+  },
+  {
+   "he": "מה עושים בשלב איסוף המידע?",
+   "a": "בודקים פתרונות קיימים",
+   "h": "f3050905",
+   "q": "What do you do at the information-gathering stage?",
+   "o": [
+    "Look at existing solutions",
+    "Build the model",
+    "Sell the product",
+    "Paint the model"
+   ],
+   "x": "Learn what already exists and what is known about the problem"
+  },
+  {
+   "he": "התנאים שהפתרון חייב לעמוד בהם נקראים…",
+   "a": "דרישות",
+   "h": "09ef78e5",
+   "q": "The conditions a solution must meet are called…",
+   "o": [
+    "Requirements",
+    "Products",
+    "Raw materials",
+    "Hypotheses"
+   ],
+   "x": "For example: lightweight, cheap and waterproof",
+   "sc": {
+    "1": "Lightweight",
+    "2": "Cheap",
+    "3": "Waterproof"
+   }
+  },
+  {
+   "he": "למה מציעים כמה רעיונות לפתרון ולא רק אחד?",
+   "a": "לבחור את הטוב",
+   "h": "c4c7b17a",
+   "q": "Why suggest several ideas for a solution, not just one?",
+   "o": [
+    "To choose the best",
+    "To waste time",
+    "Three are required",
+    "To build them all"
+   ],
+   "x": "Compare the options and choose by the requirements"
+  },
+  {
+   "he": "דגם ראשון של מוצר, שבונים כדי לבדוק אותו, נקרא…",
+   "a": "אב-טיפוס",
+   "h": "bf404c03",
+   "q": "A first model of a product, built to test it, is called…",
+   "o": [
+    "A prototype",
+    "A final product",
+    "A sketch",
+    "A raw material"
+   ],
+   "x": "A prototype shows whether the solution really works"
+  },
+  {
+   "he": "בדקו את הדגם ורשמו מה עבד ומה לא. איזה שלב?",
+   "a": "הערכה",
+   "h": "f95be745",
+   "q": "They tested the model and wrote down what worked and what didn't. Which stage is this?",
+   "o": [
+    "Evaluation",
+    "Defining the problem",
+    "Gathering information",
+    "Generating ideas"
+   ],
+   "x": "In evaluation, the results are compared to the requirements"
+  },
+  {
+   "he": "האב-טיפוס לא עמד בדרישות. מה עושים?",
+   "a": "משפרים ובודקים שוב",
+   "h": "a7942d6e",
+   "q": "The prototype did not meet the requirements. What do you do?",
+   "o": [
+    "Improve and test again",
+    "Give up",
+    "Sell it",
+    "Change the problem"
+   ],
+   "x": "Design is a cycle: test, improve, test again"
+  },
+  {
+   "he": "מה חסר בשלבי התיכון?",
+   "a": "בניית דגם",
+   "h": "76cd58ba",
+   "q": "What is missing in the design stages?",
+   "o": [
+    "Building a model",
+    "Selling it",
+    "Making a hypothesis",
+    "Asking a research question"
+   ],
+   "x": "After choosing an idea, build a model, then test it",
+   "sc": {
+    "0": "Problem → Ideas",
+    "1": "→ ? → Testing"
+   }
+  },
+  {
+   "he": "חקר מדעי שואל \"למה זה קורה?\". מה שואל התיכון ההנדסי?",
+   "a": "איך לפתור בעיה?",
+   "h": "e3ea5426",
+   "q": "Science asks \"Why does it happen?\". What does engineering design ask?",
+   "o": [
+    "How to solve problems?",
+    "What's the temperature?",
+    "Who discovered it?",
+    "How heavy is it?"
+   ],
+   "x": "Technology develops solutions to people's needs"
+  },
+  {
+   "he": "בקומקום חשמלי – מה הקלט?",
+   "a": "חשמל ומים קרים",
+   "h": "f1836cc6",
+   "q": "In an electric kettle, what is the input?",
+   "o": [
+    "Electricity and cold water",
+    "Boiling water",
+    "Steam",
+    "A whistling sound"
+   ],
+   "x": "Input – what goes into the system",
+   "sc": {
+    "0": "Electric kettle"
+   }
+  },
+  {
+   "he": "בקומקום חשמלי – מה הפלט?",
+   "a": "מים חמים",
+   "h": "0cbb0ecf",
+   "q": "In an electric kettle, what is the output?",
+   "o": [
+    "Hot water",
+    "Electricity",
+    "Cold water",
+    "The plug"
+   ],
+   "x": "Output – what the system gives out at the end",
+   "sc": {
+    "0": "Electric kettle"
+   }
+  },
+  {
+   "he": "במכונת כביסה – לאיזה חלק במערכת שייכת הסחיטה?",
+   "a": "תהליך",
+   "h": "69ae5b01",
+   "q": "In a washing machine, which part of the system is the spin cycle?",
+   "o": [
+    "Process",
+    "Input",
+    "Output",
+    "Raw material"
+   ],
+   "x": "Spinning is a step in treating the clothes – a process"
+  },
+  {
+   "he": "מה חסר במערכת הטכנולוגית?",
+   "a": "פלט",
+   "h": "dea58df6",
+   "q": "What is missing in the technological system?",
+   "o": [
+    "Output",
+    "Input",
+    "Raw material",
+    "User"
+   ],
+   "x": "Input goes in, is processed and comes out as output",
+   "sc": {
+    "0": "Input→Process→?"
+   }
+  },
+  {
+   "he": "בפנס – מה הקלט?",
+   "a": "אנרגיה מהסוללה",
+   "h": "73ff2dc1",
+   "q": "In a flashlight, what is the input?",
+   "o": [
+    "Energy from the battery",
+    "Light",
+    "Heat",
+    "Sound"
+   ],
+   "x": "The battery supplies energy; the light is the output"
+  },
+  {
+   "he": "חיישן בתנור מכבה את החימום כשמגיע לטמפרטורה הרצויה. מה זה?",
+   "a": "בקרה",
+   "h": "868bf720",
+   "q": "A sensor in an oven turns off the heating at the set temperature. What is this?",
+   "o": [
+    "Control",
+    "Output",
+    "Input",
+    "Raw material"
+   ],
+   "x": "Control – the system checks itself and corrects"
+  },
+  {
+   "he": "רוצים לבנות סירה. איזו תכונה של החומר הכי חשובה?",
+   "a": "אטום למים",
+   "h": "e0c62ecd",
+   "q": "You want to build a boat. Which material property matters most?",
+   "o": [
+    "Waterproof",
+    "Nice color",
+    "Conducts electricity",
+    "Smells good"
+   ],
+   "x": "The material must not let water in"
+  },
+  {
+   "he": "מאיזה חומר עושים את החוט שבתוך כבל חשמל?",
+   "a": "נחושת",
+   "h": "19344d9e",
+   "q": "What material is the wire inside an electric cable made of?",
+   "o": [
+    "Copper",
+    "Wood",
+    "Rubber",
+    "Glass"
+   ],
+   "x": "Copper conducts electricity well"
+  },
+  {
+   "he": "מאיזה חומר עושים את העטיפה של כבל חשמל?",
+   "a": "פלסטיק",
+   "h": "13751d14",
+   "q": "What material is the covering of an electric cable made of?",
+   "o": [
+    "Plastic",
+    "Copper",
+    "Aluminum",
+    "Iron"
+   ],
+   "x": "Plastic insulates and protects us from electric shock"
+  },
+  {
+   "he": "צריך חומר חזק וזול. לפי הטבלה – איזה מתאים?",
+   "a": "חומר א",
+   "h": "e2d1a7d9",
+   "q": "You need a strong, cheap material. According to the table, which one fits?",
+   "o": [
+    "Material A",
+    "Material B",
+    "Material C",
+    "None of them"
+   ],
+   "x": "Only material A is both strong and cheap",
+   "sc": {
+    "0": "C",
+    "1": "B",
+    "2": "A",
+    "3": "Type",
+    "4": "Yes",
+    "5": "No",
+    "6": "Yes",
+    "7": "Strong?",
+    "8": "No",
+    "9": "Yes",
+    "10": "Yes",
+    "11": "Cheap?"
+   }
+  },
+  {
+   "he": "למה למחבת גוף ממתכת וידית מפלסטיק?",
+   "a": "לכל חלק תפקיד",
+   "h": "7f5b0246",
+   "q": "Why does a frying pan have a metal body and a plastic handle?",
+   "o": [
+    "Parts have different jobs",
+    "To look nice",
+    "Metal is expensive",
+    "Plastic conducts heat"
+   ],
+   "x": "Metal conducts heat to the food; plastic insulates the hand"
+  },
+  {
+   "he": "בין חלקיקי הנוזל יש…",
+   "a": "רווחים קטנים",
+   "h": "66a7e3ed",
+   "q": "Between the particles of a liquid there are…",
+   "o": [
+    "Small gaps",
+    "Air",
+    "Huge gaps",
+    "Water"
+   ],
+   "x": "In a liquid the particles are close – the gaps are small"
+  },
+  {
+   "he": "בקיץ חוטי החשמל משתלשלים יותר. למה?",
+   "a": "התפשטו בחום",
+   "h": "7143a40d",
+   "q": "In summer, power lines sag more. Why?",
+   "o": [
+    "They expanded in heat",
+    "They contracted",
+    "They melted",
+    "They got heavier"
+   ],
+   "x": "In heat the wires get longer"
+  },
+  {
+   "he": "שקית תה צובעת מים חמים מהר יותר. למה?",
+   "a": "חלקיקים נעים מהר",
+   "h": "cf56b7f9",
+   "q": "A tea bag colors hot water faster. Why?",
+   "o": [
+    "Particles move faster",
+    "The tea is heavy",
+    "The water evaporates",
+    "The cup is big"
+   ],
+   "x": "Heat makes diffusion faster"
+  },
+  {
+   "he": "התאדות כוהל – איזה שינוי?",
+   "a": "פיזיקלי",
+   "h": "8b813da1",
+   "q": "Alcohol evaporating – which kind of change?",
+   "o": [
+    "Physical",
+    "Chemical",
+    "Burning",
+    "Rusting"
+   ],
+   "x": "The alcohol only changed from liquid to gas"
+  },
+  {
+   "he": "תפוח חתוך משחים באוויר. מה הסימן לתגובה?",
+   "a": "שינוי צבע",
+   "h": "02760df7",
+   "q": "A cut apple turns brown in the air. What is the sign of a reaction?",
+   "o": [
+    "Change in color",
+    "Change in shape",
+    "Change in size",
+    "Change in place"
+   ],
+   "x": "A new color – a new substance"
+  },
+  {
+   "he": "תערובת חול ומלח. מה עושים ראשון כדי להפריד?",
+   "a": "ממיסים במים",
+   "h": "143a50b0",
+   "q": "A mixture of sand and salt. What do you do first to separate them?",
+   "o": [
+    "Dissolve in water",
+    "Evaporate",
+    "Use a magnet",
+    "Burn it"
+   ],
+   "x": "The salt dissolves, then the sand is filtered out"
+  },
+  {
+   "he": "מטוס טס גבוה ומהר. אילו אנרגיות יש לו?",
+   "a": "קינטית וגובה",
+   "h": "a5e08a89",
+   "q": "A plane flies high and fast. Which energies does it have?",
+   "o": [
+    "Kinetic and gravitational",
+    "Only kinetic",
+    "Only gravitational",
+    "Elastic and sound"
+   ],
+   "x": "It moves (kinetic) and is high up (gravitational)"
+  },
+  {
+   "he": "טוענים סוללה נטענת. איזו המרה מתרחשת?",
+   "a": "חשמלית לכימית",
+   "h": "c840ac11",
+   "q": "A rechargeable battery is being charged. Which conversion takes place?",
+   "o": [
+    "Electrical to chemical",
+    "Chemical to electrical",
+    "Kinetic to light",
+    "Sound to heat"
+   ],
+   "x": "The energy is stored in the battery as chemical energy"
+  },
+  {
+   "he": "מכונית בולמת ונעצרת. לאן הלכה האנרגיה הקינטית?",
+   "a": "הופכת לחום",
+   "h": "671da63f",
+   "q": "A car brakes and stops. Where did its kinetic energy go?",
+   "o": [
+    "It became heat",
+    "It disappeared",
+    "Stored in the wheel",
+    "It became light"
+   ],
+   "x": "Friction makes the brakes hot"
+  },
+  {
+   "he": "מקור אנרגיה שלא נגמר נקרא…",
+   "a": "מתחדש",
+   "h": "102a0456",
+   "q": "An energy source that does not run out is called…",
+   "o": [
+    "Renewable",
+    "Nonrenewable",
+    "Fossil",
+    "Nuclear"
+   ],
+   "x": "Sun, wind and water"
+  },
+  {
+   "he": "למה לסירים טובים יש תחתית מנחושת?",
+   "a": "נחושת מוליכה היטב",
+   "h": "c2fa126c",
+   "q": "Why do good pots have a copper bottom?",
+   "o": [
+    "Copper conducts heat well",
+    "Copper insulates",
+    "Copper is cheap",
+    "Copper is light"
+   ],
+   "x": "Heat passes quickly to the food"
+  },
+  {
+   "he": "כוס מים של ⁦5°C⁩ בחדר של ⁦25°C⁩. מה יקרה?",
+   "a": "המים יתחממו",
+   "h": "2b89d5ea",
+   "q": "A glass of water at 5°C is in a room at 25°C. What will happen?",
+   "o": [
+    "The water will warm",
+    "The water will cool",
+    "Nothing will change",
+    "The water will freeze"
+   ],
+   "x": "Heat flows from the warm room to the water",
+   "sc": {
+    "0": "Water: 5°C",
+    "1": "Room: 25°C"
+   }
+  },
+  {
+   "he": "לפטרייה אין כלורופלסטים. איך היא ניזונה?",
+   "a": "מחומרים של אחרים",
+   "h": "6e4e8ad9",
+   "q": "A mushroom has no chloroplasts. How does it get food?",
+   "o": [
+    "From other organisms",
+    "From sunlight",
+    "From the air",
+    "It doesn't feed"
+   ],
+   "x": "It breaks down the matter of other organisms"
+  },
+  {
+   "he": "איזה רכיב בתא דומה ל\"מנהל\"?",
+   "a": "הגרעין",
+   "h": "a54f1f0b",
+   "q": "Which part of the cell is like a \"manager\"?",
+   "o": [
+    "The nucleus",
+    "The cell wall",
+    "The membrane",
+    "The vacuole"
+   ],
+   "x": "The nucleus controls the cell's activities"
+  },
+  {
+   "he": "עינית ⁦×15⁩ ועדשה ⁦×10⁩. מה ההגדלה?",
+   "a": "⁦150⁩",
+   "h": "3de99e33",
+   "q": "A ×15 eyepiece and a ×10 objective lens. What is the magnification?",
+   "o": [
+    "⁦150⁩",
+    "⁦25⁩",
+    "⁦1500⁩",
+    "⁦15⁩"
+   ],
+   "x": "⁦15×10=150⁩"
+  },
+  {
+   "he": "רקמת עצם היא חלק ממערכת…",
+   "a": "השלד",
+   "h": "54593ece",
+   "q": "Bone tissue is part of which system?",
+   "o": [
+    "Skeletal system",
+    "Digestive system",
+    "Respiratory system",
+    "Circulatory system"
+   ],
+   "x": "Bones make up the skeleton"
+  },
+  {
+   "he": "לאיזה כלי דם יש דופן עבה וחזקה?",
+   "a": "עורק",
+   "h": "65d9601a",
+   "q": "Which blood vessel has a thick, strong wall?",
+   "o": [
+    "Artery",
+    "Vein",
+    "Capillary",
+    "Windpipe"
+   ],
+   "x": "In arteries, the heart pushes blood at high pressure"
+  },
+  {
+   "he": "מה מוביל חמצן מהריאות אל התאים?",
+   "a": "הדם",
+   "h": "f05b453e",
+   "q": "What carries oxygen from the lungs to the cells?",
+   "o": [
+    "The blood",
+    "The muscles",
+    "The nerves",
+    "The bones"
+   ],
+   "x": "Blood passes through the lungs and picks up oxygen"
+  },
+  {
+   "he": "איזה חלק בצמח קולט מים מהאדמה?",
+   "a": "השורש",
+   "h": "24339e1d",
+   "q": "Which part of a plant takes up water from the soil?",
+   "o": [
+    "The root",
+    "The leaf",
+    "The flower",
+    "The fruit"
+   ],
+   "x": "Root hairs take up the water"
+  },
+  {
+   "he": "מה עולה בצינורות העצה?",
+   "a": "מים ומינרלים",
+   "h": "81a0068a",
+   "q": "What rises through the xylem tubes?",
+   "o": [
+    "Water and minerals",
+    "Sugar",
+    "Blood",
+    "Air"
+   ],
+   "x": "From the root up to the leaves"
+  }
+ ]
+}

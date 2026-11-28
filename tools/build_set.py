@@ -294,7 +294,8 @@ if EN is not None:
             for k2, it in enumerate(q["scene"]):
                 if is_text(it["e"]) and has_he(it["e"]) and str(k2) not in sc: en_err(f"{tag}: the card \"{it['e']}\" has no English")
         cards = [sc.get(str(k2), it["e"]) for k2, it in enumerate(q["scene"]) if is_text(it["e"])]
-        if len(cards) == 1 and cards[0].strip().lower() == ea.lower() and ea.lower() not in eq.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
+        same = lambda c, a: c == a if len(a) == 1 else c.lower() == a.lower()   # one letter keeps its case (B ≠ b)
+        if len(cards) == 1 and same(cards[0].strip(), ea) and ea.lower() not in eq.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
             en_err(f"{tag}: the English card \"{cards[0]}\" is the answer")
         q["en"] = {"k": q["question"].strip(), "q": eq, "o": [eo[SRC_OPTS[i].index(o)] for o in q["options"]], "x": ex, **({"sc": sc} if sc else {})}
         n_en += 1

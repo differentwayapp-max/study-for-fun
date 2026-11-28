@@ -1,0 +1,4364 @@
+{
+ "set": {
+  "name": "English – Grade 3",
+  "title": "ABC · First words · Short sentences",
+  "tags": [
+   "Rhymes",
+   "Letters & sounds",
+   "ABC order",
+   "Short words",
+   "Sight words",
+   "Family & body",
+   "Colors & numbers",
+   "Animals & food",
+   "School",
+   "I am / I have",
+   "Vowel sounds",
+   "Hello & my name",
+   "Reading sentences"
+  ]
+ },
+ "labels": {
+  "Rhymes & first sounds": "Rhymes & first sounds",
+  "Letter names & sounds": "Letter names & sounds",
+  "Capital & small letters": "Capital & small letters",
+  "ABC order": "ABC order",
+  "Reading short words": "Reading short words",
+  "Sight words": "Sight words",
+  "Family & body": "Family & body",
+  "Colors & numbers 1–10": "Colors & numbers 1–10",
+  "Animals": "Animals",
+  "Food": "Food",
+  "School things": "School things",
+  "Sentences & instructions": "Sentences & instructions",
+  "Vowel sounds": "Vowel sounds",
+  "Greetings & introductions": "Greetings & introductions",
+  "Reading sentences": "Reading sentences",
+  "Rhymes: cat – hat": "Rhymes: cat – hat",
+  "First sounds": "First sounds",
+  "Letter names": "Letter names",
+  "Letter sounds": "Letter sounds",
+  "Capital & small: match": "Capital & small: match",
+  "Capital or small?": "Capital or small?",
+  "ABC: what comes next?": "ABC: what comes next?",
+  "ABC order: words": "ABC order: words",
+  "Short words: the missing letter": "Short words: the missing letter",
+  "Short words: read it": "Short words: read it",
+  "Little words": "Little words",
+  "Sight words in sentences": "Sight words in sentences",
+  "My family": "My family",
+  "My body": "My body",
+  "Colors": "Colors",
+  "Numbers 1–10": "Numbers 1–10",
+  "Animals: what is it?": "Animals: what is it?",
+  "Animals: words & sounds": "Animals: words & sounds",
+  "Food words": "Food words",
+  "Food: eat & drink": "Food: eat & drink",
+  "School: words & use": "School: words & use",
+  "I am · I have · This is": "I am · I have · This is",
+  "Classroom instructions": "Classroom instructions",
+  "Vowel sounds: the middle sound": "Vowel sounds: the middle sound",
+  "Vowel sounds: change the sound": "Vowel sounds: change the sound",
+  "Hello! Goodbye!": "Hello! Goodbye!",
+  "What's your name? How old are you?": "What's your name? How old are you?",
+  "Read the card": "Read the card",
+  "Read a sentence": "Read a sentence",
+  "חזרה כללית": "General review"
+ },
+ "texts": {},
+ "questions": [
+  {
+   "he": "Which word rhymes with cat?",
+   "a": "hat",
+   "h": "ec784b33",
+   "q": "Which word rhymes with cat?",
+   "o": [
+    "hat",
+    "cup",
+    "dog",
+    "sun"
+   ],
+   "x": "cat – hat: both end in -at"
+  },
+  {
+   "he": "Which word rhymes with dog?",
+   "a": "frog",
+   "h": "44f9372f",
+   "q": "Which word rhymes with dog?",
+   "o": [
+    "frog",
+    "pig",
+    "bed",
+    "cup"
+   ],
+   "x": "dog – frog: both end in -og"
+  },
+  {
+   "he": "Which word rhymes with sun?",
+   "a": "fun",
+   "h": "7c1f2409",
+   "q": "Which word rhymes with sun?",
+   "o": [
+    "fun",
+    "sit",
+    "bed",
+    "map"
+   ],
+   "x": "sun – fun: both end in -un"
+  },
+  {
+   "he": "Which word rhymes with bed?",
+   "a": "red",
+   "h": "da42fbe1",
+   "q": "Which word rhymes with bed?",
+   "o": [
+    "red",
+    "bag",
+    "big",
+    "box"
+   ],
+   "x": "bed – red: both end in -ed"
+  },
+  {
+   "he": "Which word rhymes with pig?",
+   "a": "big",
+   "h": "79ce6366",
+   "q": "Which word rhymes with pig?",
+   "o": [
+    "big",
+    "pan",
+    "pen",
+    "dog"
+   ],
+   "x": "pig – big: both end in -ig"
+  },
+  {
+   "he": "Which word rhymes with hen?",
+   "a": "ten",
+   "h": "f5675a70",
+   "q": "Which word rhymes with hen?",
+   "o": [
+    "ten",
+    "hat",
+    "hot",
+    "sun"
+   ],
+   "x": "hen – ten: both end in -en"
+  },
+  {
+   "he": "Which word rhymes with box?",
+   "a": "fox",
+   "h": "ca4359c0",
+   "q": "Which word rhymes with box?",
+   "o": [
+    "fox",
+    "bus",
+    "bag",
+    "bed"
+   ],
+   "x": "box – fox: both end in -ox"
+  },
+  {
+   "he": "Which word rhymes with bug?",
+   "a": "rug",
+   "h": "d33c5337",
+   "q": "Which word rhymes with bug?",
+   "o": [
+    "rug",
+    "bus",
+    "bag",
+    "big"
+   ],
+   "x": "bug – rug: both end in -ug"
+  },
+  {
+   "he": "Which word does NOT rhyme?",
+   "a": "dog",
+   "h": "15310e17",
+   "q": "Which word does NOT rhyme?",
+   "o": [
+    "dog",
+    "cat",
+    "hat",
+    "bat"
+   ],
+   "x": "cat, hat, bat end in -at. dog does not"
+  },
+  {
+   "he": "Which word does NOT rhyme?",
+   "a": "cup",
+   "h": "15dd2c30",
+   "q": "Which word does NOT rhyme?",
+   "o": [
+    "cup",
+    "pen",
+    "ten",
+    "hen"
+   ],
+   "x": "pen, ten, hen end in -en. cup does not"
+  },
+  {
+   "he": "Which word starts like ball?",
+   "a": "bed",
+   "h": "5d01cadd",
+   "q": "Which word starts like ball?",
+   "o": [
+    "bed",
+    "doll",
+    "pen",
+    "hat"
+   ],
+   "x": "ball and bed start with the sound b"
+  },
+  {
+   "he": "Which word starts like sun?",
+   "a": "sock",
+   "h": "7cb4719e",
+   "q": "Which word starts like sun?",
+   "o": [
+    "sock",
+    "bus",
+    "cup",
+    "nose"
+   ],
+   "x": "sun and sock start with the sound s"
+  },
+  {
+   "he": "Which word starts like milk?",
+   "a": "map",
+   "h": "3d5350f4",
+   "q": "Which word starts like milk?",
+   "o": [
+    "map",
+    "nap",
+    "cap",
+    "hat"
+   ],
+   "x": "milk and map start with the sound m"
+  },
+  {
+   "he": "Which word starts like fish?",
+   "a": "fox",
+   "h": "35d4f9a8",
+   "q": "Which word starts like fish?",
+   "o": [
+    "fox",
+    "van",
+    "pig",
+    "dish"
+   ],
+   "x": "fish and fox start with the sound f"
+  },
+  {
+   "he": "What is the first sound in dog?",
+   "a": "d",
+   "h": "631bab50",
+   "q": "What is the first sound in dog?",
+   "o": [
+    "d",
+    "b",
+    "g",
+    "o"
+   ],
+   "x": "dog starts with the sound d"
+  },
+  {
+   "he": "What is the first sound in pen?",
+   "a": "p",
+   "h": "ffb955f7",
+   "q": "What is the first sound in pen?",
+   "o": [
+    "p",
+    "b",
+    "e",
+    "n"
+   ],
+   "x": "pen starts with the sound p"
+  },
+  {
+   "he": "What is the first sound in ten?",
+   "a": "t",
+   "h": "3bb00eb8",
+   "q": "What is the first sound in ten?",
+   "o": [
+    "t",
+    "d",
+    "n",
+    "e"
+   ],
+   "x": "ten starts with the sound t"
+  },
+  {
+   "he": "Which word starts with r?",
+   "a": "red",
+   "h": "8e128833",
+   "q": "Which word starts with r?",
+   "o": [
+    "red",
+    "bed",
+    "hat",
+    "sun"
+   ],
+   "x": "red starts with r"
+  },
+  {
+   "he": "Which two words start the same?",
+   "a": "bus, bed",
+   "h": "dc4ba24e",
+   "q": "Which two words start the same?",
+   "o": [
+    "bus, bed",
+    "cat, dog",
+    "sun, pen",
+    "hat, fish"
+   ],
+   "x": "bus and bed start with the sound b"
+  },
+  {
+   "he": "Which word starts like duck?",
+   "a": "dog",
+   "h": "3230ffc9",
+   "q": "Which word starts like duck?",
+   "o": [
+    "dog",
+    "cup",
+    "cap",
+    "can"
+   ],
+   "x": "duck and dog start with the sound d"
+  },
+  {
+   "he": "איזו אות נקראת אֶם?",
+   "a": "M",
+   "h": "ff28bf82",
+   "q": "Which letter is called אֶם?",
+   "o": [
+    "M",
+    "N",
+    "H",
+    "W"
+   ],
+   "x": "M is called אֶם"
+  },
+  {
+   "he": "איזו אות נקראת אֶן?",
+   "a": "N",
+   "h": "ab75d1c8",
+   "q": "Which letter is called אֶן?",
+   "o": [
+    "N",
+    "M",
+    "A",
+    "E"
+   ],
+   "x": "N is called אֶן"
+  },
+  {
+   "he": "איזו אות נקראת ג'יי?",
+   "a": "J",
+   "h": "fa45236c",
+   "q": "Which letter is called ג'יי?",
+   "o": [
+    "J",
+    "G",
+    "Y",
+    "I"
+   ],
+   "x": "J is called ג'יי. G is called ג'י"
+  },
+  {
+   "he": "איזו אות נקראת ג'י?",
+   "a": "G",
+   "h": "dc4a9971",
+   "q": "Which letter is called ג'י?",
+   "o": [
+    "G",
+    "J",
+    "C",
+    "Z"
+   ],
+   "x": "G is called ג'י. J is called ג'יי"
+  },
+  {
+   "he": "איזו אות נקראת וַואי?",
+   "a": "Y",
+   "h": "84d24f3b",
+   "q": "Which letter is called וַואי?",
+   "o": [
+    "Y",
+    "W",
+    "V",
+    "I"
+   ],
+   "x": "Y is called וַואי"
+  },
+  {
+   "he": "איזו אות נקראת אַר?",
+   "a": "R",
+   "h": "e2f6286c",
+   "q": "Which letter is called אַר?",
+   "o": [
+    "R",
+    "A",
+    "L",
+    "H"
+   ],
+   "x": "R is called אַר"
+  },
+  {
+   "he": "איזו אות נקראת אֶל?",
+   "a": "L",
+   "h": "19050e00",
+   "q": "Which letter is called אֶל?",
+   "o": [
+    "L",
+    "I",
+    "E",
+    "R"
+   ],
+   "x": "L is called אֶל"
+  },
+  {
+   "he": "איך קוראים לאות ⁦H⁩?",
+   "a": "אֵייץ'",
+   "h": "fc3c44f5",
+   "q": "What is the letter H called?",
+   "o": [
+    "אֵייץ'",
+    "אַר",
+    "אֵיי",
+    "אֶף"
+   ],
+   "x": "H is called אֵייץ'"
+  },
+  {
+   "he": "איך קוראים לאות ⁦E⁩?",
+   "a": "אִי",
+   "h": "8151caa7",
+   "q": "What is the letter E called?",
+   "o": [
+    "אִי",
+    "אַיי",
+    "אֵיי",
+    "יוּ"
+   ],
+   "x": "E is called אִי. I is called אַיי"
+  },
+  {
+   "he": "איך קוראים לאות ⁦I⁩?",
+   "a": "אַיי",
+   "h": "9164e360",
+   "q": "What is the letter I called?",
+   "o": [
+    "אַיי",
+    "אִי",
+    "אֵיי",
+    "וַואי"
+   ],
+   "x": "I is called אַיי. E is called אִי"
+  },
+  {
+   "he": "איך קוראים לאות ⁦A⁩?",
+   "a": "אֵיי",
+   "h": "e57e11b0",
+   "q": "What is the letter A called?",
+   "o": [
+    "אֵיי",
+    "אִי",
+    "אַיי",
+    "אוֹ"
+   ],
+   "x": "A is called אֵיי"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦B⁩?",
+   "a": "ב",
+   "h": "b14c8292",
+   "q": "What sound does the letter B make?",
+   "o": [
+    "ב",
+    "ד",
+    "פ",
+    "מ"
+   ],
+   "x": "B says ב, as in ball"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦M⁩?",
+   "a": "מ",
+   "h": "14815165",
+   "q": "What sound does the letter M make?",
+   "o": [
+    "מ",
+    "נ",
+    "ו",
+    "ה"
+   ],
+   "x": "M says מ, as in milk"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦S⁩?",
+   "a": "ס",
+   "h": "f530e7df",
+   "q": "What sound does the letter S make?",
+   "o": [
+    "ס",
+    "ז",
+    "צ",
+    "ט"
+   ],
+   "x": "S says ס, as in sun"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦D⁩?",
+   "a": "ד",
+   "h": "5c52fb68",
+   "q": "What sound does the letter D make?",
+   "o": [
+    "ד",
+    "ב",
+    "ט",
+    "ג"
+   ],
+   "x": "D says ד, as in dog"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦L⁩?",
+   "a": "ל",
+   "h": "a76f2b20",
+   "q": "What sound does the letter L make?",
+   "o": [
+    "ל",
+    "ר",
+    "נ",
+    "י"
+   ],
+   "x": "L says ל, as in lion"
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦R⁩?",
+   "a": "ר",
+   "h": "b37c20bf",
+   "q": "What sound does the letter R make?",
+   "o": [
+    "ר",
+    "ל",
+    "ה",
+    "ו"
+   ],
+   "x": "R says ר, as in red"
+  },
+  {
+   "he": "איזו אות עושה את הצליל מ?",
+   "a": "M",
+   "h": "94e36e67",
+   "q": "Which letter makes the sound מ?",
+   "o": [
+    "M",
+    "N",
+    "W",
+    "H"
+   ],
+   "x": "M says מ, as in mom"
+  },
+  {
+   "he": "איזו אות עושה את הצליל נ?",
+   "a": "N",
+   "h": "843d3e8c",
+   "q": "Which letter makes the sound נ?",
+   "o": [
+    "N",
+    "M",
+    "U",
+    "H"
+   ],
+   "x": "N says נ, as in nose"
+  },
+  {
+   "he": "איזו אות עושה את הצליל ה?",
+   "a": "H",
+   "h": "e2efaba4",
+   "q": "Which letter makes the sound ה?",
+   "o": [
+    "H",
+    "A",
+    "E",
+    "R"
+   ],
+   "x": "H says ה, as in hat"
+  },
+  {
+   "he": "איזו אות עושה את הצליל ז?",
+   "a": "Z",
+   "h": "8cbd0cae",
+   "q": "Which letter makes the sound ז?",
+   "o": [
+    "Z",
+    "C",
+    "J",
+    "G"
+   ],
+   "x": "Z says ז, as in zoo"
+  },
+  {
+   "he": "איזו אות עושה את הצליל י?",
+   "a": "Y",
+   "h": "5f70a066",
+   "q": "Which letter makes the sound י?",
+   "o": [
+    "Y",
+    "J",
+    "G",
+    "W"
+   ],
+   "x": "Y says י, as in yes"
+  },
+  {
+   "he": "האות הקטנה של ⁦B⁩?",
+   "a": "b",
+   "h": "6a10b0ea",
+   "q": "The small letter of B?",
+   "o": [
+    "b",
+    "d",
+    "p",
+    "q"
+   ],
+   "x": "Capital B = small b"
+  },
+  {
+   "he": "האות הקטנה של ⁦D⁩?",
+   "a": "d",
+   "h": "27a6d1b9",
+   "q": "The small letter of D?",
+   "o": [
+    "d",
+    "b",
+    "p",
+    "q"
+   ],
+   "x": "Capital D = small d"
+  },
+  {
+   "he": "האות הקטנה של ⁦N⁩?",
+   "a": "n",
+   "h": "7ab64957",
+   "q": "The small letter of N?",
+   "o": [
+    "n",
+    "h",
+    "m",
+    "u"
+   ],
+   "x": "Capital N = small n"
+  },
+  {
+   "he": "האות הקטנה של ⁦Q⁩?",
+   "a": "q",
+   "h": "5ce9f563",
+   "q": "The small letter of Q?",
+   "o": [
+    "q",
+    "p",
+    "g",
+    "d"
+   ],
+   "x": "Capital Q = small q"
+  },
+  {
+   "he": "האות הקטנה של ⁦G⁩?",
+   "a": "g",
+   "h": "28f9a7ab",
+   "q": "The small letter of G?",
+   "o": [
+    "g",
+    "q",
+    "j",
+    "y"
+   ],
+   "x": "Capital G = small g"
+  },
+  {
+   "he": "האות הגדולה של ⁦a⁩?",
+   "a": "A",
+   "h": "a2242bb9",
+   "q": "The capital letter of a?",
+   "o": [
+    "A",
+    "E",
+    "O",
+    "Q"
+   ],
+   "x": "Small a = capital A"
+  },
+  {
+   "he": "האות הגדולה של ⁦e⁩?",
+   "a": "E",
+   "h": "1e48e550",
+   "q": "The capital letter of e?",
+   "o": [
+    "E",
+    "F",
+    "A",
+    "I"
+   ],
+   "x": "Small e = capital E"
+  },
+  {
+   "he": "האות הגדולה של ⁦r⁩?",
+   "a": "R",
+   "h": "3590aaac",
+   "q": "The capital letter of r?",
+   "o": [
+    "R",
+    "P",
+    "B",
+    "K"
+   ],
+   "x": "Small r = capital R"
+  },
+  {
+   "he": "האות הגדולה של ⁦h⁩?",
+   "a": "H",
+   "h": "4d303fcd",
+   "q": "The capital letter of h?",
+   "o": [
+    "H",
+    "N",
+    "K",
+    "B"
+   ],
+   "x": "Small h = capital H"
+  },
+  {
+   "he": "האות הגדולה של ⁦d⁩?",
+   "a": "D",
+   "h": "9af14fc4",
+   "q": "The capital letter of d?",
+   "o": [
+    "D",
+    "B",
+    "P",
+    "Q"
+   ],
+   "x": "Small d = capital D"
+  },
+  {
+   "he": "איזו מהן היא אות גדולה?",
+   "a": "G",
+   "h": "959eb36b",
+   "q": "Which one is a capital letter?",
+   "o": [
+    "G",
+    "g",
+    "b",
+    "e"
+   ],
+   "x": "G is a capital. g, b, e are small"
+  },
+  {
+   "he": "איזו מהן היא אות קטנה?",
+   "a": "m",
+   "h": "6e00af6f",
+   "q": "Which one is a small letter?",
+   "o": [
+    "m",
+    "M",
+    "T",
+    "K"
+   ],
+   "x": "m is small. M, T, K are capitals"
+  },
+  {
+   "he": "איזו מהן היא אות גדולה?",
+   "a": "R",
+   "h": "004e23d6",
+   "q": "Which one is a capital letter?",
+   "o": [
+    "R",
+    "r",
+    "a",
+    "n"
+   ],
+   "x": "R is a capital. r, a, n are small"
+  },
+  {
+   "he": "איזו מהן היא אות קטנה?",
+   "a": "f",
+   "h": "54df369a",
+   "q": "Which one is a small letter?",
+   "o": [
+    "f",
+    "F",
+    "L",
+    "E"
+   ],
+   "x": "f is small. F, L, E are capitals"
+  },
+  {
+   "he": "איזה מהם הוא זוג של אותה אות?",
+   "a": "B b",
+   "h": "fd4fd051",
+   "q": "Which pair is the same letter?",
+   "o": [
+    "B b",
+    "B d",
+    "D b",
+    "P q"
+   ],
+   "x": "Capital B and small b – the same letter"
+  },
+  {
+   "he": "איזה מהם הוא זוג של אותה אות?",
+   "a": "T t",
+   "h": "44e2e124",
+   "q": "Which pair is the same letter?",
+   "o": [
+    "T t",
+    "T f",
+    "L t",
+    "M n"
+   ],
+   "x": "Capital T and small t – the same letter"
+  },
+  {
+   "he": "איזה מהם הוא זוג של אותה אות?",
+   "a": "M m",
+   "h": "09b11e96",
+   "q": "Which pair is the same letter?",
+   "o": [
+    "M m",
+    "M n",
+    "N m",
+    "W m"
+   ],
+   "x": "Capital M and small m – the same letter"
+  },
+  {
+   "he": "איך כותבים נכון את השם דן?",
+   "a": "Dan",
+   "h": "8ec963a4",
+   "q": "How do you write the name דן correctly?",
+   "o": [
+    "Dan",
+    "dan",
+    "dAn",
+    "daN"
+   ],
+   "x": "A name starts with a capital letter: Dan"
+  },
+  {
+   "he": "איך כותבים נכון את השם מאיה?",
+   "a": "Maya",
+   "h": "cd662923",
+   "q": "How do you write the name מאיה correctly?",
+   "o": [
+    "Maya",
+    "maya",
+    "mAya",
+    "mayA"
+   ],
+   "x": "A name starts with a capital letter: Maya"
+  },
+  {
+   "he": "איך כותבים נכון את השם נועה?",
+   "a": "Noa",
+   "h": "e0a0458c",
+   "q": "How do you write the name נועה correctly?",
+   "o": [
+    "Noa",
+    "noa",
+    "nOa",
+    "noA"
+   ],
+   "x": "A name starts with a capital letter: Noa"
+  },
+  {
+   "he": "איך כותבים נכון את השם ישראל?",
+   "a": "Israel",
+   "h": "95613176",
+   "q": "How do you write the name ישראל correctly?",
+   "o": [
+    "Israel",
+    "israel",
+    "iSrael",
+    "israeL"
+   ],
+   "x": "A country's name starts with a capital letter"
+  },
+  {
+   "he": "איך כותבים נכון את השם תל אביב?",
+   "a": "Tel Aviv",
+   "h": "c113d2c8",
+   "q": "How do you write the name תל אביב correctly?",
+   "o": [
+    "Tel Aviv",
+    "tel aviv",
+    "Tel aviv",
+    "tel Aviv"
+   ],
+   "x": "A city's name: every word starts with a capital"
+  },
+  {
+   "he": "האות הגדולה של ⁦w⁩?",
+   "a": "W",
+   "h": "7199652f",
+   "q": "The capital letter of w?",
+   "o": [
+    "W",
+    "V",
+    "M",
+    "N"
+   ],
+   "x": "Small w = capital W"
+  },
+  {
+   "he": "המילה ⁦I⁩ (אני) נכתבת…",
+   "a": "תמיד גדולה",
+   "h": "841c109e",
+   "q": "The word I (אני) is written…",
+   "o": [
+    "always capital",
+    "always small",
+    "capital or small",
+    "capital only at the start"
+   ],
+   "x": "I = אני, always a capital letter"
+  },
+  {
+   "he": "What comes after B?",
+   "a": "C",
+   "h": "5e2efa15",
+   "q": "What comes after B?",
+   "o": [
+    "C",
+    "D",
+    "A",
+    "E"
+   ],
+   "x": "A B C"
+  },
+  {
+   "he": "What comes before E?",
+   "a": "D",
+   "h": "4618dc78",
+   "q": "What comes before E?",
+   "o": [
+    "D",
+    "F",
+    "C",
+    "B"
+   ],
+   "x": "D E F"
+  },
+  {
+   "he": "What comes after H?",
+   "a": "I",
+   "h": "d85bb0a8",
+   "q": "What comes after H?",
+   "o": [
+    "I",
+    "G",
+    "J",
+    "K"
+   ],
+   "x": "G H I"
+  },
+  {
+   "he": "Which letter is missing?",
+   "a": "M",
+   "h": "276f3377",
+   "q": "Which letter is missing?",
+   "o": [
+    "M",
+    "O",
+    "J",
+    "P"
+   ],
+   "x": "K L M N"
+  },
+  {
+   "he": "Which letter is missing?",
+   "a": "Q",
+   "h": "ee72c33e",
+   "q": "Which letter is missing?",
+   "o": [
+    "Q",
+    "O",
+    "S",
+    "T"
+   ],
+   "x": "P Q R"
+  },
+  {
+   "he": "Which letter is missing?",
+   "a": "U",
+   "h": "3bbb4ce6",
+   "q": "Which letter is missing?",
+   "o": [
+    "U",
+    "V",
+    "R",
+    "W"
+   ],
+   "x": "S T U"
+  },
+  {
+   "he": "Which letter is missing?",
+   "a": "x",
+   "h": "d49018cd",
+   "q": "Which letter is missing?",
+   "o": [
+    "x",
+    "v",
+    "z",
+    "u"
+   ],
+   "x": "w x y"
+  },
+  {
+   "he": "What is the first letter of the ABC?",
+   "a": "A",
+   "h": "8a478faf",
+   "q": "What is the first letter of the ABC?",
+   "o": [
+    "A",
+    "B",
+    "Z",
+    "E"
+   ],
+   "x": "The ABC starts with A"
+  },
+  {
+   "he": "What is the last letter of the ABC?",
+   "a": "Z",
+   "h": "51d2fdc3",
+   "q": "What is the last letter of the ABC?",
+   "o": [
+    "Z",
+    "Y",
+    "X",
+    "W"
+   ],
+   "x": "The ABC ends with Z"
+  },
+  {
+   "he": "How many letters are in the ABC?",
+   "a": "26",
+   "h": "b95b4ebf",
+   "q": "How many letters are in the ABC?",
+   "o": [
+    "26",
+    "24",
+    "22",
+    "28"
+   ],
+   "x": "From A to Z there are 26 letters"
+  },
+  {
+   "he": "Which word comes first in ABC order?",
+   "a": "apple",
+   "h": "b2720a2d",
+   "q": "Which word comes first in ABC order?",
+   "o": [
+    "apple",
+    "dog",
+    "cat",
+    "egg"
+   ],
+   "x": "a comes before c, d, e"
+  },
+  {
+   "he": "Which word comes first in ABC order?",
+   "a": "ball",
+   "h": "d9a49655",
+   "q": "Which word comes first in ABC order?",
+   "o": [
+    "ball",
+    "pen",
+    "sun",
+    "hat"
+   ],
+   "x": "b comes before h, p, s"
+  },
+  {
+   "he": "Which word comes first in ABC order?",
+   "a": "cat",
+   "h": "b385fbac",
+   "q": "Which word comes first in ABC order?",
+   "o": [
+    "cat",
+    "dog",
+    "fish",
+    "sun"
+   ],
+   "x": "c comes before d, f, s"
+  },
+  {
+   "he": "Which word comes last in ABC order?",
+   "a": "sun",
+   "h": "02f2f23b",
+   "q": "Which word comes last in ABC order?",
+   "o": [
+    "sun",
+    "bed",
+    "hat",
+    "pen"
+   ],
+   "x": "s comes after b, h, p"
+  },
+  {
+   "he": "Which word comes last in ABC order?",
+   "a": "tree",
+   "h": "26b755fd",
+   "q": "Which word comes last in ABC order?",
+   "o": [
+    "tree",
+    "egg",
+    "milk",
+    "fish"
+   ],
+   "x": "t comes after e, f, m"
+  },
+  {
+   "he": "Which of these is in ABC order?",
+   "a": "d e f",
+   "h": "0b2567ad",
+   "q": "Which of these is in ABC order?",
+   "o": [
+    "d e f",
+    "d f e",
+    "e d f",
+    "f e d"
+   ],
+   "x": "d, then e, then f"
+  },
+  {
+   "he": "Which of these is in ABC order?",
+   "a": "l m n",
+   "h": "0b283ace",
+   "q": "Which of these is in ABC order?",
+   "o": [
+    "l m n",
+    "m l n",
+    "n m l",
+    "l n m"
+   ],
+   "x": "l, then m, then n"
+  },
+  {
+   "he": "Which letter comes between F and H?",
+   "a": "G",
+   "h": "68e96603",
+   "q": "Which letter comes between F and H?",
+   "o": [
+    "G",
+    "E",
+    "I",
+    "J"
+   ],
+   "x": "F G H"
+  },
+  {
+   "he": "Which letter comes before C?",
+   "a": "B",
+   "h": "9499bfbe",
+   "q": "Which letter comes before C?",
+   "o": [
+    "B",
+    "D",
+    "A",
+    "E"
+   ],
+   "x": "B C D"
+  },
+  {
+   "he": "Which letter comes after Y?",
+   "a": "Z",
+   "h": "434934c1",
+   "q": "Which letter comes after Y?",
+   "o": [
+    "Z",
+    "X",
+    "W",
+    "A"
+   ],
+   "x": "X Y Z"
+  },
+  {
+   "he": "c_t (חתול)",
+   "a": "a",
+   "h": "38367190",
+   "q": "c_t (חתול)",
+   "o": [
+    "a",
+    "o",
+    "u",
+    "i"
+   ],
+   "x": "c-a-t = cat"
+  },
+  {
+   "he": "d_g (כלב)",
+   "a": "o",
+   "h": "1a9abecb",
+   "q": "d_g (כלב)",
+   "o": [
+    "o",
+    "a",
+    "i",
+    "u"
+   ],
+   "x": "d-o-g = dog"
+  },
+  {
+   "he": "s_n (שמש)",
+   "a": "u",
+   "h": "20fddef2",
+   "q": "s_n (שמש)",
+   "o": [
+    "u",
+    "a",
+    "i",
+    "o"
+   ],
+   "x": "s-u-n = sun"
+  },
+  {
+   "he": "p_g (חזיר)",
+   "a": "i",
+   "h": "a9c979dd",
+   "q": "p_g (חזיר)",
+   "o": [
+    "i",
+    "a",
+    "e",
+    "u"
+   ],
+   "x": "p-i-g = pig"
+  },
+  {
+   "he": "b_d (מיטה)",
+   "a": "e",
+   "h": "854f6853",
+   "q": "b_d (מיטה)",
+   "o": [
+    "e",
+    "a",
+    "i",
+    "u"
+   ],
+   "x": "b-e-d = bed"
+  },
+  {
+   "he": "h_t (כובע)",
+   "a": "a",
+   "h": "c984b24a",
+   "q": "h_t (כובע)",
+   "o": [
+    "a",
+    "o",
+    "u",
+    "i"
+   ],
+   "x": "h-a-t = hat"
+  },
+  {
+   "he": "b_s (אוטובוס)",
+   "a": "u",
+   "h": "4490914c",
+   "q": "b_s (אוטובוס)",
+   "o": [
+    "u",
+    "a",
+    "i",
+    "e"
+   ],
+   "x": "b-u-s = bus"
+  },
+  {
+   "he": "_ox (שועל)",
+   "a": "f",
+   "h": "50ce5395",
+   "q": "_ox (שועל)",
+   "o": [
+    "f",
+    "b",
+    "s",
+    "v"
+   ],
+   "x": "f-o-x = fox"
+  },
+  {
+   "he": "ma_ (מפה)",
+   "a": "p",
+   "h": "ff39ea1d",
+   "q": "ma_ (מפה)",
+   "o": [
+    "p",
+    "t",
+    "n",
+    "d"
+   ],
+   "x": "m-a-p = map"
+  },
+  {
+   "he": "cu_ (ספל)",
+   "a": "p",
+   "h": "2c316ba7",
+   "q": "cu_ (ספל)",
+   "o": [
+    "p",
+    "t",
+    "b",
+    "d"
+   ],
+   "x": "c-u-p = cup"
+  },
+  {
+   "he": "Read the sounds: f-o-x",
+   "a": "fox",
+   "h": "2c7f95de",
+   "q": "Read the sounds: f-o-x",
+   "o": [
+    "fox",
+    "box",
+    "fix",
+    "six"
+   ],
+   "x": "f-o-x together = fox"
+  },
+  {
+   "he": "Read the sounds: m-a-p",
+   "a": "map",
+   "h": "2afc8311",
+   "q": "Read the sounds: m-a-p",
+   "o": [
+    "map",
+    "mop",
+    "cap",
+    "man"
+   ],
+   "x": "m-a-p together = map"
+  },
+  {
+   "he": "Read the sounds: s-i-x",
+   "a": "six",
+   "h": "e2680155",
+   "q": "Read the sounds: s-i-x",
+   "o": [
+    "six",
+    "sit",
+    "fix",
+    "mix"
+   ],
+   "x": "s-i-x together = six"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "box",
+   "h": "999111a0",
+   "q": "This is a ___.",
+   "o": [
+    "box",
+    "fox",
+    "bus",
+    "bag"
+   ],
+   "x": "קופסה = box"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "pen",
+   "h": "4eec3935",
+   "q": "This is a ___.",
+   "o": [
+    "pen",
+    "pin",
+    "pan",
+    "ten"
+   ],
+   "x": "עט = pen"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "hen",
+   "h": "3e225b4d",
+   "q": "This is a ___.",
+   "o": [
+    "hen",
+    "ten",
+    "hat",
+    "pen"
+   ],
+   "x": "תרנגולת = hen"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "bag",
+   "h": "2d705655",
+   "q": "This is a ___.",
+   "o": [
+    "bag",
+    "bug",
+    "big",
+    "bed"
+   ],
+   "x": "תיק = bag"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "bug",
+   "h": "918f97c4",
+   "q": "This is a ___.",
+   "o": [
+    "bug",
+    "bag",
+    "bus",
+    "mug"
+   ],
+   "x": "חרק = bug"
+  },
+  {
+   "he": "שש = ?",
+   "a": "six",
+   "h": "85c40142",
+   "q": "שש = ?",
+   "o": [
+    "six",
+    "sit",
+    "sun",
+    "fix"
+   ],
+   "x": "שש = six"
+  },
+  {
+   "he": "Which word is NOT an animal?",
+   "a": "cup",
+   "h": "b01c5010",
+   "q": "Which word is NOT an animal?",
+   "o": [
+    "cup",
+    "cat",
+    "dog",
+    "pig"
+   ],
+   "x": "cup = ספל. The others are animals"
+  },
+  {
+   "he": "אני = ?",
+   "a": "I",
+   "h": "53c251f3",
+   "q": "אני = ?",
+   "o": [
+    "I",
+    "you",
+    "he",
+    "a"
+   ],
+   "x": "אני = I (always a capital letter)"
+  },
+  {
+   "he": "אתה / את = ?",
+   "a": "you",
+   "h": "94a354c6",
+   "q": "אתה / את = ?",
+   "o": [
+    "you",
+    "I",
+    "he",
+    "me"
+   ],
+   "x": "אתה / את = you"
+  },
+  {
+   "he": "הוא = ?",
+   "a": "he",
+   "h": "49e8255a",
+   "q": "הוא = ?",
+   "o": [
+    "he",
+    "she",
+    "I",
+    "you"
+   ],
+   "x": "הוא = he"
+  },
+  {
+   "he": "היא = ?",
+   "a": "she",
+   "h": "20c59e54",
+   "q": "היא = ?",
+   "o": [
+    "she",
+    "he",
+    "I",
+    "we"
+   ],
+   "x": "היא = she"
+  },
+  {
+   "he": "אנחנו = ?",
+   "a": "we",
+   "h": "3d88ff9e",
+   "q": "אנחנו = ?",
+   "o": [
+    "we",
+    "he",
+    "me",
+    "she"
+   ],
+   "x": "אנחנו = we"
+  },
+  {
+   "he": "כן = ?",
+   "a": "yes",
+   "h": "779a5322",
+   "q": "כן = ?",
+   "o": [
+    "yes",
+    "no",
+    "go",
+    "see"
+   ],
+   "x": "כן = yes"
+  },
+  {
+   "he": "לא = ?",
+   "a": "no",
+   "h": "e99b195a",
+   "q": "לא = ?",
+   "o": [
+    "no",
+    "yes",
+    "on",
+    "in"
+   ],
+   "x": "לא = no"
+  },
+  {
+   "he": "שלי = ?",
+   "a": "my",
+   "h": "d7c258c3",
+   "q": "שלי = ?",
+   "o": [
+    "my",
+    "me",
+    "I",
+    "you"
+   ],
+   "x": "שלי = my (my bag = התיק שלי)"
+  },
+  {
+   "he": "חתול וכלב = ⁦a cat ___ a dog⁩",
+   "a": "and",
+   "h": "17d04c4f",
+   "q": "חתול וכלב = a cat ___ a dog",
+   "o": [
+    "and",
+    "is",
+    "the",
+    "in"
+   ],
+   "x": "ו... = and"
+  },
+  {
+   "he": "בתוך = ?",
+   "a": "in",
+   "h": "78b516ae",
+   "q": "בתוך = ?",
+   "o": [
+    "in",
+    "on",
+    "is",
+    "it"
+   ],
+   "x": "בתוך = in"
+  },
+  {
+   "he": "על = ?",
+   "a": "on",
+   "h": "04e7f5dc",
+   "q": "על = ?",
+   "o": [
+    "on",
+    "in",
+    "no",
+    "at"
+   ],
+   "x": "על = on"
+  },
+  {
+   "he": "I ___ a cat. (רואה)",
+   "a": "see",
+   "h": "5cf117c4",
+   "q": "I ___ a cat. (רואה)",
+   "o": [
+    "see",
+    "is",
+    "go",
+    "am"
+   ],
+   "x": "רואה = see"
+  },
+  {
+   "he": "I ___ to school. (הולך)",
+   "a": "go",
+   "h": "10594c81",
+   "q": "I ___ to school. (הולך)",
+   "o": [
+    "go",
+    "see",
+    "can",
+    "is"
+   ],
+   "x": "הולך = go"
+  },
+  {
+   "he": "I ___ swim. (יכול)",
+   "a": "can",
+   "h": "07354735",
+   "q": "I ___ swim. (יכול)",
+   "o": [
+    "can",
+    "is",
+    "go",
+    "see"
+   ],
+   "x": "יכול = can"
+  },
+  {
+   "he": "I ___ pizza. (אוהב)",
+   "a": "like",
+   "h": "d8225e4a",
+   "q": "I ___ pizza. (אוהב)",
+   "o": [
+    "like",
+    "see",
+    "go",
+    "can"
+   ],
+   "x": "אוהב = like"
+  },
+  {
+   "he": "___ at the bird! (תסתכל)",
+   "a": "Look",
+   "h": "9f78b3e5",
+   "q": "___ at the bird! (תסתכל)",
+   "o": [
+    "Look",
+    "Go",
+    "Like",
+    "Can"
+   ],
+   "x": "תסתכל = look"
+  },
+  {
+   "he": "Is it a dog? ___, it is.",
+   "a": "Yes",
+   "h": "97c4e3c1",
+   "q": "Is it a dog? ___, it is.",
+   "o": [
+    "Yes",
+    "No",
+    "Is",
+    "I"
+   ],
+   "x": "It is a dog, so: Yes, it is"
+  },
+  {
+   "he": "It ___ a dog.",
+   "a": "is",
+   "h": "1a70fb4f",
+   "q": "It ___ a dog.",
+   "o": [
+    "is",
+    "am",
+    "are",
+    "I"
+   ],
+   "x": "It is = זה"
+  },
+  {
+   "he": "I have ___ dog.",
+   "a": "a",
+   "h": "f28df6e5",
+   "q": "I have ___ dog.",
+   "o": [
+    "a",
+    "an",
+    "is",
+    "am"
+   ],
+   "x": "I have a dog = יש לי כלב"
+  },
+  {
+   "he": "⁦Go!⁩ = ?",
+   "a": "לך!",
+   "h": "fac88745",
+   "q": "⁦Go!⁩ = ?",
+   "o": [
+    "לך!",
+    "שב!",
+    "תסתכל!",
+    "בוא!"
+   ],
+   "x": "Go = לך"
+  },
+  {
+   "he": "⁦the⁩ = ?",
+   "a": "ה... (הכלב)",
+   "h": "72406c35",
+   "q": "⁦the⁩ = ?",
+   "o": [
+    "ה... (הכלב)",
+    "ו... (וכלב)",
+    "של",
+    "גם"
+   ],
+   "x": "the dog = הכלב"
+  },
+  {
+   "he": "אמא = ?",
+   "a": "mother",
+   "h": "be2d89ea",
+   "q": "אמא = ?",
+   "o": [
+    "mother",
+    "father",
+    "sister",
+    "baby"
+   ],
+   "x": "אמא = mother (mom)"
+  },
+  {
+   "he": "אבא = ?",
+   "a": "father",
+   "h": "461be117",
+   "q": "אבא = ?",
+   "o": [
+    "father",
+    "mother",
+    "brother",
+    "grandpa"
+   ],
+   "x": "אבא = father (dad)"
+  },
+  {
+   "he": "אח = ?",
+   "a": "brother",
+   "h": "b9e591c0",
+   "q": "אח = ?",
+   "o": [
+    "brother",
+    "sister",
+    "father",
+    "baby"
+   ],
+   "x": "אח = brother"
+  },
+  {
+   "he": "אחות = ?",
+   "a": "sister",
+   "h": "1ca7347f",
+   "q": "אחות = ?",
+   "o": [
+    "sister",
+    "brother",
+    "mother",
+    "grandma"
+   ],
+   "x": "אחות = sister"
+  },
+  {
+   "he": "סבתא = ?",
+   "a": "grandma",
+   "h": "f71c16f9",
+   "q": "סבתא = ?",
+   "o": [
+    "grandma",
+    "grandpa",
+    "mother",
+    "sister"
+   ],
+   "x": "סבתא = grandma"
+  },
+  {
+   "he": "סבא = ?",
+   "a": "grandpa",
+   "h": "daa92bf5",
+   "q": "סבא = ?",
+   "o": [
+    "grandpa",
+    "grandma",
+    "father",
+    "brother"
+   ],
+   "x": "סבא = grandpa"
+  },
+  {
+   "he": "תינוק = ?",
+   "a": "baby",
+   "h": "99bd7665",
+   "q": "תינוק = ?",
+   "o": [
+    "baby",
+    "boy",
+    "girl",
+    "brother"
+   ],
+   "x": "תינוק = baby"
+  },
+  {
+   "he": "משפחה = ?",
+   "a": "family",
+   "h": "dd572a10",
+   "q": "משפחה = ?",
+   "o": [
+    "family",
+    "school",
+    "house",
+    "friend"
+   ],
+   "x": "משפחה = family"
+  },
+  {
+   "he": "⁦mother⁩ = ?",
+   "a": "אמא",
+   "h": "4e34338b",
+   "q": "⁦mother⁩ = ?",
+   "o": [
+    "אמא",
+    "אבא",
+    "אחות",
+    "סבתא"
+   ],
+   "x": "mother = אמא"
+  },
+  {
+   "he": "⁦brother⁩ = ?",
+   "a": "אח",
+   "h": "35e1f2a3",
+   "q": "⁦brother⁩ = ?",
+   "o": [
+    "אח",
+    "אחות",
+    "אבא",
+    "סבא"
+   ],
+   "x": "brother = אח"
+  },
+  {
+   "he": "אף = ?",
+   "a": "nose",
+   "h": "384d69c6",
+   "q": "אף = ?",
+   "o": [
+    "nose",
+    "ear",
+    "eye",
+    "mouth"
+   ],
+   "x": "אף = nose"
+  },
+  {
+   "he": "אוזן = ?",
+   "a": "ear",
+   "h": "5fc0df42",
+   "q": "אוזן = ?",
+   "o": [
+    "ear",
+    "eye",
+    "nose",
+    "hand"
+   ],
+   "x": "אוזן = ear"
+  },
+  {
+   "he": "עין = ?",
+   "a": "eye",
+   "h": "acd0b55a",
+   "q": "עין = ?",
+   "o": [
+    "eye",
+    "ear",
+    "arm",
+    "leg"
+   ],
+   "x": "עין = eye"
+  },
+  {
+   "he": "פה = ?",
+   "a": "mouth",
+   "h": "e8e914f8",
+   "q": "פה = ?",
+   "o": [
+    "mouth",
+    "nose",
+    "hand",
+    "head"
+   ],
+   "x": "פה = mouth"
+  },
+  {
+   "he": "יד = ?",
+   "a": "hand",
+   "h": "c9ee1d94",
+   "q": "יד = ?",
+   "o": [
+    "hand",
+    "head",
+    "leg",
+    "foot"
+   ],
+   "x": "יד = hand"
+  },
+  {
+   "he": "רגל = ?",
+   "a": "leg",
+   "h": "7d7498ca",
+   "q": "רגל = ?",
+   "o": [
+    "leg",
+    "arm",
+    "ear",
+    "eye"
+   ],
+   "x": "רגל = leg"
+  },
+  {
+   "he": "ראש = ?",
+   "a": "head",
+   "h": "d48cffb7",
+   "q": "ראש = ?",
+   "o": [
+    "head",
+    "hand",
+    "hat",
+    "ear"
+   ],
+   "x": "ראש = head"
+  },
+  {
+   "he": "I see with my two ___.",
+   "a": "eyes",
+   "h": "38cd21cd",
+   "q": "I see with my two ___.",
+   "o": [
+    "eyes",
+    "ears",
+    "nose",
+    "hands"
+   ],
+   "x": "We see with our eyes (עיניים)"
+  },
+  {
+   "he": "I hear with my two ___.",
+   "a": "ears",
+   "h": "c793d058",
+   "q": "I hear with my two ___.",
+   "o": [
+    "ears",
+    "eyes",
+    "legs",
+    "mouth"
+   ],
+   "x": "We hear with our ears (אוזניים)"
+  },
+  {
+   "he": "I eat with my ___.",
+   "a": "mouth",
+   "h": "d31aec4e",
+   "q": "I eat with my ___.",
+   "o": [
+    "mouth",
+    "nose",
+    "ear",
+    "leg"
+   ],
+   "x": "We eat with our mouth (פה)"
+  },
+  {
+   "he": "What color is it?",
+   "a": "red",
+   "h": "10c5400b",
+   "q": "What color is it?",
+   "o": [
+    "red",
+    "blue",
+    "green",
+    "black"
+   ],
+   "x": "A strawberry is red (אדום)"
+  },
+  {
+   "he": "What color is it?",
+   "a": "purple",
+   "h": "03564751",
+   "q": "What color is it?",
+   "o": [
+    "purple",
+    "yellow",
+    "pink",
+    "white"
+   ],
+   "x": "Grapes are purple (סגול)"
+  },
+  {
+   "he": "What color is it?",
+   "a": "green",
+   "h": "3603682b",
+   "q": "What color is it?",
+   "o": [
+    "green",
+    "red",
+    "brown",
+    "orange"
+   ],
+   "x": "Broccoli is green (ירוק)"
+  },
+  {
+   "he": "What color is it?",
+   "a": "orange",
+   "h": "aa25b12c",
+   "q": "What color is it?",
+   "o": [
+    "orange",
+    "purple",
+    "blue",
+    "black"
+   ],
+   "x": "An orange is orange (כתום)"
+  },
+  {
+   "he": "The sun is ___.",
+   "a": "yellow",
+   "h": "275b278c",
+   "q": "The sun is ___.",
+   "o": [
+    "yellow",
+    "blue",
+    "black",
+    "green"
+   ],
+   "x": "The sun is yellow (צהוב)"
+  },
+  {
+   "he": "The sky is ___.",
+   "a": "blue",
+   "h": "7576ecd8",
+   "q": "The sky is ___.",
+   "o": [
+    "blue",
+    "red",
+    "brown",
+    "pink"
+   ],
+   "x": "The sky is blue (כחול)"
+  },
+  {
+   "he": "Snow is ___.",
+   "a": "white",
+   "h": "76eec417",
+   "q": "Snow is ___.",
+   "o": [
+    "white",
+    "black",
+    "red",
+    "green"
+   ],
+   "x": "Snow is white (לבן)"
+  },
+  {
+   "he": "ורוד = ?",
+   "a": "pink",
+   "h": "2a0f7aa5",
+   "q": "ורוד = ?",
+   "o": [
+    "pink",
+    "purple",
+    "red",
+    "white"
+   ],
+   "x": "ורוד = pink"
+  },
+  {
+   "he": "שחור = ?",
+   "a": "black",
+   "h": "96905833",
+   "q": "שחור = ?",
+   "o": [
+    "black",
+    "brown",
+    "blue",
+    "white"
+   ],
+   "x": "שחור = black"
+  },
+  {
+   "he": "חום = ?",
+   "a": "brown",
+   "h": "5d39cfe8",
+   "q": "חום = ?",
+   "o": [
+    "brown",
+    "black",
+    "orange",
+    "green"
+   ],
+   "x": "חום = brown"
+  },
+  {
+   "he": "How many?",
+   "a": "three",
+   "h": "0d5aea2d",
+   "q": "How many?",
+   "o": [
+    "three",
+    "two",
+    "four",
+    "tree"
+   ],
+   "x": "three = 3 (tree = עץ)"
+  },
+  {
+   "he": "How many?",
+   "a": "five",
+   "h": "abbd600e",
+   "q": "How many?",
+   "o": [
+    "five",
+    "four",
+    "six",
+    "nine"
+   ],
+   "x": "Count them: five = 5"
+  },
+  {
+   "he": "How many?",
+   "a": "one",
+   "h": "2a182273",
+   "q": "How many?",
+   "o": [
+    "one",
+    "two",
+    "ten",
+    "nine"
+   ],
+   "x": "one = 1"
+  },
+  {
+   "he": "How many?",
+   "a": "two",
+   "h": "fea71665",
+   "q": "How many?",
+   "o": [
+    "two",
+    "ten",
+    "three",
+    "one"
+   ],
+   "x": "two = 2"
+  },
+  {
+   "he": "How many?",
+   "a": "seven",
+   "h": "45495f37",
+   "q": "How many?",
+   "o": [
+    "seven",
+    "six",
+    "eight",
+    "nine"
+   ],
+   "x": "4 + 3 = 7 = seven"
+  },
+  {
+   "he": "6 = ?",
+   "a": "six",
+   "h": "c6295b37",
+   "q": "6 = ?",
+   "o": [
+    "six",
+    "seven",
+    "five",
+    "two"
+   ],
+   "x": "6 = six"
+  },
+  {
+   "he": "8 = ?",
+   "a": "eight",
+   "h": "3a6c7191",
+   "q": "8 = ?",
+   "o": [
+    "eight",
+    "nine",
+    "three",
+    "two"
+   ],
+   "x": "8 = eight"
+  },
+  {
+   "he": "9 = ?",
+   "a": "nine",
+   "h": "5a6bd065",
+   "q": "9 = ?",
+   "o": [
+    "nine",
+    "five",
+    "one",
+    "six"
+   ],
+   "x": "9 = nine"
+  },
+  {
+   "he": "10 = ?",
+   "a": "ten",
+   "h": "7f16caa8",
+   "q": "10 = ?",
+   "o": [
+    "ten",
+    "two",
+    "one",
+    "nine"
+   ],
+   "x": "10 = ten"
+  },
+  {
+   "he": "How many legs does a dog have?",
+   "a": "four",
+   "h": "57226b29",
+   "q": "How many legs does a dog have?",
+   "o": [
+    "four",
+    "two",
+    "six",
+    "five"
+   ],
+   "x": "A dog has 4 legs = four"
+  },
+  {
+   "he": "What comes after four?",
+   "a": "five",
+   "h": "d5a5b387",
+   "q": "What comes after four?",
+   "o": [
+    "five",
+    "three",
+    "six",
+    "seven"
+   ],
+   "x": "After 4 comes 5 = five"
+  },
+  {
+   "he": "two + one = ?",
+   "a": "three",
+   "h": "ab987c03",
+   "q": "two + one = ?",
+   "o": [
+    "three",
+    "two",
+    "four",
+    "one"
+   ],
+   "x": "2 + 1 = 3 = three"
+  },
+  {
+   "he": "What is this?",
+   "a": "dog",
+   "h": "096ab5cb",
+   "q": "What is this?",
+   "o": [
+    "dog",
+    "cat",
+    "cow",
+    "pig"
+   ],
+   "x": "כלב = dog"
+  },
+  {
+   "he": "What is this?",
+   "a": "cat",
+   "h": "40ff49af",
+   "q": "What is this?",
+   "o": [
+    "cat",
+    "dog",
+    "rabbit",
+    "cow"
+   ],
+   "x": "חתול = cat"
+  },
+  {
+   "he": "What is this?",
+   "a": "fish",
+   "h": "2574bd7d",
+   "q": "What is this?",
+   "o": [
+    "fish",
+    "bird",
+    "frog",
+    "duck"
+   ],
+   "x": "דג = fish"
+  },
+  {
+   "he": "What is this?",
+   "a": "bird",
+   "h": "4ac59aba",
+   "q": "What is this?",
+   "o": [
+    "bird",
+    "fish",
+    "bee",
+    "frog"
+   ],
+   "x": "ציפור = bird"
+  },
+  {
+   "he": "What is this?",
+   "a": "lion",
+   "h": "2d461c46",
+   "q": "What is this?",
+   "o": [
+    "lion",
+    "tiger",
+    "dog",
+    "cat"
+   ],
+   "x": "אריה = lion"
+  },
+  {
+   "he": "What is this?",
+   "a": "monkey",
+   "h": "57bbb91c",
+   "q": "What is this?",
+   "o": [
+    "monkey",
+    "lion",
+    "mouse",
+    "cow"
+   ],
+   "x": "קוף = monkey"
+  },
+  {
+   "he": "What is this?",
+   "a": "elephant",
+   "h": "c0890f3d",
+   "q": "What is this?",
+   "o": [
+    "elephant",
+    "horse",
+    "giraffe",
+    "bear"
+   ],
+   "x": "פיל = elephant"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "cow",
+   "h": "cef284e7",
+   "q": "This is a ___.",
+   "o": [
+    "cow",
+    "horse",
+    "pig",
+    "sheep"
+   ],
+   "x": "פרה = cow"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "frog",
+   "h": "76c91efa",
+   "q": "This is a ___.",
+   "o": [
+    "frog",
+    "fish",
+    "dog",
+    "duck"
+   ],
+   "x": "צפרדע = frog"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "duck",
+   "h": "205f0e74",
+   "q": "This is a ___.",
+   "o": [
+    "duck",
+    "dog",
+    "hen",
+    "bee"
+   ],
+   "x": "ברווז = duck"
+  },
+  {
+   "he": "סוס = ?",
+   "a": "horse",
+   "h": "5c67273c",
+   "q": "סוס = ?",
+   "o": [
+    "horse",
+    "house",
+    "cow",
+    "dog"
+   ],
+   "x": "סוס = horse (house = בית)"
+  },
+  {
+   "he": "חזיר = ?",
+   "a": "pig",
+   "h": "72099f82",
+   "q": "חזיר = ?",
+   "o": [
+    "pig",
+    "dog",
+    "big",
+    "cow"
+   ],
+   "x": "חזיר = pig"
+  },
+  {
+   "he": "כבשה = ?",
+   "a": "sheep",
+   "h": "795ec7c4",
+   "q": "כבשה = ?",
+   "o": [
+    "sheep",
+    "ship",
+    "cow",
+    "pig"
+   ],
+   "x": "כבשה = sheep (ship = אונייה)"
+  },
+  {
+   "he": "ארנב = ?",
+   "a": "rabbit",
+   "h": "f4c5c384",
+   "q": "ארנב = ?",
+   "o": [
+    "rabbit",
+    "mouse",
+    "cat",
+    "horse"
+   ],
+   "x": "ארנב = rabbit"
+  },
+  {
+   "he": "תרנגולת = ?",
+   "a": "hen",
+   "h": "5c69c2de",
+   "q": "תרנגולת = ?",
+   "o": [
+    "hen",
+    "pen",
+    "duck",
+    "cow"
+   ],
+   "x": "תרנגולת = hen"
+  },
+  {
+   "he": "דבורה = ?",
+   "a": "bee",
+   "h": "5bf6223d",
+   "q": "דבורה = ?",
+   "o": [
+    "bee",
+    "bird",
+    "bear",
+    "fish"
+   ],
+   "x": "דבורה = bee"
+  },
+  {
+   "he": "⁦cat⁩ = ?",
+   "a": "חתול",
+   "h": "2ac388bc",
+   "q": "⁦cat⁩ = ?",
+   "o": [
+    "חתול",
+    "כלב",
+    "דג",
+    "פרה"
+   ],
+   "x": "cat = חתול"
+  },
+  {
+   "he": "Which animal says \"moo\"?",
+   "a": "cow",
+   "h": "ce6f1c75",
+   "q": "Which animal says \"moo\"?",
+   "o": [
+    "cow",
+    "dog",
+    "cat",
+    "duck"
+   ],
+   "x": "The cow says moo"
+  },
+  {
+   "he": "Which animal says \"woof\"?",
+   "a": "dog",
+   "h": "428adf8e",
+   "q": "Which animal says \"woof\"?",
+   "o": [
+    "dog",
+    "cat",
+    "cow",
+    "sheep"
+   ],
+   "x": "The dog says woof"
+  },
+  {
+   "he": "Which of these animals can fly?",
+   "a": "bird",
+   "h": "f10f547e",
+   "q": "Which of these animals can fly?",
+   "o": [
+    "bird",
+    "dog",
+    "cow",
+    "fish"
+   ],
+   "x": "Birds can fly: ציפור = bird"
+  },
+  {
+   "he": "Which animal lives in the sea?",
+   "a": "fish",
+   "h": "68d773fb",
+   "q": "Which animal lives in the sea?",
+   "o": [
+    "fish",
+    "cow",
+    "cat",
+    "horse"
+   ],
+   "x": "A fish lives in the sea: דג = fish"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "banana",
+   "h": "5a87fa29",
+   "q": "This is a ___.",
+   "o": [
+    "banana",
+    "apple",
+    "carrot",
+    "cake"
+   ],
+   "x": "בננה = banana"
+  },
+  {
+   "he": "This is an ___.",
+   "a": "apple",
+   "h": "2b0e1e28",
+   "q": "This is an ___.",
+   "o": [
+    "apple",
+    "egg",
+    "orange",
+    "onion"
+   ],
+   "x": "תפוח = apple"
+  },
+  {
+   "he": "לחם = ?",
+   "a": "bread",
+   "h": "f0148bcd",
+   "q": "לחם = ?",
+   "o": [
+    "bread",
+    "milk",
+    "cake",
+    "egg"
+   ],
+   "x": "לחם = bread"
+  },
+  {
+   "he": "חלב = ?",
+   "a": "milk",
+   "h": "6b2a801a",
+   "q": "חלב = ?",
+   "o": [
+    "milk",
+    "water",
+    "bread",
+    "cheese"
+   ],
+   "x": "חלב = milk"
+  },
+  {
+   "he": "ביצה = ?",
+   "a": "egg",
+   "h": "284299e2",
+   "q": "ביצה = ?",
+   "o": [
+    "egg",
+    "leg",
+    "bag",
+    "cake"
+   ],
+   "x": "ביצה = egg"
+  },
+  {
+   "he": "עוגה = ?",
+   "a": "cake",
+   "h": "61f275b1",
+   "q": "עוגה = ?",
+   "o": [
+    "cake",
+    "cookie",
+    "bread",
+    "candy"
+   ],
+   "x": "עוגה = cake"
+  },
+  {
+   "he": "גבינה = ?",
+   "a": "cheese",
+   "h": "6f881a6c",
+   "q": "גבינה = ?",
+   "o": [
+    "cheese",
+    "chips",
+    "milk",
+    "cake"
+   ],
+   "x": "גבינה = cheese"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "carrot",
+   "h": "f2ba2ae2",
+   "q": "This is a ___.",
+   "o": [
+    "carrot",
+    "banana",
+    "tomato",
+    "cake"
+   ],
+   "x": "גזר = carrot"
+  },
+  {
+   "he": "מים = ?",
+   "a": "water",
+   "h": "5fcd8a63",
+   "q": "מים = ?",
+   "o": [
+    "water",
+    "milk",
+    "juice",
+    "bread"
+   ],
+   "x": "מים = water"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "pizza",
+   "h": "b9fc8938",
+   "q": "This is a ___.",
+   "o": [
+    "pizza",
+    "cake",
+    "salad",
+    "sandwich"
+   ],
+   "x": "פיצה = pizza"
+  },
+  {
+   "he": "Which is a drink?",
+   "a": "milk",
+   "h": "f2630ef4",
+   "q": "Which is a drink?",
+   "o": [
+    "milk",
+    "bread",
+    "egg",
+    "cake"
+   ],
+   "x": "Milk is something you drink"
+  },
+  {
+   "he": "Which of these is a yellow fruit?",
+   "a": "banana",
+   "h": "f1a7db12",
+   "q": "Which of these is a yellow fruit?",
+   "o": [
+    "banana",
+    "carrot",
+    "bread",
+    "cheese"
+   ],
+   "x": "banana = בננה – a yellow fruit"
+  },
+  {
+   "he": "Which is NOT food?",
+   "a": "book",
+   "h": "67a3fa4e",
+   "q": "Which is NOT food?",
+   "o": [
+    "book",
+    "apple",
+    "egg",
+    "bread"
+   ],
+   "x": "You can't eat a book!"
+  },
+  {
+   "he": "גלידה = ?",
+   "a": "ice cream",
+   "h": "1356a210",
+   "q": "גלידה = ?",
+   "o": [
+    "ice cream",
+    "cake",
+    "candy",
+    "milk"
+   ],
+   "x": "גלידה = ice cream"
+  },
+  {
+   "he": "תפוז = ?",
+   "a": "orange",
+   "h": "6d65b62f",
+   "q": "תפוז = ?",
+   "o": [
+    "orange",
+    "apple",
+    "banana",
+    "grapes"
+   ],
+   "x": "תפוז = orange"
+  },
+  {
+   "he": "Monkeys like ___.",
+   "a": "bananas",
+   "h": "869d93f4",
+   "q": "Monkeys like ___.",
+   "o": [
+    "bananas",
+    "milk",
+    "pizza",
+    "cheese"
+   ],
+   "x": "קופים אוהבים בננות"
+  },
+  {
+   "he": "Rabbits like ___.",
+   "a": "carrots",
+   "h": "ca873402",
+   "q": "Rabbits like ___.",
+   "o": [
+    "carrots",
+    "fish",
+    "pizza",
+    "milk"
+   ],
+   "x": "ארנבים אוהבים גזר"
+  },
+  {
+   "he": "A cow gives us ___.",
+   "a": "milk",
+   "h": "80117c11",
+   "q": "A cow gives us ___.",
+   "o": [
+    "milk",
+    "eggs",
+    "bread",
+    "water"
+   ],
+   "x": "פרה נותנת חלב = milk"
+  },
+  {
+   "he": "A hen gives us ___.",
+   "a": "eggs",
+   "h": "f1e5d4d2",
+   "q": "A hen gives us ___.",
+   "o": [
+    "eggs",
+    "milk",
+    "cheese",
+    "apples"
+   ],
+   "x": "תרנגולת מטילה ביצים = eggs"
+  },
+  {
+   "he": "⁦apple⁩ = ?",
+   "a": "תפוח",
+   "h": "bf99cb5e",
+   "q": "⁦apple⁩ = ?",
+   "o": [
+    "תפוח",
+    "בננה",
+    "ביצה",
+    "לחם"
+   ],
+   "x": "apple = תפוח"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "book",
+   "h": "2f44937d",
+   "q": "This is a ___.",
+   "o": [
+    "book",
+    "bag",
+    "box",
+    "bed"
+   ],
+   "x": "ספר = book"
+  },
+  {
+   "he": "These are ___.",
+   "a": "pencils",
+   "h": "d7638a1a",
+   "q": "These are ___.",
+   "o": [
+    "pencils",
+    "pens",
+    "books",
+    "bags"
+   ],
+   "x": "עפרונות = pencils"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "ruler",
+   "h": "fbf3988d",
+   "q": "This is a ___.",
+   "o": [
+    "ruler",
+    "pencil",
+    "book",
+    "bag"
+   ],
+   "x": "סרגל = ruler"
+  },
+  {
+   "he": "This is my ___.",
+   "a": "bag",
+   "h": "05c22894",
+   "q": "This is my ___.",
+   "o": [
+    "bag",
+    "book",
+    "box",
+    "pen"
+   ],
+   "x": "ילקוט = (school) bag"
+  },
+  {
+   "he": "מספריים = ?",
+   "a": "scissors",
+   "h": "c837fb51",
+   "q": "מספריים = ?",
+   "o": [
+    "scissors",
+    "ruler",
+    "pencil",
+    "pen"
+   ],
+   "x": "מספריים = scissors"
+  },
+  {
+   "he": "מחברת = ?",
+   "a": "notebook",
+   "h": "6049149e",
+   "q": "מחברת = ?",
+   "o": [
+    "notebook",
+    "book",
+    "pencil",
+    "bag"
+   ],
+   "x": "מחברת = notebook"
+  },
+  {
+   "he": "מורה = ?",
+   "a": "teacher",
+   "h": "11ebc1a2",
+   "q": "מורה = ?",
+   "o": [
+    "teacher",
+    "mother",
+    "sister",
+    "friend"
+   ],
+   "x": "מורה = teacher"
+  },
+  {
+   "he": "בית ספר = ?",
+   "a": "school",
+   "h": "ec60645b",
+   "q": "בית ספר = ?",
+   "o": [
+    "school",
+    "class",
+    "house",
+    "shop"
+   ],
+   "x": "בית ספר = school"
+  },
+  {
+   "he": "I write with a ___.",
+   "a": "pen",
+   "h": "dcbb82d6",
+   "q": "I write with a ___.",
+   "o": [
+    "pen",
+    "book",
+    "ruler",
+    "bag"
+   ],
+   "x": "כותבים בעט = pen"
+  },
+  {
+   "he": "This is a ___.",
+   "a": "crayon",
+   "h": "c87da5e5",
+   "q": "This is a ___.",
+   "o": [
+    "crayon",
+    "ruler",
+    "book",
+    "bag"
+   ],
+   "x": "צבע (עפרון שעווה) = crayon"
+  },
+  {
+   "he": "⁦book⁩ = ?",
+   "a": "ספר",
+   "h": "6bf6e95b",
+   "q": "⁦book⁩ = ?",
+   "o": [
+    "ספר",
+    "מחברת",
+    "ילקוט",
+    "עט"
+   ],
+   "x": "book = ספר"
+  },
+  {
+   "he": "⁦bag⁩ = ?",
+   "a": "ילקוט",
+   "h": "e73ad49d",
+   "q": "⁦bag⁩ = ?",
+   "o": [
+    "ילקוט",
+    "ספר",
+    "קופסה",
+    "עיפרון"
+   ],
+   "x": "bag = ילקוט / תיק"
+  },
+  {
+   "he": "⁦teacher⁩ = ?",
+   "a": "מורה",
+   "h": "37634d44",
+   "q": "⁦teacher⁩ = ?",
+   "o": [
+    "מורה",
+    "תלמיד",
+    "אמא",
+    "ספר"
+   ],
+   "x": "teacher = מורה"
+  },
+  {
+   "he": "⁦pencil⁩ = ?",
+   "a": "עיפרון",
+   "h": "29c638f0",
+   "q": "⁦pencil⁩ = ?",
+   "o": [
+    "עיפרון",
+    "עט",
+    "סרגל",
+    "מחברת"
+   ],
+   "x": "pencil = עיפרון"
+  },
+  {
+   "he": "I cut paper with ___.",
+   "a": "scissors",
+   "h": "4b3cc281",
+   "q": "I cut paper with ___.",
+   "o": [
+    "scissors",
+    "a pen",
+    "a book",
+    "a ruler"
+   ],
+   "x": "גוזרים במספריים = scissors"
+  },
+  {
+   "he": "I read a ___.",
+   "a": "book",
+   "h": "5f2b5e02",
+   "q": "I read a ___.",
+   "o": [
+    "book",
+    "pen",
+    "ruler",
+    "crayon"
+   ],
+   "x": "קוראים ספר = book"
+  },
+  {
+   "he": "I color with a ___.",
+   "a": "crayon",
+   "h": "cd54c561",
+   "q": "I color with a ___.",
+   "o": [
+    "crayon",
+    "ruler",
+    "book",
+    "bag"
+   ],
+   "x": "צובעים בצבע = crayon"
+  },
+  {
+   "he": "My books are in my ___.",
+   "a": "bag",
+   "h": "7d691c44",
+   "q": "My books are in my ___.",
+   "o": [
+    "bag",
+    "pen",
+    "ruler",
+    "crayon"
+   ],
+   "x": "הספרים בילקוט = bag"
+  },
+  {
+   "he": "Which is NOT a school thing?",
+   "a": "banana",
+   "h": "631f9f38",
+   "q": "Which is NOT a school thing?",
+   "o": [
+    "banana",
+    "pen",
+    "book",
+    "ruler"
+   ],
+   "x": "You eat a banana. The others are for school."
+  },
+  {
+   "he": "עט = ?",
+   "a": "pen",
+   "h": "53cd8082",
+   "q": "עט = ?",
+   "o": [
+    "pen",
+    "pin",
+    "pan",
+    "bag"
+   ],
+   "x": "עט = pen"
+  },
+  {
+   "he": "I ___ a girl. (אני ילדה)",
+   "a": "am",
+   "h": "0c6b5a95",
+   "q": "I ___ a girl. (אני ילדה)",
+   "o": [
+    "am",
+    "is",
+    "are",
+    "be"
+   ],
+   "x": "I ← am: I am a girl"
+  },
+  {
+   "he": "I ___ happy.",
+   "a": "am",
+   "h": "ea11daf1",
+   "q": "I ___ happy.",
+   "o": [
+    "am",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "I am happy = אני שמח"
+  },
+  {
+   "he": "I ___ a dog. (יש לי)",
+   "a": "have",
+   "h": "c70a4bff",
+   "q": "I ___ a dog. (יש לי)",
+   "o": [
+    "have",
+    "am",
+    "is",
+    "are"
+   ],
+   "x": "יש לי = I have"
+  },
+  {
+   "he": "I ___ two cats. (יש לי)",
+   "a": "have",
+   "h": "c9e129b1",
+   "q": "I ___ two cats. (יש לי)",
+   "o": [
+    "have",
+    "am",
+    "is",
+    "are"
+   ],
+   "x": "יש לי = I have"
+  },
+  {
+   "he": "This ___ a cat.",
+   "a": "is",
+   "h": "11051286",
+   "q": "This ___ a cat.",
+   "o": [
+    "is",
+    "am",
+    "are",
+    "I"
+   ],
+   "x": "This is = זה"
+  },
+  {
+   "he": "___ is a book.",
+   "a": "This",
+   "h": "ba3d7162",
+   "q": "___ is a book.",
+   "o": [
+    "This",
+    "I",
+    "Am",
+    "Have"
+   ],
+   "x": "This is a book = זה ספר"
+  },
+  {
+   "he": "My name ___ Dan.",
+   "a": "is",
+   "h": "d9d211e3",
+   "q": "My name ___ Dan.",
+   "o": [
+    "is",
+    "am",
+    "are",
+    "have"
+   ],
+   "x": "My name is Dan = שמי דן"
+  },
+  {
+   "he": "זה כלב = ⁦___ a dog.⁩",
+   "a": "This is",
+   "h": "5ebe425e",
+   "q": "זה כלב = ⁦___ a dog.⁩",
+   "o": [
+    "This is",
+    "I am",
+    "I have",
+    "I see"
+   ],
+   "x": "זה = This is"
+  },
+  {
+   "he": "אני בת שמונה = ⁦I ___ eight.⁩",
+   "a": "am",
+   "h": "b4c678b6",
+   "q": "אני בת שמונה = ⁦I ___ eight.⁩",
+   "o": [
+    "am",
+    "have",
+    "is",
+    "are"
+   ],
+   "x": "Age: I am eight"
+  },
+  {
+   "he": "יש לי ילקוט = ⁦___ a bag.⁩",
+   "a": "I have",
+   "h": "99c8b7a4",
+   "q": "יש לי ילקוט = ⁦___ a bag.⁩",
+   "o": [
+    "I have",
+    "I am",
+    "This is",
+    "I see"
+   ],
+   "x": "יש לי = I have"
+  },
+  {
+   "he": "שבו! = ⁦___ down!⁩",
+   "a": "Sit",
+   "h": "984b4e96",
+   "q": "שבו! = ⁦___ down!⁩",
+   "o": [
+    "Sit",
+    "Stand",
+    "Look",
+    "Open"
+   ],
+   "x": "Sit down = שבו"
+  },
+  {
+   "he": "קומו! = ⁦___ up!⁩",
+   "a": "Stand",
+   "h": "f24120c7",
+   "q": "קומו! = ⁦___ up!⁩",
+   "o": [
+    "Stand",
+    "Sit",
+    "Look",
+    "Open"
+   ],
+   "x": "Stand up = קומו"
+  },
+  {
+   "he": "פתחו את הספר = ⁦___ your book.⁩",
+   "a": "Open",
+   "h": "56fd04bd",
+   "q": "פתחו את הספר = ⁦___ your book.⁩",
+   "o": [
+    "Open",
+    "Close",
+    "Sit",
+    "Look"
+   ],
+   "x": "לפתוח = open"
+  },
+  {
+   "he": "סגרו את הדלת = ⁦___ the door.⁩",
+   "a": "Close",
+   "h": "115456f0",
+   "q": "סגרו את הדלת = ⁦___ the door.⁩",
+   "o": [
+    "Close",
+    "Open",
+    "Sit",
+    "Stand"
+   ],
+   "x": "לסגור = close"
+  },
+  {
+   "he": "הקשיבו! = ?",
+   "a": "Listen!",
+   "h": "9841689b",
+   "q": "הקשיבו! = ?",
+   "o": [
+    "Listen!",
+    "Look!",
+    "Sit!",
+    "Go!"
+   ],
+   "x": "להקשיב = listen"
+  },
+  {
+   "he": "תסתכלו! = ?",
+   "a": "Look!",
+   "h": "b2e4a6ac",
+   "q": "תסתכלו! = ?",
+   "o": [
+    "Look!",
+    "Listen!",
+    "Write!",
+    "Stand!"
+   ],
+   "x": "להסתכל = look"
+  },
+  {
+   "he": "⁦Raise your hand.⁩ = ?",
+   "a": "הרימו יד",
+   "h": "93b90ebf",
+   "q": "⁦Raise your hand.⁩ = ?",
+   "o": [
+    "הרימו יד",
+    "שבו",
+    "קומו",
+    "פתחו ספר"
+   ],
+   "x": "Raise your hand = הרימו יד"
+  },
+  {
+   "he": "⁦Be quiet!⁩ = ?",
+   "a": "שקט!",
+   "h": "c5d379f3",
+   "q": "⁦Be quiet!⁩ = ?",
+   "o": [
+    "שקט!",
+    "שבו!",
+    "קומו!",
+    "הקשיבו!"
+   ],
+   "x": "Be quiet = שקט"
+  },
+  {
+   "he": "⁦Write your name.⁩ = ?",
+   "a": "כתבו את השם",
+   "h": "3f0730f5",
+   "q": "⁦Write your name.⁩ = ?",
+   "o": [
+    "כתבו את השם",
+    "קראו את הספר",
+    "שבו בשקט",
+    "סגרו את הדלת"
+   ],
+   "x": "write = לכתוב, name = שם"
+  },
+  {
+   "he": "⁦Close your book.⁩ = ?",
+   "a": "סגרו את הספר",
+   "h": "66d0f959",
+   "q": "⁦Close your book.⁩ = ?",
+   "o": [
+    "סגרו את הספר",
+    "פתחו את הספר",
+    "קראו את הספר",
+    "שבו בשקט"
+   ],
+   "x": "close = לסגור, book = ספר"
+  },
+  {
+   "he": "Same middle sound as cat?",
+   "a": "bag",
+   "h": "548603e2",
+   "q": "Same middle sound as cat?",
+   "o": [
+    "bag",
+    "bed",
+    "big",
+    "bug"
+   ],
+   "x": "c-a-t, b-a-g: the same a sound in the middle"
+  },
+  {
+   "he": "Same middle sound as bed?",
+   "a": "pen",
+   "h": "3067ddfe",
+   "q": "Same middle sound as bed?",
+   "o": [
+    "pen",
+    "pin",
+    "pan",
+    "pot"
+   ],
+   "x": "b-e-d, p-e-n: the same e sound in the middle"
+  },
+  {
+   "he": "Same middle sound as pig?",
+   "a": "six",
+   "h": "b92d59e2",
+   "q": "Same middle sound as pig?",
+   "o": [
+    "six",
+    "box",
+    "bag",
+    "bed"
+   ],
+   "x": "p-i-g, s-i-x: the same i sound in the middle"
+  },
+  {
+   "he": "Same middle sound as dog?",
+   "a": "box",
+   "h": "b870c8c8",
+   "q": "Same middle sound as dog?",
+   "o": [
+    "box",
+    "bus",
+    "bag",
+    "big"
+   ],
+   "x": "d-o-g, b-o-x: the same o sound in the middle"
+  },
+  {
+   "he": "Same middle sound as sun?",
+   "a": "cup",
+   "h": "70f7d8f4",
+   "q": "Same middle sound as sun?",
+   "o": [
+    "cup",
+    "bag",
+    "big",
+    "box"
+   ],
+   "x": "s-u-n, c-u-p: the same u sound in the middle"
+  },
+  {
+   "he": "Same middle sound as map?",
+   "a": "bag",
+   "h": "d263d578",
+   "q": "Same middle sound as map?",
+   "o": [
+    "bag",
+    "bed",
+    "big",
+    "bug"
+   ],
+   "x": "m-a-p, b-a-g: the same a sound in the middle"
+  },
+  {
+   "he": "Which of these has a different middle sound?",
+   "a": "pig",
+   "h": "3f9283a5",
+   "q": "Which of these has a different middle sound?",
+   "o": [
+    "pig",
+    "cat",
+    "hat",
+    "map"
+   ],
+   "x": "cat, hat, map have a. pig has i."
+  },
+  {
+   "he": "Which of these has a different middle sound?",
+   "a": "sun",
+   "h": "ca3196fa",
+   "q": "Which of these has a different middle sound?",
+   "o": [
+    "sun",
+    "pen",
+    "hen",
+    "ten"
+   ],
+   "x": "pen, hen, ten have e. sun has u."
+  },
+  {
+   "he": "Which of these has a different middle sound?",
+   "a": "bed",
+   "h": "0913e316",
+   "q": "Which of these has a different middle sound?",
+   "o": [
+    "bed",
+    "dog",
+    "fox",
+    "box"
+   ],
+   "x": "dog, fox, box have o. bed has e."
+  },
+  {
+   "he": "Which of these has a different middle sound?",
+   "a": "cup",
+   "h": "a9ff285c",
+   "q": "Which of these has a different middle sound?",
+   "o": [
+    "cup",
+    "map",
+    "cat",
+    "bag"
+   ],
+   "x": "map, cat, bag have a. cup has u."
+  },
+  {
+   "he": "hat: change a to i.",
+   "a": "hit",
+   "h": "b00ccd51",
+   "q": "hat: change a to i.",
+   "o": [
+    "hit",
+    "hot",
+    "hut",
+    "hat"
+   ],
+   "x": "h-a-t → change a to i: hit"
+  },
+  {
+   "he": "pen: change e to i.",
+   "a": "pin",
+   "h": "dfac25c0",
+   "q": "pen: change e to i.",
+   "o": [
+    "pin",
+    "pan",
+    "pen",
+    "pig"
+   ],
+   "x": "p-e-n → change e to i: pin"
+  },
+  {
+   "he": "bag: change a to u.",
+   "a": "bug",
+   "h": "b84cb6b6",
+   "q": "bag: change a to u.",
+   "o": [
+    "bug",
+    "big",
+    "beg",
+    "bag"
+   ],
+   "x": "b-a-g → change a to u: bug"
+  },
+  {
+   "he": "hot: change o to a.",
+   "a": "hat",
+   "h": "f4158044",
+   "q": "hot: change o to a.",
+   "o": [
+    "hat",
+    "hit",
+    "hut",
+    "hot"
+   ],
+   "x": "h-o-t → change o to a: hat"
+  },
+  {
+   "he": "cup: change u to a.",
+   "a": "cap",
+   "h": "69d36ed9",
+   "q": "cup: change u to a.",
+   "o": [
+    "cap",
+    "cop",
+    "cup",
+    "cut"
+   ],
+   "x": "c-u-p → change u to a: cap"
+  },
+  {
+   "he": "big: change i to a.",
+   "a": "bag",
+   "h": "e82a1f3c",
+   "q": "big: change i to a.",
+   "o": [
+    "bag",
+    "bug",
+    "beg",
+    "big"
+   ],
+   "x": "b-i-g → change i to a: bag"
+  },
+  {
+   "he": "fox: change o to i.",
+   "a": "fix",
+   "h": "5645ad29",
+   "q": "fox: change o to i.",
+   "o": [
+    "fix",
+    "fax",
+    "fox",
+    "six"
+   ],
+   "x": "f-o-x → change o to i: fix"
+  },
+  {
+   "he": "Which two have the middle sound a?",
+   "a": "cat, hat",
+   "h": "c4f3fc34",
+   "q": "Which two have the middle sound a?",
+   "o": [
+    "cat, hat",
+    "cat, cut",
+    "pen, pin",
+    "dog, dig"
+   ],
+   "x": "cat and hat – both have a in the middle"
+  },
+  {
+   "he": "Which two have the middle sound i?",
+   "a": "pig, six",
+   "h": "145c3d20",
+   "q": "Which two have the middle sound i?",
+   "o": [
+    "pig, six",
+    "pig, bag",
+    "bed, bud",
+    "sun, sit"
+   ],
+   "x": "pig and six – both have i in the middle"
+  },
+  {
+   "he": "Which two have the middle sound u?",
+   "a": "sun, bus",
+   "h": "a8a14c4b",
+   "q": "Which two have the middle sound u?",
+   "o": [
+    "sun, bus",
+    "sun, sit",
+    "bus, bag",
+    "cup, cap"
+   ],
+   "x": "sun and bus – both have u in the middle"
+  },
+  {
+   "he": "שלום (כשנפגשים) = ?",
+   "a": "Hello",
+   "h": "afd278b2",
+   "q": "שלום (כשנפגשים) = ?",
+   "o": [
+    "Hello",
+    "Goodbye",
+    "Thank you",
+    "Sorry"
+   ],
+   "x": "When you meet, you say Hello"
+  },
+  {
+   "he": "להתראות = ?",
+   "a": "Goodbye",
+   "h": "69e0a6d5",
+   "q": "להתראות = ?",
+   "o": [
+    "Goodbye",
+    "Hello",
+    "Please",
+    "Good morning"
+   ],
+   "x": "When you leave, you say Goodbye"
+  },
+  {
+   "he": "בוקר טוב = ?",
+   "a": "Good morning",
+   "h": "395b7b53",
+   "q": "בוקר טוב = ?",
+   "o": [
+    "Good morning",
+    "Good night",
+    "Goodbye",
+    "Thank you"
+   ],
+   "x": "morning = בוקר, good = טוב"
+  },
+  {
+   "he": "לילה טוב = ?",
+   "a": "Good night",
+   "h": "a6282105",
+   "q": "לילה טוב = ?",
+   "o": [
+    "Good night",
+    "Good morning",
+    "Hello",
+    "Goodbye"
+   ],
+   "x": "night = לילה: Good night"
+  },
+  {
+   "he": "תודה = ?",
+   "a": "Thank you",
+   "h": "1dbe109a",
+   "q": "תודה = ?",
+   "o": [
+    "Thank you",
+    "Please",
+    "Sorry",
+    "Hello"
+   ],
+   "x": "תודה = Thank you"
+  },
+  {
+   "he": "⁦How are you?⁩ = ?",
+   "a": "מה שלומך?",
+   "h": "32e250ba",
+   "q": "⁦How are you?⁩ = ?",
+   "o": [
+    "מה שלומך?",
+    "איך קוראים לך?",
+    "בן כמה אתה?",
+    "איפה אתה?"
+   ],
+   "x": "How are you = מה שלומך"
+  },
+  {
+   "he": "⁦How are you?⁩ – ___",
+   "a": "I'm fine, thanks.",
+   "h": "53132a62",
+   "q": "⁦How are you?⁩ – ___",
+   "o": [
+    "I'm fine, thanks.",
+    "I'm Dan.",
+    "I'm eight.",
+    "Goodbye!"
+   ],
+   "x": "מה שלומך? – טוב, תודה: I'm fine"
+  },
+  {
+   "he": "⁦Goodbye!⁩ = ?",
+   "a": "להתראות!",
+   "h": "daea7b8d",
+   "q": "⁦Goodbye!⁩ = ?",
+   "o": [
+    "להתראות!",
+    "סליחה!",
+    "תודה!",
+    "בוקר טוב!"
+   ],
+   "x": "Goodbye = להתראות"
+  },
+  {
+   "he": "מה מהבאים אומרים למורה בבוקר?",
+   "a": "Good morning",
+   "h": "60a947a2",
+   "q": "What do you say to your teacher when school starts?",
+   "o": [
+    "Good morning",
+    "Good night",
+    "Goodbye",
+    "Thank you"
+   ],
+   "x": "In the morning, when you meet: Good morning"
+  },
+  {
+   "he": "⁦Dan gives you a present.⁩ You say: ___",
+   "a": "Thank you",
+   "h": "7757fe8b",
+   "q": "⁦Dan gives you a present.⁩ You say: ___",
+   "o": [
+    "Thank you",
+    "Sorry",
+    "Goodbye",
+    "Good night"
+   ],
+   "x": "You get a present – you say תודה: Thank you"
+  },
+  {
+   "he": "⁦What's your name?⁩ = ?",
+   "a": "איך קוראים לך?",
+   "h": "9c51c3b4",
+   "q": "⁦What's your name?⁩ = ?",
+   "o": [
+    "איך קוראים לך?",
+    "בן כמה אתה?",
+    "מה שלומך?",
+    "איפה אתה גר?"
+   ],
+   "x": "name = שם: What's your name = איך קוראים לך"
+  },
+  {
+   "he": "⁦What's your name?⁩ – ___",
+   "a": "I'm Dan.",
+   "h": "d4485e93",
+   "q": "⁦What's your name?⁩ – ___",
+   "o": [
+    "I'm Dan.",
+    "I'm fine.",
+    "I'm eight.",
+    "Thank you."
+   ],
+   "x": "Asked your name – answer with your name: I'm Dan"
+  },
+  {
+   "he": "⁦How old are you?⁩ = ?",
+   "a": "בן כמה אתה?",
+   "h": "db3ccea2",
+   "q": "⁦How old are you?⁩ = ?",
+   "o": [
+    "בן כמה אתה?",
+    "איך קוראים לך?",
+    "מה שלומך?",
+    "מה השעה?"
+   ],
+   "x": "How old are you = בן כמה אתה"
+  },
+  {
+   "he": "⁦How old are you?⁩ – ___",
+   "a": "I'm eight.",
+   "h": "56fefcef",
+   "q": "⁦How old are you?⁩ – ___",
+   "o": [
+    "I'm eight.",
+    "I'm Dan.",
+    "I'm fine.",
+    "Goodbye."
+   ],
+   "x": "Asked your age – answer with a number: I'm eight"
+  },
+  {
+   "he": "⁦My name is Maya.⁩ = ?",
+   "a": "קוראים לי מאיה",
+   "h": "548b8e67",
+   "q": "⁦My name is Maya.⁩ = ?",
+   "o": [
+    "קוראים לי מאיה",
+    "מאיה חברה שלי",
+    "אני אוהבת מאיה",
+    "מאיה בת שמונה"
+   ],
+   "x": "my name = השם שלי"
+  },
+  {
+   "he": "איך שואלים חבר מה שלומו?",
+   "a": "How are you?",
+   "h": "160eb4c8",
+   "q": "You want to know if your friend is OK. You ask:",
+   "o": [
+    "How are you?",
+    "What's your name?",
+    "Where are you?",
+    "Goodbye!"
+   ],
+   "x": "מה שלומך = How are you"
+  },
+  {
+   "he": "⁦Nice to meet you!⁩ = ?",
+   "a": "נעים להכיר!",
+   "h": "038326d7",
+   "q": "⁦Nice to meet you!⁩ = ?",
+   "o": [
+    "נעים להכיר!",
+    "להתראות!",
+    "מה שלומך?",
+    "תודה רבה!"
+   ],
+   "x": "Nice to meet you = נעים להכיר"
+  },
+  {
+   "he": "Hello, I'm Tom. – ___, I'm Maya.",
+   "a": "Hi",
+   "h": "ef57e241",
+   "q": "Hello, I'm Tom. – ___, I'm Maya.",
+   "o": [
+    "Hi",
+    "Bye",
+    "Thanks",
+    "Sorry"
+   ],
+   "x": "Hi = Hello = שלום"
+  },
+  {
+   "he": "___ are you? – I'm fine.",
+   "a": "How",
+   "h": "3625b9ce",
+   "q": "___ are you? – I'm fine.",
+   "o": [
+    "How",
+    "Who",
+    "What",
+    "Where"
+   ],
+   "x": "מה שלומך? = How are you"
+  },
+  {
+   "he": "___ is your name? – Dan.",
+   "a": "What",
+   "h": "46d47a67",
+   "q": "___ is your name? – Dan.",
+   "o": [
+    "What",
+    "How",
+    "Who",
+    "Where"
+   ],
+   "x": "What is your name = איך קוראים לך"
+  },
+  {
+   "he": "What color is the hat?",
+   "a": "red",
+   "h": "0dc75ba7",
+   "q": "What color is the hat?",
+   "o": [
+    "red",
+    "blue",
+    "green",
+    "black"
+   ],
+   "x": "It is red – הכובע אדום"
+  },
+  {
+   "he": "How old is Maya?",
+   "a": "eight",
+   "h": "eb2c22bd",
+   "q": "How old is Maya?",
+   "o": [
+    "eight",
+    "nine",
+    "seven",
+    "ten"
+   ],
+   "x": "I am eight = אני בת שמונה"
+  },
+  {
+   "he": "Where is the cat?",
+   "a": "in the box",
+   "h": "9bed668f",
+   "q": "Where is the cat?",
+   "o": [
+    "in the box",
+    "on the box",
+    "on the bed",
+    "in the bag"
+   ],
+   "x": "in the box = בתוך הקופסה"
+  },
+  {
+   "he": "What is big?",
+   "a": "the dog",
+   "h": "f8373803",
+   "q": "What is big?",
+   "o": [
+    "the dog",
+    "the cat",
+    "the hat",
+    "the bus"
+   ],
+   "x": "It is big – הכלב גדול"
+  },
+  {
+   "he": "How many cats does Tom have?",
+   "a": "two",
+   "h": "a2b291dd",
+   "q": "How many cats does Tom have?",
+   "o": [
+    "two",
+    "one",
+    "three",
+    "ten"
+   ],
+   "x": "Tom has two cats = לטום שני חתולים"
+  },
+  {
+   "he": "Who has a ball?",
+   "a": "my brother",
+   "h": "02cc2549",
+   "q": "Who has a ball?",
+   "o": [
+    "my brother",
+    "my sister",
+    "my father",
+    "my mother"
+   ],
+   "x": "My brother has a ball = לאח שלי כדור"
+  },
+  {
+   "he": "Where is the bird?",
+   "a": "on the tree",
+   "h": "d6747e2a",
+   "q": "Where is the bird?",
+   "o": [
+    "on the tree",
+    "in the box",
+    "on the bed",
+    "in the bag"
+   ],
+   "x": "on the tree = על העץ"
+  },
+  {
+   "he": "What am I?",
+   "a": "a frog",
+   "h": "3eee2762",
+   "q": "What am I?",
+   "o": [
+    "a frog",
+    "a dog",
+    "a fish",
+    "a bird"
+   ],
+   "x": "Green and it jumps: a frog (צפרדע)"
+  },
+  {
+   "he": "What am I?",
+   "a": "a banana",
+   "h": "614eb6fa",
+   "q": "What am I?",
+   "o": [
+    "a banana",
+    "an apple",
+    "a carrot",
+    "an egg"
+   ],
+   "x": "Yellow, and monkeys like it: banana"
+  },
+  {
+   "he": "What am I?",
+   "a": "a cat",
+   "h": "dbf04d68",
+   "q": "What am I?",
+   "o": [
+    "a cat",
+    "a dog",
+    "a cow",
+    "a fish"
+   ],
+   "x": "A pet that says meow: cat"
+  },
+  {
+   "he": "⁦The dog is big.⁩ = ?",
+   "a": "הכלב גדול",
+   "h": "c514fe66",
+   "q": "⁦The dog is big.⁩ = ?",
+   "o": [
+    "הכלב גדול",
+    "הכלב קטן",
+    "החתול גדול",
+    "הכלב שמח"
+   ],
+   "x": "dog = כלב, big = גדול"
+  },
+  {
+   "he": "⁦I like milk.⁩ = ?",
+   "a": "אני אוהב חלב",
+   "h": "7a7df766",
+   "q": "⁦I like milk.⁩ = ?",
+   "o": [
+    "אני אוהב חלב",
+    "אני שותה מים",
+    "אני אוהב לחם",
+    "אני רואה חלב"
+   ],
+   "x": "like = אוהב, milk = חלב"
+  },
+  {
+   "he": "⁦The cat is in the box.⁩ = ?",
+   "a": "החתול בתוך הקופסה",
+   "h": "d26072fd",
+   "q": "⁦The cat is in the box.⁩ = ?",
+   "o": [
+    "החתול בתוך הקופסה",
+    "החתול על הקופסה",
+    "הכלב בתוך הקופסה",
+    "החתול ליד הקופסה"
+   ],
+   "x": "in = בתוך, box = קופסה"
+  },
+  {
+   "he": "⁦My sister is happy.⁩ = ?",
+   "a": "אחותי שמחה",
+   "h": "dde4f74b",
+   "q": "⁦My sister is happy.⁩ = ?",
+   "o": [
+    "אחותי שמחה",
+    "אחי שמח",
+    "אמא שלי שמחה",
+    "אחותי עצובה"
+   ],
+   "x": "sister = אחות, happy = שמחה"
+  },
+  {
+   "he": "⁦I see a bird.⁩ = ?",
+   "a": "אני רואה ציפור",
+   "h": "7d3c5612",
+   "q": "⁦I see a bird.⁩ = ?",
+   "o": [
+    "אני רואה ציפור",
+    "אני רואה דג",
+    "אני רואה כלב",
+    "ציפור רואה אותי"
+   ],
+   "x": "I see = אני רואה, bird = ציפור"
+  },
+  {
+   "he": "⁦The sun is yellow.⁩ = ?",
+   "a": "השמש צהובה",
+   "h": "521bc827",
+   "q": "⁦The sun is yellow.⁩ = ?",
+   "o": [
+    "השמש צהובה",
+    "השמש אדומה",
+    "הירח צהוב",
+    "השמש גדולה"
+   ],
+   "x": "sun = שמש, yellow = צהוב"
+  },
+  {
+   "he": "⁦This is my bag.⁩ = ?",
+   "a": "זה התיק שלי",
+   "h": "2dcfe4e3",
+   "q": "⁦This is my bag.⁩ = ?",
+   "o": [
+    "זה התיק שלי",
+    "זה הספר שלי",
+    "זה התיק שלך",
+    "זה תיק גדול"
+   ],
+   "x": "my bag = התיק שלי"
+  },
+  {
+   "he": "⁦Look at the fish!⁩ = ?",
+   "a": "תסתכל על הדג!",
+   "h": "cb128d00",
+   "q": "⁦Look at the fish!⁩ = ?",
+   "o": [
+    "תסתכל על הדג!",
+    "תאכל את הדג!",
+    "תסתכל על הציפור!",
+    "יש לי דג!"
+   ],
+   "x": "look = להסתכל, fish = דג"
+  },
+  {
+   "he": "⁦Mom has a cake.⁩ = ?",
+   "a": "לאמא יש עוגה",
+   "h": "00777c1a",
+   "q": "⁦Mom has a cake.⁩ = ?",
+   "o": [
+    "לאמא יש עוגה",
+    "אמא אוכלת עוגה",
+    "לאבא יש עוגה",
+    "לאמא יש לחם"
+   ],
+   "x": "has = יש לה, cake = עוגה"
+  },
+  {
+   "he": "⁦I can swim.⁩ = ?",
+   "a": "אני יכול לשחות",
+   "h": "1df9c295",
+   "q": "⁦I can swim.⁩ = ?",
+   "o": [
+    "אני יכול לשחות",
+    "אני יכול לרוץ",
+    "אני רוצה לשחות",
+    "אני לא שוחה"
+   ],
+   "x": "can = יכול, swim = לשחות"
+  },
+  {
+   "he": "Which word rhymes with man?",
+   "a": "can",
+   "h": "0c299d32",
+   "q": "Which word rhymes with man?",
+   "o": [
+    "can",
+    "map",
+    "men",
+    "mom"
+   ],
+   "x": "man – can: both end in -an"
+  },
+  {
+   "he": "What is the first sound in hat?",
+   "a": "h",
+   "h": "51192ea1",
+   "q": "What is the first sound in hat?",
+   "o": [
+    "h",
+    "b",
+    "t",
+    "p"
+   ],
+   "x": "hat starts with the sound h"
+  },
+  {
+   "he": "איזו אות נקראת אֶס?",
+   "a": "S",
+   "h": "3fd82583",
+   "q": "Which letter is called אֶס?",
+   "o": [
+    "S",
+    "X",
+    "C",
+    "F"
+   ],
+   "x": "S is called אֶס",
+   "sc": {
+    "0": "אֶס"
+   }
+  },
+  {
+   "he": "איזה צליל עושה האות ⁦P⁩?",
+   "a": "פ",
+   "h": "42c33ddd",
+   "q": "Which sound does the letter P make?",
+   "o": [
+    "פ",
+    "ב",
+    "ט",
+    "ק"
+   ],
+   "x": "P עושה פ, כמו ב-pen"
+  },
+  {
+   "he": "האות הקטנה של ⁦T⁩?",
+   "a": "t",
+   "h": "58995130",
+   "q": "The small letter of T?",
+   "o": [
+    "t",
+    "f",
+    "l",
+    "i"
+   ],
+   "x": "Capital T = small t"
+  },
+  {
+   "he": "האות הגדולה של ⁦b⁩?",
+   "a": "B",
+   "h": "529b93d1",
+   "q": "The capital letter of b?",
+   "o": [
+    "B",
+    "D",
+    "P",
+    "R"
+   ],
+   "x": "Small b = capital B"
+  },
+  {
+   "he": "What comes after M?",
+   "a": "N",
+   "h": "8712b99a",
+   "q": "What comes after M?",
+   "o": [
+    "N",
+    "L",
+    "O",
+    "W"
+   ],
+   "x": "L M N"
+  },
+  {
+   "he": "Which word comes first in ABC order?",
+   "a": "bus",
+   "h": "e2bb0c7d",
+   "q": "Which word comes first in ABC order?",
+   "o": [
+    "bus",
+    "pig",
+    "sun",
+    "map"
+   ],
+   "x": "b comes before m, p, s"
+  },
+  {
+   "he": "r_n (לרוץ)",
+   "a": "u",
+   "h": "f98f9290",
+   "q": "r_n (לרוץ)",
+   "o": [
+    "u",
+    "o",
+    "i",
+    "e"
+   ],
+   "x": "r-u-n = run"
+  },
+  {
+   "he": "Read the sounds: b-e-d",
+   "a": "bed",
+   "h": "c0fbeb75",
+   "q": "Read the sounds: b-e-d",
+   "o": [
+    "bed",
+    "bad",
+    "bid",
+    "red"
+   ],
+   "x": "b-e-d together = bed"
+  },
+  {
+   "he": "We ___ to school. (הולכים)",
+   "a": "go",
+   "h": "49f15d72",
+   "q": "We ___ to school. (הולכים)",
+   "o": [
+    "go",
+    "see",
+    "like",
+    "can"
+   ],
+   "x": "הולכים = go"
+  },
+  {
+   "he": "I smell with my ___.",
+   "a": "nose",
+   "h": "7b15d199",
+   "q": "I smell with my ___.",
+   "o": [
+    "nose",
+    "ear",
+    "eye",
+    "hand"
+   ],
+   "x": "מריחים באף = nose"
+  },
+  {
+   "he": "⁦sister⁩ = ?",
+   "a": "אחות",
+   "h": "2e16b281",
+   "q": "⁦sister⁩ = ?",
+   "o": [
+    "אחות",
+    "אח",
+    "אמא",
+    "סבתא"
+   ],
+   "x": "sister = אחות"
+  },
+  {
+   "he": "What color is it?",
+   "a": "blue",
+   "h": "474ca694",
+   "q": "What color is it?",
+   "o": [
+    "blue",
+    "green",
+    "black",
+    "purple"
+   ],
+   "x": "כחול = blue"
+  },
+  {
+   "he": "How many?",
+   "a": "ten",
+   "h": "46e9d2b0",
+   "q": "How many?",
+   "o": [
+    "ten",
+    "nine",
+    "eight",
+    "two"
+   ],
+   "x": "5 + 5 = 10 = ten"
+  },
+  {
+   "he": "What is this?",
+   "a": "giraffe",
+   "h": "99ae5b6b",
+   "q": "What is this?",
+   "o": [
+    "giraffe",
+    "horse",
+    "elephant",
+    "lion"
+   ],
+   "x": "ג'ירפה = giraffe"
+  },
+  {
+   "he": "Which is NOT a drink?",
+   "a": "cake",
+   "h": "e7b90b70",
+   "q": "Which is NOT a drink?",
+   "o": [
+    "cake",
+    "milk",
+    "water",
+    "juice"
+   ],
+   "x": "You eat cake, you don't drink it"
+  },
+  {
+   "he": "⁦ruler⁩ = ?",
+   "a": "סרגל",
+   "h": "326d6986",
+   "q": "⁦ruler⁩ = ?",
+   "o": [
+    "סרגל",
+    "עיפרון",
+    "מספריים",
+    "ספר"
+   ],
+   "x": "ruler = סרגל"
+  },
+  {
+   "he": "I ___ nine.",
+   "a": "am",
+   "h": "463028ea",
+   "q": "I ___ nine.",
+   "o": [
+    "am",
+    "is",
+    "are",
+    "have"
+   ],
+   "x": "Age: I am nine = אני בן תשע"
+  },
+  {
+   "he": "⁦Open the door.⁩ = ?",
+   "a": "פתחו את הדלת",
+   "h": "508701ba",
+   "q": "⁦Open the door.⁩ = ?",
+   "o": [
+    "פתחו את הדלת",
+    "סגרו את הדלת",
+    "שבו בשקט",
+    "קומו"
+   ],
+   "x": "open = לפתוח, door = דלת"
+  }
+ ]
+}

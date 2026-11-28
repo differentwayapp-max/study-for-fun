@@ -390,52 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "sci7",
-   "ver": "8177c97f9c",
-   "subject": "מדעים",
-   "grade": 6,
-   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
-   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
-   "tags": [
-    "מודל חלקיקי",
-    "שינוי כימי",
-    "תמיסות",
-    "אנרגיה",
-    "מקורות אנרגיה",
-    "מעבר חום",
-    "התא",
-    "מיקרוסקופ",
-    "מחזור הדם",
-    "הובלה בצמח",
-    "חום וטמפרטורה",
-    "מערכת הנשימה",
-    "פוטוסינתזה",
-    "נשימה תאית",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 381,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
-     "e": "⚫⚫"
-    },
-    {
-     "q": "למה לנוזל אין צורה קבועה?",
-     "e": "💧"
-    },
-    {
-     "q": "מחממים מים. מה קורה לחלקיקים?",
-     "e": "🔥💧"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "sci7-materials",
    "ver": "d47d9e0ece",
    "subject": "מדעים",
@@ -479,42 +433,6 @@
     {
      "q": "מה מהבאים מגדיר נפח?",
      "e": "📦"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en4-nov26",
-   "ver": "6d2785e347",
-   "subject": "אנגלית",
-   "grade": 3,
-   "title": "ABC · Colors · Animals",
-   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
-   "desc_en": "Letters, colors, animals, prepositions and verbs",
-   "tags": [
-    "ABC",
-    "Colors",
-    "Animals",
-    "Prepositions",
-    "Verbs",
-    "Missing letter"
-   ],
-   "questions": 144,
-   "chapters": 13,
-   "reading": 0,
-   "words": 36,
-   "samples": [
-    {
-     "q": "האות הקטנה?",
-     "e": "A"
-    },
-    {
-     "q": "האות הגדולה?",
-     "e": "n"
-    },
-    {
-     "q": "What comes next?",
-     "e": "AB"
     }
    ],
    "status": "ready"
@@ -1733,6 +1651,124 @@
     "Ecosystems",
     "Photosynthesis",
     "Habitats",
+    "Technological systems"
+   ]
+  },
+  {
+   "id": "en4-nov26",
+   "ver": "05063c619a",
+   "subject": "אנגלית",
+   "grade": 3,
+   "title": "ABC · Colors · Animals",
+   "desc": "אותיות, צבעים, חיות, מילות יחס (כולל between, over) ופעלים",
+   "desc_en": "Letters, colors, animals, prepositions and verbs",
+   "tags": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ],
+   "questions": 144,
+   "chapters": 13,
+   "reading": 0,
+   "words": 36,
+   "samples": [
+    {
+     "q": "האות הקטנה?",
+     "e": "A",
+     "q_en": "The small letter?"
+    },
+    {
+     "q": "האות הגדולה?",
+     "e": "n",
+     "q_en": "The capital letter?"
+    },
+    {
+     "q": "What comes next?",
+     "e": "AB",
+     "q_en": "What comes next?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – ABC, Colors, Animals",
+   "title_en": "ABC · Colors · Animals",
+   "tags_en": [
+    "ABC",
+    "Colors",
+    "Animals",
+    "Prepositions",
+    "Verbs",
+    "Missing letter"
+   ]
+  },
+  {
+   "id": "sci7",
+   "ver": "b99c7d687a",
+   "subject": "מדעים",
+   "grade": 6,
+   "title": "מודל חלקיקי · שינוי כימי · אנרגיה · חום · התא · הובלה ונשימה · טכנולוגיה",
+   "desc": "המודל החלקיקי, שינוי פיזיקלי וכימי, תערובות ותמיסות, צורות ומקורות אנרגיה, מעבר חום, חום וטמפרטורה, היצור החי, התא, רמות ארגון, מערכות הובלה באדם ובצמח, מערכת הנשימה, פוטוסינתזה ונשימה תאית, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "The particle model, physical and chemical changes, mixtures and solutions, energy forms, conversions and sources, heat transfer, living things, the cell, levels of organisation, transport in humans and plants, heat and temperature, the respiratory system, photosynthesis and cellular respiration, engineering design and technological systems",
+   "tags": [
+    "מודל חלקיקי",
+    "שינוי כימי",
+    "תמיסות",
+    "אנרגיה",
+    "מקורות אנרגיה",
+    "מעבר חום",
+    "התא",
+    "מיקרוסקופ",
+    "מחזור הדם",
+    "הובלה בצמח",
+    "חום וטמפרטורה",
+    "מערכת הנשימה",
+    "פוטוסינתזה",
+    "נשימה תאית",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 381,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "לפי המודל החלקיקי, ממה בנוי כל חומר?",
+     "e": "⚫⚫",
+     "q_en": "According to the particle model, what is all matter made of?"
+    },
+    {
+     "q": "למה לנוזל אין צורה קבועה?",
+     "e": "💧",
+     "q_en": "Why doesn't a liquid have a fixed shape?"
+    },
+    {
+     "q": "מחממים מים. מה קורה לחלקיקים?",
+     "e": "🔥💧",
+     "q_en": "Water is heated. What happens to its particles?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 7 – Energy, the Cell and the Particle Model",
+   "title_en": "Particle model · Chemical change · Energy · Heat · The cell · Transport and respiration · Technology",
+   "tags_en": [
+    "Particle model",
+    "Chemical change",
+    "Solutions",
+    "Energy",
+    "Energy sources",
+    "Heat transfer",
+    "The cell",
+    "The microscope",
+    "Circulation",
+    "Transport in plants",
+    "Heat and temperature",
+    "The respiratory system",
+    "Photosynthesis",
+    "Cellular respiration",
+    "Engineering design",
     "Technological systems"
    ]
   }

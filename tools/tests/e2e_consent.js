@@ -21,7 +21,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (o = {}) => { const c = await b.newContext({ viewport: { width: o.w || 390, height: o.h || 844 } });
-    await c.addInitScript(([E, g, l]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
+    await c.addInitScript(([E, g, l]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
   const page = async (c, url, tag) => { const p = await c.newPage(); p.on('pageerror', e => errs.push((tag || '') + ': ' + e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   // draw on the signature canvas like a finger; checked (the canvas has ink) and tried again if the page was still moving
   const inkOf = p => p.evaluate(() => { const c = document.getElementById('jSig'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i]) n++; return n; });

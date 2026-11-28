@@ -17,7 +17,7 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message));
-  await p.context().addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
+  await p.context().addInitScript(() => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
     window.SFF_AI_ENABLED = true; window.SFF_TEST_GOOGLE = { sub: 'bld1', email: 'bld1@t.local', email_verified: true, name: 'הורה' }; localStorage.setItem('sff_lang', 'he'); });
   await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
   await p.waitForFunction(() => window.SFF_ROLE && window.__sffAI && typeof sample !== 'undefined' && sample, null, { timeout: 25000 }); await p.waitForTimeout(1000);
@@ -177,7 +177,7 @@ const list = async path => ((await (await fetch(`${DOCS}/${path}?pageSize=100`, 
   console.log("6. a build in a teacher's group");
   {
     const tc = await b.newContext({ viewport: { width: 390, height: 844 } }); const t = await tc.newPage(); t.on('pageerror', e => errs.push('teacher: ' + e.message));
-    await tc.addInitScript(() => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
+    await tc.addInitScript(() => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_FAKE_AI = true;
       window.SFF_AI_ENABLED = true; window.SFF_TEST_GOOGLE = { sub: 'bldT', email: 'bldt@t.local', email_verified: true, name: 'מורה' }; localStorage.setItem('sff_lang', 'he'); });
     await t.goto('http://localhost:8765/teach', { waitUntil: 'load' }); await t.waitForSelector('#fbGo'); await t.click('#fbGo'); await t.waitForSelector('#tsClass'); await t.click('#tsClass');
     await t.fill('#tsName', "ד'2 – אנגלית"); await t.click('#tsGo'); await t.waitForFunction(() => window.SFF_KIND === 'class' && typeof sample !== 'undefined' && sample, null, { timeout: 30000 }); await t.waitForTimeout(1200);

@@ -13,7 +13,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const viol = [], outside = [], errs = [];
   const ctx = async g => { const c = await b.newContext({ viewport: { width: 390, height: 844 } });
-    await c.addInitScript(([E, g]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he');
+    await c.addInitScript(([E, g]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he');
       document.addEventListener('securitypolicyviolation', e => (window.__csp = window.__csp || []).push(`${e.violatedDirective} ${e.blockedURI}`)); }, [EMU, g]);
     c.on('request', r => { const u = new URL(r.url()); if (!/^(localhost|127\.0\.0\.1)$/.test(u.hostname) && !/(^|\.)(gstatic\.com|googleapis\.com|cloudfunctions\.net|firebaseapp\.com)$/.test(u.hostname)) outside.push(u.hostname); });
     return c; };

@@ -19,7 +19,7 @@ const EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (sub, o = {}) => { const c = await b.newContext({ viewport: { width: o.w || 360, height: o.h || 740 }, hasTouch: true });
-    await c.addInitScript(([s, l, E, nm]) => { window.SFF_REST_EMU = E; window.SFF_TEST_ONB = 1; window.SFF_TEST_GOOGLE = { sub: s, email: s + '@t.local', email_verified: true, name: nm }; localStorage.setItem('sff_lang', l); },
+    await c.addInitScript(([s, l, E, nm]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; window.SFF_TEST_ONB = 1; window.SFF_TEST_GOOGLE = { sub: s, email: s + '@t.local', email_verified: true, name: nm }; localStorage.setItem('sff_lang', l); },
       [sub, o.lang || 'he', EMU, o.name || 'מורה']); return c; };
   const page = async (c, url = APP) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   const shown = p => p.evaluate(() => { const el = document.getElementById('intro'); return el ? { key: el.dataset.key, n: el.querySelectorAll('.idots i').length || 1, text: el.innerText } : null; });

@@ -25,7 +25,7 @@ const call = async (fn, data, token) => { const r = await fetch(`${FN}/${fn}`, {
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
-  const ctx = async (g, lang = 'he') => { const c = await b.newContext({ viewport: { width: 390, height: 844 } }); await c.addInitScript(([E, g, l]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, g, lang]); return c; };
+  const ctx = async (g, lang = 'he') => { const c = await b.newContext({ viewport: { width: 390, height: 844 } }); await c.addInitScript(([E, g, l]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, g, lang]); return c; };
   const signIn = async (c, url) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); await p.waitForTimeout(2000); if (await p.$('#fbGo')) await p.click('#fbGo'); return p; };
   const tokenOf = p => p.evaluate(async () => { const { getAuth } = await import('https://www.gstatic.com/firebasejs/' + window.SFF_FIREBASE_SDK + '/firebase-auth.js'); return getAuth().currentUser.getIdToken(); });
 

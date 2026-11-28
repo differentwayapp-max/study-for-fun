@@ -9,7 +9,7 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (who, name) => { const c = await b.newContext({ viewport: { width: 390, height: 844 } });
-    await c.addInitScript(g => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_TEST_ONB = true; localStorage.setItem('sff_lang', 'he'); },
+    await c.addInitScript(g => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_TEST_ONB = true; localStorage.setItem('sff_lang', 'he'); },
       { sub: who, email: who + '@test.local', email_verified: true, name }); return c; };
   const page = async (c, url) => { const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message)); await p.goto(url, { waitUntil: 'load' }); return p; };
   const intro = async (p, ms = 15000) => { await p.waitForSelector('#intro', { timeout: ms }).catch(() => {});

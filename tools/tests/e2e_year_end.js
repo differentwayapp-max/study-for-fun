@@ -30,10 +30,10 @@ const clean = async now => (await (await fetch(`${FN}/testClean`, { method: 'POS
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
-  const ctx = async g => { const c = await b.newContext({ viewport: { width: 390, height: 844 } }); await c.addInitScript(([E, g]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, [EMU, g]); return c; };
+  const ctx = async g => { const c = await b.newContext({ viewport: { width: 390, height: 844 } }); await c.addInitScript(([E, g]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, [EMU, g]); return c; };
   console.log('0. opening a group: its school year');
   { const c0 = await b.newContext({ viewport: { width: 390, height: 844 } });
-    await c0.addInitScript(([E]) => { window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = { sub: 'yearN', email: 'yearn@t.local', email_verified: true, name: 'רונית' }; window.SFF_TEST_YEARNOTE = 1; localStorage.setItem('sff_lang', 'he'); }, [EMU]);
+    await c0.addInitScript(([E]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = { sub: 'yearN', email: 'yearn@t.local', email_verified: true, name: 'רונית' }; window.SFF_TEST_YEARNOTE = 1; localStorage.setItem('sff_lang', 'he'); }, [EMU]);
     const N = await c0.newPage(); N.on('pageerror', e => errs.push('new: ' + e.message));
     await N.goto(APP + 'teach', { waitUntil: 'load' }); await N.waitForSelector('#fbGo'); await N.click('#fbGo'); await N.waitForSelector('#tsClass'); await N.click('#tsClass'); await N.waitForSelector('#tsYear');
     const f = await N.evaluate(() => ({ opts: [...document.querySelectorAll('#tsYear option')].map(o => [o.value, o.textContent, o.selected]), note: document.getElementById('tsYearNote').textContent }));

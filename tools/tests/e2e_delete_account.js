@@ -24,7 +24,7 @@ const authUsers = async ids => ((await (await fetch(`${AUTH}/identitytoolkit.goo
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const c = await b.newContext({ viewport: { width: 390, height: 844 } });
-  await c.addInitScript(([E]) => { window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = { sub: 'delP', email: 'delp@t.local', email_verified: true, name: 'שירה כהן' }; localStorage.setItem('sff_lang', 'he'); }, [EMU]);
+  await c.addInitScript(([E]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = { sub: 'delP', email: 'delp@t.local', email_verified: true, name: 'שירה כהן' }; localStorage.setItem('sff_lang', 'he'); }, [EMU]);
   const p = await c.newPage(); p.on('pageerror', e => errs.push(e.message));
   await p.goto(APP, { waitUntil: 'load' }); await p.waitForTimeout(2000); if (await p.$('#fbGo')) await p.click('#fbGo');
   await p.waitForFunction(() => window.SFF_ROLE && window.SFF_UID, null, { timeout: 25000 }); await p.waitForTimeout(1500);

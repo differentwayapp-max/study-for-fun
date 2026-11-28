@@ -23,7 +23,7 @@ const KIDS = [['k1', 'נועה כ.', .95], ['k2', 'יונתן ב.', .3], ['k3', 
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (o = {}) => { const c = await b.newContext({ viewport: { width: o.w || 390, height: o.h || 844 } });
-    await c.addInitScript(([E, g, l]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
+    await c.addInitScript(([E, g, l]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
   const GOOGLE = { sub: 'teacherR', email: 'teacherr@t.local', email_verified: true, name: 'דנה לוי' };
 
   console.log('1. a group with students, sets and games');

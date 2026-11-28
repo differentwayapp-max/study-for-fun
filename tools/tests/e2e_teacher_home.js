@@ -20,7 +20,7 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
   const errs = [];
   const GOOGLE = { sub: 'teacherH', email: 'teacherh@t.local', email_verified: true, name: 'דנה לוי' };
   const ctx = async (o = {}) => { const c = await b.newContext({ viewport: { width: o.w || 360, height: o.h || 780 }, deviceScaleFactor: o.dpr || 1 });
-    await c.addInitScript(([g, l]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [o.google || GOOGLE, o.lang || 'he']); return c; };
+    await c.addInitScript(([g, l]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [o.google || GOOGLE, o.lang || 'he']); return c; };
   const home = async p => { await p.evaluate(() => { go('kids'); }); await p.waitForTimeout(500); };
   // a group's data, written as the server would (the emulator's owner): students, consents, games, an assignment
   const seed = async (p, cid, plan, asg) => {

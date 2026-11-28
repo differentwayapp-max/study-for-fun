@@ -24,7 +24,7 @@ const KIDS = [['k1', 'נועה כ.'], ['k2', 'יונתן ב.'], ['k3', 'מאיה
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async (o = {}) => { const c = await b.newContext({ viewport: { width: o.w || 360, height: o.h || 740 } });
-    await c.addInitScript(([E, g, l]) => { window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
+    await c.addInitScript(([E, g, l]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; if (g) window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', l); }, [EMU, o.google || null, o.lang || 'he']); return c; };
   const GOOGLE = { sub: 'teacherA4', email: 'teachera4@t.local', email_verified: true, name: 'דנה לוי' };
   const teacher = async (o = {}) => { const c = await ctx({ google: GOOGLE, ...o }), p = await c.newPage(); p.on('pageerror', e => errs.push('teacher: ' + e.message + ' @ ' + String(e.stack || '').split('\n').slice(1, 3).join(' ')));
     await p.goto(APP + 'teach', { waitUntil: 'load' }); await p.waitForSelector('#fbGo', { timeout: 20000 }); await p.click('#fbGo');   // the teachers' app

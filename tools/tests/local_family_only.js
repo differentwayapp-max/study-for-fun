@@ -22,6 +22,14 @@ const { chromium } = require('playwright');
     });
     await p.close();
   }
+  // a teacher's links (joining a group / a parent's status page) open only the "soon" note – no anonymous sign-in, no request
+  for (const q of ['join=AbCdEfGhIjKlMnOpQrSt.0123456789abcdef', 'req=AbCdEfGhIjKlMnOpQrSt.ZyXwVuTsRqPoNmLkJiHg.0123456789abcdef0123']) {
+    const p = await (await b.newContext({ viewport: { width: 390, height: 844 } })).newPage(); p.on('pageerror', e => errs.push(e.message));
+    await p.addInitScript(() => localStorage.setItem('sff_lang', 'he'));
+    await p.goto('http://localhost:8765/?' + q, { waitUntil: 'load' }); await p.waitForSelector('#teachSoon', { timeout: 15000 }).catch(() => {});
+    out[q.slice(0, 4)] = await p.evaluate(() => ({ soon: !!document.getElementById('teachSoon'), text: document.getElementById('teachSoon')?.innerText || '', form: !!document.querySelector('#joinPage canvas, #joinPage input'), login: !!document.getElementById('fbLogin') }));
+    await p.close();
+  }
   console.log(JSON.stringify(out, null, 1));
   const off = out[false], on = out[true];
   const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) errs.push(m); };
@@ -29,6 +37,7 @@ const { chromium } = require('playwright');
   ok(!off.menu, '☰: no "to the teachers\' app" (also for an adult who teaches)');
   ok(!off.tutorRole, 'invitation: no "private tutor" role');
   ok(!off.introTeacher, 'intro / store screens: no teacher');
+  for (const k of ['join', 'req=']) { const j = out[k]; ok(j && j.soon && /תיפתח בקרוב/.test(j.text) && !j.form && !j.login, `a teacher's ${k.replace('=', '')} link: only "joining a teacher's group opens soon"`); }
   ok(on.login.teachLink && on.menu && on.tutorRole && on.introTeacher, 'SFF_TEACH_LINKS = true: all of them come back');
   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
 })();

@@ -33,7 +33,7 @@ const SCREENS = [
     const tag = W === 360 ? lang : `${lang}${W}`;
     const p = await (await b.newContext({ viewport: { width: W, height: W === 320 ? 560 : 720 }, deviceScaleFactor: 1 })).newPage();
     const errs = []; p.on('pageerror', e => errs.push(e.message)); p.on('console', m => { if (m.type() === 'error' && !/permission|Failed to load resource|ERR_|net::/i.test(m.text())) errs.push('console: ' + m.text().slice(0, 120)); });
-    await p.addInitScript(([l, t]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = { sub: 'qa' + t, email: 'differentway.app@gmail.com', email_verified: true, name: 'טליה' }; localStorage.setItem('sff_lang', l); }, [lang, tag]);
+    await p.addInitScript(([l, t]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = { sub: 'qa' + t, email: 'differentway.app@gmail.com', email_verified: true, name: 'טליה' }; localStorage.setItem('sff_lang', l); }, [lang, tag]);
     await p.goto('http://localhost:8765/', { waitUntil: 'load' }); await p.waitForTimeout(2500); if (await p.$('#fbGo')) await p.click('#fbGo');
     await p.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await p.waitForTimeout(2500);
     await p.evaluate(async () => { kids.push({ id: 'k1', name: 'בן', grade: 6, color: '#2F6BFF' }, { id: 'k2', name: 'עדי', grade: 3, color: '#FF5C8A' }); saveKids();
@@ -70,7 +70,7 @@ const SCREENS = [
     const tag = W === 360 ? lang : `${lang}${W}`;
     const p = await (await b.newContext({ viewport: { width: W, height: W === 320 ? 560 : 720 }, deviceScaleFactor: 1 })).newPage();
     const errs = []; p.on('pageerror', e => errs.push(e.message));
-    await p.addInitScript(([l, t]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
+    await p.addInitScript(([l, t]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' };
       window.SFF_TEST_GOOGLE = { sub: 'qat' + t, email: 'qat' + t + '@t.local', email_verified: true, name: 'מורה' }; localStorage.setItem('sff_lang', l); }, [lang, tag]);
     const check = async name => { const r = await p.evaluate(lang => {
         const vis = el => el && el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden'; let heb = [];

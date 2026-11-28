@@ -42,7 +42,7 @@ const HALF = (view) => { const v = document.getElementById(view), st = [...v.que
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
   const errs = [];
   const ctx = async g => { const c = await b.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
-    await c.addInitScript(([E, g]) => { window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, [EMU, g]); return c; };
+    await c.addInitScript(([E, g]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = E; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, [EMU, g]); return c; };
   const shot = async (p, name) => { if (process.env.OUT) await p.screenshot({ path: `${OUT}/layout_${name}.png` }); };
 
   console.log('1. a family: 4 kids, one with 1 practice set, one with 5');

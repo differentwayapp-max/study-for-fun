@@ -18,7 +18,7 @@ const exists = path => fetch(`${DOCS}/${path}`, { headers: { Authorization: 'Bea
     const c = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 }); const p = await c.newPage();
     p.on('pageerror', e => errs.push(who + ': ' + e.message));
     p.on('console', m => { const t = m.text(); if (/permission|insufficient/i.test(t)) denied.push(who + ': ' + t.slice(0, 160)); });
-    await p.addInitScript(([g, l, sd]) => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_FAKE_AI = true; window.SFF_AI_ENABLED = true;
+    await p.addInitScript(([g, l, sd]) => { window.SFF_TEACH_LINKS = true; window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; window.SFF_FAKE_AI = true; window.SFF_AI_ENABLED = true;
       localStorage.setItem('sff_lang', l); if (sd && !sessionStorage.getItem('seeded')) { sessionStorage.setItem('seeded', '1'); for (const [k, v] of Object.entries(sd)) localStorage.setItem(k, v); } },
       [{ sub: who, email: who + '@test.local', email_verified: true, name: { owner: 'טליה', tutor: 'דנה המורה', old: 'מורה ותיק' }[who] || who }, lang, seed || null]);
     await p.goto(url, { waitUntil: 'load' }); await p.waitForTimeout(2500);

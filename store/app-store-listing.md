@@ -4,8 +4,8 @@
 אפליקציית האייפון: `apple/` (Capacitor), נבנית בענן (GitHub Actions → `.github/workflows/ios.yml`). אייפון בלבד, לאורך.
 
 ## לפני ההגשה – חובה
-1. `GoogleService-Info.plist` (Firebase → Project settings → אפליקציית iOS `app.dway.studyforfun`) ב-`apple/` – בלעדיו אין כניסה.
-2. כניסה עם Apple מופעלת: Firebase → Authentication → Sign-in method → Apple (Services ID + מפתח מ-Apple Developer) → `APPLE_SIGNIN=true` ב-index.html + פריסה. אפל מחייבת אותה כשיש כניסה עם Google (סעיף 4.8).
+1. ✅ `GoogleService-Info.plist` ב-`apple/` (28.11).
+2. ✅ Apple מופעל ב-Firebase (28.11) – הכפתור מופיע באפליקציית האייפון (אפל מחייבת אותו, סעיף 4.8). לדפדפן: Services ID + מפתח מ-Apple Developer → `APPLE_SIGNIN=true`. **צריך פריסה של המערכת לפני TestFlight.**
 3. קובץ Universal Links: `public/.well-known/apple-app-site-association` עם ה-Team ID (נוצר כשהחשבון מאושר) – כך קישור ילד נפתח באפליקציה.
 4. מדיניות הפרטיות: להוסיף "כניסה עם Apple" (שם ומייל, או מייל מוסתר של אפל) לצד Google.
 5. סודות ב-GitHub (Settings → Secrets → Actions): `APPLE_TEAM_ID`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8` → Actions → iOS → Run workflow → upload ✓ → TestFlight.

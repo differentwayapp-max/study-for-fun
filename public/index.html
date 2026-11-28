@@ -1548,7 +1548,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
   const base = `https://www.gstatic.com/firebasejs/${V}/`;
   const W = window, LS = W.localStorage;
   const TEACH = W.SFF_APP === 'teach', ACT = TEACH ? 'sff_active_teach' : 'sff_active_fam';   /* each app remembers its own open space */
-const APPLE_SIGNIN=false; // true once Authentication → Sign-in method → Apple is on (Services ID + key from the Apple Developer account)
+const APPLE_SIGNIN=false; // the WEB's Apple button: true once the Apple provider in Firebase has a Services ID + key (Apple Developer account). The iPhone app shows it always.
 /* the iPhone app (apple/, Capacitor): Google and Apple sign in through the phone's own sheets (a popup or Google's page inside
    the app's web view is refused), then the credential signs in here – the web Firebase SDK stays the only sign-in. */
 const NATIVE_APP = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
@@ -2080,7 +2080,7 @@ const PRIVACY_VERSION = '2026-11-27'; // the date at the top of privacy.html –
       // email: a one-time sign-in link (Firebase sends it); the address is kept on this phone to finish the sign-in
       // the email sign-in shows only once "Email link (passwordless sign-in)" is on in the Firebase console (tests turn it on)
       if (EMAIL_LINK || W.SFF_REST_EMU) el.querySelector('#fbEmailBtn').classList.remove('hidden');
-      if (APPLE_SIGNIN) el.querySelector('#fbApple').classList.remove('hidden');
+      if (APPLE_SIGNIN || NATIVE_AUTH) el.querySelector('#fbApple').classList.remove('hidden');   // the iPhone app: Apple is on in Firebase (28.11); the web needs a Services ID first
       el.querySelector('#fbApple').onclick = () => { pick('parent'); signIn('apple'); };
       el.querySelector('#fbEmailBtn').onclick = () => { el.querySelector('#fbEmail').classList.toggle('hidden'); el.querySelector('#fbEmailIn').focus(); };
       el.querySelector('#fbEmailGo').onclick = async () => {

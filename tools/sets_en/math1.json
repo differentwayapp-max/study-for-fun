@@ -697,7 +697,7 @@
    "he": "רון הגיע שני, דנה אחריו. במקום כמה דנה?",
    "a": "שלישית",
    "h": "c58c4cb5",
-   "q": "Ron came second. Dana came right after him. What place is Dana?",
+   "q": "Ron came second, Dana right after him. What place did Dana get?",
    "o": [
     "third",
     "second",
@@ -862,12 +862,12 @@
    "he": "נועה שנייה בתור. מי עומד לפניה?",
    "a": "הראשון",
    "h": "551c26b8",
-   "q": "Noa is second in line. The child in front of her is…",
+   "q": "Noa is second in line. The place just before hers is…",
    "o": [
     "first",
     "third",
     "fourth",
-    "no one"
+    "none"
    ],
    "x": "Only the first child is in front of the second"
   },
@@ -1142,7 +1142,11 @@
     "⁦8⁩",
     "⁦1⁩"
    ],
-   "x": "⁦3 + 4 = 7⁩"
+   "x": "⁦3 + 4 = 7⁩",
+   "sc": {
+    "1": "4",
+    "2": "3"
+   }
   },
   {
    "he": "הצפרדע ב-⁦9⁩, קפצה ⁦3⁩ אחורה. איפה היא?",
@@ -1155,7 +1159,11 @@
     "⁦5⁩",
     "⁦7⁩"
    ],
-   "x": "⁦9 − 3 = 6⁩"
+   "x": "⁦9 − 3 = 6⁩",
+   "sc": {
+    "1": "3",
+    "2": "9"
+   }
   },
   {
    "he": "מ-⁦0⁩ קופצים ⁦2⁩, ⁦2⁩, ⁦2⁩. לאן מגיעים?",
@@ -1181,7 +1189,11 @@
     "⁦14⁩",
     "⁦16⁩"
    ],
-   "x": "⁦10 + 5 = 15⁩"
+   "x": "⁦10 + 5 = 15⁩",
+   "sc": {
+    "1": "5",
+    "2": "10"
+   }
   },
   {
    "he": "מ-⁦12⁩ קופצים ⁦2⁩ אחורה. לאן מגיעים?",
@@ -1194,7 +1206,11 @@
     "⁦11⁩",
     "⁦9⁩"
    ],
-   "x": "⁦12 − 2 = 10⁩"
+   "x": "⁦12 − 2 = 10⁩",
+   "sc": {
+    "1": "2",
+    "2": "12"
+   }
   },
   {
    "he": "מה המספר שבאמצע בין ⁦4⁩ ל-⁦8⁩?",
@@ -1259,7 +1275,11 @@
     "⁦19⁩",
     "⁦0⁩"
    ],
-   "x": "⁦20 − 10 = 10⁩"
+   "x": "⁦20 − 10 = 10⁩",
+   "sc": {
+    "1": "10",
+    "2": "20"
+   }
   },
   {
    "he": "מ-⁦0⁩ קופצים בעשרות: ⁦10, 20, _⁩",
@@ -1337,7 +1357,11 @@
     "⁦6⁩",
     "⁦4⁩"
    ],
-   "x": "⁦8 + 2 + 2 = 12⁩"
+   "x": "⁦8 + 2 + 2 = 12⁩",
+   "sc": {
+    "1": "2",
+    "3": "8"
+   }
   },
   {
    "he": "איזה מספר בדיוק באמצע בין ⁦10⁩ ל-⁦20⁩?",
@@ -1363,7 +1387,11 @@
     "⁦11⁩",
     "⁦5⁩"
    ],
-   "x": "⁦15 − 5 = 10⁩"
+   "x": "⁦15 − 5 = 10⁩",
+   "sc": {
+    "1": "5",
+    "2": "15"
+   }
   },
   {
    "he": "כמה צעדים מ-⁦6⁩ עד ⁦10⁩?",
@@ -1694,7 +1722,7 @@
    "he": "איזה זוג יוצר ⁦10⁩?",
    "a": "⁦7 + 3⁩",
    "h": "d6bb68e7",
-   "q": "Which pair makes 10?",
+   "q": "Which of these pairs makes 10?",
    "o": [
     "⁦7 + 3⁩",
     "⁦6 + 3⁩",
@@ -1824,7 +1852,7 @@
    "he": "איזה זוג יוצר ⁦10⁩?",
    "a": "⁦4 + 6⁩",
    "h": "b809a846",
-   "q": "Which pair makes 10?",
+   "q": "Which of these pairs makes 10?",
    "o": [
     "⁦4 + 6⁩",
     "⁦4 + 5⁩",
@@ -1909,7 +1937,11 @@
     "⁦3⁩",
     "⁦6⁩"
    ],
-   "x": "⁦6 + 4 = 10⁩"
+   "x": "⁦6 + 4 = 10⁩",
+   "sc": {
+    "2": "6",
+    "3": "10"
+   }
   },
   {
    "he": "⁦10 + 5 =⁩",
@@ -2468,7 +2500,11 @@
     "⁦14⁩",
     "⁦16⁩"
    ],
-   "x": "⁦11 + 4 = 15⁩"
+   "x": "⁦11 + 4 = 15⁩",
+   "sc": {
+    "1": "4",
+    "2": "11"
+   }
   },
   {
    "he": "בכיתה ⁦8⁩ בנים ו-⁦9⁩ בנות. כמה ילדים?",
@@ -2481,7 +2517,11 @@
     "⁦16⁩",
     "⁦18⁩"
    ],
-   "x": "⁦8 + 9 = 17⁩"
+   "x": "⁦8 + 9 = 17⁩",
+   "sc": {
+    "2": "9",
+    "3": "8"
+   }
   },
   {
    "he": "בקערה ⁦5⁩ תפוחים ו-⁦5⁩ אגסים. כמה פירות?",
@@ -2526,14 +2566,18 @@
    "he": "בספרייה ⁦12⁩ ספרים, הביאו עוד ⁦3⁩. כמה?",
    "a": "⁦15⁩",
    "h": "8a8c2d9e",
-   "q": "The library has 12 books. 3 more come. How many now?",
+   "q": "The library has 12 books. They bring 3 more. How many now?",
    "o": [
     "⁦15⁩",
     "⁦9⁩",
     "⁦14⁩",
     "⁦16⁩"
    ],
-   "x": "⁦12 + 3 = 15⁩"
+   "x": "⁦12 + 3 = 15⁩",
+   "sc": {
+    "1": "3",
+    "2": "12"
+   }
   },
   {
    "he": "כלב וחתול. כמה רגליים יחד?",
@@ -2604,7 +2648,7 @@
    "he": "בעוגה ⁦12⁩ נרות, כיבו ⁦5⁩. כמה דולקים?",
    "a": "⁦7⁩",
    "h": "edd04a14",
-   "q": "We blew out 5 of 12 candles. How many are lit?",
+   "q": "We blew out 5 of 12 candles. How many are still lit?",
    "o": [
     "⁦7⁩",
     "⁦17⁩",
@@ -2617,7 +2661,7 @@
    "he": "בבריכה ⁦9⁩ ילדים, ⁦6⁩ יצאו. כמה נשארו?",
    "a": "⁦3⁩",
    "h": "ddaa8110",
-   "q": "9 kids are in the pool. 6 got out. How many stayed?",
+   "q": "9 kids were in the pool. 6 got out. How many stayed?",
    "o": [
     "⁦3⁩",
     "⁦15⁩",
@@ -2630,7 +2674,7 @@
    "he": "לדנה ⁦7⁩ מדבקות ולגיל ⁦4⁩. כמה יותר לדנה?",
    "a": "⁦3⁩",
    "h": "373d7a8b",
-   "q": "Dana has 7 stickers, Gil has 4. How many more for Dana?",
+   "q": "Dana has 7 stickers, Gil 4. How many more does Dana have?",
    "o": [
     "⁦3⁩",
     "⁦11⁩",
@@ -2660,7 +2704,7 @@
    "he": "בעץ ⁦6⁩ תפוחים. נפלו ⁦6⁩. כמה נשארו?",
    "a": "⁦0⁩",
    "h": "523dd7ff",
-   "q": "A tree has 6 apples. 6 fell. How many are left?",
+   "q": "6 apples were on a tree. 6 fell. How many are left?",
    "o": [
     "⁦0⁩",
     "⁦12⁩",
@@ -3158,7 +3202,7 @@
    "he": "מה שווה ל-⁦4 + 4⁩?",
    "a": "⁦6 + 2⁩",
    "h": "9ca2c0bf",
-   "q": "What is equal to 4 + 4?",
+   "q": "Which of these equals 4 + 4?",
    "o": [
     "⁦6 + 2⁩",
     "⁦5 + 2⁩",
@@ -3184,7 +3228,7 @@
    "he": "איזה מספר גדול מ-⁦38⁩?",
    "a": "⁦40⁩",
    "h": "45e58a24",
-   "q": "Which number is greater than 38?",
+   "q": "Which of these is greater than 38?",
    "o": [
     "⁦40⁩",
     "⁦30⁩",
@@ -3223,7 +3267,7 @@
    "he": "בדיאגרמה: מה יש הכי הרבה?",
    "a": "ענבים",
    "h": "2d4b00f5",
-   "q": "In the graph, which fruit has the most?",
+   "q": "In the graph, which fruit is there the most of?",
    "o": [
     "Grapes",
     "Apples",
@@ -3249,7 +3293,7 @@
    "he": "בדיאגרמה: מה יש הכי מעט?",
    "a": "בננות",
    "h": "36bada2c",
-   "q": "In the graph, which fruit has the least?",
+   "q": "In the graph, what is there the least of?",
    "o": [
     "Bananas",
     "Grapes",
@@ -3327,7 +3371,7 @@
    "he": "איזה מזג אוויר היה הכי הרבה?",
    "a": "שמש",
    "h": "2c3548f6",
-   "q": "What weather did we have the most?",
+   "q": "What weather did we have most often?",
    "o": [
     "Sun",
     "Rain",
@@ -3455,7 +3499,7 @@
    "he": "לפי הטבלה: מה היה הכי מעט?",
    "a": "גשם",
    "h": "1ffc2881",
-   "q": "In the table, what weather was the least?",
+   "q": "In the table, which weather came up the least?",
    "o": [
     "Rain",
     "Sun",
@@ -3614,7 +3658,7 @@
    "he": "חצי מהעוגיות לאחי. כמה הוא קיבל?",
    "a": "⁦5⁩",
    "h": "09357af6",
-   "q": "Half the cookies go to my brother. How many did he get?",
+   "q": "I gave my brother half the cookies. How many did he get?",
    "o": [
     "⁦5⁩",
     "⁦10⁩",
@@ -3763,7 +3807,7 @@
    "he": "ליוסי ⁦6⁩ סוכריות. נתן חצי. כמה נתן?",
    "a": "⁦3⁩",
    "h": "89a2f88d",
-   "q": "Yossi has 6 candies. He gave away half. How many?",
+   "q": "Yossi had 6 candies. He gave half away. How many was that?",
    "o": [
     "⁦3⁩",
     "⁦6⁩",
@@ -4322,7 +4366,7 @@
    "he": "עיפרון ⁦8⁩ ס\"מ, מחק ⁦3⁩. בכמה ארוך יותר?",
    "a": "5 ס\"מ",
    "h": "5b6ffc3e",
-   "q": "A pencil is 8 cm, an eraser 3. How much longer?",
+   "q": "Pencil 8 cm, eraser 3 cm. How much longer is the pencil?",
    "o": [
     "5 cm",
     "11 cm",
@@ -4555,7 +4599,7 @@
    "he": "תולעת ⁦3⁩ ס\"מ גדלה עוד ⁦2⁩. כמה עכשיו?",
    "a": "5 ס\"מ",
    "h": "c9bca7c2",
-   "q": "A 3 cm worm grew 2 more. How long is it now?",
+   "q": "A 3 cm worm grew 2 cm. How long is it now?",
    "o": [
     "5 cm",
     "1 cm",
@@ -4940,7 +4984,7 @@
    "he": "בכיתה ⁦9⁩ ילדים, יצאו ⁦4⁩. כמה נשארו?",
    "a": "⁦5⁩",
    "h": "fe41e1ab",
-   "q": "9 kids are in the class. 4 went out. How many stayed?",
+   "q": "9 kids were in the class. 4 went out. How many stayed?",
    "o": [
     "⁦5⁩",
     "⁦13⁩",

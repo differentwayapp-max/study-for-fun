@@ -1322,63 +1322,6 @@
    ]
   },
   {
-   "id": "math1",
-   "ver": "957ef156c5",
-   "subject": "מתמטיקה",
-   "grade": 0,
-   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
-   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
-   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
-   "tags": [
-    "מספרים עד 100",
-    "מספרים סודרים",
-    "זוגי ואי-זוגי",
-    "פירוקי 10",
-    "חיבור וחיסור עד 20",
-    "כפל וחילוק ראשון",
-    "חצי",
-    "דיאגרמת תמונות",
-    "צורות",
-    "שעון"
-   ],
-   "questions": 377,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה תפוחים?",
-     "e": "🍎🍎",
-     "q_en": "How many apples?"
-    },
-    {
-     "q": "איזה מספר בא אחרי ⁦12⁩?",
-     "e": "12, ?",
-     "q_en": "What number comes after 12?"
-    },
-    {
-     "q": "כמה בסך הכול?",
-     "e": "🔟🔟",
-     "q_en": "How many in all?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 1",
-   "title_en": "Numbers · Addition and subtraction · Shapes · Data · The clock",
-   "tags_en": [
-    "Numbers to 100",
-    "Ordinal numbers",
-    "Even and odd",
-    "Number bonds to 10",
-    "Addition and subtraction to 20",
-    "Multiplication and division – first steps",
-    "Half",
-    "Pictographs",
-    "Shapes",
-    "The clock"
-   ]
-  },
-  {
    "id": "math2",
    "ver": "2304b256a0",
    "subject": "מתמטיקה",
@@ -1567,6 +1510,63 @@
     "Perimeter and area",
     "Time and units",
     "Data handling"
+   ]
+  },
+  {
+   "id": "math1",
+   "ver": "a88e2a469a",
+   "subject": "מתמטיקה",
+   "grade": 0,
+   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
+   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
+   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
+   "tags": [
+    "מספרים עד 100",
+    "מספרים סודרים",
+    "זוגי ואי-זוגי",
+    "פירוקי 10",
+    "חיבור וחיסור עד 20",
+    "כפל וחילוק ראשון",
+    "חצי",
+    "דיאגרמת תמונות",
+    "צורות",
+    "שעון"
+   ],
+   "questions": 377,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "כמה תפוחים?",
+     "e": "🍎🍎",
+     "q_en": "How many apples?"
+    },
+    {
+     "q": "איזה מספר בא אחרי ⁦12⁩?",
+     "e": "12, ?",
+     "q_en": "What number comes after 12?"
+    },
+    {
+     "q": "כמה בסך הכול?",
+     "e": "🔟🔟",
+     "q_en": "How many in all?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 1",
+   "title_en": "Numbers · Addition and subtraction · Shapes · Data · The clock",
+   "tags_en": [
+    "Numbers to 100",
+    "Ordinal numbers",
+    "Even and odd",
+    "Number bonds to 10",
+    "Addition and subtraction to 20",
+    "Multiplication and division – first steps",
+    "Half",
+    "Pictographs",
+    "Shapes",
+    "The clock"
    ]
   }
  ]

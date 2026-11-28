@@ -99,7 +99,7 @@
 - `IDS=math8 node tools/tests/local_scenes.js`: ‏**0 bad scenes**.
 - `node tools/match_list.js math8`: רץ. ההתנגשויות נבדקו כמתואר למעלה.
 - `node tools/tests/local_optsq.js`: ‏`{"errs":[]}`.
-- `tools/tests/local_*.js`: כל הבדיקות שרצו עברו (ראו את הסיכום שלי).
+- `tools/tests/local_*.js`: כל 21 הבדיקות עברו, וכולן החזירו `errs: []` או "no page errors". את `local_scenes` הרצתי רק על math8.
 
 ## מה דולג ולמה
 - **המשפט הרביעי (צ.צ.ז), מעריך שלילי וכתיב מדעי:** מחכים להחלטת הבעלים (התלבטויות 2–3 בדוח).

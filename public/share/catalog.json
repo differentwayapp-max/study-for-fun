@@ -939,174 +939,6 @@
    "status": "ready"
   },
   {
-   "id": "sci8",
-   "ver": "2196e0b978",
-   "subject": "מדעים",
-   "grade": 7,
-   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
-   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
-   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
-   "tags": [
-    "יסודות ותרכובות",
-    "האטום",
-    "נוסחאות כימיות",
-    "טבלה מחזורית",
-    "תגובה כימית",
-    "מעגלים חשמליים",
-    "בטיחות בחשמל",
-    "כוחות",
-    "חוקי ניוטון",
-    "מהירות",
-    "רבייה",
-    "מארג מזון",
-    "יחסי גומלין",
-    "התאמות לסביבה",
-    "שינוי האקלים",
-    "תיכון הנדסי",
-    "מערכות טכנולוגיות"
-   ],
-   "questions": 390,
-   "chapters": 37,
-   "reading": 1,
-   "words": 0,
-   "samples": [
-    {
-     "q": "יסוד הוא חומר הבנוי מ…",
-     "e": "🔵🔵"
-    },
-    {
-     "q": "באיזה זוג שני החומרים הם יסודות?",
-     "e": "💧🔩"
-    },
-    {
-     "q": "איפה נמצאים הפרוטונים?",
-     "e": "⚛️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math7",
-   "ver": "0efa1f284f",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
-   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
-   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
-   "tags": [
-    "מספרים מכוונים",
-    "ביטויים אלגבריים",
-    "כינוס איברים",
-    "חוק הפילוג",
-    "משוואות",
-    "בעיות מילוליות",
-    "מערכת צירים",
-    "פונקציות וגרפים",
-    "חזקות ושורשים",
-    "יחס",
-    "שטחים",
-    "זוויות"
-   ],
-   "questions": 338,
-   "questions2": 58,
-   "chapters": 32,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
-     "e": "-6 ? -11"
-    },
-    {
-     "q": "⁦-4·(-6) = ?⁩",
-     "e": "-4·(-6)= ?"
-    },
-    {
-     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
-     "e": "2x + 1x = 3"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en7",
-   "ver": "0a96e0430f",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
-   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
-   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
-   "tags": [
-    "Past Simple",
-    "Past Progressive",
-    "will / going to",
-    "Comparatives",
-    "as … as",
-    "Adverbs",
-    "too / enough",
-    "Modals",
-    "Quantifiers",
-    "Connectors",
-    "Band II words",
-    "Unseen"
-   ],
-   "questions": 372,
-   "chapters": 35,
-   "reading": 4,
-   "words": 58,
-   "samples": [
-    {
-     "q": "Yesterday I ___ my room.",
-     "e": "🧹🛏️"
-    },
-    {
-     "q": "Which day is in the past?",
-     "e": "📅⬅️"
-    },
-    {
-     "q": "Past of bring?",
-     "e": "🎒bring → ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "en7-nov26",
-   "ver": "2664515494",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Start of grade 7 review · Present Simple · Words",
-   "desc": "חזרה לתחילת כיתה ז': Present Simple (has, does, don't, שאלות, always / never), כ-110 מילים (מזג אוויר, טבע ומקומות, פעולות, תיאור) וקטע קריאה",
-   "desc_en": "Start of grade 7 review: Present Simple (has, does, don't, questions, always / never), about 110 words (weather, nature and places, actions, describing words) and a reading passage",
-   "tags": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
-   ],
-   "questions": 178,
-   "chapters": 13,
-   "reading": 1,
-   "words": 112,
-   "samples": [
-    {
-     "q": "She ___ to the pool every Monday.",
-     "e": "👧🏊‍♀️"
-    },
-    {
-     "q": "What is falling?",
-     "e": "🌧️"
-    },
-    {
-     "q": "She ___ like snow.",
-     "e": "👧❄️"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "en6",
    "ver": "3edfab00ba",
    "subject": "אנגלית",
@@ -1148,85 +980,6 @@
     {
      "q": "Fish ___ swim, but they can't walk.",
      "e": "🐟"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math7-nov26",
-   "ver": "981355fb93",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מערכת צירים · מספרים מכוונים · זוויות",
-   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות",
-   "desc_en": "Coordinates, absolute value, signed numbers, angles",
-   "tags": [
-    "מערכת צירים",
-    "ציר המספרים",
-    "ערך מוחלט",
-    "שטח והיקף",
-    "סדר פעולות",
-    "זוויות",
-    "חוצה זווית"
-   ],
-   "questions": 124,
-   "chapters": 10,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
-     "e": "(3, 5)"
-    },
-    {
-     "q": "איזה מהם הכי גדול?",
-     "e": "-2    -7-10    -15"
-    },
-    {
-     "q": "⁦|-5| = ?⁩",
-     "e": "|-5| = ?"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "heb7",
-   "ver": "8c019230bc",
-   "subject": "עברית / לשון",
-   "grade": 6,
-   "title": "הבנת הנקרא · סיכום · טיעון · תחביר · פיסוק · שורשים ובניינים · משקלים · סמיכות · שם המספר · משלב",
-   "desc": "ארבעה קטעי קריאה (טיעון ומידע), סיכום וסיכום ממזג, כתיבת טיעון, חלקי המשפט, סוגי משפטים, מילות קישור, שורשים וגזרות, בניינים, משקלים, שם המספר, מילות יחס בנטייה, משלב לשון, פיסוק (מירכאות, ציטוט וקו מפריד) וסמיכות ונטיית השם",
-   "desc_en": "Four reading passages (argument and information), summary and merged summary, argument writing, parts of the sentence, sentence types, connectors, roots and verb groups, binyanim, noun patterns, number words, inflected prepositions, register, punctuation (quotation marks, quoting and the dash) and construct state with possessive endings",
-   "tags": [
-    "טקסט טיעוני",
-    "טקסט מידעי",
-    "סיכום ממזג",
-    "חלקי המשפט",
-    "מחובר ומורכב",
-    "מילות קישור",
-    "גזרות",
-    "בניינים",
-    "משקלים",
-    "שם המספר",
-    "פיסוק",
-    "סמיכות"
-   ],
-   "questions": 321,
-   "chapters": 31,
-   "reading": 4,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה משאירים מגוף הטקסט בסיכום?",
-     "e": "📄➡️"
-    },
-    {
-     "q": "במה שונה סיכום ממזג מסיכום רגיל?",
-     "e": "📝סיכום ממזג"
-    },
-    {
-     "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
-     "e": "🗣️📄"
     }
    ],
    "status": "ready"
@@ -1454,6 +1207,258 @@
     {
      "q": "איזה יחס לוגי מבטא \"הואיל ו\"?",
      "e": "🌦️הואיל והגשם פסק,"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en7",
+   "ver": "f12bd98728",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Past · Future · Comparing · Adverbs · Modals · Band II words · Unseen",
+   "desc": "אנגלית לכיתה ז' – כל השנה: Past Simple ו-Past Progressive, will ו-going to, השוואות, as … as, תארי פועל, too ו-enough, פעלים מודאליים, כמתים, מילות קישור, אוצר מילים Band II וארבעה קטעי Unseen",
+   "desc_en": "Grade 7 English, the whole year: Past Simple and Past Progressive, will and going to, comparatives and superlatives, as … as, adverbs, too and enough, modals, quantifiers, connectors, Band II words and four Unseen passages",
+   "tags": [
+    "Past Simple",
+    "Past Progressive",
+    "will / going to",
+    "Comparatives",
+    "as … as",
+    "Adverbs",
+    "too / enough",
+    "Modals",
+    "Quantifiers",
+    "Connectors",
+    "Band II words",
+    "Unseen"
+   ],
+   "questions": 372,
+   "questions2": 124,
+   "chapters": 35,
+   "reading": 4,
+   "words": 58,
+   "samples": [
+    {
+     "q": "Yesterday I ___ my room.",
+     "e": "🧹🛏️"
+    },
+    {
+     "q": "Which day is in the past?",
+     "e": "📅⬅️"
+    },
+    {
+     "q": "Past of bring?",
+     "e": "🎒bring → ?"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "en7-nov26",
+   "ver": "411d1b7916",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Start of grade 7 review · Present Simple · Words",
+   "desc": "חזרה לתחילת כיתה ז': Present Simple (has, does, don't, שאלות, always / never), כ-110 מילים (מזג אוויר, טבע ומקומות, פעולות, תיאור) וקטע קריאה",
+   "desc_en": "Start of grade 7 review: Present Simple (has, does, don't, questions, always / never), about 110 words (weather, nature and places, actions, describing words) and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "questions2": 23,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to the pool every Monday.",
+     "e": "👧🏊‍♀️"
+    },
+    {
+     "q": "What is falling?",
+     "e": "🌧️"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "heb7",
+   "ver": "59a93a5c7a",
+   "subject": "עברית / לשון",
+   "grade": 6,
+   "title": "הבנת הנקרא · סיכום · טיעון · תחביר · פיסוק · שורשים ובניינים · משקלים · סמיכות · שם המספר · משלב",
+   "desc": "ארבעה קטעי קריאה (טיעון ומידע), סיכום וסיכום ממזג, כתיבת טיעון, חלקי המשפט, סוגי משפטים, מילות קישור, שורשים וגזרות, בניינים, משקלים, שם המספר, מילות יחס בנטייה, משלב לשון, פיסוק (מירכאות, ציטוט וקו מפריד) וסמיכות ונטיית השם",
+   "desc_en": "Four reading passages (argument and information), summary and merged summary, argument writing, parts of the sentence, sentence types, connectors, roots and verb groups, binyanim, noun patterns, number words, inflected prepositions, register, punctuation (quotation marks, quoting and the dash) and construct state with possessive endings",
+   "tags": [
+    "טקסט טיעוני",
+    "טקסט מידעי",
+    "סיכום ממזג",
+    "חלקי המשפט",
+    "מחובר ומורכב",
+    "מילות קישור",
+    "גזרות",
+    "בניינים",
+    "משקלים",
+    "שם המספר",
+    "פיסוק",
+    "סמיכות"
+   ],
+   "questions": 321,
+   "questions2": 145,
+   "chapters": 31,
+   "reading": 4,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה משאירים מגוף הטקסט בסיכום?",
+     "e": "📄➡️"
+    },
+    {
+     "q": "במה שונה סיכום ממזג מסיכום רגיל?",
+     "e": "📝סיכום ממזג"
+    },
+    {
+     "q": "באיזה חלק בטקסט טיעוני מוצגות הסוגיה והעמדה?",
+     "e": "🗣️📄"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "sci8",
+   "ver": "ef053be0e1",
+   "subject": "מדעים",
+   "grade": 7,
+   "title": "מבנה החומר · חשמל ובטיחות · כוחות ותנועה · רבייה · אקולוגיה ואקלים · טכנולוגיה",
+   "desc": "יסודות ותרכובות, האטום, נוסחאות, הטבלה המחזורית, תגובות כימיות, זרם ומתח, מעגלים, הספק, בטיחות בחשמל, כוחות, חוקי ניוטון, מהירות וגרפים, רבייה והתפתחות, מארג מזון, גורמים בסביבה ויחסי גומלין, שינוי האקלים, תיכון הנדסי ומערכות טכנולוגיות",
+   "desc_en": "Elements and compounds, the atom, formulas, the periodic table, chemical reactions, current and voltage, circuits, power, electrical safety, forces, Newton's laws, speed and graphs, reproduction and development, food webs, environmental factors and interactions between organisms, climate change, engineering design and technological systems",
+   "tags": [
+    "יסודות ותרכובות",
+    "האטום",
+    "נוסחאות כימיות",
+    "טבלה מחזורית",
+    "תגובה כימית",
+    "מעגלים חשמליים",
+    "בטיחות בחשמל",
+    "כוחות",
+    "חוקי ניוטון",
+    "מהירות",
+    "רבייה",
+    "מארג מזון",
+    "יחסי גומלין",
+    "התאמות לסביבה",
+    "שינוי האקלים",
+    "תיכון הנדסי",
+    "מערכות טכנולוגיות"
+   ],
+   "questions": 390,
+   "questions2": 91,
+   "chapters": 37,
+   "reading": 1,
+   "words": 0,
+   "samples": [
+    {
+     "q": "יסוד הוא חומר הבנוי מ…",
+     "e": "🔵🔵"
+    },
+    {
+     "q": "באיזה זוג שני החומרים הם יסודות?",
+     "e": "💧🔩"
+    },
+    {
+     "q": "איפה נמצאים הפרוטונים?",
+     "e": "⚛️"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math7",
+   "ver": "3d0adf01c7",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
+   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
+   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
+   "tags": [
+    "מספרים מכוונים",
+    "ביטויים אלגבריים",
+    "כינוס איברים",
+    "חוק הפילוג",
+    "משוואות",
+    "בעיות מילוליות",
+    "מערכת צירים",
+    "פונקציות וגרפים",
+    "חזקות ושורשים",
+    "יחס",
+    "שטחים",
+    "זוויות"
+   ],
+   "questions": 338,
+   "questions2": 217,
+   "chapters": 32,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
+     "e": "-6 ? -11"
+    },
+    {
+     "q": "⁦-4·(-6) = ?⁩",
+     "e": "-4·(-6)= ?"
+    },
+    {
+     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
+     "e": "2x + 1x = 3"
+    }
+   ],
+   "status": "ready"
+  },
+  {
+   "id": "math7-nov26",
+   "ver": "2d04ca3f4b",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מערכת צירים · מספרים מכוונים · זוויות",
+   "desc": "צירים, ערך מוחלט, סדר פעולות וזוויות",
+   "desc_en": "Coordinates, absolute value, signed numbers, angles",
+   "tags": [
+    "מערכת צירים",
+    "ציר המספרים",
+    "ערך מוחלט",
+    "שטח והיקף",
+    "סדר פעולות",
+    "זוויות",
+    "חוצה זווית"
+   ],
+   "questions": 124,
+   "questions2": 40,
+   "chapters": 10,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "באיזה רביע הנקודה ⁦(3,5)⁩?",
+     "e": "(3, 5)"
+    },
+    {
+     "q": "איזה מהם הכי גדול?",
+     "e": "-2    -7-10    -15"
+    },
+    {
+     "q": "⁦|-5| = ?⁩",
+     "e": "|-5| = ?"
     }
    ],
    "status": "ready"

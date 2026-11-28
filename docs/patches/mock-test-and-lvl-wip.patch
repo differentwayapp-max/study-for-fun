@@ -1,0 +1,710 @@
+diff --git a/public/i18n.js b/public/i18n.js
+index cf85b01..9a133a9 100644
+--- a/public/i18n.js
++++ b/public/i18n.js
+@@ -115,6 +115,11 @@
+     'בנייה מהחומר שלכם': 'Build from your own material', 'חסר תרגול': 'Missing a practice set', 'בנייה עם AI מהחומר שלכם – בקרוב': 'Building with AI from your material – coming soon',
+     'תאריך המבחן': 'Test date', '(לא חובה)': '(optional)', 'מה אני יודע': 'What I know', 'עברתי': 'Passed', 'לנסות שוב': 'Try again', 'פרקים לנסות שוב': 'Chapters to try again', 'לתרגל שוב': 'Practise again',
+     'לתרגל אותן עכשיו': 'Practise them now', 'אני יודע': 'I know', 'אין מה לתרגל שוב – כל הכבוד': 'Nothing to practise again – well done', 'עוד לא שיחקת – מתחילים': "You haven't played yet – let's start",
++    '⭐ שלב מבחן': '⭐ Test stage', '⭐ מבחן': '⭐ Test', '⭐ עבר את שלב המבחן': '⭐ Passed the test stage', '⭐ עברת את שלב המבחן!': '⭐ You passed the test stage!',
++    '⭐ שלב מבחן – עוד קצת וזה שם!': '⭐ Test stage – a little more and you are there!', '📝 מבחן דמה': '📝 Mock test', 'מבחן דמה': 'Mock test', 'לפני המבחן': 'Before the test',
++    'מה לחזור עליו הערב': 'What to go over tonight', '🎯 תרגול ממוקד מהטעויות': '🎯 Focused practice from the mistakes', '🌟 בלי טעויות – מוכנים למבחן!': '🌟 No mistakes – ready for the test!',
++    'טעות אחת': 'One mistake', '🎯 תרגול ממוקד ✓': '🎯 Focused practice ✓', 'נפתח אחרי שעוברים את הפרק': 'Opens once the chapter is passed', '⭐ רמת מבחן': '⭐ Test level',
++    'בפרק עם שלב מבחן – לפחות 3 מה-10 הן משאלות רמת המבחן.': 'In a chapter with a test stage – at least 3 of the 10 are test-level questions.',
+     'מוכנות': 'Readiness', 'כדאי להאיץ': 'Speed up a bit', 'מוכנים ✓': 'Ready ✓', 'מוכנות למבחן': 'Test readiness', '· מוכנות למבחן': '· Test readiness', 'ממשיכים': 'Continue', 'לתרגל': 'Practise', 'לחזק:': 'Strengthen:', 'איך מחשבים?': 'How is it counted?', 'לכל פרק – כמה תשובות נכונות ב-10 האחרונות שלו. פרק שעוד לא תורגל נחשב 0. המוכנות היא הממוצע של כל הפרקים.': 'For each chapter – how many of its last 10 answers were right. A chapter not practised yet counts as 0. Readiness is the average of all the chapters.', 'המבחן מחר': 'Test tomorrow', 'המבחן עבר': 'Test passed', 'מוכנות למבחן:': 'Test readiness:', 'יוצאים': "Let's go", '✓ היעד של היום הושלם': "✓ Today's goal done", '🌟 סיימת הכול!': '🌟 All done!', 'התקדמות': 'Progress', 'מוכנים': 'Ready', 'עוד עבודה': 'More work', 'איפה כדאי להיות היום': 'Where to be by today', 'המבחן היום': 'Test today', 'היעד של היום: פרק': "Today's goal: chapter", 'היעד של היום': "Today's goal", 'היעד של היום הושג': "Today's goal reached", 'ממשיכים קדימה': 'Keep going', 'סיימת הכול': 'All done', 'מקדים': 'Ahead', 'המבחן': 'Test', 'בזמן': 'On time', 'מילים': 'Words', 'קריאה': 'Reading', 'חזרה למבחן': 'Review', 'קדימה': "Let's go",
+     'חזרה על הטעויות': 'Mistakes review', 'יום המבחן': 'Test day', 'מחר': 'Tomorrow',
+     'יום ראשון': 'Sunday', 'יום שני': 'Monday', 'יום שלישי': 'Tuesday', 'יום רביעי': 'Wednesday', 'יום חמישי': 'Thursday', 'יום שישי': 'Friday', 'יום שבת': 'Saturday',
+@@ -288,6 +293,14 @@
+   const tr = s => (s && HE.test(s)) ? translate(s) : s;
+   // patterns for text with numbers or names in it
+   const P = [
++    // the ⭐ test stage and the 📝 mock test (before the general number patterns)
++    [/^(📝 )?מבחן דמה: (\d+)%$/, (m, e, n) => `${e || ''}Mock test: ${n}%`],
++    [/^📝 מבחן דמה: (\d+) מתוך (\d+) · ממוצע (\d+)%$/, (m, a, b, n) => `📝 Mock test: ${a} of ${b} · average ${n}%`],
++    [/^(\d+) טעויות$/, (m, n) => `${n} mistakes`],
++    [/^📖 ההסברים · (\d+)$/, (m, n) => `📖 The explanations · ${n}`],
++    [/^⭐ שלב מבחן (\d+)\/(\d+)$/, (m, a, b) => `⭐ Test stage ${a}/${b}`],
++    [/^⭐ (\d+) רמת מבחן$/, (m, n) => `⭐ ${n} test level`],
++    [/^מחכה: (פרק .+|פרקים .+)$/, (m, r) => 'Waiting: ' + translate('היום: ' + r).replace(/^Today: c/, 'c')],
+     // the readiness meter (map header + the parent's row)
+     [/^עוד (\d+) ימים$/, (m, d) => `${d} days left`],
+     [/^(\d+)% בתשובות האחרונות$/, (m, n) => `${n}% in the latest answers`],
+diff --git a/public/index.html b/public/index.html
+index 47bdb2a..8a36fcd 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -810,6 +810,15 @@ body:not(.thapp) #sBody.withfocus{padding-bottom:78px}
+ .aibox{border:2px dashed var(--sun);background:#FFFBEF;border-radius:18px;padding:12px 14px;text-align:center;margin-top:6px}
+ .demotag{display:inline-block;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-family:var(--display);font-weight:600;font-size:.85em;margin-top:4px}
+ .rsec{margin:14px 2px 8px;font-size:1.08em}
++/* the ⭐ test stage and the 📝 mock test */
++.mocktop{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px}.mocktop .revtag{margin:0}.l2tag{background:#FFF2C9}
++.mockclock{font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink2);direction:ltr;unicode-bidi:isolate}
++.track .stop.seen{background:#C9D3E6}
++.opt.picked{--c:#DCE6FF;opacity:1;outline:3px solid var(--ink)}
++#eMock{text-align:start;margin:4px 0 10px}#eMock .rsico{font-size:1.1em}
++.mexpl{margin-top:12px;border:var(--line);border-radius:14px;padding:8px 12px;background:#fff}.mexpl summary{cursor:pointer;font-weight:700;padding:4px 0}
++.mexp{padding:10px 0;border-top:1px solid #EEF2F7}.mexp .qbox{font-size:.98em;margin:0 0 6px}.mx{font-weight:600;margin:2px 0}.mx.bad{color:#B3264F}.mx.ok{color:#0B6B4A}.mexp .expl{margin-top:6px}
++.st.lv2{cursor:pointer}.l2pill{background:#FFF2C9;color:var(--ink);font-size:.8em}.tmock{white-space:nowrap}.tmockline{margin:8px 2px 0}
+ .cardcount{text-align:center;font-family:var(--display);font-weight:700;font-size:1.15em;margin-top:8px}
+ #sureDlg{z-index:90}
+ .suredlg{text-align:center;max-width:320px;width:100%}.suredlg h3{margin:6px 0 4px;font-family:var(--display);font-size:1.25em}.suredlg p{margin:0 0 14px}
+@@ -1484,6 +1493,7 @@ html.isadmin body:not(.locked) header .tabs[role=tablist]{display:inline-flex}
+       <div class="stars" id="eStars"></div>
+       <h2 id="eTitle"></h2>
+       <div class="bigstats" id="eSub"></div>
++      <div id="eMock" class="hidden"></div>
+       <div id="eTrophy" class="trophy"></div>
+       <p id="eComp" class="hint hidden" style="margin:-6px 0 16px"></p>
+       <div class="topicchips" id="eTopics" style="justify-content:center"></div>
+@@ -2250,7 +2260,7 @@ function cleanHist(h){
+   const topics={}; if(h.topics&&typeof h.topics==='object') Object.entries(h.topics).slice(0,60).forEach(([t,v])=>{ if(v&&typeof v==='object') topics[String(t).slice(0,120)]={r:num(v.r),n:num(v.n)}; });
+   return {at:+h.at, kidId:typeof h.kidId==='string'?h.kidId.slice(0,40):null, kid:str(h.kid,60), subject:str(h.subject,60), grade:Number.isInteger(+h.grade)?+h.grade:0,
+     setId:str(h.setId,60), retry:!!h.retry, topic:typeof h.topic==='string'?h.topic.slice(0,120):null, ch:Number.isInteger(h.ch)?h.ch:null,
+-    right:num(h.right), n:Math.max(1,num(h.n)), score:num(h.score), mode:['choice','memory','match','riddle','spell'].includes(h.mode)?h.mode:'choice',
++    right:num(h.right), n:Math.max(1,num(h.n)), score:num(h.score), mode:['choice','memory','match','riddle','spell','mock'].includes(h.mode)?h.mode:'choice', ...(h.lvl===2?{lvl:2}:{}), ...(Number.isFinite(+h.sec)&&+h.sec>0?{sec:Math.min(36000,Math.round(+h.sec))}:{}),
+     qr:Array.isArray(h.qr)?h.qr.filter(x=>typeof x==='string'&&/^\d+\.[01](\.\d)?$/.test(x)).slice(0,200):[], topics,
+     // each question's text key (and the picked option's when wrong) – finds the question again after the set changed or was deleted
+     ...(Array.isArray(h.qk)&&Array.isArray(h.qr)&&h.qk.length===h.qr.length&&h.qk.every(x=>typeof x==='string'&&/^[0-9a-z]{1,8}(:[0-9a-z]{1,8})?$/.test(x))?{qk:h.qk.slice(0,200)}:{}),
+@@ -2854,15 +2864,15 @@ function revQ(set,q){ const i=set.questions.indexOf(q);
+   return `<details class="rq"><summary><span class="qq" dir="auto" translate="no">${q.emoji?esc(q.emoji)+' ':''}${esc(q.question)}</span><span class="ans" dir="auto" translate="no">✓ ${esc(q.options[q.answer])}</span></summary>
+     <ol translate="no">${q.options.map((o,k)=>`<li dir="auto" class="${k===q.answer?'correct':''}">${esc(o)}</li>`).join('')}</ol>
+     <div class="hint" dir="auto"><span>💡 </span><span translate="no">${esc(q.explanation||'')}</span></div>
+-    <div class="rqact">${q.fixed||q.reported?'<span class="hint">🔧</span>':''}<button class="btn ghost small" onclick="openReport(curSet,${i})">🚩 דיווח</button><button class="btn ghost small" onclick="delQ(${i})">🗑 מחיקה</button></div></details>`; }
++    <div class="rqact">${isL2(q)||i<0?'<span class="pill l2pill">⭐ רמת מבחן</span>':`${q.fixed||q.reported?'<span class="hint">🔧</span>':''}<button class="btn ghost small" onclick="openReport(curSet,${i})">🚩 דיווח</button><button class="btn ghost small" onclick="delQ(${i})">🗑 מחיקה</button>`}</div></details>`; }
+ function renderRevChapters(set){
+   const box=$('revChs'); if(!box) return;
+   const C=getChapters(set), dn=chaptersDone(set), op=REV_OPEN[set.id]??-1, ed=!!EDIT_ON[set.id];
+   box.innerHTML=(ed?`<div class="notice editbar"><b>✏️ מצב עריכה</b><div class="hint">${EN()?`Open a chapter to add questions or remove it${set.shared&&set.src?' · an edited catalog set no longer updates from the catalog':''}`:`פותחים פרק כדי להוסיף שאלות או להסיר אותו${set.shared&&set.src?' · אחרי עריכה, התרגול כבר לא יקבל תיקונים מהקטלוג':''}`}</div><div class="edrow"><label class="btn small" style="cursor:pointer" ${sample?'':'aria-disabled="true"'}>📷 להוסיף שאלות מדפי עבודה או מצגת <input type="file" accept="image/*,application/pdf" multiple hidden onchange="editImgs(this.files);this.value=''" ${sample?'':'disabled'}></label></div><button class="btn small" onclick="toggleEdit(false)">✓ סיום עריכה</button></div>`:'')+C.map((ch,i)=>{ const pg=chPages(ch), t=String(ch.title||'').replace(/^📖\s*/,'').replace(PG_RE,''), on=i===op;
+     return `<div class="chbox ${on?'open':''}" id="chb${i}">
+       <button class="chrow ${dn.has(i)?'done':''}" onclick="toggleRevCh(${i})" aria-expanded="${on}"><span class="no">${dn.has(i)?'★':i+1}</span>
+-        <span class="nmw"><span class="nm" dir="auto">${esc(t)}</span><span class="hint">${pg?esc(pg.replace(/(\d[\d–-]*)/,'\u2066$1\u2069'))+' · ':''}${ch.qs.length} שאלות</span></span><span class="chev">${on?'▾':'◂'}</span></button>
+-      ${on?`<div class="chqs">${ch.qs.map(q=>revQ(set,q)).join('')}
++        <span class="nmw"><span class="nm" dir="auto">${esc(t)}</span><span class="hint">${pg?esc(pg.replace(/(\d[\d–-]*)/,'\u2066$1\u2069'))+' · ':''}${ch.all.length} שאלות${ch.qs2.length?` · ⭐ ${ch.qs2.length} רמת מבחן`:''}</span></span><span class="chev">${on?'▾':'◂'}</span></button>
++      ${on?`<div class="chqs">${ch.all.map(q=>revQ(set,q)).join('')}
+         ${ed?`<div class="edrow"><button class="btn small" onclick="moreQs(${i})" ${sample?'':'disabled'}>➕ עוד 6 שאלות</button><button class="btn ghost small danger" onclick="delChapter(${i})">🗑 להסיר את הפרק</button></div>`:''}
+         <div class="chnav">${i>0?`<button class="btn ghost small" onclick="toggleRevCh(${i-1})">› הפרק הקודם</button>`:'<span></span>'}${i<C.length-1?`<button class="btn small" onclick="toggleRevCh(${i+1})">הפרק הבא ‹</button>`:`<button class="btn ghost small" onclick="toggleRevCh(${i})">סגירה ▴</button>`}</div></div>`:''}
+     </div>`; }).join('')
+@@ -2892,8 +2902,9 @@ function busyNote(){ toast('⏳ עדיין כותבים את השאלות הקו
+ function toggleEdit(on){ if(!curSet) return; EDIT_ON[curSet.id]=on; renderReview(curSet); if(on) toast('✏️ פותחים פרק כדי לערוך'); }
+ function markEdited(set){ set.edited=true; set.updated=Date.now(); store.save(); }   // catalog updates no longer overwrite it
+ async function delChapter(ci){ const set=curSet, C=getChapters(set); if(!set||!C[ci]) return;
+-  if(!(await askSure({ico:'🗑',title:'להסיר את הפרק?',text:`"${String(C[ci].title).replace(PG_RE,'')}" וכל ${C[ci].qs.length} השאלות שבו יוסרו מהתרגול.`,yes:'הסרה',danger:true}))) return;
++  if(!(await askSure({ico:'🗑',title:'להסיר את הפרק?',text:`"${String(C[ci].title).replace(PG_RE,'')}" וכל ${C[ci].all.length} השאלות שבו יוסרו מהתרגול.`,yes:'הסרה',danger:true}))) return;
+   set.questions=set.questions.filter(q=>q.ch!==ci).map(q=>q.ch>ci?{...q,ch:q.ch-1}:q);
++  if(Array.isArray(set.qs2)) set.qs2=set.qs2.filter(q=>q.ch!==ci).map(q=>q.ch>ci?{...q,ch:q.ch-1}:q);   // its test level goes with it
+   if(set.chapters){ set.chapters.splice(ci,1); }
+   const used=new Set((set.chapters||[]).flatMap(c=>c.topics||[])); if(set.chapters) set.topics=(set.topics||[]).filter(t=>used.has(t));
+   history.forEach(h=>{ if(h.setId!==set.id||h.ch==null||h.ch<0) return; if(h.ch===ci) h.ch=-1; else if(h.ch>ci) h.ch--; });   // progress follows the chapters
+@@ -2952,11 +2963,14 @@ async function fixPictures(){
+ function delQ(i){ curSet.questions.splice(i,1); markEdited(curSet); renderReview(curSet); }
+ 
+ /* ---------- sharing ---------- */
+-function setPayload(s){ return {v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}}; }
++// a set's questions as they travel (a code / a link / the catalog): the regular ones, then the test level (lvl 2) – loadShare splits them again
++const shareQs=s=>s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch,core})=>({topic,question,options,answer,explanation,emoji,scene,ch,...(core?{core:true}:{})}))
++  .concat(setQs2(s).map(({topic,question,options,answer,explanation,emoji,scene,ch,core})=>({topic,question,options,answer,explanation,emoji,scene,ch,...(core?{core:true}:{}),lvl:2})));
++function setPayload(s){ return {v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:shareQs(s),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}}; }
+ const codeOf=payload=>'SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+ function openShare(){
+   const s=curSet;
+-  const payload={v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:s.questions.map(({topic,question,options,answer,explanation,emoji,scene,ch})=>({topic,question,options,answer,explanation,emoji,scene,ch})),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
++  const payload={v:1,src:s.src||'',words:s.words||[],name:'',grade:s.grade,subject:s.subject,topics:s.topics,examDate:s.examDate||'',dailyGoal:s.dailyGoal||2,perRound:s.perRound||0,group:s.group||s.id,chapters:s.chapters||null,questions:shareQs(s),qa:{checked:s.qa.checked,passed:s.qa.passed,fixed:s.qa.fixed,dropped:s.qa.dropped}};
+   $('shareCode').value='SFF1:'+btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+   const code=s.src?String(s.src).replace(/_/g,'-'):'';
+   $('shareLinkRow').classList.toggle('hidden',!code); if(code) $('shareLink').value=`${location.origin}/?add=${encodeURIComponent(code)}`;
+@@ -3253,17 +3267,31 @@ function defChapters(topics, round){
+   }
+   return out;
+ }
++// a chapter's questions: qs = the station's own (set.questions – what the games, the map, "passed" and the plan count),
++// qs2 = its test-level questions (set.qs2, lvl 2 – the "⭐ שלב מבחן" after the station passed, the mock test, the readiness
++// meter), all = both (the parent's list). Never a test-level question in qs (an old copy with them mixed in: splitLvl).
++const isL2=q=>!!q&&q.lvl===2;
++const setQs2=s=>Array.isArray(s&&s.qs2)?s.qs2.filter(isL2):[];
+ function getChapters(s){
+-  const QS=(Array.isArray(s.questions)?s.questions:[]).filter(q=>!q||q.lvl!==2);   // a broken set (no questions) never stops the screen; never a test-level question (set.qs2)
++  const QS=(Array.isArray(s.questions)?s.questions:[]).filter(q=>!q||q.lvl!==2), Q2=setQs2(s);   // a broken set (no questions) never stops the screen
+   if(Array.isArray(s.chapters) && s.chapters.length && QS.some(q=>q.ch!=null))
+-    return s.chapters.map((c,i)=>({...c, qs:QS.filter(q=>q.ch===i)})).filter(c=>c.qs.length);
++    return s.chapters.map((c,i)=>{ const qs=QS.filter(q=>q.ch===i), qs2=qs.length?Q2.filter(q=>q.ch===i):[]; return {...c, qs, qs2, all:qs.concat(qs2)}; }).filter(c=>c.qs.length);
+   const per=s.perRound||10, qs=QS, n=Math.max(1,Math.ceil(qs.length/per)), out=[];
+-  for(let i=0;i<n;i++){ const part=qs.slice(i*per,(i+1)*per); out.push({title:[...new Set(part.map(q=>q.topic))].join(' + '),topics:[...new Set(part.map(q=>q.topic))],count:part.length,qs:part}); }
++  for(let i=0;i<n;i++){ const part=qs.slice(i*per,(i+1)*per), tp=[...new Set(part.map(q=>q.topic))]; out.push({title:tp.join(' + '),topics:tp,count:part.length,qs:part,qs2:[],all:part}); }
++  Q2.forEach(q=>{ const c=out.find(c=>c.topics.includes(q.topic)); if(c){ c.qs2.push(q); c.all=c.all.concat(q); } });
+   return out;
+ }
+ const PASS=.7, passedRound=h=>h.n>0 && h.right/h.n>=PASS;
+-function chaptersDone(s){ return new Set(history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
+-function chapterBest(s){ const b={}; history.filter(h=>h.setId===s.id&&h.mode!=='memory'&&h.ch!=null&&h.ch>=0&&h.n>0).forEach(h=>{ const p=h.right/h.n; if(b[h.ch]==null||p>b[h.ch]) b[h.ch]=p; }); return b; }
++// a station's own game: not the memory bonus, not the ⭐ test stage (lvl 2) and not the mock test – only these pass a station
++const stGame=h=>h.mode!=='memory'&&h.mode!=='mock'&&h.lvl!==2;
++function chaptersDone(s){ return new Set(history.filter(h=>h.setId===s.id&&stGame(h)&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
++// the chapters whose ⭐ test stage passed (the same 70%)
++function l2Done(s, H=history){ return new Set(H.filter(h=>h.setId===s.id&&h.lvl===2&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
++// test-level questions open only in chapters that passed (the review of everything, core-fact reviews)
++// a question's place in the history's qr: its index in set.questions, or L2_OFF + its index in set.qs2 (never a regular index)
++const L2_OFF=5000, qrIdx=(s,q)=>{ const i=s.questions.indexOf(q); if(i>=0) return i; const j=Array.isArray(s.qs2)?s.qs2.indexOf(q):-1; return j>=0?L2_OFF+j:-1; };
++const openQs2=s=>{ const dn=chaptersDone(s); return setQs2(s).filter(q=>dn.has(q.ch)); };   // the test level of the chapters that passed
++function chapterBest(s){ const b={}; history.filter(h=>h.setId===s.id&&stGame(h)&&h.ch!=null&&h.ch>=0&&h.n>0).forEach(h=>{ const p=h.right/h.n; if(b[h.ch]==null||p>b[h.ch]) b[h.ch]=p; }); return b; }
+ function roundsTotal(s){ return getChapters(s).length; }
+ function roundsDone(s){ return chaptersDone(s).size; }
+ // finished: the test date passed, every station is done, or the parent opened a focused (🎯) practice for it
+@@ -3275,7 +3303,7 @@ function setDone(s){ if(!s||s.demo) return null;
+ const DONE_LBL={exam:'🏁 המבחן עבר', done:'⭐ הושלם', focus:'🎯 עבר לתרגול ממוקד'};
+ function setProgress(s){ return Math.min(1, roundsDone(s)/roundsTotal(s)); }
+ function nextChapter(s){ const d=chaptersDone(s), n=roundsTotal(s); for(let i=0;i<n;i++) if(!d.has(i)) return i; return -1; } // -1 = review of everything
+-function chapterQs(s,ch){ const C=getChapters(s); if(ch>=0&&C[ch]) return C[ch].qs; return shuffle(s.questions).slice(0,s.perRound||10); }
++function chapterQs(s,ch){ const C=getChapters(s); if(ch>=0&&C[ch]) return C[ch].qs; return shuffle(s.questions.concat(openQs2(s))).slice(0,s.perRound||10); }
+ 
+ /* ---------- full-card carousel ---------- */
+ const CAR_POS={};   // the card each carousel was on, kept while its screen is hidden
+@@ -3416,7 +3444,7 @@ function renderKids(){
+       return `<button class="prow ${x.reinf?'focus':''} ${why?'fin':''}" onclick="curSet=getSet('${x.id}');renderReview(curSet);show('vReview')"><span class="subjico" style="background:${c};color:${dark?'#1B2A4A':'#fff'}">${ico}${x.reinf?'<i class="tgt" aria-hidden="true">🎯</i>':''}</span>
+         ${(()=>{ const S=!why&&!x.reinf&&x.examDate&&daysLeft(x.examDate)>=0?rdState(x):null, dl=S&&daysLeft(x.examDate);
+           if(S) anyReady=true;
+-          const lines=S?`<span class="hint rdl2">מבחן ב-${fmtDate(x.examDate)} · ${dl>1?`עוד ${dl} ימים`:dl===1?'מחר':'היום'}</span><b class="rdl3" style="color:${S.st.t}"><span>${S.word} ·</span> <span class="nw">${S.E&&S.E.today.length?`היום ${chRange(S.E.today)}`:'היעד של היום הושג'}</span></b>`
++          const lines=S?`<span class="hint rdl2">מבחן ב-${fmtDate(x.examDate)} · ${dl>1?`עוד ${dl} ימים`:dl===1?'מחר':'היום'}</span><b class="rdl3" style="color:${S.st.t}"><span>${S.word} ·</span> <span class="nw">${(mk=>mk?`מבחן דמה: ${mockPct(mk)}%`:S.E&&S.E.today.length?`היום ${chRange(S.E.today)}`:'היעד של היום הושג')(lastMock(x))}</span></b>`
+             :`${!why&&x.examDate?`<span class="hint">🏁 ${fmtDate(x.examDate)}</span>`:''}`;
+           const v=S?S.R.pct/100:setProgress(x), clr=S?S.st.bar:why?'#B9C0D4':'#1B2A4A';
+           return `<span class="prmid"><span class="t">${esc(base)}${x.compete?' 🏅':''}${x.reinf?' <span class="pill focuspill">🎯 תרגול ממוקד</span>':''}</span>${lines}${S?'':why?`<span class="hint">${DONE_LBL[why]}</span>`:daysStrip(x)}</span>
+@@ -3610,7 +3638,7 @@ function renderKidSets(){
+ }
+ 
+ /* ---------- the road to the test: every chapter is a station, split into days until the test ---------- */
+-const ROAD_T={abc:{c:'#9B8CFF',i:'🔠',l:'אותיות'},gram:{c:'#2F6BFF',i:'✏️',l:'דקדוק'},word:{c:'#4FB3E8',i:'🔤',l:'מילים'},read:{c:'#F2A63B',i:'📖',l:'קריאה'},rev:{c:'#8C9BB5',i:'🔁',l:'חזרה למבחן'},prac:{c:'#2F6BFF',i:'✏️',l:'תרגול'}};   // neutral colors only: no red / green on the map
++const ROAD_T={abc:{c:'#9B8CFF',i:'🔠',l:'אותיות'},gram:{c:'#2F6BFF',i:'✏️',l:'דקדוק'},word:{c:'#4FB3E8',i:'🔤',l:'מילים'},read:{c:'#F2A63B',i:'📖',l:'קריאה'},rev:{c:'#8C9BB5',i:'🔁',l:'חזרה למבחן'},mock:{c:'#6B5BD6',i:'📝',l:'לפני המבחן'},prac:{c:'#2F6BFF',i:'✏️',l:'תרגול'}};   // neutral colors only: no red / green on the map
+ const WEEKDAY=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+ function chType(set,c){
+   if(c.kind && ROAD_T[c.kind]) return c.kind;                 // set by whoever built the practice set
+@@ -3625,7 +3653,7 @@ function chName(c){ let t=String(c.title||'').replace(/^📖\s*/,'').replace(PG_
+ function roadPlan(set){
+   const C=getChapters(set), N=C.length, dn=chaptersDone(set), DAY=864e5, t0=new Date().setHours(0,0,0,0);
+   const dayOf=t=>Math.round((new Date(t).setHours(0,0,0,0)-t0)/DAY);
+-  const first={}; history.filter(h=>h.setId===set.id&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).forEach(h=>{ if(!first[h.ch]||h.at<first[h.ch]) first[h.ch]=h.at; });
++  const first={}; history.filter(h=>h.setId===set.id&&stGame(h)&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).forEach(h=>{ if(!first[h.ch]||h.at<first[h.ch]) first[h.ch]=h.at; });
+   const day={};                                   // chapter → day offset (0 = today)
+   for(let i=0;i<N;i++) if(dn.has(i)) day[i]=Math.min(0,first[i]?dayOf(first[i]):0);
+   const rest=[...Array(N).keys()].filter(i=>!dn.has(i)), doneToday=Object.values(day).filter(d=>d===0).length;
+@@ -3647,13 +3675,16 @@ function roadPlan(set){
+ // readiness for the test (the test window's effort bar): per station, the right answers among the last MAST_N questions
+ // of it that were answered (a question not answered yet counts as wrong – a station never played is 0%); the set's
+ // readiness = the stations' average. From the per-question results of the games (qr ok/wrong + qk the question's key).
++const L2_MIN=3;
+ function examReady(set, H=history){
+   const C=getChapters(set); if(!C.length||set.demo) return null;
+-  const chOf={}; C.forEach((c,ci)=>c.qs.forEach(q=>{ chOf[tkey(q.question)]=ci; }));
+-  const per=C.map(c=>({r:0,n:0,need:Math.min(MAST_N,c.qs.length)}));
++  // a chapter with test-level questions: at least L2_MIN of its last 10 answers must be of level 2 (the ⭐ test stage, the mock
++  // test) – the rest of the 10 can be of either level; so 80%+ is never reached without the test level
++  const chOf={}; C.forEach((c,ci)=>c.all.forEach(q=>{ chOf[tkey(q.question)]={ci, l2:c.qs2.includes(q)}; }));
++  const per=C.map(c=>{ const need=Math.min(MAST_N,c.all.length); return {r:0,n:0,n1:0,n2:0,need,max1:need-Math.min(L2_MIN,c.qs2.length)}; });
+   H.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qk)&&Array.isArray(h.qr)).forEach(h=>h.qk.forEach((k,j)=>{   // newest game first
+-    const ci=chOf[String(k).split(':')[0]], x=per[ci]; if(!x||x.n>=x.need) return;
+-    x.n++; if(String(h.qr[j]||'').split('.')[1]==='1') x.r++; }));
++    const w=chOf[String(k).split(':')[0]], x=w&&per[w.ci]; if(!x||x.n>=x.need||(!w.l2&&x.n1>=x.max1)) return;
++    x.n++; w.l2?x.n2++:x.n1++; if(String(h.qr[j]||'').split('.')[1]==='1') x.r++; }));
+   per.forEach(x=>{ x.pct=Math.round(x.r/Math.max(1,x.need)*100); });
+   const pct=Math.round(per.reduce((a,x)=>a+x.pct,0)/per.length);
+   const weak=per.map((x,i)=>({...x,i})).filter(x=>x.n>0&&x.pct<MAST_HI).sort((a,b)=>a.pct-b.pct).slice(0,3);
+@@ -3697,7 +3728,11 @@ function openReadySheet(){
+   const ico=(bg,c,path)=>`<span class="rsico" style="background:${bg}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg></span>`;
+   const rows=[];
+   if(E&&E.today.length) rows.push(`<div class="rsrow">${ico('#EAF0FF','#2F6BFF','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/>')}<div><b>היום: ${chRange(E.today)}</b><small>כ-${E.todayQ} שאלות · כ-${Math.max(1,Math.ceil(E.todayQ*Q_MIN))} דקות</small></div><button class="rsgo" onclick="closeReadySheet();startStation('${sid}',${E.today[0]})">יוצאים</button></div>`);
+-  R.weak.forEach(w=>rows.push(`<div class="rsrow">${ico('#FFF2C9','#946200','<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/>')}<div><b><span>לחזק:</span> <bdi>${esc(chName(P.C[w.i]))}</bdi></b><small>${w.pct}% בתשובות האחרונות</small></div><button class="rsgo2" onclick="closeReadySheet();startStation('${sid}',${w.i})">לתרגל</button></div>`));
++  R.weak.forEach(w=>rows.push(`<div class="rsrow">${ico('#FFF2C9','#946200','<path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/>')}<div><b><span>לחזק:</span> <bdi>${esc(chName(P.C[w.i]))}</bdi></b><small>${w.pct}% בתשובות האחרונות</small></div><button class="rsgo2" onclick="closeReadySheet();rdPractice('${sid}',${w.i})">לתרגל</button></div>`));
++  // the ⭐ test stage: how many chapters passed it (of those that have one); the next one waiting, with a button
++  const has2=P.C.map((c,i)=>c.qs2.length?i:-1).filter(i=>i>=0);
++  if(has2.length){ const ok2=l2Done(set), wait=has2.find(i=>P.dn.has(i)&&!ok2.has(i));
++    rows.push(`<div class="rsrow">${ico('#FFF6D6','#B37A00','<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>')}<div><b>⭐ שלב מבחן ${has2.filter(i=>ok2.has(i)).length}/${has2.length}</b><small>${wait!=null?`מחכה: ${chRange([wait])}`:'נפתח אחרי שעוברים את הפרק'}</small></div>${wait!=null?`<button class="rsgo2" onclick="closeReadySheet();startLevel2('${sid}',${wait})">לתרגל</button>`:''}</div>`); }
+   if(E&&E.rest&&dl>=1) rows.push(`<div class="rsrow">${ico('#FFE4EC','#B3264F','<path d="M5 21V4M5 4h12l-2 4 2 4H5"/>')}<div><b>עד המבחן: עוד ${E.rest} פרקים</b><small>כ-${E.qs} שאלות · כ-${E.min} דקות ביום</small></div></div>`);
+   closeReadySheet(); const el=document.createElement('div'); el.id='rdSheet'; el.className='fnew';
+   el.onclick=e=>{ if(e.target===el) closeReadySheet(); };
+@@ -3706,7 +3741,7 @@ function openReadySheet(){
+     <div class="rmeter"><b class="rmpct" style="color:${st.c}">${R.pct}%</b><div><b class="rmword" style="color:${st.t}">${S.word}</b>${when?`<div class="rmsub">${when}</div>`:''}</div></div>
+     <div class="rmbar" role="img" aria-label="${esc(sffTx(`מוכנות ${R.pct}%`))}"><i style="width:${R.pct}%;background:${st.bar}"></i>${marks}</div><div class="rmlbl">${lbl}</div>
+     <div class="rsrows">${rows.join('')}</div>
+-    <div class="rshow"><b>איך מחשבים?</b> <span>לכל פרק – כמה תשובות נכונות ב-10 האחרונות שלו. פרק שעוד לא תורגל נחשב 0. המוכנות היא הממוצע של כל הפרקים.</span></div></div>`;
++    <div class="rshow"><b>איך מחשבים?</b> <span>לכל פרק – כמה תשובות נכונות ב-10 האחרונות שלו. פרק שעוד לא תורגל נחשב 0. המוכנות היא הממוצע של כל הפרקים.</span>${P.C.some(c=>c.qs2.length)?' <span>בפרק עם שלב מבחן – לפחות 3 מה-10 הן משאלות רמת המבחן.</span>':''}</div></div>`;
+   document.body.appendChild(el);
+ }
+ function closeReadySheet(){ $('rdSheet')?.remove(); }
+@@ -3729,8 +3764,9 @@ function renderRoad(){
+   // everything else (the bar with today's mark, what to strengthen, the effort left, how it is counted) in a sheet on a tap
+   const E=S&&S.E, wk=S&&S.R.weak[0], days=dl==null?'':dl<0?'המבחן עבר':dl===0?'המבחן היום':dl===1?'המבחן מחר':`עוד ${dl} ימים`;
+   let goCh=-1, goT='ממשיכים';
+-  if(E&&E.today.length){ goCh=E.today[0]; goT='יוצאים'; } else if(nx>=0&&nx<P.N) goCh=nx; else if(wk) goCh=wk.i;
+-  const go1=goCh>=0?`<button class="rmgo2" onclick="startStation('${sid}',${goCh})">${goT}<svg width="12" height="12" viewBox="0 0 24 24" fill="#F2A63B" aria-hidden="true"><path d="M18 4L6 12l12 8z"/></svg></button>`:'';
++  const mk=mockOn(set,P), mkToday=mk&&history.some(h=>h.setId===set.id&&h.mode==='mock'&&new Date(h.at).toDateString()===new Date().toDateString());
++  if(E&&E.today.length){ goCh=E.today[0]; goT='יוצאים'; } else if(mk&&!mkToday){ goCh=-1; goT='📝 מבחן דמה'; } else if(nx>=0&&nx<P.N) goCh=nx; else if(wk) goCh=wk.i;
++  const go1=goCh>=0||goT!=='ממשיכים'?`<button class="rmgo2" onclick="startStation('${sid}',${goCh})">${goT}<svg width="12" height="12" viewBox="0 0 24 24" fill="#F2A63B" aria-hidden="true"><path d="M18 4L6 12l12 8z"/></svg></button>`:'';
+   let sum;
+   if(S){ const {R,target,st}=S, C2=138.2, arc=v=>(Math.max(0,Math.min(100,v))/100*C2).toFixed(1);
+     const today=E&&E.today.length?`היום ${chRange(E.today)}`:(E&&dl>=1&&nx>=0?'✓ היעד של היום הושלם':`${doneN}/${P.N} פרקים`);
+@@ -3745,6 +3781,7 @@ function renderRoad(){
+   const best=chapterBest(set), todays=[...Array(P.N).keys()].filter(i=>P.day[i]<=0), goalAfter=todays.length?Math.max(...todays):-1;
+   const goalDone=todays.every(i=>P.dn.has(i)), tried=[...Array(P.N).keys()].filter(i=>!P.dn.has(i)&&best[i]!=null);
+   const items=[...Array(P.N).keys()].map(i=>({i,c:P.C[i]})); items.push({rev:true}); if(P.flagDay!=null) items.push({flag:true});
++  const l2=l2Done(set), mock=mockOn(set,P);
+   const COLS=3, W=390, RH=150, rtl=(window.SFF_LANG?SFF_LANG():'he')==='he', X=[74,195,316];
+   const pos=k=>{ const r=Math.floor(k/COLS), c=k%COLS, cc=(r%2===0)===rtl?COLS-1-c:c; return {x:X[cc],y:78+r*RH}; };
+   const pts=items.map((it,k)=>({...pos(k),it})), H=pts[pts.length-1].y+120;
+@@ -3758,9 +3795,9 @@ function renderRoad(){
+     if(it.flag){ svg+=`<g class="st" onclick="startStation('${set.id}',-1)"><circle cx="${x}" cy="${y+3}" r="40" fill="#1B2A4A"/><circle cx="${x}" cy="${y}" r="40" fill="#F2A63B" stroke="#1B2A4A" stroke-width="4"/>
+       <text x="${x}" y="${y+14}" font-size="38" text-anchor="middle">🏁</text></g>
+       <text x="${x}" y="${y+62}" font-size="14" text-anchor="middle" font-weight="700">${P.dl===0?'המבחן היום!':'המבחן · '+fmtDate(set.examDate)}</text>`; return; }
+-    const isRev=!!it.rev, T=ROAD_T[isRev?'rev':chType(set,it.c)];
++    const isRev=!!it.rev, T=ROAD_T[isRev?(mock?'mock':'rev'):chType(set,it.c)];
+     const done=!isRev&&P.dn.has(it.i), again=!isRev&&!done&&best[it.i]!=null, now=isRev?nx<0:it.i===nx, r=now?40:34;
+-    const emo=done?'⭐':isRev?'🔁':(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
++    const emo=done?'⭐':isRev?(mock?'📝':'🔁'):(it.c.text?'📖':(it.c.qs[0]&&it.c.qs[0].emoji)||T.i);
+     const go=`startStation('${set.id}',${isRev?-1:it.i})`;
+     svg+=`<g class="st ${now?'st-now':''}" onclick="${go}"><circle cx="${x}" cy="${y+4}" r="${r}" fill="#1B2A4A"/>
+       <circle cx="${x}" cy="${y}" r="${r}" fill="${done?T.c:'#fff'}" stroke="#1B2A4A" stroke-width="3.5"/>
+@@ -3769,8 +3806,10 @@ function renderRoad(){
+       <circle cx="${x+r-5}" cy="${y-r+5}" r="13" fill="#fff" stroke="#1B2A4A" stroke-width="2"/><text x="${x+r-5}" y="${y-r+10}" font-size="13" text-anchor="middle">${T.i}</text>
+       ${again?`<rect x="${x-r-6}" y="${y+r-18}" width="46" height="22" rx="11" fill="#6B5BD6" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+17}" y="${y+r-2}" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">↺${Math.round(best[it.i]*100)}%</text>`:''}
+       ${!isRev&&it.i===goalAfter?`<circle cx="${x-r+4}" cy="${y-r+6}" r="14" fill="${goalDone?'#FFD166':'#FFFBEF'}" stroke="#1B2A4A" stroke-width="2"/><text x="${x-r+4}" y="${y-r+12}" font-size="15" text-anchor="middle">🏆</text>`:''}</g>
+-      <text x="${x}" y="${y+r+18}" font-size="11" text-anchor="middle" fill="#3c4a6b"${!isRev&&chPages(it.c)?' direction="rtl" style="direction:rtl;unicode-bidi:embed"':''}>${isRev?esc(T.l):(it.i+1)+' · '+(chPages(it.c)?esc(chPages(it.c).replace(/(\d[\d–-]*)/,'\u2066$1\u2069')):esc(T.l))}</text>
+-      <text x="${x}" y="${y+r+33}" font-size="12" text-anchor="middle" font-weight="600" fill="#1B2A4A">${esc((s=>s.length>12?s.slice(0,11)+'…':s)(isRev?(window.sffT?sffT('חזרה על הכול'):'חזרה על הכול'):chName(it.c)))}</text>`;
++      ${done&&it.c.qs2.length?(ok2=>`<g class="st lv2${ok2?' on':''}" onclick="startLevel2('${set.id}',${it.i})" role="button" aria-label="${esc(sffTx(ok2?'⭐ עבר את שלב המבחן':'⭐ שלב מבחן'))}"><rect x="${x-r-14}" y="${y+r-20}" width="${ok2?44:62}" height="26" rx="13" fill="${ok2?'#FFD166':'#1B2A4A'}" stroke="#1B2A4A" stroke-width="2"/>
++        <text x="${x-r-14+(ok2?22:31)}" y="${y+r-2}" font-size="12.5" text-anchor="middle" font-weight="700" fill="${ok2?'#1B2A4A':'#fff'}">${ok2?'⭐ ✓':esc(sffTx('⭐ מבחן'))}</text></g>`)(l2.has(it.i)):''}
++      <text x="${x}" y="${y+r+18}" font-size="11" text-anchor="middle" fill="#3c4a6b"${!isRev&&chPages(it.c)?' direction="rtl" style="direction:rtl;unicode-bidi:embed"':''}>${isRev?esc(sffTx(T.l)):(it.i+1)+' · '+(chPages(it.c)?esc(chPages(it.c).replace(/(\d[\d–-]*)/,'\u2066$1\u2069')):esc(T.l))}</text>
++      <text x="${x}" y="${y+r+33}" font-size="12" text-anchor="middle" font-weight="600" fill="#1B2A4A">${esc((s=>s.length>12?s.slice(0,11)+'…':s)(isRev?sffTx(mock?'מבחן דמה':'חזרה על הכול'):chName(it.c)))}</text>`;
+     if(now) svg+=`<foreignObject x="${x-20}" y="${y-r-44}" width="40" height="40"><div xmlns="http://www.w3.org/1999/xhtml">${me?avatarHtml(me,38):'🧒'}</div></foreignObject>`;
+   });
+   $('rdMap').innerHTML=svg+'</svg>';
+@@ -3818,7 +3857,40 @@ function pickMode(set, ch){
+   const score=m=>H.filter(h=>h.mode===m).length*2 + (m===last?5:0) + (m===lastHere?4:0) + cand.indexOf(m)*.6;
+   return cand.slice().sort((a,b)=>score(a)-score(b))[0];
+ }
+-function startStation(setId, ch){ const set=getSet(setId); if(!set) return; startGame(set, null, pickMode(set,ch), ch); }
++function startStation(setId, ch){ const set=getSet(setId); if(!set) return; if(ch<0&&mockOn(set)) return startMock(setId); startGame(set, null, pickMode(set,ch), ch); }
++
++/* ---------- the ⭐ test stage of a chapter (its lvl-2 questions) ---------- */
++// opens after the station passed; multiple choice; mistakes first, then the questions not answered yet; L2_CAP a game.
++// Passed at the same 70% (PASS); kept in the history with lvl:2 – never counted as the station itself (stGame).
++const L2_CAP=10;
++function lastResults(set){ const last={}; history.filter(h=>h.setId===set.id&&h.mode!=='memory'&&Array.isArray(h.qk)&&Array.isArray(h.qr)).forEach(h=>h.qk.forEach((k,j)=>{   // newest first
++  const t=String(k).split(':')[0]; if(last[t]==null) last[t]=String(h.qr[j]||'').split('.')[1]==='1'; })); return last; }
++function startLevel2(setId, ch){ const set=getSet(setId); if(!set) return; const c=getChapters(set)[ch];
++  if(!c||!c.qs2.length||!chaptersDone(set).has(ch)) return startStation(setId, ch);
++  const last=lastResults(set), rank=q=>{ const v=last[tkey(q.question)]; return v===false?0:v==null?1:2; };
++  const qs=shuffle(c.qs2).sort((a,b)=>rank(a)-rank(b)).slice(0,L2_CAP);
++  startGame(set, qs, 'choice', ch, null, {ch, lvl:2}); }
++
++/* ---------- the mock test (📝 מבחן דמה) ---------- */
++// On the day before the test (P.revDay – also on the test's own day) and every day once all the chapters passed, the
++// "review everything" station becomes a mock test: about 15–20 questions from all the chapters, by each chapter's share of
++// the questions, the test level included; multiple choice only; no right / wrong and no explanation in the middle – they
++// all come at the end; a soft timer (shows the time, never stops the test). History: mode 'mock', ch -1 – counted in the
++// readiness, never as a station (stGame).
++function mockOn(set, P){ if(!set||set.demo) return false; P=P||roadPlan(set); return P.N>0 && (P.dn.size>=P.N || (P.dl!=null&&P.dl>=0&&P.revDay===0)); }
++function mockQs(set){
++  const C=getChapters(set), N=C.reduce((a,c)=>a+c.all.length,0); if(!N) return [];
++  const T=Math.min(N, N>=80?20:N>=40?18:15), share=C.map(c=>c.all.length/N*T), k=share.map(Math.floor);
++  share.map((v,i)=>[v-k[i],i]).sort((a,b)=>b[0]-a[0]).slice(0,T-k.reduce((a,b)=>a+b,0)).forEach(([,i])=>k[i]++);
++  const out=[]; C.forEach((c,i)=>{ if(!k[i]) return; const n2=c.qs2.length?Math.min(c.qs2.length,Math.round(k[i]*c.qs2.length/c.all.length)):0;
++    out.push(...shuffle(c.qs2).slice(0,n2), ...shuffle(c.qs).slice(0,k[i]-n2)); });
++  return shuffle(out);
++}
++function startMock(setId){ const set=getSet(setId); if(!set) return; const qs=mockQs(set); if(!qs.length) return;
++  startGame(set, qs, 'choice', -1, null, {ch:-1, mock:true, t0:Date.now()}); }
++const mockTime=()=>{ const t=Math.max(0,Math.round((Date.now()-((G&&G.t0)||Date.now()))/1000)); return `${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`; };
++let MOCK_T=null;
++function mockTick(on){ clearInterval(MOCK_T); MOCK_T=null; if(on) MOCK_T=setInterval(()=>{ const el=$('gClock'); if(!G||!G.mock||!el) return mockTick(false); el.textContent='⏱ '+mockTime(); },1000); }
+ 
+ /* ---------- kid feedback: what I know, what to practise again ---------- */
+ function openMe(){
+@@ -3961,7 +4033,7 @@ function startTopic(setId, i){
+ /* ---------- engine ---------- */
+ let G=null;
+ function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]} return a; }
+-function startGame(set, onlyQs, mode, ch, topic){
++function startGame(set, onlyQs, mode, ch, topic, o={}){
+   if(!set||!set.questions.length) return; followKid(set);
+   mode=mode||'choice';
+   $('pNav').classList.add('hidden'); $('tabParent').classList.remove('on'); $('tabKid').classList.add('on'); document.body.classList.add('kidside');
+@@ -3969,6 +4041,7 @@ function startGame(set, onlyQs, mode, ch, topic){
+   if(ch==null && !onlyQs) ch=nextChapter(set);
+   const base = onlyQs || chapterQs(set,ch);
+   let pool = mode==='choice'?base:base.filter(q=>modePool({questions:[q],chapters:set.chapters},mode).length);
++  if((mode==='memory'||mode==='match') && pool.some(isL2) && pool.some(q=>!isL2(q))) pool=pool.filter(q=>!isL2(q));   // the two levels never meet in one board
+   if(mode==='memory'||mode==='match') pool=noClash(pool,mode);
+   if(pool.length<MIN[mode]){ mode='choice'; pool=base; }
+   const per=set.perRound||10;
+@@ -3978,9 +4051,9 @@ function startGame(set, onlyQs, mode, ch, topic){
+   const src = whole && (mode==='riddle'||mode==='spell') ? base : pool;
+   const qs = mode==='choice' ? shuffle(pool) : shuffle(src).slice(0,cap);
+   const rev = whole ? reviewQs(set, ch, mode) : [];                       // core facts from earlier stations, at the end
+-  G={set, mode, ch: onlyQs?null:ch, topic:topic||null, retry:false, qs:qs.concat(rev), rev:new Set(rev), i:0, score:0, streak:0, best:0, res:[], moves:0};
+-  $('gSheet').className='sheet'; $('gTop').innerHTML=''; 
+-  show('vGame'); hud(); muteIcon();
++  G={set, mode, ch: onlyQs?null:ch, topic:topic||null, retry:false, qs:qs.concat(rev), rev:new Set(rev), i:0, score:0, streak:0, best:0, res:[], moves:0, ...o};
++  $('gSheet').className='sheet'; $('gTop').innerHTML=''; mockTick(false);
++  show('vGame'); hud(); muteIcon(); if(G.mock) mockTick(true);
+   ({choice:choiceStart,memory:memStart,match:matchStart,riddle:riddleStart,spell:riddleStart})[mode]();
+ }
+ // Core facts (q.core – e.g. minutes in an hour, metres in a km) come back as 2–3 short review questions at the end of a later
+@@ -3989,7 +4062,7 @@ function startGame(set, onlyQs, mode, ch, topic){
+ // Played only in one-question-at-a-time games (choice / riddle / spell) – in match / memory they could clash with the station's cards.
+ function reviewQs(set, ch, mode){
+   if(!['choice','riddle','spell'].includes(mode) || !(ch>=0)) return [];
+-  const core=set.questions.map((q,i)=>[q,i]).filter(([q])=>q.core && q.ch!==ch && !passageOf(set,q));
++  const core=set.questions.concat(openQs2(set)).map(q=>[q,qrIdx(set,q)]).filter(([q])=>q.core && q.ch!==ch && !passageOf(set,q));
+   if(!core.length) return [];
+   const last={}, today=new Date().toDateString();
+   history.filter(h=>h.setId===set.id && Array.isArray(h.qr)).forEach(h=>h.qr.forEach(x=>{ const [i,ok]=String(x).split('.');   // newest first
+@@ -4013,7 +4086,7 @@ function award(ok){ sfx(ok);
+   else G.streak=0;
+   hud(); if(ok&&G.streak>=2) bump('gStreak');
+ }
+-function quitGame(){ rdStop(); RD.text=''; try{speechSynthesis.cancel()}catch(e){} if(G.res.length) endGame(); else if(G.set&&!G.set.demo&&getSet(G.set.id)) openRoad(G.set.id); else go('kid'); }
++function quitGame(){ rdStop(); RD.text=''; try{speechSynthesis.cancel()}catch(e){} mockTick(false); if(G.mock&&G.res.length<G.qs.length){ G.tok=(G.tok||0)+1; openRoad(G.set.id); return; } if(G.res.length) endGame(); else if(G.set&&!G.set.demo&&getSet(G.set.id)) openRoad(G.set.id); else go('kid'); }
+ const PRAISE=['כל הכבוד!','מעולה!','בדיוק!','יופי!','אלופים!','וואו!'];
+ const curQ=()=>G.qs[G.i];
+ function showSheet(ok, text){
+@@ -4022,7 +4095,7 @@ function showSheet(ok, text){
+   $('gSheet').innerHTML=`<div class="verdict"><div class="face">${mascot(ok?'happy':'sad', ok?'#24C78E':'#FF5C8A')}</div><div>${esc(text)}</div></div>
+     <div class="row2">
+       <button class="btn ghost small" onclick="$('gExpl').classList.toggle('show')" aria-label="הסבר">💡 למה?</button>
+-      <button class="btn ghost small" onclick="openReport(G.set, G.set.questions.indexOf(curQ()))" aria-label="דיווח על טעות">🚩</button>
++      ${G.set.questions.includes(q)?`<button class="btn ghost small" onclick="openReport(G.set, G.set.questions.indexOf(curQ()))" aria-label="דיווח על טעות">🚩</button>`:''}
+       <button class="btn" onclick="nextQ()">${G.i+1<G.qs.length?'הבא ‹':'סיום 🏁'}</button>
+     </div>
+     <div class="expl ${ok?'':'show'}" id="gExpl" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div>`;
+@@ -4081,23 +4154,27 @@ function picOf(q, cls){ if(Array.isArray(q.scene)&&q.scene.length) return sceneH
+ function choiceStart(){ choiceRender(); }
+ function trackHtml(){
+   const n=G.qs.length, pos=i=>`${(i/(n))*100}%`;
+-  const stops=G.qs.map((_,i)=>{const r=G.res[i];return `<span class="stop ${r?(r.ok?'done':'miss'):''}" style="inset-inline-start:${pos(i)}"></span>`}).join('');
++  const stops=G.qs.map((_,i)=>{const r=G.res[i];return `<span class="stop ${r?(G.mock?'seen':r.ok?'done':'miss'):''}" style="inset-inline-start:${pos(i)}"></span>`}).join('');
+   return `<div class="track"><div class="road"></div>${stops}<span class="flag">🏁</span><div class="me" style="inset-inline-start:${pos(G.i)}">${mascot('happy')}</div></div>`;
+ }
+ function choiceRender(){
+   const q=curQ();
+   $('gCount').textContent=`❓ ${G.i+1}/${G.qs.length}`;
+-  $('gTop').innerHTML=trackHtml();
++  $('gTop').innerHTML=trackHtml()+(G.mock?`<div class="mocktop"><span class="revtag">📝 מבחן דמה</span><span class="mockclock" id="gClock" aria-live="off">⏱ ${mockTime()}</span></div>`:G.lvl===2?'<div class="mocktop"><span class="revtag l2tag">⭐ שלב מבחן</span></div>':'');
+   const txt=passageOf(G.set,q);
+   const top=txt?passageHtml(txt):picOf(q);
+   $('gPlay').innerHTML=`${top}${G.rev&&G.rev.has(q)?'<div class="revtag">🔁 שאלת חזרה</div>':''}<div class="qbox ${q.scene&&!txt?'short':''}" dir="auto">${esc(q.question)}</div>
+     <div class="opts ${!txt&&q.options.every(o=>String(o).length<=18)?'two':''}">${q.options.map((o,k)=>`<button class="opt" dir="auto" onclick="choicePick(${k})"><span class="key">${optKey(q,k)}</span>${esc(o)}</button>`).join('')}</div>
+-    <div class="helpers">${G.res.length?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
++    <div class="helpers">${G.res.length&&!G.mock?`<button class="btn ghost small" onclick="pastView(G.res.length-1)" aria-label="השאלה הקודמת">› הקודם</button>`:''}<button class="btn ghost small" onclick="speakQ()" aria-label="הקראה">🔊</button></div>`;
+   if(track(G.set.grade).young) speakQ();
+ }
+ function choicePick(k){
+   const q=curQ(), ok=k===q.answer;
+   const btns=[...document.querySelectorAll('#gPlay .opt')];
++  if(G.mock){ if(G.res.length>G.i) return;                     // the mock test: no right / wrong and no explanation until the end
++    btns.forEach((b,i)=>{ b.disabled=true; b.classList.add(i===k?'picked':'dim'); }); G.res.push({q,ok,pick:k}); if(ok) G.score+=10;
++    $('gTop').querySelector('.track')?.replaceWith(Object.assign(document.createElement('div'),{innerHTML:trackHtml()}).firstElementChild);
++    const tok=G.tok=(G.tok||0)+1; setTimeout(()=>{ if(G&&G.tok===tok&&G.mock) nextQ(); },450); return; }
+   btns.forEach((b,i)=>{b.disabled=true; if(i!==q.answer&&i!==k) b.classList.add('dim');});
+   btns[q.answer].classList.add('right'); if(!ok) btns[k].classList.add('wrong');
+   G.res.push({q,ok,pick:k}); award(ok); sayAnswer(q);
+@@ -4289,8 +4366,11 @@ function endGame(){
+   const by={}; G.res.forEach(r=>{by[r.q.topic]=by[r.q.topic]||[0,0]; by[r.q.topic][1]++; if(r.ok) by[r.q.topic][0]++;});
+   $('eTopics').innerHTML=Object.entries(by).map(([t,[a,b]])=>{const p=a/b; return `<span class="${p>=.8?'ok':p>=.5?'warn':'bad'}">${esc(t)} ${a}/${b}</span>`}).join('');
+   const bonus=G.mode==='memory';
+-  $('eRetry').classList.toggle('hidden', right===n||bonus);
+-  const bq=bonusQs(); $('eBonus').classList.toggle('hidden', bonus||!bq);
++  $('eMock').classList.add('hidden'); $('eTrophy').classList.remove('hidden');
++  $('eRetry').classList.toggle('hidden', right===n||bonus||!!G.mock);
++  const bq=G.mock?null:bonusQs(); $('eBonus').classList.toggle('hidden', bonus||!bq);
++  if(G.mock) return mockEnd(right, n, by, stars);
++  if(G.lvl===2){ $('eTitle').textContent=pct>=PASS?'⭐ עברת את שלב המבחן!':'⭐ שלב מבחן – עוד קצת וזה שם!'; $('eSub').insertAdjacentHTML('afterbegin','<span>⭐ שלב מבחן</span>'); }
+   if(bonus){ $('eTitle').textContent='🎁 כל הכבוד על משחק הבונוס!'; $('eTopics').innerHTML=''; $('eComp').classList.add('hidden'); $('eTrophy').innerHTML=''; show('vEnd'); burst(); return; }
+   recordSession(by, right, n);
+   const goal=todayGoal(G.set), done=todayCount(G.set.id), tr=$('eTrophy');
+@@ -4303,6 +4383,40 @@ function endGame(){
+   show('vEnd');
+   if(stars>=2||done===goal){ burst(); setTimeout(burst,400); }
+ }
++// the mock test's end: the score and the time, what to go over tonight (the 3 chapters with the most mistakes, a button
++// each), focused practice from the mistakes, and every mistake's explanation (none were shown during the test)
++function mockEnd(right, n, by, stars){
++  const set=G.set, sid=esc(set.id), pct=Math.round(right/n*100), C=getChapters(set), sec=G.t0?Math.round((Date.now()-G.t0)/1000):0;
++  const miss=G.res.filter(r=>!r.ok), chOfQ=q=>C.findIndex(c=>c.all.includes(q)), per={};
++  miss.forEach(r=>{ const i=chOfQ(r.q); if(i>=0) per[i]=(per[i]||0)+1; });
++  const top=Object.entries(per).map(([i,k])=>[+i,k]).sort((a,b)=>b[1]-a[1]||a[0]-b[0]).slice(0,3);
++  $('eTitle').textContent=`📝 מבחן דמה: ${pct}%`;
++  $('eSub').innerHTML=`<span>✓ ${right}/${n}</span><span>⏱ ${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}</span>`;
++  recordSession(by, right, n);
++  const rows=top.map(([i,k])=>`<div class="rsrow"><span class="rsico" style="background:#FFF2C9">📌</span><div><b><bdi>${esc(chName(C[i]))}</bdi></b><small>${k===1?'טעות אחת':`${k} טעויות`} · ${chRange([i])}</small></div><button class="rsgo2" onclick="rdPractice('${sid}',${i})">לתרגל</button></div>`).join('');
++  const expl=miss.map(r=>{ const q=r.q; return `<div class="mexp"><div class="qbox" dir="auto">${esc(q.question)}</div>
++      ${Number.isInteger(r.pick)?`<div class="mx bad" dir="auto">✗ <span translate="no">${esc(q.options[r.pick])}</span></div>`:''}<div class="mx ok" dir="auto">✓ <span translate="no">${esc(q.options[q.answer])}</span></div>
++      <div class="expl show" dir="auto"><b>למה?</b> ${esc(q.explanation)}</div></div>`; }).join('');
++  $('eMock').innerHTML=miss.length?`<h3 class="rsec">מה לחזור עליו הערב</h3><div class="rsrows">${rows}</div>
++      <button class="btn focusbtn" style="width:100%;justify-content:center;margin-top:10px" onclick="mockFocus()">🎯 תרגול ממוקד מהטעויות</button>
++      <details class="mexpl"><summary>📖 ההסברים · ${miss.length}</summary>${expl}</details>`
++    :`<p class="sub center">🌟 בלי טעויות – מוכנים למבחן!</p>`;
++  $('eMock').classList.remove('hidden');
++  ['eTrophy','eComp'].forEach(id=>$(id).classList.add('hidden')); $('eTopics').innerHTML='';
++  show('vEnd'); if(stars>=2){ burst(); setTimeout(burst,400); }
++}
++// the newest mock test of a set (of one kid, for a group's shared set) and its score
++const lastMock=(s,kid)=>history.find(h=>h.setId===s.id&&h.mode==='mock'&&(!kid||h.kidId===kid))||null;
++const mockPct=h=>Math.round(h.right/Math.max(1,h.n)*100);
++// a weak chapter's button: the ⭐ test stage when the station already passed and its test level waits, else the station
++function rdPractice(setId, ch){ const set=getSet(setId); if(!set) return; const c=getChapters(set)[ch];
++  if(c&&c.qs2.length&&chaptersDone(set).has(ch)&&!l2Done(set).has(ch)) return startLevel2(setId, ch);
++  startStation(setId, ch); }
++// focused practice from the mock test: a 🎯 set from the mistakes (an adult's phone, no AI), or – a kid's phone, an
++// assignment – the mistakes played again right away
++function mockFocus(){ if(!G) return; const set=G.set, miss=G.res.filter(r=>!r.ok).map(r=>r.q); if(!miss.length) return;
++  if(!window.SFF_KID_DEVICE&&kidOfSet(set)&&!set.to&&!set.grp){ const id=makeFocus(set.id, true); if(id){ toast('🎯 תרגול ממוקד ✓'); return openRoad(id); } }
++  startGame(set, miss, 'choice'); G.retry=true; }
+ // the bonus game uses the cards of the station just played (if they suit memory cards)
+ function bonusQs(){ if(!G||!G.set||!gameOn(G.set,'memory')) return null; const pool=modePool({questions:G.res.filter(r=>!(G.rev&&G.rev.has(r.q))).map(r=>r.q),chapters:G.set.chapters},'memory'); return pool.length>=MIN.memory?pool:null; }
+ function startBonus(){ const qs=bonusQs(); if(qs) startGame(G.set, qs, 'memory', G.ch); }
+@@ -4483,15 +4597,15 @@ function recordSession(by, right, n){
+   const s=G.set, rv=G.res.filter(r=>G.rev&&G.rev.has(r.q));
+   if(rv.length){ right-=rv.filter(r=>r.ok).length; n-=rv.length; }
+   history.unshift({at:Date.now(), kidId:(kidOfSet(s)||{}).id||null, kid:s.name||'הילד/ה', subject:s.subject, grade:s.grade, setId:s.id,
+-    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mode, ...(s.src?{src:String(s.src)}:{}), ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
+-    qr:G.res.map(r=>{ const i=s.questions.indexOf(r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
+-    qk:G.res.filter(r=>s.questions.indexOf(r.q)>=0).map(r=>tkey(r.q.question)+(!r.ok&&Number.isInteger(r.pick)?':'+tkey(r.q.options[r.pick]):'')),
++    retry:!!G.retry, topic:G.topic, ch:G.ch, right, n, score:G.score, mode:G.mock?'mock':G.mode, ...(G.lvl===2?{lvl:2}:{}), ...(G.mock&&G.t0?{sec:Math.round((Date.now()-G.t0)/1000)}:{}), ...(s.src?{src:String(s.src)}:{}), ...(rv.length?{rv:[rv.filter(r=>r.ok).length, rv.length]}:{}),
++    qr:G.res.map(r=>{ const i=qrIdx(s,r.q); return i<0?null:(i+'.'+(r.ok?1:0)+(!r.ok&&Number.isInteger(r.pick)?'.'+r.pick:'')); }).filter(Boolean),
++    qk:G.res.filter(r=>qrIdx(s,r.q)>=0).map(r=>tkey(r.q.question)+(!r.ok&&Number.isInteger(r.pick)?':'+tkey(r.q.options[r.pick]):'')),
+     topics:Object.fromEntries(Object.entries(by).map(([t,[a,b]])=>[t,{r:a,n:b}]))});
+   history=history.slice(0,500);
+   saveHistoryLocal(); pushProgress((kidOfSet(s)||{}).id);
+ }
+ /* ---------- words to strengthen (from each question's result) ---------- */
+-const MODE_ICO={choice:'✅',memory:'🃏',match:'〰️',riddle:'🧩',spell:'🔤'};
++const MODE_ICO={choice:'✅',memory:'🃏',match:'〰️',riddle:'🧩',spell:'🔤',mock:'📝'};
+ function wordCat(set,q){ return passageOf(set,q)?'unseen':(/_{2,}/.test(q.question)||/which is correct/i.test(q.question))?'grammar':'vocab'; }
+ function qrEntries(set, h){
+   if(!set._byKey||set._byKeyN!==set.questions.length){ const m={}; set.questions.forEach((q,i)=>{ m[tkey(q.question)]=i; }); Object.defineProperty(set,'_byKey',{value:m,writable:true,configurable:true,enumerable:false}); Object.defineProperty(set,'_byKeyN',{value:set.questions.length,writable:true,configurable:true,enumerable:false}); }
+@@ -6033,7 +6147,7 @@ async function tNoteSave(kid){ const ta=$('tNote'); if(!ta||!DB) return; const t
+ const isAsg=s=>!!(s&&s.to);
+ const asgKids=s=>s.to==='all'?trStudents().map(k=>k.id):(Array.isArray(s.to)?s.to.filter(id=>trStudents().some(k=>k.id===id)):[]);
+ const asgLive=s=>isAsg(s)&&!(s.ass&&s.ass.closed)&&!(s.ass&&s.ass.start&&daysLeft(s.ass.start)>0);
+-function chDoneFor(s,kid){ return new Set(history.filter(h=>h.setId===s.id&&h.kidId===kid&&h.mode!=='memory'&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
++function chDoneFor(s,kid){ return new Set(history.filter(h=>h.setId===s.id&&h.kidId===kid&&stGame(h)&&!h.retry&&h.ch!=null&&h.ch>=0&&passedRound(h)).map(h=>h.ch)); }
+ function asgState(s){ const tot=roundsTotal(s), st={done:[],mid:[],none:[]};
+   asgKids(s).forEach(id=>{ const k=kidById(id); if(!k) return; const d=chDoneFor(s,id).size, any=history.some(h=>h.setId===s.id&&h.kidId===id);
+     (d>=tot?st.done:any?st.mid:st.none).push(k); }); return st; }
+@@ -6256,9 +6370,11 @@ async function thLinkFill(){ const C=window.SFF_CLASS||{};
+ function thCopy(){ if(window.__thUrl) navigator.clipboard?.writeText(window.__thUrl).then(()=>toast('✓ הועתק')); }
+ // one assignment: who finished, who is in the middle, who did not start; close / delete
+ function tAsg(id){ const s=getSet(id); if(!s) return; const st=asgState(s), tot=roundsTotal(s);
+-  const grp=(t,l,cls)=>`<div class="tatt ${cls}"><b>${t} · ${l.length}</b>${l.length?`<div class="tnames">${l.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi>${cls==='a-o'?` · ${chDoneFor(s,k.id).size}/${tot}`:''}</button>`).join('')}</div>`:''}</div>`;
++  const grp=(t,l,cls)=>`<div class="tatt ${cls}"><b>${t} · ${l.length}</b>${l.length?`<div class="tnames">${l.map(k=>`<button onclick="tStudent('${esc(k.id)}')"><bdi>${esc(k.name)}</bdi>${cls==='a-o'?` · ${chDoneFor(s,k.id).size}/${tot}`:''}${(m=>m?` · <span class="tmock">📝 ${mockPct(m)}%</span>`:'')(lastMock(s,k.id))}</button>`).join('')}</div>`:''}</div>`;
++  const mocks=asgKids(s).map(id=>lastMock(s,id)).filter(Boolean);
+   tDialog(`<h2 translate="no" dir="auto">${esc(asgTitle(s))}</h2><p class="hint">${s.ass&&s.ass.start&&daysLeft(s.ass.start)>0?`מתחיל ב-${fmtDate(s.ass.start)} · `:''}${dueTxt(s.due)} · ${tot} פרקים${s.ass&&s.ass.mist?' · תרגול מהטעויות':''}${s.ass&&s.ass.review?' · חזרה':''}</p>
+     ${grp('סיימו',st.done,'a-g')}${grp('באמצע',st.mid,'a-o')}${grp('עוד לא התחילו',st.none,'a-r')}
++    ${mocks.length?`<p class="hint tmockline">📝 מבחן דמה: ${mocks.length} מתוך ${asgKids(s).length} · ממוצע ${Math.round(mocks.reduce((a,h)=>a+mockPct(h),0)/mocks.length)}%</p>`:''}
+     <div class="actions" style="justify-content:center;margin-top:12px">${s.ass&&s.ass.closed?'':`<button class="btn ghost" onclick="asgClose('${esc(id)}')">סגירת המשימה</button>`}
+       <button class="btn ghost danger" onclick="asgDelete('${esc(id)}')">מחיקה</button></div>
+     <p class="hint">סגירה: המשימה יורדת מראש המסך של התלמידים, והתרגול נשאר להם. מחיקה: התרגול יורד מכולם.</p>`); }
+diff --git a/tools/tests/local_lvl.js b/tools/tests/local_lvl.js
+index c8e83c1..c5aa1f2 100644
+--- a/tools/tests/local_lvl.js
++++ b/tools/tests/local_lvl.js
+@@ -1,8 +1,14 @@
+ // Test-level questions (lvl 2, a set file's 7th field `2`) never reach a regular game: loadShare / every set that arrives
+ // (storage, the cloud, an old copy with them mixed in) keeps them in set.qs2, apart from set.questions. Loads math7 (with its
+ // lvl 2 questions) and checks every station × every game, "חזרה על הכול", the review questions, focused practice and a
+-// teacher's assignment copy – and that the map ("עברתי", the plan) and the readiness meter are the same as for math7 before
+-// them (MAIN=<file>: the set without them; default: the branch's own set with its lvl 2 questions taken out).
++// teacher's assignment copy – and that the map ("עברתי", the plan) is the same as for math7 before them, while the readiness
++// meter needs them (a chapter with a test stage stays ≤ 70% on level 1 alone) (MAIN=<file>: the set without them; default:
++// the branch's own set with its lvl 2 questions taken out).
++// Stage 3 (the test window): a station plays level 1 only; "⭐ שלב מבחן" on the map after the station passed (not before),
++// its game = level 2 of that chapter, kept with lvl:2 (and never "passes" a station); passed at 70% = a full star; the
++// readiness meter: 10 level-1 answers right = 70%, with 3+ level-2 answers right = 100%; "חזרה על הכול" and review
++// questions take level 2 only from passed chapters; match / memory never mix the levels; lvl survives sharing (a code →
++// loadShare), a teacher's assignment copy and the parent's chapter list; he + en, phone width.
+ // Usage: the app served on 8765 (APP=… for another) → node tools/tests/local_lvl.js
+ const { chromium } = require('playwright'); const fs = require('fs');
+ const APP = process.env.APP || 'http://localhost:8765/';
+@@ -56,6 +62,42 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
+     history.filter(h => h.setId === S.id).forEach(h => history.push({ ...h, kidId: 'k2', setId: R.id }));
+     const P1 = roadPlan(S), P2 = roadPlan(R), E1 = examReady(S), E2 = examReady(R);
+     out.map = { N: [P1.N, P2.N], done: [[...chaptersDone(S)].join(), [...chaptersDone(R)].join()], ready: [E1 && E1.pct, E2 && E2.pct], chq: getChapters(S).map(c => c.qs.length).join() === getChapters(R).map(c => c.qs.length).join() };
++    out.map.per = getChapters(S).map((c, i) => c.qs2.length ? [i, E1.per[i].pct, E2.per[i].pct] : null).filter(Boolean);
++    // ---- stage 3: the ⭐ test stage ----
++    const T = applyImport(JSON.parse(JSON.stringify(p)), kidById('k1')).set; T.id = 'tst'; const TC = getChapters(T), ch = TC.findIndex(c => c.qs2.length);
++    out.st = { ch, n2: TC[ch].qs2.length };
++    openRoad('tst'); out.st.badgeBefore = document.querySelectorAll('#rdMap .lv2').length;
++    startStation('tst', ch); out.st.stationL2 = G.qs.filter(q => q.lvl === 2).length; out.st.stationN = G.qs.length;
++    startLevel2('tst', ch); out.st.notYet = !G.lvl;                         // before the station passed: the station itself
++    quitGame();
++    startStation('tst', ch); G.qs.forEach(q => G.res.push({ q, ok: true, pick: q.answer })); endGame();
++    out.st.ready70 = examReady(T).per[ch].pct;
++    openRoad('tst'); out.st.badge = document.querySelectorAll('#rdMap .lv2').length; out.st.badgeOn = document.querySelectorAll('#rdMap .lv2.on').length;
++    document.querySelector('#rdMap .lv2').dispatchEvent(new MouseEvent('click', { bubbles: true }));
++    out.st.game = { lvl: G.lvl, ch: G.ch, n: G.qs.length, all2: G.qs.every(q => q.lvl === 2), mine: G.qs.every(q => q.ch === ch), tag: !!document.querySelector('#gTop .l2tag') };
++    G.qs.slice(0, 3).forEach(q => G.res.push({ q, ok: true, pick: q.answer })); G.qs.slice(3).forEach(q => G.res.push({ q, ok: false, pick: (q.answer + 1) % 4 })); endGame();
++    out.st.fail = { lvl: history[0].lvl, passed: l2Done(T).has(ch), still: chaptersDone(T).has(ch), title: $('eTitle').textContent };
++    startLevel2('tst', ch); G.qs.forEach(q => G.res.push({ q, ok: true, pick: q.answer })); endGame();
++    out.st.pass = { passed: l2Done(T).has(ch), done: chaptersDone(T).size, title: $('eTitle').textContent, qk: history[0].qk.length, qr: history[0].qr.every(x => +x.split('.')[0] >= 5000) };
++    out.st.ready100 = examReady(T).per[ch].pct;
++    openRoad('tst'); out.st.badgeOn2 = document.querySelectorAll('#rdMap .lv2.on').length;
++    // the history entry survives the cloud's cleaning
++    out.st.clean = (h => h && h.lvl === 2 && h.qr.length === history[0].qr.length)(cleanHist(JSON.parse(JSON.stringify(history[0]))));
++    // "חזרה על הכול": level 2 only of passed chapters; review questions the same
++    let rev2 = new Set(); for (let k = 0; k < 30; k++) { chapterQs(T, -1).filter(q => q.lvl === 2).forEach(q => rev2.add(q.ch)); }
++    out.st.rev = [...rev2].join();
++    // match / memory never mix the levels
++    const mixQs = TC[ch].qs.slice(0, 4).concat(TC[ch].qs2.slice(0, 4)); let mixN = 0;
++    for (const m of ['match', 'memory']) { startGame(T, mixQs, m); if (G.mode === m && G.qs.some(q => q.lvl === 2) && G.qs.some(q => q.lvl !== 2)) mixN++; quitGame(); }
++    out.st.mixed = mixN;
++    // sharing: a code carries them, loadShare splits them again
++    const code = codeOf(setPayload(T)), back = await loadShare(code);
++    out.st.share = { qs: back.qs.length, qs2: back.qs2.length, lvl: back.qs2.every(q => q.lvl === 2), ch: back.qs2.every((q, i) => q.ch === T.qs2[i].ch) };
++    const A2 = asgCopy(T); out.st.asg = { qs2: A2.qs2.length, lvl: A2.qs2.every(q => q.lvl === 2) };
++    // the parent's chapter list shows them, marked
++    curSet = T; REV_OPEN[T.id] = ch; renderReview(T); show('vReview'); await new Promise(r => setTimeout(r, 100));
++    out.st.parent = document.querySelectorAll('#revChs .l2pill').length;
++    out.st.parentLine = (document.querySelectorAll('#revChs .chrow')[ch] || {}).textContent || '';
+     out.bad = bad.slice(0, 8); out.nbad = bad.length; return out;
+   }, MAIN);
+   console.log(JSON.stringify(r, null, 1));
+@@ -67,7 +109,22 @@ const MAIN = process.env.MAIN ? fs.readFileSync(process.env.MAIN, 'utf8').trim()
+   ok(r.games > 100 && !r.nbad, `every station × every game, "חזרה על הכול", review questions, focused practice: no test-level question (${r.games} games)${r.nbad ? ' – ' + r.bad.join(' | ') : ''}`);
+   ok(r.focus > 0, 'focused practice was built (' + r.focus + ' questions)');
+   ok(r.asg.qs2 === 58 && !r.asg.lvlInQs, 'a teacher\'s assignment copy keeps them apart');
+-  ok(r.map.N[0] === r.map.N[1] && r.map.done[0] === r.map.done[1] && r.map.ready[0] === r.map.ready[1] && r.map.chq, `the map and the readiness meter as without them (${r.map.N[0]} stations, readiness ${r.map.ready[0]}%)`);
++  ok(r.map.N[0] === r.map.N[1] && r.map.done[0] === r.map.done[1] && r.map.chq, `the map as without them (${r.map.N[0]} stations)`);
++  ok(r.map.ready[0] <= r.map.ready[1] && r.map.per.length === 3 && r.map.per.every(([i, a, b]) => a <= 70 && a <= b), `the readiness meter needs them: level 1 alone keeps a chapter with a test stage ≤ 70% (${JSON.stringify(r.map.per)}; ${r.map.ready[0]}% vs ${r.map.ready[1]}%)`);
++  const T = r.st;
++  ok(!T.badgeBefore && !T.stationL2 && T.stationN > 0 && T.notYet, 'before the station passed: no ⭐ on the map, the station plays level 1 only, the test stage opens the station');
++  ok(T.ready70 === 70, `the station all right, no level 2: readiness of the chapter 70% (${T.ready70})`);
++  ok(T.badge === 1 && !T.badgeOn, 'after the station passed: a ⭐ test-stage mark on that station (not full yet)');
++  ok(T.game.lvl === 2 && T.game.ch === T.ch && T.game.all2 && T.game.mine && T.game.n === Math.min(10, T.n2) && T.game.tag, `the ⭐ game: level 2 of that chapter only, ${T.game.n} questions, tagged`);
++  ok(T.fail.lvl === 2 && !T.fail.passed && T.fail.still, '3/10: kept with lvl:2, the test stage not passed, the station still passed');
++  ok(T.pass.passed && T.pass.done === 1 && T.pass.qk === T.game.n && T.pass.qr && /עברת את שלב המבחן/.test(T.pass.title) && T.badgeOn2 === 1, 'all right: the test stage passed (a full star), "עברתי" counts only the station, its answers in the history');
++  ok(T.ready100 === 100, `with level 2 right: the chapter's readiness 100% (${T.ready100})`);
++  ok(T.clean, 'cleanHist keeps lvl:2 and the level-2 answers');
++  ok(T.rev === String(T.ch), `"חזרה על הכול": level 2 only from the passed chapter (${T.rev})`);
++  ok(!T.mixed, 'match / memory never mix the two levels');
++  ok(T.share.qs2 === 58 && T.share.lvl && T.share.ch && T.share.qs === r.load.qs, 'sharing (a code): the test level goes along and is split again');
++  ok(T.asg.qs2 === 58 && T.asg.lvl, "a teacher's assignment copy keeps them (lvl 2)");
++  ok(T.parent === T.n2 && /רמת מבחן/.test(T.parentLine), `the parent's chapter list shows them, marked (${T.parent})`);
+   ok(!errs.some(e => !/^(loadShare|the |a |every|focused)/.test(e)), 'no page errors')
+   console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
+ })();
+diff --git a/tools/tests/local_mock.js b/tools/tests/local_mock.js
+new file mode 100644
+index 0000000..e59a119
+--- /dev/null
++++ b/tools/tests/local_mock.js
+@@ -0,0 +1,113 @@
++// The test window's mock test (📝 מבחן דמה): on the day before the test (P.revDay – and every day once all the chapters
++// passed) the "חזרה על הכול" station becomes a mock test – 15–20 questions from all the chapters by their share, the test
++// level (lvl 2) included, multiple choice only; no right / wrong, no explanation and no "previous" in the middle; a soft
++// timer. Its end screen: the score, "מה לחזור עליו הערב" (the 3 chapters with the most mistakes, a button each), focused
++// practice from the mistakes (makeFocus), the explanations. History: mode 'mock', ch -1 – counted in the readiness meter,
++// never as a station; the parent's row "מבחן דמה: N%"; a teacher's assignment page shows each student's score.
++// Loads math7 (58 lvl-2 questions). He + en, phone width. OUT=dir saves screenshots.
++// Usage: the app served on 8765 (APP=… for another) → node tools/tests/local_mock.js
++const { chromium } = require('playwright');
++const APP = process.env.APP || 'http://localhost:8765/', OUT = process.env.OUT || '';
++(async () => {
++  const b = await chromium.launch(); const errs = [];
++  const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) errs.push(m); };
++  for (const lang of ['he', 'en']) {
++    console.log('== ' + lang);
++    const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 })).newPage();
++    p.on('pageerror', e => errs.push(lang + ': ' + e.message));
++    await p.addInitScript(l => localStorage.setItem('sff_lang', l), lang);
++    await p.goto(APP, { waitUntil: 'load' }); await p.waitForTimeout(1800);
++    await p.evaluate(() => { document.getElementById('fbLogin')?.remove(); document.getElementById('sffLoad')?.remove(); });
++    const r = await p.evaluate(async () => {
++      const out = {}, day = 864e5, iso = t => new Date(t).toISOString().slice(0, 10), wait = ms => new Promise(r => setTimeout(r, ms));
++      kids.push({ id: 'k1', name: 'נועה', grade: 6, color: '#FF5C8A' }); activeKid = 'k1';
++      const pp = await loadShare('math7');
++      // in 10 days, nothing passed: no mock test
++      pp.examDate = iso(Date.now() + 10 * day); const S = applyImport(pp, kidById('k1')).set; S.created = Date.now() - 4 * day;
++      out.off10 = mockOn(S);
++      startStation(S.id, -1); out.revNotMock = !G.mock; quitGame();
++      // the day before the test: the review station is the mock test
++      S.examDate = iso(Date.now() + 1 * day); out.on1 = mockOn(S) && roadPlan(S).revDay === 0;
++      openRoad(S.id); await wait(100);
++      out.station = [...document.querySelectorAll('#rdMap text')].map(t => t.textContent).filter(t => /מבחן דמה|Mock test|לפני המבחן|Before the test/.test(t));
++      out.goBtn = (document.querySelector('#rdHdr .rmgo2') || {}).textContent || '';
++      // no test date, all chapters passed: mock test too
++      const N = { ...JSON.parse(JSON.stringify(S)), id: 'nod', examDate: '' }; sets.push(N);
++      getChapters(N).forEach((c, ch) => history.unshift({ at: Date.now() - 2 * day, kidId: 'k1', setId: 'nod', ch, right: 10, n: 10, mode: 'choice', qr: [], qk: [], topics: {} }));
++      out.allDone = mockOn(N); sets.splice(sets.indexOf(N), 1);
++      // the game
++      const before = examReady(S).pct;
++      startStation(S.id, -1);
++      const C = getChapters(S), chOf = q => C.findIndex(c => c.all.includes(q)), all = C.reduce((a, c) => a + c.all.length, 0);
++      const per = {}; G.qs.forEach(q => { const i = chOf(q); per[i] = (per[i] || 0) + 1; });
++      out.game = { mock: !!G.mock, mode: G.mode, n: G.qs.length, l2: G.qs.filter(q => q.lvl === 2).length, chs: Object.keys(per).length,
++        fair: Object.entries(per).every(([i, k]) => k <= Math.ceil(C[i].all.length / all * G.qs.length) + 1), clock: !!document.getElementById('gClock'), t0: $('gClock') && $('gClock').textContent };
++      await wait(1300); out.game.t1 = $('gClock') && $('gClock').textContent;
++      // the first answer: wrong – no sheet, no right / wrong colours, no "previous"
++      const q0 = curQ(); choicePick((q0.answer + 1) % 4); await wait(80);
++      out.mid = { sheet: $('gSheet').classList.contains('show'), right: document.querySelectorAll('#gPlay .opt.right,#gPlay .opt.wrong').length, picked: document.querySelectorAll('#gPlay .opt.picked').length,
++        stops: document.querySelectorAll('.track .stop.done,.track .stop.miss').length };
++      await wait(600); out.mid.next = G.i === 1; out.mid.prev = !!document.querySelector('#gPlay .helpers [onclick^="pastView"]');
++      // the rest: mistakes in the first questions of the most chapters
++      while (G.i < G.qs.length) { const q = curQ(), k = G.res.length; G.tok++; choicePick(k < 6 ? (q.answer + 1) % 4 : q.answer); G.i = G.res.length; }
++      endGame(); await wait(100);
++      const h = history[0], miss = G.res.filter(x => !x.ok).length;
++      out.hist = { mode: h.mode, ch: h.ch, n: h.n, right: h.right, sec: h.sec > 0, qk: h.qk.length };
++      out.end = { title: $('eTitle').textContent, rows: document.querySelectorAll('#eMock .rsrow').length, btns: document.querySelectorAll('#eMock .rsrow .rsgo2').length,
++        focus: !!document.querySelector('#eMock .focusbtn'), expl: document.querySelectorAll('#eMock .mexp').length, miss, retry: !$('eRetry').classList.contains('hidden'),
++        trophy: !$('eTrophy').classList.contains('hidden'), text: document.getElementById('vEnd').innerText.replace(/\s+/g, ' ') };
++      out.notStation = chaptersDone(S).size === 0;
++      out.ready = [before, examReady(S).pct];
++      // the parent's row
++      go('kids'); await wait(200);
++      out.row = [...document.querySelectorAll('.prow')].map(x => x.textContent.replace(/\s+/g, ' ')).find(t => /מבחן דמה|Mock test/.test(t)) || '';
++      // a chapter's button on the end screen: its station
++      endGame; out.chBtn = (() => { show('vEnd'); const bt = document.querySelector('#eMock .rsgo2'); if (!bt) return null; bt.click(); const x = { ch: G.ch, mock: !!G.mock }; quitGame(); return x; })();
++      // focused practice from the mistakes (an adult's phone): a 🎯 set, its map opens
++      G = { set: S, mock: true, res: G.res.length ? G.res : [] }; G.res = history[0] ? G.res : [];
++      out.missing = (window.__i18nMissing ? [...window.__i18nMissing] : []).filter(x => /מבחן|טעו|הערב|ההסברים|ממוקד|שלב/.test(x));
++      return out;
++    });
++    // focused practice: from the end screen of a fresh mock test
++    const f = await p.evaluate(async () => {
++      const S = sets.find(s => s.src === 'math7'); startMock(S.id);
++      while (G.i < G.qs.length) { const q = curQ(), k = G.res.length; G.tok++; choicePick(k < 4 ? (q.answer + 1) % 4 : q.answer); G.i = G.res.length; }
++      endGame(); const n0 = sets.length; document.querySelector('#eMock .focusbtn').click(); await new Promise(r => setTimeout(r, 200));
++      const F = sets.find(s => s.reinf === S.id);
++      return { made: sets.length === n0 + 1 && !!F, road: ROAD_SET === (F && F.id) && !document.getElementById('vRoad').classList.contains('hidden') };
++    });
++    // a teacher's assignment page: each student's mock score
++    const t = await p.evaluate(async () => {
++      const S = sets.find(s => s.src === 'math7'); const A = { ...asgCopy(S), id: 'asg1', to: 'all', toMap: {}, due: S.examDate, ass: { by: 'x', at: Date.now() } }; sets.push(A);
++      kids.push({ id: 'k2', name: 'רון', grade: 6, color: '#2F6BFF' }); CLS.consents.k1 = { status: 'digital' }; CLS.consents.k2 = { status: 'digital' };
++      history.unshift({ at: Date.now(), kidId: 'k1', setId: 'asg1', ch: -1, right: 17, n: 20, mode: 'mock', qr: [], qk: [], topics: {} });
++      tAsg('asg1'); await new Promise(r => setTimeout(r, 100));
++      const d = document.getElementById('tDlg'); const txt = d ? d.innerText.replace(/\s+/g, ' ') : ''; tClose(); return txt;
++    });
++    console.log(JSON.stringify({ ...r, end: { ...r.end, text: r.end.text.slice(0, 260) } }, null, 1), JSON.stringify(f), t.slice(0, 300));
++    const he = lang === 'he';
++    ok(!r.off10 && r.revNotMock, 'ten days before the test, nothing passed: "חזרה על הכול" stays a review');
++    ok(r.on1 && r.station.length >= 1 && /מבחן דמה|Mock test/.test(r.goBtn), `the day before the test: the station is "📝 מבחן דמה" and the header's button opens it (${r.goBtn})`);
++    ok(r.allDone, 'no test date, all chapters passed: the mock test too');
++    ok(r.game.mock && r.game.mode === 'choice' && r.game.n >= 15 && r.game.n <= 20 && r.game.l2 >= 1 && r.game.chs >= 10 && r.game.fair, `the game: ${r.game.n} questions, ${r.game.l2} test-level, from ${r.game.chs} chapters by their share, multiple choice`);
++    ok(r.game.clock && r.game.t0 !== r.game.t1, `a soft timer (${r.game.t0} → ${r.game.t1})`);
++    ok(!r.mid.sheet && !r.mid.right && r.mid.picked === 1 && !r.mid.stops && r.mid.next && !r.mid.prev, 'in the middle: no right / wrong, no explanation, no "previous" – on to the next question');
++    ok(r.hist.mode === 'mock' && r.hist.ch === -1 && r.hist.n === r.game.n && r.hist.sec && r.hist.qk === r.game.n && r.notStation, 'history: mode mock, ch -1, every answer kept; no station passed by it');
++    ok(r.ready[1] > r.ready[0], `counted in the readiness meter (${r.ready[0]}% → ${r.ready[1]}%)`);
++    ok(r.end.rows === 3 && r.end.btns === 3 && r.end.focus && r.end.expl === r.end.miss && !r.end.retry && !r.end.trophy
++      && (he ? /מבחן דמה: \d+%/.test(r.end.title) && /מה לחזור עליו הערב/.test(r.end.text) && /תרגול ממוקד מהטעויות/.test(r.end.text) && /ההסברים · \d+/.test(r.end.text)
++             : /Mock test: \d+%/.test(r.end.title) && /What to go over tonight/.test(r.end.text) && /Focused practice from the mistakes/.test(r.end.text) && /The explanations · \d+/.test(r.end.text) && !/[א-ת]/.test(r.end.title + r.end.text.replace(/📖.*$/, ''))),
++      `the end screen: score, 3 chapters to go over tonight with a button each, focused practice, ${r.end.expl} explanations`);
++    ok(r.chBtn && r.chBtn.ch >= 0 && !r.chBtn.mock, 'a chapter\'s button opens that chapter');
++    ok(he ? /מבחן דמה: \d+%/.test(r.row) : /Mock test: \d+%/.test(r.row), `the parent's row: "${(r.row.match(/(מבחן דמה|Mock test): \d+%/) || [''])[0]}"`);
++    ok(f.made && f.road, 'focused practice from the mistakes: a 🎯 set, its map opens');
++    ok(he ? /📝 85%/.test(t) && /מבחן דמה: 1 מתוך 2 · ממוצע 85%/.test(t) : /📝 85%/.test(t) && /Mock test: 1 of 2 · average 85%/.test(t), "the teacher's assignment page: the student's mock score, how many did it");
++    ok(!r.missing.length, 'no untranslated text' + (r.missing.length ? ': ' + r.missing.join(' | ') : ''));
++    if (OUT) {
++      await p.evaluate(async () => { const S = sets.find(s => s.src === 'math7'); startMock(S.id);
++        while (G.i < G.qs.length) { const q = curQ(), k = G.res.length; G.tok++; choicePick(k % 4 === 1 ? (q.answer + 1) % 4 : q.answer); G.i = G.res.length; } G.t0 = Date.now() - 754e3; endGame(); window.scrollTo(0, 0); });
++      await p.waitForTimeout(1500); await p.screenshot({ path: `${OUT}/mock_end_${lang}.png` });
++    }
++  }
++  console.log(JSON.stringify({ errs })); await b.close(); process.exit(errs.length ? 1 : 0);
++})();

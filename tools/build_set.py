@@ -273,9 +273,10 @@ if EN is not None:
         if not e or not str(e.get("q", "")).strip(): en_err(f"{tag}: no English"); continue
         used.add(k)
         if e.get("h") != q_hash(q): en_err(f"{tag}: the Hebrew changed since it was translated – check the English, then dump again (h)"); continue
-        eo = [str(o).strip() for o in (e.get("o") or [])]
+        noiso = lambda t: re.sub(r"[\u2066-\u2069]", "", str(t)).strip()   # English reads left to right: no direction marks (else "⁦5⁩" ≠ "5" in the games)
+        eo = [noiso(o) for o in (e.get("o") or [])]
         if len(eo) != 4 or len(set(eo)) != 4 or not all(eo): en_err(f"{tag}: need 4 different English options"); continue
-        eq, ex = str(e["q"]).strip(), str(e.get("x", "")).strip()
+        eq, ex = noiso(e["q"]), noiso(e.get("x", ""))
         ea = eo[SRC_OPTS[i].index(q["options"][q["answer"]])]
         if not EN_SUBJECT and any(has_he(t) for t in [eq, ex, *eo]): en_err(f"{tag}: Hebrew left in the English")
         if words(eq) > lim_q: en_err(f"{tag}: English question > {lim_q} words")
@@ -283,7 +284,7 @@ if EN is not None:
         if words(ex) > 14: en_err(f"{tag}: English explanation > 14 words")
         if not ns.get("ANSWER_IN_Q_OK") and re.search(r"(?<!\w)" + re.escape(ea.lower()) + r"(?!\w)", eq.lower()): en_err(f"{tag}: the English question gives the answer away ({ea})")
         # the picture's text cards: each Hebrew card needs its English; only text cards may be replaced
-        sc = {str(a): str(b).strip() for a, b in (e.get("sc") or {}).items() if str(b).strip()}
+        sc = {str(a): noiso(b) for a, b in (e.get("sc") or {}).items() if noiso(b)}
         for a, b in sc.items():
             if not a.isdigit() or int(a) >= len(q["scene"]) or not is_text(q["scene"][int(a)]["e"]): en_err(f"{tag}: sc {a} is not a text card of the picture"); continue
             if len(b) > 16: en_err(f"{tag}: English card too long \"{b}\"")
@@ -293,7 +294,7 @@ if EN is not None:
             for k2, it in enumerate(q["scene"]):
                 if is_text(it["e"]) and has_he(it["e"]) and str(k2) not in sc: en_err(f"{tag}: the card \"{it['e']}\" has no English")
         cards = [sc.get(str(k2), it["e"]) for k2, it in enumerate(q["scene"]) if is_text(it["e"])]
-        if len(cards) == 1 and cards[0].strip().lower() == ea.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
+        if len(cards) == 1 and cards[0].strip().lower() == ea.lower() and ea.lower() not in eq.lower() and q["scene"] and len([x for x in q["scene"] if is_text(x["e"])]) == len(q["scene"]):
             en_err(f"{tag}: the English card \"{cards[0]}\" is the answer")
         q["en"] = {"k": q["question"].strip(), "q": eq, "o": [eo[SRC_OPTS[i].index(o)] for o in q["options"]], "x": ex, **({"sc": sc} if sc else {})}
         n_en += 1

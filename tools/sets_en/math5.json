@@ -257,7 +257,7 @@
    "he": "איזה שבר שקול ל-⁦3/5⁩?",
    "a": "⁦9/15⁩",
    "h": "7c221e31",
-   "q": "Which fraction is equivalent to 3/5?",
+   "q": "Which of these fractions is equivalent to 3/5?",
    "o": [
     "⁦9/15⁩",
     "⁦6/15⁩",
@@ -503,7 +503,7 @@
    "he": "איזה שבר שווה בדיוק לחצי?",
    "a": "⁦7/14⁩",
    "h": "46097358",
-   "q": "Which fraction is exactly equal to 1/2?",
+   "q": "Which of these fractions is exactly equal to 1/2?",
    "o": [
     "⁦7/14⁩",
     "⁦7/12⁩",
@@ -710,7 +710,7 @@
    "he": "איזה שבר שווה בדיוק ל-⁦2⁩?",
    "a": "⁦10/5⁩",
    "h": "fe0a0e45",
-   "q": "Which fraction is exactly equal to 2?",
+   "q": "Which of these fractions is exactly equal to 2?",
    "o": [
     "⁦10/5⁩",
     "⁦5/10⁩",
@@ -1022,7 +1022,7 @@
    "he": "מזגו ⁦1/2⁩ כוס ועוד ⁦1/4⁩ כוס. כמה מלא?",
    "a": "⁦3/4⁩",
    "h": "8312f7c9",
-   "q": "Pour 1/2 a cup, then another 1/4 cup. How full is the cup?",
+   "q": "1/2 cup of water is poured into a cup, then 1/4 cup more. How full is it?",
    "o": [
     "⁦3/4⁩",
     "⁦2/6⁩",
@@ -1256,7 +1256,7 @@
    "he": "איזה תרגיל שווה ל-⁦2⁩?",
    "a": "⁦8 × 1/4⁩",
    "h": "5c48442a",
-   "q": "Which exercise equals 2?",
+   "q": "Which of these exercises equals 2?",
    "o": [
     "⁦8 × 1/4⁩",
     "⁦4 × 1/8⁩",
@@ -1425,7 +1425,7 @@
    "he": "באיזה מקום הספרה 5 במספר ⁦0.305⁩?",
    "a": "אלפיות",
    "h": "12d8b488",
-   "q": "Which place does the digit 5 hold in 0.305?",
+   "q": "In 0.305, which place is the digit 5 in?",
    "o": [
     "Thousandths",
     "Tenths",
@@ -1536,7 +1536,7 @@
    "he": "איזה מספר שווה ל-⁦0.5⁩?",
    "a": "⁦0.50⁩",
    "h": "51f231bb",
-   "q": "Which number is equal to 0.5?",
+   "q": "Which of these numbers is equal to 0.5?",
    "o": [
     "⁦0.50⁩",
     "⁦0.05⁩",
@@ -1565,7 +1565,7 @@
    "he": "כמה מטרים הם ⁦35⁩ ס״מ?",
    "a": "0.35 מ'",
    "h": "359151e5",
-   "q": "How many meters are 35 cm?",
+   "q": "How many meters is 35 cm?",
    "o": [
     "0.35 m",
     "3.5 m",
@@ -1594,7 +1594,7 @@
    "he": "כמה ק״ג הם ⁦250⁩ גרם?",
    "a": "0.25 ק״ג",
    "h": "57f15cff",
-   "q": "How many kg are 250 g?",
+   "q": "How many kg is 250 g?",
    "o": [
     "0.25 kg",
     "2.5 kg",
@@ -1753,7 +1753,7 @@
    "he": "איזה מספר נמצא בין ⁦0.4⁩ ל-⁦0.5⁩?",
    "a": "⁦0.45⁩",
    "h": "ba9d185a",
-   "q": "Which number is between 0.4 and 0.5?",
+   "q": "Which of these numbers is between 0.4 and 0.5?",
    "o": [
     "⁦0.45⁩",
     "⁦0.54⁩",
@@ -2090,7 +2090,7 @@
    "he": "מחברת ב-⁦7.5⁩ ₪ ועט ב-⁦3.9⁩ ₪. כמה ביחד?",
    "a": "⁦11.4 ₪⁩",
    "h": "4ea72aaf",
-   "q": "A notebook costs 7.5 ₪ and a pen costs 3.9 ₪. How much together?",
+   "q": "A notebook costs 7.5 ₪ and a pen costs 3.9 ₪. How much do they cost together?",
    "o": [
     "⁦11.4 ₪⁩",
     "⁦10.4 ₪⁩",
@@ -2103,7 +2103,7 @@
    "he": "שילמתי ⁦20⁩ ₪ על ספר שעולה ⁦12.6⁩ ₪. כמה עודף?",
    "a": "⁦7.4 ₪⁩",
    "h": "ee7a35c5",
-   "q": "I paid 20 ₪ for a book that costs 12.6 ₪. How much change?",
+   "q": "I paid 20 ₪ for a book that costs 12.6 ₪. How much change do I get?",
    "o": [
     "⁦7.4 ₪⁩",
     "⁦8.4 ₪⁩",
@@ -2161,7 +2161,7 @@
    "he": "תפוחים ב-⁦4.30⁩ ₪ ובננות ב-⁦5.70⁩ ₪. כמה ביחד?",
    "a": "⁦10 ₪⁩",
    "h": "0e27c401",
-   "q": "Apples cost 4.30 ₪ and bananas cost 5.70 ₪. How much together?",
+   "q": "Apples cost 4.30 ₪ and bananas cost 5.70 ₪. How much do they cost together?",
    "o": [
     "⁦10 ₪⁩",
     "⁦9 ₪⁩",
@@ -2343,7 +2343,7 @@
    "he": "איזה תרגיל שווה ל-⁦53⁩?",
    "a": "⁦5.3 × 10⁩",
    "h": "9052cc38",
-   "q": "Which exercise equals 53?",
+   "q": "Which of these exercises equals 53?",
    "o": [
     "⁦5.3 × 10⁩",
     "⁦0.53 × 10⁩",
@@ -2765,10 +2765,10 @@
    "h": "0f26d491",
    "q": "Which is greater?",
    "o": [
-    "⁦0.3⁩",
-    "⁦1/4⁩",
+    "0.3",
+    "1/4",
     "They are equal",
-    "You can't tell"
+    "Can't tell"
    ],
    "x": "1/4 = 0.25, less than 0.30"
   },
@@ -3089,7 +3089,7 @@
    "he": "איזה מספר הוא כפולה של ⁦7⁩?",
    "a": "⁦63⁩",
    "h": "61e051b1",
-   "q": "Which number is a multiple of 7?",
+   "q": "Which of these numbers is a multiple of 7?",
    "o": [
     "⁦63⁩",
     "⁦27⁩",
@@ -3167,7 +3167,7 @@
    "he": "לכמה ילדים בכרטיס אי אפשר לחלק ⁦18⁩ סוכריות בלי שארית?",
    "a": "⁦4⁩",
    "h": "a55d7020",
-   "q": "Which number of children on the card can't share 18 candies equally?",
+   "q": "Among how many children on the card can 18 candies NOT be shared equally?",
    "o": [
     "⁦4⁩",
     "⁦2⁩",
@@ -3245,7 +3245,7 @@
     "⁦0⁩",
     "⁦6⁩"
    ],
-   "x": "Every other even number is also divisible by 2"
+   "x": "All other even numbers are divisible by 2, too"
   },
   {
    "he": "המספר ⁦1⁩ הוא ראשוני או פריק?",
@@ -3454,7 +3454,7 @@
     "Yes",
     "No",
     "Only by 10",
-    "You can't tell"
+    "Can't tell"
    ],
    "x": "The ones digit is 5 – that is all you check"
   },
@@ -3558,7 +3558,7 @@
     "Yes",
     "No",
     "Only by 9",
-    "You can't tell"
+    "Can't tell"
    ],
    "x": "The digit sum is 6 – divisible by 3"
   },
@@ -3894,8 +3894,8 @@
    ],
    "x": "A trapezoid has only one pair of parallel sides",
    "sc": {
-    "0": "Trapezoid",
-    "1": "Rhombus · Square"
+    "0": "Square, Rhombus",
+    "1": "Rect., Trapezoid"
    }
   },
   {
@@ -4176,7 +4176,7 @@
     "⁦50°, 50°, 50°⁩",
     "⁦100°, 70°, 20°⁩"
    ],
-   "x": "Only if the sum is 180°"
+   "x": "Only 60° + 60° + 60° adds up to 180°"
   },
   {
    "he": "הגובה במקבילית הוא קטע ה…",
@@ -4297,7 +4297,7 @@
    "he": "במקבילית שאינה מלבן, הגובה ___ מהצלע הסמוכה",
    "a": "קצר יותר",
    "h": "b600c2ee",
-   "q": "A parallelogram is not a rectangle. Compared with the slanted side, its height is…",
+   "q": "In a parallelogram that is not a rectangle, how does the height compare with the slanted side?",
    "o": [
     "Shorter",
     "Longer",
@@ -5421,7 +5421,7 @@
    "he": "הממוצע של ⁦4, 6, 8⁩ הוא ⁦6⁩. מוסיפים ⁦6⁩. הממוצע…",
    "a": "לא משתנה",
    "h": "3dfd9dbc",
-   "q": "The mean of 4, 6, 8 is 6. We add 6. The mean…",
+   "q": "The mean of 4, 6, 8 is 6. We add the number 6 to them. The mean…",
    "o": [
     "Stays the same",
     "Goes up",
@@ -5434,7 +5434,7 @@
    "he": "הממוצע של ⁦10, 20, 30⁩ הוא ⁦20⁩. מוסיפים ⁦40⁩. הממוצע…",
    "a": "גדל",
    "h": "3447fb81",
-   "q": "The mean of 10, 20, 30 is 20. We add 40. The mean…",
+   "q": "The mean of 10, 20, 30 is 20. We add the number 40 to them. The mean…",
    "o": [
     "Goes up",
     "Goes down",
@@ -5671,7 +5671,7 @@
    "he": "מה המחלק המשותף הגדול של ⁦16⁩ ו-⁦24⁩?",
    "a": "⁦8⁩",
    "h": "3a3e1da6",
-   "q": "What is the greatest common divisor of 16 and 24?",
+   "q": "What is the greatest common factor of 16 and 24?",
    "o": [
     "⁦8⁩",
     "⁦4⁩",

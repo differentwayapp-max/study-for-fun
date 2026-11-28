@@ -586,7 +586,7 @@
    "he": "איזה מספר גדול מ-⁦600⁩ וקטן מ-⁦610⁩?",
    "a": "⁦605⁩",
    "h": "30da2ffb",
-   "q": "Which number is greater than 600 and less than 610?",
+   "q": "Which of these is greater than 600 and less than 610?",
    "o": [
     "⁦605⁩",
     "⁦615⁩",
@@ -690,7 +690,7 @@
    "he": "מ-⁦900⁩ קופצים ⁦300⁩ אחורה. לאן מגיעים?",
    "a": "⁦600⁩",
    "h": "bf602d4f",
-   "q": "Start at 900 and jump 300 back. Where do you land?",
+   "q": "Start at 900 and jump back 300. Where do you land?",
    "o": [
     "⁦600⁩",
     "⁦1,200⁩",
@@ -771,7 +771,7 @@
    "he": "בין אילו מאות נמצא ⁦640⁩?",
    "a": "600 ו-700",
    "h": "2c8637dc",
-   "q": "Which two hundreds is 640 between?",
+   "q": "Between which two hundreds is 640?",
    "o": [
     "600 and 700",
     "500 and 600",
@@ -823,7 +823,7 @@
    "he": "איזה מספר הכי קרוב ל-⁦500⁩?",
    "a": "⁦490⁩",
    "h": "8e91fbbc",
-   "q": "Which number is closest to 500?",
+   "q": "Which of these numbers is closest to 500?",
    "o": [
     "⁦490⁩",
     "⁦450⁩",
@@ -992,7 +992,7 @@
    "he": "איזה זוג משלים ל-⁦100⁩?",
    "a": "⁦70 + 30⁩",
    "h": "cfeb0e48",
-   "q": "Which pair adds up to 100?",
+   "q": "Which of these pairs adds up to 100?",
    "o": [
     "⁦70 + 30⁩",
     "⁦60 + 30⁩",
@@ -1096,7 +1096,7 @@
    "he": "לנועה ⁦35⁩ שקלים. קנתה ספר ב-⁦20⁩. כמה נשאר?",
    "a": "⁦15⁩",
    "h": "4b043fca",
-   "q": "Noa has 35 shekels. She buys a book for 20. How much is left?",
+   "q": "Noa has 35 shekels. She buys a book for 20 shekels. How much is left?",
    "o": [
     "⁦15⁩",
     "⁦55⁩",
@@ -1259,7 +1259,7 @@
     "⁦800⁩",
     "⁦10,000⁩"
    ],
-   "x": "7 + 2 + 1 = 10 hundreds = one thousand"
+   "x": "7 + 2 + 1 hundreds = 10 hundreds = one thousand"
   },
   {
    "he": "⁦700 − 400 =⁩",
@@ -1811,7 +1811,7 @@
    "he": "על העץ היו ציפורים. עפו ⁦4⁩, נשארו ⁦9⁩. כמה היו?",
    "a": "⁦13⁩",
    "h": "65d0374c",
-   "q": "Birds sat on a tree. 4 flew away, 9 stayed. How many were there?",
+   "q": "Some birds sat on a tree. 4 flew away, 9 stayed. How many at first?",
    "o": [
     "⁦13⁩",
     "⁦5⁩",
@@ -1941,7 +1941,7 @@
    "he": "איזה תרגיל שווה ל-⁦4 × 2⁩?",
    "a": "⁦4 + 4⁩",
    "h": "2989045f",
-   "q": "Which exercise equals 4 × 2?",
+   "q": "Which of these equals 4 × 2?",
    "o": [
     "⁦4 + 4⁩",
     "⁦4 + 2⁩",
@@ -2151,7 +2151,7 @@
    "he": "איזה תרגיל חילוק קשור ל-⁦4 × 5 = 20⁩?",
    "a": "⁦20 : 5⁩",
    "h": "7adc5368",
-   "q": "Which division goes with 4 × 5 = 20?",
+   "q": "Which of these divisions goes with 4 × 5 = 20?",
    "o": [
     "⁦20 ÷ 5⁩",
     "⁦20 ÷ 2⁩",
@@ -2712,7 +2712,7 @@
    "he": "איזה תרגיל שווה ל-⁦36⁩?",
    "a": "⁦4 × 9⁩",
    "h": "99f2eaee",
-   "q": "Which exercise equals 36?",
+   "q": "Which of these exercises equals 36?",
    "o": [
     "⁦4 × 9⁩",
     "⁦6 × 5⁩",
@@ -2884,7 +2884,7 @@
     "⁦6⁩",
     "⁦32⁩"
    ],
-   "x": "Share them into 4 equal groups"
+   "x": "Split 8 into 4 equal groups"
   },
   {
    "he": "רבע מ-⁦12⁩ הוא…",
@@ -2961,7 +2961,7 @@
    "he": "לאבא ⁦40⁩ שקלים. הוא נתן לי רבע. כמה קיבלתי?",
    "a": "⁦10⁩",
    "h": "337b6060",
-   "q": "Dad has 40 shekels. He gave me a quarter. How much did I get?",
+   "q": "Dad gave me a quarter of his 40 shekels. How many did I get?",
    "o": [
     "⁦10⁩",
     "⁦20⁩",
@@ -3170,9 +3170,9 @@
     "2": "2",
     "3": "1",
     "4": "Kids",
-    "7": "25",
+    "5": "28",
     "6": "30",
-    "5": "28"
+    "7": "25"
    }
   },
   {
@@ -3193,9 +3193,9 @@
     "2": "2",
     "3": "1",
     "4": "Kids",
-    "7": "25",
+    "5": "28",
     "6": "30",
-    "5": "28"
+    "7": "25"
    }
   },
   {
@@ -3216,9 +3216,9 @@
     "2": "2",
     "3": "1",
     "4": "Kids",
-    "7": "25",
+    "5": "28",
     "6": "30",
-    "5": "28"
+    "7": "25"
    }
   },
   {
@@ -3232,7 +3232,7 @@
     "⁦2⁩",
     "⁦12⁩"
    ],
-   "x": "The cat has 4 squares"
+   "x": "The cat row has 4 squares"
   },
   {
    "he": "איזו חיה מגדלים הכי הרבה ילדים?",
@@ -3284,7 +3284,7 @@
     "⁦7⁩",
     "⁦15⁩"
    ],
-   "x": "The rain has 3 squares"
+   "x": "The rain row has 3 squares"
   },
   {
    "he": "איזה מזג אוויר היה בהכי מעט ימים?",
@@ -3613,7 +3613,7 @@
    ],
    "x": "A hexagon – 6 sides, the most",
    "sc": {
-    "0": "Quadrilateral",
+    "0": "Triangle · quad",
     "1": "Pentagon·hexagon"
    }
   },
@@ -3900,7 +3900,7 @@
    "he": "לחרוט יש בסיס אחד בצורת…",
    "a": "עיגול",
    "h": "28949ac3",
-   "q": "The one base of a cone has the shape of a…",
+   "q": "A cone has one base. It has the shape of a…",
    "o": [
     "Circle",
     "Square",
@@ -4054,8 +4054,8 @@
    "o": [
     "Reflection",
     "Slide",
-    "Adding",
-    "Measuring"
+    "Addition",
+    "Measurement"
    ],
    "x": "Up and down swapped, like in a mirror"
   },
@@ -4093,8 +4093,8 @@
    "o": [
     "Slide",
     "Reflection",
-    "Adding",
-    "Measuring"
+    "Addition",
+    "Measurement"
    ],
    "x": "Exactly the same direction, just in another place"
   },
@@ -4106,8 +4106,8 @@
    "o": [
     "Reflection",
     "Slide",
-    "Subtracting",
-    "Measuring"
+    "Subtraction",
+    "Measurement"
    ],
    "x": "Right and left swapped – a reflection"
   },
@@ -4164,8 +4164,8 @@
    "o": [
     "Slide",
     "Reflection",
-    "Adding",
-    "Measuring"
+    "Addition",
+    "Measurement"
    ],
    "x": "Exactly the same picture, just in another place"
   },
@@ -4981,8 +4981,8 @@
    "o": [
     "Reflection",
     "Slide",
-    "Adding",
-    "Measuring"
+    "Addition",
+    "Measurement"
    ],
    "x": "Up and down swapped – a reflection"
   },

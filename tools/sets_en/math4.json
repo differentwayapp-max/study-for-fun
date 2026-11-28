@@ -28,12 +28,12 @@
   "סדר פעולות חשבון": "Order of operations",
   "סימני התחלקות": "Divisibility rules",
   "שבר – חלק משלם ומכמות": "Fractions – part of a whole and of a quantity",
-  "שברים שקולים והשוואה": "Equivalent fractions and comparing",
-  "חיבור וחיסור שברים ומספר מעורב": "Adding and subtracting fractions, mixed numbers",
+  "שברים שקולים והשוואה": "Equivalent fractions and comparison",
+  "חיבור וחיסור שברים ומספר מעורב": "Adding and subtracting fractions and mixed numbers",
   "מלבן, ריבוע, אלכסונים וסימטריה": "Rectangle, square, diagonals and symmetry",
   "סוגי משולשים": "Types of triangles",
   "תיבה ונפח": "Rectangular prisms and volume",
-  "פריסות של תיבה וקובייה": "Nets of prisms and cubes",
+  "פריסות של תיבה וקובייה": "Nets of rectangular prisms and cubes",
   "היקף ושטח": "Perimeter and area",
   "זמן ויחידות מידה": "Time and units of measure",
   "חקר נתונים: טבלאות ודיאגרמות": "Data handling: tables and charts",
@@ -46,7 +46,7 @@
   "בעיות חילוק": "Division problems",
   "כופלים ב-10, 100, 1,000": "Multiplying by 10, 100, 1,000",
   "מחלקים ב-10, 100, 1,000": "Dividing by 10, 100, 1,000",
-  "כפל וחילוק לפני חיבור וחיסור": "Multiplication and division first",
+  "כפל וחילוק לפני חיבור וחיסור": "× and ÷ before + and −",
   "סוגריים ובעיות": "Parentheses and word problems",
   "מתחלק או לא?": "Divisible or not?",
   "סימני התחלקות – תרגול": "Divisibility rules – practice",
@@ -763,7 +763,7 @@
    "he": "טיסה של ⁦5,620⁩ ק״מ. עברו ⁦2,875⁩ ק״מ. כמה נשאר?",
    "a": "2,745 ק״מ",
    "h": "0d5ddfd7",
-   "q": "A flight is 5,620 km long. 2,875 km are done. How much is left?",
+   "q": "A flight is 5,620 km long. The plane has flown 2,875 km. How far is left?",
    "o": [
     "⁦2,745 km⁩",
     "⁦3,255 km⁩",
@@ -802,7 +802,7 @@
    "he": "מחשב עולה ⁦4,350⁩ ₪, טלפון ⁦2,780⁩ ₪. בכמה המחשב יקר יותר?",
    "a": "⁦1,570 ₪⁩",
    "h": "e1ba915a",
-   "q": "A computer costs 4,350 ₪ and a phone 2,780 ₪. How much more is the computer?",
+   "q": "A computer costs 4,350 ₪ and a phone 2,780 ₪. How much more does the computer cost?",
    "o": [
     "⁦1,570 ₪⁩",
     "⁦2,430 ₪⁩",
@@ -1671,7 +1671,7 @@
    "he": "כמה מטרים הם ⁦6,000⁩ ס״מ?",
    "a": "⁦60⁩",
    "h": "329b5f22",
-   "q": "How many meters are 6,000 cm?",
+   "q": "How many meters is 6,000 cm?",
    "o": [
     "⁦60⁩",
     "⁦600⁩",
@@ -1687,7 +1687,7 @@
    "he": "כמה ק״ג הם ⁦3,000⁩ גרם?",
    "a": "⁦3⁩",
    "h": "31a36e65",
-   "q": "How many kilograms are 3,000 grams?",
+   "q": "How many kilograms is 3,000 grams?",
    "o": [
     "⁦3⁩",
     "⁦30⁩",
@@ -2490,7 +2490,7 @@
    "he": "כמה דקות הן ⁦2/3⁩ שעה?",
    "a": "⁦40⁩",
    "h": "cdbe1d82",
-   "q": "How many minutes are 2/3 of an hour?",
+   "q": "How many minutes are in 2/3 of an hour?",
    "o": [
     "⁦40⁩",
     "⁦20⁩",
@@ -2542,7 +2542,7 @@
    "he": "כמה ס״מ הם ⁦3/10⁩ מטר?",
    "a": "⁦30⁩",
    "h": "97ec3bc0",
-   "q": "How many cm are 3/10 of a meter?",
+   "q": "How many cm are in 3/10 of a meter?",
    "o": [
     "⁦30⁩",
     "⁦3⁩",
@@ -4052,7 +4052,7 @@
     "⁦6⁩",
     "⁦3⁩"
    ],
-   "x": "The four faces around it, each 6 by 3"
+   "x": "The four side faces are each 6 by 3"
   },
   {
    "he": "האם הפריסה הזאת מתקפלת לקובייה?",
@@ -4276,7 +4276,7 @@
     "6 by 3",
     "7 by 2"
    ],
-   "x": "20, 18, 18, 18",
+   "x": "9 by 1: 20 cm; each of the others: 18 cm",
    "sc": {
     "0": "5 by 4",
     "1": "6 by 3",
@@ -4301,7 +4301,7 @@
    "he": "היקף ריבוע שווה להיקף מלבן ⁦6⁩ על ⁦2⁩ ס״מ. מה צלע הריבוע?",
    "a": "4 ס״מ",
    "h": "c1a7d0bc",
-   "q": "A square has the same perimeter as a 6 by 2 cm rectangle. What is its side?",
+   "q": "A square has the same perimeter as a 6 by 2 cm rectangle. How long is its side?",
    "o": [
     "4 cm",
     "6 cm",
@@ -4695,7 +4695,7 @@
    "he": "איזו יחידה מתאימה למשקל של אבטיח?",
    "a": "ק״ג",
    "h": "5d087496",
-   "q": "Which unit fits the weight of a watermelon?",
+   "q": "Which unit would you use for a watermelon's weight?",
    "o": [
     "kg",
     "km",
@@ -4721,7 +4721,7 @@
    "he": "בבקבוק ⁦2⁩ ליטר. מזגו ⁦4⁩ כוסות של ⁦250⁩ מ״ל. כמה נשאר?",
    "a": "1 ליטר",
    "h": "3fa44cc4",
-   "q": "A bottle holds 2 L. We poured 4 cups of 250 mL. How much is left?",
+   "q": "A bottle holds 2 L. We poured out 4 cups of 250 mL each. How much is left?",
    "o": [
     "1 L",
     "1,750 mL",
@@ -4743,12 +4743,12 @@
    ],
    "x": "12 – the greatest number in the table",
    "sc": {
-    "0": "Dog",
-    "1": "12 kids",
-    "2": "Cat",
-    "3": "9 kids",
-    "4": "Fish",
-    "5": "5 kids"
+    "0": "12 kids",
+    "1": "Dog",
+    "2": "9 kids",
+    "3": "Cat",
+    "4": "5 kids",
+    "5": "Fish"
    }
   },
   {
@@ -4764,12 +4764,12 @@
    ],
    "x": "12 + 9 + 5 = 26",
    "sc": {
-    "0": "Dog",
-    "1": "12 kids",
-    "2": "Cat",
-    "3": "9 kids",
-    "4": "Fish",
-    "5": "5 kids"
+    "0": "12 kids",
+    "1": "Dog",
+    "2": "9 kids",
+    "3": "Cat",
+    "4": "5 kids",
+    "5": "Fish"
    }
   },
   {
@@ -4785,12 +4785,12 @@
    ],
    "x": "12 − 9 = 3",
    "sc": {
-    "0": "Dog",
-    "1": "12 kids",
-    "2": "Cat",
-    "3": "9 kids",
-    "4": "Fish",
-    "5": "5 kids"
+    "0": "12 kids",
+    "1": "Dog",
+    "2": "9 kids",
+    "3": "Cat",
+    "4": "5 kids",
+    "5": "Fish"
    }
   },
   {
@@ -4806,12 +4806,12 @@
    ],
    "x": "9 + 5 = 14",
    "sc": {
-    "0": "Dog",
-    "1": "12 kids",
-    "2": "Cat",
-    "3": "9 kids",
-    "4": "Fish",
-    "5": "5 kids"
+    "0": "12 kids",
+    "1": "Dog",
+    "2": "9 kids",
+    "3": "Cat",
+    "4": "5 kids",
+    "5": "Fish"
    }
   },
   {

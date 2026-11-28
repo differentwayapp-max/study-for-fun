@@ -390,91 +390,6 @@
    "status": "ready"
   },
   {
-   "id": "math6",
-   "ver": "8be0949841",
-   "subject": "מתמטיקה",
-   "grade": 5,
-   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
-   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
-   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
-   "tags": [
-    "כפל וחילוק שברים",
-    "עשרוניים",
-    "אחוזים",
-    "הנחות",
-    "יחס",
-    "קנה מידה",
-    "מהירות, דרך וזמן",
-    "מעגל ועיגול",
-    "זוויות במשולש ובמרובע",
-    "נפח",
-    "שטח פנים",
-    "פריסות",
-    "ממוצע וגרפים"
-   ],
-   "questions": 383,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "⁦2/3 × 3/4 =⁩",
-     "e": "2/3 × 3/4"
-    },
-    {
-     "q": "⁦1 1/2 × 2/3 =⁩",
-     "e": "1 1/2 × 2/3"
-    },
-    {
-     "q": "מה המספר ההופכי של ⁦3/4⁩?",
-     "e": "3/4"
-    }
-   ],
-   "status": "ready"
-  },
-  {
-   "id": "math7",
-   "ver": "6ab43ba84a",
-   "subject": "מתמטיקה",
-   "grade": 6,
-   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
-   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
-   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
-   "tags": [
-    "מספרים מכוונים",
-    "ביטויים אלגבריים",
-    "כינוס איברים",
-    "חוק הפילוג",
-    "משוואות",
-    "בעיות מילוליות",
-    "מערכת צירים",
-    "פונקציות וגרפים",
-    "חזקות ושורשים",
-    "יחס",
-    "שטחים",
-    "זוויות"
-   ],
-   "questions": 338,
-   "chapters": 32,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
-     "e": "-6 ? -11"
-    },
-    {
-     "q": "⁦-4·(-6) = ?⁩",
-     "e": "-4·(-6)= ?"
-    },
-    {
-     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
-     "e": "2x + 1x = 3"
-    }
-   ],
-   "status": "ready"
-  },
-  {
    "id": "math7-nov26",
    "ver": "a592b6ae69",
    "subject": "מתמטיקה",
@@ -1202,128 +1117,65 @@
    "status": "ready"
   },
   {
-   "id": "sci4",
-   "ver": "52674b3b8c",
-   "subject": "מדעים",
-   "grade": 3,
-   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
-   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
-   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
-   "tags": [
-    "נפח ומסה",
-    "מצבי צבירה",
-    "מחזור המים",
-    "אוויר",
-    "שלד ושרירים",
-    "העור",
-    "מזג אוויר",
-    "ליתוספרה וביוספרה",
-    "בעלי חיים",
-    "מפתח מיון",
-    "מכונות פשוטות"
-   ],
-   "questions": 279,
-   "chapters": 27,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מהו נפח?",
-     "e": "📦",
-     "q_en": "What is the volume of an object?"
-    },
-    {
-     "q": "מה מודדים במאזניים?",
-     "e": "⚖️",
-     "q_en": "What do we measure with a balance?"
-    },
-    {
-     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
-     "e": "🧱💧",
-     "q_en": "Which state of matter has a fixed shape and a fixed volume?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Science – Grade 4",
-   "title_en": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
-   "tags_en": [
-    "Volume and mass",
-    "States of matter",
-    "The water cycle",
-    "Air",
-    "Skeleton and muscles",
-    "The skin",
-    "Weather",
-    "Lithosphere and biosphere",
-    "Animals",
-    "Classification keys",
-    "Simple machines"
-   ]
-  },
-  {
-   "id": "math3",
-   "ver": "1e5a3e74cd",
+   "id": "math1",
+   "ver": "992b01e543",
    "subject": "מתמטיקה",
-   "grade": 2,
-   "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
-   "desc": "מספרים עד 10,000, עיגול ואומדן, חיבור וחיסור במאונך, לוח הכפל, כפל וחילוק בעשרות ובמאות, כפל דו-ספרתי, חילוק דו-ספרתי, פי כמה, חילוק עם שארית, סדר פעולות, חצי שליש ורבע, זוויות, ישרים מקבילים ומאונכים, משולשים ומרובעים, אורך, משקל, ליטר וזמן",
-   "desc_en": "Numbers to 10,000, rounding and estimating, column addition and subtraction, times tables, multiplying and dividing whole tens and hundreds, 2-digit by 1-digit multiplication and division, times-as-many problems, division with remainder, order of operations, halves, thirds and quarters, angles, parallel and perpendicular lines, triangles and quadrilaterals, length, weight, litres and time",
+   "grade": 0,
+   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
+   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
+   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
    "tags": [
-    "מספרים עד 10,000",
-    "עיגול ואומדן",
-    "חיבור וחיסור במאונך",
-    "לוח הכפל",
-    "כפל וחילוק",
-    "פי כמה",
-    "חילוק עם שארית",
-    "סדר פעולות",
-    "שברים",
-    "זוויות",
-    "משולשים ומרובעים",
-    "מדידות וזמן"
+    "מספרים עד 100",
+    "מספרים סודרים",
+    "זוגי ואי-זוגי",
+    "פירוקי 10",
+    "חיבור וחיסור עד 20",
+    "כפל וחילוק ראשון",
+    "חצי",
+    "דיאגרמת תמונות",
+    "צורות",
+    "שעון"
    ],
-   "questions": 378,
+   "questions": 377,
    "chapters": 37,
    "reading": 0,
    "words": 0,
    "samples": [
     {
-     "q": "מה ערך הספרה 4 במספר ⁦4,725⁩?",
-     "e": "4,725",
-     "q_en": "What is the value of the digit 4 in 4,725?"
+     "q": "כמה תפוחים?",
+     "e": "🍎🍎",
+     "q_en": "How many apples?"
     },
     {
-     "q": "איזה מספר כתוב בכרטיס?",
-     "e": "2 אלפים3 מאות",
-     "q_en": "What number is on the card?"
+     "q": "איזה מספר בא אחרי ⁦12⁩?",
+     "e": "12, ?",
+     "q_en": "What number comes after 12?"
     },
     {
-     "q": "איזה סימן מתאים? ⁦4,312 ___ 4,231⁩",
-     "e": "4,312 ? 4,231",
-     "q_en": "Which sign fits? 4,312 ___ 4,231"
+     "q": "כמה בסך הכול?",
+     "e": "🔟🔟",
+     "q_en": "How many in all?"
     }
    ],
    "status": "ready",
-   "name_en": "Math – Grade 3",
-   "title_en": "Numbers to 10,000 · Four operations · Fractions · Geometry · Measurement",
+   "name_en": "Math – Grade 1",
+   "title_en": "Numbers · Addition and subtraction · Shapes · Data · The clock",
    "tags_en": [
-    "Numbers to 10,000",
-    "Rounding and estimating",
-    "Column addition and subtraction",
-    "Times tables",
-    "Multiplication and division",
-    "How many times as many",
-    "Division with remainder",
-    "Order of operations",
-    "Fractions",
-    "Angles",
-    "Triangles and quadrilaterals",
-    "Measurement and time"
+    "Numbers to 100",
+    "Ordinal numbers",
+    "Even and odd",
+    "Number bonds to 10",
+    "Addition and subtraction to 20",
+    "Multiplication and division – first steps",
+    "Half",
+    "Pictographs",
+    "Shapes",
+    "The clock"
    ]
   },
   {
    "id": "math2",
-   "ver": "2304b256a0",
+   "ver": "a41c951c1e",
    "subject": "מתמטיקה",
    "grade": 1,
    "title": "מספרים עד 1,000 · חיבור וחיסור · לוח הכפל · מצולעים וגופים · שעון",
@@ -1385,8 +1237,315 @@
    ]
   },
   {
+   "id": "math3",
+   "ver": "db132b27ee",
+   "subject": "מתמטיקה",
+   "grade": 2,
+   "title": "מספרים עד 10,000 · ארבע פעולות · שברים · גאומטריה · מדידות",
+   "desc": "מספרים עד 10,000, עיגול ואומדן, חיבור וחיסור במאונך, לוח הכפל, כפל וחילוק בעשרות ובמאות, כפל דו-ספרתי, חילוק דו-ספרתי, פי כמה, חילוק עם שארית, סדר פעולות, חצי שליש ורבע, זוויות, ישרים מקבילים ומאונכים, משולשים ומרובעים, אורך, משקל, ליטר וזמן",
+   "desc_en": "Numbers to 10,000, rounding and estimating, column addition and subtraction, times tables, multiplying and dividing whole tens and hundreds, 2-digit by 1-digit multiplication and division, times-as-many problems, division with remainder, order of operations, halves, thirds and quarters, angles, parallel and perpendicular lines, triangles and quadrilaterals, length, weight, litres and time",
+   "tags": [
+    "מספרים עד 10,000",
+    "עיגול ואומדן",
+    "חיבור וחיסור במאונך",
+    "לוח הכפל",
+    "כפל וחילוק",
+    "פי כמה",
+    "חילוק עם שארית",
+    "סדר פעולות",
+    "שברים",
+    "זוויות",
+    "משולשים ומרובעים",
+    "מדידות וזמן"
+   ],
+   "questions": 378,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 4 במספר ⁦4,725⁩?",
+     "e": "4,725",
+     "q_en": "What is the value of the digit 4 in 4,725?"
+    },
+    {
+     "q": "איזה מספר כתוב בכרטיס?",
+     "e": "2 אלפים3 מאות",
+     "q_en": "What number is on the card?"
+    },
+    {
+     "q": "איזה סימן מתאים? ⁦4,312 ___ 4,231⁩",
+     "e": "4,312 ? 4,231",
+     "q_en": "Which sign fits? 4,312 ___ 4,231"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 3",
+   "title_en": "Numbers to 10,000 · Four operations · Fractions · Geometry · Measurement",
+   "tags_en": [
+    "Numbers to 10,000",
+    "Rounding and estimating",
+    "Column addition and subtraction",
+    "Times tables",
+    "Multiplication and division",
+    "How many times as many",
+    "Division with remainder",
+    "Order of operations",
+    "Fractions",
+    "Angles",
+    "Triangles and quadrilaterals",
+    "Measurement and time"
+   ]
+  },
+  {
+   "id": "math4",
+   "ver": "82187f5b95",
+   "subject": "מתמטיקה",
+   "grade": 3,
+   "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
+   "desc": "מספרים עד מיליונים, ארבע פעולות במאונך, כפל וחילוק ב-10, 100, 1,000, סדר פעולות, סימני התחלקות, שברים, מרובעים, משולשים, תיבה ופריסות, היקף ושטח, זמן ויחידות, טבלאות ודיאגרמות",
+   "desc_en": "Numbers to millions, the four operations (long multiplication and division), multiplying and dividing by 10, 100, 1,000, order of operations, divisibility, fractions, quadrilaterals, triangles, boxes and their nets, perimeter and area, time and units, tables and bar charts",
+   "tags": [
+    "מספרים גדולים",
+    "עיגול",
+    "כפל וחילוק ארוך",
+    "כפל וחילוק ב-10, 100, 1,000",
+    "סדר פעולות",
+    "סימני התחלקות",
+    "שברים",
+    "משולשים ומרובעים",
+    "תיבה ונפח",
+    "פריסות",
+    "היקף ושטח",
+    "זמן ויחידות",
+    "חקר נתונים"
+   ],
+   "questions": 380,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מה ערך הספרה 5 במספר ⁦352,184⁩?",
+     "e": "352,184",
+     "q_en": "What is the value of the digit 5 in 352,184?"
+    },
+    {
+     "q": "מה ערך הספרה 2 במספר ⁦2,050,000⁩?",
+     "e": "2,050,000",
+     "q_en": "What is the value of the digit 2 in 2,050,000?"
+    },
+    {
+     "q": "⁦87,654 ___ 87,564⁩",
+     "e": "87,654? 87,564",
+     "q_en": "87,654 ___ 87,564"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 4",
+   "title_en": "Large numbers · Multiplication and division · Fractions · Geometry · Measurement · Data handling",
+   "tags_en": [
+    "Large numbers",
+    "Rounding",
+    "Multiplication and long division",
+    "Multiplying and dividing by 10, 100, 1,000",
+    "Order of operations",
+    "Divisibility rules",
+    "Fractions",
+    "Triangles and quadrilaterals",
+    "Rectangular prisms and volume",
+    "Nets",
+    "Perimeter and area",
+    "Time and units",
+    "Data handling"
+   ]
+  },
+  {
+   "id": "math6",
+   "ver": "701df01be8",
+   "subject": "מתמטיקה",
+   "grade": 5,
+   "title": "כפל וחילוק שברים · עשרוניים · אחוזים · יחס וקנה מידה · מהירות · מעגל · זוויות · נפח ושטח פנים · גופים",
+   "desc": "כפל וחילוק שברים ועשרוניים, שבר עשרוני ושבר פשוט, אחוזים והנחות, יחס וחלוקה לפי יחס, קנה מידה, מהירות, דרך וזמן, מעגל ועיגול, סכום הזוויות במשולש ובמרובע, נפח וליטר, שטח פנים, גופים ופריסות, ממוצע וגרפים",
+   "desc_en": "Multiplying and dividing fractions and decimals, decimals and fractions, percents and discounts, ratio, dividing by a ratio, map scale, speed, distance and time, circles (circumference and area), angle sums in triangles and quadrilaterals, volume and liters, surface area, solids and nets, mean, median and graphs",
+   "tags": [
+    "כפל וחילוק שברים",
+    "עשרוניים",
+    "אחוזים",
+    "הנחות",
+    "יחס",
+    "קנה מידה",
+    "מהירות, דרך וזמן",
+    "מעגל ועיגול",
+    "זוויות במשולש ובמרובע",
+    "נפח",
+    "שטח פנים",
+    "פריסות",
+    "ממוצע וגרפים"
+   ],
+   "questions": 383,
+   "chapters": 37,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "⁦2/3 × 3/4 =⁩",
+     "e": "2/3 × 3/4",
+     "q_en": "2/3 × 3/4 ="
+    },
+    {
+     "q": "⁦1 1/2 × 2/3 =⁩",
+     "e": "1 1/2 × 2/3",
+     "q_en": "1 1/2 × 2/3 ="
+    },
+    {
+     "q": "מה המספר ההופכי של ⁦3/4⁩?",
+     "e": "3/4",
+     "q_en": "What is the reciprocal of 3/4?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 6",
+   "title_en": "Multiplying and dividing fractions · Decimals · Percent · Ratio and scale · Speed · Circles · Angles · Volume and surface area · Solids",
+   "tags_en": [
+    "Multiplying and dividing fractions",
+    "Decimals",
+    "Percent",
+    "Discounts",
+    "Ratio",
+    "Scale",
+    "Speed, distance and time",
+    "Circles and circle area",
+    "Angles in triangles and quadrilaterals",
+    "Volume",
+    "Surface area",
+    "Nets",
+    "Mean and graphs"
+   ]
+  },
+  {
+   "id": "math7",
+   "ver": "b0a4cf2cfc",
+   "subject": "מתמטיקה",
+   "grade": 6,
+   "title": "מספרים מכוונים · ביטויים · משוואות · צירים ופונקציות · חזקות · זוויות",
+   "desc": "כל שנת ז': מספרים מכוונים, ביטויים אלגבריים, פילוג, משוואות ובעיות, מערכת צירים, פונקציות וגרפים, חזקות, יחס, שטחים וזוויות",
+   "desc_en": "Signed numbers, algebraic expressions, like terms, the distributive law, equations and word problems, the coordinate plane, functions and graphs, powers and roots, ratio, areas, angles in triangles and polygons, parallel lines",
+   "tags": [
+    "מספרים מכוונים",
+    "ביטויים אלגבריים",
+    "כינוס איברים",
+    "חוק הפילוג",
+    "משוואות",
+    "בעיות מילוליות",
+    "מערכת צירים",
+    "פונקציות וגרפים",
+    "חזקות ושורשים",
+    "יחס",
+    "שטחים",
+    "זוויות"
+   ],
+   "questions": 338,
+   "chapters": 32,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מי גדול יותר: ⁦-6⁩ או ⁦-11⁩?",
+     "e": "-6 ? -11",
+     "q_en": "Which is greater?"
+    },
+    {
+     "q": "⁦-4·(-6) = ?⁩",
+     "e": "-4·(-6)= ?",
+     "q_en": "-4·(-6) = ?"
+    },
+    {
+     "q": "נציב ⁦x=3⁩ בביטוי ⁦2x+1⁩. מה מקבלים?",
+     "e": "2x + 1x = 3",
+     "q_en": "Substitute x=3 in the expression 2x+1. What do you get?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Math – Grade 7 – Full year",
+   "title_en": "Positive and negative numbers · Expressions · Equations · Coordinates and functions · Powers · Angles",
+   "tags_en": [
+    "Positive and negative numbers",
+    "Algebraic expressions",
+    "Combining like terms",
+    "The distributive law",
+    "Equations",
+    "Word problems",
+    "The coordinate plane",
+    "Functions and graphs",
+    "Powers and roots",
+    "Ratio",
+    "Area",
+    "Angles"
+   ]
+  },
+  {
+   "id": "sci4",
+   "ver": "3aef43a3d9",
+   "subject": "מדעים",
+   "grade": 3,
+   "title": "חומרים · מים ואוויר · מעטפות כדור הארץ · גוף האדם · בעלי חיים · טכנולוגיה",
+   "desc": "נפח וכמות חומר, מצבי צבירה, מים ומחזור המים, אוויר, שלד ושרירים, העור ובריאות, אטמוספרה ומזג אוויר, ליתוספרה וביוספרה, בעלי חוליות וחסרי חוליות, מערכת טכנולוגית ומכונות פשוטות",
+   "desc_en": "Volume and mass, states of matter, water and the water cycle, air, skeleton and muscles, skin and health, atmosphere and weather, lithosphere and biosphere, vertebrates and invertebrates, technological systems and simple machines",
+   "tags": [
+    "נפח ומסה",
+    "מצבי צבירה",
+    "מחזור המים",
+    "אוויר",
+    "שלד ושרירים",
+    "העור",
+    "מזג אוויר",
+    "ליתוספרה וביוספרה",
+    "בעלי חיים",
+    "מפתח מיון",
+    "מכונות פשוטות"
+   ],
+   "questions": 279,
+   "chapters": 27,
+   "reading": 0,
+   "words": 0,
+   "samples": [
+    {
+     "q": "מהו נפח?",
+     "e": "📦",
+     "q_en": "What is the volume of an object?"
+    },
+    {
+     "q": "מה מודדים במאזניים?",
+     "e": "⚖️",
+     "q_en": "What do we measure with a balance?"
+    },
+    {
+     "q": "לאיזה מצב צבירה יש צורה קבועה ונפח קבוע?",
+     "e": "🧱💧",
+     "q_en": "Which state of matter has a fixed shape and a fixed volume?"
+    }
+   ],
+   "status": "ready",
+   "name_en": "Science – Grade 4",
+   "title_en": "Materials · Water and air · Earth's spheres · The human body · Animals · Technology",
+   "tags_en": [
+    "Volume and mass",
+    "States of matter",
+    "The water cycle",
+    "Air",
+    "Skeleton and muscles",
+    "The skin",
+    "Weather",
+    "Lithosphere and biosphere",
+    "Animals",
+    "Classification keys",
+    "Simple machines"
+   ]
+  },
+  {
    "id": "math5",
-   "ver": "fef33d9da9",
+   "ver": "01d0b5db95",
    "subject": "מתמטיקה",
    "grade": 4,
    "title": "שברים · עשרוניים · אחוזים · ראשוניים והתחלקות · משולשים ומרובעים · שטחים · ממוצע",
@@ -1426,7 +1585,7 @@
     {
      "q": "⁦3/4 ___ 2/3⁩",
      "e": "3/4 ? 2/3",
-     "q_en": "⁦3/4 ___ 2/3⁩"
+     "q_en": "3/4 ___ 2/3"
     }
    ],
    "status": "ready",
@@ -1447,126 +1606,6 @@
     "Triangles and angles",
     "Area",
     "Mean and graphs"
-   ]
-  },
-  {
-   "id": "math4",
-   "ver": "2981bc361c",
-   "subject": "מתמטיקה",
-   "grade": 3,
-   "title": "מספרים גדולים · כפל וחילוק · שברים · גאומטריה · מדידות · חקר נתונים",
-   "desc": "מספרים עד מיליונים, ארבע פעולות במאונך, כפל וחילוק ב-10, 100, 1,000, סדר פעולות, סימני התחלקות, שברים, מרובעים, משולשים, תיבה ופריסות, היקף ושטח, זמן ויחידות, טבלאות ודיאגרמות",
-   "desc_en": "Numbers to millions, the four operations (long multiplication and division), multiplying and dividing by 10, 100, 1,000, order of operations, divisibility, fractions, quadrilaterals, triangles, boxes and their nets, perimeter and area, time and units, tables and bar charts",
-   "tags": [
-    "מספרים גדולים",
-    "עיגול",
-    "כפל וחילוק ארוך",
-    "כפל וחילוק ב-10, 100, 1,000",
-    "סדר פעולות",
-    "סימני התחלקות",
-    "שברים",
-    "משולשים ומרובעים",
-    "תיבה ונפח",
-    "פריסות",
-    "היקף ושטח",
-    "זמן ויחידות",
-    "חקר נתונים"
-   ],
-   "questions": 380,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "מה ערך הספרה 5 במספר ⁦352,184⁩?",
-     "e": "352,184",
-     "q_en": "What is the value of the digit 5 in 352,184?"
-    },
-    {
-     "q": "מה ערך הספרה 2 במספר ⁦2,050,000⁩?",
-     "e": "2,050,000",
-     "q_en": "What is the value of the digit 2 in 2,050,000?"
-    },
-    {
-     "q": "⁦87,654 ___ 87,564⁩",
-     "e": "87,654? 87,564",
-     "q_en": "⁦87,654 ___ 87,564⁩"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 4",
-   "title_en": "Large numbers · Multiplication and division · Fractions · Geometry · Measurement · Data handling",
-   "tags_en": [
-    "Large numbers",
-    "Rounding",
-    "Multiplication and long division",
-    "Multiplying and dividing by 10, 100, 1,000",
-    "Order of operations",
-    "Divisibility rules",
-    "Fractions",
-    "Triangles and quadrilaterals",
-    "Rectangular prisms and volume",
-    "Nets",
-    "Perimeter and area",
-    "Time and units",
-    "Data handling"
-   ]
-  },
-  {
-   "id": "math1",
-   "ver": "a88e2a469a",
-   "subject": "מתמטיקה",
-   "grade": 0,
-   "title": "מספרים · חיבור וחיסור · צורות · נתונים · שעון",
-   "desc": "מספרים עד 100, מספרים סודרים, פירוקי 10, חיבור וחיסור עד 20, כפל ראשון, חצי, דיאגרמת תמונות, צורות, שיקוף, אורך ושעון",
-   "desc_en": "Numbers to 100, ordinal numbers, number bonds to 10, adding and subtracting to 20, first multiplication, half, picture graphs, shapes, mirror, length and clock",
-   "tags": [
-    "מספרים עד 100",
-    "מספרים סודרים",
-    "זוגי ואי-זוגי",
-    "פירוקי 10",
-    "חיבור וחיסור עד 20",
-    "כפל וחילוק ראשון",
-    "חצי",
-    "דיאגרמת תמונות",
-    "צורות",
-    "שעון"
-   ],
-   "questions": 377,
-   "chapters": 37,
-   "reading": 0,
-   "words": 0,
-   "samples": [
-    {
-     "q": "כמה תפוחים?",
-     "e": "🍎🍎",
-     "q_en": "How many apples?"
-    },
-    {
-     "q": "איזה מספר בא אחרי ⁦12⁩?",
-     "e": "12, ?",
-     "q_en": "What number comes after 12?"
-    },
-    {
-     "q": "כמה בסך הכול?",
-     "e": "🔟🔟",
-     "q_en": "How many in all?"
-    }
-   ],
-   "status": "ready",
-   "name_en": "Math – Grade 1",
-   "title_en": "Numbers · Addition and subtraction · Shapes · Data · The clock",
-   "tags_en": [
-    "Numbers to 100",
-    "Ordinal numbers",
-    "Even and odd",
-    "Number bonds to 10",
-    "Addition and subtraction to 20",
-    "Multiplication and division – first steps",
-    "Half",
-    "Pictographs",
-    "Shapes",
-    "The clock"
    ]
   }
  ]

@@ -217,6 +217,22 @@ POOL: ${JSON.stringify(pool)}`;
 For each group, return the "i" of the questions that really practise the group's topic (as the parent wrote it). Leave out questions on another skill, even a related one.
 GROUPS: ${JSON.stringify(groups)}`;
     } },
+
+  // 10. the question bank (server only – never from the app): which checked questions of a family's new set may also serve
+  //     other children later. The questions are the AI's own (COPY_RULE); this leaves out what is tied to one family.
+  bank: { model: HAIKU, effort: 'low', max_tokens: 4000, server: true,
+    schema: obj({ drop: arr(obj({ i: int, why: str })) }),
+    build(d) {
+      const c = ctxOf(d), qs = A(d.questions, MAX_Q, 'questions', qIn);
+      if (!qs.length) bad('bank');
+      return `${c.text}
+These questions were written for one family's practice set. They may be reused for other children of the same grade and subject. List the "i" of every question that must NOT be reused:
+- "person": it names or describes a real private person or place – a classmate, a teacher, the child's school, class, family, town or a class event (a made-up name in a word problem is fine);
+- "source": it only makes sense with that family's own material – "according to the text", "in the story we read", "on page 5", "in the worksheet", a passage, table or picture the question itself does not include;
+- "other": it is personal, or not about the subject.
+Leave every other question out of the list.
+QUESTIONS: ${JSON.stringify(qs.map(q => ({ i: q.i, question: q.question, options: q.options, explanation: q.explanation })))}`;
+    } },
 };
 
 module.exports = { SYSTEM, STEPS, MAX_Q, Bad, COPY_RULE, BUILD_RULES, PIC_RULE };

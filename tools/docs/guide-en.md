@@ -140,8 +140,8 @@ A finished practice set moves to a separate section, **✓ Finished practice set
 
 ## 👨‍👩‍👧 Family & adults
 
-- You can invite another adult: a partner, a grandparent, a private tutor.
-- Roles: manager (everything), helper (sees progress and adds practice sets), tutor (chosen kids only).
+- You can invite another adult: a partner or a grandparent.
+- Roles: manager (everything), helper (sees progress and adds practice sets).
 - The invitation is sent on WhatsApp or copied, and is valid for 7 days.
 
 ## 🏅 Competition between the kids

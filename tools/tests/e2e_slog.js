@@ -7,8 +7,8 @@ const DOCS = 'http://127.0.0.1:8080/v1/projects/study-for-fun-7b03c/databases/(d
 const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) process.exitCode = 1; };
 (async () => {
   const b = await chromium.launch({ args: ['--disable-features=LocalNetworkAccessChecks,BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights'] });
-  const addLog = msg => fetch(`${DOCS}/serverLog`, { method: 'POST', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
-    body: JSON.stringify({ fields: { at: { integerValue: String(Date.now()) }, fn: { stringValue: 'ask' }, kind: { stringValue: 'error' }, code: { stringValue: 'internal' }, msg: { stringValue: msg }, ms: { integerValue: '5' } } }) });
+  const addLog = (msg, kind = 'error', fn = 'ask') => fetch(`${DOCS}/serverLog`, { method: 'POST', headers: { Authorization: 'Bearer owner', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: { at: { integerValue: String(Date.now()) }, fn: { stringValue: fn }, kind: { stringValue: kind }, code: { stringValue: 'internal' }, msg: { stringValue: msg }, ms: { integerValue: '5' } } }) });
   const ctx = await b.newContext({ viewport: { width: 360, height: 760 }, deviceScaleFactor: 2 });
   const open = async (c, sub, email) => { const p = await c.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
     await c.addInitScript(g => { window.SFF_REST_EMU = { fs: 'http://127.0.0.1:8080', auth: 'http://127.0.0.1:9099' }; window.SFF_TEST_GOOGLE = g; localStorage.setItem('sff_lang', 'he'); }, { sub, email, email_verified: true, name: 'טליה' });
@@ -27,6 +27,13 @@ const ok = (c, m) => { console.log((c ? '  ✓ ' : '  ✗ ') + m); if (!c) proce
   ok(!(await dot(adm)), 'opening the log clears the dot');
   await adm.reload({ waitUntil: 'load' }); await adm.waitForFunction(() => window.SFF_ROLE, null, { timeout: 20000 }); await adm.waitForTimeout(2500);
   ok(!(await dot(adm)), 'after a reload: still no dot (nothing new)');
+  await addLog('bugReports 0 · builds 0', 'info', 'dailyClean');
+  await adm.evaluate(() => checkServerLog()); await adm.waitForTimeout(800);
+  ok(!(await dot(adm)), 'the nightly clean-up\'s own report (all fine) → no dot');
+  await adm.click('#menuBtn'); await adm.waitForTimeout(400); await adm.click('text=יומן שרת'); await adm.waitForTimeout(1200);
+  ok(/✅ ניקוי לילי/.test(await adm.textContent('#moreDlg')), 'the log shows it as "✅ ניקוי לילי"');
+  if (OUT) await adm.screenshot({ path: `${OUT}/slog_clean.png` });
+  await adm.evaluate(() => closeMore()); await adm.waitForTimeout(300);
   await addLog('test error 2');
   await adm.evaluate(() => checkServerLog()); await adm.waitForTimeout(800);
   ok(await dot(adm), 'another new entry → the dot is back');

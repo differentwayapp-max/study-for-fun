@@ -121,7 +121,7 @@ const NAMES = ['נועה כהן', 'יונתן בר', 'מאיה שלו', 'אית�
     const n = nextLesson({ slots: [{ d: d.getDay(), t }] }, now); return Math.round((n - now) / 3600e3); });
   ok(roll === 167, 'a lesson an hour ago → the next one in a week (167 hours): ' + roll);
   const wk = await T.evaluate(() => [...document.querySelectorAll('.thday')].map(d => d.innerText.replace(/\s+/g, ' ')));
-  ok(wk.length === 5 && wk.some(x => /ליאור/.test(x)) , 'my week: 5 days with the lessons – ' + wk.join(' | '));
+  ok(wk.length === 5 && (new Date().getDay() >= 5 || wk.some(x => /ליאור/.test(x))), 'my week: 5 days (Sun–Thu) with the lessons (ליאור\'s is today – not on the list on Friday / Saturday) – ' + wk.join(' | '));
   const kc = await T.evaluate(() => [...document.querySelectorAll('.thkid')].map(x => x.innerText.replace(/\s+/g, ' ')));
   ok(kc.length === 3 && kc.some(x => /עמית/.test(x) && /לא תרגל/.test(x)), 'the students\' cards: 3, "לא תרגל/ה" for one who never played');
   await T.screenshot({ path: `${OUT}/th_private_he360.png`, fullPage: true });

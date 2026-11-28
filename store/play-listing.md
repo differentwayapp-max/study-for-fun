@@ -31,7 +31,7 @@ Study for fun – למידה חוויתית של מקצועות הליבה: אנ
 התרגול הסתיים? האפליקציה בונה לבד תרגול רק מהטעויות של הילד – בחינם, בלחיצה. התרגול הממוקד מחכה לילד ראשון, וההורה רואה מה כבר תוקן ומה עוד לחזק.
 
 👨‍👩‍👧 כל המשפחה מלווה
-אפשר לשתף בן/בת זוג, סבא וסבתא או מורה פרטי במעקב ההתקדמות ובחיזוק.
+אפשר לשתף בן/בת זוג, סבא וסבתא במעקב ההתקדמות ובחיזוק.
 
 🗓️ תרגול לפי החומר ועד יום המבחן
 התרגול נבנה לפי החומר הספציפי של המבחן, והמפה מחלקת את הפרקים עד תאריך המבחן.
@@ -45,7 +45,7 @@ by D-WAY
 ## English (optional second language)
 Short: Playful learning in English, math, language and science – tailored to the test material and date.
 
-Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Parents follow each kid's progress and can invite other adults – a partner, grandparents or a private tutor; siblings compete for stars on a friendly leaderboard.
+Full: Study for fun turns test prep into a game. The parent picks a practice set and the test date. The kid gets a map of every chapter until test day, with a different game at every station: picture questions, memory, matching and spelling with spoken English words. Chapters with 70%+ earn a star; the rest stay open for another try. "What I know" shows what to strengthen. Parents follow each kid's progress and can invite other adults – a partner or grandparents; siblings compete for stars on a friendly leaderboard.
 
 🎯 Focused practice – exactly what's missing: when a set is done, the app builds a practice set from the kid's mistakes only – free, in one tap. It waits for the kid first, and the parent sees what's fixed.
 
@@ -54,6 +54,7 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 ---
 
 ## טופס "Data safety"
+> גרסת החנות היא למשפחות בלבד (28.11): אין בה כניסה לאפליקציית המורים. השורות על מורים (הערות, חתימת הסכמה, בקשת הצטרפות) נשארות בטופס בכוונה – קישור הצטרפות של מורה (`/?join=`) עדיין נפתח באפליקציה, וגוגל מתירים להצהיר על יותר ממה שנאסף, לא על פחות.
 | שאלה | תשובה |
 |---|---|
 | האם האפליקציה אוספת או משתפת מידע? | כן, אוספת. לא משתפת עם צד שלישי (ספקי שירות שמעבדים בשבילנו – Firebase, שירות ה-AI – לא נחשבים "שיתוף" בטופס) |
@@ -113,3 +114,7 @@ Full: Study for fun turns test prep into a game. The parent picks a practice set
 - כל טענה בתמונות נבדקה מול הקוד. משנים טקסט ב-`INTRO` ב-index.html (ובתרגום ב-i18n.js) ומריצים שוב את הסקריפט.
 
 ⚠️ כשייפתח תשלום על תרגולים נוספים (קרדיטים ב-startBuild): לעדכן כאן את "בלי רכישות" בתיאור ובאנגלית ("no in-app purchases"), ובטופס IARC "רכישות דיגיטליות? כן". במסך 5 כתוב "בלי רכישות", ובמסך 4 של ההיכרות "בלי רכישות לילד" – זה נשאר נכון, כי התשלום הוא רק אצל ההורה.
+
+## תוכן שנוצר ב-AI (מדיניות AI-Generated Content)
+- תרגולים חדשים נבנים ב-AI (Claude) מהחומר שההורה מעלה; תרגולי הקטלוג נכתבו ונבדקו מראש.
+- דיווח מתוך האפליקציה: 🚩 בכל שאלה במשחק (דיווח על שאלה שגויה או לא מתאימה – נבדק ומתוקן), ו-☰ → "דיווח על תקלה או רעיון". שניהם נשמרים אצלנו (☰ → דיווחים מהמשתמשים).

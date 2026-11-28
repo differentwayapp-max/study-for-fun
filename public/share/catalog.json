@@ -1327,55 +1327,6 @@
    ]
   },
   {
-   "id": "en7-nov26",
-   "ver": "3813ae5e29",
-   "subject": "אנגלית",
-   "grade": 6,
-   "title": "Present Simple · Weather & Nature",
-   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
-   "desc_en": "Grammar, 112 worksheet words and a reading passage",
-   "tags": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
-   ],
-   "questions": 178,
-   "chapters": 13,
-   "reading": 1,
-   "words": 112,
-   "samples": [
-    {
-     "q": "She ___ to school.",
-     "e": "👧🏫",
-     "q_en": "She ___ to school."
-    },
-    {
-     "q": "What is falling?",
-     "e": "🌧️",
-     "q_en": "What is falling?"
-    },
-    {
-     "q": "She ___ like snow.",
-     "e": "👧❄️",
-     "q_en": "She ___ like snow."
-    }
-   ],
-   "status": "ready",
-   "name_en": "English – Present Simple + Words",
-   "title_en": "Present Simple · Weather & Nature",
-   "tags_en": [
-    "Present Simple",
-    "has / does",
-    "always / never",
-    "Weather",
-    "Nature",
-    "Unseen"
-   ]
-  },
-  {
    "id": "math2",
    "ver": "b3c680e83b",
    "subject": "מתמטיקה",
@@ -1897,6 +1848,55 @@
     "Climate change",
     "Engineering design",
     "Technological systems"
+   ]
+  },
+  {
+   "id": "en7-nov26",
+   "ver": "7edcdd4d22",
+   "subject": "אנגלית",
+   "grade": 6,
+   "title": "Present Simple · Weather & Nature",
+   "desc": "דקדוק, 112 מילים מהדף וקטע קריאה",
+   "desc_en": "Grammar, 112 worksheet words and a reading passage",
+   "tags": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
+   ],
+   "questions": 178,
+   "chapters": 13,
+   "reading": 1,
+   "words": 112,
+   "samples": [
+    {
+     "q": "She ___ to school.",
+     "e": "👧🏫",
+     "q_en": "She ___ to school."
+    },
+    {
+     "q": "What is falling?",
+     "e": "🌧️",
+     "q_en": "What is falling?"
+    },
+    {
+     "q": "She ___ like snow.",
+     "e": "👧❄️",
+     "q_en": "She ___ like snow."
+    }
+   ],
+   "status": "ready",
+   "name_en": "English – Present Simple + Words",
+   "title_en": "Present Simple · Weather & Nature",
+   "tags_en": [
+    "Present Simple",
+    "has / does",
+    "always / never",
+    "Weather",
+    "Nature",
+    "Unseen"
    ]
   }
  ]

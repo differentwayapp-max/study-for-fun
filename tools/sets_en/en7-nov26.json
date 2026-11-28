@@ -70,7 +70,7 @@
     "rising",
     "to rise"
    ],
-   "x": "השמש = it → rises"
+   "x": "the sun = it → rises"
   },
   {
    "he": "My cat ___ fish for dinner.",
@@ -83,7 +83,7 @@
     "eating",
     "to eat"
    ],
-   "x": "החתול = it → eats"
+   "x": "my cat = it → eats"
   },
   {
    "he": "They ___ in the river.",
@@ -174,7 +174,7 @@
     "melting",
     "to melt"
    ],
-   "x": "השלג = it → melts"
+   "x": "snow = it → melts"
   },
   {
    "he": "The farmer ___ apples to shops.",
@@ -850,7 +850,7 @@
     "is",
     "are"
    ],
-   "x": "השמש = it → does"
+   "x": "the sun = it → does"
   },
   {
    "he": "___ your dad cook?",
@@ -1971,7 +1971,7 @@
     "He walk always",
     "Always he walk"
    ],
-   "x": "always comes before the verb, and he takes -s"
+   "x": "always comes before the verb; with he, add -s"
   },
   {
    "he": "The museum ___ at ten.",
@@ -2023,7 +2023,7 @@
     "14",
     "30"
    ],
-   "x": "In the first line: thirteen = 13"
+   "x": "In the first sentence: thirteen = 13"
   },
   {
    "he": "Where does Lia live?",
@@ -2179,7 +2179,7 @@
     "sad",
     "bored"
    ],
-   "x": "I can't wait! = מתרגשת"
+   "x": "I can't wait! → she is excited (מתרגשת)"
   },
   {
    "he": "עצה = ?",

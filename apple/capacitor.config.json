@@ -1,0 +1,47 @@
+{
+  "appId": "app.dway.studyforfun",
+  "appName": "Study for fun",
+  "webDir": "www",
+  "server": {
+    "url": "https://study-for-fun-7b03c.web.app",
+    "allowNavigation": [
+      "study-for-fun-7b03c.web.app",
+      "study-for-fun-7b03c.firebaseapp.com",
+      "study.d-way.app"
+    ]
+  },
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#FFFFFF",
+    "limitsNavigationsToAppBoundDomains": false
+  },
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": [
+        "google.com",
+        "apple.com"
+      ]
+    },
+    "LocalNotifications": {
+      "iconColor": "#1B2A4A"
+    }
+  },
+  "experimental": {
+    "ios": {
+      "spm": {
+        "swiftToolsVersion": "6.1",
+        "packageOptions": {
+          "@capacitor-firebase/authentication": {
+            "symlink": true
+          }
+        },
+        "packageTraits": {
+          "@capacitor-firebase/authentication": [
+            "Google"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -112,7 +112,7 @@ C.append(("Present Simple: questions", [PS], [
  (PS, "Does Dana ___ a coat?", ["wear", "wears", "wearing", "wore"], 0, "אחרי Does ← בלי s", [("👧", 35, 55, 40), ("🧥", 70, 55, 32)]),
  Q2(PS, "'She works in a bank.' – Where ___ she work?", ["does", "do", "is", "works"], 0, "she ← Where does she work?", ROW("👩", "🏦")),
  Q2(PS, "'We eat at six.' – When ___ you eat?", ["do", "does", "are", "is"], 0, "you ← When do you…?", ROW("🍽️", "🕕")),
- Q2(PS, "What ___ you doing now? – I'm reading.", ["are", "do", "does", "is"], 0, "doing now ← are you doing", ROW("📖", "👦")),
+ Q2(PS, "What ___ your brother doing now? – Sleeping.", ["is", "does", "are", "do"], 0, "brother = he ← is he doing", ROW("👦", "😴")),
  Q2(PS, "___ he usually walk to school?", ["Does", "Is", "Do", "Are"], 0, "usually = הרגל ← Does he walk", ROW("👦", "🚶", "🏫")),
  Q2(PS, "Find the mistake: 'Does she likes pizza?'", ["likes → like", "Does → Do", "she → her", "pizza → pizzas"], 0, "אחרי Does ← פועל בלי s", ROW("👧", "🍕")),
 ]))
@@ -289,7 +289,7 @@ C.insert(_u, ("Present Simple: has, does, always…", [PS], [
  Q2(PS, "I usually ___ to school, but today it's raining.", ["walk", "am walking", "walks", "walking"], 0, "usually = הרגל ← Present Simple", ROW("🚶", "🏫", "🌧️")),
  Q2(PS, "She usually walks, but today she ___ the bus.", ["is taking", "takes", "take", "taking"], 0, "today, לא כרגיל ← is + ing", ROW("👧", "🚌")),
  Q2(PS, "Yesterday she walked, but she usually ___ the bus.", ["takes", "took", "is taking", "take"], 0, "usually = הרגל ← takes", ROW("👧", "🚌", "🚶")),
- Q2(PS, "Listen! Someone ___ at the door.", ["is knocking", "knocks", "knock", "knocking"], 0, "Listen! ← קורה עכשיו: is + ing", ROW("🚪", "👂")),
+ Q2(PS, "Listen! The birds ___ in the garden.", ["are singing", "sing", "sings", "singing"], 0, "Listen! ← קורה עכשיו: are + ing", ROW("🐦", "🌳", "👂")),
  Q2(PS, "My sister ___ her teeth twice a day.", ["brushes", "is brushing", "brush", "brushing"], 0, "twice a day = הרגל ← brushes", ROW("👧", "🦷")),
 ]))
 OLD_CODES = ["en7-nov26-9eaa62", "en7-nov26-333b7b", "en7-nov26-1adab8"]
